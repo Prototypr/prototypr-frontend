@@ -14,7 +14,7 @@ export default function HeroPost({
   return (
     <section>
       <div className="mb-8 md:mb-16">
-        <CoverImage title={title} url={coverImage.url} slug={slug} />
+        <CoverImage title={title} url={coverImage} slug={slug} />
       </div>
       <div className="md:grid md:grid-cols-2 md:col-gap-16 lg:col-gap-8 mb-20 md:mb-28">
         <div>
@@ -28,8 +28,8 @@ export default function HeroPost({
           </div>
         </div>
         <div>
-          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          <Avatar name={author.name} picture={author.picture} />
+          <div className="text-lg leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: excerpt }}></div>
+          <Avatar name={author.displayName?author.displayName:author.firstName?author.firstName:''} picture={author.avatar} />
         </div>
       </div>
     </section>

@@ -1,7 +1,8 @@
 import Image from 'next/image'
 
 export default function Avatar({ name, picture }) {
-  const url = picture.url ?? picture[0].url
+  
+  const url = picture
 
   return (
     <div className="flex items-center">
