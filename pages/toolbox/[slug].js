@@ -3,11 +3,11 @@ import ErrorPage from 'next/error'
 import Container from '@/components/container'
 import PostBody from '@/components/post-body'
 import MoreStories from '@/components/more-stories'
-import Header from '@/components/header'
+import Header from '@/components/tools/header'
 import PostHeader from '@/components/post-header'
 import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
-import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
+import { getAllPostsWithSlug, getToolsAndMoreTools } from '@/lib/api'
 import PostTitle from '@/components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
@@ -38,11 +38,12 @@ export default function Post({ post, morePosts, preview }) {
                 coverImage={post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:''}
                 date={post.attributes.date}
                 author={post.attributes.author?post.attributes.author.data.attributes:null}
+                type="toolbox"
                 />
               <PostBody content={post.attributes.content} />
             </article>
             <SectionSeparator />
-            {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+            {morePosts.length > 0 && <MoreStories type={'toolbox'} posts={morePosts} />}
           </>
         )}
       </Container>
@@ -51,7 +52,7 @@ export default function Post({ post, morePosts, preview }) {
 }
 
 export async function getStaticProps({ params, preview = null }) {
-  const data = await getPostAndMorePosts(params.slug, preview)
+  const data = await getToolsAndMoreTools(params.slug, preview)
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
 console.log(data)
   return {
@@ -68,11 +69,9 @@ console.log(data)
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug()
-  console.log(allPosts)
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 
-      console.log(post.attributes.slug)
-      return `/posts/${post.attributes.slug}`}) || [],
+      return `/toolbox/${post.attributes.slug}`}) || [],
     fallback: true,
   }
 }

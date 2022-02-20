@@ -10,16 +10,17 @@ export default function HeroPost({
   excerpt,
   author,
   slug,
+  type
 }) {
   return (
     <section>
       <div className="mb-8 md:mb-16">
-        <CoverImage title={title} url={coverImage} slug={slug} />
+        <CoverImage title={title} url={coverImage} slug={slug} type={type} />
       </div>
       <div className="md:grid md:grid-cols-2 gap-y-10 gap-x-4 mb-20 md:mb-28">
         <div>
           <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
-            <Link href={`/posts/${slug}`}>
+            <Link href={`/${type?type:'posts'}/${slug}`}>
               <a className="hover:underline">{title}</a>
             </Link>
           </h3>

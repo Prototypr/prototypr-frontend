@@ -3,7 +3,7 @@ import Date from '../components/date'
 import CoverImage from '../components/cover-image'
 import PostTitle from '../components/post-title'
 
-export default function PostHeader({ title, coverImage, date, author }) {
+export default function PostHeader({ title, coverImage, date, author, type }) {
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -11,7 +11,7 @@ export default function PostHeader({ title, coverImage, date, author }) {
         <Avatar name={author.displayName?author.displayName:author.firstName?author.firstName:''} picture={author?.avatar} />
       </div>
       <div className="mb-8 md:mb-16 sm:mx-0">
-        <CoverImage title={title} url={coverImage} />
+        <CoverImage type={type} title={title} url={coverImage} />
       </div>
       <div className="max-w-2xl mx-auto">
         <div className="block md:hidden mb-6">
