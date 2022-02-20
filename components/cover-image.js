@@ -4,21 +4,24 @@ import Link from 'next/link'
 
 export default function CoverImage({ title, url, slug }) {
 
-  url = url.mediaItemUrl
-  const imageUrl = `${
+  url = url?.mediaItemUrl
+
+  const imageUrl = url?`${
     url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''
-  }${url}`
+  }${url}`:null
 
   const image = (
-    <Image
+    url?<Image
       width={2000}
       height={1000}
+      // layout='fill'
+      objectFit="cover"
       alt={`Cover Image for ${title}`}
       src={imageUrl}
       className={cn('shadow-small', {
         'hover:shadow-medium transition-shadow duration-200': slug,
       })}
-    />
+    />:null
   )
   return (
     <div className="sm:mx-0">

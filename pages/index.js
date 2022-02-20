@@ -13,6 +13,7 @@ export default function Index({ allPosts, preview }) {
 
   const coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
 
+  console.log(heroPost)
   return (
     <>
       <Layout preview={preview}>
@@ -26,7 +27,7 @@ export default function Index({ allPosts, preview }) {
               title={heroPost.attributes.title}
               coverImage={coverImage}
               date={heroPost.attributes.date}
-              author={heroPost.attributes.author?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
+              author={(heroPost.attributes.author &&heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
               slug={heroPost.attributes.slug}
               excerpt={heroPost.attributes.excerpt}
             />

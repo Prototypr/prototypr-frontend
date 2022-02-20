@@ -25,7 +25,7 @@ export default function PostPreview({
         <Date dateString={date} />
       </div>
       <div className="text-lg leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: excerpt }}></div>
-      <Avatar name={author.displayName?author.displayName:author.firstName?author.firstName:''} picture={author.avatar} />
+     {author && <Avatar name={author.displayName?author.displayName:author.firstName?author.firstName:author.displayName?author.displayName:''} picture={author.avatar} />}
     </div>
   )
 }
