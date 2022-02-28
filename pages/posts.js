@@ -1,7 +1,7 @@
 import Container from '@/components/container'
 import MoreStories from '@/components/more-stories'
 import HeroPost from '@/components/hero-post'
-import Intro from '@/components/intro'
+import Intro from '@/components/posts/intro'
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage } from '@/lib/api'
 import Head from 'next/head'
@@ -15,9 +15,9 @@ export default function Index({ allPosts, preview }) {
 
   return (
     <>
-      <Layout preview={preview}>
+      <Layout activeNav={"posts"} preview={preview}>
         <Head>
-          <title>Next.js Blog Example with {CMS_NAME}</title>
+          <title>Open design and tech stories for everyone to read</title>
         </Head>
         <Container>
           <Intro />

@@ -15,7 +15,7 @@ export default function Index({ allPosts, preview }) {
 
   return (
     <>
-      <Layout preview={preview}>
+      <Layout activeNav={'toolbox'} preview={preview}>
         <Head>
           <title>Next.js Blog Example with {CMS_NAME}</title>
         </Head>
