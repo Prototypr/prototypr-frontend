@@ -6,6 +6,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.5.0",
+    "@heroicons/react": "^1.0.5",
     "classnames": "2.3.1",
     "date-fns": "2.28.0",
     "next": "latest",
