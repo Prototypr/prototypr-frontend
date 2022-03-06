@@ -1,6 +1,8 @@
 # Prototypr Front End Application
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using [Strapi](https://strapi.io/) as the data source.
+This site uses Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using [Strapi](https://strapi.io/) as the data source.
+
+[Learn more about how the app was created over here](https://prototypr-gftw.vercel.app/front-end).
 
 ## Prerequisites
 This Next.js app depends on a Strapi CMS backend, which is used as a headless CMS.
