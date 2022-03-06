@@ -39,7 +39,7 @@ export default function Navbar({ posts, type, activeNav }) {
                 <Link href="/toolbox" as="/toolbox">
                     <a href="#" className={activeNav=='toolbox'?"bg-gray-100 text-black px-3 py-2 shadow-sm rounded-md text-sm font-semibold":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Toolbox</a>
                 </Link>
-                <a href="#" className={activeNav=='become-author'?"bg-gray-100 text-gray-900 px-3 py-2 rounded-md text-sm font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Become an author</a>
+                <a href="#" className={activeNav=='become-author'?"bg-gray-100 text-gray-900 px-3 py-2 rounded-md text-sm font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Write for us</a>
 
                 <a href="#" className={activeNav=='subscribe'?"bg-gray-100 text-gray-900 px-3 py-2 rounded-md text-sm font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"}>Subscribe</a>
 
@@ -101,7 +101,7 @@ export default function Navbar({ posts, type, activeNav }) {
                   className={activeNav=='become-author'?"bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"}
                   aria-current={'page'}
                 >
-                  Become an author
+                  Write for us
                 </Disclosure.Button>
                 <Disclosure.Button
                   key={'subscribe'}
