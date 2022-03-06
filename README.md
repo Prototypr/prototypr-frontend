@@ -2,7 +2,7 @@
 
 This example showcases Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using [Strapi](https://strapi.io/) as the data source.
 
-### Prerequisits:
+## Prerequisites:
 This Next.js app depends on a Strapi CMS backend, which is used as a headless CMS.
 
 You don't need to install the Strapi CMS backend to run the front end - instead, you can connect to the development version we have running in the cloud by adding our hosted Strapi url in your `.env` file (see 'Set up .env variables' section below).
