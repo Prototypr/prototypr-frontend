@@ -6,7 +6,7 @@ import HeroPost from '@/components/hero-post'
 import Intro from '@/components/tools/intro'
 import NewPagination from '@/components/pagination'
 import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 13;
 
 export default function ToolboxPage({allPosts = [], preview, pagination}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
