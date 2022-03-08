@@ -3,16 +3,30 @@ import MoreStories from '@/components/more-stories'
 import HeroPost from '@/components/hero-post'
 import Intro from '@/components/tools/intro'
 import Layout from '@/components/layout'
+import NewPagination from '@/components/pagination'
 import { getAllPostsForToolsPage } from '@/lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from "react";
+const PAGE_SIZE = 12;
 
 export default function Index({ allPosts, preview }) {
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)
 
   const coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
+  const [currentPage, setCurrentPage] = useState(0)
+  const router = useRouter();
 
+  const onPageNumChange = (pageNo) => {
+    router.push({
+      pathname: `/toolbox/page/${pageNo}`,
+      // query: {
+      //   totalCount
+      // }
+    })
+  }
   return (
     <>
       <Layout activeNav={'toolbox'} preview={preview}>
@@ -33,15 +47,19 @@ export default function Index({ allPosts, preview }) {
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} type="toolbox" />}
+          <NewPagination 
+            pageSize={PAGE_SIZE}
+            currentPage={currentPage}
+            onPageNumChange={(pageNum) => {onPageNumChange(pageNum)}}
+          />
         </Container>
       </Layout>
     </>
   )
 }
 
-export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getAllPostsForToolsPage(preview)) || []
-  console.log(allPosts)
+export async function getStaticProps({ preview = null, size = PAGE_SIZE, offset = 0 }) {
+  const allPosts = (await getAllPostsForToolsPage(preview, size, offset)) || []
   return {
     props: { allPosts:allPosts.data, preview },
   }
