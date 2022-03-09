@@ -7,6 +7,7 @@ import Intro from '@/components/tools/intro'
 import NewPagination from '@/components/pagination'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 const PAGE_SIZE = 13;
+const ALL_SLUGS = ["whiteboard", "onboarding", "testing", "feedback", "moodboards", "mindmapping", "persona", "user-flow", "journey-map", "onboarding", "storymapping", "recruiting", "transcription", "survey", "analytics", "annotate"]
 
 export default function ToolboxPage({allPosts = [], preview, pagination}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
@@ -30,12 +31,12 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
             {
                 pagination && pagination.page == 1&& (
                     <>
-                        <Intro title={'Color Tools (This is a demo - it should be UX Tools!)'} />
-                        <div className='text-xl mb-6'>
+                        <Intro title={'UX Tools'} />
+                        {/* <div className='text-xl mb-6'>
                         <p>1. See the page: ux-tools/page/[pageNo]</p><br/>
                         <p>2. Check the query: <code>${`import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'`}</code></p>
                         <br/><p>3. The parameters need modifying - search for: <code>${`tags:{slug:{in:["color"]}}`}</code></p>
-                        </div>
+                        </div> */}
                         {heroPost && (
                             <HeroPost
                             title={heroPost.attributes.title}
@@ -72,7 +73,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
 export async function getStaticProps({ preview = null, params}) {
     const pageSize = PAGE_SIZE
     const page = params.pageNo
-    const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, page )) || []
+    const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, page, ALL_SLUGS )) || []
     
     console.log(allPosts)
     const pagination = allPosts.meta.pagination
@@ -84,7 +85,7 @@ export async function getStaticProps({ preview = null, params}) {
   }
 
 export async function getStaticPaths() {
-    const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0)) || []
+    const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, ALL_SLUGS)) || []
     const pagination = allPosts.meta.pagination
     const pageCount = pagination.pageCount
     const pageCountArr = new Array(pageCount).fill(' ');
