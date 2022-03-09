@@ -8,6 +8,10 @@
   "dependencies": {
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
+    "@radix-ui/colors": "^0.1.8",
+    "@radix-ui/react-icons": "^1.1.0",
+    "@radix-ui/react-navigation-menu": "^0.1.2",
+    "@stitches/react": "^1.2.7",
     "classnames": "2.3.1",
     "date-fns": "2.28.0",
     "next": "latest",
