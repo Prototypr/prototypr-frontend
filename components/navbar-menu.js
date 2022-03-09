@@ -90,7 +90,7 @@ const CustomTrigger = ({ children, to, ...props }) => {
     const isActive = props.active;
   
     return (
-          <div className="rounded-md" style={{background:isActive?indigo.indigo3:'', color:isActive?indigo.indigo9:''}}>
+          <div className="rounded-md" style={{background:isActive?indigo.indigo2:'', color:isActive?indigo.indigo9:''}}>
       <StyledTrigger active={isActive}>
           {children}
       </StyledTrigger>
