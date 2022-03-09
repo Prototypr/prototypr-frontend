@@ -81,7 +81,7 @@ export default function Navbar({ posts, type, activeNav }) {
                 <Disclosure.Button
                   key={'stories'}
                   as="a"
-                  href="/posts/page/1"
+                  href={'/posts'}
                   className={activeNav=='posts'?"bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"}
                   aria-current={'page'}
                 >
