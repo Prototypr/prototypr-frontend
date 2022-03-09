@@ -360,7 +360,7 @@ export const NavigationMenuDemo = ({activeNav}) => {
               </ContentListItem>
               <ContentListItem
                 title="UX Tools"
-                href="/toolbox/page/1"
+                href="/toolbox/ux-tools/page/1"
               >
                 Tools for User Research, Collaboration, Whiteboarding, etc.
               </ContentListItem>
