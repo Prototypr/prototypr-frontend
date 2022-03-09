@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import NavigationMenuDemo from './navbar-menu';
 
 export default function Navbar({ posts, type, activeNav }) {
 
@@ -33,15 +34,16 @@ export default function Navbar({ posts, type, activeNav }) {
         <div className="hidden sm:block sm:ml-6">
             <div className="flex space-x-4">
                 {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-800 hover:bg-gray-100 hover:text-gray-900" --> */}
-                <Link href="/posts" as="/posts">
+                {/* <Link href="/posts" as="/posts">
                     <a href="#" className={activeNav=='posts'?"bg-gray-100 text-black px-3 py-2 shadow-sm rounded-md text-sm font-semibold":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Stories</a>
-                </Link>
+                </Link> */}
                 <Link href={`/toolbox/page/1`}>
-                    <a href="#" className={activeNav=='toolbox'?"bg-gray-100 text-black px-3 py-2 shadow-sm rounded-md text-sm font-semibold":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Toolbox</a>
+                    <NavigationMenuDemo activeNav={activeNav}/>
+                    {/* <a href="#" className={activeNav=='toolbox'?"bg-gray-100 text-black px-3 py-2 shadow-sm rounded-md text-sm font-semibold":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Toolbox</a> */}
                 </Link>
-                <a href="#" className={activeNav=='become-author'?"bg-gray-100 text-gray-900 px-3 py-2 rounded-md text-sm font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Write for us</a>
+                {/* <a href="#" className={activeNav=='become-author'?"bg-gray-100 text-gray-900 px-3 py-2 rounded-md text-sm font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Write for us</a>
 
-                <a href="#" className={activeNav=='subscribe'?"bg-gray-100 text-gray-900 px-3 py-2 rounded-md text-sm font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"}>Subscribe</a>
+                <a href="#" className={activeNav=='subscribe'?"bg-gray-100 text-gray-900 px-3 py-2 rounded-md text-sm font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"}>Subscribe</a> */}
 
                 {/* <a href="#" className="text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
 

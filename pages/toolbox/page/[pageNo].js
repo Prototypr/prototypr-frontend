@@ -25,7 +25,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination = {}}) {
       }
 
     return (
-        <Layout preview={preview}>
+        <Layout activeNav={'toolbox'} preview={preview}>
             <Container>
             {
                 pagination && pagination.page == 1 && (
