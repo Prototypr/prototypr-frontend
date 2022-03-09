@@ -8,12 +8,12 @@ import NewPagination from '@/components/pagination'
 import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
 const PAGE_SIZE = 13;
 
-export default function ToolboxPage({allPosts = [], preview, pagination}) {
+export default function ToolboxPage({allPosts = [], preview, pagination = {}}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
     let heroPost;
-    let morePosts;
+    let morePosts = [];
     let coverImage;
-    if (allPosts && allPosts.length) {
+    if (allPosts.length && pagination.page && pagination.page == 1) {
         heroPost = allPosts[0]
         morePosts = allPosts.slice(1)
         coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
@@ -28,7 +28,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
         <Layout preview={preview}>
             <Container>
             {
-                pagination && pagination.page == 1&& (
+                pagination && pagination.page == 1 && (
                     <>
                         <Intro />
                         {heroPost && (
@@ -46,7 +46,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                 )
             }
             {
-                pagination && pagination.page ? (
+                pagination.page && pagination.page == 1 ? (
                     morePosts.length > 0 && <MoreStories posts={morePosts} type="toolbox" />
                 ): (
                     allPosts.length > 0 && <MoreStories posts={allPosts} type="toolbox" />
@@ -68,7 +68,6 @@ export async function getStaticProps({ preview = null, params}) {
     const pageSize = PAGE_SIZE
     const page = params.pageNo
     const allPosts = (await getPostsByPageForToolsPage(preview, pageSize, page )) || []
-    
     const pagination = allPosts.meta.pagination
     return {
         props: {
