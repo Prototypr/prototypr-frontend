@@ -7,7 +7,7 @@ import Intro from '@/components/tools/intro'
 import NewPagination from '@/components/pagination'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 const PAGE_SIZE = 13;
-const ALL_SLUGS = ["vr", "ar", "augmented-reality", "virtual-reality"]
+const ALL_SLUGS = ["chat", "conversational", "chatbot"]
 
 export default function ToolboxPage({allPosts = [], preview, pagination}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
@@ -22,7 +22,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
     const router = useRouter()
 
     const onPageNumChange = (pageNo) => {
-        router.push(`/toolbox/augmented-reality-tools/page/${pageNo}`)
+        router.push(`/toolbox/conversational-design-tools/page/${pageNo}`)
       }
 
     return (
@@ -31,7 +31,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
             {
                 pagination && pagination.page == 1&& (
                     <>
-                        <Intro title={'Virtual Reality'} />
+                        <Intro title={'Conversational Design'} />
                         {/* <div className='text-xl mb-6'>
                         <p>1. See the page: ux-tools/page/[pageNo]</p><br/>
                         <p>2. Check the query: <code>${`import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'`}</code></p>
@@ -91,7 +91,7 @@ export async function getStaticPaths() {
     const pageCountArr = new Array(pageCount).fill(' ');
     return {
         paths: pageCountArr && pageCountArr.map((pageNo) => {
-            return `/toolbox/augmented-reality-tools/page/${pageNo}`
+            return `/toolbox/conversational-design-tools/page/${pageNo}`
         }) || [],
         fallback: true,
     }
