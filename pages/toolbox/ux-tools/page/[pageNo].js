@@ -72,6 +72,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                                         } else {
                                             setSelectedFilter(item)
                                         }
+                                        //TODO:to do GQL Query again
                                     }}/>
                                 </div>
                                 <div className="col-span-3">
