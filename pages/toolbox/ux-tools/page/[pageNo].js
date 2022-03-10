@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout'
 import Container from '@/components/container'
@@ -20,6 +21,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
         morePosts = allPosts.slice(1)
         coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
     }
+    const [selectedFilter, setSelectedFilter] = useState("")
     const router = useRouter()
 
     const onPageNumChange = (pageNo) => {
@@ -43,7 +45,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                             title={heroPost.attributes.title}
                             coverImage={coverImage}
                             date={heroPost.attributes.date}
-                            author={(heroPost.attributes.author &&heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
+                            author={(heroPost.attributes.author && heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
                             slug={heroPost.attributes.slug}
                             excerpt={heroPost.attributes.excerpt}
                             type="toolbox"
@@ -60,7 +62,17 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                     (
                             <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                                 <div className="grid-cols-1 hidden lg:block">
-                                    <FilterCategory items={ALL_SLUGS} title="UX Tools" />
+                                    <FilterCategory 
+                                    items={ALL_SLUGS} 
+                                    title="UX Tools" 
+                                    selectedItem={selectedFilter}
+                                    onSelectedItemChange = {(item) => {
+                                        if (selectedFilter === item) {
+                                            setSelectedFilter("");
+                                        } else {
+                                            setSelectedFilter(item)
+                                        }
+                                    }}/>
                                 </div>
                                 <div className="col-span-3">
                                     <MoreStories posts={allPosts} type="toolbox" />
