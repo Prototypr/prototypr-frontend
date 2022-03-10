@@ -5,6 +5,7 @@ import MoreStories from '@/components/more-stories'
 import HeroPost from '@/components/hero-post'
 import Intro from '@/components/tools/intro'
 import NewPagination from '@/components/pagination'
+import FilterCategory from '@/components/FilterCategory'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 const PAGE_SIZE = 13;
 const ALL_SLUGS = ["prototyping", "design-tool"]
@@ -52,10 +53,21 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                 )
             }
             {
-                pagination && pagination.page ? (
+                pagination && pagination.page == 1 ? (
                     morePosts && morePosts.length > 0 && <MoreStories posts={morePosts} type="toolbox" />
                 ): (
-                    allPosts.length > 0 && <MoreStories posts={allPosts} type="toolbox" />
+                    allPosts.length > 0 &&
+                    (
+                            <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
+                                <div className="grid-cols-1 hidden lg:block">
+                                    <FilterCategory items={ALL_SLUGS} title="Prototyping Tools" />
+                                </div>
+                                <div className="col-span-3">
+                                    <MoreStories posts={allPosts} type="toolbox" />
+                                </div>
+                            </div>
+                    )
+                    
                 )
             }
             

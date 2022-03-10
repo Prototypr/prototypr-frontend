@@ -46,7 +46,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                 )
             }
             {
-                pagination && pagination.page ? (
+                pagination && pagination.page == 1 ? (
                     morePosts.length > 0 && <MoreStories posts={morePosts} type="toolbox" />
                 ): (
                     allPosts.length > 0 && <MoreStories posts={allPosts} type="toolbox" />
