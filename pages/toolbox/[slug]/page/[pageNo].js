@@ -29,7 +29,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
 
     const [selectedFilter, setSelectedFilter] = useState("")
     const onPageNumChange = (pageNo) => {
-        router.push(`/toolbox/page/${pageNo}`)
+        router.push(`toolbox/${slug}/page/${pageNo}`)
       }
 
     return (
