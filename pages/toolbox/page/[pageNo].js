@@ -40,19 +40,6 @@ export default function ToolboxPage({allPosts = [], preview, pagination = {}}) {
                         <div className='w-full h-screen  flex flex-col'>
                         <h1 className="font-semibold text-xl my-4">All Tools</h1>
                         <div className="display-none mb-8 lg:block text-gray-800">
-                            {/* <div className="px-2">
-                                <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">All Tools</h1>
-                            </div> */}
-                            {/* <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># UX tools</div></Link>
-                            </div>
-                            <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># User Research</div></Link>
-                            </div>
-                            <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># Prototyping tools</div></Link>
-                            </div> */}
-
                             <div className="px-2">
                                 <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">UX Tools</h1>
                             </div>
@@ -68,16 +55,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination = {}}) {
                                     )
                                 })
                             }
-                            {/* <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># User Analysis</div></Link>
-                            </div>
-                            <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># User Journey</div></Link>
-                            </div>
-                            <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># User Research</div></Link>
-                            </div> */}
-
+                            
                             <Link href="/toolbox/ux-tools/page/1">
                                 <a className="inline-block text-blue-600 my-2 text-sm px-2">Browse all UX →</a>
                             </Link>
