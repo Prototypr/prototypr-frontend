@@ -6,7 +6,8 @@ import MoreStories from '@/components/more-stories'
 import NewPagination from '@/components/pagination'
 import FilterCategory from '@/components/FilterCategory'
 
-import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
+// import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
+import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import Link from 'next/link'
 const PAGE_SIZE = 13;
 const ALL_SLUGS = [{
@@ -21,7 +22,8 @@ const ALL_SLUGS = [{
 }]
 
 
-export default function ToolboxPage({allPosts = [], preview, pagination}) {
+
+export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
     const router = useRouter()
 
@@ -60,7 +62,8 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                                 ALL_SLUGS && ALL_SLUGS.map((item, index) => {
                                     return (
                                         <div className="cursor-pointer text-sm">
-                                            <Link href={`/toolbox/${item.key}/page/1`}><div className="text-gray-700 hover:text-blue-500 p-2 rounded">
+                                            <Link href={`/toolbox/${item.key}/page/1`}>
+                                                <div className={`text-gray-700 hover:text-blue-500 p-2 rounded ${item.key === slug ? ' text-blue-600 font-semibold' : ''}`}>
                                                 {item.name}
                                                 </div>
                                             </Link>
@@ -104,26 +107,34 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
 
 export async function getStaticProps({ preview = null, params}) {
     const pageSize = PAGE_SIZE
-    const page = params.pageNo
-    const allPosts = (await getPostsByPageForToolsPage(preview, pageSize, page )) || []
-    
+    const {pageNo, slug} = params;
+    // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, [slug] )) || []
+    const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
+    console.log('res**********' + JSON.stringify(allPosts))
     const pagination = allPosts.meta.pagination
     return {
         props: {
-            allPosts: allPosts.data, preview, pagination
+            allPosts: allPosts.data, preview, pagination,slug
         },
     }
   }
 
 export async function getStaticPaths() {
-    const allPosts = (await getAllPostsForToolsPage(null, PAGE_SIZE, 0)) || []
-    const pagination = allPosts.meta.pagination
-    const pageCount = pagination.pageCount
-    const pageCountArr = new Array(pageCount).fill(' ');
+    let pageCountRes = 0;
+    let pageCountArr = [];
+    ALL_SLUGS.map(async (item, index)  => {
+        // const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0,[item.key])) || []
+        const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0,["whiteboard"])) || []
+        const pagination = allPosts.meta.pagination
+        const pageCount = pagination.pageCount
+        let arr = new Array(pageCount).fill('');
+        let newArr = arr.map((i,index) => {
+            return `toolbox/${item.key}/page/${index+1}`
+        })
+        pageCountArr = pageCountArr.concat(newArr)
+    })
     return {
-        paths: pageCountArr && pageCountArr.map((pageNo) => {
-            return `/toolbox/page/${pageNo}`
-        }) || [],
+        paths: pageCountArr || [],
         fallback: true,
     }
 }
