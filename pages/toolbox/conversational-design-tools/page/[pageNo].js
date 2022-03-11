@@ -12,14 +12,14 @@ const ALL_SLUGS = ["chat", "conversational", "chatbot"]
 
 export default function ToolboxPage({allPosts = [], preview, pagination}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
-    let heroPost;
-    let morePosts;
-    let coverImage;
-    if (allPosts && allPosts.length) {
-        heroPost = allPosts[0]
-        morePosts = allPosts.slice(1)
-        coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
-    }
+    // let heroPost;
+    // let morePosts;
+    // let coverImage;
+    // if (allPosts && allPosts.length) {
+    //     heroPost = allPosts[0]
+    //     morePosts = allPosts.slice(1)
+    //     coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
+    // }
     const router = useRouter()
 
     const onPageNumChange = (pageNo) => {
@@ -29,15 +29,10 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
     return (
         <Layout activeNav={'toolbox'} preview={preview}>
             <Container>
-            {
+            {/* {
                 pagination && pagination.page == 1 && (
                     <>
                         <Intro title={'Conversational Design'} />
-                        {/* <div className='text-xl mb-6'>
-                        <p>1. See the page: ux-tools/page/[pageNo]</p><br/>
-                        <p>2. Check the query: <code>${`import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'`}</code></p>
-                        <br/><p>3. The parameters need modifying - search for: <code>${`tags:{slug:{in:["color"]}}`}</code></p>
-                        </div> */}
                         {heroPost && (
                             <HeroPost
                             title={heroPost.attributes.title}
@@ -51,23 +46,18 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                         )}   
                     </>
                 )
-            }
+            } */}
             {
-                pagination && pagination.page == 1 ? (
-                    morePosts && morePosts.length > 0 && <MoreStories posts={morePosts} type="toolbox" />
-                ): (
-                    allPosts.length > 0 &&
-                    (
-                            <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-                                <div className="grid-cols-1 hidden lg:block">
-                                    <FilterCategory items={ALL_SLUGS} title="Conversational Design" />
-                                </div>
-                                <div className="col-span-3">
-                                    <MoreStories posts={allPosts} type="toolbox" />
-                                </div>
+                allPosts.length > 0 &&
+                (
+                        <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
+                            <div className="grid-cols-1 hidden lg:block">
+                                <FilterCategory items={ALL_SLUGS} title="Conversational Design" />
                             </div>
-                    )
-                    
+                            <div className="col-span-3">
+                                <MoreStories posts={allPosts} type="toolbox" />
+                            </div>
+                        </div>
                 )
             }
             
