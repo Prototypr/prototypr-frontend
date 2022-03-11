@@ -360,20 +360,20 @@ export const NavigationMenuDemo = ({activeNav}) => {
               </ContentListItem>
               <ContentListItem
                 title="UX Tools"
-                href="/toolbox/page/1"
+                href="/toolbox/ux-tools/page/1"
               >
                 Tools for User Research, Collaboration, Whiteboarding, etc.
               </ContentListItem>
-              <ContentListItem title="Virtual Reality" href="/toolbox/page/1">
+              <ContentListItem title="Virtual Reality" href="/toolbox/augmented-reality-tools/page/1">
                Everything you need for 3D, AR, VR, and beyond.
               </ContentListItem>
-              <ContentListItem title="Prototyping Tools" href="/toolbox/page/1">
+              <ContentListItem title="Prototyping Tools" href="/prototyping/page/1">
                 Figma to Adobe, and everything in between.
               </ContentListItem>
               <ContentListItem title="Accessibility" href="/toolbox/page/1">
                 Tools for building accessible User Interfaces.
               </ContentListItem>
-              <ContentListItem title="Conversational Design" href="/toolbox/page/1">
+              <ContentListItem title="Conversational Design" href="/toolbox/conversational-design-tools/page/1">
                 Tools for creating Voice User Interfaces, like chatbots.
               </ContentListItem>
             </ContentList>
