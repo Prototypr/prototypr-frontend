@@ -59,7 +59,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                             {
                                 ALL_SLUGS && ALL_SLUGS.map((item, index) => {
                                     return (
-                                        <div className="cursor-pointer text-sm">
+                                        <div className="cursor-pointer text-sm" key={`toobox_cat_${index}`}>
                                             <Link href={`/toolbox/${item.key}/page/1`}><div className="text-gray-700 hover:text-blue-500 p-2 rounded">
                                                 {item.name}
                                                 </div>

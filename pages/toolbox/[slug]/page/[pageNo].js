@@ -61,7 +61,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                             {
                                 ALL_SLUGS && ALL_SLUGS.map((item, index) => {
                                     return (
-                                        <div className="cursor-pointer text-sm">
+                                        <div className="cursor-pointer text-sm" key={`toolbox_${slug}_cat_${index}`}>
                                             <Link href={`/toolbox/${item.key}/page/1`}>
                                                 <div className={`text-gray-700 hover:text-blue-500 p-2 rounded ${item.key === slug ? ' text-blue-600 font-semibold' : ''}`}>
                                                 {item.name}
@@ -110,7 +110,7 @@ export async function getStaticProps({ preview = null, params}) {
     const {pageNo, slug} = params;
     // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, [slug] )) || []
     const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
-    console.log('res**********' + JSON.stringify(allPosts))
+    // console.log('res**********' + JSON.stringify(allPosts))
     const pagination = allPosts.meta.pagination
     return {
         props: {
