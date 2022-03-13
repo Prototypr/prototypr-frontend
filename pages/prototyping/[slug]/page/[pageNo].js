@@ -1,17 +1,16 @@
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import Layout from '@/components/layout'
 import Container from '@/components/container'
 import MoreStories from '@/components/more-stories'
-import HeroPost from '@/components/hero-post'
-import Intro from '@/components/tools/intro'
 import NewPagination from '@/components/pagination'
 import FilterCategory from '@/components/FilterCategory'
-import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
-const PAGE_SIZE = 13;
-const ALL_SLUGS = ["prototyping", "design-tool"]
 
-const ALL_SLUGS_CATEGORY = [{
+// import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
+import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
+import Link from 'next/link'
+const PAGE_SIZE = 13;
+const ALL_SLUGS = [{
     key: "design",
     name: "# Design",
     tags: ["prototyping", "design-tool", "prototyping-tool"]
@@ -20,48 +19,30 @@ const ALL_SLUGS_CATEGORY = [{
     name: "# Handoff",
     tags: ["handoff", "design-to-code"]
 },{
-    key: "/interactions",
+    key: "interactions",
     name: "# Interactions",
     tags: ["microinteractions", "interactions", "animation"]
 }]
 
-export default function ToolboxPage({allPosts = [], preview, pagination}) {
-    //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
-    // let heroPost;
-    // let morePosts;
-    // let coverImage;
-    // if (allPosts && allPosts.length) {
-    //     heroPost = allPosts[0]
-    //     morePosts = allPosts.slice(1)
-    //     coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
-    // }
+
+
+export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
+    //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
     const router = useRouter()
 
+    const [selectedFilter, setSelectedFilter] = useState("")
     const onPageNumChange = (pageNo) => {
-        router.push(`/prototyping/page/${pageNo}`)
+        router.push({
+            pathname:`/prototyping/[slug]/page/${pageNo}`,
+            query: {
+                slug
+            }
+        })
       }
 
     return (
         <Layout activeNav={'toolbox'} preview={preview}>
             <Container>
-            {/* {
-                pagination && pagination.page == 1 && (
-                    <>
-                        <Intro title={'Prototyping Tools'} />
-                        {heroPost && (
-                            <HeroPost
-                            title={heroPost.attributes.title}
-                            coverImage={coverImage}
-                            date={heroPost.attributes.date}
-                            author={(heroPost.attributes.author &&heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
-                            slug={heroPost.attributes.slug}
-                            excerpt={heroPost.attributes.excerpt}
-                            type="toolbox"
-                            />
-                        )}   
-                    </>
-                )
-            } */}
             {
                 allPosts.length > 0 &&
                 (
@@ -74,11 +55,11 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                                 <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">UX Tools</h1>
                             </div>
                             {
-                                ALL_SLUGS_CATEGORY && ALL_SLUGS_CATEGORY.map((item, index) => {
+                                ALL_SLUGS && ALL_SLUGS.map((item, index) => {
                                     return (
                                         <div className="cursor-pointer text-sm" key={`toobox_cat_${index}`}>
                                             <Link href={`/prototyping/${item.key}/page/1`}>
-                                                <div className="text-gray-700 hover:text-blue-500 p-2 rounded">
+                                            <div className={`text-gray-700 hover:text-blue-500 p-2 rounded ${item.key === slug ? ' text-blue-600 font-semibold' : ''}`}>
                                                 {item.name}
                                                 </div>
                                             </Link>
@@ -98,8 +79,6 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                 </div>
                 )
             }
-
-            
             
             <NewPagination 
                 total={pagination?.total}
@@ -114,27 +93,37 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
 
 export async function getStaticProps({ preview = null, params}) {
     const pageSize = PAGE_SIZE
-    const page = params.pageNo
-    const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, page, ALL_SLUGS )) || []
-    
-    console.log(allPosts)
+    const {pageNo, slug} = params;
+    const foundSlug = ALL_SLUGS.find((SLUG, index) => {
+        return slug === SLUG.key
+    })
+    const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, foundSlug.tags )) || []
+    // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
+    // console.log('page info**********' + JSON.stringify(allPosts.meta.pagination))
     const pagination = allPosts.meta.pagination
     return {
         props: {
-            allPosts: allPosts.data, preview, pagination
+            allPosts: allPosts.data, preview, pagination,slug
         },
     }
   }
 
 export async function getStaticPaths() {
-    const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, ALL_SLUGS)) || []
-    const pagination = allPosts.meta.pagination
-    const pageCount = pagination.pageCount
-    const pageCountArr = new Array(pageCount).fill(' ');
+    let pageCountRes = 0;
+    let pageCountArr = [];
+    ALL_SLUGS.map(async (item, index)  => {
+        const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, item.tags)) || []
+        // const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0,["whiteboard"])) || []
+        const pagination = allPosts.meta.pagination
+        const pageCount = pagination.pageCount
+        let arr = new Array(pageCount).fill('');
+        let newArr = arr.map((i,index) => {
+            return `prototyping/${item.key}/page/${index+1}`
+        })
+        pageCountArr = pageCountArr.concat(newArr)
+    })
     return {
-        paths: pageCountArr && pageCountArr.map((pageNo) => {
-            return `/prototyping/page/${pageNo}`
-        }) || [],
+        paths: pageCountArr || [],
         fallback: true,
     }
 }
