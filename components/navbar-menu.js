@@ -2,7 +2,7 @@ import React from 'react';
 import { styled, keyframes } from '@stitches/react';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { CaretDownIcon } from '@radix-ui/react-icons';
-import { indigo, mauve, purple, blackA, red, pink } from '@radix-ui/colors';
+import { indigo, mauve, purple, blackA, red, pink, gray } from '@radix-ui/colors';
 
 const enterFromRight = keyframes({
   from: { transform: 'translateX(200px)', opacity: 0 },
@@ -56,7 +56,7 @@ const StyledList = styled(NavigationMenuPrimitive.List, {
   all: 'unset',
   display: 'flex',
   justifyContent: 'center',
-  backgroundColor: 'white',
+  backgroundColor: gray.gray1,
   padding: 4,
   borderRadius: 6,
   listStyle: 'none',
@@ -73,6 +73,19 @@ const itemStyles = {
 //   color: indigo.indigo11,
   '&:focus': { position: 'relative', boxShadow: `0 0 0 2px ${indigo.indigo7}` },
   '&:hover': { backgroundColor: indigo.indigo3, color: indigo.indigo11 },
+};
+const itemButtonStyles = {
+  padding: '8px 12px',
+  outline: 'none',
+  userSelect: 'none',
+  fontWeight: 500,
+  lineHeight: 1,
+  borderRadius: 4,
+  fontSize: 15,
+  marginLeft:'6px',
+  color: gray.gray1,
+  '&:focus': { position: 'relative', boxShadow: `0 0 0 2px ${indigo.indigo7}` },
+  '&:hover': { backgroundColor: indigo.indigo9, color: gray.gray1 },
 };
 
 const StyledTrigger = styled(NavigationMenuPrimitive.Trigger, {
@@ -118,6 +131,15 @@ const StyledTriggerWithCaret = React.forwardRef(({ children, ...props }, forward
 const StyledLink = styled(NavigationMenuPrimitive.Link, {
   ...itemStyles,
   display: 'block',
+  textDecoration: 'none',
+  fontSize: 15,
+  lineHeight: 1
+});
+
+const StyledButton = styled(NavigationMenuPrimitive.Link, {
+  ...itemButtonStyles,
+  display: 'block',
+  background:indigo.indigo10,
   textDecoration: 'none',
   fontSize: 15,
   lineHeight: 1
@@ -198,6 +220,7 @@ const NavigationMenuList = StyledList;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 const NavigationMenuTrigger = StyledTriggerWithCaret;
 const NavigationMenuLink = StyledLink;
+const NavigationMenuButton = StyledButton;
 const NavigationMenuContent = StyledContent;
 const NavigationMenuViewport = StyledViewport;
 const NavigationMenuIndicator = StyledIndicatorWithArrow;
@@ -385,7 +408,7 @@ export const NavigationMenuDemo = ({activeNav}) => {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink href="/">Subscribe</NavigationMenuLink>
+          <NavigationMenuButton href="/">Subscribe</NavigationMenuButton>
         </NavigationMenuItem>
 
         <NavigationMenuIndicator />
