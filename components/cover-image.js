@@ -2,7 +2,7 @@ import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function CoverImage({ title, url, slug, type }) {
+export default function CoverImage({ title, url, slug, type, route }) {
 
   url = url?.mediaItemUrl
 
@@ -26,7 +26,7 @@ export default function CoverImage({ title, url, slug, type }) {
   return (
     <div className="sm:mx-0">
       {slug ? (
-        <Link href={`/${type?type:'posts'}/${slug}`}>
+        <Link href={`/${type?type:route?route:'posts'}/${slug}`}>
           <a aria-label={title}>{image}</a>
         </Link>
       ) : (

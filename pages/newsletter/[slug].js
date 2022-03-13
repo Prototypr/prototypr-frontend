@@ -21,7 +21,7 @@ export default function Post({ post, morePosts, preview }) {
   return (
     <Layout activeNav={"posts"} preview={preview}>
       <Container>
-        <Header />
+        <Header title="Newsletter"/>
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
@@ -33,16 +33,16 @@ export default function Post({ post, morePosts, preview }) {
                 </title>
                 <meta property="og:image" content={post.attributes.ogImage} />
               </Head>
-              <PostHeader
+             {(post&& post.attributes) && <PostHeader
                 title={post.attributes.title}
                 coverImage={post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:''}
                 date={post.attributes.date}
-                author={post.attributes.author?post.attributes.author.data.attributes:null}
-                />
+                author={(post.attributes.author && post.attributes.author.data)?post.attributes.author.data.attributes:{}}
+                />}
               <PostBody content={post.attributes.content} />
             </article>
             <SectionSeparator />
-            {morePosts.length > 0 && <MoreStories posts={morePosts} route={'posts'} />}
+            {morePosts.length > 0 && <MoreStories posts={morePosts} route={'newsletter'} />}
           </>
         )}
       </Container>
@@ -50,10 +50,9 @@ export default function Post({ post, morePosts, preview }) {
   )
 }
 
-export async function getStaticProps({ params, preview = null }) {
-  const data = await getPostAndMorePosts(params.slug, preview)
+export async function getStaticProps({ params, preview = null, postType="newsletter" }) {
+  const data = await getPostAndMorePosts(params.slug, preview, postType)
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
-console.log(data)
   return {
     props: {
       preview,
@@ -67,12 +66,11 @@ console.log(data)
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug()
+  const allPosts = await getAllPostsWithSlug('newsletter')
   console.log(allPosts)
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 
-      console.log(post.attributes.slug)
-      return `/posts/${post.attributes.slug}`}) || [],
+      return `/newsletter/${post.attributes.slug}`}) || [],
     fallback: true,
   }
 }

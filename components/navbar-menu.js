@@ -56,7 +56,7 @@ const StyledList = styled(NavigationMenuPrimitive.List, {
   all: 'unset',
   display: 'flex',
   justifyContent: 'center',
-  backgroundColor: gray.gray1,
+  backgroundColor: 'white',
   padding: 4,
   borderRadius: 6,
   listStyle: 'none',

@@ -1,6 +1,6 @@
 import PostPreview from './post-preview'
 
-export default function MoreStories({ posts, type }) {
+export default function MoreStories({ posts, type, route }) {
 
   return (
     <section>
@@ -18,6 +18,7 @@ export default function MoreStories({ posts, type }) {
             slug={post.attributes.slug}
             excerpt={post.attributes.excerpt}
             type={type}
+            route={route}
           />
         ))}
       </div>

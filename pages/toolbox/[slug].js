@@ -7,7 +7,7 @@ import Header from '@/components/tools/header'
 import PostHeader from '@/components/post-header'
 import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
-import { getAllToolsWithSlug, getToolsAndMoreTools } from '@/lib/api'
+import { getAllPostsWithSlug, getToolsAndMoreTools } from '@/lib/api'
 import PostTitle from '@/components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
@@ -67,7 +67,7 @@ export async function getStaticProps({ params, preview = null }) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllToolsWithSlug()
+  const allPosts = await getAllPostsWithSlug('tool')
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 
       return `/toolbox/${post.attributes.slug}`}) || [],
