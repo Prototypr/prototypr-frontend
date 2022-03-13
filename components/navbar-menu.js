@@ -380,7 +380,7 @@ export const NavigationMenuDemo = ({activeNav}) => {
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
+        <NavigationMenuItem className="hidden md:block">
           <NavigationMenuLink href="/">Write for us</NavigationMenuLink>
         </NavigationMenuItem>
 
