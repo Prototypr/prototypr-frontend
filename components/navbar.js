@@ -37,10 +37,10 @@ export default function Navbar({ posts, type, activeNav }) {
                 {/* <Link href="/posts" as="/posts">
                     <a href="#" className={activeNav=='posts'?"bg-gray-100 text-black px-3 py-2 shadow-sm rounded-md text-sm font-semibold":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Stories</a>
                 </Link> */}
-                <Link href={`/toolbox/page/1`}>
+                {/* <Link href={`/toolbox/page/1`}> */}
                     <NavigationMenuDemo activeNav={activeNav}/>
                     {/* <a href="#" className={activeNav=='toolbox'?"bg-gray-100 text-black px-3 py-2 shadow-sm rounded-md text-sm font-semibold":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Toolbox</a> */}
-                </Link>
+                {/* </Link> */}
                 {/* <a href="#" className={activeNav=='become-author'?"bg-gray-100 text-gray-900 px-3 py-2 rounded-md text-sm font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"} aria-current="page">Write for us</a>
 
                 <a href="#" className={activeNav=='subscribe'?"bg-gray-100 text-gray-900 px-3 py-2 rounded-md text-sm font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"}>Subscribe</a> */}
@@ -78,42 +78,7 @@ export default function Navbar({ posts, type, activeNav }) {
     {/* <!-- Mobile menu, show/hide based on menu state. --> */}
     <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-                <Disclosure.Button
-                  key={'stories'}
-                  as="a"
-                  href={'/posts'}
-                  className={activeNav=='posts'?"bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"}
-                  aria-current={'page'}
-                >
-                  Stories
-                </Disclosure.Button>
-                <Disclosure.Button
-                  key={'toolbox'}
-                  as="a"
-                  href={'/toolbox'}
-                  className={activeNav=='toolbox'?"bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"}
-                  aria-current={'page'}
-                >
-                  Toolbox
-                </Disclosure.Button>
-                <Disclosure.Button
-                  key={'become-author'}
-                  as="a"
-                  href={'#'}
-                  className={activeNav=='become-author'?"bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"}
-                  aria-current={'page'}
-                >
-                  Write for us
-                </Disclosure.Button>
-                <Disclosure.Button
-                  key={'subscribe'}
-                  as="a"
-                  href={'#'}
-                  className={activeNav=='become-author'?"bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium":"text-gray-800 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"}
-                  aria-current={'page'}
-                >
-                  Subscribe
-                </Disclosure.Button>
+             <NavigationMenuDemo activeNav={activeNav}/>
             </div>
           </Disclosure.Panel>
 </>)}

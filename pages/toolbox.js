@@ -31,7 +31,7 @@ export default function Index({ allPosts, preview }) {
     <>
       <Layout activeNav={'toolbox'} preview={preview}>
         <Head>
-          <title>Next.js Blog Example with {CMS_NAME}</title>
+          <title>Prototypr Toolbox - new design, UX and coding tools.</title>
         </Head>
         <Container>
           <Intro />
