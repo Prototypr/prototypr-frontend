@@ -121,7 +121,6 @@ export async function getStaticProps({ preview = null, params}) {
     })
     const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, foundSlug.tags )) || []
     // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
-    console.log('page info**********' + JSON.stringify(allPosts.meta.pagination))
     const pagination = allPosts.meta.pagination
     return {
         props: {
