@@ -13,7 +13,7 @@ export default function CoverImage({ title, url, slug, type, route }) {
   const image = (
     url?<Image
       width={2000}
-      height={1000}
+      height={1200}
       // layout='fill'
       objectFit="cover"
       alt={`Cover Image for ${title}`}
