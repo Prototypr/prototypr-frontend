@@ -18,6 +18,7 @@ export default function MoreStories({ posts, type }) {
             slug={post.attributes.slug}
             excerpt={post.attributes.excerpt}
             type={type}
+            tag={(post.attributes.tags.data && post.attributes.tags.data[0]) ? post.attributes.tags.data[0]: null}
           />
         ))}
       </div>
