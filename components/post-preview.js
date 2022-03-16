@@ -15,7 +15,7 @@ export default function PostPreview({
   tag = {}
 }) {
   return (
-    <div className="flex flex-col pt-4 flex-grow h-full rounded-t-lg shadow-md hover:shadow-xl bg-white relative rounded-lg">
+    <div className="flex flex-col py-4 flex-grow h-full shadow-md hover:shadow-xl bg-white relative rounded-lg">
       <div className="relative rounded-lg px-4 pb-4 cursor-pointer">
         <>
           <CoverImage slug={slug} title={title} url={coverImage} type={type} />
@@ -45,11 +45,11 @@ export default function PostPreview({
       <div className="text-lg leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: excerpt }}></div>
      {author && <Avatar name={author.displayName?author.displayName:author.firstName?author.firstName:author.displayName?author.displayName:''} picture={author.avatar} />}
       */}
-      <div className="px-4 py-6 flex justify-between">
+      <div className="px-4 py-1 flex justify-between">
         <div className="pl-3 overflow-hidden mt-1 cursor-pointer">
           <div className="font-medium overflow-hidden heading mt-0 h-6">{title}</div>
-          <div className="text-xs mb-3 uppercase text-gray-700">
-            # {tag && tag.attributes && tag.attributes.slug}
+          <div className="text-sm capitalize text-gray-500">
+             {tag && `#${tag.attributes && tag.attributes.slug}`}
           </div>
         </div>
       </div>

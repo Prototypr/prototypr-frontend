@@ -9,7 +9,7 @@ import FilterCategory from '@/components/FilterCategory'
 // import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import Link from 'next/link'
-const PAGE_SIZE = 13;
+const PAGE_SIZE = 12;
 const ALL_SLUGS = [{
     key: "analysis",
     name: "User Analysis",

@@ -8,7 +8,7 @@ import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
-const PAGE_SIZE = 13;
+const PAGE_SIZE = 12;
 export default function PostsPage({allPosts = [], preview, pagination = {}}) {
     let heroPost;
     let morePosts = [];

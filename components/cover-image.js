@@ -13,14 +13,15 @@ export default function CoverImage({ title, url, slug, type, route }) {
   const image = (
     url?<Image
       width={2000}
-      height={1200}
+      height={type=='toolbox'?1500:1200}
       // layout='fill'
       objectFit="cover"
       alt={`Cover Image for ${title}`}
       src={imageUrl}
-      className={cn('shadow-small', {
-        'hover:shadow-medium transition-shadow duration-200': slug,
-      })}
+      className="rounded-lg"
+      // className={cn('shadow-small', {
+      //   'hover:shadow-medium transition-shadow duration-200': slug,
+      // })}
     />:null
   )
   return (

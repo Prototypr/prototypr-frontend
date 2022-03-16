@@ -8,7 +8,7 @@ import Intro from '@/components/tools/intro'
 import NewPagination from '@/components/pagination'
 import FilterCategory from '@/components/FilterCategory'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
-const PAGE_SIZE = 13;
+const PAGE_SIZE = 12;
 const ALL_SLUGS = ["prototyping", "design-tool"]
 
 const ALL_SLUGS_CATEGORY = [{

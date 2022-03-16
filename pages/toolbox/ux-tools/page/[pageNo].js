@@ -10,7 +10,7 @@ import {
   getAllPostsForToolsSubcategoryPage,
   getPostsByPageForToolsSubcategoryPage,
 } from "@/lib/api";
-const PAGE_SIZE = 13;
+const PAGE_SIZE = 12;
 const ALL_SLUGS = [
   "whiteboard",
   "onboarding",

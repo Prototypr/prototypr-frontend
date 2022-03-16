@@ -8,7 +8,7 @@ import Intro from '@/components/tools/intro'
 import NewPagination from '@/components/pagination'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import FilterCategory from '@/components/FilterCategory'
-const PAGE_SIZE = 13;
+const PAGE_SIZE = 12;
 const ALL_SLUGS = ["chat", "conversational", "chatbot"]
 
 const ALL_SLUGS_CATEGORY = [{
