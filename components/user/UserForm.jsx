@@ -1,7 +1,12 @@
-import { useForm } from "react-hook-form";
 import FormControl from "@/components/atom/FormControl/FormControl";
 import { accountLocations } from "@/lib/constants";
+import { useForm } from "react-hook-form";
 import Button from "../atom/Button/Button";
+
+// demo
+function timeout(delay) {
+  return new Promise((res) => setTimeout(res, delay));
+}
 
 const UserForm = () => {
   const {
@@ -21,6 +26,7 @@ const UserForm = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
+    await timeout(5000);
   };
 
   return (
@@ -145,7 +151,9 @@ const UserForm = () => {
       </FormControl>
 
       <div className="mt-6">
-        <Button color="primary">Save Profile Info</Button>
+        <Button isLoading={isSubmitting} type="submit" color="primary">
+          Save Profile Info
+        </Button>
       </div>
     </form>
   );
