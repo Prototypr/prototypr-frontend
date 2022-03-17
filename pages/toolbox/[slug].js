@@ -12,12 +12,11 @@ import { getAllPostsWithSlug, getToolsAndMoreTools } from "@/lib/api";
 import PostTitle from "@/components/post-title";
 import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
-import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
+// import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
 // import markdownToHtml from '@/lib/markdownToHtml'
 
 export default function Post({ post, morePosts, preview }) {
-  // console.log('post***********' + JSON.stringify(post))
-  const postItem = MOCK_UP_ITEM;
+  // const postItem = MOCK_UP_ITEM;
   const router = useRouter();
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />;
@@ -38,9 +37,8 @@ export default function Post({ post, morePosts, preview }) {
             className="col-span-3"
           >
               <PopupGallery
-                link={postItem.toolbox.link}
-                body={postItem.content}
-                item={postItem}
+                body={post.attributes.content}
+                item={post.attributes}
                 rounded={true}
                 arrows={false}
               />

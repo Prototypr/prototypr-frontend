@@ -11,19 +11,13 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 
 export default function SwiperGallery({ data = [] }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  console.log('data**********' + JSON.stringify(data))
-
-  useEffect(() => {
-    console.log('thumbsSwiper*******' + thumbsSwiper)
-  },[thumbsSwiper])
-
 
 
   return data && data.length ? (
     <>
       <Swiper
         style={{
-          "--swiper-navigation-color": "#fff",
+          // "--swiper-navigation-color": "#fff",
         }}
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}

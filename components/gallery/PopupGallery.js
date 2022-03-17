@@ -11,9 +11,9 @@ export default function PopupGallery({ item, link, img, body, rounded, arrows })
 
   const _buildGallery = () => {
     let PHOTO_SET = [];
-    if (item && item.toolbox) {
-      if (item.toolbox.gallery && item.toolbox.gallery.length) {
-        item.toolbox.gallery.forEach((galleryItem, index) => {
+    if (item && item.legacyMedia) {
+      if (item.legacyMedia.gallery && item.legacyMedia.gallery.length) {
+        item.legacyMedia.gallery.forEach((galleryItem, index) => {
           PHOTO_SET.push({
             thumbnail:
               galleryItem.thumb.indexOf("https://") == -1
@@ -31,27 +31,27 @@ export default function PopupGallery({ item, link, img, body, rounded, arrows })
           });
         });
       }
-      if (item.toolbox.video) {
-        const youtubeEmbedLink = item.toolbox.video.replace(
-          "watch?v=",
-          "embed/"
-        );
-        PHOTO_SET.unshift({
-          thumbnail:
-            "https://img.youtube.com/vi/" +
-            item.toolbox.video.split("watch?v=")[1] +
-            "/default.jpg",
-          original:
-            "https://img.youtube.com/vi/" +
-            item.toolbox.video.split("watch?v=")[1] +
-            "/default.jpg",
-          embedUrl: youtubeEmbedLink,
-          renderItem: this._renderVideo.bind(this),
-          originalAlt: "YouTube product video",
-          thumbnailAlt: "YouTube product video",
-          type: "video",
-        });
-      }
+      // if (item.toolbox.video) {
+      //   const youtubeEmbedLink = item.toolbox.video.replace(
+      //     "watch?v=",
+      //     "embed/"
+      //   );
+      //   PHOTO_SET.unshift({
+      //     thumbnail:
+      //       "https://img.youtube.com/vi/" +
+      //       item.toolbox.video.split("watch?v=")[1] +
+      //       "/default.jpg",
+      //     original:
+      //       "https://img.youtube.com/vi/" +
+      //       item.toolbox.video.split("watch?v=")[1] +
+      //       "/default.jpg",
+      //     embedUrl: youtubeEmbedLink,
+      //     renderItem: this._renderVideo.bind(this),
+      //     originalAlt: "YouTube product video",
+      //     thumbnailAlt: "YouTube product video",
+      //     type: "video",
+      //   });
+      // }
 
       return (
         <div className="mx-4">
