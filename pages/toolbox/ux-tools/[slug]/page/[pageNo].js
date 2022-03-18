@@ -46,6 +46,44 @@ const ALL_SLUGS = [{
     key: "whiteboard",
     name: "# Whiteboarding",
     tags: ["whiteboard"]
+},{
+  key: "feedback",
+  name: "# Feedback",
+  tags: ["feedback"],
+},{
+  key: "kanban",
+  name: "# Kanban",
+  tags: ["kanban"],
+},{
+  key: "notes",
+  name: "# Note Taking",
+  tags: ["notes"],
+},{
+  key: "roadmapping",
+  name: "# Roadmapping",
+  tags: ["project-management"],
+},{
+  key: "workspace",
+  name: "# Workspace",
+  tags: ["workspace"],
+},{
+  key: "journey",
+  name: "# Journey Map",
+  tags: ["journey-map", "user-journey"],
+},{
+  key: "journey",
+  name: "# Onboarding",
+  tags: ["onboarding"],
+},
+{
+  key: "personas",
+  name: "# Personas",
+  tags: ["persona", "personas"],
+},
+{
+  key: "userflow",
+  name: "# User Flow",
+  tags: ["user-flow", "Storymapping"],
 }];
 
 const ALL_SLUGS_GROUPS = [
