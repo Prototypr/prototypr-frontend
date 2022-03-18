@@ -8,6 +8,7 @@ import PostHeader from "@/components/post-header";
 import SectionSeparator from "@/components/section-separator";
 import Layout from "@/components/layout";
 import PopupGallery from "@/components/gallery/PopupGallery";
+import AuthorCard from "@/components/toolbox/AuthorCard";
 import { getAllPostsWithSlug, getToolsAndMoreTools } from "@/lib/api";
 import PostTitle from "@/components/post-title";
 import Head from "next/head";
@@ -30,8 +31,15 @@ export default function Post({ post, morePosts, preview }) {
           {/* left sidebar */}
           <div
             className="grid-cols-1 hidden lg:block"
-            style={{ border: "1px solid blue" }}
-          ></div>
+            // style={{ border: "1px solid blue" }}
+          >
+            {
+              post && post.attributes &&  post.attributes.author && 
+              <div className="sm:hidden lg:block">
+                <AuthorCard author={post.attributes.author} />
+              </div>
+            }
+          </div>
           {/* center sidebar */}
           <div
             className="col-span-3"
@@ -47,7 +55,7 @@ export default function Post({ post, morePosts, preview }) {
           {/* RIGHT SIDEBAR START */}
           <div
             className="grid-cols-1 hidden lg:block"
-            style={{ border: "1px solid green" }}
+            // style={{ border: "1px solid green" }}
           ></div>
         </div>
         {/* <Header /> */}
