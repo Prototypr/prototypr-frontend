@@ -9,6 +9,7 @@ import SectionSeparator from "@/components/section-separator";
 import Layout from "@/components/layout";
 import PopupGallery from "@/components/gallery/PopupGallery";
 import AuthorCard from "@/components/toolbox/AuthorCard";
+import SponsorCard from "@/components/toolbox/SponsorCard";
 import { getAllPostsWithSlug, getToolsAndMoreTools } from "@/lib/api";
 import PostTitle from "@/components/post-title";
 import Head from "next/head";
@@ -39,6 +40,9 @@ export default function Post({ post, morePosts, preview }) {
                 <AuthorCard author={post.attributes.author} />
               </div>
             }
+            <div className="mt-6 sm:hidden block lg:block lg:mt-6">
+                <SponsorCard position="left" />
+            </div>
           </div>
           {/* center sidebar */}
           <div
