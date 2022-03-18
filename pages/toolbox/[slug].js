@@ -48,12 +48,13 @@ export default function Post({ post, morePosts, preview }) {
           <div
             className="col-span-3"
           >
-              <PopupGallery
+             {post &&  <PopupGallery
                 body={post.attributes.content}
                 item={post.attributes}
                 rounded={true}
                 arrows={false}
               />
+             }
             
           </div>
           {/* RIGHT SIDEBAR START */}

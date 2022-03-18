@@ -7,7 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { FreeMode, Navigation, Thumbs, A11y } from "swiper";
 
 export default function SwiperGallery({ data = [] }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -27,7 +27,7 @@ export default function SwiperGallery({ data = [] }) {
           swiper: thumbsSwiper,
           slideThumbActiveClass: "border-blue-400 border-4 rounded-xl",
         }}
-        modules={[FreeMode, Navigation, Thumbs]}
+        modules={[FreeMode, Navigation, Thumbs, A11y]}
       >
         {data?.map((current, idx) => (
           <SwiperSlide
@@ -72,7 +72,7 @@ export default function SwiperGallery({ data = [] }) {
             slidesPerView={6}
             freeMode={true}
             watchSlidesProgress={true}
-            modules={[FreeMode, Navigation, Thumbs]}
+            modules={[FreeMode, Navigation, Thumbs, A11y]}
           >
             {data.map((current, idx) => (
               <SwiperSlide className="h-20 w-20 relative flex justify-center" key={idx}>
