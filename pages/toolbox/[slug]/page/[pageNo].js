@@ -214,7 +214,20 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                     (<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                     <div className="grid-cols-1 hidden lg:block">
                     <div className="w-full h-screen  flex flex-col">
-                <h1 className="font-semibold text-xl my-4">Toolbox</h1>
+                    <h1 className="font-semibold text-2xl">Toolbox</h1>
+                    <div className="pt-1 text-sm text-gray-700 pb-8">
+                    <Link href="/">
+                        <a>Home</a>
+                    </Link>{" "}
+                    →{" "}
+                    <Link href="/toolbox/page/1">
+                        <a>Toolbox</a>
+                    </Link>
+                    →{" "}
+                    <Link href={`/toolbox/${slug}/page/1`}>
+                        <a>{slug}</a>
+                    </Link>
+                    </div>
                 <div className="display-none mb-8 lg:block text-gray-800">
                   {ALL_SLUGS_GROUPS.map((item, index) => {
                     return (
