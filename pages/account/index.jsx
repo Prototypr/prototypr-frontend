@@ -22,4 +22,16 @@ const AccountPage = ({ preview }) => {
   );
 };
 
+// export async function getServerSideProps(context) {
+//   const session = await getSession({
+//     req: context.req,
+//   });
+
+//   const userData = await getUserInfo(session.id);
+//   console.log(userData);
+//   return {
+//     props: {}, // will be passed to the page component as props
+//   };
+// }
+
 export default AccountPage;

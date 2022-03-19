@@ -1,14 +1,37 @@
 import FormControl from "@/components/atom/FormControl/FormControl";
 import { accountLocations } from "@/lib/constants";
+import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import Button from "../atom/Button/Button";
+import Fallback from "../atom/Fallback/Fallback";
 
 // demo
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 
-const UserForm = () => {
+const FormContainer = () => {
+  const { data: sessionInfo, status } = useSession();
+  console.log(sessionInfo);
+
+  if (status === "loading") {
+    return <Fallback />;
+  }
+
+  if (status === "authenticated") {
+    return (
+      <UserForm
+        info={{
+          email: sessionInfo.user.email,
+          username: sessionInfo.user.name,
+        }}
+      />
+    );
+  }
+
+  return <div>Unauthenticated whoops</div>;
+};
+const UserForm = ({ info }) => {
   const {
     register,
     handleSubmit,
@@ -21,6 +44,8 @@ const UserForm = () => {
       website: "",
       bio: "",
       paymentPointer: "",
+      email: info.email,
+      username: info.username,
     },
   });
 
@@ -108,6 +133,10 @@ const UserForm = () => {
           placeholder="https://myprofile.com"
           {...register("website", {
             disabled: isSubmitting,
+            maxLength: {
+              message: "Maximum length can be up to 50 characters",
+              value: 120,
+            },
           })}
         />
         {errors.website && (
@@ -127,6 +156,10 @@ const UserForm = () => {
           placeholder="Where are you from? What's your role? What's your favourite animal?"
           {...register("bio", {
             disabled: isSubmitting,
+            maxLength: {
+              message: "Maximum length can be up to 50 characters",
+              value: 160,
+            },
           })}
         />
         {errors.bio && <span className="error">{errors.bio.message}</span>}
@@ -143,10 +176,62 @@ const UserForm = () => {
           placeholder="$alice.wallet.example"
           {...register("paymentPointer", {
             disabled: isSubmitting,
+            maxLength: {
+              message: "Maximum length can be up to 50 characters",
+              value: 120,
+            },
           })}
         />
         {errors.paymentPointer && (
           <span className="error">{errors.paymentPointer.message}</span>
+        )}
+      </FormControl>
+
+      <FormControl inValid={!!errors.email}>
+        <label htmlFor="email" className="text-sm">
+          Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          autoComplete="off"
+          className="w-full"
+          placeholder="john@mail.com"
+          {...register("email", {
+            // disabled: isSubmitting,
+            disabled: true,
+            required: true,
+            maxLength: {
+              message: "Maximum length can be up to 120 characters",
+              value: 120,
+            },
+          })}
+        />
+        {errors.email && <span className="error">{errors.email.message}</span>}
+      </FormControl>
+
+      <FormControl inValid={!!errors.username}>
+        <label htmlFor="username" className="text-sm">
+          Username
+        </label>
+        <input
+          id="username"
+          type="text"
+          autoComplete="off"
+          className="w-full"
+          placeholder="John"
+          {...register("username", {
+            disabled: true,
+            // disabled: isSubmitting,
+            required: true,
+            maxLength: {
+              message: "Maximum length can be up to 120 characters",
+              value: 120,
+            },
+          })}
+        />
+        {errors.username && (
+          <span className="error">{errors.username.message}</span>
         )}
       </FormControl>
 
@@ -159,4 +244,4 @@ const UserForm = () => {
   );
 };
 
-export default UserForm;
+export default FormContainer;
