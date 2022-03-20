@@ -11,88 +11,9 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 
 import ALL_SLUGS_GROUPS from '@/lib/menus/allTools'
+import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
 
 const PAGE_SIZE = 12;
-const ALL_SLUGS = [
-    {
-        key: "accessibility",
-        name: "# Accessibility",
-        tags: ["accessibility", "contrast"],
-    },
-    {
-        key: "color",
-        name: "# Color",
-        tags: ["color", "colour", "colors"]
-    },
-    {
-        key: "css",
-        name: "# CSS",
-        tags: ["css"]
-    },
-    {
-        key: "icons",
-        name: "# Icons",
-        tags: ["icons"]
-    },
-    {
-        key: "illustration",
-        name: "# Illustration",
-        tags: ["illustration", "illustrations"]
-    },{
-        key: "analysis",
-        name: "User Analysis",
-        tags: ["testing", "analytics", "user-analytics", "interview", "persona"]
-    },{
-        key: "journey",
-        name: "User Journey",
-        tags: ["journey", "journey-map", "user-flow"]
-    },{
-        key: "research",
-        name: "User Research",
-        tags: ["exploration", "research", "user-research"]
-    },{
-        key: "xd",
-        name: "Adobe XD",
-        tags: ["xd", "adobe-xd", "xd-plugin"]
-    },{
-        key: "figma",
-        name: "Figma",
-        tags: ["figma", "figma-plugin"]
-    },{
-        key: "marvel",
-        name: "Marvel",
-        tags: ["marvel", "marvel-app"]
-    },{
-        key: "sketch",
-        name: "Sketch",
-        tags: ["sketch", "sketch-app", "sketch-plugin"]
-    },{
-        key: "design",
-        name: "Design",
-        tags: ["prototyping", "design-tool", "prototyping-tool"]
-    },{
-        key: "handoff",
-        name: "Handoff",
-        tags: ["handoff", "design-to-code"]
-    },{
-        key: "interactions",
-        name: "Interactions",
-        tags: ["microinteractions", "interactions", "animation"]
-    },{
-        key: "ar",
-        name: "Augmented Reality",
-        tags: ["ar", "augmented-reality"]
-      },{
-        key: "vr",
-        name: "Virtual Reality",
-        tags: ["vr", "virtual-reality"]
-      },{
-        key: "chatbots",
-        name: "Chat Bots",
-        tags: ["chat", "chat-bot"]
-    }
-]
-
 
 const BREADCRUMBS = {
     pageTitle:'Toolbox',
@@ -158,9 +79,11 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
 export async function getStaticProps({ preview = null, params}) {
     const pageSize = PAGE_SIZE
     const {pageNo, slug} = params;
-    const foundSlug = ALL_SLUGS.find((SLUG, index) => {
-        return slug === SLUG.key
-    })
+    // const foundSlug = ALL_SLUGS.find((SLUG, index) => {
+    //     return slug === SLUG.key
+    // })
+    const foundSlug = find_page_slug_from_menu(ALL_SLUGS_GROUPS, slug)
+
     const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, foundSlug.tags )) || []
     // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
     const pagination = allPosts.meta.pagination
@@ -174,17 +97,40 @@ export async function getStaticProps({ preview = null, params}) {
 export async function getStaticPaths() {
     let pageCountRes = 0;
     let pageCountArr = [];
-    ALL_SLUGS.map(async (item, index)  => {
-        const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, item.tags)) || []
-        // const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0,["whiteboard"])) || []
+
+    //create the ALL_SLUGS from ALL_SLUGS_GROUPS
+    const all_slugs = get_slugs_from_menu(ALL_SLUGS_GROUPS)
+    //now just same as the .map
+    for(var z = 0;z<all_slugs.length;z++){
+        var itemTags =(all_slugs[z].tags)
+        const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, itemTags)) || []
         const pagination = allPosts.meta.pagination
         const pageCount = pagination.pageCount
         let arr = new Array(pageCount).fill('');
         let newArr = arr.map((i,index) => {
-            return `toolbox/${item.key}/page/${index+1}`
+            return `/toolbox/${all_slugs[z].key}/page/${index+1}`
         })
         pageCountArr = pageCountArr.concat(newArr)
-    })
+    }
+
+    /**
+     * this was not doing anything, because .map doesn't wait
+     * - you would have to use a promise?
+     */
+    // ALL_SLUGS.map(async (item, index)  => {
+    //     console.log(item.tags)
+    //     const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, item.tags)) || []
+    //     // const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0,["whiteboard"])) || []
+    //     const pagination = allPosts.meta.pagination
+    //     const pageCount = pagination.pageCount
+    //     let arr = new Array(pageCount).fill('');
+    //     let newArr = arr.map((i,index) => {
+    //         return `toolbox/${item.key}/page/${index+1}`
+    //     })
+    //     pageCountArr = pageCountArr.concat(newArr)
+    // })
+
+    // console.log(pageCountArr)
     return {
         paths: pageCountArr || [],
         fallback: true,

@@ -13,7 +13,6 @@ export default function Index({ allPosts, preview }) {
 
   const coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
 
-  console.log(heroPost)
   return (
     <>
       <Layout preview={preview}>
@@ -41,7 +40,6 @@ export default function Index({ allPosts, preview }) {
 
 export async function getStaticProps({ preview = null }) {
   const allPosts = (await getAllPostsForHome(preview)) || []
-  console.log(allPosts)
   return {
     props: { allPosts:allPosts.data, preview },
   }

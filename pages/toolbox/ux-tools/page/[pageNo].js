@@ -7,6 +7,8 @@ import NewPagination from "@/components/pagination";
 import FilterCategory from "@/components/FilterCategory";
 import Breadcrumbs from '@/components/Breadcrumbs'
 
+import get_all_tags from "@/lib/menus/lib/getAllTagsFromMenu";
+
 import {
   getAllPostsForToolsSubcategoryPage,
   getPostsByPageForToolsSubcategoryPage,
@@ -15,24 +17,6 @@ import {
 import ALL_SLUGS_GROUPS from "@/lib/menus/uxTools";
 
 const PAGE_SIZE = 12;
-const ALL_SLUGS = [
-  "whiteboard",
-  "onboarding",
-  "testing",
-  "feedback",
-  "moodboards",
-  "mindmapping",
-  "persona",
-  "user-flow",
-  "journey-map",
-  "onboarding",
-  "storymapping",
-  "recruiting",
-  "transcription",
-  "survey",
-  "analytics",
-  "annotate",
-];
 
 const BREADCRUMBS = {
   pageTitle:'UX Tools',
@@ -94,12 +78,15 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
 export async function getStaticProps({ preview = null, params }) {
   const pageSize = PAGE_SIZE;
   const page = params.pageNo;
+
+  var all_tags = get_all_tags(ALL_SLUGS_GROUPS)
   const allPosts =
     (await getPostsByPageForToolsSubcategoryPage(
       preview,
       pageSize,
       page,
-      ALL_SLUGS
+      // ALL_SLUGS
+      all_tags
     )) || [];
 
   const pagination = allPosts.meta.pagination;
@@ -113,8 +100,10 @@ export async function getStaticProps({ preview = null, params }) {
 }
 
 export async function getStaticPaths() {
+
+  var all_tags = get_all_tags(ALL_SLUGS_GROUPS)
   const allPosts =
-    (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, ALL_SLUGS)) ||
+    (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, all_tags)) ||
     [];
   const pagination = allPosts.meta.pagination;
   const pageCount = pagination.pageCount;

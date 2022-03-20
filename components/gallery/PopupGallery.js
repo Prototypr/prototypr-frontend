@@ -91,6 +91,7 @@ export default function PopupGallery({ item, link, img, body, rounded, arrows })
               <div className="my-auto block mx-auto flex justify-center p-6 rounded">
                 <Image 
                 // layout="fill"
+                objectFit="cover"
                 width="600"
                 height="400"
                 alt='Product screenshot'

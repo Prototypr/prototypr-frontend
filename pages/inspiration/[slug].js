@@ -67,7 +67,7 @@ export async function getStaticProps({ params, preview = null, type="designspo" 
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug('designspo')
-  console.log(allPosts)
+  
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 
       return `/inspiration/${post.attributes.slug}`}) || [],
