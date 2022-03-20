@@ -13,18 +13,18 @@ export default function FilterCategory ({slug = "", items = [], key, urlRoot}) {
                         className="mb-8 text-gray-800"
                       >
                         <div className="">
-                          <h1 className="font-bold pb-2 mb-2 border-b border-gray-200 pr-3 text-sm uppercase text-gray-900">
+                          <h1 className="font-bold pb-2 mb-2 border-b border-gray-200 pr-3 text-md uppercase text-gray-900">
                             {item.title}
                           </h1>
                         </div>
                         {item.subItems.map((sItem, sIndex) => {
                           return (
                             <div
-                              className="cursor-pointer text-sm"
+                              className="cursor-pointer text-md"
                               key={`toolbox_cat_${sIndex}`}
                             >
                               <Link href={`${urlRoot}/${sItem.key}/page/1`}>
-                              <div className={`hover:text-blue-500 py-2 rounded ${sItem.key==slug ?'text-blue-600 font-semibold':'text-gray-600'}`}>
+                              <div className={`hover:text-blue-500 py-1.5 rounded ${sItem.key==slug ?'text-blue-600 font-semibold':'text-gray-800 font-light'}`}>
                                   # {sItem.name}
                                 </div>
                               </Link>
@@ -33,7 +33,7 @@ export default function FilterCategory ({slug = "", items = [], key, urlRoot}) {
                         })}
                         {item.moreLink && 
                         <Link href={item.moreLink.url}>
-                        <a className="inline-block text-gray-500 underline mt-3 mb-6 text-sm">{item.moreLink.text}</a>
+                        <a className="inline-block text-gray-500 underline mt-3 mb-6 text-md">{item.moreLink.text}</a>
                         </Link>
                         }
                       </div>
