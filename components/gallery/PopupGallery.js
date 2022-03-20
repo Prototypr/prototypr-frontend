@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import SwiperGallery from "./SwiperGallery";
-
+import Image from "next/image";
 
 export default function PopupGallery({ item, link, img, body, rounded, arrows }) {
 
@@ -88,10 +88,13 @@ export default function PopupGallery({ item, link, img, body, rounded, arrows })
     <div className="bg-white pb-4 mb-6">
           {
               galleryComponent ? galleryComponent :
-              <div className="my-auto block mx-auto p-6 rounded">
-                <img 
+              <div className="my-auto block mx-auto flex justify-center p-6 rounded">
+                <Image 
+                // layout="fill"
+                width="600"
+                height="400"
                 alt='Product screenshot'
-                className="rounded mx-auto my-auto"
+                className="rounded"
                 src={item.legacyFeaturedImage?item.legacyFeaturedImage.mediaItemUrl:item.ogImage?item.ogImage.opengraphImage:''}
                 />
               </div>
