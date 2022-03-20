@@ -46,6 +46,44 @@ const ALL_SLUGS = [{
     key: "whiteboard",
     name: "# Whiteboarding",
     tags: ["whiteboard"]
+},{
+  key: "feedback",
+  name: "# Feedback",
+  tags: ["feedback"],
+},{
+  key: "kanban",
+  name: "# Kanban",
+  tags: ["kanban"],
+},{
+  key: "notes",
+  name: "# Note Taking",
+  tags: ["notes"],
+},{
+  key: "roadmapping",
+  name: "# Roadmapping",
+  tags: ["project-management"],
+},{
+  key: "workspace",
+  name: "# Workspace",
+  tags: ["workspace"],
+},{
+  key: "journey",
+  name: "# Journey Map",
+  tags: ["journey-map", "user-journey"],
+},{
+  key: "journey",
+  name: "# Onboarding",
+  tags: ["onboarding"],
+},
+{
+  key: "personas",
+  name: "# Personas",
+  tags: ["persona", "personas"],
+},
+{
+  key: "userflow",
+  name: "# User Flow",
+  tags: ["user-flow", "Storymapping"],
 }];
 
 const ALL_SLUGS_GROUPS = [
@@ -185,7 +223,20 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                     (<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                     <div className="grid-cols-1 hidden lg:block">
                         <div className='w-full h-screen  flex flex-col'>
-                        <h1 className="font-semibold text-xl my-4">All Tools</h1>
+                        <h1 className="font-semibold text-2xl">All Tools</h1>
+                        <div className="pt-1 text-sm text-gray-700 pb-8">
+                          <Link href="/">
+                              <a>Home</a>
+                          </Link>{" "}
+                          →{" "}
+                          <Link href="/toolbox/ux-tools/page/1">
+                              <a>Toolbox</a>
+                          </Link>
+                          →{" "}
+                          <Link href={`/toolbox/ux-tools/${slug}/page/1`}>
+                              <a>{slug}</a>
+                          </Link>
+                        </div>
                         <div className="display-none mb-8 lg:block text-gray-800">
                         {
                             ALL_SLUGS_GROUPS.map((item, index) => {

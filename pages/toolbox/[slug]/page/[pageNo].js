@@ -10,20 +10,186 @@ import FilterCategory from '@/components/FilterCategory'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import Link from 'next/link'
 const PAGE_SIZE = 12;
-const ALL_SLUGS = [{
-    key: "analysis",
-    name: "User Analysis",
-    tags: ["testing", "analytics", "user-analytics", "interview", "persona"]
-},{
-    key: "journey",
-    name: "User Journey",
-    tags: ["journey", "journey-map", "user-flow"]
-},{
-    key: "research",
-    name: "User Research",
-    tags: ["exploration", "research", "user-research"]
-}]
+const ALL_SLUGS = [
+    {
+        key: "accessibility",
+        name: "# Accessibility",
+        tags: ["accessibility", "contrast"],
+    },
+    {
+        key: "color",
+        name: "# Color",
+        tags: ["color", "colour", "colors"]
+    },
+    {
+        key: "css",
+        name: "# CSS",
+        tags: ["css"]
+    },
+    {
+        key: "icons",
+        name: "# Icons",
+        tags: ["icons"]
+    },
+    {
+        key: "illustration",
+        name: "# Illustration",
+        tags: ["illustration", "illustrations"]
+    },{
+        key: "analysis",
+        name: "User Analysis",
+        tags: ["testing", "analytics", "user-analytics", "interview", "persona"]
+    },{
+        key: "journey",
+        name: "User Journey",
+        tags: ["journey", "journey-map", "user-flow"]
+    },{
+        key: "research",
+        name: "User Research",
+        tags: ["exploration", "research", "user-research"]
+    },{
+        key: "xd",
+        name: "Adobe XD",
+        tags: ["xd", "adobe-xd", "xd-plugin"]
+    },{
+        key: "figma",
+        name: "Figma",
+        tags: ["figma", "figma-plugin"]
+    },{
+        key: "marvel",
+        name: "Marvel",
+        tags: ["marvel", "marvel-app"]
+    },{
+        key: "sketch",
+        name: "Sketch",
+        tags: ["sketch", "sketch-app", "sketch-plugin"]
+    },{
+        key: "design",
+        name: "Design",
+        tags: ["prototyping", "design-tool", "prototyping-tool"]
+    },{
+        key: "handoff",
+        name: "Handoff",
+        tags: ["handoff", "design-to-code"]
+    },{
+        key: "interactions",
+        name: "Interactions",
+        tags: ["microinteractions", "interactions", "animation"]
+    },{
+        key: "ar",
+        name: "Augmented Reality",
+        tags: ["ar", "augmented-reality"]
+      },{
+        key: "vr",
+        name: "Virtual Reality",
+        tags: ["vr", "virtual-reality"]
+      },{
+        key: "chatbots",
+        name: "Chat Bots",
+        tags: ["chat", "chat-bot"]
+    }
+]
 
+const ALL_SLUGS_GROUPS = [
+ {
+    title: "UI",
+    subItems: [
+        {
+            key: "accessibility",
+            name: "# Accessibility",
+            tags: ["accessibility", "contrast"],
+        },
+        {
+            key: "color",
+            name: "# Color",
+            tags: ["color", "colour", "colors"]
+        },
+        {
+            key: "css",
+            name: "# CSS",
+            tags: ["css"]
+        },
+        {
+            key: "icons",
+            name: "# Icons",
+            tags: ["icons"]
+        },
+        {
+            key: "illustration",
+            name: "# Illustration",
+            tags: ["illustration", "illustrations"]
+        }
+    ]
+},{
+    title: "UX",
+    subItems: [{
+        key: "analysis",
+        name: "User Analysis",
+        tags: ["testing", "analytics", "user-analytics", "interview", "persona"]
+    },{
+        key: "journey",
+        name: "User Journey",
+        tags: ["journey", "journey-map", "user-flow"]
+    },{
+        key: "research",
+        name: "User Research",
+        tags: ["exploration", "research", "user-research"]
+    }]
+},
+{
+    title: "Plugins",
+    subItems: [{
+        key: "xd",
+        name: "Adobe XD",
+        tags: ["xd", "adobe-xd", "xd-plugin"]
+    },{
+        key: "figma",
+        name: "Figma",
+        tags: ["figma", "figma-plugin"]
+    },{
+        key: "marvel",
+        name: "Marvel",
+        tags: ["marvel", "marvel-app"]
+    },{
+        key: "sketch",
+        name: "Sketch",
+        tags: ["sketch", "sketch-app", "sketch-plugin"]
+    }]
+},{
+    title: "Prototyping",
+    subItems: [{
+        key: "design",
+        name: "Design",
+        tags: ["prototyping", "design-tool", "prototyping-tool"]
+    },{
+        key: "handoff",
+        name: "Handoff",
+        tags: ["handoff", "design-to-code"]
+    },{
+        key: "interactions",
+        name: "Interactions",
+        tags: ["microinteractions", "interactions", "animation"]
+    }]
+  },{
+      title: "Mixed Reality",
+      subItems: [{
+        key: "ar",
+        name: "Augmented Reality",
+        tags: ["ar", "augmented-reality"]
+      },{
+        key: "vr",
+        name: "Virtual Reality",
+        tags: ["vr", "virtual-reality"]
+      }]
+  },{
+      title: "Conversational Design",
+      subItems: [{
+          key: "chatbots",
+          name: "Chat Bots",
+          tags: ["chat", "chat-bot"]
+      }]
+  }
+];
 
 
 export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
@@ -44,56 +210,55 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
         <Layout activeNav={'toolbox'} preview={preview}>
             <Container>
             {
-                    allPosts.length > 0 && 
+                allPosts.length > 0 && 
                     (<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                     <div className="grid-cols-1 hidden lg:block">
-                        <div className='w-full h-screen  flex flex-col'>
-                        <h1 className="font-semibold text-xl my-4">All Tools</h1>
-                        <div className="display-none mb-8 lg:block text-gray-800">
-                            {/* <div className="px-2">
-                                <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">All Tools</h1>
-                            </div> */}
-                            {/* <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># UX tools</div></Link>
-                            </div>
-                            <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># Virtual Realilty</div></Link>
-                            </div>
-                            <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># Prototyping tools</div></Link>
-                            </div> */}
-
-                            <div className="px-2">
-                                <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">UX Tools</h1>
-                            </div>
-                            {
-                                ALL_SLUGS && ALL_SLUGS.map((item, index) => {
-                                    return (
-                                        <div className="cursor-pointer text-sm" key={`toolbox_${slug}_cat_${index}`}>
-                                            <Link href={`/toolbox/${item.key}/page/1`}>
-                                                <div className={`text-gray-700 hover:text-blue-500 p-2 rounded ${item.key === slug ? ' text-blue-600 font-semibold' : ''}`}>
-                                                {item.name}
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    )
-                                })
-                            }
-                            {/* <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># User Analysis</div></Link>
-                            </div>
-                            <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># User Journey</div></Link>
-                            </div>
-                            <div className="cursor-pointer text-sm">
-                                <Link href={'/toolbox/ux-tools/page/1'}><div className="text-gray-700 hover:text-blue-500 p-2 rounded"># User Research</div></Link>
-                            </div> */}
-
-                            <Link href="/toolbox/ux-tools/page/1">
-                                <a className="inline-block text-blue-600 my-2 text-sm px-2">Browse all UX →</a>
-                            </Link>
-                        </div>
+                    <div className="w-full h-screen  flex flex-col">
+                    <h1 className="font-semibold text-2xl">Toolbox</h1>
+                    <div className="pt-1 text-sm text-gray-700 pb-8">
+                    <Link href="/">
+                        <a>Home</a>
+                    </Link>{" "}
+                    →{" "}
+                    <Link href="/toolbox/page/1">
+                        <a>Toolbox</a>
+                    </Link>
+                    →{" "}
+                    <Link href={`/toolbox/${slug}/page/1`}>
+                        <a>{slug}</a>
+                    </Link>
                     </div>
+                <div className="display-none mb-8 lg:block text-gray-800">
+                  {ALL_SLUGS_GROUPS.map((item, index) => {
+                    return (
+                      <div
+                        key={`uxtools_item_${index}`}
+                        className="mb-8 text-gray-800"
+                      >
+                        <div className="px-2">
+                          <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">
+                            {item.title}
+                          </h1>
+                        </div>
+                        {item.subItems.map((sItem, sIndex) => {
+                          return (
+                            <div
+                              className="cursor-pointer text-sm"
+                              key={`toolbox_cat_${sIndex}`}
+                            >
+                              <Link href={`/toolbox/${sItem.key}/page/1`}>
+                                <div className="text-gray-700 hover:text-blue-500 p-2 rounded">
+                                  {sItem.name}
+                                </div>
+                              </Link>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
                        
                     </div>
                     <div className="col-span-3">
