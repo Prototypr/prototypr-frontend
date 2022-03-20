@@ -75,18 +75,26 @@ export default function PopupGallery({ item, link, img, body, rounded, arrows })
     //     bodyTxt = bod[0].nextSibling.textContent;
     //   }
     // }
+    
+    if(item.legacyMedia && item.legacyMedia.gallery.length){
+      const galleryComponent = _buildGallery();
+      setGalleryComponent(galleryComponent);
+    }
 
     // setBodyTxt(bodyTxt);
-    const galleryComponent = _buildGallery();
-    // if (galleryComponent) {
-        setGalleryComponent(galleryComponent);
-    // }
   }, []);
 
   return (
     <div className="bg-white pb-4 mb-6">
           {
-              galleryComponent ? galleryComponent :null
+              galleryComponent ? galleryComponent :
+              <div className="my-auto block mx-auto p-6 rounded">
+                <img 
+                alt='Product screenshot'
+                className="rounded mx-auto my-auto"
+                src={item.legacyFeaturedImage?item.legacyFeaturedImage.mediaItemUrl:item.ogImage?item.ogImage.opengraphImage:''}
+                />
+              </div>
           }  
     </div>
   )
