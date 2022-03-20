@@ -7,7 +7,7 @@ export default function MoreStories({ posts, type, route }) {
       {/* <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
         More {type=='toolbox'?'Tools':'Posts'}
       </h2> */}
-      <div className={`grid grid-cols-1 ${type === 'toolbox' ? ' md:grid-cols-3' : ' md:grid-cols-2'} md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-32`}>
+      <div className={`grid grid-cols-1 ${type === 'toolbox' ? ' md:grid-cols-3' : ' md:grid-cols-2'} md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
         {posts.map((post) => (
           <PostPreview
             key={post.attributes.slug}

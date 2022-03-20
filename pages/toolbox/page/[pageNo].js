@@ -55,18 +55,19 @@ export default function ToolboxPage({
             </div>
             <div className="col-span-3">
               <MoreStories posts={allPosts} type="toolbox" />
+              <NewPagination
+                total={pagination?.total}
+                pageSize={PAGE_SIZE}
+                currentPage={pagination?.page}
+                onPageNumChange={(pageNum) => {
+                  onPageNumChange(pageNum);
+                }}
+              />
             </div>
           </div>
         )}
 
-        <NewPagination
-          total={pagination?.total}
-          pageSize={PAGE_SIZE}
-          currentPage={pagination?.page}
-          onPageNumChange={(pageNum) => {
-            onPageNumChange(pageNum);
-          }}
-        />
+        
       </Container>
     </Layout>
   );
