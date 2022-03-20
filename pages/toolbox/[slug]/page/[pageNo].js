@@ -125,11 +125,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                     <div className="w-full min-h-screen  flex flex-col">
                    
                     <Breadcrumbs 
+                    urlRoot={'/toolbox'}
                     title={BREADCRUMBS.pageTitle}
                     links={BREADCRUMBS.links}
                     currentSlug={slug}
                     />
-                    <FilterCategory items={ALL_SLUGS_GROUPS} key={'uxtools_item_'} slug={slug}/>
+                    <FilterCategory 
+                        urlRoot={'/toolbox'}
+                        items={ALL_SLUGS_GROUPS} 
+                        key={'uxtools_item_'} 
+                        slug={slug}/>
               </div>
                        
                     </div>

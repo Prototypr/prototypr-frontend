@@ -3,7 +3,7 @@ import React , { useState } from "react";
 import Link from 'next/link'
 
 
-export default function Breadcrumbs ({title = "", links = [], currentSlug=''}) {
+export default function Breadcrumbs ({title = "", links = [], currentSlug='', urlRoot=''}) {
     return (
         <>
         <h1 className="font-semibold text-2xl">{title}</h1>
@@ -11,16 +11,16 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug=''}) {
              {links.map((item,index) =>{
                 return( <>
                     {" "} 
-                    <Link href={item.slug}>
-                     <a>{item.name}</a>
+                    <Link href={`${item.slug}`}>
+                     <a className="hover:underline">{item.name}</a>
                      </Link>{" "}→{" "}
                  </>)
              })}
-            {currentSlug?<Link href={`/toolbox/${currentSlug}/page/1`}>
-                <a className="capitalize">{currentSlug}</a>
+            {currentSlug?<Link href={`${urlRoot}/${currentSlug}/page/1`}>
+                <a className="capitalize underline">{currentSlug}</a>
             </Link>:
-            <Link href={`/${title.toLowerCase()}/page/1`}>
-                <a className="capitalize">{title}</a>
+            <Link href={`${urlRoot}/page/1`}>
+                <a className="capitalize underline">{title}</a>
             </Link>
             }
         </div>

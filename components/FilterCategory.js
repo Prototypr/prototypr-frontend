@@ -3,7 +3,7 @@ import React , { useState } from "react";
 import Link from 'next/link'
 
 
-export default function FilterCategory ({slug = "", items = [], key}) {
+export default function FilterCategory ({slug = "", items = [], key, urlRoot}) {
     return (
         <div className="display-none mb-8 lg:block text-gray-800">
                   {items.map((item, index) => {
@@ -23,9 +23,9 @@ export default function FilterCategory ({slug = "", items = [], key}) {
                               className="cursor-pointer text-sm"
                               key={`toolbox_cat_${sIndex}`}
                             >
-                              <Link href={`/toolbox/${sItem.key}/page/1`}>
+                              <Link href={`${urlRoot}/${sItem.key}/page/1`}>
                               <div className={`hover:text-blue-500 py-2 rounded ${sItem.key==slug ?'text-blue-600 font-semibold':'text-gray-700'}`}>
-                                  {sItem.name}
+                                  # {sItem.name}
                                 </div>
                               </Link>
                             </div>

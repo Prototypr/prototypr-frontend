@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
 import MoreStories from "@/components/more-stories";
 import NewPagination from "@/components/pagination";
 import FilterCategory from "@/components/FilterCategory";
+import Breadcrumbs from '@/components/Breadcrumbs'
+
 import {
   getAllPostsForToolsSubcategoryPage,
   getPostsByPageForToolsSubcategoryPage,
 } from "@/lib/api";
+
+import ALL_SLUGS_GROUPS from "@/lib/menus/uxTools";
+
 const PAGE_SIZE = 12;
 const ALL_SLUGS = [
   "whiteboard",
@@ -29,118 +33,16 @@ const ALL_SLUGS = [
   "analytics",
   "annotate",
 ];
-const ALL_SLUGS_GROUPS = [
-  {
-    title: "ANALYSIS",
-    subItems: [
-      {
-        key: "heatmaps",
-        name: "# Heatmaps",
-        tags: ["analytics", "heat-map"],
-      },
-      {
-        key: "record",
-        name: "# Recording",
-        tags: ["record"],
-      },
-      {
-        key: "recruiting",
-        name: "# Recruiting",
-        tags: ["recruit"],
-      },
-      {
-        key: "transcribe",
-        name: "# Transcription",
-        tags: ["transcribe"],
-      },
-      {
-        key: "survey",
-        name: "# Survey Tools",
-        tags: ["survey"],
-      },
-    ],
-  },
-  {
-    title: "BRAINSTORM",
-    subItems: [
-      {
-        key: "collaboration",
-        name: "# Collaboration",
-        tags: ["collaboration"],
-      },
-      {
-        key: "mindmapping",
-        name: "# Mindmapping",
-        tags: ["mindmapping"],
-      },
-      {
-        key: "moodboards",
-        name: "# Moodboards",
-        tags: ["moodboards", "moodboard"],
-      },
-      {
-        key: "whiteboard",
-        name: "# Whiteboarding",
-        tags: ["whiteboard"],
-      },
-    ],
-  },
-  {
-    title: "PROJECT MANAGEMENT",
-    subItems: [
-      {
-        key: "feedback",
-        name: "# Feedback",
-        tags: ["feedback"],
-      },
-      {
-        key: "kanban",
-        name: "# Kanban",
-        tags: ["kanban"],
-      },
-      {
-        key: "notes",
-        name: "# Note Taking",
-        tags: ["notes"],
-      },
-      {
-        key: "roadmapping",
-        name: "# Roadmapping",
-        tags: ["project-management"],
-      },
-      {
-        key: "workspace",
-        name: "# Workspace",
-        tags: ["workspace"],
-      },
-    ],
-  },
-  {
-    title: "USER JOURNEY",
-    subItems: [
-      {
-        key: "journey",
-        name: "# Journey Map",
-        tags: ["journey-map", "user-journey"],
-      },
-      {
-        key: "journey",
-        name: "# Onboarding",
-        tags: ["onboarding"],
-      },
-      {
-        key: "personas",
-        name: "# Personas",
-        tags: ["persona", "personas"],
-      },
-      {
-        key: "userflow",
-        name: "# User Flow",
-        tags: ["user-flow", "Storymapping"],
-      },
-    ],
-  },
-];
+
+const BREADCRUMBS = {
+  pageTitle:'UX Tools',
+  links:[
+      {name:'Home', slug:'/'},
+      {name:'Toolbox', slug:'/toolbox/page/1'},
+      // {name:'UX Tools', slug:'/toolbox/ux-tools/page/1'}
+  ]
+}
+
 
 export default function ToolboxPage({ allPosts = [], preview, pagination }) {
   //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
@@ -158,47 +60,17 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
           <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
             <div className="grid-cols-1 hidden lg:block">
               <div className="w-full min-h-screen  flex flex-col">
-                <h1 className="font-semibold text-2xl">UX Tools</h1>
-                <div className="pt-1 text-sm text-gray-700 pb-8">
-                    <Link href="/">
-                        <a>Home</a>
-                    </Link>{" "}
-                    →{" "}
-                    <Link href="/toolbox/ux-tools/page/1">
-                        <a className="capitalize">UX Tools</a>
-                    </Link>
-                  </div>
-                <div className="display-none mb-8 lg:block text-gray-800">
-                  {
-                    ALL_SLUGS_GROUPS.map((item, index) => {
-                      return (
-                        <div key={`uxtools_item_${index}`} className="mb-8 text-gray-800">
-                          <div className="">
-                            <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">
-                              {item.title}
-                            </h1>
-                          </div>
-                          {item.subItems.map((sItem, sIndex) => {
-                            return (
-                              <div
-                                className="cursor-pointer text-sm"
-                                key={`ux-tools_cat_${sIndex}`}
-                              >
-                                <Link
-                                  href={`/toolbox/ux-tools/${sItem.key}/page/1`}
-                                >
-                                  <div className="text-gray-700 hover:text-blue-500 py-2 rounded">
-                                    {sItem.name}
-                                  </div>
-                                </Link>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      );
-                    })
-                  }
-                </div>
+              <Breadcrumbs 
+                urlRoot={'/toolbox/ux-tools'}
+                title={BREADCRUMBS.pageTitle}
+                links={BREADCRUMBS.links}
+                />
+              <FilterCategory
+                urlRoot={'/toolbox/ux-tools'}
+                items={ALL_SLUGS_GROUPS} 
+                key={'uxtools_item_'} 
+                // slug={slug}
+                />
               </div>
             </div>
             <div className="col-span-3">
