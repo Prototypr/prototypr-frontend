@@ -46,7 +46,6 @@ const BREADCRUMBS = {
 
 export default function ToolboxPage({ allPosts = [], preview, pagination }) {
   //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
-  const [selectedFilter, setSelectedFilter] = useState("");
   const router = useRouter();
 
   const onPageNumChange = (pageNo) => {

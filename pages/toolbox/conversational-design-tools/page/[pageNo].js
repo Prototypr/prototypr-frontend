@@ -75,7 +75,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                             <h1 className="font-semibold text-xl my-4">All Tools</h1>
                             <div className="display-none mb-8 lg:block text-gray-800">
                             <div className="">
-                                <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">UX Tools</h1>
+                                <h1 className="font-bold pb-2 mb-2 border-b border-gray-200 pr-3 text-sm uppercase text-gray-900">UX Tools</h1>
                             </div>
                             {
                                 ALL_SLUGS_CATEGORY && ALL_SLUGS_CATEGORY.map((item, index) => {

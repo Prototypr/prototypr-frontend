@@ -6,8 +6,8 @@ import Link from 'next/link'
 export default function Breadcrumbs ({title = "", links = [], currentSlug='', urlRoot=''}) {
     return (
         <>
-        <h1 className="font-semibold text-2xl">{title}</h1>
-        <div className="pt-1 text-sm text-gray-700 pb-8">
+        <h1 className="font-semibold text-3xl">{title}</h1>
+        <div className="pt-2 text-md text-gray-700 pb-8">
              {links.map((item,index) =>{
                 return( <>
                     {" "} 
