@@ -31,7 +31,11 @@ export default function FilterCategory ({slug = "", items = [], key, urlRoot}) {
                             </div>
                           );
                         })}
-                        {item.moreLink && item.moreLink}
+                        {item.moreLink && 
+                        <Link href={item.moreLink.url}>
+                        <a className="inline-block text-gray-500 underline mt-3 mb-6 text-sm">{item.moreLink.text}</a>
+                        </Link>
+                        }
                       </div>
                     );
                   })}
