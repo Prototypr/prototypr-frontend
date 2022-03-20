@@ -42,6 +42,9 @@ const ALL_SLUGS_GROUPS = [
   },
   {
     title: "UX",
+    moreLink:<Link href="/toolbox/ux-tools/page/1">
+                <a className="inline-block text-blue-600 my-2 text-sm">Browse all UI →</a>
+            </Link>,
     subItems: [
       {
         key: "analysis",
@@ -93,6 +96,9 @@ const ALL_SLUGS_GROUPS = [
   },
   {
     title: "Prototyping",
+    moreLink:<Link href="/prototyping/page/1">
+                <a className="inline-block text-blue-600 my-2 text-sm">Browse all Prototyping →</a>
+            </Link>,
     subItems: [
       {
         key: "design",
@@ -113,6 +119,9 @@ const ALL_SLUGS_GROUPS = [
   },
   {
     title: "Mixed Reality",
+    moreLink:<Link href="/toolbox/augmented-reality-tools/page/1">
+                <a className="inline-block text-blue-600 my-2 text-sm">Browse all VR/AR →</a>
+            </Link>,
     subItems: [
       {
         key: "ar",
@@ -128,6 +137,9 @@ const ALL_SLUGS_GROUPS = [
   },
   {
     title: "Conversational Design",
+    moreLink:<Link href="/toolbox/conversational-design-tools/page/1">
+      <a className="inline-block text-blue-600 my-2 text-sm">Browse all Conversational →</a>
+    </Link>,
     subItems: [
       {
         key: "chatbots",
@@ -157,7 +169,7 @@ export default function ToolboxPage({
         {allPosts.length > 0 && (
           <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
             <div className="grid-cols-1 hidden lg:block">
-              <div className="w-full h-screen  flex flex-col">
+              <div className="w-full min-h-screen  flex flex-col">
                 <h1 className="font-semibold text-2xl">Toolbox</h1>
                 <div className="pt-1 text-sm text-gray-700 pb-8">
                   <Link href="/">
@@ -175,7 +187,7 @@ export default function ToolboxPage({
                         key={`uxtools_item_${index}`}
                         className="mb-8 text-gray-800"
                       >
-                        <div className="px-2">
+                        <div className="">
                           <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">
                             {item.title}
                           </h1>
@@ -187,16 +199,20 @@ export default function ToolboxPage({
                               key={`toolbox_cat_${sIndex}`}
                             >
                               <Link href={`/toolbox/${sItem.key}/page/1`}>
-                                <div className="text-gray-700 hover:text-blue-500 p-2 rounded">
+                                <div className="text-gray-700 hover:text-blue-500 py-2 rounded">
                                   {sItem.name}
                                 </div>
                               </Link>
                             </div>
                           );
                         })}
+
+                        {item.moreLink && item.moreLink}
                       </div>
                     );
+                    
                   })}
+
                 </div>
               </div>
             </div>

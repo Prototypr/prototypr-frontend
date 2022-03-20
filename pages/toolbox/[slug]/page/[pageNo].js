@@ -93,6 +93,9 @@ const ALL_SLUGS = [
 const ALL_SLUGS_GROUPS = [
  {
     title: "UI",
+    moreLink:<Link href="/ui-tools/page/1">
+                <a className="inline-block text-blue-600 my-2 text-sm">Browse all UI →</a>
+            </Link>,
     subItems: [
         {
             key: "accessibility",
@@ -213,7 +216,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                 allPosts.length > 0 && 
                     (<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                     <div className="grid-cols-1 hidden lg:block">
-                    <div className="w-full h-screen  flex flex-col">
+                    <div className="w-full min-h-screen  flex flex-col">
                     <h1 className="font-semibold text-2xl">Toolbox</h1>
                     <div className="pt-1 text-sm text-gray-700 pb-8">
                     <Link href="/">
@@ -225,7 +228,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                     </Link>
                     →{" "}
                     <Link href={`/toolbox/${slug}/page/1`}>
-                        <a>{slug}</a>
+                        <a className="capitalize">{slug}</a>
                     </Link>
                     </div>
                 <div className="display-none mb-8 lg:block text-gray-800">
@@ -235,7 +238,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                         key={`uxtools_item_${index}`}
                         className="mb-8 text-gray-800"
                       >
-                        <div className="px-2">
+                        <div className="">
                           <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">
                             {item.title}
                           </h1>
@@ -247,13 +250,14 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                               key={`toolbox_cat_${sIndex}`}
                             >
                               <Link href={`/toolbox/${sItem.key}/page/1`}>
-                                <div className="text-gray-700 hover:text-blue-500 p-2 rounded">
+                              <div className={`hover:text-blue-500 py-2 rounded ${sItem.key==slug ?'text-blue-600 font-semibold':'text-gray-700'}`}>
                                   {sItem.name}
                                 </div>
                               </Link>
                             </div>
                           );
                         })}
+                        {item.moreLink ? item.moreLink:'no more'}
                       </div>
                     );
                   })}

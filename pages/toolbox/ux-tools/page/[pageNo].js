@@ -157,7 +157,7 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
         {allPosts.length > 0 && (
           <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
             <div className="grid-cols-1 hidden lg:block">
-              <div className="w-full h-screen  flex flex-col">
+              <div className="w-full min-h-screen  flex flex-col">
                 <h1 className="font-semibold text-2xl">UX Tools</h1>
                 <div className="pt-1 text-sm text-gray-700 pb-8">
                     <Link href="/">
@@ -165,7 +165,7 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
                     </Link>{" "}
                     →{" "}
                     <Link href="/toolbox/ux-tools/page/1">
-                        <a>Toolbox</a>
+                        <a className="capitalize">UX Tools</a>
                     </Link>
                   </div>
                 <div className="display-none mb-8 lg:block text-gray-800">
@@ -173,7 +173,7 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
                     ALL_SLUGS_GROUPS.map((item, index) => {
                       return (
                         <div key={`uxtools_item_${index}`} className="mb-8 text-gray-800">
-                          <div className="px-2">
+                          <div className="">
                             <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">
                               {item.title}
                             </h1>
@@ -187,7 +187,7 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
                                 <Link
                                   href={`/toolbox/ux-tools/${sItem.key}/page/1`}
                                 >
-                                  <div className="text-gray-700 hover:text-blue-500 p-2 rounded">
+                                  <div className="text-gray-700 hover:text-blue-500 py-2 rounded">
                                     {sItem.name}
                                   </div>
                                 </Link>

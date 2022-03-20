@@ -24,7 +24,7 @@ export default function PostPreview({
               coverImage && coverImage.logoNew && (
                 <img 
                   alt="Brand logo for external website's link"
-                  className="object-cover flex-shrink-0 shine rounded-full border-2 border-white  shadow h-10 -mt-4 w-10 hover:shadow-xl"
+                  className="object-cover flex-shrink-0 shine rounded-full border-2 border-white bg-white shadow h-10 -mt-4 w-10 hover:shadow-xl"
                   src={coverImage.logoNew}
                 />
               )

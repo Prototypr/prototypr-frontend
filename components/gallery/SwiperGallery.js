@@ -75,11 +75,11 @@ export default function SwiperGallery({ data = [] }) {
             modules={[FreeMode, Navigation, Thumbs, A11y]}
           >
             {data.map((current, idx) => (
-              <SwiperSlide className="h-20 w-20 relative flex justify-center" key={idx}>
+              <SwiperSlide className="h-20 w-20 overflow-hidden relative flex justify-center" key={idx}>
                 <div className="rounded h-20 w-20 bg-white">
                   <img
-                    className="shadow-sm shine h-32 w-32 cursor-pointer bg-white object-cover rounded-lg"
-                    style={{ maxHeight: "120px", display: "block" }}
+                    className="shadow-sm shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
+                    style={{  display: "block" }}
                     src={current.thumbnail}
                     alt={`Gallery Image ${idx}`}
                   />
