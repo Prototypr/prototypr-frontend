@@ -31,7 +31,6 @@ export default function WriterGrid({count = 0, span = 0 ,size, cols = 4, buttonT
         let newSize = size ? size: "xs";
 
         items = items.slice(0,newCount)
-        console.log("多少个******" + items.length)
         setItems(items)
         setMySize(mySize)
         setMyCount(myCount)

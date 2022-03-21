@@ -11,6 +11,7 @@ import PopupGallery from "@/components/gallery/PopupGallery";
 import AuthorCard from "@/components/toolbox/AuthorCard";
 import SponsorCard from "@/components/toolbox/SponsorCard";
 import Contributors from "@/components/toolbox/Contributors";
+import Comment from "@/components/toolbox/Comment/Comment";
 import { getAllPostsWithSlug, getToolsAndMoreTools } from "@/lib/api";
 import PostTitle from "@/components/post-title";
 import Head from "next/head";
@@ -28,6 +29,11 @@ export default function Post({ post, morePosts, preview }) {
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />;
   }
+
+  const setUserAuthenticated = () => {
+
+  }
+
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
       <Container>
@@ -51,7 +57,9 @@ export default function Post({ post, morePosts, preview }) {
             {/**related posts(it may be empty sometimes) */}
 
             {/**Contributors */}
-            <Contributors withAuthUser={withAuthUser} />
+            <Contributors 
+              withAuthUser={withAuthUser}
+            />
           </div>
           {/* center sidebar */}
           <div
@@ -76,7 +84,12 @@ export default function Post({ post, morePosts, preview }) {
             </div>
 
             {/**Comments */}
-            
+            <Comment 
+              withAuthUser={withAuthUser}
+              setUserAuthenticated={setUserAuthenticated}
+              titleClass="text-sm font-semibold hidden text-gray-800"
+              item={post?.attributes}
+            />
           </div>
           {/* RIGHT SIDEBAR START */}
           <div
