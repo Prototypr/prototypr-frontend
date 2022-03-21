@@ -67,7 +67,7 @@ export async function getStaticProps({ params, preview = null, postType="newslet
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug('newsletter')
-  console.log(allPosts)
+  
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 
       return `/newsletter/${post.attributes.slug}`}) || [],

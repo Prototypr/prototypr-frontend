@@ -1,29 +1,24 @@
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import Layout from '@/components/layout'
 import Container from '@/components/container'
 import MoreStories from '@/components/more-stories'
-import HeroPost from '@/components/hero-post'
-import Intro from '@/components/tools/intro'
 import NewPagination from '@/components/pagination'
 import FilterCategory from '@/components/FilterCategory'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
-const PAGE_SIZE = 12;
-const ALL_SLUGS = ["prototyping", "design-tool"]
+import Breadcrumbs from '@/components/Breadcrumbs'
 
-const ALL_SLUGS_CATEGORY = [{
-    key: "design",
-    name: "# Design",
-    tags: ["prototyping", "design-tool", "prototyping-tool"]
-},{
-    key: "handoff",
-    name: "# Handoff",
-    tags: ["handoff", "design-to-code"]
-},{
-    key: "/interactions",
-    name: "# Interactions",
-    tags: ["microinteractions", "interactions", "animation"]
-}]
+import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
+import ALL_SLUGS_CATEGORY from '@/lib/menus/prototyping'
+
+const PAGE_SIZE = 12;
+
+const BREADCRUMBS = {
+    pageTitle:'Prototyping',
+    links:[
+        {name:'Home', slug:'/'},
+        // {name:'Prototyping', slug:'/prototyping/page/1'}
+    ]
+}
 
 export default function ToolboxPage({allPosts = [], preview, pagination}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
@@ -44,52 +39,24 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
     return (
         <Layout activeNav={'toolbox'} preview={preview}>
             <Container>
-            {/* {
-                pagination && pagination.page == 1 && (
-                    <>
-                        <Intro title={'Prototyping Tools'} />
-                        {heroPost && (
-                            <HeroPost
-                            title={heroPost.attributes.title}
-                            coverImage={coverImage}
-                            date={heroPost.attributes.date}
-                            author={(heroPost.attributes.author &&heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
-                            slug={heroPost.attributes.slug}
-                            excerpt={heroPost.attributes.excerpt}
-                            type="toolbox"
-                            />
-                        )}   
-                    </>
-                )
-            } */}
             {
                 allPosts.length > 0 &&
                 (
                     <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                         <div className="grid-cols-1 hidden lg:block">
-                            <div className='w-full h-screen  flex flex-col'>
-                            <h1 className="font-semibold text-xl my-4">All Tools</h1>
-                            <div className="display-none mb-8 lg:block text-gray-800">
-                            <div className="px-2">
-                                <h1 className="font-semibold pb-2 mb-2 border-b border-gray-300 pr-3 text-xs uppercase text-gray-900">UX Tools</h1>
-                            </div>
-                            {
-                                ALL_SLUGS_CATEGORY && ALL_SLUGS_CATEGORY.map((item, index) => {
-                                    return (
-                                        <div className="cursor-pointer text-sm" key={`toobox_cat_${index}`}>
-                                            <Link href={`/prototyping/${item.key}/page/1`}>
-                                                <div className="text-gray-700 hover:text-blue-500 p-2 rounded">
-                                                {item.name}
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    )
-                                })
-                            }
-                            <Link href="/prototyping/page/1">
-                                <a className="inline-block text-blue-600 my-2 text-sm px-2">Browse all Prototyping →</a>
-                            </Link>
-                        </div>
+                            <div className='w-full min-h-screen  flex flex-col'>
+                            <Breadcrumbs 
+                            urlRoot={'/prototyping'}
+                            title={BREADCRUMBS.pageTitle}
+                            links={BREADCRUMBS.links}
+                            // currentSlug={slug}
+                            />
+                            <FilterCategory 
+                            urlRoot={'/prototyping'}
+                            items={ALL_SLUGS_CATEGORY} 
+                            key={'prototyping_item_'} 
+                            // slug={slug}
+                            />
                     </div>
                     </div>
                     <div className="col-span-3">
@@ -115,9 +82,11 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
 export async function getStaticProps({ preview = null, params}) {
     const pageSize = PAGE_SIZE
     const page = params.pageNo
-    const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, page, ALL_SLUGS )) || []
+    var all_tags = get_all_tags(ALL_SLUGS_CATEGORY)
+
+    const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, page, all_tags )) || []
     
-    console.log(allPosts)
+    
     const pagination = allPosts.meta.pagination
     return {
         props: {
@@ -127,7 +96,9 @@ export async function getStaticProps({ preview = null, params}) {
   }
 
 export async function getStaticPaths() {
-    const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, ALL_SLUGS)) || []
+    var all_tags = get_all_tags(ALL_SLUGS_CATEGORY)
+
+    const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, all_tags)) || []
     const pagination = allPosts.meta.pagination
     const pageCount = pagination.pageCount
     const pageCountArr = new Array(pageCount).fill(' ');
