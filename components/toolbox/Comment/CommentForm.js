@@ -34,7 +34,7 @@ export default function Form (props) {
         </div>
         <div className="w-full">
           {/* hidden textarea */}
-          <label for="Comment">Share what you think</label>
+          <label htmlFor="Comment">Share what you think</label>
 
           <textarea
             type="text"

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "@/components/container";
@@ -12,6 +13,7 @@ import AuthorCard from "@/components/toolbox/AuthorCard";
 import SponsorCard from "@/components/toolbox/SponsorCard";
 import Contributors from "@/components/toolbox/Contributors";
 import Comment from "@/components/toolbox/Comment/Comment";
+import VisitCard from "@/components/toolbox/VisitCard";
 import { getAllPostsWithSlug, getToolsAndMoreTools } from "@/lib/api";
 import PostTitle from "@/components/post-title";
 import Head from "next/head";
@@ -26,65 +28,66 @@ export default function Post({ post, morePosts, preview }) {
   //TODO: what is withAuthUser
   const withAuthUser = {};
 
+  const link = "https://www.useberry.com/?source=prototypr"
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />;
   }
 
-  const setUserAuthenticated = () => {
+  const setUserAuthenticated = () => {};
 
-  }
+  useEffect(() => {
+
+  }, []);
 
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
       <Container>
-        <div
-          className="w-full bg-gray-200 mt-6 grid grid-rows-1 lg:grid-cols-5 grid-cols-1 gap-6"
-        >
+        <div className="w-full bg-gray-200 mt-6 grid grid-rows-1 lg:grid-cols-5 grid-cols-1 gap-6">
           {/* left sidebar */}
           <div
             className="grid-cols-1 hidden lg:block"
             // style={{ border: "1px solid blue" }}
           >
-            {
-              post && post.attributes &&  post.attributes.author && 
+            {post && post.attributes && post.attributes.author && (
               <div className="sm:hidden lg:block">
                 <AuthorCard author={post.attributes.author} />
               </div>
-            }
+            )}
             <div className="mt-6 sm:hidden block lg:block lg:mt-6">
-                <SponsorCard position="left" />
+              <SponsorCard position="left" />
             </div>
             {/**related posts(it may be empty sometimes) */}
 
             {/**Contributors */}
-            <Contributors 
-              withAuthUser={withAuthUser}
-            />
+            <Contributors withAuthUser={withAuthUser} />
           </div>
           {/* center sidebar */}
-          <div
-            className="col-span-3"
-          >
-             {(post && post.attributes) && <PopupGallery
+          <div className="col-span-3">
+            {post && post.attributes && (
+              <PopupGallery
                 body={post.attributes.content}
                 item={post.attributes}
                 rounded={true}
                 arrows={false}
-              />}
-            
+              />
+            )}
+
             {/**Description */}
             <div className="">
-                <h1 className="hidden sm:block mt-6 text-sm font-semibold mb-3">Description</h1>
-                <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg shadow w-full">
-                  <div 
-                  style={{color: "#4a5568", marginBottom: "1rem"}}
-                  className="py-3 popup-modal-content" 
-                  dangerouslySetInnerHTML={{ __html: post?.attributes.content }}></div>
-                </div>
+              <h1 className="hidden sm:block mt-6 text-sm font-semibold mb-3">
+                Description
+              </h1>
+              <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg shadow w-full">
+                <div
+                  style={{ color: "#4a5568", marginBottom: "1rem" }}
+                  className="py-3 popup-modal-content"
+                  dangerouslySetInnerHTML={{ __html: post?.attributes.content }}
+                ></div>
+              </div>
             </div>
 
             {/**Comments */}
-            <Comment 
+            <Comment
               withAuthUser={withAuthUser}
               setUserAuthenticated={setUserAuthenticated}
               titleClass="text-sm font-semibold hidden text-gray-800"
@@ -92,10 +95,15 @@ export default function Post({ post, morePosts, preview }) {
             />
           </div>
           {/* RIGHT SIDEBAR START */}
-          <div
-            className="grid-cols-1 hidden lg:block"
-            // style={{ border: "1px solid green" }}
-          ></div>
+
+          <div className="grid-cols-1 hidden lg:block">
+              <VisitCard 
+                title={post?.attributes.title}
+                link={"https://prototypr.io/toolbox/useberry/"}
+                useNextImage={true}
+                logoNew={post?.attributes.legacyFeaturedImage?.logoNew}
+              />
+          </div>
         </div>
         {/* <Header /> */}
         {/* {router.isFallback ? (
