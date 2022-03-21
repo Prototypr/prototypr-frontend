@@ -393,7 +393,7 @@ export const NavigationMenuDemo = ({activeNav}) => {
               <ContentListItem title="Prototyping Tools" href="/prototyping/page/1">
                 Figma to Adobe, and everything in between.
               </ContentListItem>
-              <ContentListItem title="Accessibility" href="/toolbox/page/1">
+              <ContentListItem title="Accessibility" href="/toolbox/accessibility/page/1">
                 Tools for building accessible User Interfaces.
               </ContentListItem>
               <ContentListItem title="Conversational Design" href="/toolbox/conversational-design-tools/page/1">

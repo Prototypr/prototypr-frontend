@@ -67,7 +67,7 @@ export async function getStaticProps({ params, preview = null, type = 'bite' }) 
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug('bite')
-  console.log(allPosts)
+  
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 
       return `/news/${post.attributes.slug}`}) || [],

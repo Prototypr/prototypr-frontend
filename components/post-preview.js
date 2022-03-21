@@ -1,7 +1,7 @@
 import Avatar from './avatar'
 import Date from './date'
 import CoverImage from './cover-image'
-// import Image from 'next/image'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function PostPreview({
@@ -15,18 +15,22 @@ export default function PostPreview({
   tag = {}
 }) {
   return (
-    <div className="flex flex-col py-4 flex-grow h-full shadow-md hover:shadow-xl bg-white relative rounded-lg">
+    <div className="flex flex-col py-4 flex-grow h-full shadow-sm border border-gray-100 hover:shadow-xl bg-white relative rounded-lg">
       <div className="relative rounded-lg px-4 pb-4 cursor-pointer">
         <>
           <CoverImage slug={slug} title={title} url={coverImage} type={type} />
           <div className="absolute rounded-full bg-white bottom-0 left-7">
             {
               coverImage && coverImage.logoNew && (
-                <img 
-                  alt="Brand logo for external website's link"
-                  className="object-cover flex-shrink-0 shine rounded-full border-2 border-white bg-white shadow h-10 -mt-4 w-10 hover:shadow-xl"
-                  src={coverImage.logoNew}
-                />
+                <div className="border-4 shadow rounded-full border-white bg-white -mt-4" style={{height:'44px',width:'44px'}}>
+                  <Image 
+                    width="44"
+                    height="44"
+                    alt="Brand logo for external website's link"
+                    className="object-cover flex-shrink-0 shine rounded-full border border-2 border-gray-200 bg-white"
+                    src={coverImage.logoNew}
+                  />
+                </div>
               )
             }
           </div>
@@ -47,9 +51,9 @@ export default function PostPreview({
       */}
       <div className="px-4 py-1 flex justify-between">
         <div className="pl-3 overflow-hidden mt-1 cursor-pointer">
-          <div className="font-medium overflow-hidden heading mt-0 h-6">{title}</div>
-          <div className="text-sm capitalize text-gray-500">
-             {tag && `#${tag.attributes && tag.attributes.slug}`}
+          <div className="font-semibold overflow-hidden heading mt-0 h-6">{title}</div>
+          <div className="text-sm capitalize text-gray-600 mt-0.5">
+             {tag && `# ${tag.attributes && tag.attributes.slug}`}
           </div>
         </div>
       </div>

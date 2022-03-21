@@ -1,5 +1,5 @@
 import RcPagination from 'rc-pagination';
-import 'rc-pagination/assets/index.css';
+// import 'rc-pagination/assets/index.css';
 
 export default function NewPagination({pageSize = 12,currentPage = 0, total = 20, onPageNumChange = ()=> {}}) {
     return (

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import SwiperGallery from "./SwiperGallery";
-
+import Image from "next/image";
 
 export default function PopupGallery({ item, link, img, body, rounded, arrows }) {
 
@@ -75,18 +75,30 @@ export default function PopupGallery({ item, link, img, body, rounded, arrows })
     //     bodyTxt = bod[0].nextSibling.textContent;
     //   }
     // }
+    
+    if(item.legacyMedia && item.legacyMedia.gallery.length){
+      const galleryComponent = _buildGallery();
+      setGalleryComponent(galleryComponent);
+    }
 
     // setBodyTxt(bodyTxt);
-    const galleryComponent = _buildGallery();
-    // if (galleryComponent) {
-        setGalleryComponent(galleryComponent);
-    // }
   }, []);
 
   return (
     <div className="bg-white pb-4 mb-6">
           {
-              galleryComponent ? galleryComponent :null
+              galleryComponent ? galleryComponent :
+              <div className="my-auto block mx-auto flex justify-center p-6 rounded">
+                <Image 
+                // layout="fill"
+                objectFit="cover"
+                width="600"
+                height="400"
+                alt='Product screenshot'
+                className="rounded"
+                src={item.legacyFeaturedImage?item.legacyFeaturedImage.mediaItemUrl:item.ogImage?item.ogImage.opengraphImage:''}
+                />
+              </div>
           }  
     </div>
   )
