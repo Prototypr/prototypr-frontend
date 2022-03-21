@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function AuthorCard({ author = {} }) {
-    console.log('my author is*******' + JSON.stringify(author))
+    // console.log('my author is*******' + JSON.stringify(author))
     let attributes = {};
     if (author.data && author.data.attributes) {
         //displayName firstName lastName avatar

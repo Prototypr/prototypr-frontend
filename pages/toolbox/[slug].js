@@ -19,6 +19,7 @@ import { CMS_NAME } from "@/lib/constants";
 // import markdownToHtml from '@/lib/markdownToHtml'
 
 export default function Post({ post, morePosts, preview }) {
+  // console.log("post*********" + JSON.stringify(post.attributes))
   // const postItem = MOCK_UP_ITEM;
   const router = useRouter();
   //TODO: what is withAuthUser
@@ -62,6 +63,19 @@ export default function Post({ post, morePosts, preview }) {
                 rounded={true}
                 arrows={false}
               />}
+            
+            {/**Description */}
+            <div className="">
+                <h1 className="hidden sm:block mt-6 text-sm font-semibold mb-3">Description</h1>
+                <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg shadow w-full">
+                  <div 
+                  style={{color: "#4a5568", marginBottom: "1rem"}}
+                  className="py-3 popup-modal-content" 
+                  dangerouslySetInnerHTML={{ __html: post?.attributes.content }}></div>
+                </div>
+            </div>
+
+            {/**Comments */}
             
           </div>
           {/* RIGHT SIDEBAR START */}
