@@ -85,10 +85,10 @@ export default function PopupGallery({ item, link, img, body, rounded, arrows })
   }, []);
 
   return (
-    <div className="bg-white pb-4 mb-6">
+    <div className="bg-white pb-4 mb-6 rounded-lg shadow w-full">
           {
               galleryComponent ? galleryComponent :
-              <div className="my-auto block mx-auto flex justify-center p-6 rounded">
+              <div className="my-auto mx-auto flex justify-center p-6 rounded">
                 <Image 
                 // layout="fill"
                 objectFit="cover"

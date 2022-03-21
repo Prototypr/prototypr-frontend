@@ -11,7 +11,7 @@ export default function AuthorCard({ author = {} }) {
     }
     return (
         <>
-            <div className="mb-6 md:mb-0 bg-white border-gray-300 px-2 py-5 block md:block rounded-lg shadow">
+            <div className="mb-6 md:mb-0 bg-white border-gray-300 px-2 py-3 block md:block rounded-lg shadow">
                 <a>
                     <h1 className="text-sm font-semibold mb-3">{attributes.title ? attributes.title : "Posted by"}</h1>
                     <div className="py-3 w-full relative flex">

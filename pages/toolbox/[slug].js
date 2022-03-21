@@ -10,6 +10,7 @@ import Layout from "@/components/layout";
 import PopupGallery from "@/components/gallery/PopupGallery";
 import AuthorCard from "@/components/toolbox/AuthorCard";
 import SponsorCard from "@/components/toolbox/SponsorCard";
+import Contributors from "@/components/toolbox/Contributors";
 import { getAllPostsWithSlug, getToolsAndMoreTools } from "@/lib/api";
 import PostTitle from "@/components/post-title";
 import Head from "next/head";
@@ -20,6 +21,9 @@ import { CMS_NAME } from "@/lib/constants";
 export default function Post({ post, morePosts, preview }) {
   // const postItem = MOCK_UP_ITEM;
   const router = useRouter();
+  //TODO: what is withAuthUser
+  const withAuthUser = {};
+
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />;
   }
@@ -43,6 +47,10 @@ export default function Post({ post, morePosts, preview }) {
             <div className="mt-6 sm:hidden block lg:block lg:mt-6">
                 <SponsorCard position="left" />
             </div>
+            {/**related posts(it may be empty sometimes) */}
+
+            {/**Contributors */}
+            <Contributors withAuthUser={withAuthUser} />
           </div>
           {/* center sidebar */}
           <div

@@ -1,0 +1,339 @@
+{
+    "people": [
+      {
+        "name": "Kushali",
+        "avatar":"https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2020/08/19171211/1_WSOl-22hqNTeZsmGqmmCLQ.jpeg",
+        "link":"https://blog.prototypr.io/@khushali.sandhi?source=collection_writer_card"        
+      },
+      {
+        "name": "Lara Hanlon",
+        "avatar":"https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2020/08/19171241/1_RGpnYfAITic7mcvLgYbiXA.jpeg",
+        "link":"https://blog.prototypr.io/@lara_hanlon?source=user_popover"        
+      }
+      ,
+      {
+        "name": "Marvel",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/200/200/1*_W_6f28_ztDRuxTMcgrqbg.png",
+        "link":"https://blog.prototypr.io/@marvelapp"        
+      }
+      ,
+      {
+        "name": "Marc Andrew",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*n5xu2TY_fFI03A85QOVGxw.jpeg",
+        "link":"https://blog.prototypr.io/@marcandrew?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Sabrina Couto",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*foiZM-nN46N14KFuFEd8sQ.jpeg",
+        "link":"https://blog.prototypr.io/@sabry_?source=collection_writer_card"        
+      },
+      {
+        "name": "Ahmed Sulaiman",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/0*RDscq4PfnN0zv99l.jpg",
+        "link":"https://blog.prototypr.io/@ahmedsulaiman"        
+      },
+      {
+        "name": "Helen Vling T",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/200/200/1*1BEhBurLBqGO7QHL7W-ukw.jpeg",
+        "link":"https://blog.prototypr.io/@Degravitate"        
+      }
+      ,
+  
+      {
+        "name": "Nnamdi Awili",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*A4gRahPTM1_Mi7GaysDzYg.jpeg",
+        "link":"https://blog.prototypr.io/@nnamdiawili"        
+      },
+      {
+        "name": "Sarah Doody",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/0*gIPMnlLxXse1Ws4b.jpeg",
+        "link":"https://blog.prototypr.io/@sarahdoody?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Chaymae Lougmani",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*ZjEVq6C6Jinv3-zZbJ7VSw.jpeg",
+        "link":"https://blog.prototypr.io/@ChaymaeLougmani?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Alex Kukharenko",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*1IkdUTDCc_ph7IwLFT1VwA.jpeg",
+        "link":"https://blog.prototypr.io/@AlexKukharenko?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Clark Valberg",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*v9mKidqDODo_j9Im2AhXqQ.jpeg",
+        "link":"https://blog.prototypr.io/@clarkvalberg?source=collection_writer_card"        
+      },
+      {
+        "name": "Thanasis Rigopoulos",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*qPl_1lhdqji9SrbGJI3d_w.jpeg",
+        "link":"https://blog.prototypr.io/@thanasis?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Jess Thoms",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*PsAXfnU4ZIb3sFlieiYSfA.jpeg",
+        "link":"https://blog.prototypr.io/@jessthoms?source=collection_writer_card"        
+      },
+      {
+        "name": "Inês Oliveira",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*98vwEnabqkdfMRDjjooo7A.jpeg",
+        "link":"https://blog.prototypr.io/@minesolivetree?source=collection_writer_card"        
+      },
+      {
+        "name": "Katerina Limpitsouni",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*8THNj9w8Yqr0Ay4DYK5dFQ.jpeg",
+        "link":"https://blog.prototypr.io/@ninalimpi?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Aziz Firat",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/200/200/1*p-LQby2LsSLew2h3DokPsg.jpeg",
+        "link":"https://blog.prototypr.io/@azizfirat"        
+      },
+
+      {
+        "name": "Ed Moffatt",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*f3Kw-B5ewua5vE5BNw5_hg.jpeg",
+        "link":"https://blog.prototypr.io/@edmoffat?source=collection_writer_card"        
+      },
+      {
+        "name": "Joanna Ngai",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*5oxeRfaUsGcs7koBDfBGpA.jpeg",
+        "link":"https://blog.prototypr.io/@ngai.yt?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Vivian Qu",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*UCorozC3luvnIksU6P6jew.png",
+        "link":"https://blog.prototypr.io/@vivqu?source=collection_writer_card"        
+      },
+
+      {
+        "name": "Andy Ayim",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*CHVTcIfrF08nwVqaOAVWyA.jpeg",
+        "link":"https://blog.prototypr.io/@AndysHVC?source=collection_writer_card"        
+      },
+      {
+        "name": "Caitria O'Neill",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*80GUNTM933eNL48DIhhxhg.jpeg",
+        "link":"https://blog.prototypr.io/@caitriaoneill?source=collection_writer_card"        
+      },
+      {
+        "name": "Nat Cooper",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*MhGdyd8Jew_ZfoUP5HD0XQ.jpeg",
+        "link":"https://blog.prototypr.io/@natacoops?source=collection_writer_card"        
+      },
+      {
+        "name": "Valentin Chrétien",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/200/200/1*Pq4IVMZc69ARg8KFJI-ZiA.jpeg",
+        "link":"https://blog.prototypr.io/@valentinchrt?source=collection_writer_cardn"        
+      },
+      {
+        "name": "Alexander Skogberg",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*e7bEyDvTVU7umIWvyJ2EJg.jpeg",
+        "link":"https://blog.prototypr.io/@Skogberg?source=collection_writer_card"        
+      },
+    
+      {
+        "name": "Eleftheria Batsou",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*c8hKVhCpOMuM2z1oYydP5g.jpeg",
+        "link":"https://blog.prototypr.io/@EleftheriaBatsou?source=collection_writer_card"        
+      },
+      {
+        "name": "Chris Bam Harrison",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*Y1WyQ-MTmBsl_yHQsTP6cg.jpeg",
+        "link":"https://blog.prototypr.io/@christopherbamharrison?source=collection_writer_card"        
+      },
+      {
+        "name": "Cindy Chang",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*eMWUrYRkiazTbmzSSSHzLw.png",
+        "link":"https://blog.prototypr.io/@cindyjchang?source=collection_writer_card"        
+      },
+      {
+        "name": "Valinda Chan",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*TeUvThZ7rc2S2_s2repuMw.jpeg",
+        "link":"https://blog.prototypr.io/@valindachan?source=collection_writer_card"        
+      },
+      {
+        "name": "Jennifer Gergen",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/0*OvFtCGQeikvSPzA2.jpeg",
+        "link":"https://blog.prototypr.io/@palebluejen"        
+      },
+      {
+        "name": "Ali R. Tariq",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/0*R9UdoDAOFZrO3EVy.png",
+        "link":"https://blog.prototypr.io/@alirtariq?source=collection_writer_card"        
+      },
+      {
+        "name": "Miuki Miu",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*MdcuHJDCWMcxgB4wrh8Sew.jpeg",
+        "link":"https://blog.prototypr.io/@miukimiu?source=collection_writer_card"        
+      },
+      {
+        "name": "Thalion",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/0*uLL_n9bNqcoNR2iL.png",
+        "link":"https://blog.prototypr.io/@thalion_pb?source=collection_writer_card"        
+      },
+      {
+        "name": "Kinneret Yifrah",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*jl306j2TbfRK1gNLdHVa6Q.jpeg",
+        "link":"https://blog.prototypr.io/@Kinneret?source=collection_writer_card"        
+      },
+      {
+        "name": "Nazli Kaya",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*d9xhiG0ZoLOKFh-8fvlkhg.jpeg",
+        "link":"https://blog.prototypr.io/@nazlikaya90?source=collection_writer_card"        
+      },
+      {
+        "name": "Saadia Minhas",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*vEeHoWbUPMK_B58XKB_DJg.jpeg",
+        "link":"https://blog.prototypr.io/@saadiam?source=collection_writer_card"        
+      },
+      {
+        "name": "Timothy Bardlavens",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*R4tip4CJvvSwA0BbwYScgg.jpeg",
+        "link":"https://blog.prototypr.io/@iThink_iDesign?source=collection_writer_card"        
+      },
+      {
+        "name": "Amanda Linden",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*v6gz4q2zWib4v4Qz0F92GQ.jpeg",
+        "link":"https://blog.prototypr.io/@amandalinden?source=collection_writer_card"        
+      },
+      {
+        "name": "Vivian Chung",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/0*cM_TXol6yWiMZLwN.",
+        "link":"https://blog.prototypr.io/@vivianchung_45670?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "José Torre",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*V97Rulxu46RkSpXi8yGKlA@2x.jpeg",
+        "link":"https://blog.prototypr.io/@zecarlostorre?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Signe Roswall🙋",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*9hw0IjW09hOW3TQizYV7gQ.jpeg",
+        "link":"https://blog.prototypr.io/@signeroswall?source=collection_writer_card"        
+      }
+      ,
+
+      {
+        "name": "Vince Schwidder",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*OEKcmmQ0hvnqGCg5R6bniw.jpeg",
+        "link":"https://blog.prototypr.io/@vschwid?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Guy Ligertwood",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*4g_kvBr5PF9hPdNncuc3wg.png",
+        "link":"https://blog.prototypr.io/@ligertwoodguy?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Jingyi Lai",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*hIfB6PpGMOmPy3MqyTzxOw.png",
+        "link":"https://blog.prototypr.io/@fairylie89?source=collection_writer_card"        
+      },
+      {
+        "name": "Joe Pascavage",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*_C24jCwBjM5yp70gKZisxQ.jpeg",
+        "link":"https://blog.prototypr.io/@joepascavage?source=collection_writer_card"        
+      },
+      {
+        "name": "Rob Sutcliffe",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*PjjC1rMUfb3ZJwQroQURjA.png",
+        "link":"https://blog.prototypr.io/@firefields"        
+      },
+      {
+        "name": "Arushi Singh",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*-FnUcRxIUThZ6r8x4VRBrQ.jpeg",
+        "link":"https://blog.prototypr.io/@arushisingh5545?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Elliot Dahl",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*rrrWuyapNIB72faNOq9rug.png",
+        "link":"https://blog.prototypr.io/@Elliotdahl?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Wojciech Zieliński",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*-aZ-l24VhQ9-yNoJ853ZuQ.jpeg",
+        "link":"https://blog.prototypr.io/@acreno?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Shina Charles Memud",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*IxwhbsmQuWx4dgh8XoZdXw.png",
+        "link":"https://blog.prototypr.io/@shinamemud?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Greg Rog",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/0*uFafUYicD_W2cwsI.",
+        "link":"https://blog.prototypr.io/@learnux.io?source=user_popover"        
+      }
+      ,
+      
+      {
+        "name": "Christine Nishiyama",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*K6s0aNA3qDbizI69wLgVqw.jpeg",
+        "link":"https://blog.prototypr.io/@might_could?source=collection_writer_card"        
+      }
+      
+      ,
+      {
+        "name": "Nick Butcher",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*T3sl6OcT7fnOUJ_sQCTJKA.jpeg",
+        "link":"https://blog.prototypr.io/@crafty?source=collection_writer_card"        
+      }
+      ,
+  
+      {
+        "name": "John Moore Williams",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/0*Rb_k7DPMjVF6y6a9.jpeg",
+        "link":"https://blog.prototypr.io/@johnamwill?source=user_popover"        
+      }
+      
+      ,
+ 
+      {
+        "name": "Sean Hervo",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*DJ92x2Sl8qhRDl1P9vurCA.jpeg",
+        "link":"https://blog.prototypr.io/@mr.hervo?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Paul Champion",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*0GjoWNaORWzMj4JO6mj-9g.png",
+        "link":"https://blog.prototypr.io/@pchampionski?source=user_popover"        
+      }
+      ,
+      {
+        "name": "Nicole Saidy",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*WI5DfsG6R20nFZ706x0ArA.jpeg",
+        "link":"https://blog.prototypr.io/@nicolesaidy?source=collection_writer_card"        
+      }
+      ,
+      {
+        "name": "Ralph Ammer",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*dpnpENXIDu8KMxIaTjbcZA.png",
+        "link":"https://blog.prototypr.io/@ralphammer?source=user_popover"        
+      }
+      ,
+      {
+        "name": "Veerle Pieters",
+        "avatar":"https://cdn-images-1.medium.com/fit/c/120/120/1*TKb1nW8TlO8PpY0680hplg.png",
+        "link":"https://blog.prototypr.io/@veerlepieters?source=collection_writer_card"        
+      }
+
+      
+      ]
+  }
+  
