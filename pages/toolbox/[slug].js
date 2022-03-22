@@ -42,7 +42,7 @@ export default function Post({ post, morePosts, preview }) {
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
       <Container>
-        <div className="w-full bg-gray-200 mt-6 grid grid-rows-1 lg:grid-cols-5 grid-cols-1 gap-6">
+        <div className="w-full mt-6 grid grid-rows-1 lg:grid-cols-5 grid-cols-1 gap-6">
           {/* left sidebar */}
           <div
             className="grid-cols-1 hidden lg:block"
@@ -103,6 +103,11 @@ export default function Post({ post, morePosts, preview }) {
                 useNextImage={true}
                 logoNew={post?.attributes.legacyFeaturedImage?.logoNew}
               />
+
+              {/**LeftSideBar */}
+              
+              {/**SubscribeCard */}
+
           </div>
         </div>
         {/* <Header /> */}
