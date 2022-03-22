@@ -15,7 +15,7 @@ export default function PostPreview({
   tag = {}
 }) {
   return (
-    <div className="flex flex-col py-4 flex-grow h-full shadow-sm border border-gray-100 hover:shadow-xl bg-white relative rounded-lg">
+    <div className="flex flex-col py-4 flex-grow h-full border border-gray-100 hover:shadow-xl bg-white relative rounded-lg">
       <div className="relative rounded-lg px-4 pb-4 cursor-pointer">
         <>
           <CoverImage slug={slug} title={title} url={coverImage} type={type} />

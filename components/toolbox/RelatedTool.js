@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function RelatedTool({ relatedPosts }) {
   return (
-    <div className="hidden md:block bg-white rounded-lg shadow mt-6 p-6 lg:mb-16">
+    <div className="hidden md:block bg-white rounded-lg mt-6 p-6 lg:mb-16">
       <h1 className="text-sm font-semibold mb-3">Related Tools</h1>
       {relatedPosts.map((post, index) => (
         <div

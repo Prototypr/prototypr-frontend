@@ -82,7 +82,7 @@ export default function PopupGallery({ item,gallery, link, img, body, rounded, a
   // }, []);
 
   return (
-    <div className="bg-white pb-4 mb-6 px-5 rounded-lg shadow w-full">
+    <div className="bg-white pb-4 mb-6 px-5 rounded-lg w-full">
           {
               (gallery && gallery.length) ? 
               <SwiperGallery data={gallery} />

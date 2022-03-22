@@ -9,7 +9,7 @@ export default function VisitCard({
   tags=[]
 }) {
   return (
-    <div className="flex bg-white shadow rounded-lg mb-0 flex-col p-5 xl:p-6 ">
+    <div className="flex bg-white rounded-lg mb-0 flex-col p-5 xl:p-6 ">
       <div className="flex flex-col lg:flex-row lg:justify-between mb-4 lg:mb-6">
         <div className="mx-auto text-center lg:text-left lg:w-4/6 pr-3 order-last lg:order-first">
           <h1 
@@ -50,7 +50,7 @@ export default function VisitCard({
       href={link}
       target="_blank"
       >
-        <button className="w-full lg:block bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+        <button className="w-full lg:block bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 border-blue-700 hover:border-blue-500 rounded-lg">
             Visit Site
         </button>
       </a>

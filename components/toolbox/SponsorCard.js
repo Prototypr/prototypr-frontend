@@ -11,7 +11,7 @@ export default function SponsorCard({ author = {}, position }) {
   return (
     <>
       {sponsor ? (
-        <div className="bg-white  border-gray-300 p-5 rounded-lg shadow flex flex-row sm:flex-col">
+        <div className="bg-white  border-gray-300 p-5 rounded-lg flex flex-row sm:flex-col">
           <a
             href={sponsor.node.sponsorInfo.trackingLink}
             className=""

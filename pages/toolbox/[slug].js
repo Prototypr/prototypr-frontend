@@ -74,7 +74,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
               {/* <h1 className="hidden sm:block mt-6 text-sm font-semibold mb-3">
                 Description
               </h1> */}
-              <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg shadow w-full">
+              <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full">
                 <div
                   style={{ color: "#4a5568", marginBottom: "1rem" }}
                   className="py-3 popup-modal-content"
