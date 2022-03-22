@@ -32,7 +32,7 @@ export default function VisitCard({
 
         <div className="lg:w-2/6 overflow-hidden my-3 mb-5 lg:my-0 lg:mb-0 lg:mr-0">
           {(useNextImage && logoNew) && (
-            <div className="mx-auto h-24 w-24 lg:h-16 lg:w-16 xl:h-20 xl:w-20 relative rounded-full border border-gray-200 shadow-sm">
+            <div className="mx-auto h-24 w-24 lg:h-16 lg:w-16 xl:h-20 xl:w-20 relative rounded-full border border-gray-200">
               <Image
                 objectFit="cover"
                 layout="fill"
