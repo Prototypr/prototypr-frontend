@@ -5,6 +5,7 @@ import Layout from '@/components/layout'
 /**new index components */
 import Intro from '@/components/new-index/Intro'
 import EditorPick from '@/components/new-index/EditorPick'
+import ProductList from '@/components/new-index/ProductList'
 
 import { getAllPostsForHome } from '@/lib/api'
 import Head from 'next/head'
@@ -25,6 +26,7 @@ export default function Index({ allPosts, preview }) {
         <Container>
           <Intro />
           <EditorPick />
+          <ProductList />
         </Container>
       </Layout>
     </>
