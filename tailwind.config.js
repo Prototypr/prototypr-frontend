@@ -4,6 +4,9 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    fontFamily: {
+      "inter": "Inter"
+    },
     extend: {
       gridTemplateColumns: {
         // Simple 16 column grid
@@ -27,11 +30,16 @@ module.exports = {
         'accent-1': '#FAFAFA',
         'accent-2': '#EAEAEA',
         'accent-7': '#333',
+        'title-1': '#2B2B2B',
+        'paragraph-1': '#010301',
+        'gray-2': '#4F4F4F',
+        'gray-3': '#828282',
         success: '#0070f3',
         cyan: '#79FFE1',
       },
       spacing: {
         28: '7rem',
+        '9/20': '45%'
       },
       letterSpacing: {
         tighter: '-.04em',

@@ -1,8 +1,11 @@
 import Container from '@/components/container'
 import MoreStories from '@/components/more-stories'
 import HeroPost from '@/components/hero-post'
-import Intro from '@/components/intro'
 import Layout from '@/components/layout'
+/**new index components */
+import Intro from '@/components/new-index/Intro'
+import EditorPick from '@/components/new-index/EditorPick'
+
 import { getAllPostsForHome } from '@/lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
@@ -21,17 +24,7 @@ export default function Index({ allPosts, preview }) {
         </Head>
         <Container>
           <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.attributes.title}
-              coverImage={coverImage}
-              date={heroPost.attributes.date}
-              author={(heroPost.attributes.author &&heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
-              slug={heroPost.attributes.slug}
-              excerpt={heroPost.attributes.excerpt}
-            />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          <EditorPick />
         </Container>
       </Layout>
     </>
