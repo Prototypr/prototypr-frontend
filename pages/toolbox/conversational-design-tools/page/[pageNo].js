@@ -116,6 +116,6 @@ export async function getStaticPaths() {
         paths: pageCountArr && pageCountArr.map((pageNo) => {
             return `/toolbox/conversational-design-tools/page/${pageNo}`
         }) || [],
-        fallback: false,
+        fallback: true,
     }
 }
