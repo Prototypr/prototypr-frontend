@@ -35,7 +35,7 @@ export default function SwiperGallery({ data = [] }) {
             key={idx + "_main"}
           >
             {current.type == "image" && current.original ? (
-              <div className="relative border border-gray-200 border-1 shadow-sm rounded-lg h-60 sm:h-96 w-full lg:max-h-full relative overflow-hidden rounded-lg flex justify-center">
+              <div className="relative border border-gray-200 border-1 rounded-lg h-60 sm:h-96 w-full lg:max-h-full relative overflow-hidden rounded-lg flex justify-center">
                 <Image
                   layout="fill"
                   objectFit="cover"
@@ -77,11 +77,11 @@ export default function SwiperGallery({ data = [] }) {
             modules={[FreeMode, Navigation, Thumbs, A11y]}
           >
             {data.map((current, idx) => (
-              <SwiperSlide className="h-20 w-20 overflow-hidden relative flex justify-center" key={idx}>
+              <SwiperSlide className="h-20 w-20 overflow-hidden relative border border-1 border-gray-100 rounded-lg flex justify-center" key={idx}>
                 <div className="rounded h-20 w-20 bg-white">
                   <Image
                     layout="fill"
-                    className="shadow-sm shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
+                    className="shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
                     style={{  display: "block" }}
                     src={current.thumbnail}
                     alt={`Gallery Image ${idx}`}

@@ -12,10 +12,12 @@ export default function RelatedTool({ relatedPosts }) {
           key={`relatedPost_${index}`}
         >
           <div className="rounded-lg relative flex md:my-4 h-16 w-16 md:h-16 flex-none">
-            <img
+            <Image
+              layout="fill"
+              objectFit="cover"
               alt={post.attributes.title}
               src={post.attributes.legacyFeaturedImage.logoNew}
-              className="cardImage flex-shrink-0 shine h-16 w-16 md:h-16 rounded-lg border border-gray-100"
+              className="cardImage flex-shrink-0 shine h-16 w-16 md:h-16 rounded-full border border-gray-100"
               style={{
                 objectFit: "cover",
                 objectPosition: " 50% 50%",
