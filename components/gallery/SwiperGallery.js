@@ -43,7 +43,6 @@ export default function SwiperGallery({ data = [] }) {
                   src={current.original}
                   // data-src={current.original}
                   alt={`Gallery Image ${idx}`}
-                  width={'600px'}
                   sizes={"(max-width: 300px) 100vw, 600px"}
                 />
               </div>
@@ -82,7 +81,6 @@ export default function SwiperGallery({ data = [] }) {
                   <Image
                     layout="fill"
                     className="shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
-                    style={{  display: "block" }}
                     src={current.thumbnail}
                     alt={`Gallery Image ${idx}`}
                   />
