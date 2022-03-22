@@ -33,7 +33,7 @@ export default function Post({ post, morePosts, relatedPosts, preview }) {
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
       <Container>
-        <div className="w-full bg-gray-100 mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
+        <div className="w-full mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
           {/* left sidebar */}
           <div
             className="md:col-span-5 hidden lg:block"
