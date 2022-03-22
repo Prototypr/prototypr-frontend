@@ -54,7 +54,7 @@ export default function PopupGallery({ item, link, img, body, rounded, arrows })
       // }
 
       return (
-        <div className="mx-4">
+        <div className="mx-5">
             {
                 PHOTO_SET && PHOTO_SET.length && <SwiperGallery data={PHOTO_SET} />
             }

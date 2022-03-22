@@ -31,14 +31,15 @@ export default function SwiperGallery({ data = [] }) {
       >
         {data?.map((current, idx) => (
           <SwiperSlide
-            className="bg-white pt-10 h-60 sm:h-96 overflow-hidden"
+            className="bg-white pt-5 rounded-lg h-60 sm:h-96 overflow-hidden"
             key={idx + "_main"}
           >
             {current.type == "image" && current.original ? (
-              <div className="relative h-60 sm:h-96 w-full lg:max-h-full rounded-lg flex justify-center">
+              <div className="relative border border-gray-200 border-1 shadow-sm rounded-lg h-60 sm:h-96 w-full lg:max-h-full relative overflow-hidden rounded-lg flex justify-center">
                 <Image
                   layout="fill"
-                  className="rounded-lg  object-contain h-60 sm:h-96"
+                  objectFit="cover"
+                  // className="rounded-lg  object-contain h-60 sm:h-96"
                   src={current.original}
                   // data-src={current.original}
                   alt={`Gallery Image ${idx}`}
