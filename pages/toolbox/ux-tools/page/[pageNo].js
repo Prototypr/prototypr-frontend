@@ -115,6 +115,6 @@ export async function getStaticPaths() {
           return `/toolbox/ux-tools/page/${pageNo}`;
         })) ||
       [],
-    fallback: true,
+    fallback: false,
   };
 }

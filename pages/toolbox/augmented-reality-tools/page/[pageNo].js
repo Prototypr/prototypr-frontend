@@ -112,6 +112,6 @@ export async function getStaticPaths() {
         paths: pageCountArr && pageCountArr.map((pageNo) => {
             return `/toolbox/augmented-reality-tools/page/${pageNo}`
         }) || [],
-        fallback: true,
+        fallback: false,
     }
 }

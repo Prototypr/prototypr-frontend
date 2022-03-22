@@ -106,6 +106,6 @@ export async function getStaticPaths() {
         paths: pageCountArr && pageCountArr.map((pageNo) => {
             return `/prototyping/page/${pageNo}`
         }) || [],
-        fallback: true,
+        fallback: false,
     }
 }
