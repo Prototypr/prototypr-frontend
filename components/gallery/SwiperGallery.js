@@ -67,7 +67,7 @@ export default function SwiperGallery({ data = [] }) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="py-6 sm:pb-2 sm:px-2 bg-white overflow-hidden sm:overflow-auto relative">
+      <div className="py-6 sm:pb-0 bg-white overflow-hidden sm:overflow-auto relative">
           <Swiper
             onSwiper={setThumbsSwiper}
             spaceBetween={10} 

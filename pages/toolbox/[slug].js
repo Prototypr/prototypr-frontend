@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "@/components/container";
-import MoreStories from "@/components/more-stories";
 import Layout from "@/components/layout";
 import PopupGallery from "@/components/gallery/PopupGallery";
 import AuthorCard from "@/components/toolbox/AuthorCard";
 import SponsorCard from "@/components/toolbox/SponsorCard";
 import Contributors from "@/components/toolbox/Contributors";
-import Comment from "@/components/toolbox/Comment/Comment";
+// import Comment from "@/components/toolbox/Comment/Comment";
+import PostTitle from '@/components/post-title'
 import VisitCard from "@/components/toolbox/VisitCard";
 import RelatedTool from "@/components/toolbox/RelatedTool";
 import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
 // import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
 // import markdownToHtml from '@/lib/markdownToHtml'
 
-export default function Post({ post, morePosts, relatedPosts, preview }) {
+export default function Post({ post, morePosts, relatedPosts, gallery, preview }) {
   // console.log("post*********" + JSON.stringify(post.attributes))
   // const postItem = MOCK_UP_ITEM;
   // console.log("relatedPosts*******" + JSON.stringify(relatedPosts))
@@ -35,8 +35,13 @@ export default function Post({ post, morePosts, relatedPosts, preview }) {
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
       <Container>
+      
         <div className="w-full mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
           {/* left sidebar */}
+          {router.isFallback ? (
+          <PostTitle>Loading…</PostTitle>
+        ) : (
+          <>
           <div
             className="md:col-span-5 hidden lg:block"
             // style={{ border: "1px solid blue" }}
@@ -49,8 +54,6 @@ export default function Post({ post, morePosts, relatedPosts, preview }) {
             <div className="mt-6 sm:hidden block lg:block lg:mt-6">
               <SponsorCard position="left" />
             </div>
-            {/**related posts(it may be empty sometimes) */}
-
             {/**Contributors */}
             <Contributors withAuthUser={withAuthUser} />
           </div>
@@ -60,6 +63,7 @@ export default function Post({ post, morePosts, relatedPosts, preview }) {
               <PopupGallery
                 body={post.attributes.content}
                 item={post.attributes}
+                gallery={gallery}
                 rounded={true}
                 arrows={false}
               />
@@ -104,34 +108,8 @@ export default function Post({ post, morePosts, relatedPosts, preview }) {
                 />
               }
           </div>
-          
-
+          </>)}
         </div>
-        {/* <Header /> */}
-        {/* {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article>
-               <Head>
-                <title>
-                  {post.attributes.title} | Prototypr
-                </title>
-                <meta property="og:image" content={post.attributes.ogImage} />
-              </Head>
-              <PostHeader
-                title={post.attributes.title}
-                coverImage={post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:''}
-                date={post.attributes.date}
-                author={post.attributes.author?post.attributes.author.data.attributes:null}
-                type="toolbox"
-                />
-              <PostBody content={post.attributes.content} />
-            </article>
-            <SectionSeparator />
-            {morePosts.length > 0 && <MoreStories type={'toolbox'} posts={morePosts} />}
-          </>
-        )} */}
       </Container>
     </Layout>
   );
@@ -150,6 +128,31 @@ export async function getStaticProps({ params, preview = null }) {
   }
   const relatedPostsData = await getRelatedTools(tagsArr,params.slug, preview);
 
+  //build the gallery here
+  let PHOTO_SET = [];
+  const item = data?.posts.data[0]
+  if (item && item.attributes.legacyMedia) {
+    if (item.attributes.legacyMedia.gallery && item.attributes.legacyMedia.gallery.length) {
+      item.attributes.legacyMedia.gallery.forEach((galleryItem, index) => {
+        PHOTO_SET.push({
+          thumbnail:
+            galleryItem.thumb.indexOf("https://") == -1
+              ? "https://prototypr.gumlet.com" + galleryItem.thumb
+              : galleryItem.thumb,
+          original:
+            galleryItem.medium.indexOf("https://") == -1
+              ? "https://prototypr.gumlet.com" + galleryItem.medium
+              : galleryItem.medium,
+          originalAlt: "Screenshot of product",
+          thumbnailAlt: "Smaller procut screenshot thumbnail",
+          type: "image",
+          srcSet: galleryItem.srcSet,
+          sizes: galleryItem.sizes?galleryItem.sizes:{},
+        });
+      });
+    }
+  }
+
   return {
     props: {
       preview,
@@ -157,6 +160,7 @@ export async function getStaticProps({ params, preview = null }) {
         ...data?.posts.data[0],
         // content,
       },
+      gallery:PHOTO_SET,
       relatedPosts:relatedPostsData?.posts.data,
       morePosts: data?.morePosts.data,
     },
