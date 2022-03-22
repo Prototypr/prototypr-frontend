@@ -10,6 +10,7 @@ import SponsorCard from "@/components/toolbox/SponsorCard";
 import Contributors from "@/components/toolbox/Contributors";
 import Comment from "@/components/toolbox/Comment/Comment";
 import VisitCard from "@/components/toolbox/VisitCard";
+import RelatedTool from "@/components/toolbox/RelatedTool";
 import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
 // import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
 // import markdownToHtml from '@/lib/markdownToHtml'
@@ -17,6 +18,7 @@ import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/li
 export default function Post({ post, morePosts, relatedPosts, preview }) {
   // console.log("post*********" + JSON.stringify(post.attributes))
   // const postItem = MOCK_UP_ITEM;
+  // console.log("relatedPosts*******" + JSON.stringify(relatedPosts))
   const router = useRouter();
   //TODO: what is withAuthUser
   const withAuthUser = {};
@@ -95,11 +97,12 @@ export default function Post({ post, morePosts, relatedPosts, preview }) {
                 useNextImage={true}
                 logoNew={post?.attributes.legacyFeaturedImage?.logoNew}
               />
-          {(relatedPosts && relatedPosts.length )&&relatedPosts.map((post, index)=>{
-            return(
-              <p className="mt-2"><a className="underline" href={`/toolbox/${post.attributes.slug}`}>{post.attributes.title}</a></p>
-            )
-          })}
+              {
+                relatedPosts && 
+                <RelatedTool 
+                  relatedPosts={relatedPosts}
+                />
+              }
           </div>
           
 
