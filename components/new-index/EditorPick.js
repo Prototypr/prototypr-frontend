@@ -20,7 +20,7 @@ export default function EditorPick({}) {
                 </div>
                 <div className="w-9/20 ml-10">
                     <div className="flex mb-5">
-                        <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3">
+                        <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
                             # leadership
                         </div>
                         <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3">
