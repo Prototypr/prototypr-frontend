@@ -113,9 +113,9 @@ export async function getStaticPaths() {
     const pageCount = pagination.pageCount
     const pageCountArr = new Array(pageCount).fill(' ');
     return {
-        paths: pageCountArr && pageCountArr.map((pageNo) => {
-            return `/toolbox/conversational-design-tools/page/${pageNo}`
+        paths: pageCountArr && pageCountArr.map((pageNo, index) => {
+            return `/toolbox/conversational-design-tools/page/${index}`
         }) || [],
-        fallback: true,
+        fallback: false,
     }
 }
