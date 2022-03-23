@@ -58,7 +58,7 @@ export default function DesignTool({}) {
     }
 
     const initScroll = () => {
-        const width = list.length * ITEM_WIDTH
+        const width = list.length * ITEM_WIDTH + (list.length - 1) * 40
         cont.current.style.width = width + 'px'
         if (!scroll) {
             const scroll = new BScroll(wrapper.current, {
@@ -96,7 +96,7 @@ export default function DesignTool({}) {
                         list.length ? list.map((item, index) => {
                             return (
                                 <div key={`h_item_${index}`} 
-                                    style={{width:"300px",boxSizing:"content-box"}} 
+                                    style={{width: `${ITEM_WIDTH}px`}} 
                                     onClick={() => testClick(item)}
                                     className="h-full mx-5 rounded-lg bg-white px-4 pt-4 flex flex-col">
                                         <div className="w-full rounded-lg h-46 bg-contain" style={{backgroundImage: "url(/static/images/design-tool.png)"}} ></div>
