@@ -36,6 +36,7 @@ module.exports = {
         'gray-2': '#4F4F4F',
         'gray-3': '#828282',
         'gray-4': '#F3F4F6',
+        'blue-1': '#2463EB',
         success: '#0070f3',
         cyan: '#79FFE1',
       },

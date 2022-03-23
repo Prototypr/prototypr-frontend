@@ -79,6 +79,7 @@ export default function DesignTool({}) {
 
     }
     return (
+        <>
         <div className="bg-gray-4 w-full relative h-74">
             {/**button block is within container */}
             <div className="xl:container relative mx-auto flex items-center justify-between h-full">
@@ -121,5 +122,9 @@ export default function DesignTool({}) {
                 </div>
             </div>
         </div>
+        <div className="bg-gray-4 w-full relative flex items-center justify-center pt-14 pb-32">
+            <button className="bg-blue-1 rounded-lg text-white font-semibold text-base leading-6 flex items-center justify-center py-4 px-8">Browse more tools</button>
+        </div>
+      </>
     )
 }
