@@ -13,7 +13,7 @@
     "@radix-ui/react-navigation-menu": "^0.1.2",
     "@stitches/react": "^1.2.7",
     "axios": "^0.19.2",
-    "better-scroll": "^2.4.1",
+    "better-scroll": "^2.4.2",
     "classnames": "2.3.1",
     "date-fns": "2.28.0",
     "js-cookie": "^2.2.1",

@@ -35,6 +35,28 @@ export default function DesignTool({}) {
         initScroll()
     }, [])
 
+    /**
+     * for accessibility 
+     */
+    //next button focused
+    const keyboardNext = (event)=>{
+        if(event.key=='Enter'){
+            navHis(1)
+        }else if (event.keyCode=='37'){
+            const prevBtn = document.getElementById('prev')
+            prevBtn.focus()
+        }
+    }
+    //prev button focused
+    const keyboardPrev = (event)=>{
+        if(event.key=='Enter'){
+            navHis(-1)
+        }else if (event.keyCode=='39'){
+            const nextBtn = document.getElementById('next')
+            nextBtn.focus()
+        }
+    }
+
     const initScroll = () => {
         const width = list.length * ITEM_WIDTH
         cont.current.style.width = width + 'px'
@@ -61,10 +83,10 @@ export default function DesignTool({}) {
             {/**button block is within container */}
             <div className="xl:container relative mx-auto flex items-center justify-between h-full">
                 {/** 64 * 64 */}
-                <div className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50" onClick={() => navHis(-1)}>
+                <div tabIndex={0} id="prev" className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50" onKeyDown={keyboardPrev} onClick={() => navHis(-1)}>
                     <img src="/static/images/icons/prev.svg" />
                 </div>
-                <div className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50" onClick={() => navHis(1)}>
+                <div tabIndex={0} id="next" className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50" onKeyDown={keyboardNext} onClick={() => navHis(1)}>
                     <img src="/static/images/icons/next.svg" />
                 </div>
             </div>
