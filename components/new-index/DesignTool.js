@@ -4,6 +4,7 @@ const getItems = () =>
   Array(20)
     .fill(0)
     .map((_, ind) => ({ id: `element-${ind}` }));
+const ITEM_WIDTH = 300
 export default function DesignTool({}) {
     const [list, setList] = useState(getItems);
     const [scroll, setScroll] = useState(null);
@@ -16,12 +17,14 @@ export default function DesignTool({}) {
     const cont = useRef()
 
 
-    const prev = () => {
-        alert('prev')
-    }
-
-    const next = () => {
-        alert('next')
+    const navHis = (type) => {
+        const nextIndex = currentIndex + type
+        if (nextIndex < 0 || nextIndex > list.length - 1) {
+            return
+        }
+        const newDelta = - (nextIndex * ITEM_WIDTH)
+        scroll.scrollTo(newDelta)
+        setCurrentIndex(nextIndex)
     }
 
     useEffect(() => {
@@ -29,7 +32,7 @@ export default function DesignTool({}) {
     }, [])
 
     const initScroll = () => {
-        const width = list.length * 306
+        const width = list.length * ITEM_WIDTH
         cont.current.style.width = width + 'px'
         if (!scroll) {
             const scroll = new BScroll(wrapper.current, {
@@ -54,10 +57,10 @@ export default function DesignTool({}) {
             {/**button block is within container */}
             <div className="xl:container relative mx-auto flex items-center justify-between h-full">
                 {/** 64 * 64 */}
-                <div className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50" onClick={prev}>
+                <div className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50" onClick={() => navHis(-1)}>
                     <img src="/static/images/icons/prev.svg" />
                 </div>
-                <div className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50" onClick={next}>
+                <div className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50" onClick={() => navHis(1)}>
                     <img src="/static/images/icons/next.svg" />
                 </div>
             </div>
@@ -69,7 +72,7 @@ export default function DesignTool({}) {
                                 <div key={`h_item_${index}`} 
                                     style={{border:"1px solid blue",width:"300px",boxSizing:"content-box"}} 
                                     className="h-full mx-5 rounded-lg bg-white px-4 pt-4">
-
+                                        {item.id}
                                 </div>
                             )
                         }):null
