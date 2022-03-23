@@ -27,6 +27,10 @@ export default function DesignTool({}) {
         setCurrentIndex(nextIndex)
     }
 
+    const testClick = (item) => {
+        alert(item.id)
+    }
+
     useEffect(() => {
         initScroll()
     }, [])
@@ -64,15 +68,30 @@ export default function DesignTool({}) {
                     <img src="/static/images/icons/next.svg" />
                 </div>
             </div>
-            <div ref={wrapper} className="absolute left-0 h-74 w-full top-0 overflow-hidden" style={{border:"1px solid red"}}>
+            <div ref={wrapper} className="absolute left-0 h-74 w-full top-0 overflow-hidden">
                 <div ref={cont} className="relative flex h-full">
                     {
                         list.length ? list.map((item, index) => {
                             return (
                                 <div key={`h_item_${index}`} 
-                                    style={{border:"1px solid blue",width:"300px",boxSizing:"content-box"}} 
-                                    className="h-full mx-5 rounded-lg bg-white px-4 pt-4">
-                                        {item.id}
+                                    style={{width:"300px",boxSizing:"content-box"}} 
+                                    onClick={() => testClick(item)}
+                                    className="h-full mx-5 rounded-lg bg-white px-4 pt-4 flex flex-col">
+                                        <div className="w-full rounded-lg h-46 bg-contain" style={{backgroundImage: "url(/static/images/design-tool.png)"}} ></div>
+                                        <div className="mt-8 flex justify-between">
+                                            <div>
+                                                <div className="text-gray-1 text-lg font-bold leading-6">Handwrytten</div>
+                                                <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3"># Prototyping</div>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <img 
+                                                    width={"20px"}
+                                                    height={"16px"}
+                                                    src="/static/images/icons/star.svg"
+                                                />
+                                                <div className="font-normal text-base ml-1">1</div>
+                                            </div>
+                                        </div>
                                 </div>
                             )
                         }):null
