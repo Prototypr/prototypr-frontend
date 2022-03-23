@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.grayscale {
+  filter: grayscale(1);
+}
+
+@layer components {
+  @import "/components/atom/FormControl/formcontrol.scss";
+  @import "/components/atom/Button/button.scss";
+  @import "/components/atom/Spinner/spinner.scss";
+}
