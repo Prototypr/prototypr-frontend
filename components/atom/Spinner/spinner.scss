@@ -1,0 +1,13 @@
+.spinner {
+  @apply animate-spin -ml-1 mr-3;
+
+  &.sm {
+    @apply h-6 w-6;
+  }
+  &.md {
+    @apply h-8 w-8;
+  }
+  &.lg {
+    @apply h-12 w-12;
+  }
+}

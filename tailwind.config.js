@@ -27,6 +27,19 @@ module.exports = {
         'span-24': 'span 24 / span 24',
       },
       colors: {
+        primary: {
+          DEFAULT: "#3A5CCC",
+          50: "#CCD5F2",
+          100: "#BCC7EE",
+          200: "#9BACE5",
+          300: "#7B92DD",
+          400: "#5A77D4",
+          500: "#3A5CCC",
+          600: "#2A47A4",
+          700: "#1F3377",
+          800: "#13204A",
+          900: "#080D1E",
+        },
         'accent-1': '#FAFAFA',
         'accent-2': '#EAEAEA',
         'accent-7': '#333',
@@ -71,5 +84,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 }

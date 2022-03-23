@@ -1,0 +1,65 @@
+.form-control {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+
+  &.form-error {
+    & input,
+    select {
+      @apply ring-2 ring-red-500;
+    }
+  }
+
+  & label {
+    @apply text-sm text-gray-700 flex items-center justify-between py-2 pr-1 select-none font-semibold;
+  }
+
+  & .error {
+    @apply text-sm text-red-500 mt-2;
+  }
+
+  & .form-label-required {
+    @apply ml-1 text-red-400;
+  }
+}
+
+[type="text"],
+[type="email"],
+[type="url"],
+[type="password"],
+[type="number"],
+[type="date"],
+[type="datetime-local"],
+[type="month"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="week"],
+[multiple],
+textarea,
+select {
+  // base style
+  @apply rounded-lg border-0 bg-gray-100 flex-shrink-0;
+  // base size
+  @apply h-10 text-sm px-4;
+  @apply transition-shadow;
+
+  &:focus:not(:disabled) {
+    @apply ring ring-primary outline-none;
+  }
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  &:disabled {
+    @apply cursor-not-allowed bg-opacity-5 text-opacity-50 placeholder-opacity-50 placeholder-gray-400 text-gray-400;
+  }
+}
+[type="checkbox"],
+[type="radio"] {
+  @apply transition-shadow bg-white rounded text-primary-500 focus:ring focus:ring-primary focus:outline-none;
+}
+option {
+  @apply bg-white;
+}

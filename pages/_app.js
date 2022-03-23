@@ -1,4 +1,4 @@
-import '@/styles/index.css'
+import "@/styles/index.scss";
 import '@/styles/toolStyles.css'
 import { SessionProvider } from "next-auth/react"
 
