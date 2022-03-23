@@ -86,7 +86,6 @@ export async function getStaticProps({ preview = null, params}) {
 
     const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, page, all_tags )) || []
     
-    
     const pagination = allPosts.meta.pagination
     return {
         props: {
@@ -102,10 +101,11 @@ export async function getStaticPaths() {
     const pagination = allPosts.meta.pagination
     const pageCount = pagination.pageCount
     const pageCountArr = new Array(pageCount).fill(' ');
+
     return {
-        paths: pageCountArr && pageCountArr.map((pageNo) => {
-            return `/prototyping/page/${pageNo}`
+        paths: pageCountArr && pageCountArr.map((pageNo, index) => {
+            return `/prototyping/page/${index}`
         }) || [],
-        fallback: true,
+        fallback: false,
     }
 }

@@ -11,7 +11,7 @@ export default function SponsorCard({ author = {}, position }) {
   return (
     <>
       {sponsor ? (
-        <div className="bg-white  border-gray-300 p-5 rounded-lg shadow flex flex-row sm:flex-col">
+        <div className="bg-white  border-gray-300 p-5 rounded-lg flex flex-row sm:flex-col">
           <a
             href={sponsor.node.sponsorInfo.trackingLink}
             className=""
@@ -34,8 +34,8 @@ export default function SponsorCard({ author = {}, position }) {
             ) : (
               // <div className="relative h-32">
               <div
-                className="relative rounded mb-2"
-                style={{ minHeight: "195px" }}
+                className="relative rounded mb-2 w-full"
+                style={{ height: "148px" }}
               >
                 <Image
                   // width="215px"
@@ -43,6 +43,7 @@ export default function SponsorCard({ author = {}, position }) {
                   // height="135px"
                   data-gumlet={false}
                   layout="fill"
+                  objectFit="cover"
                   src={
                     position == "right" &&
                     sponsor.node.sponsorInfo.rightBanner
@@ -74,7 +75,7 @@ export default function SponsorCard({ author = {}, position }) {
                 className="text-sm cursor-pointer leading-5 font-medium text-gray-800"
               />
             </a>
-            <h1 className="text-xs text-gray-700 uppercase mt-3 ">
+            <h1 className="text-xs text-gray-700 uppercase mt-4 ">
               Brought to you by:
             </h1>
             <h1 className="text-sm font-semibold">

@@ -4,7 +4,28 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      inter: "Inter",
+    },
     extend: {
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        24: "repeat(24, minmax(0, 1fr))",
+      },
+      gridColumn: {
+        "span-13": "span 13 / span 13",
+        "span-14": "span 14 / span 14",
+        "span-15": "span 15 / span 15",
+        "span-16": "span 16 / span 16",
+        "span-17": "span 17 / span 17",
+        "span-18": "span 18 / span 18",
+        "span-19": "span 19 / span 19",
+        "span-20": "span 20 / span 20",
+        "span-21": "span 21 / span 21",
+        "span-22": "span 22 / span 22",
+        "span-23": "span 23 / span 23",
+        "span-24": "span 24 / span 24",
+      },
       colors: {
         primary: {
           DEFAULT: "#3A5CCC",
@@ -22,11 +43,16 @@ module.exports = {
         "accent-1": "#FAFAFA",
         "accent-2": "#EAEAEA",
         "accent-7": "#333",
+        "title-1": "#2B2B2B",
+        "paragraph-1": "#010301",
+        "gray-2": "#4F4F4F",
+        "gray-3": "#828282",
         success: "#0070f3",
         cyan: "#79FFE1",
       },
       spacing: {
         28: "7rem",
+        "9/20": "45%",
       },
       letterSpacing: {
         tighter: "-.04em",

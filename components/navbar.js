@@ -6,7 +6,7 @@ import NavigationMenuDemo from './navbar-menu';
 export default function Navbar({ posts, type, activeNav }) {
 
     return(
-    <Disclosure as="nav" className="bg-white shadow fixed w-full top-0 z-50">
+    <Disclosure as="nav" className="bg-white fixed w-full top-0 z-50">
       {({ open }) => (
           <>
     {/* // <!-- This example requires Tailwind CSS v2.0+ --> */}

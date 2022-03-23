@@ -111,10 +111,10 @@ export async function getStaticPaths() {
   return {
     paths:
       (pageCountArr &&
-        pageCountArr.map((pageNo) => {
-          return `/toolbox/ux-tools/page/${pageNo}`;
+        pageCountArr.map((pageNo, index) => {
+          return `/toolbox/ux-tools/page/${index}`;
         })) ||
       [],
-    fallback: true,
+    fallback: false,
   };
 }

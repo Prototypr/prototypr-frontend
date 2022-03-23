@@ -1,0 +1,48 @@
+{
+    "people": [
+      {
+        "name": "Kushali",
+        "avatar":"https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2020/08/19171211/1_WSOl-22hqNTeZsmGqmmCLQ.jpeg",
+        "link":"https://blog.prototypr.io/@khushali.sandhi?source=collection_writer_card"        
+      },
+      {
+        "name": "Jordan Bowman",
+        "avatar":"https://prototypr.gumlet.io/wp-content/uploads/2020/09/mug-500.jpg?format=webp&w=1100",
+        "link":"https://prototypr.io/people/jordanbowman/"        
+      },
+      {
+        "name": "Hoang Nguyen",
+        "avatar":"https://prototypr.gumlet.io/wp-content/uploads/2020/08/avatar_big.jpg?format=webp&w=800",
+        "link":"https://prototypr.io/author/hoangnguyen/"        
+      },
+      {
+        "name": "Clo S",
+        "avatar":"https://prototypr.gumlet.io/wp-content/uploads/2021/12/IMG_20210730_143415__01.jpg?format=webp&w=576",
+        "link":"https://prototypr.io/people/jordanbowman/"        
+      },
+      {
+        "name": "Chew Yune",
+        "avatar":"https://prototypr.gumlet.io/wp-content/uploads/2021/04/IMG_6394-copy.jpg?format=webp&w=576",
+        "link":"https://prototypr.io/people/jordanbowman/"        
+      },
+      {
+        "name": "Viktorija Bachvarova",
+        "avatar":"https://prototyprio.gumlet.io/wp-content/uploads/2017/03/11180256/1jexBPmKll_93wbSlx9DUpw-150x150.jpeg?format=webp&w=640",
+        "link":"https://prototypr.io/people/jordanbowman/"        
+      },
+      {
+        "name": "Zoe Chew",
+        "avatar":"https://prototypr.gumlet.io/wp-content/uploads/2020/06/profile-photo-black-shirt-400x400-1.jpg?format=webp&w=940",
+        "link":"https://prototypr.io/people/jordanbowman/"        
+      },
+      {
+        "name": "Marcus Hofman",
+        "avatar":"https://prototypr.gumlet.io/wp-content/uploads/2020/11/markus-profile-brand.jpg?format=webp&w=940",
+        "link":"https://prototypr.io/people/jordanbowman/"        
+      }
+     
+
+      
+      ]
+  }
+  

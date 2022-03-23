@@ -96,10 +96,10 @@ export async function getStaticPaths() {
   return {
     paths:
       (pageCountArr &&
-        pageCountArr.map((pageNo) => {
-          return `/toolbox/page/${pageNo}`;
+        pageCountArr.map((pageNo, index) => {
+          return `/toolbox/page/${index}`;
         })) ||
       [],
-    fallback: true,
+    fallback: false,
   };
 }

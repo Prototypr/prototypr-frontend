@@ -31,18 +31,18 @@ export default function SwiperGallery({ data = [] }) {
       >
         {data?.map((current, idx) => (
           <SwiperSlide
-            className="bg-white pt-10 h-60 sm:h-96 overflow-hidden"
+            className="bg-white pt-5 rounded-lg h-60 sm:h-96 overflow-hidden"
             key={idx + "_main"}
           >
             {current.type == "image" && current.original ? (
-              <div className="relative h-60 sm:h-96 w-full lg:max-h-full rounded-lg flex justify-center">
+              <div className="relative border border-gray-200 border-1 rounded-lg h-60 sm:h-96 w-full lg:max-h-full relative overflow-hidden rounded-lg flex justify-center">
                 <Image
                   layout="fill"
-                  className="rounded-lg  object-contain h-60 sm:h-96"
+                  objectFit="cover"
+                  // className="rounded-lg  object-contain h-60 sm:h-96"
                   src={current.original}
                   // data-src={current.original}
                   alt={`Gallery Image ${idx}`}
-                  width={'600px'}
                   sizes={"(max-width: 300px) 100vw, 600px"}
                 />
               </div>
@@ -66,7 +66,7 @@ export default function SwiperGallery({ data = [] }) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="py-6 sm:pb-2 sm:px-2 bg-white overflow-hidden sm:overflow-auto relative">
+      <div className="py-6 sm:pb-0 bg-white overflow-hidden sm:overflow-auto relative">
           <Swiper
             onSwiper={setThumbsSwiper}
             spaceBetween={10} 
@@ -76,12 +76,11 @@ export default function SwiperGallery({ data = [] }) {
             modules={[FreeMode, Navigation, Thumbs, A11y]}
           >
             {data.map((current, idx) => (
-              <SwiperSlide className="h-20 w-20 overflow-hidden relative flex justify-center" key={idx}>
+              <SwiperSlide className="h-20 w-20 overflow-hidden relative border border-1 border-gray-100 rounded-lg flex justify-center" key={idx}>
                 <div className="rounded h-20 w-20 bg-white">
                   <Image
                     layout="fill"
-                    className="shadow-sm shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
-                    style={{  display: "block" }}
+                    className="shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
                     src={current.thumbnail}
                     alt={`Gallery Image ${idx}`}
                   />
