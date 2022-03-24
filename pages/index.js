@@ -9,6 +9,7 @@ import Intro from '@/components/new-index/Intro'
 import EditorPick from '@/components/new-index/EditorPick'
 import ProductList from '@/components/new-index/ProductList'
 import DesignTool from '@/components/new-index/DesignTool'
+import SourcePanel from '@/components/new-index/SourcePanel'
 import { getAllPostsForHome } from '@/lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
@@ -33,8 +34,11 @@ export default function Index({ allPosts, preview }) {
               <h4 className="text-4xl font-bold leading-6 text-title-1">Design tools</h4>
           </div>
         </Container>
-      </Layout>
       <DesignTool />
+      <Container>
+        <SourcePanel />
+      </Container>
+      </Layout>
       <Footer />
     </>
   )

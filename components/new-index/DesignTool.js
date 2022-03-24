@@ -123,7 +123,7 @@ export default function DesignTool({}) {
             </div>
         </div>
         <div className="bg-gray-4 w-full relative flex items-center justify-center pt-14 pb-32">
-            <button className="bg-blue-1 rounded-lg text-white font-semibold text-base leading-6 flex items-center justify-center py-4 px-8">Browse more tools</button>
+            <button className="bg-blue-1 rounded-lg text-white text-base leading-6 flex items-center justify-center py-4 px-8 hover:opacity-70">Browse more tools</button>
         </div>
       </>
     )

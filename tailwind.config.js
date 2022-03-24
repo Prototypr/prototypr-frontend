@@ -37,6 +37,7 @@ module.exports = {
         'gray-3': '#828282',
         'gray-4': '#F3F4F6',
         'blue-1': '#2463EB',
+        'neutrals-700':'#4A5568',
         success: '#0070f3',
         cyan: '#79FFE1',
       },
@@ -44,7 +45,9 @@ module.exports = {
         28: '7rem',
         '9/20': '45%',
         74: '19rem',
-        46: '187px'
+        46: '187px',
+        100: '25rem',
+        18: '4.5rem'
       },
       letterSpacing: {
         tighter: '-.04em',
@@ -57,6 +60,7 @@ module.exports = {
         '6xl': '2.75rem',
         '7xl': '4.5rem',
         '8xl': '6.25rem',
+        's6xl': '3.43rem'
       },
       boxShadow: {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',
