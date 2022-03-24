@@ -1,11 +1,11 @@
-import React , { useState, useRef,useEffect } from "react";
+import React , { useState } from "react";
 
 export default function SourcePanel({}) {
 
 
 
     return (
-        <section className="w-full">
+        <section className="w-full mb-4">
             <div className="bg-white relative w-full h-100">
                 <div className="absolute left-18 top-0 h-full bg-contain w-7/12" style={{backgroundImage: "url(/static/images/source-bg.png)"}}></div>
                 <div className="absolute top-20 z-30 w-2/5" style={{left: "45%"}}>
