@@ -99,7 +99,7 @@ export default function DesignTool({}) {
                                 <div key={`h_item_${index}`} 
                                     style={{width: `${ITEM_WIDTH}px`}} 
                                     onClick={() => testClick(item)}
-                                    className="h-full mx-5 rounded-lg bg-white px-4 pt-4 flex flex-col">
+                                    className="h-full mx-5 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer">
                                         <div className="w-full rounded-lg h-46 bg-contain" style={{backgroundImage: "url(/static/images/design-tool.png)"}} ></div>
                                         <div className="mt-8 flex justify-between">
                                             <div>

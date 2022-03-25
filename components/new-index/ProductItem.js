@@ -3,7 +3,7 @@
 export default function ProductItem({}) {
   return (
     <div
-      className="grid-cols-1 flex items-center"
+      className="grid-cols-1 flex items-center cursor-pointer"
       style={{ border: "1px solid blue" }}
     >
       <div className="w-36 h-36" style={{ border: "1px solid red" }}></div>

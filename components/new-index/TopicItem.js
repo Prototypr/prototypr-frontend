@@ -6,7 +6,7 @@ import Author from './Author'
 export default function TopicItem({}) {
 
     return (
-        <div className="grid-cols-1 p-3 flex">
+        <div className="grid-cols-1 p-3 flex cursor-pointer">
             <div style={{width: "146px", height: "146px", border:"1px solid blue"}} className="rounded-lg mr-4"></div>
             <div className="flex flex-col flex-1">
                 <div className="flex">

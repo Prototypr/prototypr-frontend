@@ -3,7 +3,7 @@ import Author from './Author'
 export default function TopicTopItem({}) {
 
     return (
-        <div className="grid-cols-1 bg-white p-6 flex">
+        <div className="grid-cols-1 bg-white p-6 flex cursor-pointer">
             <div style={{width: "284px", height: "297px",border:"1px solid red"}} className="mr-6 rounded-lg"></div>
             <div className="flex flex-col flex-1">
                 <div className="flex">
