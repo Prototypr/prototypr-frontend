@@ -11,6 +11,8 @@ import ProductList from '@/components/new-index/ProductList'
 import DesignTool from '@/components/new-index/DesignTool'
 import SourcePanel from '@/components/new-index/SourcePanel'
 import TopicSpolights from '@/components/new-index/TopicSpolights'
+import Aspiring from '@/components/new-index/Aspiring'
+import Feeds from '@/components/new-index/Feeds'
 import { getAllPostsForHome } from '@/lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
@@ -39,6 +41,8 @@ export default function Index({ allPosts, preview }) {
       <Container>
         <SourcePanel />
         <TopicSpolights />
+        <Aspiring />
+        <Feeds />
       </Container>
       </Layout>
       <Footer />
