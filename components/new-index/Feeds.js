@@ -1,7 +1,7 @@
 import React , { useState, useEffect } from "react";
 import dynamic from 'next/dynamic'
 
-// const FeedItem = dynamic(() => import('./FeedItem'), { ssr: false })
+const FeedItem = dynamic(() => import('./FeedItem'), { ssr: false })
 
 export default function Feeds({}) {
     /**Math.random 200~400 */
@@ -34,7 +34,10 @@ export default function Feeds({}) {
                     {
                         list1.length && list1.map((item, index) => {
                             return (
-                                <div className="w-full" key={`col1_${index}`} style={{height:` ${item.height}px`,border:"1px solid red"}}></div>
+                                <FeedItem 
+                                    height={item.height}
+                                    key={`col1_${index}`}
+                                />
                             )
                         })
                     }
@@ -44,7 +47,10 @@ export default function Feeds({}) {
                     {
                         list2.length && list2.map((item, index) => {
                             return (
-                                <div className="w-full" key={`col2_${index}`} style={{height:` ${item.height}px`,border:"1px solid red"}}></div>
+                                <FeedItem 
+                                    height={item.height}
+                                    key={`col2_${index}`}
+                                />
                             )
                         })
                     }
@@ -54,7 +60,10 @@ export default function Feeds({}) {
                     {
                         list3.length && list3.map((item, index) => {
                             return (
-                                <div className="w-full" key={`col3_${index}`} style={{height:` ${item.height}px`,border:"1px solid red"}}></div>
+                                <FeedItem 
+                                    height={item.height}
+                                    key={`col3_${index}`}
+                                />
                             )
                         })
                     }
