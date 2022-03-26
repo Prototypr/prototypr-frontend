@@ -289,59 +289,6 @@
   }
 }
 
-.tab {
-  &::after {
-    position: absolute;
-    content: "";
-    background: #E0E0E0;
-    bottom: 0px;
-    left:0;
-    width: 100%;
-    height: 2px;
-  }
-}
-
-.tab-item {
-  &:hover {
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0px;
-      left:0;
-      width: 100%;
-      background-color: #2463EB;
-      height: 2px;
-      z-index: 20;
-    }
-  }
-}
-
-.tab-item-active {
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0px;
-    left:0;
-    width: 100%;
-    background-color: #2463EB;
-    height: 2px;
-    z-index: 20;
-  }
-}
-
-
-.clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
 @layer components {
   @import "/components/atom/FormControl/formcontrol.scss";
   @import "/components/atom/Button/button.scss";
