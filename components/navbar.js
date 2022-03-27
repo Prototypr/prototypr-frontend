@@ -1,12 +1,47 @@
 import Link from 'next/link';
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Disclosure } from '@headlessui/react'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import NavigationMenuDemo from './navbar-menu';
+import {useState, useEffect} from 'react'
 
 export default function Navbar({ posts, type, activeNav }) {
 
+  const [clientWindowHeight, setClientWindowHeight] = useState("");
+
+  const [backgroundTransparacy, setBackgroundTransparacy] = useState(0.5);
+  const [borderTransparacy, setBorderTransparency] = useState(0.5);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
+
+  const handleScroll = () => {
+    setClientWindowHeight(window.scrollY);
+  };
+
+  useEffect(() => {
+    let backgroundTransparacyVar = clientWindowHeight / 3000;
+    if (backgroundTransparacyVar < 1) {
+      let border = backgroundTransparacyVar/1.2
+      if(border<0.12){
+        setBorderTransparency(backgroundTransparacyVar/1.2);
+      }
+      let bg = 1-backgroundTransparacyVar
+      if(bg>0.94){
+        setBackgroundTransparacy(bg)
+      }
+    }
+  }, [clientWindowHeight]);
+
+
     return(
-    <Disclosure as="nav" className="bg-white fixed w-full top-0 z-50">
+    <Disclosure as="nav" className="bg-white fixed w-full top-0 z-50 border-b border-1 backdrop-blur"
+    style={{
+      borderBottom: `1px solid rgba(17, 24, 39, ${borderTransparacy})`,
+      background: `rgba(255, 255, 255, ${backgroundTransparacy})`,
+    }}
+    >
       {({ open }) => (
           <>
     {/* // <!-- This example requires Tailwind CSS v2.0+ --> */}
