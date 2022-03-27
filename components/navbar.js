@@ -26,8 +26,8 @@ export default function Navbar({ posts, type, activeNav }) {
         <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <Link href="/" as="/">
                 <div className="flex-shrink-0 flex items-center cursor-pointer">
-                        <img className="block lg:hidden h-12 w-auto" src="https://prototypr.io/wp-content/uploads/2018/10/1_SdMNHdB-vvUH4eWMBYkzQw.png" alt="Workflow"/>
-                        <img className="hidden lg:block h-8 w-auto" src="https://letter-so.s3.us-west-1.amazonaws.com/uploads/LQatPZxS8qFXER9Hi/2rzv1a" alt="Workflow"/>
+                        <img className="block lg:hidden h-12 w-auto" src="/static/images/logo-small.svg" alt="Prototypr Logo"/>
+                        <img className="hidden lg:block h-8 w-auto" src="/static/images/logo.svg" alt="Prototypr Logo"/>
                 </div>
             </Link>
         </div>
