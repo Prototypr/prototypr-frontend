@@ -5,11 +5,11 @@
 export default function FeedItem({height}) {
 
     return (
-        <div className="w-full cursor-pointer">
+        <div className="cursor-pointer py-6 px-1 inline-block">
             <div className="w-full rounded-lg" style={{height:` ${height}px`,border:"1px solid red"}}></div>
                 {
                     height > 350 && (
-                        <div className="grid lg:grid-cols-4 grid-cols-1 gap-4 mt-4">
+                        <div className="grid grid-cols-4 grid-cols-1 gap-4 mt-4">
                             <div className="grid-cols-1 rounded-lg" style={{height:"81px",border:"1px solid red"}}>
                             </div>
                             <div className="grid-cols-1 rounded-lg" style={{height:"81px",border:"1px solid red"}}>

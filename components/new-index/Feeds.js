@@ -26,13 +26,14 @@ export default function Feeds({}) {
         // setList(newList)
     }, [])
 
+    
     return (
         <section className="mt-36 pt-3 pb-10">
             <h4 className="text-4xl font-bold  text-title-1 mb-10">Feeds</h4>
-            <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
-                <div className="grid-cols-1 grid gap-y-10">
+                {/* https://tailwindcss.com/docs/columns */}
+                <div className="w-full lg:columns-3 sm:columns-2 gap-12">
                     {
-                        list1.length && list1.map((item, index) => {
+                        list.length && list.map((item, index) => {
                             return (
                                 <FeedItem 
                                     height={item.height}
@@ -43,7 +44,7 @@ export default function Feeds({}) {
                     }
                 </div>
 
-                <div className="grid-cols-1 grid gap-y-10">
+                {/* <div className="grid-cols-1 grid gap-y-10">
                     {
                         list2.length && list2.map((item, index) => {
                             return (
@@ -67,8 +68,7 @@ export default function Feeds({}) {
                             )
                         })
                     }
-                </div>
-            </div>
+                </div> */}
             <div className="mt-10 flex items-center justify-center">
                 <button className="font-semibold text-base leading-6 blue-1 h-12 w-52 border-2 border-solid border-blue-1 text-blue-1 rounded-lg hover:opacity-50">Show more feeds</button>
             </div>
