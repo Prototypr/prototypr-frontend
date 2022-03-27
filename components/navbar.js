@@ -28,7 +28,7 @@ export default function Navbar({ posts, type, activeNav }) {
         setBorderTransparency(backgroundTransparacyVar/1.2);
       }
       let bg = 1-backgroundTransparacyVar
-      if(bg>0.94){
+      if(bg>0.9){
         setBackgroundTransparacy(bg)
       }
     }
