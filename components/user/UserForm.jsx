@@ -16,8 +16,8 @@ const UserForm = ({ info }) => {
     register,
     handleSubmit,
     watch,
-    setValue,
-    formState: { isSubmitting, errors },
+    setError,
+    formState: { isSubmitting, errors, isSubmitSuccessful },
   } = useForm({
     defaultValues: {
       location: info.location,
@@ -48,19 +48,39 @@ const UserForm = ({ info }) => {
           Authorization: `Bearer ${jwt}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        data: qs.stringify({
-          ...data,
-          location: "",
-        }),
+        data: qs.stringify(data),
       });
-
-      setValue(data.bio);
 
       toast.success("Successfully updated", {
         duration: 10000,
       });
     } catch (error) {
-      if (error) console.log(error.response);
+      toast.error("Error has occured.");
+      console.log(error.response.data.error.details.errors);
+      error.response.data.error.details.errors.forEach((i) => {
+        if (
+          [
+            "location",
+            "firstName",
+            "secondName",
+            "website",
+            "bio",
+            "paymentPointer",
+            "email",
+          ].includes(i.path[0])
+        ) {
+          setError(
+            i.path[0],
+            i.path[0] === "location"
+              ? {
+                  message: "Location not available.",
+                }
+              : {
+                  message: i.message,
+                }
+          );
+        }
+      });
     }
   };
 
@@ -79,6 +99,8 @@ const UserForm = ({ info }) => {
               className="w-full"
               placeholder="John"
               disabled={isSubmitting}
+              aria-describedby="firstName_error"
+              aria-live="assertive"
               {...register("firstName", {
                 maxLength: {
                   message: "Maximum length can be up to 50 characters",
@@ -87,7 +109,9 @@ const UserForm = ({ info }) => {
               })}
             />
             {errors.firstName && (
-              <span className="error">{errors.firstName.message}</span>
+              <span className="error" role="alert" id="firstName_error">
+                {errors.firstName.message}
+              </span>
             )}
           </FormControl>
           <FormControl inValid={!!errors.secondName}>
@@ -101,6 +125,8 @@ const UserForm = ({ info }) => {
               className="w-full"
               placeholder="Doe"
               disabled={isSubmitting}
+              aria-describedby="secondName_error"
+              aria-live="assertive"
               {...register("secondName", {
                 maxLength: {
                   message: "Maximum length can be up to 50 characters",
@@ -109,7 +135,9 @@ const UserForm = ({ info }) => {
               })}
             />
             {errors.secondName && (
-              <span className="error">{errors.secondName.message}</span>
+              <span className="error" role="alert" id="secondName_error">
+                {errors.secondName.message}
+              </span>
             )}
           </FormControl>
           <FormControl inValid={!!errors.location}>
@@ -120,6 +148,8 @@ const UserForm = ({ info }) => {
               id="location"
               className="w-full"
               disabled={isSubmitting}
+              aria-describedby="location_error"
+              aria-live="assertive"
               {...register("location")}
             >
               {accountLocations.map((i) => (
@@ -129,7 +159,9 @@ const UserForm = ({ info }) => {
               ))}
             </select>
             {errors.location && (
-              <span className="error">{errors.location.message}</span>
+              <span className="error" role="alert" id="location_error">
+                {errors.location.message}
+              </span>
             )}
           </FormControl>
           <FormControl inValid={!!errors.website}>
@@ -142,6 +174,8 @@ const UserForm = ({ info }) => {
               autoComplete="off"
               className="w-full"
               disabled={isSubmitting}
+              aria-describedby="website_error"
+              aria-live="assertive"
               placeholder="https://myprofile.com"
               {...register("website", {
                 maxLength: {
@@ -151,7 +185,9 @@ const UserForm = ({ info }) => {
               })}
             />
             {errors.website && (
-              <span className="error">{errors.website.message}</span>
+              <span className="error" role="alert" id="website_error">
+                {errors.website.message}
+              </span>
             )}
           </FormControl>
         </div>
@@ -167,6 +203,8 @@ const UserForm = ({ info }) => {
             className="w-full resize-y h-auto"
             rows={4}
             disabled={isSubmitting}
+            aria-describedby="bio_error"
+            aria-live="assertive"
             placeholder="Where are you from? What's your role? What's your favourite animal?"
             {...register("bio", {
               maxLength: {
@@ -179,7 +217,11 @@ const UserForm = ({ info }) => {
             (watchBio ?? "").length
           } / ${160} characters used`}</span>
 
-          {errors.bio && <span className="error">{errors.bio.message}</span>}
+          {errors.bio && (
+            <span className="error" role="alert" id="bio_error">
+              {errors.bio.message}
+            </span>
+          )}
         </FormControl>
         <FormControl inValid={!!errors.paymentPointer}>
           <label htmlFor="paymentPointer" className="text-sm">
@@ -191,6 +233,8 @@ const UserForm = ({ info }) => {
             autoComplete="off"
             className="w-full"
             disabled={isSubmitting}
+            aria-describedby="paymentPointer_error"
+            aria-live="assertive"
             placeholder="$alice.wallet.example"
             {...register("paymentPointer", {
               maxLength: {
@@ -200,7 +244,9 @@ const UserForm = ({ info }) => {
             })}
           />
           {errors.paymentPointer && (
-            <span className="error">{errors.paymentPointer.message}</span>
+            <span className="error" role="alert" id="paymentPointer_error">
+              {errors.paymentPointer.message}
+            </span>
           )}
         </FormControl>
 
@@ -215,6 +261,8 @@ const UserForm = ({ info }) => {
             className="w-full"
             placeholder="john@mail.com"
             disabled={true}
+            aria-describedby="email_error"
+            aria-live="assertive"
             {...register("email", {
               required: true,
               maxLength: {
@@ -224,7 +272,9 @@ const UserForm = ({ info }) => {
             })}
           />
           {errors.email && (
-            <span className="error">{errors.email.message}</span>
+            <span className="error" role="alert" id="email_error">
+              {errors.email.message}
+            </span>
           )}
         </FormControl>
 
@@ -239,6 +289,8 @@ const UserForm = ({ info }) => {
             className="w-full"
             placeholder="John"
             disabled={true}
+            aria-describedby="username_error"
+            aria-live="assertive"
             {...register("username", {
               required: true,
               maxLength: {
@@ -248,11 +300,13 @@ const UserForm = ({ info }) => {
             })}
           />
           {errors.username && (
-            <span className="error">{errors.username.message}</span>
+            <span className="error" role="alert" id="username_error">
+              {errors.username.message}
+            </span>
           )}
         </FormControl>
 
-        <div className="mt-6">
+        <div className="mt-6 flex items-center gap-3">
           <Button
             disabled={Object.keys(errors).length > 0}
             isLoading={isSubmitting}
@@ -261,6 +315,11 @@ const UserForm = ({ info }) => {
           >
             Save Profile Info
           </Button>
+          {isSubmitSuccessful && (
+            <div role="alert" className="text-green-600 text-sm font-medium">
+              Profile information successfully updated.
+            </div>
+          )}
         </div>
       </div>
     </form>
