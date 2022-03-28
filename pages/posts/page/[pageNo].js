@@ -85,7 +85,6 @@ export async function getStaticProps({ preview = null, params }) {
       const allPosts = (await getAllPostsForPostsPage(null, PAGE_SIZE, 0)) || []
       const pagination = allPosts.meta.pagination
       const pageCount = pagination.pageCount
-      console.log('总页数********' + pageCount)
       const pageCountArr = new Array(pageCount).fill(' ')
       return {
         paths: pageCountArr && pageCountArr.map((pageNo) => {
