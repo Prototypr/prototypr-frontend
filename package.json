@@ -11,6 +11,7 @@
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-icons": "^1.1.0",
     "@radix-ui/react-navigation-menu": "^0.1.2",
+    "@radix-ui/react-portal": "^0.1.4",
     "@stitches/react": "^1.2.7",
     "axios": "^0.19.2",
     "classnames": "2.3.1",

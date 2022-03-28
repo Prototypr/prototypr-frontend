@@ -4,6 +4,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import Button from "../atom/Button/Button";
 
 const UserForm = ({ info }) => {
@@ -14,6 +15,8 @@ const UserForm = ({ info }) => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { isSubmitting, errors },
   } = useForm({
     defaultValues: {
@@ -28,6 +31,7 @@ const UserForm = ({ info }) => {
     },
   });
 
+  const watchBio = watch("bio");
   const onSubmit = async (data) => {
     if (!data.location) {
       // if location not provided
@@ -44,10 +48,19 @@ const UserForm = ({ info }) => {
           Authorization: `Bearer ${jwt}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        data: qs.stringify(data),
+        data: qs.stringify({
+          ...data,
+          location: "",
+        }),
+      });
+
+      setValue(data.bio);
+
+      toast.success("Successfully updated", {
+        duration: 10000,
       });
     } catch (error) {
-      console.log(error);
+      if (error) console.log(error.response);
     }
   };
 
@@ -65,8 +78,8 @@ const UserForm = ({ info }) => {
               autoComplete="off"
               className="w-full"
               placeholder="John"
+              disabled={isSubmitting}
               {...register("firstName", {
-                disabled: isSubmitting,
                 maxLength: {
                   message: "Maximum length can be up to 50 characters",
                   value: 50,
@@ -87,8 +100,8 @@ const UserForm = ({ info }) => {
               autoComplete="off"
               className="w-full"
               placeholder="Doe"
+              disabled={isSubmitting}
               {...register("secondName", {
-                disabled: isSubmitting,
                 maxLength: {
                   message: "Maximum length can be up to 50 characters",
                   value: 50,
@@ -106,9 +119,8 @@ const UserForm = ({ info }) => {
             <select
               id="location"
               className="w-full"
-              {...register("location", {
-                disabled: isSubmitting,
-              })}
+              disabled={isSubmitting}
+              {...register("location")}
             >
               {accountLocations.map((i) => (
                 <option key={i} value={i}>
@@ -129,11 +141,11 @@ const UserForm = ({ info }) => {
               type="text"
               autoComplete="off"
               className="w-full"
+              disabled={isSubmitting}
               placeholder="https://myprofile.com"
               {...register("website", {
-                disabled: isSubmitting,
                 maxLength: {
-                  message: "Maximum length can be up to 50 characters",
+                  message: "Maximum length can be up to 120 characters",
                   value: 120,
                 },
               })}
@@ -154,15 +166,19 @@ const UserForm = ({ info }) => {
             autoComplete="off"
             className="w-full resize-y h-auto"
             rows={4}
+            disabled={isSubmitting}
             placeholder="Where are you from? What's your role? What's your favourite animal?"
             {...register("bio", {
-              disabled: isSubmitting,
               maxLength: {
-                message: "Maximum length can be up to 50 characters",
+                message: "Maximum length can be up to 160 characters",
                 value: 160,
               },
             })}
           />
+          <span className="text-xs text-gray-400 mt-1">{`${
+            (watchBio ?? "").length
+          } / ${160} characters used`}</span>
+
           {errors.bio && <span className="error">{errors.bio.message}</span>}
         </FormControl>
         <FormControl inValid={!!errors.paymentPointer}>
@@ -174,11 +190,11 @@ const UserForm = ({ info }) => {
             type="text"
             autoComplete="off"
             className="w-full"
+            disabled={isSubmitting}
             placeholder="$alice.wallet.example"
             {...register("paymentPointer", {
-              disabled: isSubmitting,
               maxLength: {
-                message: "Maximum length can be up to 50 characters",
+                message: "Maximum length can be up to 120 characters",
                 value: 120,
               },
             })}
@@ -198,9 +214,8 @@ const UserForm = ({ info }) => {
             autoComplete="off"
             className="w-full"
             placeholder="john@mail.com"
+            disabled={true}
             {...register("email", {
-              // disabled: isSubmitting,
-              disabled: true,
               required: true,
               maxLength: {
                 message: "Maximum length can be up to 120 characters",
@@ -223,9 +238,8 @@ const UserForm = ({ info }) => {
             autoComplete="off"
             className="w-full"
             placeholder="John"
+            disabled={true}
             {...register("username", {
-              disabled: true,
-              // disabled: isSubmitting,
               required: true,
               maxLength: {
                 message: "Maximum length can be up to 120 characters",
@@ -239,7 +253,12 @@ const UserForm = ({ info }) => {
         </FormControl>
 
         <div className="mt-6">
-          <Button isLoading={isSubmitting} type="submit" color="primary">
+          <Button
+            disabled={Object.keys(errors).length > 0}
+            isLoading={isSubmitting}
+            type="submit"
+            color="primary"
+          >
             Save Profile Info
           </Button>
         </div>

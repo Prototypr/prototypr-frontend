@@ -1,5 +1,4 @@
 import Fallback from "@/components/atom/Fallback/Fallback";
-import Container from "@/components/container";
 import Layout from "@/components/layout";
 import UserForm from "@/components/user/UserForm";
 import axios from "axios";
@@ -19,7 +18,7 @@ const AccountPage = ({ preview, userData }) => {
         <Head>
           <title>Account Settings</title>
         </Head>
-        <Container>
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="pt-6 pb-10 md:pt-10">
             <div className="bg-white shadow-md rounded-lg py-6 px-4">
               <h1 className="font-semibold">Public Profile</h1>
@@ -42,7 +41,7 @@ const AccountPage = ({ preview, userData }) => {
               />
             </div>
           </div>
-        </Container>
+        </div>
       </Layout>
     );
   }
