@@ -100,8 +100,12 @@ export default function DesignTool({}) {
                                     style={{width: `${ITEM_WIDTH}px`}} 
                                     onClick={() => testClick(item)}
                                     className="h-full mx-5 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer">
-                                        <div className="w-full rounded-lg h-46 bg-contain" style={{backgroundImage: "url(/static/images/design-tool.png)"}} ></div>
-                                        <div className="mt-8 flex justify-between">
+                                        <div className="w-full rounded-lg h-46 bg-contain relative" style={{backgroundImage: "url(/static/images/design-tool.png)"}}>
+                                            <div className="absolute border-2 border-solid border-white w-10 h-10 rounded-full -bottom-3"
+                                            style={{left: "10.46%", right: "76.47%",backgroundColor:"#E75E47"}}
+                                            ></div>
+                                        </div>
+                                        <div className="mt-5 flex justify-between">
                                             <div>
                                                 <div className="text-gray-1 text-lg font-bold leading-6">Handwrytten</div>
                                                 <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3"># Prototyping</div>

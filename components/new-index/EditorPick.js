@@ -33,6 +33,10 @@ export default function EditorPick({}) {
                     <p className="text-base font-medium text-gray-2 leading-normal mt-4">
                     Guiding leadership values for 2022. Excellent leadership skills are hard to find these days. However, I have been in and out working ...
                     </p>
+                    <div className="flex mt-6 items-center">
+                        <div className="w-11 h-11 rounded-full" style={{border:"1px solid red"}}></div>
+                        <div className="font-medium text-base ml-3 text-gray-1">Abram Bator</div>
+                    </div>
                 </div>
             </div>
         </section>
