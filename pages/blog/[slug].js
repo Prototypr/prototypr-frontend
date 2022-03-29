@@ -24,7 +24,7 @@ import dynamic from 'next/dynamic'
 const TimeAgo = dynamic(() => import('react-timeago'), { ssr: false })
 
 export default function Post({ post, morePosts,relatedPosts, preview }) {
-  console.log("blog page:post*********" + JSON.stringify(post?.attributes))
+  // console.log("blog page:post*********" + JSON.stringify(post?.attributes))
   const router = useRouter()
   //TODO: what is withAuthUser
   const withAuthUser = {};
@@ -129,7 +129,7 @@ export default function Post({ post, morePosts,relatedPosts, preview }) {
                           <a href={"https://blog.prototypr.io/being-a-design-intern-at-dunzo-ccebe8a6eac7?source=rss----eb297ea1161a---4?ref=prototyprio"}>
 
                             <h1 className="text-lg tracking-tight mr-2 leading-tight font-medium text-gray-900">
-                              <div dangerouslySetInnerHTML={{ __html: "Being a design intern at Dunzo" }} />
+                              <div dangerouslySetInnerHTML={{ __html: post.attributes.title }} />
                             </h1>
                             <div className="flex mt-1">
                               <div className=" pr-1 text-sm md:text-base text-blue-700 ">
@@ -150,7 +150,7 @@ export default function Post({ post, morePosts,relatedPosts, preview }) {
                       </div>
                       <div className="pb-3">{getDesc()}</div>
                       <a href={"https://blog.prototypr.io/being-a-design-intern-at-dunzo-ccebe8a6eac7?source=rss----eb297ea1161a---4?ref=prototyprio"}>
-                        <img className="rounded-md" alt={"Being a design intern at Dunzo"} src={"https://prototypr.io/wp-content/uploads/2020/08/1G7GioLR6VT5LfN_m7y23Dw.jpeg"} />
+                        <img className="rounded-md" alt={post.attributes.title} src={post?.attributes.ogImage.opengraphImage} />
                       </a>
                   </div>
                 </div>
