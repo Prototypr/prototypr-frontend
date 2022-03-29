@@ -16,9 +16,10 @@ export default function VisitCard({
            dangerouslySetInnerHTML={{ __html: title }}
           className="text-2xl tracking-tight lg:text-lg mb-2 lg:mb-1 leading-tight font-bold text-gray-900 my-auto">
           </h1>
-          {tags.data && tags.data.length && tags.data.slice(0, 2).map((tag, index)=>{
+          {tags.data && tags.data.length ? tags.data.slice(0, 2).map((tag, index)=>{
             return (
               <a
+              key={`tag_${index}`}
               rel="noreferrer"
               className="cursor-default inline-block mr-1 text-xs bg-gray-200 p-1 px-2 rounded-lg mt-1"
               // href={`${tag.attributes.slug}`}
@@ -27,7 +28,7 @@ export default function VisitCard({
               # {tag.attributes.slug}
             </a>
             )
-          })}
+          }):null}
         </div>
 
         <div className="lg:w-2/6 overflow-hidden my-3 mb-5 lg:my-0 lg:mb-0 lg:mr-0">
