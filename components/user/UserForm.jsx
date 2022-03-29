@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Button from "../atom/Button/Button";
 
+const websiteRegex =
+  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
 const UserForm = ({ info }) => {
   const {
     data: { jwt },
@@ -180,6 +182,10 @@ const UserForm = ({ info }) => {
                 maxLength: {
                   message: "Maximum length can be up to 120 characters",
                   value: 120,
+                },
+                pattern: {
+                  message: "Enter a valid URL",
+                  value: websiteRegex,
                 },
               })}
             />
