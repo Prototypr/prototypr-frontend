@@ -5,7 +5,7 @@ const getItems = () =>
     .fill(0)
     .map((_, ind) => ({ id: `element-${ind}` }));
 const ITEM_WIDTH = 300
-export default function DesignTool({}) {
+export default function DesignTool({allTools = []}) {
     const [list, setList] = useState(getItems);
     const [scroll, setScroll] = useState(null);
 
@@ -19,7 +19,7 @@ export default function DesignTool({}) {
 
     const navHis = (type) => {
         const nextIndex = currentIndex + type
-        if (nextIndex < 0 || nextIndex > list.length - 1) {
+        if (nextIndex < 0 || nextIndex > allTools.length - 1) {
             return
         }
         const newDelta = - (nextIndex * ITEM_WIDTH)
@@ -28,12 +28,14 @@ export default function DesignTool({}) {
     }
 
     const testClick = (item) => {
-        alert(item.id)
+        alert(item)
     }
 
     useEffect(() => {
-        initScroll()
-    }, [])
+        if (allTools.length) {
+            initScroll()
+        }
+    }, [allTools])
 
     /**
      * for accessibility 
@@ -58,7 +60,7 @@ export default function DesignTool({}) {
     }
 
     const initScroll = () => {
-        const width = list.length * ITEM_WIDTH + (list.length - 1) * 40
+        const width = allTools.length * ITEM_WIDTH + (allTools.length - 1) * 40
         cont.current.style.width = width + 'px'
         if (!scroll) {
             const scroll = new BScroll(wrapper.current, {
@@ -94,21 +96,28 @@ export default function DesignTool({}) {
             <div ref={wrapper} className="absolute left-0 h-74 w-full top-0 overflow-hidden">
                 <div ref={cont} className="relative flex h-full">
                     {
-                        list.length ? list.map((item, index) => {
+                        allTools.length ? allTools.map((item, index) => {
+                            const showItem = item?.attributes
                             return (
                                 <div key={`h_item_${index}`} 
                                     style={{width: `${ITEM_WIDTH}px`}} 
                                     onClick={() => testClick(item)}
                                     className="h-full mx-5 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer">
-                                        <div className="w-full rounded-lg h-46 bg-contain relative" style={{backgroundImage: "url(/static/images/design-tool.png)"}}>
-                                            <div className="absolute border-2 border-solid border-white w-10 h-10 rounded-full -bottom-3"
-                                            style={{left: "10.46%", right: "76.47%",backgroundColor:"#E75E47"}}
+                                        <div className="w-full rounded-lg h-46 bg-contain relative" style={{backgroundImage: `url(${showItem.legacyFeaturedImage.imgUrl})`}}>
+                                            <div className="absolute border-2 border-solid border-white w-10 h-10 rounded-full -bottom-3 bg-contain"
+                                            style={{left: "10.46%", right: "76.47%", backgroundImage:`url(${showItem.legacyFeaturedImage.logoNew})`}}
                                             ></div>
                                         </div>
+                                        {/* <img 
+                                            className="w-full rounded-lg h-46 relative"
+                                            srcSet={`"https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-300x225.png 300w, https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-1024x768.png 1024w, https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-768x576.png 768w, https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox.png 1400w",
+                                            "medium": "https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-768x576.png",
+                                            "thumb": "https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-150x150.png"`}
+                                        /> */}
                                         <div className="mt-5 flex justify-between">
                                             <div>
-                                                <div className="text-gray-1 text-lg font-bold leading-6">Handwrytten</div>
-                                                <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3"># Prototyping</div>
+                                                <div className="text-gray-1 text-lg font-bold leading-6">{showItem.title}</div>
+                                                <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3"># {showItem.slug}</div>
                                             </div>
                                             <div className="flex items-center">
                                                 <img 
