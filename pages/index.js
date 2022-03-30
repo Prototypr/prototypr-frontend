@@ -13,7 +13,7 @@ import SourcePanel from "@/components/new-index/SourcePanel";
 import TopicSpolights from "@/components/new-index/TopicSpolights";
 import Aspiring from "@/components/new-index/Aspiring";
 import Feeds from "@/components/new-index/Feeds";
-import { getAllPostsForHome, getAllToolsForHome } from "@/lib/api";
+import { getCombinedPostsForHome, getAllToolsForHome } from "@/lib/api";
 import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 const PAGE_SIZE = 12;
@@ -37,8 +37,8 @@ export default function Index({ allPosts, preview, allTools }) {
         </Head>
         <Container>
           <Intro />
-          <EditorPick />
-          <ProductList />
+          <EditorPick post={heroPost} />
+          <ProductList posts={morePosts} />
           <div className="mt-32 pb-10">
             <h4 className="text-4xl font-bold leading-6 text-title-1">
               Design tools
@@ -59,10 +59,10 @@ export default function Index({ allPosts, preview, allTools }) {
 }
 
 export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getAllPostsForHome(preview)) || [];
+  const allPosts = (await getCombinedPostsForHome(preview)) || [];
   const allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0)) || [];
   // console.log('alltools length*****' + allTools?.data.length)
-  // console.log('alltools from home**********' + JSON.stringify(allTools))
+  // console.log('home:allPosts**********' + allPosts.data.length)
   return {
     props: {
       allPosts: allPosts.data,
