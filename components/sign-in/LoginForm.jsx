@@ -1,7 +1,6 @@
 import { signIn } from "next-auth/react";
 import Button from "../atom/Button/Button";
 
-// const colors = {}
 const LoginForm = () => {
   return (
     <div className="flex flex-col">

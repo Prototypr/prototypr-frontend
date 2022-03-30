@@ -24,6 +24,19 @@ export default function Index({ allPosts, preview }) {
         <div className="col-span-12 md:col-span-6 lg:col-span-8">
           <div className="flex items-center justify-center h-full w-full relative">
             {status === "loading" && <Fallback />}
+            {status !== "loading" && (
+              <div className="absolute top-[2%] left-[2%]">
+                <Link href="/" passHref prefetch={false}>
+                  <a>
+                    <img
+                      src={`/static/images/logo-small.svg`}
+                      alt=""
+                      className="w-8 h-8"
+                    />
+                  </a>
+                </Link>
+              </div>
+            )}
             {status === "authenticated" && (
               <div className="flex flex-col w-[285px]">
                 <h2 className="text-lg text-gray-800 font-bold text-center">
@@ -44,7 +57,7 @@ export default function Index({ allPosts, preview }) {
               <>
                 <LoginForm />
                 <div className="absolute top-[2%] right-[2%]">
-                  <div className="text-sm text-gray-700 font-inter">
+                  <div className="text-sm text-gray-700">
                     <span>I already have access? </span>
                     <Link href="/sign_in" passHref prefetch={false}>
                       <a className="text-primary-400">Sign in.</a>
