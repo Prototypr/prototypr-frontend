@@ -1,23 +1,35 @@
-import Container from '@/components/container'
-import Intro from '@/components/sign-in/intro'
-import Layout from '@/components/layout'
-import Head from 'next/head'
-import { CMS_NAME } from '@/lib/constants'
-import {signIn, signOut, useSession} from "next-auth/react"
+import Intro from "@/components/sign-in/intro";
+import Head from "next/head";
+import { signIn, signOut, useSession } from "next-auth/react";
+import LoginForm from "@/components/sign-in/LoginForm";
+import Link from "next/link";
 
 export default function Index({ allPosts, preview }) {
-
-    const { data: session, status } = useSession()
-
+  const { data: session, status } = useSession();
 
   return (
     <>
-      <Layout preview={preview}>
-        <Head>
-          <title>Sign into Prototypr</title>
-        </Head>
-        <Container>
-          <Intro session={session} />        
+      <Head>
+        <title>Sign into Prototypr</title>
+      </Head>
+      {session ? (
+        <div>Logged in.</div>
+      ) : (
+        <div className="h-full">
+          <div className="flex items-center justify-center h-full w-full relative">
+            <LoginForm />
+            <div className="absolute top-[2%] right-[2%]">
+              <div className="text-sm text-gray-700">
+                <span>I already have access? </span>
+                <Link href="/sign_in" passHref prefetch={false}>
+                  <a className="text-primary-400">Sign in.</a>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* <Intro session={session} />        
           {session?
            <>
            Signed in as {session.user.email} <br />
@@ -41,10 +53,7 @@ export default function Index({ allPosts, preview }) {
                 <defs> <path id="prefix__a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" /> </defs> <clipPath id="prefix__b"> <use xlinkHref="#prefix__a" overflow="visible" /> </clipPath> <path clipPath="url(#prefix__b)" fill="#FBBC05" d="M0 37V11l17 13z" /> <path clipPath="url(#prefix__b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z" /> <path clipPath="url(#prefix__b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z" /> <path clipPath="url(#prefix__b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" /> </svg>
                 <span className="text-xs uppercase">Sign In with Google</span>
             </button>
-        </div>}
-
-        </Container>
-      </Layout>
+        </div>} */}
     </>
-  )
+  );
 }

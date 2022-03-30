@@ -1,7 +1,7 @@
 .btn {
   @apply inline-flex items-center justify-center relative appearance-none;
   @apply border border-transparent;
-  @apply rounded-lg font-semibold;
+  @apply rounded-lg font-medium;
   @apply outline-none transition-all;
 
   &:disabled {
@@ -102,6 +102,85 @@
     }
     &.btn-outline {
       @apply border-red-500;
+    }
+  }
+
+  &.btn-twitter {
+    @apply bg-[#55ACEE] focus:bg-[#2293E9] focus:ring focus:ring-[#9FD0F5];
+    @apply text-white;
+
+    &:active:not(:disabled) {
+      @apply bg-[#1375C0];
+    }
+
+    &.btn-outline,
+    &.btn-ghost {
+      @apply bg-opacity-0;
+      @apply text-[#55ACEE];
+      &:focus:not(:disabled) {
+        @apply bg-opacity-10;
+      }
+      &:hover:not(:disabled) {
+        @apply bg-opacity-10;
+      }
+      &:active:not(:disabled) {
+        @apply bg-opacity-20;
+      }
+    }
+    &.btn-outline {
+      @apply border-[#55ACEE];
+    }
+  }
+  &.btn-github {
+    @apply bg-[#1F1F1F] focus:bg-[#030303] focus:ring focus:ring-[#484848];
+    @apply text-white;
+
+    &:active:not(:disabled) {
+      @apply bg-[#000000];
+    }
+
+    &.btn-outline,
+    &.btn-ghost {
+      @apply bg-opacity-0;
+      @apply text-[#1F1F1F];
+      &:focus:not(:disabled) {
+        @apply bg-opacity-10;
+      }
+      &:hover:not(:disabled) {
+        @apply bg-opacity-10;
+      }
+      &:active:not(:disabled) {
+        @apply bg-opacity-20;
+      }
+    }
+    &.btn-outline {
+      @apply border-[#1F1F1F];
+    }
+  }
+  &.btn-google {
+    @apply bg-[#1A73E8] focus:bg-[#125AB7] focus:ring focus:ring-[#64A0EF];
+    @apply text-white;
+
+    &:active:not(:disabled) {
+      @apply bg-[#0D4184];
+    }
+
+    &.btn-outline,
+    &.btn-ghost {
+      @apply bg-opacity-0;
+      @apply text-[#1A73E8];
+      &:focus:not(:disabled) {
+        @apply bg-opacity-10;
+      }
+      &:hover:not(:disabled) {
+        @apply bg-opacity-10;
+      }
+      &:active:not(:disabled) {
+        @apply bg-opacity-20;
+      }
+    }
+    &.btn-outline {
+      @apply border-[#1A73E8];
     }
   }
 

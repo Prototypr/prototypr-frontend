@@ -289,6 +289,20 @@
   }
 }
 
+@layer base {
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply h-full;
+  }
+
+  div#__next {
+    @apply h-full;
+  }
+}
+
 @layer components {
   @import "/components/atom/FormControl/formcontrol.scss";
   @import "/components/atom/Button/button.scss";
