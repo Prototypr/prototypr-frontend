@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 
 const FeedItem = dynamic(() => import('./FeedItem'), { ssr: false })
 
-export default function Feeds({}) {
+export default function Feeds({posts = []}) {
     /**Math.random 200~400 */
     const getItems = () =>
   Array(20)
@@ -33,14 +33,14 @@ export default function Feeds({}) {
                 {/* https://tailwindcss.com/docs/columns */}
                 <div className="w-full lg:columns-3 sm:columns-2 gap-12">
                     {
-                        list.length && list.map((item, index) => {
+                        posts.length ? posts.map((item, index) => {
                             return (
                                 <FeedItem 
-                                    height={item.height}
+                                    post={item?.attributes}
                                     key={`col1_${index}`}
                                 />
                             )
-                        })
+                        }): null
                     }
                 </div>
 

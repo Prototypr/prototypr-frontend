@@ -92,6 +92,12 @@ module.exports = {
         },
       },
     },
+    backgroundSize: {
+      auto: 'auto',
+      cover: 'cover',
+      contain: 'contain',
+      100: '100% 100%'
+    }
   },
   plugins: [require("@tailwindcss/forms")],
 }

@@ -18,7 +18,7 @@ import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 const PAGE_SIZE = 12;
 
-export default function Index({ allPosts, preview, allTools }) {
+export default function Index({ allPosts, preview, allTools, otherPosts }) {
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
 
@@ -50,7 +50,7 @@ export default function Index({ allPosts, preview, allTools }) {
           <SourcePanel />
           <TopicSpolights />
           <Aspiring />
-          <Feeds />
+          <Feeds posts={otherPosts} />
         </Container>
       </Layout>
       <Footer />
@@ -59,14 +59,17 @@ export default function Index({ allPosts, preview, allTools }) {
 }
 
 export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getCombinedPostsForHome(preview)) || [];
+  const allPosts = (await getCombinedPostsForHome(preview, 5, 0)) || [];
   const allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0)) || [];
+  const otherPosts = (await getCombinedPostsForHome(preview, 8, 5)) || [];
+
   // console.log('alltools length*****' + allTools?.data.length)
   // console.log('home:allPosts**********' + allPosts.data.length)
   return {
     props: {
       allPosts: allPosts.data,
       allTools: allTools.data,
+      otherPosts: otherPosts.data,
       preview,
     },
   };

@@ -28,11 +28,12 @@ export default function EditorPick({post = {}}) {
                     </div>
                     <p className="text-2xl font-bold leading-tight text-paragraph-1 w-4/5">{title}</p>
                     <div 
-                        className="text-base font-medium text-gray-2 leading-normal mt-4"
+                        className="text-base font-medium text-gray-3 leading-normal mt-4 clamp-2 overflow-hidden text-ellipsis"
                         dangerouslySetInnerHTML={{ __html: excerpt }}
                     ></div>
+                    
                     <div className="flex mt-6 items-center">
-                        <div className="w-11 h-11 rounded-full" style={{backgroundImage: `url(${author?.data?.attributes?.avatar})`}}></div>
+                        <div className="w-11 h-11 rounded-full bg-contain bg-no-repeat bg-center" style={{backgroundImage: `url(${author?.data?.attributes?.avatar})`}}></div>
                         <div className="font-medium text-base ml-3 text-gray-1">{author?.data?.attributes?.displayName}</div>
                     </div>
                 </div>

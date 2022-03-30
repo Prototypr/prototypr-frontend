@@ -103,8 +103,8 @@ export default function DesignTool({allTools = []}) {
                                     style={{width: `${ITEM_WIDTH}px`}} 
                                     onClick={() => testClick(item)}
                                     className="h-full mx-5 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer">
-                                        <div className="w-full rounded-lg h-46 bg-contain relative" style={{backgroundImage: `url(${showItem.legacyFeaturedImage.imgUrl})`}}>
-                                            <div className="absolute border-2 border-solid border-white w-10 h-10 rounded-full -bottom-3 bg-contain"
+                                        <div className="w-full rounded-lg h-46 relative bg-no-repeat bg-100" style={{backgroundImage: `url(${showItem.legacyFeaturedImage.imgUrl})`}}>
+                                            <div className="absolute border-2 border-solid border-white w-10 h-10 rounded-full -bottom-3 bg-100 bg-no-repeat bg-center"
                                             style={{left: "10.46%", right: "76.47%", backgroundImage:`url(${showItem.legacyFeaturedImage.logoNew})`}}
                                             ></div>
                                         </div>
