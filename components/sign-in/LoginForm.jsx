@@ -14,7 +14,7 @@ const LoginForm = () => {
       <div className="flex flex-col gap-2 flex-grow mt-6">
         <Button
           isFullWidth
-          className="text-left justify-start h-11"
+          className="text-left justify-start h-11 font-normal"
           color="twitter"
           leftIcon={
             <div className="bg-white p-1 rounded-md">
@@ -28,12 +28,13 @@ const LoginForm = () => {
               </svg>
             </div>
           }
+          onClick={() => signIn("twitter")}
         >
           Sign up with Twitter
         </Button>
         <Button
           isFullWidth
-          className="text-left justify-start h-11"
+          className="text-left justify-start h-11 font-normal"
           color="github"
           leftIcon={
             <div className="bg-white p-1 rounded-md">
@@ -49,12 +50,13 @@ const LoginForm = () => {
               </svg>
             </div>
           }
+          onClick={() => signIn("github")}
         >
           Sign up with Github
         </Button>
         <Button
           isFullWidth
-          className="text-left justify-start h-11"
+          className="text-left justify-start h-11 font-normal"
           color="google"
           leftIcon={
             <div className="bg-white p-1 rounded-md">
@@ -98,6 +100,7 @@ const LoginForm = () => {
               </svg>
             </div>
           }
+          onClick={() => signIn("google")}
         >
           Sign up with Google
         </Button>
@@ -107,7 +110,7 @@ const LoginForm = () => {
       </div>
       <Button
         isFullWidth
-        className="text-left justify-start h-11"
+        className="text-left justify-start h-11 font-normal"
         leftIcon={
           <div className="bg-white p-1 rounded-md">
             <svg

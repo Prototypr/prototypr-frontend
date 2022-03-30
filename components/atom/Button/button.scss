@@ -1,7 +1,7 @@
 .btn {
   @apply inline-flex items-center justify-center relative appearance-none;
   @apply border border-transparent;
-  @apply rounded-lg font-medium;
+  @apply rounded-lg;
   @apply outline-none transition-all;
 
   &:disabled {
