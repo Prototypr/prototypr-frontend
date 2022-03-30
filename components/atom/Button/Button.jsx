@@ -33,6 +33,12 @@ const getColor = (color) => {
       return "btn-primary";
     case "danger":
       return "btn-danger";
+    case "twitter":
+      return "btn-twitter";
+    case "github":
+      return "btn-github";
+    case "google":
+      return "btn-google";
     default:
       return undefined;
   }
