@@ -2,7 +2,8 @@
 
 export default function ProductItem({post = {}}) {
 
-  const { title = "", excerpt, slug, date, legacyFeaturedImage = null, author = null } = post
+  const { title = "", excerpt, slug, date, tags, legacyFeaturedImage = null, author = null } = post
+  const tagArr = tags.data
   return (
     <div
       className="grid-cols-1 flex items-center cursor-pointer"
@@ -11,7 +12,9 @@ export default function ProductItem({post = {}}) {
       <div className="flex-1 ml-4">
         <div className="flex">
           <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
-            # {slug}
+            # {
+              tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"
+            }
           </div>
           {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
             # product design
