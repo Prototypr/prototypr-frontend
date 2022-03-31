@@ -4,7 +4,8 @@ import Image from "next/image";
 export default function EditorPick({post = {}}) {
     const postItem = post?.attributes
     // console.log('postItem********' + JSON.stringify(postItem))
-    const { title = "", excerpt, slug, date, legacyFeaturedImage = null, author = null } = postItem
+    const { title = "", excerpt, slug, date, tags, legacyFeaturedImage = null, author = null } = postItem
+    const tagArr = tags.data
     return (
         <section className="pb-10">
             <h3 className="text-4xl text-title-1 font-bold leading-6 tracking-wide mb-9">Editor’s picks</h3>
@@ -23,7 +24,7 @@ export default function EditorPick({post = {}}) {
                 <div className="w-9/20 ml-10">
                     <div className="flex mb-5">
                         <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
-                            # {slug}
+                            # {tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"}
                         </div>
                     </div>
                     <p className="text-2xl font-bold leading-tight text-paragraph-1 w-4/5">{title}</p>
