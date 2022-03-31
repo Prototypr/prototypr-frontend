@@ -248,6 +248,13 @@ const ContentList = styled('ul', {
           gridTemplateRows: 'repeat(3, 1fr)',
         },
       },
+      three: {
+        '@media only screen and (min-width: 600px)': {
+          width: 650,
+          gridAutoFlow: 'column',
+          gridTemplateRows: 'repeat(3, 1fr)',
+        },
+      },
     },
   },
 });
@@ -349,6 +356,8 @@ const ViewportPosition = styled('div', {
   width: '100%',
   top: '100%',
   left: 0,
+  // left: '-10%',
+
   perspective: '2000px',
 });
 
@@ -359,16 +368,25 @@ export const NavigationMenuDemo = ({activeNav}) => {
         <NavigationMenuItem>
           <NavigationMenuTrigger active={activeNav=='posts'?true:false}>Stories</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ContentList layout="one">
+            <ContentList layout="three">
               <ContentListItemCallout />
-              <ContentListItem href="/posts" title="Open Stories">
-                All the latest articles - open for everyone.
+              <ContentListItem href="/topics" title="All Topics">
+                Browse all topics and catagories.
               </ContentListItem>
-              <ContentListItem href="/posts" title="Web3">
-                Learn about all things Web3 and Web Monetization.
+              <ContentListItem href="/posts/ux/page/1" title="UX Design">
+                User research, personas, and more.
               </ContentListItem>
-              <ContentListItem href="/posts" title="Interviews">
-                Read interviews with people in design and tech.
+              <ContentListItem href="/posts/interview/page/1" title="Interviews">
+                Advice and lessons from creatives.
+              </ContentListItem>
+              <ContentListItem href="/posts/accessibility/page/1" title="Accessibility">
+                Everthing accessibility and inclusion.
+              </ContentListItem>
+              <ContentListItem href="/posts/ui/page/1" title="UI Design">
+                Learn about layout, colour, typography...
+              </ContentListItem>
+              <ContentListItem href="/posts/interview/page/1" title="Code">
+                CSS, React, and everything code.
               </ContentListItem>
             </ContentList>
           </NavigationMenuContent>
@@ -414,7 +432,7 @@ export const NavigationMenuDemo = ({activeNav}) => {
         <NavigationMenuIndicator />
       </NavigationMenuList>
 
-      <ViewportPosition>
+      <ViewportPosition className="ml-0 sm:-ml-12">
         <NavigationMenuViewport />
       </ViewportPosition>
     </NavigationMenu>

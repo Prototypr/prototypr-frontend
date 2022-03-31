@@ -5,9 +5,9 @@ import NewPagination from '@/components/pagination'
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
-import { CMS_NAME } from '@/lib/constants'
+
 const PAGE_SIZE = 12;
-const ALL_SLUGS = ["ux", "ui", "color", "career"]
+const ALL_SLUGS = ["ux", "ui", "color", "career", "interview", "accessibility", "code"]
 export default function PostsPage({allPosts = [], preview, pagination = {}}) {
 
     const router = useRouter()
@@ -43,8 +43,7 @@ export async function getStaticProps({ preview = null, params }) {
     const pageSize = PAGE_SIZE
     const {pageNo, slug} = params
     const allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug])) || []
-    // console.log('res*********' + allPosts.data.length)
-    // console.log('allPosts.meta.pagination*****' + JSON.stringify(allPosts.meta.pagination));
+  
     const pagination = allPosts.meta.pagination
     return {
       props: { allPosts:allPosts.data, preview, pagination },
@@ -54,16 +53,28 @@ export async function getStaticProps({ preview = null, params }) {
   export async function getStaticPaths() {
     let pageCountArr = [];
 
-    ALL_SLUGS.forEach(async (item) => {
-      const allPosts = (await getAllPostsForPostsPage(null, PAGE_SIZE, 0, [item])) || []
+    for(var z = 0;z<ALL_SLUGS.length;z++){
+      const allPosts = (await getAllPostsForPostsPage(null, PAGE_SIZE, 0, [ALL_SLUGS[z]])) || []
       const pagination = allPosts.meta.pagination
       const pageCount = pagination.pageCount
       let arr = new Array(pageCount).fill('');
-      let newArr = arr.map((i,idx) => {
-        return `/posts/${item}/page/${idx+1}`
+      let newArr = arr.map((i,index) => {
+        return `/posts/${ALL_SLUGS[z]}/page/${index+1}`
       })
       pageCountArr = pageCountArr.concat(newArr)
-    })
+    }
+
+    // foreach is not synchronous
+    // ALL_SLUGS.forEach(async (item) => {
+    //   const allPosts = (await getAllPostsForPostsPage(null, PAGE_SIZE, 0, [item])) || []
+    //   const pagination = allPosts.meta.pagination
+    //   const pageCount = pagination.pageCount
+    //   let arr = new Array(pageCount).fill('');
+    //   let newArr = arr.map((i,idx) => {
+    //     return `/posts/${item}/page/${idx+1}`
+    //   })
+    //   pageCountArr = pageCountArr.concat(newArr)
+    // })
 
     return {
       paths: pageCountArr || [],
