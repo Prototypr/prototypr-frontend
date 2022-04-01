@@ -1,11 +1,11 @@
 
 
 
-export default function Author({}) {
+export default function Author({avatar = "", author = ""}) {
     return (
         <>
-            <div style={{width: "36px",height: "36px",border: "1px solid red"}} className="rounded-full mr-3"></div>
-            <div className="font-medium text-base leading-normal text-gray-1">Justin Rhiel Madsen</div>
+            <div style={{backgroundImage: `url(${avatar})`}} className="w-9 h-9 rounded-full bg-100 bg-no-repeat bg-center mr-3"></div>
+            <div className="font-medium text-base leading-normal text-gray-1">{author}</div>
         </>
     )
 }

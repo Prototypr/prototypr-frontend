@@ -16,9 +16,26 @@ import Feeds from "@/components/new-index/Feeds";
 import { getCombinedPostsForHome, getAllToolsForHome,getCommonQuery } from "@/lib/api";
 import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
+const TAB_ITEMS = [{
+  slug: '',
+  name: 'accessibility'
+},{
+  slug: '',
+  name: 'user-research'
+},{
+  slug: '',
+  name: 'ux-writing'
+},{
+  slug: '',
+  name: 'vr'
+},{
+  slug: '',
+  name: 'code'
+}]
 const PAGE_SIZE = 12;
 
-export default function Index({ allPosts, preview, allTools, otherPosts,interviewPosts}) {
+export default function Index({ allPosts, preview, allTools, otherPosts,interviewPosts,topicRes}) {
+  // console.log('topicRes*********' + JSON.stringify(topicRes))
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
 
@@ -48,7 +65,7 @@ export default function Index({ allPosts, preview, allTools, otherPosts,intervie
         <DesignTool allTools={allTools} />
         <Container>
           <SourcePanel />
-          <TopicSpolights />
+          <TopicSpolights tabs={TAB_ITEMS} topics={topicRes} />
           <Aspiring 
             posts={interviewPosts}
           />
@@ -68,12 +85,22 @@ export async function getStaticProps({ preview = null }) {
   // console.log("interview data from home***********" + JSON.stringify(interviews))
   // console.log('alltools length*****' + allTools?.data.length)
   // console.log('home:allPosts**********' + JSON.stringify(allPosts.data))
+  let topicRes = {};
+
+  for (let index = 0; index < TAB_ITEMS.length; index++) {
+    const tag = TAB_ITEMS[index].name;
+    const res = (await getCommonQuery(preview, [tag], "article", 4, 0)) || []
+    console.log(tag + '*******res************' + res.data.length)
+    topicRes[tag] = res.data;
+  }
+  
   return {
     props: {
       allPosts: allPosts.data,
       allTools: allTools.data,
       otherPosts: otherPosts.data,
       interviewPosts: interviews.data,
+      topicRes,
       preview,
     },
   };

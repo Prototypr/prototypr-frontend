@@ -9,7 +9,7 @@ export default function Tabs({items = [], onTabChanged = () => {}}) {
         <div className="flex border-b-gray-5 w-full mt-10 tab relative">
             {/**tab item */}
             {
-                items.map((item, index) => {
+                items.length ? items.map((item, index) => {
                     return (
                         <div
                             key={`tab_${index}`}
@@ -17,11 +17,11 @@ export default function Tabs({items = [], onTabChanged = () => {}}) {
                             ${index === currentTabIndex ? ' tab-item-active font-semibold': ' font-medium'}`}
                             onClick={() => {
                                 setCurrentTabIndex(index)
-                                onTabChanged(item.slug)
+                                onTabChanged(item.name)
                             }}
                             >{item.name}</div>
                     )
-                })
+                }) : null
             }
         </div>
     )
