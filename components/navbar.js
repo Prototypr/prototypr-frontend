@@ -24,9 +24,9 @@ export default function Navbar({ posts, type, activeNav }) {
     let backgroundTransparacyVar = clientWindowHeight / 3000;
     if (backgroundTransparacyVar < 1) {
       let border = backgroundTransparacyVar/1.2
-      if(border<0.12){
-        setBorderTransparency(backgroundTransparacyVar/1.2);
-      }
+      // if(border<0.12){
+      //   setBorderTransparency(backgroundTransparacyVar/1.2);
+      // }
       let bg = 1-backgroundTransparacyVar
       if(bg>0.9){
         setBackgroundTransparacy(bg)
@@ -38,7 +38,7 @@ export default function Navbar({ posts, type, activeNav }) {
     return(
     <Disclosure as="nav" className="bg-white fixed w-full top-0 z-50 border-b border-1 backdrop-blur"
     style={{
-      borderBottom: `1px solid rgba(17, 24, 39, ${borderTransparacy})`,
+      // borderBottom: `1px solid rgba(17, 24, 39, ${borderTransparacy})`,
       background: `rgba(255, 255, 255, ${backgroundTransparacy})`,
     }}
     >
