@@ -2,6 +2,9 @@
     color:#2D3748;
     font-size:1.14rem;
     font-weight: 400;
+    p{
+        margin-bottom: 1.25rem;
+    }
     h1{
         font-weight: 600;
         margin-top: 2.5rem;
@@ -21,6 +24,13 @@
         margin-top: 2rem;
         margin-bottom: 1.25rem;
         font-size: 1.28rem;
+        font-weight: 500;
+        color: #1a202c;
+    }
+    h4{
+        margin-top: 2rem;
+        margin-bottom: 1.25rem;
+        font-size: 1.22rem;
         font-weight: 500;
         color: #1a202c;
     }
@@ -91,6 +101,9 @@
   margin-top: -0.5rem;
   text-align: center;
   margin-bottom: 2.5rem;
+  }
+  .p-3{
+    padding:0.75rem;
   }
   .table-display td, .table-display  th {
     border: 1px solid #ddd;
