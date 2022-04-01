@@ -19,9 +19,9 @@ export default function Post({ post, morePosts, preview }) {
     return <ErrorPage statusCode={404} />
   }
   return (
-    <Layout activeNav={"posts"} preview={preview}>
+    <Layout background="#fff" activeNav={"posts"} preview={preview}>
       <Container>
-        <Header />
+        {/* <Header /> */}
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (

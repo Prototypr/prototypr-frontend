@@ -303,6 +303,7 @@
   }
 }
 
+@import './posts-page.scss';
 @layer components {
   @import "/components/atom/FormControl/formcontrol.scss";
   @import "/components/atom/Button/button.scss";

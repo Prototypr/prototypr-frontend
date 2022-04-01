@@ -36,7 +36,7 @@ export default function Navbar({ posts, type, activeNav }) {
 
 
     return(
-    <Disclosure as="nav" className="bg-white fixed w-full top-0 z-50 border-b border-1 backdrop-blur"
+    <Disclosure as="nav" className="bg-white fixed w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur"
     style={{
       // borderBottom: `1px solid rgba(17, 24, 39, ${borderTransparacy})`,
       background: `rgba(255, 255, 255, ${backgroundTransparacy})`,

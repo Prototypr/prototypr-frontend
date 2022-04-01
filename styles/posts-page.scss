@@ -1,0 +1,246 @@
+.blog-content{
+    color:#2D3748;
+    font-size:1.14rem;
+    font-weight: 400;
+    h1{
+        font-weight: 600;
+        margin-top: 2.5rem;
+        margin-bottom: 2.5rem;
+        font-size: 1.875rem;
+        font-weight: 500;
+    }
+    h2{
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem!important;
+        padding-bottom: 0!important;
+        font-weight: 500;
+        color: #1a202c;
+    }
+    h3{
+        margin-top: 2rem;
+        margin-bottom: 1.25rem;
+        font-size: 1.28rem;
+        font-weight: 500;
+        color: #1a202c;
+    }
+    blockquote {
+        background: #f9f9f9;
+        border-left: 3px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C" "\201D" "\2018" "\2019";
+        color: #4a5568;
+        margin-bottom: 1.25rem;
+        p {
+            display: inline;
+            font-weight: normal;
+            font-style: italic;
+        }
+        strong{
+            font-weight: normal;
+        }
+    }
+    blockquote:before {
+        color: #ccc;
+        content: open-quote;
+        font-size: 4em;
+        line-height: .1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+    }
+    .wp-block-image.full-size img, .wp-block-cover{
+        margin-top: 2.5rem;
+        margin-bottom:2.5rem;
+    }
+    .wp-block-image img {
+        margin: 2.5rem auto;
+        border-radius: 0.375rem;
+    }
+   *, ul, ol{
+    max-width: 43rem;
+    margin-right: auto;
+    margin-left: auto;
+   }
+   .wp-block-image {
+       img.full-size{
+        max-width:56rem;
+       }
+   }
+   li{
+    // margin-left:2rem;
+    margin-top:1.25rem;
+   }
+   .fig-img{
+       max-width: 100%!important;
+   }
+   blockquote.wp-block-quote, figure.wp-block-image.size-large.full-size, figure.wp-block-image.size-full{
+       max-width:46rem;
+       p{
+           max-width: 46rem;
+       }
+   }
+   .table-display {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  figcaption{
+  margin-top:10px!important;
+  font-size: .875rem;
+  color: #718096;
+  margin-top: -0.5rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  }
+  .table-display td, .table-display  th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .table-display  tr:nth-child(even){background-color: #f2f2f2;}
+  .table-display  tr:hover {background-color: #ddd;}
+  .table-display  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #435a97;
+    color: white;
+  }
+   img{
+       max-width: 100%;
+   }
+   blockquote.wp-block-quote.main-menu{
+    max-width: 40rem;
+    margin: 0em 0px;
+    margin-left:auto;
+    margin-right: auto;
+    font-size: 1.14rem;
+    a{
+        margin-top: 0.5rem;
+        display: inline-block;
+    }
+   }
+   blockquote.wp-block-quote{
+    margin: 2.5em auto;
+    font-size:1.5rem;
+    a{
+        color:#1d3d7d;
+    }
+    p{
+        color:#1d3d7d;
+        display:inline;
+    }
+    color:#1d3d7d;
+    background:#fff;
+    border:0px;
+    font-weight: 500;
+    line-height: 1.375;
+    letter-spacing: -0.025em;
+    cite{
+        display: block;
+    margin-top: 1rem;
+    text-align: left;
+    padding: 0px;
+    margin-left: 0px;
+    font-weight: normal;
+    color: rgb(113, 128, 150);
+    }
+   }
+   blockquote.wp-block-quote:before {
+    margin-right: 0.2em;
+    color: #334f9c;
+    content: open-quote;
+    quotes:"\201C" "\201D" "\2018" "\2019";
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.2em;
+    vertical-align: -0.4em;
+}
+
+.wp-block-image{
+   figcaption{
+       margin-top:-2rem;
+   }
+}
+}
+
+/* colours from theme */
+::-webkit-selection {
+    background-color: #a4dcfc; 
+  }
+  ::-moz-selection {
+    background-color: #a4dcfc;
+  }
+  ::selection {
+    background-color: #a4dcfc; 
+  }
+
+  .blocks-gallery-caption,.wp-block-embed figcaption,.wp-block-image figcaption{color:#555d66;font-size:13px;text-align:center}
+  .wp-block-quote__citation,.wp-block-quote cite,.wp-block-quote footer{color:#6c7781;font-size:13px;margin-top:1em;position:relative;font-style:normal}
+
+  .wp-block-pullquote{
+  margin-top: 2.8em ;
+  margin-bottom: 2.8em;
+  blockquote{
+      padding-top:0px;
+      padding-bottom:0px;
+      margin-top:0px;
+      margin-bottom:0px;
+      background: none; 
+     border-left:none; 
+        padding: 0px;
+        max-width: 36rem;
+  }
+  blockquote:before{
+      display: none;
+  }
+  cite{
+      display:block;
+      margin-top:1.5rem;
+  }
+ }
+
+
+.wp-caption-text{margin-top:10px!important;}figure{margin-bottom:20px;}
+
+@media only screen and (max-width: 600px) {
+    figure{
+        max-width:100%!important;
+    }
+  }
+
+  .blog-page .blog-content video {
+    width: 100%;
+ }
+
+ .blocks-gallery-item{
+     list-style-type: none;
+ }
+
+ /*** Works on common browsers ***/
+::selection {
+    background-color: rgb(164, 220, 252);
+    background: rgb(164, 220, 252)!important;
+}
+
+/*** Mozilla based browsers ***/
+::-moz-selection {
+    background-color: rgb(164, 220, 252);
+    background: rgb(164, 220, 252)!important;
+}
+
+/***For Other Browsers ***/
+::-o-selection {
+    background-color: rgb(164, 220, 252);
+    background: rgb(164, 220, 252)!important;
+}
+
+::-ms-selection {
+    background-color: rgb(164, 220, 252);
+    background: rgb(164, 220, 252)!important;
+}
+
+/*** For Webkit ***/
+::-webkit-selection {
+    background-color: rgb(164, 220, 252);
+    background: rgb(164, 220, 252)!important;
+}
