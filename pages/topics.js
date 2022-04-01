@@ -15,19 +15,19 @@ export default function Index({ allPosts, preview }) {
       imageAlt: "UX topic",
     },
     {
-      name: "AR/VR",
-      slug: "vr",
+      name: "Code",
+      slug: "code",
       imageSrc:
-        "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dnJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      imageAlt: "UX topic",
+        "https://images.unsplash.com/photo-1566837945700-30057527ade0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+      imageAlt: "Coding",
     },
-    {
-      name: "Generative Coding",
-      slug: "generative",
-      imageSrc:
-        "https://images.unsplash.com/photo-1599059919177-1960faea6655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-      imageAlt: "UX topic",
-    },
+    // {
+    //   name: "Generative Coding",
+    //   slug: "generative",
+    //   imageSrc:
+    //     "https://images.unsplash.com/photo-1599059919177-1960faea6655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+    //   imageAlt: "UX topic",
+    // },
     {
       name: "UI Design",
       slug: "ui",
@@ -43,12 +43,26 @@ export default function Index({ allPosts, preview }) {
       imageAlt: "UX topic",
     },
     {
-      name: "Web 3",
-      slug: "web3",
+      name: "User Research",
+      slug: "user-research",
       imageSrc:
-        "https://images.unsplash.com/photo-1644215529308-7877e68eb0b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2232&q=80",
+        "https://images.unsplash.com/photo-1573497491208-6b1acb260507?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
       imageAlt: "UX topic",
     },
+    {
+        name: "VR",
+        slug: "vr",
+        imageSrc:
+          "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dnJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
+        imageAlt: "UX topic",
+      },
+    // {
+    //   name: "Web 3",
+    //   slug: "web3",
+    //   imageSrc:
+    //     "https://images.unsplash.com/photo-1644215529308-7877e68eb0b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2232&q=80",
+    //   imageAlt: "UX topic",
+    // },
   ];
 
   return (

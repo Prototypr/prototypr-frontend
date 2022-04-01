@@ -7,7 +7,7 @@ import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
 
 const PAGE_SIZE = 12;
-const ALL_SLUGS = ["ux", "ui", "color", "career", "interview", "accessibility", "code"]
+const ALL_SLUGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]
 export default function PostsPage({allPosts = [], preview, pagination = {}}) {
 
     const router = useRouter()
