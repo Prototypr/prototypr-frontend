@@ -35,7 +35,6 @@ const TAB_ITEMS = [{
 const PAGE_SIZE = 12;
 
 export default function Index({ allPosts, preview, allTools, otherPosts,interviewPosts,topicRes}) {
-  // console.log('topicRes*********' + JSON.stringify(topicRes))
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
 
@@ -90,7 +89,6 @@ export async function getStaticProps({ preview = null }) {
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].name;
     const res = (await getCommonQuery(preview, [tag], "article", 4, 0)) || []
-    console.log(tag + '*******res************' + res.data.length)
     topicRes[tag] = res.data;
   }
   

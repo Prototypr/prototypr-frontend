@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 export default function EditorPick({post = {}}) {
     const postItem = post?.attributes
-    // console.log('postItem********' + JSON.stringify(postItem))
     const { title = "", excerpt, slug, date, tags, legacyFeaturedImage = null, author = null } = postItem
     const tagArr = tags.data
     return (

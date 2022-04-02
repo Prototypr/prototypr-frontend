@@ -32,7 +32,7 @@ export default function TopicSpolights({tabs = [], topics = {}}) {
                 onTabChanged={(item) => onTabChanged(item)}
             />
             <TopicList 
-                currentTopic={currentTopic}
+                currentTopics={currentTopic}
             />
         </section>
     )
