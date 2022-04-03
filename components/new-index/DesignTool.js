@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import BScroll from "better-scroll";
 import Link from "next/link";
+import Image from "next/image";
 const getItems = () =>
   Array(20)
     .fill(0)
@@ -25,10 +26,6 @@ export default function DesignTool({ allTools = [] }) {
     const newDelta = -(nextIndex * ITEM_WIDTH);
     scroll.scrollTo(newDelta);
     setCurrentIndex(nextIndex);
-  };
-
-  const testClick = (item) => {
-    alert(item);
   };
 
   useEffect(() => {
@@ -106,7 +103,7 @@ export default function DesignTool({ allTools = [] }) {
         </div>
         <div
           ref={wrapper}
-          className="absolute left-0 h-74 w-full top-0 overflow-hidden"
+          className="absolute left-0 h-full w-full top-0  pb-1 overflow-hidden"
         >
           <div ref={cont} className="relative flex h-full">
             {allTools.length
@@ -116,23 +113,41 @@ export default function DesignTool({ allTools = [] }) {
                     <div
                       key={`h_item_${index}`}
                       style={{ width: `${ITEM_WIDTH}px` }}
-                      onClick={() => testClick(item)}
-                      className="h-full mx-5 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer"
+                      className="h-full mx-5 group hover:shadow-md transition duration-500 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer"
                     >
-                      <div
-                        className="w-full rounded-lg h-46 relative bg-no-repeat bg-100"
-                        style={{
-                          backgroundImage: `url(${showItem.legacyFeaturedImage.imgUrl})`,
-                        }}
-                      >
+                      <div className="w-full rounded-lg h-46 relative bg-no-repeat bg-100">
+                        {showItem.legacyFeaturedImage.imgUrl && (
+                          <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+                            <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+                              <Link href={`/toolbox/${showItem.slug}`}>
+                                <Image
+                                  className="rounded-lg"
+                                  objectFit="cover"
+                                  layout="fill"
+                                  src={showItem.legacyFeaturedImage.imgUrl}
+                                />
+                              </Link>
+                            </div>
+                          </figure>
+                        )}
                         <div
-                          className="absolute border-2 border-solid border-white w-10 h-10 rounded-full -bottom-3 bg-100 bg-no-repeat bg-center"
+                          className="absolute border-2 border-solid border-white bg-white w-10 h-10 rounded-full -bottom-3 bg-100 bg-no-repeat bg-center"
                           style={{
-                            left: "10.46%",
+                            // border: "3px",
+                            left: "12px",
                             right: "76.47%",
-                            backgroundImage: `url(${showItem.legacyFeaturedImage.logoNew})`,
+                            bottom: "-18px",
                           }}
-                        ></div>
+                        >
+                          {showItem.legacyFeaturedImage.logoNew && (
+                            <Image
+                              className="rounded-full"
+                              objectFit="cover"
+                              layout="fill"
+                              src={showItem.legacyFeaturedImage.logoNew}
+                            />
+                          )}
+                        </div>
                       </div>
                       {/* <img 
                                             className="w-full rounded-lg h-46 relative"
@@ -140,15 +155,18 @@ export default function DesignTool({ allTools = [] }) {
                                             "medium": "https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-768x576.png",
                                             "thumb": "https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-150x150.png"`}
                                         /> */}
-                      <div className="mt-5 flex justify-between">
-                        <div>
-                          <div className="text-gray-1 text-lg font-bold leading-6">
-                            {showItem.title}
+                      <div className="mt-7 flex justify-between">
+                        <Link href={`/toolbox/${showItem.slug}`}>
+                          <div className="px-3 w-full">
+                            <div className="text-gray-1 hover:underline text-lg font-bold leading-6">
+                              {showItem.title}
+                            </div>
+                            <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3">
+                              # {showItem.slug}
+                            </div>
                           </div>
-                          <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3">
-                            # {showItem.slug}
-                          </div>
-                        </div>
+                        </Link>
+                        {/*
                         <div className="flex items-center">
                           <img
                             width={"20px"}
@@ -157,6 +175,7 @@ export default function DesignTool({ allTools = [] }) {
                           />
                           <div className="font-normal text-base ml-1">1</div>
                         </div>
+                        */}
                       </div>
                     </div>
                   );
