@@ -1,4 +1,7 @@
 .blog-content{
+    .wp-caption-text{margin-top:10px!important;}
+
+figure{margin-bottom:20px;}
     color:#2D3748;
     font-size:1.14rem;
     font-weight: 400;
@@ -217,9 +220,6 @@
       margin-top:1.5rem;
   }
  }
-
-
-.wp-caption-text{margin-top:10px!important;}figure{margin-bottom:20px;}
 
 @media only screen and (max-width: 600px) {
     figure{
