@@ -361,20 +361,20 @@
   content: "";
   position: absolute;
   z-index: 1;
-  right: -9%;
+  right: 0%;
   pointer-events: none;
   background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
-  width: 10%;
+  width: 14%;
   height:100%;
 }
 .fade-out-edges:before {
   content: "";
   position: absolute;
   z-index: 1;
-  left: -9%;
+  left: 0%;
   pointer-events: none;
   background-image: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
-  width: 10%;
+  width: 14%;
   height:100%;
 }
 
