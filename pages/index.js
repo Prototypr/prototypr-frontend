@@ -10,6 +10,7 @@ import EditorPick from "@/components/new-index/EditorPick";
 import EditorPick2 from "@/components/new-index/EditorPick2";
 import ProductList from "@/components/new-index/ProductList";
 import DesignTool from "@/components/new-index/DesignTool";
+import DesignTool2 from "@/components/new-index/DesignTool2";
 import SourcePanel from "@/components/new-index/SourcePanel";
 import TopicSpolights from "@/components/new-index/TopicSpolights";
 import Aspiring from "@/components/new-index/Aspiring";
@@ -69,12 +70,12 @@ export default function Index({
             👾.
           </title>
         </Head>
+        <Intro />
         <Container>
-          <Intro />
           <EditorPick2 post={heroPost} />
           <ProductList posts={morePosts} />
           <div className="mt-32 pb-10 px-3 xl:px-0">
-            <h4 className="text-4xl font-bold leading-6 text-title-1">
+            <h4 className="text-3xl text-gray-900 font-bold leading-6 text-title-1">
               Latest tools
             </h4>
           </div>
