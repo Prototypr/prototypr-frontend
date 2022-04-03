@@ -357,6 +357,27 @@
   -webkit-box-orient: vertical;
 }
 
+.fade-out-edges:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: -9%;
+  pointer-events: none;
+  background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
+  width: 10%;
+  height:100%;
+}
+.fade-out-edges:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: -9%;
+  pointer-events: none;
+  background-image: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
+  width: 10%;
+  height:100%;
+}
+
 
 @layer components {
   @import "/components/atom/FormControl/formcontrol.scss";
