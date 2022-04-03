@@ -11,7 +11,7 @@ export default function ProductItem({ post = {} }) {
   } = post;
   const tagArr = tags.data;
   return (
-    <div className="grid-cols-1 flex items-center cursor-pointer">
+    <div className="grid-cols-1 flex items-center cursor-pointer py-2">
       <div className="w-40 h-40 rounded-lg bg-contain bg-no-repeat relative">
         <Image
           objectFit="cover"

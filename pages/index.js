@@ -73,7 +73,7 @@ export default function Index({
           <Intro />
           <EditorPick2 post={heroPost} />
           <ProductList posts={morePosts} />
-          <div className="mt-32 pb-10">
+          <div className="mt-32 pb-10 px-3 md:px-0">
             <h4 className="text-4xl font-bold leading-6 text-title-1">
               Latest tools
             </h4>

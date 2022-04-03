@@ -13,7 +13,7 @@ export default function EditorPick({ post = {} }) {
   } = postItem;
   const tagArr = tags.data;
   return (
-    <section className="pb-10">
+    <section className="pb-10 px-3 md:px-0">
       <h3 className="text-4xl text-title-1 font-bold leading-6 tracking-wide mb-9">
         Editor’s picks
       </h3>
