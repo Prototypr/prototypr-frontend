@@ -5,7 +5,7 @@ const AspiringItem = dynamic(() => import("./AspiringItem"), { ssr: false });
 
 export default function Aspiring({ posts = [] }) {
   return (
-    <section className="mt-36 pt-3 pb-10 px-3 md:px-0">
+    <section className="mt-36 pt-3 pb-10 px-3 xl:px-0">
       <h4 className="text-4xl font-bold  text-title-1 mb-10">
         Aspiring Designers
       </h4>

@@ -22,7 +22,7 @@ export default function TopicSpolights({ tabs = [], topics = {} }) {
   }, []);
 
   return (
-    <section className="mt-36 pt-3 pb-10 px-3 md:px-0">
+    <section className="mt-36 pt-3 pb-10 px-3 xl:px-0">
       <h4 className="text-4xl font-bold  text-title-1">Topic Spolights</h4>
       {/**tabs */}
       <Tabs items={tabs} onTabChanged={(item) => onTabChanged(item)} />

@@ -19,7 +19,7 @@ const AccountPage = ({ preview, userData }) => {
           <title>Account Settings</title>
         </Head>
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="pt-6 pb-10 md:pt-10 px-3 md:px-0">
+          <div className="pt-6 pb-10 md:pt-10 px-3 xl:px-0">
             <div className="bg-white shadow-md rounded-lg py-6 px-4">
               <h1 className="font-semibold">Public Profile</h1>
               <span className="text-sm text-gray-400">
