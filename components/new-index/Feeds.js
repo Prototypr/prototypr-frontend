@@ -28,7 +28,9 @@ export default function Feeds({ posts = [] }) {
 
   return (
     <section className="mt-36 pt-3 pb-10 px-3 xl:px-0">
-      <h4 className="text-4xl font-bold  text-title-1 mb-10">Feeds</h4>
+      <h4 className="text-3xl text-gray-900 font-bold  text-title-1 mb-10">
+        Feeds
+      </h4>
       {/* https://tailwindcss.com/docs/columns */}
       <div className="w-full lg:columns-3 sm:columns-2 gap-12">
         {posts.length

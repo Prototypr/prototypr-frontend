@@ -78,7 +78,7 @@ export default function DesignTool({ allTools = [] }) {
   };
   return (
     <>
-      <div className="bg-gray-4 w-full relative h-74 fade-out-edges">
+      <div className="z-10 bg-gray-4 w-full relative h-74 fade-out-edges">
         {/**button block is within container */}
         <div className="container relative mx-auto flex items-center justify-between h-full">
           {/** 64 * 64 */}
@@ -140,12 +140,14 @@ export default function DesignTool({ allTools = [] }) {
                           }}
                         >
                           {showItem.legacyFeaturedImage.logoNew && (
-                            <Image
-                              className="rounded-full"
-                              objectFit="cover"
-                              layout="fill"
-                              src={showItem.legacyFeaturedImage.logoNew}
-                            />
+                            <Link href={`/toolbox/${showItem.slug}`}>
+                              <Image
+                                className="rounded-full"
+                                objectFit="cover"
+                                layout="fill"
+                                src={showItem.legacyFeaturedImage.logoNew}
+                              />
+                            </Link>
                           )}
                         </div>
                       </div>

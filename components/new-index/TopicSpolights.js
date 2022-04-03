@@ -23,7 +23,9 @@ export default function TopicSpolights({ tabs = [], topics = {} }) {
 
   return (
     <section className="mt-36 pt-3 pb-10 px-3 xl:px-0">
-      <h4 className="text-4xl font-bold  text-title-1">Topic Spolights</h4>
+      <h4 className="text-3xl font-bold text-gray-900 text-title-1">
+        Topic Spotlights
+      </h4>
       {/**tabs */}
       <Tabs items={tabs} onTabChanged={(item) => onTabChanged(item)} />
       <TopicList currentTopics={currentTopic} />

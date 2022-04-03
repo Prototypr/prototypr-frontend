@@ -1,3 +1,5 @@
+const { blueDark } = require("@radix-ui/colors");
+const colors = require("tailwindcss/colors");
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -8,6 +10,38 @@ module.exports = {
       inter: "Inter",
     },
     extend: {
+      linearBorderGradients: ({ theme }) => ({
+        directions: {
+          // defaults to these values
+          t: "to top",
+          tr: "to top right",
+          r: "to right",
+          br: "to bottom right",
+          b: "to bottom",
+          bl: "to bottom left",
+          l: "to left",
+          tl: "to top left",
+        },
+        colors: {
+          // defaults to {}
+          red: "#f00",
+          "blue-darkblue": ["#1e3a8a", "#3b82f6"],
+          "red-blue": ["#f00", "#00f"],
+          "blue-green": ["#0000ff", "#00FF00"],
+          "red-green-blue": ["#f00", "#0f0", "#00f"],
+          "black-white-with-stops": ["#000", "#000 45%", "#fff 55%", "#fff"],
+        },
+        background: {
+          "gray-50": "#F9FAFB",
+          "gray-900": "#111827",
+          white: "#fff",
+        },
+        borders: {
+          // defaults to these values (optional)
+          1: "1px",
+          2: "2px",
+        },
+      }),
       gridTemplateColumns: {
         // Simple 16 column grid
         24: "repeat(24, minmax(0, 1fr))",
@@ -77,6 +111,7 @@ module.exports = {
         "7xl": "4.5rem",
         "8xl": "6.25rem",
         s6xl: "3.43rem",
+        "6.5xl": "3rem",
       },
       boxShadow: {
         small: "0 5px 10px rgba(0, 0, 0, 0.12)",
@@ -99,5 +134,8 @@ module.exports = {
       100: "100% 100%",
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("tailwindcss-border-gradient-radius"),
+  ],
 };
