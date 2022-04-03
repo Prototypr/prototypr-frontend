@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function SourcePanel({}) {
   return (
-    <section className="w-full mb-4 px-3 md:px-0">
+    <section className="w-full mb-4 px-3 xl:px-0">
       <div className="bg-white relative w-full h-100">
         <div
           className="absolute left-18 top-0 h-full bg-contain w-7/12"
