@@ -81,13 +81,10 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
 export async function getStaticProps({ preview = null, params}) {
     const pageSize = PAGE_SIZE
     const {pageNo, slug} = params;
-    // const foundSlug = ALL_SLUGS.find((SLUG, index) => {
-    //     return slug === SLUG.key
-    // })
+
     const foundSlug = find_page_slug_from_menu(ALL_SLUGS_CATEGORY, slug)
 
     const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, foundSlug.tags )) || []
-    // console.log('page info**********' + JSON.stringify(allPosts.meta.pagination))
     const pagination = allPosts.meta.pagination
     return {
         props: {

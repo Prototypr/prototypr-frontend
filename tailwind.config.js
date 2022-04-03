@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         // Simple 16 column grid
-        24: "repeat(24, minmax(0, 1fr))",
+        24: 'repeat(24, minmax(0, 1fr))'
       },
       gridColumn: {
         "span-13": "span 13 / span 13",
@@ -45,14 +45,25 @@ module.exports = {
         "accent-7": "#333",
         "title-1": "#2B2B2B",
         "paragraph-1": "#010301",
+        "gray-1": "#333333",
         "gray-2": "#4F4F4F",
         "gray-3": "#828282",
-        success: "#0070f3",
-        cyan: "#79FFE1",
+        "gray-4": "#F3F4F6",
+        "gray-5": "#E0E0E0",
+        "blue-1": "#2463EB",
+        "neutrals-700":"#4A5568",
+        "black-1": "#222222",
+        success: '#0070f3',
+        cyan: '#79FFE1',
       },
       spacing: {
-        28: "7rem",
-        "9/20": "45%",
+        28: '7rem',
+        '9/20': '45%',
+        74: '19rem',
+        46: '187px',
+        100: '25rem',
+        18: '4.5rem',
+        65: '17rem'
       },
       letterSpacing: {
         tighter: "-.04em",
@@ -65,6 +76,7 @@ module.exports = {
         "6xl": "2.75rem",
         "7xl": "4.5rem",
         "8xl": "6.25rem",
+        "s6xl": "3.43rem"
       },
       boxShadow: {
         small: "0 5px 10px rgba(0, 0, 0, 0.12)",
@@ -80,6 +92,12 @@ module.exports = {
         },
       },
     },
+    backgroundSize: {
+      auto: 'auto',
+      cover: 'cover',
+      contain: 'contain',
+      100: '100% 100%'
+    }
   },
   plugins: [require("@tailwindcss/forms")],
-};
+}

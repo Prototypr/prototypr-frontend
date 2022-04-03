@@ -73,8 +73,6 @@ export async function getStaticProps({ preview = null, params }) {
     const pageSize = PAGE_SIZE
     const page = params.pageNo
     const allPosts = (await getPostsByPageForPostsPage(preview, pageSize, page)) || []
-    console.log('res*********' + allPosts.data.length)
-    console.log('allPosts.meta.pagination*****' + JSON.stringify(allPosts.meta.pagination));
     const pagination = allPosts.meta.pagination
     return {
       props: { allPosts:allPosts.data, preview, pagination },

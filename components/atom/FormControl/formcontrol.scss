@@ -53,7 +53,7 @@ select {
   }
 
   &:disabled {
-    @apply cursor-not-allowed bg-opacity-30 text-opacity-50 placeholder-opacity-50 placeholder-gray-400 text-gray-400;
+    @apply cursor-not-allowed bg-opacity-5 text-opacity-50 placeholder-opacity-50 placeholder-gray-400 text-gray-400;
   }
 }
 [type="checkbox"],
