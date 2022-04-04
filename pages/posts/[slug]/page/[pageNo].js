@@ -6,8 +6,8 @@ import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
 import Aspiring from "@/components/new-index/Aspiring";
-import EditorPick from "@/components/new-index/EditorPick";
-import TopicItem from "@/components/new-index/TopicItem"
+import EditorPick2 from "@/components/new-index/EditorPick2";
+import ProductList from "@/components/new-index/ProductList";
 import {
   getCombinedPostsForHome,
   getAllToolsForHome,
@@ -16,7 +16,7 @@ import {
 
 const PAGE_SIZE = 12;
 const ALL_SLUGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]
-export default function PostsPage({allPosts = [], preview, pagination = {},interviewPosts}) {
+export default function PostsPage({allPosts = [], preview, pagination = {},interviewPosts, slug}) {
 
     const heroPost = allPosts[0];
     const morePosts = allPosts.slice(1);
@@ -33,16 +33,10 @@ export default function PostsPage({allPosts = [], preview, pagination = {},inter
               <title>Open design and tech stories for everyone to read</title>
             </Head>
             <Container>
-            <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5'>Accessibility</h2>
+            <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5 capitalize'>{slug}</h2>
             <Aspiring posts={interviewPosts} showTitle={false} />
-            <EditorPick post={heroPost} showTitle={false} />
-            <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
-            {
-                morePosts.length ? morePosts.map((item, index) => {
-                    return <TopicItem key={`topic_${index}`} topic={item?.attributes} />
-                }): null
-            }
-            </section>
+            <EditorPick2 post={heroPost} showTitle={false} />
+            <ProductList posts={morePosts} />
             {/* {
                 allPosts.length > 0 && <MoreStories posts={allPosts} />
             }
@@ -73,6 +67,7 @@ export async function getStaticProps({ preview = null, params }) {
       props: { 
         allPosts:allPosts.data, preview, pagination,
         interviewPosts: interviews.data,
+        slug
       },
     }
   }
