@@ -72,7 +72,7 @@ export default function Index({
         </Head>
         <Intro />
         <Container>
-          <EditorPick2 post={heroPost} />
+          <EditorPick2 header="Editor's Picks" post={heroPost} />
           <ProductList posts={morePosts} />
           <div className="mt-32 pb-10 px-3 xl:px-0">
             <h4 className="text-3xl text-gray-900 font-bold leading-6 text-title-1">

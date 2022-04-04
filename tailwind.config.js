@@ -10,6 +10,10 @@ module.exports = {
       inter: "Inter",
     },
     extend: {
+      contrast: {
+        110: "1.10",
+        115: "1.15",
+      },
       linearBorderGradients: ({ theme }) => ({
         directions: {
           // defaults to these values

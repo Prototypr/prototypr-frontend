@@ -18,7 +18,7 @@ export default function ProductItem({ post = {} }) {
           <Link href={`/posts/${slug}`}>
             <Image
               objectFit="cover"
-              className="rounded-lg"
+              className="rounded-lg contrast-150"
               layout="fill"
               src={legacyFeaturedImage?.thumb}
             />
@@ -41,14 +41,16 @@ export default function ProductItem({ post = {} }) {
         </h4>
         <div className="mt-3 flex items-center">
           <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
-            <Link href={`people/${author?.data?.attributes?.slug}`}>
-              <Image
-                src={author?.data?.attributes?.avatar}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-full"
-              />
-            </Link>
+            {author?.data?.attributes?.avatar && (
+              <Link href={`people/${author?.data?.attributes?.slug}`}>
+                <Image
+                  src={author?.data?.attributes?.avatar}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-full"
+                />
+              </Link>
+            )}
           </div>
           <div className="font-medium text-base ml-3">
             {author?.data?.attributes?.displayName}

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-export default function EditorPick({ post = {} }) {
+export default function EditorPick({ post = {}, showTitle = true }) {
   const postItem = post?.attributes;
   const {
     title = "",
@@ -13,10 +13,14 @@ export default function EditorPick({ post = {} }) {
   } = postItem;
   const tagArr = tags.data;
   return (
-    <section className="pb-10 px-3 xl:px-0">
+    <section className="pb-10 px-3 xl:px-0 mt-2">
+      {
+        showTitle &&  
       <h3 className="text-4xl text-title-1 font-bold leading-6 tracking-wide mb-9">
         Editor’s picks
       </h3>
+      }
+     
       <div className="rounded-lg bg-white w-full p-10 flex">
         <div className="flex-1">
           <Image
