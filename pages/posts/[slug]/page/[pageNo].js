@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
 import NewPagination from '@/components/pagination'
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
@@ -8,22 +7,16 @@ import Head from 'next/head'
 import Aspiring from "@/components/new-index/Aspiring";
 import EditorPick2 from "@/components/new-index/EditorPick2";
 import ProductList from "@/components/new-index/ProductList";
-import {
-  getCombinedPostsForHome,
-  getAllToolsForHome,
-  getCommonQuery,
-} from "@/lib/api";
+import TopicTopItem from "@/components/new-index/TopicTopItem"
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 11;
 const ALL_SLUGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]
-export default function PostsPage({allPosts = [], preview, pagination = {},interviewPosts, slug}) {
+export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], preview, pagination = {},first4Posts=[],first2Posts=[], slug='', pageNo=1}) {
 
-    const heroPost = allPosts[0];
-    const morePosts = allPosts.slice(1);
     const router = useRouter()
 
-    const onPageNumChange = (pageNo) => {
-        router.push(`/posts/page/${pageNo}`)
+    const onPageNumChange = (pageNum) => {
+        router.push(`/posts/${slug}/page/${pageNum}`)
     }
 
     return (
@@ -34,18 +27,22 @@ export default function PostsPage({allPosts = [], preview, pagination = {},inter
             </Head>
             <Container>
             <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5 capitalize'>{slug}</h2>
-            <Aspiring posts={interviewPosts} showTitle={false} />
-            <EditorPick2 post={heroPost} showTitle={false} />
-            <ProductList posts={morePosts} />
-            {/* {
-                allPosts.length > 0 && <MoreStories posts={allPosts} />
-            }
+            {first4Posts?.length>0  &&<Aspiring posts={first4Posts} showTitle={false} />}
+            
+            <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
+            {first2Posts?.length>0 &&  first2Posts.map((item, index) => {
+                    return <TopicTopItem key={`topic_${index}`} topic={item?.attributes} />
+                })}
+            </section>
+            {heroPost && <EditorPick2 post={heroPost} showTitle={false} />}
+            {morePosts && <ProductList posts={morePosts} />}
+           
             <NewPagination 
                 total={pagination?.total}
                 pageSize={PAGE_SIZE}
                 currentPage={pagination?.page}
-                onPageNumChange={(pageNum) => {onPageNumChange(pageNum)}}
-            /> */}
+                onPageNumChange={(pageNum, slug) => {onPageNumChange(pageNum, slug)}}
+            />
 
             </Container>
           </Layout>
@@ -56,20 +53,46 @@ export default function PostsPage({allPosts = [], preview, pagination = {},inter
 export async function getStaticProps({ preview = null, params }) {
     const pageSize = PAGE_SIZE
     const {pageNo, slug} = params
-    const allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug])) || []
-  
-    const interviews =
-    (await getCommonQuery(preview, [slug], "article", 4, 0)) || [];
+    
+    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug])) || []
+    const pagination = allPosts.meta.pagination
+    
+    let first4 = [],first2=[], nextPosts = [], morePosts = [], heroPost = null
+    
+    // if first page, divide posts into sections
+    if(pageNo == 1){
+      first4 = allPosts.data.slice(0, 4);
+      if(allPosts.data && allPosts.data.length>4){
+        nextPosts = allPosts?.data.slice(4)
+        heroPost = nextPosts[0];
+        morePosts = nextPosts.slice(1);
+      }
+      
+    }else{
+     // otherwise, just send back the list without splicing
+     first2 = allPosts.data.slice(0, 2);
+     morePosts = allPosts.data.slice(2)
+     
+     nextPosts = allPosts.data
+    }
+    
+    return {
+        props: { 
+          allPosts:nextPosts, preview, pagination,
+          first4Posts: first4,
+          first2Posts: first2,
+          slug,
+          pageNo,
+          morePosts,
+          heroPost
+        },
+      }
+    
+    // const interviews =
+    // (await getCommonQuery(preview, [slug], "article", 4, 0)) || [];
 
     // console.log("interview data from home***********" + JSON.stringify(interviews))
-    const pagination = allPosts.meta.pagination
-    return {
-      props: { 
-        allPosts:allPosts.data, preview, pagination,
-        interviewPosts: interviews.data,
-        slug
-      },
-    }
+    
   }
 
   export async function getStaticPaths() {

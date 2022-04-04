@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function EditorPick({ post = {} }) {
+export default function EditorPick({ post = {}, header = false }) {
   const postItem = post?.attributes;
   const {
     title = "",
@@ -16,9 +16,11 @@ export default function EditorPick({ post = {} }) {
   const tagArr = tags.data;
   return (
     <div className="pb-10 px-3 xl:px-0">
-      <h3 className="text-3xl text-title-1 text-gray-900 font-bold leading-6 tracking-wide mb-9">
-        Editor’s picks
-      </h3>
+      {header && (
+        <h3 className="text-3xl text-title-1 text-gray-900 font-bold leading-6 tracking-wide mb-9">
+          {header}
+        </h3>
+      )}
       <section className="flex group flex-col justify-center antialiased bg-white text-gray-900 py-4 lg:py-16 rounded-lg">
         <div className="max-w-6xl mx-auto p-4 sm:px-6 h-full">
           {/* Blog post */}

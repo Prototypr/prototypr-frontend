@@ -1,17 +1,46 @@
-import React , { useState } from "react";
-
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function AspiringItem({ post = {} }) {
-    const { title = "", excerpt, slug, date, tags, legacyFeaturedImage = null, author = null } = post
-    const tagArr = tags.data
-    return (
-        <div className="grid-cols-1 cursor-pointer">
-            <div className="rounded-lg w-full h-65 bg-contain bg-no-repeat" style={{ backgroundImage: `url(${legacyFeaturedImage?.thumb})` }}></div>
-            <h5 className="font-bold text-lg leading-none text-gray-1 mt-4">{title}</h5>
-            <p className="mt-1 font-medium text-base tracking-wide uppercase text-gray-1">{
-              tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"
-            }</p>
-            <p className="text-gray-3 text-base leading-normal font-medium overflow-hidden text-ellipsis clamp-3 mt-2">I grew up in Rapid City, South Dakota in my grandfather’s house. But my grandfather is originally...</p>
+  const {
+    title = "",
+    excerpt,
+    slug,
+    date,
+    tags,
+    legacyFeaturedImage = null,
+    author = null,
+  } = post;
+  const tagArr = tags.data;
+  return (
+    <div className="grid-cols-1 cursor-pointer group">
+      <figure className="relative w-full h-65 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+        <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+          <Link href={`/posts/${slug}`}>
+            <Image
+              objectFit="cover"
+              className="rounded-lg contrast-110"
+              layout="fill"
+              src={legacyFeaturedImage?.thumb}
+            />
+          </Link>
         </div>
-    )
+      </figure>
+
+      <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mt-2">
+        # {tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"}
+      </div>
+      <h4 className="text-black-1 font-semibold text-lg leading-normal mt-1">
+        <Link href={`/posts/${slug}`}>
+          <a className="group-hover:underline">{title}</a>
+        </Link>
+      </h4>
+
+      <p
+        className="text-gray-3 text-base leading-normal font-normal overflow-hidden text-ellipsis clamp-3 mt-2"
+        dangerouslySetInnerHTML={{ __html: excerpt }}
+      ></p>
+    </div>
+  );
 }
