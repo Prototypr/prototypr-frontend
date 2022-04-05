@@ -106,7 +106,7 @@ export async function getStaticProps({ preview = null }) {
 
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].name;
-    const res = (await getCommonQuery(preview, [tag], "article", 4, 0)) || [];
+    const res = (await getCommonQuery(preview, [tag], "article", 6, 0)) || [];
     topicRes[tag] = res.data;
   }
 
