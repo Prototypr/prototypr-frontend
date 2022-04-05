@@ -15,7 +15,7 @@ export default function TopicTopItem({ topic = {} }) {
 
   return (
     <div className="grid-cols-1 bg-white p-6 flex flex-col sm:flex-row cursor-pointer group">
-      <figure className="relative h-0 w-full sm:w-1/2 h-64 mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+      <figure className="relative w-full sm:w-1/2 h-64 mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
         <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
           <Link href={`/posts/${slug}`}>
             <Image
