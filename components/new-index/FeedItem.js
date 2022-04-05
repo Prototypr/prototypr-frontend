@@ -31,7 +31,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
       </figure>
 
       <div className="mt-3 flex">
-        <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
+        <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
           # {tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"}{" "}
         </div>
         {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">#START up</div> */}

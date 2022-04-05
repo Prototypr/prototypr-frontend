@@ -70,8 +70,8 @@ export default function Index({
             👾.
           </title>
         </Head>
-        <Intro />
         <Container>
+          <Intro />
           <EditorPick2 header="Editor's Picks" post={heroPost} />
           <ProductList posts={morePosts} />
           <div className="mt-32 pb-10 px-3 xl:px-0">
