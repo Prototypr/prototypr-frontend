@@ -22,7 +22,7 @@ export default function TopicItem({ topic = {} }) {
               objectFit="cover"
               className="rounded-lg contrast-115"
               layout="fill"
-              src={legacyFeaturedImage?.thumb}
+              src={legacyFeaturedImage?.mediaItemUrl}
             />
           </Link>
         </div>
