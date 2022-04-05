@@ -47,7 +47,7 @@ export default function EditorPick({ post = {}, header = false }) {
                   <ul className="flex flex-wrap text-xs font-medium -m-1">
                     <li className="m-1">
                       <Link href={`/posts/${slug}`}>
-                        <a className="inline-flex text-center text-gray-200 py-1 px-3 rounded-full bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">
+                        <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
                           #{" "}
                           {tagArr && tagArr.length
                             ? tagArr[0].attributes.slug
@@ -58,7 +58,7 @@ export default function EditorPick({ post = {}, header = false }) {
                     {tagArr && tagArr.length > 1 && (
                       <li className="m-1">
                         <Link href={`/posts/${slug}`}>
-                          <a className="inline-flex text-center text-gray-200 py-1 px-3 rounded-full bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out">
+                          <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
                             #{" "}
                             {tagArr && tagArr.length
                               ? tagArr[1].attributes.slug
