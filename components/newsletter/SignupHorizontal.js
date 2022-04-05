@@ -8,7 +8,6 @@ export default function SignupHorizontal() {
   const [buttonText, setButtonText] = useState("Get Updates");
 
   const onSubmit = async (data) => {
-    console.log(data);
     setButtonText("Submitting");
 
     axios

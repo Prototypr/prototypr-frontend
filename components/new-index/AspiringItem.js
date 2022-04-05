@@ -15,7 +15,7 @@ export default function AspiringItem({ post = {} }) {
   const tagArr = tags.data;
   return (
     <div className="grid-cols-1 cursor-pointer group">
-      <figure className="relative w-full h-65 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+      <figure className="relative w-full h-64 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
         <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
           <Link href={`/posts/${slug}`}>
             <Image
