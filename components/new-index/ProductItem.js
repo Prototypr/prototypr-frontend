@@ -18,9 +18,9 @@ export default function ProductItem({ post = {} }) {
           <Link href={`/posts/${slug}`}>
             <Image
               objectFit="cover"
-              className="rounded-lg contrast-150"
+              className="rounded-lg contrast-115"
               layout="fill"
-              src={legacyFeaturedImage?.thumb}
+              src={legacyFeaturedImage?.mediaItemUrl}
             />
           </Link>
         </div>
