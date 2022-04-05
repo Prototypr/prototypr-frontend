@@ -27,7 +27,7 @@ export default function ProductItem({ post = {} }) {
       </figure>
       <div className="flex-1 ml-4 h-full">
         <div className="flex">
-          <div className="font-light text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
+          <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
             # {tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"}
           </div>
           {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
