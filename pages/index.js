@@ -1,16 +1,11 @@
 import Container from "@/components/container";
-import MoreStories from "@/components/more-stories";
-import HeroPost from "@/components/hero-post";
-// import Layout from '@/components/layout'
 import Layout from "@/components/new-index/layoutForIndex";
 import Footer from "@/components/footer";
 /**new index components */
 import Intro from "@/components/new-index/Intro";
-import EditorPick from "@/components/new-index/EditorPick";
 import EditorPick2 from "@/components/new-index/EditorPick2";
 import ProductList from "@/components/new-index/ProductList";
 import DesignTool from "@/components/new-index/DesignTool";
-import DesignTool2 from "@/components/new-index/DesignTool2";
 import SourcePanel from "@/components/new-index/SourcePanel";
 import TopicSpolights from "@/components/new-index/TopicSpolights";
 import Aspiring from "@/components/new-index/Aspiring";
@@ -21,7 +16,6 @@ import {
   getCommonQuery,
 } from "@/lib/api";
 import Head from "next/head";
-import { CMS_NAME } from "@/lib/constants";
 const TAB_ITEMS = [
   {
     slug: "",
@@ -99,9 +93,6 @@ export async function getStaticProps({ preview = null }) {
   const otherPosts = (await getCombinedPostsForHome(preview, 8, 7)) || [];
   const interviews =
     (await getCommonQuery(preview, ["interview"], "article", 4, 0)) || [];
-  // console.log("interview data from home***********" + JSON.stringify(interviews))
-  // console.log('alltools length*****' + allTools?.data.length)
-  // console.log('home:allPosts**********' + JSON.stringify(allPosts.data))
   let topicRes = {};
 
   for (let index = 0; index < TAB_ITEMS.length; index++) {
