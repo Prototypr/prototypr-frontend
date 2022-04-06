@@ -10,13 +10,13 @@ import Contributors from "@/components/toolbox/Contributors";
 // import Comment from "@/components/toolbox/Comment/Comment";
 import PostTitle from '@/components/post-title'
 import VisitCard from "@/components/toolbox/VisitCard";
-import RelatedTool from "@/components/toolbox/RelatedTool";
+import RelatedPosts from "@/components/related-posts";
 import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
 // import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
 // import markdownToHtml from '@/lib/markdownToHtml'
 
 export default function Post({ post, morePosts, relatedPosts, gallery, preview }) {
-  // console.log("post*********" + JSON.stringify(post.attributes))
+  // console.log("toolbox page:post*********" + JSON.stringify(post.attributes))
   // const postItem = MOCK_UP_ITEM;
   // console.log("relatedPosts*******" + JSON.stringify(relatedPosts))
   const router = useRouter();
@@ -35,7 +35,6 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
       <Container>
-      
         <div className="w-full mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
           {/* left sidebar */}
           {router.isFallback ? (
@@ -44,7 +43,6 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
           <>
           <div
             className="md:col-span-5 hidden lg:block"
-            // style={{ border: "1px solid blue" }}
           >
             {post && post.attributes && post.attributes.author && (
               <div className="sm:hidden lg:block">
@@ -103,8 +101,10 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
               />
               {
                 relatedPosts && 
-                <RelatedTool 
+                <RelatedPosts
+                  title={'Related tools'} 
                   relatedPosts={relatedPosts}
+                  img={post.attributes?.legacyFeaturedImage?.logoNew}
                 />
               }
           </div>

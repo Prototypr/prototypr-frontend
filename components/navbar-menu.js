@@ -104,7 +104,7 @@ const CustomTrigger = ({ children, to, ...props }) => {
   
     return (
           <div className="rounded-md" style={{background:isActive?indigo.indigo3:'', color:isActive?indigo.indigo9:''}}>
-      <StyledTrigger active={isActive}>
+      <StyledTrigger active={isActive.toString()}>
           {children}
       </StyledTrigger>
           </div>
@@ -366,7 +366,7 @@ export const NavigationMenuDemo = ({activeNav}) => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger active={activeNav=='posts'?true:false}>Stories</NavigationMenuTrigger>
+          <NavigationMenuTrigger active={activeNav === 'posts'}>Stories</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ContentList layout="three">
               <ContentListItemCallout />
@@ -393,7 +393,7 @@ export const NavigationMenuDemo = ({activeNav}) => {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger active={activeNav=='toolbox'?true:false}>Toolbox</NavigationMenuTrigger>
+          <NavigationMenuTrigger active={activeNav === 'toolbox'}>Toolbox</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ContentList layout="two">
               <ContentListItem title="All Tools" href="/toolbox/page/1">

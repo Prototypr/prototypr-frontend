@@ -11,7 +11,7 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug='', ur
              {links.map((item,index) =>{
                 return( <>
                     {" "} 
-                    <Link href={`${item.slug}`}>
+                    <Link href={`${item.slug}`} key={`breadcrumb_${title}_${index}`}>
                      <a className="hover:underline">{item.name}</a>
                      </Link>{" "}→{" "}
                  </>)

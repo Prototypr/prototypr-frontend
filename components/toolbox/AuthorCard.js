@@ -24,13 +24,15 @@ export default function AuthorCard({ author = {} }) {
                                 alt="Author profile picture"
                             /> */}
                             <div className="w-12 h-12 rounded-full border border-1 overflow-hidden relative border-gray-100 shadow-sm">
-                                <Image 
-                                tabIndex={0}
-                                layout="fill"
-                                objectFit="cover"
-                                src={attributes?.avatar}
-                                className="rounded-full " 
-                                alt="Author profile picture"/>
+                                {
+                                    attributes.avatar && <Image 
+                                    tabIndex={0}
+                                    layout="fill"
+                                    objectFit="cover"
+                                    src={attributes?.avatar}
+                                    className="rounded-full " 
+                                    alt="Author profile picture"/>
+                                }
                             </div>
                         </div>
 

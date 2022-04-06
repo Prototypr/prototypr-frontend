@@ -11,6 +11,9 @@ module.exports = {
       "secure.gravatar.com",
       "cdn-images-1.medium.com",
       "www.prototypr.io",
+      "cdn.dribbble.com",
+      "secure.gravatar.com",
+      "cdn-images-1.medium.com",
     ],
   },
 };
