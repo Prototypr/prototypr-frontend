@@ -112,7 +112,9 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
 
     for (var x = 0; x < nameArr.length; x++) {
       var jsxpart = (
-        <div className="bg-gray-200 mr-2 mb-2 text-gray-600 text-xs px-2 py-1 rounded inline-block">
+        <div 
+        key={`author_tags_${x}`}
+        className="bg-gray-200 mr-2 mb-2 text-gray-600 text-xs px-2 py-1 rounded inline-block">
           {"# " + titleCase(nameArr[x])}
         </div>
       );
@@ -165,7 +167,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
       const totalCount = posts.length;
       posts.forEach((item, index) => {
         jsx.push(
-          <PostListItem postItem={item} index={index} totalCount={totalCount} />
+          <PostListItem key={`author_post_${index}`} postItem={item} index={index} totalCount={totalCount} />
         );
       });
     } else {

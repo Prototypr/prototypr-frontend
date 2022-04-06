@@ -18,7 +18,6 @@ export default function PostListItem({
     : ""
   return (
     <div
-      key={`peopleItem_${index}`}
       className={
         "pt-3 md:pt-0 " +
         (totalCount > 1 && index !== totalCount - 1 && "border-b border-gray-200")
