@@ -10,7 +10,7 @@ import { getPostsByPageAndAuthor } from '@/lib/api'
 
 const PAGE_SIZE = 12;
 const PAGE_COUNT = 20;
-const ALL_SLUGS = ['clos']
+const ALL_SLUGS = ['hoangnguyen','clos','ebruaksoy','giovanitier','atharvapatil','alexanderigwe','kelechiu','tamarasredojevic','leandrofernandez','alexandragrochowski','chamansharma']
 export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1 }) {
   const hash = require("string-hash");
   const color = require("tinycolor2");
