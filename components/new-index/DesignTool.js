@@ -11,7 +11,7 @@ export default function DesignTool({ allTools = [] }) {
   const [list, setList] = useState(getItems);
   const [scroll, setScroll] = useState(null);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(3);
   const [initialized, setInitialized] = useState(false);
   const [scrollX, setScrollX] = useState(-1);
 
@@ -72,6 +72,10 @@ export default function DesignTool({ allTools = [] }) {
         //that._watchScrollY(pos.y)
       });
       setScroll(scroll);
+      //initialize position in the middle
+      const newDelta = -(3 * ITEM_WIDTH);
+      scroll.scrollTo(newDelta);
+      setScrollX(newDelta);
     } else {
       scroll.refresh();
     }
@@ -154,12 +158,6 @@ export default function DesignTool({ allTools = [] }) {
                           )}
                         </div>
                       </div>
-                      {/* <img 
-                                            className="w-full rounded-lg h-46 relative"
-                                            srcSet={`"https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-300x225.png 300w, https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-1024x768.png 1024w, https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-768x576.png 768w, https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox.png 1400w",
-                                            "medium": "https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-768x576.png",
-                                            "thumb": "https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-150x150.png"`}
-                                        /> */}
                       <div className="mt-7 flex justify-between">
                         <Link href={`/toolbox/${showItem.slug}`}>
                           <div className="px-3 w-full">
@@ -171,16 +169,6 @@ export default function DesignTool({ allTools = [] }) {
                             </div>
                           </div>
                         </Link>
-                        {/*
-                        <div className="flex items-center">
-                          <img
-                            width={"20px"}
-                            height={"16px"}
-                            src="/static/images/icons/star.svg"
-                          />
-                          <div className="font-normal text-base ml-1">1</div>
-                        </div>
-                        */}
                       </div>
                     </div>
                   );
