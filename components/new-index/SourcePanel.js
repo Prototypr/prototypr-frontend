@@ -5,7 +5,7 @@ export default function SourcePanel({}) {
     <section className="w-full mb-4 px-3 xl:px-0">
       <div className="bg-white relative w-full h-100">
         <div
-          className="absolute left-18 top-0 h-full bg-contain w-7/12"
+          className="absolute left-18 top-0 h-full bg-contain w-7/12 bg-no-repeat"
           style={{ backgroundImage: "url(/static/images/source-bg.png)" }}
         ></div>
         <div className="absolute top-20 z-30 w-2/5" style={{ left: "45%" }}>
