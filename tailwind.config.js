@@ -7,7 +7,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      inter: "Inter",
+      inter: "'Inter', sans-serif;",
     },
     extend: {
       contrast: {
