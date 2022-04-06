@@ -3,8 +3,10 @@ import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
 import PostListItem from "@/components/people/PostListItem";
+import NewPagination from "@/components/pagination";
 import USER_MOCK_ITEM from "@/components/people/UserMockData";
 import POST_MOCK_ITEM from "@/components/people/PostMockData";
+
 const PAGE_SIZE = 12;
 const PAGE_COUNT = 20;
 export default function PeoplePage({ allPosts = [], preview, pagination }) {
@@ -12,7 +14,14 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
   const color = require("tinycolor2");
 
   const user = USER_MOCK_ITEM;
-  const posts = [POST_MOCK_ITEM];
+  const posts = new Array(5).fill(POST_MOCK_ITEM);
+
+  const router = useRouter()
+
+  const onPageNumChange = (pageNum) => {
+      router.push(`/people/${slug}/page/${pageNum}`)
+  }
+
   const LightenDarkenColor = (colorCode, amount) => {
     var usePound = false;
 
@@ -153,14 +162,10 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
   const getPostList = (posts) => {
     let jsx = [];
     if (posts.length) {
-      const totalLength = posts.length;
+      const totalCount = posts.length;
       posts.forEach((item, index) => {
         jsx.push(
-          <PostListItem
-            postItem={item}
-            index={index}
-            totalLength={totalLength}
-          />
+          <PostListItem postItem={item} index={index} totalCount={totalCount} />
         );
       });
     } else {
@@ -192,8 +197,8 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
             ></div>
           </section>
         </>
-        <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1 gap-10">
-          <div className="grid-cols-1 hidden lg:block ml-10">
+        <div className="mt-6 flex px-20">
+          <div className="w-1/4 hidden lg:block">
             <div className="relative">
               <img
                 alt="..."
@@ -355,8 +360,8 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
               </div>
             </div>
           </div>
-          <div className="col-span-3 lg:col-span-3">
-            <div className=" mx-auto bg-white rounded-lg border border-gray-300 mb-20 max-w-3xl">
+          <div className="flex-1 ml-20">
+            <div className=" mx-auto bg-white rounded-lg border border-gray-300 mb-20 max-w-4xl">
               {!posts.length ? (
                 <div className="pt-20 pb-20 px-6">
                   <img
@@ -406,60 +411,14 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
               ) : (
                 <div className=" md:py-2 md:pb-6">
                   {getPostList(posts)}
-                  {/**PAGE_COUNT */}
-                  {/* {PAGE_COUNT > 1 && (
-                    <ReactPaginate
-                      previousLabel={
-                        <div className="py-1">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            stroke="#286dc4"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            className="feather feather-chevron-left"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M15 18L9 12 15 6"></path>
-                          </svg>
-                        </div>
-                      }
-                      nextLabel={
-                        <div className="py-1">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            stroke="#286dc4"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            className="feather feather-chevron-right"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M9 18L15 12 9 6"></path>
-                          </svg>
-                        </div>
-                      }
-                      breakLabel={"..."}
-                      breakClassName={"break-me"}
-                      pageCount={PAGE_COUNT}
-                      marginPagesDisplayed={2}
-                      pageRangeDisplayed={5}
-                      onPageChange={this.handlePagination}
-                      containerClassName={"flex-wrap flex justify-center mt-6"}
-                      activeClassName={
-                        "bg-white border border-gray-400 rounded"
-                      }
-                      pageLinkClassName="rounded text-blue-800"
-                      activeLinkClassName="text-blue-600"
-                      pageClassName="py-1 px-3"
-                    />
-                  )} */}
+                  <NewPagination
+                    total={pagination?.total}
+                    pageSize={PAGE_SIZE}
+                    currentPage={pagination?.page}
+                    onPageNumChange={(pageNum, slug) => {
+                      onPageNumChange(pageNum, slug);
+                    }}
+                  />
                 </div>
               )}
             </div>
@@ -473,8 +432,18 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
 export async function getStaticProps({ preview = null, params }) {
   const pageSize = PAGE_SIZE;
   const { pageNo, slug } = params;
+  const pagination = {
+    "total": 24,
+    "pageSize": 12,
+    "page": 1,
+    "pageCount": 2
+  }
   return {
-    props: {},
+    props: {
+      slug,
+      preview,
+      pagination
+    },
   };
 }
 

@@ -5,7 +5,6 @@ export default function NewPagination({pageSize = 12,currentPage = 0, total = 20
     return (
         <div className="flex justify-end items-center pb-6">
             <RcPagination 
-                showQuickJumper
                 showPrevNextJumpers
                 current={currentPage}
                 pageSize={pageSize}
