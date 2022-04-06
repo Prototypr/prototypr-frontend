@@ -1,82 +1,64 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
-import PostBody from '@/components/post-body'
-import MoreStories from '@/components/more-stories'
-import Header from '@/components/posts/header'
-import PostHeader from '@/components/post-header'
-import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
-import AuthorCard from "@/components/toolbox/AuthorCard";
+import AuthorNewsCredit from "@/components/AuthorNewsCredit";
 import SponsorCard from "@/components/toolbox/SponsorCard";
-import Contributors from "@/components/toolbox/Contributors";
 import PostTitle from '@/components/post-title'
-import VisitCard from "@/components/toolbox/VisitCard";
-import RelatedTool from "@/components/toolbox/RelatedTool";
-import { getAllPostsWithSlug, getPostAndMorePosts, getRelatedTools } from '@/lib/api'
-import Head from 'next/head'
-import { CMS_NAME } from '@/lib/constants'
+import RelatedPosts from "@/components/related-posts";
+import { getAllPostsWithSlug, getNewsAndMoreNews } from '@/lib/api'
 // import markdownToHtml from '@/lib/markdownToHtml'
 
-export default function Post({ post, morePosts,relatedPosts, preview }) {
-  console.log("news page:post*********" + JSON.stringify(post?.attributes))
+export default function Post({ post, morePosts, preview, domain,link, postDate }) {
+
   const router = useRouter()
-    //TODO: what is withAuthUser
-    const withAuthUser = {};
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />
   }
   return (
     <Layout activeNav={"posts"} preview={preview}>
       <Container>
-        <div className="w-full mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
+        <div className="w-full mt-6 grid grid-rows-1 grid-cols-12 lg:gap-6 lg:px-4">
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-          <div
-            className="md:col-span-5 hidden lg:block"
-          >
-            {post && post.attributes && post.attributes.author && (
-              <div className="sm:hidden lg:block">
-                <AuthorCard author={post.attributes.author} />
-              </div>
-            )}
-            <div className="mt-6 sm:hidden block lg:block lg:mt-6">
-              <SponsorCard position="left" />
-            </div>
-            {/**Contributors */}
-            <Contributors withAuthUser={withAuthUser} />
-          </div>
-
           {/* center sidebar */}
-          <div className="col-span-full lg:col-span-13">
+          <div className="col-span-full lg:col-span-9">
 
             {/**Description */}
             <div className="mb-8">
-              <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full">
+              <div className="mb-6 relative bg-white px-6 pt-6 rounded-lg w-full">
+                <a href={link?link:''} className="hover:underline" target="_blank">
+                <h1 className="text-xl  max-w-2xl font-medium">{post?.attributes.title}</h1>
+                </a>
+                {post && post.attributes && post.attributes.author && (
+                  <div className="sm:hidden lg:block">
+                    <AuthorNewsCredit author={post.attributes.author} postDate={postDate} domain={domain} link={link} />
+                  </div>
+                )}
                 <div
-                  style={{ color: "#4a5568", marginBottom: "1rem" }}
-                  className="py-3 popup-modal-content"
+                  style={{ color: "#4a5568"}}
+                  className="py-3 max-w-3xl blog-content text-md mb-2"
                   dangerouslySetInnerHTML={{ __html: post?.attributes.content }}
                 ></div>
+                {post?.attributes.legacyAttributes?.imgUrl && <a href={link?link:''} target="_blank"><img className="rounded" src={post?.attributes.legacyAttributes?.imgUrl}/></a>}
+                {link && <div className="py-6"><a className="underline text-gray-600 font-semibold" href={post?.attributes.legacyAttributes?.link} target="_blank">Read more</a></div>}
               </div>
             </div>
           </div>
 
           {/* RIGHT SIDEBAR START */}
-          <div className="col-span-full mb-6 lg:mb-0 lg:col-span-6 order-first lg:order-last lg:block">
-              <VisitCard 
-                tags={post?.attributes.tags}
-                title={post?.attributes.title}
-                link={post?.attributes.link}
-                useNextImage={true}
-                logoNew={post?.attributes.legacyFeaturedImage?.logoNew}
-              />
+          <div className="col-span-full mb-6 lg:mb-0 lg:col-span-3 order-last lg:order-last lg:block">
+              <div className="sm:hidden block lg:block">
+              <SponsorCard position="left" />
+            </div>
               {
-                relatedPosts && 
-                <RelatedTool 
-                  relatedPosts={relatedPosts}
+                morePosts && 
+                <RelatedPosts 
+                  relatedPosts={morePosts}
+                  type={'news'}
+                  title={'More news'}
                 />
               }
           </div>
@@ -90,27 +72,37 @@ export default function Post({ post, morePosts,relatedPosts, preview }) {
 }
 
 export async function getStaticProps({ params, preview = null, type = 'bite' }) {
-  const data = await getPostAndMorePosts(params.slug, preview, type)
-  let tags = data?.posts.data[0].attributes.tags
-  let tagsArr = []
-  if(tags.data){
-    for(var x = 0;x<tags.data.length;x++){
-      tagsArr.push(tags.data[x].attributes.slug)
+  const data = await getNewsAndMoreNews(params.slug, preview, type)
+  
+  let link = data?.posts.data[0].attributes.link
+  if(!link){
+    link = data?.posts.data[0].attributes.legacyAttributes?.link ? data?.posts.data[0].attributes.legacyAttributes?.link:'#'
+  }
+  //get url for link
+  let domain = ''
+  if(link){
+    if (typeof link == 'string') {
+      let matches = link.match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i);
+      domain = matches && matches[1];
+      if (domain) {
+        domain = domain.replace('www.', '')
+      }
     }
   }
-  // console.log('news pages:tagsArr*******' + tagsArr)
-  // console.log('params.slug*******' + params.slug)
-  const relatedPostsData = await getRelatedTools(tagsArr,params.slug, preview);
-
+  
+  let postDate = new Date(data?.posts.data[0]?.attributes?.date);
+  
+  
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
     props: {
       preview,
       post: {
         ...data?.posts.data[0],
-        // content,
       },
-      relatedPosts:relatedPostsData?.posts.data,
+      domain,
+      link,
+      postDate:JSON.stringify(postDate),
       morePosts: data?.morePosts.data,
     },
   }

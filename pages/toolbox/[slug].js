@@ -10,7 +10,7 @@ import Contributors from "@/components/toolbox/Contributors";
 // import Comment from "@/components/toolbox/Comment/Comment";
 import PostTitle from '@/components/post-title'
 import VisitCard from "@/components/toolbox/VisitCard";
-import RelatedTool from "@/components/toolbox/RelatedTool";
+import RelatedPosts from "@/components/related-posts";
 import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
 // import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
 // import markdownToHtml from '@/lib/markdownToHtml'
@@ -101,8 +101,10 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
               />
               {
                 relatedPosts && 
-                <RelatedTool 
+                <RelatedPosts
+                  title={'Related tools'} 
                   relatedPosts={relatedPosts}
+                  img={post.attributes?.legacyFeaturedImage?.logoNew}
                 />
               }
           </div>
