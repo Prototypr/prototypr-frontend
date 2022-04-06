@@ -6,16 +6,18 @@ import PostListItem from "@/components/people/PostListItem";
 import NewPagination from "@/components/pagination";
 import USER_MOCK_ITEM from "@/components/people/UserMockData";
 import POST_MOCK_ITEM from "@/components/people/PostMockData";
+import { getPostsByPageAndAuthor } from '@/lib/api'
 
 const PAGE_SIZE = 12;
 const PAGE_COUNT = 20;
-export default function PeoplePage({ allPosts = [], preview, pagination }) {
+const ALL_SLUGS = ['clos']
+export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1 }) {
   const hash = require("string-hash");
   const color = require("tinycolor2");
 
   const user = USER_MOCK_ITEM;
-  const posts = new Array(5).fill(POST_MOCK_ITEM);
-
+  // const posts = new Array(5).fill(POST_MOCK_ITEM);
+  const withAuthUser = {}
   const router = useRouter()
 
   const onPageNumChange = (pageNum) => {
@@ -161,13 +163,13 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
     return result;
   };
 
-  const getPostList = (posts) => {
+  const getPostList = () => {
     let jsx = [];
-    if (posts.length) {
-      const totalCount = posts.length;
-      posts.forEach((item, index) => {
+    if (allPosts.length) {
+      const totalCount = allPosts.length;
+      allPosts.forEach((item, index) => {
         jsx.push(
-          <PostListItem key={`author_post_${index}`} postItem={item} index={index} totalCount={totalCount} />
+          <PostListItem key={`author_post_${index}`} postItem={item.attributes} index={index} totalCount={totalCount} />
         );
       });
     } else {
@@ -364,7 +366,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
           </div>
           <div className="flex-1 ml-20">
             <div className=" mx-auto bg-white rounded-lg border border-gray-300 mb-20 max-w-4xl">
-              {!posts.length ? (
+              {!allPosts.length ? (
                 <div className="pt-20 pb-20 px-6">
                   <img
                     width="150"
@@ -412,7 +414,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
                 </div>
               ) : (
                 <div className=" md:py-2 md:pb-6">
-                  {getPostList(posts)}
+                  {getPostList()}
                   <NewPagination
                     total={pagination?.total}
                     pageSize={PAGE_SIZE}
@@ -433,24 +435,34 @@ export default function PeoplePage({ allPosts = [], preview, pagination }) {
 
 export async function getStaticProps({ preview = null, params }) {
   const pageSize = PAGE_SIZE;
-  const { pageNo, slug } = params;
-  const pagination = {
-    "total": 24,
-    "pageSize": 12,
-    "page": 1,
-    "pageCount": 2
-  }
+  const { pageNo, slug } = params
+
+  let allPosts = (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug])) || []
+  const pagination = allPosts.meta.pagination
   return {
     props: {
       slug,
+      pageNo,
       preview,
-      pagination
+      pagination,
+      allPosts: allPosts.data
     },
   };
 }
 
 export async function getStaticPaths() {
-  const pageCountArr = ["/people/sophieclifton-tucker/page/1"];
+  let pageCountArr = [];
+  
+  for (let index = 0; index < ALL_SLUGS.length; index++) {
+    const allPosts = (await getPostsByPageAndAuthor(null, PAGE_SIZE, 0, [ALL_SLUGS[index]])) || []
+    const pagination = allPosts.meta.pagination
+    const pageCount = pagination.pageCount
+    let arr = new Array(pageCount).fill('');
+    let newArr = arr.map((i,index) => {
+      return `/people/${ALL_SLUGS[index]}/page/${index+1}`
+    })
+    pageCountArr = pageCountArr.concat(newArr)
+  }
   return {
     paths: pageCountArr || [],
     fallback: true,

@@ -7,15 +7,18 @@ export default function PostListItem({
   totalCount = 0,
 }) {
 
-  const logo = postItem.logo
-    ? postItem.logo
-    : postItem.featured_img_src
-    ? postItem.featured_img_src
-    : postItem.img_url
-    ? postItem.img_url
-    : postItem.og_image
-    ? postItem.og_image
-    : ""
+  const logo = postItem.legacyFeaturedImage && postItem.legacyFeaturedImage.mediaItemUrl ? postItem.legacyFeaturedImage.mediaItemUrl: ""
+
+    const url = postItem.link
+    let domain = ""
+    if (url) {
+      const matches = url.match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i);
+      domain = matches && matches[1];
+      if (domain) {
+          domain = domain.replace('www.', '')
+      }
+    }
+
   return (
     <div
       className={
@@ -86,7 +89,7 @@ export default function PostListItem({
                 )}
               </div>
               <div className="hidden md:block text-xs text-gray-500">
-                {postItem.type.charAt(0).toUpperCase() + postItem.type.slice(1)}
+                {postItem.type && postItem.type.charAt(0).toUpperCase() + postItem.type.slice(1)}
               </div>
             </div>
           </div>
