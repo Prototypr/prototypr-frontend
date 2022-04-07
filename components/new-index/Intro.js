@@ -1,5 +1,5 @@
 import SignupHorizontal from "@/components/newsletter/SignupHorizontal";
-
+import { FormattedMessage } from 'react-intl';
 export default function Intro() {
   return (
     <aside className="px-5 py-10 sm:p-12 bg-gray-100 sm:p-16 mb-8">
@@ -9,7 +9,9 @@ export default function Intro() {
             Top design articles, tools, and{" "}
           </span>
           <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
-            shiny pixels.
+            <FormattedMessage 
+              id="title"
+            />
           </span>
         </p>
         <SignupHorizontal />
