@@ -110,5 +110,6 @@ export async function getStaticProps({ preview = null }) {
       topicRes,
       preview,
     },
+    revalidate: 20
   };
 }
