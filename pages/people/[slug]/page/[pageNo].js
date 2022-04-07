@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
 import PostListItem from "@/components/people/PostListItem";
+import KoFiButton from "@/components/people/KoFiButton";
 import NewPagination from "@/components/pagination";
 import USER_MOCK_ITEM from "@/components/people/UserMockData";
 import POST_MOCK_ITEM from "@/components/people/PostMockData";
@@ -11,7 +12,8 @@ import { getPostsByPageAndAuthor } from '@/lib/api'
 const PAGE_SIZE = 12;
 const PAGE_COUNT = 20;
 const ALL_SLUGS = ['hoangnguyen','clos','ebruaksoy','giovanitier','atharvapatil','alexanderigwe','kelechiu','tamarasredojevic','leandrofernandez','alexandragrochowski','chamansharma']
-export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1 }) {
+export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1, author }) {
+  // console.log('author info2 *********' + JSON.stringify(author))
   const hash = require("string-hash");
   const color = require("tinycolor2");
 
@@ -178,6 +180,17 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
     return jsx;
   };
 
+  const getKofiName = (string) => {
+    var result = string.replace(/(^\w+:|^)\/\//, '');
+    result = result.replace(/\//g, '')
+    result = result.replace('ko-fi.com', '')
+    result = result.replace('kofi.com', '')
+    result = result.replace('www.', '')
+    result = result.replace('@', '')
+
+    return result
+  }
+
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
       <Container>
@@ -190,10 +203,10 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
               className="absolute top-0 w-full h-full bg-center bg-cover"
               style={{
                 background: gradient(
-                  user.name
-                    ? user.name
-                    : user.displayName
-                    ? user.displayName
+                  author.name
+                    ? author.name
+                    : author.displayName
+                    ? author.displayName
                     : "",
                   "horizontal"
                 ),
@@ -207,11 +220,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
               <img
                 alt="..."
                 src={
-                  user.custom_avatar
-                    ? user.custom_avatar
-                    : user.avatar_urls && user.avatar_urls["96"]
-                    ? user.avatar_urls["96"]
-                    : ""
+                  author?.avatar
                 }
                 className="bg-white shadow-sm rounded-full object-cover h-auto align-middle border-4 border-white absolute"
                 style={{ width: "122px", height: "122px", marginTop: "-62px" }}
@@ -220,23 +229,19 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
             <div className="">
               <div className="mb-3">
                 <h1 className="text-2xl pt-16 font-semibold leading-normal text-gray-800 mb-3">
-                  {user.name
-                    ? user.name
-                    : user.displayName
-                    ? user.displayName
-                    : ""}
+                  {author?.name}
                 </h1>
-                {user.meta && user.meta.location && (
+                {author && author.location && (
                   <div className="text-sm flex leading-normal mt-0 text-gray-600 font-normal uppercase">
                     <img
                       style={{ height: "0.94rem" }}
                       className="my-auto mr-1"
                       src="/static/images/icons/map-pin.svg"
                     />
-                    <span>{user.meta.location}</span>
+                    <span>{author.location}</span>
                   </div>
                 )}
-                {user && user.url && (
+                {author && author.url && (
                   <div className="text-sm flex leading-normal mt-1 text-gray-600 font-normal">
                     <img
                       style={{ height: "0.94rem" }}
@@ -248,9 +253,9 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                         className="underline"
                         target="_blank"
                         rel="nofollow"
-                        href={user.url}
+                        href={author.url}
                       >
-                        {user.url
+                        {author.url
                           .replace(/(^\w+:|^)\/\//, "")
                           .replace(/\/+$/, "")}
                       </a>
@@ -258,12 +263,12 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                   </div>
                 )}
               </div>
-              {user.meta.availability == "1" && (
+              {author.availability == "1" && (
                 <a
                   className="hidden md:block cursor-pointer mb-1 inline-block"
                   rel="nofollow"
                   target="_blank"
-                  href={`${user.url ? user.url : "#"}`}
+                  href={`${author.url ? author.url : "#"}`}
                 >
                   <div className=" bg-blue-900 mr-2 mb-2 uppercase text-gray-100 text-xs px-3 py-2 rounded inline-block">
                     <span className="hidden sm:block">
@@ -274,13 +279,13 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                 </a>
               )}
 
-              {/* {user.meta && user.meta.kofi && (
+              {author.kofi && (
                 <KoFiButton
                   color="#53b1e6"
                   label={"Buy me a coffee"}
-                  kofiId={getKofiName(user.meta.kofi)}
+                  kofiId={getKofiName(author.kofi)}
                 />
-              )} */}
+              )}
 
               {user.meta && user.meta.role && (
                 <h3 className="text-lg font-normal leading-normal mb-2 mt-4 text-gray-800">
@@ -288,7 +293,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                 </h3>
               )}
 
-              {user.meta.skills && getTags(user.meta.skills)}
+              {author.skills && getTags(author.skills)}
 
               <div className="w-full border-b border-gray-400 my-6" />
 
@@ -300,11 +305,11 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
             </div>
 
             <div className="mt-3 md:mt-6 absolute top-0 right-0 md:relative">
-              {user.meta.availability == "1" && (
+              {author.availability == "1" && (
                 <a
                   className="cursor-pointer"
                   target="_blank"
-                  href={`${user.url ? user.url : "#"}`}
+                  href={`${author.url ? author.url : "#"}`}
                 >
                   <div className=" bg-blue-900 mr-2 mb-2 uppercase text-gray-100 text-xs px-3 py-2 rounded inline-block">
                     <span className="hidden sm:block">
@@ -316,11 +321,11 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
               )}
 
               <div className="flex justify-end md:justify-start mt-1 md:mt-3 z-20">
-                {user.meta.twitter && (
+                {author.twitter && (
                   <a
                     className="link block mr-2"
                     href={`https://twitter.com/${getTwitterHandle(
-                      user.meta.twitter
+                      author.twitter
                     )}`}
                     target="_blank"
                   >
@@ -331,11 +336,11 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                     />
                   </a>
                 )}
-                {user.meta.dribbble && (
+                {author.dribbble && (
                   <a
                     className="link block mr-2"
                     href={`https://dribbble.com/${getDribbbleHandle(
-                      user.meta.dribbble
+                      author.dribbble
                     )}`}
                     target="_blank"
                   >
@@ -346,11 +351,11 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                     />
                   </a>
                 )}
-                {user.meta.github && (
+                {author.github && (
                   <a
                     className="link block mr-2"
                     href={`https://github.com/${getGithubHandle(
-                      user.meta.github
+                      author.github
                     )}`}
                     target="_blank"
                   >
@@ -386,10 +391,10 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                   ) : (
                     <>
                       <h1 className="text-lg text-gray-500 w-full text-center mt-3">
-                        {user.name
-                          ? user.name
-                          : user.displayName
-                          ? user.displayName
+                        {author.name
+                          ? author.name
+                          : author.displayName
+                          ? author.displayName
                           : ""}{" "}
                         has not posted anything yet.
                       </h1>
@@ -439,8 +444,10 @@ export async function getStaticProps({ preview = null, params }) {
 
   let allPosts = (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug])) || []
   const pagination = allPosts.meta.pagination
+  const author = allPosts.data.length && allPosts.data[0] ? allPosts.data[0].attributes.author: {}
   return {
     props: {
+      author: author.data.attributes,
       slug,
       pageNo,
       preview,
