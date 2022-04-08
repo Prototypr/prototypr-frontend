@@ -10,7 +10,7 @@ import {
   IntlProvider
 } from 'react-intl'
 import EN from "../locales/en-US";
-import DE from "../locales/de-DE";
+import ES from "../locales/es-ES";
 import { useRouter } from 'next/router'
 
 
@@ -25,8 +25,8 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   const messages = useMemo(() => {
     console.log('shortLocale*******' + shortLocale)
     switch (shortLocale) {
-        case "de":
-            return DE;
+        case "es":
+            return ES;
         case "en":
             return EN;
         default:
@@ -39,8 +39,8 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
     // `session` comes from `getServerSideProps` or `getInitialProps`.
     // Avoids flickering/session loading on first load.
     <IntlProvider 
-      defaultLocale="de"
-      locale={"de"}
+      defaultLocale="es"
+      locale={"es"}
       messages={messages}    
     >
       <>

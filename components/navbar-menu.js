@@ -3,7 +3,7 @@ import { styled, keyframes } from '@stitches/react';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { indigo, mauve, purple, blackA, red, pink, gray } from '@radix-ui/colors';
-
+import LocaleSwitcher from './LocaleSwitcher';
 const enterFromRight = keyframes({
   from: { transform: 'translateX(200px)', opacity: 0 },
   to: { transform: 'translateX(0)', opacity: 1 },
@@ -365,6 +365,7 @@ export const NavigationMenuDemo = ({activeNav}) => {
   return (
     <NavigationMenu>
       <NavigationMenuList>
+        <LocaleSwitcher />
         <NavigationMenuItem>
           <NavigationMenuTrigger active={activeNav === 'posts'}>Stories</NavigationMenuTrigger>
           <NavigationMenuContent>
