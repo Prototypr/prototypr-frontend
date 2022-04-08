@@ -297,9 +297,9 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
 
               <div className="w-full border-b border-gray-400 my-6" />
 
-              {user.description && (
+              {author.bio && (
                 <div className="text-base text-gray-700 mt-2 pr-3">
-                  <div dangerouslySetInnerHTML={{ __html: user.description }} />
+                  <div dangerouslySetInnerHTML={{ __html: author.bio }} />
                 </div>
               )}
             </div>
