@@ -9,8 +9,8 @@ import {
   addLocaleData,
   IntlProvider
 } from 'react-intl'
-import EN from "../locales/en";
-import DE from "../locales/de";
+import EN from "../locales/en-US";
+import DE from "../locales/de-DE";
 import { useRouter } from 'next/router'
 
 
