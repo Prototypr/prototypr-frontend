@@ -112,3 +112,8 @@
   font-size: 64px;
   line-height: 64px;
 }
+.language-item {
+  &:hover {
+    background-color: rgba(0,0,0,0.05);
+  }
+}

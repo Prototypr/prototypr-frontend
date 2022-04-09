@@ -6,11 +6,13 @@ export default function Intro() {
       <div className="max-w-xl mx-auto text-center">
         <p className="text-3xl sm:text-5xl md:text-6.5xl text-black leading-tight text-title-1 font-bold tracking-wide mt-2">
           <span className="block sm:inline">
-            Top design articles, tools, and{" "}
+            <FormattedMessage 
+              id="intro.title.half1"
+            />{" "}
           </span>
           <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
             <FormattedMessage 
-              id="title"
+              id="intro.title.half2"
             />
           </span>
         </p>
