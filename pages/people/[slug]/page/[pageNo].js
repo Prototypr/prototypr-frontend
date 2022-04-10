@@ -253,7 +253,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
               ) : (
                 <div className="md:py-2 pb-6">
                   {allPosts.length && allPosts.map((item, index) =>
-                    <PostListItem type={'article'} key={`author_post_${index}`} postItem={item.attributes} index={index} totalCount={allPosts.length} />
+                    <PostListItem key={`author_post_${index}`} postItem={item.attributes} index={index} totalCount={allPosts.length} />
                   )}
                   <NewPagination
                     total={pagination?.total}

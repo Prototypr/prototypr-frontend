@@ -6,7 +6,7 @@ export default function Author({ avatar = "", author = "", authorName = "" }) {
       <div className="flex items-center">
         <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
           {avatar && (
-            <Link href={`people/${author?.data?.attributes?.slug}`}>
+            <Link href={`people/${author?.data?.attributes?.slug}/page/1`}>
               <Image
                 src={avatar}
                 layout="fill"
