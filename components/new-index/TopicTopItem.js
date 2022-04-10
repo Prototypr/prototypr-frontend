@@ -31,7 +31,7 @@ export default function TopicTopItem({ topic = {} }) {
       <div className="flex flex-col flex-1">
         <div className="flex">
           <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
-            # {tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"}
+            # {tagArr && tagArr.length ? tagArr[0].attributes.name : "design"}
           </div>
           {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">#data</div> */}
         </div>
