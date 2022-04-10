@@ -6,49 +6,38 @@ export default function PostListItem({
   postItem = {},
   totalCount = 0,
 }) {
+  const logo =
+    postItem.legacyFeaturedImage && postItem.legacyFeaturedImage.mediaItemUrl
+      ? postItem.legacyFeaturedImage.mediaItemUrl
+      : "";
 
-  const logo = postItem.legacyFeaturedImage && postItem.legacyFeaturedImage.mediaItemUrl ? postItem.legacyFeaturedImage.mediaItemUrl: ""
-
-    const url = postItem.link
-    let domain = ""
-    if (url) {
-      const matches = url.match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i);
-      domain = matches && matches[1];
-      if (domain) {
-          domain = domain.replace('www.', '')
-      }
+  const url = postItem.link;
+  let domain = "";
+  if (url) {
+    const matches = url.match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i);
+    domain = matches && matches[1];
+    if (domain) {
+      domain = domain.replace("www.", "");
     }
+  }
 
   return (
     <div
       className={
         "pt-3 md:pt-0 " +
-        (totalCount > 1 && index !== totalCount - 1 && "border-b border-gray-200")
+        (totalCount > 1 &&
+          index !== totalCount - 1 &&
+          "border-b border-gray-200")
       }
     >
       <Link
         href={
           postItem.type == "toolbox"
-            ? "/toolbox/[slug]"
-            : postItem.type == "design-tool"
-            ? "/design-tool/[slug]"
-            : postItem.type == "post"
-            ? "/post/[slug]"
-            : postItem.type == "blog"
-            ? "/blog/[slug]"
-            : postItem.type == "news"
-            ? "/news/[slug]"
-            : postItem.type == "inspiratin"
-            ? "/inspiration/[slug]"
-            : "#"
-        }
-        as={
-          postItem.type == "toolbox"
             ? "/toolbox/" + postItem.slug
             : postItem.type == "design-tool"
             ? "/design-tool/" + postItem.slug
-            : postItem.type == "post"
-            ? "/post/" + postItem.slug
+            : postItem.type == "article"
+            ? "/posts/" + postItem.slug
             : postItem.type == "blog"
             ? "/blog/" + postItem.slug
             : postItem.type == "news"
@@ -61,16 +50,19 @@ export default function PostListItem({
         <a>
           <div className={"px-4 md:px-4 flex h-full relative mb-3 md:mb-0"}>
             <div className="cursor-pointer rounded-lg relative flex md:my-4 h-16 w-16 md:h-16 flex-none">
-              <img
-                alt={postItem.title}
-                src={logo}
-                data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                className="cardImage h-16 w-16 md:h-16 rounded-lg border flex-shrink-0 shine border-gray-100"
-                style={{
-                  objectFit: "cover",
-                  objectPosition: " 50% 50%",
-                }}
-              />
+              {logo ? (
+                <div className="rounded-lg relative flex h-16 w-16 md:h-16 flex-none">
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    alt={postItem.title}
+                    src={logo}
+                    className="cardImage flex-shrink-0 shine h-16 w-16 md:h-16 rounded-md border border-gray-100"
+                  />
+                </div>
+              ) : (
+                <div className="rounded-lg border border-gray-200 bg-gray-100 relative flex h-16 w-16 md:h-16 flex-none"></div>
+              )}
             </div>
 
             <div className=" sm:w-auto pl-3 md:p-4">
@@ -89,7 +81,9 @@ export default function PostListItem({
                 )}
               </div>
               <div className="hidden md:block text-xs text-gray-500">
-                {postItem.type && postItem.type.charAt(0).toUpperCase() + postItem.type.slice(1)}
+                {postItem.type &&
+                  postItem.type.charAt(0).toUpperCase() +
+                    postItem.type.slice(1)}
               </div>
             </div>
           </div>
