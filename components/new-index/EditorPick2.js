@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+// import Moment from "react-moment";
 
 export default function EditorPick({ post = {}, header = false }) {
   const postItem = post?.attributes;
@@ -98,13 +99,15 @@ export default function EditorPick({ post = {}, header = false }) {
                 </a>
                 <div>
                   <a
-                    className="font-medium text-gray-900 hover:text-gray-900 transition duration-150 ease-in-out"
+                    className="font-medium text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out"
                     href={`/posts/${slug}`}
                   >
-                    Display Name
+                    {author?.data?.attributes?.name}
                   </a>
-                  <span className="text-gray-700"> - </span>
-                  <span className="text-gray-500">{date}</span>
+                  {/*<span className="text-gray-700"> - </span>
+                  <span className="text-gray-500">
+                    <Moment format="DD/MM/YYYY">{date}</Moment>
+                  </span>*/}
                 </div>
               </footer>
             </div>
