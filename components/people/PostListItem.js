@@ -5,11 +5,21 @@ export default function PostListItem({
   index = 0,
   postItem = {},
   totalCount = 0,
+  item = {},
 }) {
-  const logo =
+  let img =
     postItem.legacyFeaturedImage && postItem.legacyFeaturedImage.mediaItemUrl
       ? postItem.legacyFeaturedImage.mediaItemUrl
       : "";
+  if (!img) {
+    img = postItem?.legacyMedia?.logoNew;
+    if (!img) {
+      img = postItem.legacyMedia?.mediaItemUrl;
+    }
+    if (!img) {
+      img = postItem.legacyMedia?.ogImage;
+    }
+  }
 
   const url = postItem.link;
   let domain = "";
@@ -32,7 +42,7 @@ export default function PostListItem({
     >
       <Link
         href={
-          postItem.type == "toolbox"
+          postItem.type == "tool"
             ? "/toolbox/" + postItem.slug
             : postItem.type == "design-tool"
             ? "/design-tool/" + postItem.slug
@@ -50,13 +60,13 @@ export default function PostListItem({
         <a>
           <div className={"px-4 md:px-4 flex h-full relative mb-3 md:mb-0"}>
             <div className="cursor-pointer rounded-lg relative flex md:my-4 h-16 w-16 md:h-16 flex-none">
-              {logo ? (
+              {img ? (
                 <div className="rounded-lg relative flex h-16 w-16 md:h-16 flex-none">
                   <Image
                     layout="fill"
                     objectFit="cover"
                     alt={postItem.title}
-                    src={logo}
+                    src={img}
                     className="cardImage flex-shrink-0 shine h-16 w-16 md:h-16 rounded-md border border-gray-100"
                   />
                 </div>
