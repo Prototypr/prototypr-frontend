@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled, keyframes } from "@stitches/react";
 import { violet, mauve, blackA } from "@radix-ui/colors";
 // import { MixerHorizontalIcon, Cross2Icon } from "@radix-ui/react-icons";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { useRouter } from "next/router";
-
+import { LocaleContext } from "../context/LocaleContext"
 const slideUpAndFade = keyframes({
   "0%": { opacity: 0, transform: "translateY(2px)" },
   "100%": { opacity: 1, transform: "translateY(0)" },
@@ -64,12 +64,15 @@ const PopoverContent = StyledContent;
 //  const PopoverClose = StyledClose;
 
 export default function LocaleSwitcher() {
+  const router = useRouter();
   const { locale } = useRouter();
-  console.log("locale*********" + locale);
+  // const {locale, setLocale} = useContext(LocaleContext)
   const [shortLocale] = locale ? locale.split("-") : ["en"];
 
+
   const switchLanguage = (itemLocale) => {
-      alert(JSON.stringify(itemLocale))
+      // setLocale(itemLocale)
+      router.push(router.pathname, router.pathname, { locale:itemLocale })
   }
 
   return (
@@ -84,7 +87,9 @@ export default function LocaleSwitcher() {
           {
               LANGUAGE_ITEMS.map((item, index) => {
                   return (
-                    <div className="language-item cursor-pointer py-2 px-4 rounded-md text-lg" onClick={() => {
+                    <div
+                    key={`locale_${index}`}
+                    className="language-item cursor-pointer py-2 px-4 rounded-md text-lg" onClick={() => {
                         switchLanguage(item.locale)
                     }}>
                         {item.name}
