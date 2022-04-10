@@ -12,7 +12,7 @@ import { getPostsByPageAndAuthor } from '@/lib/api'
 const PAGE_SIZE = 12;
 const PAGE_COUNT = 20;
 const ALL_SLUGS = ['hoangnguyen','clos','ebruaksoy','giovanitier','atharvapatil','alexanderigwe','kelechiu','tamarasredojevic','leandrofernandez','alexandragrochowski','chamansharma']
-export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1, author }) {
+export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1, author = {} }) {
   // console.log('author info2 *********' + JSON.stringify(author))
   const hash = require("string-hash");
   const color = require("tinycolor2");
@@ -287,9 +287,9 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                 />
               )}
 
-              {user.meta && user.meta.role && (
-                <h3 className="text-lg font-normal leading-normal mb-2 mt-4 text-gray-800">
-                  {user.meta.role}
+              { author.role && (
+                <h3 style={{border:"1px solid red"}} className="text-lg font-normal leading-normal mb-2 mt-4 text-gray-800">
+                  {author.role}
                 </h3>
               )}
 
