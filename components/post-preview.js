@@ -57,8 +57,8 @@ export default function PostPreview({
               <a className="group-hover:underline">{title}</a>
             </Link>
           </div>
-          <div className="text-sm capitalize text-gray-600 mt-0.5">
-            {tag && `# ${tag.attributes && tag.attributes.slug}`}
+          <div className="text-xs text-gray-600 mt-0.5 uppercase">
+            {tag && `# ${tag.attributes?.name}`}
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ export default function TopicTopItem({ topic = {} }) {
         <div className="flex items-center mt-5">
           <Author
             avatar={author?.data?.attributes?.avatar}
-            author={author?.data?.attributes?.displayName}
+            authorName={author?.data?.attributes?.name}
           />
           {/* <div style={{width: "36px",height: "36px",border: "1px solid red"}} className="rounded-full mr-3"></div>
                     <div className="font-medium text-base leading-normal text-gray-1">Justin Rhiel Madsen</div> */}

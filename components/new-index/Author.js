@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-export default function Author({ avatar = "", author = "" }) {
+export default function Author({ avatar = "", author = "", authorName = "" }) {
   return (
     <>
       <div className="flex items-center">
@@ -16,8 +16,8 @@ export default function Author({ avatar = "", author = "" }) {
             </Link>
           )}
         </div>
-        <div className="font-medium text-base ml-3">
-          {author?.data?.attributes?.displayName}
+        <div className="font-normal text-base ml-3 text-gray-600">
+          {authorName}
         </div>
       </div>
     </>

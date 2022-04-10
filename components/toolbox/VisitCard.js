@@ -22,11 +22,11 @@ export default function VisitCard({
               return (
                 <a
                   rel="noreferrer"
-                  className="cursor-default inline-block mr-1 text-xs bg-gray-200 p-1 px-2 rounded-lg mt-1"
+                  className="cursor-default inline-block mr-1 text-xs bg-gray-200 p-1 px-2 rounded-lg mt-1 uppercase"
                   // href={`${tag.attributes.slug}`}
                   // target="_blank"
                 >
-                  # {tag.attributes.slug}
+                  # {tag.attributes.name}
                 </a>
               );
             })}
