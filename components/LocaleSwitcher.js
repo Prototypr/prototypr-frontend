@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { styled, keyframes } from "@stitches/react";
 import { violet, mauve, blackA } from "@radix-ui/colors";
 // import { MixerHorizontalIcon, Cross2Icon } from "@radix-ui/react-icons";
@@ -66,9 +66,9 @@ const PopoverContent = StyledContent;
 export default function LocaleSwitcher() {
   const router = useRouter();
   const { locale } = useRouter();
-  // const {locale, setLocale} = useContext(LocaleContext)
   const [shortLocale] = locale ? locale.split("-") : ["en"];
 
+  const [open, setOpen] = useState(false)
 
   const switchLanguage = (itemLocale) => {
       // setLocale(itemLocale)
@@ -77,8 +77,8 @@ export default function LocaleSwitcher() {
   }
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
+    <Popover open={open}>
+      <PopoverTrigger asChild onClick={() => setOpen(!open)}>
         <div className="flex flex-row items-center space-x-2 cursor-pointer mx-4">
           <img src="/static/images/icons/global.svg" />
           <div>{shortLocale.toUpperCase()}</div>
@@ -91,7 +91,8 @@ export default function LocaleSwitcher() {
                     <div
                     key={`locale_${index}`}
                     className="language-item cursor-pointer py-2 px-4 rounded-md text-lg" onClick={() => {
-                        switchLanguage(item.locale)
+                        setOpen(false);
+                        switchLanguage(item.locale);
                     }}>
                         {item.name}
                     </div>
