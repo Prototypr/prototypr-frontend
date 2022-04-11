@@ -72,7 +72,8 @@ export default function LocaleSwitcher() {
 
   const switchLanguage = (itemLocale) => {
       // setLocale(itemLocale)
-      router.push(router.pathname, router.pathname, { locale:itemLocale })
+      const routerQuery = router.query
+      router.push(router.asPath, router.asPath , { locale:itemLocale })
   }
 
   return (
