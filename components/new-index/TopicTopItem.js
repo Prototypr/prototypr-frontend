@@ -31,7 +31,7 @@ export default function TopicTopItem({ topic = {} }) {
       <div className="flex flex-col flex-1">
         <div className="flex">
           <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
-            # {tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"}
+            # {tagArr && tagArr.length ? tagArr[0].attributes.name : "design"}
           </div>
           {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">#data</div> */}
         </div>
@@ -47,7 +47,7 @@ export default function TopicTopItem({ topic = {} }) {
         <div className="flex items-center mt-5">
           <Author
             avatar={author?.data?.attributes?.avatar}
-            author={author?.data?.attributes?.displayName}
+            authorName={author?.data?.attributes?.name}
           />
           {/* <div style={{width: "36px",height: "36px",border: "1px solid red"}} className="rounded-full mr-3"></div>
                     <div className="font-medium text-base leading-normal text-gray-1">Justin Rhiel Madsen</div> */}

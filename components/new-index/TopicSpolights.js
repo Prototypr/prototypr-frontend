@@ -14,7 +14,7 @@ export default function TopicSpolights({ tabs = [], topics = {} }) {
 
   useEffect(() => {
     if (tabs.length) {
-      const tag = tabs[0].name;
+      const tag = tabs[0].slug;
       if (topics[tag]) {
         setCurrentTopic(topics[tag]);
       }

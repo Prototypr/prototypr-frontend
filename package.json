@@ -19,6 +19,7 @@
     "classnames": "2.3.1",
     "date-fns": "2.28.0",
     "js-cookie": "^2.2.1",
+    "moment": "^2.29.2",
     "next": "latest",
     "next-auth": "^4.2.1",
     "query-string": "^7.1.1",
@@ -28,11 +29,14 @@
     "react-hook-form": "^7.29.0",
     "react-hot-toast": "^2.2.0",
     "react-intl": "^5.24.8",
+    "react-moment": "^1.1.2",
     "react-timeago": "^4.4.0",
     "remark": "^14.0.1",
     "remark-html": "^15.0.0",
+    "string-hash": "^1.1.3",
     "swiper": "^8.0.0",
-    "tailwindcss-border-gradient-radius": "^3.0.1"
+    "tailwindcss-border-gradient-radius": "^3.0.1",
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.0",

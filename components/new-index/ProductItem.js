@@ -28,7 +28,7 @@ export default function ProductItem({ post = {} }) {
       <div className="flex-1 ml-4 h-full">
         <div className="flex">
           <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
-            # {tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"}
+            # {tagArr && tagArr.length ? tagArr[0].attributes.name : "design"}
           </div>
           {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
             # product design
@@ -42,7 +42,7 @@ export default function ProductItem({ post = {} }) {
         <div className="mt-3 flex items-center">
           <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
             {author?.data?.attributes?.avatar && (
-              <Link href={`people/${author?.data?.attributes?.slug}`}>
+              <Link href={`people/${author?.data?.attributes?.slug}/page/1`}>
                 <Image
                   src={author?.data?.attributes?.avatar}
                   layout="fill"
@@ -52,8 +52,12 @@ export default function ProductItem({ post = {} }) {
               </Link>
             )}
           </div>
-          <div className="font-medium text-base ml-3">
-            {author?.data?.attributes?.displayName}
+          <div className="font-normal text-base ml-3 text-gray-600">
+            <Link href={`people/${author?.data?.attributes?.slug}/page/1`}>
+              <a className="hover:underline hover:text-gray-800">
+                {author?.data?.attributes?.name}
+              </a>
+            </Link>
           </div>
         </div>
       </div>

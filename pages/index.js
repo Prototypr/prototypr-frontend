@@ -18,24 +18,24 @@ import {
 import Head from "next/head";
 const TAB_ITEMS = [
   {
-    slug: "",
-    name: "accessibility",
+    slug: "accessibility",
+    name: "Accessibility",
   },
   {
-    slug: "",
-    name: "user-research",
+    slug: "user-research",
+    name: "User Research",
   },
   {
-    slug: "",
-    name: "ux-writing",
+    slug: "ux-writing",
+    name: "UX Writing",
   },
   {
-    slug: "",
-    name: "vr",
+    slug: "vr",
+    name: "VR",
   },
   {
-    slug: "",
-    name: "code",
+    slug: "code",
+    name: "Code",
   },
 ];
 const PAGE_SIZE = 12;
@@ -96,7 +96,7 @@ export async function getStaticProps({ preview = null }) {
   let topicRes = {};
 
   for (let index = 0; index < TAB_ITEMS.length; index++) {
-    const tag = TAB_ITEMS[index].name;
+    const tag = TAB_ITEMS[index].slug;
     const res = (await getCommonQuery(preview, [tag], "article", 6, 0)) || [];
     topicRes[tag] = res.data;
   }
@@ -110,5 +110,6 @@ export async function getStaticProps({ preview = null }) {
       topicRes,
       preview,
     },
+    revalidate: 20,
   };
 }

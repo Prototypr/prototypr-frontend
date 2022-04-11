@@ -164,9 +164,11 @@ export default function DesignTool({ allTools = [] }) {
                             <div className="text-gray-1 hover:underline text-lg font-bold leading-6">
                               {showItem.title}
                             </div>
-                            <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3">
-                              # {showItem.slug}
-                            </div>
+                            {showItem.tags?.data[0] && (
+                              <div className="font-normal text-xs leading-6 tracking-wide uppercase text-gray-3">
+                                # {showItem.tags?.data[0].attributes?.name}
+                              </div>
+                            )}
                           </div>
                         </Link>
                       </div>

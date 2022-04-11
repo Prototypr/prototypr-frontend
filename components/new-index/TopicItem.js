@@ -42,7 +42,7 @@ export default function TopicItem({ topic = {} }) {
         <div className="flex items-center mt-4">
           <Author
             avatar={author?.data?.attributes?.avatar}
-            author={author?.data?.attributes?.displayName}
+            authorName={author?.data?.attributes?.name}
           />
         </div>
       </div>
