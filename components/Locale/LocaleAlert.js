@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { styled, keyframes } from "@stitches/react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { useRouter } from "next/router";
+import LOCALE_MAP from "./localeMap";
 
 const overlayShow = keyframes({
   "0%": { opacity: 0 },
@@ -120,14 +121,15 @@ export default function LocaleAlert({locale = "", open = false, setOpen=() => {}
 
     const switchLanguage = (itemLocale) => {
         sessionStorage.setItem("SELECTED_LOCALE", true)
-        if (locales.indexOf(itemLocale) < 0) {
-            alert(`Sorry, we dont't support ${itemLocale} now`)
-            setOpen(false);
-        } else {
-            setOpen(false);
-            const routerQuery = router.query;
-            router.push(router.asPath, router.asPath , { locale:itemLocale });
-        }
+        setOpen(false);
+        const routerQuery = router.query;
+        router.push(router.asPath, router.asPath , { locale:itemLocale });
+    }
+    let localeName = ""
+    if (locale) {
+      localeName = LOCALE_MAP.LANGUAGE_ITEMS.find((item, index) => {
+        return item.locale === locale
+      })
     }
   return (
     <Dialog open={open}>
@@ -135,7 +137,7 @@ export default function LocaleAlert({locale = "", open = false, setOpen=() => {}
       <DialogContent>
         <DialogTitle>Switch Language</DialogTitle>
         <DialogDescription>
-          Do you what to switch to language of {locale}?
+          Do you want to change to {localeName}?
         </DialogDescription>
         <div className="flex justify-end mt-6">
             <Button aria-label="Close" variant="green" onClick={() => switchLanguage(locale)}>

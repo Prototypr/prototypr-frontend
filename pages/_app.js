@@ -10,12 +10,26 @@ import { addLocaleData, IntlProvider } from "react-intl";
 import EN from "../locales/en-US";
 import ES from "../locales/es-ES";
 import { useRouter } from "next/router";
-
+import Router from 'next/router'
+import NProgress from 'nprogress'
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
+
+
+Router.events.on('routeChangeStart', url => {
+  NProgress.start()
+  console.log('start progress******')
+  // if (window && window._paq) {
+  //   window._paq.push(["setCustomUrl", url]);
+  //   window._paq.push(["setDocumentTitle", document.title]);
+  //   window._paq.push(["trackPageView"]);
+  // }
+})
+Router.events.on('routeChangeComplete', () => NProgress.done())
+
   // addLocaleData([...en, ...de])
   // const {locale} = useContext(LocaleContext)
-  const { locale } = useRouter();
+  const { locale, locales } = useRouter();
   const [shortLocale] = locale ? locale.split("-") : ["en"];
 
   const [localeAlert, setLocaleAlert] = useState(false)
@@ -23,8 +37,10 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
 
   useEffect(()=> {
     if (navigator.language && locale && navigator.language !== locale && !sessionStorage.getItem("SELECTED_LOCALE")) {
-      setLocaleAlert(true)
-      setLocaleOfNavigator(navigator.language)
+      if (locales.indexOf(navigator.language) > -1) {
+        setLocaleAlert(true)
+        setLocaleOfNavigator(navigator.language)
+      }
     }
   },[])
 
