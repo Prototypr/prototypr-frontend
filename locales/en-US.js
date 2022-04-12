@@ -1,5 +1,24 @@
 const EN =  {
     "intro.title.half1": "Top design articles, tools, and",
-    "intro.title.half2": "shiny pixels."
+    "intro.title.half2": "shiny pixels.",
+    "intro.input.placeholder": "Enter your email address",
+    "intro.button.updates": "Get Updates",
+    "intro.description": "Open source. Free to all. No paywall.",
+    "intro.link": "Learn about Prototypr",
+    "navbar.menu.title1": "Stories",
+    "navbar.menu.title2": "Toolbox",
+    "navbar.menu.title3": "Write for us",
+    "navbar.submenu1.title1": "All Topics",
+    "navbar.submenu1.title2": "UX Design",
+    "navbar.submenu1.title3": "Interviews",
+    "navbar.submenu1.title4": "Accessibility",
+    "navbar.submenu1.title5": "UI Design",
+    "navbar.submenu1.title6": "Code",
+    "navbar.submenu2.title1": "All Tools",
+    "navbar.submenu2.title2": "UX Tools",
+    "navbar.submenu2.title3": "Virtual Reality",
+    "navbar.submenu2.title4": "Prototyping Tools",
+    "navbar.submenu2.title5": "Accessibility",
+    "navbar.submenu2.title6": "Conversational Design",
 }
 export default EN;

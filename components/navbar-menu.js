@@ -4,6 +4,7 @@ import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { indigo, mauve, purple, blackA, red, pink, gray } from '@radix-ui/colors';
 import LocaleSwitcher from './Locale/LocaleSwitcher';
+import { FormattedMessage, useIntl } from 'react-intl';
 const enterFromRight = keyframes({
   from: { transform: 'translateX(200px)', opacity: 0 },
   to: { transform: 'translateX(0)', opacity: 1 },
@@ -362,30 +363,31 @@ const ViewportPosition = styled('div', {
 });
 
 export const NavigationMenuDemo = ({activeNav}) => {
+  const intl = useIntl();
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger active={activeNav === 'posts'}>Stories</NavigationMenuTrigger>
+          <NavigationMenuTrigger active={activeNav === 'posts'}>{intl.formatMessage({ id: "navbar.menu.title1" })}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ContentList layout="three">
               <ContentListItemCallout />
-              <ContentListItem href="/topics" title="All Topics">
+              <ContentListItem href="/topics" title={intl.formatMessage({ id: "navbar.submenu1.title1" })}>
                 Browse all topics and catagories.
               </ContentListItem>
-              <ContentListItem href="/posts/ux/page/1" title="UX Design">
+              <ContentListItem href="/posts/ux/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title2" })}>
                 User research, personas, and more.
               </ContentListItem>
-              <ContentListItem href="/posts/interview/page/1" title="Interviews">
+              <ContentListItem href="/posts/interview/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title3" })}>
                 Advice and lessons from creatives.
               </ContentListItem>
-              <ContentListItem href="/posts/accessibility/page/1" title="Accessibility">
+              <ContentListItem href="/posts/accessibility/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title4" })}>
                 Everthing accessibility and inclusion.
               </ContentListItem>
-              <ContentListItem href="/posts/ui/page/1" title="UI Design">
+              <ContentListItem href="/posts/ui/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title5" })}>
                 Learn about layout, colour, typography...
               </ContentListItem>
-              <ContentListItem href="/posts/interview/page/1" title="Code">
+              <ContentListItem href="/posts/interview/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title6" })}>
                 CSS, React, and everything code.
               </ContentListItem>
             </ContentList>
@@ -393,28 +395,28 @@ export const NavigationMenuDemo = ({activeNav}) => {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger active={activeNav === 'toolbox'}>Toolbox</NavigationMenuTrigger>
+          <NavigationMenuTrigger active={activeNav === 'toolbox'}>{intl.formatMessage({ id: "navbar.menu.title2" })}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ContentList layout="two">
-              <ContentListItem title="All Tools" href="/toolbox/page/1">
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title1" })} href="/toolbox/page/1">
                 Browse all the latest tools in the Prototypr toolbox.
               </ContentListItem>
               <ContentListItem
-                title="UX Tools"
+                title={intl.formatMessage({ id: "navbar.submenu2.title2" })}
                 href="/toolbox/ux-tools/page/1"
               >
                 Tools for User Research, Collaboration, Whiteboarding, etc.
               </ContentListItem>
-              <ContentListItem title="Virtual Reality" href="/toolbox/augmented-reality-tools/page/1">
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title3" })} href="/toolbox/augmented-reality-tools/page/1">
                Everything you need for 3D, AR, VR, and beyond.
               </ContentListItem>
-              <ContentListItem title="Prototyping Tools" href="/prototyping/page/1">
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title4" })} href="/prototyping/page/1">
                 Figma to Adobe, and everything in between.
               </ContentListItem>
-              <ContentListItem title="Accessibility" href="/toolbox/accessibility/page/1">
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title5" })} href="/toolbox/accessibility/page/1">
                 Tools for building accessible User Interfaces.
               </ContentListItem>
-              <ContentListItem title="Conversational Design" href="/toolbox/conversational-design-tools/page/1">
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title6" })} href="/toolbox/conversational-design-tools/page/1">
                 Tools for creating Voice User Interfaces, like chatbots.
               </ContentListItem>
             </ContentList>

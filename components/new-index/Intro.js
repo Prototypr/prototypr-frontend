@@ -18,9 +18,15 @@ export default function Intro() {
         </p>
         <SignupHorizontal />
         <p className="text-xs font-medium mt-5 text-gray-900">
-          Open source. Free to all. No paywall.
+            <FormattedMessage 
+              id="intro.description"
+            />
           <div className="sm:hidden pt-2"></div> 💙{" "}
-          <a className="underline">Learn about Prototypr</a>.
+          <a className="underline">
+            <FormattedMessage 
+              id="intro.link"
+            />
+          </a>.
         </p>
       </div>
     </aside>

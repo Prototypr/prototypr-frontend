@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export default function SignupHorizontal() {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
-  const [buttonText, setButtonText] = useState("Get Updates");
-
+  const intl = useIntl();
+  const [buttonText, setButtonText] = useState(intl.formatMessage({ id: "intro.button.updates" }));
   const onSubmit = async (data) => {
     setButtonText("Submitting");
 
@@ -88,6 +88,7 @@ function HookForm(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => props.onSubmit(data);
+  const intl = useIntl();
 
   return (
     <div>
@@ -97,13 +98,13 @@ function HookForm(props) {
       >
         <div className="sm:flex-1 sm:max-w-xs w-full">
           <label htmlFor="Email" className="sr-only	">
-            Enter email address
+            <FormattedMessage id="intro.input.placeholder" />
           </label>
           <input
             id="Email"
             style={{ fontSize: ".875rem" }}
             type="text"
-            placeholder="Enter your email address"
+            placeholder={intl.formatMessage({ id: "intro.input.placeholder" })}
             name="email"
             {...register("emailRequired", {
               required: true,
