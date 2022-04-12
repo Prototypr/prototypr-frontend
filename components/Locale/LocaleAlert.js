@@ -71,14 +71,14 @@ const Content = ({ children, ...props }) => {
 const StyledTitle = styled(DialogPrimitive.Title, {
     margin: 0,
     fontWeight: 500,
-    color: "red",
-    fontSize: 17,
+    color: "rgb(26, 21, 35)",
+    fontSize: 18,
 });
 
 const StyledDescription = styled(DialogPrimitive.Description, {
     margin: '10px 0 20px',
-    color: "green",
-    fontSize: 15,
+    color: "rgb(111, 110, 119)",
+    fontSize: 16,
     lineHeight: 1.5,
 });
 
@@ -93,6 +93,17 @@ const Button = styled('button', {
     lineHeight: 1,
     fontWeight: 500,
     height: 35,
+    cursor: "pointer",
+    variants: {
+      variant: {
+        green: {
+          backgroundColor: "rgb(221, 243, 228)",
+          color: "rgb(24, 121, 78)",
+          '&:hover': { backgroundColor: "rgb(204, 235, 215)" },
+          '&:focus': { boxShadow: `0 0 0 2px rgb(146 206 172)` },
+        },
+      },
+    },
   });
 
 // Exports
@@ -124,7 +135,7 @@ export default function LocaleAlert({locale = "", open = false, setOpen=() => {}
       <DialogContent>
         <DialogTitle>Switch Language</DialogTitle>
         <DialogDescription>
-          Do you what to switch to {locale}?
+          Do you what to switch to language of {locale}?
         </DialogDescription>
         <div className="flex justify-end mt-6">
             <Button aria-label="Close" variant="green" onClick={() => switchLanguage(locale)}>
