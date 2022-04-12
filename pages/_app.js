@@ -1,11 +1,11 @@
-import {useContext, useEffect, useMemo } from "react";
+import {useContext, useState, useEffect, useMemo } from "react";
 import "@/styles/index.scss";
 import { SessionProvider } from "next-auth/react";
 import "@/styles/toolStyles.css";
 import { Toaster } from "react-hot-toast";
 import * as Portal from "@radix-ui/react-portal";
 // import { LocaleProvider, LocaleContext } from '../context/LocaleContext';
-
+import LocaleAlert from "@/components/Locale/LocaleAlert";
 import { addLocaleData, IntlProvider } from "react-intl";
 import EN from "../locales/en-US";
 import ES from "../locales/es-ES";
@@ -18,9 +18,13 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   const { locale } = useRouter();
   const [shortLocale] = locale ? locale.split("-") : ["en"];
 
+  const [localeAlert, setLocaleAlert] = useState(false)
+  const [localeOfNavigator, setLocaleOfNavigator] = useState("")
+
   useEffect(()=> {
-    if (locale && navigator.language !== locale) {
-      console.log(`Do you what to switch to ${navigator.language}?`)
+    if (navigator.language && locale && navigator.language !== locale) {
+      setLocaleAlert(true)
+      setLocaleOfNavigator(navigator.language)
     }
   },[])
 
@@ -48,6 +52,10 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
           <SessionProvider session={session} refetchInterval={5 * 60}>
             <Component {...pageProps} />
           </SessionProvider>
+          <LocaleAlert 
+            locale={localeOfNavigator} 
+            open={localeAlert}
+            setOpen={(flag) => setLocaleAlert(flag)} />
           <Portal.Root>
             <Toaster
               toastOptions={{

@@ -4,7 +4,8 @@ import { violet, mauve, blackA } from "@radix-ui/colors";
 // import { MixerHorizontalIcon, Cross2Icon } from "@radix-ui/react-icons";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { useRouter } from "next/router";
-import { LocaleContext } from "../context/LocaleContext"
+import LOCALE_MAP from "./localeMap";
+
 const slideUpAndFade = keyframes({
   "0%": { opacity: 0, transform: "translateY(2px)" },
   "100%": { opacity: 1, transform: "translateY(0)" },
@@ -23,6 +24,9 @@ const slideDownAndFade = keyframes({
 const slideLeftAndFade = keyframes({
   "0%": { opacity: 0, transform: "translateX(2px)" },
   "100%": { opacity: 1, transform: "translateX(0)" },
+});
+const StyledArrow = styled(PopoverPrimitive.Arrow, {
+  fill: 'white',
 });
 
 const StyledContent = styled(PopoverPrimitive.Content, {
@@ -49,18 +53,11 @@ const StyledContent = styled(PopoverPrimitive.Content, {
   },
 });
 
-const LANGUAGE_ITEMS = [{
-    name: "English",
-    locale: "en-US"
-},{
-    name: "Spanish",
-    locale: "es-ES"
-}];
 
 const Popover = PopoverPrimitive.Root;
 const PopoverTrigger = PopoverPrimitive.Trigger;
 const PopoverContent = StyledContent;
-//  const PopoverArrow = StyledArrow;
+const PopoverArrow = StyledArrow;
 //  const PopoverClose = StyledClose;
 
 export default function LocaleSwitcher() {
@@ -72,8 +69,8 @@ export default function LocaleSwitcher() {
 
   const switchLanguage = (itemLocale) => {
       // setLocale(itemLocale)
-      const routerQuery = router.query
-      router.push(router.asPath, router.asPath , { locale:itemLocale })
+      const routerQuery = router.query;
+      router.push(router.asPath, router.asPath , { locale:itemLocale });
   }
 
   return (
@@ -85,8 +82,9 @@ export default function LocaleSwitcher() {
         </div>
       </PopoverTrigger>
       <PopoverContent sideOffset={5}>
+        <>
           {
-              LANGUAGE_ITEMS.map((item, index) => {
+              LOCALE_MAP.LANGUAGE_ITEMS.map((item, index) => {
                   return (
                     <div
                     key={`locale_${index}`}
@@ -99,6 +97,8 @@ export default function LocaleSwitcher() {
                   )
               })
           }
+          <PopoverArrow />
+        </>
       </PopoverContent>
     </Popover>
   );

@@ -10,10 +10,10 @@ export const LocaleProvider = ({ children }) => {
     const [lang, setLang] = useState(router.locale);
 
     useEffect(() => {
-        console.log('language from browser*****' + navigator.language)
-        if (lang && navigator.language !== locale) {
-            console.log(`Do you what to switch to ${navigator.language}?`)
-        }
+        // console.log('language from browser*****' + navigator.language)
+        // if (lang && navigator.language !== locale) {
+        //     console.log(`Do you what to switch to ${navigator.language}?`)
+        // }
         setLang(router.locale)
     }, []);
 
