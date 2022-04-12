@@ -119,7 +119,7 @@ export default function LocaleAlert({locale = "", open = false, setOpen=() => {}
     const {locales } = useRouter();
 
     const switchLanguage = (itemLocale) => {
-        console.log(locales);
+        sessionStorage.setItem("SELECTED_LOCALE", true)
         if (locales.indexOf(itemLocale) < 0) {
             alert(`Sorry, we dont't support ${itemLocale} now`)
             setOpen(false);

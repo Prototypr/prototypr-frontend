@@ -22,7 +22,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   const [localeOfNavigator, setLocaleOfNavigator] = useState("")
 
   useEffect(()=> {
-    if (navigator.language && locale && navigator.language !== locale) {
+    if (navigator.language && locale && navigator.language !== locale && !sessionStorage.getItem("SELECTED_LOCALE")) {
       setLocaleAlert(true)
       setLocaleOfNavigator(navigator.language)
     }
