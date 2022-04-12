@@ -102,7 +102,8 @@
 }
 
 @import "./rc-pagination.scss";
- 
+@import "./nprogress.scss";
+
 @layer components {
   @import "/components/atom/FormControl/formcontrol.scss";
   @import "/components/atom/Button/button.scss";

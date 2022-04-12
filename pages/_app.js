@@ -18,12 +18,11 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
 
 Router.events.on('routeChangeStart', url => {
   NProgress.start()
-  console.log('start progress******')
-  // if (window && window._paq) {
-  //   window._paq.push(["setCustomUrl", url]);
-  //   window._paq.push(["setDocumentTitle", document.title]);
-  //   window._paq.push(["trackPageView"]);
-  // }
+  if (window && window._paq) {
+    window._paq.push(["setCustomUrl", url]);
+    window._paq.push(["setDocumentTitle", document.title]);
+    window._paq.push(["trackPageView"]);
+  }
 })
 Router.events.on('routeChangeComplete', () => NProgress.done())
 
