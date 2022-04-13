@@ -5,6 +5,10 @@ import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
 import LoginSide from "@/components/sign-in/LoginSide";
 import Button from "@/components/atom/Button/Button";
+import { User } from 'pages/api/auth/user'
+import { sessionOptions } from '@/lib/iron-session/session'
+import { withIronSessionSsr } from 'iron-session/next'
+import { InferGetServerSidePropsType } from 'next'
 
 export default function Index({ allPosts, preview }) {
   const { status } = useSession();
@@ -72,3 +76,29 @@ export default function Index({ allPosts, preview }) {
     </>
   );
 }
+
+
+// export const getServerSideProps = withIronSessionSsr(async function ({
+//   req,
+//   res,
+// }) {
+//   const user = req.session.user
+
+//   console.log(user)
+
+//   if (user === undefined) {
+//     res.setHeader('location', '/login')
+//     res.statusCode = 302
+//     res.end()
+//     return {
+//       props: {
+//         user: { isLoggedIn: false, login: '', avatarUrl: '' },
+//       },
+//     }
+//   }
+
+//   return {
+//     props: { user: req.session.user },
+//   }
+// },
+// sessionOptions)

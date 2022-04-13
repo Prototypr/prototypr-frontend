@@ -1,7 +1,12 @@
 import { signIn } from "next-auth/react";
 import Button from "../atom/Button/Button";
+import {useState} from 'react'
+import Form from '@/components/Form'
 
 const LoginForm = () => {
+
+  const [showLoginForm, setShowLoginForm] = useState(false)
+
   return (
     <div className="flex flex-col">
       <h2 className="text-lg text-gray-800 font-bold text-center mb-1">
@@ -107,9 +112,13 @@ const LoginForm = () => {
       <div className="my-5">
         <p className="text-gray-600 text-center font-medium">OR</p>
       </div>
-      <Button
+      {showLoginForm==false ?<Button
         isFullWidth
         className="text-left justify-start h-11 font-normal"
+        onClick={()=>{
+          setShowLoginForm(!showLoginForm)
+          // signIn("email", {email:'graeme@prototypr.io'})
+        }}
         leftIcon={
           <div className="bg-white p-1 rounded-md">
             <svg
@@ -131,7 +140,18 @@ const LoginForm = () => {
         }
       >
         Sign up with Email
-      </Button>
+      </Button>:
+      <Form 
+        buttonText={'Sign up'} 
+        label={'Enter your email address'}
+        inputType={'email'}
+        placeholder={'hola@prototypr.io'}
+        onSubmit={(e)=>{
+          e.preventDefault()
+          // alert(e.target[0].value)
+          signIn("email", {email:e.target[0].value})
+        }}
+        />}
     </div>
   );
 };

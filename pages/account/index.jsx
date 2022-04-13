@@ -6,13 +6,18 @@ import { getToken } from "next-auth/jwt";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 
-const AccountPage = ({ preview, userData }) => {
+import { User } from 'pages/api/auth/user'
+import { sessionOptions } from '@/lib/iron-session/session'
+import { withIronSessionSsr } from 'iron-session/next'
+import { InferGetServerSidePropsType } from 'next'
+
+const AccountPage = ({ preview, userData, user, jwt }) => {
   const { data: sessionInfo, status } = useSession();
   if (status === "loading") {
     return <Fallback />;
   }
 
-  if (status === "authenticated") {
+  if (status === "authenticated" || user?.isLoggedIn) {
     return (
       <Layout preview={preview}>
         <Head>
@@ -26,6 +31,7 @@ const AccountPage = ({ preview, userData }) => {
                 This information will be displayed publicly on your profile
               </span>
               <UserForm
+                jwt={jwt}
                 info={{
                   firstName: userData.firstName,
                   secondName: userData.secondName,
@@ -35,8 +41,8 @@ const AccountPage = ({ preview, userData }) => {
                   paymentPointer: userData.paymentPointer,
 
                   // ask about these later
-                  email: sessionInfo.user.email,
-                  username: sessionInfo.user.name,
+                  email: sessionInfo?.user.email?sessionInfo?.user.email:userData.email,
+                  username: sessionInfo?.user.name?sessionInfo?.user.name:userData.username,
                 }}
               />
             </div>
@@ -47,16 +53,27 @@ const AccountPage = ({ preview, userData }) => {
   }
 
   // TODO
-  return <div>Unauthenticated whoops</div>;
+  return <div>Unauthenticated with nextauth, whoops</div>;
 };
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = withIronSessionSsr(async function ({
+  req,
+  res,
+}) {
+  //iron-session user
+  const user = req.session.user
+
+
+  /**
+   * nextauth
+   */
   try {
     const token = await getToken({
-      req: context.req,
+      req: req,
       secret: process.env.NEXTAUTH_SECRET,
     });
-    if (token) {
+
+  if (token) {
       const res = await axios({
         method: "GET", // change this GET later
         url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
@@ -71,17 +88,36 @@ export async function getServerSideProps(context) {
         }, // will be passed to the page component as props
       };
     }
-    // TODO redirect back to home
-    return {
-      notFound: true,
-    };
-  } catch (error) {
-    console.log(error);
-    // TODO 500 server error
+     
+  }
+  catch(e){
+    console.log(e.message)
     return {
       notFound: true,
     };
   }
-}
+
+  /**
+   * iron session user
+   * who logged in with email
+   */
+   if (user === undefined) {
+    res.setHeader('location', '/sign-in')
+    res.statusCode = 302
+    res.end()
+    return {
+      props: {
+        user: { isLoggedIn: false, login: '', avatarUrl: '' },
+      },
+    }
+  }
+
+  console.log(req.session.user)
+
+  return {
+    props: { user: req.session.user, jwt:req.session.user.login.jwt,userData:req.session.user.login.user },
+  }
+},
+sessionOptions)
 
 export default AccountPage;

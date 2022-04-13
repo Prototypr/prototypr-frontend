@@ -9,10 +9,8 @@ import Button from "../atom/Button/Button";
 
 const websiteRegex =
   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
-const UserForm = ({ info }) => {
-  const {
-    data: { jwt },
-  } = useSession();
+const UserForm = ({ info, jwt }) => {
+  const datas = useSession();
 
   const {
     register,
@@ -47,7 +45,7 @@ const UserForm = ({ info }) => {
         url:
           process.env.NEXT_PUBLIC_API_URL + "/api/users-permissions/users/me",
         headers: {
-          Authorization: `Bearer ${jwt}`,
+          Authorization: `Bearer ${datas?.jwt?datas?.jwt:jwt}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
         data: qs.stringify(data),

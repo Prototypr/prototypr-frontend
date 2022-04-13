@@ -3,6 +3,8 @@ import { SessionProvider } from "next-auth/react";
 import "@/styles/toolStyles.css";
 import { Toaster } from "react-hot-toast";
 import * as Portal from "@radix-ui/react-portal";
+import { SWRConfig } from 'swr'
+import fetchJson from '@/lib/iron-session/fetchJson'
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
@@ -10,9 +12,18 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
     // `session` comes from `getServerSideProps` or `getInitialProps`.
     // Avoids flickering/session loading on first load.
     <>
+    <SWRConfig
+      value={{
+        fetcher: fetchJson,
+        onError: (err) => {
+          console.error(err)
+        },
+      }}
+    >
       <SessionProvider session={session} refetchInterval={5 * 60}>
         <Component {...pageProps} />
       </SessionProvider>
+      </SWRConfig>
       <Portal.Root>
         <Toaster
           toastOptions={{
