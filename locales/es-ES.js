@@ -1,7 +1,7 @@
 const ES =  {
     "intro.title.half1": "Los mejores artículos de diseño, herramientas y",
     "intro.title.half2": "píxeles brillantes.",
-    "intro.input.placeholder": "Entrar su dirección de email",
+    "intro.input.placeholder": "Entrar su email",
     "intro.button.updates": "Conseguir Actualizaciones",
     "intro.description": "Fuente abierta. Gratis para todos. Sin muro de pago.",
     "intro.link": "Aprender acerca Prototypr",
