@@ -3,21 +3,29 @@ import Layout from "@/components/layout";
 import UserForm from "@/components/user/UserForm";
 import axios from "axios";
 import { getToken } from "next-auth/jwt";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import Head from "next/head";
 
-import { User } from 'pages/api/auth/user'
+// import { User } from 'pages/api/auth/user'
 import { sessionOptions } from '@/lib/iron-session/session'
 import { withIronSessionSsr } from 'iron-session/next'
-import { InferGetServerSidePropsType } from 'next'
+// import { InferGetServerSidePropsType } from 'next'
+import useUser from "@/lib/iron-session/useUser";
 
-const AccountPage = ({ preview, userData, user, jwt }) => {
-  const { data: sessionInfo, status } = useSession();
-  if (status === "loading") {
+const AccountPage = ({ preview, userData }) => {
+  // const { data: sessionInfo, status } = useSession();
+
+  const {user} = useUser({
+    redirectTo: '/sign-in',
+    redirectIfFound: false,
+  })
+
+
+  if (!user) {
     return <Fallback />;
   }
 
-  if (status === "authenticated" || user?.isLoggedIn) {
+  if (user?.isLoggedIn) {
     return (
       <Layout preview={preview}>
         <Head>
@@ -31,7 +39,6 @@ const AccountPage = ({ preview, userData, user, jwt }) => {
                 This information will be displayed publicly on your profile
               </span>
               <UserForm
-                jwt={jwt}
                 info={{
                   firstName: userData.firstName,
                   secondName: userData.secondName,
@@ -41,8 +48,8 @@ const AccountPage = ({ preview, userData, user, jwt }) => {
                   paymentPointer: userData.paymentPointer,
 
                   // ask about these later
-                  email: sessionInfo?.user.email?sessionInfo?.user.email:userData.email,
-                  username: sessionInfo?.user.name?sessionInfo?.user.name:userData.username,
+                  email: user?.email,
+                  username: user?.name?user.name:userData.username,
                 }}
               />
             </div>
@@ -53,7 +60,13 @@ const AccountPage = ({ preview, userData, user, jwt }) => {
   }
 
   // TODO
-  return <div>Unauthenticated with nextauth, whoops</div>;
+  return( <Layout preview={preview}>
+    <Head>
+      <title>Account Settings</title>
+    </Head>
+
+<div>Unauthenticated, whoops!</div>
+    </Layout>)
 };
 
 export const getServerSideProps = withIronSessionSsr(async function ({
@@ -110,12 +123,28 @@ export const getServerSideProps = withIronSessionSsr(async function ({
         user: { isLoggedIn: false, login: '', avatarUrl: '' },
       },
     }
+  }else{
+    if(user?.login?.jwt){
+      const res = await axios({
+          method: "GET", // change this GET later
+          url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
+          headers: {
+            Authorization: `Bearer ${user.login.jwt}`,
+          },
+        });
+  
+        return {
+          props: {
+            userData: res.data,
+          }, // will be passed to the page component as props
+        };
+    }
   }
 
-  console.log(req.session.user)
+  // console.log(req.session.user)
 
   return {
-    props: { user: req.session.user, jwt:req.session.user.login.jwt,userData:req.session.user.login.user },
+    props: { userData:req.session.user.login.user },
   }
 },
 sessionOptions)

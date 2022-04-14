@@ -6,11 +6,16 @@ import qs from "query-string";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Button from "../atom/Button/Button";
+import useUser from '@/lib/iron-session/useUser'
 
 const websiteRegex =
   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
-const UserForm = ({ info, jwt }) => {
-  const datas = useSession();
+const UserForm = ({ info }) => {
+
+  const {user} = useUser({
+    redirectTo: '/sign-in',
+    redirectIfFound: false,
+  })
 
   const {
     register,
@@ -45,7 +50,7 @@ const UserForm = ({ info, jwt }) => {
         url:
           process.env.NEXT_PUBLIC_API_URL + "/api/users-permissions/users/me",
         headers: {
-          Authorization: `Bearer ${datas?.jwt?datas?.jwt:jwt}`,
+          Authorization: `Bearer ${user?.jwt}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
         data: qs.stringify(data),

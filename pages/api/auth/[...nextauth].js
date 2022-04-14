@@ -22,7 +22,7 @@ const options = {
   },
   callbacks: {
     jwt: async ({ token, user, account, profile, isNewUser }) => {
-      console.log('jwt',user)
+
       const isSignIn = user ? true : false;
       if (isSignIn) {
         let url = new URL(
@@ -54,8 +54,6 @@ const options = {
       return Promise.resolve(token);
     },
     session: async ({ session, token, user }) => {
-      console.log('session',user)
-
       //user session param comes from jwt callback
       session.jwt = token.jwt;
       session.id = token.id;
@@ -67,38 +65,3 @@ const options = {
 };
 
 export default (req,res)=> NextAuth(req, res, options);
-
-
-function signIn({ email, password }) {
-  console.log('wa')
-
-
-    /* your function */
-    var data = JSON.stringify({
-      "email": email
-    });
-
-    var config = {
-      method: 'post',
-      url: `${process.env.NEXT_PUBLIC_API_URL}/api/passwordless/send-link`,
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-
-    console.log(data)
-
-  axios(config)
-  .then(function (response) {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-  // const res = await axios.post(`${strapiUrl}/api/auth/local`, {
-  //   identifier: email,
-  //   password,
-  // });
-  // return res.data;
-}

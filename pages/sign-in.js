@@ -9,9 +9,15 @@ import { User } from 'pages/api/auth/user'
 import { sessionOptions } from '@/lib/iron-session/session'
 import { withIronSessionSsr } from 'iron-session/next'
 import { InferGetServerSidePropsType } from 'next'
+import useUser from '@/lib/iron-session/useUser'
 
 export default function Index({ allPosts, preview }) {
   const { status } = useSession();
+
+  const {user} = useUser({
+    // redirectTo: '/account',
+    redirectIfFound: false,
+  })
 
   return (
     <>
@@ -27,8 +33,8 @@ export default function Index({ allPosts, preview }) {
         </div>
         <div className="col-span-12 md:col-span-6 lg:col-span-8">
           <div className="flex items-center justify-center h-full w-full relative">
-            {status === "loading" && <Fallback />}
-            {status !== "loading" && (
+            {!user && <Fallback />}
+            {user?.isLoggedIn && (
               <div className="absolute top-[2%] left-[2%]">
                 <Link href="/" passHref prefetch={false}>
                   <a>
@@ -41,7 +47,19 @@ export default function Index({ allPosts, preview }) {
                 </Link>
               </div>
             )}
-            {status === "authenticated" && (
+            {user && !user?.isLoggedIn ? (
+              <>
+                <LoginForm />
+                <div className="absolute top-[2%] right-[2%]">
+                  <div className="text-sm text-gray-700">
+                    <span>I already have access? </span>
+                    <Link href="/sign_in" passHref prefetch={false}>
+                      <a className="text-primary-400">Sign in.</a>
+                    </Link>
+                  </div>
+                </div>
+              </>
+            ): user && user?.isLoggedIn && (
               <div className="flex flex-col w-[285px]">
                 <h2 className="text-lg text-gray-800 font-bold text-center">
                   You're on the waitlist!
@@ -57,48 +75,9 @@ export default function Index({ allPosts, preview }) {
                 </Link>
               </div>
             )}
-            {status === "unauthenticated" && (
-              <>
-                <LoginForm />
-                <div className="absolute top-[2%] right-[2%]">
-                  <div className="text-sm text-gray-700">
-                    <span>I already have access? </span>
-                    <Link href="/sign_in" passHref prefetch={false}>
-                      <a className="text-primary-400">Sign in.</a>
-                    </Link>
-                  </div>
-                </div>
-              </>
-            )}
           </div>
         </div>
       </div>
     </>
   );
 }
-
-
-// export const getServerSideProps = withIronSessionSsr(async function ({
-//   req,
-//   res,
-// }) {
-//   const user = req.session.user
-
-//   console.log(user)
-
-//   if (user === undefined) {
-//     res.setHeader('location', '/login')
-//     res.statusCode = 302
-//     res.end()
-//     return {
-//       props: {
-//         user: { isLoggedIn: false, login: '', avatarUrl: '' },
-//       },
-//     }
-//   }
-
-//   return {
-//     props: { user: req.session.user },
-//   }
-// },
-// sessionOptions)
