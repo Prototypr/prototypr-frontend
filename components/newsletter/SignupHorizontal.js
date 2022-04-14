@@ -8,7 +8,7 @@ export default function SignupHorizontal() {
   const intl = useIntl();
   const [buttonText, setButtonText] = useState(intl.formatMessage({ id: "intro.button.updates" }));
   const onSubmit = async (data) => {
-    setButtonText("Submitting");
+    setButtonText(intl.formatMessage({ id: "signup.button.submitting" }));
 
     axios
       .post(
@@ -25,13 +25,13 @@ export default function SignupHorizontal() {
         if (response.data.success) {
           setRegistered(true);
           setError(false);
-          setButtonText("Get Updates");
+          setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
         }
       })
       .catch(function (error) {
         setRegistered(false);
         setError(true);
-        setButtonText("Get Updates");
+        setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
       });
   };
 
@@ -52,26 +52,23 @@ export default function SignupHorizontal() {
             <h2
               className={`text-base text-gray-800 text-white font-semibold mb-2`}
             >
-              Please try again! &nbsp; <div className="inline -mt-1">🤖</div>
+              {intl.formatMessage({ id: "signup.tip.again" })} &nbsp; <div className="inline -mt-1">🤖</div>
             </h2>
             <div
               className={`block text-sm mb-1 leading-5 font-base text-gray-800`}
             >
-              Something went wrong. Please refresh the page and try again.
-              Contact hello@prototypr.io for help.
+              {intl.formatMessage({ id: "signup.res.error" })}
             </div>
           </>
         ) : (
           <>
             <h2 className={`text-2xl text-gray-800 font-semibold mb-2 mt-10`}>
-              Check your inbox! &nbsp; <div className="inline -mt-1">🎉</div>
+            {intl.formatMessage({ id: "signup.input.check" })} &nbsp; <div className="inline -mt-1">🎉</div>
             </h2>
             <div
               className={`block text-lg mb-10 leading-6 font-base text-gray-800 text-white`}
             >
-              Click the activation link in the email we just sent you, and add
-              hello@prototypr.io to your address list so you don't miss the
-              newsletter.
+              {intl.formatMessage({ id: "signup.input.click" })}
             </div>
           </>
         )}
@@ -117,7 +114,9 @@ function HookForm(props) {
         {/* <input type="checkbox" placeholder="Consent" name="consent" ref={register({ required: true })} /> */}
         {errors.consent && errors.consent.type === "required" && (
           <p className="text-orange-600 mt-1">
-            Please confirm you want to join the newsletter.
+            <FormattedMessage 
+              id="signup.input.confirm"
+            />
           </p>
         )}
 
@@ -157,12 +156,16 @@ function HookForm(props) {
       <div className="px-1 w-10/12 mx-auto">
         {errors.emailRequired && errors.emailRequired.type === "required" && (
           <p className="text-pink-600 mt-2 text-sm text-left">
-            Email address required.
+             <FormattedMessage 
+              id="signup.input.validation"
+            />
           </p>
         )}
         {errors.emailRequired && errors.emailRequired.type === "pattern" && (
           <p className="text-pink-600 mt-2 text-sm text-left">
-            Please check and try again.
+            <FormattedMessage 
+              id="signup.input.error"
+            />
           </p>
         )}
       </div>

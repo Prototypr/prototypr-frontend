@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-
+import { FormattedMessage } from 'react-intl';
 export default function SourcePanel({}) {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
@@ -141,7 +141,9 @@ function HookForm(props) {
       <div className="px-1">
         {errors.emailRequired && errors.emailRequired.type === "required" && (
           <p className="text-pink-600 mt-2 text-sm text-left">
-            Email address required.
+            <FormattedMessage 
+              id="signup.input.validation"
+            />
           </p>
         )}
         {errors.emailRequired && errors.emailRequired.type === "pattern" && (
