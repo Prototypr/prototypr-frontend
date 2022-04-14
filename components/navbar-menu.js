@@ -335,7 +335,9 @@ const ContentListItemCallout = React.forwardRef(({ children, ...props }, forward
           marginBottom: 7,
         }}
       >
-        The Source
+        <FormattedMessage 
+          id="navbar.contentitem.title"
+        />
       </LinkTitle>
       <LinkText
         css={{
@@ -344,7 +346,9 @@ const ContentListItemCallout = React.forwardRef(({ children, ...props }, forward
           lineHeight: 1.3,
         }}
       >
-        A spicy newsletter tackling taboo topics and exposing unseen truths in the tech and design sphere.
+        <FormattedMessage 
+          id="navbar.contentitem.desc"
+        />
       </LinkText>
     </NavigationMenuLink>
   </ListItem>

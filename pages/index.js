@@ -16,6 +16,7 @@ import {
   getCommonQuery,
 } from "@/lib/api";
 import Head from "next/head";
+import { FormattedMessage, useIntl } from 'react-intl';
 const TAB_ITEMS = [
   {
     slug: "accessibility",
@@ -54,23 +55,24 @@ export default function Index({
   const coverImage = heroPost.attributes.legacyFeaturedImage
     ? heroPost.attributes.legacyFeaturedImage
     : "";
+  const intl = useIntl();
 
   return (
     <>
       <Layout preview={preview}>
         <Head>
           <title>
-            Prototypr - Prototyping, UX Design, Front-end Development and Beyond
+            {intl.formatMessage({id: "index.header.title"})}
             👾.
           </title>
         </Head>
         <Container>
           <Intro />
-          <EditorPick2 header="Editor's Picks" post={heroPost} />
+          <EditorPick2 header={intl.formatMessage({ id: "editpicker.title"})} post={heroPost} />
           <ProductList posts={morePosts} />
           <div className="mt-32 pb-10 px-3 xl:px-0">
             <h4 className="text-3xl text-gray-900 font-bold leading-6 text-title-1">
-              Latest tools
+              {intl.formatMessage({id: "designtool.title"})}
             </h4>
           </div>
         </Container>

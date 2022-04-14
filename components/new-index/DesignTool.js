@@ -2,12 +2,16 @@ import React, { useState, useRef, useEffect } from "react";
 import BScroll from "better-scroll";
 import Link from "next/link";
 import Image from "next/image";
+import { useIntl } from 'react-intl';
 const getItems = () =>
   Array(20)
     .fill(0)
     .map((_, ind) => ({ id: `element-${ind}` }));
 const ITEM_WIDTH = 300;
 export default function DesignTool({ allTools = [] }) {
+
+  const intl = useIntl();
+  
   const [list, setList] = useState(getItems);
   const [scroll, setScroll] = useState(null);
 
@@ -182,7 +186,7 @@ export default function DesignTool({ allTools = [] }) {
       <div className="bg-gray-4 w-full relative flex items-center justify-center pt-14 pb-32">
         <Link href="/toolbox/page/1">
           <button className="bg-blue-1 rounded-lg text-white text-base leading-6 flex items-center justify-center py-4 px-8 hover:opacity-70 font-semibold">
-            Browse more tools
+            {intl.formatMessage({ id: "designtool.button.browsemore"})}
           </button>
         </Link>
       </div>

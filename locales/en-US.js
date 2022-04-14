@@ -41,5 +41,19 @@ const EN =  {
     "navbar.submenu2.desc4": "Figma to Adobe, and everything in between.",
     "navbar.submenu2.desc5": "Tools for building accessible User Interfaces.",
     "navbar.submenu2.desc6": "Tools for creating Voice User Interfaces, like chatbots.",
+    "navbar.contentitem.title": "The Source",
+    "navbar.contentitem.desc": "A spicy newsletter tackling taboo topics and exposing unseen truths in the tech and design sphere.",
+    "editpicker.title": "Editor's Picks",
+    "designtool.title": "Latest tools",
+    "designtool.button.browsemore": "Browse more tools",
+    "index.header.title": "Prototypr - Prototyping, UX Design, Front-end Development and Beyond",
+    "sourcepanel.desc": "The Source tackles taboo topics, exposes unseen truths, and gets the scoop on the latest in the tech and design sphere.",
+    "sourcepanel.form.label": "Enter email address",
+    "sourcepanel.form.placeholder": "Your Email",
+    "sourcepanel.form.errortip": "Please check and try again.",
+    "topicSpotlight.title": "Topic Spotlights",
+    "creatorSpotlight.title": "Creator Spotlight",
+    "moretoppicks.title": "More top picks",
+    "moretopicks.button": "Show more feeds"
 }
 export default EN;
