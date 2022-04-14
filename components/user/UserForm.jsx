@@ -52,7 +52,7 @@ const UserForm = ({ info, jwt }) => {
       });
 
       toast.success("Successfully updated", {
-        duration: 10000,
+        duration: 5000,
       });
     } catch (error) {
       toast.error("Error has occured.");

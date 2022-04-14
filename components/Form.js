@@ -8,10 +8,15 @@ export default function Form({
   buttonText,
   inputName,
   inputType,
-  placeholder
+  placeholder,
+  disabledMessage,
+  disabled,
+  isLoading
 }) {
   return (
-    <form onSubmit={onSubmit}>
+    <>
+    {disabled!==true ?
+      <form onSubmit={onSubmit}>
       <label>
         <span>{label?label:'Type your GitHub username'}</span>
         <input type={inputType?inputType:"text"} placeholder={placeholder} name={inputName?inputName:"token"} required />
@@ -22,6 +27,7 @@ export default function Form({
           type="submit"
           className="justify-center h-11 font-medium"
           color="default"
+          isLoading={isLoading}
       >
           {buttonText?buttonText:'Log in'}
         </Button>
@@ -48,6 +54,10 @@ export default function Form({
           margin: 1rem 0 0;
         }
       `}</style>
-    </form>
+    </form>:
+    <>
+    {disabledMessage}
+    </>}
+    </>
   )
 }

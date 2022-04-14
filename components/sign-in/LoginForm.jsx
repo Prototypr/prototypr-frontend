@@ -2,10 +2,16 @@ import { signIn } from "next-auth/react";
 import Button from "../atom/Button/Button";
 import {useState} from 'react'
 import Form from '@/components/Form'
+import Router from 'next/router'
+import axios from 'axios'
+import toast from "react-hot-toast";
+
 
 const LoginForm = () => {
 
   const [showLoginForm, setShowLoginForm] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <div className="flex flex-col">
@@ -141,19 +147,99 @@ const LoginForm = () => {
       >
         Sign up with Email
       </Button>:
+      <div className="max-w-xs">
       <Form 
         buttonText={'Sign up'} 
+        disabled={sent?true:false}
+        disabledMessage={<div className="text-center">
+        A login link has been sent to your email. <br/>If you didn't receive it, <a className="text-blue-600 cursor-pointer" onClick={()=>setSent(false)}>retry</a>.
+        </div>}
         label={'Enter your email address'}
         inputType={'email'}
         placeholder={'hola@prototypr.io'}
+        isLoading={isLoading}
         onSubmit={(e)=>{
           e.preventDefault()
-          // alert(e.target[0].value)
-          signIn("email", {email:e.target[0].value})
+          setSent(false)
+          setIsLoading(true)
+          var data = JSON.stringify({
+            "email": e.target[0].value
+          });
+    
+          var config = {
+            method: 'post',
+            url: `${process.env.NEXT_PUBLIC_API_URL}/api/passwordless/send-link`,
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          };
+  
+         const loadingToastId = toast.loading('Sending verification email');
+         
+        axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            //redirect to verification page
+            // Router.push('/account/verification-sent')
+            // toast.success("Successfully updated", {
+            //   duration: 10000,
+            // });
+            setSent(true)
+            setTimeout(()=>{
+              setSent(true)
+              setIsLoading(false)
+              showSuccessToast(loadingToastId)
+            },800)
+            
+
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
         }}
-        />}
+        />
+        </div>
+        }
     </div>
   );
 };
 
 export default LoginForm;
+
+const showSuccessToast = (loadingToastId) =>{
+  toast.dismiss(loadingToastId)
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? 'animate-enter' : 'animate-leave'
+      } max-w-md bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <div className="relative border border-gray-200 rounded-lg shadow-lg">
+        <button
+        onClick={() => toast.dismiss(t.id)}
+        className="absolute p-1 bg-gray-100 border border-gray-300 rounded-full -top-1 -right-1">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+        </button>
+        <div className="flex items-center p-4">
+          <div className="flex flex-col justify-start h-10">
+
+            <svg viewBox="0 0 24 24" className="text-teal-600 w-5 h-5 mx-auto">
+            <path fill="currentColor" d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
+            </path>
+          </svg>
+          </div>
+          <div className="ml-3 overflow-hidden">
+            <p className="font-medium text-gray-900">Check your email.</p>
+            <p className="max-w-xs text-sm text-gray-500 truncate">
+             Click the link in your inbox to sign in.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ), {duration:10000})
+}

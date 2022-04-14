@@ -4,6 +4,7 @@ import Layout from 'components/Layout'
 import fetchJson, { FetchError } from '@/lib/iron-session/fetchJson'
 import Button from '@/components/atom/Button/Button'
 import Spinner from "@/components/atom/Spinner/Spinner"
+import toast from "react-hot-toast";
 
 export default function Login({loginToken}) {
   // here we just check if user is already logged in and redirect to profile
@@ -36,6 +37,10 @@ export default function Login({loginToken}) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
+          }).then(()=>{
+            toast.success('Successfully signed in!', 
+            {position: 'top-center', duration: 5000}
+            )
           })
         )
         setTokenInvalid(false)

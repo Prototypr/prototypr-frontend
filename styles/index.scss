@@ -206,3 +206,7 @@ a.kofi-button:active {
     transform: rotate(0) scale(1);
   }
 }
+
+.toastOverride div:nth-of-type(2){
+  flex-direction: column;
+}

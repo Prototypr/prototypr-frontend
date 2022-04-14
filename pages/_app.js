@@ -27,7 +27,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
       <Portal.Root>
         <Toaster
           toastOptions={{
-            position: "top-right",
+            position: "top-rigcenterht",
             className: "toastOverride",
 
             success: {
