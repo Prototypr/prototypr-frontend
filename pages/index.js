@@ -20,23 +20,23 @@ import { FormattedMessage, useIntl } from 'react-intl';
 const TAB_ITEMS = [
   {
     slug: "accessibility",
-    name: "Accessibility",
+    name: "topicSpotlight.tabs.accessibility",
   },
   {
     slug: "user-research",
-    name: "User Research",
+    name: "topicSpotlight.tabs.userResearch",
   },
   {
     slug: "ux-writing",
-    name: "UX Writing",
+    name: "topicSpotlight.tabs.userWriting",
   },
   {
     slug: "vr",
-    name: "VR",
+    name: "topicSpotlight.tabs.vr",
   },
   {
     slug: "code",
-    name: "Code",
+    name: "topicSpotlight.tabs.code",
   },
 ];
 const PAGE_SIZE = 12;

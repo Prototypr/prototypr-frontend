@@ -60,6 +60,11 @@ const ES = {
     "sourcepanel.form.placeholder": "Su Email",
     "sourcepanel.form.errortip": "Por favor revisa e intenta de nuevo.",
     "topicSpotlight.title": "Destacados del tema",
+    "topicSpotlight.tabs.accessibility": "Accesibilidad",
+    "topicSpotlight.tabs.userResearch": "Investigación de usuarios",
+    "topicSpotlight.tabs.userWriting": "Escritura de UX",
+    "topicSpotlight.tabs.vr": "VR",
+    "topicSpotlight.tabs.code": "Código",
     "creatorSpotlight.title":"Spotlight de Creadoro",
     "moretoppicks.title": "Más selecciones principales",
     "moretopicks.button": "Mostrar más fuentes"

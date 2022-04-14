@@ -52,6 +52,11 @@ const EN =  {
     "sourcepanel.form.placeholder": "Your Email",
     "sourcepanel.form.errortip": "Please check and try again.",
     "topicSpotlight.title": "Topic Spotlights",
+    "topicSpotlight.tabs.accessibility": "Accessibility",
+    "topicSpotlight.tabs.userResearch": "User Research",
+    "topicSpotlight.tabs.userWriting": "UX Writing",
+    "topicSpotlight.tabs.vr": "VR",
+    "topicSpotlight.tabs.code": "Code",
     "creatorSpotlight.title": "Creator Spotlight",
     "moretoppicks.title": "More top picks",
     "moretopicks.button": "Show more feeds"
