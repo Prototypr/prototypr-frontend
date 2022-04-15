@@ -59,6 +59,11 @@ const EN =  {
     "topicSpotlight.tabs.code": "Code",
     "creatorSpotlight.title": "Creator Spotlight",
     "moretoppicks.title": "More top picks",
-    "moretopicks.button": "Show more feeds"
+    "moretopicks.button": "Show more feeds",
+    "footer.title": "Statically Generated with Next.js.",
+    "footer.button": "Read Documentation",
+    "footer.link": "View on GitHub",
+    "topics.title": "Topics",
+    "topics.header": "Open design and tech stories for everyone to read"
 }
 export default EN;

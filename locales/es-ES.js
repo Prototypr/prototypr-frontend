@@ -15,7 +15,7 @@ const ES = {
     "intro.button.updates": "Conseguir Actualizaciones",
     "intro.description": "Fuente abierta. Gratis para todos. Sin muro de pago.",
     "intro.link": "Aprender acerca Prototypr",
-    "navbar.menu.title1": "Cuentos",
+    "navbar.menu.title1": "Historias",
     "navbar.menu.title2": "Toolbox",
     "navbar.menu.title3": "Escribe para nosotros",
     "navbar.menu.title4": "Suscribir",
@@ -67,7 +67,12 @@ const ES = {
     "topicSpotlight.tabs.code": "Código",
     "creatorSpotlight.title":"Spotlight de Creadoro",
     "moretoppicks.title": "Más selecciones principales",
-    "moretopicks.button": "Mostrar más fuentes"
+    "moretopicks.button": "Mostrar más fuentes",
+    "footer.title": "Generado estáticamente con Next.js.",
+    "footer.button": "Leer documentación",
+    "footer.link": "Ver en GitHub",
+    "topics.title": "Temas",
+    "topics.header": "Historias abiertas de diseño y tecnología para que todos puedan leer"
   };
   export default ES;
   
