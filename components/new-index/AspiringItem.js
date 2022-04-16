@@ -12,7 +12,7 @@ export default function AspiringItem({ post = {} }) {
     legacyFeaturedImage = null,
     author = null,
   } = post;
-  const tagArr = tags.data;
+
   return (
     <div className="grid-cols-1 cursor-pointer group">
       <figure className="relative w-full h-64 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
@@ -28,8 +28,11 @@ export default function AspiringItem({ post = {} }) {
         </div>
       </figure>
 
-      <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mt-2">
-        # {tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"}
+      <div className="font-base text-sm hover:underline leading-6 tracking-wide uppercase text-gray-3 mt-2">
+        By {" "}
+      <Link className="hover:underline" href={`/people/${author?.data?.attributes?.slug}/page/1`}>
+        <a>{author?.data?.attributes?.name}</a>
+      </Link>
       </div>
       <h4 className="text-black-1 font-semibold text-lg leading-normal mt-1">
         <Link href={`/posts/${slug}`}>

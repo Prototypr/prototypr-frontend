@@ -5,10 +5,6 @@ import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
 import LoginSide from "@/components/sign-in/LoginSide";
 import Button from "@/components/atom/Button/Button";
-import { User } from 'pages/api/auth/user'
-import { sessionOptions } from '@/lib/iron-session/session'
-import { withIronSessionSsr } from 'iron-session/next'
-import { InferGetServerSidePropsType } from 'next'
 import useUser from '@/lib/iron-session/useUser'
 
 export default function Index({ allPosts, preview }) {

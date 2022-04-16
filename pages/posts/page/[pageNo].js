@@ -72,7 +72,8 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
 export async function getStaticProps({ preview = null, params }) {
     const pageSize = PAGE_SIZE
     const page = params.pageNo
-    const allPosts = (await getPostsByPageForPostsPage(preview, pageSize, page)) || []
+    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, page)) || []
+    allPosts = allPosts[0]
     const pagination = allPosts.meta.pagination
     return {
       props: { allPosts:allPosts.data, preview, pagination },

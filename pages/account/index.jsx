@@ -31,7 +31,7 @@ const AccountPage = ({ preview, userData }) => {
         <Head>
           <title>Account Settings</title>
         </Head>
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="pt-6 pb-10 md:pt-10 px-3 xl:px-0">
             <div className="bg-white shadow-md rounded-lg py-6 px-4">
               <h1 className="font-semibold">Public Profile</h1>
@@ -76,6 +76,12 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   //iron-session user
   const user = req.session.user
 
+  /**
+   * to fetch user data, we need to use the jwt token
+   * - if user is logged in with passwordless email, it's in the iron-session
+   * 
+   * - if the user is logged in with nextauth, use getToken
+   */
 
   /**
    * nextauth

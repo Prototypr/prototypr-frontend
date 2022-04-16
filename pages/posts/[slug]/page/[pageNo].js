@@ -11,7 +11,7 @@ import TopicTopItem from "@/components/new-index/TopicTopItem"
 
 const PAGE_SIZE = 11;
 const ALL_SLUGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]
-export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], preview, pagination = {},first4Posts=[],first2Posts=[], slug='', pageNo=1}) {
+export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], preview, pagination = {},first4Posts=[],first2Posts=[], slug='', pageNo=1, tagName=''}) {
 
     const router = useRouter()
 
@@ -26,7 +26,7 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
               <title>Open design and tech stories for everyone to read</title>
             </Head>
             <Container>
-            <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5 capitalize'>{slug}</h2>
+            <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5 capitalize'>{tagName}</h2>
             {first4Posts?.length>0  &&<Aspiring posts={first4Posts} showTitle={false} />}
             
             <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
@@ -55,6 +55,9 @@ export async function getStaticProps({ preview = null, params }) {
     const {pageNo, slug} = params
     
     let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug])) || []
+
+    let tags = allPosts[1]
+    allPosts = allPosts[0]
     const pagination = allPosts.meta.pagination
     
     let first4 = [],first2=[], nextPosts = [], morePosts = [], heroPost = null
@@ -82,6 +85,7 @@ export async function getStaticProps({ preview = null, params }) {
           first4Posts: first4,
           first2Posts: first2,
           slug,
+          tagName:tags?.data[0]?.attributes?.name,
           pageNo,
           morePosts,
           heroPost
