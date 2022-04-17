@@ -1,7 +1,7 @@
-import { User } from "./user";
+// import { User } from "./user";
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "@/lib/iron-session/session";
-import { NextApiRequest, NextApiResponse } from "next";
+// import { NextApiRequest, NextApiResponse } from "next";
 
 var axios = require("axios");
 
@@ -9,7 +9,6 @@ export default withIronSessionApiRoute(loginRoute, sessionOptions);
 
 async function loginRoute(req, res) {
   const { token } = await req.body;
-
   try {
     var config = {
       method: "get",
@@ -24,8 +23,8 @@ async function loginRoute(req, res) {
         const user = { isLoggedIn: true, login: response.data };
         req.session.user = user;
         await req.session.save();
-        res.json(user);
         res.setHeader("location", "/account");
+        res.status(200).json(user);
       })
       .catch(function (error) {
         console.log(error.message);
