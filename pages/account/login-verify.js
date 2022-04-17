@@ -5,10 +5,11 @@ import fetchJson, { FetchError } from '@/lib/iron-session/fetchJson'
 import Button from '@/components/atom/Button/Button'
 import Spinner from "@/components/atom/Spinner/Spinner"
 import toast from "react-hot-toast";
+import Router from 'next/router'
 
 export default function Login({loginToken}) {
   // here we just check if user is already logged in and redirect to profile
-  const { mutateUser } = useUser({
+  const { mutateUser, user } = useUser({
     redirectTo: '/account',
     redirectIfFound: true,
   })

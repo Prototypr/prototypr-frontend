@@ -11,7 +11,8 @@ export default function Form({
   placeholder,
   disabledMessage,
   disabled,
-  isLoading
+  isLoading,
+  defaultValue
 }) {
   return (
     <>
@@ -19,7 +20,7 @@ export default function Form({
       <form onSubmit={onSubmit}>
       <label>
         <span>{label?label:'Type your GitHub username'}</span>
-        <input type={inputType?inputType:"text"} placeholder={placeholder} name={inputName?inputName:"token"} required />
+        <input type={inputType?inputType:"text"} defaultValue={defaultValue?defaultValue:''} placeholder={placeholder} name={inputName?inputName:"token"} required />
       </label>
       
       <Button

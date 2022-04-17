@@ -54,10 +54,32 @@ async function userRoute(req, res) {
   
   //if the user is authenticated via nextauth session
   if(nextAuthSession && nextAuthSession.user){
+    //check if the email is in the iron-session
+    let email = nextAuthSession.user.email
+
+    if(req.session.user && req.session.user.login?.user?.email){
+      email = req.session.user.login?.user?.email
+    }
+    //save to iron-session
+    let nextAuthUser={
+      isLoggedIn:true,
+      isNextAuth:true,
+      login:{
+        jwt:nextAuthSession.jwt,
+        user:{
+          email:email,//problem - this does not get updated
+          name:nextAuthSession.user.name
+        }
+      }
+    }
+     req.session.user=nextAuthUser
+    await req.session.save();
+
     res.json({
-      ...nextAuthSession.user,
+      ...nextAuthUser.login.user,
       jwt:nextAuthSession.jwt,
       isLoggedIn: true,
+      isNextauth:true
     })
   }
   //now check if there's a strapi passwordless withIronSession session
@@ -68,6 +90,7 @@ async function userRoute(req, res) {
       ...req.session.user.login.user,
       jwt:req.session.user.login.jwt,
       isLoggedIn: true,
+      isNextAuth:false
     })
   }
   else {

@@ -1,18 +1,20 @@
 import FormControl from "@/components/atom/FormControl/FormControl";
 import { accountLocations } from "@/lib/constants";
 import axios from "axios";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import Button from "../atom/Button/Button";
 import useUser from '@/lib/iron-session/useUser'
+import Button from "../atom/Button/Button";
+import { useRouter } from 'next/router'
+import { updateUserSession } from "@/lib/iron-session/updateUserSession";
 
 const websiteRegex =
   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
 const UserForm = ({ info }) => {
 
-  const {user} = useUser({
+  const {user, mutateUser} = useUser({
     redirectTo: '/sign-in',
     redirectIfFound: false,
   })
@@ -35,6 +37,8 @@ const UserForm = ({ info }) => {
       username: info.username,
     },
   });
+  
+  const router = useRouter()
 
   const watchBio = watch("bio");
   const onSubmit = async (data) => {
@@ -43,6 +47,11 @@ const UserForm = ({ info }) => {
       // clear it
       data.location = undefined;
     }
+
+  //update the session with the latest user input
+  //returns true or false if the form should refresh
+  const refresh = await updateUserSession(data, mutateUser)
+
 
     try {
       await axios({
@@ -59,8 +68,16 @@ const UserForm = ({ info }) => {
       toast.success("Successfully updated", {
         duration: 5000,
       });
+      //if the user email has been changed, the account is unconfirmed.
+      //trigger a refresh so the verification form is showing
+      if(refresh){
+        setTimeout(()=>{
+          router.reload(window.location.pathname)
+        },100)
+      }
     } catch (error) {
       toast.error("Error has occured.");
+      console.log(error.message)
       error.response.data.error.details.errors.forEach((i) => {
         if (
           [
@@ -268,7 +285,7 @@ const UserForm = ({ info }) => {
             autoComplete="off"
             className="w-full"
             placeholder="john@mail.com"
-            disabled={true}
+            disabled={false}
             aria-describedby="email_error"
             aria-live="assertive"
             {...register("email", {
