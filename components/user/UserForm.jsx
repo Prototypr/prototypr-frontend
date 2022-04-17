@@ -174,8 +174,8 @@ const UserForm = ({ info }) => {
               {...register("location")}
             >
               {accountLocations.map((i) => (
-                <option key={i} value={i}>
-                  {i}
+                <option key={i} value={i.Code}>
+                  {i.Name}
                 </option>
               ))}
             </select>
