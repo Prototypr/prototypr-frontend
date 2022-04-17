@@ -135,65 +135,6 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   //iron-session user
   const user = req.session.user
 
-  /**
-   * to fetch user data, we need to use the jwt token
-   * - if user is logged in with passwordless email, it's in the iron-session
-   * 
-   * - if the user is logged in with nextauth, use getToken
-   */
-
-  /**
-   * nextauth
-   */
-  // try {
-  //   const token = await getToken({
-  //     req: req,
-  //     secret: process.env.NEXTAUTH_SECRET,
-  //   });
-
-  // if (token) {
-  //     const res = await axios({
-  //       method: "GET", // change this GET later
-  //       url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
-  //       headers: {
-  //         Authorization: `Bearer ${token.jwt}`,
-  //       },
-  //     });
-
-  //     return {
-  //       props: {
-  //         userData: res.data,
-  //         isConfirmed:res.data.confirmed
-  //       }, // will be passed to the page component as props
-  //     };
-  //   }
-     
-  // }
-  // catch(e){
-  //   /**
-  //    * if the iron-session user is there
-  //    * but email is not confirmed in next-auth
-  //    */
-  //   if(user){
-  //     return{
-  //       props:{
-  //         isConfirmed:false,
-  //         userData:user?.login?.user
-  //       }
-  //     }
-  //   }
-  //   return {
-  //    props:{
-  //     notFound: true,
-  //     // userData:null
-  //    } 
-  //   };
-  // }
-
-  /**
-   * iron session user
-   * who logged in with email
-   */
    if (user === undefined) {
     res.setHeader('location', '/sign-in')
     res.statusCode = 302
