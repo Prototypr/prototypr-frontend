@@ -2,6 +2,8 @@ import NextAuth from 'next-auth'
 import TwitterProvider from "next-auth/providers/twitter"
 import GitHubProvider from "next-auth/providers/github"
 
+var axios = require('axios');
+
 
 const options = {
   providers: [
@@ -20,6 +22,7 @@ const options = {
   },
   callbacks: {
     jwt: async ({ token, user, account, profile, isNewUser }) => {
+
       const isSignIn = user ? true : false;
       if (isSignIn) {
         let url = new URL(

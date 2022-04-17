@@ -2,23 +2,37 @@ import Fallback from "@/components/atom/Fallback/Fallback";
 import Layout from "@/components/layout";
 import UserForm from "@/components/user/UserForm";
 import axios from "axios";
-import { getToken } from "next-auth/jwt";
-import { useSession } from "next-auth/react";
 import Head from "next/head";
+import Form from "@/components/Form"
+import {useState} from "react"
+import toast from "react-hot-toast";
 
-const AccountPage = ({ preview, userData }) => {
-  const { data: sessionInfo, status } = useSession();
-  if (status === "loading") {
+import { sessionOptions } from '@/lib/iron-session/session'
+import { withIronSessionSsr } from 'iron-session/next'
+import useUser from "@/lib/iron-session/useUser";
+import { updateUserSessionSSR } from "@/lib/iron-session/updateUserSession";
+
+const AccountPage = ({ preview, userData, isConfirmed }) => {
+
+  const {user} = useUser({
+    redirectTo: '/sign-in',
+    redirectIfFound: false,
+  })
+
+  const [sent, setSent] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  if (!user) {
     return <Fallback />;
   }
 
-  if (status === "authenticated") {
+  if (user?.isLoggedIn) {
     return (
       <Layout preview={preview}>
         <Head>
           <title>Account Settings</title>
         </Head>
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        {userData && isConfirmed? <div className="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="pt-6 pb-10 md:pt-10 px-3 xl:px-0">
             <div className="bg-white shadow-md rounded-lg py-6 px-4">
               <h1 className="font-semibold">Public Profile</h1>
@@ -35,53 +49,172 @@ const AccountPage = ({ preview, userData }) => {
                   paymentPointer: userData.paymentPointer,
 
                   // ask about these later
-                  email: sessionInfo.user.email,
-                  username: sessionInfo.user.name,
+                  email: user?.email,//this is always updated in the iron session when the user submits the form
+                  username: userData?.username?userData?.username:user.name,
                 }}
               />
             </div>
           </div>
         </div>
+        :
+        <div className="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="pt-6 pb-10 md:pt-10 px-3 xl:px-0">
+            <div className="bg-white shadow-md rounded-lg py-6 px-4">
+              <h1 className="font-semibold text-lg">Confirm your email</h1>
+                <p className="text-normal mt-3 mb-3 text-gray-800">
+                Hi {user.name}, 
+                please check your email ({user.email}) to confirm your account. If you didn't receive it, try again with the following form:
+                </p>
+                <Form 
+                  buttonText={'Resend email verification'} 
+                  disabled={sent?true:false}
+                  disabledMessage={<div className="text-center">
+                  A new login link has been sent to your email.
+                  </div>}
+                  label={'Enter your email address'}
+                  inputType={'email'}
+                  defaultValue={user.email}
+                  placeholder={'hola@prototypr.io'}
+                  isLoading={isLoading}
+                  onSubmit={(e)=>{
+                    e.preventDefault()
+                    setSent(false)
+                    setIsLoading(true)
+                    var data = JSON.stringify({
+                      "email":  e.target[0].value
+                    });
+                    var config = {
+                      method: 'post',
+                      url: `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/users-permissions/users/resendConfirmationEmail`,
+                      headers: { 
+                        'Authorization': user.jwt, 
+                        'Content-Type': 'application/json'
+                      },
+                      data : data
+                    };
+                    const loadingToastId = toast.loading('Sending verification email');
+
+                    axios(config)
+                    .then(function (response) {
+                      console.log(JSON.stringify(response.data));
+                      setSent(true)
+                      setTimeout(()=>{
+                        setSent(true)
+                        setIsLoading(false)
+                        showSuccessToast(loadingToastId)
+                      },800)
+                    })
+                    .catch(function (error) {
+                      console.log(error);
+                    });
+
+                  }}
+                  />
+              </div>
+            </div>
+        </div>}
+
       </Layout>
     );
   }
 
   // TODO
-  return <div>Unauthenticated whoops</div>;
+  return( <Layout preview={preview}>
+    <Head>
+      <title>Account Settings</title>
+    </Head>
+
+<div>Unauthenticated, whoops!</div>
+    </Layout>)
 };
 
-export async function getServerSideProps(context) {
-  try {
-    const token = await getToken({
-      req: context.req,
-      secret: process.env.NEXTAUTH_SECRET,
-    });
-    if (token) {
-      const res = await axios({
-        method: "GET", // change this GET later
-        url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
-        headers: {
-          Authorization: `Bearer ${token.jwt}`,
-        },
-      });
+export const getServerSideProps = withIronSessionSsr(async function ({
+  req,
+  res,
+}) {
+  //iron-session user
+  const user = req.session.user
 
-      return {
-        props: {
-          userData: res.data,
-        }, // will be passed to the page component as props
-      };
+   if (user === undefined) {
+    res.setHeader('location', '/sign-in')
+    res.statusCode = 302
+    res.end()
+    return {
+      props: {
+        user: { isLoggedIn: false, login: '', avatarUrl: '' },
+      },
     }
-    // TODO redirect back to home
-    return {
-      notFound: true,
-    };
-  } catch (error) {
-    console.log(error);
-    // TODO 500 server error
-    return {
-      notFound: true,
-    };
+  }else{
+    if(user?.login?.jwt){
+      try{
+        const res = await axios({
+            method: "GET", // change this GET later
+            url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
+            headers: {
+              Authorization: `Bearer ${user.login.jwt}`,
+            },
+          });
+          //update iron-session with this up to date data
+          await updateUserSessionSSR(req,res)
+
+          //then return it
+          return {
+            props: {
+              userData: res.data,
+              isConfirmed:res.data.confirmed
+            }, // will be passed to the page component as props
+          };
+      }catch(e){
+        console.log(e.message)
+        return {
+          props: {
+            user: { isLoggedIn: false, login: '', avatarUrl: '', isConfirmed:false },
+          },
+        }
+      }
+    }
   }
-}
+  return {
+    props: { userData:req.session.user.login.user },
+  }
+},
+sessionOptions)
 
 export default AccountPage;
+
+
+const showSuccessToast = (loadingToastId) =>{
+  toast.dismiss(loadingToastId)
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? 'animate-enter' : 'animate-leave'
+      } max-w-md bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <div className="relative border border-gray-200 rounded-lg shadow-lg">
+        <button
+        onClick={() => toast.dismiss(t.id)}
+        className="absolute p-1 bg-gray-100 border border-gray-300 rounded-full -top-1 -right-1">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+        </button>
+        <div className="flex items-center p-4">
+          <div className="flex flex-col justify-start h-10">
+
+            <svg viewBox="0 0 24 24" className="text-teal-600 w-5 h-5 mx-auto">
+            <path fill="currentColor" d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
+            </path>
+          </svg>
+          </div>
+          <div className="ml-3 overflow-hidden">
+            <p className="font-medium text-gray-900">Check your email.</p>
+            <p className="max-w-xs text-sm text-gray-500 truncate">
+             Click the link in your inbox to sign in.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ), {duration:10000})
+}

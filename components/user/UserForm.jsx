@@ -1,18 +1,23 @@
 import FormControl from "@/components/atom/FormControl/FormControl";
 import { accountLocations } from "@/lib/constants";
 import axios from "axios";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import useUser from '@/lib/iron-session/useUser'
 import Button from "../atom/Button/Button";
+import { useRouter } from 'next/router'
+import { updateUserSession } from "@/lib/iron-session/updateUserSession";
 
 const websiteRegex =
   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
 const UserForm = ({ info }) => {
-  const {
-    data: { jwt },
-  } = useSession();
+
+  const {user, mutateUser} = useUser({
+    redirectTo: '/sign-in',
+    redirectIfFound: false,
+  })
 
   const {
     register,
@@ -32,6 +37,8 @@ const UserForm = ({ info }) => {
       username: info.username,
     },
   });
+  
+  const router = useRouter()
 
   const watchBio = watch("bio");
   const onSubmit = async (data) => {
@@ -41,23 +48,36 @@ const UserForm = ({ info }) => {
       data.location = undefined;
     }
 
+  //update the session with the latest user input
+  //returns true or false if the form should refresh
+  const refresh = await updateUserSession(data, mutateUser)
+
+
     try {
       await axios({
         method: "POST",
         url:
           process.env.NEXT_PUBLIC_API_URL + "/api/users-permissions/users/me",
         headers: {
-          Authorization: `Bearer ${jwt}`,
+          Authorization: `Bearer ${user?.jwt}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
         data: qs.stringify(data),
       });
 
       toast.success("Successfully updated", {
-        duration: 10000,
+        duration: 5000,
       });
+      //if the user email has been changed, the account is unconfirmed.
+      //trigger a refresh so the verification form is showing
+      if(refresh){
+        setTimeout(()=>{
+          router.reload(window.location.pathname)
+        },100)
+      }
     } catch (error) {
       toast.error("Error has occured.");
+      console.log(error.message)
       error.response.data.error.details.errors.forEach((i) => {
         if (
           [
@@ -88,7 +108,7 @@ const UserForm = ({ info }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-2">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormControl inValid={!!errors.firstName}>
             <label htmlFor="firstName" className="text-sm">
               First name
@@ -265,7 +285,7 @@ const UserForm = ({ info }) => {
             autoComplete="off"
             className="w-full"
             placeholder="john@mail.com"
-            disabled={true}
+            disabled={false}
             aria-describedby="email_error"
             aria-live="assertive"
             {...register("email", {
