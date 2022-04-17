@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useSession } from "next-auth/react";
 import LoginForm from "@/components/sign-in/LoginForm";
 import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
@@ -8,7 +7,6 @@ import Button from "@/components/atom/Button/Button";
 import useUser from '@/lib/iron-session/useUser'
 
 export default function Index({ allPosts, preview }) {
-  const { status } = useSession();
 
   const {user} = useUser({
     // redirectTo: '/account',
