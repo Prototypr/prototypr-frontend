@@ -52,6 +52,7 @@ async function userRoute(req, res) {
   //get the nextauth session
   const nextAuthSession = await getSession({req})
   
+  console.log(nextAuthSession)
   //if the user is authenticated via nextauth session
   if(nextAuthSession && nextAuthSession.user){
     //check if the email is in the iron-session
@@ -72,6 +73,7 @@ async function userRoute(req, res) {
         }
       }
     }
+    console.log(nextAuthUser)
      req.session.user=nextAuthUser
     await req.session.save();
 
