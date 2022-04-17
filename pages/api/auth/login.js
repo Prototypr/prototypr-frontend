@@ -23,7 +23,6 @@ async function loginRoute(req, res) {
         const user = { isLoggedIn: true, login: response.data };
         req.session.user = user;
         await req.session.save();
-        res.setHeader("location", "/account");
         res.status(200).json(user);
       })
       .catch(function (error) {

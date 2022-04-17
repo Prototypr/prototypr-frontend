@@ -41,6 +41,9 @@ export default function Login({ loginToken }) {
               position: "top-center",
               duration: 5000,
             });
+            setTimeout(()=>{
+              Router.push('/account')
+            },200)
           })
         );
         setTokenInvalid(false);
