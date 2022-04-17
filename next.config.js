@@ -2,6 +2,7 @@ module.exports = {
   images: {
     domains: [
       "localhost",
+      "www.iconshock.com",
       "s3.amazonaws.com",
       "prototypr-media.sfo2.digitaloceanspaces.com",
       "prototypr.io",
