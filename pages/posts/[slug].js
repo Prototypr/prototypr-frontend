@@ -13,7 +13,7 @@ import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
 // import markdownToHtml from '@/lib/markdownToHtml'
 
-export default function Post({ post, morePosts, preview }) {
+export default function Post({ post, morePosts, preview, relatedPosts, combinedRelatedPosts }) {
   const router = useRouter()
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />
@@ -42,7 +42,8 @@ export default function Post({ post, morePosts, preview }) {
               <PostBody content={post.attributes.content} />
             </article>
             <SectionSeparator />
-            {morePosts.length > 0 && <MoreStories posts={morePosts} route={'posts'} />}
+            <h1 className="text-4xl font-semibold -mt-10 mb-12">{relatedPosts.length<2? `More Posts`:`Related Posts`}</h1>
+            {combinedRelatedPosts.length>0 && <MoreStories posts={combinedRelatedPosts} route={'posts'}/>}
           </>
         )}
       </Container>
@@ -54,6 +55,16 @@ export async function getStaticProps({ params, preview = null }) {
   const data = await getPostAndMorePosts(params.slug, preview)
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
 // console.log(data)
+
+ let combinedRelatedPosts = {};
+  let relatedPostData = data?.relatedPosts?.data;
+  let morePostsData =  data?.morePosts?.data;
+  combinedRelatedPosts.data = relatedPostData.concat(morePostsData);
+  //limit related posts to 6
+  if(combinedRelatedPosts.data?.length>6){
+    combinedRelatedPosts.data = combinedRelatedPosts.data.slice(0, 6);
+  }
+    
   return {
     props: {
       preview,
@@ -61,7 +72,9 @@ export async function getStaticProps({ params, preview = null }) {
         ...data?.posts.data[0],
         // content,
       },
-      morePosts: data?.morePosts.data,
+      combinedRelatedPosts:combinedRelatedPosts?.data,
+      relatedPosts:data?.relatedPosts?.data,
+      morePosts: data?.morePosts?.data,
     },
   }
 }
