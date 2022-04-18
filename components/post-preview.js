@@ -18,7 +18,7 @@ export default function PostPreview({
     <div className="flex group flex-col py-4 flex-grow h-full border border-gray-100 hover:shadow-lg transition-shadow duration-500 bg-white relative rounded-lg">
       <div className="relative rounded-lg px-4 pb-4 cursor-pointer">
         <>
-          <CoverImage slug={slug} title={title} url={coverImage} type={type} />
+          <CoverImage imageHeight="h-60" slug={slug} title={title} url={coverImage} type={type} />
           <div className="absolute rounded-full bg-white bottom-0 left-7">
             {coverImage && coverImage.logoNew && (
               <div

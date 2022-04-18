@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
 import MoreStories from '@/components/more-stories'
-import HeroPost from '@/components/hero-post'
-import Intro from '@/components/posts/intro'
+// import HeroPost from '@/components/hero-post'
+// import Intro from '@/components/posts/intro'
+import EditorPick2 from "@/components/new-index/EditorPick2";
 import NewPagination from '@/components/pagination'
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
@@ -34,16 +35,11 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
             {
                 pagination.page && pagination.page == 1 && (
                     <>
-                        <Intro />
+                        {/* <Intro /> */}
                         {heroPost && (
-                             <HeroPost
-                             title={heroPost.attributes.title}
-                             coverImage={coverImage}
-                             date={heroPost.attributes.date}
-                             author={(heroPost.attributes.author &&heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
-                             slug={heroPost.attributes.slug}
-                             excerpt={heroPost.attributes.excerpt}
-                           />
+                           <div className="pt-12">
+                           <EditorPick2 header="Editor's Picks" post={heroPost} />
+                          </div>
                         )}
                     </>
                 )
@@ -52,7 +48,10 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
                 pagination.page && pagination.page == 1 ? (
                     morePosts.length > 0 && <MoreStories posts={morePosts} />
                 ): (
-                    allPosts.length > 0 && <MoreStories posts={allPosts} />
+                    allPosts.length > 0 && 
+                    <div className="pt-8">
+                      <MoreStories posts={allPosts} />
+                    </div>
                 )
             }
 

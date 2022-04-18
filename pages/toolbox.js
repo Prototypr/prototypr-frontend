@@ -1,66 +1,87 @@
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import Layout from '@/components/layout'
 import Container from '@/components/container'
 import MoreStories from '@/components/more-stories'
-import HeroPost from '@/components/hero-post'
-import Intro from '@/components/tools/intro'
-import Layout from '@/components/layout'
 import NewPagination from '@/components/pagination'
-import { getAllPostsForToolsPage } from '@/lib/api'
-import Head from 'next/head'
-import { CMS_NAME } from '@/lib/constants'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from "react";
+import FilterCategory from '@/components/FilterCategory'
+import Breadcrumbs from '@/components/Breadcrumbs'
+
+// import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
+import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
+
+import ALL_SLUGS_GROUPS from '@/lib/menus/allTools'
+import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
+
 const PAGE_SIZE = 12;
 
-export default function Index({ allPosts, preview }) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+const BREADCRUMBS = {
+    pageTitle:'Toolbox',
+    links:[
+        {name:'Home', slug:'/'},
+        {name:'Toolbox', slug:'/toolbox/page/1'}
+    ]
+}
 
-  const coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
-  const [currentPage, setCurrentPage] = useState(0)
-  const router = useRouter();
+export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
+    //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
+    const router = useRouter()
 
-  const onPageNumChange = (pageNo) => {
-    router.push({
-      pathname: `/toolbox/page/${pageNo}`,
-      // query: {
-      //   totalCount
-      // }
-    })
-  }
-  return (
-    <>
-      <Layout activeNav={'toolbox'} preview={preview}>
-        <Head>
-          <title>Prototypr Toolbox - new design, UX and coding tools.</title>
-        </Head>
-        <Container>
-          <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.attributes.title}
-              coverImage={coverImage}
-              date={heroPost.attributes.date}
-              author={(heroPost.attributes.author &&heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
-              slug={heroPost.attributes.slug}
-              excerpt={heroPost.attributes.excerpt}
-              type="toolbox"
+    const onPageNumChange = (pageNo) => {
+        router.push({
+            pathname:`/toolbox/page/${pageNo}`
+        })
+      }
+
+    return (
+        <Layout activeNav={'toolbox'} preview={preview}>
+            <Container>
+            {
+                allPosts.length > 0 && 
+                    (<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
+                    <div className="grid-cols-1 hidden lg:block">
+                    <div className="w-full min-h-screen  flex flex-col">
+                   
+                    <Breadcrumbs 
+                    urlRoot={'/toolbox'}
+                    title={BREADCRUMBS.pageTitle}
+                    links={BREADCRUMBS.links}
+                    currentSlug={slug}
+                    />
+                    <FilterCategory 
+                        urlRoot={'/toolbox'}
+                        items={ALL_SLUGS_GROUPS} 
+                        key={'uxtools_item_'} 
+                        slug={slug}/>
+              </div>
+                       
+                    </div>
+                    <div className="col-span-3">
+                        <MoreStories posts={allPosts} type="toolbox" />
+                    </div>
+                </div>)
+            }
+            
+            <NewPagination 
+                total={pagination?.total}
+                pageSize={PAGE_SIZE}
+                currentPage={pagination?.page}
+                onPageNumChange={(pageNum) => {onPageNumChange(pageNum)}}
             />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} type="toolbox" />}
-          <NewPagination 
-            pageSize={PAGE_SIZE}
-            currentPage={currentPage}
-            onPageNumChange={(pageNum) => {onPageNumChange(pageNum)}}
-          />
-        </Container>
-      </Layout>
-    </>
-  )
+            </Container>
+        </Layout>
+    )
 }
 
-export async function getStaticProps({ preview = null, size = PAGE_SIZE, offset = 0 }) {
-  const allPosts = (await getAllPostsForToolsPage(preview, size, offset)) || []
-  return {
-    props: { allPosts:allPosts.data, preview },
+export async function getStaticProps({ preview = null, params}) {
+    const pageSize = PAGE_SIZE
+
+    const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize )) || []
+    // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
+    const pagination = allPosts.meta.pagination
+    return {
+        props: {
+            allPosts: allPosts.data, preview, pagination
+        },
+    }
   }
-}
