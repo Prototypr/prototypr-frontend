@@ -43,6 +43,7 @@ export default function TopicItem({ topic = {} }) {
           <Author
             avatar={author?.data?.attributes?.avatar}
             authorName={author?.data?.attributes?.name}
+            author={author}
           />
         </div>
       </div>
