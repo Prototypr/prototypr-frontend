@@ -3,6 +3,7 @@ import ErrorPage from 'next/error'
 import Container from '@/components/container'
 import PostBody from '@/components/post-body'
 import MoreStories from '@/components/more-stories'
+import TopicTopItem from '@/components/new-index/TopicTopItem'
 // import Header from '@/components/posts/header'
 import PostHeader from '@/components/post-header'
 import SectionSeparator from '@/components/section-separator'
@@ -43,7 +44,12 @@ export default function Post({ post, morePosts, preview, relatedPosts, combinedR
             </article>
             <SectionSeparator />
             <h1 className="text-4xl font-semibold -mt-10 mb-12">{relatedPosts.length<2? `More Posts`:`Related Posts`}</h1>
-            {combinedRelatedPosts.length>0 && <MoreStories posts={combinedRelatedPosts} route={'posts'}/>}
+
+            <div className="mt-10 mb-20 grid lg:grid-cols-2 grid-cols-1 gap-10">
+            {combinedRelatedPosts.length>0 && combinedRelatedPosts.map((item, index) => (
+                <TopicTopItem key={index} topic={item?.attributes}/>
+            ))}
+            </div>
           </>
         )}
       </Container>
