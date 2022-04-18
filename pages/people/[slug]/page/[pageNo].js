@@ -6,6 +6,7 @@ import PostListItem from "@/components/people/PostListItem";
 import KoFiButton from "@/components/people/KoFiButton";
 import NewPagination from "@/components/pagination";
 import PostTitle from '@/components/post-title'
+import Image from "next/image";
 
 import { getPostsByPageAndAuthor } from '@/lib/api'
 import {gradient,getTwitterHandle, getKofiName, getDribbbleHandle, getGithubHandle} from "@/lib/profile-page/profile-page.js"
@@ -46,21 +47,28 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
           </section>
         </>
         <Container>
-        <div className="mt-0 flex flex-col md:flex-row px-4 md:px-20">
+        <div className="mt-0 flex flex-col md:flex-row px-4 md:px-6">
           <div className="w-full md:w-1/4 lg:block">
             <div className="relative">
-              <img
-                alt="..."
-                src={
-                  author?.avatar
-                }
-                className="bg-white shadow-sm rounded-full object-cover h-auto align-middle border-4 border-white absolute"
-                style={{ width: "122px", height: "122px", marginTop: "-62px" }}
-              />
+              <div style={{marginTop:'-86px'}} className="w-44 h-44 mr-2 rounded-full border border-1 overflow-hidden relative border-gray-100 shadow-sm">
+                {/* <div className="bg-white shadow-sm rounded-full object-cover h-auto align-middle border-4 border-white absolute"
+                style={{ width: "122px", height: "122px", marginTop: "-62px" }}> */}
+
+                {author?.avatar && (
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={author?.avatar}
+                    className="rounded-full "
+                    alt="Author profile picture"
+                  />
+                )}
+                {/* </div> */}
+              </div>
             </div>
             <div className="">
               <div className="mb-3">
-                <h1 className="text-2xl pt-16 font-semibold leading-normal text-gray-800 mb-3">
+                <h1 className="text-2xl pt-6 font-semibold leading-normal text-gray-800 mb-3">
                   {author?.name}
                 </h1>
                 {author && author.location && (
