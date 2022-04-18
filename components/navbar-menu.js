@@ -363,7 +363,7 @@ const ViewportPosition = styled('div', {
   perspective: '2000px',
 });
 
-export const NavigationMenuDemo = ({activeNav, user}) => {
+export const NavigationMenuDemo = ({activeNav, user, userLoading}) => {
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -433,9 +433,9 @@ export const NavigationMenuDemo = ({activeNav, user}) => {
         {user.avatar?<img className="hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer" src={user.avatar}/>:
         <Gravatar className="hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer" email={user.email}/>}
       </Link>
-
+      :userLoading?
+      <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
       :
-
       <NavigationMenuButton href="/">Subscribe</NavigationMenuButton>}
         </NavigationMenuItem>
 
