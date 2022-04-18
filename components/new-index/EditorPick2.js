@@ -86,9 +86,7 @@ export default function EditorPick({ post = {}, header = false }) {
               </div>
               <footer className="flex items-center mt-4">
                 <div className="cursor-pointer transform transition duration-500 hover:scale-125  rounded-full relative">
-                  <Link
-                    href={`/people/${author?.data?.attributes?.slug}/page/1`}
-                  >
+                  <Link href={`/people/${author?.data?.attributes?.slug}`}>
                     <div className="mr-4 relative flex-shrink-0 hover:cursor-pointer">
                       <Image
                         className="rounded-full"
@@ -102,9 +100,7 @@ export default function EditorPick({ post = {}, header = false }) {
                   </Link>
                 </div>
                 <div>
-                  <Link
-                    href={`/people/${author?.data?.attributes?.slug}/page/1`}
-                  >
+                  <Link href={`/people/${author?.data?.attributes?.slug}`}>
                     <a className="font-medium text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
                       {author?.data?.attributes?.name}
                     </a>

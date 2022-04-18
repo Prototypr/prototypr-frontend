@@ -4,27 +4,7 @@ import dynamic from "next/dynamic";
 const FeedItem = dynamic(() => import("./FeedItem"), { ssr: false });
 
 export default function Feeds({ posts = [] }) {
-  /**Math.random 200~400 */
-  const getItems = () =>
-    Array(20)
-      .fill(0)
-      .map((_, ind) => ({ id: `feed-${ind}` }));
-
-  const [list, setList] = useState(getItems);
-
-  const [list1, setList1] = useState([]);
-  const [list2, setList2] = useState([]);
-  const [list3, setList3] = useState([]);
-
-  useEffect(() => {
-    const newList = list.forEach((item, index) => {
-      item.height = Math.floor(Math.random() * 200) + 200;
-    });
-    setList1(list.filter((item, index) => !(index % 3)));
-    setList2(list.filter((item, index) => index % 3 === 1));
-    setList3(list.filter((item, index) => index % 3 === 2));
-    // setList(newList)
-  }, []);
+  console.log(posts);
 
   return (
     <section className="mt-16 md:mt-36 pt-3 pb-10 px-3 xl:px-0">
@@ -37,8 +17,10 @@ export default function Feeds({ posts = [] }) {
           ? posts.map((item, index) => {
               return (
                 <FeedItem
+                  textColor={"text-gray-500"}
                   post={item?.attributes}
                   index={index}
+                  author={item?.attributes?.author?.data?.attributes}
                   key={`col1_${index}`}
                 />
               );

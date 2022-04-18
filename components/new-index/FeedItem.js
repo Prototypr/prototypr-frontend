@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Author from "@/components/new-index/Author";
 export default function FeedItem({ height = 20, post = {}, index = 0 }) {
   const {
     title = "",
@@ -32,7 +33,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
 
       <div className="mt-3 flex">
         <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
-          # {tagArr && tagArr.length ? tagArr[0].attributes.slug : "design"}{" "}
+          # {tagArr && tagArr.length ? tagArr[0].attributes.name : "design"}{" "}
         </div>
         {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">#START up</div> */}
       </div>
@@ -41,6 +42,9 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
           <a className="group-hover:underline">{title}</a>
         </Link>
       </h4>
+      <div className="mt-3">
+        <Author textColor={"text-gray-500"} author={author} />
+      </div>
     </div>
   );
 }
