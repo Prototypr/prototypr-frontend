@@ -71,6 +71,9 @@ export async function getStaticProps({ params, preview = null }) {
     combinedRelatedPosts.data = combinedRelatedPosts.data.slice(0, 6);
   }
     
+    // for(var x = 0;x<combinedRelatedPosts.data.length;x++){
+    //     console.log(combinedRelatedPosts.data[x])
+    // }
   return {
     props: {
       preview,
