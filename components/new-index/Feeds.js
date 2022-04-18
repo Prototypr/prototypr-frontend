@@ -4,8 +4,6 @@ import dynamic from "next/dynamic";
 const FeedItem = dynamic(() => import("./FeedItem"), { ssr: false });
 
 export default function Feeds({ posts = [] }) {
-  console.log(posts);
-
   return (
     <section className="mt-16 md:mt-36 pt-3 pb-10 px-3 xl:px-0">
       <h4 className="text-3xl text-gray-900 font-bold  text-title-1 mb-10">
