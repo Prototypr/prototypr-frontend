@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Tabs from "./Tabs";
 import TopicList from "./TopicLIst";
-
+import { useIntl } from 'react-intl';
 export default function TopicSpolights({ tabs = [], topics = {} }) {
+  const intl = useIntl();
+
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const [currentTopic, setCurrentTopic] = useState([]);
 
@@ -24,7 +26,7 @@ export default function TopicSpolights({ tabs = [], topics = {} }) {
   return (
     <section className="mt-16 md:mt-36 pt-3 pb-10 px-3 xl:px-0">
       <h4 className="text-3xl font-bold text-gray-900 text-title-1">
-        Topic Spotlights
+        {intl.formatMessage({ id: "topicSpotlight.title"})}
       </h4>
       {/**tabs */}
       <Tabs items={tabs} onTabChanged={(item) => onTabChanged(item)} />

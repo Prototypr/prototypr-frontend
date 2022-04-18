@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-
+import { useIntl, FormattedMessage } from 'react-intl';
 export default function Tabs({ items = [], onTabChanged = () => {} }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
-
+  const intl = useIntl();
   return (
     <div className="flex border-b-gray-5 w-full mt-10 tab relative">
       {/**tab item */}
@@ -22,7 +22,7 @@ export default function Tabs({ items = [], onTabChanged = () => {} }) {
                   onTabChanged(item.slug);
                 }}
               >
-                {item.name}
+                {intl.formatMessage({ id: item.name})}
               </div>
             );
           })

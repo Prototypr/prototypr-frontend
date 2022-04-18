@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-
+import { useIntl, FormattedMessage } from 'react-intl';
 export default function SourcePanel({}) {
+  const intl = useIntl();
+
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
-  const [buttonText, setButtonText] = useState("Subscribe");
+  const [buttonText, setButtonText] = useState(intl.formatMessage({ id: "navbar.menu.title4"}));
 
   const onSubmit = async (data) => {
-    setButtonText("Submitting");
+    setButtonText(intl.formatMessage({ id: "signup.button.submitting"}));
 
     axios
       .post(
@@ -57,35 +59,31 @@ export default function SourcePanel({}) {
             {registered == false ? (
               <>
                 <h3 className="font-semibold text-5xl md:text-s6xl text-gray-1">
-                  The Source
+                  {intl.formatMessage({ id: "navbar.contentitem.title"})}
                 </h3>
                 <p className="font-base text-lg leading-normal">
-                  The Source tackles taboo topics, exposes unseen truths, and
-                  gets the scoop on the latest in the tech and design sphere.
+                  {intl.formatMessage({ id: "sourcepanel.desc"})}
                 </p>
                 <HookForm onSubmit={onSubmit} buttonText={buttonText} />
               </>
             ) : error ? (
               <>
                 <h3 className="font-semibold text-3xl my-3 md:text-s6xl text-gray-1">
-                  Please try again! &nbsp;{" "}
+                {intl.formatMessage({ id: "signup.tip.again"})} &nbsp;{" "}
                   <div className="inline -mt-1">🤖</div>
                 </h3>
                 <p className="font-base text-lg leading-normal">
-                  Something went wrong. Please refresh the page and try again.
-                  Contact hello@prototypr.io for help.
+                {intl.formatMessage({ id: "signup.res.error"})}
                 </p>
               </>
             ) : (
               <>
                 <h3 className="font-semibold text-3xl my-3 md:text-s6xl text-gray-1">
-                  Check your inbox! &nbsp;{" "}
+                  {intl.formatMessage({ id: "signup.input.check"})} &nbsp;{" "}
                   <div className="inline -mt-1">🎉</div>
                 </h3>
                 <p className="font-base text-lg leading-normal">
-                  Click the activation link in the email we just sent you, and
-                  add hello@prototypr.io to your address list so you don't miss
-                  the newsletter.
+                  {intl.formatMessage({ id: "signup.input.click"})}
                 </p>
               </>
             )}
@@ -104,7 +102,7 @@ function HookForm(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => props.onSubmit(data);
-
+  const intl = useIntl();
   return (
     <div>
       <form
@@ -112,12 +110,12 @@ function HookForm(props) {
         onSubmit={handleSubmit(onSubmit)}
       >
         <label htmlFor="Email" className="sr-only	">
-          Enter email address
+          {intl.formatMessage({ id: "sourcepanel.form.label"})}
         </label>
         <input
           id="Email"
           name="email"
-          placeholder="Your Email"
+          placeholder={intl.formatMessage({ id: "sourcepanel.form.placeholder"})}
           {...register("emailRequired", {
             required: true,
             pattern: /^\S+@\S+$/i,
@@ -141,12 +139,16 @@ function HookForm(props) {
       <div className="px-1">
         {errors.emailRequired && errors.emailRequired.type === "required" && (
           <p className="text-pink-600 mt-2 text-sm text-left">
-            Email address required.
+            <FormattedMessage 
+              id="signup.input.validation"
+            />
           </p>
         )}
         {errors.emailRequired && errors.emailRequired.type === "pattern" && (
           <p className="text-pink-600 mt-2 text-sm text-left">
-            Please check and try again.
+            <FormattedMessage 
+              id="sourcepanel.form.errortip"
+            />
           </p>
         )}
       </div>

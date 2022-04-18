@@ -6,6 +6,8 @@ import { indigo, mauve, purple, blackA, red, pink, gray } from '@radix-ui/colors
 import Link from 'next/link';
 import Gravatar from 'react-gravatar';
 
+import LocaleSwitcher from './Locale/LocaleSwitcher';
+import { FormattedMessage, useIntl } from 'react-intl';
 const enterFromRight = keyframes({
   from: { transform: 'translateX(200px)', opacity: 0 },
   to: { transform: 'translateX(0)', opacity: 1 },
@@ -336,7 +338,9 @@ const ContentListItemCallout = React.forwardRef(({ children, ...props }, forward
           marginBottom: 7,
         }}
       >
-        The Source
+        <FormattedMessage 
+          id="navbar.contentitem.title"
+        />
       </LinkTitle>
       <LinkText
         css={{
@@ -345,7 +349,9 @@ const ContentListItemCallout = React.forwardRef(({ children, ...props }, forward
           lineHeight: 1.3,
         }}
       >
-        A spicy newsletter tackling taboo topics and exposing unseen truths in the tech and design sphere.
+        <FormattedMessage 
+          id="navbar.contentitem.desc"
+        />
       </LinkText>
     </NavigationMenuLink>
   </ListItem>
@@ -364,67 +370,68 @@ const ViewportPosition = styled('div', {
 });
 
 export const NavigationMenuDemo = ({activeNav, user, userLoading}) => {
+  const intl = useIntl();
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger active={activeNav === 'posts'}>Stories</NavigationMenuTrigger>
+          <NavigationMenuTrigger active={activeNav === 'posts'}>{intl.formatMessage({ id: "navbar.menu.title1" })}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ContentList layout="three">
               <ContentListItemCallout />
-              <ContentListItem href="/topics" title="All Topics">
-                Browse all topics and catagories.
+              <ContentListItem href="/topics" title={intl.formatMessage({ id: "navbar.submenu1.title1" })}>
+                {intl.formatMessage({ id: "navbar.submenu1.desc1"})}
               </ContentListItem>
-              <ContentListItem href="/posts/ux/page/1" title="UX Design">
-                User research, personas, and more.
+              <ContentListItem href="/posts/ux/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title2" })}>
+                {intl.formatMessage({ id: "navbar.submenu1.desc2"})}
               </ContentListItem>
-              <ContentListItem href="/posts/interview/page/1" title="Interviews">
-                Advice and lessons from creatives.
+              <ContentListItem href="/posts/interview/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title3" })}>
+                {intl.formatMessage({ id: "navbar.submenu1.desc3"})}
               </ContentListItem>
-              <ContentListItem href="/posts/accessibility/page/1" title="Accessibility">
-                Everthing accessibility and inclusion.
+              <ContentListItem href="/posts/accessibility/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title4" })}>
+                {intl.formatMessage({ id: "navbar.submenu1.desc4"})}
               </ContentListItem>
-              <ContentListItem href="/posts/ui/page/1" title="UI Design">
-                Learn about layout, colour, typography...
+              <ContentListItem href="/posts/ui/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title5" })}>
+                {intl.formatMessage({ id: "navbar.submenu1.desc5"})}
               </ContentListItem>
-              <ContentListItem href="/posts/interview/page/1" title="Code">
-                CSS, React, and everything code.
+              <ContentListItem href="/posts/interview/page/1" title={intl.formatMessage({ id: "navbar.submenu1.title6" })}>
+                {intl.formatMessage({ id: "navbar.submenu1.desc6"})}
               </ContentListItem>
             </ContentList>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger active={activeNav === 'toolbox'}>Toolbox</NavigationMenuTrigger>
+          <NavigationMenuTrigger active={activeNav === 'toolbox'}>{intl.formatMessage({ id: "navbar.menu.title2" })}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ContentList layout="two">
-              <ContentListItem title="All Tools" href="/toolbox/page/1">
-                Browse all the latest tools in the Prototypr toolbox.
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title1" })} href="/toolbox/page/1">
+                {intl.formatMessage({ id: "navbar.submenu2.desc1" })}
               </ContentListItem>
               <ContentListItem
-                title="UX Tools"
+                title={intl.formatMessage({ id: "navbar.submenu2.title2" })}
                 href="/toolbox/ux-tools/page/1"
               >
-                Tools for User Research, Collaboration, Whiteboarding, etc.
+                {intl.formatMessage({ id: "navbar.submenu2.desc2" })}
               </ContentListItem>
-              <ContentListItem title="Virtual Reality" href="/toolbox/augmented-reality-tools/page/1">
-               Everything you need for 3D, AR, VR, and beyond.
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title3" })} href="/toolbox/augmented-reality-tools/page/1">
+                {intl.formatMessage({ id: "navbar.submenu2.desc3" })}
               </ContentListItem>
-              <ContentListItem title="Prototyping Tools" href="/prototyping/page/1">
-                Figma to Adobe, and everything in between.
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title4" })} href="/prototyping/page/1">
+                {intl.formatMessage({ id: "navbar.submenu2.desc4" })}
               </ContentListItem>
-              <ContentListItem title="Accessibility" href="/toolbox/accessibility/page/1">
-                Tools for building accessible User Interfaces.
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title5" })} href="/toolbox/accessibility/page/1">
+                {intl.formatMessage({ id: "navbar.submenu2.desc5" })}
               </ContentListItem>
-              <ContentListItem title="Conversational Design" href="/toolbox/conversational-design-tools/page/1">
-                Tools for creating Voice User Interfaces, like chatbots.
+              <ContentListItem title={intl.formatMessage({ id: "navbar.submenu2.title6" })} href="/toolbox/conversational-design-tools/page/1">
+                {intl.formatMessage({ id: "navbar.submenu2.desc6" })}
               </ContentListItem>
             </ContentList>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem className="hidden md:block">
-          <NavigationMenuLink href="/">Write for us</NavigationMenuLink>
+          <NavigationMenuLink href="/">{intl.formatMessage({ id: "navbar.menu.title3" })}</NavigationMenuLink>
         </NavigationMenuItem>
 
       <NavigationMenuItem>
@@ -437,8 +444,11 @@ export const NavigationMenuDemo = ({activeNav, user, userLoading}) => {
       <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
       :
       <NavigationMenuButton href="/">Subscribe</NavigationMenuButton>}
+      </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuButton href="/">{intl.formatMessage({ id: "navbar.menu.title4" })}</NavigationMenuButton>
         </NavigationMenuItem>
-
+        <LocaleSwitcher />
         <NavigationMenuIndicator />
       </NavigationMenuList>
 
