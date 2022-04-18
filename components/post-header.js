@@ -7,22 +7,8 @@ export default function PostHeader({ title, coverImage, date, author, type }) {
   return (
     <div className="max-w-2xl mx-auto pt-12">
       <PostTitle>{title}</PostTitle>
-      <div className="hidden md:block md:mb-12">
-        <Avatar
-          name={
-            author.name
-              ? author.name
-              : author.displayName
-              ? author.displayName
-              : author.firstName
-              ? author.firstName
-              : ""
-          }
-          picture={author?.avatar}
-        />
-      </div>
-      <div className="max-w-2xl mx-auto">
-        <div className="block md:hidden mb-6">
+      {author && (
+        <div className="hidden md:block md:mb-12">
           <Avatar
             name={
               author.name
@@ -36,6 +22,24 @@ export default function PostHeader({ title, coverImage, date, author, type }) {
             picture={author?.avatar}
           />
         </div>
+      )}
+      <div className="max-w-2xl mx-auto">
+        {author && (
+          <div className="block md:hidden mb-6">
+            <Avatar
+              name={
+                author.name
+                  ? author.name
+                  : author.displayName
+                  ? author.displayName
+                  : author.firstName
+                  ? author.firstName
+                  : ""
+              }
+              picture={author?.avatar}
+            />
+          </div>
+        )}
         <div className="mb-6 text-lg">
           <Date dateString={date} />
         </div>
