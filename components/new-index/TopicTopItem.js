@@ -38,9 +38,11 @@ export default function TopicTopItem({ topic = {} }) {
           {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">#data</div> */}
         </div>
         <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
-          <Link href={`/posts/${slug}`}>
-            <a className="group-hover:underline">{title}</a>
-          </Link>
+          {slug && (
+            <Link href={`/posts/${slug}`}>
+              <a className="group-hover:underline">{title}</a>
+            </Link>
+          )}
         </h4>
         <div
           className="mt-3 text-gray-3 font-normal text-base leading-normal overflow-hidden text-ellipsis clamp-2"
