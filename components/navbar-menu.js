@@ -3,6 +3,8 @@ import { styled, keyframes } from '@stitches/react';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { indigo, mauve, purple, blackA, red, pink, gray } from '@radix-ui/colors';
+import Link from 'next/link';
+import Gravatar from 'react-gravatar';
 
 const enterFromRight = keyframes({
   from: { transform: 'translateX(200px)', opacity: 0 },
@@ -361,7 +363,7 @@ const ViewportPosition = styled('div', {
   perspective: '2000px',
 });
 
-export const NavigationMenuDemo = ({activeNav}) => {
+export const NavigationMenuDemo = ({activeNav, user}) => {
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -425,8 +427,16 @@ export const NavigationMenuDemo = ({activeNav}) => {
           <NavigationMenuLink href="/">Write for us</NavigationMenuLink>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
-          <NavigationMenuButton href="/">Subscribe</NavigationMenuButton>
+      <NavigationMenuItem>
+      {user && user.isLoggedIn?
+      <Link href="/account">
+        {user.avatar?<img className="hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer" src={user.avatar}/>:
+        <Gravatar className="hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer" email={user.email}/>}
+      </Link>
+
+      :
+
+      <NavigationMenuButton href="/">Subscribe</NavigationMenuButton>}
         </NavigationMenuItem>
 
         <NavigationMenuIndicator />

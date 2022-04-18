@@ -3,12 +3,17 @@ import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import NavigationMenuDemo from "./navbar-menu";
 import { useState, useEffect } from "react";
+import useUser from '@/lib/iron-session/useUser'
 
-export default function Navbar({ posts, type, activeNav }) {
+export default function Navbar({ activeNav }) {
   const [clientWindowHeight, setClientWindowHeight] = useState("");
 
   const [backgroundTransparacy, setBackgroundTransparacy] = useState(0.5);
-  const [borderTransparacy, setBorderTransparency] = useState(0.5);
+  
+  const {user} = useUser({
+    // redirectTo: '/account',
+    redirectIfFound: false,
+  })
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -79,7 +84,7 @@ export default function Navbar({ posts, type, activeNav }) {
               </div>
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
-                  <NavigationMenuDemo activeNav={activeNav} />
+                  <NavigationMenuDemo user={user} activeNav={activeNav} />
                 </div>
               </div>
             </div>
@@ -88,7 +93,7 @@ export default function Navbar({ posts, type, activeNav }) {
           {/* <!-- Mobile menu, show/hide based on menu state. --> */}
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <NavigationMenuDemo activeNav={activeNav} />
+              <NavigationMenuDemo user={user} activeNav={activeNav} />
             </div>
           </Disclosure.Panel>
         </>

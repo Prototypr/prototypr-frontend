@@ -6,7 +6,7 @@ import LoginSide from "@/components/sign-in/LoginSide";
 import Button from "@/components/atom/Button/Button";
 import useUser from '@/lib/iron-session/useUser'
 
-export default function Index({ allPosts, preview }) {
+export default function Index() {
 
   const {user} = useUser({
     // redirectTo: '/account',
