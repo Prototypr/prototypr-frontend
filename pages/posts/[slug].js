@@ -38,7 +38,7 @@ export default function Post({ post, morePosts, preview, relatedPosts, combinedR
                 title={post.attributes.title}
                 coverImage={post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:''}
                 date={post.attributes.date}
-                author={post.attributes.author?post.attributes.author.data.attributes:null}
+                author={post.attributes?.author?.data?.attributes}
                 />
               <PostBody content={post.attributes.content} />
             </article>
