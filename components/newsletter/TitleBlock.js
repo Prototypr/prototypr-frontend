@@ -1,0 +1,9 @@
+export default function TitleBlock() {
+    return (
+        <aside className="lg:py-24 bg-gray-100 p-16 mb-8">
+            <div className="max-w-xl mx-auto text-center">
+                <h2 className="font-bold text-6xl tracking-wide text-title-1">Get the newsletter</h2>
+            </div>
+        </aside>
+    )
+}
