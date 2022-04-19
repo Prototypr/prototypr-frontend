@@ -108,8 +108,10 @@ export default function Index({ allPosts, preview }) {
                   <div>
                     <h3 className="text-2xl text-white">
                       <Link href={`/posts/${topic.slug}/page/1`}>
+                        <>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {intl.formatMessage({ id: topic.name})}
+                        </>
                       </Link>
                     </h3>
                   </div>
