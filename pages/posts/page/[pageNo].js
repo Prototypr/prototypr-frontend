@@ -14,7 +14,9 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
     if (allPosts.length && pagination.page && pagination.page == 1) {
         heroPost = allPosts[0]
         morePosts = allPosts.slice(1)
-        coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
+        coverImage = 
+        heroPost.attributes.featuredImage?.data?.attributes?.url? heroPost.attributes.featuredImage?.data?.attributes?.url:
+        heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
     }
     const router = useRouter()
 

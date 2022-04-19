@@ -127,7 +127,7 @@ export default function DesignTool({ allTools = [] }) {
                       className="h-full mx-5 group hover:shadow-md transition duration-500 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer"
                     >
                       <div className="w-full rounded-lg h-46 relative bg-no-repeat bg-100">
-                        {showItem.legacyFeaturedImage.imgUrl && (
+                        {showItem.legacyFeaturedImage.imgUrl ? (
                           <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
                             <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
                               <Link href={`/toolbox/${showItem.slug}`}>
@@ -140,7 +140,21 @@ export default function DesignTool({ allTools = [] }) {
                               </Link>
                             </div>
                           </figure>
-                        )}
+                        ):showItem.featuredImage?.data?.attributes?.url && (
+                          <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+                            <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+                              <Link href={`/toolbox/${showItem.slug}`}>
+                                <Image
+                                  className="rounded-lg contrast-115"
+                                  objectFit="cover"
+                                  layout="fill"
+                                  src={showItem.featuredImage?.data?.attributes?.url}
+                                />
+                              </Link>
+                            </div>
+                          </figure>
+                        )
+                        }
                         <div
                           className="absolute border-2 border-solid border-white bg-white w-10 h-10 rounded-full -bottom-3 bg-100 bg-no-repeat bg-center"
                           style={{

@@ -12,6 +12,7 @@ export default function EditorPick({ post = {}, header = false }) {
     date,
     tags,
     legacyFeaturedImage = null,
+    featuredImage = null,
     author = null,
   } = postItem;
   const tagArr = tags.data;
@@ -37,7 +38,7 @@ export default function EditorPick({ post = {}, header = false }) {
                   <Image
                     layout="fill"
                     objectFit="cover"
-                    src={legacyFeaturedImage?.mediaItemUrl}
+                    src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl && legacyFeaturedImage.mediaItemUrl}
                     alt="Blog post"
                   />
                 </div>
