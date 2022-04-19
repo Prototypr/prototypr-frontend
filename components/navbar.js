@@ -5,17 +5,39 @@ import NavigationMenuDemo from "./navbar-menu";
 import { useState, useEffect } from "react";
 import useUser from '@/lib/iron-session/useUser'
 import useSWR from 'swr'
+import jsCookie from 'js-cookie';
 
 export default function Navbar({ activeNav }) {
   const [clientWindowHeight, setClientWindowHeight] = useState("");
 
   const [backgroundTransparacy, setBackgroundTransparacy] = useState(0.5);
+
   
   // const { data: user, mutate: mutateUser } = useSWR('/api/auth/user')
   const {user, isLoading} = useUser({
     // redirectTo: '/account',
     redirectIfFound: false,
   })
+
+    /**
+   * use the logged in true/false cookie
+   * so there is minimal flicker between subscribe and log in button
+   */
+    const [userLoggedInCookie, setUserLoggedInCookie] = useState(()=>{
+    let loggedInCookie = jsCookie.get('prototypr-loggedIn')
+    if(loggedInCookie){
+      return true
+    }else{
+      return false
+    }
+  })
+
+  useEffect(()=>{
+    if(user?.email){
+      jsCookie.set('prototypr-loggedIn', true);
+    }
+
+  },[user?.email])
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -86,7 +108,7 @@ export default function Navbar({ activeNav }) {
               </div>
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
-                  <NavigationMenuDemo user={user} userLoading={isLoading} activeNav={activeNav} />
+                  <NavigationMenuDemo user={user} userLoading={isLoading} userLoggedInCookie={userLoggedInCookie} activeNav={activeNav} />
                 </div>
               </div>
             </div>
@@ -95,7 +117,7 @@ export default function Navbar({ activeNav }) {
           {/* <!-- Mobile menu, show/hide based on menu state. --> */}
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <NavigationMenuDemo user={user} userLoading={isLoading} activeNav={activeNav} />
+              <NavigationMenuDemo user={user} userLoggedInCookie={userLoggedInCookie} userLoading={isLoading} activeNav={activeNav} />
             </div>
           </Disclosure.Panel>
         </>

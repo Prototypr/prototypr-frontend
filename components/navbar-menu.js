@@ -448,7 +448,7 @@ const ViewportPosition = styled("div", {
   perspective: "2000px",
 });
 
-export const NavigationMenuDemo = ({ activeNav, user, userLoading }) => {
+export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInCookie }) => {
   const intl = useIntl();
   return (
     <NavigationMenu>
@@ -553,7 +553,7 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading }) => {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          {user && user.isLoggedIn ? (
+          {(user && user.isLoggedIn) ? (
             <Link href="/account">
               {user.avatar ? (
                 <img
@@ -567,7 +567,7 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading }) => {
                 />
               )}
             </Link>
-          ) : userLoading ? (
+          ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (
             <NavigationMenuButton href="/">

@@ -61,7 +61,7 @@ async function userRoute(req, res) {
       email = req.session.user.login?.user?.email
     }
     let avatar = ''
-    if(req.session.user.login?.user?.avatar){
+    if(req.session.user?.login?.user?.avatar){
       avatar=req.session.user.login?.user?.avatar
     }
     //save to iron-session
