@@ -80,6 +80,7 @@ module.exports = {
         },
         "accent-1": "#FAFAFA",
         "accent-2": "#EAEAEA",
+        "accent-3": "#EEEEEE",
         "accent-7": "#333",
         "title-1": "#2B2B2B",
         "paragraph-1": "#010301",
