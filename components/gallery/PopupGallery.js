@@ -95,7 +95,7 @@ export default function PopupGallery({ item,gallery, link, img, body, rounded, a
                 height="400"
                 alt='Product screenshot'
                 className="rounded"
-                src={item.attributes.featuredImage?.data?.attributes?.url ? item.attributes.featuredImage.data.attributes.url:item.legacyFeaturedImage?item.legacyFeaturedImage.mediaItemUrl:item.ogImage?item.ogImage.opengraphImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
+                src={item.attributes?.featuredImage?.data?.attributes?.url ? item.attributes.featuredImage.data.attributes.url:item.legacyFeaturedImage?item.legacyFeaturedImage.mediaItemUrl:item.ogImage?item.ogImage.opengraphImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                 />
               </div>
           }  
