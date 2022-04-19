@@ -5,6 +5,7 @@ import EditorPick2 from "@/components/new-index/EditorPick2";
 import NewPagination from '@/components/pagination'
 import Layout from '@/components/layout'
 import { FormattedMessage, useIntl } from 'react-intl';
+import PostTitle from '@/components/post-title'
 
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
@@ -34,8 +35,13 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
               <title>Open design and tech stories for everyone to read</title>
             </Head>
             <Container>
-            {
-                pagination.page && pagination.page == 1 && (
+            {router.isFallback ? (
+                 <PostTitle>Loading…</PostTitle>
+                ) :
+                <>  
+                {
+            <>
+              {  pagination.page && pagination.page == 1 && (
                     <>
                         {/* <Intro /> */}
                         {heroPost && (
@@ -55,7 +61,9 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
                       <MoreStories posts={allPosts} />
                     </div>
                 )
-            }
+              }
+            </>}
+              </>}
 
             <NewPagination 
                 total={pagination?.total}

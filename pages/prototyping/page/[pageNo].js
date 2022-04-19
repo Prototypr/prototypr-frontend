@@ -6,6 +6,7 @@ import NewPagination from '@/components/pagination'
 import FilterCategory from '@/components/FilterCategory'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import PostTitle from '@/components/post-title'
 
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/prototyping'
@@ -39,8 +40,11 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
     return (
         <Layout activeNav={'toolbox'} preview={preview}>
             <Container>
-            {
-                allPosts.length > 0 &&
+            {router.isFallback ? (
+                 <PostTitle>Loading…</PostTitle>
+                ) :
+                <>  
+                {allPosts.length > 0 &&
                 (
                     <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                         <div className="grid-cols-1 hidden lg:block">
@@ -63,7 +67,8 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                         <MoreStories posts={allPosts} type="toolbox" />
                     </div>
                 </div>
-                )
+                )}
+                </>
             }
 
             
@@ -106,6 +111,6 @@ export async function getStaticPaths() {
         paths: pageCountArr && pageCountArr.map((pageNo, index) => {
             return `/prototyping/page/${index}`
         }) || [],
-        fallback: false,
+        fallback: true,
     }
 }

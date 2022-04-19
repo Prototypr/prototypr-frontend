@@ -6,6 +6,7 @@ import MoreStories from '@/components/more-stories'
 import NewPagination from '@/components/pagination'
 import FilterCategory from '@/components/FilterCategory'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import PostTitle from '@/components/post-title'
 
 // import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
@@ -39,7 +40,11 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
     return (
         <Layout activeNav={'toolbox'} preview={preview}>
             <Container>
-            {
+            {router.isFallback ? (
+                 <PostTitle>Loading…</PostTitle>
+                ) :
+                <>  
+                {
                 allPosts.length > 0 && 
                     (<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                     <div className="grid-cols-1 hidden lg:block">
@@ -64,6 +69,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                     </div>
                 </div>)
             }
+            </>}
             
             <NewPagination 
                 total={pagination?.total}
