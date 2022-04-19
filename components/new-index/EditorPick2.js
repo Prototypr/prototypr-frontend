@@ -26,7 +26,7 @@ export default function EditorPick({ post = {}, header = false }) {
         <div className="max-w-6xl mx-auto px-6 sm:px-12 h-full">
           {/* Blog post */}
           <article className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
-            <a className="relative block" href={`/posts/${slug}`}>
+            <a className="relative block" href={`/post/${slug}`}>
               <div
                 className="absolute inset-0 bg-blue-100 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
                 aria-hidden="true"
@@ -47,7 +47,7 @@ export default function EditorPick({ post = {}, header = false }) {
                 <div className="mb-3">
                   <ul className="flex flex-wrap text-xs font-medium -m-1">
                     <li className="m-1">
-                      <Link href={`/posts/${slug}`}>
+                      <Link href={`/post/${slug}`}>
                         <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
                           #{" "}
                           {tagArr && tagArr.length
@@ -58,7 +58,7 @@ export default function EditorPick({ post = {}, header = false }) {
                     </li>
                     {tagArr && tagArr.length > 1 && (
                       <li className="m-1">
-                        <Link href={`/posts/${slug}`}>
+                        <Link href={`/post/${slug}`}>
                           <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
                             #{" "}
                             {tagArr && tagArr.length
@@ -71,7 +71,7 @@ export default function EditorPick({ post = {}, header = false }) {
                   </ul>
                 </div>
                 <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-2">
-                  <Link href={`/posts/${slug}`}>
+                  <Link href={`/post/${slug}`}>
                     <a className="hover:text-gray-900 group-hover:underline transition duration-150 ease-in-out">
                       {title}
                     </a>

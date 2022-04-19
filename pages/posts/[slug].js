@@ -1,100 +1,113 @@
 import { useRouter } from 'next/router'
-import ErrorPage from 'next/error'
 import Container from '@/components/container'
-import PostBody from '@/components/post-body'
-import MoreStories from '@/components/more-stories'
-import TopicTopItem from '@/components/new-index/TopicTopItem'
-// import Header from '@/components/posts/header'
-import PostHeader from '@/components/post-header'
-import SectionSeparator from '@/components/section-separator'
+import NewPagination from '@/components/pagination'
 import Layout from '@/components/layout'
-import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
-import PostTitle from '@/components/post-title'
+import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
-import { CMS_NAME } from '@/lib/constants'
-// import markdownToHtml from '@/lib/markdownToHtml'
+import Aspiring from "@/components/new-index/Aspiring";
+import EditorPick2 from "@/components/new-index/EditorPick2";
+import ProductList from "@/components/new-index/ProductList";
+import TopicTopItem from "@/components/new-index/TopicTopItem"
 
-export default function Post({ post, morePosts, preview, relatedPosts, combinedRelatedPosts }) {
-  const router = useRouter()
-  if (!router.isFallback && !post?.attributes.slug) {
-    return <ErrorPage statusCode={404} />
-  }
-  return (
-    <Layout background="#fff" activeNav={"posts"} preview={preview}>
-      <Container>
-        {/* <Header /> */}
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article>
-              <Head>
-                <title>
-                  {post.attributes.title} | Prototypr
-                </title>
-                <meta property="og:image" content={post.attributes.ogImage} />
-              </Head>
-              <PostHeader
-                title={post.attributes.title}
-                coverImage={post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:''}
-                date={post.attributes.date}
-                author={post.attributes?.author?.data?.attributes}
-                />
-              <PostBody content={post.attributes.content} />
-            </article>
-            <SectionSeparator />
-            <h1 className="text-4xl font-semibold -mt-10 mb-12">{relatedPosts.length<2? `More Posts`:`Related Posts`}</h1>
+const PAGE_SIZE = 11;
+const ALL_SLUGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]
+export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], preview, pagination = {},first4Posts=[],first2Posts=[], slug='', pageNo=1, tagName=''}) {
 
-            <div className="mt-10 mb-20 grid lg:grid-cols-2 grid-cols-1 gap-10">
-            {combinedRelatedPosts.length>0 && combinedRelatedPosts.map((item, index) => (
-                <TopicTopItem key={index} topic={item?.attributes}/>
-            ))}
-            </div>
-          </>
-        )}
-      </Container>
-    </Layout>
-  )
+    const router = useRouter()
+
+    const onPageNumChange = (pageNum) => {
+        router.push(`/posts/${slug}/page/${pageNum}`)
+    }
+
+    return (
+        <>
+          <Layout activeNav={"posts"} preview={preview}>
+            <Head>
+              <title>Open design and tech stories for everyone to read</title>
+            </Head>
+            <Container>
+            <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5 capitalize'>{tagName}</h2>
+            {first4Posts?.length>0  &&<Aspiring posts={first4Posts} showTitle={false} />}
+            
+            <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
+            {first2Posts?.length>0 &&  first2Posts.map((item, index) => {
+                    return <TopicTopItem key={`topic_${index}`} topic={item?.attributes} />
+                })}
+            </section>
+            {heroPost && <EditorPick2 post={heroPost} showTitle={false} />}
+            {morePosts && <ProductList posts={morePosts} />}
+           
+            <NewPagination 
+                total={pagination?.total}
+                pageSize={PAGE_SIZE}
+                currentPage={pagination?.page}
+                onPageNumChange={(pageNum, slug) => {onPageNumChange(pageNum, slug)}}
+            />
+
+            </Container>
+          </Layout>
+        </>
+      )
 }
 
-export async function getStaticProps({ params, preview = null }) {
-  const data = await getPostAndMorePosts(params.slug, preview)
-  // const content = await markdownToHtml(data?.posts[0]?.content || '')
-// console.log(data)
+export async function getStaticProps({ preview = null, params }) {
+    const pageSize = PAGE_SIZE
+    const {slug} = params
+    const pageNo = 1
+    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug])) || []
 
- let combinedRelatedPosts = {};
-  let relatedPostData = data?.relatedPosts?.data;
-  let morePostsData =  data?.morePosts?.data;
-  combinedRelatedPosts.data = relatedPostData.concat(morePostsData);
-  //limit related posts to 6
-  if(combinedRelatedPosts.data?.length>6){
-    combinedRelatedPosts.data = combinedRelatedPosts.data.slice(0, 6);
-  }
+    let tags = allPosts[1]
+    allPosts = allPosts[0]
+    const pagination = allPosts.meta.pagination
     
-    // for(var x = 0;x<combinedRelatedPosts.data.length;x++){
-    //     console.log(combinedRelatedPosts.data[x])
-    // }
-  return {
-    props: {
-      preview,
-      post: {
-        ...data?.posts.data[0],
-        // content,
-      },
-      combinedRelatedPosts:combinedRelatedPosts?.data,
-      relatedPosts:data?.relatedPosts?.data,
-      morePosts: data?.morePosts?.data,
-    },
-  }
-}
+    let first4 = [],first2=[], nextPosts = [], morePosts = [], heroPost = null
+    
+    // if first page, divide posts into sections
+    if(pageNo == 1){
+      first4 = allPosts.data.slice(0, 4);
+      if(allPosts.data && allPosts.data.length>4){
+        nextPosts = allPosts?.data.slice(4)
+        heroPost = nextPosts[0];
+        morePosts = nextPosts.slice(1);
+      } 
+    }
+    
+    return {
+        props: { 
+          allPosts:nextPosts, preview, pagination,
+          first4Posts: first4,
+          first2Posts: first2,
+          slug,
+          tagName:tags?.data[0]?.attributes?.name,
+          pageNo,
+          morePosts,
+          heroPost
+        },
+      }
+    
+    // const interviews =
+    // (await getCommonQuery(preview, [slug], "article", 4, 0)) || [];
 
-export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug()
-  
-  return {
-    paths: allPosts && allPosts.data?.map((post) =>{ 
-      // console.log(post.attributes.slug)
-      return `/posts/${post.attributes.slug}`}) || [],
-    fallback: true,
+    // console.log("interview data from home***********" + JSON.stringify(interviews))
+    
   }
-}
+
+  export async function getStaticPaths() {
+    let pageCountArr = [];
+
+    for(var z = 0;z<ALL_SLUGS.length;z++){
+      const allPosts = (await getAllPostsForPostsPage(null, PAGE_SIZE, 0, [ALL_SLUGS[z]])) || []
+      const pagination = allPosts.meta.pagination
+      const pageCount = pagination.pageCount
+      let arr = new Array(pageCount).fill('');
+      let newArr = arr.map((i,index) => {
+        return `/posts/${ALL_SLUGS[z]}`
+      })
+      pageCountArr = pageCountArr.concat(newArr)
+    }
+
+    return {
+      paths: pageCountArr || [],
+      fallback: true,
+    }
+  }

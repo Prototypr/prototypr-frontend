@@ -47,7 +47,7 @@ export default function PostListItem({
             : postItem.type == "design-tool"
             ? "/design-tool/" + postItem.slug
             : postItem.type == "article"
-            ? "/posts/" + postItem.slug
+            ? "/post/" + postItem.slug
             : postItem.type == "blog"
             ? "/blog/" + postItem.slug
             : postItem.type == "news"

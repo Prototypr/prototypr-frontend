@@ -331,7 +331,7 @@ const ContentListItemCallout = React.forwardRef(
     <ListItem css={{ gridRow: "span 3" }}>
       <NavigationMenuLink
         {...props}
-        href="/posts/the-freemium-web-youve-read-all-your-free-articles-this-month"
+        href="/post/the-freemium-web-youve-read-all-your-free-articles-this-month"
         ref={forwardedRef}
         css={{
           display: "flex",

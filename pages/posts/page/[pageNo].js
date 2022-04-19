@@ -1,14 +1,11 @@
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
 import MoreStories from '@/components/more-stories'
-// import HeroPost from '@/components/hero-post'
-// import Intro from '@/components/posts/intro'
 import EditorPick2 from "@/components/new-index/EditorPick2";
 import NewPagination from '@/components/pagination'
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
-import { CMS_NAME } from '@/lib/constants'
 const PAGE_SIZE = 12;
 export default function PostsPage({allPosts = [], preview, pagination = {}}) {
     let heroPost;
