@@ -27,22 +27,22 @@ export default function EditorPick({ post = {}, header = false }) {
           {/* Blog post */}
           <article className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
             <Link href={`/post/${slug}`}>
-              <a className="relative block" >
-                <div
-                  className="absolute inset-0 bg-blue-100 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
-                  aria-hidden="true"
-                />
-                <figure className="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
-                  <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
-                    <Image
-                      layout="fill"
-                      objectFit="cover"
-                      src={legacyFeaturedImage?.mediaItemUrl}
-                      alt="Blog post"
-                    />
-                  </div>
-                </figure>
-              </a>
+            <a className="relative block" >
+              <div
+                className="absolute inset-0 bg-blue-100 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
+                aria-hidden="true"
+              />
+              <figure className="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
+                <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={legacyFeaturedImage?.mediaItemUrl}
+                    alt="Blog post"
+                  />
+                </div>
+              </figure>
+            </a>
             </Link>
             <div>
               <header>
