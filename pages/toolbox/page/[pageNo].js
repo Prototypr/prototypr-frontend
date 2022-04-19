@@ -100,6 +100,6 @@ export async function getStaticPaths() {
           return `/toolbox/page/${index}`;
         })) ||
       [],
-    fallback: false,
+    fallback: true,
   };
 }
