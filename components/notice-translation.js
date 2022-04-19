@@ -11,7 +11,7 @@ export default function NoticeTranslation() {
             <span className="flex p-1.5 rounded-lg bg-white text-lg w-10 h-10 justify-center">
              🇪🇸
             </span>
-            <p className="ml-3 font-medium text-gray-800 truncate">
+            <p className="ml-3 font-medium text-gray-800">
               <span>Este articulo solo está disponible en Inglés.</span>
             </p>
           </div>

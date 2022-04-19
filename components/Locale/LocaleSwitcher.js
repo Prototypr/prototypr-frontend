@@ -76,7 +76,7 @@ export default function LocaleSwitcher() {
   return (
     <Popover open={open}>
       <PopoverTrigger asChild onClick={() => setOpen(!open)}>
-        <div className="flex flex-row items-center space-x-1.5 cursor-pointer ml-5 mx-4">
+        <div className="flex flex-row items-center space-x-1.5 cursor-pointer ml-1 md:ml-5 md:mx-4">
           <img style={{opacity:0.9}} src="/static/images/icons/global.svg" />
           <div className="text-sm">{shortLocale.toUpperCase()}</div>
         </div>
