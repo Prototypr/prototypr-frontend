@@ -12,8 +12,8 @@ export default function ProductItem({ post = {} }) {
   } = post;
   const tagArr = tags.data;
   return (
-    <div className="grid-cols-1 flex items-center py-2 group">
-      <figure className="relative h-0 w-40 h-40 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+    <div className="grid-cols-1 flex items-top py-2 group">
+      <figure className="relative h-0 w-36 h-36 sm:w-40 sm:h-40 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
         <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
           <Link href={`/posts/${slug}`}>
             <Image

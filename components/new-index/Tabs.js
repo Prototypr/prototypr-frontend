@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useIntl, FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from "react-intl";
 export default function Tabs({ items = [], onTabChanged = () => {} }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const intl = useIntl();
@@ -11,7 +11,7 @@ export default function Tabs({ items = [], onTabChanged = () => {} }) {
             return (
               <div
                 key={`tab_${index}`}
-                className={`text-gray-1 text-sm md:text-2xl pb-1 md:pb-3 leading-8  relative mr-6 cursor-pointer tab-item
+                className={`text-gray-1 text-xs sm:text-sm md:text-2xl pb-1 md:pb-3 leading-8  relative mr-6 cursor-pointer tab-item
                             ${
                               index === currentTabIndex
                                 ? " tab-item-active font-bold"
@@ -22,7 +22,7 @@ export default function Tabs({ items = [], onTabChanged = () => {} }) {
                   onTabChanged(item.slug);
                 }}
               >
-                {intl.formatMessage({ id: item.name})}
+                {intl.formatMessage({ id: item.name })}
               </div>
             );
           })
