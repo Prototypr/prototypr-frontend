@@ -28,7 +28,7 @@ export default function Navbar({ activeNav }) {
    */
     const [userLoggedInCookie, setUserLoggedInCookie] = useState(()=>{
     let loggedInCookie = jsCookie.get('prototypr-loggedIn')
-    if(loggedInCookie){
+    if(loggedInCookie=='true'){
       return true
     }else{
       return false
