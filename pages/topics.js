@@ -8,7 +8,7 @@ export default function Index({ allPosts, preview }) {
   const intl = useIntl();
   const topics = [
     {
-      name: "navbar.submenu1.title1",
+      name: "navbar.submenu1.title4",
       slug: "accessibility",
       imageSrc:
         "https://images.unsplash.com/photo-1574887427561-d3d5d58c9273?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80",
@@ -108,10 +108,10 @@ export default function Index({ allPosts, preview }) {
                   <div>
                     <h3 className="text-2xl text-white">
                       <Link href={`/posts/${topic.slug}/page/1`}>
-                        <>
+                        <a>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {intl.formatMessage({ id: topic.name})}
-                        </>
+                        </a>
                       </Link>
                     </h3>
                   </div>
