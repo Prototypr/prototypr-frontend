@@ -7,6 +7,7 @@ module.exports = {
     domains: [
       "localhost",
       "www.iconshock.com",
+      "s3-us-west-1.amazonaws.com",
       "s3.amazonaws.com",
       "prototypr-media.sfo2.digitaloceanspaces.com",
       "prototypr.io",

@@ -9,6 +9,7 @@ export default function EditorPick({ post = {}, showTitle = true }) {
     date,
     tags,
     legacyFeaturedImage = null,
+    featuredImage = null,
     author = null,
   } = postItem;
   const tagArr = tags.data;
@@ -28,7 +29,7 @@ export default function EditorPick({ post = {}, showTitle = true }) {
             height={430}
             className="object-cover"
             alt="img"
-            src={legacyFeaturedImage?.mediaItemUrl}
+            src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}
           />
         </div>
         <div className="w-9/20 ml-10">

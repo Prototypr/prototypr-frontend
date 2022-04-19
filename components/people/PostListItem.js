@@ -7,10 +7,10 @@ export default function PostListItem({
   totalCount = 0,
   item = {},
 }) {
-  let img =
-    postItem.legacyFeaturedImage && postItem.legacyFeaturedImage.mediaItemUrl
+  let img = postItem.featuredImage?.data?.attributes?.url ? postItem.featuredImage?.data?.attributes?.url
+  : postItem.legacyFeaturedImage && postItem.legacyFeaturedImage.mediaItemUrl
       ? postItem.legacyFeaturedImage.mediaItemUrl
-      : "";
+      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
   if (!img) {
     img = postItem?.legacyMedia?.logoNew;
     if (!img) {

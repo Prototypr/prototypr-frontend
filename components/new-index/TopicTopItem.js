@@ -9,6 +9,7 @@ export default function TopicTopItem({ topic = {} }) {
     date,
     tags,
     legacyFeaturedImage = null,
+    featuredImage = null,
     author = null,
   } = topic;
   const tagArr = tags.data;
@@ -17,7 +18,7 @@ export default function TopicTopItem({ topic = {} }) {
     <div className="grid-cols-1 bg-white p-6 flex flex-col sm:flex-row cursor-pointer group">
       <figure className="relative w-full sm:w-1/2 h-64 mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
         <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
-          {legacyFeaturedImage?.mediaItemUrl && (
+          {legacyFeaturedImage?.mediaItemUrl ? (
             <Link href={`/post/${slug}`}>
               <Image
                 objectFit="cover"
@@ -26,7 +27,16 @@ export default function TopicTopItem({ topic = {} }) {
                 src={legacyFeaturedImage?.mediaItemUrl}
               />
             </Link>
-          )}
+          ):featuredImage?.data?.attributes?.url &&
+          <Link href={`/post/${slug}`}>
+              <Image
+                objectFit="cover"
+                className="rounded-lg contrast-115"
+                layout="fill"
+                src={featuredImage?.data?.attributes?.url}
+              />
+            </Link>
+          }
         </div>
       </figure>
 

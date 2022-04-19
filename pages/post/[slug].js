@@ -36,7 +36,7 @@ export default function Post({ post, morePosts, preview, relatedPosts, combinedR
               </Head>
               <PostHeader
                 title={post.attributes.title}
-                coverImage={post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:''}
+                coverImage={post.attributes.featuredImage?.data?.attributes?.url? post.attributes.featuredImage?.data?.attributes?.url:post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                 date={post.attributes.date}
                 author={post.attributes?.author?.data?.attributes}
                 />

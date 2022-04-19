@@ -10,9 +10,10 @@ export default function AspiringItem({ post = {} }) {
     date,
     tags,
     legacyFeaturedImage = null,
+    featuredImage = null,
     author = null,
   } = post;
-
+console.log(featuredImage?.data?.attributes?.url )
   return (
     <div className="grid-cols-1 cursor-pointer group">
       <figure className="relative w-full h-64 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
@@ -22,7 +23,7 @@ export default function AspiringItem({ post = {} }) {
               objectFit="cover"
               className="rounded-lg contrast-115"
               layout="fill"
-              src={legacyFeaturedImage?.mediaItemUrl}
+              src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
             />
           </Link>
         </div>

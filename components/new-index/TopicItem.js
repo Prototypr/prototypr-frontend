@@ -9,6 +9,7 @@ export default function TopicItem({ topic = {} }) {
     date,
     tags,
     legacyFeaturedImage = null,
+    featuredImage = null,
     author = null,
   } = topic;
   const tagArr = tags.data;
@@ -22,7 +23,7 @@ export default function TopicItem({ topic = {} }) {
               objectFit="cover"
               className="rounded-lg contrast-115"
               layout="fill"
-              src={legacyFeaturedImage?.mediaItemUrl}
+              src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl:"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}
             />
           </Link>
         </div>

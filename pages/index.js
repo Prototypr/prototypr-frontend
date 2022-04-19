@@ -52,9 +52,12 @@ export default function Index({
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
 
-  const coverImage = heroPost.attributes.legacyFeaturedImage
+  const coverImage =
+  heroPost.attributes.featuredImage?.data?.attributes?.url?
+  heroPost.attributes.featuredImage?.data?.attributes?.url:
+  heroPost.attributes.legacyFeaturedImage
     ? heroPost.attributes.legacyFeaturedImage
-    : "";
+    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
   const intl = useIntl();
 
   return (
