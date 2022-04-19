@@ -218,12 +218,27 @@ const StyledViewport = styled(NavigationMenuPrimitive.Viewport, {
   },
 });
 
+const NextLink = ({ children, ...props }) => {
+  // const resolved = useResolvedPath(href);
+  // const match = useMatch({ path: resolved.pathname, end: true });
+  // const isActive = Boolean(match);
+  return (
+    <Link href={props.href} passHref>
+        <StyledLink asChild>
+          <a style={props.css} {...props}>
+          {children}
+          </a>
+        </StyledLink>
+    </Link>
+  );
+};
+
 // Exports
 const NavigationMenu = StyledMenu;
 const NavigationMenuList = StyledList;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 const NavigationMenuTrigger = StyledTriggerWithCaret;
-const NavigationMenuLink = StyledLink;
+const NavigationMenuLink = NextLink;
 const NavigationMenuButton = StyledButton;
 const NavigationMenuContent = StyledContent;
 const NavigationMenuViewport = StyledViewport;
@@ -308,7 +323,7 @@ const ContentListItemCallout = React.forwardRef(({ children, ...props }, forward
         flexDirection: 'column',
         width: '100%',
         height: '100%',
-        background: `linear-gradient(135deg, ${pink.pink9} 0%, ${red.red9} 100%);`,
+        background: `linear-gradient(135deg, ${pink.pink9} 0%, ${red.red9} 100%)`,
         borderRadius: 6,
         padding: 25,
       }}

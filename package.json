@@ -36,6 +36,7 @@
     "react-hot-toast": "^2.2.0",
     "react-intl": "^5.24.8",
     "react-moment": "^1.1.2",
+    "react-router-dom": "^6.3.0",
     "react-timeago": "^4.4.0",
     "remark": "^14.0.1",
     "remark-html": "^15.0.0",
