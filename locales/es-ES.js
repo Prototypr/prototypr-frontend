@@ -1,5 +1,5 @@
 const ES = {
-    "intro.title.half1": "Los mejores artículos de diseño, herramientas y",
+    "intro.title.half1": "Los mejores artículos de diseño, cada semana.",
     "intro.title.half2": "píxeles brillantes.",
     "intro.input.placeholder": "Entrar su email",
     "signup.input.validation": "Dirección de email es requerido.",
@@ -51,7 +51,7 @@ const ES = {
     "navbar.contentitem.title": "La fuente",
     "navbar.contentitem.desc":
       "Un boletín picante que aborda temas tabú y expone verdades ocultas en la esfera de la tecnología y el diseño.",
-    "editpicker.title": "Editor's Picks",
+    "editpicker.title": "Selecciones de los editores",
     "designtool.title": "Últimas herramientas",
     "designtool.button.browsemore": "Explorar más herramientas",
     "index.header.title": "Prototypr: creación de prototipos, diseño de UX, desarrollo front-end y más",

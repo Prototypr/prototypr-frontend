@@ -19,7 +19,7 @@ export default function EditorPick({ post = {}, header = false }) {
   return (
     <div className="pb-10 px-3 xl:px-0">
       {header && (
-        <h3 className="text-3xl text-title-1 text-gray-900 font-bold leading-6 tracking-wide mb-9">
+        <h3 className="text-3xl text-title-1 text-gray-900 font-bold leading-6 mb-9">
           {header}
         </h3>
       )}

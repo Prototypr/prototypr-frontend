@@ -3,7 +3,7 @@ const LOCALE_MAP = {
         name: "English",
         locale: "en-US"
     },{
-        name: "Spanish",
+        name: "Español",
         locale: "es-ES"
     }]
 };

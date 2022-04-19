@@ -4,6 +4,8 @@ import MoreStories from '@/components/more-stories'
 import EditorPick2 from "@/components/new-index/EditorPick2";
 import NewPagination from '@/components/pagination'
 import Layout from '@/components/layout'
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
 const PAGE_SIZE = 12;
@@ -19,6 +21,7 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
         heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
     }
     const router = useRouter()
+    const intl = useIntl();
 
     const onPageNumChange = (pageNo) => {
         router.push(`/posts/page/${pageNo}`)
@@ -37,7 +40,7 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
                         {/* <Intro /> */}
                         {heroPost && (
                            <div className="pt-12">
-                           <EditorPick2 header="Editor's Picks" post={heroPost} />
+                           <EditorPick2 header={intl.formatMessage({ id: "editpicker.title"})} post={heroPost} />
                           </div>
                         )}
                     </>

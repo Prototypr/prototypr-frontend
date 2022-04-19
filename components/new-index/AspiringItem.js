@@ -30,7 +30,6 @@ console.log(featuredImage?.data?.attributes?.url )
       </figure>
 
       <div className="font-base text-sm hover:underline leading-6 tracking-wide uppercase text-gray-3 mt-2">
-        By {" "}
       <Link className="hover:underline" href={`/people/${author?.data?.attributes?.slug}/page/1`}>
         <a>{author?.data?.attributes?.name}</a>
       </Link>

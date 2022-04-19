@@ -1,5 +1,5 @@
 const EN =  {
-    "intro.title.half1": "Top design articles, tools, and",
+    "intro.title.half1": "Top design articles, every week.",
     "intro.title.half2": "shiny pixels.",
     "intro.input.placeholder": "Enter your email address",
     "signup.input.validation": "Email address required.",

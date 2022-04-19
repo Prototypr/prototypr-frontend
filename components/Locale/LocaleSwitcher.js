@@ -31,8 +31,8 @@ const StyledArrow = styled(PopoverPrimitive.Arrow, {
 
 const StyledContent = styled(PopoverPrimitive.Content, {
   borderRadius: 4,
-  padding: 20,
-  width: 260,
+  padding: 10,
+  width: 126,
   backgroundColor: "white",
   boxShadow:
     "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
@@ -76,9 +76,9 @@ export default function LocaleSwitcher() {
   return (
     <Popover open={open}>
       <PopoverTrigger asChild onClick={() => setOpen(!open)}>
-        <div className="flex flex-row items-center space-x-2 cursor-pointer mx-4">
-          <img src="/static/images/icons/global.svg" />
-          <div>{shortLocale.toUpperCase()}</div>
+        <div className="flex flex-row items-center space-x-1.5 cursor-pointer ml-5 mx-4">
+          <img style={{opacity:0.9}} src="/static/images/icons/global.svg" />
+          <div className="text-sm">{shortLocale.toUpperCase()}</div>
         </div>
       </PopoverTrigger>
       <PopoverContent sideOffset={5}>
@@ -88,7 +88,7 @@ export default function LocaleSwitcher() {
                   return (
                     <div
                     key={`locale_${index}`}
-                    className="language-item cursor-pointer py-2 px-4 rounded-md text-lg" onClick={() => {
+                    className="language-item text-center cursor-pointer py-2 px-4 rounded-md text-base text-gray-700" onClick={() => {
                         setOpen(false);
                         switchLanguage(item.locale);
                     }}>

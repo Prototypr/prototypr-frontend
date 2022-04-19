@@ -2,23 +2,23 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
 import PostBody from '@/components/post-body'
-import MoreStories from '@/components/more-stories'
 import TopicTopItem from '@/components/new-index/TopicTopItem'
-// import Header from '@/components/posts/header'
 import PostHeader from '@/components/post-header'
 import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
 import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
 import PostTitle from '@/components/post-title'
 import Head from 'next/head'
-import { CMS_NAME } from '@/lib/constants'
-// import markdownToHtml from '@/lib/markdownToHtml'
+import NoticeTranslation from '@/components/notice-translation'
+import { FormattedMessage, useIntl } from "react-intl";
 
-export default function Post({ post, morePosts, preview, relatedPosts, combinedRelatedPosts }) {
+export default function Post({ post, morePosts, preview, relatedPosts, combinedRelatedPosts, title, content}) {
   const router = useRouter()
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />
   }
+  const intl = useIntl();
+
   return (
     <Layout background="#fff" activeNav={"posts"} preview={preview}>
       <Container>
@@ -30,17 +30,18 @@ export default function Post({ post, morePosts, preview, relatedPosts, combinedR
             <article>
               <Head>
                 <title>
-                  {post.attributes.title} | Prototypr
+                  {title[intl.locale]?title[intl.locale]:title['en-US']} | Prototypr
                 </title>
                 <meta property="og:image" content={post.attributes.ogImage} />
               </Head>
+              {!title[intl.locale] && <NoticeTranslation/>}
               <PostHeader
-                title={post.attributes.title}
+                title={title[intl.locale]?title[intl.locale]:title['en-US']}
                 coverImage={post.attributes.featuredImage?.data?.attributes?.url? post.attributes.featuredImage?.data?.attributes?.url:post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                 date={post.attributes.date}
                 author={post.attributes?.author?.data?.attributes}
                 />
-              <PostBody content={post.attributes.content} />
+              <PostBody content={content[intl.locale]?content[intl.locale]:content['en-US']} />
             </article>
             <SectionSeparator />
             <h1 className="text-4xl font-semibold -mt-10 mb-12">{relatedPosts.length<2? `More Posts`:`Related Posts`}</h1>
@@ -57,7 +58,8 @@ export default function Post({ post, morePosts, preview, relatedPosts, combinedR
   )
 }
 
-export async function getStaticProps({ params, preview = null }) {
+export async function getStaticProps({ params, preview = null, locales}) {
+
   const data = await getPostAndMorePosts(params.slug, preview)
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
 // console.log(data)
@@ -70,10 +72,22 @@ export async function getStaticProps({ params, preview = null }) {
   if(combinedRelatedPosts.data?.length>6){
     combinedRelatedPosts.data = combinedRelatedPosts.data.slice(0, 6);
   }
-    
-    // for(var x = 0;x<combinedRelatedPosts.data.length;x++){
-    //     console.log(combinedRelatedPosts.data[x])
-    // }
+
+
+  let content={}
+  let title={}
+
+  //set the default locale (en-us)
+  title['en-US']=data?.posts.data[0]?.attributes?.title
+  content['en-US']=data?.posts.data[0]?.attributes?.content
+
+  //get each localization and add the translation for title and content
+  const localizations = data?.posts.data[0]?.attributes?.localizations?.data
+  for(var x = 0;x<localizations.length;x++){
+    title[localizations[x].attributes.locale]=localizations[x].attributes.title
+    content[localizations[x].attributes.locale]=localizations[x].attributes.content
+  }
+
   return {
     props: {
       preview,
@@ -81,6 +95,8 @@ export async function getStaticProps({ params, preview = null }) {
         ...data?.posts.data[0],
         // content,
       },
+      title,
+      content,
       combinedRelatedPosts:combinedRelatedPosts?.data,
       relatedPosts:data?.relatedPosts?.data,
       morePosts: data?.morePosts?.data,
@@ -88,7 +104,7 @@ export async function getStaticProps({ params, preview = null }) {
   }
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({locales}) {
   const allPosts = await getAllPostsWithSlug()
   
   return {
