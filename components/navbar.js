@@ -35,6 +35,8 @@ export default function Navbar({ activeNav }) {
   useEffect(()=>{
     if(user?.email){
       jsCookie.set('prototypr-loggedIn', true);
+    }else{
+      jsCookie.set('prototypr-loggedIn', false);
     }
 
   },[user?.email])

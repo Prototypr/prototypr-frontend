@@ -36,7 +36,12 @@ async function handler(req, res) {
      }
      req.session.user.login.user.bio = req.body.bio
      req.session.user.login.user.paymentPointer = req.body.paymentPointer
-     req.session.user.login.user.avatar = res.body.avatar?.url
+
+     if(req.body?.avatar?.url){
+      req.session.user.login.user.avatar = req.body.avatar?.url
+     }else if (res.body?.avatar?.url){
+       req.session.user.login.user.avatar = res.body.avatar?.url
+     }
 
      
      req.session.user={
