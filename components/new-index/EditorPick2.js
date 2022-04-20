@@ -2,8 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 // import Moment from "react-moment";
-
+import { transformOfContentAndTitle } from "@/lib/locale/transformLocale";
+import { useIntl } from "react-intl";
 export default function EditorPick({ post = {}, header = false }) {
+  const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   const postItem = post?.attributes;
   const {
     title = "",
@@ -16,6 +19,9 @@ export default function EditorPick({ post = {}, header = false }) {
     author = null,
   } = postItem;
   const tagArr = tags.data;
+  const res = transformOfContentAndTitle(post);
+  console.log(res.content)
+
   return (
     <div className="pb-10 px-3 xl:px-0">
       {header && (
@@ -76,7 +82,7 @@ export default function EditorPick({ post = {}, header = false }) {
                 <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-2">
                   <Link href={`/post/${slug}`}>
                     <a className="hover:text-gray-900 group-hover:underline transition duration-150 ease-in-out">
-                      {title}
+                      {res.title[locale]}
                     </a>
                   </Link>
                 </h3>
@@ -84,7 +90,7 @@ export default function EditorPick({ post = {}, header = false }) {
               <div className="text-lg text-gray-400 flex-grow">
                 <div
                   className="text-base font-medium text-gray-3 leading-normal mt-4 clamp-2 overflow-hidden text-ellipsis"
-                  dangerouslySetInnerHTML={{ __html: excerpt }}
+                  dangerouslySetInnerHTML={{ __html: res.content[locale] }}
                 ></div>
               </div>
               <footer className="flex items-center mt-4">
