@@ -1,20 +1,20 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { styled, keyframes } from "@stitches/react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import {
   indigo,
   mauve,
-  purple,
-  blackA,
   red,
   pink,
   gray,
 } from "@radix-ui/colors";
 import Link from "next/link";
-import Gravatar from "react-gravatar";
 
-import LocaleSwitcher from "./Locale/LocaleSwitcher";
+const Gravatar = dynamic(() => import("react-gravatar"), { ssr: false });
+const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), { ssr: true });
+
 import { FormattedMessage, useIntl } from "react-intl";
 const enterFromRight = keyframes({
   from: { transform: "translateX(200px)", opacity: 0 },
