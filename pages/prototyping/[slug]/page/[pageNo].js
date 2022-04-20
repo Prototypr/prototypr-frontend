@@ -112,7 +112,6 @@ export async function getStaticProps({ preview = null, params }) {
 }
 
 export async function getStaticPaths() {
-  let pageCountRes = 0;
   let pageCountArr = [];
   //create the ALL_SLUGS from ALL_SLUGS_GROUPS
   const all_slugs = get_slugs_from_menu(ALL_SLUGS_CATEGORY)
@@ -128,23 +127,6 @@ export async function getStaticPaths() {
     })
     pageCountArr = pageCountArr.concat(newArr)
   }
-  // ALL_SLUGS_CATEGORY.map(async (item, index) => {
-  //   const allPosts =
-  //     (await getAllPostsForToolsSubcategoryPage(
-  //       null,
-  //       PAGE_SIZE,
-  //       0,
-  //       item.tags
-  //     )) || [];
-  //   // const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0,["whiteboard"])) || []
-  //   const pagination = allPosts.meta.pagination;
-  //   const pageCount = pagination.pageCount;
-  //   let arr = new Array(pageCount).fill("");
-  //   let newArr = arr.map((i, index) => {
-  //     return `prototyping/${item.key}/page/${index + 1}`;
-  //   });
-  //   pageCountArr = pageCountArr.concat(newArr);
-  // });
   return {
     paths: pageCountArr || [],
     fallback: true,

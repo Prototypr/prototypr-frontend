@@ -1,4 +1,4 @@
-import {useContext, useState, useEffect, useMemo } from "react";
+import {useState, useEffect, useMemo } from "react";
 import "@/styles/index.scss";
 import { SessionProvider } from "next-auth/react";
 import "@/styles/toolStyles.css";
@@ -7,7 +7,7 @@ import * as Portal from "@radix-ui/react-portal";
 import { SWRConfig } from 'swr'
 import fetchJson from '@/lib/iron-session/fetchJson'
 // import { LocaleProvider, LocaleContext } from '../context/LocaleContext';
-import LocaleAlert from "@/components/Locale/LocaleAlert";
+// import LocaleAlert from "@/components/Locale/LocaleAlert";
 import { addLocaleData, IntlProvider } from "react-intl";
 import EN from "../locales/en-US";
 import ES from "../locales/es-ES";

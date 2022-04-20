@@ -1,4 +1,8 @@
-module.exports = {
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+})
+
+module.exports = withBundleAnalyzer({
   i18n: {
     locales: ['en-US', 'es-ES'],
     defaultLocale: 'en-US',
@@ -22,4 +26,4 @@ module.exports = {
       "cdn-images-1.medium.com",
     ],
   },
-};
+});
