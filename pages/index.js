@@ -1,22 +1,24 @@
+import dynamic from "next/dynamic";
+
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 import Footer from "@/components/footer";
 /**new index components */
 import Intro from "@/components/new-index/Intro";
-import EditorPick2 from "@/components/new-index/EditorPick2";
-import ProductList from "@/components/new-index/ProductList";
-import DesignTool from "@/components/new-index/DesignTool";
-import SourcePanel from "@/components/new-index/SourcePanel";
-import TopicSpolights from "@/components/new-index/TopicSpolights";
-import Aspiring from "@/components/new-index/Aspiring";
-import Feeds from "@/components/new-index/Feeds";
+const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
+const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
+const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
+const TopicSpolights = dynamic(() => import("@/components/new-index/TopicSpolights"));
+const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
+const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
 import {
   getCombinedPostsForHome,
   getAllToolsForHome,
   getCommonQuery,
 } from "@/lib/api";
 import Head from "next/head";
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 const TAB_ITEMS = [
   {
     slug: "accessibility",
