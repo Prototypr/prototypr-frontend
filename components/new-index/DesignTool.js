@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 // const BScroll = dynamic(() => import("better-scroll"), { ssr: false });
 import BScroll from "better-scroll";
 

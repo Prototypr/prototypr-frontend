@@ -5,7 +5,7 @@ import Container from '@/components/container'
 const MoreStories = dynamic(() => import("@/components/more-stories"));
 import NewPagination from '@/components/pagination'
 import Layout from '@/components/layout'
-import EditorPick2 from "@/components/new-index/EditorPick2";
+const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { getPostsByPageForPostsPage } from '@/lib/api'

@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
 import NewPagination from '@/components/pagination'
@@ -5,7 +6,7 @@ import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
 import Aspiring from "@/components/new-index/Aspiring";
-import EditorPick2 from "@/components/new-index/EditorPick2";
+const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 import ProductList from "@/components/new-index/ProductList";
 import TopicTopItem from "@/components/new-index/TopicTopItem"
 
