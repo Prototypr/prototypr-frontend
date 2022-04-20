@@ -14,10 +14,12 @@ import { FormattedMessage, useIntl } from "react-intl";
 
 export default function Post({ post, morePosts, preview, relatedPosts, combinedRelatedPosts, title, content}) {
   const router = useRouter()
-  if (!router.isFallback && !post?.attributes.slug) {
+  if (!router.isFallback && !post?.attributes?.slug) {
     return <ErrorPage statusCode={404} />
   }
   const intl = useIntl();
+  // console.log('locale changed********' + intl.locale);
+  const locale = intl.locale ? intl.locale : "en-US";
 
   return (
     <Layout background="#fff" activeNav={"posts"} preview={preview}>
@@ -30,18 +32,18 @@ export default function Post({ post, morePosts, preview, relatedPosts, combinedR
             <article>
               <Head>
                 <title>
-                  {title[intl.locale]?title[intl.locale]:title['en-US']} | Prototypr
+                  {title[locale]} | Prototypr
                 </title>
                 <meta property="og:image" content={post.attributes.ogImage} />
               </Head>
-              {!title[intl.locale] && <NoticeTranslation/>}
+              {!title[locale] && <NoticeTranslation/>}
               <PostHeader
-                title={title[intl.locale]?title[intl.locale]:title['en-US']}
+                title={title[locale]}
                 coverImage={post.attributes.featuredImage?.data?.attributes?.url? post.attributes.featuredImage?.data?.attributes?.url:post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                 date={post.attributes.date}
                 author={post.attributes?.author?.data?.attributes}
                 />
-              <PostBody content={content[intl.locale]?content[intl.locale]:content['en-US']} />
+              <PostBody content={content[locale]} />
             </article>
             <SectionSeparator />
             <h1 className="text-4xl font-semibold -mt-10 mb-12">{relatedPosts.length<2? `More Posts`:`Related Posts`}</h1>
@@ -59,10 +61,10 @@ export default function Post({ post, morePosts, preview, relatedPosts, combinedR
 }
 
 export async function getStaticProps({ params, preview = null, locales}) {
-
+  // console.log('~~~~~~' + params.slug);
   const data = await getPostAndMorePosts(params.slug, preview)
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
-// console.log(data)
+  // console.log("data******" + JSON.stringify(data))
 
  let combinedRelatedPosts = {};
   let relatedPostData = data?.relatedPosts?.data;
@@ -78,14 +80,18 @@ export async function getStaticProps({ params, preview = null, locales}) {
   let title={}
 
   //set the default locale (en-us)
-  title['en-US']=data?.posts.data[0]?.attributes?.title
-  content['en-US']=data?.posts.data[0]?.attributes?.content
+  title['en-US']= data?.posts.data[0]?.attributes?.title ? data?.posts.data[0]?.attributes?.title: ""
+  content['en-US']= data?.posts.data[0]?.attributes?.content ? data?.posts.data[0]?.attributes?.content: ""
 
   //get each localization and add the translation for title and content
   const localizations = data?.posts.data[0]?.attributes?.localizations?.data
-  for(var x = 0;x<localizations.length;x++){
-    title[localizations[x].attributes.locale]=localizations[x].attributes.title
-    content[localizations[x].attributes.locale]=localizations[x].attributes.content
+  // console.log('title******' + JSON.stringify(title))
+  // console.log('content*******' + JSON.stringify(content))
+  if (localizations && localizations.length) {
+    for(var x = 0;x<localizations.length;x++){
+      title[localizations[x].attributes.locale]=localizations[x].attributes.title
+      content[localizations[x].attributes.locale]=localizations[x].attributes.content
+    }
   }
 
   return {
