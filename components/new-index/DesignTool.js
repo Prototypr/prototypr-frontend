@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
-const BScroll = dynamic(() => import("better-scroll"), { ssr: false });
+// const BScroll = dynamic(() => import("better-scroll"), { ssr: false });
+import BScroll from "better-scroll";
 
 import Link from "next/link";
 import Image from "next/image";

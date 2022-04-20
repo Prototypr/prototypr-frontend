@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import dynamic from "next/dynamic";
+
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
+
 import NewPagination from '@/components/pagination'
-import FilterCategory from '@/components/FilterCategory'
-import Breadcrumbs from '@/components/Breadcrumbs'
 import PostTitle from '@/components/post-title'
 
 // import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
 import MoreStories from "@/components/more-stories";
 import NewPagination from "@/components/pagination";
 import FilterCategory from "@/components/FilterCategory";
-import Breadcrumbs from '@/components/Breadcrumbs'
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 import PostTitle from '@/components/post-title'
 
 import get_all_tags from "@/lib/menus/lib/getAllTagsFromMenu";

@@ -21,6 +21,7 @@ export default function VisitCard({
             tags.data.slice(0, 2).map((tag, index) => {
               return (
                 <a
+                key ={index}
                   rel="noreferrer"
                   className="cursor-default inline-block mr-1 text-xs bg-gray-200 p-1 px-2 rounded-lg mt-1 uppercase"
                   // href={`${tag.attributes.slug}`}

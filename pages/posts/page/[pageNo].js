@@ -1,6 +1,8 @@
+import dynamic from "next/dynamic";
+
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
 import EditorPick2 from "@/components/new-index/EditorPick2";
 import NewPagination from '@/components/pagination'
 import Layout from '@/components/layout'

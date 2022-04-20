@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
+import dynamic from "next/dynamic";
 import Layout from '@/components/layout'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
 import NewPagination from '@/components/pagination'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
-import FilterCategory from '@/components/FilterCategory'
-import Breadcrumbs from '@/components/Breadcrumbs'
+const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 import PostTitle from '@/components/post-title'
 
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'

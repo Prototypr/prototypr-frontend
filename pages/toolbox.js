@@ -5,8 +5,8 @@ const MoreStories = dynamic(() => import("@/components/more-stories"));
 import Layout from '@/components/layout'
 import Container from '@/components/container'
 import NewPagination from '@/components/pagination'
-import FilterCategory from '@/components/FilterCategory'
-import Breadcrumbs from '@/components/Breadcrumbs'
+const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 
 // import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
 import { getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
