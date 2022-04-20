@@ -12,7 +12,7 @@ export default function NoticeTranslation() {
              🇪🇸
             </span>
             <p className="ml-3 font-medium text-gray-800">
-              <span>Este articulo solo está disponible en Inglés.</span>
+              <FormattedMessage id="notice.translation.copy" />
             </p>
           </div>
           <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
@@ -20,7 +20,7 @@ export default function NoticeTranslation() {
               
               className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-indigo-50"
             >
-              Learn more
+              <FormattedMessage id="notice.translation.button" />
             </a>
           </div>
         </div>

@@ -65,6 +65,8 @@ const ES = {
     "topicSpotlight.tabs.userWriting": "Escritura de UX",
     "topicSpotlight.tabs.vr": "VR",
     "topicSpotlight.tabs.code": "Código",
+    "notice.translation.copy": "Este artículo solo está disponible en Inglés.",
+    "notice.translation.button": "Aprende más",
     "creatorSpotlight.title":"Spotlight de Creadoro",
     "moretoppicks.title": "Más selecciones principales",
     "moretopicks.button": "Mostrar más fuentes",

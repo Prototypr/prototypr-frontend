@@ -57,6 +57,8 @@ const EN =  {
     "topicSpotlight.tabs.userWriting": "UX Writing",
     "topicSpotlight.tabs.vr": "VR",
     "topicSpotlight.tabs.code": "Code",
+    "notice.translation.copy": "This article is only available in English",
+    "notice.translation.button": "Learn more",
     "creatorSpotlight.title": "Creator Spotlight",
     "moretoppicks.title": "More top picks",
     "moretopicks.button": "Show more feeds",

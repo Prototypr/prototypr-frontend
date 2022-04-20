@@ -105,7 +105,8 @@ export default function Navbar({ activeNav }) {
                     />
                     <img
                       className="hidden lg:block h-8 w-auto"
-                      src={`/static/images/logo${intl.locale=='es-ES'?'-es':''}.svg`}
+                      // src={`/static/images/logo${intl.locale=='es-ES'?'-es':''}.svg`}
+                      src={`/static/images/logo.svg`}
                       alt="Prototypr Logo"
                     />
                   </div>
