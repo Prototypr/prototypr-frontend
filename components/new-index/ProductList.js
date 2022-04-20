@@ -1,4 +1,3 @@
-import React from "react";
 import ProductItem from "@/components/new-index/ProductItem";
 export default function ProductList({ posts = [] }) {
   return (

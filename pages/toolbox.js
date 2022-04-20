@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import dynamic from "next/dynamic";
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+
 import Layout from '@/components/layout'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
 import NewPagination from '@/components/pagination'
 import FilterCategory from '@/components/FilterCategory'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 // import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
-import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
+import { getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 
 import ALL_SLUGS_GROUPS from '@/lib/menus/allTools'
-import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
 
 const PAGE_SIZE = 12;
 

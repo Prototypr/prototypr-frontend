@@ -1,4 +1,6 @@
-import SignupHorizontal from "@/components/newsletter/SignupHorizontal";
+import dynamic from "next/dynamic";
+const SignupHorizontal = dynamic(() => import("@/components/newsletter/SignupHorizontal"), { ssr: true });
+
 import { FormattedMessage } from 'react-intl';
 export default function Intro() {
   return (

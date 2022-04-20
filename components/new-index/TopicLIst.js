@@ -1,6 +1,7 @@
-import React from "react";
-import TopicTopItem from "./TopicTopItem";
-import TopicItem from "./TopicItem";
+import dynamic from "next/dynamic";
+const TopicTopItem = dynamic(() => import("./TopicTopItem"), { ssr: false });
+const TopicItem = dynamic(() => import("./TopicItem"), { ssr: false });
+
 export default function TopicList({ currentTopics = [] }) {
   const heroTopics = currentTopics.length ? currentTopics.slice(0, 2) : [];
   const moreTopics = currentTopics.length ? currentTopics.slice(2) : [];

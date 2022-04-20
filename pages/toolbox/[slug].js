@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
 import ErrorPage from "next/error";
 import Container from "@/components/container";
 import Layout from "@/components/layout";
-import PopupGallery from "@/components/gallery/PopupGallery";
-import AuthorCard from "@/components/toolbox/AuthorCard";
-import SponsorCard from "@/components/toolbox/SponsorCard";
+const PopupGallery = dynamic(() => import("@/components/gallery/PopupGallery"));
+const AuthorCard = dynamic(() => import("@/components/toolbox/AuthorCard"));
+const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"));
+const RelatedPosts = dynamic(() => import("@/components/related-posts"));
+
 import Contributors from "@/components/toolbox/Contributors";
 // import Comment from "@/components/toolbox/Comment/Comment";
 import PostTitle from '@/components/post-title'
 import VisitCard from "@/components/toolbox/VisitCard";
-import RelatedPosts from "@/components/related-posts";
 import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
 // import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
 // import markdownToHtml from '@/lib/markdownToHtml'

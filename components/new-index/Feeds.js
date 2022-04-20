@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useIntl } from 'react-intl';
 const FeedItem = dynamic(() => import("./FeedItem"), { ssr: false });

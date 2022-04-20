@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Tabs from "./Tabs";
-import TopicList from "./TopicLIst";
+import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
+const Tabs = dynamic(() => import("./Tabs"), { ssr: false });
+const TopicList = dynamic(() => import("./TopicLIst"), { ssr: false });
+
 import { useIntl } from 'react-intl';
 export default function TopicSpolights({ tabs = [], topics = {} }) {
   const intl = useIntl();
 
-  const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const [currentTopic, setCurrentTopic] = useState([]);
 
   const onTabChanged = (tag) => {

@@ -1,8 +1,11 @@
+import dynamic from "next/dynamic";
+
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
 import PostBody from '@/components/post-body'
-import TopicTopItem from '@/components/new-index/TopicTopItem'
+const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
+
 import PostHeader from '@/components/post-header'
 import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
@@ -10,7 +13,7 @@ import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
 import PostTitle from '@/components/post-title'
 import Head from 'next/head'
 import NoticeTranslation from '@/components/notice-translation'
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
 export default function Post({ post, morePosts, preview, relatedPosts, combinedRelatedPosts, title, content}) {
   const router = useRouter()

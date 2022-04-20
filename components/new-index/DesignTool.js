@@ -1,22 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
-import BScroll from "better-scroll";
+import dynamic from "next/dynamic";
+const BScroll = dynamic(() => import("better-scroll"), { ssr: false });
+
 import Link from "next/link";
 import Image from "next/image";
 import { useIntl } from 'react-intl';
-const getItems = () =>
-  Array(20)
-    .fill(0)
-    .map((_, ind) => ({ id: `element-${ind}` }));
+
 const ITEM_WIDTH = 300;
+
 export default function DesignTool({ allTools = [] }) {
 
   const intl = useIntl();
   
-  const [list, setList] = useState(getItems);
   const [scroll, setScroll] = useState(null);
 
   const [currentIndex, setCurrentIndex] = useState(3);
-  const [initialized, setInitialized] = useState(false);
   const [scrollX, setScrollX] = useState(-1);
 
   const wrapper = useRef();
