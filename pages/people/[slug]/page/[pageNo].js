@@ -1,10 +1,10 @@
-import React from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
 import PostListItem from "@/components/people/PostListItem";
 import KoFiButton from "@/components/people/KoFiButton";
-import NewPagination from "@/components/pagination";
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import PostTitle from '@/components/post-title'
 import Image from "next/image";
 

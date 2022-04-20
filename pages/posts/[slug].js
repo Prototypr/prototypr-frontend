@@ -1,14 +1,14 @@
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
-import NewPagination from '@/components/pagination'
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
-import Aspiring from "@/components/new-index/Aspiring";
+const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
-import ProductList from "@/components/new-index/ProductList";
-import TopicTopItem from "@/components/new-index/TopicTopItem"
+const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
+const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
 
 const PAGE_SIZE = 11;
 const ALL_SLUGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]

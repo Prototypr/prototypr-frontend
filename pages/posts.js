@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
 const MoreStories = dynamic(() => import("@/components/more-stories"));
-import NewPagination from '@/components/pagination'
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 import { FormattedMessage, useIntl } from 'react-intl';

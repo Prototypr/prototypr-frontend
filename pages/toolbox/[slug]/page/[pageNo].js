@@ -7,7 +7,7 @@ const MoreStories = dynamic(() => import("@/components/more-stories"));
 const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
 const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 
-import NewPagination from '@/components/pagination'
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import PostTitle from '@/components/post-title'
 
 // import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'

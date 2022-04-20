@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Layout from '@/components/layout'
 import Container from '@/components/container'
 const MoreStories = dynamic(() => import("@/components/more-stories"));
-import NewPagination from '@/components/pagination'
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
 const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));

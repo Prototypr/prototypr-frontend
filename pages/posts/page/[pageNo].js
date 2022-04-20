@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Container from '@/components/container'
 const MoreStories = dynamic(() => import("@/components/more-stories"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
-import NewPagination from '@/components/pagination'
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
 import { FormattedMessage, useIntl } from 'react-intl';
 import PostTitle from '@/components/post-title'
