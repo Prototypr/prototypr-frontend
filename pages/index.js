@@ -100,7 +100,7 @@ export async function getStaticProps({ preview = null, locale}) {
   }
 
   const allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
-  const allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0)) || [];
+  const allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0, sort)) || [];
   const otherPosts = (await getCombinedPostsForHome(preview, 8, 7)) || [];
   const interviews =
     (await getCommonQuery(preview, ["interview"], "article", 4, 0)) || [];

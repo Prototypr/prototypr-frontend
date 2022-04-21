@@ -20,6 +20,7 @@ module.exports = {
       "cdn.dribbble.com",
       "secure.gravatar.com",
       "cdn-images-1.medium.com",
+      "claritee.io"
     ],
   },
 };

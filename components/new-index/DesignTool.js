@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import BScroll from "better-scroll";
 import Link from "next/link";
 import Image from "next/image";
+import { transformOfContentAndTitle } from "@/lib/locale/transformLocale";
 import { useIntl } from 'react-intl';
 const getItems = () =>
   Array(20)
@@ -11,6 +12,7 @@ const ITEM_WIDTH = 300;
 export default function DesignTool({ allTools = [] }) {
 
   const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   
   const [list, setList] = useState(getItems);
   const [scroll, setScroll] = useState(null);
@@ -120,6 +122,7 @@ export default function DesignTool({ allTools = [] }) {
             {allTools.length
               ? allTools.map((item, index) => {
                   const showItem = item?.attributes;
+                  const res = transformOfContentAndTitle(item);
                   return (
                     <div
                       key={`h_item_${index}`}
@@ -180,7 +183,7 @@ export default function DesignTool({ allTools = [] }) {
                         <Link href={`/toolbox/${showItem.slug}`}>
                           <div className="px-3 w-full">
                             <div className="text-gray-1 hover:underline text-lg font-bold leading-6">
-                              {showItem.title}
+                              {res.title[locale]}
                             </div>
                             {showItem.tags?.data[0] && (
                               <div className="font-normal text-xs leading-6 tracking-wide uppercase text-gray-3">
