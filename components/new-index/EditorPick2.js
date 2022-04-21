@@ -20,7 +20,7 @@ export default function EditorPick({ post = {}, header = false }) {
   } = postItem;
   const tagArr = tags.data;
   const res = transformOfContentAndTitle(post);
-  console.log(res.content)
+  // console.log(res.content)
 
   return (
     <div className="pb-10 px-3 xl:px-0">
