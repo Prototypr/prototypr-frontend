@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { transformOfContentAndTitle } from "@/lib/locale/transformLocale";
+import { useIntl } from "react-intl";
 export default function ProductItem({ post = {} }) {
+  const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   const {
     title = "",
     excerpt,
@@ -10,8 +14,10 @@ export default function ProductItem({ post = {} }) {
     legacyFeaturedImage = null,
     featuredImage = null,
     author = null,
-  } = post;
+  } = post?.attributes;
   const tagArr = tags.data;
+  const res = transformOfContentAndTitle(post);
+  
   return (
     <div className="grid-cols-1 flex items-top py-2 group">
       <figure className="relative h-0 w-36 h-36 sm:w-40 sm:h-40 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
@@ -37,7 +43,7 @@ export default function ProductItem({ post = {} }) {
         </div>
         <h4 className="font-semibold text-lg leading-7 text-gray-1 md:w-2/3">
           <Link href={`/post/${slug}`}>
-            <a className="group-hover:underline">{title}</a>
+            <a className="group-hover:underline">{res.title[locale]}</a>
           </Link>
         </h4>
         <div className="mt-3 flex items-center">

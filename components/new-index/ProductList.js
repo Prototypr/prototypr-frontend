@@ -8,7 +8,7 @@ export default function ProductList({ posts = [] }) {
             return (
               <ProductItem
                 key={`product_item_${index}`}
-                post={item?.attributes}
+                post={item}
               />
             );
           })
