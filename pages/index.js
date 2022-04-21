@@ -92,8 +92,14 @@ export default function Index({
   );
 }
 
-export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getCombinedPostsForHome(preview, 7, 0)) || [];
+export async function getStaticProps({ preview = null, locale}) {
+
+  let sort = ["featured:desc","tier:asc",  "date:desc"]
+  if(locale=='es-ES'){
+    sort = ["esES:asc","featured:desc","tier:asc",  "date:desc"]
+  }
+
+  const allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
   const allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0)) || [];
   const otherPosts = (await getCombinedPostsForHome(preview, 8, 7)) || [];
   const interviews =
@@ -118,3 +124,13 @@ export async function getStaticProps({ preview = null }) {
     revalidate: 20,
   };
 }
+
+// export const getStaticPaths = ({ locales }) => {
+//   return {
+//     paths: [
+//       { params: {}, locale: 'en-US' },
+//       { params: { }, locale: 'en-ES' },
+//     ],
+//     fallback: true,
+//   }
+// }
