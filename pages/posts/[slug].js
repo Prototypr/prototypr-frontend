@@ -51,6 +51,7 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
 }
 
 export async function getStaticProps({ preview = null, params,locale }) {
+    console.log('locale*******' + locale)
     let sort = ["featured:desc","tier:asc",  "date:desc"]
     if(locale === 'es-ES'){
       sort = ["esES:asc","featured:desc","tier:asc","date:desc"]

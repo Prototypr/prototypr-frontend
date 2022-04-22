@@ -84,7 +84,11 @@ export default function ToolboxPage({
   );
 }
 
-export async function getStaticProps({ preview = null, params }) {
+export async function getStaticProps({ preview = null, params, locale }) {
+  let sort = ["date:desc"]
+  if(locale === 'es-ES'){
+    sort = ["esES:asc","date:desc"]
+  }
   const pageSize = PAGE_SIZE;
   const { pageNo, slug } = params;
 
@@ -95,10 +99,9 @@ export async function getStaticProps({ preview = null, params }) {
       preview,
       pageSize,
       pageNo,
-      foundSlug.tags
+      foundSlug.tags,
+      sort
     )) || [];
-  // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
-  // console.log('page info**********' + JSON.stringify(allPosts.meta.pagination))
   const pagination = allPosts.meta.pagination;
   return {
     props: {
@@ -127,23 +130,6 @@ export async function getStaticPaths() {
     })
     pageCountArr = pageCountArr.concat(newArr)
   }
-  // ALL_SLUGS_CATEGORY.map(async (item, index) => {
-  //   const allPosts =
-  //     (await getAllPostsForToolsSubcategoryPage(
-  //       null,
-  //       PAGE_SIZE,
-  //       0,
-  //       item.tags
-  //     )) || [];
-  //   // const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0,["whiteboard"])) || []
-  //   const pagination = allPosts.meta.pagination;
-  //   const pageCount = pagination.pageCount;
-  //   let arr = new Array(pageCount).fill("");
-  //   let newArr = arr.map((i, index) => {
-  //     return `prototyping/${item.key}/page/${index + 1}`;
-  //   });
-  //   pageCountArr = pageCountArr.concat(newArr);
-  // });
   return {
     paths: pageCountArr || [],
     fallback: true,
