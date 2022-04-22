@@ -10,14 +10,14 @@ export default function TopicList({ currentTopics = [] }) {
       {heroTopics.length
         ? heroTopics.map((item, index) => {
             return (
-              <TopicTopItem key={`topic_${index}`} topic={item?.attributes} />
+              <TopicTopItem key={`topic_${index}`} topic={item} />
             );
           })
         : null}
       {moreTopics.length
         ? moreTopics.map((item, index) => {
             return (
-              <TopicItem key={`topic_${index}`} topic={item?.attributes} />
+              <TopicItem key={`topic_${index}`} topic={item} />
             );
           })
         : null}

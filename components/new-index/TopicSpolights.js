@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Tabs from "./Tabs";
-import TopicList from "./TopicLIst";
+import TopicList from "./TopicList";
 import { useIntl } from 'react-intl';
 export default function TopicSpolights({ tabs = [], topics = {} }) {
   const intl = useIntl();

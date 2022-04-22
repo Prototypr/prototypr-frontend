@@ -12,13 +12,14 @@ import PostTitle from '@/components/post-title'
 import VisitCard from "@/components/toolbox/VisitCard";
 import RelatedPosts from "@/components/related-posts";
 import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
+import { transformOfContentAndTitle } from "@/lib/locale/transformLocale";
+import { useIntl } from 'react-intl';
 // import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
 // import markdownToHtml from '@/lib/markdownToHtml'
 
 export default function Post({ post, morePosts, relatedPosts, gallery, preview }) {
-  // console.log("toolbox page:post*********" + JSON.stringify(post.attributes))
-  // const postItem = MOCK_UP_ITEM;
-  // console.log("relatedPosts*******" + JSON.stringify(relatedPosts))
+  const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   const router = useRouter();
   //TODO: what is withAuthUser
   const withAuthUser = {};
@@ -29,8 +30,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
 
   const setUserAuthenticated = () => {};
 
-  useEffect(() => {
-  }, []);
+  const res = transformOfContentAndTitle(post);
 
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
@@ -59,7 +59,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
           <div className="col-span-full lg:col-span-13">
             {post && post.attributes && (
               <PopupGallery
-                body={post.attributes.content}
+                body={res.content[locale]}
                 item={post.attributes}
                 gallery={gallery}
                 rounded={true}
@@ -76,7 +76,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
                 <div
                   style={{ color: "#4a5568", marginBottom: "1rem" }}
                   className="py-3 popup-modal-content"
-                  dangerouslySetInnerHTML={{ __html: post?.attributes.content }}
+                  dangerouslySetInnerHTML={{ __html: res.content[locale] }}
                 ></div>
               </div>
             </div>
@@ -94,7 +94,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
           <div className="col-span-full mb-6 lg:mb-0 lg:col-span-6 order-first lg:order-last lg:block">
               <VisitCard 
                 tags={post?.attributes.tags}
-                title={post?.attributes.title}
+                title={res.content[title]}
                 link={post?.attributes.link}
                 useNextImage={true}
                 logoNew={post?.attributes.legacyFeaturedImage?.logoNew}

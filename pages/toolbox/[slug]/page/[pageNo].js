@@ -8,7 +8,6 @@ import FilterCategory from '@/components/FilterCategory'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import PostTitle from '@/components/post-title'
 
-// import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 
 import ALL_SLUGS_GROUPS from '@/lib/menus/allTools'

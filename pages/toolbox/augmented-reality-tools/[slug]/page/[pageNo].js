@@ -7,7 +7,6 @@ import NewPagination from '@/components/pagination'
 import FilterCategory from '@/components/FilterCategory'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
-// import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
 
