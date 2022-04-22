@@ -31,7 +31,7 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
             
             <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
             {first2Posts?.length>0 &&  first2Posts.map((item, index) => {
-                    return <TopicTopItem key={`topic_${index}`} topic={item?.attributes} />
+                    return <TopicTopItem key={`topic_${index}`} topic={item} />
                 })}
             </section>
             {heroPost && <EditorPick2 post={heroPost} showTitle={false} />}
@@ -50,11 +50,15 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
       )
 }
 
-export async function getStaticProps({ preview = null, params }) {
+export async function getStaticProps({ preview = null, params,locale }) {
+    let sort = ["featured:desc","tier:asc",  "date:desc"]
+    if(locale === 'es-ES'){
+      sort = ["esES:asc","featured:desc","tier:asc","date:desc"]
+    }
     const pageSize = PAGE_SIZE
     const {slug} = params
     const pageNo = 1
-    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug])) || []
+    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug],sort)) || []
 
     let tags = allPosts[1]
     allPosts = allPosts[0]
