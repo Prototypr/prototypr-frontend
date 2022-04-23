@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import BScroll from "better-scroll";
 import Link from "next/link";
 import Image from "next/image";
-import { transformOfContentAndTitle } from "@/lib/locale/transformLocale";
 import { useIntl } from 'react-intl';
 const getItems = () =>
   Array(20)
@@ -39,7 +38,6 @@ export default function DesignTool({ allTools = [] }) {
       initScroll();
     }
   }, [allTools]);
-
   /**
    * for accessibility
    */
@@ -122,7 +120,6 @@ export default function DesignTool({ allTools = [] }) {
             {allTools.length
               ? allTools.map((item, index) => {
                   const showItem = item?.attributes;
-                  const res = transformOfContentAndTitle(item);
                   return (
                     <div
                       key={`h_item_${index}`}
@@ -130,7 +127,7 @@ export default function DesignTool({ allTools = [] }) {
                       className="h-full mx-5 group hover:shadow-md transition duration-500 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer"
                     >
                       <div className="w-full rounded-lg h-46 relative bg-no-repeat bg-100">
-                        {showItem.legacyFeaturedImage.imgUrl ? (
+                        {showItem.legacyFeaturedImage.mediaItemUrl ? (
                           <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
                             <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
                               <Link href={`/toolbox/${showItem.slug}`}>
@@ -138,7 +135,7 @@ export default function DesignTool({ allTools = [] }) {
                                   className="rounded-lg contrast-115"
                                   objectFit="cover"
                                   layout="fill"
-                                  src={showItem.legacyFeaturedImage.imgUrl}
+                                  src={showItem.legacyFeaturedImage.mediaItemUrl}
                                 />
                               </Link>
                             </div>
@@ -183,7 +180,7 @@ export default function DesignTool({ allTools = [] }) {
                         <Link href={`/toolbox/${showItem.slug}`}>
                           <div className="px-3 w-full">
                             <div className="text-gray-1 hover:underline text-lg font-bold leading-6">
-                              {res.title[locale]}
+                              {showItem.title}
                             </div>
                             {showItem.tags?.data[0] && (
                               <div className="font-normal text-xs leading-6 tracking-wide uppercase text-gray-3">

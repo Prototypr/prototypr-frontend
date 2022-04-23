@@ -12,12 +12,13 @@ import PostTitle from '@/components/post-title'
 import VisitCard from "@/components/toolbox/VisitCard";
 import RelatedPosts from "@/components/related-posts";
 import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
-import { transformOfContentAndTitle } from "@/lib/locale/transformLocale";
 import { useIntl } from 'react-intl';
+import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
+
 // import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
 // import markdownToHtml from '@/lib/markdownToHtml'
 
-export default function Post({ post, morePosts, relatedPosts, gallery, preview }) {
+export default function Post({ post, relatedPosts, gallery, preview }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
   const router = useRouter();
@@ -30,7 +31,6 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
 
   const setUserAuthenticated = () => {};
 
-  const res = transformOfContentAndTitle(post);
 
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
@@ -59,7 +59,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
           <div className="col-span-full lg:col-span-13">
             {post && post.attributes && (
               <PopupGallery
-                body={res.content[locale]}
+                // body={content}
                 item={post.attributes}
                 gallery={gallery}
                 rounded={true}
@@ -76,7 +76,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
                 <div
                   style={{ color: "#4a5568", marginBottom: "1rem" }}
                   className="py-3 popup-modal-content"
-                  dangerouslySetInnerHTML={{ __html: res.content[locale] }}
+                  dangerouslySetInnerHTML={{ __html: post.attributes.content }}
                 ></div>
               </div>
             </div>
@@ -94,7 +94,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
           <div className="col-span-full mb-6 lg:mb-0 lg:col-span-6 order-first lg:order-last lg:block">
               <VisitCard 
                 tags={post?.attributes.tags}
-                title={res.content[title]}
+                title={post.attributes.title}
                 link={post?.attributes.link}
                 useNextImage={true}
                 logoNew={post?.attributes.legacyFeaturedImage?.logoNew}
@@ -115,7 +115,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
   );
 }
 
-export async function getStaticProps({ params, preview = null }) {
+export async function getStaticProps({ params, preview = null, locale }) {
   const data = await getToolsAndMoreTools(params.slug, preview);
 
   //get the tags for the next query
@@ -126,7 +126,7 @@ export async function getStaticProps({ params, preview = null }) {
       tagsArr.push(tags.data[x].attributes.slug)
     }
   }
-  const relatedPostsData = await getRelatedTools(tagsArr,params.slug, preview);
+  let relatedPostsData = await getRelatedTools(tagsArr,params.slug, preview);
 
   //build the gallery here
   let PHOTO_SET = [];
@@ -153,16 +153,21 @@ export async function getStaticProps({ params, preview = null }) {
     }
   }
 
+  data?.posts.data[0] = transformPost(data?.posts.data[0], locale)
+  relatedPostsData = transformPostList(relatedPostsData?.posts.data, locale)
+
+
+
+
   return {
     props: {
       preview,
       post: {
         ...data?.posts.data[0],
-        // content,
       },
       gallery:PHOTO_SET,
-      relatedPosts:relatedPostsData?.posts.data,
-      morePosts: data?.morePosts.data,
+      relatedPosts:relatedPostsData,
+      // morePosts: data?.morePosts.data,
     },
   };
 }

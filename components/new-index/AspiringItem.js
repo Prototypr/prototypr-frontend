@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { transformOfContentAndTitle } from "@/lib/locale/transformLocale";
 import { useIntl } from 'react-intl';
 export default function AspiringItem({ post = {} }) {
   const intl = useIntl();
@@ -16,7 +15,6 @@ export default function AspiringItem({ post = {} }) {
     featuredImage = null,
     author = null,
   } = post?.attributes;
-  const res = transformOfContentAndTitle(post);
   return (
     <div className="grid-cols-1 cursor-pointer group">
       <figure className="relative w-full h-64 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
@@ -39,13 +37,13 @@ export default function AspiringItem({ post = {} }) {
       </div>
       <h4 className="text-black-1 font-semibold text-lg leading-normal mt-1">
         <Link href={`/post/${slug}`}>
-          <a className="group-hover:underline">{res.title[locale]}</a>
+          <a className="group-hover:underline">{title}</a>
         </Link>
       </h4>
 
       <p
         className="text-gray-3 text-base leading-normal font-normal overflow-hidden text-ellipsis clamp-3 mt-2"
-        dangerouslySetInnerHTML={{ __html: res.content[locale]  }}
+        dangerouslySetInnerHTML={{ __html: excerpt  }}
       ></p>
     </div>
   );

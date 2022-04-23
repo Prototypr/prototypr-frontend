@@ -1,7 +1,6 @@
 import Author from "./Author";
 import Image from "next/image";
 import Link from "next/link";
-import { transformOfContentAndTitle } from "@/lib/locale/transformLocale";
 import { useIntl } from "react-intl";
 export default function TopicTopItem({ topic = {} }) {
   const intl = useIntl();
@@ -17,7 +16,6 @@ export default function TopicTopItem({ topic = {} }) {
     author = null,
   } = topic?.attributes;
   const tagArr = tags.data;
-  const res = transformOfContentAndTitle(topic);
   return (
     <div className="grid-cols-1 bg-white p-6 flex flex-col sm:flex-row cursor-pointer group">
       <figure className="relative w-full sm:w-1/2 h-64 mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
@@ -54,13 +52,13 @@ export default function TopicTopItem({ topic = {} }) {
         <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
           {slug && (
             <Link href={`/post/${slug}`}>
-              <a className="group-hover:underline">{res.title[locale]}</a>
+              <a className="group-hover:underline">{title}</a>
             </Link>
           )}
         </h4>
         <div
           className="mt-3 text-gray-3 font-normal text-base leading-normal overflow-hidden text-ellipsis clamp-2"
-          dangerouslySetInnerHTML={{ __html: res.content[locale] }}
+          dangerouslySetInnerHTML={{ __html: excerpt}}
         ></div>
         <div className="flex items-center mt-5">
           <Author

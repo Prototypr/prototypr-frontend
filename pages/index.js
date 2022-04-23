@@ -17,6 +17,8 @@ import {
 } from "@/lib/api";
 import Head from "next/head";
 import { FormattedMessage, useIntl } from 'react-intl';
+import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
+
 const TAB_ITEMS = [
   {
     slug: "accessibility",
@@ -94,14 +96,14 @@ export default function Index({
 
 export async function getStaticProps({ preview = null, locale}) {
 
-  let sort = ["featured:desc","tier:asc",  "date:desc"]
+  let sort = ["featured:desc","tier:asc","date:desc"]
   if(locale=='es-ES'){
     sort = ["esES:asc","featured:desc","tier:asc",  "date:desc"]
   }
 
-  const allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
-  const allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0, sort)) || [];
-  const otherPosts = (await getCombinedPostsForHome(preview, 8, 7)) || [];
+  let allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
+  let allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0, sort)) || [];
+  let otherPosts = (await getCombinedPostsForHome(preview, 8, 7, sort)) || [];
   const interviews =
     (await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
   let topicRes = {};
@@ -112,11 +114,15 @@ export async function getStaticProps({ preview = null, locale}) {
     topicRes[tag] = res.data;
   }
 
+  allPosts = transformPostList(allPosts.data, locale)
+  allTools = transformPostList(allTools.data, locale)
+  otherPosts = transformPostList(otherPosts.data, locale)
+
   return {
     props: {
-      allPosts: allPosts.data,
-      allTools: allTools.data,
-      otherPosts: otherPosts.data,
+      allPosts: allPosts,
+      allTools: allTools,
+      otherPosts: otherPosts,
       interviewPosts: interviews.data,
       topicRes,
       preview,
