@@ -16,7 +16,7 @@ export default function EditorPick({ post = {}, header = false }) {
     tags,
     legacyFeaturedImage = null,
     featuredImage = null,
-    author = null,
+    author = {},
   } = postItem;
   const tagArr = tags.data;
   const res = transformOfContentAndTitle(post);
@@ -99,7 +99,7 @@ export default function EditorPick({ post = {}, header = false }) {
                     <div className="mr-4 relative flex-shrink-0 hover:cursor-pointer">
                       <Image
                         className="rounded-full"
-                        src={author?.data?.attributes?.avatar}
+                        src={author?.data?.attributes?.avatar ? author?.data?.attributes?.avatar : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}
                         width={40}
                         height={40}
                         objectFit="cover"

@@ -18,7 +18,7 @@ export default function Feeds({ posts = [] }) {
               return (
                 <FeedItem
                   textColor={"text-gray-500"}
-                  post={item?.attributes}
+                  post={item}
                   index={index}
                   author={item?.attributes?.author?.data?.attributes}
                   key={`col1_${index}`}

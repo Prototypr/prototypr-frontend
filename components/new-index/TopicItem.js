@@ -41,7 +41,7 @@ export default function TopicItem({ topic = {} }) {
         </div>
         <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
           <Link href={`/post/${slug}`}>
-            <a className="group-hover:underline">{title}</a>
+            <a className="group-hover:underline">{res.title[locale]}</a>
           </Link>
         </h4>
         <div className="flex items-center mt-4">

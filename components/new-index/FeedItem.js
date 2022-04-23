@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import Author from "@/components/new-index/Author";
+import { transformOfContentAndTitle } from "@/lib/locale/transformLocale";
+import { useIntl } from 'react-intl';
 export default function FeedItem({ height = 20, post = {}, index = 0 }) {
   const {
     title = "",
@@ -11,10 +13,13 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
     legacyFeaturedImage = null,
     featuredImage = null,
     author = null,
-  } = post;
+  } = post?.attributes;
+  const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
+  const res = transformOfContentAndTitle(post);
   const tagArr = tags.data;
   return (
-    <div className="cursor-pointer py-6 px-1 inline-block w-full group">
+    <div className="cursor-pointer py-6 px-1 inline-block w-full group" style={{border: "1px solid red"}}>
       <figure
         className={`relative h-64 ${
           index % 2 == 0 ? "md:h-96" : "md:h-64"
@@ -40,7 +45,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
       </div>
       <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
         <Link href={`/post/${slug}`}>
-          <a className="group-hover:underline">{title}</a>
+          <a className="group-hover:underline">{res.title[locale]}</a>
         </Link>
       </h4>
       <div className="mt-3">

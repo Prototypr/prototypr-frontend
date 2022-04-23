@@ -103,12 +103,12 @@ export async function getStaticProps({ preview = null, locale}) {
   const allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0, sort)) || [];
   const otherPosts = (await getCombinedPostsForHome(preview, 8, 7)) || [];
   const interviews =
-    (await getCommonQuery(preview, ["interview"], "article", 4, 0)) || [];
+    (await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
   let topicRes = {};
 
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].slug;
-    const res = (await getCommonQuery(preview, [tag], "article", 6, 0)) || [];
+    const res = (await getCommonQuery(preview, [tag], "article", 6, 0, sort)) || [];
     topicRes[tag] = res.data;
   }
 
