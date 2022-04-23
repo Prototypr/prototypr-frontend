@@ -19,7 +19,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
   const res = transformOfContentAndTitle(post);
   const tagArr = tags.data;
   return (
-    <div className="cursor-pointer py-6 px-1 inline-block w-full group" style={{border: "1px solid red"}}>
+    <div className="cursor-pointer py-6 px-1 inline-block w-full group">
       <figure
         className={`relative h-64 ${
           index % 2 == 0 ? "md:h-96" : "md:h-64"
