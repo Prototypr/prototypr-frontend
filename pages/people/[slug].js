@@ -288,6 +288,7 @@ export async function getStaticProps({ preview = null, params }) {
   const pageNo = 1
 
   let allPosts = (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug])) || []
+
   const pagination = allPosts.meta.pagination
   let author = allPosts.data.length && allPosts.data[0] ? allPosts.data[0].attributes.author: {}
   author = author.data.attributes
