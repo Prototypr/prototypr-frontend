@@ -18,7 +18,9 @@ import {
   getCommonQuery,
 } from "@/lib/api";
 import Head from "next/head";
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { transformPostList } from "@/lib/locale/transformLocale";
+
 const TAB_ITEMS = [
   {
     slug: "accessibility",
@@ -88,25 +90,35 @@ export default function Index({
   );
 }
 
-export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getCombinedPostsForHome(preview, 7, 0)) || [];
-  const allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0)) || [];
-  const otherPosts = (await getCombinedPostsForHome(preview, 8, 7)) || [];
+export async function getStaticProps({ preview = null, locale}) {
+
+  let sort = ["featured:desc","tier:asc","date:desc"]
+  if(locale=='es-ES'){
+    sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
+  }
+
+  let allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
+  let allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0, sort)) || [];
+  let otherPosts = (await getCombinedPostsForHome(preview, 8, 7, sort)) || [];
   const interviews =
-    (await getCommonQuery(preview, ["interview"], "article", 4, 0)) || [];
+    (await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
   let topicRes = {};
 
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].slug;
-    const res = (await getCommonQuery(preview, [tag], "article", 6, 0)) || [];
+    const res = (await getCommonQuery(preview, [tag], "article", 6, 0, sort)) || [];
     topicRes[tag] = res.data;
   }
 
+  allPosts = transformPostList(allPosts.data, locale)
+  allTools = transformPostList(allTools.data, locale)
+  otherPosts = transformPostList(otherPosts.data, locale)
+
   return {
     props: {
-      allPosts: allPosts.data,
-      allTools: allTools.data,
-      otherPosts: otherPosts.data,
+      allPosts: allPosts,
+      allTools: allTools,
+      otherPosts: otherPosts,
       interviewPosts: interviews.data,
       topicRes,
       preview,
@@ -114,3 +126,13 @@ export async function getStaticProps({ preview = null }) {
     revalidate: 20,
   };
 }
+
+// export const getStaticPaths = ({ locales }) => {
+//   return {
+//     paths: [
+//       { params: {}, locale: 'en-US' },
+//       { params: { }, locale: 'en-ES' },
+//     ],
+//     fallback: true,
+//   }
+// }

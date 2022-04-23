@@ -1,7 +1,10 @@
 import Author from "./Author";
 import Image from "next/image";
 import Link from "next/link";
+import { useIntl } from "react-intl";
 export default function TopicTopItem({ topic = {} }) {
+  const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   const {
     title = "",
     excerpt,
@@ -11,9 +14,8 @@ export default function TopicTopItem({ topic = {} }) {
     legacyFeaturedImage = null,
     featuredImage = null,
     author = null,
-  } = topic;
+  } = topic?.attributes;
   const tagArr = tags.data;
-
   return (
     <div className="grid-cols-1 bg-white p-6 flex flex-col sm:flex-row cursor-pointer group">
       <figure className="relative w-full sm:w-1/2 h-64 mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
@@ -56,7 +58,7 @@ export default function TopicTopItem({ topic = {} }) {
         </h4>
         <div
           className="mt-3 text-gray-3 font-normal text-base leading-normal overflow-hidden text-ellipsis clamp-2"
-          dangerouslySetInnerHTML={{ __html: excerpt }}
+          dangerouslySetInnerHTML={{ __html: excerpt}}
         ></div>
         <div className="flex items-center mt-5">
           <Author
@@ -64,8 +66,6 @@ export default function TopicTopItem({ topic = {} }) {
             authorName={author?.data?.attributes?.name}
             author={author}
           />
-          {/* <div style={{width: "36px",height: "36px",border: "1px solid red"}} className="rounded-full mr-3"></div>
-                    <div className="font-medium text-base leading-normal text-gray-1">Justin Rhiel Madsen</div> */}
         </div>
       </div>
     </div>

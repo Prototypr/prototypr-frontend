@@ -78,11 +78,15 @@ export default function ToolboxPage({
   );
 }
 
-export async function getStaticProps({ preview = null, params }) {
+export async function getStaticProps({ preview = null, params,locale }) {
+  let sort = ["date:desc"]
+  if(locale === 'es-ES'){
+    sort = ["esES:asc","date:desc"]
+  }
   const pageSize = PAGE_SIZE;
   const page = params.pageNo;
   const allPosts =
-    (await getPostsByPageForToolsPage(preview, pageSize, page)) || [];
+    (await getPostsByPageForToolsPage(preview, pageSize, page, sort)) || [];
   const pagination = allPosts.meta.pagination;
   return {
     props: {

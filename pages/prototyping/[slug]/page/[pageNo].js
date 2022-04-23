@@ -85,7 +85,11 @@ export default function ToolboxPage({
   );
 }
 
-export async function getStaticProps({ preview = null, params }) {
+export async function getStaticProps({ preview = null, params, locale }) {
+  let sort = ["date:desc"]
+  if(locale === 'es-ES'){
+    sort = ["esES:asc","date:desc"]
+  }
   const pageSize = PAGE_SIZE;
   const { pageNo, slug } = params;
 
@@ -96,10 +100,9 @@ export async function getStaticProps({ preview = null, params }) {
       preview,
       pageSize,
       pageNo,
-      foundSlug.tags
+      foundSlug.tags,
+      sort
     )) || [];
-  // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
-  // console.log('page info**********' + JSON.stringify(allPosts.meta.pagination))
   const pagination = allPosts.meta.pagination;
   return {
     props: {

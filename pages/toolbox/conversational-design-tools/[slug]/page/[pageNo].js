@@ -8,7 +8,6 @@ const NewPagination = dynamic(() => import("@/components/pagination"));
 const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
 const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 
-// import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
 const PAGE_SIZE = 12;

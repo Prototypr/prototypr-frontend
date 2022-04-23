@@ -12,6 +12,7 @@ const ITEM_WIDTH = 300;
 export default function DesignTool({ allTools = [] }) {
 
   const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   
   const [scroll, setScroll] = useState(null);
 
@@ -36,7 +37,6 @@ export default function DesignTool({ allTools = [] }) {
       initScroll();
     }
   }, [allTools]);
-
   /**
    * for accessibility
    */
@@ -126,7 +126,7 @@ export default function DesignTool({ allTools = [] }) {
                       className="h-full mx-5 group hover:shadow-md transition duration-500 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer"
                     >
                       <div className="w-full rounded-lg h-46 relative bg-no-repeat bg-100">
-                        {showItem.legacyFeaturedImage.imgUrl ? (
+                        {showItem.legacyFeaturedImage.mediaItemUrl ? (
                           <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
                             <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
                               <Link href={`/toolbox/${showItem.slug}`}>
@@ -134,7 +134,7 @@ export default function DesignTool({ allTools = [] }) {
                                   className="rounded-lg contrast-115"
                                   objectFit="cover"
                                   layout="fill"
-                                  src={showItem.legacyFeaturedImage.imgUrl}
+                                  src={showItem.legacyFeaturedImage.mediaItemUrl}
                                 />
                               </Link>
                             </div>

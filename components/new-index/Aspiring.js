@@ -20,7 +20,7 @@ export default function Aspiring({ posts = [], showTitle = true }) {
               return (
                 <AspiringItem
                   key={`AspiringItem_${index}`}
-                  post={item?.attributes}
+                  post={item}
                 />
               );
             })
