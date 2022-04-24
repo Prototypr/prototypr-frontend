@@ -41,7 +41,7 @@ export default function EditorPick({ post = {}, header = false }) {
                   <Image
                     layout="fill"
                     objectFit="cover"
-                    src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl && legacyFeaturedImage.mediaItemUrl}
+                    src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl ? legacyFeaturedImage.mediaItemUrl:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                     alt="Blog post"
                   />
                 </div>

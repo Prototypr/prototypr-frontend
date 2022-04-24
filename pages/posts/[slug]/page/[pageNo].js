@@ -5,6 +5,7 @@ const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
+import { transformPostList } from "@/lib/locale/transformLocale";
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
@@ -54,7 +55,7 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
 export async function getStaticProps({ preview = null, params, locale }) {
     let sort = ["featured:desc","tier:asc",  "date:desc"]
     if(locale === 'es-ES'){
-      sort = ["esES:asc","featured:desc","tier:asc","date:desc"]
+      sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
     }
     const pageSize = PAGE_SIZE
     const {pageNo, slug} = params
@@ -67,21 +68,23 @@ export async function getStaticProps({ preview = null, params, locale }) {
     
     let first4 = [],first2=[], nextPosts = [], morePosts = [], heroPost = null
     
+    allPosts = transformPostList(allPosts.data, locale)
+    
     // if first page, divide posts into sections
     if(pageNo == 1){
-      first4 = allPosts.data.slice(0, 4);
-      if(allPosts.data && allPosts.data.length>4){
-        nextPosts = allPosts?.data.slice(4)
+      first4 = allPosts.slice(0, 4);
+      if(allPosts && allPosts.length>4){
+        nextPosts = allPosts?.slice(4)
         heroPost = nextPosts[0];
         morePosts = nextPosts.slice(1);
       }
       
     }else{
      // otherwise, just send back the list without splicing
-     first2 = allPosts.data.slice(0, 2);
-     morePosts = allPosts.data.slice(2)
+     first2 = allPosts.slice(0, 2);
+     morePosts = allPosts.slice(2)
      
-     nextPosts = allPosts.data
+     nextPosts = allPosts
     }
     
     return {
