@@ -7,6 +7,7 @@ import KoFiButton from "@/components/people/KoFiButton";
 const NewPagination = dynamic(() => import("@/components/pagination"));
 import PostTitle from '@/components/post-title'
 import Image from "next/image";
+import { transformPostList } from "@/lib/locale/transformLocale";
 
 import { getPostsByPageAndAuthor } from '@/lib/api'
 import {gradient,getTwitterHandle, getKofiName, getDribbbleHandle, getGithubHandle} from "@/lib/profile-page/profile-page.js"
@@ -282,12 +283,17 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
   );
 }
 
-export async function getStaticProps({ preview = null, params }) {
+export async function getStaticProps({ preview = null, params, locale }) {
   const pageSize = PAGE_SIZE;
   const { slug } = params
   const pageNo = 1
 
-  let allPosts = (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug])) || []
+  let sort = ["featured:desc","tier:asc","date:desc"]
+  if(locale=='es-ES'){
+    sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
+  }
+
+  let allPosts = (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug], sort)) || []
 
   const pagination = allPosts.meta.pagination
   let author = allPosts.data.length && allPosts.data[0] ? allPosts.data[0].attributes.author: {}
@@ -304,18 +310,21 @@ export async function getStaticProps({ preview = null, params }) {
   const kofi = getKofiName(author.kofi)
   const github = getGithubHandle(author.github)
   const twitter = getTwitterHandle(author.twitter)
-  const authorUrl = author.url
-                          .replace(/(^\w+:|^)\/\//, "")
-                          .replace(/\/+$/, "")
+  let authorUrl=''
+  if(author.url){
+    authorUrl = author.url.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "")
+  }
                           
   let skills = []
-  if (author.skills.indexOf(",") > -1) {
+  if (author.skills && author.skills.indexOf(",") > -1) {
     skills = author.skills.split(",");
-  } else {
+  } else if(author.skills){
     //trin string
     var skill = author.skills.substring(0, 22);
     skills.push(skill);
   }
+
+  allPosts = transformPostList(allPosts.data, locale)
   
   return {
     props: {
@@ -329,19 +338,22 @@ export async function getStaticProps({ preview = null, params }) {
       pageNo,
       preview,
       pagination,
-      allPosts: allPosts.data,
+      allPosts: allPosts,
       gradient:grad
     },
   };
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({locale}) {
   let pageCountArr = [];
-  
+  let sort = ["featured:desc","tier:asc","date:desc"]
+  if(locale=='es-ES'){
+    sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
+  }
   
   
   for (let index = 0; index < ALL_SLUGS.length; index++) {
-    const allPosts = (await getPostsByPageAndAuthor(null, PAGE_SIZE, 0, [ALL_SLUGS[index]])) || []
+    const allPosts = (await getPostsByPageAndAuthor(null, PAGE_SIZE, 0, [ALL_SLUGS[index]], sort)) || []
     const pagination = allPosts.meta.pagination
     const pageCount = pagination.pageCount
     let arr = new Array(pageCount).fill('');
