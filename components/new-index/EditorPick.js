@@ -51,7 +51,7 @@ export default function EditorPick({ post = {}, showTitle = true }) {
               className="w-11 h-11 rounded-full bg-contain bg-no-repeat bg-center"
               style={{
                 backgroundImage: `url(${
-                  author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributesauthor.data.attributes.avatar.data.attributes.url:
+                  author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
                   author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
                     :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
                 })`,
