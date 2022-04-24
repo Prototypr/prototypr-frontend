@@ -19,7 +19,10 @@ export default function Layout({
         style={{ background: background ? background : "#F3F4F6" }}
       >
         {/* <Alert preview={preview} /> */}
-        <main className="pt-20 -mt-3 mx-auto" style={{ maxWidth:padding == false? "":"1200px" }}>
+        <main
+          className="pt-20 -mt-3 mx-auto"
+          style={{ maxWidth: padding == false ? "" : "1200px" }}
+        >
           {children}
         </main>
       </div>
