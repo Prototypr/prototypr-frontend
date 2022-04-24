@@ -54,11 +54,16 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                 {/* <div className="bg-white shadow-sm rounded-full object-cover h-auto align-middle border-4 border-white absolute"
                 style={{ width: "122px", height: "122px", marginTop: "-62px" }}> */}
 
-                {author?.avatar && (
+                {(author?.avatar || author?.legacyAvatar) && (
                   <Image
                     layout="fill"
                     objectFit="cover"
-                    src={author?.avatar}
+                    src={
+                        
+                        author.avatar?.data?.attributes?.avatar?.data?.attributes? author.avatar.data.attributes.url:
+                    author?.legacyAvatar ? author.legacyAvatar
+                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                    }
                     className="rounded-full "
                     alt="Author profile picture"
                   />
