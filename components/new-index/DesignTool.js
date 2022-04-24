@@ -5,15 +5,14 @@ import BScroll from "better-scroll";
 
 import Link from "next/link";
 import Image from "next/image";
-import { useIntl } from 'react-intl';
+import { useIntl } from "react-intl";
 
 const ITEM_WIDTH = 300;
 
 export default function DesignTool({ allTools = [] }) {
-
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
-  
+
   const [scroll, setScroll] = useState(null);
 
   const [currentIndex, setCurrentIndex] = useState(3);
@@ -134,26 +133,32 @@ export default function DesignTool({ allTools = [] }) {
                                   className="rounded-lg contrast-115"
                                   objectFit="cover"
                                   layout="fill"
-                                  src={showItem.legacyFeaturedImage.mediaItemUrl}
+                                  src={
+                                    showItem.legacyFeaturedImage.mediaItemUrl
+                                  }
                                 />
                               </Link>
                             </div>
                           </figure>
-                        ):showItem.featuredImage?.data?.attributes?.url && (
-                          <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
-                            <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
-                              <Link href={`/toolbox/${showItem.slug}`}>
-                                <Image
-                                  className="rounded-lg contrast-115"
-                                  objectFit="cover"
-                                  layout="fill"
-                                  src={showItem.featuredImage?.data?.attributes?.url}
-                                />
-                              </Link>
-                            </div>
-                          </figure>
-                        )
-                        }
+                        ) : (
+                          showItem.featuredImage?.data?.attributes?.url && (
+                            <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+                              <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+                                <Link href={`/toolbox/${showItem.slug}`}>
+                                  <Image
+                                    className="rounded-lg contrast-115"
+                                    objectFit="cover"
+                                    layout="fill"
+                                    src={
+                                      showItem.featuredImage?.data?.attributes
+                                        ?.url
+                                    }
+                                  />
+                                </Link>
+                              </div>
+                            </figure>
+                          )
+                        )}
                         <div
                           className="absolute border-2 border-solid border-white bg-white w-10 h-10 rounded-full -bottom-3 bg-100 bg-no-repeat bg-center"
                           style={{
@@ -178,7 +183,7 @@ export default function DesignTool({ allTools = [] }) {
                       <div className="mt-7 flex justify-between">
                         <Link href={`/toolbox/${showItem.slug}`}>
                           <div className="px-3 w-full">
-                            <div className="text-gray-1 hover:underline text-lg font-bold leading-6">
+                            <div className="text-gray-1 hover:underline truncate text-lg font-bold leading-6">
                               {showItem.title}
                             </div>
                             {showItem.tags?.data[0] && (
@@ -199,7 +204,7 @@ export default function DesignTool({ allTools = [] }) {
       <div className="bg-gray-4 w-full relative flex items-center justify-center pt-14 pb-32">
         <Link href="/toolbox/page/1">
           <button className="bg-blue-1 rounded-lg text-white text-base leading-6 flex items-center justify-center py-4 px-8 hover:opacity-70 font-semibold">
-            {intl.formatMessage({ id: "designtool.button.browsemore"})}
+            {intl.formatMessage({ id: "designtool.button.browsemore" })}
           </button>
         </Link>
       </div>
