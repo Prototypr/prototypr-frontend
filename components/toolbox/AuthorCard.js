@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import Link from 'next/link'
 import Image from 'next/image'
 
-export default function AuthorCard({ author = {} }) {
-    // console.log('my author is*******' + JSON.stringify(author))
+export default function AuthorCard({ author = {}, avatar='' }) {
     let attributes = {};
     if (author.data && author.data.attributes) {
         //displayName firstName lastName avatar
         attributes = author.data.attributes
+    }
+
+    var username = attributes.username
+    if(!username){
+        username = (attributes.firstName ?attributes.firstName:'')+(attributes.lastName ?(' '+attributes.lastName):'')
     }
     return (
         <>
@@ -16,20 +18,15 @@ export default function AuthorCard({ author = {} }) {
                     <h1 tabIndex={0} className="text-sm font-semibold mb-3">{attributes.title ? attributes.title : "Posted by"}</h1>
                     <div className="py-2 w-full relative flex">
                         <div className="relative mr-3">
-                            {/* <img 
-                                width="48px"
-                                height="48px"
-                                src={attributes?.avatar}
-                                className="border border-3 border-gray-400 cursor-pointer rounded-lg mr-3 flex-shrink-0" 
-                                alt="Author profile picture"
-                            /> */}
                             <div className="w-12 h-12 rounded-full border border-1 overflow-hidden relative border-gray-100 shadow-sm">
                                 {
-                                    attributes.avatar && <Image 
+                                    (attributes.avatar || attributes.legacyAvatar) && <Image 
                                     tabIndex={0}
                                     layout="fill"
                                     objectFit="cover"
-                                    src={attributes?.avatar}
+                                    src={ attributes?.avatar?.data? attributes.avatar.data.attributes.url:
+                                        attributes?.legacyAvatar ? attributes.legacyAvatar
+                                          :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}
                                     className="rounded-full " 
                                     alt="Author profile picture"/>
                                 }
@@ -37,7 +34,9 @@ export default function AuthorCard({ author = {} }) {
                         </div>
 
                         <div className="my-auto">
-                            <p tabIndex={0} className="text-sm cursor-pointer leading-5 font-semibold text-gray-800">{attributes.firstName} {attributes.lastName}</p>
+                            <p tabIndex={0} className="text-sm cursor-pointer leading-5 font-semibold text-gray-800">
+                                {username}
+                            </p>
                             <p tabIndex={0} className="text-sm">Editor</p>
                             {/* <div className="flex">
                                 <p className="text-sm leading-5 text-gray-700">

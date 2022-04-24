@@ -46,10 +46,14 @@ export default function ProductItem({ post = {} }) {
         </h4>
         <div className="mt-3 flex items-center">
           <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
-            {author?.data?.attributes?.avatar && (
+            {(author?.data?.attributes?.avatar || author.data.attributes.legacyAvatar) && (
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
-                  src={author?.data?.attributes?.avatar}
+                  src={
+                    author?.data?.attributes?.avatar?.data?author.data.attributes.avatar.data.attributes.url:
+                    author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                  }
                   layout="fill"
                   objectFit="cover"
                   className="rounded-full"

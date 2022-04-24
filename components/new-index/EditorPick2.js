@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 // import Moment from "react-moment";
 import { useIntl } from "react-intl";
+import { data } from "autoprefixer";
 export default function EditorPick({ post = {}, header = false }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
@@ -96,7 +97,11 @@ export default function EditorPick({ post = {}, header = false }) {
                     <div className="mr-4 relative flex-shrink-0 hover:cursor-pointer">
                       <Image
                         className="rounded-full"
-                        src={author?.data?.attributes?.avatar ? author?.data?.attributes?.avatar : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}
+                        src={
+                          author?.data?.attributes?.avatar?.data?author.data.attributes.avatar.data.attributes.url:
+                          author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+                            :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                          }
                         width={40}
                         height={40}
                         objectFit="cover"

@@ -11,19 +11,15 @@ const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"));
 const RelatedPosts = dynamic(() => import("@/components/related-posts"));
 
 import Contributors from "@/components/toolbox/Contributors";
-// import Comment from "@/components/toolbox/Comment/Comment";
 import PostTitle from '@/components/post-title'
 import VisitCard from "@/components/toolbox/VisitCard";
 import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
 import { useIntl } from 'react-intl';
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
 
-// import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
-// import markdownToHtml from '@/lib/markdownToHtml'
-
 export default function Post({ post, relatedPosts, gallery, preview }) {
   const intl = useIntl();
-  const locale = intl.locale ? intl.locale : "en-US";
+  // const locale = intl.locale ? intl.locale : "en-US";
   const router = useRouter();
   //TODO: what is withAuthUser
   const withAuthUser = {};
@@ -31,9 +27,6 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />;
   }
-
-  const setUserAuthenticated = () => {};
-
 
   return (
     <Layout activeNav={"toolbox"} preview={preview}>
@@ -49,7 +42,7 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
           >
             {post && post.attributes && post.attributes.author && (
               <div className="sm:hidden lg:block">
-                <AuthorCard author={post.attributes.author} />
+                <AuthorCard author={post.attributes.author} avatar={post.attributes?.author} />
               </div>
             )}
             <div className="mt-6 sm:hidden block lg:block lg:mt-6">
@@ -120,7 +113,6 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
 
 export async function getStaticProps({ params, preview = null, locale }) {
   const data = await getToolsAndMoreTools(params.slug, preview);
-
   //get the tags for the next query
   let tags = data?.posts.data[0].attributes.tags
   let tagsArr = []

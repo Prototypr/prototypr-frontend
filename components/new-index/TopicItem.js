@@ -44,7 +44,11 @@ export default function TopicItem({ topic = {} }) {
         </h4>
         <div className="flex items-center mt-4">
           <Author
-            avatar={author?.data?.attributes?.avatar}
+            avatar={
+              author?.data?.attributes?.avatar?.data?author.data.attributes.avatar.data.attributes.url:
+              author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+                :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+            }
             authorName={author?.data?.attributes?.name}
             author={author}
           />

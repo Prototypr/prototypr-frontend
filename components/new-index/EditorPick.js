@@ -50,7 +50,11 @@ export default function EditorPick({ post = {}, showTitle = true }) {
             <div
               className="w-11 h-11 rounded-full bg-contain bg-no-repeat bg-center"
               style={{
-                backgroundImage: `url(${author?.data?.attributes?.avatar})`,
+                backgroundImage: `url(${
+                  author?.data?.attributes?.avatar?.data?author.data.attributes.avatar.data.attributes.url:
+                  author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+                    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                })`,
               }}
             ></div>
             <div className="font-medium text-base ml-3 text-gray-1">

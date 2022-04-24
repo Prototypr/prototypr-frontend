@@ -38,18 +38,6 @@ export default function PostPreview({
         </>
       </div>
 
-      {/* <h3 className="text-3xl mb-3 leading-snug">
-        <Link href={`/${type?type:'posts'}/${slug}`}>
-          <a className="hover:underline">{title}</a>
-        </Link>
-      </h3> 
-
-      <div className="text-lg mb-4">
-        <Date dateString={date} />
-      </div>
-      <div className="text-lg leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: excerpt }}></div>
-     {author && <Avatar name={author.displayName?author.displayName:author.firstName?author.firstName:author.displayName?author.displayName:''} picture={author.avatar} />}
-      */}
       <div className="px-4 py-1 flex justify-between">
         <div className="pl-3 overflow-hidden mt-1 cursor-pointer">
           <div className="font-semibold overflow-hidden heading mt-0 h-6">
