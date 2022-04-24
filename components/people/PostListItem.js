@@ -7,20 +7,19 @@ export default function PostListItem({
   totalCount = 0,
   item = {},
 }) {
-  let img = postItem.featuredImage?.data?.attributes?.url ? postItem.featuredImage?.data?.attributes?.url
-  : postItem.legacyFeaturedImage && postItem.legacyFeaturedImage.mediaItemUrl
-      ? postItem.legacyFeaturedImage.mediaItemUrl
-      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-  if (!img) {
-    img = postItem?.legacyMedia?.logoNew;
-    if (!img) {
-      img = postItem.legacyMedia?.mediaItemUrl;
-    }
-    if (!img) {
-      img = postItem.legacyMedia?.ogImage;
-    }
-  }
+  let img = postItem.featuredImage?.data?.attributes?.url
+    ? postItem.featuredImage?.data?.attributes?.url
+    : postItem?.legacyFeaturedImage?.logoNew
+    ? postItem?.legacyFeaturedImage?.logoNew
+    : postItem.legacyFeaturedImage && postItem.legacyFeaturedImage.mediaItemUrl
+    ? postItem.legacyFeaturedImage.mediaItemUrl
+    : postItem.legacyFeaturedImage?.mediaItemUrl
+    ? postItem.legacyFeaturedImage?.mediaItemUrl
+    : postItem.legacyMedia?.ogImage
+    ? postItem.legacyMedia?.ogImage
+    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
+  console.log(postItem);
   const url = postItem.link;
   let domain = "";
   if (url) {
