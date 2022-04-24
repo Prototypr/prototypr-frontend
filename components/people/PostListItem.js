@@ -9,17 +9,16 @@ export default function PostListItem({
 }) {
   let img = postItem.featuredImage?.data?.attributes?.url
     ? postItem.featuredImage?.data?.attributes?.url
-    : postItem?.legacyFeaturedImage?.logoNew
-    ? postItem?.legacyFeaturedImage?.logoNew
-    : postItem.legacyFeaturedImage && postItem.legacyFeaturedImage.mediaItemUrl
-    ? postItem.legacyFeaturedImage.mediaItemUrl
-    : postItem.legacyFeaturedImage?.mediaItemUrl
-    ? postItem.legacyFeaturedImage?.mediaItemUrl
+    : postItem?.legacyFeaturedImage?.mediaItemUrl //article
+    ? postItem.legacyFeaturedImage.mediaItemUrl //article
+    : postItem?.legacyMedia?.logoNew //tool
+    ? postItem?.legacyMedia?.logoNew //tool
+    : postItem.legacyMedia?.featuredImage //tool
+    ? postItem.legacyMedia?.featuredImage //tool
     : postItem.legacyMedia?.ogImage
     ? postItem.legacyMedia?.ogImage
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
-  console.log(postItem);
   const url = postItem.link;
   let domain = "";
   if (url) {
