@@ -24,7 +24,7 @@ export default function AuthorCard({ author = {}, avatar='' }) {
                                     tabIndex={0}
                                     layout="fill"
                                     objectFit="cover"
-                                    src={ attributes?.avatar?.data? attributes.avatar.data.attributes.url:
+                                    src={ attributes?.avatar?.data?.attributes?.avatar?.data?.attributes attributes.avatar.data.attributes.url:
                                         attributes?.legacyAvatar ? attributes.legacyAvatar
                                           :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}
                                     className="rounded-full " 
