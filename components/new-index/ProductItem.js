@@ -46,7 +46,7 @@ export default function ProductItem({ post = {} }) {
         </h4>
         <div className="mt-3 flex items-center">
           <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
-            {(author?.data?.attributes?.avatar || author.data.attributes.legacyAvatar) && (
+            {(author?.data?.attributes?.avatar || author?.data?.attributes?.legacyAvatar) && (
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
                   src={
