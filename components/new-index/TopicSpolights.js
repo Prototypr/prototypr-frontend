@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 const Tabs = dynamic(() => import("./Tabs"), { ssr: false });
-const TopicList = dynamic(() => import("./TopicLIst"), { ssr: false });
+const TopicList = dynamic(() => import("./TopicList"), { ssr: false });
 
 import { useIntl } from 'react-intl';
 export default function TopicSpolights({ tabs = [], topics = {} }) {
