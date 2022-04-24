@@ -149,8 +149,8 @@ export async function getStaticProps({ params, preview = null, locale }) {
           originalAlt: "Screenshot of product",
           thumbnailAlt: "Smaller procut screenshot thumbnail",
           type: "image",
-          srcSet: galleryItem.srcSet,
-          sizes: galleryItem.sizes?galleryItem.sizes:{},
+          // srcSet: galleryItem.srcSet,
+          // sizes: galleryItem.sizes?galleryItem.sizes:{},
         });
       });
     }
