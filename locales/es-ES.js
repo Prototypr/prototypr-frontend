@@ -1,7 +1,7 @@
 const ES = {
   "intro.title.half1": "Los mejores artículos de diseño, cada semana.",
   "intro.title.half2": "píxeles brillantes.",
-  "intro.input.placeholder": "Introduce tu email",
+  "intro.input.placeholder": "Introduzca su email",
   "signup.input.validation": "La dirección de email es necesaria.",
   "signup.input.error": "Revise los datos e intente de nuevo por favor.",
   "signup.input.confirm": "Por favor, confirme que desea unirse al boletín.",
