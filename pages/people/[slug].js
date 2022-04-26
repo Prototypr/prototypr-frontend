@@ -33,8 +33,8 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
         image:author.avatar?.data?.attributes?.avatar?.data?.attributes? author.avatar.data.attributes.url:
                     author?.legacyAvatar ? author.legacyAvatar
                       :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png",
-        canonical: `https://prototypr.io/people/${post?.attributes.slug}`,
-        url: `https://prototypr.io/people/${post?.attributes.slug}`
+        canonical: `https://prototypr.io/people/${slug}`,
+        url: `https://prototypr.io/people/${slug}`
     }}
     activeNav={"toolbox"} preview={preview} padding={false}>
      

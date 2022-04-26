@@ -53,8 +53,8 @@ export default function ToolboxPage({
         description:
           "Find tools like Adobe XD, Sketch, Figma, Marvel, and InVision.",
         //   image: "",
-        canonical: `https://prototypr.io/prototyping`,
-        url: `https://prototypr.io/prototyping`,
+        canonical: `https://prototypr.io/prototyping/${slug}/page/${pagination?.page}`,
+        url: `https://prototypr.io/prototyping/${slug}/page/${pagination?.page}`,
       }}
     activeNav={"toolbox"} preview={preview}>
       <Container>
