@@ -44,6 +44,7 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                 <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
                   <Image
                     data-gmlazy={lazy} 
+                    priority={lazy?false:true}
                     loader={gumletLoader}
                     layout="fill"
                     objectFit="cover"
