@@ -4,7 +4,7 @@ import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 import Footer from "@/components/footer";
 /**new index components */
-import Intro from "@/components/new-index/Intro";
+const Intro = dynamic(() => import("@/components/new-index/Intro"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
@@ -14,15 +14,13 @@ const TopicSpolights = dynamic(() =>
 );
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
-import { NextSeo } from "next-seo";
 
 import {
   getCombinedPostsForHome,
   getAllToolsForHome,
   getCommonQuery,
 } from "@/lib/api";
-import Head from "next/head";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import { transformPostList } from "@/lib/locale/transformLocale";
 
 const TAB_ITEMS = [
