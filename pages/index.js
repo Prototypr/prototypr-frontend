@@ -50,16 +50,14 @@ const TAB_ITEMS = [
 const PAGE_SIZE = 12;
 
 export default function Index({
-  allPosts,
   preview,
   allTools,
   otherPosts,
   interviewPosts,
   topicRes,
+  heroPost,
+  morePosts,
 }) {
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
-
   const intl = useIntl();
 
   return (
@@ -126,7 +124,8 @@ export async function getStaticProps({ preview = null, locale }) {
 
   return {
     props: {
-      allPosts: allPosts,
+      heroPost: allPosts[0],
+      morePosts: allPosts.slice(1),
       allTools: allTools,
       otherPosts: otherPosts,
       interviewPosts: interviews.data,

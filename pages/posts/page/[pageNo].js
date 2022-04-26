@@ -32,7 +32,16 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
 
     return (
         <>
-          <Layout activeNav={"posts"} preview={preview}>
+          <Layout 
+          seo={{
+          title: `Prototypr Design articles – free for everyone | Page ${pagination?.page}`,
+          description:
+            "Design content open and accessible to everyone, no paywall here.",
+          //   image: "",
+          canonical:`https://prototypr.io/posts/page/${pagination?.page}`,
+          url: `https://prototypr.io/posts/page/${pagination?.page}`,
+        }}
+          activeNav={"posts"} preview={preview}>
             <Head>
               <title>Open design and tech stories for everyone to read</title>
             </Head>

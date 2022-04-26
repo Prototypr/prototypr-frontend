@@ -39,7 +39,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
       }
 
     return (
-        <Layout activeNav={'toolbox'} preview={preview}>
+        <Layout 
+        seo={{
+        title: `${slug} – design tools | Prototypr Toolbox | Page ${pagination?.page}`,
+        description:
+          "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
+        //   image: "",
+        canonical:`https://prototypr.io/toolbox/${slug}/page/${pagination?.page}`,
+        url: `https://prototypr.io/toolbox/${slug}/page/${pagination?.page}`,
+      }}
+        activeNav={'toolbox'} preview={preview}>
             <Container>
             {router.isFallback ? (
                  <PostTitle>Loading…</PostTitle>
