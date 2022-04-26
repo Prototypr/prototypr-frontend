@@ -17,6 +17,7 @@ module.exports = withBundleAnalyzer({
       "prototypr.io",
       "prototypr.gumlet.io",
       "prototyprio.gumlet.io",
+      "prototypr.gumlet.com",
       "miro.medium.com",
       "secure.gravatar.com",
       "cdn-images-1.medium.com",

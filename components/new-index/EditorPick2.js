@@ -19,6 +19,10 @@ export default function EditorPick({ post = {}, header = false }) {
   } = postItem;
   const tagArr = tags.data;
 
+  const gumletLoader = ({ src, width, quality }) => {
+    return `${src}?w=${width}&q=${quality || 75}`
+  }
+
   return (
     <div className="pb-10 px-3 xl:px-0">
       {header && (
@@ -39,6 +43,7 @@ export default function EditorPick({ post = {}, header = false }) {
               <figure className="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
                 <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
                   <Image
+                    loader={gumletLoader}
                     layout="fill"
                     objectFit="cover"
                     src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl ? legacyFeaturedImage.mediaItemUrl:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}

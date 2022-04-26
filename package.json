@@ -32,6 +32,7 @@
     "next-seo": "^5.4.0",
     "nodemailer": "^6.7.3",
     "nprogress": "^0.2.0",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
     "prop-types": "^15.8.1",
     "query-string": "^7.1.1",
     "rc-pagination": "^3.1.15",
