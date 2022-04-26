@@ -3,6 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 // import Moment from "react-moment";
 import { useIntl } from "react-intl";
+
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
 export default function EditorPick({ post = {}, header = false , lazy=true}) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
@@ -18,10 +23,6 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
     author = {},
   } = postItem;
   const tagArr = tags.data;
-
-  const gumletLoader = ({ src, width, quality }) => {
-    return `${src}?w=${width}&q=${quality || 75}`
-  }
 
   return (
     <div className="pb-10 px-3 xl:px-0">
@@ -44,6 +45,7 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                 <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
                   <Image
                     data-gmlazy={lazy} 
+                    data-priority={lazy?false:true}
                     priority={lazy?false:true}
                     loader={gumletLoader}
                     layout="fill"

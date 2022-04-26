@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useIntl } from "react-intl";
+
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
 export default function ProductItem({ post = {} }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
@@ -15,13 +20,15 @@ export default function ProductItem({ post = {} }) {
     author = null,
   } = post?.attributes;
   const tagArr = tags.data;
-  
+
+
   return (
     <div className="grid-cols-1 flex items-top py-2 group">
       <figure className="relative h-0 w-36 h-36 sm:w-40 sm:h-40 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
         <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
           <Link href={`/post/${slug}`}>
             <Image
+              loader={gumletLoader}
               objectFit="cover"
               className="rounded-lg contrast-115"
               layout="fill"
@@ -49,6 +56,7 @@ export default function ProductItem({ post = {} }) {
             {(author?.data?.attributes?.avatar || author?.data?.attributes?.legacyAvatar) && (
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
+                  loader={gumletLoader}
                   src={
                     author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
                     author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar

@@ -9,6 +9,10 @@ import { useIntl } from "react-intl";
 
 const ITEM_WIDTH = 300;
 
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
 export default function DesignTool({ allTools = [] }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
@@ -130,6 +134,7 @@ export default function DesignTool({ allTools = [] }) {
                             <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
                               <Link href={`/toolbox/${showItem.slug}`}>
                                 <Image
+                                  loader={gumletLoader}
                                   className="rounded-lg contrast-115"
                                   objectFit="cover"
                                   layout="fill"
@@ -146,8 +151,10 @@ export default function DesignTool({ allTools = [] }) {
                               <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
                                 <Link href={`/toolbox/${showItem.slug}`}>
                                   <Image
+                                  loader={gumletLoader}
                                     className="rounded-lg contrast-115"
                                     objectFit="cover"
+                                    
                                     layout="fill"
                                     src={
                                       showItem.featuredImage?.data?.attributes
@@ -171,6 +178,7 @@ export default function DesignTool({ allTools = [] }) {
                           {showItem.legacyFeaturedImage.logoNew && (
                             <Link href={`/toolbox/${showItem.slug}`}>
                               <Image
+                              loader={gumletLoader}
                                 className="rounded-full"
                                 objectFit="cover"
                                 layout="fill"

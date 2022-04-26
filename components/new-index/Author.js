@@ -1,5 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
 export default function Author({
   avatar = "",
   author = "",
@@ -14,6 +18,7 @@ export default function Author({
             author?.data?.attributes?.slug && (
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
+                  loader={gumletLoader}
                   src={
                     author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
                     author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
