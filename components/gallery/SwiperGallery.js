@@ -42,6 +42,9 @@ export default function SwiperGallery({ data = [] }) {
                   loader={gumletLoader}
                   layout="fill"
                   objectFit="cover"
+                  priority={idx==0?true:false}
+                  data-priority={idx==0?true:false}
+                  data-gmlazy={idx==0?false:true}
                   // className="rounded-lg  object-contain h-60 sm:h-96"
                   src={current.original}
                   // data-src={current.original}
