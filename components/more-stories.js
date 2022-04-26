@@ -9,9 +9,10 @@ export default function MoreStories({ posts, type, route }) {
     <section>
       <div className={`grid grid-cols-1 ${type === 'toolbox' ? ' md:grid-cols-3' : ' md:grid-cols-2'} md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
         {
-          posts.map((post) => {
+          posts.map((post, index) => {
             return (
               <PostPreview
+                index={index}
                 key={post.attributes.slug}
                 title={post.attributes.title}
                 coverImage={post.attributes.featuredImage?.data?.attributes?.url ? post.attributes.featuredImage.data.attributes.url:post.attributes.legacyFeaturedImage ?post.attributes.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}

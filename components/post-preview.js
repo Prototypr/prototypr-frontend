@@ -15,6 +15,7 @@ export default function PostPreview({
   author,
   slug,
   type,
+  index,
   tag = {},
 }) {
   return (
@@ -30,6 +31,9 @@ export default function PostPreview({
               >
                 <Image
                   loader={gumletLoader}
+                  priority={index==0?true:false}
+                  data-priority={index==0?true:false}
+                  data-gmlazy={index==0?false:true}
                   width="44"
                   height="44"
                   alt="Brand logo for external website's link"

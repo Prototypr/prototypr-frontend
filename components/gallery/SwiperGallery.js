@@ -82,6 +82,9 @@ export default function SwiperGallery({ data = [] }) {
               <SwiperSlide className="h-20 w-20 overflow-hidden relative border border-1 border-gray-100 rounded-lg flex justify-center" key={idx}>
                 <div className="rounded h-20 w-20 bg-white">
                   <Image
+                    priority={idx==0?true:false}
+                    data-priority={idx==0?true:false}
+                    data-gmlazy={idx==0?false:true}
                     loader={gumletLoader}
                     layout="fill"
                     className="shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
