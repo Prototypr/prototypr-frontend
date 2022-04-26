@@ -46,11 +46,11 @@ export default function Footer() {
         <div className="w-full max-w-screen-xl relative mx-auto py-12 ">
           <div className="flex flex-wrap">
             <div className="w-full md:w-6/12">
-              <p className="text-xl font-semibold">Get Prototypr Weekly</p>
+              <p className="text-xl font-semibold">{intl.formatMessage({ id: "footer.title"})}</p>
               <input className="hidden" defaultValue={"hello@prototypr.io"} />
 
               <p className="text-base mt-0 mb-2 text-gray-700">
-                Top articles and tools every week 💌
+                {intl.formatMessage({ id: "footer.subtitle"})} 💌
               </p>
               <p className="text-sm mt-6 text-gray-800 font-semibold">
                 Created by{" "}
