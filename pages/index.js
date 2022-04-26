@@ -50,6 +50,8 @@ const TAB_ITEMS = [
 const PAGE_SIZE = 12;
 
 export default function Index({
+  heroPost,
+  morePosts,
   preview,
   allTools,
   otherPosts,
