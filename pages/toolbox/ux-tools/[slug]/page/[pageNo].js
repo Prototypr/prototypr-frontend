@@ -40,12 +40,12 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
     return (
         <Layout 
         seo={{
-        title: `Prototypr Toolbox: UX Tools | Page: ${pageNo}`,
+        title: `${slug} - UX Tools | Page: ${pagination?.page}`,
         description:
           "The best User Experience tools: Research, Heatmaps, Analytics, Collaboration and more.",
         //   image: "",
-        canonical:`https://prototypr.io/toolbox/ux-tools/page/${pageNo}`,
-        url: `https://prototypr.io/toolbox/ux-tools/page/${pageNo}`,
+        canonical:`https://prototypr.io/toolbox/ux-tools/${slug}/page/${pagination?.page}`,
+        url: `https://prototypr.io/toolbox/ux-tools/page/${slug}/${pagination?.page}`,
       }}
         activeNav={'toolbox'} preview={preview}>
             <Container>
@@ -121,16 +121,6 @@ export async function getStaticPaths() {
          pageCountArr = pageCountArr.concat(newArr)
      }
 
-    // ALL_SLUGS.map(async (item, index)  => {
-    //     const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, item.tags)) || []
-    //     const pagination = allPosts.meta.pagination
-    //     const pageCount = pagination.pageCount
-    //     let arr = new Array(pageCount).fill('');
-    //     let newArr = arr.map((i,index) => {
-    //         return `toolbox/ux-tools/${item.key}/page/${index+1}`
-    //     })
-    //     pageCountArr = pageCountArr.concat(newArr)
-    // })
     return {
         paths: pageCountArr || [],
         fallback: true,

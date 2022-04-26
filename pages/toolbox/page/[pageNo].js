@@ -37,12 +37,12 @@ export default function ToolboxPage({
   return (
     <Layout
     seo={{
-        title: `Prototypr Toolbox - new design, UX and coding tools | Page ${pageNo}`,
+        title: `Prototypr Toolbox - new design, UX and coding tools | Page ${pagination?.page}`,
         description:
           "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
         //   image: "",
-        canonical:`https://prototypr.io/toolbox/${pageNo}`,
-        url: `https://prototypr.io/toolbox/${pageNo}`,
+        canonical:`https://prototypr.io/toolbox/${pagination?.page}`,
+        url: `https://prototypr.io/toolbox/${pagination?.page}`,
       }}
      activeNav={"toolbox"} preview={preview}>
       <Container>
