@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 // import Moment from "react-moment";
 import { useIntl } from "react-intl";
-import { data } from "autoprefixer";
 export default function EditorPick({ post = {}, header = false }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
