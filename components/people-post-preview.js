@@ -6,10 +6,15 @@ import {gradient} from "@/lib/profile-page/profile-page.js"
 export default function PeoplePostPreview({
     title,
     slug,
-    legacyAvatar = ""
+    legacyAvatar = "",
+    skills = ""
 }) {
     const location = "China";
     const description = "Co-Founder and Product Design Coach at GEEK Up. Writing about Design, Business, and Personal Development."
+    let skillArr = [];
+    if (skills && skills !== "") {
+        skillArr = skills.split(",");
+    }
     return (
         <div className="flex group flex-col pb-4 flex-grow h-full border border-gray-100 hover:shadow-lg transition-shadow duration-500 bg-white relative rounded-lg">
             <div className="relative rounded-lg cursor-pointer">
@@ -49,9 +54,13 @@ export default function PeoplePostPreview({
                     </div>
                 </div>
                 <div className="text-base text-gray-600 mt-2 overflow-hidden">
-                    <div className="bg-gray-200 mr-2 text-gray-600 text-xs mb-1 px-2 py-1 rounded inline-block">#UX Design</div>
-                    <div className="bg-gray-200 mr-2 text-gray-600 text-xs mb-1 px-2 py-1 rounded inline-block">#UI Design</div>
-                    <div className="bg-gray-200 mr-2 text-gray-600 text-xs mb-1 px-2 py-1 rounded inline-block">#Branding</div>
+                    {
+                        skillArr.length ? skillArr.map((skill) => {
+                            return (
+                                <div className="bg-gray-200 mr-2 text-gray-600 text-xs mb-1 px-2 py-1 rounded inline-block"># {skill}</div>
+                            )
+                        }): null
+                    }
                 </div>
             </div>
         </div>
