@@ -9,10 +9,11 @@ export default function Layout({
   activeNav,
   background,
   padding,
+  seo,
 }) {
   return (
     <>
-      <Meta />
+      <Meta seo={seo} />
       <Navbar activeNav={activeNav} />
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}

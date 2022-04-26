@@ -38,7 +38,16 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
   };
 
   return (
-    <Layout activeNav={"toolbox"} preview={preview}>
+    <Layout 
+    seo={{
+        title: "Prototypr Toolbox: UX Tools",
+        description:
+          "The best User Experience tools: Research, Heatmaps, Analytics, Collaboration and more.",
+        //   image: "",
+        canonical: `https://prototypr.io/toolbox/ux-tools`,
+        url: `https://prototypr.io/toolbox/ux-tools`,
+      }}
+    activeNav={"toolbox"} preview={preview}>
       <Container>
       {router.isFallback ? (
                  <PostTitle>Loading…</PostTitle>

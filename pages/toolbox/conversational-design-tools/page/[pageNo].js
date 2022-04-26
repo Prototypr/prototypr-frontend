@@ -33,7 +33,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
       }
 
     return (
-        <Layout activeNav={'toolbox'} preview={preview}>
+        <Layout 
+        seo={{
+        title: "Conversational design tools | Prototypr Toolbox",
+        description:
+          "The best conversational design tools: chatbots, messaging and more.",
+        //   image: "",
+        canonical: `https://prototypr.io/toolbox/conversational-design-tools`,
+        url: `https://prototypr.io/toolbox/conversational-design-tools`,
+      }}
+        activeNav={'toolbox'} preview={preview}>
             <Container>
             {router.isFallback ? (
                  <PostTitle>Loading…</PostTitle>

@@ -1,6 +1,6 @@
 import { CMS_NAME, HOME_OG_IMAGE_URL } from "@/lib/constants";
-import { NextSeo } from "next-seo";
-export default function Meta({ seo }) {
+import { NextSeo, ArticleJsonLd, ProductJsonLd } from "next-seo";
+export default function Meta({ seo, articleJsonLd, productJsonLd }) {
   return (
     <>
       <NextSeo
@@ -96,6 +96,40 @@ export default function Meta({ seo }) {
           cardType: "summary_large_image",
         }}
       />
+      {articleJsonLd && (
+        <ArticleJsonLd
+          url="https://example.com/article"
+          title="Article headline"
+          images={[
+            "https://example.com/photos/1x1/photo.jpg",
+            "https://example.com/photos/4x3/photo.jpg",
+            "https://example.com/photos/16x9/photo.jpg",
+          ]}
+          datePublished="2015-02-05T08:00:00+08:00"
+          dateModified="2015-02-05T09:00:00+08:00"
+          authorName={["Jane Blogs", "Mary Stone"]}
+          publisherName="Gary Meehan"
+          publisherLogo="https://www.example.com/photos/logo.jpg"
+          description="This is a mighty good description of this article."
+        />
+      )}
+      {productJsonLd && (
+        <ProductJsonLd
+          url="https://example.com/article"
+          title="Article headline"
+          images={[
+            "https://example.com/photos/1x1/photo.jpg",
+            "https://example.com/photos/4x3/photo.jpg",
+            "https://example.com/photos/16x9/photo.jpg",
+          ]}
+          datePublished="2015-02-05T08:00:00+08:00"
+          dateModified="2015-02-05T09:00:00+08:00"
+          authorName={["Jane Blogs", "Mary Stone"]}
+          publisherName="Gary Meehan"
+          publisherLogo="https://www.example.com/photos/logo.jpg"
+          description="This is a mighty good description of this article."
+        />
+      )}
     </>
   );
 }

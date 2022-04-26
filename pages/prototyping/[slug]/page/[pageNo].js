@@ -47,7 +47,16 @@ export default function ToolboxPage({
   };
 
   return (
-    <Layout activeNav={"toolbox"} preview={preview}>
+    <Layout 
+    seo={{
+        title: "Prototypr Prototyping Toolbox.",
+        description:
+          "Find tools like Adobe XD, Sketch, Figma, Marvel, and InVision.",
+        //   image: "",
+        canonical: `https://prototypr.io/prototyping`,
+        url: `https://prototypr.io/prototyping`,
+      }}
+    activeNav={"toolbox"} preview={preview}>
       <Container>
         {allPosts.length > 0 && (
           <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">

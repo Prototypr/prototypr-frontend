@@ -38,7 +38,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
       }
 
     return (
-        <Layout activeNav={'toolbox'} preview={preview}>
+        <Layout 
+        seo={{
+        title: "AR/VR design tools | Prototypr Toolbox",
+        description:
+          "Find the best design tools for Augmented Reality, Virtual reality, Mixed Reality, and more.",
+        //   image: "",
+        canonical:`https://prototypr.io/toolbox/augmented-reality-tools/page/${pageNo}`,
+        url: `https://prototypr.io/toolbox/augmented-reality-tools/page/${pageNo}`,
+      }}
+        activeNav={'toolbox'} preview={preview}>
             <Container>
             {
                     allPosts.length > 0 && 

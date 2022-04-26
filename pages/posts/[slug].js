@@ -22,10 +22,16 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
 
     return (
         <>
-          <Layout activeNav={"posts"} preview={preview}>
-            <Head>
-              <title>Open design and tech stories for everyone to read</title>
-            </Head>
+          <Layout 
+          seo={{
+          title: "Prototypr Design articles – free for everyone.",
+          description:
+            "Design content open and accessible to everyone, no paywall here.",
+          //   image: "",
+          canonical: "https://prototypr.io/posts",
+          url: "https://prototypr.io/posts",
+        }}
+          activeNav={"posts"} preview={preview}>
             <Container>
             <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5 capitalize'>{tagName}</h2>
             {first4Posts?.length>0  &&<Aspiring posts={first4Posts} showTitle={false} />}
