@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 // import Moment from "react-moment";
 import { useIntl } from "react-intl";
-export default function EditorPick({ post = {}, header = false }) {
+export default function EditorPick({ post = {}, header = false , lazy=true}) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
   const postItem = post?.attributes;
@@ -43,6 +43,7 @@ export default function EditorPick({ post = {}, header = false }) {
               <figure className="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
                 <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
                   <Image
+                    data-gmlazy={lazy} 
                     loader={gumletLoader}
                     layout="fill"
                     objectFit="cover"

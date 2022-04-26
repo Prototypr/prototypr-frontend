@@ -73,6 +73,7 @@ export default function Index({
         <Container>
           <Intro />
           <EditorPick2
+            lazy={false}
             header={intl.formatMessage({ id: "editpicker.title" })}
             post={heroPost}
           />
