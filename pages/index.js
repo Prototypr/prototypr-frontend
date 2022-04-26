@@ -9,16 +9,20 @@ const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
-const TopicSpolights = dynamic(() => import("@/components/new-index/TopicSpolights"));
+const TopicSpolights = dynamic(() =>
+  import("@/components/new-index/TopicSpolights")
+);
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
+import { NextSeo } from "next-seo";
+
 import {
   getCombinedPostsForHome,
   getAllToolsForHome,
   getCommonQuery,
 } from "@/lib/api";
 import Head from "next/head";
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from "react-intl";
 import { transformPostList } from "@/lib/locale/transformLocale";
 
 const TAB_ITEMS = [
@@ -60,20 +64,26 @@ export default function Index({
 
   return (
     <>
-      <Layout preview={preview}>
-        <Head>
-          <title>
-            {intl.formatMessage({id: "index.header.title"})}
-            👾.
-          </title>
-        </Head>
+      <Layout
+        preview={preview}
+        seo={{
+          title: intl.formatMessage({ id: "index.header.title" }),
+          description: intl.formatMessage({ id: "intro.description" }),
+          image: "",
+          canonical: "https://prototypr.io",
+          url: "https://prototypr.io",
+        }}
+      >
         <Container>
           <Intro />
-          <EditorPick2 header={intl.formatMessage({ id: "editpicker.title"})} post={heroPost} />
+          <EditorPick2
+            header={intl.formatMessage({ id: "editpicker.title" })}
+            post={heroPost}
+          />
           <ProductList posts={morePosts} />
           <div className="mt-32 pb-10 px-3 xl:px-0">
             <h4 className="text-3xl text-gray-900 font-bold leading-6 text-title-1">
-              {intl.formatMessage({id: "designtool.title"})}
+              {intl.formatMessage({ id: "designtool.title" })}
             </h4>
           </div>
         </Container>
@@ -90,11 +100,10 @@ export default function Index({
   );
 }
 
-export async function getStaticProps({ preview = null, locale}) {
-
-  let sort = ["featured:desc","tier:asc","date:desc"]
-  if(locale=='es-ES'){
-    sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
+export async function getStaticProps({ preview = null, locale }) {
+  let sort = ["featured:desc", "tier:asc", "date:desc"];
+  if (locale == "es-ES") {
+    sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
   }
 
   let allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
@@ -106,13 +115,14 @@ export async function getStaticProps({ preview = null, locale}) {
 
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].slug;
-    const res = (await getCommonQuery(preview, [tag], "article", 6, 0, sort)) || [];
+    const res =
+      (await getCommonQuery(preview, [tag], "article", 6, 0, sort)) || [];
     topicRes[tag] = res.data;
   }
 
-  allPosts = transformPostList(allPosts.data, locale)
-  allTools = transformPostList(allTools.data, locale)
-  otherPosts = transformPostList(otherPosts.data, locale)
+  allPosts = transformPostList(allPosts.data, locale);
+  allTools = transformPostList(allTools.data, locale);
+  otherPosts = transformPostList(otherPosts.data, locale);
 
   return {
     props: {
