@@ -3,6 +3,9 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Image from "next/image";
 import Link from "next/link";
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
 
 export default function PostPreview({
   title,
@@ -26,6 +29,7 @@ export default function PostPreview({
                 style={{ height: "44px", width: "44px" }}
               >
                 <Image
+                  loader={gumletLoader}
                   width="44"
                   height="44"
                   alt="Brand logo for external website's link"

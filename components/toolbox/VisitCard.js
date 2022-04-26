@@ -1,4 +1,7 @@
 import Image from "next/image";
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
 export default function VisitCard({
   title = "",
   link = "",
@@ -35,6 +38,7 @@ export default function VisitCard({
           {useNextImage && logoNew && (
             <div className="mx-auto h-24 w-24 lg:h-16 lg:w-16 xl:h-20 xl:w-20 relative rounded-full border border-gray-200">
               <Image
+                loader={gumletLoader}
                 objectFit="cover"
                 layout="fill"
                 src={logoNew}
