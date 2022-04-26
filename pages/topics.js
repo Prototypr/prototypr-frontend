@@ -3,7 +3,7 @@ import Layout from "@/components/layout";
 // import { getAllPostsForPostsPage } from "@/lib/api";
 import Head from "next/head";
 import Link from "next/link";
-import { useIntl } from 'react-intl';
+import { useIntl } from "react-intl";
 export default function Index({ allPosts, preview }) {
   const intl = useIntl();
   const topics = [
@@ -13,7 +13,7 @@ export default function Index({ allPosts, preview }) {
       imageSrc:
         "https://images.unsplash.com/photo-1574887427561-d3d5d58c9273?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80",
       imageAlt: "UX topic",
-      color:"from-blue-600 to-purple-500"
+      color: "from-blue-600 to-purple-500",
     },
     {
       name: "navbar.submenu1.title6",
@@ -21,7 +21,7 @@ export default function Index({ allPosts, preview }) {
       imageSrc:
         "https://images.unsplash.com/photo-1566837945700-30057527ade0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
       imageAlt: "Coding",
-      color:"from-teal-600 to-blue-600"
+      color: "from-teal-600 to-blue-600",
     },
     // {
     //   name: "Generative Coding",
@@ -36,7 +36,7 @@ export default function Index({ allPosts, preview }) {
       imageSrc:
         "https://images.unsplash.com/photo-1545235617-7a424c1a60cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
       imageAlt: "UX topic",
-      color:"from-purple-600 to-red-600"
+      color: "from-purple-600 to-red-600",
     },
     {
       name: "navbar.submenu1.title2",
@@ -44,7 +44,7 @@ export default function Index({ allPosts, preview }) {
       imageSrc:
         "https://images.unsplash.com/photo-1629752187687-3d3c7ea3a21b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80",
       imageAlt: "UX topic",
-      color:"from-green-600 to-blue-600"
+      color: "from-green-600 to-blue-600",
     },
     {
       name: "topicSpotlight.tabs.userResearch",
@@ -52,16 +52,16 @@ export default function Index({ allPosts, preview }) {
       imageSrc:
         "https://images.unsplash.com/photo-1573497491208-6b1acb260507?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
       imageAlt: "UX topic",
-      color:"from-orange-600 to-red-400"
+      color: "from-orange-600 to-red-400",
     },
     {
-        name: "topicSpotlight.tabs.vr",
-        slug: "vr",
-        imageSrc:
-          "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dnJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-        imageAlt: "UX topic",
-        color:"from-red-500 to-yellow-600"
-      },
+      name: "topicSpotlight.tabs.vr",
+      slug: "vr",
+      imageSrc:
+        "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dnJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
+      imageAlt: "UX topic",
+      color: "from-red-500 to-yellow-600",
+    },
     // {
     //   name: "Web 3",
     //   slug: "web3",
@@ -73,9 +73,20 @@ export default function Index({ allPosts, preview }) {
 
   return (
     <>
-      <Layout activeNav={"posts"} preview={preview}>
+      <Layout
+        seo={{
+          title: "Prototypr Topics - Design, UX, UI, accessibility...",
+          description:
+            "Browse design topics on Prototoypr. Discover the category you want to learn about.",
+          //   image: "",
+          canonical: "https://prototypr.io/toolbox",
+          url: "https://prototypr.io/toolbox",
+        }}
+        activeNav={"posts"}
+        preview={preview}
+      >
         <Head>
-          <title>{intl.formatMessage({ id: "topics.header"})}.</title>
+          <title>{intl.formatMessage({ id: "topics.header" })}.</title>
         </Head>
         <Container>
           <div className="pt-5 text-md text-gray-700 pb-8">
@@ -90,13 +101,16 @@ export default function Index({ allPosts, preview }) {
 
           <section className="flex-col md:flex-row flex items-center md:justify-between mt-6 mb-16 md:mb-12">
             <h1 className="text-4xl font-bold tracking-tighter leading-tight md:pr-8">
-              {intl.formatMessage({ id: "topics.title"})}.
+              {intl.formatMessage({ id: "topics.title" })}.
             </h1>
           </section>
 
           <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 pb-24">
             {topics.map((topic, i) => (
-              <div key={i} className={`group relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}>
+              <div
+                key={i}
+                className={`group relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
+              >
                 {/* <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 sm:h-80 lg:aspect-none">
                   <img
                     src={topic.imageSrc}
@@ -109,8 +123,11 @@ export default function Index({ allPosts, preview }) {
                     <h3 className="text-2xl text-white">
                       <Link href={`/posts/${topic.slug}/page/1`}>
                         <a>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {intl.formatMessage({ id: topic.name})}
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0"
+                          />
+                          {intl.formatMessage({ id: topic.name })}
                         </a>
                       </Link>
                     </h3>

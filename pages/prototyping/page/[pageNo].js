@@ -39,7 +39,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
       }
 
     return (
-        <Layout activeNav={'toolbox'} preview={preview}>
+        <Layout 
+        seo={{
+        title: "Prototypr Prototyping Toolbox.",
+        description:
+          "Find tools like Adobe XD, Sketch, Figma, Marvel, and InVision.",
+        //   image: "",
+        canonical:`https://prototypr.io/prototyping/page/${pageNo}`,
+        url: `https://prototypr.io/prototyping/page/${pageNo}`,
+      }}
+        activeNav={'toolbox'} preview={preview}>
             <Container>
             {router.isFallback ? (
                  <PostTitle>Loading…</PostTitle>

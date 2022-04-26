@@ -14,6 +14,8 @@ const TopicSpolights = dynamic(() =>
 );
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
+import { NextSeo } from "next-seo";
+
 import {
   getCombinedPostsForHome,
   getAllToolsForHome,
@@ -55,18 +57,23 @@ export default function Index({
   otherPosts,
   interviewPosts,
   topicRes,
+  heroPost,
+  morePosts,
 }) {
   const intl = useIntl();
 
   return (
     <>
-      <Layout preview={preview}>
-        <Head>
-          <title>
-            {intl.formatMessage({ id: "index.header.title" })}
-            👾.
-          </title>
-        </Head>
+      <Layout
+        preview={preview}
+        seo={{
+          title: intl.formatMessage({ id: "index.header.title" }),
+          description: intl.formatMessage({ id: "intro.description" }),
+          image: "",
+          canonical: "https://prototypr.io",
+          url: "https://prototypr.io",
+        }}
+      >
         <Container>
           <Intro />
           <EditorPick2
