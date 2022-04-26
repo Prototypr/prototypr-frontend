@@ -31,11 +31,11 @@ export default function PeoplePage({
   const router = useRouter();
 
   const onPageNumChange = (pageNo) => {
-    router.push(`/toolbox/page/${pageNo}`);
+    router.push(`/people/page/${pageNo}`);
   };
 
   return (
-    <Layout activeNav={"toolbox"} preview={preview}>
+    <Layout activeNav={"people"} preview={preview}>
       <Container>
       {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
@@ -53,7 +53,7 @@ export default function PeoplePage({
               <FilterCategory
                urlRoot={'/people'}
                items={ALL_PEOPLE_GROUPS} 
-               key={'uxtools_item_'} 
+               key={'people_item_'} 
                slug={'/people'}/>
 
               </div>
@@ -83,7 +83,7 @@ export async function getStaticProps({ preview = null, params,locale }) {
   const page = params.pageNo;
   const allPosts =
     (await getPeopleByPage(preview, pageSize, page)) || [];
-  console.log("allposts*******" + JSON.stringify(allPosts))
+    // console.log("allposts*******" + JSON.stringify(allPosts))
   const pagination = allPosts.meta.pagination;
   return {
     props: {
