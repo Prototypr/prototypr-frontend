@@ -29,6 +29,8 @@ export default function MoreStories({ posts, type, route }) {
               return (
                 <PeoplePostPreview
                   key={`peoplecard_${post.attributes.slug}`}
+                  location={post.attributes?.location}
+                  bio={post.attributes?.bio}
                   title={post.attributes.username}
                   slug={post.attributes.slug}
                   legacyAvatar={post.attributes.legacyAvatar}

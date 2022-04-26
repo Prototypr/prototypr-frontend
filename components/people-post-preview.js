@@ -7,10 +7,10 @@ export default function PeoplePostPreview({
     title,
     slug,
     legacyAvatar = "",
-    skills = ""
+    skills = "",
+    bio = "",
+    location = ""
 }) {
-    const location = "China";
-    const description = "Co-Founder and Product Design Coach at GEEK Up. Writing about Design, Business, and Personal Development."
     let skillArr = [];
     if (skills && skills !== "") {
         skillArr = skills.split(",");
@@ -50,7 +50,7 @@ export default function PeoplePostPreview({
                     <div className="overflow-hidden mt-1">
                         <div><h1 className="text-base overflow-hidden heading mt-0 h-6 mt-0 text-gray-900" weight="medium">{title}</h1></div>
                             <div className="text-xs uppercase text-gray-700 mt-1">{location}</div>
-                            <div className="text-sm text-gray-700 mt-2 clamp-2"><div dangerouslySetInnerHTML={{ __html: description }} /></div>
+                            <div className="text-sm text-gray-700 mt-2 clamp-2"><div dangerouslySetInnerHTML={{ __html: bio }} /></div>
                     </div>
                 </div>
                 <div className="text-base text-gray-600 mt-2 overflow-hidden">
