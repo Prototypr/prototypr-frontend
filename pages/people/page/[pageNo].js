@@ -59,7 +59,7 @@ export default function PeoplePage({
               </div>
             </div>
             <div className="col-span-3">
-              <MoreStories posts={allPosts} type="toolbox" />
+              <MoreStories posts={allPosts} type="people" />
               <NewPagination
                 total={pagination?.total}
                 pageSize={PAGE_SIZE}

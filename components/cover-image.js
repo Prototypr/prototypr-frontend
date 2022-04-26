@@ -12,7 +12,7 @@ export default function CoverImage({ title, url, slug, type, route, imageHeight 
     : null;
 
   const image = url ? (
-    <figure className={`relative w-full ${(type!=='toolbox') && imageHeight?imageHeight:'h-60 md:h-40'} overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden`}>
+    <figure className={`relative w-full ${(type!=='toolbox') && imageHeight?imageHeight:'h-60 md:h-40'} overflow-hidden  ${type === 'people' ? ' rounded-t-lg': 'rounded-lg'} transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden`}>
       <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
         <Link href={`/${type ? type : route ? route : "posts"}/${slug}`}>
           <Image
