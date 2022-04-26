@@ -1,6 +1,7 @@
-import { parseISO, format } from 'date-fns'
-import { es } from 'date-fns/locale'
-import { FormattedMessage, useIntl } from "react-intl";
+import parseISO from 'date-fns/parseISO'
+import format from 'date-fns/format'
+import es from 'date-fns/locale/es'
+import { useIntl } from "react-intl";
 
 export default function Date({ dateString, locale }) {
   const intl = useIntl();
