@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useIntl } from 'react-intl';
+
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
 export default function AspiringItem({ post = {} }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
@@ -20,6 +25,7 @@ export default function AspiringItem({ post = {} }) {
         <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
           <Link href={`/post/${slug}`}>
             <Image
+              loader={gumletLoader}
               objectFit="cover"
               className="rounded-lg contrast-115"
               layout="fill"

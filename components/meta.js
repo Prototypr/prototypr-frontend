@@ -6,7 +6,7 @@ export default function Meta({ seo, articleJsonLd, productJsonLd }) {
       <NextSeo
         additionalMetaTags={[
           {
-            property: "monetization",
+            name:"monetization",
             content: seo?.monetization
               ? seo?.monetization
               : "$ilp.uphold.com/KFf2ZdYLXnj9",
