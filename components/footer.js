@@ -1,10 +1,11 @@
 import Container from "./container";
-import { EXAMPLE_PATH } from "@/lib/constants";
-import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useState } from "react";
-import { useIntl, FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 import axios from "axios";
+import dynamic from 'next/dynamic'
+const SignupHorizontal = dynamic(() => import("@/components/newsletter/SignupHorizontal"), { ssr: true });
+
 export default function Footer() {
   const intl = useIntl();
   const [buttonText, setButtonText] = useState(
@@ -49,9 +50,12 @@ export default function Footer() {
               <p className="text-xl font-semibold">{intl.formatMessage({ id: "footer.title"})}</p>
               <input className="hidden" defaultValue={"hello@prototypr.io"} />
 
-              <p className="text-base mt-0 mb-2 text-gray-700">
+              <p className="text-base mt-0 text-gray-700">
                 {intl.formatMessage({ id: "footer.subtitle"})} 💌
               </p>
+
+             <SignupHorizontal className="sm:flex w-11/12 mt-5" />
+              {/* <HookForm onSubmit={onSubmit} buttonText={buttonText} /> */}
               <p className="text-sm mt-6 text-gray-800 font-semibold">
                 {intl.formatMessage({ id: "footer.author1" })}{" "}
                 <a
@@ -77,9 +81,9 @@ export default function Footer() {
                 . {intl.formatMessage({ id: "footer.author3" })}{" "}
                 <a
                   className="text-blue-800 underline"
-                  href="https://twitter.com/thisismariaespi"
+                  href="https://twitter.com/thisismimiespi"
                 >
-                  María
+                  Mimi
                 </a>
                 .
               </p>
@@ -87,7 +91,7 @@ export default function Footer() {
                 {" "}
                 © 2020 Prototpyr, {intl.formatMessage({ id: "footer.copyright" })}
               </p>
-              <HookForm onSubmit={onSubmit} buttonText={buttonText} />
+             
             </div>
 
             <div className="w-full md:w-6/12">
@@ -101,7 +105,7 @@ export default function Footer() {
                       <a
                         className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base"
                         rel="noreferrer"
-                        href="https://blog.prototypr.io"
+                        href="https://github.com/Prototypr"
                         target="_blank"
                       >
                         {intl.formatMessage({ id: "footer.rightCat2" })}
@@ -155,16 +159,6 @@ export default function Footer() {
                       <a
                         className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base"
                         rel="noreferrer"
-                        href="https://tailwindcss.com"
-                        target="_blank"
-                      >
-                        {intl.formatMessage({ id: "footer.other2" })}
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base"
-                        rel="noreferrer"
                         href="https://letter.so"
                         target="_blank"
                       >
@@ -189,65 +183,5 @@ export default function Footer() {
         </div>
       </Container>
     </footer>
-  );
-}
-
-function HookForm(props) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => props.onSubmit(data);
-  const intl = useIntl();
-  return (
-    <div>
-      <form
-        className="mt-7 relative h-16 md:w-10/12"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <label htmlFor="Email" className="sr-only	">
-          {intl.formatMessage({ id: "sourcepanel.form.label" })}
-        </label>
-        <input
-          id="Email"
-          name="email"
-          placeholder={intl.formatMessage({
-            id: "sourcepanel.form.placeholder",
-          })}
-          {...register("emailRequired", {
-            required: true,
-            pattern: /^\S+@\S+$/i,
-          })}
-          style={{ boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.02)" }}
-          className="bg-gray-4 rounded-lg w-full h-full p-3 focus:outline-none text-base font-medium leading-6 text-neutrals-700 placeholder:text-neutrals-700"
-        />
-        <div className="hidden email-octopus-form-row-hp" aria-hidden="true">
-          {/* Do not remove this field, otherwise you risk bot sign-ups */}
-          <input
-            type="text"
-            name="hp1cc5fdf6-63b5-11ea-a3d0-06b4694bee2a"
-            tabIndex={-1}
-            autoComplete="nope"
-          />
-        </div>
-        <button className="absolute top-3 right-3 h-10 z-20 bg-blue-1 rounded-lg text-white text-base font-medium leading-6 flex items-center justify-center py-2 px-3 hover:opacity-70">
-          {props.buttonText}
-        </button>
-      </form>
-      <div className="px-1">
-        {errors.emailRequired && errors.emailRequired.type === "required" && (
-          <p className="text-pink-600 mt-2 text-sm text-left">
-            <FormattedMessage id="signup.input.validation" />
-          </p>
-        )}
-        {errors.emailRequired && errors.emailRequired.type === "pattern" && (
-          <p className="text-pink-600 mt-2 text-sm text-left">
-            <FormattedMessage id="sourcepanel.form.errortip" />
-          </p>
-        )}
-      </div>
-    </div>
   );
 }

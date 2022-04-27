@@ -18,7 +18,7 @@ export default function Intro() {
             />
           </span> */}
         </p>
-        <SignupHorizontal />
+        <SignupHorizontal className="mt-5 md:mt-8 sm:flex w-10/12 mx-auto"/>
         <p className="text-xs font-medium mt-5 text-gray-900">
             <FormattedMessage 
               id="intro.description"

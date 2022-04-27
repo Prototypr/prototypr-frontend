@@ -86,7 +86,7 @@ export default function Index({
         </Container>
         <DesignTool allTools={allTools} />
         <Container>
-          <SourcePanel />
+          <SourcePanel/>
           <TopicSpolights tabs={TAB_ITEMS} topics={topicRes} />
           <Aspiring posts={interviewPosts} />
           <Feeds posts={otherPosts} />
