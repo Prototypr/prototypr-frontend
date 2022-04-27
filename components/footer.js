@@ -53,7 +53,7 @@ export default function Footer() {
                 {intl.formatMessage({ id: "footer.subtitle"})} 💌
               </p>
               <p className="text-sm mt-6 text-gray-800 font-semibold">
-                Created by{" "}
+                {intl.formatMessage({ id: "footer.author1" })}{" "}
                 <a
                   className="text-blue-800 underline"
                   href="https://twitter.com/annchichii"
@@ -67,14 +67,14 @@ export default function Footer() {
                 >
                   Graeme
                 </a>
-                , and{" "}
+                , {intl.formatMessage({ id: "footer.author2" })}{" "}
                 <a
                   className="text-blue-800 underline"
                   href="https://twitter.com/iamsofiamm"
                 >
                   Sofia
                 </a>
-                . Illustrations by{" "}
+                . {intl.formatMessage({ id: "footer.author3" })}{" "}
                 <a
                   className="text-blue-800 underline"
                   href="https://twitter.com/thisismariaespi"
@@ -85,7 +85,7 @@ export default function Footer() {
               </p>
               <p className="text-sm text-gray-700 font-semibold mt-2">
                 {" "}
-                © 2020 Prototpyr, All rights reserved.
+                © 2020 Prototpyr, {intl.formatMessage({ id: "footer.copyright" })}
               </p>
               <HookForm onSubmit={onSubmit} buttonText={buttonText} />
             </div>
@@ -94,7 +94,7 @@ export default function Footer() {
               <div className="flex flex-wrap items-top mb-6">
                 <div className="w-full md:w-6/12 xl:w-4/12 pt-6 md:pt-0 md:px-4 ml-auto">
                   <span className="block uppercase text-gray-900 text-sm font-semibold mb-2">
-                    Good Stuff
+                    {intl.formatMessage({ id: "footer.rightCat1" })}
                   </span>
                   <ul className="list-unstyled">
                     <li>
@@ -104,13 +104,13 @@ export default function Footer() {
                         href="https://blog.prototypr.io"
                         target="_blank"
                       >
-                        Medium Publication
+                        {intl.formatMessage({ id: "footer.rightCat2" })}
                       </a>
                     </li>
                     <li>
                       <Link href="/posts" as="/posts">
                         <a className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base">
-                          Prototypr Open
+                        {intl.formatMessage({ id: "footer.rightCat3" })}
                         </a>
                       </Link>
                     </li>
@@ -138,7 +138,7 @@ export default function Footer() {
                 </div>
                 <div className="w-full md:w-6/12 xl:w-4/12 pt-6 md:pt-0 ml-auto">
                   <span className="block uppercase text-gray-900 text-sm font-semibold mb-2">
-                    Other Resources
+                    {intl.formatMessage({ id: "footer.otherResource" })}
                   </span>
                   <ul className="list-unstyled">
                     <li>
@@ -148,7 +148,7 @@ export default function Footer() {
                         href="https://adobe.com/products/xd/adobe-fund.html"
                         target="_blank"
                       >
-                        Adobe Fund for Design
+                        {intl.formatMessage({ id: "footer.other1" })}
                       </a>
                     </li>
                     <li>
@@ -158,7 +158,7 @@ export default function Footer() {
                         href="https://tailwindcss.com"
                         target="_blank"
                       >
-                        Made with Tailwind
+                        {intl.formatMessage({ id: "footer.other2" })}
                       </a>
                     </li>
                     <li>
@@ -168,7 +168,7 @@ export default function Footer() {
                         href="https://letter.so"
                         target="_blank"
                       >
-                        Mail by Letter
+                        {intl.formatMessage({ id: "footer.other3" })}
                       </a>
                     </li>
                     <li>
@@ -178,7 +178,7 @@ export default function Footer() {
                         href="https://prototypr.io/privacy-policy/"
                         target="_blank"
                       >
-                        Privacy Policy
+                        {intl.formatMessage({ id: "footer.other4" })}
                       </a>
                     </li>
                   </ul>
