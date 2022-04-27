@@ -1,46 +1,11 @@
 import Container from "./container";
 import Link from "next/link";
-import { useState } from "react";
 import { useIntl } from "react-intl";
-import axios from "axios";
 import dynamic from 'next/dynamic'
 const SignupHorizontal = dynamic(() => import("@/components/newsletter/SignupHorizontal"), { ssr: true });
 
 export default function Footer() {
   const intl = useIntl();
-  const [buttonText, setButtonText] = useState(
-    intl.formatMessage({ id: "navbar.menu.title4" })
-  );
-  const [registered, setRegistered] = useState(false);
-  const [error, setError] = useState(false);
-  const onSubmit = async (data) => {
-    setButtonText(intl.formatMessage({ id: "signup.button.submitting" }));
-
-    axios
-      .post(
-        "https://req.prototypr.io/https://emailoctopus.com/lists/c70b3a0c-1390-11eb-a3d0-06b4694bee2a/members/embedded/1.3/add",
-        {
-          field_0: data.emailRequired,
-        }
-      )
-      .then(function (response) {
-        console.log("success");
-        // var cookieDomain = process.env.customKey && { domain: ".prototypr.io" };
-        // jsCookie.set("prototypr_signupbar", "hide", cookieDomain);
-
-        if (response.data.success) {
-          setRegistered(true);
-          setError(false);
-          setButtonText("Subscribe");
-        }
-      })
-      .catch(function (error) {
-        setRegistered(false);
-        setError(true);
-        setButtonText("Subscribe");
-      });
-  };
-
   return (
     <footer className="bg-accent-1 border-accent-2">
       <Container>
