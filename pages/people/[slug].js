@@ -262,9 +262,9 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                   )}
 
                   {withAuthUser && withAuthUser.ID == user.id ? (
-                    <div class="flex justify-center w-full my-3">
+                    <div className="flex justify-center w-full my-3">
                       <a
-                        class="inline-block bg-blue-600 hover:bg-blue-500 mx-auto text-white font-bold  py-2 px-6 rounded-full shadow hover:shadow-lg"
+                        className="inline-block bg-blue-600 hover:bg-blue-500 mx-auto text-white font-bold  py-2 px-6 rounded-full shadow hover:shadow-lg"
                         href="/new-story"
                       >
                         Write Post

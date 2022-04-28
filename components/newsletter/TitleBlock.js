@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 export default function TitleBlock() {
     const intl = useIntl();
     return (

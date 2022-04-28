@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 import Footer from "@/components/footer";
@@ -11,9 +12,10 @@ const PAGE_SIZE = 8;
 
 export default function NewsLetter({
     preview,
-    allPosts
+    allPosts =[]
 }) {
     const intl = useIntl();
+    const router = useRouter();
     return (
         <>
             <Layout preview={preview}>
@@ -26,7 +28,7 @@ export default function NewsLetter({
                 <Container>
                     <TitleBlock />
                     <SourcePanel />
-                    <IssueList />
+                    <IssueList posts={allPosts} />
                 </Container>
             </Layout>
         </>
@@ -35,7 +37,7 @@ export default function NewsLetter({
 
 export async function getStaticProps({ preview = null }) {
     const allPosts = await getAllPostsForToolsPage(null, PAGE_SIZE, 0 ,"newsletter") || [];
-    console.log("post***********" + JSON.stringify(allPosts));
+
     return {
         props: {
             preview,

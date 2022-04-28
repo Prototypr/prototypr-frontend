@@ -87,6 +87,7 @@ const ES = {
   "footer.other4": "Política de privacidad",
   "topics.header":
     "Historias abiertas de diseño y tecnología para que todos puedan leer",
-  "newsletter.title": "Reciber el boletín"
+  "newsletter.title": "Reciber el boletín",
+  "newsletter.issue": "Cuestiones anteriores"
 };
 export default ES;
