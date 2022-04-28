@@ -72,7 +72,6 @@ export async function getStaticPaths() {
   
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 
-      console.log('slug*******' + post?.attributes?.slug);
       return `/newsletter/${post.attributes.slug}`}) || [],
     fallback: true,
   }

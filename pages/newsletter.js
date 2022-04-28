@@ -37,7 +37,6 @@ export default function NewsLetter({
 
 export async function getStaticProps({ preview = null }) {
     const allPosts = await getAllPostsForToolsPage(null, PAGE_SIZE, 0 ,"newsletter") || [];
-
     return {
         props: {
             preview,

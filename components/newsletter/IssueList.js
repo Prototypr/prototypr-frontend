@@ -1,5 +1,6 @@
 import React from "react";
-import IssueItem from "@/components/newsletter/IssueItem";
+import dynamic from "next/dynamic";
+const IssueItem = dynamic(() => import("@/components/newsletter/IssueItem"));
 import { useIntl } from 'react-intl';
 export default function IssueList({ posts = [] }) {
   const intl = useIntl();
@@ -14,9 +15,6 @@ export default function IssueList({ posts = [] }) {
             return (
               <IssueItem 
                 key={`issue_${index}`}
-                coverImage={post?.attributes?.legacyFeaturedImage?.mediaItemUrl}
-                title={post?.attributes.title}
-                excerpt={post.attributes.excerpt}
                 post={post?.attributes}
                 />
             )
