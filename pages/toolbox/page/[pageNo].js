@@ -107,7 +107,7 @@ export async function getStaticProps({ preview = null, params,locale }) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = (await getAllPostsForToolsPage(null, PAGE_SIZE, 0)) || [];
+  const allPosts = (await getAllPostsForToolsPage(null, PAGE_SIZE, 0, "tool")) || [];
   const pagination = allPosts.meta.pagination;
   const pageCount = pagination.pageCount;
   const pageCountArr = new Array(pageCount).fill(" ");

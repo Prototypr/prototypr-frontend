@@ -15,7 +15,7 @@ import Head from 'next/head'
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter()
-  if (!router.isFallback && !post?.attributes.slug) {
+  if (!router.isFallback && !post?.attributes?.slug) {
     return <ErrorPage statusCode={404} />
   }
   return (
@@ -72,6 +72,7 @@ export async function getStaticPaths() {
   
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 
+      console.log('slug*******' + post?.attributes?.slug);
       return `/newsletter/${post.attributes.slug}`}) || [],
     fallback: true,
   }

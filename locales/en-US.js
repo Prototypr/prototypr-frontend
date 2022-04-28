@@ -76,6 +76,7 @@ const EN =  {
     "footer.other3": "Mail by Letter",
     "footer.other4": "Privacy Policy",
     "topics.title": "Topics",
-    "topics.header": "Open design and tech stories for everyone to read"
+    "topics.header": "Open design and tech stories for everyone to read",
+    "newsletter.title": "Get the newsletter"
 }
 export default EN;
