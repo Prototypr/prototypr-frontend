@@ -151,12 +151,6 @@ export default function DesignTool({ allTools = [] }) {
                                 }}
                               ></div>
                             </div>
-                            {/* <img 
-                                            className="w-full rounded-lg h-46 relative"
-                                            srcSet={`"https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-300x225.png 300w, https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-1024x768.png 1024w, https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-768x576.png 768w, https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox.png 1400w",
-                                            "medium": "https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-768x576.png",
-                                            "thumb": "https://prototypr.io/wp-content/uploads/2020/09/Product-Header-_-Prototypr-Toolbox-150x150.png"`}
-                                        /> */}
                             <div className="mt-5 flex justify-between">
                               <div>
                                 <div className="text-gray-1 text-lg font-bold leading-6">

@@ -4,23 +4,25 @@ import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
 import LoginSide from "@/components/sign-in/LoginSide";
 import Button from "@/components/atom/Button/Button";
-import useUser from '@/lib/iron-session/useUser'
-import { withIronSessionSsr } from 'iron-session/next'
-import { updateUserSessionSSR, updateUserSession} from "@/lib/iron-session/updateUserSession";
-import { sessionOptions } from '@/lib/iron-session/session'
-import axios from 'axios'
-import {useEffect} from 'react'
+import useUser from "@/lib/iron-session/useUser";
+import { withIronSessionSsr } from "iron-session/next";
+import {
+  updateUserSessionSSR,
+  updateUserSession,
+} from "@/lib/iron-session/updateUserSession";
+import { sessionOptions } from "@/lib/iron-session/session";
+import axios from "axios";
+import { useEffect } from "react";
+import Meta from "@/components/meta";
 
 export default function Index() {
-
-  const {user} = useUser({
+  const { user } = useUser({
     // redirectTo: '/account',
     redirectIfFound: false,
-  })
+  });
 
-  useEffect(()=>{
-    if(user && !user.avatar){
-
+  useEffect(() => {
+    if (user && !user.avatar) {
       // declare the data fetching function
       const fetchUserData = async () => {
         const res = await axios({
@@ -30,22 +32,29 @@ export default function Index() {
             Authorization: `Bearer ${user.jwt}`,
           },
         });
-        if(res.data){
-          await updateUserSession(res.data)
+        if (res.data) {
+          await updateUserSession(res.data);
         }
-      }
-       // call the function
-       fetchUserData()
-      // make sure to catch any error
-      .catch(console.error);
+      };
+      // call the function
+      fetchUserData()
+        // make sure to catch any error
+        .catch(console.error);
     }
-
-  },[user])
+  }, [user]);
 
   return (
     <>
       <Head>
-        <title>Sign into Prototypr</title>
+        <Meta
+          seo={{
+            title: "Sign into Prototypr",
+            description: "Sign in or create an account",
+            //   image: "",
+            canonical: "https://prototypr.io/sign-in",
+            url: "https://prototypr.io/sign-in",
+          }}
+        />
       </Head>
 
       <div className="h-full w-full grid md:grid-cols-12">
@@ -82,21 +91,24 @@ export default function Index() {
                   </div>
                 </div>
               </>
-            ): user && user?.isLoggedIn && (
-              <div className="flex flex-col w-[285px]">
-                <h2 className="text-lg text-gray-800 font-bold text-center">
-                  You're on the waitlist!
-                </h2>
-                <p className="text-sm text-gray-600 text-center mt-3 mb-4">
-                  Let us know more about you by filling out your profile
-                  information, and we'll be in touch soon!
-                </p>
-                <Link href="/account" passHref prefetch={false}>
-                  <Button as="a" color="primary" className="text-sm">
-                    Set up profile
-                  </Button>
-                </Link>
-              </div>
+            ) : (
+              user &&
+              user?.isLoggedIn && (
+                <div className="flex flex-col w-[285px]">
+                  <h2 className="text-lg text-gray-800 font-bold text-center">
+                    You're on the waitlist!
+                  </h2>
+                  <p className="text-sm text-gray-600 text-center mt-3 mb-4">
+                    Let us know more about you by filling out your profile
+                    information, and we'll be in touch soon!
+                  </p>
+                  <Link href="/account" passHref prefetch={false}>
+                    <Button as="a" color="primary" className="text-sm">
+                      Set up profile
+                    </Button>
+                  </Link>
+                </div>
+              )
             )}
           </div>
         </div>
@@ -110,38 +122,43 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   res,
 }) {
   //iron-session user
-  const user = req.session.user
+  const user = req.session.user;
 
-    if(user?.login?.jwt){
-      try{
-        const res = await axios({
-            method: "GET", // change this GET later
-            url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
-            headers: {
-              Authorization: `Bearer ${user.login.jwt}`,
-            },
-          });
-          //update iron-session with this up to date data
-          await updateUserSessionSSR(req,res)
+  if (user?.login?.jwt) {
+    try {
+      const res = await axios({
+        method: "GET", // change this GET later
+        url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
+        headers: {
+          Authorization: `Bearer ${user.login.jwt}`,
+        },
+      });
+      //update iron-session with this up to date data
+      await updateUserSessionSSR(req, res);
 
-          //then return it
-          return {
-            props: {
-              userData: res.data,
-              isConfirmed:res.data.confirmed
-            }, // will be passed to the page component as props
-          };
-      }catch(e){
-        console.log(e.message)
-        return {
-          props: {
-            user: { isLoggedIn: false, login: '', avatarUrl: '', isConfirmed:false },
+      //then return it
+      return {
+        props: {
+          userData: res.data,
+          isConfirmed: res.data.confirmed,
+        }, // will be passed to the page component as props
+      };
+    } catch (e) {
+      console.log(e.message);
+      return {
+        props: {
+          user: {
+            isLoggedIn: false,
+            login: "",
+            avatarUrl: "",
+            isConfirmed: false,
           },
-        }
-      }
+        },
+      };
     }
-  return {
-    props: { },
   }
+  return {
+    props: {},
+  };
 },
-sessionOptions)
+sessionOptions);

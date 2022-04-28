@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import dynamic from "next/dynamic";
+
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
-import NewPagination from '@/components/pagination'
-import FilterCategory from '@/components/FilterCategory'
-import Breadcrumbs from '@/components/Breadcrumbs'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 
-// import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
+const NewPagination = dynamic(() => import("@/components/pagination"));
+import PostTitle from '@/components/post-title'
+
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 
 import ALL_SLUGS_GROUPS from '@/lib/menus/allTools'
@@ -37,9 +39,22 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
       }
 
     return (
-        <Layout activeNav={'toolbox'} preview={preview}>
+        <Layout 
+        seo={{
+        title: `${slug} – design tools | Prototypr Toolbox | Page ${pagination?.page}`,
+        description:
+          "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
+        //   image: "",
+        canonical:`https://prototypr.io/toolbox/${slug}/page/${pagination?.page}`,
+        url: `https://prototypr.io/toolbox/${slug}/page/${pagination?.page}`,
+      }}
+        activeNav={'toolbox'} preview={preview}>
             <Container>
-            {
+            {router.isFallback ? (
+                 <PostTitle>Loading…</PostTitle>
+                ) :
+                <>  
+                {
                 allPosts.length > 0 && 
                     (<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                     <div className="grid-cols-1 hidden lg:block">
@@ -64,6 +79,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                     </div>
                 </div>)
             }
+            </>}
             
             <NewPagination 
                 total={pagination?.total}

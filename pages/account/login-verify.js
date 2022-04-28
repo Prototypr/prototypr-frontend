@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 import Layout from "@/components/layout";
 import fetchJson, { FetchError } from "@/lib/iron-session/fetchJson";

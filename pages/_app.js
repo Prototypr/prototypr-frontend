@@ -1,32 +1,23 @@
-import {useContext, useState, useEffect, useMemo } from "react";
+import dynamic from "next/dynamic";
+
+import {useState, useEffect, useMemo } from "react";
 import "@/styles/index.scss";
 import { SessionProvider } from "next-auth/react";
 import "@/styles/toolStyles.css";
-import { Toaster } from "react-hot-toast";
-import * as Portal from "@radix-ui/react-portal";
 import { SWRConfig } from 'swr'
-import fetchJson from '@/lib/iron-session/fetchJson'
 // import { LocaleProvider, LocaleContext } from '../context/LocaleContext';
-import LocaleAlert from "@/components/Locale/LocaleAlert";
+// import LocaleAlert from "@/components/Locale/LocaleAlert";
 import { addLocaleData, IntlProvider } from "react-intl";
 import EN from "../locales/en-US";
 import ES from "../locales/es-ES";
 import { useRouter } from "next/router";
-import Router from 'next/router'
-import NProgress from 'nprogress'
+import fetchJson from '@/lib/iron-session/fetchJson'
+
+const TopProgressBar = dynamic(() => {return import("@/components/TopProgressBar")},{ ssr: false });
+const AppToaster = dynamic(() => {return import("@/components/AppToaster")},{ ssr: false });
+
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
-
-
-Router.events.on('routeChangeStart', url => {
-  NProgress.start()
-  if (window && window._paq) {
-    window._paq.push(["setCustomUrl", url]);
-    window._paq.push(["setDocumentTitle", document.title]);
-    window._paq.push(["trackPageView"]);
-  }
-})
-Router.events.on('routeChangeComplete', () => NProgress.done())
 
   // addLocaleData([...en, ...de])
   // const {locale} = useContext(LocaleContext)
@@ -65,6 +56,7 @@ Router.events.on('routeChangeComplete', () => NProgress.done())
       key={locale || "en-US"}
       defaultLocale="en-US" locale={locale || "en-US"} messages={messages}>
     <>
+    <TopProgressBar/>
     <SWRConfig
       value={{
         fetcher: fetchJson,
@@ -77,27 +69,7 @@ Router.events.on('routeChangeComplete', () => NProgress.done())
         <Component {...pageProps} />
       </SessionProvider>
       </SWRConfig>
-      <Portal.Root>
-        <Toaster
-          toastOptions={{
-            position: "top-rigcenterht",
-            className: "toastOverride",
-
-            success: {
-              iconTheme: {
-                primary: "#10B981",
-                secondary: "white",
-              },
-            },
-            error: {
-              iconTheme: {
-                primary: "#EF4444",
-                secondary: "white",
-              },
-            },
-          }}
-        />
-      </Portal.Root>
+      <AppToaster/>
     </>
     </IntlProvider>
   );

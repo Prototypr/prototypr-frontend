@@ -4,13 +4,16 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import NavigationMenuDemo from "./navbar-menu";
 import { useState, useEffect } from "react";
 import useUser from '@/lib/iron-session/useUser'
-import useSWR from 'swr'
+// import useSWR from 'swr'
 import jsCookie from 'js-cookie';
+import { FormattedMessage, useIntl } from "react-intl";
+
 
 export default function Navbar({ activeNav }) {
   const [clientWindowHeight, setClientWindowHeight] = useState("");
 
   const [backgroundTransparacy, setBackgroundTransparacy] = useState(0.5);
+  const intl = useIntl();
 
   
   // const { data: user, mutate: mutateUser } = useSWR('/api/auth/user')
@@ -25,7 +28,7 @@ export default function Navbar({ activeNav }) {
    */
     const [userLoggedInCookie, setUserLoggedInCookie] = useState(()=>{
     let loggedInCookie = jsCookie.get('prototypr-loggedIn')
-    if(loggedInCookie){
+    if(loggedInCookie=='true'){
       return true
     }else{
       return false
@@ -102,7 +105,8 @@ export default function Navbar({ activeNav }) {
                     />
                     <img
                       className="hidden lg:block h-8 w-auto"
-                      src="/static/images/logo.svg"
+                      // src={`/static/images/logo${intl.locale=='es-ES'?'-es':''}.svg`}
+                      src={`/static/images/logo.svg`}
                       alt="Prototypr Logo"
                     />
                   </div>

@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
-import NewPagination from '@/components/pagination'
-import FilterCategory from '@/components/FilterCategory'
-import Breadcrumbs from '@/components/Breadcrumbs'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+const NewPagination = dynamic(() => import("@/components/pagination"));
+const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 
-// import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
 const PAGE_SIZE = 12;
@@ -39,7 +39,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
       }
 
     return (
-        <Layout activeNav={'toolbox'} preview={preview}>
+        <Layout 
+        seo={{
+        title: `${slug} - Conversational design tools | Prototypr Toolbox`,
+        description:
+          "The best conversational design tools: chatbots, messaging and more.",
+        //   image: "",
+       canonical:`https://prototypr.io/toolbox/conversational-design-tools/${slug}/page/${pagination?.page}`,
+        url: `https://prototypr.io/toolbox/conversational-design-tools/${slug}/page/${pagination?.page}`,
+      }}
+        activeNav={'toolbox'} preview={preview}>
             <Container>
             {
                     allPosts.length > 0 && 

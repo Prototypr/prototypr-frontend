@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { useIntl } from 'react-intl';
 const AspiringItem = dynamic(() => import("./AspiringItem"), { ssr: false });
@@ -21,7 +20,7 @@ export default function Aspiring({ posts = [], showTitle = true }) {
               return (
                 <AspiringItem
                   key={`AspiringItem_${index}`}
-                  post={item?.attributes}
+                  post={item}
                 />
               );
             })

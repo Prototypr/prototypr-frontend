@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import Author from "@/components/new-index/Author";
+import { useIntl } from 'react-intl';
+
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
 export default function FeedItem({ height = 20, post = {}, index = 0 }) {
   const {
     title = "",
@@ -11,7 +17,9 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
     legacyFeaturedImage = null,
     featuredImage = null,
     author = null,
-  } = post;
+  } = post?.attributes;
+  const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   const tagArr = tags.data;
   return (
     <div className="cursor-pointer py-6 px-1 inline-block w-full group">
@@ -23,6 +31,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
         <div className="absolute w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
           <Link href={`/post/${slug}`}>
             <Image
+              loader={gumletLoader}
               objectFit="cover"
               className="rounded-lg contrast-115"
               layout="fill"

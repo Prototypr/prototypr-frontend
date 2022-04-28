@@ -8,7 +8,9 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import { FreeMode, Navigation, Thumbs, A11y } from "swiper";
-
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
 export default function SwiperGallery({ data = [] }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
@@ -37,8 +39,12 @@ export default function SwiperGallery({ data = [] }) {
             {current.type == "image" && current.original ? (
               <div className="relative border border-gray-200 border-1 rounded-lg h-60 sm:h-96 w-full lg:max-h-full relative overflow-hidden rounded-lg flex justify-center">
                 <Image
+                  loader={gumletLoader}
                   layout="fill"
                   objectFit="cover"
+                  priority={idx==0?true:false}
+                  data-priority={idx==0?true:false}
+                  data-gmlazy={idx==0?false:true}
                   // className="rounded-lg  object-contain h-60 sm:h-96"
                   src={current.original}
                   // data-src={current.original}
@@ -79,6 +85,10 @@ export default function SwiperGallery({ data = [] }) {
               <SwiperSlide className="h-20 w-20 overflow-hidden relative border border-1 border-gray-100 rounded-lg flex justify-center" key={idx}>
                 <div className="rounded h-20 w-20 bg-white">
                   <Image
+                    priority={idx==0?true:false}
+                    data-priority={idx==0?true:false}
+                    data-gmlazy={idx==0?false:true}
+                    loader={gumletLoader}
                     layout="fill"
                     className="shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
                     src={current.thumbnail}

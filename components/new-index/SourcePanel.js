@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import axios from "axios";

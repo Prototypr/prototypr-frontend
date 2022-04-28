@@ -1,6 +1,11 @@
-import { parseISO, format } from 'date-fns'
+import parseISO from 'date-fns/parseISO'
+import format from 'date-fns/format'
+import es from 'date-fns/locale/es'
+import { useIntl } from "react-intl";
 
-export default function Date({ dateString }) {
+export default function Date({ dateString, locale }) {
+  const intl = useIntl();
+
   const date = parseISO(dateString)
-  return <time dateTime={dateString}>{format(date, 'LLLL	d, yyyy')}</time>
+  return <time dateTime={dateString} className="capitalize">{format(date, 'LLLL	d, yyyy', {locale:intl.locale.indexOf('es-ES')>-1 ?es:''})}</time>
 }

@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import dynamic from "next/dynamic";
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
-import NewPagination from '@/components/pagination'
-import FilterCategory from '@/components/FilterCategory'
-import Breadcrumbs from '@/components/Breadcrumbs'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+const NewPagination = dynamic(() => import("@/components/pagination"));
+const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 
 import ALL_SLUGS_GROUPS from "@/lib/menus/uxTools";
@@ -37,7 +38,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
       }
 
     return (
-        <Layout activeNav={'toolbox'} preview={preview}>
+        <Layout 
+        seo={{
+        title: `${slug} - UX Tools | Page: ${pagination?.page}`,
+        description:
+          "The best User Experience tools: Research, Heatmaps, Analytics, Collaboration and more.",
+        //   image: "",
+        canonical:`https://prototypr.io/toolbox/ux-tools/${slug}/page/${pagination?.page}`,
+        url: `https://prototypr.io/toolbox/ux-tools/page/${slug}/${pagination?.page}`,
+      }}
+        activeNav={'toolbox'} preview={preview}>
             <Container>
             {
                     allPosts.length > 0 && 
@@ -111,16 +121,6 @@ export async function getStaticPaths() {
          pageCountArr = pageCountArr.concat(newArr)
      }
 
-    // ALL_SLUGS.map(async (item, index)  => {
-    //     const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0, item.tags)) || []
-    //     const pagination = allPosts.meta.pagination
-    //     const pageCount = pagination.pageCount
-    //     let arr = new Array(pageCount).fill('');
-    //     let newArr = arr.map((i,index) => {
-    //         return `toolbox/ux-tools/${item.key}/page/${index+1}`
-    //     })
-    //     pageCountArr = pageCountArr.concat(newArr)
-    // })
     return {
         paths: pageCountArr || [],
         fallback: true,

@@ -1,9 +1,14 @@
+import dynamic from "next/dynamic";
+
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
-import EditorPick2 from "@/components/new-index/EditorPick2";
-import NewPagination from '@/components/pagination'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
+import { FormattedMessage, useIntl } from 'react-intl';
+import PostTitle from '@/components/post-title'
+
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
 const PAGE_SIZE = 12;
@@ -19,6 +24,7 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
         heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
     }
     const router = useRouter()
+    const intl = useIntl();
 
     const onPageNumChange = (pageNo) => {
         router.push(`/posts/page/${pageNo}`)
@@ -26,18 +32,32 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
 
     return (
         <>
-          <Layout activeNav={"posts"} preview={preview}>
+          <Layout 
+          seo={{
+          title: `Prototypr Design articles – free for everyone | Page ${pagination?.page}`,
+          description:
+            "Design content open and accessible to everyone, no paywall here.",
+          //   image: "",
+          canonical:`https://prototypr.io/posts/page/${pagination?.page}`,
+          url: `https://prototypr.io/posts/page/${pagination?.page}`,
+        }}
+          activeNav={"posts"} preview={preview}>
             <Head>
               <title>Open design and tech stories for everyone to read</title>
             </Head>
             <Container>
-            {
-                pagination.page && pagination.page == 1 && (
+            {router.isFallback ? (
+                 <PostTitle>Loading…</PostTitle>
+                ) :
+                <>  
+                {
+            <>
+              {  pagination.page && pagination.page == 1 && (
                     <>
                         {/* <Intro /> */}
                         {heroPost && (
                            <div className="pt-12">
-                           <EditorPick2 header="Editor's Picks" post={heroPost} />
+                           <EditorPick2 header={intl.formatMessage({ id: "editpicker.title"})} post={heroPost} />
                           </div>
                         )}
                     </>
@@ -52,7 +72,9 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
                       <MoreStories posts={allPosts} />
                     </div>
                 )
-            }
+              }
+            </>}
+              </>}
 
             <NewPagination 
                 total={pagination?.total}

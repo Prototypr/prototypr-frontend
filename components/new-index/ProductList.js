@@ -1,4 +1,3 @@
-import React from "react";
 import ProductItem from "@/components/new-index/ProductItem";
 export default function ProductList({ posts = [] }) {
   return (
@@ -8,7 +7,7 @@ export default function ProductList({ posts = [] }) {
             return (
               <ProductItem
                 key={`product_item_${index}`}
-                post={item?.attributes}
+                post={item}
               />
             );
           })

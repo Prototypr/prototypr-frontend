@@ -1,10 +1,10 @@
-import React from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
 import PostListItem from "@/components/people/PostListItem";
 import KoFiButton from "@/components/people/KoFiButton";
-import NewPagination from "@/components/pagination";
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import PostTitle from '@/components/post-title'
 import Image from "next/image";
 
@@ -25,7 +25,17 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
   }
 
   return (
-    <Layout activeNav={"toolbox"} preview={preview} padding={false}>
+    <Layout 
+    seo={{
+        title:`${author?.name}, member profile at Prototypr`,
+        description:`Say hi to ${author?.name} on Prototypr - check out their profile!`,
+        image:author.avatar?.data?.attributes?.avatar?.data?.attributes? author.avatar.data.attributes.url:
+                    author?.legacyAvatar ? author.legacyAvatar
+                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png",
+        canonical: `https://prototypr.io/people/${slug}/page/${pageNo}`,
+        url: `https://prototypr.io/people/${slug}/page/${pageNo}`
+    }}
+    activeNav={"toolbox"} preview={preview} padding={false}>
      
       {router.isFallback ? (
          <Container>
@@ -54,11 +64,16 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                 {/* <div className="bg-white shadow-sm rounded-full object-cover h-auto align-middle border-4 border-white absolute"
                 style={{ width: "122px", height: "122px", marginTop: "-62px" }}> */}
 
-                {author?.avatar && (
+                {(author?.avatar || author?.legacyAvatar) && (
                   <Image
                     layout="fill"
                     objectFit="cover"
-                    src={author?.avatar}
+                    src={
+                        
+                        author.avatar?.data?.attributes?.avatar?.data?.attributes? author.avatar.data.attributes.url:
+                    author?.legacyAvatar ? author.legacyAvatar
+                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                    }
                     className="rounded-full "
                     alt="Author profile picture"
                   />

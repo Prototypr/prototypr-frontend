@@ -1,6 +1,7 @@
-import React from "react";
-import TopicTopItem from "./TopicTopItem";
-import TopicItem from "./TopicItem";
+import dynamic from "next/dynamic";
+const TopicTopItem = dynamic(() => import("./TopicTopItem"), { ssr: false });
+const TopicItem = dynamic(() => import("./TopicItem"), { ssr: false });
+
 export default function TopicList({ currentTopics = [] }) {
   const heroTopics = currentTopics.length ? currentTopics.slice(0, 2) : [];
   const moreTopics = currentTopics.length ? currentTopics.slice(2) : [];
@@ -10,14 +11,14 @@ export default function TopicList({ currentTopics = [] }) {
       {heroTopics.length
         ? heroTopics.map((item, index) => {
             return (
-              <TopicTopItem key={`topic_${index}`} topic={item?.attributes} />
+              <TopicTopItem key={`topic_${index}`} topic={item} />
             );
           })
         : null}
       {moreTopics.length
         ? moreTopics.map((item, index) => {
             return (
-              <TopicItem key={`topic_${index}`} topic={item?.attributes} />
+              <TopicItem key={`topic_${index}`} topic={item} />
             );
           })
         : null}

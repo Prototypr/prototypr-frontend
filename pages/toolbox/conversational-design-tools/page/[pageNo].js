@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router'
+import dynamic from "next/dynamic";
 import Layout from '@/components/layout'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
-import NewPagination from '@/components/pagination'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
-import FilterCategory from '@/components/FilterCategory'
-import Breadcrumbs from '@/components/Breadcrumbs'
+const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
+import PostTitle from '@/components/post-title'
 
 const PAGE_SIZE = 12;
 
@@ -31,27 +33,22 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
       }
 
     return (
-        <Layout activeNav={'toolbox'} preview={preview}>
+        <Layout 
+        seo={{
+        title: `Conversational design tools | Prototypr Toolbox | Page ${pagination?.page}`,
+        description:
+          "The best conversational design tools: chatbots, messaging and more.",
+        //   image: "",
+        canonical: `https://prototypr.io/toolbox/conversational-design-tools/page/${pagination?.page}`,
+        url: `https://prototypr.io/toolbox/conversational-design-tools/page/${pagination?.page}`,
+      }}
+        activeNav={'toolbox'} preview={preview}>
             <Container>
-            {/* {
-                pagination && pagination.page == 1 && (
-                    <>
-                        <Intro title={'Conversational Design'} />
-                        {heroPost && (
-                            <HeroPost
-                            title={heroPost.attributes.title}
-                            coverImage={coverImage}
-                            date={heroPost.attributes.date}
-                            author={(heroPost.attributes.author &&heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
-                            slug={heroPost.attributes.slug}
-                            excerpt={heroPost.attributes.excerpt}
-                            type="toolbox"
-                            />
-                        )}   
-                    </>
-                )
-            } */}
-            {
+            {router.isFallback ? (
+                 <PostTitle>Loading…</PostTitle>
+                ) :
+                <>  
+                {
                 allPosts.length > 0 &&
                 (
                     <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
@@ -78,6 +75,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                 </div>
                 )
             }
+            </>}
             
             <NewPagination 
                 total={pagination?.total}
@@ -116,6 +114,6 @@ export async function getStaticPaths() {
         paths: pageCountArr && pageCountArr.map((pageNo, index) => {
             return `/toolbox/conversational-design-tools/page/${index}`
         }) || [],
-        fallback: false,
+        fallback: true,
     }
 }

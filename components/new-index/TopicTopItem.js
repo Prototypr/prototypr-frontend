@@ -1,7 +1,13 @@
 import Author from "./Author";
 import Image from "next/image";
 import Link from "next/link";
+import { useIntl } from "react-intl";
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
 export default function TopicTopItem({ topic = {} }) {
+  const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   const {
     title = "",
     excerpt,
@@ -11,8 +17,9 @@ export default function TopicTopItem({ topic = {} }) {
     legacyFeaturedImage = null,
     featuredImage = null,
     author = null,
-  } = topic;
+  } = topic?.attributes;
   const tagArr = tags.data;
+
 
   return (
     <div className="grid-cols-1 bg-white p-6 flex flex-col sm:flex-row cursor-pointer group">
@@ -21,6 +28,7 @@ export default function TopicTopItem({ topic = {} }) {
           {legacyFeaturedImage?.mediaItemUrl ? (
             <Link href={`/post/${slug}`}>
               <Image
+                loader={gumletLoader}
                 objectFit="cover"
                 className="rounded-lg contrast-115"
                 layout="fill"
@@ -30,6 +38,7 @@ export default function TopicTopItem({ topic = {} }) {
           ):featuredImage?.data?.attributes?.url &&
           <Link href={`/post/${slug}`}>
               <Image
+                loader={gumletLoader}
                 objectFit="cover"
                 className="rounded-lg contrast-115"
                 layout="fill"
@@ -56,16 +65,18 @@ export default function TopicTopItem({ topic = {} }) {
         </h4>
         <div
           className="mt-3 text-gray-3 font-normal text-base leading-normal overflow-hidden text-ellipsis clamp-2"
-          dangerouslySetInnerHTML={{ __html: excerpt }}
+          dangerouslySetInnerHTML={{ __html: excerpt}}
         ></div>
         <div className="flex items-center mt-5">
           <Author
-            avatar={author?.data?.attributes?.avatar}
+            avatar={
+              author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+              author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+                :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+            }
             authorName={author?.data?.attributes?.name}
             author={author}
           />
-          {/* <div style={{width: "36px",height: "36px",border: "1px solid red"}} className="rounded-full mr-3"></div>
-                    <div className="font-medium text-base leading-normal text-gray-1">Justin Rhiel Madsen</div> */}
         </div>
       </div>
     </div>

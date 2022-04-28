@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router'
+import dynamic from "next/dynamic";
 import Layout from '@/components/layout'
 import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
-import NewPagination from '@/components/pagination'
-import FilterCategory from '@/components/FilterCategory'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+const NewPagination = dynamic(() => import("@/components/pagination"));
+const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
-import Breadcrumbs from '@/components/Breadcrumbs'
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
+import PostTitle from '@/components/post-title'
 
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/prototyping'
@@ -37,10 +39,22 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
       }
 
     return (
-        <Layout activeNav={'toolbox'} preview={preview}>
+        <Layout 
+        seo={{
+        title: "Prototypr Prototyping Toolbox.",
+        description:
+          "Find tools like Adobe XD, Sketch, Figma, Marvel, and InVision.",
+        //   image: "",
+        canonical:`https://prototypr.io/prototyping/page/${pagination?.page}`,
+        url: `https://prototypr.io/prototyping/page/${pagination?.page}`,
+      }}
+        activeNav={'toolbox'} preview={preview}>
             <Container>
-            {
-                allPosts.length > 0 &&
+            {router.isFallback ? (
+                 <PostTitle>Loading…</PostTitle>
+                ) :
+                <>  
+                {allPosts.length > 0 &&
                 (
                     <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
                         <div className="grid-cols-1 hidden lg:block">
@@ -63,7 +77,8 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
                         <MoreStories posts={allPosts} type="toolbox" />
                     </div>
                 </div>
-                )
+                )}
+                </>
             }
 
             
@@ -106,6 +121,6 @@ export async function getStaticPaths() {
         paths: pageCountArr && pageCountArr.map((pageNo, index) => {
             return `/prototyping/page/${index}`
         }) || [],
-        fallback: false,
+        fallback: true,
     }
 }

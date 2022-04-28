@@ -1,13 +1,14 @@
+import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
-import NewPagination from '@/components/pagination'
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
-import Aspiring from "@/components/new-index/Aspiring";
-import EditorPick2 from "@/components/new-index/EditorPick2";
-import ProductList from "@/components/new-index/ProductList";
-import TopicTopItem from "@/components/new-index/TopicTopItem"
+const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
+const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
+const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
 
 const PAGE_SIZE = 11;
 const ALL_SLUGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]
@@ -21,17 +22,23 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
 
     return (
         <>
-          <Layout activeNav={"posts"} preview={preview}>
-            <Head>
-              <title>Open design and tech stories for everyone to read</title>
-            </Head>
+          <Layout 
+          seo={{
+          title: "Prototypr Design articles – free for everyone.",
+          description:
+            "Design content open and accessible to everyone, no paywall here.",
+          //   image: "",
+          canonical: "https://prototypr.io/posts",
+          url: "https://prototypr.io/posts",
+        }}
+          activeNav={"posts"} preview={preview}>
             <Container>
             <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5 capitalize'>{tagName}</h2>
             {first4Posts?.length>0  &&<Aspiring posts={first4Posts} showTitle={false} />}
             
             <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
             {first2Posts?.length>0 &&  first2Posts.map((item, index) => {
-                    return <TopicTopItem key={`topic_${index}`} topic={item?.attributes} />
+                    return <TopicTopItem key={`topic_${index}`} topic={item} />
                 })}
             </section>
             {heroPost && <EditorPick2 post={heroPost} showTitle={false} />}
@@ -50,11 +57,15 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
       )
 }
 
-export async function getStaticProps({ preview = null, params }) {
+export async function getStaticProps({ preview = null, params,locale }) {
+    let sort = ["featured:desc","tier:asc",  "date:desc"]
+    if(locale === 'es-ES'){
+      sort = ["esES:asc","featured:desc","tier:asc","date:desc"]
+    }
     const pageSize = PAGE_SIZE
     const {slug} = params
     const pageNo = 1
-    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug])) || []
+    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug],sort)) || []
 
     let tags = allPosts[1]
     allPosts = allPosts[0]

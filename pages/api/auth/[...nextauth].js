@@ -2,9 +2,6 @@ import NextAuth from 'next-auth'
 import TwitterProvider from "next-auth/providers/twitter"
 import GitHubProvider from "next-auth/providers/github"
 
-var axios = require('axios');
-
-
 const options = {
   providers: [
     GitHubProvider({

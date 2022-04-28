@@ -1,5 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
 export default function Author({
   avatar = "",
   author = "",
@@ -10,11 +14,16 @@ export default function Author({
     <>
       <div className="flex items-center">
         <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
-          {(avatar || author?.data?.attributes?.avatar) &&
+          {(author?.data?.attributes?.legacyAvatar || author?.data?.attributes?.avatar) &&
             author?.data?.attributes?.slug && (
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
-                  src={avatar ? avatar : author?.data?.attributes?.avatar}
+                  loader={gumletLoader}
+                  src={
+                    author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+                    author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                  }
                   layout="fill"
                   objectFit="cover"
                   className="rounded-full"

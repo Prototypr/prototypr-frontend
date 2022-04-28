@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useIntl, FormattedMessage } from "react-intl";
+import { useState } from "react";
+import { useIntl } from "react-intl";
 export default function Tabs({ items = [], onTabChanged = () => {} }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const intl = useIntl();

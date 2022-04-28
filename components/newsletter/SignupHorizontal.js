@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FormattedMessage, useIntl } from 'react-intl';
-export default function SignupHorizontal() {
+
+export default function SignupHorizontal({className}) {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
   const intl = useIntl();
@@ -41,7 +42,7 @@ export default function SignupHorizontal() {
         {registered == false ? (
           <>
             <HookForm
-              align={"left"}
+              className={className}
               onSubmit={onSubmit}
               buttonText={buttonText}
               layout={"horizontal"}
@@ -90,7 +91,7 @@ function HookForm(props) {
   return (
     <div>
       <form
-        className="mt-5 md:mt-8 sm:flex w-10/12 mx-auto"
+        className={`${props.className}`}
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="sm:flex-1 sm:max-w-xs w-full">

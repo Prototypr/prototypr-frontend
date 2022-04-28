@@ -1,13 +1,15 @@
+import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
-import NewPagination from '@/components/pagination'
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
-import Aspiring from "@/components/new-index/Aspiring";
-import EditorPick2 from "@/components/new-index/EditorPick2";
-import ProductList from "@/components/new-index/ProductList";
-import TopicTopItem from "@/components/new-index/TopicTopItem"
+import { transformPostList } from "@/lib/locale/transformLocale";
+const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
+const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
+const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
 
 const PAGE_SIZE = 11;
 const ALL_SLUGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]
@@ -21,7 +23,16 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
 
     return (
         <>
-          <Layout activeNav={"posts"} preview={preview}>
+          <Layout
+           seo={{
+          title: `${tagName} | design articles on Prototypr | Page ${pagination?.page}`,
+          description:
+            `Articles on ${tagName} - design content open and accessible to everyone, no paywall here.`,
+          //   image: "",
+          canonical:`https://prototypr.io/posts/${slug}/page/${pagination?.page}`,
+          url: `https://prototypr.io/posts/page/${slug}/${pagination?.page}`,
+        }}
+           activeNav={"posts"} preview={preview}>
             <Head>
               <title>Open design and tech stories for everyone to read</title>
             </Head>
@@ -31,7 +42,7 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
             
             <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
             {first2Posts?.length>0 &&  first2Posts.map((item, index) => {
-                    return <TopicTopItem key={`topic_${index}`} topic={item?.attributes} />
+                    return <TopicTopItem key={`topic_${index}`} topic={item} />
                 })}
             </section>
             {heroPost && <EditorPick2 post={heroPost} showTitle={false} />}
@@ -50,11 +61,15 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
       )
 }
 
-export async function getStaticProps({ preview = null, params }) {
+export async function getStaticProps({ preview = null, params, locale }) {
+    let sort = ["featured:desc","tier:asc",  "date:desc"]
+    if(locale === 'es-ES'){
+      sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
+    }
     const pageSize = PAGE_SIZE
     const {pageNo, slug} = params
     
-    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug])) || []
+    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug],sort)) || []
 
     let tags = allPosts[1]
     allPosts = allPosts[0]
@@ -62,21 +77,23 @@ export async function getStaticProps({ preview = null, params }) {
     
     let first4 = [],first2=[], nextPosts = [], morePosts = [], heroPost = null
     
+    allPosts = transformPostList(allPosts.data, locale)
+    
     // if first page, divide posts into sections
     if(pageNo == 1){
-      first4 = allPosts.data.slice(0, 4);
-      if(allPosts.data && allPosts.data.length>4){
-        nextPosts = allPosts?.data.slice(4)
+      first4 = allPosts.slice(0, 4);
+      if(allPosts && allPosts.length>4){
+        nextPosts = allPosts?.slice(4)
         heroPost = nextPosts[0];
         morePosts = nextPosts.slice(1);
       }
       
     }else{
      // otherwise, just send back the list without splicing
-     first2 = allPosts.data.slice(0, 2);
-     morePosts = allPosts.data.slice(2)
+     first2 = allPosts.slice(0, 2);
+     morePosts = allPosts.slice(2)
      
-     nextPosts = allPosts.data
+     nextPosts = allPosts
     }
     
     return {

@@ -1,12 +1,13 @@
-import React from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
 import PostListItem from "@/components/people/PostListItem";
 import KoFiButton from "@/components/people/KoFiButton";
-import NewPagination from "@/components/pagination";
+const NewPagination = dynamic(() => import("@/components/pagination"));
 import PostTitle from '@/components/post-title'
 import Image from "next/image";
+import { transformPostList } from "@/lib/locale/transformLocale";
 
 import { getPostsByPageAndAuthor } from '@/lib/api'
 import {gradient,getTwitterHandle, getKofiName, getDribbbleHandle, getGithubHandle} from "@/lib/profile-page/profile-page.js"
@@ -25,7 +26,17 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
   }
 
   return (
-    <Layout activeNav={"toolbox"} preview={preview} padding={false}>
+    <Layout 
+     seo={{
+        title:`${author?.name}, member profile at Prototypr`,
+        description:`Say hi to ${author?.name} on Prototypr - check out their profile!`,
+        image:author.avatar?.data?.attributes?.avatar?.data?.attributes? author.avatar.data.attributes.url:
+                    author?.legacyAvatar ? author.legacyAvatar
+                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png",
+        canonical: `https://prototypr.io/people/${slug}`,
+        url: `https://prototypr.io/people/${slug}`
+    }}
+    activeNav={"toolbox"} preview={preview} padding={false}>
      
       {router.isFallback ? (
          <Container>
@@ -54,11 +65,16 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                 {/* <div className="bg-white shadow-sm rounded-full object-cover h-auto align-middle border-4 border-white absolute"
                 style={{ width: "122px", height: "122px", marginTop: "-62px" }}> */}
 
-                {author?.avatar && (
+                {(author?.avatar || author?.legacyAvatar) && (
                   <Image
                     layout="fill"
                     objectFit="cover"
-                    src={author?.avatar}
+                    src={
+                        
+                        author.avatar?.data?.attributes?.avatar?.data?.attributes? author.avatar.data.attributes.url:
+                    author?.legacyAvatar ? author.legacyAvatar
+                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                    }
                     className="rounded-full "
                     alt="Author profile picture"
                   />
@@ -282,12 +298,18 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
   );
 }
 
-export async function getStaticProps({ preview = null, params }) {
+export async function getStaticProps({ preview = null, params, locale }) {
   const pageSize = PAGE_SIZE;
   const { slug } = params
   const pageNo = 1
 
-  let allPosts = (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug])) || []
+  let sort = ["featured:desc","tier:asc","date:desc"]
+  if(locale=='es-ES'){
+    sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
+  }
+
+  let allPosts = (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug], sort)) || []
+
   const pagination = allPosts.meta.pagination
   let author = allPosts.data.length && allPosts.data[0] ? allPosts.data[0].attributes.author: {}
   author = author.data.attributes
@@ -303,18 +325,21 @@ export async function getStaticProps({ preview = null, params }) {
   const kofi = getKofiName(author.kofi)
   const github = getGithubHandle(author.github)
   const twitter = getTwitterHandle(author.twitter)
-  const authorUrl = author.url
-                          .replace(/(^\w+:|^)\/\//, "")
-                          .replace(/\/+$/, "")
+  let authorUrl=''
+  if(author.url){
+    authorUrl = author.url.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "")
+  }
                           
   let skills = []
-  if (author.skills.indexOf(",") > -1) {
+  if (author.skills && author.skills.indexOf(",") > -1) {
     skills = author.skills.split(",");
-  } else {
+  } else if(author.skills){
     //trin string
     var skill = author.skills.substring(0, 22);
     skills.push(skill);
   }
+
+  allPosts = transformPostList(allPosts.data, locale)
   
   return {
     props: {
@@ -328,19 +353,22 @@ export async function getStaticProps({ preview = null, params }) {
       pageNo,
       preview,
       pagination,
-      allPosts: allPosts.data,
+      allPosts: allPosts,
       gradient:grad
     },
   };
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({locale}) {
   let pageCountArr = [];
-  
+  let sort = ["featured:desc","tier:asc","date:desc"]
+  if(locale=='es-ES'){
+    sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
+  }
   
   
   for (let index = 0; index < ALL_SLUGS.length; index++) {
-    const allPosts = (await getPostsByPageAndAuthor(null, PAGE_SIZE, 0, [ALL_SLUGS[index]])) || []
+    const allPosts = (await getPostsByPageAndAuthor(null, PAGE_SIZE, 0, [ALL_SLUGS[index]], sort)) || []
     const pagination = allPosts.meta.pagination
     const pageCount = pagination.pageCount
     let arr = new Array(pageCount).fill('');

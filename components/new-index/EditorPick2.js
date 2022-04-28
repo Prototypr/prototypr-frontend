@@ -2,8 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 // import Moment from "react-moment";
+import { useIntl } from "react-intl";
 
-export default function EditorPick({ post = {}, header = false }) {
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
+export default function EditorPick({ post = {}, header = false , lazy=true}) {
+  const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   const postItem = post?.attributes;
   const {
     title = "",
@@ -13,13 +20,14 @@ export default function EditorPick({ post = {}, header = false }) {
     tags,
     legacyFeaturedImage = null,
     featuredImage = null,
-    author = null,
+    author = {},
   } = postItem;
   const tagArr = tags.data;
+
   return (
     <div className="pb-10 px-3 xl:px-0">
       {header && (
-        <h3 className="text-3xl text-title-1 text-gray-900 font-bold leading-6 tracking-wide mb-9">
+        <h3 className="text-3xl text-title-1 text-gray-900 font-bold leading-6 mb-9">
           {header}
         </h3>
       )}
@@ -36,9 +44,13 @@ export default function EditorPick({ post = {}, header = false }) {
               <figure className="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
                 <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
                   <Image
+                    data-gmlazy={lazy} 
+                    data-priority={lazy?false:true}
+                    priority={lazy?false:true}
+                    loader={gumletLoader}
                     layout="fill"
                     objectFit="cover"
-                    src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl && legacyFeaturedImage.mediaItemUrl}
+                    src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl ? legacyFeaturedImage.mediaItemUrl:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                     alt="Blog post"
                   />
                 </div>
@@ -93,7 +105,11 @@ export default function EditorPick({ post = {}, header = false }) {
                     <div className="mr-4 relative flex-shrink-0 hover:cursor-pointer">
                       <Image
                         className="rounded-full"
-                        src={author?.data?.attributes?.avatar}
+                        src={
+                          author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+                          author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+                            :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                          }
                         width={40}
                         height={40}
                         objectFit="cover"

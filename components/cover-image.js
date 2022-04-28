@@ -1,8 +1,12 @@
-import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CoverImage({ title, url, slug, type, route, imageHeight }) {
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
+
+export default function CoverImage({ title, url, slug, type, route, imageHeight, index }) {
   url = url?.mediaItemUrl;
 
   const imageUrl = url
@@ -16,6 +20,10 @@ export default function CoverImage({ title, url, slug, type, route, imageHeight 
       <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
         <Link href={`/${type ? type : route ? route : "posts"}/${slug}`}>
           <Image
+            loader={gumletLoader}
+            priority={index<2?true:false}
+            data-priority={index<2?true:false}
+            data-gmlazy={index<2?false:true}
             className="rounded-lg contrast-115"
             objectFit="cover"
             layout="fill"

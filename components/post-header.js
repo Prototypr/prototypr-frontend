@@ -19,7 +19,12 @@ export default function PostHeader({ title, coverImage, date, author, type }) {
                 ? author.firstName
                 : ""
             }
-            picture={author?.avatar}
+            picture={
+              author.avatar?.data?author.avatar.data.url:
+              author.legacyAvatar ? author.legacyAvatar
+                :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+
+            }
           />
         </div>
       )}
@@ -36,7 +41,11 @@ export default function PostHeader({ title, coverImage, date, author, type }) {
                   ? author.firstName
                   : ""
               }
-              picture={author?.avatar}
+              picture={
+                author.avatar?.data?author.avatar.data.url:
+                author.legacyAvatar ? author.legacyAvatar
+                  :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+              }
             />
           </div>
         )}

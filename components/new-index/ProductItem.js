@@ -1,6 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useIntl } from "react-intl";
+
+const gumletLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
 export default function ProductItem({ post = {} }) {
+  const intl = useIntl();
+  const locale = intl.locale ? intl.locale : "en-US";
   const {
     title = "",
     excerpt,
@@ -10,14 +18,17 @@ export default function ProductItem({ post = {} }) {
     legacyFeaturedImage = null,
     featuredImage = null,
     author = null,
-  } = post;
+  } = post?.attributes;
   const tagArr = tags.data;
+
+
   return (
     <div className="grid-cols-1 flex items-top py-2 group">
       <figure className="relative h-0 w-36 h-36 sm:w-40 sm:h-40 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
         <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
           <Link href={`/post/${slug}`}>
             <Image
+              loader={gumletLoader}
               objectFit="cover"
               className="rounded-lg contrast-115"
               layout="fill"
@@ -42,10 +53,15 @@ export default function ProductItem({ post = {} }) {
         </h4>
         <div className="mt-3 flex items-center">
           <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
-            {author?.data?.attributes?.avatar && (
+            {(author?.data?.attributes?.avatar || author?.data?.attributes?.legacyAvatar) && (
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
-                  src={author?.data?.attributes?.avatar}
+                  loader={gumletLoader}
+                  src={
+                    author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+                    author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                  }
                   layout="fill"
                   objectFit="cover"
                   className="rounded-full"

@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
 import ErrorPage from "next/error";
 import Container from "@/components/container";
 import Layout from "@/components/layout";
-import PopupGallery from "@/components/gallery/PopupGallery";
-import AuthorCard from "@/components/toolbox/AuthorCard";
-import SponsorCard from "@/components/toolbox/SponsorCard";
+const PopupGallery = dynamic(() => import("@/components/gallery/PopupGallery"));
+const AuthorCard = dynamic(() => import("@/components/toolbox/AuthorCard"));
+const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"));
+const RelatedPosts = dynamic(() => import("@/components/related-posts"));
+
 import Contributors from "@/components/toolbox/Contributors";
-// import Comment from "@/components/toolbox/Comment/Comment";
 import PostTitle from '@/components/post-title'
 import VisitCard from "@/components/toolbox/VisitCard";
-import RelatedPosts from "@/components/related-posts";
 import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
-// import MOCK_UP_ITEM from "@/components/gallery/ItemMockData";
-// import markdownToHtml from '@/lib/markdownToHtml'
+import { useIntl } from 'react-intl';
+import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
 
-export default function Post({ post, morePosts, relatedPosts, gallery, preview }) {
-  // console.log("toolbox page:post*********" + JSON.stringify(post.attributes))
-  // const postItem = MOCK_UP_ITEM;
-  // console.log("relatedPosts*******" + JSON.stringify(relatedPosts))
+export default function Post({ post, relatedPosts, gallery, preview }) {
+  const intl = useIntl();
+  // const locale = intl.locale ? intl.locale : "en-US";
   const router = useRouter();
   //TODO: what is withAuthUser
   const withAuthUser = {};
@@ -27,13 +28,16 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
     return <ErrorPage statusCode={404} />;
   }
 
-  const setUserAuthenticated = () => {};
-
-  useEffect(() => {
-  }, []);
-
   return (
-    <Layout activeNav={"toolbox"} preview={preview}>
+    <Layout 
+    seo={{
+        title:`${post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphTitle: post?.attributes?.title && post.attributes.title}`,
+        description:`${post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphDescription: post?.attributes?.excerpt && post.attributes.excerpt}`,
+        image:`${post?.attributes?.seo?.opengraphImage?post?.attributes?.seo?.opengraphImage:  post?.attributes?.featuredImage?.data?.attributes?.url ? post?.attributes?.featuredImage?.data?.attributes?.url:post?.legacyFeaturedImage?post?.legacyFeaturedImage?.mediaItemUrl:post?.ogImage?post?.ogImage.opengraphImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}`,
+        canonical: `${post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/toolbox/${post?.attributes.slug}`}`,
+        url: `${post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/toolbox/${post?.attributes.slug}`}`
+      }}
+    activeNav={"toolbox"} preview={preview}>
       <Container>
         <div className="w-full mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
           {/* left sidebar */}
@@ -46,7 +50,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
           >
             {post && post.attributes && post.attributes.author && (
               <div className="sm:hidden lg:block">
-                <AuthorCard author={post.attributes.author} />
+                <AuthorCard author={post.attributes.author} avatar={post.attributes?.author} />
               </div>
             )}
             <div className="mt-6 sm:hidden block lg:block lg:mt-6">
@@ -59,7 +63,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
           <div className="col-span-full lg:col-span-13">
             {post && post.attributes && (
               <PopupGallery
-                body={post.attributes.content}
+                // body={content}
                 item={post.attributes}
                 gallery={gallery}
                 rounded={true}
@@ -76,7 +80,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
                 <div
                   style={{ color: "#4a5568", marginBottom: "1rem" }}
                   className="py-3 popup-modal-content"
-                  dangerouslySetInnerHTML={{ __html: post?.attributes.content }}
+                  dangerouslySetInnerHTML={{ __html: post.attributes.content }}
                 ></div>
               </div>
             </div>
@@ -94,7 +98,7 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
           <div className="col-span-full mb-6 lg:mb-0 lg:col-span-6 order-first lg:order-last lg:block">
               <VisitCard 
                 tags={post?.attributes.tags}
-                title={post?.attributes.title}
+                title={post.attributes.title}
                 link={post?.attributes.link}
                 useNextImage={true}
                 logoNew={post?.attributes.legacyFeaturedImage?.logoNew}
@@ -115,9 +119,8 @@ export default function Post({ post, morePosts, relatedPosts, gallery, preview }
   );
 }
 
-export async function getStaticProps({ params, preview = null }) {
+export async function getStaticProps({ params, preview = null, locale }) {
   const data = await getToolsAndMoreTools(params.slug, preview);
-
   //get the tags for the next query
   let tags = data?.posts.data[0].attributes.tags
   let tagsArr = []
@@ -126,7 +129,7 @@ export async function getStaticProps({ params, preview = null }) {
       tagsArr.push(tags.data[x].attributes.slug)
     }
   }
-  const relatedPostsData = await getRelatedTools(tagsArr,params.slug, preview);
+  let relatedPostsData = await getRelatedTools(tagsArr,params.slug, preview);
 
   //build the gallery here
   let PHOTO_SET = [];
@@ -146,23 +149,28 @@ export async function getStaticProps({ params, preview = null }) {
           originalAlt: "Screenshot of product",
           thumbnailAlt: "Smaller procut screenshot thumbnail",
           type: "image",
-          srcSet: galleryItem.srcSet,
-          sizes: galleryItem.sizes?galleryItem.sizes:{},
+          // srcSet: galleryItem.srcSet,
+          // sizes: galleryItem.sizes?galleryItem.sizes:{},
         });
       });
     }
   }
+
+  data?.posts.data[0] = transformPost(data?.posts.data[0], locale)
+  relatedPostsData = transformPostList(relatedPostsData?.posts.data, locale)
+
+
+
 
   return {
     props: {
       preview,
       post: {
         ...data?.posts.data[0],
-        // content,
       },
       gallery:PHOTO_SET,
-      relatedPosts:relatedPostsData?.posts.data,
-      morePosts: data?.morePosts.data,
+      relatedPosts:relatedPostsData,
+      // morePosts: data?.morePosts.data,
     },
   };
 }

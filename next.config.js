@@ -1,4 +1,8 @@
-module.exports = {
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+})
+
+module.exports = withBundleAnalyzer({
   i18n: {
     locales: ['en-US', 'es-ES'],
     defaultLocale: 'en-US',
@@ -13,6 +17,7 @@ module.exports = {
       "prototypr.io",
       "prototypr.gumlet.io",
       "prototyprio.gumlet.io",
+      "prototypr.gumlet.com",
       "miro.medium.com",
       "secure.gravatar.com",
       "cdn-images-1.medium.com",
@@ -20,6 +25,7 @@ module.exports = {
       "cdn.dribbble.com",
       "secure.gravatar.com",
       "cdn-images-1.medium.com",
+      "claritee.io"
     ],
   },
-};
+});

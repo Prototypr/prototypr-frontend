@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import dynamic from "next/dynamic";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
-import MoreStories from "@/components/more-stories";
-import NewPagination from "@/components/pagination";
-import FilterCategory from "@/components/FilterCategory";
-import Breadcrumbs from '@/components/Breadcrumbs'
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+const NewPagination = dynamic(() => import("@/components/pagination"));
+const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 // import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from '@/lib/api'
 import {
   getAllPostsForToolsSubcategoryPage,
@@ -46,7 +47,16 @@ export default function ToolboxPage({
   };
 
   return (
-    <Layout activeNav={"toolbox"} preview={preview}>
+    <Layout 
+    seo={{
+        title: "Prototypr Prototyping Toolbox.",
+        description:
+          "Find tools like Adobe XD, Sketch, Figma, Marvel, and InVision.",
+        //   image: "",
+        canonical: `https://prototypr.io/prototyping/${slug}/page/${pagination?.page}`,
+        url: `https://prototypr.io/prototyping/${slug}/page/${pagination?.page}`,
+      }}
+    activeNav={"toolbox"} preview={preview}>
       <Container>
         {allPosts.length > 0 && (
           <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
@@ -84,7 +94,11 @@ export default function ToolboxPage({
   );
 }
 
-export async function getStaticProps({ preview = null, params }) {
+export async function getStaticProps({ preview = null, params, locale }) {
+  let sort = ["date:desc"]
+  if(locale === 'es-ES'){
+    sort = ["esES:asc","date:desc"]
+  }
   const pageSize = PAGE_SIZE;
   const { pageNo, slug } = params;
 
@@ -95,10 +109,9 @@ export async function getStaticProps({ preview = null, params }) {
       preview,
       pageSize,
       pageNo,
-      foundSlug.tags
+      foundSlug.tags,
+      sort
     )) || [];
-  // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
-  // console.log('page info**********' + JSON.stringify(allPosts.meta.pagination))
   const pagination = allPosts.meta.pagination;
   return {
     props: {
@@ -111,7 +124,6 @@ export async function getStaticProps({ preview = null, params }) {
 }
 
 export async function getStaticPaths() {
-  let pageCountRes = 0;
   let pageCountArr = [];
   //create the ALL_SLUGS from ALL_SLUGS_GROUPS
   const all_slugs = get_slugs_from_menu(ALL_SLUGS_CATEGORY)
@@ -127,23 +139,6 @@ export async function getStaticPaths() {
     })
     pageCountArr = pageCountArr.concat(newArr)
   }
-  // ALL_SLUGS_CATEGORY.map(async (item, index) => {
-  //   const allPosts =
-  //     (await getAllPostsForToolsSubcategoryPage(
-  //       null,
-  //       PAGE_SIZE,
-  //       0,
-  //       item.tags
-  //     )) || [];
-  //   // const allPosts = (await getAllPostsForToolsSubcategoryPage(null, PAGE_SIZE, 0,["whiteboard"])) || []
-  //   const pagination = allPosts.meta.pagination;
-  //   const pageCount = pagination.pageCount;
-  //   let arr = new Array(pageCount).fill("");
-  //   let newArr = arr.map((i, index) => {
-  //     return `prototyping/${item.key}/page/${index + 1}`;
-  //   });
-  //   pageCountArr = pageCountArr.concat(newArr);
-  // });
   return {
     paths: pageCountArr || [],
     fallback: true,

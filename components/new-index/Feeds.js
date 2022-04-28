@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useIntl } from 'react-intl';
 const FeedItem = dynamic(() => import("./FeedItem"), { ssr: false });
@@ -18,7 +17,7 @@ export default function Feeds({ posts = [] }) {
               return (
                 <FeedItem
                   textColor={"text-gray-500"}
-                  post={item?.attributes}
+                  post={item}
                   index={index}
                   author={item?.attributes?.author?.data?.attributes}
                   key={`col1_${index}`}
