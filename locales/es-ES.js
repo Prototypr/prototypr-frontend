@@ -89,6 +89,7 @@ const ES = {
     "Historias abiertas de diseño y tecnología para que todos puedan leer",
   "newsletter.title": "Reciber el boletín",
   "newsletter.issue": "Cuestiones anteriores",
-  "issue": "Asunto"
+  "issue": "Asunto",
+  "issue.viewAll": "Ver todo"
 };
 export default ES;

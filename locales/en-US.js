@@ -79,6 +79,7 @@ const EN =  {
     "topics.header": "Open design and tech stories for everyone to read",
     "newsletter.title": "Get the newsletter",
     "newsletter.issue": "Previous issues",
-    "issue": "Issue"
+    "issue": "Issue",
+    "issue.viewAll": "View all"
 }
 export default EN;

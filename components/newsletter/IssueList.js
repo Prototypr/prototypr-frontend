@@ -21,8 +21,10 @@ export default function IssueList({ posts = [] }) {
           }): null
         }
       </div>
-      <div className="flex items-center justify-center">
-        <button className="bg-white rounded-lg px-18 py-4 font-semibold text-base flex items-center justify-center text-gray-1 hover:opacity-80">View all</button>
+      <div className="flex items-center justify-center mb-4">
+        <button className="bg-white rounded-lg px-18 py-4 font-semibold text-base flex items-center justify-center text-gray-1 hover:opacity-80">
+          {intl.formatMessage({ id: "issue.viewAll" })}
+        </button>
       </div>
     </section>
   );

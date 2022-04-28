@@ -31,6 +31,7 @@ export default function NewsLetter({
                     <IssueList posts={allPosts} />
                 </Container>
             </Layout>
+            <Footer />
         </>
     )
 }
