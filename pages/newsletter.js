@@ -6,16 +6,17 @@ import Head from "next/head";
 import SourcePanel from "@/components/new-index/SourcePanel";
 import TitleBlock from "@/components/newsletter/TitleBlock";
 import IssueList from "@/components/newsletter/IssueList";
-
+import { FormattedMessage, useIntl } from 'react-intl';
 export default function NewsLetter({
     preview
 }) {
+    const intl = useIntl();
     return (
         <>
             <Layout preview={preview}>
                 <Head>
                     <title>
-                        Prototypr - Prototyping, UX Design, Front-end Development and Beyond
+                        {intl.formatMessage({id: "index.header.title"})}
                         👾.
                     </title>
                 </Head>
