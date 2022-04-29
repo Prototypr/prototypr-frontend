@@ -5,9 +5,9 @@ import Layout from "@/components/new-index/layoutForIndex";
 import Footer from "@/components/footer";
 import Head from "next/head";
 import { getAllPostsForToolsPage } from '@/lib/api'
-import SourcePanel from "@/components/new-index/SourcePanel";
-import TitleBlock from "@/components/newsletter/TitleBlock";
-import IssueList from "@/components/newsletter/IssueList";
+const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
+const TitleBlock = dynamic(() => import("@/components/newsletter/TitleBlock"));
+const IssueList = dynamic(() => import("@/components/newsletter/IssueList"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
 import { FormattedMessage, useIntl } from 'react-intl';
 const PAGE_SIZE = 8;
