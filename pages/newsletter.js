@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import Head from "next/head";
 import { getAllPostsForToolsPage } from '@/lib/api'
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
-const TitleBlock = dynamic(() => import("@/components/newsletter/TitleBlock"));
+// const TitleBlock = dynamic(() => import("@/components/newsletter/TitleBlock"));
 const IssueList = dynamic(() => import("@/components/newsletter/IssueList"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -33,9 +33,13 @@ export default function NewsLetter({
                     </title>
                 </Head>
                 <Container>
-                    <TitleBlock />
-                    <SourcePanel />
-                    <IssueList posts={allPosts} />
+                    {/* <TitleBlock /> */}
+                    <div className="mt-12">
+                    <SourcePanel 
+                    title={intl.formatMessage({ id: "navbar.contentitem.title2"})}
+                    desc={intl.formatMessage({ id: "sourcepanel.desc2"})}/>
+                    </div>
+                    <IssueList marginTop="mt-12" posts={allPosts} />
                     <NewPagination
                         total={pagination?.total}
                         pageSize={PAGE_SIZE}

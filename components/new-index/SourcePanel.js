@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useIntl, FormattedMessage } from 'react-intl';
-export default function SourcePanel({}) {
+export default function SourcePanel({desc, title}) {
   const intl = useIntl();
 
   const [registered, setRegistered] = useState(false);
@@ -40,7 +40,7 @@ export default function SourcePanel({}) {
 
   return (
     <section className="w-full mb-4 px-3 xl:px-0">
-      <div className="bg-white relative w-full h-auto md:h-100 flex flex-col md:flex-row relative">
+      <div className="bg-white relative w-full h-auto md:h-100 flex flex-col md:flex-row relative rounded-lg">
         <figure className="relative h-56 md:absolute left-0 relative w-full md:h-full mb-3 sm:mb-0 mr-6 lg:mr-0 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
           <div className="absolute bottom-0 left-0 w-full md:w-2/3 h-full ml-8 sm:ml-0 md:ml-8 object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out">
             <Image
@@ -59,10 +59,10 @@ export default function SourcePanel({}) {
             {registered == false ? (
               <>
                 <h3 className="font-semibold text-5xl md:text-s6xl text-gray-1">
-                  {intl.formatMessage({ id: "navbar.contentitem.title"})}
+                  {title}
                 </h3>
                 <p className="font-base text-lg leading-normal">
-                  {intl.formatMessage({ id: "sourcepanel.desc"})}
+                  {desc}
                 </p>
                 <HookForm onSubmit={onSubmit} buttonText={buttonText} />
               </>

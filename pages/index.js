@@ -86,7 +86,10 @@ export default function Index({
         </Container>
         <DesignTool allTools={allTools} />
         <Container>
-          <SourcePanel/>
+        <SourcePanel 
+          title={intl.formatMessage({ id: "navbar.contentitem.title"})}
+          desc={intl.formatMessage({ id: "sourcepanel.desc"})}
+          />
           <TopicSpolights tabs={TAB_ITEMS} topics={topicRes} />
           <Aspiring posts={interviewPosts} />
           <Feeds posts={otherPosts} />

@@ -49,6 +49,7 @@ const ES = {
   "navbar.submenu2.desc6":
     "Herramientas para crear interfaces de usuario de voz, como chatbots.",
   "navbar.contentitem.title": "The Source",
+  "navbar.contentitem.title2": "Reciber el boletín",
   "navbar.contentitem.desc":
     "Un boletín picante que aborda temas tabú y expone verdades ocultas en la esfera de la tecnología y el diseño.",
   "editpicker.title": "Selección de los editores",
@@ -58,6 +59,7 @@ const ES = {
     "Prototypr: creación de prototipos, diseño de UX, desarrollo front-end y más",
   "sourcepanel.desc":
     "The Source aborda temas tabú, expone verdades ocultas y comparte primicias sobre lo último en la esfera de la tecnología y el diseño.",
+  "sourcepanel.desc2": "Los mejores artículos y herramientas cada semana.",
   "sourcepanel.form.label": "Introduzca su email",
   "sourcepanel.form.placeholder": "Su Email",
   "sourcepanel.form.errortip": "Por favor revise e intente de nuevo.",

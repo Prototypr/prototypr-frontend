@@ -2,11 +2,11 @@ import React from "react";
 import dynamic from "next/dynamic";
 const IssueItem = dynamic(() => import("@/components/newsletter/IssueItem"));
 import { useIntl } from 'react-intl';
-export default function IssueList({ posts = [] }) {
+export default function IssueList({ posts = [], marginTop }) {
   const intl = useIntl();
   return (
-    <section className="mt-28 pt-2 px-3 xl:px-0">
-      <h2 className="font-bold text-4xl tracking-wide text-title-1 mb-10">
+    <section className={`pt-2 px-3 xl:px-0 ${!marginTop?'':marginTop}`}>
+      <h2 className="font-bold text-3xl text-title-1 mb-10">
         {intl.formatMessage({ id: "newsletter.issue" })}
       </h2>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 mb-20">

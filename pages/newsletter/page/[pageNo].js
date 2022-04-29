@@ -44,7 +44,7 @@ export default function NewsletterPage({ allPosts = [], preview, pagination = {}
                             {
                                  allPosts.length > 0 &&
                                  <div className="pt-8">
-                                     <IssueList posts={allPosts} />
+                                     <IssueList marginTop={false} posts={allPosts} />
                                  </div>
                             }
                         </>
