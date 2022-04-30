@@ -2,15 +2,16 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
-const MoreStories = dynamic(() => import("@/components/more-stories"));
-const NewPagination = dynamic(() => import("@/components/pagination"));
-const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
-const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
-import PostTitle from '@/components/post-title'
 
+import PostTitle from '@/components/post-title'
 import { getPeopleByPage } from "@/lib/api";
 
 import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
+
+const MoreStories = dynamic(() => import("@/components/more-stories"));
+const NewPagination = dynamic(() => import("@/components/pagination"));
+// const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 
 const PAGE_SIZE = 12;
 
@@ -50,11 +51,11 @@ export default function PeoplePage({
                     title={BREADCRUMBS.pageTitle}
                     links={BREADCRUMBS.links}
                     />
-              <FilterCategory
+              {/* <FilterCategory
                urlRoot={'/people'}
                items={ALL_PEOPLE_GROUPS} 
                key={'people_item_'} 
-               slug={'/people'}/>
+               slug={'/people'}/> */}
 
               </div>
             </div>

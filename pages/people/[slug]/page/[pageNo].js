@@ -4,13 +4,13 @@ import Layout from "@/components/layout";
 import Container from "@/components/container";
 import PostListItem from "@/components/people/PostListItem";
 import KoFiButton from "@/components/people/KoFiButton";
-const NewPagination = dynamic(() => import("@/components/pagination"));
 import PostTitle from '@/components/post-title'
 import Image from "next/image";
 
 import { getPostsByPageAndAuthor } from '@/lib/api'
 import {gradient,getTwitterHandle, getKofiName, getDribbbleHandle, getGithubHandle} from "@/lib/profile-page/profile-page.js"
 
+const NewPagination = dynamic(() => import("@/components/pagination"));
 const PAGE_SIZE = 12;
 const ALL_SLUGS = ['hoangnguyen','clos','ebruaksoy','giovanitier','atharvapatil','alexanderigwe','kelechiu','tamarasredojevic','leandrofernandez','alexandragrochowski','chamansharma']
 
