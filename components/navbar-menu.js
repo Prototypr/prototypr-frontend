@@ -570,7 +570,7 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInC
           ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (
-            <NavigationMenuButton href="/">
+            <NavigationMenuButton href="/newsletter">
               {intl.formatMessage({ id: "navbar.menu.title4" })}
             </NavigationMenuButton>
           )}

@@ -15,7 +15,7 @@ import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/chatTools'
 
 const BREADCRUMBS = {
-    pageTitle:'Mixed Reality',
+    pageTitle:'Conversational Design',
     links:[
         {name:'Home', slug:'/'},
         {name:'Toolbox', slug:'/toolbox/page/1'},

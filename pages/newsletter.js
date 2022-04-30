@@ -39,13 +39,15 @@ export default function NewsLetter({
                     title={intl.formatMessage({ id: "navbar.contentitem.title2"})}
                     desc={intl.formatMessage({ id: "sourcepanel.desc2"})}/>
                     </div>
-                    <IssueList marginTop="mt-12" posts={allPosts} />
-                    <NewPagination
-                        total={pagination?.total}
-                        pageSize={PAGE_SIZE}
-                        currentPage={pagination?.page}
-                        onPageNumChange={(pageNum) => onPageNumChange(pageNum)}
-                    />
+                    <IssueList marginTop="mt-12 mb-6" posts={allPosts} />
+                    <div className="pb-6">
+                        <NewPagination
+                            total={pagination?.total}
+                            pageSize={PAGE_SIZE}
+                            currentPage={pagination?.page}
+                            onPageNumChange={(pageNum) => onPageNumChange(pageNum)}
+                        />
+                    </div>
                 </Container>
             </Layout>
             <Footer />

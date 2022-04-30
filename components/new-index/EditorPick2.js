@@ -38,12 +38,13 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
             <Link href={`/post/${slug}`}>
             <a className="relative block" >
               <div
-                className="absolute inset-0 bg-blue-100 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
+                className="absolute rounded-sm inset-0 bg-blue-100 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
                 aria-hidden="true"
               />
-              <figure className="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
+              <figure className="relative rounded-sm h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
                 <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
                   <Image
+                    className="rounded-sm"
                     data-gmlazy={lazy} 
                     data-priority={lazy?false:true}
                     priority={lazy?false:true}

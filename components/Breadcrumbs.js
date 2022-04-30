@@ -9,7 +9,7 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug='', ur
         <h1 className="font-semibold text-3xl">{title}</h1>
         <div className="pt-2 text-md text-gray-700 pb-8">
              {links.map((item,index) =>{
-                return( <div key={index}>
+                return( <div className="inline" key={index}>
                     {" "} 
                     <Link href={`${item.slug}`} key={`breadcrumb_${title}_${index}`}>
                      <a className="hover:underline">{item.name}</a>

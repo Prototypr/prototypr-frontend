@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useIntl, FormattedMessage } from 'react-intl';
+import SignupHorizontal from "../newsletter/SignupHorizontal";
 export default function SourcePanel({desc, title}) {
   const intl = useIntl();
 
@@ -64,7 +65,8 @@ export default function SourcePanel({desc, title}) {
                 <p className="font-base text-lg leading-normal">
                   {desc}
                 </p>
-                <HookForm onSubmit={onSubmit} buttonText={buttonText} />
+                <SignupHorizontal className="sm:flex w-full mt-5"/>
+                {/* <HookForm onSubmit={onSubmit} buttonText={buttonText} /> */}
               </>
             ) : error ? (
               <>

@@ -109,7 +109,7 @@ function HookForm(props) {
               pattern: /^\S+@\S+$/i,
             })}
             // ref={...register({ required: true, pattern: /^\S+@\S+$/i })}
-            className="border-transparent border-solid border-2 border-gradient-br-blue-darkblue-gray-50 hover:border-gradient-tl-blue-darkblue-gray-50 gradient-border-3 w-full h-full p-3 text-gray-800 bg-white rounded-xl"
+            className="border-transparent border-solid border-2 border-gradient-br-blue-darkblue-gray-50 hover:border-gradient-tl-blue-darkblue-gray-50 gradient-border-3 w-full h-full p-3 text-gray-800 bg-white rounded-lg"
           />
         </div>
         {/* <input type="checkbox" placeholder="Consent" name="consent" ref={register({ required: true })} /> */}
@@ -133,7 +133,7 @@ function HookForm(props) {
         <div className="flex flex-col ">
           <button
             aria-label="Sign up for newsletter"
-            className="flex justify-center md:text-left items-center md:justify-between w-full px-5 py-3 mt-4 font-medium text-white bg-blue-800 rounded-xl sm:w-auto sm:mt-0 sm:ml-3 hover:bg-blue-700"
+            className="flex justify-center md:text-left items-center md:justify-between w-full px-5 py-3 mt-4 font-medium text-white bg-blue-700 rounded-lg sm:w-auto sm:mt-0 sm:ml-3 hover:bg-blue-600"
             type="submit"
           >
             {props.buttonText}
