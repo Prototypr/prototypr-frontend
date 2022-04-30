@@ -10,7 +10,7 @@ export default function MoreStories({ posts, type, route }) {
     <section>
       <div className={`grid grid-cols-1 ${type === 'toolbox' || type === 'people' ? ' md:grid-cols-3' : ' md:grid-cols-2'} md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
         {
-          posts.map((post) => {
+          posts.map((post, i) => {
             if (type !== 'people') {
               return (
                 <PostPreview
@@ -28,7 +28,7 @@ export default function MoreStories({ posts, type, route }) {
             } else {
               return (
                 <PeoplePostPreview
-                  key={`peoplecard_${post.attributes.slug}`}
+                  key={`peoplecard_${post.attributes.slug?post.attributes.slug:i}`}
                   location={post.attributes?.location}
                   bio={post.attributes?.bio}
                   title={post.attributes.username}

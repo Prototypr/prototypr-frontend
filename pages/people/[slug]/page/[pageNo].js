@@ -25,7 +25,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
   }
 
   return (
-    <Layout activeNav={"toolbox"} preview={preview} padding={false}>
+    <Layout preview={preview} padding={false}>
      
       {router.isFallback ? (
          <Container>

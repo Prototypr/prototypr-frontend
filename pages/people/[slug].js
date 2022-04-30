@@ -26,7 +26,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
   }
 
   return (
-    <Layout activeNav={"toolbox"} preview={preview} padding={false}>
+    <Layout preview={preview} padding={false}>
      
       {router.isFallback ? (
          <Container>
@@ -156,7 +156,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
             </div>
 
             <div className="mt-3 md:mt-6 top-0 right-0 md:relative">
-              {author.availability == "1" && (
+              {/* {author.availability == "1" && (
                 <a
                   className="cursor-pointer"
                   target="_blank"
@@ -169,7 +169,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                     <span className="sm:hidden">🔥 Hire me</span>
                   </div>
                 </a>
-              )}
+              )} */}
 
               <div className="flex justify-start mt-1 md:mt-3 z-20">
                 {twitter && (
