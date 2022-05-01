@@ -11,7 +11,7 @@ export const getServerSideProps = async (ctx) => {
     let siteMapUrls=[]
     if(pageCount){
         for(var page =0;page<pageCount;page++){
-            siteMapUrls.push(`https://prototypr.io/sitemap-tools/${page}.xml`)
+            siteMapUrls.push(`https://prototypr.io/sitemap/tools/${page}.xml`)
         }
     }
     return getServerSideSitemapIndex(ctx, siteMapUrls)

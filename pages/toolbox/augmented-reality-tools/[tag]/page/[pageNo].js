@@ -23,16 +23,16 @@ const BREADCRUMBS = {
     ]
 }
 
-export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
+export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
     //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
     const router = useRouter()
 
     const [selectedFilter, setSelectedFilter] = useState("")
     const onPageNumChange = (pageNo) => {
         router.push({
-            pathname:`/toolbox/augmented-reality-tools/[slug]/page/${pageNo}`,
+            pathname:`/toolbox/augmented-reality-tools/[tag]/page/${pageNo}`,
             query: {
-                slug
+                tag
             }
         })
       }
@@ -40,12 +40,12 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
     return (
         <Layout 
         seo={{
-        title: `${slug} – AR/VR design tools | Prototypr Toolbox | Page ${pagination?.page}`,
+        title: `${tag} – AR/VR design tools | Prototypr Toolbox | Page ${pagination?.page}`,
         description:
           "Find the best design tools for Augmented Reality, Virtual reality, Mixed Reality, and more.",
         //   image: "",
-        canonical:`https://prototypr.io/toolbox/augmented-reality-tools/${slug}/page/${pagination?.page}`,
-        url: `https://prototypr.io/toolbox/augmented-reality-tools/${slug}/page/${pagination?.page}`,
+        canonical:`https://prototypr.io/toolbox/augmented-reality-tools/${tag}/page/${pagination?.page}`,
+        url: `https://prototypr.io/toolbox/augmented-reality-tools/${tag}/page/${pagination?.page}`,
       }}
         activeNav={'toolbox'} preview={preview}>
             <Container>
@@ -58,13 +58,13 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
                     urlRoot={'/toolbox/augmented-reality-tools'}
                     title={BREADCRUMBS.pageTitle}
                     links={BREADCRUMBS.links}
-                    currentSlug={slug}
+                    currentSlug={tag}
                     />
                     <FilterCategory 
                         urlRoot={'/toolbox/augmented-reality-tools'}
                         items={ALL_SLUGS_CATEGORY} 
                         key={'uxtools_item_'} 
-                        slug={slug}/>
+                        slug={tag}/>
                     </div>
                        
                     </div>
@@ -87,15 +87,15 @@ export default function ToolboxPage({allPosts = [], preview, pagination,slug}) {
 
 export async function getStaticProps({ preview = null, params}) {
     const pageSize = PAGE_SIZE
-    const {pageNo, slug} = params;
-    const foundSlug = find_page_slug_from_menu(ALL_SLUGS_CATEGORY, slug)
+    const {pageNo, tag} = params;
+    const foundSlug = find_page_slug_from_menu(ALL_SLUGS_CATEGORY, tag)
 
     const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, foundSlug.tags )) || []
     // console.log('page info**********' + JSON.stringify(allPosts.meta.pagination))
     const pagination = allPosts.meta.pagination
     return {
         props: {
-            allPosts: allPosts.data, preview, pagination,slug
+            allPosts: allPosts.data, preview, pagination,tag
         },
     }
   }

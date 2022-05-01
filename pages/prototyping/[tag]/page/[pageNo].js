@@ -30,17 +30,16 @@ export default function ToolboxPage({
   allPosts = [],
   preview,
   pagination,
-  slug,
+  tag,
 }) {
   //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
   const router = useRouter();
 
-  const [selectedFilter, setSelectedFilter] = useState("");
   const onPageNumChange = pageNo => {
     router.push({
-      pathname: `/prototyping/[slug]/page/${pageNo}`,
+      pathname: `/prototyping/[tag]/page/${pageNo}`,
       query: {
-        slug,
+        tag,
       },
     });
   };
@@ -52,8 +51,8 @@ export default function ToolboxPage({
         description:
           "Find tools like Adobe XD, Sketch, Figma, Marvel, and InVision.",
         //   image: "",
-        canonical: `https://prototypr.io/prototyping/${slug}/page/${pagination?.page}`,
-        url: `https://prototypr.io/prototyping/${slug}/page/${pagination?.page}`,
+        canonical: `https://prototypr.io/prototyping/${tag}/page/${pagination?.page}`,
+        url: `https://prototypr.io/prototyping/${tag}/page/${pagination?.page}`,
       }}
     activeNav={"toolbox"} preview={preview}>
       <Container>
@@ -65,13 +64,13 @@ export default function ToolboxPage({
                     urlRoot={'/prototyping'}
                     title={BREADCRUMBS.pageTitle}
                     links={BREADCRUMBS.links}
-                    currentSlug={slug}
+                    currentSlug={tag}
                     />
                 <FilterCategory 
                     urlRoot={'/prototyping'}
                     items={ALL_SLUGS_CATEGORY} 
                     key={'prototyping_item_'} 
-                    slug={slug}/>
+                    slug={tag}/>
               </div>
             </div>
             <div className="col-span-3">
@@ -99,9 +98,9 @@ export async function getStaticProps({ preview = null, params, locale }) {
     sort = ["esES:asc","date:desc"]
   }
   const pageSize = PAGE_SIZE;
-  const { pageNo, slug } = params;
+  const { pageNo, tag } = params;
 
-  const foundSlug = find_page_slug_from_menu(ALL_SLUGS_CATEGORY, slug)
+  const foundSlug = find_page_slug_from_menu(ALL_SLUGS_CATEGORY, tag)
 
   const allPosts =
     (await getPostsByPageForToolsSubcategoryPage(
@@ -117,7 +116,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       allPosts: allPosts.data,
       preview,
       pagination,
-      slug,
+      tag,
     },
   };
 }

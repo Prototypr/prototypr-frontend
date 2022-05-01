@@ -5,33 +5,37 @@ const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import Head from 'next/head'
+import { transformPostList } from "@/lib/locale/transformLocale";
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
 
 const PAGE_SIZE = 11;
-const ALL_SLUGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]
-export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], preview, pagination = {},first4Posts=[],first2Posts=[], slug='', pageNo=1, tagName=''}) {
+const ALL_TAGS = ["ux", "user-research","ui", "color", "career", "interview", "accessibility", "code", "vr", ]
+export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], preview, pagination = {},first4Posts=[],first2Posts=[], tag='', pageNo=1, tagName=''}) {
 
     const router = useRouter()
 
     const onPageNumChange = (pageNum) => {
-        router.push(`/posts/${slug}/page/${pageNum}`)
+        router.push(`/posts/${tag}/page/${pageNum}`)
     }
 
     return (
         <>
-          <Layout 
-          seo={{
-          title: "Prototypr Design articles – free for everyone.",
+          <Layout
+           seo={{
+          title: `${tagName} | design articles on Prototypr | Page ${pagination?.page}`,
           description:
-            "Design content open and accessible to everyone, no paywall here.",
+            `Articles on ${tagName} - design content open and accessible to everyone, no paywall here.`,
           //   image: "",
-          canonical: "https://prototypr.io/posts",
-          url: "https://prototypr.io/posts",
+          canonical:`https://prototypr.io/posts/${tag}/page/${pagination?.page}`,
+          url: `https://prototypr.io/posts/page/${tag}/${pagination?.page}`,
         }}
-          activeNav={"posts"} preview={preview}>
+           activeNav={"posts"} preview={preview}>
+            <Head>
+              <title>Open design and tech stories for everyone to read</title>
+            </Head>
             <Container>
             <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5 capitalize'>{tagName}</h2>
             {first4Posts?.length>0  &&<Aspiring posts={first4Posts} showTitle={false} />}
@@ -48,7 +52,7 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
                 total={pagination?.total}
                 pageSize={PAGE_SIZE}
                 currentPage={pagination?.page}
-                onPageNumChange={(pageNum, slug) => {onPageNumChange(pageNum, slug)}}
+                onPageNumChange={(pageNum, tag) => {onPageNumChange(pageNum, tag)}}
             />
 
             </Container>
@@ -57,15 +61,15 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
       )
 }
 
-export async function getStaticProps({ preview = null, params,locale }) {
+export async function getStaticProps({ preview = null, params, locale }) {
     let sort = ["featured:desc","tier:asc",  "date:desc"]
     if(locale === 'es-ES'){
-      sort = ["esES:asc","featured:desc","tier:asc","date:desc"]
+      sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
     }
     const pageSize = PAGE_SIZE
-    const {slug} = params
-    const pageNo = 1
-    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [slug],sort)) || []
+    const {pageNo, tag} = params
+    
+    let allPosts = (await getPostsByPageForPostsPage(preview, pageSize, pageNo, [tag],sort)) || []
 
     let tags = allPosts[1]
     allPosts = allPosts[0]
@@ -73,14 +77,23 @@ export async function getStaticProps({ preview = null, params,locale }) {
     
     let first4 = [],first2=[], nextPosts = [], morePosts = [], heroPost = null
     
+    allPosts = transformPostList(allPosts.data, locale)
+    
     // if first page, divide posts into sections
     if(pageNo == 1){
-      first4 = allPosts.data.slice(0, 4);
-      if(allPosts.data && allPosts.data.length>4){
-        nextPosts = allPosts?.data.slice(4)
+      first4 = allPosts.slice(0, 4);
+      if(allPosts && allPosts.length>4){
+        nextPosts = allPosts?.slice(4)
         heroPost = nextPosts[0];
         morePosts = nextPosts.slice(1);
-      } 
+      }
+      
+    }else{
+     // otherwise, just send back the list without splicing
+     first2 = allPosts.slice(0, 2);
+     morePosts = allPosts.slice(2)
+     
+     nextPosts = allPosts
     }
     
     return {
@@ -88,7 +101,7 @@ export async function getStaticProps({ preview = null, params,locale }) {
           allPosts:nextPosts, preview, pagination,
           first4Posts: first4,
           first2Posts: first2,
-          slug,
+          tag,
           tagName:tags?.data[0]?.attributes?.name,
           pageNo,
           morePosts,
@@ -97,7 +110,7 @@ export async function getStaticProps({ preview = null, params,locale }) {
       }
     
     // const interviews =
-    // (await getCommonQuery(preview, [slug], "article", 4, 0)) || [];
+    // (await getCommonQuery(preview, [tag], "article", 4, 0)) || [];
 
     // console.log("interview data from home***********" + JSON.stringify(interviews))
     
@@ -106,13 +119,13 @@ export async function getStaticProps({ preview = null, params,locale }) {
   export async function getStaticPaths() {
     let pageCountArr = [];
 
-    for(var z = 0;z<ALL_SLUGS.length;z++){
-      const allPosts = (await getAllPostsForPostsPage(null, PAGE_SIZE, 0, [ALL_SLUGS[z]])) || []
+    for(var z = 0;z<ALL_TAGS.length;z++){
+      const allPosts = (await getAllPostsForPostsPage(null, PAGE_SIZE, 0, [ALL_TAGS[z]])) || []
       const pagination = allPosts.meta.pagination
       const pageCount = pagination.pageCount
       let arr = new Array(pageCount).fill('');
       let newArr = arr.map((i,index) => {
-        return `/posts/${ALL_SLUGS[z]}`
+        return `/posts/${ALL_TAGS[z]}/page/${index+1}`
       })
       pageCountArr = pageCountArr.concat(newArr)
     }

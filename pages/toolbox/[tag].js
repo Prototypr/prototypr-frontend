@@ -120,7 +120,7 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
 }
 
 export async function getStaticProps({ params, preview = null, locale }) {
-  const data = await getToolsAndMoreTools(params.slug, preview);
+  const data = await getToolsAndMoreTools(params.tag, preview);
   //get the tags for the next query
   let tags = data?.posts.data[0].attributes.tags
   let tagsArr = []
@@ -129,7 +129,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       tagsArr.push(tags.data[x].attributes.slug)
     }
   }
-  let relatedPostsData = await getRelatedTools(tagsArr,params.slug, preview);
+  let relatedPostsData = await getRelatedTools(tagsArr,params.tag, preview);
 
   //build the gallery here
   let PHOTO_SET = [];
