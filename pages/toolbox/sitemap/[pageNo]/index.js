@@ -11,7 +11,7 @@ export const getServerSideProps = async (ctx) => {
 
   for(var x = 0;x<first12Posts?.posts?.data?.length;x++){
     fields.push({
-      loc:first12Posts?.posts?.data[x]?.attributes?.slug,
+      loc:'https://prototypr.io/toolbox/'+first12Posts?.posts?.data[x]?.attributes?.slug,
       lastmod: new Date().toISOString(),
     })
   }

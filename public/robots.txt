@@ -7,5 +7,9 @@ Host: https://prototypr.io
 
 # Sitemaps
 Sitemap: https://prototypr.io/sitemap.xml
-Sitemap: https://example.com/server-sitemap-index.xml
-Sitemap: https://example.com/sitemap-tools.xml
+Sitemap: https://prototypr.io/posts/sitemap.xml
+Sitemap: https://prototypr.io/toolbox/sitemap.xml
+Sitemap: https://prototypr.io/newsletter/sitemap.xml
+Sitemap: https://prototypr.io/news/sitemap.xml
+Sitemap: https://prototypr.io/blog/sitemap.xml
+Sitemap: https://prototypr.io/inspiration/sitemap.xml

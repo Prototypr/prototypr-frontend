@@ -4,31 +4,16 @@ import { getAllPostsForSitemap } from "@/lib/api";
 export const getServerSideProps = async (ctx) => {
   // Method to source urls from cms
   // const urls = await fetch('https//example.com/api')
-  console.log(ctx.params)
+  console.log(ctx.params.pageNo)
   let fields = []
 
-  const first12Posts = await getAllPostsForSitemap("tool", 1);
+  const first12Posts = await getAllPostsForSitemap("article", parseInt(ctx.params.pageNo));
 
   for(var x = 0;x<first12Posts?.posts?.data?.length;x++){
     fields.push({
-      loc:first12Posts?.posts?.data[x]?.attributes?.slug,
+      loc:'https://prototypr.io/post/'+first12Posts?.posts?.data[x]?.attributes?.slug,
       lastmod: new Date().toISOString(),
     })
-  }
-
-  let pageCount = first12Posts.posts?.meta?.pagination?.pageCount 
-
-  if(pageCount){
-    for(var page =2;page<pageCount;page++){
-      console.log(page)
-      const next12 = await getAllPostsForSitemap("tool", page);
-      for(var y = 0;y<next12?.posts?.data?.length;y++){
-        fields.push({
-          loc:next12?.posts?.data[y]?.attributes?.slug,
-          lastmod: new Date().toISOString(),
-        })
-      }
-    }
   }
 
   // const fields = [
