@@ -15,7 +15,7 @@ export default function Contributors({ withAuthUser = {}}) {
             </h1>
           </Link>
         ) : (
-          <Link href="/new-story" as="/new-story">
+          <Link href="/write-for-us">
             <h1 className="ml-1 cursor-pointer hover:underline text-sm font-medium text-blue-600">
               Write with us →
             </h1>

@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://prototypr.io
+
+# Sitemaps
+Sitemap: https://prototypr.io/sitemap.xml
+Sitemap: https://example.com/server-sitemap-index.xml
+Sitemap: https://example.com/sitemap-tools.xml

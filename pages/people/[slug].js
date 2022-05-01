@@ -265,7 +265,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                     <div className="flex justify-center w-full my-3">
                       <a
                         className="inline-block bg-blue-600 hover:bg-blue-500 mx-auto text-white font-bold  py-2 px-6 rounded-full shadow hover:shadow-lg"
-                        href="/new-story"
+                        href="/write-for-us"
                       >
                         Write Post
                       </a>

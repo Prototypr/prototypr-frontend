@@ -74,7 +74,7 @@ export default function WriterGrid({count = 0, span = 0 ,size, cols = 4, buttonT
                 }
             </div>
             <div  className="borderRadius-l" style={{marginTop:'-5px'}} >
-                <Link href="/new-story" as="/new-story">
+                <Link href="/write-for-us">
                     <button aria-label={buttonText} size="small" hover="secondary">{buttonText}</button>
                 </Link>
             </div>

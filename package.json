@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
@@ -30,6 +31,7 @@
     "next": "latest",
     "next-auth": "^4.2.1",
     "next-seo": "^5.4.0",
+    "next-sitemap": "^2.5.20",
     "nodemailer": "^6.7.3",
     "nprogress": "^0.2.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
