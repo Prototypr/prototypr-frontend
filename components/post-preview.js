@@ -4,8 +4,8 @@ import CoverImage from "./cover-image";
 import Image from "next/image";
 import Link from "next/link";
 const gumletLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
+  return `${src}?w=${width}&q=${quality || 75}`;
+};
 
 export default function PostPreview({
   title,
@@ -17,12 +17,20 @@ export default function PostPreview({
   type,
   index,
   tag = {},
+  route = "",
 }) {
   return (
     <div className="flex group flex-col py-4 flex-grow h-full border border-gray-100 hover:shadow-lg transition-shadow duration-500 bg-white relative rounded-lg">
       <div className="relative rounded-lg px-4 pb-4 cursor-pointer">
         <>
-          <CoverImage index={index} imageHeight="h-60" slug={slug} title={title} url={coverImage} type={type} />
+          <CoverImage
+            index={index}
+            imageHeight="h-60"
+            slug={slug}
+            title={title}
+            url={coverImage}
+            type={type}
+          />
           <div className="absolute rounded-full bg-white bottom-0 left-7">
             {coverImage && coverImage.logoNew && (
               <div
@@ -31,9 +39,9 @@ export default function PostPreview({
               >
                 <Image
                   loader={gumletLoader}
-                  priority={index<2?true:false}
-                  data-priority={index<2?true:false}
-                  data-gmlazy={index<2?false:true}
+                  priority={index < 2 ? true : false}
+                  data-priority={index < 2 ? true : false}
+                  data-gmlazy={index < 2 ? false : true}
                   width="44"
                   height="44"
                   alt="Brand logo for external website's link"
@@ -49,7 +57,7 @@ export default function PostPreview({
       <div className="px-4 py-1 flex justify-between">
         <div className="pl-3 overflow-hidden mt-1 cursor-pointer">
           <div className="font-semibold overflow-hidden heading mt-0 h-6">
-            <Link href={`/${type ? type : "posts"}/${slug}`}>
+            <Link href={`/${type ? type : route ? route : "posts"}/${slug}`}>
               <a className="group-hover:underline">{title}</a>
             </Link>
           </div>
