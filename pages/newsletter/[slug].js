@@ -5,13 +5,11 @@ import ErrorPage from 'next/error'
 import Container from '@/components/container'
 import PostBody from '@/components/post-body'
 const MoreStories = dynamic(() => import("@/components/more-stories"));
-import Header from '@/components/posts/header'
 import PostHeader from '@/components/post-header'
 import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
 import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
 import PostTitle from '@/components/post-title'
-import Head from 'next/head'
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter()
@@ -29,21 +27,24 @@ export default function Post({ post, morePosts, preview }) {
     }}
     activeNav={"posts"} preview={preview}>
       <Container>
-        <Header title="Newsletter"/>
+        {/* <Header title="Newsletter"/> */}
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
             <article>
-             {(post&& post.attributes) && <PostHeader
-                title={post.attributes.title}
-                coverImage={post.attributes.featuredImage?.data?.attributes?.url? post.attributes.featuredImage?.data?.attributes?.url:post.attributes.legacyFeaturedImage ? post.attributes.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
-                date={post.attributes.date}
-                author={(post.attributes.author && post.attributes.author.data)?post.attributes.author.data.attributes:{}}
-                />}
+            <div style={{maxWidth:'600px'}} className="mx-auto">
+            { post?.attributes && 
+                <h1 className="text-3xl font-semibold tracking-tighter leading-tight md:leading-tighter my-6 mt-12 text-center md:text-left">
+                {post.attributes.title}
+                </h1>}
+            </div>
+            <div className="newsletter-content">
               <PostBody content={post.attributes.content} />
+            </div>
             </article>
             <SectionSeparator />
+            <h2 className="text-4xl -mt-12 mb-12 font-semibold">More Newsletters</h2>
             {morePosts.length > 0 && <MoreStories posts={morePosts} route={'newsletter'} />}
           </>
         )}
