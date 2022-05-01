@@ -23,5 +23,57 @@ module.exports = {
         'https://prototypr.io/inspiration/sitemap.xml', // <==== Add here,
         ],
     },
+    additionalPaths: async (config) => {
+      const result = []
+    
+      // all possible values
+      result.push({
+        loc: '/toolbox',
+        changefreq: 'weekly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })
+      result.push({
+        loc: '/toolbox/augmented-reality-tools',
+        changefreq: 'weekly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })
+      result.push({
+        loc: '/toolbox/conversational-design-tools',
+        changefreq: 'weekly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })
+      result.push({
+        loc: '/toolbox/ux-tools',
+        changefreq: 'weekly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })
+      result.push({
+        loc: '/prototyping',
+        changefreq: 'weekly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })
+      result.push({
+        loc: '/newsletter',
+        changefreq: 'weekly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })
+      result.push({
+        loc: '/posts',
+        changefreq: 'weekly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })
+  
+      // using transformation from the current configuration
+      // result.push(await config.transform(config, '/additional-page-3'))
+  
+      return result
+    },
     // ...other options
   }
