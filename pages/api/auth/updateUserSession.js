@@ -31,6 +31,8 @@ async function handler(req, res) {
      req.session.user.login.user.location = req.body.location
      req.session.user.login.user.firstName = req.body.firstName
      req.session.user.login.user.secondName = req.body.secondName
+     req.session.user.login.user.id = req.body.id
+
      if(req.body.website){
        req.session.user.login.user.website = req.body.website
      }
@@ -38,9 +40,9 @@ async function handler(req, res) {
      req.session.user.login.user.paymentPointer = req.body.paymentPointer
 
      if(req.body?.avatar?.url){
-      req.session.user.login.user.avatar = req.body.avatar?.url
+      req.session.user.login.user.avatar = req.body.avatar
      }else if (res.body?.avatar?.url){
-       req.session.user.login.user.avatar = res.body.avatar?.url
+       req.session.user.login.user.avatar = res.body.avatar
      }
 
      

@@ -9,6 +9,7 @@ import useUser from '@/lib/iron-session/useUser'
 import Button from "../atom/Button/Button";
 import { useRouter } from 'next/router'
 import { updateUserSession } from "@/lib/iron-session/updateUserSession";
+import AvatarEditor from "./AvatarEditor";
 
 const websiteRegex =
   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
@@ -106,6 +107,12 @@ const UserForm = ({ info }) => {
   };
 
   return (
+    <div>
+       <div className="text-sm mt-3 font-semibold text-gray-700">
+          Profile picture
+        </div>
+      <AvatarEditor/>
+   
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -173,8 +180,8 @@ const UserForm = ({ info }) => {
               aria-live="assertive"
               {...register("location")}
             >
-              {accountLocations.map((i) => (
-                <option key={i} value={i.Code}>
+              {accountLocations.map((i, index) => (
+                <option key={'loaction_'+index} value={i.Code}>
                   {i.Name}
                 </option>
               ))}
@@ -348,6 +355,7 @@ const UserForm = ({ info }) => {
         </div>
       </div>
     </form>
+    </div>
   );
 };
 

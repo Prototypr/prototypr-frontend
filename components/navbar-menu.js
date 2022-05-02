@@ -558,7 +558,7 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInC
               {user.avatar ? (
                 <img
                   className="hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"
-                  src={user.avatar}
+                  src={user.avatar.url}
                 />
               ) : (
                 <Gravatar

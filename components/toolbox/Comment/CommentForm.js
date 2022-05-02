@@ -22,12 +22,12 @@ export default function Form (props) {
             className="rounded-full"
             data-src={
               props.user && props.user.avatar
-                ? props.user.avatar
+                ? props.user.avatar.url
                 : "/static/images/dummyuser.png"
             }
             src={
               props.user && props.user.avatar
-                ? props.user.avatar
+                ? props.user.avatar.url
                 : "/static/images/dummyuser.png"
             }
           />

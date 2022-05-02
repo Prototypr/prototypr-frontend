@@ -10,7 +10,8 @@ export default function PeoplePostPreview({
     legacyAvatar = "",
     skills = "",
     bio = "",
-    location = ""
+    location = "",
+    avatar = ""
 }) {
     let skillArr = [];
     if (skills && skills !== "") {
@@ -28,7 +29,7 @@ export default function PeoplePostPreview({
                         </div>
                     </figure>
                     <div className="absolute rounded-full bg-white -bottom-5 left-4">
-                        {legacyAvatar ? (
+                        {avatar || legacyAvatar ? (
                             <div
                                 className="rounded-full transform group-hover:scale-110 transition duration-700 ease-out  border-white border border-2 bg-white -mt-2 shadow"
                                 style={{ height: "44px", width: "44px" }}
@@ -38,7 +39,7 @@ export default function PeoplePostPreview({
                                     height="44"
                                     alt={`Avatar for ${title}`}
                                     className="object-cover flex-shrink-0 shine rounded-full bg-white"
-                                    src={legacyAvatar}
+                                    src={avatar?avatar:legacyAvatar}
                                 />
                             </div>
                         ):

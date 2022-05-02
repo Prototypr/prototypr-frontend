@@ -58,6 +58,7 @@ export default function MoreStories({ posts, type, route }) {
                 title={post.attributes.username}
                 slug={post.attributes.slug}
                 legacyAvatar={post.attributes.legacyAvatar}
+                avatar={post.attributes.avatar?.data?.attributes?.url}
                 skills={post.attributes.skills}
               />
             );

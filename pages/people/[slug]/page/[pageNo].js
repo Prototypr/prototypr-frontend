@@ -29,7 +29,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
     seo={{
         title:`${author?.name}, member profile at Prototypr`,
         description:`Say hi to ${author?.name} on Prototypr - check out their profile!`,
-        image:author.avatar?.data?.attributes?.avatar?.data?.attributes? author.avatar.data.attributes.url:
+        image:author.avatar?.data?.attributes? author.avatar.data.attributes.url:
                     author?.legacyAvatar ? author.legacyAvatar
                       :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png",
         canonical: `https://prototypr.io/people/${slug}/page/${pageNo}`,
@@ -70,7 +70,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                     objectFit="cover"
                     src={
                         
-                        author.avatar?.data?.attributes?.avatar?.data?.attributes? author.avatar.data.attributes.url:
+                        author.avatar?.data?.attributes? author.avatar.data.attributes.url:
                     author?.legacyAvatar ? author.legacyAvatar
                       :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
                     }
