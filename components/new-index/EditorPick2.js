@@ -22,13 +22,21 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
   } = postItem;
   const tagArr = tags.data;
 
-  const ftImage = featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl ? legacyFeaturedImage.mediaItemUrl:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
-  const authorImage = author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
-  author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
-    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+  const ftImage = featuredImage?.data?.attributes?.url ? 
+  featuredImage.data.attributes.url:
+  legacyFeaturedImage?.mediaItemUrl ? 
+  legacyFeaturedImage.mediaItemUrl:
+  'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
+  
   const tagName = tagArr && tagArr.length
   ? tagArr[1].attributes.slug
   : "design"
+
+  let authorImage = "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+  if(author?.data?.attributes?.legacyAvatar || author?.data?.attributes?.avatar){
+    authorImage = author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+    author?.data?.attributes?.legacyAvatar && author.data.attributes.legacyAvatar
+  }
 
 
   return (

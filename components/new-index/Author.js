@@ -10,10 +10,12 @@ export default function Author({
   authorName = "",
   textColor = "",
 }) {
-  const authorImage = 
-  author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
-  author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
-    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+  let authorImage = "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+  if(author?.data?.attributes?.legacyAvatar || author?.data?.attributes?.avatar){
+    authorImage = author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+    author?.data?.attributes?.legacyAvatar && author.data.attributes.legacyAvatar
+  }
+
 
   return (
     <>
