@@ -4,13 +4,14 @@ const AspiringItem = dynamic(() => import("./AspiringItem"), { ssr: false });
 
 export default function Aspiring({ posts = [], showTitle = true }) {
   const intl = useIntl();
+  const title =intl.formatMessage({ id: "creatorSpotlight.title"})
   return (
     <section
       className={`pt-3 pb-10 px-3 xl:px-0 ${showTitle ? "mt-16" : ""}`}
     >
       {showTitle && (
         <h4 className="text-3xl font-bold text-gray-900 text-title-1 mb-10">
-          {intl.formatMessage({ id: "creatorSpotlight.title"})}
+          {title}
         </h4>
       )}
 

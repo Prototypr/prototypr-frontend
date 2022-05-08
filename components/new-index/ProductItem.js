@@ -21,6 +21,14 @@ export default function ProductItem({ post = {} }) {
   } = post?.attributes;
   const tagArr = tags.data;
 
+  const authorImage =  author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+  author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+
+
+  const ftImage = featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl:"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+
+  const tagName = tagArr && tagArr.length ? tagArr[0].attributes.name : "design"
 
   return (
     <div className="grid-cols-1 flex items-top py-2 group">
@@ -32,7 +40,7 @@ export default function ProductItem({ post = {} }) {
               objectFit="cover"
               className="rounded-lg contrast-115"
               layout="fill"
-              src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl:"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}
+              src={ftImage}
             />
           </Link>
         </div>
@@ -40,7 +48,7 @@ export default function ProductItem({ post = {} }) {
       <div className="flex-1 ml-4 h-full">
         <div className="flex">
           <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
-            # {tagArr && tagArr.length ? tagArr[0].attributes.name : "design"}
+            # {tagName}
           </div>
           {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
             # product design
@@ -53,15 +61,11 @@ export default function ProductItem({ post = {} }) {
         </h4>
         <div className="mt-3 flex items-center">
           <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
-            {(author?.data?.attributes?.avatar || author?.data?.attributes?.legacyAvatar) && (
+            {authorImage && (
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
                   loader={gumletLoader}
-                  src={
-                    author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
-                    author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
-                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-                  }
+                  src={authorImage}
                   layout="fill"
                   objectFit="cover"
                   className="rounded-full"

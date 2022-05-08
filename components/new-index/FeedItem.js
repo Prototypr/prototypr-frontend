@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Author from "@/components/new-index/Author";
-import { useIntl } from 'react-intl';
+// import { useIntl } from 'react-intl';
 
 const gumletLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`
@@ -10,16 +10,14 @@ const gumletLoader = ({ src, width, quality }) => {
 export default function FeedItem({ height = 20, post = {}, index = 0 }) {
   const {
     title = "",
-    excerpt,
     slug,
-    date,
     tags,
     legacyFeaturedImage = null,
     featuredImage = null,
     author = null,
   } = post?.attributes;
-  const intl = useIntl();
-  const locale = intl.locale ? intl.locale : "en-US";
+  // const intl = useIntl();
+  // const locale = intl.locale ? intl.locale : "en-US";
   const tagArr = tags.data;
   const ftImage = featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
   const tagName = tagArr && tagArr.length ? tagArr[0].attributes.name : "design"

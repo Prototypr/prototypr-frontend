@@ -1,20 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useIntl } from 'react-intl';
+// import { useIntl } from 'react-intl';
 
 const gumletLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`
 }
 
 export default function AspiringItem({ post = {} }) {
-  const intl = useIntl();
-  const locale = intl.locale ? intl.locale : "en-US";
+  // const intl = useIntl();
+  // const locale = intl.locale ? intl.locale : "en-US";
   const {
     title = "",
     excerpt,
     slug,
-    date,
-    tags,
     legacyFeaturedImage = null,
     featuredImage = null,
     author = null,
