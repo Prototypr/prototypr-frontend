@@ -7,7 +7,8 @@ import Footer from "@/components/footer";
 import { BrowserView} from 'react-device-detect';
 
 const Intro = dynamic(() => import("@/components/new-index/Intro"));
-const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+// const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+import EditorPick2 from "@/components/new-index/EditorPick2";
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
