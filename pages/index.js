@@ -7,13 +7,13 @@ import Footer from "@/components/footer";
 const Intro = dynamic(() => import("@/components/new-index/Intro"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
-const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
+const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"),{ ssr: false });
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 const TopicSpolights = dynamic(() =>
-  import("@/components/new-index/TopicSpolights")
+  import("@/components/new-index/TopicSpolights"),{ ssr: false }
 );
-const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
-const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
+const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"),{ ssr: false });
+const Feeds = dynamic(() => import("@/components/new-index/Feeds"),{ ssr: false });
 
 import {
   getCombinedPostsForHome,
