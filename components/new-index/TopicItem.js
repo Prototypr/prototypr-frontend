@@ -19,6 +19,7 @@ export default function TopicItem({ topic = {} }) {
     author = null,
   } = topic?.attributes;
   const tagArr = tags.data;
+  const ftImage = featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl:"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
   return (
     <div className="grid-cols-1 p-3 flex cursor-pointer group">
       <figure className="relative h-0 mr-1 sm:mr-0 w-28 h-28 sm:w-40 sm:h-40 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
@@ -29,7 +30,7 @@ export default function TopicItem({ topic = {} }) {
               objectFit="cover"
               className="rounded-lg contrast-115"
               layout="fill"
-              src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl:"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}
+              src={ftImage}
             />
           </Link>
         </div>
