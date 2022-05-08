@@ -16,7 +16,7 @@ const websiteRegex =
 const UserForm = ({ info }) => {
 
   const {user, mutateUser} = useUser({
-    redirectTo: '/sign-in',
+    redirectTo: '/',
     redirectIfFound: false,
   })
 

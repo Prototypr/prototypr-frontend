@@ -15,7 +15,7 @@ import { updateUserSessionSSR } from "@/lib/iron-session/updateUserSession";
 const AccountPage = ({ preview, userData, isConfirmed }) => {
 
   const {user} = useUser({
-    redirectTo: '/sign-in',
+    redirectTo: '/',
     redirectIfFound: false,
   })
 
@@ -134,6 +134,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 }) {
   //iron-session user
   const user = req.session.user
+  console.log(user)
 
    if (user === undefined) {
     res.setHeader('location', '/sign-in')

@@ -1,10 +1,19 @@
 import React from 'react';
 import { styled, keyframes } from '@stitches/react';
-import { indigo, mauve, blackA, gray } from '@radix-ui/colors';
+import { blue, mauve, blackA, gray} from '@radix-ui/colors';
+import {
+  HamburgerMenuIcon,
+  DotFilledIcon,
+  CheckIcon,
+  ChevronRightIcon,
+} from '@radix-ui/react-icons';
+import { signOut } from "next-auth/react"
+import useUser from '@/lib/iron-session/useUser'
+import fetchJson from "@/lib/iron-session/fetchJson";
 
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { useRouter } from "next/router";
-import LOCALE_MAP from "./localeMap";
+
 const slideUpAndFade = keyframes({
   '0%': { opacity: 0, transform: 'translateY(2px)' },
   '100%': { opacity: 1, transform: 'translateY(0)' },
@@ -66,8 +75,8 @@ const itemStyles = {
   },
 
   '&:focus': {
-    backgroundColor: indigo.indigo9,
-    color: indigo.indigo1,
+    backgroundColor: blue.blue11,
+    color: blue.blue1,
   },
 };
 
@@ -76,8 +85,8 @@ const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, { ...itemS
 const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, { ...itemStyles });
 const StyledTriggerItem = styled(DropdownMenuPrimitive.TriggerItem, {
   '&[data-state="open"]': {
-    backgroundColor: indigo.indigo4,
-    color: indigo.indigo11,
+    backgroundColor: blue.blue4,
+    color: blue.blue11,
   },
   ...itemStyles,
 });
@@ -87,11 +96,12 @@ const StyledLabel = styled(DropdownMenuPrimitive.Label, {
   fontSize: 12,
   lineHeight: '25px',
   color: mauve.mauve11,
+  borderRadius:'4px'
 });
 
 const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
   height: 1,
-  backgroundColor: indigo.indigo6,
+  backgroundColor: gray.gray4,
   margin: 5,
 });
 
@@ -142,55 +152,53 @@ const IconButton = styled('button', {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: indigo.indigo11,
+  color: blue.blue11,
   backgroundColor: 'white',
   border:`1px solid ${gray.gray3}`,
-  // boxShadow: `0 2px 12px ${blackA.blackA7}`,
-  '&:hover': { backgroundColor: indigo.indigo3 },
-  '&:focus': { boxShadow: `0 0 0 2px ${indigo.indigo8}` },
+//   boxShadow: `0 2px 10px ${blackA.blackA7}`,
+  '&:hover': { backgroundColor: blue.blue3 },
+  '&:focus': { boxShadow: `0 0 0 2px ${blue.blue7}` },
 });
 
-
-const switchLanguage = (itemLocale, router) => {
-  // setLocale(itemLocale)
-  const routerQuery = router.query;
-  router.push(router.asPath, router.asPath , { locale:itemLocale });
+const signOutAPI = (mutateUser) =>{
+    signOut()
 }
 
- const LocaleSwitcher = () => {
-  const router = useRouter();
-  const { locale } = useRouter();
-  const [shortLocale] = locale ? locale.split("-") : ["en"];
+export const DropdownMenuDemo = ({icon}) => {
+    const router = useRouter();
+    const {mutateUser} = useUser({
+        redirectTo: '/',
+        redirectIfFound: false,
+      })
   return (
-    <Box className="ml-3">
+    <Box>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <IconButton aria-label="Customise options">
-         
-      <svg className="opacity-75" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24}><path fill="none" d="M0 0h24v24H0z" /><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-2.29-2.333A17.9 17.9 0 0 1 8.027 13H4.062a8.008 8.008 0 0 0 5.648 6.667zM10.03 13c.151 2.439.848 4.73 1.97 6.752A15.905 15.905 0 0 0 13.97 13h-3.94zm9.908 0h-3.965a17.9 17.9 0 0 1-1.683 6.667A8.008 8.008 0 0 0 19.938 13zM4.062 11h3.965A17.9 17.9 0 0 1 9.71 4.333 8.008 8.008 0 0 0 4.062 11zm5.969 0h3.938A15.905 15.905 0 0 0 12 4.248 15.905 15.905 0 0 0 10.03 11zm4.259-6.667A17.9 17.9 0 0 1 15.973 11h3.965a8.008 8.008 0 0 0-5.648-6.667z" /></svg>
+           {icon}
           </IconButton>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent sideOffset={5}>
-        {
-              LOCALE_MAP.LANGUAGE_ITEMS.map((item, index) => {
-                  return (
-                    <DropdownMenuItem key={`locale_${index}`}
-                    onClick={() => {
-                      switchLanguage(item.locale, router);
-                  }}>
-                      
-                    {item.name} 
-                    <RightSlot>{item.logo}</RightSlot>
-                  </DropdownMenuItem>
-                  )
-              })
-          }
-         
-          {/* <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem onSelect={()=>{
+            router.push('/account');}}>
+              {/* <Link href="/account"> */}
+                Profile 
+              {/* </Link> */}
+            {/* <RightSlot>⌘+T</RightSlot> */}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onSelect={async ()=>{
+              await signOut({redirect: false})
+              mutateUser(
+                await fetchJson("/api/auth/logout", { method: "POST" }),
+                false,
+              );
+            //   router.push("/");
+          }}>
             Sign Out
-          </DropdownMenuItem> */}
+             {/* <RightSlot>⌘+N</RightSlot> */}
+          </DropdownMenuItem>
             
           <DropdownMenuArrow offset={12} />
         </DropdownMenuContent>
@@ -199,4 +207,5 @@ const switchLanguage = (itemLocale, router) => {
   );
 };
 
-export default LocaleSwitcher;
+export default DropdownMenuDemo;
+

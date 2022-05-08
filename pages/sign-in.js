@@ -102,11 +102,12 @@ export default function Index() {
                     Let us know more about you by filling out your profile
                     information, and we'll be in touch soon!
                   </p>
-                  <Link href="/account" passHref prefetch={false}>
+                  {/* <Link href="/account" passHref prefetch={false}> */}
+                  <a className="block mx-auto" href="/account" passHref prefetch={false}>
                     <Button as="a" color="primary" className="text-sm">
                       Set up profile
                     </Button>
-                  </Link>
+                  </a>
                 </div>
               )
             )}

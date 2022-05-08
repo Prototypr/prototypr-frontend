@@ -11,6 +11,7 @@ import {
   gray,
 } from "@radix-ui/colors";
 import Link from "next/link";
+import ProfileBadge from './ProfileBadge'
 
 const Gravatar = dynamic(() => import("react-gravatar"), { ssr: false });
 const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), { ssr: true });
@@ -83,7 +84,7 @@ const itemStyles = {
   borderRadius: 4,
   fontSize: 15,
   //   color: indigo.indigo11,
-  "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${indigo.indigo7}` },
+  "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${indigo.indigo8}` },
   "&:hover": { backgroundColor: indigo.indigo3, color: indigo.indigo11 },
 };
 const itemButtonStyles = {
@@ -96,7 +97,7 @@ const itemButtonStyles = {
   fontSize: 15,
   marginLeft: "6px",
   color: gray.gray1,
-  "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${indigo.indigo7}` },
+  "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${indigo.indigo8}` },
   "&:hover": { backgroundColor: indigo.indigo9, color: gray.gray1 },
 };
 
@@ -453,7 +454,7 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInC
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        <NavigationMenuItem>
+        <NavigationMenuItem className="flex flex-col justify-center">
           <NavigationMenuTrigger active={activeNav === "posts"}>
             {intl.formatMessage({ id: "navbar.menu.title1" })}
           </NavigationMenuTrigger>
@@ -500,7 +501,7 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInC
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
+        <NavigationMenuItem className="flex flex-col justify-center">
           <NavigationMenuTrigger active={activeNav === "toolbox"}>
             {intl.formatMessage({ id: "navbar.menu.title2" })}
           </NavigationMenuTrigger>
@@ -546,27 +547,31 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInC
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className="hidden md:block">
+        <NavigationMenuItem className="hidden md:block md:flex md:flex-col md:justify-center">
           <NavigationMenuLink href="/">
             {intl.formatMessage({ id: "navbar.menu.title3" })}
           </NavigationMenuLink>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
+        <NavigationMenuItem  className="flex flex-col justify-center">
           {(user && user.isLoggedIn) ? (
+          <div className="ml-2">
             <Link href="/account">
               {user.avatar ? (
-                <img
-                  className="hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"
+                <ProfileBadge icon={ <img
+                  className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
                   src={user.avatar.url}
-                />
+                />}/>
+               
               ) : (
-                <Gravatar
-                  className="hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"
+                <ProfileBadge icon={ <Gravatar
+                  className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
                   email={user.email}
-                />
+                />}/>
+                
               )}
             </Link>
+            </div>
           ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (

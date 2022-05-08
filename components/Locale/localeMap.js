@@ -1,10 +1,12 @@
 const LOCALE_MAP = {
     LANGUAGE_ITEMS:  [{
         name: "English",
-        locale: "en-US"
+        locale: "en-US",
+        logo:"🇺🇸"
     },{
         name: "Español",
-        locale: "es-ES"
+        locale: "es-ES",
+        logo:"🇪🇸"
     }]
 };
 

@@ -10,7 +10,6 @@ const AvatarEditor = () => {
   const router = useRouter()
 
     const {user, mutateUser} = useUser({
-        redirectTo: '/sign-in',
         redirectIfFound: false,
       })
 
@@ -127,7 +126,11 @@ const AvatarEditor = () => {
   }
 
   useEffect(() => {
-    let profPic = 'https://req.prototypr.io/'+user.avatar.url
+    let profPic=''
+    if(user?.avatar?.url){
+
+      profPic= 'https://req.prototypr.io/'+user.avatar.url
+    }
     if(!profPic){
       profPic = "https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png"
     }
