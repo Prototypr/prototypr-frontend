@@ -41,7 +41,7 @@ export default function PostPreview({
                   loader={gumletLoader}
                   priority={index < 2 ? true : false}
                   data-priority={index < 2 ? true : false}
-                  fetchpriority={index<2?true:false}
+                  fetchpriority={index<2?"true":"false"}
                   data-gmlazy={index < 2 ? false : true}
                   width="44"
                   height="44"

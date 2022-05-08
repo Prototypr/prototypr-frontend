@@ -27,10 +27,7 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
   legacyFeaturedImage?.mediaItemUrl ? 
   legacyFeaturedImage.mediaItemUrl:
   'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
-  
-  const tagName = tagArr && tagArr.length
-  ? tagArr[1].attributes.slug
-  : "design"
+
 
   let authorImage = "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
   if(author?.data?.attributes?.legacyAvatar || author?.data?.attributes?.avatar){
@@ -61,7 +58,7 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                   <Image
                     className="rounded-sm"
                     data-gmlazy={lazy} 
-                    fetchpriority={lazy?false:true}
+                    fetchpriority={lazy?"false":"true"}
                     data-priority={lazy?false:true}
                     priority={lazy?false:true}
                     loader={gumletLoader}
@@ -93,7 +90,9 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                         <Link href={`/post/${slug}`}>
                           <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
                             #{" "}
-                            {tagName}
+                            {tagArr && tagArr.length
+                              ? tagArr[1].attributes.slug
+                              : "design"}
                           </a>
                         </Link>
                       </li>
