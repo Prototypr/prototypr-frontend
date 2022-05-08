@@ -65,10 +65,8 @@ export default function ProductItem({ post = {} }) {
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
                   loader={gumletLoader}
-                  width={80}
-                  height={80}
                   src={authorImage}
-                  // layout="fill"
+                  layout="fill"
                   objectFit="cover"
                   className="rounded-full"
                 />

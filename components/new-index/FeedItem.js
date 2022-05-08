@@ -25,17 +25,15 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
       <figure
         className={`relative h-64 ${
           index % 2 == 0 ? "md:h-96" : "md:h-64"
-        } w-full mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden`}
+        } w-full hidden md:block mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden`}
       >
         <div className="absolute w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
           <Link href={`/post/${slug}`}>
             <Image
               loader={gumletLoader}
               objectFit="cover"
-              width={340}
-              height={index % 2 == 0? 390 : 260}
               className="rounded-lg contrast-115"
-              // layout="fill"
+              layout="fill"
               src={ftImage}
             />
           </Link>

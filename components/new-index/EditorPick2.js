@@ -60,9 +60,7 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                     data-priority={lazy?`false`:`true`}
                     priority={lazy?false:true}
                     loader={gumletLoader}
-                    // layout="fill"
-                    width={500}
-                    height={350}
+                    layout="fill"
                     objectFit="cover"
                     src={ftImage}
                     alt="Blog post"
@@ -123,7 +121,7 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                         width={40}
                         height={40}
                         objectFit="cover"
-                        alt="Author avatar"
+                        alt="Author 04"
                       />
                     </div>
                   </Link>

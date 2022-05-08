@@ -11,7 +11,7 @@ export default function Feeds({ posts = [] }) {
 
   return (
     <section className="mt-16 pt-3 pb-10 px-3 xl:px-0">
-      <h4 className="text-3xl text-gray-900 font-bold  text-title-1 mb-10">
+      <h4 className="text-3xl text-gray-900 font-bold  text-title-1 md:mb-10">
         {titleText}
       </h4>
       {/* https://tailwindcss.com/docs/columns */}
