@@ -39,10 +39,10 @@ export default function PostPreview({
               >
                 <Image
                   loader={gumletLoader}
-                  priority={index < 2 ? true : false}
-                  data-priority={index < 2 ? true : false}
+                  priority={index < 2 ? `true` : `false`}
+                  data-priority={index < 2 ? `true` : `false`}
                   fetchpriority={index<2?"true":"false"}
-                  data-gmlazy={index < 2 ? false : true}
+                  data-gmlazy={index < 2 ? `false` : `true`}
                   width="44"
                   height="44"
                   alt="Brand logo for external website's link"

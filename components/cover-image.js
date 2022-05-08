@@ -21,9 +21,9 @@ export default function CoverImage({ title, url, slug, type, route, imageHeight,
         <Link href={`/${type ? type : route ? route : "posts"}/${slug}`}>
           <Image
             loader={gumletLoader}
-            priority={index<2?true:false}
-            data-priority={index<2?true:false}
-            data-gmlazy={index<2?false:true}
+            priority={index<2?`true`:`false`}
+            data-priority={index<2?`true`:`false`}
+            data-gmlazy={index<2?`false`:`true`}
             className="rounded-lg contrast-115"
             objectFit="cover"
             layout="fill"
