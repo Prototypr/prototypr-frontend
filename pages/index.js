@@ -111,7 +111,7 @@ export default function Index({
           <TopicSpotlights tabs={TAB_ITEMS} topics={topicRes} />
         </BrowserView>
           <Aspiring posts={interviewPosts} />
-          <Feeds posts={otherPosts} />
+          {/* <Feeds posts={otherPosts} /> */}
         </Container>
       </Layout>
       <Footer />
