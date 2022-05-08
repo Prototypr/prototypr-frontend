@@ -156,19 +156,14 @@ export async function getStaticProps({ params, preview = null, locale }) {
     }
   }
 
-  if(data && data.posts?.data?.length){
-    data?.posts.data[0] = transformPost(data?.posts.data[0], locale)
-  }
+  const postData = transformPost(data?.posts.data[0], locale)
   relatedPostsData = transformPostList(relatedPostsData?.posts.data, locale)
-
-
-
 
   return {
     props: {
       preview,
       post: {
-        ...data?.posts.data[0],
+        ...postData,
       },
       gallery:PHOTO_SET,
       relatedPosts:relatedPostsData,

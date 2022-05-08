@@ -86,16 +86,15 @@ export async function getStaticProps({ params, preview = null, locale}) {
   if(combinedRelatedPosts.data?.length>6){
     combinedRelatedPosts.data = combinedRelatedPosts.data.slice(0, 6);
   }
-  if(data && data.posts?.data?.length){
-    data?.posts.data[0] = transformPost(data?.posts.data[0], locale)
-  }
+
+  const postData = transformPost(data?.posts.data[0], locale)
   combinedRelatedPosts.data = transformPostList(combinedRelatedPosts?.data, locale)
 
   return {
     props: {
       preview,
       post: {
-        ...data?.posts.data[0],
+        ...postData,
         // content,
       },
       combinedRelatedPosts:combinedRelatedPosts.data,
