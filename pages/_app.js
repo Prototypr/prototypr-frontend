@@ -7,7 +7,7 @@ import "@/styles/toolStyles.css";
 import { SWRConfig } from 'swr'
 // import { LocaleProvider, LocaleContext } from '../context/LocaleContext';
 // import LocaleAlert from "@/components/Locale/LocaleAlert";
-import { addLocaleData, IntlProvider } from "react-intl";
+import { IntlProvider } from "react-intl";
 import EN from "../locales/en-US";
 import ES from "../locales/es-ES";
 import { useRouter } from "next/router";
@@ -24,17 +24,17 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   const { locale, locales } = useRouter();
   const [shortLocale] = locale ? locale.split("-") : ["en"];
 
-  const [localeAlert, setLocaleAlert] = useState(false)
-  const [localeOfNavigator, setLocaleOfNavigator] = useState("")
+  // const [localeAlert, setLocaleAlert] = useState(false)
+  // const [localeOfNavigator, setLocaleOfNavigator] = useState("")
 
-  useEffect(()=> {
-    if (navigator.language && locale && navigator.language !== locale && !sessionStorage.getItem("SELECTED_LOCALE")) {
-      if (locales.indexOf(navigator.language) > -1) {
-        setLocaleAlert(true)
-        setLocaleOfNavigator(navigator.language)
-      }
-    }
-  },[])
+  // useEffect(()=> {
+  //   if (navigator.language && locale && navigator.language !== locale && !sessionStorage.getItem("SELECTED_LOCALE")) {
+  //     if (locales.indexOf(navigator.language) > -1) {
+  //       setLocaleAlert(true)
+  //       setLocaleOfNavigator(navigator.language)
+  //     }
+  //   }
+  // },[])
 
   const messages = useMemo(() => {
 

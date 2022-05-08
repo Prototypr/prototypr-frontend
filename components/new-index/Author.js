@@ -16,12 +16,18 @@ export default function Author({
   }
 
 
+  const name = 
+  authorName
+                ? authorName
+                : author?.data?.attributes?.name
+                ? author?.data?.attributes?.name
+                : ""
+
   return (
     <>
       <div className="flex items-center">
         <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
-          {(author?.data?.attributes?.legacyAvatar || author?.data?.attributes?.avatar) &&
-            author?.data?.attributes?.slug && (
+          {authorImage && (
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
                   loader={gumletLoader}
@@ -40,11 +46,7 @@ export default function Author({
         >
           {author?.data?.attributes?.slug && (
             <Link href={`people/${author?.data?.attributes?.slug}`}>
-              {authorName
-                ? authorName
-                : author?.data?.attributes?.name
-                ? author?.data?.attributes?.name
-                : ""}
+              {name}
             </Link>
           )}
         </div>

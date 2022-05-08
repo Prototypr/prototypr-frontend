@@ -1,5 +1,6 @@
 import FormControl from "@/components/atom/FormControl/FormControl";
 import { accountLocations } from "@/lib/constants";
+import dynamic from "next/dynamic";
 import axios from "axios";
 // import { useSession } from "next-auth/react";
 import qs from "query-string";
@@ -9,7 +10,8 @@ import useUser from '@/lib/iron-session/useUser'
 import Button from "../atom/Button/Button";
 import { useRouter } from 'next/router'
 import { updateUserSession } from "@/lib/iron-session/updateUserSession";
-import AvatarEditor from "./AvatarEditor";
+// import AvatarEditor from "";
+const AvatarEditor = dynamic(() => {return import("./AvatarEditor")},{ ssr: false });
 
 const websiteRegex =
   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
