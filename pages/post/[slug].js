@@ -87,14 +87,14 @@ export async function getStaticProps({ params, preview = null, locale}) {
     combinedRelatedPosts.data = combinedRelatedPosts.data.slice(0, 6);
   }
 
-  data?.posts.data[0] = transformPost(data?.posts.data[0], locale)
+  data?.posts?.data[0] = transformPost(data?.posts.data[0], locale)
   combinedRelatedPosts.data = transformPostList(combinedRelatedPosts?.data, locale)
 
   return {
     props: {
       preview,
       post: {
-        ...data?.posts.data[0],
+        ...data?.posts?.data[0],
         // content,
       },
       combinedRelatedPosts:combinedRelatedPosts.data,
