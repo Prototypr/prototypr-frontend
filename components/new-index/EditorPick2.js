@@ -59,8 +59,8 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                     className="rounded-sm"
                     data-gmlazy={lazy} 
                     fetchpriority={lazy?"false":"true"}
-                    data-priority={lazy?false:true}
-                    priority={lazy?false:true}
+                    data-priority={lazy?`false`:`true`}
+                    priority={lazy?`false`:`true`}
                     loader={gumletLoader}
                     layout="fill"
                     objectFit="cover"

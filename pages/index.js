@@ -4,18 +4,23 @@ import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 import Footer from "@/components/footer";
 /**new index components */
-import { BrowserView } from 'react-device-detect';
+import { BrowserView, isMobile } from 'react-device-detect';
 
 const Intro = dynamic(() => import("@/components/new-index/Intro"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
-const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
+// const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
-const TopicSpotlights = dynamic(() =>
-  import("@/components/new-index/TopicSpotlights")
-);
+// const TopicSpotlights = dynamic(() =>
+//   import("@/components/new-index/TopicSpotlights")
+// );
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
+
+const DesignTool = !isMobile &&  dynamic(() => import("@/components/new-index/DesignTool"));
+const TopicSpotlights = !isMobile && dynamic(() =>
+  import("@/components/new-index/TopicSpotlights")
+);
 
 import {
   getCombinedPostsForHome,
