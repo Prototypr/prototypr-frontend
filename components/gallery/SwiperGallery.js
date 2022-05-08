@@ -8,9 +8,8 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import { FreeMode, Navigation, Thumbs, A11y } from "swiper";
-const gumletLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
+import gumletLoader from "@/components/new-index/gumletLoader";
+
 export default function SwiperGallery({ data = [] }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 

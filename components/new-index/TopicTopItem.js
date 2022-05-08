@@ -2,9 +2,8 @@ import Author from "./Author";
 import Image from "next/image";
 import Link from "next/link";
 import { useIntl } from "react-intl";
-const gumletLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
+import gumletLoader from "@/components/new-index/gumletLoader";
+
 export default function TopicTopItem({ topic = {} }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";

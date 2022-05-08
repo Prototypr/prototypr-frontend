@@ -1,7 +1,6 @@
 import Image from "next/image";
-const gumletLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
+import gumletLoader from "@/components/new-index/gumletLoader";
+
 export default function VisitCard({
   title = "",
   link = "",

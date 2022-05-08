@@ -1,10 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const gumletLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
-
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 export default function CoverImage({ title, url, slug, type, route, imageHeight, index }) {
   url = url?.mediaItemUrl;

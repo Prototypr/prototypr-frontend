@@ -6,12 +6,10 @@ import BScroll from "better-scroll";
 import Link from "next/link";
 import Image from "next/image";
 import { useIntl } from "react-intl";
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 const ITEM_WIDTH = 300;
 
-const gumletLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
 
 export default function DesignTool({ allTools = [] }) {
   const intl = useIntl();

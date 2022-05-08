@@ -3,9 +3,7 @@ import Link from "next/link";
 import Author from "@/components/new-index/Author";
 // import { useIntl } from 'react-intl';
 
-const gumletLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 export default function FeedItem({ height = 20, post = {}, index = 0 }) {
   const {

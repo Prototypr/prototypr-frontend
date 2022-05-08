@@ -1,10 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 // import { useIntl } from 'react-intl';
-
-const gumletLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
+import gumletLoader from "./gumletLoader";
 
 export default function AspiringItem({ post = {} }) {
   // const intl = useIntl();
