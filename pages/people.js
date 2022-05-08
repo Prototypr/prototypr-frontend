@@ -10,7 +10,7 @@ import PostTitle from '@/components/post-title'
 
 import { getPeopleByPage } from "@/lib/api";
 
-import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
+// import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
 
 const PAGE_SIZE = 12;
 

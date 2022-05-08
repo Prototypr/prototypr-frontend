@@ -11,7 +11,8 @@ import {
   gray,
 } from "@radix-ui/colors";
 import Link from "next/link";
-import ProfileBadge from './ProfileBadge'
+const ProfileBadge = dynamic(() => import("./ProfileBadge"));
+
 
 const Gravatar = dynamic(() => import("react-gravatar"), { ssr: false });
 const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), { ssr: true });
@@ -451,51 +452,73 @@ const ViewportPosition = styled("div", {
 
 export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInCookie }) => {
   const intl = useIntl();
+  const title1 = intl.formatMessage({ id: "navbar.menu.title1" })
+  const title2 = intl.formatMessage({ id: "navbar.menu.title2" })
+  const title3 = intl.formatMessage({ id: "navbar.menu.title3" })
+
+  const submenuTitle1 = intl.formatMessage({ id: "navbar.submenu1.title1" })
+  const submenuDesc1 = intl.formatMessage({ id: "navbar.submenu1.desc1" })
+  
+  const submenuTitle2 = intl.formatMessage({ id: "navbar.submenu1.title2" })
+  const submenuDesc2 = intl.formatMessage({ id: "navbar.submenu1.desc2" })
+  
+  const submenuTitle3 = intl.formatMessage({ id: "navbar.submenu1.title3" })
+  const submenuDesc3 = intl.formatMessage({ id: "navbar.submenu1.desc3" })
+
+  const submenuTitle4 = intl.formatMessage({ id: "navbar.submenu1.title4" })
+  const submenuDesc4 = intl.formatMessage({ id: "navbar.submenu1.desc4" })
+  
+  const submenuTitle5 = intl.formatMessage({ id: "navbar.submenu1.title5" })
+  const submenuDesc5 = intl.formatMessage({ id: "navbar.submenu1.desc5" })
+  
+  const submenuTitle6 = intl.formatMessage({ id: "navbar.submenu1.title6" })
+  const submenuDesc6 = intl.formatMessage({ id: "navbar.submenu1.desc6" })
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem className="flex flex-col justify-center">
           <NavigationMenuTrigger active={activeNav === "posts"}>
-            {intl.formatMessage({ id: "navbar.menu.title1" })}
+            {title1}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ContentList layout="three">
               <ContentListItemCallout />
               <ContentListItem
                 href="/topics"
-                title={intl.formatMessage({ id: "navbar.submenu1.title1" })}
+                title={submenuTitle1}
               >
-                {intl.formatMessage({ id: "navbar.submenu1.desc1" })}
+                {submenuDesc1}
               </ContentListItem>
               <ContentListItem
                 href="/posts/ux/page/1"
-                title={intl.formatMessage({ id: "navbar.submenu1.title2" })}
+                title={submenuTitle2}
               >
-                {intl.formatMessage({ id: "navbar.submenu1.desc2" })}
+                {submenuDesc2}
               </ContentListItem>
               <ContentListItem
                 href="/posts/interview/page/1"
-                title={intl.formatMessage({ id: "navbar.submenu1.title3" })}
+                title={submenuTitle3}
               >
-                {intl.formatMessage({ id: "navbar.submenu1.desc3" })}
+                {submenuDesc3}
               </ContentListItem>
               <ContentListItem
                 href="/posts/accessibility/page/1"
-                title={intl.formatMessage({ id: "navbar.submenu1.title4" })}
+                title={submenuTitle4}
               >
-                {intl.formatMessage({ id: "navbar.submenu1.desc4" })}
+                {submenuDesc4}
               </ContentListItem>
               <ContentListItem
                 href="/posts/ui/page/1"
-                title={intl.formatMessage({ id: "navbar.submenu1.title5" })}
+                title={submenuTitle5}
               >
-                {intl.formatMessage({ id: "navbar.submenu1.desc5" })}
+                {submenuDesc5}
               </ContentListItem>
               <ContentListItem
                 href="/posts/interview/page/1"
-                title={intl.formatMessage({ id: "navbar.submenu1.title6" })}
+                title={submenuTitle6}
               >
-                {intl.formatMessage({ id: "navbar.submenu1.desc6" })}
+                {submenuDesc6}
               </ContentListItem>
             </ContentList>
           </NavigationMenuContent>
@@ -503,45 +526,45 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInC
 
         <NavigationMenuItem className="flex flex-col justify-center">
           <NavigationMenuTrigger active={activeNav === "toolbox"}>
-            {intl.formatMessage({ id: "navbar.menu.title2" })}
+           {title2}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ContentList layout="two">
               <ContentListItem
-                title={intl.formatMessage({ id: "navbar.submenu2.title1" })}
+                title={submenuTitle1}
                 href="/toolbox/page/1"
               >
-                {intl.formatMessage({ id: "navbar.submenu2.desc1" })}
+                {submenuDesc1}
               </ContentListItem>
               <ContentListItem
-                title={intl.formatMessage({ id: "navbar.submenu2.title2" })}
+                title={submenuTitle2}
                 href="/toolbox/ux-tools/page/1"
               >
-                {intl.formatMessage({ id: "navbar.submenu2.desc2" })}
+                {submenuDesc2}
               </ContentListItem>
               <ContentListItem
-                title={intl.formatMessage({ id: "navbar.submenu2.title3" })}
+                title={submenuTitle3}
                 href="/toolbox/augmented-reality-tools/page/1"
               >
-                {intl.formatMessage({ id: "navbar.submenu2.desc3" })}
+                {submenuDesc3}
               </ContentListItem>
               <ContentListItem
-                title={intl.formatMessage({ id: "navbar.submenu2.title4" })}
+                title={submenuTitle4}
                 href="/prototyping/page/1"
               >
-                {intl.formatMessage({ id: "navbar.submenu2.desc4" })}
+                {submenuDesc4}
               </ContentListItem>
               <ContentListItem
-                title={intl.formatMessage({ id: "navbar.submenu2.title5" })}
+                title={submenuTitle5}
                 href="/toolbox/accessibility/page/1"
               >
-                {intl.formatMessage({ id: "navbar.submenu2.desc5" })}
+                {submenuDesc5}
               </ContentListItem>
               <ContentListItem
-                title={intl.formatMessage({ id: "navbar.submenu2.title6" })}
+                title={submenuTitle6}
                 href="/toolbox/conversational-design-tools/page/1"
               >
-                {intl.formatMessage({ id: "navbar.submenu2.desc6" })}
+                {submenuDesc6}
               </ContentListItem>
             </ContentList>
           </NavigationMenuContent>
@@ -549,7 +572,7 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInC
 
         <NavigationMenuItem className="hidden md:block md:flex md:flex-col md:justify-center">
           <NavigationMenuLink href="/">
-            {intl.formatMessage({ id: "navbar.menu.title3" })}
+            {title3}
           </NavigationMenuLink>
         </NavigationMenuItem>
 

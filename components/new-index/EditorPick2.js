@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-// import Moment from "react-moment";
 import { useIntl } from "react-intl";
 
 const gumletLoader = ({ src, width, quality }) => {
@@ -16,13 +15,21 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
     title = "",
     excerpt,
     slug,
-    date,
     tags,
     legacyFeaturedImage = null,
     featuredImage = null,
     author = {},
   } = postItem;
   const tagArr = tags.data;
+
+  const ftImage = featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl ? legacyFeaturedImage.mediaItemUrl:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
+  const authorImage = author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+  author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+  const tagName = tagArr && tagArr.length
+  ? tagArr[1].attributes.slug
+  : "design"
+
 
   return (
     <div className="pb-10 px-3 xl:px-0">
@@ -46,12 +53,13 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                   <Image
                     className="rounded-sm"
                     data-gmlazy={lazy} 
+                    fetchpriority={lazy?false:true}
                     data-priority={lazy?false:true}
                     priority={lazy?false:true}
                     loader={gumletLoader}
                     layout="fill"
                     objectFit="cover"
-                    src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl ? legacyFeaturedImage.mediaItemUrl:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
+                    src={ftImage}
                     alt="Blog post"
                   />
                 </div>
@@ -77,9 +85,7 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                         <Link href={`/post/${slug}`}>
                           <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
                             #{" "}
-                            {tagArr && tagArr.length
-                              ? tagArr[1].attributes.slug
-                              : "design"}
+                            {tagName}
                           </a>
                         </Link>
                       </li>
@@ -106,11 +112,7 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                     <div className="mr-4 relative flex-shrink-0 hover:cursor-pointer">
                       <Image
                         className="rounded-full"
-                        src={
-                          author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
-                          author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
-                            :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-                          }
+                        src={authorImage}
                         width={40}
                         height={40}
                         objectFit="cover"
@@ -125,10 +127,6 @@ export default function EditorPick({ post = {}, header = false , lazy=true}) {
                       {author?.data?.attributes?.name}
                     </a>
                   </Link>
-                  {/*<span className="text-gray-700"> - </span>
-                  <span className="text-gray-500">
-                    <Moment format="DD/MM/YYYY">{date}</Moment>
-                  </span>*/}
                 </div>
               </footer>
             </div>

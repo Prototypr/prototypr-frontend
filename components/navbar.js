@@ -1,21 +1,20 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import NavigationMenuDemo from "./navbar-menu";
+// import NavigationMenuDemo from "./navbar-menu";
 import { useState, useEffect } from "react";
 import useUser from '@/lib/iron-session/useUser'
 // import useSWR from 'swr'
 import jsCookie from 'js-cookie';
-import { FormattedMessage, useIntl } from "react-intl";
+// import { useIntl } from "react-intl";
+const NavigationMenuDemo = dynamic(() => import("./navbar-menu"));
 
 
 export default function Navbar({ activeNav }) {
-  const [clientWindowHeight, setClientWindowHeight] = useState("");
 
-  const [backgroundTransparacy, setBackgroundTransparacy] = useState(0.5);
-  const intl = useIntl();
+  // const intl = useIntl();
 
-  
   // const { data: user, mutate: mutateUser } = useSWR('/api/auth/user')
   const {user, isLoading} = useUser({
     // redirectTo: '/account',
@@ -26,7 +25,7 @@ export default function Navbar({ activeNav }) {
    * use the logged in true/false cookie
    * so there is minimal flicker between subscribe and log in button
    */
-    const [userLoggedInCookie, setUserLoggedInCookie] = useState(()=>{
+    const [userLoggedInCookie] = useState(()=>{
     let loggedInCookie = jsCookie.get('prototypr-loggedIn')
     if(loggedInCookie=='true'){
       return true
@@ -44,36 +43,13 @@ export default function Navbar({ activeNav }) {
 
   },[user?.email])
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  });
-
-  const handleScroll = () => {
-    setClientWindowHeight(window.scrollY);
-  };
-
-  useEffect(() => {
-    let backgroundTransparacyVar = clientWindowHeight / 3000;
-    if (backgroundTransparacyVar < 1) {
-      let border = backgroundTransparacyVar / 1.2;
-      // if(border<0.12){
-      //   setBorderTransparency(backgroundTransparacyVar/1.2);
-      // }
-      let bg = 1 - backgroundTransparacyVar;
-      if (bg > 0.9) {
-        setBackgroundTransparacy(bg);
-      }
-    }
-  }, [clientWindowHeight]);
-
   return (
     <Disclosure
       as="nav"
       className="bg-white fixed w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur"
       style={{
         // borderBottom: `1px solid rgba(17, 24, 39, ${borderTransparacy})`,
-        background: `rgba(255, 255, 255, ${backgroundTransparacy})`,
+        background: `rgba(255, 255, 255, 0.9)`,
       }}
     >
       {({ open }) => (
@@ -99,7 +75,7 @@ export default function Navbar({ activeNav }) {
                 <Link href="/" as="/">
                   <div className="flex-shrink-0 flex items-center cursor-pointer">
                     <img
-                      className="block lg:hidden h-12 w-auto"
+                      className="block lg:hidden h-9 w-9"
                       src="/static/images/logo-small.svg"
                       alt="Prototypr Logo"
                     />

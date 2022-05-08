@@ -60,13 +60,20 @@ export default function Index({
 }) {
   const intl = useIntl();
 
+  const titleText = intl.formatMessage({ id: "index.header.title" })
+  const descriptionText = intl.formatMessage({ id: "intro.description" })
+  const editorPickTitle = intl.formatMessage({ id: "editpicker.title" })
+  const designToolTitle = intl.formatMessage({ id: "designtool.title" })
+  const sourcePanelTitle = intl.formatMessage({ id: "navbar.contentitem.title"})
+  const sourcePanelDescription =intl.formatMessage({ id: "sourcepanel.desc"})
+
   return (
     <>
       <Layout
         preview={preview}
         seo={{
-          title: intl.formatMessage({ id: "index.header.title" }),
-          description: intl.formatMessage({ id: "intro.description" }),
+          title: titleText,
+          description: descriptionText,
           image: "",
           canonical: "https://prototypr.io",
           url: "https://prototypr.io",
@@ -76,13 +83,13 @@ export default function Index({
           <Intro />
           <EditorPick2
             lazy={false}
-            header={intl.formatMessage({ id: "editpicker.title" })}
+            header={editorPickTitle}
             post={heroPost}
           />
           <ProductList posts={morePosts} />
           <div className="hidden md:block mt-32 pb-10 px-3 xl:px-0">
             <h4 className="text-3xl text-gray-900 font-bold leading-6 text-title-1">
-              {intl.formatMessage({ id: "designtool.title" })}
+              {designToolTitle}
             </h4>
           </div>
         </Container>
@@ -91,8 +98,8 @@ export default function Index({
         </BrowserView>
         <Container>
         <SourcePanel 
-          title={intl.formatMessage({ id: "navbar.contentitem.title"})}
-          desc={intl.formatMessage({ id: "sourcepanel.desc"})}
+          title={sourcePanelTitle}
+          desc={sourcePanelDescription}
           />
 
         <BrowserView>
