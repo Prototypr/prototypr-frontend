@@ -4,16 +4,18 @@ import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 import Footer from "@/components/footer";
 /**new index components */
+import { BrowserView } from 'react-device-detect';
+
 const Intro = dynamic(() => import("@/components/new-index/Intro"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
-const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"),{ ssr: false });
+const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 const TopicSpolights = dynamic(() =>
-  import("@/components/new-index/TopicSpolights"),{ ssr: false }
+  import("@/components/new-index/TopicSpolights")
 );
-const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"),{ ssr: false });
-const Feeds = dynamic(() => import("@/components/new-index/Feeds"),{ ssr: false });
+const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
+const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
 
 import {
   getCombinedPostsForHome,
@@ -84,13 +86,18 @@ export default function Index({
             </h4>
           </div>
         </Container>
-        <DesignTool allTools={allTools} />
+        <BrowserView>
+            <DesignTool allTools={allTools} />
+        </BrowserView>
         <Container>
         <SourcePanel 
           title={intl.formatMessage({ id: "navbar.contentitem.title"})}
           desc={intl.formatMessage({ id: "sourcepanel.desc"})}
           />
+
+        <BrowserView>
           <TopicSpolights tabs={TAB_ITEMS} topics={topicRes} />
+        </BrowserView>
           <Aspiring posts={interviewPosts} />
           <Feeds posts={otherPosts} />
         </Container>
@@ -137,13 +144,3 @@ export async function getStaticProps({ preview = null, locale }) {
     revalidate: 20,
   };
 }
-
-// export const getStaticPaths = ({ locales }) => {
-//   return {
-//     paths: [
-//       { params: {}, locale: 'en-US' },
-//       { params: { }, locale: 'en-ES' },
-//     ],
-//     fallback: true,
-//   }
-// }
