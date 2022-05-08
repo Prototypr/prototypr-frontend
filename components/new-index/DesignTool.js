@@ -132,10 +132,12 @@ export default function DesignTool({ allTools = [] }) {
                             <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
                               <Link href={`/toolbox/${showItem.slug}`}>
                                 <Image
+                                  width={300}
+                                  height={210}
                                   loader={gumletLoader}
                                   className="rounded-lg contrast-115"
                                   objectFit="cover"
-                                  layout="fill"
+                                  // layout="fill"
                                   src={
                                     showItem.legacyFeaturedImage.mediaItemUrl
                                   }

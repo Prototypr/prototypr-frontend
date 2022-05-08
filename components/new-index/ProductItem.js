@@ -36,8 +36,10 @@ export default function ProductItem({ post = {} }) {
             <Image
               loader={gumletLoader}
               objectFit="cover"
+              width={160}
+              height={160}
               className="rounded-lg contrast-115"
-              layout="fill"
+              // layout="fill"
               src={ftImage}
             />
           </Link>
@@ -63,8 +65,10 @@ export default function ProductItem({ post = {} }) {
               <Link href={`people/${author?.data?.attributes?.slug}`}>
                 <Image
                   loader={gumletLoader}
+                  width={80}
+                  height={80}
                   src={authorImage}
-                  layout="fill"
+                  // layout="fill"
                   objectFit="cover"
                   className="rounded-full"
                 />

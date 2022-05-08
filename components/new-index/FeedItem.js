@@ -32,8 +32,10 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
             <Image
               loader={gumletLoader}
               objectFit="cover"
+              width={340}
+              height={index % 2 == 0? 390 : 260}
               className="rounded-lg contrast-115"
-              layout="fill"
+              // layout="fill"
               src={ftImage}
             />
           </Link>
