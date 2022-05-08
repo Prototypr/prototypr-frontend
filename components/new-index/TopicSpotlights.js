@@ -25,7 +25,7 @@ export default function TopicSpolights({ tabs = [], topics = {} }) {
   }, []);
 
   return (
-    <section className="mt-16 md:mt-24 pt-3 pb-10 px-3 xl:px-0">
+    <section className="hidden md:block mt-16 md:mt-24 pt-3 pb-10 px-3 xl:px-0">
       <h4 className="text-3xl font-bold text-gray-900 text-title-1">
         {intl.formatMessage({ id: "topicSpotlight.title"})}
       </h4>

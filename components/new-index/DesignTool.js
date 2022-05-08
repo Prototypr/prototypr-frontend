@@ -89,7 +89,7 @@ export default function DesignTool({ allTools = [] }) {
   return (
     <>
       <div
-        className="z-10 bg-gray-4 w-full relative h-74 fade-out-edges mx-auto"
+        className="hidden md:block z-10 bg-gray-4 w-full relative h-74 fade-out-edges mx-auto"
         style={{ maxWidth: "1600px" }}
       >
         {/**button block is within container */}

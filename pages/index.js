@@ -11,8 +11,8 @@ const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
-const TopicSpolights = dynamic(() =>
-  import("@/components/new-index/TopicSpolights")
+const TopicSpotlights = dynamic(() =>
+  import("@/components/new-index/TopicSpotlights")
 );
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
@@ -80,7 +80,7 @@ export default function Index({
             post={heroPost}
           />
           <ProductList posts={morePosts} />
-          <div className="mt-32 pb-10 px-3 xl:px-0">
+          <div className="hidden md:block mt-32 pb-10 px-3 xl:px-0">
             <h4 className="text-3xl text-gray-900 font-bold leading-6 text-title-1">
               {intl.formatMessage({ id: "designtool.title" })}
             </h4>
@@ -96,7 +96,7 @@ export default function Index({
           />
 
         <BrowserView>
-          <TopicSpolights tabs={TAB_ITEMS} topics={topicRes} />
+          <TopicSpotlights tabs={TAB_ITEMS} topics={topicRes} />
         </BrowserView>
           <Aspiring posts={interviewPosts} />
           <Feeds posts={otherPosts} />
