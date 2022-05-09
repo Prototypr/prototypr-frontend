@@ -3,19 +3,14 @@ import dynamic from "next/dynamic";
 import { styled, keyframes } from "@stitches/react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
-import {
-  indigo,
-  mauve,
-  red,
-  pink,
-  gray,
-} from "@radix-ui/colors";
+import { indigo, mauve, red, pink, gray } from "@radix-ui/colors";
 import Link from "next/link";
 const ProfileBadge = dynamic(() => import("./ProfileBadge"));
 
-
 const Gravatar = dynamic(() => import("react-gravatar"), { ssr: false });
-const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), { ssr: true });
+const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
+  ssr: true,
+});
 
 import { FormattedMessage, useIntl } from "react-intl";
 const enterFromRight = keyframes({
@@ -239,11 +234,11 @@ const NextLink = ({ children, ...props }) => {
   // const isActive = Boolean(match);
   return (
     <Link href={props.href} passHref>
-        <StyledLink asChild>
-          <a style={props.css} {...props}>
+      <StyledLink asChild>
+        <a style={props.css} {...props}>
           {children}
-          </a>
-        </StyledLink>
+        </a>
+      </StyledLink>
     </Link>
   );
 };
@@ -346,7 +341,6 @@ const ContentListItemCallout = React.forwardRef(
           padding: 25,
         }}
       >
-      
         <LinkTitle
           css={{
             fontSize: 18,
@@ -383,39 +377,54 @@ const ViewportPosition = styled("div", {
   perspective: "2000px",
 });
 
-export const NavigationMenuDemo = ({ activeNav, collapsed, user, userLoading, userLoggedInCookie }) => {
+export const NavigationMenuDemo = ({
+  activeNav,
+  collapsed,
+  user,
+  userLoading,
+  userLoggedInCookie,
+}) => {
   const intl = useIntl();
-  const title3 = intl.formatMessage({ id: "navbar.menu.title3" })
-
+  const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
 
   return (
     <NavigationMenu>
-      <NavigationMenuList>      
-      <LocaleSwitcher collapsed={collapsed} />
+      <NavigationMenuList>
+        <LocaleSwitcher collapsed={collapsed} />
 
-        <NavigationMenuItem className={`hidden mr-3 md:block ${!collapsed?'md:opacity-0 md:flex':'md:flex'} transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}>
+        <NavigationMenuItem
+          className={`hidden mr-3 md:block ${
+            !collapsed ? "md:opacity-0 md:flex md:invisible" : "md:flex"
+          } transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
+        >
           <NavigationMenuLink href="/post/write-for-us">
             {title3}
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem  className="flex flex-col justify-center">
-          {(user && user.isLoggedIn) ? (
-          <div className="ml-2">
-            <Link href="/account">
-              {user.avatar ? (
-                <ProfileBadge icon={ <img
-                  className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
-                  src={user.avatar.url}
-                />}/>
-               
-              ) : (
-                <ProfileBadge icon={ <Gravatar
-                  className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
-                  email={user.email}
-                />}/>
-                
-              )}
-            </Link>
+        <NavigationMenuItem className="flex flex-col justify-center">
+          {user && user.isLoggedIn ? (
+            <div className="ml-2">
+              <Link href="/account">
+                {user.avatar ? (
+                  <ProfileBadge
+                    icon={
+                      <img
+                        className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
+                        src={user.avatar.url}
+                      />
+                    }
+                  />
+                ) : (
+                  <ProfileBadge
+                    icon={
+                      <Gravatar
+                        className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
+                        email={user.email}
+                      />
+                    }
+                  />
+                )}
+              </Link>
             </div>
           ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
