@@ -157,12 +157,12 @@ const switchLanguage = (itemLocale, router) => {
   router.push(router.asPath, router.asPath , { locale:itemLocale });
 }
 
- const LocaleSwitcher = () => {
+ const LocaleSwitcher = ({collapsed}) => {
   const router = useRouter();
   const { locale } = useRouter();
   const [shortLocale] = locale ? locale.split("-") : ["en"];
   return (
-    <Box className="ml-3">
+    <Box className={`mr-3 ${!collapsed?'md:opacity-0 md:flex':'md:flex'} transition transition-all duration-500 ease-in-out`}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <IconButton aria-label="Customise options">

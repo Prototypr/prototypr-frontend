@@ -15,7 +15,7 @@ const ES = {
   "intro.button.updates": "Recibir novedades",
   "intro.description": "Código abierto. Gratis para todos. Sin muro de pago.",
   "intro.link": "Saber más sobre Prototypr",
-  "navbar.menu.title1": "Historias",
+  "navbar.menu.title1": "Más",
   "navbar.menu.title2": "Toolbox",
   "navbar.menu.title3": "Escribe para nosotros",
   "navbar.menu.title4": "Suscribirse",

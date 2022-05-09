@@ -11,6 +11,8 @@ import {
   gray,
 } from "@radix-ui/colors";
 import Link from "next/link";
+import { useRouter } from 'next/router'
+
 const ProfileBadge = dynamic(() => import("./ProfileBadge"));
 
 
@@ -61,6 +63,7 @@ const fadeOut = keyframes({
 const StyledMenu = styled(NavigationMenuPrimitive.Root, {
   position: "relative",
   display: "flex",
+  flexDirection:'column',
   justifyContent: "center",
   width: "auto",
   zIndex: 1,
@@ -70,6 +73,7 @@ const StyledList = styled(NavigationMenuPrimitive.List, {
   all: "unset",
   display: "flex",
   justifyContent: "center",
+  flexDirection:'column',
   // backgroundColor: 'white',
   padding: 4,
   borderRadius: 6,
@@ -77,7 +81,7 @@ const StyledList = styled(NavigationMenuPrimitive.List, {
 });
 
 const itemStyles = {
-  padding: "8px 12px",
+  padding: "10px 14px",
   outline: "none",
   userSelect: "none",
   fontWeight: 500,
@@ -89,7 +93,7 @@ const itemStyles = {
   "&:hover": { backgroundColor: indigo.indigo3, color: indigo.indigo11 },
 };
 const itemButtonStyles = {
-  padding: "8px 12px",
+  padding: "10px 14px",
   outline: "none",
   userSelect: "none",
   fontWeight: 500,
@@ -237,10 +241,12 @@ const NextLink = ({ children, ...props }) => {
   // const resolved = useResolvedPath(href);
   // const match = useMatch({ path: resolved.pathname, end: true });
   // const isActive = Boolean(match);
+  const router = useRouter()
+  const isActive = Boolean(router.asPath==props.href);
   return (
     <Link href={props.href} passHref>
         <StyledLink asChild>
-          <a style={props.css} {...props}>
+          <a style={props.css} className={isActive?'bg-blue-50 border border-blue-100 border-1 text-blue-700':''} {...props}>
           {children}
           </a>
         </StyledLink>
@@ -383,22 +389,47 @@ const ViewportPosition = styled("div", {
   perspective: "2000px",
 });
 
-export const NavigationMenuDemo = ({ activeNav, collapsed, user, userLoading, userLoggedInCookie }) => {
+export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInCookie }) => {
   const intl = useIntl();
   const title3 = intl.formatMessage({ id: "navbar.menu.title3" })
 
 
   return (
     <NavigationMenu>
-      <NavigationMenuList>      
-      <LocaleSwitcher collapsed={collapsed} />
+      <NavigationMenuList>
+      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+          <NavigationMenuLink href="/posts/accessibility">
+            Accessibility
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+          <NavigationMenuLink href="/posts/interview">
+            Interviews
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+          <NavigationMenuLink href="/posts/ux">
+            UX Design
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+          <NavigationMenuLink href="/posts/ui">
+            UI Design
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+          <NavigationMenuLink href="/toolbox">
+            Toolbox
+          </NavigationMenuLink>
+        </NavigationMenuItem>
 
-        <NavigationMenuItem className={`hidden mr-3 md:block ${!collapsed?'md:opacity-0 md:flex':'md:flex'} transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}>
+        <NavigationMenuItem className="block flex py-2 flex-col justify-center">
           <NavigationMenuLink href="/post/write-for-us">
             {title3}
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem  className="flex flex-col justify-center">
+
+        <NavigationMenuItem  className="py-2 flex">
           {(user && user.isLoggedIn) ? (
           <div className="ml-2">
             <Link href="/account">
@@ -424,8 +455,13 @@ export const NavigationMenuDemo = ({ activeNav, collapsed, user, userLoading, us
               {intl.formatMessage({ id: "navbar.menu.title4" })}
             </NavigationMenuButton>
           )}
+          <div className="ml-3">
+           <LocaleSwitcher />
+          </div>
         </NavigationMenuItem>
+
         <NavigationMenuIndicator />
+        
       </NavigationMenuList>
 
       <ViewportPosition className="ml-0 sm:-ml-12">

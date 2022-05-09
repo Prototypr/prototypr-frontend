@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 /**new index components */
 import { BrowserView} from 'react-device-detect';
 
-const Intro = dynamic(() => import("@/components/new-index/Intro"));
+// const Intro = dynamic(() => import("@/components/new-index/Intro"));
 // const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 import EditorPick2 from "@/components/new-index/EditorPick2";
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
@@ -81,12 +81,12 @@ export default function Index({
         }}
       >
         <Container>
-          <Intro />
-          <EditorPick2
-            lazy={false}
-            header={editorPickTitle}
-            post={heroPost}
-          />
+          {/* <Intro /> */}
+            <EditorPick2
+              lazy={false}
+              header={editorPickTitle}
+              post={heroPost}
+            />
           <ProductList posts={morePosts} />
           <div className="hidden md:block mt-32 pb-10 px-3 xl:px-0">
             <h4 className="text-3xl text-gray-900 font-bold leading-6 text-title-1">

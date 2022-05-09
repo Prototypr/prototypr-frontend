@@ -37,7 +37,7 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
               <title>Open design and tech stories for everyone to read</title>
             </Head>
             <Container>
-            <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-20 mb-5 capitalize'>{tagName}</h2>
+            <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-8 mb-5 capitalize'>{tagName}</h2>
             {first4Posts?.length>0  &&<Aspiring posts={first4Posts} showTitle={false} />}
             
             <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
