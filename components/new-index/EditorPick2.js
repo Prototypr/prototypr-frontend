@@ -80,7 +80,7 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                   <ul className="flex flex-wrap text-xs font-medium -m-1">
                     <li className="m-1">
                       <Link href={`/post/${slug}`}>
-                        <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
+                        <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-600 mr-2">
                           #{" "}
                           {tagArr && tagArr.length
                             ? tagArr[0].attributes.slug
@@ -104,7 +104,7 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                 </div>
                 <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-2">
                   <Link href={`/post/${slug}`}>
-                    <a className="hover:text-gray-900 group-hover:underline transition duration-150 ease-in-out">
+                    <a className="font-noto-serif hover:text-gray-900 group-hover:underline transition duration-150 ease-in-out">
                       {title}
                     </a>
                   </Link>
@@ -112,7 +112,7 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
               </header>
               <div className="text-lg text-gray-400 flex-grow">
                 <div
-                  className="text-base font-medium text-gray-3 leading-normal mt-4 clamp-2 overflow-hidden text-ellipsis"
+                  className="text-base font-medium text-gray-600 leading-normal mt-4 clamp-2 overflow-hidden text-ellipsis"
                   dangerouslySetInnerHTML={{ __html: excerpt }}
                 ></div>
               </div>

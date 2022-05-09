@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useIntl } from "react-intl";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-
 export default function ProductItem({ post = {} }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
@@ -19,14 +18,21 @@ export default function ProductItem({ post = {} }) {
   } = post?.attributes;
   const tagArr = tags.data;
 
-  const authorImage =  author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
-  author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
-    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+  const authorImage = author?.data?.attributes?.avatar?.data?.attributes?.avatar
+    ?.data?.attributes
+    ? author.data.attributes.avatar.data.attributes.url
+    : author?.data?.attributes?.legacyAvatar
+    ? author.data.attributes.legacyAvatar
+    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
+  const ftImage = featuredImage?.data?.attributes?.url
+    ? featuredImage.data.attributes.url
+    : legacyFeaturedImage?.mediaItemUrl
+    ? legacyFeaturedImage?.mediaItemUrl
+    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
-  const ftImage = featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl:"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-
-  const tagName = tagArr && tagArr.length ? tagArr[0].attributes.name : "design"
+  const tagName =
+    tagArr && tagArr.length ? tagArr[0].attributes.name : "design";
 
   return (
     <div className="grid-cols-1 flex items-top py-2 group">
@@ -47,19 +53,19 @@ export default function ProductItem({ post = {} }) {
       </figure>
       <div className="flex-1 ml-4 h-full">
         <div className="flex">
-          <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
+          <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-500 mr-1">
             # {tagName}
           </div>
           {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
             # product design
           </div> */}
         </div>
-        <h4 className="font-semibold text-lg leading-7 text-gray-1 md:w-2/3">
+        <h4 className="font-semibold text-lg leading-7 text-gray-1 md:w-2/3 mt-1">
           <Link href={`/post/${slug}`}>
-            <a className="group-hover:underline">{title}</a>
+            <a className="font-noto-serif group-hover:underline">{title}</a>
           </Link>
         </h4>
-        <div className="mt-3 flex items-center">
+        <div className="mt-4 flex items-center">
           <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
             {authorImage && (
               <Link href={`people/${author?.data?.attributes?.slug}`}>

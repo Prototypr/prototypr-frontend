@@ -5,7 +5,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head />
-        <body className="font-inter">
+        <body className="font-noto-sans">
           <Main />
           <NextScript />
         </body>
