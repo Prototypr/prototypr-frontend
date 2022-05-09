@@ -8,9 +8,10 @@ export default function NewPagination({
   onPageNumChange = () => {},
 }) {
   return (
-    <div className="flex justify-center items-center mt-8 md:pb-4">
+    <div className="flex justify-center items-center mt-8 pb-12 md:pb-4">
       <RcPagination
-        showPrevNextJumpers
+        hideOnSinglePage={true}
+        showPrevNextJumpers={false}
         current={currentPage}
         pageSize={pageSize}
         total={total}

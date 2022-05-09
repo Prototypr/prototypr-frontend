@@ -1,25 +1,30 @@
 import Container from "./container";
 import Link from "next/link";
 import { useIntl } from "react-intl";
-import dynamic from 'next/dynamic'
-const SignupHorizontal = dynamic(() => import("@/components/newsletter/SignupHorizontal"), { ssr: true });
+import dynamic from "next/dynamic";
+const SignupHorizontal = dynamic(
+  () => import("@/components/newsletter/SignupHorizontal"),
+  { ssr: true }
+);
 
 export default function Footer() {
   const intl = useIntl();
   return (
     <footer className="bg-accent-1 border-accent-2">
       <Container>
-        <div className="w-full max-w-screen-xl relative mx-auto py-12 ">
+        <div className="w-full max-w-screen-xl relative mx-auto py-12 px-6">
           <div className="flex flex-wrap">
             <div className="w-full md:w-6/12">
-              <p className="text-xl font-semibold">{intl.formatMessage({ id: "footer.title"})}</p>
+              <p className="text-xl font-semibold">
+                {intl.formatMessage({ id: "footer.title" })}
+              </p>
               <input className="hidden" defaultValue={"hello@prototypr.io"} />
 
               <p className="text-base mt-0 text-gray-700">
-                {intl.formatMessage({ id: "footer.subtitle"})} 💌
+                {intl.formatMessage({ id: "footer.subtitle" })} 💌
               </p>
 
-             <SignupHorizontal className="sm:flex w-11/12 mt-5" />
+              <SignupHorizontal className="sm:flex w-11/12 mt-5" />
               {/* <HookForm onSubmit={onSubmit} buttonText={buttonText} /> */}
               <p className="text-sm mt-6 text-gray-800 font-semibold">
                 {intl.formatMessage({ id: "footer.author1" })}{" "}
@@ -54,9 +59,9 @@ export default function Footer() {
               </p>
               <p className="text-sm text-gray-700 font-semibold mt-2">
                 {" "}
-                © 2020 Prototpyr, {intl.formatMessage({ id: "footer.copyright" })}
+                © 2020 Prototpyr,{" "}
+                {intl.formatMessage({ id: "footer.copyright" })}
               </p>
-             
             </div>
 
             <div className="w-full md:w-6/12">
@@ -79,7 +84,7 @@ export default function Footer() {
                     <li>
                       <Link href="/posts" as="/posts">
                         <a className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base">
-                        {intl.formatMessage({ id: "footer.rightCat3" })}
+                          {intl.formatMessage({ id: "footer.rightCat3" })}
                         </a>
                       </Link>
                     </li>

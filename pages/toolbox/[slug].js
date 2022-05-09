@@ -39,7 +39,7 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
       }}
     activeNav={"toolbox"} preview={preview}>
       <Container>
-        <div className="w-full mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
+        <div className="w-full mt-6 md:mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
           {/* left sidebar */}
           {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>

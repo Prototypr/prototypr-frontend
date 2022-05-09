@@ -10,7 +10,6 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const ITEM_WIDTH = 300;
 
-
 export default function DesignTool({ allTools = [] }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
@@ -149,10 +148,9 @@ export default function DesignTool({ allTools = [] }) {
                               <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
                                 <Link href={`/toolbox/${showItem.slug}`}>
                                   <Image
-                                  loader={gumletLoader}
+                                    loader={gumletLoader}
                                     className="rounded-lg contrast-115"
                                     objectFit="cover"
-                                    
                                     layout="fill"
                                     src={
                                       showItem.featuredImage?.data?.attributes
@@ -176,7 +174,7 @@ export default function DesignTool({ allTools = [] }) {
                           {showItem.legacyFeaturedImage.logoNew && (
                             <Link href={`/toolbox/${showItem.slug}`}>
                               <Image
-                              loader={gumletLoader}
+                                loader={gumletLoader}
                                 className="rounded-full"
                                 objectFit="cover"
                                 layout="fill"
@@ -207,7 +205,7 @@ export default function DesignTool({ allTools = [] }) {
           </div>
         </div>
       </div>
-      <div className="bg-gray-4 w-full relative flex items-center justify-center pt-14 pb-32">
+      <div className="bg-gray-4 w-full relative flex items-center justify-center pt-14 pb-24 md:pb-32">
         <Link href="/toolbox/page/1">
           <button className="bg-blue-700 rounded-lg text-white text-base leading-6 flex items-center justify-center py-4 px-8 hover:bg-blue-500 font-semibold">
             {intl.formatMessage({ id: "designtool.button.browsemore" })}
