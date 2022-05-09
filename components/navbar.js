@@ -152,7 +152,7 @@ export default function Navbar({ activeNav }) {
                 activeNav={activeNav}
               />
               <p
-                className={`my-auto hidden xl:block normal-case font-semibold ${
+                className={`my-auto font-noto-serif hidden xl:block normal-case font-semibold ${
                   !showNav
                     ? "opacity-0 -z-10 absolute right-0 pt-3.5 text-gray-50 -mr-12 text-xs"
                     : "text-base"

@@ -446,7 +446,7 @@ export const NavigationMenuDemo = ({
             alt="Prototypr Logo"
           />
           <p
-            className={`hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
+            className={`font-noto-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
               collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"
             } transition transition-all duration-150 ease-in-out`}
           >

@@ -11,12 +11,18 @@ figure{margin-bottom:20px;}
     font-weight: 400;
     p,li,ol, ul{
         font-family:'Noto Serif', serif;
-            line-height:2rem;
+            line-height:30px;
+            font-size:18px;
+    }
+     a{
+        color:#2384de;
+        text-decoration:underline;
     }
     p{
         margin-bottom: 1.25rem;
     }
     h1{
+        font-family:'Noto Serif';
         font-weight: 600;
         margin-top: 2.5rem;
         margin-bottom: 2.5rem;

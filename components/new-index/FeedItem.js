@@ -17,8 +17,13 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
   // const intl = useIntl();
   // const locale = intl.locale ? intl.locale : "en-US";
   const tagArr = tags.data;
-  const ftImage = featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-  const tagName = tagArr && tagArr.length ? tagArr[0].attributes.name : "design"
+  const ftImage = featuredImage?.data?.attributes?.url
+    ? featuredImage.data.attributes.url
+    : legacyFeaturedImage?.mediaItemUrl
+    ? legacyFeaturedImage?.mediaItemUrl
+    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+  const tagName =
+    tagArr && tagArr.length ? tagArr[0].attributes.name : "design";
 
   return (
     <div className="cursor-pointer py-6 px-1 inline-block w-full group">
@@ -41,13 +46,13 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
       </figure>
 
       <div className="mt-3 flex">
-        <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
+        <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-500 mr-2">
           # {tagName}{" "}
         </div>
       </div>
       <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
         <Link href={`/post/${slug}`}>
-          <a className="group-hover:underline">{title}</a>
+          <a className="font-noto-serif group-hover:underline">{title}</a>
         </Link>
       </h4>
       <div className="mt-3">

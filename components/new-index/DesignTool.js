@@ -187,11 +187,11 @@ export default function DesignTool({ allTools = [] }) {
                       <div className="mt-7 flex justify-between">
                         <Link href={`/toolbox/${showItem.slug}`}>
                           <div className="px-3 w-full">
-                            <div className="text-gray-1 hover:underline truncate text-lg font-bold leading-6">
+                            <div className="font-noto-serif text-gray-1 hover:underline truncate text-lg font-bold leading-6">
                               {showItem.title}
                             </div>
                             {showItem.tags?.data[0] && (
-                              <div className="font-normal text-xs leading-6 tracking-wide uppercase text-gray-3">
+                              <div className="font-normal text-xs leading-6 tracking-wide uppercase text-gray-500 mt-1">
                                 # {showItem.tags?.data[0].attributes?.name}
                               </div>
                             )}

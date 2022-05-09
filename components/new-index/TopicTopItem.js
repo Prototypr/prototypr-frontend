@@ -19,11 +19,12 @@ export default function TopicTopItem({ topic = {} }) {
   } = topic?.attributes;
   const tagArr = tags.data;
 
-  const avatar = 
-  author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
-  author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
-    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-
+  const avatar = author?.data?.attributes?.avatar?.data?.attributes?.avatar
+    ?.data?.attributes
+    ? author.data.attributes.avatar.data.attributes.url
+    : author?.data?.attributes?.legacyAvatar
+    ? author.data.attributes.legacyAvatar
+    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
   return (
     <div className="grid-cols-1 rounded-lg bg-white p-6 flex flex-col sm:flex-row cursor-pointer group">
@@ -39,17 +40,19 @@ export default function TopicTopItem({ topic = {} }) {
                 src={legacyFeaturedImage?.mediaItemUrl}
               />
             </Link>
-          ):featuredImage?.data?.attributes?.url &&
-          <Link href={`/post/${slug}`}>
-              <Image
-                loader={gumletLoader}
-                objectFit="cover"
-                className="rounded-lg contrast-115"
-                layout="fill"
-                src={featuredImage?.data?.attributes?.url}
-              />
-            </Link>
-          }
+          ) : (
+            featuredImage?.data?.attributes?.url && (
+              <Link href={`/post/${slug}`}>
+                <Image
+                  loader={gumletLoader}
+                  objectFit="cover"
+                  className="rounded-lg contrast-115"
+                  layout="fill"
+                  src={featuredImage?.data?.attributes?.url}
+                />
+              </Link>
+            )
+          )}
         </div>
       </figure>
 
@@ -63,13 +66,13 @@ export default function TopicTopItem({ topic = {} }) {
         <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
           {slug && (
             <Link href={`/post/${slug}`}>
-              <a className="group-hover:underline">{title}</a>
+              <a className="font-noto-serif group-hover:underline">{title}</a>
             </Link>
           )}
         </h4>
         <div
           className="mt-3 text-gray-3 font-normal text-base leading-normal overflow-hidden text-ellipsis clamp-2"
-          dangerouslySetInnerHTML={{ __html: excerpt}}
+          dangerouslySetInnerHTML={{ __html: excerpt }}
         ></div>
         <div className="flex items-center mt-5">
           <Author
