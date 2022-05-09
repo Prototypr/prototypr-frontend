@@ -3,21 +3,16 @@ import dynamic from "next/dynamic";
 import { styled, keyframes } from "@stitches/react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
-import {
-  indigo,
-  mauve,
-  red,
-  pink,
-  gray,
-} from "@radix-ui/colors";
+import { indigo, mauve, red, pink, gray } from "@radix-ui/colors";
 import Link from "next/link";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 const ProfileBadge = dynamic(() => import("./ProfileBadge"));
 
-
 const Gravatar = dynamic(() => import("react-gravatar"), { ssr: false });
-const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), { ssr: true });
+const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
+  ssr: true,
+});
 
 import { FormattedMessage, useIntl } from "react-intl";
 const enterFromRight = keyframes({
@@ -236,15 +231,23 @@ const StyledViewport = styled(NavigationMenuPrimitive.Viewport, {
 });
 
 const NextLink = ({ children, ...props }) => {
-  const router = useRouter()
-  const isActive = Boolean(router.asPath==props.href);
+  const router = useRouter();
+  const isActive = Boolean(router.asPath.indexOf(props.href) > -1);
   return (
     <Link href={props.href} passHref>
-        <StyledLink asChild>
-          <a style={props.css} className={isActive?'bg-blue-50 border border-blue-100 border-1 text-blue-700':''} {...props}>
+      <StyledLink asChild>
+        <a
+          style={props.css}
+          className={
+            isActive
+              ? "bg-blue-50 border border-blue-100 border-1 text-blue-700"
+              : ""
+          }
+          {...props}
+        >
           {children}
-          </a>
-        </StyledLink>
+        </a>
+      </StyledLink>
     </Link>
   );
 };
@@ -347,7 +350,6 @@ const ContentListItemCallout = React.forwardRef(
           padding: 25,
         }}
       >
-      
         <LinkTitle
           css={{
             // fontSize: 18,
@@ -384,167 +386,165 @@ const ViewportPosition = styled("div", {
   perspective: "2000px",
 });
 
-export const NavigationMenuDemo = ({ activeNav,collapse, user, userLoading, userLoggedInCookie }) => {
+export const NavigationMenuDemo = ({
+  activeNav,
+  collapse,
+  user,
+  userLoading,
+  userLoggedInCookie,
+}) => {
   const intl = useIntl();
-  const title1 = intl.formatMessage({ id: "navbar.menu.title1" })
-  const title2 = intl.formatMessage({ id: "navbar.menu.title2" })
-  const title3 = intl.formatMessage({ id: "navbar.menu.title3" })
+  const title1 = intl.formatMessage({ id: "navbar.menu.title1" });
+  const title2 = intl.formatMessage({ id: "navbar.menu.title2" });
+  const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
 
-  const submenuTitle1 = intl.formatMessage({ id: "navbar.submenu1.title1" })
-  const submenuDesc1 = intl.formatMessage({ id: "navbar.submenu1.desc1" })
-  
-  const submenuTitle2 = intl.formatMessage({ id: "navbar.submenu1.title2" })
-  const submenuDesc2 = intl.formatMessage({ id: "navbar.submenu1.desc2" })
-  
-  const submenuTitle3 = intl.formatMessage({ id: "navbar.submenu1.title3" })
-  const submenuDesc3 = intl.formatMessage({ id: "navbar.submenu1.desc3" })
+  const submenuTitle1 = intl.formatMessage({ id: "navbar.submenu1.title1" });
+  const submenuDesc1 = intl.formatMessage({ id: "navbar.submenu1.desc1" });
 
-  const submenuTitle4 = intl.formatMessage({ id: "navbar.submenu1.title4" })
-  const submenuDesc4 = intl.formatMessage({ id: "navbar.submenu1.desc4" })
-  
-  const submenuTitle5 = intl.formatMessage({ id: "navbar.submenu1.title5" })
-  const submenuDesc5 = intl.formatMessage({ id: "navbar.submenu1.desc5" })
-  
-  const submenuTitle6 = intl.formatMessage({ id: "navbar.submenu1.title6" })
-  const submenuDesc6 = intl.formatMessage({ id: "navbar.submenu1.desc6" })
+  const submenuTitle2 = intl.formatMessage({ id: "navbar.submenu1.title2" });
+  const submenuDesc2 = intl.formatMessage({ id: "navbar.submenu1.desc2" });
+
+  const submenuTitle3 = intl.formatMessage({ id: "navbar.submenu1.title3" });
+  const submenuDesc3 = intl.formatMessage({ id: "navbar.submenu1.desc3" });
+
+  const submenuTitle4 = intl.formatMessage({ id: "navbar.submenu1.title4" });
+  const submenuDesc4 = intl.formatMessage({ id: "navbar.submenu1.desc4" });
+
+  const submenuTitle5 = intl.formatMessage({ id: "navbar.submenu1.title5" });
+  const submenuDesc5 = intl.formatMessage({ id: "navbar.submenu1.desc5" });
+
+  const submenuTitle6 = intl.formatMessage({ id: "navbar.submenu1.title6" });
+  const submenuDesc6 = intl.formatMessage({ id: "navbar.submenu1.desc6" });
 
   return (
     <NavigationMenu>
-    <Link href="/">
+      <Link href="/">
         <div className="cursor-pointer flex">
-            <img
-                className={`my-auto h-8 ${collapse?'w-0 opacity-0':'w-8 opacity-1'} transition transition-all duration-300 ease-in-out`}
-                src="/static/images/logo-small.svg"
-                alt="Prototypr Logo"
-            />
-            <p className={`hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${collapse?'w-0 opacity-0':'w-auto opacity-1 ml-3'} transition transition-all duration-150 ease-in-out`}>
-                <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
-                    design<br/>discovery
-                    {/* <FormattedMessage 
+          <img
+            className={`my-auto h-8 ${
+              collapse ? "w-0 opacity-0" : "w-8 opacity-1"
+            } transition transition-all duration-300 ease-in-out`}
+            src="/static/images/logo-small.svg"
+            alt="Prototypr Logo"
+          />
+          <p
+            className={`hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
+              collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"
+            } transition transition-all duration-150 ease-in-out`}
+          >
+            <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
+              design
+              <br />
+              discovery
+              {/* <FormattedMessage 
                     id="intro.title.half2"
                     /> */}
-                </span>
-            </p>
+            </span>
+          </p>
         </div>
-    </Link>
-    <div className={`${collapse?'':'ml-10'} transition transition-all duration-300 ease-in-out`}>
-      <NavigationMenuList >
-      <NavigationMenuItem className="hidden -ml-4 text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-          <NavigationMenuLink href="/posts/accessibility">
-            Accessibility
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-      <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-          <NavigationMenuLink href="/posts/interview">
-            Interviews
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-      <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-          <NavigationMenuLink href="/posts/ux">
-            UX Design
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-      <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-          <NavigationMenuLink href="/posts/ui">
-            UI Design
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-        <NavigationMenuItem className="flex text-xs md:text-sm xl:mr-2.5 flex-col justify-center">
-          {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
-          <NavigationMenuTrigger active={''}>
-            {title1}
-          </NavigationMenuTrigger>
-          <NavigationMenuContent className="normal-case">
-            <ContentList layout="three">
-              <ContentListItemCallout />
-              <ContentListItem
-                href="/topics"
-                title={submenuTitle1}
-              >
-                {submenuDesc1}
-              </ContentListItem>
-              <ContentListItem
-                href="/posts/ux/page/1"
-                title={submenuTitle2}
-              >
-                {submenuDesc2}
-              </ContentListItem>
-              <ContentListItem
-                href="/posts/interview/page/1"
-                title={submenuTitle3}
-              >
-                {submenuDesc3}
-              </ContentListItem>
-              <ContentListItem
-                href="/posts/accessibility/page/1"
-                title={submenuTitle4}
-              >
-                {submenuDesc4}
-              </ContentListItem>
-              <ContentListItem
-                href="/posts/ui/page/1"
-                title={submenuTitle5}
-              >
-                {submenuDesc5}
-              </ContentListItem>
-              <ContentListItem
-                href="/posts/interview/page/1"
-                title={submenuTitle6}
-              >
-                {submenuDesc6}
-              </ContentListItem>
-            </ContentList>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+      </Link>
+      <div
+        className={`${
+          collapse ? "" : "ml-10"
+        } transition transition-all duration-300 ease-in-out`}
+      >
+        <NavigationMenuList>
+          <NavigationMenuItem className="hidden -ml-4 text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuLink href="/posts/accessibility">
+              Accessibility
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuLink href="/posts/interview">
+              Interviews
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuLink href="/posts/ux">UX Design</NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuLink href="/posts/ui">UI Design</NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem className="flex text-xs md:text-sm xl:mr-2.5 flex-col justify-center">
+            {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
+            <NavigationMenuTrigger active={""}>{title1}</NavigationMenuTrigger>
+            <NavigationMenuContent className="normal-case">
+              <ContentList layout="three">
+                <ContentListItemCallout />
+                <ContentListItem href="/topics" title={submenuTitle1}>
+                  {submenuDesc1}
+                </ContentListItem>
+                <ContentListItem href="/posts/ux/page/1" title={submenuTitle2}>
+                  {submenuDesc2}
+                </ContentListItem>
+                <ContentListItem
+                  href="/posts/interview/page/1"
+                  title={submenuTitle3}
+                >
+                  {submenuDesc3}
+                </ContentListItem>
+                <ContentListItem
+                  href="/posts/accessibility/page/1"
+                  title={submenuTitle4}
+                >
+                  {submenuDesc4}
+                </ContentListItem>
+                <ContentListItem href="/posts/ui/page/1" title={submenuTitle5}>
+                  {submenuDesc5}
+                </ContentListItem>
+                <ContentListItem
+                  href="/posts/interview/page/1"
+                  title={submenuTitle6}
+                >
+                  {submenuDesc6}
+                </ContentListItem>
+              </ContentList>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
 
-        <NavigationMenuItem className="flex flex-col text-xs md:text-sm xl:mr-2.5 justify-center">
-          <NavigationMenuTrigger active={activeNav === "toolbox"}>
-           {title2}
-          </NavigationMenuTrigger>
-          <NavigationMenuContent className="normal-case">
-            <ContentList layout="two">
-              <ContentListItem
-                title={submenuTitle1}
-                href="/toolbox/page/1"
-              >
-                {submenuDesc1}
-              </ContentListItem>
-              <ContentListItem
-                title={submenuTitle2}
-                href="/toolbox/ux-tools/page/1"
-              >
-                {submenuDesc2}
-              </ContentListItem>
-              <ContentListItem
-                title={submenuTitle3}
-                href="/toolbox/augmented-reality-tools/page/1"
-              >
-                {submenuDesc3}
-              </ContentListItem>
-              <ContentListItem
-                title={submenuTitle4}
-                href="/prototyping/page/1"
-              >
-                {submenuDesc4}
-              </ContentListItem>
-              <ContentListItem
-                title={submenuTitle5}
-                href="/toolbox/accessibility/page/1"
-              >
-                {submenuDesc5}
-              </ContentListItem>
-              <ContentListItem
-                title={submenuTitle6}
-                href="/toolbox/conversational-design-tools/page/1"
-              >
-                {submenuDesc6}
-              </ContentListItem>
-            </ContentList>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-       
-      </NavigationMenuList>
+          <NavigationMenuItem className="flex flex-col text-xs md:text-sm xl:mr-2.5 justify-center">
+            <NavigationMenuTrigger active={activeNav === "toolbox"}>
+              {title2}
+            </NavigationMenuTrigger>
+            <NavigationMenuContent className="normal-case">
+              <ContentList layout="two">
+                <ContentListItem title={submenuTitle1} href="/toolbox/page/1">
+                  {submenuDesc1}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenuTitle2}
+                  href="/toolbox/ux-tools/page/1"
+                >
+                  {submenuDesc2}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenuTitle3}
+                  href="/toolbox/augmented-reality-tools/page/1"
+                >
+                  {submenuDesc3}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenuTitle4}
+                  href="/prototyping/page/1"
+                >
+                  {submenuDesc4}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenuTitle5}
+                  href="/toolbox/accessibility/page/1"
+                >
+                  {submenuDesc5}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenuTitle6}
+                  href="/toolbox/conversational-design-tools/page/1"
+                >
+                  {submenuDesc6}
+                </ContentListItem>
+              </ContentList>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
       </div>
       <NavigationMenuIndicator />
       <ViewportPosition className="ml-0 ml-36">
