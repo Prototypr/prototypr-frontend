@@ -13,13 +13,14 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 export default function SwiperGallery({ data = [] }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-
   return data && data.length ? (
     <>
       <Swiper
-        style={{
-          // "--swiper-navigation-color": "#fff",
-        }}
+        style={
+          {
+            // "--swiper-navigation-color": "#fff",
+          }
+        }
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         navigation={true}
@@ -41,10 +42,10 @@ export default function SwiperGallery({ data = [] }) {
                   loader={gumletLoader}
                   layout="fill"
                   objectFit="cover"
-                  priority={idx==0?true:false}
-                  fetchpriority={idx==0?"true":"false"}
-                  data-priority={idx==0?`true`:`false`}
-                  data-gmlazy={idx==0?`false`:`true`}
+                  priority={idx == 0 ? true : false}
+                  fetchpriority={idx == 0 ? "true" : "false"}
+                  data-priority={idx == 0 ? `true` : `false`}
+                  data-gmlazy={idx == 0 ? `false` : `true`}
                   // className="rounded-lg  object-contain h-60 sm:h-96"
                   src={current.original}
                   // data-src={current.original}
@@ -73,32 +74,36 @@ export default function SwiperGallery({ data = [] }) {
         ))}
       </Swiper>
       <div className="py-6 sm:pb-0 bg-white overflow-hidden sm:overflow-auto relative">
-          <Swiper
-            onSwiper={setThumbsSwiper}
-            spaceBetween={10} 
-            slidesPerView={6}
-            freeMode={true}
-            watchSlidesProgress={true}
-            modules={[FreeMode, Navigation, Thumbs, A11y]}
-          >
-            {data.map((current, idx) => (
-              <SwiperSlide className="h-20 w-20 overflow-hidden relative border border-1 border-gray-100 rounded-lg flex justify-center" key={idx}>
-                <div className="rounded h-20 w-20 bg-white">
-                  <Image
-                    priority={idx==0?`true`:`false`}
-                    fetchpriority={idx==0?"true":"false"}
-                    data-priority={idx==0?`true`:`false`}
-                    data-gmlazy={idx==0?`false`:`true`}
-                    loader={gumletLoader}
-                    layout="fill"
-                    className="shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
-                    src={current.thumbnail}
-                    alt={`Gallery Image ${idx}`}
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          spaceBetween={10}
+          slidesPerView={6}
+          freeMode={true}
+          watchSlidesProgress={true}
+          modules={[FreeMode, Navigation, Thumbs, A11y]}
+        >
+          {data.map((current, idx) => (
+            <SwiperSlide
+              style={{ minWidth: "86px" }}
+              className="h-20 w-20 overflow-scroll relative border border-1 border-gray-100 rounded-lg justify-center"
+              key={idx}
+            >
+              <div className="rounded h-20 w-20 bg-white">
+                <Image
+                  priority={idx == 0 ? `true` : `false`}
+                  fetchpriority={idx == 0 ? "true" : "false"}
+                  data-priority={idx == 0 ? `true` : `false`}
+                  data-gmlazy={idx == 0 ? `false` : `true`}
+                  loader={gumletLoader}
+                  layout="fill"
+                  className="shine w-full h-full cursor-pointer bg-white object-cover rounded-lg"
+                  src={current.thumbnail}
+                  alt={`Gallery Image ${idx}`}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </>
   ) : null;

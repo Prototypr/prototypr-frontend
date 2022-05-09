@@ -21,7 +21,7 @@ export default function Layout({
       >
         {/* <Alert preview={preview} /> */}
         <main
-          className="pt-44 -mt-3 mx-auto"
+          className="pt-24 md:pt-36 -mt-3 mx-auto"
           style={{ maxWidth: padding == false ? "" : "1200px" }}
         >
           {children}
