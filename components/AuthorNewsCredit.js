@@ -15,6 +15,11 @@ export default function AuthorNewsCredit({
     //displayName firstName lastName avatar
     attributes = author.data.attributes;
   }
+  const avatar = 
+  attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+  attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+
   return (
     <>
       <div className="mb-6 py-2 flex md:mb-0 bg-white border-gray-300 block md:block rounded-lg">
@@ -26,11 +31,7 @@ export default function AuthorNewsCredit({
                   tabIndex={0}
                   layout="fill"
                   objectFit="cover"
-                  src={
-                    attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
-                    attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
-                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-                  }
+                  src={avatar}
                   className="rounded-full "
                   alt="Author profile picture"
                 />

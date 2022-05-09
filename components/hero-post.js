@@ -12,6 +12,11 @@ export default function HeroPost({
   slug,
   type
 }) {
+  const avatar = 
+  author.avatar?.data?author.avatar.data.url:
+  author.legacyAvatar ? author.legacyAvatar
+    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+
   return (
     <section>
       <div className="mb-8 md:mb-16">
@@ -31,11 +36,7 @@ export default function HeroPost({
         <div>
           <div className="text-lg leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: excerpt }}></div>
           <Avatar name={author.displayName?author.displayName:author.firstName?author.firstName:''} 
-          picture={
-            author.avatar?.data?author.avatar.data.url:
-            author.legacyAvatar ? author.legacyAvatar
-              :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-          } />
+          picture={avatar} />
         </div>
       </div>
     </section>

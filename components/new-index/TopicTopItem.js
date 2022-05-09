@@ -19,6 +19,11 @@ export default function TopicTopItem({ topic = {} }) {
   } = topic?.attributes;
   const tagArr = tags.data;
 
+  const avatar = 
+  author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+  author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
+    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+
 
   return (
     <div className="grid-cols-1 rounded-lg bg-white p-6 flex flex-col sm:flex-row cursor-pointer group">
@@ -68,11 +73,7 @@ export default function TopicTopItem({ topic = {} }) {
         ></div>
         <div className="flex items-center mt-5">
           <Author
-            avatar={
-              author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
-              author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
-                :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-            }
+            avatar={avatar}
             authorName={author?.data?.attributes?.name}
             author={author}
           />
