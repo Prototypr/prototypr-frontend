@@ -20,6 +20,14 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
     const onPageNumChange = (pageNum) => {
         router.push(`/posts/${tag}/page/${pageNum}`)
     }
+    if(tagName=='Interview'){
+        tagName="Interviews"
+    }else if(tagName=='UX'){
+        tagName="UX Design"
+    }else if(tagName=='UI'){
+        tagName = 'UI Design'
+    }
+
 
     return (
         <>
@@ -37,7 +45,9 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
               <title>Open design and tech stories for everyone to read</title>
             </Head>
             <Container>
-            <h2 className='font-bold topic-title tracking-wide color-title-1 text-center mt-8 mb-5 capitalize'>{tagName}</h2>
+            <h2 className='font-bold text-5xl md:text-6.5xl tracking-wide text-center mt-6 md:mt-10 md:my-8'>
+                {tagName}
+            </h2>            
             {first4Posts?.length>0  &&<Aspiring posts={first4Posts} showTitle={false} />}
             
             <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
