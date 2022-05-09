@@ -416,6 +416,24 @@ export const NavigationMenuDemo = ({
   const submenuTitle6 = intl.formatMessage({ id: "navbar.submenu1.title6" });
   const submenuDesc6 = intl.formatMessage({ id: "navbar.submenu1.desc6" });
 
+  const submenu2Title1 = intl.formatMessage({ id: "navbar.submenu2.title1" });
+  const submenu2Desc1 = intl.formatMessage({ id: "navbar.submenu2.desc1" });
+
+  const submenu2Title2 = intl.formatMessage({ id: "navbar.submenu2.title2" });
+  const submenu2Desc2 = intl.formatMessage({ id: "navbar.submenu2.desc2" });
+
+  const submenu2Title3 = intl.formatMessage({ id: "navbar.submenu2.title3" });
+  const submenu2Desc3 = intl.formatMessage({ id: "navbar.submenu2.desc3" });
+
+  const submenu2Title4 = intl.formatMessage({ id: "navbar.submenu2.title4" });
+  const submenu2Desc4 = intl.formatMessage({ id: "navbar.submenu2.desc4" });
+
+  const submenu2Title5 = intl.formatMessage({ id: "navbar.submenu2.title5" });
+  const submenu2Desc5 = intl.formatMessage({ id: "navbar.submenu2.desc5" });
+
+  const submenu2Title6 = intl.formatMessage({ id: "navbar.submenu2.title6" });
+  const submenu2Desc6 = intl.formatMessage({ id: "navbar.submenu2.desc6" });
+
   return (
     <NavigationMenu>
       <Link href="/">
@@ -493,7 +511,7 @@ export const NavigationMenuDemo = ({
                   {submenuDesc5}
                 </ContentListItem>
                 <ContentListItem
-                  href="/posts/interview/page/1"
+                  href="/posts/code/page/1"
                   title={submenuTitle6}
                 >
                   {submenuDesc6}
@@ -508,38 +526,38 @@ export const NavigationMenuDemo = ({
             </NavigationMenuTrigger>
             <NavigationMenuContent className="normal-case">
               <ContentList layout="two">
-                <ContentListItem title={submenuTitle1} href="/toolbox/page/1">
-                  {submenuDesc1}
+                <ContentListItem title={submenu2Title1} href="/toolbox/page/1">
+                  {submenu2Desc1}
                 </ContentListItem>
                 <ContentListItem
-                  title={submenuTitle2}
+                  title={submenu2Title2}
                   href="/toolbox/ux-tools/page/1"
                 >
-                  {submenuDesc2}
+                  {submenu2Desc2}
                 </ContentListItem>
                 <ContentListItem
-                  title={submenuTitle3}
+                  title={submenu2Title3}
                   href="/toolbox/augmented-reality-tools/page/1"
                 >
-                  {submenuDesc3}
+                  {submenu2Desc3}
                 </ContentListItem>
                 <ContentListItem
-                  title={submenuTitle4}
+                  title={submenu2Title4}
                   href="/prototyping/page/1"
                 >
-                  {submenuDesc4}
+                  {submenu2Desc4}
                 </ContentListItem>
                 <ContentListItem
                   title={submenuTitle5}
                   href="/toolbox/accessibility/page/1"
                 >
-                  {submenuDesc5}
+                  {submenu2Desc5}
                 </ContentListItem>
                 <ContentListItem
                   title={submenuTitle6}
                   href="/toolbox/conversational-design-tools/page/1"
                 >
-                  {submenuDesc6}
+                  {submenu2Desc6}
                 </ContentListItem>
               </ContentList>
             </NavigationMenuContent>
