@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="bg-accent-1 border-accent-2">
       <Container>
-        <div className="w-full max-w-screen-xl relative mx-auto py-12 px-6">
+        <div className="w-full max-w-screen-xl relative mx-auto py-16 px-6">
           <div className="flex flex-wrap">
             <div className="w-full md:w-6/12">
               <p className="text-xl font-semibold">
