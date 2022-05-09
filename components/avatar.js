@@ -4,7 +4,7 @@ export default function Avatar({ name, picture }) {
   const url = picture;
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center mt-8">
       <div className="w-12 h-12 relative mr-4">
         {url && (
           <Image
