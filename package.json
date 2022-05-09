@@ -50,6 +50,7 @@
     "react-moment": "^1.1.2",
     "react-router-dom": "^6.3.0",
     "react-timeago": "^4.4.0",
+    "sharp": "^0.30.4",
     "string-hash": "^1.1.3",
     "swiper": "^8.0.0",
     "swr": "^1.3.0",

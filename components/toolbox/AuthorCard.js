@@ -11,7 +11,7 @@ export default function AuthorCard({ author = {}, avatar='' }) {
     if(!username){
         username = (attributes.firstName ?attributes.firstName:'')+(attributes.lastName ?(' '+attributes.lastName):'')
     }
-    const avatar = attributes?.avatar?.data?.attributes?.avatar?.data?.attributes? attributes.avatar.data.attributes.url:
+    const pic = attributes?.avatar?.data?.attributes?.avatar?.data?.attributes? attributes.avatar.data.attributes.url:
     attributes?.legacyAvatar ? attributes.legacyAvatar
       :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
       
@@ -24,11 +24,11 @@ export default function AuthorCard({ author = {}, avatar='' }) {
                         <div className="relative mr-3">
                             <div className="w-12 h-12 rounded-full border border-1 overflow-hidden relative border-gray-100 shadow-sm">
                                 {
-                                    (attributes.avatar || attributes.legacyAvatar) && <Image 
+                                    (pic) && <Image 
                                     tabIndex={0}
                                     layout="fill"
                                     objectFit="cover"
-                                    src={avatar}
+                                    src={pic}
                                     className="rounded-full " 
                                     alt="Author profile picture"/>
                                 }
