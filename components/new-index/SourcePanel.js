@@ -1,43 +1,14 @@
 import { useState } from "react";
 import Image from "next/image";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import dynamic from "next/dynamic";
 import { useIntl, FormattedMessage } from 'react-intl';
-import SignupHorizontal from "../newsletter/SignupHorizontal";
+const SignupHorizontal = dynamic(() => import("../newsletter/SignupHorizontal"));
+
 export default function SourcePanel({desc, title}) {
   const intl = useIntl();
 
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
-  const [buttonText, setButtonText] = useState(intl.formatMessage({ id: "navbar.menu.title4"}));
-
-  const onSubmit = async (data) => {
-    setButtonText(intl.formatMessage({ id: "signup.button.submitting"}));
-
-    axios
-      .post(
-        "https://req.prototypr.io/https://emailoctopus.com/lists/c70b3a0c-1390-11eb-a3d0-06b4694bee2a/members/embedded/1.3/add",
-        {
-          field_0: data.emailRequired,
-        }
-      )
-      .then(function (response) {
-        console.log("success");
-        // var cookieDomain = process.env.customKey && { domain: ".prototypr.io" };
-        // jsCookie.set("prototypr_signupbar", "hide", cookieDomain);
-
-        if (response.data.success) {
-          setRegistered(true);
-          setError(false);
-          setButtonText("Subscribe");
-        }
-      })
-      .catch(function (error) {
-        setRegistered(false);
-        setError(true);
-        setButtonText("Subscribe");
-      });
-  };
 
   return (
     <section className="w-full mb-4 px-3 xl:px-0">
@@ -93,67 +64,5 @@ export default function SourcePanel({desc, title}) {
         </div>
       </div>
     </section>
-  );
-}
-
-function HookForm(props) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => props.onSubmit(data);
-  const intl = useIntl();
-  return (
-    <div>
-      <form
-        className="mt-7 relative h-16 md:w-10/12"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <label htmlFor="Email" className="sr-only	">
-          {intl.formatMessage({ id: "sourcepanel.form.label"})}
-        </label>
-        <input
-          id="Email"
-          name="email"
-          placeholder={intl.formatMessage({ id: "sourcepanel.form.placeholder"})}
-          {...register("emailRequired", {
-            required: true,
-            pattern: /^\S+@\S+$/i,
-          })}
-          style={{ boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.02)" }}
-          className="bg-gray-4 rounded-lg w-full h-full p-3 focus:outline-none text-base font-medium leading-6 text-neutrals-700 placeholder:text-neutrals-700"
-        />
-        <div className="hidden email-octopus-form-row-hp" aria-hidden="true">
-          {/* Do not remove this field, otherwise you risk bot sign-ups */}
-          <input
-            type="text"
-            name="hp1cc5fdf6-63b5-11ea-a3d0-06b4694bee2a"
-            tabIndex={-1}
-            autoComplete="nope"
-          />
-        </div>
-        <button className="absolute top-3 right-3 h-10 z-20 bg-blue-1 rounded-lg text-white text-base font-medium leading-6 flex items-center justify-center py-2 px-3 hover:opacity-70">
-          {props.buttonText}
-        </button>
-      </form>
-      <div className="px-1">
-        {errors.emailRequired && errors.emailRequired.type === "required" && (
-          <p className="text-pink-600 mt-2 text-sm text-left">
-            <FormattedMessage 
-              id="signup.input.validation"
-            />
-          </p>
-        )}
-        {errors.emailRequired && errors.emailRequired.type === "pattern" && (
-          <p className="text-pink-600 mt-2 text-sm text-left">
-            <FormattedMessage 
-              id="sourcepanel.form.errortip"
-            />
-          </p>
-        )}
-      </div>
-    </div>
   );
 }
