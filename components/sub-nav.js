@@ -452,11 +452,11 @@ export const NavigationMenuDemo = ({
           } transition transition-all duration-150 ease-in-out`}
         >
           <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
-            design
+            <FormattedMessage id="navbar.tagline.small.piece1" />
           </span>
           <br />
           <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
-            discovery
+            <FormattedMessage id="navbar.tagline.small.piece2" />
           </span>
         </p>
       </Link>

@@ -1,4 +1,9 @@
 const ES = {
+  "navbar.tagline.piece1": "Leer",
+  "navbar.tagline.piece2": "artículos de diseño",
+  "navbar.tagline.piece3": "gratis",
+  "navbar.tagline.small.piece1": "diseño",
+  "navbar.tagline.small.piece2": "abierto",
   "intro.title.half1": "Los mejores artículos de diseño, cada semana.",
   "intro.title.half2": "píxeles brillantes.",
   "intro.input.placeholder": "Introduzca su email",
@@ -91,7 +96,7 @@ const ES = {
     "Historias abiertas de diseño y tecnología para que todos puedan leer",
   "newsletter.title": "Reciber el boletín",
   "newsletter.issue": "Cuestiones anteriores",
-  "issue": "Asunto",
-  "issue.viewAll": "Ver todo"
+  issue: "Asunto",
+  "issue.viewAll": "Ver todo",
 };
 export default ES;
