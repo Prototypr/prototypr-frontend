@@ -5,7 +5,9 @@
     
     .wp-caption-text{margin-top:10px!important;}
 
-figure{margin-bottom:20px;}
+figure{
+      margin-bottom: 3.6rem;
+}
     color:#2D3748;
     font-size:1.14rem;
     font-weight: 400;
@@ -24,23 +26,23 @@ figure{margin-bottom:20px;}
     h1{
         // font-family:'Noto Serif';
         font-weight: 600;
-        margin-top: 2.5rem;
-        margin-bottom: 2.5rem;
-        font-size: 1.875rem;
+        margin-top: 3.2rem;
+        margin-bottom: 2.6rem;
+        font-size: 2rem;
         font-weight: 500;
     }
     h2{
-        margin-top: 2rem;
+        margin-top: 2.8rem;
         margin-bottom: 1.5rem;
-        font-size: 1.5rem!important;
+        font-size: 1.6rem!important;
         padding-bottom: 0!important;
         font-weight: 500;
         color: #1a202c;
     }
     h3{
-        margin-top: 2rem;
+        margin-top: 2.6rem;
         margin-bottom: 1.25rem;
-        font-size: 1.28rem;
+        font-size: 1.5rem;
         font-weight: 500;
         color: #1a202c;
     }
@@ -52,12 +54,14 @@ figure{margin-bottom:20px;}
         color: #1a202c;
     }
     blockquote {
-        background: #f9f9f9;
-        border-left: 3px solid #ccc;
+        background: #f2f5f7;
+        border-top-right-radius:6px;
+        border-bottom-right-radius:6px;
+        border-left: 3px solid #1d3d7d;
         margin: 1.5em 10px;
         padding: 0.5em 10px;
         quotes: "\201C" "\201D" "\2018" "\2019";
-        color: #4a5568;
+        color: #1d3d7d;
         margin-bottom: 1.25rem;
         p {
             display: inline;
@@ -69,7 +73,7 @@ figure{margin-bottom:20px;}
         }
     }
     blockquote:before {
-        color: #ccc;
+        color: #1d3d7d;
         content: open-quote;
         font-size: 4em;
         line-height: .1em;
@@ -110,10 +114,17 @@ figure{margin-bottom:20px;}
    figure>img{
        margin-bottom:0px!important;
    }
+   figure>img.w-full, figure.size-large>img{
+       width:46rem;
+   }
    blockquote.wp-block-quote, figure.wp-block-image.size-large.full-size, figure.wp-block-image.size-full{
        max-width:46rem;
        p{
            max-width: 46rem;
+        //    font-style:normal;
+           font-size:1.75rem;
+           line-height:2.5rem;
+        //    font-family:"Noto Sans";
        }
    }
    .table-display {
@@ -126,7 +137,6 @@ figure{margin-bottom:20px;}
   color: #718096;
   margin-top: -0.5rem;
   text-align: center;
-  margin-bottom: 4rem;
   }
   .p-3{
     padding:0.75rem;
