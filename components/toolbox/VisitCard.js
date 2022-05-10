@@ -14,16 +14,16 @@ export default function VisitCard({
         <div className="text-center lg:text-left lg:w-4/6 pr-3 order-last lg:order-first">
           <h1
             dangerouslySetInnerHTML={{ __html: title }}
-            className="text-2xl tracking-tight lg:text-lg mb-2 lg:mb-1 leading-tight font-bold text-gray-900 my-auto"
+            className="text-2xl lg:text-lg tracking-tight mb-2 lg:mb-3 lg:mb-1 lg:leading-snug font-bold text-gray-900 my-auto"
           ></h1>
           {tags.data &&
             tags.data.length &&
             tags.data.slice(0, 2).map((tag, index) => {
               return (
                 <a
-                key ={index}
+                  key={index}
                   rel="noreferrer"
-                  className="cursor-default inline-block mr-1 md:mr-0 text-xs bg-gray-200 p-1 px-2 rounded-lg mt-1 uppercase"
+                  className="cursor-default inline-block mr-2 lg:mr-0 text-xs bg-gray-200 p-1 px-2 rounded-lg mt-1 uppercase"
                   // href={`${tag.attributes.slug}`}
                   // target="_blank"
                 >
