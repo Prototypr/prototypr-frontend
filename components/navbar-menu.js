@@ -242,6 +242,20 @@ const NextLink = ({ children, ...props }) => {
     </Link>
   );
 };
+const NextButton = ({ children, ...props }) => {
+  // const resolved = useResolvedPath(href);
+  // const match = useMatch({ path: resolved.pathname, end: true });
+  // const isActive = Boolean(match);
+  return (
+    <Link href={props.href} passHref>
+      <StyledButton asChild>
+        <a style={props.css} {...props}>
+          {children}
+        </a>
+      </StyledButton>
+    </Link>
+  );
+};
 
 // Exports
 const NavigationMenu = StyledMenu;
@@ -249,7 +263,7 @@ const NavigationMenuList = StyledList;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 const NavigationMenuTrigger = StyledTriggerWithCaret;
 const NavigationMenuLink = NextLink;
-const NavigationMenuButton = StyledButton;
+const NavigationMenuButton = NextButton;
 const NavigationMenuContent = StyledContent;
 const NavigationMenuViewport = StyledViewport;
 const NavigationMenuIndicator = StyledIndicatorWithArrow;

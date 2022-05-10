@@ -3,21 +3,16 @@ import dynamic from "next/dynamic";
 import { styled, keyframes } from "@stitches/react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
-import {
-  indigo,
-  mauve,
-  red,
-  pink,
-  gray,
-} from "@radix-ui/colors";
+import { indigo, mauve, red, pink, gray } from "@radix-ui/colors";
 import Link from "next/link";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 const ProfileBadge = dynamic(() => import("./ProfileBadge"));
 
-
 const Gravatar = dynamic(() => import("react-gravatar"), { ssr: false });
-const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), { ssr: true });
+const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
+  ssr: true,
+});
 
 import { FormattedMessage, useIntl } from "react-intl";
 const enterFromRight = keyframes({
@@ -63,7 +58,7 @@ const fadeOut = keyframes({
 const StyledMenu = styled(NavigationMenuPrimitive.Root, {
   position: "relative",
   display: "flex",
-  flexDirection:'column',
+  flexDirection: "column",
   justifyContent: "center",
   width: "auto",
   zIndex: 1,
@@ -73,7 +68,7 @@ const StyledList = styled(NavigationMenuPrimitive.List, {
   all: "unset",
   display: "flex",
   justifyContent: "center",
-  flexDirection:'column',
+  flexDirection: "column",
   // backgroundColor: 'white',
   padding: 4,
   borderRadius: 6,
@@ -241,15 +236,47 @@ const NextLink = ({ children, ...props }) => {
   // const resolved = useResolvedPath(href);
   // const match = useMatch({ path: resolved.pathname, end: true });
   // const isActive = Boolean(match);
-  const router = useRouter()
-  const isActive = Boolean(router.asPath==props.href);
+  const router = useRouter();
+  const isActive = Boolean(router.asPath == props.href);
   return (
     <Link href={props.href} passHref>
-        <StyledLink asChild>
-          <a style={props.css} className={isActive?'bg-blue-50 border border-blue-100 border-1 text-blue-700':''} {...props}>
+      <StyledLink asChild>
+        <a
+          style={props.css}
+          className={
+            isActive
+              ? "bg-blue-50 border border-blue-100 border-1 text-blue-700"
+              : ""
+          }
+          {...props}
+        >
           {children}
-          </a>
-        </StyledLink>
+        </a>
+      </StyledLink>
+    </Link>
+  );
+};
+const NextButton = ({ children, ...props }) => {
+  // const resolved = useResolvedPath(href);
+  // const match = useMatch({ path: resolved.pathname, end: true });
+  // const isActive = Boolean(match);
+  const router = useRouter();
+  const isActive = Boolean(router.asPath == props.href);
+  return (
+    <Link href={props.href} passHref>
+      <StyledButton asChild>
+        <a
+          style={props.css}
+          className={
+            isActive
+              ? "bg-blue-50 border border-blue-100 border-1 text-blue-700"
+              : ""
+          }
+          {...props}
+        >
+          {children}
+        </a>
+      </StyledButton>
     </Link>
   );
 };
@@ -260,7 +287,8 @@ const NavigationMenuList = StyledList;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 const NavigationMenuTrigger = StyledTriggerWithCaret;
 const NavigationMenuLink = NextLink;
-const NavigationMenuButton = StyledButton;
+// const NavigationMenuButton = StyledButton;
+const NavigationMenuButton = NextButton;
 const NavigationMenuContent = StyledContent;
 const NavigationMenuViewport = StyledViewport;
 const NavigationMenuIndicator = StyledIndicatorWithArrow;
@@ -352,7 +380,6 @@ const ContentListItemCallout = React.forwardRef(
           padding: 25,
         }}
       >
-      
         <LinkTitle
           css={{
             fontSize: 18,
@@ -389,38 +416,36 @@ const ViewportPosition = styled("div", {
   perspective: "2000px",
 });
 
-export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInCookie }) => {
+export const NavigationMenuDemo = ({
+  activeNav,
+  user,
+  userLoading,
+  userLoggedInCookie,
+}) => {
   const intl = useIntl();
-  const title3 = intl.formatMessage({ id: "navbar.menu.title3" })
-
+  const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
 
   return (
     <NavigationMenu>
       <NavigationMenuList>
-      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+        <NavigationMenuItem className="block flex py-2 flex-col justify-center">
           <NavigationMenuLink href="/posts/accessibility">
             Accessibility
           </NavigationMenuLink>
         </NavigationMenuItem>
-      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+        <NavigationMenuItem className="block flex py-2 flex-col justify-center">
           <NavigationMenuLink href="/posts/interview">
             Interviews
           </NavigationMenuLink>
         </NavigationMenuItem>
-      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
-          <NavigationMenuLink href="/posts/ux">
-            UX Design
-          </NavigationMenuLink>
+        <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+          <NavigationMenuLink href="/posts/ux">UX Design</NavigationMenuLink>
         </NavigationMenuItem>
-      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
-          <NavigationMenuLink href="/posts/ui">
-            UI Design
-          </NavigationMenuLink>
+        <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+          <NavigationMenuLink href="/posts/ui">UI Design</NavigationMenuLink>
         </NavigationMenuItem>
-      <NavigationMenuItem className="block flex py-2 flex-col justify-center">
-          <NavigationMenuLink href="/toolbox">
-            Toolbox
-          </NavigationMenuLink>
+        <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+          <NavigationMenuLink href="/toolbox">Toolbox</NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem className="block flex py-2 flex-col justify-center">
@@ -429,24 +454,30 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInC
           </NavigationMenuLink>
         </NavigationMenuItem>
 
-        <NavigationMenuItem  className="py-2 flex">
-          {(user && user.isLoggedIn) ? (
-          <div className="ml-2">
-            <Link href="/account">
-              {user.avatar ? (
-                <ProfileBadge icon={ <img
-                  className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
-                  src={user.avatar.url}
-                />}/>
-               
-              ) : (
-                <ProfileBadge icon={ <Gravatar
-                  className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
-                  email={user.email}
-                />}/>
-                
-              )}
-            </Link>
+        <NavigationMenuItem className="py-2 flex">
+          {user && user.isLoggedIn ? (
+            <div className="ml-2">
+              <Link href="/account">
+                {user.avatar ? (
+                  <ProfileBadge
+                    icon={
+                      <img
+                        className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
+                        src={user.avatar.url}
+                      />
+                    }
+                  />
+                ) : (
+                  <ProfileBadge
+                    icon={
+                      <Gravatar
+                        className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
+                        email={user.email}
+                      />
+                    }
+                  />
+                )}
+              </Link>
             </div>
           ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
@@ -456,12 +487,11 @@ export const NavigationMenuDemo = ({ activeNav, user, userLoading, userLoggedInC
             </NavigationMenuButton>
           )}
           <div className="ml-3">
-           <LocaleSwitcher />
+            <LocaleSwitcher />
           </div>
         </NavigationMenuItem>
 
         <NavigationMenuIndicator />
-        
       </NavigationMenuList>
 
       <ViewportPosition className="ml-0 sm:-ml-12">
