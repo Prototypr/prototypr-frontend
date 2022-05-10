@@ -114,6 +114,9 @@ figure{
     // margin-left:2rem;
     margin-top:1.25rem;
    }
+   li>p, ol>p{
+       display:inline;
+   }
    .fig-img{
        max-width: 100%!important;
    }
