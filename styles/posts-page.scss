@@ -11,8 +11,11 @@ figure{
     color:#2D3748;
     font-size:1.14rem;
     font-weight: 400;
-    p,li,ol, ul{
+    h1,h2,h3,h4,h5{
         font-family:'Noto Serif', serif;
+    }
+    p,li,ol, ul{
+        // font-family:'Noto Serif', serif;
             line-height:30px;
             font-size:18px;
     }
