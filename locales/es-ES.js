@@ -1,5 +1,5 @@
 const ES = {
-  "navbar.tagline.piece1": "Disen",
+  "navbar.tagline.piece1": "Leer",
   "navbar.tagline.piece2": "artículos de diseño",
   "navbar.tagline.piece3": "gratis",
   "navbar.tagline.small.piece1": "diseño",
