@@ -107,6 +107,9 @@ figure{margin-bottom:20px;}
    .fig-img{
        max-width: 100%!important;
    }
+   figure>img{
+       margin-bottom:0px!important;
+   }
    blockquote.wp-block-quote, figure.wp-block-image.size-large.full-size, figure.wp-block-image.size-full{
        max-width:46rem;
        p{
@@ -118,12 +121,12 @@ figure{margin-bottom:20px;}
     width: 100%;
   }
   figcaption{
-  margin-top:10px!important;
+  margin-top:16px!important;
   font-size: .875rem;
   color: #718096;
   margin-top: -0.5rem;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 4rem;
   }
   .p-3{
     padding:0.75rem;
