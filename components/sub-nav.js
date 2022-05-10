@@ -437,29 +437,28 @@ export const NavigationMenuDemo = ({
   return (
     <NavigationMenu>
       <Link href="/">
-        <div className="cursor-pointer flex">
-          <img
-            className={`my-auto h-8 ${
-              collapse ? "w-0 opacity-0" : "w-8 opacity-1"
-            } transition transition-all duration-300 ease-in-out`}
-            src="/static/images/logo-small.svg"
-            alt="Prototypr Logo"
-          />
-          <p
-            className={`font-noto-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
-              collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"
-            } transition transition-all duration-150 ease-in-out`}
-          >
-            <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
-              design
-              <br />
-              discovery
-              {/* <FormattedMessage 
-                    id="intro.title.half2"
-                    /> */}
-            </span>
-          </p>
-        </div>
+        <img
+          className={`cursor-pointer my-auto h-8 ${
+            collapse ? "w-0 opacity-0" : "w-8 opacity-1"
+          } transition transition-all duration-300 ease-in-out`}
+          src="/static/images/logo-small.svg"
+          alt="Prototypr Logo"
+        />
+      </Link>
+      <Link href="/">
+        <p
+          className={`cursor-pointer font-noto-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
+            collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"
+          } transition transition-all duration-150 ease-in-out`}
+        >
+          <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
+            design
+          </span>
+          <br />
+          <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
+            discovery
+          </span>
+        </p>
       </Link>
       <div
         className={`${
