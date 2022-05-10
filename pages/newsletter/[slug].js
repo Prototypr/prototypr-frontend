@@ -53,7 +53,7 @@ export default function Post({ post, morePosts, preview }) {
             </article>
             <SectionSeparator />
             <h2 className="text-4xl -mt-12 mb-12 font-semibold"> {intl.formatMessage({ id: "newsletter.issue" })}</h2>
-            {morePosts.length > 0 && <MoreStories posts={morePosts} route={'newsletter'} />}
+            {morePosts.length > 0 && <MoreStories posts={morePosts} type="newsletter" route={'newsletter'} />}
           </>
         )}
       </Container>
