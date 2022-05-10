@@ -158,11 +158,11 @@ export default function Navbar({ activeNav }) {
                     : "text-base"
                 } transition transition-all duration-200 ease-in-out `}
               >
-                A{" "}
+                <FormattedMessage id="navbar.tagline.piece1" />{" "}
                 <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
-                  design discovery
+                  <FormattedMessage id="navbar.tagline.piece2" />
                 </span>{" "}
-                publication platform.
+                <FormattedMessage id="navbar.tagline.piece3" />
               </p>
             </div>
           </div>
