@@ -468,19 +468,23 @@ export const NavigationMenuDemo = ({
         <NavigationMenuList>
           <NavigationMenuItem className="hidden -ml-4 text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
             <NavigationMenuLink href="/posts/accessibility">
-              Accessibility
+              {submenuTitle4}
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
             <NavigationMenuLink href="/posts/interview">
-              Interviews
+              {submenuTitle3}
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-            <NavigationMenuLink href="/posts/ux">UX Design</NavigationMenuLink>
+            <NavigationMenuLink href="/posts/ux">
+              {submenuTitle2}
+            </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-            <NavigationMenuLink href="/posts/ui">UI Design</NavigationMenuLink>
+            <NavigationMenuLink href="/posts/ui">
+              {submenuTitle5}
+            </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem className="flex text-xs md:text-sm xl:mr-2.5 flex-col justify-center">
             {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
