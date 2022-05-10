@@ -32,7 +32,7 @@ export default function SourcePanel({ desc, title }) {
           >
             {registered == false ? (
               <>
-                <h3 className="font-semibold text-5xl md:text-s6xl text-gray-1">
+                <h3 className="font-semibold text-5xl lg:text-s6xl text-gray-1">
                   {title}
                 </h3>
                 <p className="font-base text-lg leading-normal">{desc}</p>
