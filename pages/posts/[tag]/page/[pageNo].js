@@ -116,7 +116,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
           pageNo,
           morePosts,
           heroPost
-        },
+        },revalidate: 20,
       }
     
     // const interviews =

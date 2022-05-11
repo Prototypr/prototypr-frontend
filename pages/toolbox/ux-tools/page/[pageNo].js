@@ -110,7 +110,7 @@ export async function getStaticProps({ preview = null, params }) {
       allPosts: allPosts.data,
       preview,
       pagination,
-    },
+    },revalidate: 20,
   };
 }
 

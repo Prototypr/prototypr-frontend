@@ -98,7 +98,7 @@ export async function getStaticProps({ preview = null, params}) {
     return {
         props: {
             allPosts: allPosts.data, preview, pagination,tag
-        },
+        },revalidate: 20,
     }
   }
 

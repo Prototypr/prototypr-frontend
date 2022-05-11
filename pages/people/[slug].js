@@ -357,6 +357,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       allPosts: allPosts,
       gradient:grad
     },
+    revalidate: 20,
   };
 }
 
