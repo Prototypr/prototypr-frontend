@@ -38,6 +38,10 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
         author.data.attributes.legacyAvatar;
   }
 
+  const tagName =
+    tagArr && tagArr.length ? tagArr[0].attributes.name : "design";
+  const tagSlug = tagArr && tagArr.length ? tagArr[0].attributes.slug : "";
+
   return (
     <div className="pb-10 px-3 xl:px-0">
       {header && (
@@ -78,12 +82,9 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                 <div className="mb-3">
                   <ul className="flex flex-wrap text-xs font-medium -m-1">
                     <li className="m-1">
-                      <Link href={`/post/${slug}`}>
-                        <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-600 mr-2">
-                          #{" "}
-                          {tagArr && tagArr.length
-                            ? tagArr[0].attributes.slug
-                            : "design"}
+                      <Link href={`/posts/${tagSlug}`}>
+                        <a className="font-base hover:cursor-pointer hover:underline text-sm leading-6 tracking-wide uppercase text-gray-600 mr-2">
+                          # {tagName ? tagName : "design"}
                         </a>
                       </Link>
                     </li>
