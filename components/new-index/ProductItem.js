@@ -18,8 +18,7 @@ export default function ProductItem({ post = {} }) {
   } = post?.attributes;
   const tagArr = tags.data;
 
-  const authorImage = author?.data?.attributes?.avatar?.data?.attributes?.avatar
-    ?.data?.attributes
+  const authorImage = author?.data?.attributes?.avatar?.data?.attributes?.url
     ? author.data.attributes.avatar.data.attributes.url
     : author?.data?.attributes?.legacyAvatar
     ? author.data.attributes.legacyAvatar

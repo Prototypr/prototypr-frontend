@@ -15,13 +15,12 @@ export default function EditorPick({ post = {}, showTitle = true }) {
   const tagArr = tags.data;
   return (
     <section className="pb-10 px-3 xl:px-0 mt-2">
-      {
-        showTitle &&  
-      <h3 className="text-4xl text-title-1 font-bold leading-6 tracking-wide mb-9">
-        Editor’s picks
-      </h3>
-      }
-     
+      {showTitle && (
+        <h3 className="text-4xl text-title-1 font-bold leading-6 tracking-wide mb-9">
+          Editor’s picks
+        </h3>
+      )}
+
       <div className="rounded-lg bg-white w-full p-10 flex">
         <div className="flex-1">
           <Image
@@ -29,7 +28,13 @@ export default function EditorPick({ post = {}, showTitle = true }) {
             height={430}
             className="object-cover"
             alt="img"
-            src={featuredImage?.data?.attributes?.url ? featuredImage.data.attributes.url:legacyFeaturedImage?.mediaItemUrl?legacyFeaturedImage?.mediaItemUrl :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}
+            src={
+              featuredImage?.data?.attributes?.url
+                ? featuredImage.data.attributes.url
+                : legacyFeaturedImage?.mediaItemUrl
+                ? legacyFeaturedImage?.mediaItemUrl
+                : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+            }
           />
         </div>
         <div className="w-9/20 ml-10">
@@ -51,9 +56,11 @@ export default function EditorPick({ post = {}, showTitle = true }) {
               className="w-11 h-11 rounded-full bg-contain bg-no-repeat bg-center"
               style={{
                 backgroundImage: `url(${
-                  author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
-                  author?.data?.attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
-                    :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                  author?.data?.attributes?.avatar?.data?.attributes?.url
+                    ? author.data.attributes.avatar.data.attributes.url
+                    : author?.data?.attributes?.legacyAvatar
+                    ? author.data.attributes.legacyAvatar
+                    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
                 })`,
               }}
             ></div>
