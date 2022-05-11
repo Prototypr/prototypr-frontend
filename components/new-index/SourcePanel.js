@@ -16,12 +16,12 @@ export default function SourcePanel({ desc, title }) {
     <section className="w-full mb-4 px-3 xl:px-0 pb-8 md:py-0">
       <div className="bg-white relative w-full h-auto md:h-100 flex flex-col md:flex-row relative rounded-lg">
         <figure className="relative h-56 md:absolute left-0 relative w-full md:h-full mb-3 sm:mb-0 mr-6 lg:mr-0 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
-          <div className="absolute bottom-0 left-0 w-full md:w-2/3 h-full ml-8 sm:ml-0 md:ml-8 object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out">
+          <div className="absolute bottom-0 left-0 w-full md:w-2/3 h-full -ml-8 sm:ml-0 md:-ml-24 object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out">
             <Image
               objectFit="contain"
               className="rounded-lg contrast-115"
               layout="fill"
-              src={"/static/images/source-bg.png"}
+              src={"/static/images/robot-banner.svg"}
             />
           </div>
         </figure>
