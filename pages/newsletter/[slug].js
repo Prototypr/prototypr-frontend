@@ -73,6 +73,7 @@ export async function getStaticProps({ params, preview = null, postType="newslet
       },
       morePosts: data?.morePosts.data,
     },
+    revalidate: 20
   }
 }
 

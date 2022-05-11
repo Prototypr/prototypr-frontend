@@ -117,7 +117,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       preview,
       pagination,
       tag,
-    },
+    },revalidate: 20,
   };
 }
 

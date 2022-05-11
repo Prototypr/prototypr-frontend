@@ -105,6 +105,7 @@ export async function getStaticProps({ params, preview = null, locale}) {
       combinedRelatedPosts:combinedRelatedPosts.data,
       relatedPosts:data?.relatedPosts?.data
     },
+    revalidate: 20,
   }
 }
 
