@@ -19,8 +19,7 @@ export default function TopicTopItem({ topic = {} }) {
   } = topic?.attributes;
   const tagArr = tags.data;
 
-  const avatar = author?.data?.attributes?.avatar?.data?.attributes?.avatar
-    ?.data?.attributes
+  const avatar = author?.data?.attributes?.avatar?.data?.attributes?.url
     ? author.data.attributes.avatar.data.attributes.url
     : author?.data?.attributes?.legacyAvatar
     ? author.data.attributes.legacyAvatar

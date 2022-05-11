@@ -16,7 +16,7 @@ export default function AuthorNewsCredit({
     attributes = author.data.attributes;
   }
   const avatar = 
-  attributes?.avatar?.data?.attributes?.avatar?.data?.attributes?author.data.attributes.avatar.data.attributes.url:
+  attributes?.avatar?.data?.attributes?.url?author.data.attributes.avatar.data.attributes.url:
   attributes?.legacyAvatar ? author.data.attributes.legacyAvatar
     :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
 

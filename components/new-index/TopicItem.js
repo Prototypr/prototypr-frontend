@@ -53,8 +53,7 @@ export default function TopicItem({ topic = {} }) {
         <div className="flex items-center mt-4">
           <Author
             avatar={
-              author?.data?.attributes?.avatar?.data?.attributes?.avatar?.data
-                ?.attributes
+              author?.data?.attributes?.avatar?.data?.attributes?.url
                 ? author.data.attributes.avatar.data.attributes.url
                 : author?.data?.attributes?.legacyAvatar
                 ? author.data.attributes.legacyAvatar

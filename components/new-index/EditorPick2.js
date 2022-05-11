@@ -32,8 +32,7 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
     author?.data?.attributes?.legacyAvatar ||
     author?.data?.attributes?.avatar
   ) {
-    authorImage = author?.data?.attributes?.avatar?.data?.attributes?.avatar
-      ?.data?.attributes
+    authorImage = author?.data?.attributes?.avatar?.data?.attributes?.url
       ? author.data.attributes.avatar.data.attributes.url
       : author?.data?.attributes?.legacyAvatar &&
         author.data.attributes.legacyAvatar;
