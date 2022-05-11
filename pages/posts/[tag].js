@@ -4,7 +4,6 @@ import Container from '@/components/container'
 const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
-import Head from 'next/head'
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
