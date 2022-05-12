@@ -94,14 +94,25 @@ export default function Index() {
             ) : (
               user &&
               user?.isLoggedIn && (
-                <div className="flex flex-col w-[285px]">
+                // <div className="flex flex-col w-[285px]">
+                <div className="flex flex-col  w-[585px] ">
                   <h2 className="text-lg text-gray-800 font-bold text-center">
-                    You're on the waitlist!
+                    Welcome, early adopter!
                   </h2>
-                  <p className="text-sm text-gray-600 text-center mt-3 mb-4">
-                    Let us know more about you by filling out your profile
-                    information, and we'll be in touch soon!
+                  {/* <p className="text-gray-600 mt-3">
+                    Hi {user.name},
+                  </p> */}
+                  {/* <p className="text-gray-600 mt-3">
+                    Thanks for joining as a writer, and welcome to the new Prototypr.
+                    </p> */}
+                    <p className="text-gray-600 mt-3"> 
+                    You're among the first joining our new Open Source web design publication, which is being built to boost an <span className="font-bold">open</span>, <span className="font-bold">fair</span>, and <span className="font-bold">inclusive</span> web through a new browser technology called '<a target="_blank" className="text-blue-600 cursor-pointer hover:underline" href="https://prototypr.io/post/imagining-an-ad-free-internet-web-monetization-for-designers/">Web Monetization</a>' – yes, a solution to paywalls and intrusive ads.
                   </p>
+                  <ul className="list-disc pl-8 text-gray-600 mt-3">
+                    <li className="my-2"><span className="font-semibold">Accessible and Inclusive</span>: No more paywalls or subscriptions. Built for different cultures and abilities.</li>
+                    <li className="my-2"><span className="font-semibold">Privacy-first</span>: No to tracking or targeted ads, you control your data.</li>
+                    <li className="my-2"><span className="font-semibold">Open Source</span>: The code for the Prototypr platform will be published under MIT Open License for anyone to remix, learn from, and copy.</li>
+                  </ul>
                   {/* <Link href="/account" passHref prefetch={false}> */}
                   <a className="block mx-auto" href="/account" passHref prefetch={false}>
                     <Button as="a" color="primary" className="text-sm">

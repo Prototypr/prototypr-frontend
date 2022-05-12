@@ -7,6 +7,7 @@ import KoFiButton from "@/components/people/KoFiButton";
 import PostTitle from '@/components/post-title'
 import Image from "next/image";
 import { transformPostList } from "@/lib/locale/transformLocale";
+import ErrorPage from "next/error";
 
 import { getPostsByPageAndAuthor } from '@/lib/api'
 import {gradient,getTwitterHandle, getKofiName, getDribbbleHandle, getGithubHandle} from "@/lib/profile-page/profile-page.js"
@@ -24,6 +25,11 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
   const onPageNumChange = (pageNum) => {
       router.push(`/people/${slug}/page/${pageNum}`)
   }
+
+  if (!router.isFallback) {
+    return <ErrorPage statusCode={404} />;
+  }
+
 
   // avatar?.data?.attributes?.avatar?.data?.attributes
   return (
@@ -309,36 +315,46 @@ export async function getStaticProps({ preview = null, params, locale }) {
     sort = ["esES:desc","featured:desc","tier:asc","date:desc"]
   }
 
+  /**
+   * if a user has not made a post, they will not get a page 
+   * this was by accident, but it works well against bots - they can't 
+   * create a profile for backlinks, as you need a published article to
+   * have a profile page
+   */
   let allPosts = (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug], sort)) || []
 
   const pagination = allPosts.meta.pagination
   let author = allPosts.data.length && allPosts.data[0] ? allPosts.data[0].attributes.author: {}
-  author = author.data.attributes
-  const grad = gradient(
-                  author.name
-                    ? author.name
-                    : author.displayName
-                    ? author.displayName
-                    : "",
-                  "horizontal"
-                );
-    
-  const kofi = getKofiName(author.kofi)
-  const github = getGithubHandle(author.github)
-  const twitter = getTwitterHandle(author.twitter)
-  let authorUrl=''
-  if(author.url){
-    authorUrl = author.url.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "")
+  author = author?.data?.attributes?author?.data?.attributes:null
+  
+  let grad, kofi, github, twitter, authorUrl = '' 
+  let skills = []
+
+  if(author){
+
+    grad = gradient(
+                    author.name
+                      ? author.name
+                      : author.displayName
+                      ? author.displayName
+                      : "",
+                    "horizontal"
+                  );
+    kofi = getKofiName(author.kofi)
+    github = getGithubHandle(author.github)
+    twitter = getTwitterHandle(author.twitter)
+    if(author.url){
+      authorUrl = author.url.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "")
+    }
+    if (author.skills && author.skills.indexOf(",") > -1) {
+      skills = author.skills.split(",");
+    } else if(author.skills){
+      //trin string
+      var skill = author.skills.substring(0, 22);
+      skills.push(skill);
+    }
   }
                           
-  let skills = []
-  if (author.skills && author.skills.indexOf(",") > -1) {
-    skills = author.skills.split(",");
-  } else if(author.skills){
-    //trin string
-    var skill = author.skills.substring(0, 22);
-    skills.push(skill);
-  }
 
   allPosts = transformPostList(allPosts.data, locale)
   
@@ -346,16 +362,16 @@ export async function getStaticProps({ preview = null, params, locale }) {
     props: {
       author: author,
       slug,
-      kofi,
-      github,
-      twitter,
+      kofi:kofi?kofi:'',
+      github:github?github:'',
+      twitter:twitter?twitter:'',
       skills,
       authorUrl,
       pageNo,
       preview,
       pagination,
       allPosts: allPosts,
-      gradient:grad
+      gradient:grad?grad:''
     },
     revalidate: 20,
   };

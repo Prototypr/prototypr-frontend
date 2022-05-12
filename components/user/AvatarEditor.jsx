@@ -49,7 +49,7 @@ const AvatarEditor = () => {
         return false
     }
 
-    const img = editor.getImageScaledToCanvas().toBlob(
+    const img = editor.getImage().toBlob(
        async (blob) => {
    
           const file = new File([blob], `profilePicture.png`, {
