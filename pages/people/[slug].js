@@ -26,7 +26,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
       router.push(`/people/${slug}/page/${pageNum}`)
   }
 
-  if (!router.isFallback) {
+  if (router.isFallback || !author) {
     return <ErrorPage statusCode={404} />;
   }
 
@@ -371,9 +371,10 @@ export async function getStaticProps({ preview = null, params, locale }) {
       preview,
       pagination,
       allPosts: allPosts,
-      gradient:grad?grad:''
+      gradient:grad?grad:'',
     },
     revalidate: 20,
+    
   };
 }
 
@@ -397,6 +398,6 @@ export async function getStaticPaths({locale}) {
   }
   return {
     paths: pageCountArr || [],
-    fallback: true,
+    fallback: 'blocking',
   };
 }

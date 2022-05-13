@@ -1,7 +1,7 @@
 const EN = {
   "navbar.tagline.piece1": "A",
   "navbar.tagline.piece2": "design discovery",
-  "navbar.tagline.piece3": "publication platform",
+  "navbar.tagline.piece3": "universe",
   "navbar.tagline.small.piece1": "design",
   "navbar.tagline.small.piece2": "discovery",
   "intro.title.half1": "Top design articles, every week.",

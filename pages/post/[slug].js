@@ -116,6 +116,6 @@ export async function getStaticPaths({locales}) {
     paths: allPosts && allPosts.data?.map((post) =>{ 
       // console.log(post.attributes.slug)
       return `/post/${post.attributes.slug}`}) || [],
-    fallback: true,
+    fallback: 'blocking',
   }
 }
