@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import {useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import "@/styles/index.scss";
 import { SessionProvider } from "next-auth/react";
 import "@/styles/toolStyles.css";

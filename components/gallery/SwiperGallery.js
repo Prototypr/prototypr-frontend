@@ -45,7 +45,6 @@ export default function SwiperGallery({ data = [] }) {
                   sizes={"(max-width: 300px) 100vw, 600px"}
                 />
               </div>
-            ) 
           </SwiperSlide>
         ))}
       </Swiper>
