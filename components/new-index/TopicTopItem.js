@@ -1,23 +1,19 @@
 import Author from "./Author";
 import Image from "next/image";
 import Link from "next/link";
-import { useIntl } from "react-intl";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
 export default function TopicTopItem({ topic = {} }) {
-  const intl = useIntl();
-  const locale = intl.locale ? intl.locale : "en-US";
   const {
     title = "",
     excerpt,
     slug,
-    date,
     tags,
     legacyFeaturedImage = null,
     featuredImage = null,
     author = null,
-  } = topic?.attributes;
-  const tagArr = tags.data;
+  } = topic?.attributes?topic.attributes:topic;
+  const tagArr = tags?.data;
 
   const avatar = author?.data?.attributes?.avatar?.data?.attributes?.url
     ? author.data.attributes.avatar.data.attributes.url

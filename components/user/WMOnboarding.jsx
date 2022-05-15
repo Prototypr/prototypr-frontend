@@ -1,7 +1,10 @@
 import { Wizard, Steps, Step } from 'react-albus';
 import { Line } from 'rc-progress';
+import { useRouter } from 'next/router'
 
 export default function Alert({ preview }) {
+  const router = useRouter()
+
   return (
     <Wizard 
     basename='/sign-in'

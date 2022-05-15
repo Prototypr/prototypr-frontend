@@ -13,7 +13,7 @@ const RelatedPosts = dynamic(() => import("@/components/related-posts"));
 import Contributors from "@/components/toolbox/Contributors";
 import PostTitle from '@/components/post-title'
 import VisitCard from "@/components/toolbox/VisitCard";
-import { getAllPostsWithSlug, getRelatedTools, getToolsAndMoreTools } from "@/lib/api";
+import { getAllPostsWithSlug, getTool } from "@/lib/api";
 import { useIntl } from 'react-intl';
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
 
@@ -120,16 +120,9 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
 }
 
 export async function getStaticProps({ params, preview = null, locale }) {
-  const data = await getToolsAndMoreTools(params.slug, preview);
-  //get the tags for the next query
-  let tags = data?.posts.data[0].attributes.tags
-  let tagsArr = []
-  if(tags.data){
-    for(var x = 0;x<tags.data.length;x++){
-      tagsArr.push(tags.data[x].attributes.slug)
-    }
-  }
-  let relatedPostsData = await getRelatedTools(tagsArr,params.slug, preview);
+  const data = await getTool(params.slug, preview);
+
+  let relatedPostsData = data.posts.data[0].attributes.relatedTools
 
   //build the gallery here
   let PHOTO_SET = [];
@@ -156,8 +149,12 @@ export async function getStaticProps({ params, preview = null, locale }) {
     }
   }
 
-  const postData = transformPost(data?.posts.data[0], locale)
-  relatedPostsData = transformPostList(relatedPostsData?.posts.data, locale)
+  // no point transforming these, cos they're all english anyway
+  // const postData = transformPost(data?.posts.data[0], locale)
+  const postData = data?.posts.data[0]
+
+  // no point transforming these, cos they're all english anyway
+  // relatedPostsData = transformPostList(relatedPostsData, locale)
 
   return {
     props: {
@@ -182,6 +179,6 @@ export async function getStaticPaths() {
           return `/toolbox/${post.attributes.slug}`;
         })) ||
       [],
-    fallback: true,
+    fallback: 'blocking',
   };
 }

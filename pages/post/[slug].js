@@ -9,7 +9,7 @@ const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem")
 import PostHeader from '@/components/post-header'
 import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
-import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
+import { getAllPostsWithSlug, getPost } from '@/lib/api'
 import PostTitle from '@/components/post-title'
 import Head from 'next/head'
 import NoticeTranslation from '@/components/notice-translation'
@@ -66,8 +66,8 @@ export default function Post({ post, preview, relatedPosts, combinedRelatedPosts
             <h1 className="text-4xl font-semibold -mt-10 mb-12">{relatedPosts.length<2? `More Posts`:`Related Posts`}</h1>
 
             <div className="mt-10 mb-20 grid lg:grid-cols-2 grid-cols-1 gap-10">
-            {combinedRelatedPosts.length>0 && combinedRelatedPosts.map((item, index) => {
-              // console.log(item)
+            {relatedPosts?.data?.length>0 && relatedPosts.data.map((item, index) => {
+              console.log(item)
               return(
                 <TopicTopItem key={index} topic={item}/>
             )})}
@@ -81,20 +81,14 @@ export default function Post({ post, preview, relatedPosts, combinedRelatedPosts
 
 export async function getStaticProps({ params, preview = null, locale}) {
   
-  const data = await getPostAndMorePosts(params.slug, preview)
+  const data = await getPost(params.slug, preview)
 
- let combinedRelatedPosts = {};
-  let relatedPostData = data?.relatedPosts?.data;
-  let morePostsData =  data?.morePosts?.data;
-  combinedRelatedPosts.data = relatedPostData.concat(morePostsData);
-  //limit related posts to 6
-  if(combinedRelatedPosts.data?.length>6){
-    combinedRelatedPosts.data = combinedRelatedPosts.data.slice(0, 6);
-  }
+ let relatedPosts = {};
 
   const postData = transformPost(data?.posts.data[0], locale)
-  combinedRelatedPosts.data = transformPostList(combinedRelatedPosts?.data, locale)
+  relatedPosts.data = transformPostList(data?.posts.data[0].attributes.relatedArticles, locale)
 
+  console.log(locale)
   return {
     props: {
       preview,
@@ -102,8 +96,7 @@ export async function getStaticProps({ params, preview = null, locale}) {
         ...postData,
         // content,
       },
-      combinedRelatedPosts:combinedRelatedPosts.data,
-      relatedPosts:data?.relatedPosts?.data
+      relatedPosts:relatedPosts
     },
     revalidate: 20,
   }

@@ -24,7 +24,7 @@ import {
   getCommonQuery,
 } from "@/lib/api";
 import { useIntl } from "react-intl";
-import { transformPostList } from "@/lib/locale/transformLocale";
+import { transformPostListOld } from "@/lib/locale/transformLocale";
 
 const TAB_ITEMS = [
   {
@@ -135,9 +135,9 @@ export async function getStaticProps({ preview = null, locale }) {
     topicRes[tag] = res.data;
   }
 
-  allPosts = transformPostList(allPosts.data, locale);
-  allTools = transformPostList(allTools.data, locale);
-  otherPosts = transformPostList(otherPosts.data, locale);
+  allPosts = transformPostListOld(allPosts.data, locale);
+  allTools = transformPostListOld(allTools.data, locale);
+  otherPosts = transformPostListOld(otherPosts.data, locale);
 
   return {
     props: {

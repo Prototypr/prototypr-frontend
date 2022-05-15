@@ -30,7 +30,7 @@ export default function Author({
       <div className="flex items-center">
         <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
           {authorImage && (
-              <Link href={`people/${author?.data?.attributes?.slug}`}>
+              <Link href={`/people/${author?.data?.attributes?.slug}`}>
                 <Image
                   loader={gumletLoader}
                   src={authorImage}
@@ -47,7 +47,7 @@ export default function Author({
           } hover:underline`}
         >
           {author?.data?.attributes?.slug && (
-            <Link href={`people/${author?.data?.attributes?.slug}`}>
+            <Link href={`/people/${author?.data?.attributes?.slug}`}>
               {name}
             </Link>
           )}

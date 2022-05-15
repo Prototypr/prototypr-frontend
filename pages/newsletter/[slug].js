@@ -7,7 +7,7 @@ import PostBody from '@/components/post-body'
 const MoreStories = dynamic(() => import("@/components/more-stories"));
 import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
-import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
+import { getAllPostsWithSlug, getPost } from '@/lib/api'
 import PostTitle from '@/components/post-title'
 import { useIntl } from "react-intl";
 
@@ -62,7 +62,7 @@ export default function Post({ post, morePosts, preview }) {
 }
 
 export async function getStaticProps({ params, preview = null, postType="newsletter" }) {
-  const data = await getPostAndMorePosts(params.slug, preview, postType)
+  const data = await getPost(params.slug, preview, postType)
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
     props: {

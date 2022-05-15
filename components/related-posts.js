@@ -9,16 +9,16 @@ export default function RelatedPosts({ relatedPosts, title="More posts", type='t
       {relatedPosts.map((post, index) => 
       { 
         let img = ''
-        img = post.attributes?.legacyFeaturedImage?.logoNew
+        img = post?.legacyFeaturedImage?.logoNew
         if(!img){
-         img = post?.attributes.legacyFeaturedImage?.mediaItemUrl
+         img = post?.legacyFeaturedImage?.mediaItemUrl
         }
         if (!img){
-          img = post?.attributes.legacyAttributes?.ogImage
+          img = post?.legacyAttributes?.ogImage
         }
         return (
         <div key={`related_post_${index}`}>
-          <Link href={`/${type}/${post.attributes.slug}`}>
+          <Link href={`/${type}/${post.slug}`}>
           <div
             className="flex h-full relative mb-3 md:mb-0 border-b border-gray-50 cursor-pointer"
             key={`relatedPost_${index}`}
@@ -32,7 +32,7 @@ export default function RelatedPosts({ relatedPosts, title="More posts", type='t
                 objectFit="cover"
                 width={66}
                 height={66}
-                alt={post.attributes.title}
+                alt={post.title}
                 src={img}
                 className="cardImage flex-shrink-0 shine h-16 w-16 md:h-16 rounded-md border border-gray-100"
               />}
@@ -46,7 +46,7 @@ export default function RelatedPosts({ relatedPosts, title="More posts", type='t
                       className="cursor-pointer text-sm text-gray-800 leading-tight"
                       style={{ overflow: "hidden" }}
                   >
-                          {post.attributes.title}
+                          {post.title}
                   </div>
                 
                 {/* <div className="flex flex-col md:flex-row md:items-center">
@@ -54,7 +54,7 @@ export default function RelatedPosts({ relatedPosts, title="More posts", type='t
                   className="text-xs text-gray-700 mt-1"
                   style={{ wordBreak: "break-word" }}
                   >
-                  {post.attributes.slug}
+                  {post.slug}
                   </div>
                 </div> */}
             </div>
