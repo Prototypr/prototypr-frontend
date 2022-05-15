@@ -1,8 +1,8 @@
-// const withBundleAnalyzer = require('@next/bundle-analyzer')({
-//   enabled: process.env.ANALYZE === 'true'
-// })
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+})
 
-module.exports = {
+module.exports = withBundleAnalyzer({
   i18n: {
     locales: ['en-US', 'es-ES'],
     defaultLocale: 'en-US',
@@ -29,4 +29,4 @@ module.exports = {
       "claritee.io"
     ],
   },
-};
+});

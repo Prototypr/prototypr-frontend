@@ -2,20 +2,21 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
-import PostListItem from "@/components/people/PostListItem";
-import KoFiButton from "@/components/people/KoFiButton";
-import PostTitle from '@/components/post-title'
 import Image from "next/image";
 
 import { getPostsByPageAndAuthor } from '@/lib/api'
 import {gradient,getTwitterHandle, getKofiName, getDribbbleHandle, getGithubHandle} from "@/lib/profile-page/profile-page.js"
+
+const PostListItem = dynamic(() => import('@/components/people/PostListItem'), { ssr: true })
+const KoFiButton = dynamic(() => import('@/components/people/KoFiButton'), { ssr: true })
+const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true })
 
 const NewPagination = dynamic(() => import("@/components/pagination"));
 const PAGE_SIZE = 12;
 const ALL_SLUGS = ['hoangnguyen','clos','ebruaksoy','giovanitier','atharvapatil','alexanderigwe','kelechiu','tamarasredojevic','leandrofernandez','alexandragrochowski','chamansharma']
 
 
-export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1, author = {}, gradient='', kofi=null,github=null,twitter=null, authorUrl='', skills=[] }) {
+export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1, author = {}, gradient='', kofi=null,github=null,twitter=null,dribbble=null, authorUrl='', skills=[] }) {
 
   const withAuthUser = {}
   const router = useRouter()
@@ -23,6 +24,11 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
   const onPageNumChange = (pageNum) => {
       router.push(`/people/${slug}/page/${pageNum}`)
   }
+
+  const avatar =  author.avatar?.data?.attributes? author.avatar.data.attributes.url:
+author?.legacyAvatar ? author.legacyAvatar
+:"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+
 
   return (
     <Layout 
@@ -61,19 +67,11 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
           <div className="w-full md:w-1/4 lg:block">
             <div className="relative">
               <div style={{marginTop:'-86px'}} className="w-44 h-44 mr-2 rounded-full border border-1 overflow-hidden relative border-gray-100 shadow-sm">
-                {/* <div className="bg-white shadow-sm rounded-full object-cover h-auto align-middle border-4 border-white absolute"
-                style={{ width: "122px", height: "122px", marginTop: "-62px" }}> */}
-
                 {(author?.avatar || author?.legacyAvatar) && (
                   <Image
                     layout="fill"
                     objectFit="cover"
-                    src={
-                        
-                        author.avatar?.data?.attributes? author.avatar.data.attributes.url:
-                    author?.legacyAvatar ? author.legacyAvatar
-                      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-                    }
+                    src={avatar }
                     className="rounded-full "
                     alt="Author profile picture"
                   />
@@ -194,12 +192,10 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                     />
                   </a>
                 )}
-                {author.dribbble && (
+                {dribbble && (
                   <a
                     className="link block mr-2"
-                    href={`https://dribbble.com/${getDribbbleHandle(
-                      author.dribbble
-                    )}`}
+                    href={`https://dribbble.com/${dribbble}`}
                     target="_blank"
                   >
                     <img
@@ -320,6 +316,7 @@ export async function getStaticProps({ preview = null, params }) {
   const authorUrl = author.url
                           .replace(/(^\w+:|^)\/\//, "")
                           .replace(/\/+$/, "")
+  const dribbble = getDribbbleHandle(author.dribbble)
                           
   let skills = []
   if (author.skills.indexOf(",") > -1) {
@@ -337,6 +334,7 @@ export async function getStaticProps({ preview = null, params }) {
       kofi,
       github,
       twitter,
+      dribbble,
       skills,
       authorUrl,
       pageNo,

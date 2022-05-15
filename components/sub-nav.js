@@ -1,18 +1,10 @@
 import React from "react";
-import dynamic from "next/dynamic";
 import { styled, keyframes } from "@stitches/react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
-import { indigo, mauve, red, pink, gray } from "@radix-ui/colors";
+import { indigo, mauve, red, pink } from "@radix-ui/colors";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
-const ProfileBadge = dynamic(() => import("./ProfileBadge"));
-
-const Gravatar = dynamic(() => import("react-gravatar"), { ssr: false });
-const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
-  ssr: true,
-});
 
 import { FormattedMessage, useIntl } from "react-intl";
 const enterFromRight = keyframes({
@@ -85,19 +77,6 @@ const itemStyles = {
   "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${indigo.indigo8}` },
   "&:hover": { backgroundColor: indigo.indigo3, color: indigo.indigo11 },
 };
-const itemButtonStyles = {
-  padding: "8px 12px",
-  outline: "none",
-  userSelect: "none",
-  fontWeight: 500,
-  lineHeight: 1,
-  borderRadius: 4,
-  // fontSize: 15,
-  marginLeft: "6px",
-  color: gray.gray1,
-  "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${indigo.indigo8}` },
-  "&:hover": { backgroundColor: indigo.indigo9, color: gray.gray1 },
-};
 
 const StyledTrigger = styled(NavigationMenuPrimitive.Trigger, {
   all: "unset",
@@ -146,15 +125,6 @@ const StyledTriggerWithCaret = React.forwardRef(
 const StyledLink = styled(NavigationMenuPrimitive.Link, {
   ...itemStyles,
   display: "block",
-  textDecoration: "none",
-  // fontSize: 15,
-  lineHeight: 1,
-});
-
-const StyledButton = styled(NavigationMenuPrimitive.Link, {
-  ...itemButtonStyles,
-  display: "block",
-  background: indigo.indigo10,
   textDecoration: "none",
   // fontSize: 15,
   lineHeight: 1,
@@ -258,7 +228,6 @@ const NavigationMenuList = StyledList;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 const NavigationMenuTrigger = StyledTriggerWithCaret;
 const NavigationMenuLink = NextLink;
-const NavigationMenuButton = StyledButton;
 const NavigationMenuContent = StyledContent;
 const NavigationMenuViewport = StyledViewport;
 const NavigationMenuIndicator = StyledIndicatorWithArrow;
@@ -389,9 +358,6 @@ const ViewportPosition = styled("div", {
 export const NavigationMenuDemo = ({
   activeNav,
   collapse,
-  user,
-  userLoading,
-  userLoggedInCookie,
 }) => {
   const intl = useIntl();
   const title1 = intl.formatMessage({ id: "navbar.menu.title1" });
@@ -428,10 +394,8 @@ export const NavigationMenuDemo = ({
   const submenu2Title4 = intl.formatMessage({ id: "navbar.submenu2.title4" });
   const submenu2Desc4 = intl.formatMessage({ id: "navbar.submenu2.desc4" });
 
-  const submenu2Title5 = intl.formatMessage({ id: "navbar.submenu2.title5" });
   const submenu2Desc5 = intl.formatMessage({ id: "navbar.submenu2.desc5" });
 
-  const submenu2Title6 = intl.formatMessage({ id: "navbar.submenu2.title6" });
   const submenu2Desc6 = intl.formatMessage({ id: "navbar.submenu2.desc6" });
 
   return (

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 
@@ -9,20 +8,14 @@ const PopupGallery = dynamic(() => import("@/components/gallery/PopupGallery"));
 const AuthorCard = dynamic(() => import("@/components/toolbox/AuthorCard"));
 const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"));
 const RelatedPosts = dynamic(() => import("@/components/related-posts"));
+const VisitCard = dynamic(() => import("@/components/toolbox/VisitCard"));
 
-import Contributors from "@/components/toolbox/Contributors";
-import PostTitle from '@/components/post-title'
-import VisitCard from "@/components/toolbox/VisitCard";
+// import Contributors from "@/components/toolbox/Contributors";
 import { getAllPostsWithSlug, getTool } from "@/lib/api";
-import { useIntl } from 'react-intl';
-import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
 
 export default function Post({ post, relatedPosts, gallery, preview }) {
-  const intl = useIntl();
-  // const locale = intl.locale ? intl.locale : "en-US";
+
   const router = useRouter();
-  //TODO: what is withAuthUser
-  const withAuthUser = {};
 
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />;
@@ -42,13 +35,15 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
         <div className="w-full mt-6 md:mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
           {/* left sidebar */}
           {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
+            <h1 className="text-6xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
+            Loading...
+          </h1>
         ) : (
           <>
           <div
             className="md:col-span-5 hidden lg:block"
           >
-            {post && post.attributes && post.attributes.author && (
+            {post?.attributes?.author && (
               <div className="sm:hidden lg:block">
                 <AuthorCard author={post.attributes.author} avatar={post.attributes?.author} />
               </div>
@@ -57,13 +52,12 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
               <SponsorCard position="left" />
             </div>
             {/**Contributors */}
-            <Contributors withAuthUser={withAuthUser} />
+            {/* <Contributors withAuthUser={withAuthUser} /> */}
           </div>
           {/* center sidebar */}
           <div className="col-span-full lg:col-span-13">
-            {post && post.attributes && (
+            {post?.attributes && (
               <PopupGallery
-                // body={content}
                 item={post.attributes}
                 gallery={gallery}
                 rounded={true}
@@ -84,17 +78,8 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
                 ></div>
               </div>
             </div>
-
-            {/**Comments */}
-            {/* <Comment
-              withAuthUser={withAuthUser}
-              setUserAuthenticated={setUserAuthenticated}
-              titleClass="text-sm font-semibold hidden text-gray-800"
-              item={post?.attributes}
-            /> */}
           </div>
           {/* RIGHT SIDEBAR START */}
-
           <div className="col-span-full mb-6 lg:mb-0 lg:col-span-6 order-first lg:order-last lg:block">
               <VisitCard 
                 tags={post?.attributes.tags}

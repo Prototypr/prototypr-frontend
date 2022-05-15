@@ -3,13 +3,15 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
-import PostBody from '@/components/post-body'
 // const MoreStories = dynamic(() => import("@/components/more-stories"));
-import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
 import { getAllPostsWithSlug, getPost } from '@/lib/api'
-import PostTitle from '@/components/post-title'
 import { useIntl } from "react-intl";
+
+
+const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true })
+const PostBody = dynamic(() => import('@/components/post-body'), { ssr: true })
+
 
 export default function Post({ post, morePosts, preview }) {
       const intl = useIntl();

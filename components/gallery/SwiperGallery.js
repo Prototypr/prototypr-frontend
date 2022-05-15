@@ -3,9 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/free-mode";
 import "swiper/css/navigation";
-import "swiper/css/thumbs";
 
 import { FreeMode, Navigation, Thumbs, A11y } from "swiper";
 import gumletLoader from "@/components/new-index/gumletLoader";
@@ -13,14 +11,9 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 export default function SwiperGallery({ data = [] }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  return data && data.length ? (
+  return data && data.length && (
     <>
       <Swiper
-        style={
-          {
-            // "--swiper-navigation-color": "#fff",
-          }
-        }
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         navigation={true}
@@ -34,9 +27,8 @@ export default function SwiperGallery({ data = [] }) {
         {data?.map((current, idx) => (
           <SwiperSlide
             className="bg-white pt-5 rounded-lg h-60 sm:h-96 overflow-hidden"
-            key={idx + "_main"}
+            key={`${idx}_main`}
           >
-            {current.type == "image" && current.original ? (
               <div className="relative border border-gray-200 border-1 rounded-lg h-60 sm:h-96 w-full lg:max-h-full relative overflow-hidden rounded-lg flex justify-center">
                 <Image
                   loader={gumletLoader}
@@ -53,23 +45,7 @@ export default function SwiperGallery({ data = [] }) {
                   sizes={"(max-width: 300px) 100vw, 600px"}
                 />
               </div>
-            ) : (
-              <div
-                className={"image-gallery-image rounded-lg "}
-                style={{ textAlign: "center" }}
-              >
-                {/* VIDEO */}
-                <div className="video-wrapper h-60 sm:h-96">
-                  <iframe
-                    width="550"
-                    height="440"
-                    src={current.embedUrl}
-                    frameBorder="0"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            )}
+            ) 
           </SwiperSlide>
         ))}
       </Swiper>
@@ -106,5 +82,5 @@ export default function SwiperGallery({ data = [] }) {
         </Swiper>
       </div>
     </>
-  ) : null;
+  );
 }

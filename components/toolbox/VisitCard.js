@@ -8,6 +8,7 @@ export default function VisitCard({
   logoNew,
   tags = [],
 }) {
+  const tagz = tags?.data?.length ? tags?.data?.slice(0, 2):null
   return (
     <div className="flex bg-white rounded-lg mb-0 flex-col p-5 xl:p-6 ">
       <div className="flex flex-col lg:flex-row lg:justify-between mb-4 lg:mb-6">
@@ -16,9 +17,7 @@ export default function VisitCard({
             dangerouslySetInnerHTML={{ __html: title }}
             className="text-2xl lg:text-lg tracking-tight mb-2 lg:mb-3 lg:mb-1 lg:leading-snug font-bold text-gray-900 my-auto"
           ></h1>
-          {tags.data &&
-            tags.data.length &&
-            tags.data.slice(0, 2).map((tag, index) => {
+          {tagz?.map((tag, index) => {
               return (
                 <a
                   key={index}

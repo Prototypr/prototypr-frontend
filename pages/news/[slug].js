@@ -2,12 +2,15 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
 import Layout from '@/components/layout'
-import AuthorNewsCredit from "@/components/AuthorNewsCredit";
-import SponsorCard from "@/components/toolbox/SponsorCard";
-import PostTitle from '@/components/post-title'
-import RelatedPosts from "@/components/related-posts";
 import { getAllPostsWithSlug, getNewsAndMoreNews } from '@/lib/api'
 // import markdownToHtml from '@/lib/markdownToHtml'
+
+import dynamic from 'next/dynamic'
+const RelatedPosts = dynamic(() => import('@/components/related-posts'), { ssr: true })
+const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true })
+const SponsorCard = dynamic(() => import('@/components/toolbox/SponsorCard'), { ssr: true })
+const AuthorNewsCredit = dynamic(() => import('@/components/AuthorNewsCredit'), { ssr: true })
+
 
 export default function Post({ post, morePosts, preview, domain,link, postDate }) {
 

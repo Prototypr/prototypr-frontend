@@ -3,17 +3,14 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
-import PostBody from '@/components/post-body'
-const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
+const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: true });
+const PostHeader = dynamic(() => import("@/components/post-header"), { ssr: true });
 
-import PostHeader from '@/components/post-header'
-import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
 import { getAllPostsWithSlug, getPost } from '@/lib/api'
-import PostTitle from '@/components/post-title'
 import Head from 'next/head'
-import NoticeTranslation from '@/components/notice-translation'
-import { FormattedMessage, useIntl } from "react-intl";
+const NoticeTranslation = dynamic(() => import("@/components/notice-translation"), { ssr: true });
+
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
 
 export default function Post({ post, preview, relatedPosts, combinedRelatedPosts}) {
@@ -21,9 +18,7 @@ export default function Post({ post, preview, relatedPosts, combinedRelatedPosts
   if (!router.isFallback && !post?.attributes?.slug) {
     return <ErrorPage statusCode={404} />
   }
-  const intl = useIntl();
-  // console.log('locale changed********' + intl.locale);
-  const locale = intl.locale ? intl.locale : "en-US";
+
   const title = post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphTitle: post?.attributes?.title && post.attributes.title
   const description = post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphDescription: post?.attributes?.excerpt && post.attributes.excerpt
   const image = post?.attributes?.seo?.opengraphImage?post?.attributes?.seo?.opengraphImage:  post?.attributes?.featuredImage?.data?.attributes?.url ? post?.attributes?.featuredImage?.data?.attributes?.url:post?.legacyFeaturedImage?post?.legacyFeaturedImage?.mediaItemUrl:post?.ogImage?post?.ogImage.opengraphImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
@@ -41,9 +36,10 @@ export default function Post({ post, preview, relatedPosts, combinedRelatedPosts
     }}
      background="#fff" activeNav={"posts"} preview={preview}>
       <Container>
-        {/* <Header /> */}
         {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
+          <h1 className="text-6xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
+          Loading
+        </h1>
         ) : (
           <>
             <article>
@@ -60,14 +56,17 @@ export default function Post({ post, preview, relatedPosts, combinedRelatedPosts
                 date={post.attributes.date}
                 author={post.attributes?.author?.data?.attributes}
                 />
-              <PostBody content={post.attributes?.content} />
+                <div className="max-w-2xl mx-auto blog-content">
+                <div
+                  dangerouslySetInnerHTML={{ __html: post.attributes?.content }}
+                />
+              </div>
             </article>
-            <SectionSeparator />
-            <h1 className="text-4xl font-semibold -mt-10 mb-12">{relatedPosts.length<2? `More Posts`:`Related Posts`}</h1>
+            <hr className="border-accent-2 mt-28 mb-24" />
+            <h1 className="text-4xl font-semibold -mt-10 mb-12">More Posts</h1>
 
             <div className="mt-10 mb-20 grid lg:grid-cols-2 grid-cols-1 gap-10">
             {relatedPosts?.data?.length>0 && relatedPosts.data.map((item, index) => {
-              console.log(item)
               return(
                 <TopicTopItem key={index} topic={item}/>
             )})}
@@ -88,13 +87,11 @@ export async function getStaticProps({ params, preview = null, locale}) {
   const postData = transformPost(data?.posts.data[0], locale)
   relatedPosts.data = transformPostList(data?.posts.data[0].attributes.relatedArticles, locale)
 
-  console.log(locale)
   return {
     props: {
       preview,
       post: {
         ...postData,
-        // content,
       },
       relatedPosts:relatedPosts
     },

@@ -40,11 +40,6 @@ export default function AuthorCard({ author = {}, avatar='' }) {
                                 {username}
                             </p>
                             <p tabIndex={0} className="text-sm">Editor</p>
-                            {/* <div className="flex">
-                                <p className="text-sm leading-5 text-gray-700">
-                                Social Media and Partnerships Management at Prototypr.io
-                                </p>
-                            </div> */}
                         </div>
                     </div>
                 </a>

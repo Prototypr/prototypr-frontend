@@ -1,10 +1,10 @@
 import { signIn } from "next-auth/react";
 import Button from "../atom/Button/Button";
 import {useState} from 'react'
-import Form from '@/components/Form'
-import Router from 'next/router'
 import axios from 'axios'
-import toast from "react-hot-toast";
+import dynamic from "next/dynamic";
+const Form = dynamic(() => import('@/components/Form'), { ssr: true })
+const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 
 
 const LoginForm = () => {

@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import SwiperGallery from "./SwiperGallery";
+import dynamic from "next/dynamic";
 import Image from "next/image";
+const SwiperGallery = dynamic(() => import("./SwiperGallery"));
 
 export default function PopupGallery({ item,gallery, link, img, body, rounded, arrows }) {
 

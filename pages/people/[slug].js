@@ -2,15 +2,17 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
-import PostListItem from "@/components/people/PostListItem";
-import KoFiButton from "@/components/people/KoFiButton";
-import PostTitle from '@/components/post-title'
 import Image from "next/image";
 import { transformPostList } from "@/lib/locale/transformLocale";
 import ErrorPage from "next/error";
 
 import { getPostsByPageAndAuthor } from '@/lib/api'
 import {gradient,getTwitterHandle, getKofiName, getDribbbleHandle, getGithubHandle} from "@/lib/profile-page/profile-page.js"
+
+const PostListItem = dynamic(() => import('@/components/people/PostListItem'), { ssr: true })
+const KoFiButton = dynamic(() => import('@/components/people/KoFiButton'), { ssr: true })
+const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true })
+
 
 const NewPagination = dynamic(() => import("@/components/pagination"));
 const PAGE_SIZE = 12;

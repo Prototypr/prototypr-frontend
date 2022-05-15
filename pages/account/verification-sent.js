@@ -1,6 +1,5 @@
 import useUser from "@/lib/iron-session/useUser";
 import Layout from "@/components/layout";
-// import fetchJson, { FetchError } from "@/lib/iron-session/fetchJson";
 import Button from "@/components/atom/Button/Button";
 
 export default function Login({ email }) {
