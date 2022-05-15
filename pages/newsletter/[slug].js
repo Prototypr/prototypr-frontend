@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
 import PostBody from '@/components/post-body'
-const MoreStories = dynamic(() => import("@/components/more-stories"));
+// const MoreStories = dynamic(() => import("@/components/more-stories"));
 import SectionSeparator from '@/components/section-separator'
 import Layout from '@/components/layout'
 import { getAllPostsWithSlug, getPost } from '@/lib/api'
@@ -51,9 +51,9 @@ export default function Post({ post, morePosts, preview }) {
               <PostBody content={post.attributes.content} />
             </div>
             </article>
-            <SectionSeparator />
-            <h2 className="text-4xl -mt-12 mb-12 font-semibold"> {intl.formatMessage({ id: "newsletter.issue" })}</h2>
-            {morePosts.length > 0 && <MoreStories posts={morePosts} type="newsletter" route={'newsletter'} />}
+            {/* <SectionSeparator /> */}
+            {/* <h2 className="text-4xl -mt-12 mb-12 font-semibold"> {intl.formatMessage({ id: "newsletter.issue" })}</h2> */}
+            {/* {morePosts.length > 0 && <MoreStories posts={morePosts} type="newsletter" route={'newsletter'} />} */}
           </>
         )}
       </Container>
@@ -71,7 +71,7 @@ export async function getStaticProps({ params, preview = null, postType="newslet
         ...data?.posts.data[0],
         // content,
       },
-      morePosts: data?.morePosts.data,
+      // morePosts: data?.morePosts.data,
     },
     revalidate: 20
   }
