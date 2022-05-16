@@ -1,18 +1,21 @@
 import Fallback from "@/components/atom/Fallback/Fallback";
 import Layout from "@/components/layout";
+import dynamic from "next/dynamic";
 import Head from "next/head";
+
+import axios from "axios";
 import {useState} from "react"
+// import toast from "react-hot-toast";
 
 import { sessionOptions } from '@/lib/iron-session/session'
 import { withIronSessionSsr } from 'iron-session/next'
 import useUser from "@/lib/iron-session/useUser";
 import { updateUserSessionSSR } from "@/lib/iron-session/updateUserSession";
 
-import dynamic from 'next/dynamic'
+
 const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 const Form = dynamic(() => import('@/components/Form'), { ssr: true })
 const UserForm = dynamic(() => import('@/components/user/UserForm'), { ssr: true })
-const axios = dynamic(() => import('axios'), { ssr: false })
 
 
 const AccountPage = ({ preview, userData, isConfirmed }) => {
