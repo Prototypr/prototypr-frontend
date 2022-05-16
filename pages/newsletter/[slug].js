@@ -3,10 +3,9 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
-// const MoreStories = dynamic(() => import("@/components/more-stories"));
+const MoreStories = dynamic(() => import("@/components/more-stories"));
 import Layout from '@/components/layout'
-import { getAllPostsWithSlug, getPost } from '@/lib/api'
-import { useIntl } from "react-intl";
+import { getAllPostsWithSlug, getNewsletter } from '@/lib/api'
 
 
 const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true })
@@ -14,7 +13,6 @@ const PostBody = dynamic(() => import('@/components/post-body'), { ssr: true })
 
 
 export default function Post({ post, morePosts, preview }) {
-      const intl = useIntl();
 
   const router = useRouter()
   if (!router.isFallback && !post?.attributes?.slug) {
@@ -45,7 +43,7 @@ export default function Post({ post, morePosts, preview }) {
             <article>
             <div style={{maxWidth:'600px'}} className="mx-auto">
             { post?.attributes && 
-                <h1 className="text-3xl font-semibold tracking-tighter leading-tight md:leading-tighter my-6 mt-12 text-center md:text-left">
+                <h1 className="text-3xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter my-6 mt-12 text-center md:text-left">
                 {post.attributes.title}
                 </h1>}
             </div>
@@ -55,7 +53,7 @@ export default function Post({ post, morePosts, preview }) {
             </article>
             {/* <SectionSeparator /> */}
             {/* <h2 className="text-4xl -mt-12 mb-12 font-semibold"> {intl.formatMessage({ id: "newsletter.issue" })}</h2> */}
-            {/* {morePosts.length > 0 && <MoreStories posts={morePosts} type="newsletter" route={'newsletter'} />} */}
+            {morePosts.length > 0 && <MoreStories posts={morePosts} type="newsletter" route={'newsletter'} />}
           </>
         )}
       </Container>
@@ -64,8 +62,11 @@ export default function Post({ post, morePosts, preview }) {
 }
 
 export async function getStaticProps({ params, preview = null, postType="newsletter" }) {
-  const data = await getPost(params.slug, preview, postType)
+  const data = await getNewsletter(params.slug, preview, postType)
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
+  const relatedNewsletters =  data?.posts.data[0]?.attributes?.relatedNewsletters?
+  data?.posts.data[0]?.attributes?.relatedNewsletters:[]
+  
   return {
     props: {
       preview,
@@ -73,7 +74,7 @@ export async function getStaticProps({ params, preview = null, postType="newslet
         ...data?.posts.data[0],
         // content,
       },
-      // morePosts: data?.morePosts.data,
+      morePosts: relatedNewsletters,
     },
     revalidate: 20
   }

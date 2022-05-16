@@ -15,6 +15,7 @@ export default function PeoplePostPreview({
     if (skills && skills !== "") {
         skillArr = skills.split(",");
     }
+    const img = avatar ?avatar: legacyAvatar
     return (
             <Link href={`/people/${slug}`}>
         <div className="flex group cursor-pointer flex-col pb-4 flex-grow h-full border border-1 border-gray-100 hover:shadow-lg transition-shadow duration-500 bg-white relative rounded-lg">
@@ -27,7 +28,7 @@ export default function PeoplePostPreview({
                         </div>
                     </figure>
                     <div className="absolute rounded-full bg-white -bottom-5 left-4">
-                        {avatar || legacyAvatar && (
+                        {img && (
                             <div
                                 className="rounded-full transform group-hover:scale-110 transition duration-700 ease-out  border-white border border-2 bg-white -mt-2 shadow"
                                 style={{ height: "44px", width: "44px" }}
@@ -37,7 +38,7 @@ export default function PeoplePostPreview({
                                     height="44"
                                     alt={`Avatar for ${title}`}
                                     className="object-cover flex-shrink-0 shine rounded-full bg-white"
-                                    src={avatar?avatar:legacyAvatar}
+                                    src={img}
                                 />
                             </div>
                         )}

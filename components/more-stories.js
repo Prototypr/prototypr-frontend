@@ -1,22 +1,17 @@
 import PostPreview from "./post-preview";
-import PeoplePostPreview from "./people-post-preview";
-import { useIntl } from "react-intl";
 
 export default function MoreStories({ posts, type, route }) {
-  const intl = useIntl();
-  const locale = intl.locale ? intl.locale : "en-US";
 
   return (
     <section>
       <div
         className={`grid grid-cols-1 ${
-          type === "toolbox" || type === "people"
+          type === "toolbox"
             ? " md:grid-cols-3"
             : " md:grid-cols-2"
         } md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}
       >
         {posts.map((post, i) => {
-          if (type !== "people") {
             return (
               <PostPreview
                 key={post.attributes.slug}
@@ -47,22 +42,7 @@ export default function MoreStories({ posts, type, route }) {
                 }
               />
             );
-          } else {
-            return (
-              <PeoplePostPreview
-                key={`peoplecard_${
-                  post.attributes.slug ? post.attributes.slug : i
-                }`}
-                location={post.attributes?.location}
-                bio={post.attributes?.bio}
-                title={post.attributes.username}
-                slug={post.attributes.slug}
-                legacyAvatar={post.attributes.legacyAvatar}
-                avatar={post.attributes.avatar?.data?.attributes?.url}
-                skills={post.attributes.skills}
-              />
-            );
-          }
+          
         })}
       </div>
     </section>

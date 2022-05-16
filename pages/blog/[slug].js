@@ -72,8 +72,8 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                 morePosts && 
                 <RelatedPosts 
                   relatedPosts={morePosts}
-                  type={'blog'}
-                  title={'More posts'}
+                  type={'post'}
+                  title={'Top Stories'}
                 />
               }
           </div>
@@ -106,7 +106,8 @@ export async function getStaticProps({ params, preview = null, type = 'protobite
   }
   
   let postDate = new Date(data?.posts.data[0]?.attributes?.date);
-  
+  const relatedArticles =  data?.posts.data[0]?.attributes?.relatedArticles?
+  data?.posts.data[0]?.attributes?.relatedArticles:[]
   
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
@@ -118,7 +119,7 @@ export async function getStaticProps({ params, preview = null, type = 'protobite
       domain,
       link,
       postDate:JSON.stringify(postDate),
-      morePosts: data?.morePosts.data,
+      morePosts:relatedArticles,
     },
   }
 }

@@ -2,24 +2,35 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function RelatedPosts({ relatedPosts, title="More posts", type='toolbox' }) {
+  
+ 
   return (
     <div className="hidden md:block bg-white rounded-lg mt-6 p-6 lg:mb-16">
       <h1 className="text-sm font-semibold mb-3">{title}</h1>
-      {relatedPosts.map((post, index) => 
-        <div key={`related_post_${index}`}>
+      {relatedPosts.map((post, index) => {
+ const img = 
+ post?.legacyFeaturedImage?.logoNew? 
+ post.legacyFeaturedImage.logoNew
+ :post?.legacyFeaturedImage?.mediaItemUrl? 
+ post.legacyFeaturedImage.mediaItemUrl:
+ post?.featuredImage?.data?.attributes?.url ? 
+ post?.featuredImage?.data?.attributes?.url:
+ "https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png";
+
+       return (<div key={`related_post_${index}`}>
           <Link href={`/${type}/${post.slug}`}>
           <div
             className="flex h-full relative mb-3 md:mb-0 border-b border-gray-50 cursor-pointer"
             key={`relatedPost_${index}`}
           >
             <div className="rounded-lg relative flex md:my-4 h-16 w-16 md:h-16 flex-none">
-              {post?.legacyFeaturedImage?.logoNew &&
+              {img &&
               <Image
                 objectFit="cover"
                 width={66}
                 height={66}
                 alt={post.title}
-                src={post?.legacyFeaturedImage?.logoNew}
+                src={img}
                 className="cardImage flex-shrink-0 shine h-16 w-16 md:h-16 rounded-md border border-gray-100"
               />}
             </div>
@@ -34,8 +45,8 @@ export default function RelatedPosts({ relatedPosts, title="More posts", type='t
             </div>
           </div>
           </Link>
-        </div>
-      )}
+        </div>)
+      })}
     </div>
   );
 }

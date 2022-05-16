@@ -2,10 +2,10 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
-const MoreStories = dynamic(() => import("@/components/more-stories"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
 // const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
 const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
+const PeoplePostPreview = dynamic(() => import("@/components/people/people-post-preview"));
 import PostTitle from '@/components/post-title'
 
 import { getPeopleByPage } from "@/lib/api";
@@ -59,7 +59,21 @@ export default function PeoplePage({
               </div>
             </div>
             <div className="col-span-3">
-              <MoreStories posts={allPosts} type="people" />
+            <div className={`grid md:grid-cols-3 grid-cols-1 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
+            {allPosts.map((post, i) =>
+            <PeoplePostPreview
+                  key={`peoplecard_${
+                    post.attributes.slug ? post.attributes.slug : i
+                  }`}
+                  location={post.attributes?.location}
+                  bio={post.attributes?.bio}
+                  title={post.attributes.username}
+                  slug={post.attributes.slug}
+                  legacyAvatar={post.attributes.legacyAvatar}
+                  avatar={post.attributes.avatar?.data?.attributes?.url}
+                  skills={post.attributes.skills}
+                />)}
+            </div>
               <NewPagination
                 total={pagination?.total}
                 pageSize={PAGE_SIZE}
