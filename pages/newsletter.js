@@ -2,9 +2,10 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
-import Footer from "@/components/footer";
+
 import Head from "next/head";
 import { getAllPostsForToolsPage } from "@/lib/api";
+const Footer = dynamic(() => import('./footer'))
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 // const TitleBlock = dynamic(() => import("@/components/newsletter/TitleBlock"));
 const IssueList = dynamic(() => import("@/components/newsletter/IssueList"));
