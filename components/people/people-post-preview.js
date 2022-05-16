@@ -15,6 +15,7 @@ export default function PeoplePostPreview({
     if (skills && skills !== "") {
         skillArr = skills.split(",");
     }
+    const grad = gradient(title, 'horizontal')
     const img = avatar ?avatar: legacyAvatar
     return (
             <Link href={`/people/${slug}`}>
@@ -23,7 +24,7 @@ export default function PeoplePostPreview({
                 <>
                 <figure className={`relative w-full h-20 overflow-hidden rounded-t-lg  overflow-hidden`}>
                         <div
-                        style={{ background: gradient(title, 'horizontal')}}
+                        style={{ background: grad}}
                         className="absolute w-full h-full object-cover rounded-lg rounded-b-none cursor-pointer">
                         </div>
                     </figure>
