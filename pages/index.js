@@ -2,11 +2,11 @@ import dynamic from "next/dynamic";
 
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
-import Footer from "@/components/footer";
 /**new index components */
 import { BrowserView} from 'react-device-detect';
 
 // const Intro = dynamic(() => import("@/components/new-index/Intro"));
+const Footer = dynamic(() => import("@/components/footer"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 // import EditorPick2 from "@/components/new-index/EditorPick2";
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));

@@ -5,12 +5,12 @@ import Layout from "@/components/new-index/layoutForIndex";
 
 import Head from "next/head";
 import { getAllPostsForToolsPage } from "@/lib/api";
-const Footer = dynamic(() => import('./footer')) 
+const Footer = dynamic(() => import('@/components/footer')) 
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 // const TitleBlock = dynamic(() => import("@/components/newsletter/TitleBlock"));
 const IssueList = dynamic(() => import("@/components/newsletter/IssueList"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 const PAGE_SIZE = 8;
 
 export default function NewsLetter({
