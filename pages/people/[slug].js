@@ -192,7 +192,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                 {dribbble && (
                   <a
                     className="link block mr-2"
-                    href={`https://dribbble.com/${dribble}`}
+                    href={`https://dribbble.com/${dribbble}`}
                     target="_blank"
                   >
                     <img
