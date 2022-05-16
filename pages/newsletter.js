@@ -5,7 +5,7 @@ import Layout from "@/components/new-index/layoutForIndex";
 
 import Head from "next/head";
 import { getAllPostsForToolsPage } from "@/lib/api";
-const Footer = dynamic(() => import('./footer'))
+const Footer = dynamic(() => import('./footer')) 
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 // const TitleBlock = dynamic(() => import("@/components/newsletter/TitleBlock"));
 const IssueList = dynamic(() => import("@/components/newsletter/IssueList"));
