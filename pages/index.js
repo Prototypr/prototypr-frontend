@@ -65,8 +65,8 @@ export default function Index({
   const descriptionText = intl.formatMessage({ id: "intro.description" })
   const editorPickTitle = intl.formatMessage({ id: "editpicker.title" })
   const designToolTitle = intl.formatMessage({ id: "designtool.title" })
-  const sourcePanelTitle = intl.formatMessage({ id: "navbar.contentitem.title"})
-  const sourcePanelDescription =intl.formatMessage({ id: "sourcepanel.desc"})
+  const sourcePanelTitle = intl.formatMessage({ id: "navbar.contentitem.title2"})
+  const sourcePanelDescription =intl.formatMessage({ id: "sourcepanel.desc2"})
 
   return (
     <>

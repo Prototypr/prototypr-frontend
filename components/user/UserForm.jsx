@@ -110,11 +110,52 @@ const UserForm = ({ info }) => {
 
   return (
     <div>
-       <div className="text-sm mt-3 font-semibold text-gray-700">
+      
+      <div className="flex flex-col md:flex-row mt-2">
+      <div>
+        <div className="text-sm mt-3 font-semibold text-gray-700">
           Profile picture
         </div>
-      <AvatarEditor/>
-   
+        <AvatarEditor/>
+      </div>
+      <div className="md:px-4 w-full md:ml-6">
+      <FormControl inValid={!!errors.paymentPointer}>
+          <label htmlFor="paymentPointer" className="text-sm">
+            Payment Pointer
+          </label>
+          <input
+            id="paymentPointer"
+            type="text"
+            autoComplete="off"
+            className="w-full"
+            disabled={isSubmitting}
+            aria-describedby="paymentPointer_error"
+            aria-live="assertive"
+            placeholder="$alice.wallet.example"
+            {...register("paymentPointer", {
+              maxLength: {
+                message: "Maximum length can be up to 120 characters",
+                value: 120,
+              },
+            })}
+          />
+          {errors.paymentPointer && (
+            <span className="error" role="alert" id="paymentPointer_error">
+              {errors.paymentPointer.message}
+            </span>
+          )}
+        </FormControl>
+        <a href="#" className='cursor-pointer'>
+        <div className="p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
+          <img className="w-10 mr-4" src="https://webmonetization.org/img/wm-icon-animated.svg"/>
+            <div>
+            <h2 className="text-md font-primary font-medium text-green-800">Learn about Web Monetization</h2>
+            <p className="text-green-800 text-sm">To receive tips and streamed payments, you'll need to set up a wallet. <a className="underline text-green-800 font-medium" href="#">Read the guide</a> →</p>
+            </div>
+        </div>
+        </a>
+      </div>
+      </div>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -254,32 +295,6 @@ const UserForm = ({ info }) => {
           {errors.bio && (
             <span className="error" role="alert" id="bio_error">
               {errors.bio.message}
-            </span>
-          )}
-        </FormControl>
-        <FormControl inValid={!!errors.paymentPointer}>
-          <label htmlFor="paymentPointer" className="text-sm">
-            Payment Pointer
-          </label>
-          <input
-            id="paymentPointer"
-            type="text"
-            autoComplete="off"
-            className="w-full"
-            disabled={isSubmitting}
-            aria-describedby="paymentPointer_error"
-            aria-live="assertive"
-            placeholder="$alice.wallet.example"
-            {...register("paymentPointer", {
-              maxLength: {
-                message: "Maximum length can be up to 120 characters",
-                value: 120,
-              },
-            })}
-          />
-          {errors.paymentPointer && (
-            <span className="error" role="alert" id="paymentPointer_error">
-              {errors.paymentPointer.message}
             </span>
           )}
         </FormControl>

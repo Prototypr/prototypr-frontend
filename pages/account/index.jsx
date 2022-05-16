@@ -102,7 +102,6 @@ const AccountPage = ({ preview, userData, isConfirmed }) => {
 
                     axios(config)
                     .then(function (response) {
-                      console.log(JSON.stringify(response.data));
                       setSent(true)
                       setTimeout(()=>{
                         setSent(true)
@@ -140,7 +139,6 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 }) {
   //iron-session user
   const user = req.session.user
-  console.log(user)
 
    if (user === undefined) {
     res.setHeader('location', '/sign-in')

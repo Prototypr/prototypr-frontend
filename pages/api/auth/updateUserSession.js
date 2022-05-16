@@ -26,6 +26,7 @@ async function handler(req, res) {
      }else{
       req.session.user.login.user.confirmed = true 
      }
+     req.session.user.login.user.slug = req.body.slug
      req.session.user.login.user.username = req.body.username
      req.session.user.login.user.provider = req.body.provider
      req.session.user.login.user.location = req.body.location

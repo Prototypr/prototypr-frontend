@@ -90,8 +90,10 @@ const ES = {
   "footer.rightCat3": "Prototypr Abierto",
   "footer.otherResource": "Otros recursos",
   "footer.other1": "Fondo Adobe para el Diseño",
+  "footer.other2": "Web Monetization",
   "footer.other3": "Correo por Letter",
   "footer.other4": "Política de privacidad",
+  "footer.other5": "Grant for the Web",
   "topics.header":
     "Historias abiertas de diseño y tecnología para que todos puedan leer",
   "newsletter.title": "Reciber el boletín",

@@ -421,6 +421,7 @@ export const NavigationMenuDemo = ({
               <Link href="/account">
                 {user && 
                   <ProfileBadge
+                  user={user}
                     icon={
                       <img
                         className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer object-cover"

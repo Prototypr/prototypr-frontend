@@ -63,7 +63,7 @@ export default function Post({ post, preview, relatedPosts, combinedRelatedPosts
               </div>
             </article>
             <hr className="border-accent-2 mt-28 mb-24" />
-            <h1 className="text-4xl font-semibold -mt-10 mb-12">More Posts</h1>
+            <h1 className="text-4xl font-noto-serif font-semibold -mt-10 mb-12">More Posts</h1>
 
             <div className="mt-10 mb-20 grid lg:grid-cols-2 grid-cols-1 gap-10">
             {relatedPosts?.data?.length>0 && relatedPosts.data.map((item, index) => {

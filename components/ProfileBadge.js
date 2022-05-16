@@ -1,12 +1,12 @@
 import React from 'react';
 import { styled, keyframes } from '@stitches/react';
 import { blue, mauve, blackA, gray} from '@radix-ui/colors';
-import {
-  HamburgerMenuIcon,
-  DotFilledIcon,
-  CheckIcon,
-  ChevronRightIcon,
-} from '@radix-ui/react-icons';
+// import {
+//   HamburgerMenuIcon,
+//   DotFilledIcon,
+//   CheckIcon,
+//   ChevronRightIcon,
+// } from '@radix-ui/react-icons';
 import { signOut } from "next-auth/react"
 import useUser from '@/lib/iron-session/useUser'
 import fetchJson from "@/lib/iron-session/fetchJson";
@@ -135,13 +135,13 @@ export const DropdownMenuArrow = StyledArrow;
 // Your app...
 const Box = styled('div', {});
 
-const RightSlot = styled('div', {
-  marginLeft: 'auto',
-  paddingLeft: 20,
-  color: mauve.mauve11,
-  ':focus > &': { color: 'white' },
-  '[data-disabled] &': { color: mauve.mauve8 },
-});
+// const RightSlot = styled('div', {
+//   marginLeft: 'auto',
+//   paddingLeft: 20,
+//   color: mauve.mauve11,
+//   ':focus > &': { color: 'white' },
+//   '[data-disabled] &': { color: mauve.mauve8 },
+// });
 
 const IconButton = styled('button', {
   all: 'unset',
@@ -160,11 +160,11 @@ const IconButton = styled('button', {
   '&:focus': { boxShadow: `0 0 0 2px ${blue.blue7}` },
 });
 
-const signOutAPI = (mutateUser) =>{
-    signOut()
-}
+// const signOutAPI = (mutateUser) =>{
+//     signOut()
+// }
 
-export const DropdownMenuDemo = ({icon}) => {
+export const DropdownMenuDemo = ({icon, user}) => {
     const router = useRouter();
     const {mutateUser} = useUser({
         redirectTo: '/',
@@ -181,9 +181,24 @@ export const DropdownMenuDemo = ({icon}) => {
 
         <DropdownMenuContent sideOffset={5}>
           <DropdownMenuItem onSelect={()=>{
-            router.push('/account');}}>
+            router.push(`/people/${user.slug}`);}}>
               {/* <Link href="/account"> */}
                 Profile 
+              {/* </Link> */}
+            {/* <RightSlot>⌘+T</RightSlot> */}
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={()=>{
+            router.push('/account');}}>
+              {/* <Link href="/account"> */}
+                Set up profile 
+              {/* </Link> */}
+            {/* <RightSlot>⌘+T</RightSlot> */}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onSelect={()=>{
+            router.push(`/sign-in`);}}>
+              {/* <Link href="/account"> */}
+                Welcome Guide 
               {/* </Link> */}
             {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
@@ -194,10 +209,8 @@ export const DropdownMenuDemo = ({icon}) => {
                 await fetchJson("/api/auth/logout", { method: "POST" }),
                 false,
               );
-            //   router.push("/");
           }}>
             Sign Out
-             {/* <RightSlot>⌘+N</RightSlot> */}
           </DropdownMenuItem>
             
           <DropdownMenuArrow offset={12} />

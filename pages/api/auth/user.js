@@ -68,6 +68,10 @@ async function userRoute(req, res) {
     if(req.session.user?.login?.user?.id){
       id=req.session.user.login?.user?.id
     }
+    let slug = null
+    if(req.session.user?.login?.user?.slug){
+      slug=req.session.user.login?.user?.slug
+    }
     //save to iron-session
     let nextAuthUser={
       isLoggedIn:true,
@@ -78,7 +82,8 @@ async function userRoute(req, res) {
           email:email,//problem - this does not get updated
           name:nextAuthSession.user.name,
           avatar:avatar,
-          id
+          id,
+          slug
         }
       }
     }

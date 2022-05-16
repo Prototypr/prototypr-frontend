@@ -63,7 +63,7 @@ const EN = {
   "sourcepanel.desc":
     "The Source tackles taboo topics, exposes unseen truths, and gets the scoop on the latest in the tech and design sphere.",
   "sourcepanel.desc2":
-    "Get our hand-picked design articles, tips and tools, straight to your inbox. No paywalls, just good stuff. ",
+    "Get hand-picked design articles, tips and tools, straight to your inbox. No paywalls, just good stuff. ",
   "sourcepanel.form.label": "Enter email address",
   "sourcepanel.form.placeholder": "Your Email",
   "sourcepanel.form.errortip": "Please check and try again.",
@@ -89,8 +89,10 @@ const EN = {
   "footer.rightCat3": "Prototypr Open",
   "footer.otherResource": "Other Resources",
   "footer.other1": "Adobe Fund for Design",
+  "footer.other2": "Web Monetization",
   "footer.other3": "Mail by Letter",
   "footer.other4": "Privacy Policy",
+  "footer.other5": "Grant for the Web",
   "topics.title": "Topics",
   "topics.header": "Open design and tech stories for everyone to read",
   "newsletter.title": "Get the newsletter",

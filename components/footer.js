@@ -115,7 +115,7 @@ export default function Footer() {
                     {intl.formatMessage({ id: "footer.otherResource" })}
                   </span>
                   <ul className="list-unstyled">
-                    <li>
+                  <li>
                       <a
                         className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base"
                         rel="noreferrer"
@@ -123,6 +123,26 @@ export default function Footer() {
                         target="_blank"
                       >
                         {intl.formatMessage({ id: "footer.other1" })}
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base"
+                        rel="noreferrer"
+                        href="https://grantfortheweb.org"
+                        target="_blank"
+                      >
+                        {intl.formatMessage({ id: "footer.other5" })}
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base"
+                        rel="noreferrer"
+                        href="https://interledger.org/"
+                        target="_blank"
+                      >
+                        {intl.formatMessage({ id: "footer.other2" })}
                       </a>
                     </li>
                     <li>
