@@ -1,13 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useIntl } from "react-intl";
 
 import gumletLoader from "@/components/new-index/gumletLoader";
 
 export default function EditorPick({ post = {}, header = false, lazy = true }) {
-  const intl = useIntl();
-  const locale = intl.locale ? intl.locale : "en-US";
   const postItem = post?.attributes;
   const {
     title = "",
@@ -20,12 +17,14 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
   } = postItem;
   const tagArr = tags.data;
 
-  const ftImage = featuredImage?.data?.attributes?.url
+  let ftImage = featuredImage?.data?.attributes?.url
     ? featuredImage.data.attributes.url
     : legacyFeaturedImage?.mediaItemUrl
     ? legacyFeaturedImage.mediaItemUrl
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
+  ftImage = ftImage.replace('https://prototypr-media.sfo2.digitaloceanspaces.com','https://prototyprio.gumlet.io')
+    
   let authorImage =
     "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
   if (
