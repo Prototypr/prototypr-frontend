@@ -5,6 +5,8 @@ import ErrorPage from 'next/error'
 import Container from '@/components/container'
 import Layout from '@/components/layout'
 import { getAllPostsWithSlug, getNewsletter } from '@/lib/api'
+import { FormattedMessage } from "react-intl";
+
 const PostPreview = dynamic(() => import("@/components/post-preview"));
 
 
@@ -52,7 +54,9 @@ export default function Post({ post, morePosts, preview }) {
             </div>
             </article>
             <hr className="border-accent-2 mt-28 mb-24" />
-            <h2 className="text-4xl -mt-12 mb-12 font-semibold"> {intl.formatMessage({ id: "newsletter.issue" })}</h2>
+            <h2 className="text-4xl -mt-12 mb-12 font-semibold"> 
+            <FormattedMessage id="newsletter.issue" />
+            </h2>
             {morePosts.length > 0 && 
             <div
             className={`grid grid-cols-1 md:grid-cols-2 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}
