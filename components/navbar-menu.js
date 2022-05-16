@@ -1,7 +1,8 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { styled, keyframes } from "@stitches/react";
-import {Root, List, Trigger, Content,Indicator,Viewport,Item} from "@radix-ui/react-navigation-menu";
+import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { indigo, mauve, red, pink, gray } from "@radix-ui/colors";
 import Link from "next/link";
@@ -52,7 +53,7 @@ const fadeOut = keyframes({
   to: { opacity: 0 },
 });
 
-const StyledMenu = styled(Root, {
+const StyledMenu = styled(NavigationMenuPrimitive.Root, {
   position: "relative",
   display: "flex",
   justifyContent: "center",
@@ -60,7 +61,7 @@ const StyledMenu = styled(Root, {
   zIndex: 1,
 });
 
-const StyledList = styled(List, {
+const StyledList = styled(NavigationMenuPrimitive.List, {
   all: "unset",
   display: "flex",
   justifyContent: "center",
@@ -96,7 +97,7 @@ const itemButtonStyles = {
   "&:hover": { backgroundColor: indigo.indigo9, color: gray.gray1 },
 };
 
-const StyledTrigger = styled(Trigger, {
+const StyledTrigger = styled(NavigationMenuPrimitive.Trigger, {
   all: "unset",
   ...itemStyles,
   display: "flex",
@@ -140,7 +141,7 @@ const StyledTriggerWithCaret = React.forwardRef(
   )
 );
 
-const StyledLink = styled(Link, {
+const StyledLink = styled(NavigationMenuPrimitive.Link, {
   ...itemStyles,
   display: "block",
   textDecoration: "none",
@@ -148,7 +149,7 @@ const StyledLink = styled(Link, {
   lineHeight: 1,
 });
 
-const StyledButton = styled(Link, {
+const StyledButton = styled(NavigationMenuPrimitive.Link, {
   ...itemButtonStyles,
   display: "block",
   background: indigo.indigo10,
@@ -157,7 +158,7 @@ const StyledButton = styled(Link, {
   lineHeight: 1,
 });
 
-const StyledContent = styled(Content, {
+const StyledContent = styled(NavigationMenuPrimitive.Content, {
   position: "absolute",
   top: 0,
   left: 0,
@@ -173,7 +174,7 @@ const StyledContent = styled(Content, {
   },
 });
 
-const StyledIndicator = styled(Indicator, {
+const StyledIndicator = styled(NavigationMenuPrimitive.Indicator, {
   display: "flex",
   alignItems: "flex-end",
   justifyContent: "center",
@@ -205,7 +206,7 @@ const StyledIndicatorWithArrow = React.forwardRef((props, forwardedRef) => (
   </StyledIndicator>
 ));
 
-const StyledViewport = styled(Viewport, {
+const StyledViewport = styled(NavigationMenuPrimitive.Viewport, {
   position: "absolute",
   transformOrigin: "top center",
   marginTop: 10,
@@ -259,7 +260,7 @@ const NextButton = ({ children, ...props }) => {
 // Exports
 const NavigationMenu = StyledMenu;
 const NavigationMenuList = StyledList;
-const NavigationMenuItem = Item;
+const NavigationMenuItem = NavigationMenuPrimitive.Item;
 const NavigationMenuTrigger = StyledTriggerWithCaret;
 const NavigationMenuLink = NextLink;
 const NavigationMenuButton = NextButton;
