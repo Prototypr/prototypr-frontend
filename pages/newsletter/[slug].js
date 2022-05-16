@@ -3,9 +3,9 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
-const MoreStories = dynamic(() => import("@/components/more-stories"));
 import Layout from '@/components/layout'
 import { getAllPostsWithSlug, getNewsletter } from '@/lib/api'
+const PostPreview = dynamic(() => import("@/components/post-preview"));
 
 
 const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true })
@@ -53,7 +53,45 @@ export default function Post({ post, morePosts, preview }) {
             </article>
             {/* <SectionSeparator /> */}
             {/* <h2 className="text-4xl -mt-12 mb-12 font-semibold"> {intl.formatMessage({ id: "newsletter.issue" })}</h2> */}
-            {morePosts.length > 0 && <MoreStories posts={morePosts} type="newsletter" route={'newsletter'} />}
+            {morePosts.length > 0 && 
+            <div
+            className={`grid grid-cols-1 md:grid-cols-2 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}
+          >
+            {morePosts.map((post, i) => {
+                return (
+                  <PostPreview
+                    key={post.slug}
+                    title={post.title}
+                    coverImage={
+                      post.featuredImage?.data?.attributes?.url
+                        ? post.featuredImage.data.attributes.url
+                        : post.legacyFeaturedImage
+                        ? post.legacyFeaturedImage
+                        : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                    }
+                    date={post.date}
+                    author={
+                      post.author && post.author.data
+                        ? post.author.data.attributes
+                        : null
+                    }
+                    slug={post.slug}
+                    excerpt={post.excerpt}
+                    type={'newsletter'}
+                    route={'newsletter'}
+                    tag={
+                      post.tags &&
+                      post.tags.data &&
+                      post.tags.data[0]
+                        ? post.tags.data[0]
+                        : null
+                    }
+                  />
+                );
+              
+            })}
+          </div>            
+            }
           </>
         )}
       </Container>

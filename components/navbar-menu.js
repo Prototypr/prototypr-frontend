@@ -419,12 +419,12 @@ export const NavigationMenuDemo = ({
           {user && user.isLoggedIn ? (
             <div className="ml-2">
               <Link href="/account">
-                {user.avatar && 
+                {user && 
                   <ProfileBadge
                     icon={
                       <img
-                        className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
-                        src={user.avatar.url?user.avatar.url:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
+                        className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer object-cover"
+                        src={user?.avatar?.url?user.avatar.url:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                       />
                     }
                   />}
