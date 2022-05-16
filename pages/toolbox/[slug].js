@@ -9,8 +9,8 @@ const AuthorCard = dynamic(() => import("@/components/toolbox/AuthorCard"));
 const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"));
 const RelatedPosts = dynamic(() => import("@/components/related-posts"));
 const VisitCard = dynamic(() => import("@/components/toolbox/VisitCard"));
+const Contributors = dynamic(() => import("@/components/toolbox/Contributors"));
 
-// import Contributors from "@/components/toolbox/Contributors";
 import { getAllPostsWithSlug, getTool } from "@/lib/api";
 
 export default function Post({ post, relatedPosts, gallery, preview }) {
@@ -52,7 +52,7 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
               <SponsorCard position="left" />
             </div>
             {/**Contributors */}
-            {/* <Contributors withAuthUser={withAuthUser} /> */}
+            <Contributors />
           </div>
           {/* center sidebar */}
           <div className="col-span-full lg:col-span-13">
