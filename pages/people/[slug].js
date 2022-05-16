@@ -19,7 +19,7 @@ const PAGE_SIZE = 12;
 const ALL_SLUGS = ['hoangnguyen','clos','ebruaksoy','giovanitier','atharvapatil','alexanderigwe','kelechiu','tamarasredojevic','leandrofernandez','alexandragrochowski','chamansharma']
 
 
-export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1, author = {}, gradient='', kofi=null,github=null,twitter=null, authorUrl='', skills=[] }) {
+export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1, author = {}, gradient='', kofi=null,github=null,twitter=null, dribbble=null,authorUrl='', skills=[] }) {
 
   const router = useRouter()
 
