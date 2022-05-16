@@ -51,8 +51,8 @@ export default function Post({ post, morePosts, preview }) {
               <PostBody content={post.attributes.content} />
             </div>
             </article>
-            {/* <SectionSeparator /> */}
-            {/* <h2 className="text-4xl -mt-12 mb-12 font-semibold"> {intl.formatMessage({ id: "newsletter.issue" })}</h2> */}
+            <hr className="border-accent-2 mt-28 mb-24" />
+            <h2 className="text-4xl -mt-12 mb-12 font-semibold"> {intl.formatMessage({ id: "newsletter.issue" })}</h2>
             {morePosts.length > 0 && 
             <div
             className={`grid grid-cols-1 md:grid-cols-2 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}
