@@ -3,12 +3,12 @@ import dynamic from 'next/dynamic'
 import useUser from "@/lib/iron-session/useUser";
 import Layout from "@/components/layout";
 // import fetchJson from "@/lib/iron-session/fetchJson";
-import Button from "@/components/atom/Button/Button";
-import Spinner from "@/components/atom/Spinner/Spinner";
 // import toast from "react-hot-toast";
 import Router from "next/router";
 const fetchJson = dynamic(() => import('@/lib/iron-session/fetchJson'), { ssr: true })
 const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
+const Spinner = dynamic(() => import('@/components/atom/Spinner/Spinner'))
+const Button = dynamic(() => import('@/components/atom/Button/Button'))
 
 export default function Login({ loginToken }) {
   // here we just check if user is already logged in and redirect to profile

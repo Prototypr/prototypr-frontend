@@ -223,53 +223,7 @@ author?.legacyAvatar ? author.legacyAvatar
           </div>
           <div className="mt-10 flex-1 md:ml-20">
             <div className=" mx-auto bg-white rounded-lg border border-gray-200 mb-20 max-w-4xl">
-              {!allPosts.length ? (
-                <div className="pt-20 pb-20 px-6">
-                  <img
-                    width="150"
-                    className=" mx-auto"
-                    src="https://prototypr.io/wp-content/uploads/2018/07/6dd2bd90-2c61-4163-bd5d-720567a692e6.png"
-                    style={{ opacity: "0.92" }}
-                  />
-                  {withAuthUser && withAuthUser.ID == user.id ? (
-                    <>
-                      <h1 className="text-lg text-gray-500 w-full text-center mt-3">
-                        Share something you've learned.
-                      </h1>
-                      <h1 className="text-lg text-gray-500 pt-0 text-center">
-                        Add your first article.
-                      </h1>
-                    </>
-                  ) : (
-                    <>
-                      <h1 className="text-lg text-gray-500 w-full text-center mt-3">
-                        {author.name
-                          ? author.name
-                          : author.displayName
-                          ? author.displayName
-                          : ""}{" "}
-                        has not posted anything yet.
-                      </h1>
-                      <h1 className="text-lg text-gray-500 pt-0 text-center">
-                        Check back soon!
-                      </h1>
-                    </>
-                  )}
-
-                  {withAuthUser && withAuthUser.ID == user.id ? (
-                    <div className="flex justify-center w-full my-3">
-                      <a
-                        className="inline-block bg-blue-600 hover:bg-blue-500 mx-auto text-white font-bold  py-2 px-6 rounded-full shadow hover:shadow-lg"
-                        href="/write-for-us"
-                      >
-                        Write Post
-                      </a>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              ) : (
+            {allPosts.length &&
                 <div className="md:py-2 pb-6">
                   {allPosts.length && allPosts.map((item, index) =>
                     <PostListItem key={`author_post_${index}`} postItem={item.attributes} index={index} totalCount={allPosts.length} />
@@ -282,8 +236,7 @@ author?.legacyAvatar ? author.legacyAvatar
                       onPageNumChange(pageNum, slug);
                     }}
                   />
-                </div>
-              )}
+                </div>}
             </div>
           </div>
         </div>

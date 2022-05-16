@@ -21,7 +21,6 @@ const ALL_SLUGS = ['hoangnguyen','clos','ebruaksoy','giovanitier','atharvapatil'
 
 export default function PeoplePage({ allPosts = [], preview, pagination, slug = '', pageNo = 1, author = {}, gradient='', kofi=null,github=null,twitter=null, authorUrl='', skills=[] }) {
 
-  const withAuthUser = {}
   const router = useRouter()
 
   const onPageNumChange = (pageNum) => {
@@ -175,20 +174,6 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
             </div>
 
             <div className="mt-3 md:mt-6 top-0 right-0 md:relative">
-              {/* {author.availability == "1" && (
-                <a
-                  className="cursor-pointer"
-                  target="_blank"
-                  href={`${author.url ? author.url : "#"}`}
-                >
-                  <div className=" bg-blue-900 mr-2 mb-2 uppercase text-gray-100 text-xs px-3 py-2 rounded inline-block">
-                    <span className="hidden sm:block">
-                      🔥 Available for hire
-                    </span>
-                    <span className="sm:hidden">🔥 Hire me</span>
-                  </div>
-                </a>
-              )} */}
 
               <div className="flex justify-start mt-1 md:mt-3 z-20">
                 {twitter && (
@@ -204,12 +189,10 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                     />
                   </a>
                 )}
-                {author.dribbble && (
+                {dribbble && (
                   <a
                     className="link block mr-2"
-                    href={`https://dribbble.com/${getDribbbleHandle(
-                      author.dribbble
-                    )}`}
+                    href={`https://dribbble.com/${dribble}`}
                     target="_blank"
                   >
                     <img
@@ -237,53 +220,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
           </div>
           <div className="mt-10 flex-1 md:ml-20">
             <div className=" mx-auto bg-white rounded-lg border border-gray-200 mb-20 max-w-4xl">
-              {!allPosts.length ? (
-                <div className="pt-20 pb-20 px-6">
-                  <img
-                    width="150"
-                    className=" mx-auto"
-                    src="https://prototypr.io/wp-content/uploads/2018/07/6dd2bd90-2c61-4163-bd5d-720567a692e6.png"
-                    style={{ opacity: "0.92" }}
-                  />
-                  {withAuthUser && withAuthUser.ID == user.id ? (
-                    <>
-                      <h1 className="text-lg text-gray-500 w-full text-center mt-3">
-                        Share something you've learned.
-                      </h1>
-                      <h1 className="text-lg text-gray-500 pt-0 text-center">
-                        Add your first article.
-                      </h1>
-                    </>
-                  ) : (
-                    <>
-                      <h1 className="text-lg text-gray-500 w-full text-center mt-3">
-                        {author.name
-                          ? author.name
-                          : author.displayName
-                          ? author.displayName
-                          : ""}{" "}
-                        has not posted anything yet.
-                      </h1>
-                      <h1 className="text-lg text-gray-500 pt-0 text-center">
-                        Check back soon!
-                      </h1>
-                    </>
-                  )}
-
-                  {withAuthUser && withAuthUser.ID == user.id ? (
-                    <div className="flex justify-center w-full my-3">
-                      <a
-                        className="inline-block bg-blue-600 hover:bg-blue-500 mx-auto text-white font-bold  py-2 px-6 rounded-full shadow hover:shadow-lg"
-                        href="/write-for-us"
-                      >
-                        Write Post
-                      </a>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              ) : (
+              {allPosts.length &&
                 <div className="md:py-2 pb-6">
                   {allPosts.length && allPosts.map((item, index) =>
                     <PostListItem key={`author_post_${index}`} postItem={item.attributes} index={index} totalCount={allPosts.length} />
@@ -296,8 +233,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                       onPageNumChange(pageNum, slug);
                     }}
                   />
-                </div>
-              )}
+                </div>}
             </div>
           </div>
         </div>
@@ -329,7 +265,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
   let author = allPosts.data.length && allPosts.data[0] ? allPosts.data[0].attributes.author: {}
   author = author?.data?.attributes?author?.data?.attributes:null
   
-  let grad, kofi, github, twitter, authorUrl = '' 
+  let grad, kofi, github, twitter, authorUrl, dribbble = '' 
   let skills = []
 
   if(author){
@@ -345,6 +281,8 @@ export async function getStaticProps({ preview = null, params, locale }) {
     kofi = getKofiName(author.kofi)
     github = getGithubHandle(author.github)
     twitter = getTwitterHandle(author.twitter)
+    dribbble = getDribbbleHandle(author.dribbble)
+
     if(author.url){
       authorUrl = author.url.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "")
     }
@@ -367,6 +305,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       kofi:kofi?kofi:'',
       github:github?github:'',
       twitter:twitter?twitter:'',
+      dribbble:dribbble?dribbble:'',
       skills,
       authorUrl,
       pageNo,

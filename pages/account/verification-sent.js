@@ -1,6 +1,8 @@
 import useUser from "@/lib/iron-session/useUser";
 import Layout from "@/components/layout";
-import Button from "@/components/atom/Button/Button";
+import dynamic from "next/dynamic";
+const Button = dynamic(() => import('@/components/atom/Button/Button'))
+
 
 export default function Login({ email }) {
   // here we just check if user is already logged in and redirect to profile

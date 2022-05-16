@@ -1,6 +1,5 @@
 import Fallback from "@/components/atom/Fallback/Fallback";
 import Layout from "@/components/layout";
-import axios from "axios";
 import Head from "next/head";
 import {useState} from "react"
 
@@ -13,6 +12,7 @@ import dynamic from 'next/dynamic'
 const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 const Form = dynamic(() => import('@/components/Form'), { ssr: true })
 const UserForm = dynamic(() => import('@/components/user/UserForm'), { ssr: true })
+const axios = dynamic(() => import('axios'), { ssr: false })
 
 
 const AccountPage = ({ preview, userData, isConfirmed }) => {
