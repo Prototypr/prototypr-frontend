@@ -1,7 +1,7 @@
 import Alert from "./alert";
 import Footer from "./footer";
 import Meta from "./meta";
-import Navbar from "./navbar";
+import Navbar from "./navbar2";
 
 export default function Layout({
   preview,

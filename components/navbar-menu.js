@@ -1,13 +1,12 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { styled, keyframes } from "@stitches/react";
-import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import {Root, List, Trigger, Content,Indicator,Viewport,Item} from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { indigo, mauve, red, pink, gray } from "@radix-ui/colors";
 import Link from "next/link";
 const ProfileBadge = dynamic(() => import("./ProfileBadge"));
 
-const Gravatar = dynamic(() => import("react-gravatar"), { ssr: false });
 const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
   ssr: true,
 });
@@ -53,7 +52,7 @@ const fadeOut = keyframes({
   to: { opacity: 0 },
 });
 
-const StyledMenu = styled(NavigationMenuPrimitive.Root, {
+const StyledMenu = styled(Root, {
   position: "relative",
   display: "flex",
   justifyContent: "center",
@@ -61,7 +60,7 @@ const StyledMenu = styled(NavigationMenuPrimitive.Root, {
   zIndex: 1,
 });
 
-const StyledList = styled(NavigationMenuPrimitive.List, {
+const StyledList = styled(List, {
   all: "unset",
   display: "flex",
   justifyContent: "center",
@@ -97,7 +96,7 @@ const itemButtonStyles = {
   "&:hover": { backgroundColor: indigo.indigo9, color: gray.gray1 },
 };
 
-const StyledTrigger = styled(NavigationMenuPrimitive.Trigger, {
+const StyledTrigger = styled(Trigger, {
   all: "unset",
   ...itemStyles,
   display: "flex",
@@ -141,7 +140,7 @@ const StyledTriggerWithCaret = React.forwardRef(
   )
 );
 
-const StyledLink = styled(NavigationMenuPrimitive.Link, {
+const StyledLink = styled(Link, {
   ...itemStyles,
   display: "block",
   textDecoration: "none",
@@ -149,7 +148,7 @@ const StyledLink = styled(NavigationMenuPrimitive.Link, {
   lineHeight: 1,
 });
 
-const StyledButton = styled(NavigationMenuPrimitive.Link, {
+const StyledButton = styled(Link, {
   ...itemButtonStyles,
   display: "block",
   background: indigo.indigo10,
@@ -158,7 +157,7 @@ const StyledButton = styled(NavigationMenuPrimitive.Link, {
   lineHeight: 1,
 });
 
-const StyledContent = styled(NavigationMenuPrimitive.Content, {
+const StyledContent = styled(Content, {
   position: "absolute",
   top: 0,
   left: 0,
@@ -174,7 +173,7 @@ const StyledContent = styled(NavigationMenuPrimitive.Content, {
   },
 });
 
-const StyledIndicator = styled(NavigationMenuPrimitive.Indicator, {
+const StyledIndicator = styled(Indicator, {
   display: "flex",
   alignItems: "flex-end",
   justifyContent: "center",
@@ -206,7 +205,7 @@ const StyledIndicatorWithArrow = React.forwardRef((props, forwardedRef) => (
   </StyledIndicator>
 ));
 
-const StyledViewport = styled(NavigationMenuPrimitive.Viewport, {
+const StyledViewport = styled(Viewport, {
   position: "absolute",
   transformOrigin: "top center",
   marginTop: 10,
@@ -260,7 +259,7 @@ const NextButton = ({ children, ...props }) => {
 // Exports
 const NavigationMenu = StyledMenu;
 const NavigationMenuList = StyledList;
-const NavigationMenuItem = NavigationMenuPrimitive.Item;
+const NavigationMenuItem = Item;
 const NavigationMenuTrigger = StyledTriggerWithCaret;
 const NavigationMenuLink = NextLink;
 const NavigationMenuButton = NextButton;
@@ -419,25 +418,15 @@ export const NavigationMenuDemo = ({
           {user && user.isLoggedIn ? (
             <div className="ml-2">
               <Link href="/account">
-                {user.avatar ? (
+                {user.avatar && 
                   <ProfileBadge
                     icon={
                       <img
                         className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
-                        src={user.avatar.url}
+                        src={user.avatar.url?user.avatar.url:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                       />
                     }
-                  />
-                ) : (
-                  <ProfileBadge
-                    icon={
-                      <Gravatar
-                        className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
-                        email={user.email}
-                      />
-                    }
-                  />
-                )}
+                  />}
               </Link>
             </div>
           ) : userLoading && userLoggedInCookie ? (

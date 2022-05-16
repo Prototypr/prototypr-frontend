@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import "@/styles/index.scss";
 import { SessionProvider } from "next-auth/react";
 import "@/styles/toolStyles.css";
@@ -21,8 +21,10 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
 
   // addLocaleData([...en, ...de])
   // const {locale} = useContext(LocaleContext)
-  const { locale, locales } = useRouter();
-  const [shortLocale] = locale ? locale.split("-") : ["en"];
+  const { locale } = useRouter();
+  const [shortLocale] = useState(()=>{
+    locale ? locale.split("-") : ["en"]
+  });
 
   // const [localeAlert, setLocaleAlert] = useState(false)
   // const [localeOfNavigator, setLocaleOfNavigator] = useState("")

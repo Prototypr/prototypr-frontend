@@ -1,8 +1,6 @@
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import {gradient} from "@/lib/profile-page/profile-page.js"
-const Gravatar = dynamic(() => import("react-gravatar"), { ssr: false });
 
 export default function PeoplePostPreview({
     title,
@@ -29,7 +27,7 @@ export default function PeoplePostPreview({
                         </div>
                     </figure>
                     <div className="absolute rounded-full bg-white -bottom-5 left-4">
-                        {avatar || legacyAvatar ? (
+                        {avatar || legacyAvatar && (
                             <div
                                 className="rounded-full transform group-hover:scale-110 transition duration-700 ease-out  border-white border border-2 bg-white -mt-2 shadow"
                                 style={{ height: "44px", width: "44px" }}
@@ -42,16 +40,7 @@ export default function PeoplePostPreview({
                                     src={avatar?avatar:legacyAvatar}
                                 />
                             </div>
-                        ):
-                        <div
-                        className="rounded-full transform group-hover:scale-110 transition duration-700 ease-out  border-white border border-2 bg-white -mt-2 shadow"
-                        style={{ height: "44px", width: "44px" }}
-                    >
-                        <Gravatar
-                        className="hover:shadow border  rounded-full my-auto w-full h-full cursor-pointer"
-                        email={title}
-                        />
-                        </div>}
+                        )}
                     </div>
                 </>
             </div>

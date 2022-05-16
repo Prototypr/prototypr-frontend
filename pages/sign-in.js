@@ -1,20 +1,23 @@
 import Head from "next/head";
-import LoginForm from "@/components/sign-in/LoginForm";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
-import LoginSide from "@/components/sign-in/LoginSide";
-import Button from "@/components/atom/Button/Button";
 import useUser from "@/lib/iron-session/useUser";
-import WMOnboarding from '@/components/user/WMOnboarding'
 import { withIronSessionSsr } from "iron-session/next";
 import {
   updateUserSessionSSR,
   updateUserSession,
 } from "@/lib/iron-session/updateUserSession";
 import { sessionOptions } from "@/lib/iron-session/session";
-import axios from "axios";
+// import axios from "axios";
 import { useEffect } from "react";
 import Meta from "@/components/meta";
+
+const axios = dynamic(() => import("axios"));
+const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
+const LoginSide = dynamic(() => import("@/components/sign-in/LoginSide"));
+const WMOnboarding = dynamic(() => import("@/components/user/WMOnboarding"));
+
 
 export default function Index() {
   const { user } = useUser({
