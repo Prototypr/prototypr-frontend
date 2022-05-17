@@ -10,8 +10,11 @@ const ProfileBadge = dynamic(() => import("./ProfileBadge"));
 const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
   ssr: true,
 });
+const NewsletterNav = dynamic(() => import("./NewsletterNav"), {
+  ssr: true,
+});
 
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
 const StyledMenu = styled(NavigationMenuPrimitive.Root, {
   position: "relative",
@@ -102,7 +105,7 @@ const NavigationMenu = StyledMenu;
 const NavigationMenuList = StyledList;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 const NavigationMenuLink = NextLink;
-const NavigationMenuButton = NextButton;
+// const NavigationMenuButton = NextButton;
 
 export const NavigationMenuDemo = ({
   collapsed,
@@ -146,9 +149,10 @@ export const NavigationMenuDemo = ({
           ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (
-            <NavigationMenuButton href="/newsletter">
-              {intl.formatMessage({ id: "navbar.menu.title4" })}
-            </NavigationMenuButton>
+            // <NavigationMenuButton href="/newsletter">
+            //   {intl.formatMessage({ id: "navbar.menu.title4" })}
+            // </NavigationMenuButton>
+            <NewsletterNav collapsed={collapsed} />
           )}
         </NavigationMenuItem>
       </NavigationMenuList>

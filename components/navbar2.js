@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import useUser from "@/lib/iron-session/useUser";
 import { FormattedMessage } from "react-intl";
 import useScrollDirection from "./useScrollDirection";
+import jsCookie from "js-cookie";
 const NavigationMenuDemo = dynamic(() => import("./navbar-menu"), {ssr:true});
 const SubNav = dynamic(() => import("./sub-nav"), {ssr:true});
 const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {ssr:false});
@@ -30,29 +31,20 @@ export default function Navbar({ activeNav }) {
    * so there is minimal flicker between subscribe and log in button
    */
   const [userLoggedInCookie] = useState(() => {
-
-    const checkCookie = async()=>{
-      const jsCookie = (await import('js-cookie')).default
-      let loggedInCookie = jsCookie.get("prototypr-loggedIn");
-      if (loggedInCookie == "true") {
-        return true;
-      } else {
-        return false;
-      }
+    let loggedInCookie = jsCookie.get("prototypr-loggedIn");
+    if (loggedInCookie == "true") {
+      return true;
+    } else {
+      return false;
     }
-    checkCookie()
   });
 
   useEffect(() => {
-    const checkCookie=async()=>{
-      const jsCookie = (await import('js-cookie')).default
-      if (user?.email) {
-        jsCookie.set("prototypr-loggedIn", true);
-      } else {
-        jsCookie.set("prototypr-loggedIn", false);
-      }
+    if (user?.email) {
+      jsCookie.set("prototypr-loggedIn", true);
+    } else {
+      jsCookie.set("prototypr-loggedIn", false);
     }
-    checkCookie()
   }, [user?.email]);
 
   useEffect(() => {

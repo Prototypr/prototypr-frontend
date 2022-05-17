@@ -23,7 +23,7 @@ const EN = {
   "navbar.menu.title1": "More",
   "navbar.menu.title2": "Toolbox",
   "navbar.menu.title3": "Write for us",
-  "navbar.menu.title4": "Sign up",
+  "navbar.menu.title4": "Subscribe",
   "navbar.submenu1.title1": "All Topics",
   "navbar.submenu1.title2": "UX Design",
   "navbar.submenu1.title3": "Interviews",

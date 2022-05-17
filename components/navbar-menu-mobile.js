@@ -12,7 +12,7 @@ const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
   ssr: true,
 });
 
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
 const StyledMenu = styled(NavigationMenuPrimitive.Root, {
   position: "relative",

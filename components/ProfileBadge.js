@@ -180,21 +180,15 @@ export const DropdownMenuDemo = ({icon, user}) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent sideOffset={5}>
-          <DropdownMenuItem onSelect={()=>{
+          {/* <DropdownMenuItem onSelect={()=>{
             router.push(`/people/${user.slug}`);}}>
-              {/* <Link href="/account"> */}
                 Profile 
-              {/* </Link> */}
-            {/* <RightSlot>⌘+T</RightSlot> */}
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem onSelect={()=>{
             router.push('/account');}}>
-              {/* <Link href="/account"> */}
                 Set up profile 
-              {/* </Link> */}
-            {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
+          {/* <DropdownMenuSeparator /> */}
           <DropdownMenuItem onSelect={()=>{
             router.push(`/early-access`);}}>
               {/* <Link href="/account"> */}
