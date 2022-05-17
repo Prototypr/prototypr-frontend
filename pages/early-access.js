@@ -66,8 +66,8 @@ export default function Index() {
             title: "Sign into Prototypr",
             description: "Sign in or create an account",
             //   image: "",
-            canonical: "https://prototypr.io/sign-in",
-            url: "https://prototypr.io/sign-in",
+            canonical: "https://prototypr.io/early-acess",
+            url: "https://prototypr.io/early-acess",
           }}
         />
       </Head>

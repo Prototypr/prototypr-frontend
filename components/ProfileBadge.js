@@ -196,7 +196,7 @@ export const DropdownMenuDemo = ({icon, user}) => {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={()=>{
-            router.push(`/sign-in`);}}>
+            router.push(`/early-access`);}}>
               {/* <Link href="/account"> */}
                 Welcome Guide 
               {/* </Link> */}

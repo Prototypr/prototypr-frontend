@@ -4,8 +4,8 @@ import {useState} from 'react'
 import dynamic from "next/dynamic";
 import axios from 'axios'
 const Form = dynamic(() => import('@/components/Form'), { ssr: true })
-const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
-
+// const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
+import toast from 'react-hot-toast'
 
 const LoginForm = ({isSignUp}) => {
 

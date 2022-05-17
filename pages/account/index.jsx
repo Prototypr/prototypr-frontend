@@ -141,7 +141,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   const user = req.session.user
 
    if (user === undefined) {
-    res.setHeader('location', '/sign-in')
+    res.setHeader('location', '/early-access')
     res.statusCode = 302
     res.end()
     return {

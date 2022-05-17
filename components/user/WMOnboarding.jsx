@@ -7,7 +7,7 @@ export default function Alert({ preview }) {
 
   return (
     <Wizard 
-    basename='/sign-in'
+    basename='/early-access'
     render={({ step, steps }) => (
         <div className="">
             <Steps>
@@ -35,7 +35,7 @@ export default function Alert({ preview }) {
                               </ul>
                               <div className="w-full text-center relative flex justify-center mt-6">
                               <button 
-                                aria-label="Learn more"
+                                aria-label="Get started"
                                 onClick={next}
                                 className={`text-base z-10 px-4 py-3 mt-2 focus:outline-none focus:ring focus:ring-blue-400 flex justify-center rounded-md cursor-pointer 
                                   hover:bg-blue-600
@@ -43,7 +43,7 @@ export default function Alert({ preview }) {
                                   text-white text-sm font-semibold leading-5
                                   duration-200 ease-in-out 
                                   transition`}>
-                                      Learn more
+                                      Get started
                                 </button>
                               </div>
                             </div>
