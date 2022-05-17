@@ -123,7 +123,7 @@ export async function getStaticProps({ params, preview = null, postType="newslet
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug('newsletter')
+  const allPosts = await getAllPostsWithSlug('newsletter', 1000)
   
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 

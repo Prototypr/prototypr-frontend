@@ -158,18 +158,18 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug("tool");
-  const homePageTools = await getAllToolsForHomeStatic()
+  const allPosts = await getAllPostsWithSlug("tool", 5000);
+  // const homePageTools = await getAllToolsForHomeStatic()
 
-  let mergedSlugs = {
-    ...allPosts,
-    ...homePageTools
-  };
+  // let mergedSlugs = {
+  //   ...allPosts,
+  //   ...homePageTools
+  // };
 
   return {
     paths:
       (allPosts &&
-        mergedSlugs.data?.map((post) => {
+        allPosts.data?.map((post) => {
           return `/toolbox/${post.attributes.slug}`;
         })) ||
       [],

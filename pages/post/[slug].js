@@ -101,16 +101,16 @@ export async function getStaticProps({ params, preview = null, locale}) {
 
 export async function getStaticPaths({locales}) {
   
-  const allPosts = await getAllPostsWithSlug()
-  const homePosts = await getCombinedPostsForHomeStatic()
+  const allPosts = await getAllPostsWithSlug('article',5000)
+  // const homePosts = await getCombinedPostsForHomeStatic()
 
-  let mergedSlugs = {
-    ...allPosts,
-    ...homePosts
-  };
+  // let mergedSlugs = {
+  //   ...allPosts,
+  //   ...homePosts
+  // };
   
   return {
-    paths: mergedSlugs && mergedSlugs.data?.map((post) =>{ 
+    paths: allPosts && allPosts.data?.map((post) =>{ 
       // console.log(post.attributes.slug)
       return `/post/${post.attributes.slug}`}) || [],
     fallback: 'blocking',
