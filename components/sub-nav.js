@@ -2,7 +2,7 @@ import React from "react";
 import { styled, keyframes } from "@stitches/react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
-import { indigo, mauve, red, pink } from "@radix-ui/colors";
+import { indigo, mauve, green, teal } from "@radix-ui/colors";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -306,7 +306,7 @@ const ContentListItemCallout = React.forwardRef(
     <ListItem css={{ gridRow: "span 3" }}>
       <NavigationMenuLink
         {...props}
-        href="/post/the-freemium-web-youve-read-all-your-free-articles-this-month"
+        href="/post/write-for-us"
         ref={forwardedRef}
         css={{
           display: "flex",
@@ -314,29 +314,30 @@ const ContentListItemCallout = React.forwardRef(
           flexDirection: "column",
           width: "100%",
           height: "100%",
-          background: `linear-gradient(135deg, ${pink.pink9} 0%, ${red.red9} 100%)`,
+          background: `linear-gradient(135deg, ${teal.teal4} 0%, ${green.green4} 100%)`,
           borderRadius: 6,
           padding: 25,
         }}
       >
         <LinkTitle
           css={{
-            // fontSize: 18,
-            color: "white",
+            fontSize: 18,
+            color: "#222",
             marginTop: 16,
             marginBottom: 7,
           }}
         >
-          <FormattedMessage id="navbar.contentitem.title" />
+          <img className="w-14 mb-4 -ml-0.5" src='/static/images/icons/wm-icon-animated.svg'/>
+          <FormattedMessage id="navbar.webmonetization.title" />
         </LinkTitle>
         <LinkText
           css={{
             // fontSize: 14,
-            color: mauve.mauve4,
+            color: '#444',
             lineHeight: 1.3,
           }}
         >
-          <FormattedMessage id="navbar.contentitem.desc" />
+          <FormattedMessage id="navbar.webmonetization.desc" />
         </LinkText>
       </NavigationMenuLink>
     </ListItem>
