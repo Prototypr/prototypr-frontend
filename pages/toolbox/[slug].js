@@ -115,6 +115,8 @@ export async function getStaticProps({ params, preview = null, locale }) {
   if (item && item.attributes.legacyMedia) {
     if (item.attributes.legacyMedia.gallery && item.attributes.legacyMedia.gallery.length) {
       item.attributes.legacyMedia.gallery.forEach((galleryItem, index) => {
+       //make nextjs preload the gumlet image
+        galleryItem.medium =  galleryItem.medium.replace('https://prototypr-media.sfo2.digitaloceanspaces.com','https://prototyprio.gumlet.io')
         PHOTO_SET.push({
           thumbnail:
             galleryItem.thumb.indexOf("https://") == -1
