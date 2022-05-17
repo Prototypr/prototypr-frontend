@@ -7,13 +7,13 @@ const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem")
 const PostHeader = dynamic(() => import("@/components/post-header"), { ssr: true });
 
 import Layout from '@/components/layout'
-import { getAllPostsWithSlug, getPost } from '@/lib/api'
+import { getAllPostsWithSlug, getPost, getCombinedPostsForHomeStatic } from '@/lib/api'
 import Head from 'next/head'
 const NoticeTranslation = dynamic(() => import("@/components/notice-translation"), { ssr: true });
 
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
 
-export default function Post({ post, preview, relatedPosts, combinedRelatedPosts}) {
+export default function Post({ post, preview, relatedPosts}) {
   const router = useRouter()
   if (!router.isFallback && !post?.attributes?.slug) {
     return <ErrorPage statusCode={404} />
@@ -79,7 +79,7 @@ export default function Post({ post, preview, relatedPosts, combinedRelatedPosts
 }
 
 export async function getStaticProps({ params, preview = null, locale}) {
-  
+
   const data = await getPost(params.slug, preview)
 
  let relatedPosts = {};
@@ -100,10 +100,17 @@ export async function getStaticProps({ params, preview = null, locale}) {
 }
 
 export async function getStaticPaths({locales}) {
+  
   const allPosts = await getAllPostsWithSlug()
+  const homePosts = await getCombinedPostsForHomeStatic()
+
+  let mergedSlugs = {
+    ...allPosts,
+    ...homePosts
+  };
   
   return {
-    paths: allPosts && allPosts.data?.map((post) =>{ 
+    paths: mergedSlugs && mergedSlugs.data?.map((post) =>{ 
       // console.log(post.attributes.slug)
       return `/post/${post.attributes.slug}`}) || [],
     fallback: 'blocking',

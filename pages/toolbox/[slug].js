@@ -11,7 +11,7 @@ const RelatedPosts = dynamic(() => import("@/components/related-posts"));
 const VisitCard = dynamic(() => import("@/components/toolbox/VisitCard"));
 const Contributors = dynamic(() => import("@/components/toolbox/Contributors"));
 
-import { getAllPostsWithSlug, getTool } from "@/lib/api";
+import { getAllPostsWithSlug, getTool, getAllToolsForHomeStatic } from "@/lib/api";
 
 export default function Post({ post, relatedPosts, gallery, preview }) {
 
@@ -157,10 +157,17 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug("tool");
+  const homePageTools = await getAllToolsForHomeStatic()
+
+  let mergedSlugs = {
+    ...allPosts,
+    ...homePageTools
+  };
+
   return {
     paths:
       (allPosts &&
-        allPosts.data?.map((post) => {
+        mergedSlugs.data?.map((post) => {
           return `/toolbox/${post.attributes.slug}`;
         })) ||
       [],
