@@ -3,7 +3,7 @@ import Date from "../components/date";
 import Link from "next/link";
 import PostTitle from "../components/post-title";
 
-export default function PostHeader({ title, coverImage, date, author, type }) {
+export default function PostHeader({ title, coverImage, date, author, type, template }) {
   const avatar = author?.avatar?.data?.attributes?.url
     ? author?.avatar?.data?.attributes?.url
     : author.legacyAvatar
@@ -13,7 +13,7 @@ export default function PostHeader({ title, coverImage, date, author, type }) {
   return (
     <div className="max-w-2xl mx-auto pt-4 md:pt-12">
       <PostTitle>{title}</PostTitle>
-      {author && (
+      {(author && template!==2) && (
         <Link href={`/people/${author.slug}`}>
           <div className="hidden cursor-pointer hover:underline md:block md:mb-12">
             <Avatar
@@ -32,7 +32,7 @@ export default function PostHeader({ title, coverImage, date, author, type }) {
         </Link>
       )}
       <div className="max-w-2xl mx-auto">
-        {author && (
+        {(author && template!==2) && (
           <Link href={`/people/${author.slug}`}>
             <div className="cursor-pointer hover:underline block md:hidden mb-6">
               <Avatar
@@ -50,7 +50,7 @@ export default function PostHeader({ title, coverImage, date, author, type }) {
             </div>
           </Link>
         )}
-        <div className="mb-6 text-lg">{date && <Date dateString={date} />}</div>
+        {template!==2 ?<div className="mb-6 text-lg">{date && <Date dateString={date} />}</div>:<div className="py-2"/>}
       </div>
     </div>
   );

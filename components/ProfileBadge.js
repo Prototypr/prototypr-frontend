@@ -215,7 +215,7 @@ export const DropdownMenuDemo = ({icon, user}) => {
           <DropdownMenuSeparator />
 
           <DropdownMenuItemBanner onSelect={()=>{
-            router.push(`/people/${user.slug}`);}}>
+            router.push(`/post/web-monetization-payment-pointer`);}}>
             <div className="p-3 rounded-lg flex">
               <div className="flex flex-col justify-start mr-2 w-20">
               <img className="w-20 " src="https://webmonetization.org/img/wm-icon-animated.svg"/>

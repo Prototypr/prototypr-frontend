@@ -10,6 +10,7 @@ import useUser from '@/lib/iron-session/useUser'
 import Button from "../atom/Button/Button";
 import { useRouter } from 'next/router'
 import { updateUserSession } from "@/lib/iron-session/updateUserSession";
+import Link from 'next/link'
 // import AvatarEditor from "";
 const AvatarEditor = dynamic(() => {return import("./AvatarEditor")},{ ssr: false });
 
@@ -145,7 +146,8 @@ const UserForm = ({ info }) => {
             </span>
           )}
         </FormControl>
-        <a href="#" className='cursor-pointer'>
+        <Link href="/post/web-monetization-payment-pointer">
+        <a className='cursor-pointer'>
         <div className="p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
           <img className="w-10 mr-4" src="https://webmonetization.org/img/wm-icon-animated.svg"/>
             <div>
@@ -154,6 +156,7 @@ const UserForm = ({ info }) => {
             </div>
         </div>
         </a>
+        </Link>
       </div>
       </div>
     <form onSubmit={handleSubmit(onSubmit)}>

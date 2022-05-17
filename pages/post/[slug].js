@@ -55,6 +55,7 @@ export default function Post({ post, preview, relatedPosts}) {
                 coverImage={post?.attributes?.featuredImage?.data?.attributes?.url? post?.attributes?.featuredImage?.data?.attributes?.url:post?.attributes?.legacyFeaturedImage ? post?.attributes?.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                 date={post.attributes.date}
                 author={post.attributes?.author?.data?.attributes}
+                template={post.attributes?.template}
                 />
                 <div className="max-w-2xl mx-auto blog-content">
                 <div
