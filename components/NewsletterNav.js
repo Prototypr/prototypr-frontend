@@ -87,7 +87,7 @@ const PopoverDemo = () => {
     const buttonText = intl.formatMessage({ id: "navbar.menu.title4" });
     const title = intl.formatMessage({ id: "navbar.contentitem.title2" });
     const desc =intl.formatMessage({ id: "sourcepanel.desc2"})
-
+    const tagline = intl.formatMessage({id:'intro.description'})
 
     return (
   <Popover>
@@ -101,6 +101,7 @@ const PopoverDemo = () => {
           <h1 className="text-3xl font-semibold">{title}</h1>
           <p>{desc}</p>
        <SignupHorizontal className="sm:flex w-full mt-2"/>
+       <p className='text-gray-600 text-xs'>{tagline} 💙</p>
       </Flex>
       <PopoverArrow />
       <PopoverClose aria-label="Close">
