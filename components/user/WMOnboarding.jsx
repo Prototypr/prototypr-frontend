@@ -144,7 +144,7 @@ export default function Alert({ preview }) {
 
                       <div className="w-full p-8 text-center">
                                               <img className="mx-auto w-64 h-56  object-cover  mb-6 rounded-lg" src="https://prototyprio.gumlet.io/wp-content/uploads/2022/03/image1.jpg?format=webp&w=1400" alt="Illustration of a cartoon person holding a book, surrounded by spooky hands"/>
-                                <div><h1 className="text-2xl text-gray-900 font-bold font-noto-serif mb-3 ">Proudly Open Source</h1></div>
+                                <div><h1 className="text-2xl text-gray-900 font-bold font-noto-serif mb-3 ">Contribute to Open Source</h1></div>
                                 <p className="text-gray-600 mt-3">The code for the Prototypr platform will be published under MIT Open License for anyone to remix, learn from, and copy. Whether you're a designer, developer, writer, or anything else, feel free to get in touch if you're interested in contributing to the platform.</p>
                                 {/* <ul className="list-disc pl-8 text-gray-600 mt-3">
                                 <li className="my-2"><span className="font-semibold">Accessible and Inclusive</span>: No more paywalls. Built for people of different abilities, and <a className="underline text-blue-600" target="_blank" href="https://open.prototypr.io/i18n">internationalised</a> for people of different backgrounds.</li>
@@ -188,22 +188,14 @@ export default function Alert({ preview }) {
                     id="step5"
                     render={({ previous }) => (
                       <div className="md:w-[585px] w-full px-10 lg:px-0">
+
                             <div><h1 className="text-2xl font-noto-serif text-gray-900 font-bold mb-3">Sound good? Get involved!</h1></div>
                             <p className="text-gray-600 mb-3">
                             We believe in an open, inclusive web where information is accessible and unburdened by paywalls or subscription fees, whilst still rewarding authors.
                             </p>
                             <p className="text-gray-600 mb-3">
-                              When you publish with us, you’ll be eligible to earn tips and streamed payments based on viewing time.
+                              When you publish on Prototypr, you'll be eligible to earn tips and streamed payments based on viewing time. Just fill in the payment pointer <img className="w-6 inline" src="https://webmonetization.org/img/wm-icon-animated.svg"/> field on your profile page.
                             </p>
-                            <a href="#" className='cursor-pointer'>
-                            <div className="p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
-                              <img className="w-12 mr-4" src="https://webmonetization.org/img/wm-icon-animated.svg"/>
-                                <div>
-                                <h2 className="text-md font-primary font-medium text-green-800">Get started with Web Monetization</h2>
-                                <p className="text-green-800 text-sm">To receive tips and streamed payments, you'll need to set up a wallet.<br/> <a className="underline text-green-800 font-medium" href="#">Read the guide</a> →</p>
-                                </div>
-                            </div>
-                            </a>
                             <p className="text-gray-700 mt-3 mb-6">We're in early, but as Web Monetisation grows, you’ll be at the forefront of our platform and contributing to an open web.</p>
                             {/* <a target="_blank" href="https://twitter.com/graeme_fulton" className="rounded-lg text-xs leading-tight cursor-pointer mb-6">
                                 <div className="avatar size-small gutter-none">

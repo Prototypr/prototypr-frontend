@@ -149,8 +149,8 @@ const UserForm = ({ info }) => {
         <div className="p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
           <img className="w-10 mr-4" src="https://webmonetization.org/img/wm-icon-animated.svg"/>
             <div>
-            <h2 className="text-md font-primary font-medium text-green-800">Learn about Web Monetization</h2>
-            <p className="text-green-800 text-sm">To receive tips and streamed payments, you'll need to set up a wallet. <a className="underline text-green-800 font-medium" href="#">Read the guide</a> →</p>
+            <h2 className="text-md font-primary font-medium text-gray-800">Learn about Web Monetization</h2>
+            <p className="text-gray-800 text-sm">To receive tips and streamed payments, you'll need to set up a wallet. <a className="underline text-green-900 font-medium" href="#">Read the guide</a> →</p>
             </div>
         </div>
         </a>

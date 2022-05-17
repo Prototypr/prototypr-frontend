@@ -19,7 +19,7 @@ const LoginForm = ({isSignUp}) => {
         {isSignUp?'Get early access':'Welcome back'}
       </h2>
       <p className="text-sm text-gray-600 whitespace-nowrap text-center">
-        Join an open and inclusive design platform. <br/>No Paywalls. No intrusive ads.
+        Be the first to join an inclusive design platform. <br/>No Paywalls. No intrusive ads. Help shape it!
       </p>
       <div className="flex flex-col gap-2 flex-grow mt-6">
         <Button
