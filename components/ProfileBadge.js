@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled, keyframes } from '@stitches/react';
-import { blue, mauve, blackA, gray} from '@radix-ui/colors';
+import { blue, mauve, blackA, gray, green} from '@radix-ui/colors';
 // import {
 //   HamburgerMenuIcon,
 //   DotFilledIcon,
@@ -80,7 +80,34 @@ const itemStyles = {
   },
 };
 
+const itemBannerStyles = {
+  all: 'unset',
+  fontSize: 15,
+  lineHeight: 1,
+  color: blackA,
+  borderRadius: 3,
+  display: 'flex',
+  alignItems: 'center',
+  width:'300px',
+  height: 'auto',
+  padding: '0 0px',
+  position: 'relative',
+  paddingLeft: 0,
+  userSelect: 'none',
+  backgroundColor: green.green2,
+  '&[data-disabled]': {
+    color: mauve.mauve8,
+    pointerEvents: 'none',
+  },
+
+  '&:focus': {
+    backgroundColor: blue.blue11,
+    color: blue.blue1,
+  },
+};
+
 const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
+const StyledItemBanner = styled(DropdownMenuPrimitive.Item, { ...itemBannerStyles });
 const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, { ...itemStyles });
 const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, { ...itemStyles });
 const StyledTriggerItem = styled(DropdownMenuPrimitive.TriggerItem, {
@@ -123,6 +150,7 @@ export const DropdownMenu = DropdownMenuPrimitive.Root;
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuContent = StyledContent;
 export const DropdownMenuItem = StyledItem;
+export const DropdownMenuItemBanner = StyledItemBanner;
 export const DropdownMenuCheckboxItem = StyledCheckboxItem;
 export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 export const DropdownMenuRadioItem = StyledRadioItem;
@@ -180,19 +208,30 @@ export const DropdownMenuDemo = ({icon, user}) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent sideOffset={5}>
-          {/* <DropdownMenuItem onSelect={()=>{
-            router.push(`/people/${user.slug}`);}}>
-                Profile 
-          </DropdownMenuItem> */}
           <DropdownMenuItem onSelect={()=>{
             router.push('/account');}}>
-                Set up profile 
+                Profile settings 
           </DropdownMenuItem>
-          {/* <DropdownMenuSeparator /> */}
+          <DropdownMenuSeparator />
+
+          <DropdownMenuItemBanner onSelect={()=>{
+            router.push(`/people/${user.slug}`);}}>
+            <div className="p-3 rounded-lg flex">
+              <div className="flex flex-col justify-start mr-2 w-20">
+              <img className="w-20 " src="https://webmonetization.org/img/wm-icon-animated.svg"/>
+              </div>
+                <div>
+                <h2 className="text-md font-primary font-medium mb-1">Learn Web Monetization</h2>
+                <p className="text-sm opacity-70">Receive streamed payments and tips on your articles.</p>
+                </div>
+            </div>
+          </DropdownMenuItemBanner>
+          <DropdownMenuSeparator />
+
           <DropdownMenuItem onSelect={()=>{
             router.push(`/early-access`);}}>
               {/* <Link href="/account"> */}
-                Welcome Guide 
+                Welcome guide 
               {/* </Link> */}
             {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
@@ -204,7 +243,7 @@ export const DropdownMenuDemo = ({icon, user}) => {
                 false,
               );
           }}>
-            Sign Out
+            Sign out
           </DropdownMenuItem>
             
           <DropdownMenuArrow offset={12} />

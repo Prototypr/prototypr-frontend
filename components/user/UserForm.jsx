@@ -150,7 +150,7 @@ const UserForm = ({ info }) => {
           <img className="w-10 mr-4" src="https://webmonetization.org/img/wm-icon-animated.svg"/>
             <div>
             <h2 className="text-md font-primary font-medium text-gray-800">Learn about Web Monetization</h2>
-            <p className="text-gray-800 text-sm">To receive tips and streamed payments, you'll need to set up a wallet. <a className="underline text-green-900 font-medium" href="#">Read the guide</a> →</p>
+            <p className="text-gray-800 text-sm">Receive tips and streamed payments with a <a className="underline text-green-900 font-medium" href="#">Payment Pointer</a> and wallet. Learn how to <a className="underline text-green-900 font-medium" href="#">set it up here</a>. →</p>
             </div>
         </div>
         </a>
