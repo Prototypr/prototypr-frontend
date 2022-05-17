@@ -7,7 +7,7 @@ const Form = dynamic(() => import('@/components/Form'), { ssr: true })
 const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 
 
-const LoginForm = () => {
+const LoginForm = ({isSignUp}) => {
 
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [sent, setSent] = useState(false)
@@ -15,11 +15,11 @@ const LoginForm = () => {
 
   return (
     <div className="flex flex-col">
-      <h2 className="text-lg text-gray-800 font-bold text-center mb-1">
-        Join Waitlist
+      <h2 className="text-xl text-gray-800 font-bold text-center mb-2">
+        {isSignUp?'Get early access':'Welcome back'}
       </h2>
       <p className="text-sm text-gray-600 whitespace-nowrap text-center">
-        Join 680k designers, makers, and coders
+        Join an open and inclusive design platform. <br/>No Paywalls. No intrusive ads.
       </p>
       <div className="flex flex-col gap-2 flex-grow mt-6">
         <Button
@@ -40,7 +40,7 @@ const LoginForm = () => {
           }
           onClick={() => signIn("twitter")}
         >
-          Sign up with Twitter
+          {isSignUp?'Sign up with Twitter':'Sign in with Twitter'}
         </Button>
         <Button
           isFullWidth
@@ -62,9 +62,10 @@ const LoginForm = () => {
           }
           onClick={() => signIn("github")}
         >
-          Sign up with Github
+          
+          {isSignUp?'Sign up with GitHub':'Sign in with GitHub'}
         </Button>
-        <Button
+        {/* <Button
           isFullWidth
           className="text-left justify-start h-11 font-normal"
           color="google"
@@ -112,8 +113,8 @@ const LoginForm = () => {
           }
           onClick={() => signIn("google")}
         >
-          Sign up with Google
-        </Button>
+          {isSignUp?'Sign up with Google':'Sign in with Google'}
+        </Button> */}
       </div>
       <div className="my-5">
         <p className="text-gray-600 text-center font-medium">OR</p>
@@ -145,7 +146,7 @@ const LoginForm = () => {
           </div>
         }
       >
-        Sign up with Email
+          {isSignUp?'Sign up with Email':'Sign in with Email'}
       </Button>:
       <div className="max-w-xs">
       <Form 

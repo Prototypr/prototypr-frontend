@@ -41,7 +41,7 @@ author?.legacyAvatar ? author.legacyAvatar
         canonical: `https://prototypr.io/people/${slug}/page/${pageNo}`,
         url: `https://prototypr.io/people/${slug}/page/${pageNo}`
     }}
-    activeNav={"toolbox"} preview={preview} padding={false}>
+    activeNav={"people"} preview={preview} padding={false}>
      
       {router.isFallback ? (
          <Container>

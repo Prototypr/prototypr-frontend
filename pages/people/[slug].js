@@ -44,7 +44,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
         canonical: `https://prototypr.io/people/${slug}`,
         url: `https://prototypr.io/people/${slug}`
     }}
-    activeNav={"toolbox"} preview={preview} padding={false}>
+    activeNav={"people"} preview={preview} padding={false}>
      
       {router.isFallback ? (
          <Container>
