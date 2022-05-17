@@ -395,8 +395,10 @@ export const NavigationMenuDemo = ({
   const submenu2Title4 = intl.formatMessage({ id: "navbar.submenu2.title4" });
   const submenu2Desc4 = intl.formatMessage({ id: "navbar.submenu2.desc4" });
 
+  const submenu2Title5 = intl.formatMessage({ id: "navbar.submenu2.title5" });
   const submenu2Desc5 = intl.formatMessage({ id: "navbar.submenu2.desc5" });
 
+  const submenu2Title6 = intl.formatMessage({ id: "navbar.submenu2.title6" });
   const submenu2Desc6 = intl.formatMessage({ id: "navbar.submenu2.desc6" });
 
   return (
@@ -516,13 +518,13 @@ export const NavigationMenuDemo = ({
                   {submenu2Desc4}
                 </ContentListItem>
                 <ContentListItem
-                  title={submenuTitle5}
+                  title={submenu2Title5}
                   href="/toolbox/accessibility/page/1"
                 >
                   {submenu2Desc5}
                 </ContentListItem>
                 <ContentListItem
-                  title={submenuTitle6}
+                  title={submenu2Title6}
                   href="/toolbox/conversational-design-tools/page/1"
                 >
                   {submenu2Desc6}
