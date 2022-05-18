@@ -15,7 +15,7 @@ export default function PostHeader({ title, coverImage, date, author, type, temp
   return (
     <>
      {template==2 &&
-      <div className="w-full relative h-56 md:h-80 ronuded-lg mt-2 mb-4 md:mb-0 md:mt-6">
+      <div className="w-full relative h-56 md:h-80 rounded-lg mt-2 mb-4 md:mb-0 md:mt-6">
         <Image
         loader={gumletLoader}
         objectFit="cover"
