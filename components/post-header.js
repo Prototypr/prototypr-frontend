@@ -2,6 +2,8 @@ import Avatar from "../components/avatar";
 import Date from "../components/date";
 import Link from "next/link";
 import PostTitle from "../components/post-title";
+import Image from "next/image"
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 export default function PostHeader({ title, coverImage, date, author, type, template }) {
   const avatar = author?.avatar?.data?.attributes?.url
@@ -11,7 +13,20 @@ export default function PostHeader({ title, coverImage, date, author, type, temp
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
   return (
+    <>
+     {template==2 &&
+      <div className="w-full relative h-80 ronuded-lg mt-6">
+        <Image
+        loader={gumletLoader}
+        objectFit="cover"
+        className="rounded-lg"
+        layout="fill"
+        src={coverImage}
+      />
+        </div>
+      }
     <div className="max-w-2xl mx-auto pt-4 md:pt-12">
+     
       <PostTitle>{title}</PostTitle>
       {(author && template!==2) && (
         <Link href={`/people/${author.slug}`}>
@@ -53,5 +68,6 @@ export default function PostHeader({ title, coverImage, date, author, type, temp
         {template!==2 ?<div className="mb-6 text-lg">{date && <Date dateString={date} />}</div>:<div className="py-2"/>}
       </div>
     </div>
+    </>
   );
 }
