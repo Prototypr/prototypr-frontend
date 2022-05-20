@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-
 export default function PostPreview({
   title,
   coverImage,
@@ -27,17 +26,17 @@ export default function PostPreview({
             url={coverImage}
             type={type}
           />
-          <div className="absolute rounded-full bg-white bottom-0 left-7">
+          <div className="absolute rounded-full bg-white bottom-0 -mb-1 left-7">
             {coverImage && coverImage.logoNew && (
               <div
-                className="p-1 rounded-full border-gray-100 border bg-white -mt-4"
+                className="p-1 rounded-full border-gray-100 border bg-white hover:scale-110 transition duration-700 ease-out"
                 style={{ height: "44px", width: "44px" }}
               >
                 <Image
                   loader={gumletLoader}
                   priority={index < 2 ? `true` : `false`}
                   data-priority={index < 2 ? `true` : `false`}
-                  fetchpriority={index<2?"true":"false"}
+                  fetchpriority={index < 2 ? "true" : "false"}
                   data-gmlazy={index < 2 ? `false` : `true`}
                   width="44"
                   height="44"

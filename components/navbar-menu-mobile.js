@@ -1,6 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { styled,  } from "@stitches/react";
+import { styled } from "@stitches/react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { indigo, gray } from "@radix-ui/colors";
 import Link from "next/link";
@@ -164,21 +164,31 @@ export const NavigationMenuDemo = ({
           </NavigationMenuLink>
         </NavigationMenuItem>
 
+        <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+          <NavigationMenuLink href="/post/web-monetization-payment-pointer">
+            Web Monetization
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+
         <NavigationMenuItem className="py-2 flex">
           {user && user.isLoggedIn ? (
             <div className="ml-2">
               <Link href="/account">
-                {user &&
+                {user && (
                   <ProfileBadge
                     user={user}
                     icon={
                       <img
                         className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer"
-                        src={user?.avatar?.url?user.avatar.url:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
+                        src={
+                          user?.avatar?.url
+                            ? user.avatar.url
+                            : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                        }
                       />
                     }
                   />
-                }
+                )}
               </Link>
             </div>
           ) : userLoading && userLoggedInCookie ? (
@@ -192,9 +202,7 @@ export const NavigationMenuDemo = ({
             <LocaleSwitcher />
           </div>
         </NavigationMenuItem>
-
       </NavigationMenuList>
-
     </NavigationMenu>
   );
 };
