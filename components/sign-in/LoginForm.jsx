@@ -65,7 +65,7 @@ const LoginForm = ({isSignUp}) => {
           
           {isSignUp?'Sign up with GitHub':'Sign in with GitHub'}
         </Button>
-        {/* <Button
+        <Button
           isFullWidth
           className="text-left justify-start h-11 font-normal"
           color="google"
@@ -114,7 +114,7 @@ const LoginForm = ({isSignUp}) => {
           onClick={() => signIn("google")}
         >
           {isSignUp?'Sign up with Google':'Sign in with Google'}
-        </Button> */}
+        </Button>
       </div>
       <div className="my-5">
         <p className="text-gray-600 text-center font-medium">OR</p>

@@ -207,6 +207,7 @@ const AvatarEditor = () => {
       {hasChanged &&
       <div className="mb-3 mt-1">
       <Button
+      className="text-sm"
       onClick={uploadImage}
       isLoading={isSubmitting}
       type="submit"

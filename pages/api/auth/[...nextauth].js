@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
 import TwitterProvider from "next-auth/providers/twitter"
 import GitHubProvider from "next-auth/providers/github"
-
+import GoogleProvider from 'next-auth/providers/google'
 const options = {
   providers: [
     GitHubProvider({
@@ -12,6 +12,10 @@ const options = {
     TwitterProvider({
       clientId: process.env.TWITTER_ID,
       clientSecret: process.env.TWITTER_SECRET,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
   database: process.env.NEXT_PUBLIC_DATABASE_URL,

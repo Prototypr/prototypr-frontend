@@ -113,13 +113,13 @@ const UserForm = ({ info }) => {
     <div>
       
       <div className="flex flex-col md:flex-row mt-2">
-      <div>
+      <div className="md:mr-4">
         <div className="text-sm mt-3 font-semibold text-gray-700">
           Profile picture
         </div>
         <AvatarEditor/>
       </div>
-      <div className="md:px-4 w-full md:ml-6">
+      <div className="md:px-4 w-full">
       <FormControl inValid={!!errors.paymentPointer}>
           <label htmlFor="paymentPointer" className="text-sm">
             Payment Pointer
