@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import dynamic from 'next/dynamic'
 import useUser from "@/lib/iron-session/useUser";
 import Layout from "@/components/layout";
-// import fetchJson from "@/lib/iron-session/fetchJson";
-// import toast from "react-hot-toast";
+import fetchJson from "@/lib/iron-session/fetchJson";
+import toast from "react-hot-toast";
 import Router from "next/router";
-const fetchJson = dynamic(() => import('@/lib/iron-session/fetchJson'), { ssr: true })
-const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
+// const fetchJson = dynamic(() => import('@/lib/iron-session/fetchJson'), { ssr: true })
+// const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 const Spinner = dynamic(() => import('@/components/atom/Spinner/Spinner'))
 const Button = dynamic(() => import('@/components/atom/Button/Button'))
 
