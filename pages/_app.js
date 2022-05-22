@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import PlausibleProvider from 'next-plausible'
 
 // import { useEffect, useMemo, useState } from "react";
 import { useMemo } from "react";
@@ -62,6 +63,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
     // https://next-auth.js.org/getting-started/upgrade-v4#sessionprovider
     // `session` comes from `getServerSideProps` or `getInitialProps`.
     // Avoids flickering/session loading on first load.
+    <PlausibleProvider customDomain="https://analytics.prototypr.io" selfHosted={true} domain="https://4.prototypr.io">
     <IntlProvider 
       key={locale || "en-US"}
       defaultLocale="en-US" locale={locale || "en-US"} messages={messages}>
@@ -82,6 +84,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
       <AppToaster/>
     </>
     </IntlProvider>
+    </PlausibleProvider>
   );
 }
 

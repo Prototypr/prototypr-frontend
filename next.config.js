@@ -1,8 +1,12 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true'
-})
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true'
+// })
+const { withPlausibleProxy } = require('next-plausible')
 
-module.exports = withBundleAnalyzer({
+module.exports =
+//  withBundleAnalyzer(
+  withPlausibleProxy({customDomain:'https://analytics.prototypr.io',domain:'https://4.prototypr.io', selfHosted:true})(
+  {
   i18n: {
     locales: ['en-US', 'es-ES'],
     defaultLocale: 'en-US',
@@ -29,4 +33,5 @@ module.exports = withBundleAnalyzer({
       "claritee.io"
     ],
   },
-});
+}
+);

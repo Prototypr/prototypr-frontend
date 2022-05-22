@@ -30,6 +30,7 @@
     "moment": "^2.29.2",
     "next": "latest",
     "next-auth": "^4.2.1",
+    "next-plausible": "^3.1.9",
     "next-seo": "^5.4.0",
     "next-sitemap": "^2.5.20",
     "nodemailer": "^6.7.3",
