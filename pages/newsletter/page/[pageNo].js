@@ -33,9 +33,9 @@ export default function NewsletterPage({ allPosts = [], preview, pagination = {}
                     url: `https://prototypr.io/posts/page/${pagination?.page}`,
                 }}
                 activeNav={"posts"} preview={preview}>
-                <Head>
+                {/* <Head>
                     <title>Open design and tech stories for everyone to read</title>
-                </Head>
+                </Head> */}
                 <Container>
                     {router.isFallback ? (
                         <PostTitle>Loading…</PostTitle>

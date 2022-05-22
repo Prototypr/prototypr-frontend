@@ -84,6 +84,16 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
 
 export async function getStaticProps({ params, preview = null, type = 'bite' }) {
   const data = await getNewsAndMoreNews(params.slug, preview, type)
+
+  //if no post found, 404
+  if(!data?.posts?.data[0]){
+    return {
+      props: {
+        post: null,
+      },
+      revalidate:30
+    }
+  }
   
   let link = data?.posts.data[0].attributes.link
   if(!link){

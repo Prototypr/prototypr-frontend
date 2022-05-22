@@ -45,9 +45,6 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
         activeNav={"posts"}
         preview={preview}
       >
-        <Head>
-          <title>Open design and tech stories for everyone to read</title>
-        </Head>
         <Container>
           {pagination.page && pagination.page == 1 && (
             <>

@@ -261,9 +261,21 @@ export async function getStaticProps({ preview = null, params, locale }) {
    */
   let allPosts = (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug], sort)) || []
 
+
+  if(!allPosts.data[0]){
+    //if no post found, 404
+    return {
+      props: {
+        author: null,
+      },
+      revalidate:30
+    }
+  }
+  
   const pagination = allPosts.meta.pagination
   let author = allPosts.data.length && allPosts.data[0] ? allPosts.data[0].attributes.author: {}
   author = author?.data?.attributes?author?.data?.attributes:null
+
   
   let grad, kofi, github, twitter, authorUrl, dribbble = '' 
   let skills = []

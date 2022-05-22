@@ -67,5 +67,6 @@ export async function getStaticProps({ preview = null }) {
       allPosts: allPosts?.data,
       pagination,
     },
+    revalidate:20
   };
 }

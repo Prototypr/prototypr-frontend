@@ -101,5 +101,6 @@ export async function getStaticProps({ preview = null, params }) {
       preview,
       pagination,
     },
+    revalidate:20
   };
 }

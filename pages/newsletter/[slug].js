@@ -105,6 +105,16 @@ export default function Post({ post, morePosts, preview }) {
 
 export async function getStaticProps({ params, preview = null, postType="newsletter" }) {
   const data = await getNewsletter(params.slug, preview, postType)
+
+  //if no post found, 404
+  if(!data?.posts?.data[0]){
+    return {
+      props: {
+        post: null,
+      },
+      revalidate:30
+    }
+  }
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   const relatedNewsletters =  data?.posts.data[0]?.attributes?.relatedNewsletters?
   data?.posts.data[0]?.attributes?.relatedNewsletters:[]

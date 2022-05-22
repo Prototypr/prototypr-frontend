@@ -8,8 +8,8 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 export default function PostHeader({ title, coverImage, date, author, type, template }) {
   const avatar = author?.avatar?.data?.attributes?.url
     ? author?.avatar?.data?.attributes?.url
-    : author.legacyAvatar
-    ? author.legacyAvatar
+    : author?.legacyAvatar
+    ? author?.legacyAvatar
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
   return (

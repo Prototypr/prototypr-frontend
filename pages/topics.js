@@ -85,9 +85,9 @@ export default function Index({ allPosts, preview }) {
         activeNav={"posts"}
         preview={preview}
       >
-        <Head>
+        {/* <Head>
           <title>{intl.formatMessage({ id: "topics.header" })}.</title>
-        </Head>
+        </Head> */}
         <Container>
           <div className="pt-5 text-md text-gray-700 pb-8">
             <Link href={`/`}>

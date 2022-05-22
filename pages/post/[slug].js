@@ -43,12 +43,12 @@ export default function Post({ post, preview, relatedPosts}) {
         ) : (
           <>
             <article>
-              <Head>
-                <title>
+              {/* <Head> */}
+                {/* <title>
                   {post.attributes?.title} | Prototypr
-                </title>
-                <meta property="og:image" content={post.attributes.ogImage} />
-              </Head>
+                </title> */}
+                {/* <meta property="og:image" content={post.attributes.ogImage} /> */}
+              {/* </Head> */}
               {!post.currentLocaleAvailable && <NoticeTranslation/>}
               <PostHeader
                 title={post?.attributes?.title}
@@ -82,6 +82,15 @@ export default function Post({ post, preview, relatedPosts}) {
 export async function getStaticProps({ params, preview = null, locale}) {
 
   const data = await getPost(params.slug, preview)
+  //if no post found, 404
+  if(!data?.posts?.data[0]){
+    return {
+      props: {
+        post: null,
+      },
+      revalidate:30
+    }
+  }
 
  let relatedPosts = {};
 

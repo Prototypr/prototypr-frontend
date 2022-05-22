@@ -41,9 +41,6 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
           url: `https://prototypr.io/posts/page/${tag}/${pagination?.page}`,
         }}
            activeNav={"posts"} preview={preview}>
-            <Head>
-              <title>Open design and tech stories for everyone to read</title>
-            </Head>
             <Container>
             <h2 className='font-bold text-5xl md:text-6.5xl tracking-wide text-center mt-6 md:mt-10 md:my-8'>
                 {tagName}

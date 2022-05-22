@@ -36,12 +36,12 @@ export default function SponsorCard({ position }) {
                 className="text-sm cursor-pointer leading-5 font-medium text-gray-800"
               />
             </a>
-            <h1 className="text-xs text-gray-700 uppercase mt-4 ">
+            {/* <h1 className="text-xs text-gray-700 uppercase mt-4 ">
               Brought to you by:
             </h1>
             <h1 className="text-sm font-semibold">
               {sponsor.node.sponsorInfo.sponsorName}
-            </h1>
+            </h1> */}
           </div>
         </div>
     </>
