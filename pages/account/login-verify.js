@@ -45,7 +45,9 @@ export default function Login({ loginToken }) {
               duration: 5000,
             });
             setTimeout(()=>{
-              Router.push('/account')
+              // Router.push('/account')
+              // Router.reload()
+              window.location.replace("/account");
             },200)
           })
         );
