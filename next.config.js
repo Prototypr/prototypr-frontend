@@ -5,7 +5,7 @@ const { withPlausibleProxy } = require('next-plausible')
 
 module.exports =
 //  withBundleAnalyzer(
-  withPlausibleProxy({customDomain:'https://analytics.prototypr.io',domain:'https://4.prototypr.io', selfHosted:true})(
+  withPlausibleProxy({customDomain:'https://analytics.prototypr.io',domain:'4.prototypr.io', selfHosted:true})(
   {
   i18n: {
     locales: ['en-US', 'es-ES'],
