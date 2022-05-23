@@ -101,6 +101,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                       style={{ height: "0.94rem" }}
                       className="my-auto mr-1"
                       src="/static/images/icons/map-pin.svg"
+                      data-gumlet="false"
                     />
                     <span>{author.location}</span>
                   </div>
@@ -111,6 +112,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                       style={{ height: "0.94rem" }}
                       className="h-4 my-auto mr-1"
                       src="/static/images/icons/link.svg"
+                      data-gumlet="false"
                     />
                     <span>
                       <a
@@ -186,6 +188,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                       style={{ width: "28px" }}
                       className=" bg-white rounded-full shadow-sm hover:shadow-md"
                       src="/static/images/icons/twitter.svg"
+                      data-gumlet="false"
                     />
                   </a>
                 )}
@@ -199,6 +202,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                       style={{ width: "28px" }}
                       className=" bg-white rounded-full shadow-sm hover:shadow-md"
                       src="/static/images/icons/dribbble.svg"
+                      data-gumlet="false"
                     />
                   </a>
                 )}
@@ -212,6 +216,7 @@ export default function PeoplePage({ allPosts = [], preview, pagination, slug = 
                       style={{ width: "28px" }}
                       className=" bg-white rounded-full shadow-sm hover:shadow-md"
                       src="/static/images/icons/github.svg"
+                      data-gumlet="false"
                     />
                   </a>
                 )}

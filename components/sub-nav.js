@@ -327,7 +327,9 @@ const ContentListItemCallout = React.forwardRef(
             marginBottom: 7,
           }}
         >
-          <img className="w-14 mb-4 -ml-0.5" src='/static/images/icons/wm-icon-animated.svg'/>
+          <img className="w-14 mb-4 -ml-0.5" 
+          data-gumlet="false"
+          src='/static/images/icons/wm-icon-animated.svg'/>
           <FormattedMessage id="navbar.webmonetization.title" />
         </LinkTitle>
         <LinkText
@@ -409,6 +411,7 @@ export const NavigationMenuDemo = ({
             collapse ? "w-0 opacity-0" : "w-8 opacity-1"
           } transition transition-all duration-300 ease-in-out`}
           src="/static/images/logo-small.svg"
+          data-gumlet="false"
           alt="Prototypr Logo"
         />
       </Link>

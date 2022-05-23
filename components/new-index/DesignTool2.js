@@ -109,7 +109,8 @@ export default function DesignTool({ allTools = [] }) {
                   onKeyDown={keyboardPrev}
                   onClick={() => navHis(-1)}
                 >
-                  <img src="/static/images/icons/prev.svg" />
+                  <img src="/static/images/icons/prev.svg"
+                  data-gumlet="false" />
                 </div>
                 <div
                   tabIndex={0}
@@ -118,7 +119,8 @@ export default function DesignTool({ allTools = [] }) {
                   onKeyDown={keyboardNext}
                   onClick={() => navHis(1)}
                 >
-                  <img src="/static/images/icons/next.svg" />
+                  <img src="/static/images/icons/next.svg"
+                  data-gumlet="false" />
                 </div>
               </div>
               <div

@@ -112,12 +112,14 @@ export default function Navbar({ activeNav }) {
                     } flex-shrink-0 flex items-center cursor-pointer transition transition-all duration-300 ease-in-out`}
                   >
                     <img
+                    data-gumlet="false"
                       className="block lg:hidden h-10 w-auto"
                       src="/static/images/logo-small.svg"
                       alt="Prototypr Logo"
                     />
                     <img
                       className="hidden lg:block h-8 w-auto"
+                      data-gumlet="false"
                       src={`/static/images/logo.svg`}
                       alt="Prototypr Logo"
                     />

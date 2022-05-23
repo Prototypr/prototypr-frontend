@@ -21,6 +21,7 @@ export default function SourcePanel({ desc, title }) {
               objectFit="contain"
               className="rounded-lg contrast-115"
               layout="fill"
+              data-gumlet="false"
               src={"/static/images/robot-banner.svg"}
             />
           </div>

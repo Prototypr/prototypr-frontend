@@ -36,7 +36,8 @@ export default function IssueItem({ post = {} }) {
           ></div>
         </div>
         <div className="w-10 h-10 border-2 border-solid border-accent-3 rounded-full flex items-center justify-center">
-          <img src="/static/images/icons/arrow.svg" />
+          <img src="/static/images/icons/arrow.svg" 
+          data-gumlet="false"/>
         </div>
       </div>
     </Link>
