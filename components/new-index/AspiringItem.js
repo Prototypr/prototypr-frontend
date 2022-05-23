@@ -20,10 +20,10 @@ export default function AspiringItem({ post = {} }) {
     ? legacyFeaturedImage?.mediaItemUrl
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
   return (
-    <div className="grid-cols-1 cursor-pointer group">
-      <figure className="relative w-full h-64 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
-        <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
-          <Link href={`/post/${slug}`}>
+    <Link href={`/post/${slug}`}>
+      <div className="grid-cols-1 cursor-pointer group">
+        <figure className="relative w-full h-64 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+          <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
             <Image
               loader={gumletLoader}
               objectFit="cover"
@@ -31,28 +31,28 @@ export default function AspiringItem({ post = {} }) {
               layout="fill"
               src={ftImage}
             />
+          </div>
+        </figure>
+
+        <div className="font-base text-sm hover:underline leading-6 tracking-wide uppercase text-gray-500 mt-2">
+          <Link
+            className="hover:underline"
+            href={`/people/${author?.data?.attributes?.slug}/page/1`}
+          >
+            <a>{author?.data?.attributes?.name}</a>
           </Link>
         </div>
-      </figure>
+        <h4 className="text-black-1 font-semibold text-lg leading-normal mt-1">
+          <Link href={`/post/${slug}`}>
+            <a className="font-noto-serif">{title}</a>
+          </Link>
+        </h4>
 
-      <div className="font-base text-sm hover:underline leading-6 tracking-wide uppercase text-gray-500 mt-2">
-        <Link
-          className="hover:underline"
-          href={`/people/${author?.data?.attributes?.slug}/page/1`}
-        >
-          <a>{author?.data?.attributes?.name}</a>
-        </Link>
+        <p
+          className="text-gray-500 text-base leading-normal font-normal overflow-hidden text-ellipsis clamp-3 mt-2"
+          dangerouslySetInnerHTML={{ __html: excerpt }}
+        ></p>
       </div>
-      <h4 className="text-black-1 font-semibold text-lg leading-normal mt-1">
-        <Link href={`/post/${slug}`}>
-          <a className="font-noto-serif group-hover:underline">{title}</a>
-        </Link>
-      </h4>
-
-      <p
-        className="text-gray-500 text-base leading-normal font-normal overflow-hidden text-ellipsis clamp-3 mt-2"
-        dangerouslySetInnerHTML={{ __html: excerpt }}
-      ></p>
-    </div>
+    </Link>
   );
 }

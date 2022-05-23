@@ -99,9 +99,7 @@ export default function DesignTool({ allTools = [] }) {
             onKeyDown={keyboardPrev}
             onClick={() => navHis(-1)}
           >
-            <img src="/static/images/icons/prev.svg" 
-            data-gumlet="false"
-            />
+            <img src="/static/images/icons/prev.svg" data-gumlet="false" />
           </div>
           <div
             tabIndex={0}
@@ -110,9 +108,7 @@ export default function DesignTool({ allTools = [] }) {
             onKeyDown={keyboardNext}
             onClick={() => navHis(1)}
           >
-            <img src="/static/images/icons/next.svg"
-            data-gumlet="false"
-            />
+            <img src="/static/images/icons/next.svg" data-gumlet="false" />
           </div>
         </div>
         <div
@@ -124,16 +120,16 @@ export default function DesignTool({ allTools = [] }) {
               ? allTools.map((item, index) => {
                   const showItem = item?.attributes;
                   return (
-                    <div
-                      key={`h_item_${index}`}
-                      style={{ width: `${ITEM_WIDTH}px` }}
-                      className="h-full mx-5 group hover:shadow-md transition duration-500 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer"
-                    >
-                      <div className="w-full rounded-lg h-46 relative bg-no-repeat bg-100">
-                        {showItem.legacyFeaturedImage.mediaItemUrl ? (
-                          <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
-                            <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
-                              <Link href={`/toolbox/${showItem.slug}`}>
+                    <Link href={`/toolbox/${showItem.slug}`}>
+                      <div
+                        key={`h_item_${index}`}
+                        style={{ width: `${ITEM_WIDTH}px` }}
+                        className="h-full mx-5 group hover:shadow-md transition duration-500 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer"
+                      >
+                        <div className="w-full rounded-lg h-46 relative bg-no-repeat bg-100">
+                          {showItem.legacyFeaturedImage.mediaItemUrl ? (
+                            <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+                              <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
                                 <Image
                                   loader={gumletLoader}
                                   className="rounded-lg contrast-115"
@@ -143,66 +139,66 @@ export default function DesignTool({ allTools = [] }) {
                                     showItem.legacyFeaturedImage.mediaItemUrl
                                   }
                                 />
-                              </Link>
-                            </div>
-                          </figure>
-                        ) : (
-                          showItem.featuredImage?.data?.attributes?.url && (
-                            <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
-                              <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
-                                <Link href={`/toolbox/${showItem.slug}`}>
-                                  <Image
-                                    loader={gumletLoader}
-                                    className="rounded-lg contrast-115"
-                                    objectFit="cover"
-                                    layout="fill"
-                                    src={
-                                      showItem.featuredImage?.data?.attributes
-                                        ?.url
-                                    }
-                                  />
-                                </Link>
                               </div>
                             </figure>
-                          )
-                        )}
-                        <div
-                          className="absolute border-2 border-solid border-white bg-white w-10 h-10 rounded-full -bottom-3 bg-100 bg-no-repeat bg-center"
-                          style={{
-                            // border: "3px",
-                            left: "12px",
-                            right: "76.47%",
-                            bottom: "-18px",
-                          }}
-                        >
-                          {showItem.legacyFeaturedImage.logoNew && (
-                            <Link href={`/toolbox/${showItem.slug}`}>
-                              <Image
-                                loader={gumletLoader}
-                                className="rounded-full"
-                                objectFit="cover"
-                                layout="fill"
-                                src={showItem.legacyFeaturedImage.logoNew}
-                              />
-                            </Link>
+                          ) : (
+                            showItem.featuredImage?.data?.attributes?.url && (
+                              <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
+                                <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+                                  <Link href={`/toolbox/${showItem.slug}`}>
+                                    <Image
+                                      loader={gumletLoader}
+                                      className="rounded-lg contrast-115"
+                                      objectFit="cover"
+                                      layout="fill"
+                                      src={
+                                        showItem.featuredImage?.data?.attributes
+                                          ?.url
+                                      }
+                                    />
+                                  </Link>
+                                </div>
+                              </figure>
+                            )
                           )}
-                        </div>
-                      </div>
-                      <div className="mt-7 flex justify-between">
-                        <Link href={`/toolbox/${showItem.slug}`}>
-                          <div className="px-3 w-full">
-                            <div className="font-noto-serif text-gray-1 hover:underline truncate text-lg font-bold leading-6">
-                              {showItem.title}
-                            </div>
-                            {showItem.tags?.data[0] && (
-                              <div className="font-normal text-xs leading-6 tracking-wide uppercase text-gray-500 mt-1">
-                                # {showItem.tags?.data[0].attributes?.name}
-                              </div>
+                          <div
+                            className="absolute border-2 border-solid border-white bg-white w-10 h-10 rounded-full -bottom-3 bg-100 bg-no-repeat bg-center"
+                            style={{
+                              // border: "3px",
+                              left: "12px",
+                              right: "76.47%",
+                              bottom: "-18px",
+                            }}
+                          >
+                            {showItem.legacyFeaturedImage.logoNew && (
+                              <Link href={`/toolbox/${showItem.slug}`}>
+                                <Image
+                                  loader={gumletLoader}
+                                  className="rounded-full"
+                                  objectFit="cover"
+                                  layout="fill"
+                                  src={showItem.legacyFeaturedImage.logoNew}
+                                />
+                              </Link>
                             )}
                           </div>
-                        </Link>
+                        </div>
+                        <div className="mt-7 flex justify-between">
+                          <Link href={`/toolbox/${showItem.slug}`}>
+                            <div className="px-3 w-full">
+                              <div className="font-noto-serif text-gray-1 hover:underline truncate text-lg font-bold leading-6">
+                                {showItem.title}
+                              </div>
+                              {showItem.tags?.data[0] && (
+                                <div className="font-normal text-xs leading-6 tracking-wide uppercase text-gray-500 mt-1">
+                                  # {showItem.tags?.data[0].attributes?.name}
+                                </div>
+                              )}
+                            </div>
+                          </Link>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })
               : null}
