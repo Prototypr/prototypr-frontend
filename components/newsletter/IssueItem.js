@@ -22,8 +22,8 @@ export default function IssueItem({ post = {} }) {
           </div>
         </div>
         <div className="flex flex-col justify-between flex-1 ml-4 mr-6">
-          <h5 className="group-hover:underline font-semibold text-xl leading-8 text-gray-1 overflow-hidden text-ellipsis clamp-1">
-            <a className="group-hover:underline">
+          <h5 className=" font-semibold text-xl leading-8 text-gray-1 overflow-hidden text-ellipsis clamp-1">
+            <a className="">
               {title.replace(
                 title.substring(title.indexOf("Issue"), title.indexOf(":") + 1),
                 ""
@@ -36,8 +36,7 @@ export default function IssueItem({ post = {} }) {
           ></div>
         </div>
         <div className="w-10 h-10 border-2 border-solid border-accent-3 rounded-full flex items-center justify-center">
-          <img src="/static/images/icons/arrow.svg" 
-          data-gumlet="false"/>
+          <img src="/static/images/icons/arrow.svg" data-gumlet="false" />
         </div>
       </div>
     </Link>
