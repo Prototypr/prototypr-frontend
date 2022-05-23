@@ -11,6 +11,15 @@ module.exports =
     locales: ['en-US', 'es-ES'],
     defaultLocale: 'en-US',
   },
+  async redirects() {
+    return [
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true,
+      },
+    ]
+  },
   images: {
     domains: [
       "localhost",
