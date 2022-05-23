@@ -119,7 +119,7 @@ export async function getStaticProps({ preview = null, locale }) {
   let sort = ["featured:desc", "tier:asc", "date:desc"];
   if (locale == "es-ES") {
     sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
-  }
+  } 
 
   let allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
   let allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0, sort)) || [];
