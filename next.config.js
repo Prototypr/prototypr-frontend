@@ -28,6 +28,7 @@ module.exports =
       "s3-us-west-1.amazonaws.com",
       "s3.amazonaws.com",
       "prototypr-media.sfo2.digitaloceanspaces.com",
+      "wp.prototypr.io",
       "prototypr.io",
       "prototypr.gumlet.io",
       "prototyprio.gumlet.io",
