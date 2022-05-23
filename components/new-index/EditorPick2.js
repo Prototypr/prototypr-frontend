@@ -53,11 +53,11 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
       )}
       <section className="flex group flex-col justify-center antialiased bg-white text-gray-900 rounded-lg">
         <Link href={`/post/${slug}`}>
-          <div className="cursor-pointer max-w-6xl mx-auto p-6 sm:p-8 h-full rounded-lg">
+          <div className="cursor-pointer max-w-6xl p-6 sm:p-8 md:pr-12 h-full rounded-lg">
             {/* Blog post */}
-            <article className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
+            <article className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
               <a className="relative block">
-                <figure className="rounded-lg relative rounded-lg h-56 sm:h-64 overflow-hidden transform transition duration-700 ease-out">
+                <figure className="rounded-lg relative rounded-lg h-56 sm:h-64 md:h-80 overflow-hidden transform transition duration-700 ease-out">
                   <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
                     <Image
                       className="rounded-lg"
@@ -99,7 +99,7 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                       )}
                     </ul>
                   </div>
-                  <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-2">
+                  <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-2 max-w-md">
                     <Link href={`/post/${slug}`}>
                       <a className="font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
                         {title}
@@ -107,7 +107,7 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                     </Link>
                   </h3>
                 </header>
-                <div className="text-lg text-gray-400 flex-grow">
+                <div className="text-lg max-w-sm text-gray-400 flex-grow">
                   <div
                     className="text-base font-medium text-gray-600 leading-normal mt-4 clamp-2 overflow-hidden text-ellipsis"
                     dangerouslySetInnerHTML={{ __html: excerpt }}
