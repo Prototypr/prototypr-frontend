@@ -12,17 +12,26 @@ const SponsorCard = dynamic(() => import('@/components/toolbox/SponsorCard'), { 
 const AuthorNewsCredit = dynamic(() => import('@/components/AuthorNewsCredit'), { ssr: true })
 
 
+function truncate(str, n){
+  return (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
+};
+
 export default function Post({ post, morePosts, preview, domain,link, postDate }) {
 
   const router = useRouter()
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />
   }
+  let content = ''
+  if(post?.attributes.content){
+      content = truncate(post?.attributes.content, 400)
+  }
+
   return (
     <Layout
     seo={{
         title:`${post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphTitle: post?.attributes?.title && post.attributes.title}`,
-        description:`${post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphDescription: post?.attributes?.excerpt && post.attributes.excerpt}`,
+        description:`${post?.attributes?.seo?.opengraphDescription?post?.attributes?.seo?.opengraphDescription: post?.attributes?.excerpt && post.attributes.excerpt}`,
         image:`${post?.attributes?.seo?.opengraphImage?post?.attributes?.seo?.opengraphImage:  post?.attributes?.featuredImage?.data?.attributes?.url ? post?.attributes?.featuredImage?.data?.attributes?.url:post?.legacyFeaturedImage?post?.legacyFeaturedImage?.mediaItemUrl:post?.ogImage?post?.ogImage.opengraphImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}`,
         canonical: `${post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/news/${post?.attributes.slug}`}`,
         url: `${post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/news/${post?.attributes.slug}`}`
@@ -51,7 +60,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                 <div
                   style={{ color: "#4a5568"}}
                   className="py-3 max-w-3xl text-md mb-2"
-                  dangerouslySetInnerHTML={{ __html: post?.attributes.content }}
+                  dangerouslySetInnerHTML={{ __html: content }}
                 ></div>
                 {post?.attributes.legacyAttributes?.imgUrl && <a href={link?link:''} target="_blank"><img className="rounded" src={post?.attributes.legacyAttributes?.imgUrl}/></a>}
                 {link && <div className="py-6"><a className="underline text-gray-600 font-semibold" href={post?.attributes.legacyAttributes?.link} target="_blank">Read more</a></div>}

@@ -20,7 +20,7 @@ export default function Post({ post, preview, relatedPosts}) {
   }
 
   const title = post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphTitle: post?.attributes?.title && post.attributes.title
-  const description = post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphDescription: post?.attributes?.excerpt && post.attributes.excerpt
+  const description = post?.attributes?.seo?.opengraphDescription?post?.attributes?.seo?.opengraphDescription: post?.attributes?.excerpt && post.attributes.excerpt
   const image = post?.attributes?.seo?.opengraphImage?post?.attributes?.seo?.opengraphImage:  post?.attributes?.featuredImage?.data?.attributes?.url ? post?.attributes?.featuredImage?.data?.attributes?.url:post?.legacyFeaturedImage?post?.legacyFeaturedImage?.mediaItemUrl:post?.ogImage?post?.ogImage.opengraphImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
   const canonical = post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/post/${post?.attributes.slug}`
   const url = post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/post/${post?.attributes.slug}`
@@ -96,6 +96,7 @@ export async function getStaticProps({ params, preview = null, locale}) {
 
   const postData = transformPost(data?.posts.data[0], locale)
   relatedPosts.data = transformPostList(data?.posts.data[0].attributes.relatedArticles, locale)
+//   console.log(data?.posts.data[0]?.attributes?.relatedArticles)
 
   return {
     props: {
