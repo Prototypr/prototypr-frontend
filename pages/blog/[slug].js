@@ -11,13 +11,23 @@ const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true }
 const SponsorCard = dynamic(() => import('@/components/toolbox/SponsorCard'), { ssr: true })
 const AuthorNewsCredit = dynamic(() => import('@/components/AuthorNewsCredit'), { ssr: true })
 
+function truncate(str, n){
+  return (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
+};
+
 export default function Post({ post, morePosts, preview, domain,link, postDate }) {
   const router = useRouter()
+  
+    let content = ''
+  if(post?.attributes.content){
+      content = truncate(post?.attributes.content, 400)
+  }
+  
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />
   }
   const title = post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphTitle: post?.attributes?.title && post.attributes.title
-  const description = post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphDescription: post?.attributes?.excerpt && post.attributes.excerpt
+  const description = post?.attributes?.seo?.opengraphDescription?post?.attributes?.seo?.opengraphDescription: post?.attributes?.excerpt && post.attributes.excerpt
   const image = post?.attributes?.seo?.opengraphImage?post?.attributes?.seo?.opengraphImage:  post?.attributes?.featuredImage?.data?.attributes?.url ? post?.attributes?.featuredImage?.data?.attributes?.url:post?.legacyFeaturedImage?post?.legacyFeaturedImage?.mediaItemUrl:post?.ogImage?post?.ogImage.opengraphImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
   const canonical = post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/blog/${post?.attributes.slug}`
   const url = post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/blog/${post?.attributes.slug}`
@@ -54,7 +64,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                 <div
                   style={{ color: "#4a5568"}}
                   className="py-3 max-w-3xl text-md mb-2"
-                  dangerouslySetInnerHTML={{ __html: post?.attributes.content }}
+                  dangerouslySetInnerHTML={{ __html: content }}
                 ></div>
                 {post?.attributes.legacyAttributes?.imgUrl ? <a href={link?link:''} target="_blank"><img className="rounded" src={post?.attributes.legacyAttributes?.imgUrl}/></a>:
                 post?.attributes.legacyAttributes?.ogImage && <a href={link?link:''} target="_blank"><img className="rounded" src={post?.attributes.legacyAttributes?.ogImage}/></a>}

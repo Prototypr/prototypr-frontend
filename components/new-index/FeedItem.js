@@ -27,14 +27,14 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
   const tagSlug = tagArr && tagArr.length ? tagArr[0].attributes.slug : "";
 
   return (
-    <div className="cursor-pointer py-6 px-1 inline-block w-full group">
-      <figure
-        className={`relative h-64 ${
-          index % 2 == 0 ? "md:h-96" : "md:h-64"
-        } w-full hidden md:block mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden`}
-      >
-        <div className="absolute w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
-          <Link href={`/post/${slug}`}>
+    <Link href={`/post/${slug}`}>
+      <div className="cursor-pointer py-6 px-1 inline-block w-full group">
+        <figure
+          className={`relative h-64 ${
+            index % 2 == 0 ? "md:h-96" : "md:h-64"
+          } w-full hidden md:block mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden`}
+        >
+          <div className="absolute w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
             <Image
               loader={gumletLoader}
               objectFit="cover"
@@ -42,25 +42,25 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
               layout="fill"
               src={ftImage}
             />
-          </Link>
-        </div>
-      </figure>
-
-      <Link href={`/posts/${tagSlug}`}>
-        <div className="mt-3 flex">
-          <div className="font-base hover:cursor-pointer hover:underline text-sm leading-6 tracking-wide uppercase text-gray-500 mr-2">
-            # {tagName}{" "}
           </div>
-        </div>
-      </Link>
-      <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
-        <Link href={`/post/${slug}`}>
-          <a className="font-noto-serif group-hover:underline">{title}</a>
+        </figure>
+
+        <Link href={`/posts/${tagSlug}`}>
+          <div className="mt-3 flex">
+            <div className="font-base hover:cursor-pointer hover:underline text-sm leading-6 tracking-wide uppercase text-gray-500 mr-2">
+              # {tagName}{" "}
+            </div>
+          </div>
         </Link>
-      </h4>
-      <div className="mt-3">
-        <Author textColor={"text-gray-500"} author={author} />
+        <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
+          <Link href={`/post/${slug}`}>
+            <a className="font-noto-serif">{title}</a>
+          </Link>
+        </h4>
+        <div className="mt-3">
+          <Author textColor={"text-gray-500"} author={author} />
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
