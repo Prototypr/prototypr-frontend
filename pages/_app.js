@@ -3,9 +3,9 @@ import PlausibleProvider from 'next-plausible'
 
 // import { useEffect, useMemo, useState } from "react";
 import { useMemo } from "react";
-import "@/styles/index.scss";
+// import "@/styles/index.scss";
 import { SessionProvider } from "next-auth/react";
-import "@/styles/toolStyles.css";
+// import "@/styles/toolStyles.css";
 import { SWRConfig } from 'swr'
 // import { LocaleProvider, LocaleContext } from '../context/LocaleContext';
 // import LocaleAlert from "@/components/Locale/LocaleAlert";
@@ -18,6 +18,9 @@ import fetchJson from '@/lib/iron-session/fetchJson'
 const TopProgressBar = dynamic(() => {return import("@/components/TopProgressBar")},{ ssr: false });
 const AppToaster = dynamic(() => {return import("@/components/AppToaster")},{ ssr: false });
 
+
+import '../styles/index.scss'
+import '../styles/toolStyles.css'
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
 
