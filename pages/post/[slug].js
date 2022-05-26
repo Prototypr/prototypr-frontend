@@ -8,7 +8,6 @@ const PostHeader = dynamic(() => import("@/components/post-header"), { ssr: true
 
 import Layout from '@/components/layout'
 import { getAllPostsWithSlug, getPost, getCombinedPostsForHomeStatic } from '@/lib/api'
-import Head from 'next/head'
 const NoticeTranslation = dynamic(() => import("@/components/notice-translation"), { ssr: true });
 
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
@@ -25,6 +24,8 @@ export default function Post({ post, preview, relatedPosts}) {
   const canonical = post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/post/${post?.attributes.slug}`
   const url = post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/post/${post?.attributes.slug}`
 
+  const paymentPointer = post?.attributes?.author?.data?.attributes?.paymentPointer
+
   return (
     <Layout
     seo={{
@@ -32,7 +33,8 @@ export default function Post({ post, preview, relatedPosts}) {
       description:`${description}`,
       image:`${image}`,
       canonical: `${canonical}`,
-      url: `${url}`
+      url: `${url}`,
+      monetization:`${paymentPointer}`
     }}
      background="#fff" activeNav={"posts"} preview={preview}>
       <Container>

@@ -9,7 +9,7 @@ const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 import { useIntl } from "react-intl";
 
 import { getPostsByPageForPostsPage } from "@/lib/api";
-import Head from "next/head";
+// import Head from "next/head";
 const PAGE_SIZE = 12;
 export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
   let heroPost;
@@ -94,5 +94,6 @@ export async function getStaticProps({ preview = null, params }) {
   const pagination = allPosts.meta.pagination;
   return {
     props: { allPosts: allPosts.data, preview, pagination },
+    revalidate:20
   };
 }
