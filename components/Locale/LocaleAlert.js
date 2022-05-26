@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { styled, keyframes } from "@stitches/react";
+import { keyframes } from "@stitches/react";
+import { styled } from '../stitches.config';
+
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { useRouter } from "next/router";
 import LOCALE_MAP from "./localeMap";

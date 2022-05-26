@@ -1,5 +1,5 @@
-import React from "react";
-import { styled, keyframes } from "@stitches/react";
+import { keyframes } from "@stitches/react";
+import { styled } from '../../stitches.config';
 import { indigo, mauve, blackA, gray } from "@radix-ui/colors";
 
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";

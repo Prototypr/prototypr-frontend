@@ -1,7 +1,9 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { styled, keyframes } from '@stitches/react';
-import { violet, mauve, blackA } from '@radix-ui/colors';
+import { keyframes } from '@stitches/react';
+import { styled } from '../stitches.config';
+
+import { violet } from '@radix-ui/colors';
 import {  Cross2Icon } from '@radix-ui/react-icons';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { useIntl } from "react-intl";

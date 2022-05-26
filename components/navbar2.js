@@ -1,9 +1,8 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { useState, useEffect } from "react";
 import useUser from "@/lib/iron-session/useUser";
-import { FormattedMessage } from "react-intl";
+import { useState, useEffect } from "react";
 import useScrollDirection from "./useScrollDirection";
 import jsCookie from "js-cookie";
 const NavigationMenuDemo = dynamic(() => import("./navbar-menu"), {ssr:true});
@@ -77,7 +76,7 @@ export default function Navbar({ activeNav }) {
   return (
     <div
       as="nav"
-      className="bg-white fixed w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur"
+      className={`bg-white fixed w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur`}
       style={{
         background: `rgba(255, 255, 255, ${0.9})`,
       }}
@@ -92,7 +91,7 @@ export default function Navbar({ activeNav }) {
                 showNav ? "" : "md:-mt-16"
               } transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-16`}
             >
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <div className="sm:hidden absolute inset-y-0 left-0 flex items-center">
                 {/* <!-- Mobile menu button--> */}
                 <button onClick={toggleMobileNav} className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>   
@@ -142,9 +141,6 @@ export default function Navbar({ activeNav }) {
                 </div>
               </div>
             </div>
-            <div
-              className={`hidden md:flex justify-between space-x-4 w-full transition transition-all duration-700 ease-in-out relative py-2 uppercase text-sm`}
-            >
               <SubNav
                 collapse={showNav}
                 user={user}
@@ -152,20 +148,6 @@ export default function Navbar({ activeNav }) {
                 userLoggedInCookie={userLoggedInCookie}
                 activeNav={activeNav}
               />
-              <p
-                className={`my-auto font-noto-serif hidden xl:block normal-case font-semibold ${
-                  !showNav
-                    ? "opacity-0 -z-10 absolute right-0 pt-3.5 text-gray-50 -mr-12 text-xs"
-                    : "text-base"
-                } transition transition-all duration-200 ease-in-out `}
-              >
-                <FormattedMessage id="navbar.tagline.piece1" />{" "}
-                <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
-                  <FormattedMessage id="navbar.tagline.piece2" />
-                </span>{" "}
-                <FormattedMessage id="navbar.tagline.piece3" />
-              </p>
-            </div>
           </div>
 
           {/* <!-- Mobile menu, show/hide based on menu state. --> */}

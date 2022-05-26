@@ -1,10 +1,11 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { styled } from "@stitches/react";
+import { styled } from '../stitches.config';
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 
 import { indigo, gray } from "@radix-ui/colors";
 import Link from "next/link";
+import {useState, useEffect} from 'react'
 const ProfileBadge = dynamic(() => import("./ProfileBadge"));
 
 const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
@@ -115,7 +116,10 @@ export const NavigationMenuDemo = ({
 }) => {
   const intl = useIntl();
   const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
-
+  const [clientMounted, setClientMounted] = useState(false)
+  useEffect(()=>{
+    setClientMounted(true)
+  },[])
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -130,9 +134,10 @@ export const NavigationMenuDemo = ({
             {title3}
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem className="flex flex-col justify-center">
+       {clientMounted? 
+       <NavigationMenuItem className="flex flex-col justify-center">
           {user && user.isLoggedIn ? (
-            <div className="ml-2">
+            <div className="ml-2 w-8">
               <Link href="/account">
                 {user && 
                   <ProfileBadge
@@ -154,7 +159,12 @@ export const NavigationMenuDemo = ({
             // </NavigationMenuButton>
             <NewsletterNav collapsed={collapsed} />
           )}
+        </NavigationMenuItem>:
+        <NavigationMenuItem className="flex flex-col justify-center">
+          {!userLoggedInCookie?
+           <NewsletterNav collapsed={collapsed} />:<div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>          }
         </NavigationMenuItem>
+        }
       </NavigationMenuList>
 
     </NavigationMenu>

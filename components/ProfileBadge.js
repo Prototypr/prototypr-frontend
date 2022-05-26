@@ -1,5 +1,6 @@
 import React from 'react';
-import { styled, keyframes } from '@stitches/react';
+import { keyframes } from '@stitches/react';
+import { styled } from '../stitches.config';
 import { blue, mauve, blackA, gray, green} from '@radix-ui/colors';
 // import {
 //   HamburgerMenuIcon,

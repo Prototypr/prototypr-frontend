@@ -1,6 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { styled } from "@stitches/react";
+import { styled } from '../stitches.config';
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { indigo, gray } from "@radix-ui/colors";
 import Link from "next/link";
@@ -136,7 +136,7 @@ export const NavigationMenuDemo = ({
   const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
 
   return (
-    <NavigationMenu>
+    <NavigationMenu className="sm:hidden">
       <NavigationMenuList>
         <NavigationMenuItem className="block flex py-2 flex-col justify-center">
           <NavigationMenuLink href="/posts/accessibility">

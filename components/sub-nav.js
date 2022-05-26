@@ -1,5 +1,6 @@
 import React from "react";
-import { styled, keyframes } from "@stitches/react";
+import { keyframes } from "@stitches/react";
+import { styled } from '../stitches.config';
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { indigo, mauve, green, teal } from "@radix-ui/colors";
@@ -404,6 +405,7 @@ export const NavigationMenuDemo = ({
   const submenu2Desc6 = intl.formatMessage({ id: "navbar.submenu2.desc6" });
 
   return (
+  <div className={`hidden md:flex justify-between space-x-4 w-full transition transition-all duration-700 ease-in-out relative py-2 uppercase text-sm`}>    
     <NavigationMenu>
       <Link href="/">
         <img
@@ -542,6 +544,22 @@ export const NavigationMenuDemo = ({
         <NavigationMenuViewport />
       </ViewportPosition>
     </NavigationMenu>
+
+    {/* tagline */}
+    <p
+      className={`my-auto font-noto-serif hidden xl:block normal-case font-semibold ${
+        !collapse
+          ? "opacity-0 -z-10 absolute right-0 pt-3.5 text-gray-50 -mr-12 text-xs"
+          : "text-base"
+      } transition transition-all duration-200 ease-in-out `}
+      >
+        <FormattedMessage id="navbar.tagline.piece1" />{" "}
+        <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
+          <FormattedMessage id="navbar.tagline.piece2" />
+        </span>{" "}
+        <FormattedMessage id="navbar.tagline.piece3" />
+      </p>
+    </div>
   );
 };
 
