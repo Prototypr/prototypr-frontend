@@ -28,6 +28,13 @@ module.exports =
         },
       ];
     },
+    // https://twitter.com/dan_abramov/status/1529677207869825024
+    experimental: {
+      plugins: true,
+      scrollRestoration: true,
+      legacyBrowsers: false,
+      browsersListForSwc: true,
+    },
     images: {
       domains: [
         "localhost",
