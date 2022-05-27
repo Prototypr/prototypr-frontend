@@ -1,11 +1,12 @@
 import Image from "next/image";
+import Date from "@/components/date";
 
-export default function Avatar({ name, picture }) {
+export default function Avatar({ name, picture, date }) {
   const url = picture;
 
   return (
-    <div className="flex items-center mt-8">
-      <div className="w-12 h-12 relative mr-4">
+    <div className="flex items-center mt-8 pb-4">
+      <div className="w-12 h-12 relative mr-4 my-auto">
         {url && (
           <Image
             src={`${
@@ -18,7 +19,14 @@ export default function Avatar({ name, picture }) {
           />
         )}
       </div>
-      <div className="text-lg font-semibold">{name}</div>
+      <div className="flex flex-col justify-center">
+        <div className="text-lg hover:underline font-semibold">{name}</div>
+        {date && (
+          <div className="text-base text-gray-700">
+            <Date dateString={date} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

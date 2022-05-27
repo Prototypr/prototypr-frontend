@@ -5,9 +5,10 @@ import ErrorPage from 'next/error'
 import Container from '@/components/container'
 const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: true });
 const PostHeader = dynamic(() => import("@/components/post-header"), { ssr: true });
+const AuthorBio = dynamic(() => import("@/components/authorBio"), { ssr: true });
 
 import Layout from '@/components/layout'
-import { getAllPostsWithSlug, getPost, getCombinedPostsForHomeStatic } from '@/lib/api'
+import { getAllPostsWithSlug, getPost } from '@/lib/api'
 const NoticeTranslation = dynamic(() => import("@/components/notice-translation"), { ssr: true });
 
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
@@ -53,6 +54,7 @@ export default function Post({ post, preview, relatedPosts}) {
               {/* </Head> */}
               {!post.currentLocaleAvailable && <NoticeTranslation/>}
               <PostHeader
+                slug={post?.attributes?.slug}
                 title={post?.attributes?.title}
                 coverImage={post?.attributes?.featuredImage?.data?.attributes?.url? post?.attributes?.featuredImage?.data?.attributes?.url:post?.attributes?.legacyFeaturedImage ? post?.attributes?.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                 date={post.attributes.date}
@@ -65,9 +67,15 @@ export default function Post({ post, preview, relatedPosts}) {
                 />
               </div>
             </article>
+            <div>
+                
+                <AuthorBio 
+                 slug={post?.attributes?.slug}
+                title={post?.attributes?.title}
+                author={post?.attributes?.author?.data?.attributes}/>
+            </div>
             <hr className="border-accent-2 mt-28 mb-24" />
             <h1 className="text-4xl font-noto-serif font-semibold -mt-10 mb-12">More Posts</h1>
-
             <div className="mt-10 mb-20 grid lg:grid-cols-2 grid-cols-1 gap-10">
             {relatedPosts?.data?.length>0 && relatedPosts.data.map((item, index) => {
               return(

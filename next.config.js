@@ -26,6 +26,13 @@ module.exports =
           destination: "/toolbox",
           permanent: true,
         },
+        {
+          source:
+            "/post/announcing-prototypr-grant-for-the-web-flagship-project-🎉",
+          destination:
+            "/post/announcing-prototypr-grant-for-the-web-flagship-project-f09f8e89",
+          permanent: true,
+        },
       ];
     },
     // https://twitter.com/dan_abramov/status/1529677207869825024
