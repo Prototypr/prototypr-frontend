@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 /**new index components */
-import { BrowserView} from 'react-device-detect';
+import { BrowserView } from "react-device-detect";
 
 // const Intro = dynamic(() => import("@/components/new-index/Intro"));
 const Footer = dynamic(() => import("@/components/footer"));
@@ -61,12 +61,16 @@ export default function Index({
 }) {
   const intl = useIntl();
 
-  const titleText = intl.formatMessage({ id: "index.header.title" })
-  const descriptionText = intl.formatMessage({ id: "intro.description" })
-  const editorPickTitle = intl.formatMessage({ id: "editpicker.title" })
-  const designToolTitle = intl.formatMessage({ id: "designtool.title" })
-  const sourcePanelTitle = intl.formatMessage({ id: "navbar.contentitem.title2"})
-  const sourcePanelDescription =intl.formatMessage({ id: "sourcepanel.desc2"})
+  const titleText = intl.formatMessage({ id: "index.header.title" });
+  const descriptionText = intl.formatMessage({ id: "intro.description" });
+  const editorPickTitle = intl.formatMessage({ id: "editpicker.title" });
+  const designToolTitle = intl.formatMessage({ id: "designtool.title" });
+  const sourcePanelTitle = intl.formatMessage({
+    id: "navbar.contentitem.title2",
+  });
+  const sourcePanelDescription = intl.formatMessage({
+    id: "sourcepanel.desc2",
+  });
 
   return (
     <>
@@ -82,11 +86,7 @@ export default function Index({
       >
         <Container>
           {/* <Intro /> */}
-            <EditorPick2
-              lazy={false}
-              header={editorPickTitle}
-              post={heroPost}
-            />
+          <EditorPick2 lazy={false} header={editorPickTitle} post={heroPost} />
           <ProductList posts={morePosts} />
           <div className="hidden md:block mt-32 pb-10 px-3 xl:px-0">
             <h4 className="text-3xl text-gray-900 font-bold leading-6 text-title-1">
@@ -95,17 +95,14 @@ export default function Index({
           </div>
         </Container>
         <BrowserView>
-            <DesignTool allTools={allTools} />
+          <DesignTool allTools={allTools} />
         </BrowserView>
         <Container>
-        <SourcePanel 
-          title={sourcePanelTitle}
-          desc={sourcePanelDescription}
-          />
+          <SourcePanel title={sourcePanelTitle} desc={sourcePanelDescription} />
 
-        <BrowserView>
-          <TopicSpotlights tabs={TAB_ITEMS} topics={topicRes} />
-        </BrowserView>
+          <BrowserView>
+            <TopicSpotlights tabs={TAB_ITEMS} topics={topicRes} />
+          </BrowserView>
           <Aspiring posts={interviewPosts} />
           <Feeds posts={otherPosts} />
         </Container>
@@ -119,11 +116,12 @@ export async function getStaticProps({ preview = null, locale }) {
   let sort = ["featured:desc", "tier:asc", "date:desc"];
   if (locale == "es-ES") {
     sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
-  } 
+  }
 
   let allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
-  let allTools = (await getAllToolsForHome(preview, PAGE_SIZE, 0, sort)) || [];
-  let otherPosts = (await getCombinedPostsForHome(preview, 8, 7, sort)) || [];
+  let allTools =
+    (await getAllToolsForHome(preview, PAGE_SIZE, 0, ["date:desc"])) || [];
+  let otherPosts = (await getCombinedPostsForHome(preview, 9, 8, sort)) || [];
   const interviews =
     (await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
   let topicRes = {};
