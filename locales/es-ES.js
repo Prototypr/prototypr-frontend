@@ -20,8 +20,9 @@ const ES = {
   "intro.button.updates": "Recibir novedades",
   "intro.description": "Código abierto. Gratis para todos. Sin muro de pago.",
   "intro.link": "Saber más sobre Prototypr",
-  "navbar.webmonetization.title":"Ad-free Web",
-  "navbar.webmonetization.desc":"No more paywalls or ads. Learn more about Web Monetization and Prototypr.",
+  "navbar.webmonetization.title": "Ad-free Web",
+  "navbar.webmonetization.desc":
+    "No more paywalls or ads. Learn more about Web Monetization and Prototypr.",
   "navbar.menu.title1": "Más",
   "navbar.menu.title2": "Toolbox",
   "navbar.menu.title3": "Escribe para nosotros",
@@ -100,6 +101,8 @@ const ES = {
     "Historias abiertas de diseño y tecnología para que todos puedan leer",
   "newsletter.title": "Reciber el boletín",
   "newsletter.issue": "Cuestiones anteriores",
+  "newsletterPanel.title3": "Reciber el boletín",
+  "newsletterPanel.desc3": "Los mejores artículos y herramientas cada semana.",
   issue: "Asunto",
   "issue.viewAll": "Ver todo",
 };

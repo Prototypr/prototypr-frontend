@@ -62,11 +62,13 @@ export default function PostHeader({
               </Link>
             )}
           </div>
-          <SocialShare
-            slug={slug}
-            title={title}
-            authorTwitter={author?.twitter}
-          />
+          {template !== 2 && (
+            <SocialShare
+              slug={slug}
+              title={title}
+              authorTwitter={author?.twitter}
+            />
+          )}
         </div>
       </div>
     </>

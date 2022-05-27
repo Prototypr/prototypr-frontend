@@ -6,6 +6,8 @@ import Container from '@/components/container'
 const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: true });
 const PostHeader = dynamic(() => import("@/components/post-header"), { ssr: true });
 const AuthorBio = dynamic(() => import("@/components/authorBio"), { ssr: true });
+const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
+import { useIntl } from "react-intl";
 
 import Layout from '@/components/layout'
 import { getAllPostsWithSlug, getPost } from '@/lib/api'
@@ -26,6 +28,7 @@ export default function Post({ post, preview, relatedPosts}) {
   const url = post?.attributes?.seo?.canonical?post?.attributes?.seo?.canonical: post?.attributes?.slug && `https://prototypr.io/post/${post?.attributes.slug}`
 
   const paymentPointer = post?.attributes?.author?.data?.attributes?.paymentPointer
+  const intl = useIntl();
 
   return (
     <Layout
@@ -73,9 +76,16 @@ export default function Post({ post, preview, relatedPosts}) {
                  slug={post?.attributes?.slug}
                 title={post?.attributes?.title}
                 author={post?.attributes?.author?.data?.attributes}/>
+            
             </div>
+           {post.attributes?.template!==2 && <SourcePanel
+            titleSize={'lg:text-5xl'}
+            className={'w-full font-noto-serif mb-4 mt-16 border rounded-lg pb-0 pt-8 border-gray-100'}
+            title={intl.formatMessage({ id: "newsletterPanel.title3" })}
+            desc={intl.formatMessage({ id: "newsletterPanel.desc3" })}/>}
+            
             <hr className="border-accent-2 mt-28 mb-24" />
-            <h1 className="text-4xl font-noto-serif font-semibold -mt-10 mb-12">More Posts</h1>
+            <h1 className="text-4xl font-noto-serif font-semibold -mt-10 mb-12">Related Posts</h1>
             <div className="mt-10 mb-20 grid lg:grid-cols-2 grid-cols-1 gap-10">
             {relatedPosts?.data?.length>0 && relatedPosts.data.map((item, index) => {
               return(

@@ -6,10 +6,14 @@ export default function AuthorBio({ author, slug, title }) {
     ? author?.legacyAvatar
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
+  const github = getGithubHandle(author.github);
+  const twitter = getTwitterHandle(author.twitter);
+  const dribbble = getDribbbleHandle(author.dribbble);
+
   return (
-    <div className="py-4 px-8 md:px-0">
+    <div className="py-4">
       <div
-        className="flex px-6 md:px-0 justify-between mx-auto"
+        className="flex md:px-0 justify-between mx-auto"
         style={{ maxWidth: "43rem" }}
       >
         <div className="my-auto mx-auto text-center pt-20">
@@ -31,14 +35,16 @@ export default function AuthorBio({ author, slug, title }) {
         <div className="w-full border-b border-gray-200 my-12" />
         <div className="flex flex-col sm:flex-row sm:justify-between">
           <div className="flex">
-            <a href={"/people/" + author.slug}>
-              <img
-                alt="Author avatar"
-                className=" mr-5 border-2 border-gray-300 flex-shrink-0 shine mb-2 cursor-pointer mt-2 rounded-lg h-12 w-12 md:h-20 md:w-20 object-cover bg-white rounded-full "
-                src={pic}
-              />
-            </a>
-            <div>
+            <div className="w-32 md:w-auto flex justify-end">
+              <a href={"/people/" + author.slug}>
+                <img
+                  alt="Author avatar"
+                  className="border-2 border-gray-300 flex-shrink-0 shine mb-2 cursor-pointer mt-2 rounded-lg h-12 w-12 md:h-20 md:w-20 object-cover bg-white rounded-full "
+                  src={pic}
+                />
+              </a>
+            </div>
+            <div className="ml-3 md:ml-6">
               <p className="uppercase text-sm text-gray-600">Written by</p>
 
               <h1 className="text-xl mt-1 font-semibold leading-normal text-gray-800">
@@ -62,7 +68,7 @@ export default function AuthorBio({ author, slug, title }) {
                   />
                 </div>
               )}
-              <div className="flex mt-8 mb-3 z-20">
+              <div className="flex mt-5 mb-3 z-20">
                 {author.url && (
                   <a href={author.url}>
                     <div
@@ -82,12 +88,10 @@ export default function AuthorBio({ author, slug, title }) {
                   </a>
                 )}
 
-                {author.twitter && (
+                {twitter && (
                   <a
                     className="link block mr-2"
-                    href={`https://twitter.com/${getTwitterHandle(
-                      author.twitter
-                    )}`}
+                    href={`https://twitter.com/${twitter}`}
                     target="_blank"
                   >
                     <img
@@ -97,12 +101,10 @@ export default function AuthorBio({ author, slug, title }) {
                     />
                   </a>
                 )}
-                {author.dribbble && (
+                {dribbble && (
                   <a
                     className="link block mr-2"
-                    href={`https://dribbble.com/${getDribbbleHandle(
-                      author.dribbble
-                    )}`}
+                    href={`https://dribbble.com/${dribbble}`}
                     target="_blank"
                   >
                     <img
@@ -112,12 +114,10 @@ export default function AuthorBio({ author, slug, title }) {
                     />
                   </a>
                 )}
-                {author.github && (
+                {github && (
                   <a
                     className="link block mr-2"
-                    href={`https://github.com/${getGithubHandle(
-                      author.github
-                    )}`}
+                    href={`https://github.com/${github}`}
                     target="_blank"
                   >
                     <img
@@ -144,14 +144,6 @@ export default function AuthorBio({ author, slug, title }) {
               )}
             </div>
           </div>
-          {/* <div className="hidden sm:block">
-                                    {this.props.user.meta.availability == '1' &&
-                                        <div className=" bg-blue-800 mt-2 uppercase text-white text-xs px-3 py-2 rounded inline-block">
-                                            <span className="hidden sm:block">🔥 Available for hire</span>
-                                            <span className="sm:hidden">🔥 Hire me</span>
-                                        </div>
-                                    }
-                                </div> */}
         </div>
       </div>
     </div>
@@ -159,6 +151,9 @@ export default function AuthorBio({ author, slug, title }) {
 }
 
 function getTwitterHandle(string) {
+  if (!string) {
+    return false;
+  }
   //https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
   //remove protocols
   var result = string.replace(/(^\w+:|^)\/\//, "");
@@ -170,6 +165,9 @@ function getTwitterHandle(string) {
   return "@" + result;
 }
 function getDribbbleHandle(string) {
+  if (!string) {
+    return false;
+  }
   //https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
   //remove protocols
   var result = string.replace(/(^\w+:|^)\/\//, "");
@@ -181,6 +179,9 @@ function getDribbbleHandle(string) {
   return result;
 }
 function getGithubHandle(string) {
+  if (!string) {
+    return false;
+  }
   //https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
   //remove protocols
   var result = string.replace(/(^\w+:|^)\/\//, "");
