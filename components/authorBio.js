@@ -6,9 +6,9 @@ export default function AuthorBio({ author, slug, title }) {
     ? author?.legacyAvatar
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
-  const github = getGithubHandle(author.github);
-  const twitter = getTwitterHandle(author.twitter);
-  const dribbble = getDribbbleHandle(author.dribbble);
+  const github = getGithubHandle(author?.github);
+  const twitter = getTwitterHandle(author?.twitter);
+  const dribbble = getDribbbleHandle(author?.dribbble);
 
   return (
     <div className="py-4">
