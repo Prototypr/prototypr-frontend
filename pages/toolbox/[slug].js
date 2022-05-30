@@ -112,7 +112,31 @@ export async function getStaticProps({ params, preview = null, locale }) {
   //build the gallery here
   let PHOTO_SET = [];
   const item = data?.posts.data[0]
-  if (item && item.attributes.legacyMedia) {
+
+  // new gallry
+  if(item && item.attributes.gallery?.data?.length){
+    item.attributes.gallery.data.forEach((galleryItem, index) => {
+      galleryItem.medium =  galleryItem.attributes.url.replace('https://prototypr-media.sfo2.digitaloceanspaces.com','https://prototyprio.gumlet.io')
+      PHOTO_SET.push({
+        thumbnail:
+          galleryItem.attributes.url.indexOf("https://") == -1
+            ? "https://prototypr.gumlet.com" + galleryItem.attributes.url
+            : galleryItem.attributes.url,
+        original:
+          galleryItem.attributes.url.indexOf("https://") == -1
+            ? "https://prototypr.gumlet.com" + galleryItem.attributes.url
+            : galleryItem.attributes.url,
+        originalAlt:galleryItem.attributes.alternativeText? galleryItem.attributes.alternativeText: "Screenshot of product",
+        thumbnailAlt:galleryItem.attributes.alternativeText? galleryItem.attributes.alternativeText: "Screenshot of product",
+        type: "image",
+        // srcSet: galleryItem.srcSet,
+        // sizes: galleryItem.sizes?galleryItem.sizes:{},
+      });
+    })
+  }
+
+  // legacy gallery
+  else if (item && item.attributes.legacyMedia) {
     if (item.attributes.legacyMedia.gallery && item.attributes.legacyMedia.gallery.length) {
       item.attributes.legacyMedia.gallery.forEach((galleryItem, index) => {
        //make nextjs preload the gumlet image
