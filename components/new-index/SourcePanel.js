@@ -26,7 +26,7 @@ export default function SourcePanel({ desc, title, className, titleSize }) {
               className="rounded-lg contrast-115"
               layout="fill"
               data-gumlet="false"
-              src={"/static/images/robot-banner.svg"}
+              src={"/static/images/newsletter-3.svg"}
             />
           </div>
         </figure>

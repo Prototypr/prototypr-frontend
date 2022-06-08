@@ -14,6 +14,7 @@ import { getAllPostsWithSlug, getPost } from '@/lib/api'
 const NoticeTranslation = dynamic(() => import("@/components/notice-translation"), { ssr: true });
 
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
+import { useEffect } from "react";
 
 export default function Post({ post, preview, relatedPosts}) {
   const router = useRouter()
@@ -29,6 +30,13 @@ export default function Post({ post, preview, relatedPosts}) {
 
   const paymentPointer = post?.attributes?.author?.data?.attributes?.paymentPointer
   const intl = useIntl();
+
+  useEffect(()=>{
+    const s = document.createElement("script");
+    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
+    s.setAttribute("async", "true");
+    document.head.appendChild(s);
+  },[])
 
   return (
     <Layout
