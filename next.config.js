@@ -27,10 +27,14 @@ module.exports =
           permanent: true,
         },
         {
-          source:
-            "/post/announcing-prototypr-grant-for-the-web-flagship-project-🎉",
+          source: '/post/:slug(\announcing-prototypr-grant-for-the-web-flagship-project-%F0%9F%8E%89\)',
           destination:
             "/post/announcing-prototypr-grant-for-the-web-flagship-project-f09f8e89",
+          permanent: true,
+        },
+        {
+          source: '/prototyping-tool/:slug*',
+          destination: '/toolbox/:slug*', // Matched parameters can be used in the destination
           permanent: true,
         },
       ];
