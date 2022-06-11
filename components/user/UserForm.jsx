@@ -82,6 +82,7 @@ const UserForm = ({ info }) => {
     } catch (error) {
       toast.error("Error has occured.");
       console.log(error.message)
+      console.log(error.response)
       error.response.data.error.details.errors.forEach((i) => {
         if (
           [
