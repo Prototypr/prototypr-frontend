@@ -52,7 +52,7 @@ module.exports =
           permanent: true,
         },
         {
-          source: "%2Ftoolbox%2F%F0%9F%8E%A8-macos-big-sur-icons",
+          source: "/toolbox/%F0%9F%8E%A8-macos-big-sur-icons",
           destination: "/toolbox/f09f8ea8-macos-big-sur-icons",
           permanent: true,
         },
