@@ -1,6 +1,11 @@
 .newsletter-content .blog-content>div>p{
     display:none;
 }
+.popup-modal-content{
+    li p{
+        display:inline;
+    }
+}
 .blog-content{
     
     .wp-caption-text{margin-top:10px!important;}
