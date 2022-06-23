@@ -1,6 +1,6 @@
 import React from "react";
 import { keyframes } from "@stitches/react";
-import { styled } from '../stitches.config';
+import { styled } from "../stitches.config";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { indigo, mauve, green, teal } from "@radix-ui/colors";
@@ -211,7 +211,7 @@ const NextLink = ({ children, ...props }) => {
           style={props.css}
           className={
             isActive
-              ? "bg-blue-50 border border-blue-100 border-1 text-blue-700"
+              ? "bg-blue-50 border border-blue-100 border-1 text-blue-default"
               : ""
           }
           {...props}
@@ -328,15 +328,17 @@ const ContentListItemCallout = React.forwardRef(
             marginBottom: 7,
           }}
         >
-          <img className="w-14 mb-4 -ml-0.5" 
-          data-gumlet="false"
-          src='/static/images/icons/wm-icon-animated.svg'/>
+          <img
+            className="w-14 mb-4 -ml-0.5"
+            data-gumlet="false"
+            src="/static/images/icons/wm-icon-animated.svg"
+          />
           <FormattedMessage id="navbar.webmonetization.title" />
         </LinkTitle>
         <LinkText
           css={{
             // fontSize: 14,
-            color: '#444',
+            color: "#444",
             lineHeight: 1.3,
           }}
         >
@@ -359,10 +361,7 @@ const ViewportPosition = styled("div", {
   perspective: "2000px",
 });
 
-export const NavigationMenuDemo = ({
-  activeNav,
-  collapse,
-}) => {
+export const NavigationMenuDemo = ({ activeNav, collapse }) => {
   const intl = useIntl();
   const title1 = intl.formatMessage({ id: "navbar.menu.title1" });
   const title2 = intl.formatMessage({ id: "navbar.menu.title2" });
@@ -405,156 +404,169 @@ export const NavigationMenuDemo = ({
   const submenu2Desc6 = intl.formatMessage({ id: "navbar.submenu2.desc6" });
 
   return (
-  <div className={`hidden md:flex justify-between space-x-4 w-full transition transition-all duration-700 ease-in-out relative py-2 uppercase text-sm`}>    
-    <NavigationMenu>
-      <Link href="/">
-        <img
-          className={`cursor-pointer my-auto h-8 ${
-            collapse ? "w-0 opacity-0" : "w-8 opacity-1"
+    <div
+      className={`hidden md:flex justify-between space-x-4 w-full transition transition-all duration-700 ease-in-out relative py-2 uppercase text-sm`}
+    >
+      <NavigationMenu>
+        <Link href="/">
+          <img
+            className={`cursor-pointer my-auto h-8 ${
+              collapse ? "w-0 opacity-0" : "w-8 opacity-1"
+            } transition transition-all duration-300 ease-in-out`}
+            src="/static/images/logo-small.svg"
+            data-gumlet="false"
+            alt="Prototypr Logo"
+          />
+        </Link>
+        <Link href="/">
+          <p
+            className={`cursor-pointer font-noto-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
+              collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"
+            } transition transition-all duration-150 ease-in-out`}
+          >
+            <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-default to-blue-dark">
+              <FormattedMessage id="navbar.tagline.small.piece1" />
+            </span>
+            <br />
+            <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-default to-blue-dark">
+              <FormattedMessage id="navbar.tagline.small.piece2" />
+            </span>
+          </p>
+        </Link>
+        <div
+          className={`${
+            collapse ? "" : "ml-10"
           } transition transition-all duration-300 ease-in-out`}
-          src="/static/images/logo-small.svg"
-          data-gumlet="false"
-          alt="Prototypr Logo"
-        />
-      </Link>
-      <Link href="/">
-        <p
-          className={`cursor-pointer font-noto-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
-            collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"
-          } transition transition-all duration-150 ease-in-out`}
         >
-          <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
-            <FormattedMessage id="navbar.tagline.small.piece1" />
-          </span>
-          <br />
-          <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
-            <FormattedMessage id="navbar.tagline.small.piece2" />
-          </span>
-        </p>
-      </Link>
-      <div
-        className={`${
-          collapse ? "" : "ml-10"
-        } transition transition-all duration-300 ease-in-out`}
-      >
-        <NavigationMenuList>
-          <NavigationMenuItem className="hidden -ml-4 text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-            <NavigationMenuLink href="/posts/accessibility">
-              {submenuTitle4}
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-            <NavigationMenuLink href="/posts/interview">
-              {submenuTitle3}
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-            <NavigationMenuLink href="/posts/ux">
-              {submenuTitle2}
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-            <NavigationMenuLink href="/posts/ui">
-              {submenuTitle5}
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="flex text-xs md:text-sm xl:mr-2.5 flex-col justify-center">
-            {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
-            <NavigationMenuTrigger active={""}>{title1}</NavigationMenuTrigger>
-            <NavigationMenuContent className="normal-case">
-              <ContentList layout="three">
-                <ContentListItemCallout />
-                <ContentListItem href="/topics" title={submenuTitle1}>
-                  {submenuDesc1}
-                </ContentListItem>
-                <ContentListItem href="/posts/ux/page/1" title={submenuTitle2}>
-                  {submenuDesc2}
-                </ContentListItem>
-                <ContentListItem
-                  href="/posts/interview/page/1"
-                  title={submenuTitle3}
-                >
-                  {submenuDesc3}
-                </ContentListItem>
-                <ContentListItem
-                  href="/posts/accessibility/page/1"
-                  title={submenuTitle4}
-                >
-                  {submenuDesc4}
-                </ContentListItem>
-                <ContentListItem href="/posts/ui/page/1" title={submenuTitle5}>
-                  {submenuDesc5}
-                </ContentListItem>
-                <ContentListItem
-                  href="/posts/code/page/1"
-                  title={submenuTitle6}
-                >
-                  {submenuDesc6}
-                </ContentListItem>
-              </ContentList>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+          <NavigationMenuList>
+            <NavigationMenuItem className="hidden -ml-4 text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+              <NavigationMenuLink href="/posts/accessibility">
+                {submenuTitle4}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+              <NavigationMenuLink href="/posts/interview">
+                {submenuTitle3}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+              <NavigationMenuLink href="/posts/ux">
+                {submenuTitle2}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+              <NavigationMenuLink href="/posts/ui">
+                {submenuTitle5}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="flex text-xs md:text-sm xl:mr-2.5 flex-col justify-center">
+              {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
+              <NavigationMenuTrigger active={""}>
+                {title1}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="normal-case">
+                <ContentList layout="three">
+                  <ContentListItemCallout />
+                  <ContentListItem href="/topics" title={submenuTitle1}>
+                    {submenuDesc1}
+                  </ContentListItem>
+                  <ContentListItem
+                    href="/posts/ux/page/1"
+                    title={submenuTitle2}
+                  >
+                    {submenuDesc2}
+                  </ContentListItem>
+                  <ContentListItem
+                    href="/posts/interview/page/1"
+                    title={submenuTitle3}
+                  >
+                    {submenuDesc3}
+                  </ContentListItem>
+                  <ContentListItem
+                    href="/posts/accessibility/page/1"
+                    title={submenuTitle4}
+                  >
+                    {submenuDesc4}
+                  </ContentListItem>
+                  <ContentListItem
+                    href="/posts/ui/page/1"
+                    title={submenuTitle5}
+                  >
+                    {submenuDesc5}
+                  </ContentListItem>
+                  <ContentListItem
+                    href="/posts/code/page/1"
+                    title={submenuTitle6}
+                  >
+                    {submenuDesc6}
+                  </ContentListItem>
+                </ContentList>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
 
-          <NavigationMenuItem className="flex flex-col text-xs md:text-sm xl:mr-2.5 justify-center">
-            <NavigationMenuTrigger active={activeNav === "toolbox"}>
-              {title2}
-            </NavigationMenuTrigger>
-            <NavigationMenuContent className="normal-case">
-              <ContentList layout="two">
-                <ContentListItem title={submenu2Title1} href="/toolbox/page/1">
-                  {submenu2Desc1}
-                </ContentListItem>
-                <ContentListItem
-                  title={submenu2Title2}
-                  href="/toolbox/ux-tools/page/1"
-                >
-                  {submenu2Desc2}
-                </ContentListItem>
-                <ContentListItem
-                  title={submenu2Title3}
-                  href="/toolbox/augmented-reality-tools/page/1"
-                >
-                  {submenu2Desc3}
-                </ContentListItem>
-                <ContentListItem
-                  title={submenu2Title4}
-                  href="/prototyping/page/1"
-                >
-                  {submenu2Desc4}
-                </ContentListItem>
-                <ContentListItem
-                  title={submenu2Title5}
-                  href="/toolbox/accessibility/page/1"
-                >
-                  {submenu2Desc5}
-                </ContentListItem>
-                <ContentListItem
-                  title={submenu2Title6}
-                  href="/toolbox/conversational-design-tools/page/1"
-                >
-                  {submenu2Desc6}
-                </ContentListItem>
-              </ContentList>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </div>
-      <NavigationMenuIndicator />
-      <ViewportPosition className="ml-0 ml-36">
-        <NavigationMenuViewport />
-      </ViewportPosition>
-    </NavigationMenu>
+            <NavigationMenuItem className="flex flex-col text-xs md:text-sm xl:mr-2.5 justify-center">
+              <NavigationMenuTrigger active={activeNav === "toolbox"}>
+                {title2}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="normal-case">
+                <ContentList layout="two">
+                  <ContentListItem
+                    title={submenu2Title1}
+                    href="/toolbox/page/1"
+                  >
+                    {submenu2Desc1}
+                  </ContentListItem>
+                  <ContentListItem
+                    title={submenu2Title2}
+                    href="/toolbox/ux-tools/page/1"
+                  >
+                    {submenu2Desc2}
+                  </ContentListItem>
+                  <ContentListItem
+                    title={submenu2Title3}
+                    href="/toolbox/augmented-reality-tools/page/1"
+                  >
+                    {submenu2Desc3}
+                  </ContentListItem>
+                  <ContentListItem
+                    title={submenu2Title4}
+                    href="/prototyping/page/1"
+                  >
+                    {submenu2Desc4}
+                  </ContentListItem>
+                  <ContentListItem
+                    title={submenu2Title5}
+                    href="/toolbox/accessibility/page/1"
+                  >
+                    {submenu2Desc5}
+                  </ContentListItem>
+                  <ContentListItem
+                    title={submenu2Title6}
+                    href="/toolbox/conversational-design-tools/page/1"
+                  >
+                    {submenu2Desc6}
+                  </ContentListItem>
+                </ContentList>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </div>
+        <NavigationMenuIndicator />
+        <ViewportPosition className="ml-0 ml-36">
+          <NavigationMenuViewport />
+        </ViewportPosition>
+      </NavigationMenu>
 
-    {/* tagline */}
-    <p
-      className={`my-auto font-noto-serif hidden xl:block normal-case font-semibold ${
-        !collapse
-          ? "opacity-0 -z-10 absolute right-0 pt-3.5 text-gray-50 -mr-12 text-xs"
-          : "text-base"
-      } transition transition-all duration-200 ease-in-out `}
+      {/* tagline */}
+      <p
+        className={`my-auto font-noto-serif hidden xl:block normal-case font-semibold ${
+          !collapse
+            ? "opacity-0 -z-10 absolute right-0 pt-3.5 text-gray-50 -mr-12 text-xs"
+            : "text-base"
+        } transition transition-all duration-200 ease-in-out `}
       >
         <FormattedMessage id="navbar.tagline.piece1" />{" "}
-        <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
+        <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-default to-blue-dark">
           <FormattedMessage id="navbar.tagline.piece2" />
         </span>{" "}
         <FormattedMessage id="navbar.tagline.piece3" />

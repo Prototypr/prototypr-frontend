@@ -83,7 +83,7 @@ export default function PostListItem({
               </div>
               <div className="flex flex-col md:flex-row md:items-center">
                 {postItem && postItem.link && (
-                  <div className="w-48 sm:w-64 rounded-full flex-wrap flex text-sm text-blue-700 mt-1 mb-1">
+                  <div className="w-48 sm:w-64 rounded-full flex-wrap flex text-sm text-blue-default mt-1 mb-1">
                     {domain}
                   </div>
                 )}

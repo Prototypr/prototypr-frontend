@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from "react-intl";
 
-export default function SignupHorizontal({className}) {
+export default function SignupHorizontal({ className }) {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
   const intl = useIntl();
-  const [buttonText, setButtonText] = useState(intl.formatMessage({ id: "intro.button.updates" }));
+  const [buttonText, setButtonText] = useState(
+    intl.formatMessage({ id: "intro.button.updates" })
+  );
   const onSubmit = async (data) => {
     setButtonText(intl.formatMessage({ id: "signup.button.submitting" }));
 
@@ -53,7 +55,8 @@ export default function SignupHorizontal({className}) {
             <h2
               className={`text-base text-gray-800 text-white font-semibold mb-2`}
             >
-              {intl.formatMessage({ id: "signup.tip.again" })} &nbsp; <div className="inline -mt-1">🤖</div>
+              {intl.formatMessage({ id: "signup.tip.again" })} &nbsp;{" "}
+              <div className="inline -mt-1">🤖</div>
             </h2>
             <div
               className={`block text-sm mb-1 leading-5 font-base text-gray-800`}
@@ -64,7 +67,8 @@ export default function SignupHorizontal({className}) {
         ) : (
           <>
             <h2 className={`text-2xl text-gray-800 font-semibold mb-2 mt-10`}>
-            {intl.formatMessage({ id: "signup.input.check" })} &nbsp; <div className="inline -mt-1">🎉</div>
+              {intl.formatMessage({ id: "signup.input.check" })} &nbsp;{" "}
+              <div className="inline -mt-1">🎉</div>
             </h2>
             <div
               className={`block text-lg mb-10 leading-6 font-base text-gray-800 text-white`}
@@ -90,10 +94,7 @@ function HookForm(props) {
 
   return (
     <div>
-      <form
-        className={`${props.className}`}
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className={`${props.className}`} onSubmit={handleSubmit(onSubmit)}>
         <div className="sm:flex-1 sm:max-w-xs w-full">
           <label htmlFor="Email" className="sr-only	">
             <FormattedMessage id="intro.input.placeholder" />
@@ -115,9 +116,7 @@ function HookForm(props) {
         {/* <input type="checkbox" placeholder="Consent" name="consent" ref={register({ required: true })} /> */}
         {errors.consent && errors.consent.type === "required" && (
           <p className="text-orange-600 mt-1">
-            <FormattedMessage 
-              id="signup.input.confirm"
-            />
+            <FormattedMessage id="signup.input.confirm" />
           </p>
         )}
 
@@ -133,7 +132,7 @@ function HookForm(props) {
         <div className="flex flex-col ">
           <button
             aria-label="Sign up for newsletter"
-            className="flex justify-center md:text-left items-center md:justify-between w-full px-5 py-3 mt-4 font-medium text-white bg-blue-700 rounded-lg sm:w-auto sm:mt-0 sm:ml-3 hover:bg-blue-600"
+            className="flex justify-center md:text-left items-center md:justify-between w-full px-5 py-3 mt-4 font-medium text-white bg-blue-default rounded-lg sm:w-auto sm:mt-0 sm:ml-3 hover:bg-blue-600"
             type="submit"
           >
             {props.buttonText}
@@ -157,16 +156,12 @@ function HookForm(props) {
       <div className="px-1 w-10/12 mx-auto">
         {errors.emailRequired && errors.emailRequired.type === "required" && (
           <p className="text-pink-600 mt-2 text-sm text-left">
-             <FormattedMessage 
-              id="signup.input.validation"
-            />
+            <FormattedMessage id="signup.input.validation" />
           </p>
         )}
         {errors.emailRequired && errors.emailRequired.type === "pattern" && (
           <p className="text-pink-600 mt-2 text-sm text-left">
-            <FormattedMessage 
-              id="signup.input.error"
-            />
+            <FormattedMessage id="signup.input.error" />
           </p>
         )}
       </div>

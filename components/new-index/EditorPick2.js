@@ -80,26 +80,14 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                     <ul className="flex flex-wrap text-xs font-medium -m-1">
                       <li className="m-1">
                         <Link href={`/posts/${tagSlug}`}>
-                          <a className="font-base hover:cursor-pointer hover:underline text-sm leading-6 tracking-wide uppercase text-gray-600 mr-2">
-                            # {tagName ? tagName : "design"}
+                          <a className="font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-2 font-semibold tracking-[.05em]">
+                            {tagName ? tagName : "design"}
                           </a>
                         </Link>
                       </li>
-                      {tagArr && tagArr.length > 1 && (
-                        <li className="m-1">
-                          <Link href={`/post/${slug}`}>
-                            <a className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
-                              #{" "}
-                              {tagArr && tagArr.length
-                                ? tagArr[1].attributes.slug
-                                : "design"}
-                            </a>
-                          </Link>
-                        </li>
-                      )}
                     </ul>
                   </div>
-                  <h3 className="text-2xl lg:text-3xl font-bold leading-tight mb-2 max-w-md">
+                  <h3 className="text-2xl lg:text-4xl font-semibold mb-4 max-w-md">
                     <Link href={`/post/${slug}`}>
                       <a className="font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
                         {title}
@@ -107,13 +95,13 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                     </Link>
                   </h3>
                 </header>
-                <div className="text-lg max-w-sm text-gray-400 flex-grow">
+                <div className="text-lg max-w-sm text-neutral-700 flex-grow">
                   <div
-                    className="text-base font-medium text-gray-600 leading-normal mt-4 clamp-2 overflow-hidden text-ellipsis"
+                    className="text-base font-medium text-neutral-800 leading-normal mt-4 clamp-2 overflow-hidden text-ellipsis"
                     dangerouslySetInnerHTML={{ __html: excerpt }}
                   ></div>
                 </div>
-                <footer className="flex items-center mt-4">
+                <footer className="flex items-center mt-6">
                   <div className="cursor-pointer transform transition duration-500 hover:scale-125  rounded-full relative">
                     <Link href={`/people/${author?.data?.attributes?.slug}`}>
                       <div className="mr-4 relative flex-shrink-0 hover:cursor-pointer">
@@ -130,7 +118,7 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                   </div>
                   <div>
                     <Link href={`/people/${author?.data?.attributes?.slug}`}>
-                      <a className="font-medium text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">
+                      <a className="font-medium text-neutral-700 hover:text-gray-900 transition duration-150 ease-in-out">
                         {author?.data?.attributes?.name}
                       </a>
                     </Link>
