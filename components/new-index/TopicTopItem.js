@@ -25,7 +25,7 @@ export default function TopicTopItem({ topic = {} }) {
     <Link href={`/post/${slug}`}>
       <div className="grid-cols-1 rounded-lg bg-white p-6 flex flex-col sm:flex-row cursor-pointer group">
         <figure className="relative w-full sm:w-1/2 h-64 mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
-          <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+          <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
             {legacyFeaturedImage?.mediaItemUrl ? (
               <Image
                 loader={gumletLoader}
@@ -52,15 +52,17 @@ export default function TopicTopItem({ topic = {} }) {
 
         <div className="flex flex-col flex-1">
           <div className="flex">
-            <div className="font-base text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">
-              # {tagArr && tagArr.length ? tagArr[0].attributes.name : "design"}
+            <div className="font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-2 font-semibold tracking-[.05em]">
+              {tagArr && tagArr.length ? tagArr[0].attributes.name : "design"}
             </div>
             {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-2">#data</div> */}
           </div>
-          <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
+          <h4 className="text-2xl lg:text-4xl font-semibold mb-4 mt-4 max-w-md">
             {slug && (
               <Link href={`/post/${slug}`}>
-                <a className="font-noto-serif">{title}</a>
+                <a className="font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
+                  {title}
+                </a>
               </Link>
             )}
           </h4>

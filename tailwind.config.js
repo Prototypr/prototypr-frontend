@@ -168,8 +168,11 @@ module.exports = {
         "6.5xl": "3rem",
       },
       boxShadow: {
-        small: "0 5px 10px rgba(0, 0, 0, 0.12)",
-        medium: "0 8px 30px rgba(0, 0, 0, 0.12)",
+        sm: "0 1px 2px rgba(0, 0, 0, 0.07)",
+        md: "0px 2px 6px rgba(0, 0, 0, 0.1)",
+        lg: "0px 5px 14px rgba(0, 0, 0, 0.05), 0px 2px 6px rgba(0, 0, 0, 0.05)",
+        xl: "0px 24px 40px rgba(0, 0, 0, 0.03), 0px 8px 24px rgba(0, 0, 0, 0.05)",
+        xxl: "0px 60px 100px rgba(0, 0, 0, 0.07), 0px 20px 40px rgba(0, 0, 0, 0.0417275)",
       },
       animation: {
         spinner: "spinner 1.5s linear infinite",

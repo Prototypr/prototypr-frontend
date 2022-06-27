@@ -4,7 +4,7 @@ export default function Tabs({ items = [], onTabChanged = () => {} }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const intl = useIntl();
   return (
-    <div className="flex border-b-gray-5 w-full mt-10 tab relative">
+    <div className="flex border-b-gray-5 w-full mt-10 tab relative mb-10">
       {/**tab item */}
       {items.length
         ? items.map((item, index) => {

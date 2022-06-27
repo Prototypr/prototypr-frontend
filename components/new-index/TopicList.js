@@ -1,27 +1,20 @@
 import dynamic from "next/dynamic";
-const TopicTopItem = dynamic(() => import("./TopicTopItem"), { ssr: false });
-const TopicItem = dynamic(() => import("./TopicItem"), { ssr: false });
+const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 
 export default function TopicList({ currentTopics = [] }) {
-  const heroTopics = currentTopics.length ? currentTopics.slice(0, 2) : [];
-  const moreTopics = currentTopics.length ? currentTopics.slice(2) : [];
+  const heroTopics = currentTopics.length ? currentTopics.slice(0, 1) : [];
+  const moreTopics = currentTopics.length ? currentTopics.slice(1) : [];
 
   return (
-    <section className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
+    <section className="flex group flex-col justify-center antialiased text-gray-900 rounded-lg">
       {heroTopics.length
         ? heroTopics.map((item, index) => {
-            return (
-              <TopicTopItem key={`topic_${index}`} topic={item} />
-            );
+            return <EditorPick2 lazy={false} header={""} post={item} />;
+            // return <TopicTopItem key={`topic_${index}`} topic={item} />;
           })
         : null}
-      {moreTopics.length
-        ? moreTopics.map((item, index) => {
-            return (
-              <TopicItem key={`topic_${index}`} topic={item} />
-            );
-          })
-        : null}
+      {moreTopics.length && <ProductList posts={moreTopics} />}
     </section>
   );
 }
