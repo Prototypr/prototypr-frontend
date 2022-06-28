@@ -25,7 +25,7 @@ export default function TopicItem({ topic = {} }) {
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
   return (
     <Link href={`/post/${slug}`}>
-      <div className="grid-cols-1 p-3 flex cursor-pointer group">
+      <div className="grid-cols-2 p-3 flex cursor-pointer group">
         <figure className="relative h-0 mr-1 sm:mr-0 w-28 h-28 sm:w-40 sm:h-40 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
           <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
             <Image

@@ -129,7 +129,7 @@ export async function getStaticProps({ preview = null, locale }) {
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].slug;
     const res =
-      (await getCommonQuery(preview, [tag], "article", 6, 0, sort)) || [];
+      (await getCommonQuery(preview, [tag], "article", 5, 0, sort)) || [];
     topicRes[tag] = res.data;
   }
 

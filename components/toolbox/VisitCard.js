@@ -8,7 +8,7 @@ export default function VisitCard({
   logoNew,
   tags = [],
 }) {
-  const tagz = tags?.data?.length ? tags?.data?.slice(0, 2):null
+  const tagz = tags?.data?.length ? tags?.data?.slice(0, 2) : null;
   return (
     <div className="flex bg-white rounded-lg mb-0 flex-col p-5 xl:p-6 ">
       <div className="flex flex-col lg:flex-row lg:justify-between mb-4 lg:mb-6">
@@ -18,18 +18,18 @@ export default function VisitCard({
             className="text-2xl lg:text-lg tracking-tight mb-2 lg:mb-3 lg:mb-1 lg:leading-snug font-bold text-gray-900 my-auto"
           ></h1>
           {tagz?.map((tag, index) => {
-              return (
-                <a
-                  key={index}
-                  rel="noreferrer"
-                  className="cursor-default inline-block mr-2 lg:mr-0 text-xs bg-gray-200 p-1 px-2 rounded-lg mt-1 uppercase"
-                  // href={`${tag.attributes.slug}`}
-                  // target="_blank"
-                >
-                  # {tag.attributes.name}
-                </a>
-              );
-            })}
+            return (
+              <a
+                key={index}
+                rel="noreferrer"
+                className="cursor-default inline-block mr-2 lg:mr-0 text-xs bg-gray-200 p-1 px-2 rounded-lg mt-1 uppercase"
+                // href={`${tag.attributes.slug}`}
+                // target="_blank"
+              >
+                # {tag.attributes.name}
+              </a>
+            );
+          })}
         </div>
 
         <div className="lg:w-2.5/6 my-3 mb-5 lg:my-0 lg:mb-0 lg:mr-0">
@@ -53,7 +53,7 @@ export default function VisitCard({
         href={link}
         target="_blank"
       >
-        <button className="w-full lg:block bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 border-blue-700 hover:border-blue-500 rounded-lg">
+        <button className="w-full lg:block bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 border-blue-default hover:border-blue-500 rounded-lg">
           Visit Site
         </button>
       </a>

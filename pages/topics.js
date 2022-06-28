@@ -13,7 +13,7 @@ export default function Index({ allPosts, preview }) {
       imageSrc:
         "https://images.unsplash.com/photo-1574887427561-d3d5d58c9273?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80",
       imageAlt: "UX topic",
-      color: "from-blue-600 to-purple-500",
+      color: "from-blue-default to-purple-500",
     },
     {
       name: "navbar.submenu1.title6",

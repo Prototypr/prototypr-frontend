@@ -84,7 +84,7 @@ export default function DesignTool({ allTools = [] }) {
       <section>
         <div className="p-8 pr-2 my-20 rounded-lg bg-gray-900 mx-auto sm:px-6 lg:px-8 lg:pr-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:items-stretch">
-            <div className="col-span-1 flex items-center p-8 bg-gradient-to-br from-blue-600 to-indigo-400 rounded">
+            <div className="col-span-1 flex items-center p-8 bg-gradient-to-br from-blue-default to-indigo-400 rounded">
               <div className="mx-auto text-center lg:text-left">
                 <h2 className="text-2xl font-bold text-gray-100">Toolbox</h2>
                 <p className="mt-4 text-sm text-gray-200 max-w-[45ch]">
@@ -109,8 +109,10 @@ export default function DesignTool({ allTools = [] }) {
                   onKeyDown={keyboardPrev}
                   onClick={() => navHis(-1)}
                 >
-                  <img src="/static/images/icons/prev.svg"
-                  data-gumlet="false" />
+                  <img
+                    src="/static/images/icons/prev.svg"
+                    data-gumlet="false"
+                  />
                 </div>
                 <div
                   tabIndex={0}
@@ -119,8 +121,10 @@ export default function DesignTool({ allTools = [] }) {
                   onKeyDown={keyboardNext}
                   onClick={() => navHis(1)}
                 >
-                  <img src="/static/images/icons/next.svg"
-                  data-gumlet="false" />
+                  <img
+                    src="/static/images/icons/next.svg"
+                    data-gumlet="false"
+                  />
                 </div>
               </div>
               <div

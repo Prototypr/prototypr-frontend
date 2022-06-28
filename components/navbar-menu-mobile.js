@@ -1,6 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { styled } from '../stitches.config';
+import { styled } from "../stitches.config";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { indigo, gray } from "@radix-ui/colors";
 import Link from "next/link";
@@ -87,7 +87,7 @@ const NextLink = ({ children, ...props }) => {
           style={props.css}
           className={
             isActive
-              ? "bg-blue-50 border border-blue-100 border-1 text-blue-700"
+              ? "bg-blue-50 border border-blue-100 border-1 text-blue-default"
               : ""
           }
           {...props}
@@ -108,7 +108,7 @@ const NextButton = ({ children, ...props }) => {
           style={props.css}
           className={
             isActive
-              ? "bg-blue-50 border border-blue-100 border-1 text-blue-700"
+              ? "bg-blue-50 border border-blue-100 border-1 text-blue-default"
               : ""
           }
           {...props}
