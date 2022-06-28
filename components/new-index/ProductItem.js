@@ -35,19 +35,14 @@ export default function ProductItem({ post = {} }) {
   const tagSlug = tagArr && tagArr.length ? tagArr[0].attributes.slug : "";
   return (
     <Link href={`/post/${slug}`}>
-      <div className="cursor-pointer grid-cols-1 flex items-top py-2 group">
-        <div className="flex-1 ml-4 h-full">
+      <div className="cursor-pointer grid-cols-1 flex items-top p-4 group hover:bg-white hover:shadow-sm hover:rounded-lg hover:transition duration-300 ease-in-out">
+        <div className="flex-1 ml-0 h-full">
           <Link href={`/posts/${tagSlug}`}>
-            <div className="flex">
-              <div className="font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-1 font-semibold tracking-[.05em]">
-                {tagName}
-              </div>
-              {/* <div className="font-medium text-sm leading-6 tracking-wide uppercase text-gray-3 mr-1">
-            # product design
-          </div> */}
+            <div className="font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-1 font-semibold tracking-[.05em]">
+              {tagName}
             </div>
           </Link>
-          <h4 className="font-semibold text-xl leading-6 text-gray-1 pr-7 mt-4">
+          <h4 className="font-semibold text-lg sm:text-xl leading-6 text-gray-1 pr-7 mt-4">
             <Link href={`/post/${slug}`}>
               <a className="font-noto-serif">{title}</a>
             </Link>
@@ -76,16 +71,16 @@ export default function ProductItem({ post = {} }) {
           </div>
         </div>
         <figure
-          style={{ width: 162, height: 124 }}
-          className="relative h-0 w-36 h-36 sm:w-40 sm:h-40 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden"
+          //   style={{ width: 162, height: 124 }}
+          className="relative w-[105px] h-[80px] sm:w-[162px] sm:h-[124px] overflow-hidden rounded-lg transform group-hover:translate-x-0  group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden"
         >
-          <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+          <div className="absolute  w-full h-full object-cover rounded-lg transform border cursor-pointer">
             <Image
               loader={gumletLoader}
               objectFit="cover"
               width={162}
               height={124}
-              className="rounded-lg contrast-115"
+              className="rounded-lg contrast-115  w-[100px] h-[75px] sm:w-[162px] sm:h-[124px]"
               // layout="fill"
               src={ftImage}
             />

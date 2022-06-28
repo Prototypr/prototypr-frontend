@@ -53,7 +53,7 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
       )}
       <section className="flex group flex-col justify-center antialiased text-gray-900 rounded-lg">
         <Link href={`/post/${slug}`}>
-          <div className="cursor-pointer max-w-6xl p-6 sm:p-8 md:pr-12 h-full rounded-lg shadow-md bg-white">
+          <div className="cursor-pointer max-w-6xl p-6 sm:p-8 md:pr-12 h-full rounded-lg shadow-md hover:shadow-lg bg-white hover:transition duration-300 ease-in-out">
             {/* Blog post */}
             <article className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
               <a className="relative block">
@@ -103,18 +103,20 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                 </div>
                 <footer className="flex items-center mt-6">
                   <div className="cursor-pointer transform transition duration-500 hover:scale-125  rounded-full relative">
-                    <Link href={`/people/${author?.data?.attributes?.slug}`}>
-                      <div className="mr-4 relative flex-shrink-0 hover:cursor-pointer">
-                        <Image
-                          className="rounded-full"
-                          src={authorImage}
-                          width={40}
-                          height={40}
-                          objectFit="cover"
-                          alt="Author 04"
-                        />
-                      </div>
-                    </Link>
+                    {authorImage && (
+                      <Link href={`/people/${author?.data?.attributes?.slug}`}>
+                        <div className="mr-4 relative flex-shrink-0 hover:cursor-pointer">
+                          <Image
+                            className="rounded-full"
+                            src={authorImage}
+                            width={40}
+                            height={40}
+                            objectFit="cover"
+                            alt="Author 04"
+                          />
+                        </div>
+                      </Link>
+                    )}
                   </div>
                   <div>
                     <Link href={`/people/${author?.data?.attributes?.slug}`}>
