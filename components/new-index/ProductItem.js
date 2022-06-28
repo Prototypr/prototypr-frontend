@@ -50,7 +50,7 @@ export default function ProductItem({ post = {} }) {
           <div className="mt-4 flex items-center">
             <div className="w-8 h-8 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
               {authorImage && (
-                <Link href={`people/${author?.data?.attributes?.slug}`}>
+                <Link href={`/people/${author?.data?.attributes?.slug}`}>
                   <Image
                     loader={gumletLoader}
                     src={authorImage}
@@ -62,7 +62,7 @@ export default function ProductItem({ post = {} }) {
               )}
             </div>
             <div className="font-normal text-base ml-3 text-neutral-700 leading-5">
-              <Link href={`people/${author?.data?.attributes?.slug}`}>
+              <Link href={`/people/${author?.data?.attributes?.slug}`}>
                 <a className="hover:underline hover:text-gray-800">
                   {author?.data?.attributes?.name}
                 </a>
