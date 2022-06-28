@@ -28,7 +28,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
 
   return (
     <Link href={`/post/${slug}`}>
-      <div className="cursor-pointer py-6 px-1 inline-block w-full group">
+      <div className="cursor-pointer py-6 px-1 inline-block w-full group relative">
         <figure
           className={`relative h-64 ${
             index % 2 == 0 ? "md:h-96" : "md:h-64"

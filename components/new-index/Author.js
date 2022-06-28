@@ -9,37 +9,39 @@ export default function Author({
   authorName = "",
   textColor = "",
 }) {
-  let authorImage = "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-  if(author?.data?.attributes?.legacyAvatar || author?.data?.attributes?.avatar){
+  let authorImage =
+    "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+  if (
+    author?.data?.attributes?.legacyAvatar ||
+    author?.data?.attributes?.avatar
+  ) {
     authorImage = author?.data?.attributes?.avatar?.data?.attributes?.url
-    ? author.data.attributes.avatar.data.attributes.url
-    : author?.data?.attributes?.legacyAvatar &&
-      author.data.attributes.legacyAvatar;
+      ? author.data.attributes.avatar.data.attributes.url
+      : author?.data?.attributes?.legacyAvatar &&
+        author.data.attributes.legacyAvatar;
   }
 
-
-  const name = 
-  authorName
-                ? authorName
-                : author?.data?.attributes?.name
-                ? author?.data?.attributes?.name
-                : ""
+  const name = authorName
+    ? authorName
+    : author?.data?.attributes?.name
+    ? author?.data?.attributes?.name
+    : "";
 
   return (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center relative">
         <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
           {authorImage && (
-              <Link href={`/people/${author?.data?.attributes?.slug}`}>
-                <Image
-                  loader={gumletLoader}
-                  src={authorImage}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-full"
-                />
-              </Link>
-            )}
+            <Link href={`/people/${author?.data?.attributes?.slug}`}>
+              <Image
+                loader={gumletLoader}
+                src={authorImage}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-full"
+              />
+            </Link>
+          )}
         </div>
         <div
           className={`font-normal text-base ml-3 ${
