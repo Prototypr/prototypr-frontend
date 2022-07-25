@@ -36,7 +36,7 @@ export default function AuthorBio({ author, slug, title }) {
         <div className="flex flex-col sm:flex-row sm:justify-between">
           <div className="flex">
             <div className="w-32 md:w-auto flex justify-end">
-              <a href={"/people/" + author.slug}>
+              <a href={"/people/" + author?.slug}>
                 <img
                   alt="Author avatar"
                   className="border-2 border-gray-300 flex-shrink-0 shine mb-2 cursor-pointer mt-2 rounded-lg h-12 w-12 md:h-20 md:w-20 object-cover bg-white rounded-full "
@@ -48,15 +48,15 @@ export default function AuthorBio({ author, slug, title }) {
               <p className="uppercase text-sm text-gray-600">Written by</p>
 
               <h1 className="text-xl mt-1 font-semibold leading-normal text-gray-800">
-                {author.name ? author.name : ""}
+                {author?.name ? author?.name : ""}
               </h1>
 
-              {author.jobrole && (
+              {author?.jobrole && (
                 <h3 className="text-base font-normal leading-normal mb-1 text-gray-700">
-                  {author.jobrole}
+                  {author?.jobrole}
                 </h3>
               )}
-              {author.bio && (
+              {author?.bio && (
                 <div
                   style={{ maxWidth: "40rem" }}
                   className="text-lg text-gray-600 mt-3 pr-3 max-w-lg mx-auto"
@@ -69,8 +69,8 @@ export default function AuthorBio({ author, slug, title }) {
                 </div>
               )}
               <div className="flex mt-5 mb-3 z-20">
-                {author.url && (
-                  <a href={author.url}>
+                {author?.url && (
+                  <a href={author?.url}>
                     <div
                       style={{
                         width: "25px",
@@ -128,11 +128,11 @@ export default function AuthorBio({ author, slug, title }) {
                   </a>
                 )}
               </div>
-              {author.availability == "1" && (
+              {author?.availability == "1" && (
                 <a
                   className="cursor-pointer"
                   target="_blank"
-                  href={`${author.url ? author.url : "#"}`}
+                  href={`${author?.url ? author?.url : "#"}`}
                 >
                   <div className="bg-blue-800 mr-2 mb-2 mt-4 uppercase text-white text-xs px-3 py-2 rounded inline-block">
                     <span className="hidden sm:block">

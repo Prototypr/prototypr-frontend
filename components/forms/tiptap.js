@@ -6,6 +6,7 @@ import Document from "@tiptap/extension-document";
 import { useEffect } from "react";
 import useUser from "@/lib/iron-session/useUser";
 var axios = require("axios");
+var slugify = require("slugify");
 
 const CustomDocument = Document.extend({
   content: "heading block*",
@@ -52,8 +53,12 @@ const MenuActions = {
         var reader = new FileReader();
 
         reader.onload = async (e) => {
-          console.log(files[0].name);
-          const blob = e.target.result;
+          console.log(files[0]);
+          const url = e.target.result;
+
+          const resp = await fetch(url);
+          const blob = await resp.blob();
+
           const file = new File([blob], `${files[0].name || "image.png"}`, {
             type: "image/png",
           });
@@ -83,13 +88,6 @@ const MenuActions = {
         };
         reader.readAsDataURL(files[0]);
       }
-      //   const url = window.prompt("URL");
-
-      //   // upload image here....
-
-      //   if (url) {
-      //     editor.chain().focus().setImage({ src: url }).run();
-      //   }
     },
   },
 };
@@ -137,6 +135,9 @@ const MenuBar = ({ editor }) => {
 };
 
 const Tiptap = () => {
+  const { user } = useUser({
+    redirectIfFound: false,
+  });
   const editor = useEditor({
     extensions: [
       CustomDocument,
@@ -166,14 +167,70 @@ const Tiptap = () => {
   // load from local storage if anything exists
   useEffect(() => {
     let retrievedObject = localStorage.getItem("wipContent");
-    // if (editor && retrievedObject) {
-    //   editor?.commands?.setContent(JSON.parse(retrievedObject));
-    // }
+    if (editor && retrievedObject) {
+      editor?.commands?.setContent(JSON.parse(retrievedObject));
+    }
   }, [editor]);
 
-  const onSubmit = () => {
-    const json = editor.getJSON();
-    console.log(json);
+  const onSubmit = async () => {
+    // before submitting, check strapi if slug or id already exists
+    // if it exists, then do an update, else create a new one
+    const html = editor.getHTML();
+    const json = editor.getJSON()?.content;
+
+    const title = json[0]?.content[0]?.text;
+    console.log(user.id);
+
+    let entry = {
+      //   excerpt: item.excerpt,
+      featured: false,
+      //    legacyAttributes: {
+      //      link: item.attributes.link,
+      //      imgUrl: item.attributes.imgUrl,
+      //      ogImage: item.attributes.ogImage,
+      //      ogDescription: item.attributes.ogDescription,
+      //      canonicalLink: item.attributes.canonicalLink,
+      //    },
+      type: "article",
+      legacyFeaturedImage: {},
+      date: new Date(),
+      status: "publish",
+      title: title,
+      content: html,
+      user: user?.id,
+      seo: {
+        //  canonical: item.seo.canonical,
+        //  opengraphTitle: item.seo.title,
+        //  metaDesc: item.seo.metaDesc,
+        //  opengraphDescription: item.seo.opengraphDescription,
+        //  schemaSeo: item.seo.schema.raw,
+      },
+      esES: false,
+      slug: slugify(title),
+    };
+
+    let configUpload = {
+      method: "post",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts`,
+      headers: {
+        Authorization: `Bearer ${user?.jwt}`,
+      },
+
+      data: {
+        data: {
+          ...entry,
+        },
+      },
+    };
+
+    await axios(configUpload)
+      .then(async function (response) {
+        console.log(response);
+        alert("submited!");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
