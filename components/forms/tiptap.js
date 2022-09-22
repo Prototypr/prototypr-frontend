@@ -22,6 +22,10 @@ const CustomDocument = Document.extend({
   atom: true,
 });
 
+const uid = function () {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+};
+
 function generateImageTypes(url) {
   const breakpoints = [
     { w: 300, h: 131 },
@@ -29,7 +33,7 @@ function generateImageTypes(url) {
     { w: 1024, h: 448 },
     { w: 1400, h: 600 },
   ];
-  const splitString = url.split(".");
+  const splitString = url?.split(".");
   const extention = splitString[splitString.length - 1];
   const mediaURL = splitString.slice(0, -1).join(".");
 
@@ -185,7 +189,7 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const Tiptap = () => {
+const Tiptap = ({ content, editorType = "create" }) => {
   const { user } = useUser({
     redirectIfFound: false,
   });
@@ -220,22 +224,32 @@ const Tiptap = () => {
 
   // load from local storage if anything exists
   useEffect(() => {
-    let retrievedObject = localStorage.getItem("wipContent");
-    if (retrievedObject && editor && !editor.isDestroyed) {
-      if (editor?.commands) {
-        editor?.commands?.setContent(JSON.parse(retrievedObject));
+    if (editorType === "edit") {
+      console.log("loading from backend");
+      if (editor && !editor.isDestroyed) {
+        if (editor?.commands) {
+          editor?.commands?.setContent(content);
+        }
+      }
+    } else {
+      console.log("loading from local");
+
+      let retrievedObject = localStorage.getItem("wipContent");
+      if (retrievedObject && editor && !editor.isDestroyed) {
+        if (editor?.commands) {
+          editor?.commands?.setContent(JSON.parse(retrievedObject));
+        }
       }
     }
   }, [editor]);
 
-  const onSubmit = async () => {
-    // before submitting, check strapi if slug or id already exists
-    // if it exists, then do an update, else create a new one
+  const getPostDetails = () => {
     const html = editor.getHTML();
     const json = editor.getJSON()?.content;
 
     const title = json[0]?.content[0]?.text;
-    const postSlug = slugify(title.toLocaleLowerCase());
+    // append an id at the end of the slug
+    const postSlug = slugify(title.toLocaleLowerCase()) + `-${uid()}`;
     const firstParagraph = json.find((p) => p?.type === "paragraph").content[0]
       .text;
     const coverImage = json.find((p) => p?.type === "image")?.attrs?.src;
@@ -266,13 +280,6 @@ const Tiptap = () => {
     let entry = {
       excerpt: firstParagraph,
       featured: false,
-      //  legacyAttributes: {
-      //    link: item.attributes.link,
-      //    imgUrl: item.attributes.imgUrl,
-      //    ogImage: item.attributes.ogImage,
-      //    ogDescription: item.attributes.ogDescription,
-      //    canonicalLink: item.attributes.canonicalLink,
-      //  },
       type: "article",
       legacyFeaturedImage: {},
       date: new Date(),
@@ -282,10 +289,10 @@ const Tiptap = () => {
       user: user?.id,
       //   featuredImage: coverImage,
       legacyFeaturedImage: {
-        mediaItemUrl: coverImage,
-        srcSet: generateImageTypes(coverImage),
-        thumb: `${coverImage}-150x150.${getImageExtention(coverImage)}`,
-        medium: `${coverImage}-768x336.${getImageExtention(coverImage)}`,
+        mediaItemUrl: coverImage || "",
+        srcSet: generateImageTypes(coverImage || ""),
+        thumb: `${coverImage}-150x150.${getImageExtention(coverImage || "")}`,
+        medium: `${coverImage}-768x336.${getImageExtention(coverImage || "")}`,
       },
       seo: {
         opengraphTitle: title,
@@ -298,6 +305,14 @@ const Tiptap = () => {
       esES: false,
       slug: postSlug,
     };
+    return {
+      entry,
+      findPostEndpointConfigs,
+    };
+  };
+
+  const createNewPost = async () => {
+    const { entry, findPostEndpointConfigs } = getPostDetails();
 
     let publishPostEndpointConfig = {
       method: "post",
@@ -333,6 +348,62 @@ const Tiptap = () => {
       }
     } catch {
       (e) => console.log(e);
+    }
+  };
+
+  const updateExisitingPost = async () => {
+    console.log("Update post");
+    const { entry, findPostEndpointConfigs } = getPostDetails();
+
+    let publishPostEndpointConfig = {
+      method: "put",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts/{id}`,
+      headers: {
+        Authorization: `Bearer ${user?.jwt}`,
+      },
+
+      data: {
+        data: {
+          ...entry,
+        },
+      },
+    };
+
+    try {
+      const existsResult = await axios(findPostEndpointConfigs);
+      const exists = existsResult?.data?.data?.length > 0;
+      if (exists) {
+        const postId = existsResult.data.data[0].id;
+        publishPostEndpointConfig.url = publishPostEndpointConfig.url.replace(
+          "{id}",
+          postId
+        );
+
+        console.log(publishPostEndpointConfig.url);
+        await axios(publishPostEndpointConfig)
+          .then(async function (response) {
+            toast.success("Your draft has been updated!", {
+              duration: 5000,
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    } catch {
+      (e) => console.log(e);
+    }
+  };
+
+  const onSubmit = async () => {
+    // before submitting, check strapi if slug or id already exists
+    // if it exists, then do an update, else create a new one
+    if (editorType === "create") {
+      createNewPost();
+    }
+
+    if (editorType === "edit") {
+      updateExisitingPost();
     }
   };
 
