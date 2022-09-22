@@ -56,7 +56,7 @@ const EditDraft = () => {
             <button>←Back</button>
           </Link>
           <h1>{currentPost.title}</h1>
-          <Tiptap content={currentPost.content} editorType="edit" />
+          <Tiptap content={currentPost.content} editorType="edit" slug={slug} />
           {/* <div>{currentPost.content}</div> */}
         </div>
       )}

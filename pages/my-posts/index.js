@@ -2,6 +2,8 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
+import Navbar from "@/components/small-nav";
+
 import useUser from "@/lib/iron-session/useUser";
 import { withIronSessionSsr } from "iron-session/next";
 import {
@@ -62,9 +64,9 @@ export default function Index() {
         <div className="w-full h-full mx-auto  relative">
           {!user && <Fallback />}
 
-          <div className="w-full max-w-4xl p-4 mx-auto ">
+          <div className="w-full p-4 mx-auto ">
             {user && !user?.isLoggedIn ? (
-              <>
+              <div className="w-full max-w-4xl p-4 mx-auto ">
                 <LoginForm isSignUp={isSignUp} />
                 <div className="absolute top-[2%] right-[2%]">
                   <div className="text-sm text-gray-700">
@@ -81,13 +83,16 @@ export default function Index() {
                     </a>
                   </div>
                 </div>
-              </>
+              </div>
             ) : (
               user &&
               user?.isLoggedIn && (
                 <div>
+                  <Navbar />
                   <div className="my-4">
-                    <MyPosts />
+                    <div className="w-full max-w-4xl p-4 mx-auto ">
+                      <MyPosts />
+                    </div>
                   </div>
                 </div>
               )

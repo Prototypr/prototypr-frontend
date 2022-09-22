@@ -55,7 +55,7 @@ const MyPosts = () => {
 
   return (
     <div>
-      <div className="flex flex-row justify-between items-baseline">
+      <div className="flex flex-row justify-between items-baseline mt-10">
         <h1 className="my-3 text-2xl font-bold">My Posts</h1>
         <Link href="/write">
           <button className="px-3 py-2 bg-blue-700 rounded text-sm text-white ">

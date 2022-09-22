@@ -26,6 +26,22 @@ const uid = function () {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
 
+const confirmationMessage = "You have unsaved changes. Continue?";
+
+const useConfirmTabClose = (isUnsafeTabClose) => {
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (isUnsafeTabClose) {
+        event.returnValue = confirmationMessage;
+        return confirmationMessage;
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [isUnsafeTabClose]);
+};
+
 function generateImageTypes(url) {
   const breakpoints = [
     { w: 300, h: 131 },
@@ -189,10 +205,15 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const Tiptap = ({ content, editorType = "create" }) => {
+const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
   const { user } = useUser({
     redirectIfFound: false,
   });
+  const [saving, setSaving] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(undefined);
+
+  useConfirmTabClose(hasUnsavedChanges);
+
   const editor = useEditor({
     extensions: [
       CustomDocument,
@@ -217,6 +238,7 @@ const Tiptap = ({ content, editorType = "create" }) => {
     ],
     onUpdate: ({ editor }) => {
       const json = editor.getJSON();
+      setHasUnsavedChanges(true);
       // send the content to an API here
       localStorage.setItem("wipContent", JSON.stringify(json));
     },
@@ -249,7 +271,16 @@ const Tiptap = ({ content, editorType = "create" }) => {
 
     const title = json[0]?.content[0]?.text;
     // append an id at the end of the slug
-    const postSlug = slugify(title.toLocaleLowerCase()) + `-${uid()}`;
+    let postSlug;
+
+    // when creating a new post, create a unique slug
+    if (editorType === "create") {
+      postSlug = slugify(title.toLocaleLowerCase()) + `-${uid()}`;
+    } else {
+      // in edit draft mode, use existing slug passed down from the parent component
+      postSlug = slug;
+    }
+
     const firstParagraph = json.find((p) => p?.type === "paragraph").content[0]
       .text;
     const coverImage = json.find((p) => p?.type === "image")?.attrs?.src;
@@ -372,16 +403,19 @@ const Tiptap = ({ content, editorType = "create" }) => {
     try {
       const existsResult = await axios(findPostEndpointConfigs);
       const exists = existsResult?.data?.data?.length > 0;
+      console.log("hahahahllalala");
       if (exists) {
         const postId = existsResult.data.data[0].id;
         publishPostEndpointConfig.url = publishPostEndpointConfig.url.replace(
           "{id}",
           postId
         );
-
+        console.log("exisits");
         console.log(publishPostEndpointConfig.url);
         await axios(publishPostEndpointConfig)
           .then(async function (response) {
+            setSaving(false);
+            setHasUnsavedChanges(false);
             toast.success("Your draft has been updated!", {
               duration: 5000,
             });
@@ -389,6 +423,12 @@ const Tiptap = ({ content, editorType = "create" }) => {
           .catch(function (error) {
             console.log(error);
           });
+      } else {
+        setSaving(false);
+        setHasUnsavedChanges(true);
+        toast.error("Your draft could not be saved!", {
+          duration: 5000,
+        });
       }
     } catch {
       (e) => console.log(e);
@@ -399,11 +439,23 @@ const Tiptap = ({ content, editorType = "create" }) => {
     // before submitting, check strapi if slug or id already exists
     // if it exists, then do an update, else create a new one
     if (editorType === "create") {
-      createNewPost();
+      await createNewPost();
     }
 
     if (editorType === "edit") {
-      updateExisitingPost();
+      await updateExisitingPost();
+    }
+  };
+
+  const onSave = async () => {
+    if (editorType === "edit") {
+      setSaving(true);
+      try {
+        console.log("saving...");
+        await updateExisitingPost();
+      } catch (e) {
+        setSaving(false);
+      }
     }
   };
 
@@ -415,9 +467,20 @@ const Tiptap = ({ content, editorType = "create" }) => {
         </span>
       </div>
       <div className="flex z-50 sticky top-0 bg-white">
-        <aside className="w-full p-2 py-4 border-b   flex flex-row justify-center items-center">
+        <aside className="w-full p-2 py-4 border-b flex flex-row justify-center items-center">
           <MenuBar editor={editor} />
-          <div className="flex flex-row justify-end">
+
+          <div className="flex flex-row justify-end gap-2">
+            {editorType === "edit" && (
+              <div>
+                <button
+                  onClick={onSave}
+                  className="p-1 px-3 bg-green-400 rounded text-sm text-white"
+                >
+                  {saving ? "Saving..." : "Save"}
+                </button>
+              </div>
+            )}
             <SubmitPostModal>
               <div className="p-10">
                 <div className="flex flex-col gap-4">
@@ -437,6 +500,7 @@ const Tiptap = ({ content, editorType = "create" }) => {
                   <div className="p-4">
                     <img src="/static/images/source-bg.png" />
                   </div>
+
                   <button
                     onClick={onSubmit}
                     className="px-3 py-3 bg-blue-700 rounded text-sm text-white "
@@ -451,6 +515,10 @@ const Tiptap = ({ content, editorType = "create" }) => {
       </div>
 
       <div className="my-4">
+        {/* <div className="fixed bottom-10 left-5 z-10 flex flex-row gap-[2px]">
+          <Spinner size={"sm"} />
+          <span className="m-0 p-0">Saving</span>
+        </div> */}
         <EditorContent editor={editor} />
         <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
       </div>
