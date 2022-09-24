@@ -1,30 +1,8 @@
 // import dynamic from "next/dynamic";
-import { useEffect } from "react";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
-import axios from "axios";
 
 export default function PaymentFailure({}) {
-    
-    useEffect(()=>{
-        
-        const getProdIssue = async()=>{
-            const params = new URLSearchParams(document.location.search);
-            const checkoutSessionId = params.get("sessionId");
-            const response = await axios.get(`http://localhost:1337/strapi-stripe/retrieveCheckoutSession/${checkoutSessionId}`)
-
-
-            console.log(response)
-        }
-        
-        const s = document.createElement("script");
-        s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-        s.setAttribute("async", "true");
-        document.head.appendChild(s);
-        
-        getProdIssue()
-     
-      },[])
     
 
   return (
@@ -34,8 +12,8 @@ export default function PaymentFailure({}) {
         description:
           "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
         //   image: "",
-        canonical: "https://prototypr.io/toolbox",
-        url: "https://prototypr.io/toolbox",
+        // canonical: "https://prototypr.io/toolbox",
+        // url: "https://prototypr.io/toolbox",
       }}
       activeNav={"toolbox"}
     >

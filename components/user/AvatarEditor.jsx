@@ -55,7 +55,7 @@ const AvatarEditor = () => {
       /**
        * delete the old avatar first
        */
-      if (user.avatar.id) {
+      if (user?.avatar?.id) {
         var configDelete = {
           method: "POST",
           // url: `${process.env.NEXT_PUBLIC_API_URL}/api/upload/files/${user.avatar.id}`,
