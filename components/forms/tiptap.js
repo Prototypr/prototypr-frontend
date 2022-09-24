@@ -3,12 +3,12 @@ import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import Image from "@tiptap/extension-image";
 import Document from "@tiptap/extension-document";
-import BulletList from "@tiptap/extension-bullet-list";
 
 import Link from "@tiptap/extension-link";
 import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
-import { ImageIcon, BoldIcon, ItalicIcon, CodeIcon, ListIcon } from "./icons";
+import { MenuActions } from "@/components/atom/toolbar";
+
 import Spinner from "../atom/Spinner/Spinner";
 import toast from "react-hot-toast";
 import SubmitPostModal from "../modal/submitPost";
@@ -22,6 +22,26 @@ const CustomDocument = Document.extend({
   atom: true,
 });
 
+const uid = function () {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+};
+
+const confirmationMessage = "You have unsaved changes. Continue?";
+
+const useConfirmTabClose = (isUnsafeTabClose) => {
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (isUnsafeTabClose) {
+        event.returnValue = confirmationMessage;
+        return confirmationMessage;
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [isUnsafeTabClose]);
+};
+
 function generateImageTypes(url) {
   const breakpoints = [
     { w: 300, h: 131 },
@@ -29,7 +49,7 @@ function generateImageTypes(url) {
     { w: 1024, h: 448 },
     { w: 1400, h: 600 },
   ];
-  const splitString = url.split(".");
+  const splitString = url?.split(".");
   const extention = splitString[splitString.length - 1];
   const mediaURL = splitString.slice(0, -1).join(".");
 
@@ -46,79 +66,6 @@ function getImageExtention(url) {
 
   return extention;
 }
-
-const MenuActions = {
-  bold: {
-    label: "bold",
-    action: (editor) => editor.chain().focus().toggleBold().run(),
-    icon: <BoldIcon size={16} />,
-  },
-  italic: {
-    label: "italic",
-    action: (editor) => editor.chain().focus().toggleItalic().run(),
-    icon: <ItalicIcon size={16} />,
-  },
-  code: {
-    label: "code",
-    action: (editor) => editor.chain().focus().toggleCode().run(),
-    icon: <CodeIcon size={16} />,
-  },
-  bulletList: {
-    label: "bulletList",
-    action: (editor) => editor.chain().focus().toggleBulletList().run(),
-    icon: <ListIcon size={16} />,
-  },
-  image: {
-    label: "image",
-    type: "file",
-    icon: <ImageIcon size={16} />,
-    action: (event, editor, user, setLoading) => {
-      const files = event.target.files;
-      if (files && files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = async (e) => {
-          setLoading(true);
-          const url = e.target.result;
-
-          const resp = await fetch(url);
-          const blob = await resp.blob();
-
-          const file = new File([blob], `${files[0].name || "image.png"}`, {
-            type: "image/png",
-          });
-
-          const data = new FormData();
-          data.append("files", file);
-
-          var configUpload = {
-            method: "post",
-            url: `${process.env.NEXT_PUBLIC_API_URL}/api/users-permissions/users/article/image/upload`,
-            headers: {
-              Authorization: `Bearer ${user?.jwt}`,
-            },
-            data: data,
-          };
-
-          await axios(configUpload)
-            .then(async function (response) {
-              setLoading(false);
-              toast.success("Image Uploaded!", {
-                duration: 5000,
-              });
-              const url = response?.data?.url;
-              editor.chain().focus().setImage({ src: url }).run();
-            })
-            .catch(function (error) {
-              console.log(error);
-              setTimeout(() => {}, 300);
-            });
-        };
-        reader.readAsDataURL(files[0]);
-      }
-    },
-  },
-};
 
 const MenuBar = ({ editor }) => {
   const [loading, setLoading] = useState(false);
@@ -185,10 +132,15 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const Tiptap = () => {
+const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
   const { user } = useUser({
     redirectIfFound: false,
   });
+  const [saving, setSaving] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(undefined);
+
+  useConfirmTabClose(hasUnsavedChanges);
+
   const editor = useEditor({
     extensions: [
       CustomDocument,
@@ -213,6 +165,7 @@ const Tiptap = () => {
     ],
     onUpdate: ({ editor }) => {
       const json = editor.getJSON();
+      setHasUnsavedChanges(true);
       // send the content to an API here
       localStorage.setItem("wipContent", JSON.stringify(json));
     },
@@ -220,22 +173,41 @@ const Tiptap = () => {
 
   // load from local storage if anything exists
   useEffect(() => {
-    let retrievedObject = localStorage.getItem("wipContent");
-    if (retrievedObject && editor && !editor.isDestroyed) {
-      if (editor?.commands) {
-        editor?.commands?.setContent(JSON.parse(retrievedObject));
+    if (editorType === "edit") {
+      console.log("loading from backend");
+      if (editor && !editor.isDestroyed) {
+        if (editor?.commands) {
+          editor?.commands?.setContent(content);
+        }
+      }
+    } else {
+      console.log("loading from local");
+
+      let retrievedObject = localStorage.getItem("wipContent");
+      if (retrievedObject && editor && !editor.isDestroyed) {
+        if (editor?.commands) {
+          editor?.commands?.setContent(JSON.parse(retrievedObject));
+        }
       }
     }
   }, [editor]);
 
-  const onSubmit = async () => {
-    // before submitting, check strapi if slug or id already exists
-    // if it exists, then do an update, else create a new one
+  const getPostDetails = () => {
     const html = editor.getHTML();
     const json = editor.getJSON()?.content;
 
     const title = json[0]?.content[0]?.text;
-    const postSlug = slugify(title.toLocaleLowerCase());
+    // append an id at the end of the slug
+    let postSlug;
+
+    // when creating a new post, create a unique slug
+    if (editorType === "create") {
+      postSlug = slugify(title.toLocaleLowerCase()) + `-${uid()}`;
+    } else {
+      // in edit draft mode, use existing slug passed down from the parent component
+      postSlug = slug;
+    }
+
     const firstParagraph = json.find((p) => p?.type === "paragraph").content[0]
       .text;
     const coverImage = json.find((p) => p?.type === "image")?.attrs?.src;
@@ -266,13 +238,6 @@ const Tiptap = () => {
     let entry = {
       excerpt: firstParagraph,
       featured: false,
-      //  legacyAttributes: {
-      //    link: item.attributes.link,
-      //    imgUrl: item.attributes.imgUrl,
-      //    ogImage: item.attributes.ogImage,
-      //    ogDescription: item.attributes.ogDescription,
-      //    canonicalLink: item.attributes.canonicalLink,
-      //  },
       type: "article",
       legacyFeaturedImage: {},
       date: new Date(),
@@ -282,10 +247,10 @@ const Tiptap = () => {
       user: user?.id,
       //   featuredImage: coverImage,
       legacyFeaturedImage: {
-        mediaItemUrl: coverImage,
-        srcSet: generateImageTypes(coverImage),
-        thumb: `${coverImage}-150x150.${getImageExtention(coverImage)}`,
-        medium: `${coverImage}-768x336.${getImageExtention(coverImage)}`,
+        mediaItemUrl: coverImage || "",
+        srcSet: generateImageTypes(coverImage || ""),
+        thumb: `${coverImage}-150x150.${getImageExtention(coverImage || "")}`,
+        medium: `${coverImage}-768x336.${getImageExtention(coverImage || "")}`,
       },
       seo: {
         opengraphTitle: title,
@@ -298,6 +263,14 @@ const Tiptap = () => {
       esES: false,
       slug: postSlug,
     };
+    return {
+      entry,
+      findPostEndpointConfigs,
+    };
+  };
+
+  const createNewPost = async () => {
+    const { entry, findPostEndpointConfigs } = getPostDetails();
 
     let publishPostEndpointConfig = {
       method: "post",
@@ -336,6 +309,83 @@ const Tiptap = () => {
     }
   };
 
+  const updateExisitingPost = async () => {
+    console.log("Update post");
+    const { entry, findPostEndpointConfigs } = getPostDetails();
+
+    let publishPostEndpointConfig = {
+      method: "put",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts/{id}`,
+      headers: {
+        Authorization: `Bearer ${user?.jwt}`,
+      },
+
+      data: {
+        data: {
+          ...entry,
+        },
+      },
+    };
+
+    try {
+      const existsResult = await axios(findPostEndpointConfigs);
+      const exists = existsResult?.data?.data?.length > 0;
+      console.log("hahahahllalala");
+      if (exists) {
+        const postId = existsResult.data.data[0].id;
+        publishPostEndpointConfig.url = publishPostEndpointConfig.url.replace(
+          "{id}",
+          postId
+        );
+        console.log("exisits");
+        console.log(publishPostEndpointConfig.url);
+        await axios(publishPostEndpointConfig)
+          .then(async function (response) {
+            setSaving(false);
+            setHasUnsavedChanges(false);
+            toast.success("Your draft has been updated!", {
+              duration: 5000,
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        setSaving(false);
+        setHasUnsavedChanges(true);
+        toast.error("Your draft could not be saved!", {
+          duration: 5000,
+        });
+      }
+    } catch {
+      (e) => console.log(e);
+    }
+  };
+
+  const onSubmit = async () => {
+    // before submitting, check strapi if slug or id already exists
+    // if it exists, then do an update, else create a new one
+    if (editorType === "create") {
+      await createNewPost();
+    }
+
+    if (editorType === "edit") {
+      await updateExisitingPost();
+    }
+  };
+
+  const onSave = async () => {
+    if (editorType === "edit") {
+      setSaving(true);
+      try {
+        console.log("saving...");
+        await updateExisitingPost();
+      } catch (e) {
+        setSaving(false);
+      }
+    }
+  };
+
   return (
     <div className="w-full relative my-4">
       <div className="flex">
@@ -344,9 +394,20 @@ const Tiptap = () => {
         </span>
       </div>
       <div className="flex z-50 sticky top-0 bg-white">
-        <aside className="w-full p-2 py-4 border-b   flex flex-row justify-center items-center">
+        <aside className="w-full p-2 py-4 border-b flex flex-row justify-center items-center">
           <MenuBar editor={editor} />
-          <div className="flex flex-row justify-end">
+
+          <div className="flex flex-row justify-end gap-2">
+            {editorType === "edit" && (
+              <div>
+                <button
+                  onClick={onSave}
+                  className="p-1 px-3 bg-green-400 rounded text-sm text-white"
+                >
+                  {saving ? "Saving..." : "Save"}
+                </button>
+              </div>
+            )}
             <SubmitPostModal>
               <div className="p-10">
                 <div className="flex flex-col gap-4">
@@ -366,6 +427,7 @@ const Tiptap = () => {
                   <div className="p-4">
                     <img src="/static/images/source-bg.png" />
                   </div>
+
                   <button
                     onClick={onSubmit}
                     className="px-3 py-3 bg-blue-700 rounded text-sm text-white "
@@ -380,6 +442,10 @@ const Tiptap = () => {
       </div>
 
       <div className="my-4">
+        {/* <div className="fixed bottom-10 left-5 z-10 flex flex-row gap-[2px]">
+          <Spinner size={"sm"} />
+          <span className="m-0 p-0">Saving</span>
+        </div> */}
         <EditorContent editor={editor} />
         <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
       </div>

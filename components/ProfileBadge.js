@@ -1,52 +1,52 @@
-import React from 'react';
-import { keyframes } from '@stitches/react';
-import { styled } from '../stitches.config';
-import { blue, mauve, blackA, gray, green} from '@radix-ui/colors';
+import React from "react";
+import { keyframes } from "@stitches/react";
+import { styled } from "../stitches.config";
+import { blue, mauve, blackA, gray, green } from "@radix-ui/colors";
 // import {
 //   HamburgerMenuIcon,
 //   DotFilledIcon,
 //   CheckIcon,
 //   ChevronRightIcon,
 // } from '@radix-ui/react-icons';
-import { signOut } from "next-auth/react"
-import useUser from '@/lib/iron-session/useUser'
+import { signOut } from "next-auth/react";
+import useUser from "@/lib/iron-session/useUser";
 import fetchJson from "@/lib/iron-session/fetchJson";
 
-import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { useRouter } from "next/router";
 
 const slideUpAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateY(2px)' },
-  '100%': { opacity: 1, transform: 'translateY(0)' },
+  "0%": { opacity: 0, transform: "translateY(2px)" },
+  "100%": { opacity: 1, transform: "translateY(0)" },
 });
 
 const slideRightAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateX(-2px)' },
-  '100%': { opacity: 1, transform: 'translateX(0)' },
+  "0%": { opacity: 0, transform: "translateX(-2px)" },
+  "100%": { opacity: 1, transform: "translateX(0)" },
 });
 
 const slideDownAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateY(-2px)' },
-  '100%': { opacity: 1, transform: 'translateY(0)' },
+  "0%": { opacity: 0, transform: "translateY(-2px)" },
+  "100%": { opacity: 1, transform: "translateY(0)" },
 });
 
 const slideLeftAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateX(2px)' },
-  '100%': { opacity: 1, transform: 'translateX(0)' },
+  "0%": { opacity: 0, transform: "translateX(2px)" },
+  "100%": { opacity: 1, transform: "translateX(0)" },
 });
 
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
   minWidth: 220,
-  backgroundColor: 'white',
+  backgroundColor: "white",
   borderRadius: 6,
   padding: 5,
   boxShadow:
-    '0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)',
-  '@media (prefers-reduced-motion: no-preference)': {
-    animationDuration: '400ms',
-    animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-    animationFillMode: 'forwards',
-    willChange: 'transform, opacity',
+    "0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)",
+  "@media (prefers-reduced-motion: no-preference)": {
+    animationDuration: "400ms",
+    animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+    animationFillMode: "forwards",
+    willChange: "transform, opacity",
     '&[data-state="open"]': {
       '&[data-side="top"]': { animationName: slideDownAndFade },
       '&[data-side="right"]': { animationName: slideLeftAndFade },
@@ -57,60 +57,66 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
 });
 
 const itemStyles = {
-  all: 'unset',
+  all: "unset",
   fontSize: 15,
   lineHeight: 1,
   color: blackA,
   borderRadius: 3,
-  display: 'flex',
-  alignItems: 'center',
+  display: "flex",
+  alignItems: "center",
   height: 36,
-  padding: '0 5px',
-  position: 'relative',
+  padding: "0 5px",
+  position: "relative",
   paddingLeft: 25,
-  userSelect: 'none',
+  userSelect: "none",
 
-  '&[data-disabled]': {
+  "&[data-disabled]": {
     color: mauve.mauve8,
-    pointerEvents: 'none',
+    pointerEvents: "none",
   },
 
-  '&:focus': {
+  "&:focus": {
     backgroundColor: blue.blue11,
     color: blue.blue1,
   },
 };
 
 const itemBannerStyles = {
-  all: 'unset',
+  all: "unset",
   fontSize: 15,
   lineHeight: 1,
   color: blackA,
   borderRadius: 3,
-  display: 'flex',
-  alignItems: 'center',
-  width:'300px',
-  height: 'auto',
-  padding: '0 0px',
-  position: 'relative',
+  display: "flex",
+  alignItems: "center",
+  width: "300px",
+  height: "auto",
+  padding: "0 0px",
+  position: "relative",
   paddingLeft: 0,
-  userSelect: 'none',
+  userSelect: "none",
   backgroundColor: green.green2,
-  '&[data-disabled]': {
+  "&[data-disabled]": {
     color: mauve.mauve8,
-    pointerEvents: 'none',
+    pointerEvents: "none",
   },
 
-  '&:focus': {
+  "&:focus": {
     backgroundColor: blue.blue11,
     color: blue.blue1,
   },
 };
 
 const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
-const StyledItemBanner = styled(DropdownMenuPrimitive.Item, { ...itemBannerStyles });
-const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, { ...itemStyles });
-const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, { ...itemStyles });
+const StyledItemBanner = styled(DropdownMenuPrimitive.Item, {
+  ...itemBannerStyles,
+});
+const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, {
+  ...itemStyles,
+});
+const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, {
+  ...itemStyles,
+});
 const StyledTriggerItem = styled(DropdownMenuPrimitive.TriggerItem, {
   '&[data-state="open"]': {
     backgroundColor: blue.blue4,
@@ -122,9 +128,9 @@ const StyledTriggerItem = styled(DropdownMenuPrimitive.TriggerItem, {
 const StyledLabel = styled(DropdownMenuPrimitive.Label, {
   paddingLeft: 25,
   fontSize: 12,
-  lineHeight: '25px',
+  lineHeight: "25px",
   color: mauve.mauve11,
-  borderRadius:'4px'
+  borderRadius: "4px",
 });
 
 const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
@@ -134,16 +140,16 @@ const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
 });
 
 const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
-  position: 'absolute',
+  position: "absolute",
   left: 0,
   width: 25,
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
 });
 
 const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
-  fill: 'white',
+  fill: "white",
 });
 
 // Exports
@@ -162,7 +168,7 @@ export const DropdownMenuSeparator = StyledSeparator;
 export const DropdownMenuArrow = StyledArrow;
 
 // Your app...
-const Box = styled('div', {});
+const Box = styled("div", {});
 
 // const RightSlot = styled('div', {
 //   marginLeft: 'auto',
@@ -172,81 +178,113 @@ const Box = styled('div', {});
 //   '[data-disabled] &': { color: mauve.mauve8 },
 // });
 
-const IconButton = styled('button', {
-  all: 'unset',
-  fontFamily: 'inherit',
-  borderRadius: '100%',
+const IconButton = styled("button", {
+  all: "unset",
+  fontFamily: "inherit",
+  borderRadius: "100%",
   height: 35,
   width: 35,
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
   color: blue.blue11,
-  backgroundColor: 'white',
-  border:`1px solid ${gray.gray3}`,
-//   boxShadow: `0 2px 10px ${blackA.blackA7}`,
-  '&:hover': { backgroundColor: blue.blue3 },
-  '&:focus': { boxShadow: `0 0 0 2px ${blue.blue7}` },
+  backgroundColor: "white",
+  border: `1px solid ${gray.gray3}`,
+  //   boxShadow: `0 2px 10px ${blackA.blackA7}`,
+  "&:hover": { backgroundColor: blue.blue3 },
+  "&:focus": { boxShadow: `0 0 0 2px ${blue.blue7}` },
 });
 
 // const signOutAPI = (mutateUser) =>{
 //     signOut()
 // }
 
-export const DropdownMenuDemo = ({icon, user}) => {
-    const router = useRouter();
-    const {mutateUser} = useUser({
-        redirectTo: '/',
-        redirectIfFound: false,
-      })
+export const DropdownMenuDemo = ({ icon, user }) => {
+  const router = useRouter();
+  const { mutateUser } = useUser({
+    redirectTo: "/",
+    redirectIfFound: false,
+  });
   return (
     <Box>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <IconButton aria-label="Customise options">
-           {icon}
-          </IconButton>
+          <IconButton aria-label="Customise options">{icon}</IconButton>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent sideOffset={5}>
-          <DropdownMenuItem onSelect={()=>{
-            router.push('/account');}}>
-                Profile settings 
+          <DropdownMenuItem
+            onSelect={() => {
+              router.push("/account");
+            }}
+          >
+            Profile settings
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onSelect={() => {
+              router.push("/my-posts");
+            }}
+          >
+            My Posts
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onSelect={() => {
+              router.push("/write");
+            }}
+          >
+            Write a Post
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
-          <DropdownMenuItemBanner onSelect={()=>{
-            router.push(`/post/web-monetization-payment-pointer`);}}>
+          <DropdownMenuItemBanner
+            onSelect={() => {
+              router.push(`/post/web-monetization-payment-pointer`);
+            }}
+          >
             <div className="p-3 rounded-lg flex">
               <div className="flex flex-col justify-start mr-2 w-20">
-              <img className="w-20 " src="https://webmonetization.org/img/wm-icon-animated.svg"/>
+                <img
+                  className="w-20 "
+                  src="https://webmonetization.org/img/wm-icon-animated.svg"
+                />
               </div>
-                <div>
-                <h2 className="text-md font-primary font-medium mb-1">Learn Web Monetization</h2>
-                <p className="text-sm opacity-70">Receive streamed payments and tips on your articles.</p>
-                </div>
+              <div>
+                <h2 className="text-md font-primary font-medium mb-1">
+                  Learn Web Monetization
+                </h2>
+                <p className="text-sm opacity-70">
+                  Receive streamed payments and tips on your articles.
+                </p>
+              </div>
             </div>
           </DropdownMenuItemBanner>
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem onSelect={()=>{
-            router.push(`/early-access`);}}>
-              {/* <Link href="/account"> */}
-                Welcome guide 
-              {/* </Link> */}
+          <DropdownMenuItem
+            onSelect={() => {
+              router.push(`/early-access`);
+            }}
+          >
+            {/* <Link href="/account"> */}
+            Welcome guide
+            {/* </Link> */}
             {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onSelect={async ()=>{
-              await signOut({redirect: false})
+          <DropdownMenuItem
+            onSelect={async () => {
+              await signOut({ redirect: false });
               mutateUser(
                 await fetchJson("/api/auth/logout", { method: "POST" }),
-                false,
+                false
               );
-          }}>
+            }}
+          >
             Sign out
           </DropdownMenuItem>
-            
+
           <DropdownMenuArrow offset={12} />
         </DropdownMenuContent>
       </DropdownMenu>
@@ -255,4 +293,3 @@ export const DropdownMenuDemo = ({icon, user}) => {
 };
 
 export default DropdownMenuDemo;
-

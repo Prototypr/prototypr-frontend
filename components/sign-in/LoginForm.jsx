@@ -1,25 +1,25 @@
 import { signIn } from "next-auth/react";
 import Button from "../atom/Button/Button";
-import {useState} from 'react'
+import { useState } from "react";
 import dynamic from "next/dynamic";
-import axios from 'axios'
-const Form = dynamic(() => import('@/components/Form'), { ssr: true })
+import axios from "axios";
+const Form = dynamic(() => import("@/components/Form"), { ssr: true });
 // const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
-import toast from 'react-hot-toast'
+import toast from "react-hot-toast";
 
-const LoginForm = ({isSignUp}) => {
-
-  const [showLoginForm, setShowLoginForm] = useState(false)
-  const [sent, setSent] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+const LoginForm = ({ isSignUp }) => {
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className="flex flex-col">
       <h2 className="text-xl text-gray-800 font-bold text-center mb-2">
-        {isSignUp?'Get early access':'Welcome back'}
+        {isSignUp ? "Get early access" : "Welcome back"}
       </h2>
       <p className="text-sm text-gray-600 whitespace-nowrap text-center">
-        Be the first to join an inclusive design platform. <br/>No Paywalls. No intrusive ads. Help shape it!
+        Be the first to join an inclusive design platform. <br />
+        No Paywalls. No intrusive ads. Help shape it!
       </p>
       <div className="flex flex-col gap-2 flex-grow mt-6">
         <Button
@@ -40,7 +40,7 @@ const LoginForm = ({isSignUp}) => {
           }
           onClick={() => signIn("twitter")}
         >
-          {isSignUp?'Sign up with Twitter':'Sign in with Twitter'}
+          {isSignUp ? "Sign up with Twitter" : "Sign in with Twitter"}
         </Button>
         <Button
           isFullWidth
@@ -62,8 +62,7 @@ const LoginForm = ({isSignUp}) => {
           }
           onClick={() => signIn("github")}
         >
-          
-          {isSignUp?'Sign up with GitHub':'Sign in with GitHub'}
+          {isSignUp ? "Sign up with GitHub" : "Sign in with GitHub"}
         </Button>
         <Button
           isFullWidth
@@ -113,134 +112,162 @@ const LoginForm = ({isSignUp}) => {
           }
           onClick={() => signIn("google")}
         >
-          {isSignUp?'Sign up with Google':'Sign in with Google'}
+          {isSignUp ? "Sign up with Google" : "Sign in with Google"}
         </Button>
       </div>
       <div className="my-5">
         <p className="text-gray-600 text-center font-medium">OR</p>
       </div>
-      {showLoginForm==false ?<Button
-        isFullWidth
-        className="text-left justify-start h-11 font-normal"
-        onClick={()=>{
-          setShowLoginForm(!showLoginForm)
-          // signIn("email", {email:'graeme@prototypr.io'})
-        }}
-        leftIcon={
-          <div className="bg-white p-1 rounded-md">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              // className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="!h-4 !w-4"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
-            </svg>
-          </div>
-        }
-      >
-          {isSignUp?'Sign up with Email':'Sign in with Email'}
-      </Button>:
-      <div className="max-w-xs">
-      <Form 
-        buttonText={'Sign up'} 
-        disabled={sent?true:false}
-        disabledMessage={<div className="text-center">
-        A login link has been sent to your email. <br/>If you didn't receive it, <a className="text-blue-600 cursor-pointer" onClick={()=>setSent(false)}>retry</a>.
-        </div>}
-        label={'Enter your email address'}
-        inputType={'email'}
-        placeholder={'hola@prototypr.io'}
-        isLoading={isLoading}
-        onSubmit={(e)=>{
-          e.preventDefault()
-          setSent(false)
-          setIsLoading(true)
-          var data = JSON.stringify({
-            "email": e.target[0].value
-          });
-    
-          var config = {
-            method: 'post',
-            url: `${process.env.NEXT_PUBLIC_API_URL}/api/passwordless/send-link`,
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
-  
-         const loadingToastId = toast.loading('Sending verification email');
-         
-        axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-            //redirect to verification page
-            // Router.push('/account/verification-sent')
-            // toast.success("Successfully updated", {
-            //   duration: 10000,
-            // });
-            setSent(true)
-            setTimeout(()=>{
-              setSent(true)
-              setIsLoading(false)
-              showSuccessToast(loadingToastId)
-            },800)
-            
+      {showLoginForm == false ? (
+        <Button
+          isFullWidth
+          className="text-left justify-start h-11 font-normal"
+          onClick={() => {
+            setShowLoginForm(!showLoginForm);
+            // signIn("email", {email:'graeme@prototypr.io'})
+          }}
+          leftIcon={
+            <div className="bg-white p-1 rounded-md">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                // className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="!h-4 !w-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+          }
+        >
+          {isSignUp ? "Sign up with Email" : "Sign in with Email"}
+        </Button>
+      ) : (
+        <div className="max-w-xs">
+          <Form
+            buttonText={"Sign up"}
+            disabled={sent ? true : false}
+            disabledMessage={
+              <div className="text-center">
+                A login link has been sent to your email. <br />
+                If you didn't receive it,{" "}
+                <a
+                  className="text-blue-600 cursor-pointer"
+                  onClick={() => setSent(false)}
+                >
+                  retry
+                </a>
+                .
+              </div>
+            }
+            label={"Enter your email address"}
+            inputType={"email"}
+            placeholder={"hola@prototypr.io"}
+            isLoading={isLoading}
+            onSubmit={(e) => {
+              e.preventDefault();
+              setSent(false);
+              setIsLoading(true);
+              var data = JSON.stringify({
+                email: e.target[0].value,
+              });
 
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+              var config = {
+                method: "post",
+                url: `${process.env.NEXT_PUBLIC_API_URL}/api/passwordless/send-link`,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                data: data,
+              };
 
-        }}
-        />
+              const loadingToastId = toast.loading(
+                "Sending verification email"
+              );
+
+              axios(config)
+                .then(function (response) {
+                  console.log(JSON.stringify(response.data));
+                  //redirect to verification page
+                  // Router.push('/account/verification-sent')
+                  // toast.success("Successfully updated", {
+                  //   duration: 10000,
+                  // });
+                  setSent(true);
+                  setTimeout(() => {
+                    setSent(true);
+                    setIsLoading(false);
+                    showSuccessToast(loadingToastId);
+                  }, 800);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }}
+          />
         </div>
-        }
+      )}
     </div>
   );
 };
 
 export default LoginForm;
 
-const showSuccessToast = (loadingToastId) =>{
-  toast.dismiss(loadingToastId)
-  toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? 'animate-enter' : 'animate-leave'
-      } max-w-md bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-    >
-      <div className="relative border border-gray-200 rounded-lg shadow-lg">
-        <button
-        onClick={() => toast.dismiss(t.id)}
-        className="absolute p-1 bg-gray-100 border border-gray-300 rounded-full -top-1 -right-1">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg>
-        </button>
-        <div className="flex items-center p-4">
-          <div className="flex flex-col justify-start h-10">
-
-            <svg viewBox="0 0 24 24" className="text-teal-600 w-5 h-5 mx-auto">
-            <path fill="currentColor" d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
-            </path>
-          </svg>
-          </div>
-          <div className="ml-3 overflow-hidden">
-            <p className="font-medium text-gray-900">Check your email.</p>
-            <p className="max-w-xs text-sm text-gray-500 truncate">
-             Click the link in your inbox to sign in.
-            </p>
+const showSuccessToast = (loadingToastId) => {
+  toast.dismiss(loadingToastId);
+  toast.custom(
+    (t) => (
+      <div
+        className={`${
+          t.visible ? "animate-enter" : "animate-leave"
+        } max-w-md bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+      >
+        <div className="relative border border-gray-200 rounded-lg shadow-lg">
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="absolute p-1 bg-gray-100 border border-gray-300 rounded-full -top-1 -right-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-3 h-3"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+          <div className="flex items-center p-4">
+            <div className="flex flex-col justify-start h-10">
+              <svg
+                viewBox="0 0 24 24"
+                className="text-teal-600 w-5 h-5 mx-auto"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
+                ></path>
+              </svg>
+            </div>
+            <div className="ml-3 overflow-hidden">
+              <p className="font-medium text-gray-900">Check your email.</p>
+              <p className="max-w-xs text-sm text-gray-500 truncate">
+                Click the link in your inbox to sign in.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  ), {duration:10000})
-}
+    ),
+    { duration: 10000 }
+  );
+};

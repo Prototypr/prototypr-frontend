@@ -147,17 +147,17 @@ export default function Navbar({ activeNav }) {
               </div>
             </div>
           </div>
-          <SubNav
+          {/* <SubNav
             collapse={showNav}
             user={user}
             userLoading={isLoading}
             userLoggedInCookie={userLoggedInCookie}
             activeNav={activeNav}
-          />
+          /> */}
         </div>
 
         {/* <!-- Mobile menu, show/hide based on menu state. --> */}
-        <div
+        {/* <div
           className={`sm:hidden relative ${
             !mobileNavOpen ? "h-0 overflow-hidden" : ""
           }`}
@@ -170,7 +170,7 @@ export default function Navbar({ activeNav }) {
               activeNav={activeNav}
             />
           </div>
-        </div>
+        </div> */}
       </>
     </div>
   );
