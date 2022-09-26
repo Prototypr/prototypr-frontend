@@ -12,6 +12,8 @@ import { MenuActions } from "@/components/atom/toolbar";
 import Spinner from "../atom/Spinner/Spinner";
 import toast from "react-hot-toast";
 import SubmitPostModal from "../modal/submitPost";
+import { saveAs } from "file-saver";
+
 const qs = require("qs");
 
 var axios = require("axios");
@@ -27,6 +29,12 @@ const uid = function () {
 };
 
 const confirmationMessage = "You have unsaved changes. Continue?";
+
+/**
+ *
+ * Change edit draft slug to an id.
+ * Slug should be generated only when posts are published
+ */
 
 const useConfirmTabClose = (isUnsafeTabClose) => {
   useEffect(() => {
@@ -159,7 +167,7 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
             return "Whats the title?";
           }
 
-          return "Can you add some further context?";
+          return "Tell a story...";
         },
       }),
     ],
@@ -196,7 +204,14 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
     const html = editor.getHTML();
     const json = editor.getJSON()?.content;
 
-    const title = json[0]?.content[0]?.text;
+    console.log(json);
+
+    const title =
+      json[0]?.content?.find((x) => x.type === "text")?.text || "Untitled post";
+    const firstParagraph = json
+      .find((p) => p?.type === "paragraph")
+      ?.content?.find((x) => x.type === "text")?.text;
+    const coverImage = json.find((p) => p?.type === "image")?.attrs?.src;
     // append an id at the end of the slug
     let postSlug;
 
@@ -207,10 +222,6 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
       // in edit draft mode, use existing slug passed down from the parent component
       postSlug = slug;
     }
-
-    const firstParagraph = json.find((p) => p?.type === "paragraph").content[0]
-      .text;
-    const coverImage = json.find((p) => p?.type === "image")?.attrs?.src;
 
     const query = qs.stringify(
       {
@@ -330,7 +341,6 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
     try {
       const existsResult = await axios(findPostEndpointConfigs);
       const exists = existsResult?.data?.data?.length > 0;
-      console.log("hahahahllalala");
       if (exists) {
         const postId = existsResult.data.data[0].id;
         publishPostEndpointConfig.url = publishPostEndpointConfig.url.replace(
@@ -386,6 +396,25 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
     }
   };
 
+  const onExport = async () => {
+    const json = editor.getJSON();
+    const content = json.content;
+    if (content) {
+      let blob = new Blob([JSON.stringify({ content: content })], {
+        type: "application/json",
+      });
+      const filename = slug ? `${slug}.json` : `${Date.now()}.json`;
+      saveAs(blob, filename);
+    }
+  };
+
+  const handleBeforeSubmit = async (open) => {
+    // do all editor content checks here
+    // check if post has a title
+    // check if post has a description
+    open();
+  };
+
   return (
     <div className="w-full relative my-4">
       <div className="flex">
@@ -401,6 +430,16 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
             {editorType === "edit" && (
               <div>
                 <button
+                  onClick={onExport}
+                  className="p-1 px-3 bg-yellow-400 rounded text-sm text-white"
+                >
+                  Export
+                </button>
+              </div>
+            )}
+            {editorType === "edit" && (
+              <div>
+                <button
                   onClick={onSave}
                   className="p-1 px-3 bg-green-400 rounded text-sm text-white"
                 >
@@ -408,7 +447,7 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
                 </button>
               </div>
             )}
-            <SubmitPostModal>
+            <SubmitPostModal handleBeforeOpen={handleBeforeSubmit}>
               <div className="p-10">
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">

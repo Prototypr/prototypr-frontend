@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 import Link from "next/link";
 import Layout from "@/components/layout";
+import toast from "react-hot-toast";
+import DeletePostButton from "@/components/modal/deletePostModal";
 
 const qs = require("qs");
 
@@ -11,13 +13,57 @@ var slugify = require("slugify");
 /**
  *
  * View all posts from a user [x]
- * View draft posts
- * view published posts
- * edit draft post
+ * View draft posts[x]
+ * view published posts[x]
+ * edit draft post [x]
  * edit published post
+ * 
+ * next features
+ * these are some next features:
+ * 
+ * delete post [x]
+ * delete post modal [x]
+ * export post [x]
+ * each new post will have its own namespace in local storage
+- delete profile in profile danger section, and deleting profile should delete all posts?
  */
 
 const PostCard = ({ post }) => {
+  const { user } = useUser({
+    redirectIfFound: false,
+  });
+
+  const deletePost = async (id) => {
+    if (id) {
+      let currentPostData = {
+        method: "delete",
+        url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${id}`,
+        headers: {
+          Authorization: `Bearer ${user?.jwt}`,
+        },
+      };
+
+      try {
+        const resp = await axios(currentPostData);
+        console.log("HELLO", resp);
+        if (resp.status === 200) {
+          toast.success("Your post has been deleted!", {
+            duration: 5000,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+        toast.success("Oops, something went wrong!", {
+          duration: 5000,
+        });
+      }
+    } else {
+      toast.success("Could not find that post!", {
+        duration: 5000,
+      });
+    }
+  };
+
   return (
     <div className="cursor-pointe p-6 h-full rounded-lg shadow-md hover:shadow-lg bg-white hover:transition duration-300 ease-in-out">
       <div className="flex flex-col gap-2">
@@ -44,6 +90,22 @@ const PostCard = ({ post }) => {
           </Link>
         </div>
       )}
+
+      <div>
+        <DeletePostButton
+          onClick={() => {
+            deletePost(post.id);
+          }}
+        />
+        {/* <button
+          onClick={() => {
+            deletePost(post.id);
+          }}
+          className="text-sm underline text-red-400 hover:text-red-500"
+        >
+          Delete Post
+        </button> */}
+      </div>
     </div>
   );
 };
@@ -55,7 +117,6 @@ const MyPosts = () => {
     redirectIfFound: false,
   });
   const getAllPostsFromUser = async () => {
-    console.log(user.id);
     const query = qs.stringify(
       {
         filters: {
