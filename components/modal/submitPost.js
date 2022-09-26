@@ -1,13 +1,14 @@
 import ModalComponent, { useModal } from "./modal";
 
-const SubmitPostModal = ({ children }) => {
+const SubmitPostModal = ({ children, handleBeforeOpen }) => {
   const { showDialog, open, close } = useModal();
 
   return (
     <div>
       <button
         onClick={() => {
-          open();
+          handleBeforeOpen(open);
+          //   open();
         }}
         className="p-1 px-3 bg-blue-700 rounded text-sm text-white"
       >
