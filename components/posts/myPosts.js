@@ -15,6 +15,12 @@ var slugify = require("slugify");
  * view published posts
  * edit draft post
  * edit published post
+ * 
+ * next features
+ * these are some next features:
+- export post 
+- delete post
+- delete profile in profile danger section, and deleting profile should delete all posts?
  */
 
 const PostCard = ({ post }) => {
