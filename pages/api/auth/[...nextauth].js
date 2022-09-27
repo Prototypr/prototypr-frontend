@@ -18,7 +18,7 @@ const options = {
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-  database: process.env.NEXT_PUBLIC_DATABASE_URL,
+  database: process.env.STRAPI_DATABASE_URL,
   session: {
     strategy: "jwt"
   },
