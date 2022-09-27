@@ -4,12 +4,14 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
 const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: true });
+import ProductItem from "@/components/new-index/ProductItem";
+
 const PostHeader = dynamic(() => import("@/components/post-header"), { ssr: true });
 const AuthorBio = dynamic(() => import("@/components/authorBio"), { ssr: true });
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 import { useIntl } from "react-intl";
 
-import Layout from '@/components/layout'
+import Layout from '@/components/layout-post'
 import { getAllPostsWithSlug, getPost } from '@/lib/api'
 const NoticeTranslation = dynamic(() => import("@/components/notice-translation"), { ssr: true });
 
@@ -49,6 +51,15 @@ export default function Post({ post, preview, relatedPosts}) {
       monetization:`${paymentPointer}`
     }}
      background="#fff" activeNav={"posts"} preview={preview}>
+         <div
+        className={`min-h-screen px-3 md:px-8`}
+        style={{ background: "#fff" }}
+      >
+        {/* <Alert preview={preview} /> */}
+        <main
+          className="pt-24 md:pt-36 -mt-3 mx-auto"
+          style={{ maxWidth:"1200px" }}
+        >
       <Container>
         {router.isFallback ? (
           <h1 className="text-6xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
@@ -91,18 +102,24 @@ export default function Post({ post, preview, relatedPosts}) {
             className={'w-full font-noto-serif mb-4 mt-16 border rounded-lg pb-0 pt-8 border-gray-100'}
             title={intl.formatMessage({ id: "newsletterPanel.title3" })}
             desc={intl.formatMessage({ id: "newsletterPanel.desc3" })}/>}
-            
-            <hr className="border-accent-2 mt-28 mb-24" />
-            <h1 className="text-4xl font-noto-serif font-semibold -mt-10 mb-12">Related Posts</h1>
-            <div className="mt-10 mb-20 grid lg:grid-cols-2 grid-cols-1 gap-10">
-            {relatedPosts?.data?.length>0 && relatedPosts.data.map((item, index) => {
-              return(
-                <TopicTopItem key={index} topic={item}/>
-            )})}
-            </div>
           </>
         )}
       </Container>
+      </main>
+      </div>
+         <section className="bg-gray-100">
+            <hr className="border-accent-2" />
+             <div style={{ maxWidth:"1200px"}} className="px-6 md:px-0 mx-auto pb-20 mt-20">
+                <h1 className="text-4xl font-noto-serif font-semibold -mt-3 mb-12">Related Posts</h1>
+                <div className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
+                {relatedPosts?.data?.length>0 && relatedPosts.data.map((item, index) => {
+                return(
+                    <ProductItem key={`product_item_${index}`} post={item} />
+                    // <TopicTopItem key={index} topic={item}/>
+                )})}
+                </div>
+             </div>
+            </section>
     </Layout>
   )
 }

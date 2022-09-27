@@ -34,22 +34,30 @@ export default function AspiringItem({ post = {} }) {
           </div>
         </figure>
 
-        <div className="font-base text-sm hover:underline leading-6 tracking-wide uppercase text-gray-500 mt-2">
+        {/* <div className="font-base text-sm hover:underline leading-6 tracking-wide uppercase text-gray-500 mt-2">
           <Link
             className="hover:underline"
             href={`/people/${author?.data?.attributes?.slug}/page/1`}
           >
             <a>{author?.data?.attributes?.name}</a>
           </Link>
-        </div>
-        <h4 className="text-black-1 font-semibold text-lg leading-normal mt-1">
+        </div> */}
+        <h4 className="text-black-1 font-semibold text-lg leading-6 mt-4">
           <Link href={`/post/${slug}`}>
             <a className="font-noto-serif">{title}</a>
           </Link>
         </h4>
+        <div className="font-base font-normal hover:underline hover:text-gray-800 text-base text-neutral-700 leading-5 mt-2">
+          <Link
+            className="hover:underline hover:text-gray-800"
+            href={`/people/${author?.data?.attributes?.slug}/page/1`}
+          >
+            <a>{author?.data?.attributes?.name}</a>
+          </Link>
+        </div>
 
         <p
-          className="text-gray-500 text-base leading-normal font-normal overflow-hidden text-ellipsis clamp-3 mt-2"
+          className="text-neutral-800 text-base leading-normal font-normal overflow-hidden text-ellipsis clamp-3 mt-4"
           dangerouslySetInnerHTML={{ __html: excerpt }}
         ></p>
       </div>

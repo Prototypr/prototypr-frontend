@@ -48,7 +48,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
         <Link href={`/posts/${tagSlug}`}>
           <div className="mt-3 flex">
             <div className="font-base hover:cursor-pointer hover:underline text-sm leading-6 tracking-wide uppercase text-gray-500 mr-2">
-              # {tagName}{" "}
+              {tagName}{" "}
             </div>
           </div>
         </Link>
