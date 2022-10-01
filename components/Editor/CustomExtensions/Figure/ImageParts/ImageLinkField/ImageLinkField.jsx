@@ -199,7 +199,7 @@ const LinkField = ({editor,node, setCanvasLoading, updateAttributes, closePopup}
         <div className="flex flex-col">
               <form onSubmit={formik.handleSubmit} className="flex flex-col">
               <Fieldset>
-                <Label htmlFor="url">Outgoing Link</Label>
+                <Label htmlFor="url">Link</Label>
                 <Input 
                 ref={firstFieldRef}
                 onChange={formik.handleChange}

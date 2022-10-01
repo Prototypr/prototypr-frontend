@@ -30,6 +30,8 @@ const IconButton = styled('button', {
   height: 28,
   width: 35,
   display: 'inline-flex',
+  marginRight:1,
+  marginLeft:1,
   alignItems: 'center',
   justifyContent: 'center',
   // color: slate.slate6,
@@ -114,6 +116,28 @@ const MenuBar = ({ editor, isSelecting }) => {
               <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M8 3v9a4 4 0 1 0 8 0V3h2v9a6 6 0 1 1-12 0V3h2zM4 20h16v2H4v-2z" fill="currentColor"/></svg>
                 {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="h-5 w-5 feather-underline"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path><line x1="4" y1="21" x2="20" y2="21"></line></svg> */}
               </IconButton>
+              {/* headings */}
+              <div className="bg-gray-700 hover:bg-gray-900 mx-1 my-auto" style={{height:'20px', width:'1px'}}/>
+
+              <IconButton
+                onClick={()=>editor.chain().focus().toggleHeading({ level: 1 }).run()}
+                // className={editor.isActive("strike") ? "is-active" : ""}
+                className={`hover:bg-gray-800  mr-1
+                ${editor.isActive('heading', { level: 1 })?'bg-gray-800':'bg-gray-900'}
+                ${editor.isActive('heading', { level: 1 })?'text-blue-400':'text-gray-200'}`}
+              >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0H24V24H0z"/><path d="M13 20h-2v-7H4v7H2V4h2v7h7V4h2v16zm8-12v12h-2v-9.796l-2 .536V8.67L19.5 8H21z" fill="currentColor"/></svg>
+              </IconButton>
+              <IconButton
+                onClick={()=>editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                // className={editor.isActive("strike") ? "is-active" : ""}
+                className={`hover:bg-gray-800  mr-1
+                ${editor.isActive('heading', { level: 2 })?'bg-gray-800':'bg-gray-900'}
+                ${editor.isActive('heading', { level: 2 })?'text-blue-400':'text-gray-200'}`}
+              >
+                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0H24V24H0z"/><path d="M4 4v7h7V4h2v16h-2v-7H4v7H2V4h2zm14.5 4c2.071 0 3.75 1.679 3.75 3.75 0 .857-.288 1.648-.772 2.28l-.148.18L18.034 18H22v2h-7v-1.556l4.82-5.546c.268-.307.43-.709.43-1.148 0-.966-.784-1.75-1.75-1.75-.918 0-1.671.707-1.744 1.606l-.006.144h-2C14.75 9.679 16.429 8 18.5 8z" fill="currentColor"/></svg>
+              </IconButton>
+              <div className="bg-gray-700 hover:bg-gray-900 mx-1 my-auto" style={{height:'20px', width:'1px'}}/>
               {/* blockquote */}
               <IconButton
                 onClick={()=>switchBlockQuote(editor)}
@@ -123,7 +147,6 @@ const MenuBar = ({ editor, isSelecting }) => {
                 ${editor.isActive("blockquote")?'text-blue-400':'text-gray-200'}`}
               >
              <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.417 6.679C20.447 7.773 21 9 21 10.989c0 3.5-2.457 6.637-6.03 8.188l-.893-1.378c3.335-1.804 3.987-4.145 4.247-5.621-.537.278-1.24.375-1.929.311-1.804-.167-3.226-1.648-3.226-3.489a3.5 3.5 0 0 1 3.5-3.5c1.073 0 2.099.49 2.748 1.179zm-10 0C10.447 7.773 11 9 11 10.989c0 3.5-2.457 6.637-6.03 8.188l-.893-1.378c3.335-1.804 3.987-4.145 4.247-5.621-.537.278-1.24.375-1.929.311C4.591 12.322 3.17 10.841 3.17 9a3.5 3.5 0 0 1 3.5-3.5c1.073 0 2.099.49 2.748 1.179z" fill="currentColor"/></svg>
-                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="h-5 w-5 feather-underline"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path><line x1="4" y1="21" x2="20" y2="21"></line></svg> */}
               </IconButton>
 
               {/* Ordered list */}

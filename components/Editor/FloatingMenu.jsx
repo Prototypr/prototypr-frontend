@@ -206,23 +206,6 @@ const MenuFloating = ({ editor, isSelecting }) => {
           </IconButton>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <IconButton  onClick={()=>{  
-               editor.chain().focus().setHorizontalRule().run()
-            }} className="hover:cursor-pointer" aria-label="Insert Divider">
-            <DividerHorizontalIcon/>
-          </IconButton>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <IconButton
-           onClick={()=>{
-
-            editor.chain().focus().setCodeBlock().run()
-         }} 
-          className="hover:cursor-pointer" aria-label="Insert Code Block">
-            <CodeIcon/>
-          </IconButton>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
           <IconButton  onClick={()=>{
                 const url = prompt('Enter Twitter URL')
                 if(url){
@@ -244,6 +227,24 @@ const MenuFloating = ({ editor, isSelecting }) => {
                 }
             }}  className="hover:cursor-pointer" aria-label="Insert Code Block">
             <VideoIcon/>
+          </IconButton>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <IconButton
+           onClick={()=>{
+
+            editor.chain().focus().setCodeBlock().run()
+         }} 
+          className="hover:cursor-pointer" aria-label="Insert Code Block">
+            <CodeIcon/>
+          </IconButton>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem>
+          <IconButton  onClick={()=>{  
+               editor.chain().focus().setHorizontalRule().run()
+            }} className="hover:cursor-pointer" aria-label="Insert Divider">
+            <DividerHorizontalIcon/>
           </IconButton>
         </DropdownMenuItem>
       </Flex>
