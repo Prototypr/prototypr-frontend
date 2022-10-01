@@ -11,7 +11,7 @@
     .wp-caption-text{margin-top:10px!important;}
 
 figure{
-      margin-bottom: 3.6rem;
+    //   margin-bottom: 3.6rem;
 }
     color:#2D3748;
     font-size:1.14rem;
@@ -248,6 +248,26 @@ figure{
     background-color: #a4dcfc; 
   }
 
+  textarea.figcaption{
+    width:100%;
+    background:#fff;
+    border:0px;
+    color:#555d66;
+    font-size:13px;
+    text-align:center;
+    border: none;
+    // background-color: transparent!important;
+    resize: none!important;
+    outline: none!important;
+  }
+  textarea.figcaption:focus{
+    border:0px;
+    box-shadow: none;
+  }
+  textarea.figcaption::placeholder{
+    color:#7e8d9e;
+  }
+
   .blocks-gallery-caption,.wp-block-embed figcaption,.wp-block-image figcaption{color:#555d66;font-size:13px;text-align:center}
   .wp-block-quote__citation,.wp-block-quote cite,.wp-block-quote footer{color:#6c7781;font-size:13px;margin-top:1em;position:relative;font-style:normal}
 
@@ -286,6 +306,24 @@ figure{
  .blocks-gallery-item{
      list-style-type: none;
  }
+
+ .editor-img::selection, figure::selection {
+    background-color:transparent!important;
+}
+ .react-renderer.node-figure{
+    margin-left:auto;
+    margin-right: auto;
+    display:flex;
+ }
+
+ pre {
+    background: #0D0D0D;
+    color: #FFF;
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    max-width: 43rem;
+}
 
  /*** Works on common browsers ***/
 ::selection {

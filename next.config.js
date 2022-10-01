@@ -109,6 +109,20 @@ module.exports =
         },
       ];
     },
+    webpack: (config, options) => {
+      if (!options.isServer) {
+        //letter addition - graeme graylien change
+        config.resolve.fallback.fs=false
+        config.resolve.fallback.net=false
+        config.resolve.fallback.tls=false
+        config.resolve.fallback.dns=false
+      }
+
+      if (typeof config.webpack === "function") {
+        return config.webpack(config, options);
+      }
+      return config;
+    },
     // https://twitter.com/dan_abramov/status/1529677207869825024
     experimental: {
       plugins: true,

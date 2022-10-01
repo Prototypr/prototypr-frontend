@@ -34,6 +34,18 @@ export default function Index() {
     setSignUp(!isSignUp);
   };
 
+  useEffect(()=>{
+    const s = document.createElement("script");
+    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
+    s.setAttribute("id", "twitter-widget");
+    s.setAttribute("async", "true");
+
+    if(!document.getElementById('twitter-widget')){
+      document.head.appendChild(s);
+    }
+
+  },[])
+
   useEffect(() => {
     if (user && !user.avatar) {
       // declare the data fetching function
@@ -58,7 +70,7 @@ export default function Index() {
 
   return (
     <>
-      <div className="h-full w-full">
+      <div className="h-full w-full" id="editor-container">
         <div className="w-full h-full mx-auto  relative">
           {!user && <Fallback />}
 

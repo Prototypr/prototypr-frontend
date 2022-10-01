@@ -1,18 +1,40 @@
 import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import MenuFloating from '../Editor/FloatingMenu'
+// import { EditorContent, useEditor } from "@/components/Editor/BlockNote";
+
 import Placeholder from "@tiptap/extension-placeholder";
-import Image from "@tiptap/extension-image";
+// import Image from "@tiptap/extension-image";
 import Document from "@tiptap/extension-document";
+import TextMenu from '@/components/Editor/TextMenu'
 
 import Link from "@tiptap/extension-link";
 import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
-import { MenuActions } from "@/components/atom/toolbar";
+// import { MenuActions } from "@/components/atom/toolbar";
 
-import Spinner from "../atom/Spinner/Spinner";
 import toast from "react-hot-toast";
 import SubmitPostModal from "../modal/submitPost";
 import { saveAs } from "file-saver";
+
+import Gapcursor from "@tiptap/extension-gapcursor";
+import Youtube from "@tiptap/extension-youtube";
+import HorizontalRule from "@tiptap/extension-horizontal-rule";
+import Text from '@tiptap/extension-text'
+import Heading from '@tiptap/extension-heading'
+import Paragraph from '@tiptap/extension-paragraph'
+import CodeBlock from "@tiptap/extension-code-block";
+import Bold from '@tiptap/extension-bold'
+import HardBreak from '@tiptap/extension-hard-break'
+import Underline from '@tiptap/extension-underline'
+import Italic from '@tiptap/extension-italic'
+import ListItem from '@tiptap/extension-list-item'
+import BulletList from '@tiptap/extension-bullet-list'
+import OrderedList from '@tiptap/extension-ordered-list'
+import Dropcursor from '@tiptap/extension-dropcursor'
+import History from "@tiptap/extension-history";
+import {Blockquote} from "@/components/Editor/CustomExtensions/CustomBlockquote";
+import Figure from "../Editor/CustomExtensions/Figure"
+import Tweet from "../Editor/CustomExtensions/Tweet/Tweet"
 
 const qs = require("qs");
 
@@ -75,71 +97,6 @@ function getImageExtention(url) {
   return extention;
 }
 
-const MenuBar = ({ editor }) => {
-  const [loading, setLoading] = useState(false);
-  const { user } = useUser({
-    redirectIfFound: false,
-  });
-
-  if (!editor) {
-    return null;
-  }
-
-  return (
-    <div className="w-full flex flex-row gap-5">
-      <div className="flex flex-row gap-2">
-        {Object.values(MenuActions).map((obj) => {
-          return (
-            <>
-              {obj?.type === "file" ? (
-                <>
-                  <label
-                    for="img-upload"
-                    class="custom-file-upload"
-                    className="w-6 h-6 grid place-items-center text-sm border cursor-pointer hover:shadow-sm rounded"
-                  >
-                    {obj.icon}
-                  </label>
-                  <input
-                    type="file"
-                    id="img-upload"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(event) =>
-                      obj.action(event, editor, user, setLoading)
-                    }
-                  />
-                </>
-              ) : (
-                <button
-                  onClick={() => {
-                    obj.action(editor);
-                  }}
-                  className={`w-6 h-6 grid place-items-center rounded text-sm border hover:shadow-sm ${
-                    editor.isActive(obj.label)
-                      ? "is-active bg-black text-white"
-                      : ""
-                  }`}
-                >
-                  {obj.icon}
-                </button>
-              )}
-            </>
-          );
-        })}
-      </div>
-      <div>
-        {loading && (
-          <div className="flex flex-row gap-1 justify-center items-center">
-            <Spinner size={"sm"} />
-            <p className="text-sm">Uploading Image...</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
 const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
   const { user } = useUser({
     redirectIfFound: false,
@@ -152,22 +109,36 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
   const editor = useEditor({
     extensions: [
       CustomDocument,
-      StarterKit.configure({
-        document: false,
-      }),
+      Text,
+      History,
+      Paragraph,
+      Heading,
+      CodeBlock,
+      HorizontalRule,
+      Bold,
+      HardBreak,
+      Underline,
+      Italic,
+      ListItem,
+      Gapcursor,
+      BulletList,
+      OrderedList,
+      Dropcursor,
+      Tweet,
+      Youtube,
+      Blockquote,
       Link.configure({
         openOnClick: false,
       }),
-      Image.configure({
+      Figure.configure({
         allowBase64: true,
       }),
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
-            return "Whats the title?";
+            return "What's the title?";
           }
-
-          return "Tell a story...";
+            return "Tell a story...";
         },
       }),
     ],
@@ -417,15 +388,14 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
 
   return (
     <div className="w-full relative my-4">
-      <div className="flex">
-        <span className="p-2 py-1 text-xs bg-green-400 bg-opacity-20 text-green-500 rounded-full border border-green-500">
-          Beta
-        </span>
-      </div>
+      
       <div className="flex z-50 sticky top-0 bg-white">
-        <aside className="w-full p-2 py-4 border-b flex flex-row justify-center items-center">
-          <MenuBar editor={editor} />
-
+        <aside className="w-full p-2 py-4 border-b flex flex-row justify-between items-center">
+        <div className="flex">
+            <span className="p-2 py-1 text-xs bg-green-400 bg-opacity-20 text-green-500 rounded-full border border-green-500">
+              Beta
+            </span>
+          </div>
           <div className="flex flex-row justify-end gap-2">
             {editorType === "edit" && (
               <div>
@@ -480,11 +450,14 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
         </aside>
       </div>
 
-      <div className="my-4">
+      <div className="my-4 blog-content">
         {/* <div className="fixed bottom-10 left-5 z-10 flex flex-row gap-[2px]">
           <Spinner size={"sm"} />
           <span className="m-0 p-0">Saving</span>
         </div> */}
+        {editor && 
+       <MenuFloating editor={editor}/>}
+        <TextMenu  editor={editor} />
         <EditorContent editor={editor} />
         <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
       </div>

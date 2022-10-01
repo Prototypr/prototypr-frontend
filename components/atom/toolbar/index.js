@@ -58,6 +58,7 @@ export const MenuActions = {
 
           await axios(configUpload)
             .then(async function (response) {
+              console.log(response)
               setLoading(false);
               toast.success("Image Uploaded!", {
                 duration: 5000,
