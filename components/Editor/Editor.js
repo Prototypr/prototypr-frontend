@@ -1,5 +1,6 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import MenuFloating from './Menus/FloatingMenu'
+import EditorNav from "../EditorNav";
 
 import Placeholder from "@tiptap/extension-placeholder";
 import Document from "@tiptap/extension-document";
@@ -50,7 +51,7 @@ const Editor = ({ editorType = "create" }) => {
   });
 
   const {content, loading, slug} = useLoad(editorType, user)
-  const {updateExisitingPost, setHasUnsavedChanges, hasUnsavedChanges, saving} = useUpdate()
+  const {updateExisitingPost, setSaving, setHasUnsavedChanges, hasUnsavedChanges, saving} = useUpdate()
   const {createNewPost} = useCreate()
 
   useConfirmTabClose(hasUnsavedChanges);
@@ -157,10 +158,13 @@ const Editor = ({ editorType = "create" }) => {
 
   return (
     <div className="w-full relative my-4">
-      
-      <div className="flex z-50 sticky top-0 bg-white">
-        <aside className="w-full p-2 py-4 border-b flex flex-row justify-between items-center">
-        <div className="flex">
+     {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
+      <EditorNav 
+      editorButtons = {
+        <div className="w-full max-w-4xl p-4 mx-auto ">
+          <div className="flex z-50 sticky top-0 bg-white">
+          <aside className="w-full p-2 py-4 border-b flex flex-row justify-between items-center">
+          <div className="flex">
             <span className="p-2 py-1 text-xs bg-green-400 bg-opacity-20 text-green-500 rounded-full border border-green-500">
               Beta
             </span>
@@ -218,8 +222,12 @@ const Editor = ({ editorType = "create" }) => {
           </div>
         </aside>
       </div>
+      </div>
+      }
+      />
+    {/* NAVIGATION END */}
 
-      <div className="my-4 blog-content">
+      <div className="my-4 pt-16 pb-10 blog-content">
         {/* <div className="fixed bottom-10 left-5 z-10 flex flex-row gap-[2px]">
           <Spinner size={"sm"} />
           <span className="m-0 p-0">Saving</span>

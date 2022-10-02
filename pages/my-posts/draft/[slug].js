@@ -60,7 +60,7 @@ export default function Index(props) {
   return (
     <>
       <div className="h-full w-full">
-        <div className="w-full h-full mx-auto  relative">
+        <div id="editor-container" className="w-full h-full mx-auto  relative">
           {!user && <Fallback />}
 
             {user && !user?.isLoggedIn ? (
@@ -85,14 +85,10 @@ export default function Index(props) {
             ) : (
               user &&
               user?.isLoggedIn && (
-                <Layout navType={"simple"}>
                 <div>
-                <div className="w-full max-w-4xl p-4 mx-auto ">
                   {/* <EditDraft/> */}
                     <Editor editorType="edit" />
-                  </div>
                 </div>
-                </Layout>
               )
             )}
           </div>

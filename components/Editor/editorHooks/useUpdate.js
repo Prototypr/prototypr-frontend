@@ -60,7 +60,7 @@ const useUpdate = () => {
         }
       };
 
-    return { updateExisitingPost, saving, hasUnsavedChanges, setHasUnsavedChanges };
+    return { updateExisitingPost, saving, hasUnsavedChanges, setHasUnsavedChanges, setSaving };
 
     
   };

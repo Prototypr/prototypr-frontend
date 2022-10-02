@@ -3,21 +3,16 @@ import dynamic from "next/dynamic";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import useUser from "@/lib/iron-session/useUser";
 import { useState, useEffect } from "react";
-import useScrollDirection from "./useScrollDirection";
 import jsCookie from "js-cookie";
 const NavigationMenuDemo = dynamic(() => import("./navbar-menu"), {
   ssr: true,
 });
-const SubNav = dynamic(() => import("./sub-nav"), { ssr: true });
 const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({ activeNav }) {
-  const [clientWindowHeight, setClientWindowHeight] = useState("");
-  // const scrollDirection = useScrollDirection();
+export default function EditorNav({ activeNav, editorButtons }) {
 
-  const [showNav, setShowNav] = useState(true);
   const { user, isLoading } = useUser({
     redirectIfFound: false,
   });
@@ -49,32 +44,7 @@ export default function EditorNav({ activeNav }) {
     }
   }, [user?.email]);
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  });
 
-  const handleScroll = () => {
-    setClientWindowHeight(window.scrollY);
-  };
-
-  // useEffect(() => {
-  //   let backgroundTransparacyVar = clientWindowHeight / 3000;
-  //   if (backgroundTransparacyVar < 1) {
-  //     let border = backgroundTransparacyVar / 1.2;
-  //     if (border < 0.12) {
-  //       setShowNav(false);
-  //     }
-  //     let bg = 1 - backgroundTransparacyVar;
-  //     if (bg > 0.9) {
-  //       setShowNav(true);
-  //     } else {
-  //       if (scrollDirection == "down") {
-  //         setShowNav(false);
-  //       }
-  //     }
-  //   }
-  // }, [clientWindowHeight, scrollDirection]);
 
   return (
     <div
@@ -90,9 +60,7 @@ export default function EditorNav({ activeNav }) {
           style={{ maxWidth: "1200px" }}
         >
           <div
-            className={`${
-              showNav ? "" : "md:-mt-16"
-            } transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-16`}
+            className={` transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-16`}
           >
             <div className="sm:hidden absolute inset-y-0 left-0 flex items-center">
               {/* <!-- Mobile menu button--> */}
@@ -112,10 +80,7 @@ export default function EditorNav({ activeNav }) {
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <Link href="/" as="/">
                 <div
-                  className={`${
-                    showNav ? "opacity-1" : "md:opacity-0 md:mt-16 md:-z-1"
-                  } flex-shrink-0 flex items-center cursor-pointer transition transition-all duration-300 ease-in-out`}
-                >
+                  className={`flex-shrink-0 flex items-center cursor-pointer transition transition-all duration-300 ease-in-out`}>
                   <img
                     className="lg:block h-8 w-auto"
                     data-gumlet="false"
@@ -125,15 +90,13 @@ export default function EditorNav({ activeNav }) {
                 </div>
               </Link>
             </div>
+            {editorButtons}
             <div
-              className={`hidden sm:block sm:ml-6 ${
-                showNav ? "" : "md:mt-28 pt-1"
-              } transition transition-all duration-500 ease-in-out`}
+              className={`hidden sm:block sm:ml-6 transition transition-all duration-500 ease-in-out`}
             >
               <div className="flex space-x-4">
                 <NavigationMenuDemo
                   hideLocaleSwitcher={true}
-                  collapsed={showNav}
                   user={user}
                   userLoading={isLoading}
                   userLoggedInCookie={userLoggedInCookie}

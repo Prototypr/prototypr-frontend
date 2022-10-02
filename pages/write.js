@@ -98,14 +98,10 @@ export default function Index() {
             ) : (
               user &&
               user?.isLoggedIn && (
-                <Layout navType={"simple"}>
                 
-                <div className="w-full max-w-4xl p-4 mx-auto ">
                   <div className="my-4">
                     <Editor />
                   </div>
-                </div>
-                </Layout>
               )
             )}
           </div>
