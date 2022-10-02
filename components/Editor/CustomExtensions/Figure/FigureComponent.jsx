@@ -155,7 +155,7 @@ const ImageComponent = (props) => {
       }
       interactive={true}
       arrow={roundArrow}
-      appendTo={() => document.getElementById("editor-container")}
+      // appendTo={() => document.getElementById("editor-container")}
       animation="scale-subtle"
       inertia={true}
     >
