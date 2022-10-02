@@ -61,15 +61,18 @@ export default function Index() {
 
   return (
     <>
-      <div className="h-full w-full">
-        <div className="w-full h-full mx-auto  relative">
+      {/* <div className="h-full w-full">
+        <div className="w-full h-full mx-auto  relative"> */}
           {!user && <Fallback />}
 
-          <div className="w-full mx-auto ">
             {user && !user?.isLoggedIn ? (
-              <div className="w-full max-w-4xl p-4 mx-auto ">
+              <Layout>
+              <div className="w-full relative max-w-4xl p-4 mx-auto ">
+              <div className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto mt-8" style={{maxWidth:390}}>
                 <LoginForm isSignUp={isSignUp} />
-                <div className="absolute top-[2%] right-[2%]">
+                </div>
+              </div>
+              <div className="mt-4 flex justify-center">
                   <div className="text-sm text-gray-700">
                     <span>
                       {isSignUp
@@ -84,7 +87,7 @@ export default function Index() {
                     </a>
                   </div>
                 </div>
-              </div>
+              </Layout>
             ) : (
               user &&
               user?.isLoggedIn && (
@@ -93,9 +96,8 @@ export default function Index() {
                 </Layout>
               )
             )}
-          </div>
-        </div>
-      </div>
+        {/* </div>
+      </div> */}
     </>
   );
 }

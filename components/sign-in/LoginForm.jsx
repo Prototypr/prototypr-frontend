@@ -168,7 +168,7 @@ const LoginForm = ({ isSignUp }) => {
             }
             label={"Enter your email address"}
             inputType={"email"}
-            placeholder={"hola@prototypr.io"}
+            placeholder={"hi@email.com"}
             isLoading={isLoading}
             onSubmit={(e) => {
               e.preventDefault();

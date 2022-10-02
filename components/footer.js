@@ -82,11 +82,11 @@ export default function Footer() {
                       </a>
                     </li>
                     <li>
-                      <Link href="/posts" as="/posts">
-                        <a className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base">
+                      {/* <Link href="/posts" as="/posts"> */}
+                        <a href="https://open.prototypr.io" target="_blank" className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base">
                           {intl.formatMessage({ id: "footer.rightCat3" })}
                         </a>
-                      </Link>
+                      {/* </Link> */}
                     </li>
                     <li>
                       <a

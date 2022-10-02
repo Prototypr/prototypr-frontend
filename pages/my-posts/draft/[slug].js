@@ -1,7 +1,4 @@
-import Head from "next/head";
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import Layout from "@/components/layout-editor";
 
 import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
@@ -13,19 +10,19 @@ import {
 import { sessionOptions } from "@/lib/iron-session/session";
 // import axios from "axios";
 import { useEffect } from "react";
-import Meta from "@/components/meta";
-import { Cross1Icon } from "@radix-ui/react-icons";
+// import Meta from "@/components/meta";
 import axios from "axios";
 import { useState } from "react";
+import Layout from "@/components/layout-editor";
 
-import EditDraft from "@/components/posts/editDraft";
 import Editor from "@/components/Editor/Editor";
+const Spinner = dynamic(() => import('@/components/atom/Spinner/Spinner'))
 
-const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
+// const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
 export default function Index(props) {
   const { user } = useUser({
-    // redirectTo: '/account',
+    redirectTo: '/early-access',
     redirectIfFound: false,
   });
 
@@ -65,7 +62,15 @@ export default function Index(props) {
 
             {user && !user?.isLoggedIn ? (
               <>
-                <LoginForm isSignUp={isSignUp} />
+              <Layout>
+              <div className="relative w-full h-full flex">
+               <div className="my-auto mx-auto">
+                  <Spinner />
+                </div>
+              </div>
+              </Layout>
+
+                {/* <LoginForm isSignUp={isSignUp} />
                 <div className="absolute top-[2%] right-[2%]">
                   <div className="text-sm text-gray-700">
                     <span>
@@ -80,7 +85,7 @@ export default function Index(props) {
                       {isSignUp ? " Sign in." : " Sign up"}
                     </a>
                   </div>
-                </div>
+                </div> */}
               </>
             ) : (
               user &&
