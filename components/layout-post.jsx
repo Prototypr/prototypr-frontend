@@ -10,7 +10,7 @@ export default function Layout({
   activeNav,
   background,
   padding,
-  seo,
+  seo
 }) {
   return (
     <>

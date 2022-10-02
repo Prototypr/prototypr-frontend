@@ -144,9 +144,13 @@ const MyPosts = () => {
     setAllPosts(postsFromUser);
   };
 
-  useEffect(async () => {
-    await getAllPostsFromUser();
-  }, []);
+
+  useEffect(()=>{
+    getAllPostsFromUser();
+  },[])
+  // useEffect(async () => {
+  //   await getAllPostsFromUser();
+  // }, []);
 
   return (
     <div className="pb-20">

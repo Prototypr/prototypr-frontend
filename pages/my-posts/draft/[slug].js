@@ -1,6 +1,8 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import Layout from "@/components/layout-editor";
+
 import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
 import { withIronSessionSsr } from "iron-session/next";
@@ -17,6 +19,7 @@ import axios from "axios";
 import { useState } from "react";
 
 import EditDraft from "@/components/posts/editDraft";
+import Editor from "@/components/Editor/Editor";
 
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
@@ -60,7 +63,6 @@ export default function Index(props) {
         <div className="w-full h-full mx-auto  relative">
           {!user && <Fallback />}
 
-          <div className="w-full max-w-4xl p-4 mx-auto ">
             {user && !user?.isLoggedIn ? (
               <>
                 <LoginForm isSignUp={isSignUp} />
@@ -83,16 +85,18 @@ export default function Index(props) {
             ) : (
               user &&
               user?.isLoggedIn && (
+                <Layout navType={"simple"}>
                 <div>
-                  <div className="my-4">
-                    <EditDraft />
+                <div className="w-full max-w-4xl p-4 mx-auto ">
+                  {/* <EditDraft/> */}
+                    <Editor editorType="edit" />
                   </div>
                 </div>
+                </Layout>
               )
             )}
           </div>
         </div>
-      </div>
     </>
   );
 }

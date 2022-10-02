@@ -150,7 +150,7 @@ const MenuBar = ({ editor, isSelecting }) => {
               </IconButton>
 
               {/* Ordered list */}
-              <div className="bg-gray-800 hover:bg-gray-900 mx-1 my-auto" style={{height:'20px', width:'1px'}}/>
+              {/* <div className="bg-gray-800 hover:bg-gray-900 mx-1 my-auto" style={{height:'20px', width:'1px'}}/> */}
 
               <IconButton
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -172,10 +172,10 @@ const MenuBar = ({ editor, isSelecting }) => {
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M8 4h13v2H8V4zM5 3v3h1v1H3V6h1V4H3V3h2zM3 14v-2.5h2V11H3v-1h3v2.5H4v.5h2v1H3zm2 5.5H3v-1h2V18H3v-1h3v4H3v-1h2v-.5zM8 11h13v2H8v-2zm0 7h13v2H8v-2z" fill="currentColor"/></svg>
               </IconButton>
-              <div className="bg-gray-800 hover:bg-gray-900 mx-1 my-auto" style={{height:'20px', width:'1px'}}/>
+              <div className="bg-gray-700 hover:bg-gray-900 mx-1 my-auto" style={{height:'20px',marginRight:1, width:'1px'}}/>
 
               <LinkInput showRemove={true} editor={editor} />
-              <div className="bg-gray-800 hover:bg-gray-900 mx-1 my-auto" style={{height:'20px', width:'1px'}}/>
+              {/* <div className="bg-gray-800 hover:bg-gray-900 mx-1 my-auto" style={{height:'20px', width:'1px'}}/> */}
 
               </div>
               </div>

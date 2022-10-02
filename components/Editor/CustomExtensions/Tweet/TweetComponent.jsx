@@ -5,7 +5,9 @@ import { DragHandleDots2Icon } from "@radix-ui/react-icons";
 export default ({editor, node, getPos, selected}) => {
   // if (nodes < 2) {
     useEffect(()=>{
-        twttr?.widgets?.load()
+        if(typeof twttr !=='undefined'){
+            twttr?.widgets?.load()
+        }
     },[node])
 
   return (

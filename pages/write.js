@@ -1,6 +1,8 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import Layout from "@/components/layout-editor";
+
 import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
 import { withIronSessionSsr } from "iron-session/next";
@@ -16,7 +18,7 @@ import { Cross1Icon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useState } from "react";
 
-import Tiptap from "@/components/forms/tiptap";
+import Editor from "@/components/Editor/Editor";
 // const axios = dynamic(() => import("axios"));
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 const LoginSide = dynamic(() => import("@/components/sign-in/LoginSide"));
@@ -74,7 +76,6 @@ export default function Index() {
         <div className="w-full h-full mx-auto  relative">
           {!user && <Fallback />}
 
-          <div className="w-full max-w-4xl p-4 mx-auto ">
             {user && !user?.isLoggedIn ? (
               <>
                 <LoginForm isSignUp={isSignUp} />
@@ -97,15 +98,17 @@ export default function Index() {
             ) : (
               user &&
               user?.isLoggedIn && (
-                <div>
+                <Layout navType={"simple"}>
+                
+                <div className="w-full max-w-4xl p-4 mx-auto ">
                   <div className="my-4">
-                    <Tiptap />
+                    <Editor />
                   </div>
                 </div>
+                </Layout>
               )
             )}
           </div>
-        </div>
       </div>
     </>
   );

@@ -2,8 +2,8 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
-import Navbar from "@/components/small-nav";
-import Layout from "@/components/layout";
+// import Navbar from "@/components/small-nav";
+import Layout from "@/components/layout-dashboard";
 
 import useUser from "@/lib/iron-session/useUser";
 import { withIronSessionSsr } from "iron-session/next";
@@ -88,7 +88,7 @@ export default function Index() {
             ) : (
               user &&
               user?.isLoggedIn && (
-                <Layout>
+                <Layout navType={"simple"}>
                   <MyPosts />
                 </Layout>
               )

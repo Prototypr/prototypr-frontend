@@ -113,6 +113,7 @@ export const NavigationMenuDemo = ({
   user,
   userLoading,
   userLoggedInCookie,
+  hideLocaleSwitcher
 }) => {
   const intl = useIntl();
   const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
@@ -120,19 +121,20 @@ export const NavigationMenuDemo = ({
   useEffect(()=>{
     setClientMounted(true)
   },[])
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        <LocaleSwitcher collapsed={collapsed} />
+       {!hideLocaleSwitcher && <LocaleSwitcher collapsed={collapsed} />}
 
         <NavigationMenuItem
           className={`hidden mr-3 md:block ${
             !collapsed ? "md:opacity-0 md:flex md:invisible" : "md:flex"
           } transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
         >
-          <NavigationMenuLink href="/post/write-for-us">
+         {!hideLocaleSwitcher &&  <NavigationMenuLink href="/post/write-for-us">
             {title3}
-          </NavigationMenuLink>
+          </NavigationMenuLink>}
         </NavigationMenuItem>
        {clientMounted? 
        <NavigationMenuItem className="flex flex-col justify-center">

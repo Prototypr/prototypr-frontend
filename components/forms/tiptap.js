@@ -1,16 +1,13 @@
 import { useEditor, EditorContent } from "@tiptap/react";
-import MenuFloating from '../Editor/FloatingMenu'
-// import { EditorContent, useEditor } from "@/components/Editor/BlockNote";
+import MenuFloating from '../Editor/Menus/FloatingMenu'
 
 import Placeholder from "@tiptap/extension-placeholder";
-// import Image from "@tiptap/extension-image";
 import Document from "@tiptap/extension-document";
-import TextMenu from '@/components/Editor/TextMenu'
+import TextMenu from '@/components/Editor/Menus/TextMenu'
 
 import Link from "@tiptap/extension-link";
 import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
-// import { MenuActions } from "@/components/atom/toolbar";
 
 import toast from "react-hot-toast";
 import SubmitPostModal from "../modal/submitPost";
@@ -35,6 +32,7 @@ import History from "@tiptap/extension-history";
 import {Blockquote} from "@/components/Editor/CustomExtensions/CustomBlockquote";
 import Figure from "../Editor/CustomExtensions/Figure"
 import Tweet from "../Editor/CustomExtensions/Tweet/Tweet"
+import Video from "../Editor/CustomExtensions/Video/Video"
 
 const qs = require("qs");
 
@@ -125,6 +123,7 @@ const Tiptap = ({ content, editorType = "create", slug = undefined }) => {
       OrderedList,
       Dropcursor,
       Tweet,
+      Video,
       Youtube,
       Blockquote,
       Link.configure({
