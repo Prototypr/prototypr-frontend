@@ -60,6 +60,8 @@ const Editor = ({ editorType = "create" }) => {
   const {updateExisitingPost, setSaving, setHasUnsavedChanges, hasUnsavedChanges, saving} = useUpdate()
   const {createNewPost} = useCreate()
 
+  const [editorCreated, setEditorCreated] = useState(false) 
+
   useConfirmTabClose(hasUnsavedChanges);
 
   const editor = useEditor({
@@ -102,6 +104,11 @@ const Editor = ({ editorType = "create" }) => {
         },
       }),
     ],
+    onCreate:()=>{
+      setTimeout(()=>{
+        setEditorCreated(true)
+      },1200)
+    },
     onUpdate: ({ editor }) => {
       const json = editor.getJSON();
       setHasUnsavedChanges(true);
@@ -243,7 +250,7 @@ const Editor = ({ editorType = "create" }) => {
       />
     {/* NAVIGATION END */}
 
-      <div className="my-4 pt-16 pb-10 blog-content">
+      <div className="my-4 pt-16 relative pb-10 blog-content">
         {/* <div className="fixed bottom-10 left-5 z-10 flex flex-row gap-[2px]">
           <Spinner size={"sm"} />
           <span className="m-0 p-0">Saving</span>
@@ -251,9 +258,11 @@ const Editor = ({ editorType = "create" }) => {
         {editor && 
        <MenuFloating editor={editor}/>}
         <TextMenu  editor={editor} />
-        {loading ?
-          <div className="mx-2">
+        {loading || !editorCreated ?
+          <div style={{maxWidth:'100%'}} className="mx-2 h-screen absolute top-0 left-0 flex flex-col justify-center w-screen">
+            <div className="-mt-32 mx-auto">
             <Spinner />
+          </div>
           </div>:
           <EditorContent editor={editor} />
         }
