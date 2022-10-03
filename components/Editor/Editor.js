@@ -15,6 +15,7 @@ import useUser from "@/lib/iron-session/useUser";
 import SubmitPostModal from "../modal/submitPost";
 import { saveAs } from "file-saver";
 
+import Image from "@tiptap/extension-image";
 import Gapcursor from "@tiptap/extension-gapcursor";
 import Youtube from "@tiptap/extension-youtube";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
@@ -87,6 +88,9 @@ const Editor = ({ editorType = "create" }) => {
         openOnClick: false,
       }),
       Figure.configure({
+        allowBase64: true,
+      }),
+      Image.configure({
         allowBase64: true,
       }),
       Placeholder.configure({
