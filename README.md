@@ -35,7 +35,7 @@ NEXT_PUBLIC_STRAPI_API_URL=yourstrapiapiurl.com
 NEXTAUTH_URL=http://localhost:3000
 
 NEXTAUTH_SECRET=_genrate_key
-NEXT_PUBLIC_API_URL=https://prototypr-backend-e8a72.ondigitalocean.app
+NEXT_PUBLIC_API_URL=yourstrapiapiurl.com
 
 NEXT_PUBLIC_DATABASE_URL=postgresql://[dbusername]:[dbpassword]@[dburl]:[db-port]/[name]
 ```
