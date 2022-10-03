@@ -6,6 +6,8 @@ const useFetchPosts = (user) => {
 
     const [posts, setPosts] = useState(null);
     const [loading, setLoading] = useState(null);
+    const [drafts, setDrafts] = useState(null);
+    const [publishedPosts, setPublishedPosts] = useState(null);
 
     useEffect(() => {
 
@@ -44,11 +46,25 @@ const useFetchPosts = (user) => {
         const postsFromUser = currentUser.data[0]?.posts;
 
         setPosts(postsFromUser);
+
+        let drfts =[], pblished = []
+
+        for (var x = 0;x<postsFromUser.length;x++){
+            let post = postsFromUser[x]
+            console.log(post)
+            if(post.status==='publish'){
+                pblished.push(post)
+            }else if (post.status==='draft' || post.status==='pending'){
+                drfts.push(post)
+            }
+        }
+        setDrafts(drfts)
+        setPublishedPosts(pblished)
         setLoading(false)
       };
   
 
-    return { loading, posts, refetch};
+    return { loading, posts,drafts, publishedPosts, refetch};
 
     
   };

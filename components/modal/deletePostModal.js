@@ -1,7 +1,7 @@
 import React from "react";
 import { styled, keyframes } from "@stitches/react";
 import { violet, blackA, mauve, green, red, gray } from "@radix-ui/colors";
-// import { Cross2Icon } from "@radix-ui/react-icons";
+import { Cross2Icon } from "@radix-ui/react-icons";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 const overlayShow = keyframes({
@@ -161,11 +161,11 @@ const DeletePostButton = ({ onClick }) => (
         </DialogClose>
 
         <DialogClose asChild>
-          <Button variant="gray">Not yet</Button>
+          <Button variant="gray">Cancel</Button>
         </DialogClose>
       </div>
       <DialogClose asChild>
-        <IconButton aria-label="Close">{/* <Cross2Icon /> */}x</IconButton>
+        <IconButton aria-label="Close"><Cross2Icon /></IconButton>
       </DialogClose>
     </DialogContent>
   </Dialog>

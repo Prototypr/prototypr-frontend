@@ -130,7 +130,7 @@ export const NavigationMenuDemo = ({
       <NavigationMenuList>
        {!hideLocaleSwitcher && <LocaleSwitcher collapsed={collapsed} />}
 
-        {(user || !user?.isLoggedIn)?<NavigationMenuItem
+        {(!user || !user?.isLoggedIn)?<NavigationMenuItem
           className={`hidden mr-3 md:block ${
             !collapsed ? "md:opacity-0 md:flex md:invisible" : "md:flex"
           } transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
