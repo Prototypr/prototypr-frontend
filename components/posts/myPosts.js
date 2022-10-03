@@ -46,7 +46,7 @@ const PostCard = ({ post, refetch }) => {
 
       try {
         const resp = await axios(currentPostData);
-        console.log("HELLO", resp);
+        // console.log("HELLO", resp);
         if (resp.status === 200) {
           toast.success("Your post has been deleted!", {
             duration: 5000,

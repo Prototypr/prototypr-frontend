@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-const qs = require("qs");
-var axios = require("axios");
+import { getUserArticles } from "@/lib/api";
+// const qs = require("qs");
+// var axios = require("axios");
 
 const useFetchPosts = (user) => {
 
@@ -20,30 +21,32 @@ const useFetchPosts = (user) => {
 
       const refetch = async () => {
         setLoading(true)
-        const query = qs.stringify(
-          {
-            filters: {
-              id: {
-                $eq: user.id,
-              },
-            },
-            populate: "*",
-            fields: ["email", "firstName"],
-          },
-          {
-            encodeValuesOnly: true, // prettify URL
-          }
-        );
+        // const query = qs.stringify(
+        //   {
+        //     filters: {
+        //       id: {
+        //         $eq: user.id,
+        //       },
+        //     },
+        //     populate: "*",
+        //     fields: ["email", "firstName"],
+        //   },
+        //   {
+        //     encodeValuesOnly: true, // prettify URL
+        //   }
+        // );
     
-        let currentUserData = {
-          method: "get",
-          url: `${process.env.NEXT_PUBLIC_API_URL}/api/users?${query}`,
-          headers: {
-            Authorization: `Bearer ${user?.jwt}`,
-          },
-        };
-        const currentUser = await axios(currentUserData);
-        const postsFromUser = currentUser.data[0]?.posts;
+        // let currentUserData = {
+        //   method: "get",
+        //   url: `${process.env.NEXT_PUBLIC_API_URL}/api/users?${query}`,
+        //   headers: {
+        //     Authorization: `Bearer ${user?.jwt}`,
+        //   },
+        // };
+        // const currentUser = await axios(currentUserData);
+        //use graphql
+        const data = await getUserArticles(user);
+        const postsFromUser = data.userPosts
 
         setPosts(postsFromUser);
 
@@ -51,7 +54,7 @@ const useFetchPosts = (user) => {
 
         for (var x = 0;x<postsFromUser.length;x++){
             let post = postsFromUser[x]
-            console.log(post)
+            
             if(post.status==='publish'){
                 pblished.push(post)
             }else if (post.status==='draft' || post.status==='pending'){
