@@ -29,7 +29,7 @@ const useCreate = () => {
           if (!exists) {
            let newSlug =  await axios(publishPostEndpointConfig)
               .then(async function (response) {
-                toast.success("Your post has been submitted!", {
+                toast.success("Your draft has been saved!", {
                   duration: 5000,
                 });
                 console.log(response?.data?.data?.attributes?.slug)

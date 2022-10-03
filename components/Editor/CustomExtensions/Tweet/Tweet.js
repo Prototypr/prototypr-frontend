@@ -90,7 +90,24 @@ const Tweet = Node.create({
               },
             }).run()
             setTimeout(()=>{
+              if(typeof twttr=='undefined'){
+                //embed twitter 
+                const s = document.createElement("script");
+                s.setAttribute("src", "https://platform.twitter.com/widgets.js");
+                s.setAttribute("id", "twitter-widget");
+                s.setAttribute("async", "true");
+            
+                if(!document.getElementById('twitter-widget')){
+                  document.head.appendChild(s);
+                  setTimeout(()=>{
+                    twttr?.widgets?.load()
+
+                  },200)
+                }
+              }else{
+
                 twttr?.widgets?.load()
+              }
 
             },200)
             // const from = getPos()

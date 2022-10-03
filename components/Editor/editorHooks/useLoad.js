@@ -77,8 +77,16 @@ const useLoad = (type='create', usr) => {
         };
     
         const resp = await axios(currentPostData);
-        const post = resp.data.data[0].attributes;
-        setContent(post?.content);
+        const post = resp.data?.data[0]?.attributes;
+
+        let content = post?.content
+
+        //if title isn't part of body, add it in
+        if(post?.title && content.indexOf(post?.title)==-1){
+          content = `<h1>${post?.title}</h1>${content}`
+        }
+        
+        setContent(content);
         setTitle(post?.title);
         setStatus(post?.status)
 

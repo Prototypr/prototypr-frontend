@@ -35,12 +35,25 @@ export function getImageExtention(url) {
     const html = editor.getHTML();
     const json = editor.getJSON()?.content;
 
+    // let docNode = editor?.view?.state?.doc
+    // let title = 'Untitled post'
+    // docNode.descendants((node, pos) => {
+    //   if(node.type.name=='heading' && node.attrs.level==1){
+    //     console.log(node)
+    //     title = node.textContent 
+    //     return false
+    //   }
+    // })
+
+    
     const title =
       json[0]?.content?.find((x) => x.type === "text")?.text || "Untitled post";
-    const firstParagraph = json
+    
+      const firstParagraph = json
       .find((p) => p?.type === "paragraph")
       ?.content?.find((x) => x.type === "text")?.text;
-    const coverImage = json.find((p) => p?.type === "image")?.attrs?.src;
+   
+      const coverImage = json.find((p) => p?.type === "image")?.attrs?.src;
     // append an id at the end of the slug
     let postSlug;
 

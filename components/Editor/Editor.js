@@ -1,6 +1,7 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import MenuFloating from './Menus/FloatingMenu'
 import EditorNav from "../EditorNav";
+import dynamic from 'next/dynamic'
 
 import Placeholder from "@tiptap/extension-placeholder";
 import Document from "@tiptap/extension-document";
@@ -39,6 +40,7 @@ import {useConfirmTabClose} from './useConfirmTabClose'
 import {useCreate, useLoad, useUpdate} from './editorHooks/index'
 
 import { useRouter } from "next/router";
+const Spinner = dynamic(() => import('@/components/atom/Spinner/Spinner'))
 
 const CustomDocument = Document.extend({
   content: "heading block*",
@@ -53,7 +55,7 @@ const Editor = ({ editorType = "create" }) => {
     redirectIfFound: false,
   });
 
-  const {content, loading, slug, postStatus} = useLoad(editorType, user)
+  const {content, loading, slug,title, postStatus} = useLoad(editorType, user)
   const {updateExisitingPost, setSaving, setHasUnsavedChanges, hasUnsavedChanges, saving} = useUpdate()
   const {createNewPost} = useCreate()
 
@@ -245,7 +247,13 @@ const Editor = ({ editorType = "create" }) => {
         {editor && 
        <MenuFloating editor={editor}/>}
         <TextMenu  editor={editor} />
-        <EditorContent editor={editor} />
+        {loading ?
+          <div className="mx-2">
+            <Spinner />
+          </div>:
+          <EditorContent editor={editor} />
+        }
+       
         <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
       </div>
     </div>
