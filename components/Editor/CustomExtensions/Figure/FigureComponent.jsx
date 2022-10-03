@@ -44,6 +44,8 @@ export default (props) => {
       }}
     >
       <LazyLoad
+      style={{maxWidth:'100%'}}
+      className={props?.node?.attrs?.class}
         // height={200}
         // once={true}
         // scrollContainer={"#scrollable-area"}
@@ -181,11 +183,11 @@ const ImageComponent = (props) => {
       <DragHandleDots2Icon className="w-5 h-5"/>
       </div>
         <figure 
-        
-        draggable={false} className={`${props.selected?'border border-blue-400 border-2':''} `}> 
+        style={{maxWidth:'100%'}}
+        draggable={false} className={`${props.selected?'border border-blue-400 border-2':''} ${props.node.attrs.class} `}> 
           <img 
           draggable={false}
-          className="editor-img"
+          className={`editor-img ${props.node.attrs.class}`}
           onClick={()=>{
             var pos = props.getPos();
             if (pos) {

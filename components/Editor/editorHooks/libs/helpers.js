@@ -32,7 +32,8 @@ export function getImageExtention(url) {
   }
   
  export const getPostDetails = (user, editor, slug, forReview, postStatus) => {
-    const html = editor.getHTML();
+
+  const html = editor.getHTML();
     const json = editor.getJSON()?.content;
 
     let docNode = editor?.view?.state?.doc
@@ -66,7 +67,7 @@ export function getImageExtention(url) {
       .find((p) => p?.type === "paragraph")
       ?.content?.find((x) => x.type === "text")?.text;
    
-      const coverImage = json.find((p) => p?.type === "image")?.attrs?.src;
+      const coverImage = json.find((p) => p?.type === "figure")?.attrs?.src;
     // append an id at the end of the slug
     let postSlug;
 

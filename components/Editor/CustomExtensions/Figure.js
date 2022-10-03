@@ -118,7 +118,7 @@ const Figure = Node.create({
       return [
         'figure',
         ['img', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false })],
-        ['figcaption', HTMLAttributes.figcaption],
+        ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:''],
       ]
     },
   
