@@ -30,12 +30,12 @@ Once you've cloned the repo, create a `.env.local` file, and add the following:
 
 ```code
 STRAPI_PREVIEW_SECRET=_genrate_key
-NEXT_PUBLIC_STRAPI_API_URL=https://prototypr-backend-e8a72.ondigitalocean.app
+NEXT_PUBLIC_STRAPI_API_URL=yourstrapiapiurl.com
 
 NEXTAUTH_URL=http://localhost:3000
 
 NEXTAUTH_SECRET=_genrate_key
-NEXT_PUBLIC_API_URL=https://prototypr-backend-e8a72.ondigitalocean.app
+NEXT_PUBLIC_API_URL=yourstrapiapiurl.com
 
-NEXT_PUBLIC_DATABASE_URL=postgresql://db:1ZU2k7DZPkRb7iEW@app-c58bb3a6-5c2d-4dea-b5bf-491b9914532a-do-user-2421263-0.b.db.ondigitalocean.com:25060/db?ssl=no-verify&synchronize=true
+NEXT_PUBLIC_DATABASE_URL=postgresql://[dbusername]:[dbpassword]@[dburl]:[db-port]/[name]
 ```
