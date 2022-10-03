@@ -22,6 +22,9 @@ const SubNav = dynamic(() => import("./sub-nav"), { ssr: true });
 const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
+const WebMonCounter = dynamic(() => import("./WebMonetization/Counter"), {
+  ssr: false,
+});
 
 export default function Navbar({ activeNav }) {
   const [clientWindowHeight, setClientWindowHeight] = useState("");
@@ -140,6 +143,9 @@ export default function Navbar({ activeNav }) {
                   />
                 </div>
               </Link>
+                <div className={`${showNav ? "opacity-1" : "md:opacity-0"} my-auto transition transition-all duration-300 ease-in-out`}>
+                <WebMonCounter/>
+                </div>
             </div>
             <div
               className={`hidden sm:block sm:ml-6 ${
