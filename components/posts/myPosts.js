@@ -83,7 +83,7 @@ const PostCard = ({ post, refetch }) => {
         </h3>
       </div>
 
-      {(post.status === "draft" || post.status === "pending") && (
+      {/* {(post.status === "draft" || post.status === "pending") && ( */}
         <div>
           <Link href={`/my-posts/draft/${post.slug}`}>
             <button className="text-sm underline text-blue-400 hover:text-blue-500">
@@ -91,7 +91,7 @@ const PostCard = ({ post, refetch }) => {
             </button>
           </Link>
         </div>
-      )}
+      {/* )} */}
 
       <div>
         <DeletePostButton
@@ -167,7 +167,7 @@ const MyPosts = () => {
           <div className="grid grid-cols-3 gap-5">
             {!loading && publishedPosts?.map((post) =><PostCard refetch={refetch} post={post} />)}
           </div>
-          {!loading && !drafts?.length && <EmptyState draft={false}/>}
+          {!loading && !publishedPosts?.length && <EmptyState draft={false}/>}
           </>
         )}
       </div>

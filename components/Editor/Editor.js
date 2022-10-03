@@ -173,6 +173,7 @@ const Editor = ({ editorType = "create" }) => {
     <div className="w-full relative my-4">
      {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
       <EditorNav 
+      postStatus={postStatus}
       isEditor={true}
       editorButtons = {
           <div className="my-auto flex mr-1">
@@ -195,15 +196,15 @@ const Editor = ({ editorType = "create" }) => {
               }
               <div>
                 <Button
-                variant="ghostBlue"
+                  variant="ghostBlue"
                   onClick={onSave}
                   className="text-sm"
                 >
-                  {saving ? "Saving..." : "Save Draft"}
+                  {saving ? "Saving..." : postStatus=='publish'?"Update":"Save Draft"}
                 </Button>
               </div>
             {/* )} */}
-            {slug && <SubmitPostModal handleBeforeOpen={handleBeforeSubmit}>
+            {(slug && postStatus!='publish') && <SubmitPostModal handleBeforeOpen={handleBeforeSubmit}>
               <div className="p-10">
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">

@@ -44,9 +44,15 @@ const useUpdate = () => {
                   toast.success("Submitted for review!", {
                     duration: 5000,
                   });
+                  localStorage.removeItem("wipContent");
+                }else if (postStatus=='publish'){
+                  toast.success("Your post has been updated!", {
+                    duration: 5000,
+                  });
 
                   localStorage.removeItem("wipContent");
-                }else{
+                }
+                else{
 
                   toast.success("Your draft has been updated!", {
                     duration: 5000,

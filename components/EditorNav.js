@@ -11,7 +11,7 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({ activeNav, editorButtons, isEditor }) {
+export default function EditorNav({ activeNav, editorButtons, isEditor, postStatus }) {
 
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -45,6 +45,32 @@ export default function EditorNav({ activeNav, editorButtons, isEditor }) {
   }, [user?.email]);
 
 
+  const [statusComponent, setStatusComponent] = useState(null)
+  useEffect(()=>{
+
+    if(postStatus=='draft'){
+      setStatusComponent(
+        <div className="p-2 py-0.5 text-xs bg-gray-300 bg-opacity-20 text-gray-500 rounded-full border border-gray-300">
+          Draft
+        </div>
+        )
+    }
+    if(postStatus=='pending'){
+      setStatusComponent(
+        <div className="p-2 py-0.5 text-xs bg-yellow-300 bg-opacity-20 text-yellow-600 rounded-full border border-yellow-300">
+          Pending Review
+        </div>
+        )
+    }
+    if(postStatus=='publish'){
+      setStatusComponent(
+        <div className="p-2 py-0.5 text-xs bg-green-400 bg-opacity-20 text-green-700 rounded-full border border-green-500">
+          Published
+        </div>
+        )
+    }
+
+  },[postStatus])
 
   return (
     <div
@@ -90,10 +116,13 @@ export default function EditorNav({ activeNav, editorButtons, isEditor }) {
                 </div>
               </Link>
               <div className="my-auto ml-4">
-            <span className="p-2 py-0.5 text-xs bg-green-400 bg-opacity-20 text-green-500 rounded-full border border-green-500">
-              Beta
-            </span>
-          </div>
+              <span className="p-2 py-0.5 text-xs bg-blue-400 bg-opacity-20 text-blue-600 rounded-full border border-blue-200">
+                Beta
+              </span>
+              </div>
+              <div className="my-auto ml-3">
+              {statusComponent}
+              </div>
             </div>
             <div
               className={`hidden sm:block sm:ml-6 transition transition-all duration-500 ease-in-out`}
