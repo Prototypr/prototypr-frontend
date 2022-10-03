@@ -15,6 +15,7 @@ import useUser from "@/lib/iron-session/useUser";
 import SubmitPostModal from "../modal/submitPost";
 import { saveAs } from "file-saver";
 
+import Iframe from "./CustomExtensions/Iframe/Iframe";
 import Image from "@tiptap/extension-image";
 import Gapcursor from "@tiptap/extension-gapcursor";
 import Youtube from "@tiptap/extension-youtube";
@@ -84,6 +85,7 @@ const Editor = ({ editorType = "create" }) => {
       Dropcursor,
       Tweet,
       Video,
+      Iframe,
       Youtube,
       Blockquote,
       Link.configure({
