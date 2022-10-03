@@ -5,6 +5,16 @@ import useUser from "@/lib/iron-session/useUser";
 import { useState, useEffect } from "react";
 import useScrollDirection from "./useScrollDirection";
 import jsCookie from "js-cookie";
+/**
+ * with ssr set to true, hydration fails
+ * when the user is logged in.
+ * 
+ * if it's false, the page load time will be quite a bit slower
+ * so page speed will take a hit.
+ * 
+ * probably better for logged in users to get an error 
+ * (which they wont see in production)
+ */
 const NavigationMenuDemo = dynamic(() => import("./navbar-menu"), {
   ssr: true,
 });
@@ -149,9 +159,7 @@ export default function Navbar({ activeNav }) {
           </div>
           <SubNav
             collapse={showNav}
-            user={user}
             userLoading={isLoading}
-            userLoggedInCookie={userLoggedInCookie}
             activeNav={activeNav}
           />
         </div>

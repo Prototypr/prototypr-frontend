@@ -130,7 +130,7 @@ export const NavigationMenuDemo = ({
       <NavigationMenuList>
        {!hideLocaleSwitcher && <LocaleSwitcher collapsed={collapsed} />}
 
-        {(!user || !user?.isLoggedIn)?<NavigationMenuItem
+        {(user || !user?.isLoggedIn)?<NavigationMenuItem
           className={`hidden mr-3 md:block ${
             !collapsed ? "md:opacity-0 md:flex md:invisible" : "md:flex"
           } transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
@@ -154,7 +154,7 @@ export const NavigationMenuDemo = ({
         }
        {clientMounted? 
        <NavigationMenuItem className="flex flex-col justify-center">
-          {user && user.isLoggedIn ? (
+          {(user && user?.isLoggedIn) ? (
             <div className="ml-2 w-8">
               <Link href="/account">
                 {user && 
@@ -178,9 +178,12 @@ export const NavigationMenuDemo = ({
             <NewsletterNav collapsed={collapsed} />
           )}
         </NavigationMenuItem>:
+        userLoggedInCookie?
         <NavigationMenuItem className="flex flex-col justify-center">
-          {!userLoggedInCookie?
-           <NewsletterNav collapsed={collapsed} />:<div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>          }
+          <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
+        </NavigationMenuItem>:
+        <NavigationMenuItem className="flex flex-col justify-center">
+           <NewsletterNav collapsed={collapsed} />
         </NavigationMenuItem>
         }
       </NavigationMenuList>

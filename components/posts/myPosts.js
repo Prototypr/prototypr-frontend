@@ -5,6 +5,7 @@ import Layout from "@/components/layout";
 import toast from "react-hot-toast";
 import DeletePostButton from "@/components/modal/deletePostModal";
 
+import useFetchPosts from "../Dashboard/useFetchPosts";
 const qs = require("qs");
 
 var axios = require("axios");
@@ -28,7 +29,7 @@ var slugify = require("slugify");
 - delete profile in profile danger section, and deleting profile should delete all posts?
  */
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, refetch }) => {
   const { user } = useUser({
     redirectIfFound: false,
   });
@@ -50,6 +51,7 @@ const PostCard = ({ post }) => {
           toast.success("Your post has been deleted!", {
             duration: 5000,
           });
+          refetch()
         }
       } catch (error) {
         console.log(error);
@@ -111,46 +113,15 @@ const PostCard = ({ post }) => {
 };
 
 const MyPosts = () => {
-  const [allPosts, setAllPosts] = useState([]);
+
+  
   const [currentTab, setCurrentTab] = useState("drafts");
   const { user } = useUser({
     redirectIfFound: false,
   });
-  const getAllPostsFromUser = async () => {
-    const query = qs.stringify(
-      {
-        filters: {
-          id: {
-            $eq: user.id,
-          },
-        },
-        populate: "*",
-        fields: ["email", "firstName"],
-      },
-      {
-        encodeValuesOnly: true, // prettify URL
-      }
-    );
 
-    let currentUserData = {
-      method: "get",
-      url: `${process.env.NEXT_PUBLIC_API_URL}/api/users?${query}`,
-      headers: {
-        Authorization: `Bearer ${user?.jwt}`,
-      },
-    };
-    const currentUser = await axios(currentUserData);
-    const postsFromUser = currentUser.data[0]?.posts;
-    setAllPosts(postsFromUser);
-  };
+  const {posts:allPosts, loading, refetch} = useFetchPosts(user)
 
-
-  useEffect(()=>{
-    getAllPostsFromUser();
-  },[])
-  // useEffect(async () => {
-  //   await getAllPostsFromUser();
-  // }, []);
 
   return (
     <div className="pb-20 mx-auto px-2 sm:px-6 lg:px-8" style={{maxWidth:1200}}>
@@ -184,9 +155,9 @@ const MyPosts = () => {
 
         {currentTab === "drafts" && (
           <div className="grid grid-cols-3 gap-5">
-            {allPosts.map((post) => {
+            {!loading && allPosts?.map((post) => {
               if ((post.status === "draft" || post.status === "pending")) {
-                return <PostCard post={post} />;
+                return <PostCard refetch={refetch} post={post} />;
               } else {
                 return <></>;
               }
@@ -198,7 +169,7 @@ const MyPosts = () => {
           <div className="grid grid-cols-3 gap-5">
             {allPosts.map((post) => {
               if (post.status === "publish") {
-                return <PostCard post={post} />;
+                return <PostCard refetch={refetch} post={post} />;
               } else {
                 return <></>;
               }
