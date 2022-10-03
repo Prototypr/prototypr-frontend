@@ -208,7 +208,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       },
       relatedPosts: relatedPosts,
     },
-    revalidate: 20,
+    // revalidate: 20,
   };
 }
 

@@ -35,20 +35,32 @@ export function getImageExtention(url) {
     const html = editor.getHTML();
     const json = editor.getJSON()?.content;
 
-    // let docNode = editor?.view?.state?.doc
-    // let title = 'Untitled post'
-    // docNode.descendants((node, pos) => {
-    //   if(node.type.name=='heading' && node.attrs.level==1){
-    //     console.log(node)
-    //     title = node.textContent 
-    //     return false
-    //   }
-    // })
+    let docNode = editor?.view?.state?.doc
+    let title = ''
+    docNode.descendants((node, pos) => {
+      if(title){
+        return false
+      }
+      if(node.type.name=='heading' && node.attrs.level==1){
+        title = node.textContent 
+        return false
+      }
+    })
+    if(!title){
+      title='Untitled post'
+    }
 
-    // console.log(html)
-    
-    const title =
-      json[0]?.content?.find((x) => x.type === "text")?.text || "Untitled post";
+    //remove title from content body
+    let div = document.createElement('div')
+    div.innerHTML = html
+
+    let headings = div.querySelectorAll('h1')
+    for(var x =0;x<headings.length;x++){
+      if(headings[x].innerText==title){
+        headings[x].remove()
+        break;
+      }
+    }
     
       const firstParagraph = json
       .find((p) => p?.type === "paragraph")
@@ -89,6 +101,11 @@ export function getImageExtention(url) {
       },
     };
 
+    let contentToInsert = html
+    if(div?.innerHTML && div.innerHTML.length>5){
+      contentToInsert = div?.innerHTML
+    }
+
     let entry = {
       excerpt: firstParagraph,
       featured: false,
@@ -97,7 +114,7 @@ export function getImageExtention(url) {
       date: new Date(),
       status: forReview?"pending":postStatus?postStatus:"draft",
       title: title,
-      content: html,
+      content:contentToInsert,
       user: user?.id,
       //   featuredImage: coverImage,
       legacyFeaturedImage: {
