@@ -91,10 +91,10 @@ const Figure = Node.create({
   
     addCommands() {
       return {
-        setFigure: ({ caption, ...attrs }) => ({ chain }) => {
+        setFigure: ({ position,caption, ...attrs }) => ({ chain }) => {
 
             return chain()
-            .insertContent({
+            .insertContentAt(position,{
               type: this.name,
               attrs,
               content: caption

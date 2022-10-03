@@ -15,6 +15,9 @@ import {
   TwitterLogoIcon,
   VideoIcon
 } from "@radix-ui/react-icons";
+
+import { ImageDecorationKey } from "@/components/Editor/CustomExtensions/Figure";
+
 let axios = require("axios");
 
 const slideUpAndFade = keyframes({
@@ -56,6 +59,64 @@ const StyledContent = styled(PopoverPrimitive.Content, {
   }
 });
 
+function findPlaceholder(state, id) {
+  let decos = ImageDecorationKey.getState(state);
+  let found = decos.find(null, null, (spec) => spec.id == id);
+  return found.length ? found[0].from : null;
+}
+
+
+let id = {}
+
+const removePlaceholder = (editor) => {
+  let placeholderPos = findPlaceholder(editor.state, id);
+  // If the content around the placeholder has been deleted, drop
+  // the image
+  if (placeholderPos !== null) {
+    const { view } = editor;
+
+    view.dispatch(
+      view.state.tr.setMeta(ImageDecorationKey.key, {
+        remove: { id },
+      })
+    );
+  }
+};
+
+
+const addPlaceholder = (blob,editor ) =>{
+  // A fresh object to act as the ID for this upload
+  id = {}
+
+  let pos = editor.state.selection
+
+   let imgSrc = URL.createObjectURL(blob)
+   if(pos.from){
+
+    editor.chain().focus().insertContentAt(pos, '<p class="is-empty"></p>', {
+      updateSelection: true,
+    }).run()
+
+     const {view} = editor
+     // Replace the selection with a placeholder
+     let tr = view.state.tr;
+     tr.setMeta(ImageDecorationKey.key, {
+       add: {
+         id,
+         pos: pos.from-1,
+         src: imgSrc,
+         width: 200,
+         height: 200,
+         type:'png'
+       },
+     });
+
+     view.dispatch(tr);
+    
+     return pos.from-1
+   }
+}
+
 const insertImage = (event, editor, user, setLoading) =>{
     const files = event.target.files;
     if (files && files[0]) {
@@ -68,9 +129,12 @@ const insertImage = (event, editor, user, setLoading) =>{
         const resp = await fetch(url);
         const blob = await resp.blob();
 
+        let placeholderPos =  addPlaceholder(blob, editor)
+
         const file = new File([blob], `${files[0].name || "image.png"}`, {
           type: "image/png",
         });
+
 
         const data = new FormData();
         data.append("files", file);
@@ -86,19 +150,21 @@ const insertImage = (event, editor, user, setLoading) =>{
 
         await axios(configUpload)
           .then(async function (response) {
-            console.log(response)
             setLoading(false);
             toast.success("Image Uploaded!", {
               duration: 5000,
             });
             const url = response?.data?.url;
+            removePlaceholder(editor)
             // editor.chain().focus().setFigure({src: url, caption:'enter caption'}).run()
             // editor.chain().focus().setImage({ src: url }).run();
-            editor.commands.setFigure({src: url, alt: '', caption:''})
+            editor.commands.setFigure({position:placeholderPos,src: url, alt: '', caption:''})
           })
           .catch(function (error) {
             console.log(error);
+            alert('There was an issue with that image. Please try again.')
             setTimeout(() => {}, 300);
+            removePlaceholder(editor)
           });
       };
       reader.readAsDataURL(files[0]);
