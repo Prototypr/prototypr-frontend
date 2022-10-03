@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useIntl } from "react-intl";
 import gumletLoader from "@/components/new-index/gumletLoader";
+import Button from "../Primitives/Button";
 
 const ITEM_WIDTH = 300;
 
@@ -207,9 +208,9 @@ export default function DesignTool({ allTools = [] }) {
       </div>
       <div className="hidden bg-gray-4 w-full relative md:flex items-center justify-center pt-14 pb-24 md:pb-32">
         <Link href="/toolbox/page/1">
-          <button className="bg-blue-default rounded-lg text-white text-base leading-6 flex items-center justify-center py-4 px-8 hover:bg-blue-500 font-semibold">
+          <Button variant="ghostBlue" className="h-14 w-52 rounded-lg">
             {intl.formatMessage({ id: "designtool.button.browsemore" })}
-          </button>
+          </Button>
         </Link>
       </div>
     </>

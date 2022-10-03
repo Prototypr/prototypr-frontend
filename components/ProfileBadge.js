@@ -213,15 +213,8 @@ export const DropdownMenuDemo = ({ icon, user }) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent sideOffset={5}>
-          <DropdownMenuItem
-            onSelect={() => {
-              router.push("/account");
-            }}
-          >
-            Profile settings
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
+
+        <DropdownMenuItem
             onSelect={() => {
               router.push("/my-posts");
             }}
@@ -229,12 +222,13 @@ export const DropdownMenuDemo = ({ icon, user }) => {
             My Posts
           </DropdownMenuItem>
           <DropdownMenuSeparator />
+          
           <DropdownMenuItem
             onSelect={() => {
-              router.push("/write");
+              router.push("/account");
             }}
           >
-            Write a Post
+            Profile settings
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
@@ -262,6 +256,18 @@ export const DropdownMenuDemo = ({ icon, user }) => {
           </DropdownMenuItemBanner>
           <DropdownMenuSeparator />
 
+         
+          {/* <DropdownMenuItem
+            onSelect={() => {
+              router.push("/write");
+            }}
+          >
+            Write a Post
+          </DropdownMenuItem>
+          <DropdownMenuSeparator /> */}
+
+       
+
           <DropdownMenuItem
             onSelect={() => {
               router.push(`/early-access`);
@@ -273,6 +279,7 @@ export const DropdownMenuDemo = ({ icon, user }) => {
             {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
+         
           <DropdownMenuItem
             onSelect={async () => {
               await signOut({ redirect: false });

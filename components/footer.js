@@ -59,7 +59,7 @@ export default function Footer() {
               </p>
               <p className="text-sm text-gray-700 font-semibold mt-2">
                 {" "}
-                © 2020 Prototpyr,{" "}
+                © 2022 Prototpyr,{" "}
                 {intl.formatMessage({ id: "footer.copyright" })}
               </p>
             </div>

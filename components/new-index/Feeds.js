@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { useIntl } from "react-intl";
 import Link from "next/link";
+import Button from "../Primitives/Button";
 const FeedItem = dynamic(() => import("./FeedItem"), { ssr: false });
 
 export default function Feeds({ posts = [] }) {
@@ -32,9 +33,9 @@ export default function Feeds({ posts = [] }) {
       </div>
 
       <div className="mt-10 flex items-center justify-center">
-        <button className="font-semibold text-base leading-6 blue-1 h-12 w-52 border-2 border-solid border-blue-1 text-blue-1 rounded-lg hover:opacity-50">
+        <Button variant="ghostBlue" className="h-14 w-52 rounded-lg">
           <Link href="/topics">{moreButtonText}</Link>
-        </button>
+        </Button>
       </div>
     </section>
   );

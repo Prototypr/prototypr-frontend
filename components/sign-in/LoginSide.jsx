@@ -11,14 +11,14 @@ const LoginSide = ({user}) => {
         Be part of the next generation of web publishing.
       </p>
       <div className="text-sm font-light text-gray-200">
-        <p>
-          <span>👉</span> Increase your audience
+        <p className="mb-1">
+          <span>👉 </span> Share your knowledge
         </p>
-        <p>
-          <span>👉</span> Dive into the design universe
+        <p className="mb-1">
+          <span>👉 </span> Build your online presence
         </p>
-        <p>
-          <span>👉</span> Earn rewards for reading + contributing
+        <p className="mb-1">
+          <span>👉 </span> Earn rewards for contributing
         </p>
       </div>
     </div>

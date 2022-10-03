@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FormattedMessage, useIntl } from "react-intl";
+import Button from "../Primitives/Button";
 
 export default function SignupHorizontal({ className }) {
   const [registered, setRegistered] = useState(false);
@@ -129,11 +130,12 @@ function HookForm(props) {
             autoComplete="nope"
           />
         </div>
-        <div className="flex flex-col ">
-          <button
+        <div className="flex flex-col ml-2">
+          <Button
             aria-label="Sign up for newsletter"
-            className="flex justify-center md:text-left items-center md:justify-between w-full px-5 py-3 mt-4 font-medium text-white bg-blue-default rounded-lg sm:w-auto sm:mt-0 sm:ml-3 hover:bg-blue-600"
-            type="submit"
+            style={{height:47}}
+            className="px-5 ml-2 rounded-lg"
+            type=""
           >
             {props.buttonText}
             <svg
@@ -150,7 +152,7 @@ function HookForm(props) {
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               />
             </svg>
-          </button>
+          </Button>
         </div>
       </form>
       <div className="px-1 w-10/12 mx-auto">

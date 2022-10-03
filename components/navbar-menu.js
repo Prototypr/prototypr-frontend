@@ -2,10 +2,12 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { styled } from '../stitches.config';
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import Button from "./Primitives/Button";
 
 import { indigo, gray } from "@radix-ui/colors";
 import Link from "next/link";
 import {useState, useEffect} from 'react'
+
 const ProfileBadge = dynamic(() => import("./ProfileBadge"));
 
 const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
@@ -113,7 +115,8 @@ export const NavigationMenuDemo = ({
   user,
   userLoading,
   userLoggedInCookie,
-  hideLocaleSwitcher
+  hideLocaleSwitcher,
+  editor
 }) => {
   const intl = useIntl();
   const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
@@ -127,7 +130,7 @@ export const NavigationMenuDemo = ({
       <NavigationMenuList>
        {!hideLocaleSwitcher && <LocaleSwitcher collapsed={collapsed} />}
 
-        <NavigationMenuItem
+        {(!user || !user?.isLoggedIn)?<NavigationMenuItem
           className={`hidden mr-3 md:block ${
             !collapsed ? "md:opacity-0 md:flex md:invisible" : "md:flex"
           } transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
@@ -136,6 +139,19 @@ export const NavigationMenuDemo = ({
             {title3}
           </NavigationMenuLink>}
         </NavigationMenuItem>
+        
+        :(user && !editor) &&
+        <NavigationMenuItem
+        className={`hidden mr-2 ml-4 md:block md:flex transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
+      >
+        <Link href="/write">
+         <Button className="flex"type="" variant="confirm">
+         <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.414 16L16.556 5.858l-1.414-1.414L5 14.586V16h1.414zm.829 2H3v-4.243L14.435 2.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 18zM3 20h18v2H3v-2z" fill="currentColor"/></svg>
+          Write
+         </Button>
+        </Link>
+         </NavigationMenuItem>
+        }
        {clientMounted? 
        <NavigationMenuItem className="flex flex-col justify-center">
           {user && user.isLoggedIn ? (

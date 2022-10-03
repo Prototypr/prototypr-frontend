@@ -70,7 +70,7 @@ const PostCard = ({ post }) => {
         <div>
           <span
             className={`text-[10px] uppercase w-auto px-4 py-1 ${
-              post.status === "draft" ? "bg-yellow-500" : "bg-green-500"
+              post.status === "draft" ? "bg-yellow-500" :post.status === "pending" ? "bg-orange-500":"bg-green-500"
             }  text-white rounded-[4px] my-2`}
           >
             {post.status}
@@ -81,7 +81,7 @@ const PostCard = ({ post }) => {
         </h3>
       </div>
 
-      {post.status === "draft" && (
+      {(post.status === "draft" || post.status === "pending") && (
         <div>
           <Link href={`/my-posts/draft/${post.slug}`}>
             <button className="text-sm underline text-blue-400 hover:text-blue-500">
@@ -153,14 +153,14 @@ const MyPosts = () => {
   // }, []);
 
   return (
-    <div className="pb-20">
-      <div className="flex flex-row justify-between items-baseline mt-10">
+    <div className="pb-20 mx-auto px-2 sm:px-6 lg:px-8" style={{maxWidth:1200}}>
+      <div className="flex flex-row justify-between items-baseline mt-3">
         <h1 className="my-3 text-2xl font-bold">My Posts</h1>
-        <Link href="/write">
+        {/* <Link href="/write">
           <button className="px-3 py-2 bg-blue-700 rounded text-sm text-white ">
             Write a Post
           </button>
-        </Link>
+        </Link> */}
       </div>
       <div>
         <div className="flex flex-row gap-3">
@@ -185,7 +185,7 @@ const MyPosts = () => {
         {currentTab === "drafts" && (
           <div className="grid grid-cols-3 gap-5">
             {allPosts.map((post) => {
-              if (post.status === "draft") {
+              if ((post.status === "draft" || post.status === "pending")) {
                 return <PostCard post={post} />;
               } else {
                 return <></>;

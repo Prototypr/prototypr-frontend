@@ -8,9 +8,9 @@ const useUpdate = () => {
     const [saving, setSaving] = useState(false);
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(undefined);
 
-      const updateExisitingPost = async (user, editor, editorType, slug) => {
-        console.log("Update post");
-        const { entry, findPostEndpointConfigs } = getPostDetails(user, editor, editorType, slug);
+      const updateExisitingPost = async (user, editor, slug, forReview, postStatus) => {
+
+        const { entry, findPostEndpointConfigs } = getPostDetails(user, editor, slug, forReview, postStatus);
     
         let publishPostEndpointConfig = {
           method: "put",
@@ -35,15 +35,25 @@ const useUpdate = () => {
               "{id}",
               postId
             );
-            console.log("exisits");
-            console.log(publishPostEndpointConfig.url);
+            
             await axios(publishPostEndpointConfig)
               .then(async function (response) {
                 setSaving(false);
                 setHasUnsavedChanges(false);
-                toast.success("Your draft has been updated!", {
-                  duration: 5000,
-                });
+                if(forReview){
+                  toast.success("Submitted for review!", {
+                    duration: 5000,
+                  });
+
+                  localStorage.removeItem("wipContent");
+                }else{
+
+                  toast.success("Your draft has been updated!", {
+                    duration: 5000,
+                  });
+
+                  localStorage.removeItem("wipContent");
+                }
               })
               .catch(function (error) {
                 console.log(error);

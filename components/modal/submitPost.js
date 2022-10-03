@@ -1,19 +1,20 @@
 import ModalComponent, { useModal } from "./modal";
+import Button from "../Primitives/Button";
 
 const SubmitPostModal = ({ children, handleBeforeOpen }) => {
   const { showDialog, open, close } = useModal();
 
   return (
     <div>
-      <button
+      <Button
+      className="ml-1"
         onClick={() => {
           handleBeforeOpen(open);
           //   open();
         }}
-        className="p-1 px-3 bg-blue-700 rounded text-sm text-white"
       >
-        Submit
-      </button>
+        Publish
+      </Button>
 
       <ModalComponent showDialog={showDialog} close={close}>
         <div className="flex flex-row justify-between">{children}</div>

@@ -31,11 +31,9 @@ export function getImageExtention(url) {
     return extention;
   }
   
- export const getPostDetails = (user, editor, editorType, slug) => {
+ export const getPostDetails = (user, editor, slug, forReview, postStatus) => {
     const html = editor.getHTML();
     const json = editor.getJSON()?.content;
-
-    console.log(json);
 
     const title =
       json[0]?.content?.find((x) => x.type === "text")?.text || "Untitled post";
@@ -47,7 +45,7 @@ export function getImageExtention(url) {
     let postSlug;
 
     // when creating a new post, create a unique slug
-    if (editorType === "create") {
+    if (!slug) {
       postSlug = slugify(title.toLocaleLowerCase()) + `-${uid()}`;
     } else {
       // in edit draft mode, use existing slug passed down from the parent component
@@ -83,7 +81,7 @@ export function getImageExtention(url) {
       type: "article",
       legacyFeaturedImage: {},
       date: new Date(),
-      status: "draft",
+      status: forReview?"pending":postStatus?postStatus:"draft",
       title: title,
       content: html,
       user: user?.id,

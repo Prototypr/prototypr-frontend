@@ -11,7 +11,7 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({ activeNav, editorButtons }) {
+export default function EditorNav({ activeNav, editorButtons, isEditor }) {
 
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -89,18 +89,25 @@ export default function EditorNav({ activeNav, editorButtons }) {
                   />
                 </div>
               </Link>
+              <div className="my-auto ml-4">
+            <span className="p-2 py-0.5 text-xs bg-green-400 bg-opacity-20 text-green-500 rounded-full border border-green-500">
+              Beta
+            </span>
+          </div>
             </div>
-            {editorButtons}
             <div
               className={`hidden sm:block sm:ml-6 transition transition-all duration-500 ease-in-out`}
             >
-              <div className="flex space-x-4">
+              <div className="flex ">
+
+                {editorButtons}
                 <NavigationMenuDemo
                   hideLocaleSwitcher={true}
                   user={user}
                   userLoading={isLoading}
                   userLoggedInCookie={userLoggedInCookie}
                   activeNav={activeNav}
+                  editor={isEditor}
                 />
               </div>
             </div>

@@ -9,18 +9,27 @@ const useLoad = (type='create', usr) => {
     const [user] = useState(usr);
     const [loading, setLoading] = useState(true);
     const [title, setTitle] = useState(null);
+    const [postStatus, setStatus] = useState('draft');
     const [content, setContent] = useState(null);
     const [editorType] = useState(type)
-    const [sluggy, setSlug] = useState(null)
 
     const router = useRouter();
+    const { slug } = router.query;
 
 
     useEffect(() => {
 
 
       setLoading(true)
-        if (editorType === "edit") {
+      
+      refetch()
+      
+      }, []);
+
+
+      const refetch = () =>{
+
+        if (slug) {
           console.log("loading from backend");
 
           //load data
@@ -37,15 +46,13 @@ const useLoad = (type='create', usr) => {
             setLoading(false)
           }
         }
-      }, []);
+      }
 
 
 
       const getCurrentPost = async () => {
 
         setLoading(true)
-        const { slug } = router.query;
-        setSlug(slug)
         const query = qs.stringify(
           {
             filters: {
@@ -73,12 +80,13 @@ const useLoad = (type='create', usr) => {
         const post = resp.data.data[0].attributes;
         setContent(post?.content);
         setTitle(post?.title);
+        setStatus(post?.status)
 
         setLoading(false)
       };
   
 
-    return { loading, content, title, editorType, slug:sluggy};
+    return { loading, content, title, editorType, slug, postStatus};
 
     
   };

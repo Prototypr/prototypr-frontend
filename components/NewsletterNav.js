@@ -2,6 +2,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { keyframes } from "@stitches/react";
 import { styled } from "../stitches.config";
+import Button from "./Primitives/Button";
 
 import { violet } from "@radix-ui/colors";
 import { Cross2Icon } from "@radix-ui/react-icons";
@@ -97,9 +98,9 @@ const PopoverDemo = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="px-3 py-1.5 font-medium bg-blue-default rounded rounded-md text-white hover:bg-blue-500">
+        <Button type="" variant="confirm">
           {buttonText}
-        </button>
+        </Button>
       </PopoverTrigger>
       <PopoverContent sideOffset={5}>
         <Flex css={{ flexDirection: "column", gap: 10 }}>

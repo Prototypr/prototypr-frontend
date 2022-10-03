@@ -19,7 +19,6 @@ import { Cross1Icon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useState } from "react";
 
-import Tiptap from "@/components/forms/tiptap";
 import MyPosts from "@/components/posts/myPosts";
 // const axios = dynamic(() => import("axios"));
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));

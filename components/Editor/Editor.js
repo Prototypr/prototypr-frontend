@@ -5,6 +5,7 @@ import EditorNav from "../EditorNav";
 import Placeholder from "@tiptap/extension-placeholder";
 import Document from "@tiptap/extension-document";
 import TextMenu from '@/components/Editor/Menus/TextMenu'
+import Button from "../Primitives/Button";
 
 import Link from "@tiptap/extension-link";
 import { useEffect, useState } from "react";
@@ -37,6 +38,7 @@ import Video from "./CustomExtensions/Video/Video"
 import {useConfirmTabClose} from './useConfirmTabClose'
 import {useCreate, useLoad, useUpdate} from './editorHooks/index'
 
+import { useRouter } from "next/router";
 
 const CustomDocument = Document.extend({
   content: "heading block*",
@@ -45,12 +47,13 @@ const CustomDocument = Document.extend({
 
 
 const Editor = ({ editorType = "create" }) => {
-  
+  const router = useRouter();
+
   const { user } = useUser({
     redirectIfFound: false,
   });
 
-  const {content, loading, slug} = useLoad(editorType, user)
+  const {content, loading, slug, postStatus} = useLoad(editorType, user)
   const {updateExisitingPost, setSaving, setHasUnsavedChanges, hasUnsavedChanges, saving} = useUpdate()
   const {createNewPost} = useCreate()
 
@@ -96,19 +99,21 @@ const Editor = ({ editorType = "create" }) => {
     onUpdate: ({ editor }) => {
       const json = editor.getJSON();
       setHasUnsavedChanges(true);
-      // send the content to an API here
-      localStorage.setItem("wipContent", JSON.stringify(json));
+      // send the content to an API here (if new post only)
+      if(!slug){
+        localStorage.setItem("wipContent", JSON.stringify(json));
+      }
     },
   });
 
   // load from local storage if anything exists
   useEffect(() => {
     if (editor && !editor.isDestroyed) {
-        if (editor?.commands) {
+      if (editor?.commands) {
           editor?.commands?.setContent(content);
         }
       }
-  }, [content, editor]);
+  }, [content]);
 
 
 
@@ -116,23 +121,31 @@ const Editor = ({ editorType = "create" }) => {
   const onSubmit = async () => {
     // before submitting, check strapi if slug or id already exists
     // if it exists, then do an update, else create a new one
-    if (editorType === "create") {
-      await createNewPost(user, editor, editorType);
+    if (!slug) {
+      await createNewPost(user, editor);
     }
 
-    if (editorType === "edit") {
-      await updateExisitingPost(user, editor, editorType, slug);
+    if (slug) {
+      await updateExisitingPost(user, editor, slug, true, postStatus);
     }
   };
 
   const onSave = async () => {
-    if (editorType === "edit") {
+    // if (editorType === "edit") {
+    if (slug) {
       setSaving(true);
       try {
         console.log("saving...");
-        await updateExisitingPost(user, editor, editorType, slug);
+        await updateExisitingPost(user, editor, slug, false, postStatus);
       } catch (e) {
         setSaving(false);
+      }
+    }else{
+      if (editorType === "create") {
+        const newSlug = await createNewPost(user, editor);
+        //set the new slug
+        localStorage.removeItem("wipContent");
+        router.push(`my-posts/draft/${newSlug}`)
       }
     }
   };
@@ -160,17 +173,10 @@ const Editor = ({ editorType = "create" }) => {
     <div className="w-full relative my-4">
      {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
       <EditorNav 
+      isEditor={true}
       editorButtons = {
-        <div className="w-full max-w-4xl p-4 mx-auto ">
-          <div className="flex z-50 sticky top-0 bg-white">
-          <aside className="w-full p-2 py-4 border-b flex flex-row justify-between items-center">
-          <div className="flex">
-            <span className="p-2 py-1 text-xs bg-green-400 bg-opacity-20 text-green-500 rounded-full border border-green-500">
-              Beta
-            </span>
-          </div>
-          <div className="flex flex-row justify-end gap-2">
-            {editorType === "edit" && (
+          <div className="my-auto flex mr-1">
+            {/* {editorType === "edit" && (
               <div>
                 <button
                   onClick={onExport}
@@ -179,50 +185,53 @@ const Editor = ({ editorType = "create" }) => {
                   Export
                 </button>
               </div>
-            )}
-            {editorType === "edit" && (
-              <div>
-                <button
-                  onClick={onSave}
-                  className="p-1 px-3 bg-green-400 rounded text-sm text-white"
-                >
-                  {saving ? "Saving..." : "Save"}
-                </button>
+            )} */}
+            {/* {editorType === "edit" && ( */}
+
+            {hasUnsavedChanges && 
+            <div className="inline mr-6 text-pink-500 text-xs my-auto">
+              Unsaved changes
               </div>
-            )}
-            <SubmitPostModal handleBeforeOpen={handleBeforeSubmit}>
+              }
+              <div>
+                <Button
+                variant="ghostBlue"
+                  onClick={onSave}
+                  className="text-sm"
+                >
+                  {saving ? "Saving..." : "Save Draft"}
+                </Button>
+              </div>
+            {/* )} */}
+            {slug && <SubmitPostModal handleBeforeOpen={handleBeforeSubmit}>
               <div className="p-10">
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
                     <h1 className="text-2xl my-0">
-                      Are you sure you want to publish this post?
+                      Submit this post for review?
                     </h1>
-                    <p className="text-sm leading-7 my-0">
-                      Feel free to make any changes. You can always edit the
-                      post later. After you submit your draft, our editors will
-                      look through it to ensure it aligns with our guidelines.
-                      Once that's done, we will approve your draft and it will
-                      be published on Prototypr. We will email you when it's
-                      live.
+
+                    <p className="text-sm leading-7 my-0 mb-4">
+                      Your story will be submitted to our publication editors for review. 
+                      The editors will review your draft and publish it within 24hrs if it fits our guidelines, or get back to you with feedback. 
+                      Readers will not see your story in the publication until it is reviewed and published by our editors.
+                      Feel free to continue editing even after submitting.
                     </p>
                   </div>
-                  <div className="p-4">
+                  {/* <div className="p-4">
                     <img src="/static/images/source-bg.png" />
-                  </div>
+                  </div> */}
 
-                  <button
+                  <Button
                     onClick={onSubmit}
-                    className="px-3 py-3 bg-blue-700 rounded text-sm text-white "
+                    className="px-3 py-2 text-md"
                   >
-                    Submit Draft
-                  </button>
+                    Submit
+                  </Button>
                 </div>
               </div>
-            </SubmitPostModal>
+            </SubmitPostModal>}
           </div>
-        </aside>
-      </div>
-      </div>
       }
       />
     {/* NAVIGATION END */}

@@ -303,7 +303,7 @@ const UserForm = ({ info }) => {
           )}
         </FormControl>
 
-        <FormControl inValid={!!errors.email}>
+        {/* <FormControl inValid={!!errors.email}>
           <label htmlFor="email" className="text-sm">
             Email
           </label>
@@ -329,7 +329,7 @@ const UserForm = ({ info }) => {
               {errors.email.message}
             </span>
           )}
-        </FormControl>
+        </FormControl> */}
 
         <FormControl inValid={!!errors.username}>
           <label htmlFor="username" className="text-sm">
