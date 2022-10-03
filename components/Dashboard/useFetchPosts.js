@@ -5,7 +5,7 @@ var axios = require("axios");
 const useFetchPosts = (user) => {
 
     const [posts, setPosts] = useState(null);
-    const [loading, setLoading] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [drafts, setDrafts] = useState(null);
     const [publishedPosts, setPublishedPosts] = useState(null);
 
