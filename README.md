@@ -30,7 +30,7 @@ Once you've cloned the repo, create a `.env.local` file, and add the following:
 
 ```code
 STRAPI_PREVIEW_SECRET=_genrate_key
-NEXT_PUBLIC_STRAPI_API_URL=https://prototypr-backend-e8a72.ondigitalocean.app
+NEXT_PUBLIC_STRAPI_API_URL=yourstrapiapiurl.com
 
 NEXTAUTH_URL=http://localhost:3000
 
