@@ -45,6 +45,7 @@ export function getImageExtention(url) {
     //   }
     // })
 
+    // console.log(html)
     
     const title =
       json[0]?.content?.find((x) => x.type === "text")?.text || "Untitled post";

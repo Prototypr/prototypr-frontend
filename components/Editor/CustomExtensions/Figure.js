@@ -59,8 +59,23 @@ const Figure = Node.create({
         },
         figcaption:{
           default: null,
-          parseHTML: element => element.querySelector('figcaption')?.innerText,
+          parseHTML: element => {
+            return element.querySelector('figcaption')?.innerText
+          },
+        },
+        
+        link: { parseHTML: (element) => {
+          if(element.querySelector('a')){
+            return element.querySelector('a')?.getAttribute('title')
+          }
+          else if(element.parentElement?.nodeName=='A') {
+           var url = element.parentElement.getAttribute("href")
+           return url
+          }else{
+            return null
+          }
         }
+        },
 
       }
     },
@@ -82,10 +97,28 @@ const Figure = Node.create({
     },
   
     renderHTML({ HTMLAttributes }) {
+
+      if (HTMLAttributes.link) {
+        const linkattrs = {
+          href: HTMLAttributes.link,
+          target: "_blank",
+          rel: "noopener noreferrer nofollow",
+          class:HTMLAttributes.class,
+        }
+        return [
+          'figure',
+          ["a",
+            linkattrs,
+            ['img', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false })],
+         ],
+          ['figcaption', HTMLAttributes.figcaption]
+        ];
+      }
+
       return [
         'figure',
         ['img', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false })],
-        ['figcaption', 0],
+        ['figcaption', HTMLAttributes.figcaption],
       ]
     },
   

@@ -11,7 +11,12 @@
     .wp-caption-text{margin-top:10px!important;}
 
 figure{
-    //   margin-bottom: 3.6rem;
+      margin-bottom: 3.6rem;
+}
+.lazyload-wrapper{
+    figure{
+        margin-bottom:0rem;
+    }
 }
     color:#2D3748;
     font-size:1.14rem;

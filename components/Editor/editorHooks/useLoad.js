@@ -44,6 +44,9 @@ const useLoad = (type='create', usr) => {
           if (retrievedObject) {
             setContent(JSON.parse(retrievedObject));
             setLoading(false)
+          }else{
+            //it's a new post
+            setLoading(false)
           }
         }
       }
