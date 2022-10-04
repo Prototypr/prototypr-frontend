@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 const MoreStories = dynamic(() => import("@/components/more-stories"));
-
+import { useEffect } from "react";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
 const NewPagination = dynamic(() => import("@/components/pagination"));
