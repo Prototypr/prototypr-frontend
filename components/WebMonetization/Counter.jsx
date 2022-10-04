@@ -25,12 +25,17 @@ import { styled } from '@stitches/react';
 
 const WebMonetizationCounter = () =>{
 
-    const [count, setCount] = useState(null)
+    const [count, setCount] = useState(()=>{
+        const storedCount = localStorage.getItem("WMFormatted")
+        if(storedCount){
+            return storedCount
+        }
+    })
 
     useEffect(()=>{
-        let total = Number(localStorage.getItem("webMonCount"));
+        let total = Number(localStorage.getItem("WMCount"));
         if(!total){
-         localStorage.setItem("webMonCount", 0);
+         localStorage.setItem("WMCount", 0);
          total = 0
         }
         let scale
@@ -40,18 +45,22 @@ const WebMonetizationCounter = () =>{
               // initialize currency and scale on first progress event
               if (total === 0) {
                 scale = ev.detail.assetScale
-                localStorage.setItem("webMonScale", Number(scale));
+                localStorage.setItem("WMScale", Number(scale));
+                if(ev.detail?.assetCode=='USD'){
+                    localStorage.setItem("WMCurrency", '$');
+                }
             }
+            
             if(!scale){
-                scale = Number(localStorage.getItem("webMonScale")); 
+                scale = Number(localStorage.getItem("WMScale")); 
             }
       
               total += Number(ev.detail.amount)
-      
+
               const formatted = (total * Math.pow(10, -scale)).toFixed(scale)
 
-              localStorage.setItem("webMonCount", Number(total));
-            //   document.getElementById('total').innerText = formatted
+              localStorage.setItem("WMFormatted", formatted);
+              localStorage.setItem("WMCount", Number(total));
                 setCount(formatted)
             })
           }
@@ -63,15 +72,16 @@ const WebMonetizationCounter = () =>{
       <Provider delayDuration={1}>
         <Tooltip>
           <TooltipTrigger asChild>
-          {count &&<div className="rounded-full shadow w-2 h-2 ml-4 mr-4 mt-1 bg-green-500"/>}
+          {count &&<div className="hover:cursor-pointer rounded-full shadow w-2 h-2 ml-4 mr-4 mt-1 bg-teal-500"/>}
             {/* <IconButton>
               <PlusIcon />
             </IconButton> */}
           </TooltipTrigger>
           <TooltipContent sideOffset={5} >
-          <div className="inline text-green-700 text-xs flex flex-col"> 
-          <div className="mb-2 font-semibold">Web Monetization</div>
-          <div>{count}</div>
+          <div className="inline text-gray-600 text-sm flex flex-col"> 
+          <div className="mb-2 text-xs font-medium text-gray-600">Micropayments</div>
+          <div className="mb-4 flex p-1 px-2 bg-green-50 border border-green-100 border-1 rounded-lg text-teal-600 font-medium">{localStorage.getItem('WMCurrency')}{count}</div>
+          <div className="" style={{fontSize:11}}>💚 Thanks for your support!</div>
           </div>
           </TooltipContent>
         </Tooltip>

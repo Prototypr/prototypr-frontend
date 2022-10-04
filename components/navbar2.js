@@ -143,7 +143,7 @@ export default function Navbar({ activeNav }) {
                   />
                 </div>
               </Link>
-                <div className={`${showNav ? "opacity-1" : "md:opacity-0"} my-auto transition transition-all duration-300 ease-in-out`}>
+                <div className={`hidden md:block ${showNav ? "opacity-1" : "md:opacity-0"} my-auto transition transition-all duration-300 ease-in-out`}>
                 <WebMonCounter/>
                 </div>
             </div>
