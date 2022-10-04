@@ -71,6 +71,13 @@ export default function Post({ post, preview, relatedPosts }) {
     if (!document.getElementById("twitter-widget")) {
       document.head.appendChild(s);
     }
+
+    if(window.$crisp){
+      // window.$crisp.push(["config", "position:reverse", true])
+      // window.$crisp.push(['do', 'chat:close']);
+      window.$crisp.push(['do', 'chat:hide']);
+    }
+
   }, []);
 
   return (

@@ -25,6 +25,7 @@ import {
 } from "@/lib/api";
 import { useIntl } from "react-intl";
 import { transformPostListOld } from "@/lib/locale/transformLocale";
+import { useEffect } from "react";
 
 const TAB_ITEMS = [
   {
@@ -71,6 +72,12 @@ export default function Index({
   const sourcePanelDescription = intl.formatMessage({
     id: "sourcepanel.desc2",
   });
+
+  useEffect(()=>{
+    if(window.$crisp){
+      window.$crisp.push(['do', 'chat:show']);
+    }
+  },[])
 
   return (
     <>

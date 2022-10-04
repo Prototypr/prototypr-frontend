@@ -87,6 +87,7 @@ const EN = {
   "footer.author2": "and",
   "footer.author3": "Illustrations by",
   "footer.copyright": "All rights reserved.",
+  "footer.helplink": "Help",
   "footer.rightCat1": "Good Stuff",
   "footer.rightCat2": "Open Source",
   "footer.rightCat3": "Prototypr Open",

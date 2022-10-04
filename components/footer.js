@@ -75,6 +75,16 @@ export default function Footer() {
                       <a
                         className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base"
                         rel="noreferrer"
+                        href="https://help.prototypr.io"
+                        target="_blank"
+                      >
+                        {intl.formatMessage({ id: "footer.helplink" })}
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-gray-700 hover:text-gray-900 font-base block py-3 text-base"
+                        rel="noreferrer"
                         href="https://github.com/Prototypr"
                         target="_blank"
                       >

@@ -47,6 +47,9 @@ export default function Index() {
     if(!document.getElementById('twitter-widget')){
       document.head.appendChild(s);
     }
+    if(window.$crisp){
+      window.$crisp.push(['do', 'chat:hide']);
+    }
 
   },[])
 

@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-
+import { useEffect } from "react";
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout'
 import Container from '@/components/container'
@@ -37,6 +37,12 @@ export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
             }
         })
       }
+
+      useEffect(()=>{
+        if(window.$crisp){
+          window.$crisp.push(['do', 'chat:show']);
+        }
+      },[])
 
     return (
         <Layout 

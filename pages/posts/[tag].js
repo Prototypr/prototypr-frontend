@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
+import { useEffect } from "react";
 import Container from '@/components/container'
 const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from '@/components/layout'
@@ -24,6 +25,12 @@ export default function PostsPage({heroPost=null,morePosts=[], preview, paginati
     }else if(tagName=='UI'){
         tagName = 'UI Design'
     }
+
+    useEffect(()=>{
+      if(window.$crisp){
+        window.$crisp.push(['do', 'chat:show']);
+      }
+    },[])
 
     return (
         <>

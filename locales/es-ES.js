@@ -88,6 +88,7 @@ const ES = {
   "footer.author2": "y",
   "footer.author3": "Ilustrado por",
   "footer.copyright": "Reservados todos los derechos.",
+  "footer.helplink": "Ayuda",
   "footer.rightCat1": "Buen material",
   "footer.rightCat2": "Código Abierto",
   "footer.rightCat3": "Prototypr Abierto",

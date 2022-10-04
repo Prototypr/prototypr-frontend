@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import PlausibleProvider from 'next-plausible'
 
-// import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { useMemo } from "react";
 // import "@/styles/index.scss";
 import { SessionProvider } from "next-auth/react";
@@ -41,14 +41,29 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   // const [localeAlert, setLocaleAlert] = useState(false)
   // const [localeOfNavigator, setLocaleOfNavigator] = useState("")
 
-  // useEffect(()=> {
-  //   if (navigator.language && locale && navigator.language !== locale && !sessionStorage.getItem("SELECTED_LOCALE")) {
-  //     if (locales.indexOf(navigator.language) > -1) {
-  //       setLocaleAlert(true)
-  //       setLocaleOfNavigator(navigator.language)
-  //     }
-  //   }
-  // },[])
+  useEffect(()=> {
+    // if (navigator.language && locale && navigator.language !== locale && !sessionStorage.getItem("SELECTED_LOCALE")) {
+    //   if (locales.indexOf(navigator.language) > -1) {
+    //     setLocaleAlert(true)
+    //     setLocaleOfNavigator(navigator.language)
+    //   }
+    // }
+
+    if(typeof window !='undefined' && !window.$crisp){
+      window.$crisp = [];
+      window.CRISP_WEBSITE_ID = "ac6ad370-9e66-4030-97de-dfaba3301952";
+  
+      (function() {
+        var d = document;
+        var s = d.createElement("script");
+  
+        s.src = "https://client.crisp.chat/l.js";
+        s.async = 1;
+        d.getElementsByTagName("head")[0].appendChild(s);
+      })();
+    }
+  },[])
+
 
   const messages = useMemo(() => {
 

@@ -279,6 +279,15 @@ export const DropdownMenuDemo = ({ icon, user }) => {
             {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
+          <DropdownMenuItem
+          onSelect={() => {
+            window.open(`https://help.prototypr.io`);
+          }}
+          >            
+            Help
+            {/* <RightSlot>⌘+T</RightSlot> */}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
          
           <DropdownMenuItem
             onSelect={async () => {

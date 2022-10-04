@@ -37,6 +37,12 @@ export default function ToolboxPage({
     });
   };
 
+  useEffect(()=>{
+    if(window.$crisp){
+      window.$crisp.push(['do', 'chat:show']);
+    }
+  },[])
+
   return (
     <Layout
       seo={{

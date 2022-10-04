@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 
 import ErrorPage from "next/error";
 import Container from "@/components/container";
@@ -20,6 +21,12 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />;
   }
+  
+  useEffect(()=>{
+    if(window.$crisp){
+      window.$crisp.push(['do', 'chat:show']);
+    }
+  },[])
 
   return (
     <Layout 
