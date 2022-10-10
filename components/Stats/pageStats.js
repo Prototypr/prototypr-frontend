@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 // import axios from "axios";
 import { useEffect } from "react";
 // import Meta from "@/components/meta";
@@ -11,6 +10,7 @@ import {
 import { Graph } from "@/components/Stats/Graph";
 import format from "date-fns/format";
 import Link from "next/link";
+import Layout from "@/components/layout-editor";
 
 import {
   Chart as ChartJS,
@@ -23,6 +23,7 @@ import {
   Legend,
   Filler,
 } from "chart.js";
+import { useRouter } from "next/router";
 
 ChartJS.register(
   CategoryScale,
@@ -38,9 +39,13 @@ ChartJS.register(
 export const PageStats = () => {
   const [loaded, setLoaded] = useState(false);
   const [metrics, setMetrics] = useState(undefined);
+
+  const router = useRouter();
+  const { slug: slugger } = router.query;
+
   useEffect(() => {
     async function run() {
-      const slug = "/post/adobe-figma-meme";
+      const slug = slugger; //"/post/adobe-figma-meme";
       const monthlyAggregate = await fetchPlausibleData(slug, [
         "visits",
         "bounce_rate",
@@ -71,11 +76,11 @@ export const PageStats = () => {
         datasets: [
           {
             label: "Visits ",
-            backgroundColor: "#175BE0",
+            backgroundColor: "#0542DF",
             fill: "origin",
-            lineTension: 0.1,
+            lineTension: 0.3,
 
-            borderColor: "#175BE0",
+            borderColor: "#0542DF",
             data: visits,
           },
         ],
@@ -89,38 +94,61 @@ export const PageStats = () => {
     run();
   }, []);
 
+  const labels = {
+    bounce_rate: { title: "Bounce Rate", suffix: "%" },
+    pageviews: { title: "Page Views", suffix: " views" },
+    visit_duration: { title: "Visits Duration", suffix: " min" },
+    visits: { title: "Visits", suffix: " uniques" },
+  };
+
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="p-10">
-        {loaded && (
-          <div className="flex flex-col gap-3">
-            <div>
-              <Link href="/my-posts/stats">
-                <button> Back</button>
-              </Link>
+    <Layout>
+      <div>
+        <div className="p-10">
+          {loaded && (
+            <div className="flex flex-col gap-3 mt-10">
+              <div>
+                <Link href="/my-posts/stats">
+                  <button className="text-sm"> Back</button>
+                </Link>
+              </div>
+              <h2 className="text-2xl font-bold">Page visits</h2>
+              <p className="underline text-sm cursor-pointer">
+                /posts/{slugger}
+              </p>
+
+              <div className="w-full bg-[#EFF2F8] rounded-lg border border-opacity-10 h-auto p-10 flex flex-col gap-2">
+                <div className="flex flex-row gap-4">
+                  {Object.keys(metrics.monthlyAggregate).map((data, i) => {
+                    const value = metrics.monthlyAggregate[data].value;
+                    return (
+                      <div
+                        className="bg-white w-[200px] rounded p-5 border border-opacity-10"
+                        key={`${data}-${i}`}
+                      >
+                        <p className="text-xs text-[#696969]">
+                          {labels[data].title}
+                        </p>
+                        <p className="text-2xl font-semibold text-[#333]">
+                          {`${value}`}
+                          <span className="text-base font-medium">
+                            {labels[data].suffix}
+                          </span>
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <Graph
+                  options={options}
+                  data={metrics.visitsData}
+                  label={"Visits Stats"}
+                />
+              </div>
             </div>
-            <h2 className="text-2xl font-bold">Page Stats</h2>
-            <div className="flex flex-row gap-4">
-              {Object.keys(metrics.monthlyAggregate).map((data, i) => {
-                const value = metrics.monthlyAggregate[data].value;
-                return (
-                  <div className="bg-gray-200 rounded p-5" key={`${data}-${i}`}>
-                    <p>{data}</p>
-                    <p className="text-2xl font-bold">{value}</p>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="w-full bg-gray-300 rounded h-[300px]">
-              <Graph
-                options={options}
-                data={metrics.visitsData}
-                label={"Visits Stats"}
-              />
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
