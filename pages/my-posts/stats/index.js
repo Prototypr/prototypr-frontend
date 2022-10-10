@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 
-import useFetchPosts from "@/components/Dashboard/useFetchPosts";
 import Layout from "@/components/new-index/layoutForIndex";
 let axios = require("axios");
 
@@ -14,83 +13,9 @@ import {
   updateUserSession,
 } from "@/lib/iron-session/updateUserSession";
 import { sessionOptions } from "@/lib/iron-session/session";
-import Link from "next/link";
 
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
-import { fetchPlausibleData } from "@/components/Stats/utils";
-
-const ArticleStats = () => {
-  const { user } = useUser({
-    redirectIfFound: false,
-  });
-
-  const [postViews, setPostViews] = useState([]);
-
-  const {
-    posts: allPosts,
-
-    loading,
-  } = useFetchPosts(user);
-
-  useEffect(() => {
-    async function run() {
-      const res = allPosts.map(async (post) => {
-        const r = await fetchPlausibleData(post.slug, ["visits"]);
-        return { views: r?.visits.value, slug: post.slug };
-      });
-
-      const allStats = await Promise.all(res);
-      setPostViews(allStats);
-    }
-    if (!loading) {
-      // fetch stats from plausible.
-      run();
-    }
-  }, [loading]);
-
-  return (
-    <Layout>
-      <div
-        className="pb-20 mx-auto px-2 sm:px-6 lg:px-8"
-        style={{ maxWidth: 1200 }}
-      >
-        <h1 className="text-2xl">Article Stats</h1>
-        <div className="my-2">
-          {!loading ? (
-            <div className="flex flex-col gap-4">
-              {allPosts.map((post, i) => {
-                const url = `/my-posts/stats/${post.slug}`;
-                const currentPostViews = postViews.find(
-                  (p) => p.slug === post.slug
-                );
-                console.log(currentPostViews);
-
-                return (
-                  <Link key={i} href={url}>
-                    <div className="w-full bg-white rounded shadow-lg p-5">
-                      <p>{post.title}</p>
-                      <div>
-                        {currentPostViews && (
-                          <span>{currentPostViews.views} views</span>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          ) : (
-            <div>
-              <p>Loading...</p>
-            </div>
-          )}
-        </div>
-      </div>
-    </Layout>
-  );
-};
-
-// export default ArticleStats;
+import ArticleStats from "@/components/stats/statsDashboard";
 
 export default function Index(props) {
   const { user } = useUser({
@@ -162,7 +87,7 @@ export default function Index(props) {
           ) : (
             user &&
             user?.isLoggedIn && (
-              <div>
+              <div className="w-full h-full">
                 <ArticleStats />
               </div>
             )
