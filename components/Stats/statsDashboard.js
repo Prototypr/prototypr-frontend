@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
-import { fetchPlausibleData } from "@/components/Stats/utils";
+import { fetchPlausibleData } from "@/components/stats/utils";
 
 const ArticleStats = () => {
   const { user } = useUser({

@@ -6,8 +6,8 @@ import {
   fetchPlausibleData,
   fetchTimeSeriesData,
   options,
-} from "@/components/Stats/utils";
-import { Graph } from "@/components/Stats/Graph";
+} from "@/components/stats/utils";
+import { Graph } from "@/components/stats/Graph";
 import format from "date-fns/format";
 import Link from "next/link";
 import Layout from "@/components/layout-editor";
