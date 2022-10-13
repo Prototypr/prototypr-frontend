@@ -15,7 +15,7 @@ import axios from "axios";
 import { useState } from "react";
 import Layout from "@/components/layout-editor";
 
-import { PageStats } from "@/components/stats/pageStats";
+import { PageStats } from "@/components/stats/PageStats";
 
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 

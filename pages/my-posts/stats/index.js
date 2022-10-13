@@ -15,7 +15,7 @@ import {
 import { sessionOptions } from "@/lib/iron-session/session";
 
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
-import ArticleStats from "@/components/stats/statsDashboard";
+import ArticleStats from "@/components/stats/StatsDashboard";
 
 export default function Index(props) {
   const { user } = useUser({
