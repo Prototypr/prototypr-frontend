@@ -100,6 +100,7 @@
     "react-portal": "^4.2.2",
     "react-router-dom": "^6.3.0",
     "react-timeago": "^4.4.0",
+    "react-web-monetization": "0.0.13",
     "sharp": "^0.30.4",
     "slugify": "^1.6.5",
     "string-hash": "^1.1.3",
