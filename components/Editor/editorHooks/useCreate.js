@@ -19,6 +19,7 @@ const useCreate = () => {
           data: {
             data: {
               ...entry,
+              publishedAt:null
             },
           },
         };

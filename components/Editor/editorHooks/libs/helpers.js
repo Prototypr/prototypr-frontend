@@ -79,29 +79,6 @@ export function getImageExtention(url) {
       postSlug = slug;
     }
 
-    const query = qs.stringify(
-      {
-        filters: {
-          slug: {
-            $eq: postSlug,
-          },
-        },
-        populate: "*",
-        fields: ["slug"],
-      },
-      {
-        encodeValuesOnly: true, // prettify URL
-      }
-    );
-
-    let findPostEndpointConfigs = {
-      method: "get",
-      url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts?${query}`,
-      headers: {
-        Authorization: `Bearer ${user?.jwt}`,
-      },
-    };
-
     let contentToInsert = html
     if(div?.innerHTML && div.innerHTML.length>5){
       contentToInsert = div?.innerHTML
@@ -137,6 +114,5 @@ export function getImageExtention(url) {
     };
     return {
       entry,
-      findPostEndpointConfigs,
     };
   };

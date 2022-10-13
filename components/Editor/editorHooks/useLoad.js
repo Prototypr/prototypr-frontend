@@ -3,10 +3,13 @@ import { useRouter } from "next/router";
 const qs = require("qs");
 var axios = require("axios");
 
+import { getUserArticle } from "@/lib/api";
+
 const useLoad = (type='create', usr) => {
 
 
     const [user] = useState(usr);
+    const [postId, setPostId] = useState(true);
     const [loading, setLoading] = useState(true);
     const [title, setTitle] = useState(null);
     const [postStatus, setStatus] = useState('draft');
@@ -56,48 +59,35 @@ const useLoad = (type='create', usr) => {
       const getCurrentPost = async () => {
 
         setLoading(true)
-        const query = qs.stringify(
-          {
-            filters: {
-              slug: {
-                $eq: slug,
-              },
-            },
-            populate: "*",
-            fields: [],
-          },
-          {
-            encodeValuesOnly: true, // prettify URL
+
+        try{
+          const data = await getUserArticle(user, slug);
+
+          const post = data.userPost
+      
+          let content = post?.content
+  
+          //if title isn't part of body, add it in
+          if(post?.title && content.indexOf(post?.title)==-1){
+            content = `<h1>${post?.title}</h1>${content}`
           }
-        );
-    
-        let currentPostData = {
-          method: "get",
-          url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts?${query}`,
-          headers: {
-            Authorization: `Bearer ${user?.jwt}`,
-          },
-        };
-    
-        const resp = await axios(currentPostData);
-        const post = resp.data?.data[0]?.attributes;
+          
+          setPostId(post?.id)
+          setContent(content);
+          setTitle(post?.title);
+          setStatus(post?.status)
+  
+          setLoading(false)
 
-        let content = post?.content
-
-        //if title isn't part of body, add it in
-        if(post?.title && content.indexOf(post?.title)==-1){
-          content = `<h1>${post?.title}</h1>${content}`
+        }catch(e){
+          console.log(e)
+          setLoading(false)
         }
-        
-        setContent(content);
-        setTitle(post?.title);
-        setStatus(post?.status)
-
-        setLoading(false)
+       
       };
   
 
-    return { loading, content, title, editorType, slug, postStatus};
+    return { loading, content,postId, title, editorType, slug, postStatus};
 
     
   };

@@ -57,7 +57,7 @@ const Editor = ({ editorType = "create" }) => {
     redirectIfFound: false,
   });
 
-  const {content, loading, slug,title, postStatus} = useLoad(editorType, user)
+  const {content, loading, slug,title,postId, postStatus} = useLoad(editorType, user)
   const {updateExisitingPost, setSaving, setHasUnsavedChanges, hasUnsavedChanges, saving} = useUpdate()
   const {createNewPost} = useCreate()
 
@@ -141,7 +141,7 @@ const Editor = ({ editorType = "create" }) => {
     }
 
     if (slug) {
-      await updateExisitingPost(user, editor, slug, true, postStatus);
+      await updateExisitingPost(postId,user, editor, slug, true, postStatus);
     }
   };
 
@@ -151,7 +151,8 @@ const Editor = ({ editorType = "create" }) => {
       setSaving(true);
       try {
         console.log("saving...");
-        await updateExisitingPost(user, editor, slug, false, postStatus);
+        console.log(postId)
+        await updateExisitingPost(postId,user, editor, slug, false, postStatus);
       } catch (e) {
         setSaving(false);
       }
@@ -262,7 +263,7 @@ const Editor = ({ editorType = "create" }) => {
         <TextMenu  editor={editor} />
         {loading || !editorCreated ?
           <div style={{maxWidth:'100%'}} className="mx-2 h-screen absolute top-0 left-0 flex flex-col justify-center w-screen">
-            <div className="-mt-32 mx-auto">
+            <div className="-mt-32 mx-auto text-blue-800 opacity-80">
             <Spinner />
           </div>
           </div>:
