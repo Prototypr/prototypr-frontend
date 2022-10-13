@@ -7,7 +7,7 @@ const useCreate = () => {
 
 
       const createNewPost = async (user, editor) => {
-        const { entry, findPostEndpointConfigs } = getPostDetails(user, editor);
+        const { entry } = getPostDetails(user, editor);
     
         let publishPostEndpointConfig = {
           method: "post",
@@ -25,27 +25,22 @@ const useCreate = () => {
         };
     
         try {
-          const existsResult = await axios(findPostEndpointConfigs);
-          const exists = existsResult?.data?.data?.length > 0;
-          if (!exists) {
-           let newSlug =  await axios(publishPostEndpointConfig)
+           let postResult =  await axios(publishPostEndpointConfig)
               .then(async function (response) {
                 toast.success("Your draft has been saved!", {
                   duration: 5000,
                 });
-                console.log(response?.data?.data?.attributes?.slug)
-                return response?.data?.data?.attributes?.slug
+                return response?.data?.data
               })
               .catch(function (error) {
                 console.log(error);
               });
-              return newSlug
-          } else {
-            toast.error("You've already submitted this post!", {
-              duration: 5000,
-            });
-          }
+
+              return postResult
         } catch {
+          toast.error("Error creating draft! Please contact support for help.", {
+            duration: 5000,
+          });
           (e) => console.log(e);
         }
       };
