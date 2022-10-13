@@ -46,6 +46,7 @@ export const PageStats = () => {
   useEffect(() => {
     async function run() {
       const slug = slugger; //"/post/adobe-figma-meme";
+      console.log(slug)
       const monthlyAggregate = await fetchPlausibleData(slug, [
         "visits",
         "bounce_rate",
