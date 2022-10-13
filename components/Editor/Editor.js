@@ -137,7 +137,10 @@ const Editor = ({ editorType = "create" }) => {
     // before submitting, check strapi if slug or id already exists
     // if it exists, then do an update, else create a new one
     if (!slug) {
-      await createNewPost(user, editor);
+      const postInfo = await createNewPost(user, editor);
+      //set the new slug
+      localStorage.removeItem("wipContent");
+      router.push(`my-posts/draft/${postInfo?.attributes?.slug}`)
     }
 
     if (slug) {
@@ -158,10 +161,10 @@ const Editor = ({ editorType = "create" }) => {
       }
     }else{
       if (editorType === "create") {
-        const newSlug = await createNewPost(user, editor);
+        const postInfo = await createNewPost(user, editor);
         //set the new slug
         localStorage.removeItem("wipContent");
-        router.push(`my-posts/draft/${newSlug}`)
+        router.push(`my-posts/draft/${postInfo?.attributes?.slug}`)
       }
     }
   };
