@@ -19,7 +19,8 @@ const WMPostTracker = ({postId}) =>{
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        formattedTotal:monetization.formattedTotal,
+                        // formattedTotal:monetization.formattedTotal,
+                        formattedAmount:monetization.formattedAmount,
                         url:url,
                         monetization:monetization,
                         post_id:postId
@@ -30,7 +31,7 @@ const WMPostTracker = ({postId}) =>{
         //every time it changes send a request
         updateWM(monetization, router.asPath)
 
-    },[monetization.totalAmount])
+    },[monetization.amount])
 
 
     useEffect(() => {

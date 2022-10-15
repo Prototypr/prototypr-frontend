@@ -24,13 +24,17 @@ export class GlobalWebMonetizationState extends EventEmitter {
     this.requestId = null
     this.assetCode = null
     this.assetScale = null
+    this.amount = 0
     this.totalAmount = 0
     this.receipt = null
+    this.formattedAmount = 0
     this.formattedTotal = 0
   }
   setPage(url) {
     this.totalAmount = 0
+    this.amount = 0
     this.url = url
+    this.formattedAmount = 0
     this.formattedTotal = 0
   }
 
@@ -41,9 +45,11 @@ export class GlobalWebMonetizationState extends EventEmitter {
       requestId: this.requestId,
       assetCode: this.assetCode,
       assetScale: this.assetScale,
+      amount: this.amount,
       totalAmount: this.totalAmount,
       receipt: this.receipt,
       url:this.url,
+      formattedAmount:this.formattedAmount,
       formattedTotal:this.formattedTotal,
       // synthetic state
       hasPaid: this.totalAmount !== 0 || this.state === 'started'
@@ -145,13 +151,16 @@ export class GlobalWebMonetizationState extends EventEmitter {
   onMonetizationProgress(ev) {
     const { amount, assetCode, assetScale, receipt } = ev.detail
 
+    this.amount = Number(amount)
     this.totalAmount = this.totalAmount + Number(amount)
     this.assetCode = assetCode
     this.assetScale = assetScale
     this.receipt = receipt
 
-    const formatted = (this.totalAmount * Math.pow(10, -assetScale)).toFixed(assetScale)
-    this.formattedTotal = formatted
+    const formattedT = (this.totalAmount * Math.pow(10, -assetScale)).toFixed(assetScale)
+    const formatted = (this.amount * Math.pow(10, -assetScale)).toFixed(assetScale)
+    this.formattedTotal = formattedT
+    this.formattedAmount = formatted
 
     this.emit('monetizationprogress')
   }
