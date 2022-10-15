@@ -1,18 +1,44 @@
 import { useEffect } from 'react'
 import { useMonetizationCounter } from './react-web-monetization'
-import { resetGlobalWebMonetizationPage } from './react-web-monetization/global'
+import { resetGlobalWebMonetizationPage, resetTotal, addBackToTotal } from './react-web-monetization/global'
 import { useRouter } from "next/router";
 import { Provider, Tooltip, TooltipTrigger, TooltipContent } from "../Primitives/Tooltip";
+import { cloneDeep } from "lodash"
+// import useDebounce from './useDebounce';
+import useThrottle from './useThrottle';
 
 
 const WMPostTracker = ({postId}) =>{
     const router = useRouter();
 
     const monetization = useMonetizationCounter(router.asPath)
+    const throttledMonetization = useThrottle(monetization, 2000);
 
+    // useEffect(()=>{
+
+    //     const updateWM = async(monetization, url) =>{
+    //         const result = await fetch(
+    //             `https://wm.prototypr.io/`,
+    //             {
+    //                 method: "POST",
+    //                 headers: { "Content-Type": "application/json" },
+    //                 body: JSON.stringify({
+    //                     // formattedTotal:monetization.formattedTotal,
+    //                     formattedAmount:monetization.formattedAmount,
+    //                     url:url,
+    //                     monetization:monetization,
+    //                     post_id:postId
+    //               })
+    //             }
+    //             );
+    //         }
+    //     //every time it changes send a request
+    //     updateWM(monetization, router.asPath)
+
+    // },[monetization.amount])
     useEffect(()=>{
-
         const updateWM = async(monetization, url) =>{
+          console.log(monetization)
             const result = await fetch(
                 `https://wm.prototypr.io/`,
                 {
@@ -20,18 +46,28 @@ const WMPostTracker = ({postId}) =>{
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         // formattedTotal:monetization.formattedTotal,
-                        formattedAmount:monetization.formattedAmount,
+                        formattedAmount:monetization.formattedTotal,
                         url:url,
                         monetization:monetization,
                         post_id:postId
                   })
                 }
                 );
+                if(result.status!==200){
+                  //failed,so add the amount back on 
+                  addBackToTotal(monetization.totalAmount)
+                }else{
+                  resetTotal()
+                }
             }
+            console.log(throttledMonetization)
+          const monetizationCopy = cloneDeep(throttledMonetization)
+          resetTotal()
+          
         //every time it changes send a request
-        updateWM(monetization, router.asPath)
+        updateWM(monetizationCopy, router.asPath)
 
-    },[monetization.amount])
+    },[throttledMonetization.totalAmount])
 
 
     useEffect(() => {
