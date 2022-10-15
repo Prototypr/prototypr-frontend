@@ -27,6 +27,9 @@ const NoticeTranslation = dynamic(
 
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
+const WMPostTracker = dynamic(() => import("@/components/WebMonetization/WMPostTracker"), {
+  ssr: false,
+});
 
 export default function Post({ post, preview, relatedPosts }) {
   const router = useRouter();
@@ -34,6 +37,7 @@ export default function Post({ post, preview, relatedPosts }) {
     return <ErrorPage statusCode={404} />;
   }
 
+  console.log(post.id)
   const title = post?.attributes?.seo?.opengraphTitle
     ? post?.attributes?.seo?.opengraphTitle
     : post?.attributes?.title && post.attributes.title;
@@ -103,6 +107,8 @@ export default function Post({ post, preview, relatedPosts }) {
           className="pt-24 md:pt-36 -mt-3 mx-auto"
           style={{ maxWidth: "1200px" }}
         >
+          {post?.id &&
+          <WMPostTracker postId={post?.id}/>}
           <Container>
             {router.isFallback ? (
               <h1 className="text-6xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
