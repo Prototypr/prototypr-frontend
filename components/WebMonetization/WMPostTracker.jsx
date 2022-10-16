@@ -38,8 +38,8 @@ const WMPostTracker = ({postId}) =>{
     // },[monetization.amount])
     useEffect(()=>{
         const updateWM = async(monetization, url) =>{
-          console.log(monetization)
-            const result = await fetch(
+
+          const result = await fetch(
                 `https://wm.prototypr.io/`,
                 {
                     method: "POST",
@@ -53,19 +53,20 @@ const WMPostTracker = ({postId}) =>{
                   })
                 }
                 );
+
                 if(result.status!==200){
                   //failed,so add the amount back on 
-                  addBackToTotal(monetization.totalAmount)
+                  addBackToTotal(monetization.totalAmount, url)
                 }else{
                   resetTotal()
                 }
             }
-            console.log(throttledMonetization)
-          const monetizationCopy = cloneDeep(throttledMonetization)
+
+            const monetizationCopy = cloneDeep(throttledMonetization)
           resetTotal()
           
         //every time it changes send a request
-        updateWM(monetizationCopy, router.asPath)
+        updateWM(monetizationCopy, monetizationCopy.url)
 
     },[throttledMonetization.totalAmount])
 
@@ -75,7 +76,7 @@ const WMPostTracker = ({postId}) =>{
       
         function onRouteChangeComplete(url, { shallow }) {
   
-            // console.log(url)
+            console.log(url)
           //only check views for posts
           resetGlobalWebMonetizationPage(url)
   

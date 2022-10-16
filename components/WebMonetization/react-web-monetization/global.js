@@ -49,10 +49,12 @@ export class GlobalWebMonetizationState extends EventEmitter {
    * be recorded in the next post request
    * @param {*} amount 
    */
-  addBackToTotal(failedAmount) {
-    this.totalAmount += failedAmount
-    const formattedT = (this.totalAmount * Math.pow(10, -this.assetScale)).toFixed(this.assetScale)
-    this.formattedTotal = formattedT
+  addBackToTotal(failedAmount, url) {
+    if(this.url==url){
+      this.totalAmount += failedAmount
+      const formattedT = (this.totalAmount * Math.pow(10, -this.assetScale)).toFixed(this.assetScale)
+      this.formattedTotal = formattedT
+    }
   }
 
   getState() {
@@ -201,6 +203,6 @@ export function resetGlobalWebMonetizationPage(url) {
 export function resetTotal() {
   getGlobalWebMonetizationState().resetTotal()
 }
-export function addBackToTotal(amount) {
-  getGlobalWebMonetizationState().addBackToTotal(amount)
+export function addBackToTotal(amount, url) {
+  getGlobalWebMonetizationState().addBackToTotal(amount, url)
 }
