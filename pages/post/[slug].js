@@ -108,7 +108,7 @@ export default function Post({ post, preview, relatedPosts }) {
           style={{ maxWidth: "1200px" }}
         >
           {post?.id &&
-          <WMPostTracker postId={post?.id}/>}
+          <WMPostTracker postId={post?.id} post={post}/>}
           <Container>
             {router.isFallback ? (
               <h1 className="text-6xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">

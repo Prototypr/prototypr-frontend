@@ -8,37 +8,19 @@ import { cloneDeep } from "lodash"
 import useThrottle from './useThrottle';
 
 
-const WMPostTracker = ({postId}) =>{
+const WMPostTracker = ({postId, post}) =>{
     const router = useRouter();
 
-    const monetization = useMonetizationCounter(router.asPath, postId)
+    const monetization = useMonetizationCounter(router.asPath, postId, post?.attributes?.title)
     const throttledMonetization = useThrottle(monetization, 2000);
 
     const postIdRef = useRef();  // will be same object each render
     postIdRef.current = postId; // assign new num value each render
+   
+    const postRef = useRef();  // will be same object each render
+    postRef.current = post; // assign new num value each render
 
-    // useEffect(()=>{
 
-    //     const updateWM = async(monetization, url) =>{
-    //         const result = await fetch(
-    //             `https://wm.prototypr.io/`,
-    //             {
-    //                 method: "POST",
-    //                 headers: { "Content-Type": "application/json" },
-    //                 body: JSON.stringify({
-    //                     // formattedTotal:monetization.formattedTotal,
-    //                     formattedAmount:monetization.formattedAmount,
-    //                     url:url,
-    //                     monetization:monetization,
-    //                     post_id:postId
-    //               })
-    //             }
-    //             );
-    //         }
-    //     //every time it changes send a request
-    //     updateWM(monetization, router.asPath)
-
-    // },[monetization.amount])
     useEffect(()=>{
         const updateWM = async(monetization) =>{
           console.log(monetization)
@@ -52,7 +34,8 @@ const WMPostTracker = ({postId}) =>{
                         formattedAmount:monetization.formattedTotal,
                         url:monetization.url,
                         monetization:monetization,
-                        post_id:monetization.postId
+                        post_id:monetization.postId,
+                        title:monetization.title
                   })
                 }
                 );
@@ -81,7 +64,7 @@ const WMPostTracker = ({postId}) =>{
   
           console.log(url)
           //only check views for posts
-          resetGlobalWebMonetizationPage(url, postIdRef.current)
+          resetGlobalWebMonetizationPage(url, postIdRef.current, postRef.current?.attributes?.title)
   
         }
         // Record a pageview when route changes

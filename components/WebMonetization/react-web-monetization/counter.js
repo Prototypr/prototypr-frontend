@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 
 import { getGlobalWebMonetizationState } from './global'
 
-export function useMonetizationCounter(url, postId) {
+export function useMonetizationCounter(url, postId, title) {
   // get the singleton WM state
   const webMonetizationState = getGlobalWebMonetizationState()
 
-  webMonetizationState.init(url, postId)
+  webMonetizationState.init(url, postId, title)
 
   const [monetizationDetails, setMonetizationDetails] = useState(
     webMonetizationState.getState()
