@@ -175,13 +175,15 @@ export class GlobalWebMonetizationState extends EventEmitter {
   }
 
   onMonetizationProgress(ev) {
-    const { amount, assetCode, assetScale, receipt } = ev.detail
+    const { amount, assetCode, assetScale, receipt,requestId,paymentPointer } = ev.detail
 
     this.amount = Number(amount)
     this.totalAmount = this.totalAmount + Number(amount)
     this.assetCode = assetCode
     this.assetScale = assetScale
     this.receipt = receipt
+    this.requestId = requestId
+    this.paymentPointer = paymentPointer
 
     const formattedT = (this.totalAmount * Math.pow(10, -assetScale)).toFixed(assetScale)
     const formatted = (this.amount * Math.pow(10, -assetScale)).toFixed(assetScale)

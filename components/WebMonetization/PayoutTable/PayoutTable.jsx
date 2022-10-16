@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 import { useState, useEffect } from 'react'
 import DataTable from 'react-data-table-component';
+import dynamic from 'next/dynamic';
+const Spinner = dynamic(() => import('@/components/atom/Spinner/Spinner'))
 
 
 const customStyles = {
@@ -56,13 +58,11 @@ const PayoutTable = () =>{
     
 
     },[])
-  
-    console.log(payouts)
 
 
     return(
         <div className='mt-6 mb-8'>
-            {payouts?.length &&
+            {payouts?.length ?
              <div>
                 <DataTable
                     columns={columns}
@@ -70,7 +70,13 @@ const PayoutTable = () =>{
                     striped={true}
                     customStyles={customStyles}
                 />
-                </div>}
+                </div>:
+                  <div style={{maxWidth:'100%', height:400}} className="mx-2 top-0 left-0 flex flex-col justify-center w-screen">
+                  <div className="-mt-32 mx-auto text-blue-800 opacity-80">
+                  <Spinner />
+                </div>
+                </div>
+                }
         </div>
     )
 

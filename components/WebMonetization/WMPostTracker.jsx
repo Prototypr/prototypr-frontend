@@ -35,7 +35,8 @@ const WMPostTracker = ({postId, post}) =>{
                         url:monetization.url,
                         monetization:monetization,
                         post_id:monetization.postId,
-                        title:monetization.title
+                        title:monetization.title,
+                        paymentPointer:monetization.paymentPointer
                   })
                 }
                 );
