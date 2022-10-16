@@ -237,18 +237,35 @@ const MenuFloating = ({ editor, isSelecting }) => {
       });
 
       const [loading, setLoading] = useState(false);
-
+      const [open, setIsOpen] = useState(false)
+      const toggleOpen = () =>{
+        setIsOpen(!open)
+      }
 
     return(
 <FloatingMenu editor={editor} tippyOptions={{ duration: 100 }}>
-<div style={{marginLeft:-72}}>
-<Popover>
-    <PopoverTrigger asChild>
-      <IconButton className="hover:cursor-pointer" aria-label="Update dimensions">
+<div id="menu-trigger-container" className="relative z-20" style={{marginLeft:-72}}>
+<Popover  open={open}>
+{/* <Popover > */}
+    <PopoverTrigger autoFocus={false}  asChild>
+      <IconButton onMouseDown={(e)=>{
+        e.target.closest('#menu-trigger-container').focus()
+        toggleOpen()
+        // e.target.parentElement.click()
+        // tcontent.click()
+      }} className="hover:cursor-pointer" aria-label="Update dimensions">
         <PlusIcon />
       </IconButton>
     </PopoverTrigger>
-    <PopoverContent side="right" sideOffset={5}>
+    <PopoverContent
+    sticky="always"
+    onPointerDownOutside={(e)=>{
+      if(!e.target.closest('#menu-trigger-container')){
+        setIsOpen(false)
+      }
+      }}
+    onFocusOutside={(e)=>e.preventDefault()}
+     side="right" sideOffset={5}>
       <Flex css={{ flexDirection: "row", gap: 10 }}>
         <DropdownMenuItem>
           <IconButton aria-label="Customise options">
