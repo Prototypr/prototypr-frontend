@@ -30,10 +30,11 @@ export class GlobalWebMonetizationState extends EventEmitter {
     this.formattedAmount = 0
     this.formattedTotal = 0
   }
-  setPage(url) {
+  setPage(url, postId) {
     this.totalAmount = 0
     this.amount = 0
     this.url = url
+    this.postId = postId
     this.formattedAmount = 0
     this.formattedTotal = 0
   }
@@ -68,6 +69,7 @@ export class GlobalWebMonetizationState extends EventEmitter {
       totalAmount: this.totalAmount,
       receipt: this.receipt,
       url:this.url,
+      postId:this.postId,
       formattedAmount:this.formattedAmount,
       formattedTotal:this.formattedTotal,
       // synthetic state
@@ -75,13 +77,14 @@ export class GlobalWebMonetizationState extends EventEmitter {
     }
   }
 
-  init(url) {
+  init(url, postId) {
     if (
       !this.initialized &&
       typeof document !== 'undefined' &&
       document.monetization
     ) {
       this.url = url
+      this.postId = postId
       this.initialized = true
       document.monetization.addEventListener(
         'monetizationstart',
@@ -197,8 +200,8 @@ export function getGlobalWebMonetizationState() {
 export function initGlobalWebMonetizationState() {
   getGlobalWebMonetizationState().init()
 }
-export function resetGlobalWebMonetizationPage(url) {
-  getGlobalWebMonetizationState().setPage(url)
+export function resetGlobalWebMonetizationPage(url, postId) {
+  getGlobalWebMonetizationState().setPage(url, postId)
 }
 export function resetTotal() {
   getGlobalWebMonetizationState().resetTotal()

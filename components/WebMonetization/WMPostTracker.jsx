@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useMonetizationCounter } from './react-web-monetization'
 import { resetGlobalWebMonetizationPage, resetTotal, addBackToTotal } from './react-web-monetization/global'
 import { useRouter } from "next/router";
@@ -11,8 +11,11 @@ import useThrottle from './useThrottle';
 const WMPostTracker = ({postId}) =>{
     const router = useRouter();
 
-    const monetization = useMonetizationCounter(router.asPath)
+    const monetization = useMonetizationCounter(router.asPath, postId)
     const throttledMonetization = useThrottle(monetization, 2000);
+
+    const postIdRef = useRef();  // will be same object each render
+    postIdRef.current = postId; // assign new num value each render
 
     // useEffect(()=>{
 
@@ -37,9 +40,9 @@ const WMPostTracker = ({postId}) =>{
 
     // },[monetization.amount])
     useEffect(()=>{
-        const updateWM = async(monetization, url) =>{
-
-          const result = await fetch(
+        const updateWM = async(monetization) =>{
+          console.log(monetization)
+            const result = await fetch(
                 `https://wm.prototypr.io/`,
                 {
                     method: "POST",
@@ -47,26 +50,26 @@ const WMPostTracker = ({postId}) =>{
                     body: JSON.stringify({
                         // formattedTotal:monetization.formattedTotal,
                         formattedAmount:monetization.formattedTotal,
-                        url:url,
+                        url:monetization.url,
                         monetization:monetization,
-                        post_id:postId
+                        post_id:monetization.postId
                   })
                 }
                 );
 
                 if(result.status!==200){
                   //failed,so add the amount back on 
-                  addBackToTotal(monetization.totalAmount, url)
+                  addBackToTotal(monetization.totalAmount, monetization.url)
                 }else{
                   resetTotal()
                 }
             }
-
-            const monetizationCopy = cloneDeep(throttledMonetization)
+            console.log(throttledMonetization)
+          const monetizationCopy = cloneDeep(throttledMonetization)
           resetTotal()
           
         //every time it changes send a request
-        updateWM(monetizationCopy, monetizationCopy.url)
+        updateWM(monetizationCopy)
 
     },[throttledMonetization.totalAmount])
 
@@ -76,14 +79,15 @@ const WMPostTracker = ({postId}) =>{
       
         function onRouteChangeComplete(url, { shallow }) {
   
-            console.log(url)
+          console.log(url)
           //only check views for posts
-          resetGlobalWebMonetizationPage(url)
+          resetGlobalWebMonetizationPage(url, postIdRef.current)
   
         }
         // Record a pageview when route changes
-        router.events.on('routeChangeComplete', onRouteChangeComplete);
-    
+        router.events.on('routeChangeComplete',onRouteChangeComplete);
+        // router.events.on('routeChangeComplete',(url, { shallow })=>onRouteChangeComplete(url, { shallow }, postId));
+
         // Unassign event listener
         return () => {
           router.events.off('routeChangeComplete',onRouteChangeComplete);
