@@ -46,6 +46,7 @@ const StyledContent = styled(PopoverPrimitive.Content, {
   paddingLeft: 20,
   background:'#fff',
   width:1000,
+  outline:'none',
   "@media (prefers-reduced-motion: no-preference)": {
     animationDuration: "400ms",
     animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
@@ -242,6 +243,15 @@ const MenuFloating = ({ editor, isSelecting }) => {
         setIsOpen(!open)
       }
 
+      useEffect(()=>{
+        function handleKeyUp(event) {
+          setIsOpen(false)
+        }
+      
+        window.addEventListener("keyup", handleKeyUp);
+        return () => window.removeEventListener("keyup", handleKeyUp);      
+      })
+
     return(
 <FloatingMenu editor={editor} tippyOptions={{ duration: 100 }}>
 <div id="menu-trigger-container" className="relative z-20" style={{marginLeft:-72}}>
@@ -249,7 +259,7 @@ const MenuFloating = ({ editor, isSelecting }) => {
 {/* <Popover > */}
     <PopoverTrigger autoFocus={false}  asChild>
       <IconButton onMouseDown={(e)=>{
-        e.target.closest('#menu-trigger-container').focus()
+        // e.target.closest('#menu-trigger-container').focus()
         toggleOpen()
         // e.target.parentElement.click()
         // tcontent.click()
@@ -260,7 +270,7 @@ const MenuFloating = ({ editor, isSelecting }) => {
     <PopoverContent
     sticky="always"
     onPointerDownOutside={(e)=>{
-      if(!e.target.closest('#menu-trigger-container')){
+      if(!e.target.closest('#menu-trigger-container') && !e.target.closest('.menu-item')){
         setIsOpen(false)
       }
       }}
@@ -268,7 +278,7 @@ const MenuFloating = ({ editor, isSelecting }) => {
      side="right" sideOffset={5}>
       <Flex css={{ flexDirection: "row", gap: 10 }}>
         <DropdownMenuItem>
-          <IconButton aria-label="Customise options">
+          <IconButton className="menu-item">
           <>   
           <label
             for="img-upload"
@@ -292,9 +302,9 @@ const MenuFloating = ({ editor, isSelecting }) => {
           <IconButton  onClick={()=>{
                 const url = prompt('Enter Twitter URL')
                 if(url){
-                    editor.chain().focus().insertTweet(url).run()
+                    editor.chain().insertTweet(url).run()
                 }
-            }}  className="hover:cursor-pointer" aria-label="Insert Code Block">
+            }}  className="hover:cursor-pointer menu-item" aria-label="Insert Code Block">
             <TwitterLogoIcon/>
           </IconButton>
         </DropdownMenuItem>
@@ -308,7 +318,7 @@ const MenuFloating = ({ editor, isSelecting }) => {
                         height: 400,
                       })
                 }
-            }}  className="hover:cursor-pointer" aria-label="Insert Code Block">
+            }}  className="hover:cursor-pointer menu-item" aria-label="Insert Code Block">
             <VideoIcon/>
           </IconButton>
         </DropdownMenuItem>
@@ -318,7 +328,7 @@ const MenuFloating = ({ editor, isSelecting }) => {
 
             editor.chain().focus().setCodeBlock().run()
          }} 
-          className="hover:cursor-pointer" aria-label="Insert Code Block">
+          className="hover:cursor-pointer menu-item" aria-label="Insert Code Block">
             <CodeIcon/>
           </IconButton>
         </DropdownMenuItem>
@@ -326,7 +336,7 @@ const MenuFloating = ({ editor, isSelecting }) => {
         <DropdownMenuItem>
           <IconButton  onClick={()=>{  
                editor.chain().focus().setHorizontalRule().run()
-            }} className="hover:cursor-pointer" aria-label="Insert Divider">
+            }} className="hover:cursor-pointer menu-item" aria-label="Insert Divider">
             <DividerHorizontalIcon/>
           </IconButton>
         </DropdownMenuItem>
