@@ -7,6 +7,8 @@ import Layout from "@/components/layout";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
+let axios = require("axios");
+
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 import { fetchPlausibleData } from "@/components/stats/utils";
 
