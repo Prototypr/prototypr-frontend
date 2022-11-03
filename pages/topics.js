@@ -90,11 +90,11 @@ export default function Index({ allPosts, preview }) {
       <Container>
         <div className="pt-5 text-md text-gray-700 pb-8">
           <Link href={`/`} legacyBehavior>
-            <span className="hover:underline">{"Home"}</span>
+            <span className="hover:underline">Home</span>
           </Link>{" "}
           →{" "}
           <Link href={`/topics`} legacyBehavior>
-            <span className="underline">{"Topics"}</span>
+            <span className="underline">Topics</span>
           </Link>
         </div>
 
@@ -124,8 +124,9 @@ export default function Index({ allPosts, preview }) {
                         <span
                           aria-hidden="true"
                           className="absolute inset-0"
-                        />
+                        >
                         {intl.formatMessage({ id: topic.name })}
+                        </span>
                     </Link>
                   </h3>
                 </div>
