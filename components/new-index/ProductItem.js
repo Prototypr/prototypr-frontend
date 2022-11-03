@@ -76,13 +76,13 @@ export default function ProductItem({ post = {} }) {
           //   style={{ width: 162, height: 124 }}
           className="relative w-[105px] h-[80px] sm:w-[162px] sm:h-[124px] overflow-hidden rounded-lg transform group-hover:translate-x-0  group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden"
         >
-          <div className="absolute  w-full h-full object-cover rounded-lg transform border cursor-pointer">
+          <div className="absolute  w-full h-full rounded-lg transform border cursor-pointer">
             <Image
               loader={gumletLoader}
               objectFit="cover"
               width={162}
               height={124}
-              className="rounded-lg contrast-115  w-[100px] h-[75px] sm:w-[162px] sm:h-[124px]"
+              className="rounded-lg contrast-115 object-cover w-[100px] h-[75px] sm:w-[162px] sm:h-[124px]"
               // layout="fill"
               src={ftImage}
             />
