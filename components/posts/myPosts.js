@@ -51,7 +51,7 @@ const PostCard = ({ post, refetch }) => {
           toast.success("Your post has been deleted!", {
             duration: 5000,
           });
-          refetch()
+          refetch();
         }
       } catch (error) {
         console.log(error);
@@ -72,7 +72,11 @@ const PostCard = ({ post, refetch }) => {
         <div>
           <span
             className={`text-[10px] uppercase w-auto px-4 py-1 ${
-              post.status === "draft" ? "bg-yellow-500" :post.status === "pending" ? "bg-orange-500":"bg-green-500"
+              post.status === "draft"
+                ? "bg-yellow-500"
+                : post.status === "pending"
+                ? "bg-orange-500"
+                : "bg-green-500"
             }  text-white rounded-[4px] my-2`}
           >
             {post.status}
@@ -84,13 +88,13 @@ const PostCard = ({ post, refetch }) => {
       </div>
 
       {/* {(post.status === "draft" || post.status === "pending") && ( */}
-        <div>
-          <Link href={`/my-posts/draft/${post.slug}`}>
-            <button className="text-sm underline text-blue-400 hover:text-blue-500">
-              Edit Draft
-            </button>
-          </Link>
-        </div>
+      <div>
+        <Link href={`/my-posts/draft/${post.id}`}>
+          <button className="text-sm underline text-blue-400 hover:text-blue-500">
+            Edit Draft
+          </button>
+        </Link>
+      </div>
       {/* )} */}
 
       <div>
@@ -113,18 +117,24 @@ const PostCard = ({ post, refetch }) => {
 };
 
 const MyPosts = () => {
-
-  
   const [currentTab, setCurrentTab] = useState("drafts");
   const { user } = useUser({
     redirectIfFound: false,
   });
 
-  const {posts:allPosts,publishedPosts, drafts, loading, refetch} = useFetchPosts(user)
-
+  const {
+    posts: allPosts,
+    publishedPosts,
+    drafts,
+    loading,
+    refetch,
+  } = useFetchPosts(user);
 
   return (
-    <div className="pb-20 mx-auto px-2 sm:px-6 lg:px-8" style={{maxWidth:1200}}>
+    <div
+      className="pb-20 mx-auto px-2 sm:px-6 lg:px-8"
+      style={{ maxWidth: 1200 }}
+    >
       <div className="flex flex-row justify-between items-baseline mt-3">
         <h1 className="my-3 text-2xl font-bold">My Posts</h1>
         {/* <Link href="/write">
@@ -155,19 +165,27 @@ const MyPosts = () => {
 
         {currentTab === "drafts" && (
           <>
-          <div className="grid grid-cols-3 gap-5">
-            {!loading && drafts?.map((post) =><PostCard refetch={refetch} post={post} />)}
-          </div>
-          {!loading && !drafts?.length && <EmptyState draft={true}/>}
+            <div className="grid grid-cols-3 gap-5">
+              {!loading &&
+                drafts?.map((post) => (
+                  <PostCard refetch={refetch} post={post} />
+                ))}
+            </div>
+            {!loading && !drafts?.length && <EmptyState draft={true} />}
           </>
         )}
 
         {currentTab === "publish" && (
           <>
-          <div className="grid grid-cols-3 gap-5">
-            {!loading && publishedPosts?.map((post) =><PostCard refetch={refetch} post={post} />)}
-          </div>
-          {!loading && !publishedPosts?.length && <EmptyState draft={false}/>}
+            <div className="grid grid-cols-3 gap-5">
+              {!loading &&
+                publishedPosts?.map((post) => (
+                  <PostCard refetch={refetch} post={post} />
+                ))}
+            </div>
+            {!loading && !publishedPosts?.length && (
+              <EmptyState draft={false} />
+            )}
           </>
         )}
       </div>
@@ -177,18 +195,32 @@ const MyPosts = () => {
 
 export default MyPosts;
 
-const EmptyState = ({draft}) =>{
-  return(
+const EmptyState = ({ draft }) => {
+  return (
     <div className="mt-6 mx-auto rounded-lg border border-gray-300">
-    <div className="pt-20 pb-20 px-6">
-    <img width="150" className=" mx-auto" src="https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png" style={{ opacity: '0.92' }} />
-    <h1 className="text-lg text-gray-500 pt-0 mt-4 mb-8 text-center">
-           {draft ?`You've not created any drafts.`:`You've not published anything.`}
-    </h1>
-    {draft && <div class="flex justify-center w-full my-3">
-        <a class="inline-block bg-blue-600 hover:bg-blue-500 mx-auto text-white font-semibold  py-2 px-6 rounded-full shadow hover:shadow-lg" href="/write">New draft</a>
-    </div>}
+      <div className="pt-20 pb-20 px-6">
+        <img
+          width="150"
+          className=" mx-auto"
+          src="https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png"
+          style={{ opacity: "0.92" }}
+        />
+        <h1 className="text-lg text-gray-500 pt-0 mt-4 mb-8 text-center">
+          {draft
+            ? `You've not created any drafts.`
+            : `You've not published anything.`}
+        </h1>
+        {draft && (
+          <div class="flex justify-center w-full my-3">
+            <a
+              class="inline-block bg-blue-600 hover:bg-blue-500 mx-auto text-white font-semibold  py-2 px-6 rounded-full shadow hover:shadow-lg"
+              href="/write"
+            >
+              New draft
+            </a>
+          </div>
+        )}
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};

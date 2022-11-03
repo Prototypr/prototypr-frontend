@@ -116,6 +116,8 @@ export const PageStats = () => {
     }
 
     if (user) {
+      console.log(`Bearer  ${user?.jwt}`);
+
       fetch();
     }
   }, [user]);
