@@ -205,9 +205,9 @@ const NextLink = ({ children, ...props }) => {
   const router = useRouter();
   const isActive = Boolean(router.asPath.indexOf(props.href) > -1);
   return (
-    <Link href={props.href} passHref>
+    <Link legacyBehavior href={props.href} passHref>
       <StyledLink asChild>
-        <a
+        <span
           style={props.css}
           className={
             isActive
@@ -217,7 +217,7 @@ const NextLink = ({ children, ...props }) => {
           {...props}
         >
           {children}
-        </a>
+        </span>
       </StyledLink>
     </Link>
   );

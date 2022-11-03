@@ -82,11 +82,11 @@ const StyledButton = styled(NavigationMenuPrimitive.Link, {
 
 const NextLink = ({ children, ...props }) => {
   return (
-    <Link href={props.href} passHref>
+    <Link legacyBehavior href={props.href} passHref>
       <StyledLink asChild>
-        <a style={props.css} {...props}>
+        <span style={props.css} {...props}>
           {children}
-        </a>
+        </span>
       </StyledLink>
     </Link>
   );
@@ -95,9 +95,9 @@ const NextButton = ({ children, ...props }) => {
   return (
     <Link href={props.href} passHref>
       <StyledButton asChild>
-        <a style={props.css} {...props}>
+        <span style={props.css} {...props}>
           {children}
-        </a>
+        </span>
       </StyledButton>
     </Link>
   );

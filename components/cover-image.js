@@ -33,7 +33,7 @@ export default function CoverImage({ title, url, slug, type, route, imageHeight,
     <div className="sm:mx-0">
       {slug ? (
         <Link href={`/${type ? type : route ? route : "posts"}/${slug}`}>
-          <a aria-label={title}>{image}</a>
+          <span aria-label={title}>{image}</span>
         </Link>
       ) : (
         image

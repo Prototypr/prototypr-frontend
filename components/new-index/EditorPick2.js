@@ -80,18 +80,18 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                     <ul className="flex flex-wrap text-xs font-medium -m-1">
                       <li className="m-1">
                         <Link href={`/posts/${tagSlug}`}>
-                          <a className="font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-2 font-semibold tracking-[.05em]">
+                          <span className="font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-2 font-semibold tracking-[.05em]">
                             {tagName ? tagName : "design"}
-                          </a>
+                          </span>
                         </Link>
                       </li>
                     </ul>
                   </div>
                   <h3 className="text-2xl lg:text-4xl font-semibold mb-4 max-w-md">
                     <Link href={`/post/${slug}`}>
-                      <a className="font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
+                      <span className="font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
                         {title}
-                      </a>
+                      </span>
                     </Link>
                   </h3>
                 </header>
@@ -120,9 +120,9 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                   </div>
                   <div>
                     <Link href={`/people/${author?.data?.attributes?.slug}`}>
-                      <a className="font-medium text-neutral-700 hover:text-gray-900 transition duration-150 ease-in-out">
+                      <span className="font-medium text-neutral-700 hover:text-gray-900 transition duration-150 ease-in-out">
                         {author?.data?.attributes?.name}
-                      </a>
+                      </span>
                     </Link>
                   </div>
                 </footer>

@@ -91,11 +91,11 @@ export default function Index({ allPosts, preview }) {
         <Container>
           <div className="pt-5 text-md text-gray-700 pb-8">
             <Link href={`/`}>
-              <a className="hover:underline">{"Home"}</a>
+              <span className="hover:underline">{"Home"}</span>
             </Link>{" "}
             →{" "}
             <Link href={`/topics`}>
-              <a className="underline">{"Topics"}</a>
+              <span className="underline">{"Topics"}</span>
             </Link>
           </div>
 
@@ -122,13 +122,11 @@ export default function Index({ allPosts, preview }) {
                   <div>
                     <h3 className="text-2xl text-white">
                       <Link href={`/posts/${topic.slug}/page/1`}>
-                        <a>
                           <span
                             aria-hidden="true"
                             className="absolute inset-0"
                           />
                           {intl.formatMessage({ id: topic.name })}
-                        </a>
                       </Link>
                     </h3>
                   </div>

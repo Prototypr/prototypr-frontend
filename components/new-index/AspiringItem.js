@@ -44,7 +44,7 @@ export default function AspiringItem({ post = {} }) {
         </div> */}
         <h4 className="text-black-1 font-semibold text-lg leading-6 mt-4">
           <Link href={`/post/${slug}`}>
-            <a className="font-noto-serif">{title}</a>
+            <span className="font-noto-serif">{title}</span>
           </Link>
         </h4>
         <div className="font-base font-normal hover:underline hover:text-gray-800 text-base text-neutral-700 leading-5 mt-2">
@@ -52,7 +52,7 @@ export default function AspiringItem({ post = {} }) {
             className="hover:underline hover:text-gray-800"
             href={`/people/${author?.data?.attributes?.slug}/page/1`}
           >
-            <a>{author?.data?.attributes?.name}</a>
+            <span>{author?.data?.attributes?.name}</span>
           </Link>
         </div>
 

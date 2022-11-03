@@ -46,7 +46,7 @@ export default function TopicItem({ topic = {} }) {
           </div>
           <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
             <Link href={`/post/${slug}`}>
-              <a className="font-noto-serif">{title}</a>
+              <span className="font-noto-serif">{title}</span>
             </Link>
           </h4>
           <div className="flex items-center mt-4">

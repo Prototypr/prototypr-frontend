@@ -31,7 +31,7 @@ export default function HeroPost({
         <div>
           <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
             <Link href={`/${type ? type : "posts"}/${slug}`}>
-              <a className="hover:underline">{title}</a>
+              <span className="hover:underline">{title}</span>
             </Link>
           </h3>
           <div className="mb-4 md:mb-0 text-lg">

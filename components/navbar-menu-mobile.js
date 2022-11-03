@@ -81,9 +81,9 @@ const NextLink = ({ children, ...props }) => {
   const router = useRouter();
   const isActive = Boolean(router.asPath == props.href);
   return (
-    <Link href={props.href} passHref>
+    <Link legacyBehavior href={props.href} passHref>
       <StyledLink asChild>
-        <a
+        <span
           style={props.css}
           className={
             isActive
@@ -93,7 +93,7 @@ const NextLink = ({ children, ...props }) => {
           {...props}
         >
           {children}
-        </a>
+        </span>
       </StyledLink>
     </Link>
   );
@@ -104,7 +104,7 @@ const NextButton = ({ children, ...props }) => {
   return (
     <Link href={props.href} passHref>
       <StyledButton asChild>
-        <a
+        <span
           style={props.css}
           className={
             isActive
@@ -114,7 +114,7 @@ const NextButton = ({ children, ...props }) => {
           {...props}
         >
           {children}
-        </a>
+        </span>
       </StyledButton>
     </Link>
   );

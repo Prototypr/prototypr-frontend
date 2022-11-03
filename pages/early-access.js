@@ -84,9 +84,7 @@ export default function Index() {
             
               <div className="absolute top-[2%] left-[2%]">
                 <Link href="/" passHref prefetch={false}>
-                  <a>
                     <Cross1Icon/>
-                  </a>
                 </Link>
               </div>
             {user && !user?.isLoggedIn ? (

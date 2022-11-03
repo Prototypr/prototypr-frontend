@@ -39,9 +39,9 @@ export default function FilterCategory({
             })}
             {item.moreLink && (
               <Link href={item.moreLink.url}>
-                <a className="inline-block text-gray-500 underline mt-3 mb-6 text-md">
+                <span className="inline-block text-gray-500 underline mt-3 mb-6 text-md">
                   {item.moreLink.text}
-                </a>
+                </span>
               </Link>
             )}
           </div>

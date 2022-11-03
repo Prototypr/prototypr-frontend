@@ -12,7 +12,7 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug='', ur
                 return( <div className="inline" key={index}>
                     {" "} 
                     <Link href={`${item.slug}`} key={`breadcrumb_${title}_${index}`}>
-                     <a className="hover:underline">{item.name}</a>
+                     <span className="hover:underline">{item.name}</span>
                      </Link>{" "}→{" "}
                  </div>)
              })}
@@ -20,7 +20,7 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug='', ur
                 <a className="capitalize underline">{currentSlug}</a>
             </Link>:
             <Link href={`${urlRoot}/page/1`}>
-                <a className="capitalize underline">{title}</a>
+                <span className="capitalize underline">{title}</span>
             </Link>
             }
         </div>

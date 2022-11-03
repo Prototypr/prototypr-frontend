@@ -54,7 +54,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
         </Link>
         <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
           <Link href={`/post/${slug}`}>
-            <a className="font-noto-serif">{title}</a>
+            <span className="font-noto-serif">{title}</span>
           </Link>
         </h4>
         <div className="mt-3">

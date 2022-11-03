@@ -92,9 +92,9 @@ export default function DesignTool({ allTools = [] }) {
                   cupiditate mollitia saepe vitae libero nobis.
                 </p>
                 <Link href="/toolbox/page/1">
-                  <a className="inline-block px-6 py-3 mt-6 text-sm text-white bg-black rounded">
+                  <span className="inline-block px-6 py-3 mt-6 text-sm text-white bg-black rounded">
                     Browse all tools
-                  </a>
+                  </span>
                 </Link>
               </div>
             </div>

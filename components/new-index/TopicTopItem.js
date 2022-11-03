@@ -60,9 +60,9 @@ export default function TopicTopItem({ topic = {} }) {
           <h4 className="text-2xl lg:text-4xl font-semibold mb-4 mt-4 max-w-md">
             {slug && (
               <Link href={`/post/${slug}`}>
-                <a className="font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
+                <span className="font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
                   {title}
-                </a>
+                </span>
               </Link>
             )}
           </h4>
