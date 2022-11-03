@@ -16,16 +16,20 @@ import { useState } from "react";
 import Layout from "@/components/layout-editor";
 
 import { PageStats } from "@/components/stats/PageStats";
+import { useRouter } from "next/router";
 
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
 export default function Index(props) {
+  const router = useRouter();
+
   const { user } = useUser({
     redirectTo: "/early-access",
     redirectIfFound: false,
   });
 
   const [isSignUp, setSignUp] = useState(true);
+  const { slug: slugger } = router.query;
 
   const toggleSignIn = () => {
     setSignUp(!isSignUp);
