@@ -147,7 +147,7 @@ const UserForm = ({ info }) => {
             </span>
           )}
         </FormControl>
-        <Link href="/post/web-monetization-payment-pointer">
+        <Link href="/post/web-monetization-payment-pointer" legacyBehavior>
         <div className="cursor-pointer p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
           <img className="w-10 mr-4" src="https://webmonetization.org/img/wm-icon-animated.svg"/>
             <div>

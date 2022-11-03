@@ -104,7 +104,7 @@ export default function EditorNav({ activeNav, editorButtons, isEditor, postStat
               </button>
             </div>
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-              <Link href="/" as="/">
+              <Link href="/" as="/" legacyBehavior>
                 <div
                   className={`flex-shrink-0 flex items-center cursor-pointer transition transition-all duration-300 ease-in-out`}>
                   <img

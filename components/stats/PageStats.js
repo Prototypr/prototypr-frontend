@@ -109,7 +109,7 @@ export const PageStats = () => {
           {loaded && (
             <div className="flex flex-col gap-3 mt-10">
               <div>
-                <Link href="/my-posts/stats">
+                <Link href="/my-posts/stats" legacyBehavior>
                   <button className="text-sm"> Back</button>
                 </Link>
               </div>

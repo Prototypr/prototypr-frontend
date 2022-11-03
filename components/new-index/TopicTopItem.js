@@ -22,7 +22,7 @@ export default function TopicTopItem({ topic = {} }) {
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
   return (
-    <Link href={`/post/${slug}`}>
+    <Link href={`/post/${slug}`} legacyBehavior>
       <div className="grid-cols-1 rounded-lg bg-white p-6 flex flex-col sm:flex-row cursor-pointer group">
         <figure className="relative w-full sm:w-1/2 h-64 mb-3 sm:mb-0 mr-6 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
           <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
@@ -36,7 +36,7 @@ export default function TopicTopItem({ topic = {} }) {
               />
             ) : (
               featuredImage?.data?.attributes?.url && (
-                <Link href={`/post/${slug}`}>
+                <Link href={`/post/${slug}`} legacyBehavior>
                   <Image
                     loader={gumletLoader}
                     objectFit="cover"
@@ -59,7 +59,7 @@ export default function TopicTopItem({ topic = {} }) {
           </div>
           <h4 className="text-2xl lg:text-4xl font-semibold mb-4 mt-4 max-w-md">
             {slug && (
-              <Link href={`/post/${slug}`}>
+              <Link href={`/post/${slug}`} legacyBehavior>
                 <span className="font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
                   {title}
                 </span>

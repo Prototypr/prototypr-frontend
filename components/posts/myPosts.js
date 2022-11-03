@@ -85,7 +85,7 @@ const PostCard = ({ post, refetch }) => {
 
       {/* {(post.status === "draft" || post.status === "pending") && ( */}
         <div>
-          <Link href={`/my-posts/draft/${post.slug}`}>
+          <Link href={`/my-posts/draft/${post.slug}`} legacyBehavior>
             <button className="text-sm underline text-blue-400 hover:text-blue-500">
               Edit Draft
             </button>

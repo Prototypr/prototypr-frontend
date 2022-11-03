@@ -34,23 +34,23 @@ export default function ProductItem({ post = {} }) {
     tagArr && tagArr.length ? tagArr[0].attributes.name : "design";
   const tagSlug = tagArr && tagArr.length ? tagArr[0].attributes.slug : "";
   return (
-    <Link href={`/post/${slug}`}>
+    <Link href={`/post/${slug}`} legacyBehavior>
       <div className="cursor-pointer grid-cols-1 flex items-top p-4 group hover:bg-white hover:shadow-sm hover:rounded-lg hover:transition duration-300 ease-in-out">
         <div className="flex-1 ml-0 h-full">
-          <Link href={`/posts/${tagSlug}`}>
+          <Link href={`/posts/${tagSlug}`} legacyBehavior>
             <div className="font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-1 font-semibold tracking-[.05em]">
               {tagName}
             </div>
           </Link>
           <h4 className="font-semibold text-lg sm:text-xl leading-6 text-gray-1 pr-7 mt-4">
-            <Link href={`/post/${slug}`}>
+            <Link href={`/post/${slug}`} legacyBehavior>
               <span className="font-noto-serif">{title}</span>
             </Link>
           </h4>
           <div className="mt-4 flex items-center">
             <div className="w-8 h-8 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
               {authorImage && (
-                <Link href={`/people/${author?.data?.attributes?.slug}`}>
+                <Link href={`/people/${author?.data?.attributes?.slug}`} legacyBehavior>
                   <Image
                     loader={gumletLoader}
                     src={authorImage}
@@ -62,10 +62,12 @@ export default function ProductItem({ post = {} }) {
               )}
             </div>
             <div className="font-normal text-base ml-3 text-neutral-700 leading-5">
-              <Link href={`/people/${author?.data?.attributes?.slug}`}>
-                <a className="hover:underline hover:text-gray-800">
-                  {author?.data?.attributes?.name}
-                </a>
+              <Link
+                href={`/people/${author?.data?.attributes?.slug}`}
+                className="hover:underline hover:text-gray-800">
+
+                {author?.data?.attributes?.name}
+
               </Link>
             </div>
           </div>

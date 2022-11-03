@@ -17,35 +17,37 @@ export default function RelatedPosts({ relatedPosts, title="More posts", type='t
  post?.featuredImage?.data?.attributes?.url:
  "https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png";
 
-       return (<div key={`related_post_${index}`}>
-          <Link href={`/${type}/${post.slug}`}>
-          <div
-            className="flex h-full relative mb-3 md:mb-0 border-b border-gray-50 cursor-pointer"
-            key={`relatedPost_${index}`}
-          >
-            <div className="rounded-lg relative flex md:my-4 h-16 w-16 md:h-16 flex-none">
-              {img &&
-              <Image
-                objectFit="cover"
-                width={66}
-                height={66}
-                alt={post.title}
-                src={img}
-                className="cardImage flex-shrink-0 shine h-16 w-16 md:h-16 rounded-md border border-gray-100"
-              />}
-            </div>
+       return (
+         <div key={`related_post_${index}`}>
+            <Link href={`/${type}/${post.slug}`} legacyBehavior>
+            <div
+              className="flex h-full relative mb-3 md:mb-0 border-b border-gray-50 cursor-pointer"
+              key={`relatedPost_${index}`}
+            >
+              <div className="rounded-lg relative flex md:my-4 h-16 w-16 md:h-16 flex-none">
+                {img &&
+                <Image
+                  objectFit="cover"
+                  width={66}
+                  height={66}
+                  alt={post.title}
+                  src={img}
+                  className="cardImage flex-shrink-0 shine h-16 w-16 md:h-16 rounded-md border border-gray-100"
+                />}
+              </div>
 
-            <div className=" sm:w-auto pl-3 py-4 md:pl-3">
-                  <div
-                      className="cursor-pointer text-sm text-gray-800 leading-tight"
-                      style={{ overflow: "hidden" }}
-                  >
-                    {post.title}
-                  </div>
+              <div className=" sm:w-auto pl-3 py-4 md:pl-3">
+                    <div
+                        className="cursor-pointer text-sm text-gray-800 leading-tight"
+                        style={{ overflow: "hidden" }}
+                    >
+                      {post.title}
+                    </div>
+              </div>
             </div>
+            </Link>
           </div>
-          </Link>
-        </div>)
+       );
       })}
     </div>
   );
