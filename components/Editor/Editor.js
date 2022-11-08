@@ -63,6 +63,7 @@ const Editor = ({ editorType = "create" }) => {
   const {createNewPost} = useCreate()
 
   const [editorCreated, setEditorCreated] = useState(false) 
+  const [editorInstance, setEditorInstance] = useState(false)
 
   useConfirmTabClose(hasUnsavedChanges);
 
@@ -108,7 +109,8 @@ const Editor = ({ editorType = "create" }) => {
         },
       }),
     ],
-    onCreate:()=>{
+    onCreate:({editor})=>{
+      setEditorInstance(editor)
       setTimeout(()=>{
         setEditorCreated(true)
       },1200)
@@ -127,7 +129,7 @@ const Editor = ({ editorType = "create" }) => {
   useEffect(() => {
     if (editor && !editor.isDestroyed) {
       if (editor?.commands) {
-          editor?.commands?.setContent(content);
+          editor?.chain().setContent(content).setMeta('addToHistory', false).run();
         }
       }
   }, [content]);
@@ -194,6 +196,7 @@ const Editor = ({ editorType = "create" }) => {
     <div className="w-full relative my-4">
      {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
       <EditorNav 
+      editorInstance={editorInstance}
       postStatus={postStatus}
       isEditor={true}
       editorButtons = {
