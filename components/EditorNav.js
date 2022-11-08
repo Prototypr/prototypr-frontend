@@ -125,7 +125,7 @@ export default function EditorNav({ editorInstance,activeNav, editorButtons, isE
               {statusComponent}
               </div>
               {/* Undo/redo */}
-              <UndoRedoButtons editor={editorInstance}/>
+              {isEditor && <UndoRedoButtons editor={editorInstance}/>}
             </div>
             <div
               className={`hidden sm:block sm:ml-6 transition transition-all duration-500 ease-in-out`}
