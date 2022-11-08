@@ -338,7 +338,19 @@ figcaption{
   width:100%; 
   left:0;
   top:0;
-    content: "Image Caption (Optional)";
+  content: "Image Caption (Optional)";
+}
+.editable_text.empty{
+  opacity:0;
+  height:0px;
+  margin-top:0px!important;
+}
+figure.ProseMirror-selectednode, figure.is-empty{
+  .editable_text{
+    opacity:1;
+    height:'auto';
+    margin-top:16px!important;
+  }
 }
 button[type="submit"]{
   background:rgb(58, 92, 204)!important;
