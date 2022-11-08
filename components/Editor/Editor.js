@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import Placeholder from "@tiptap/extension-placeholder";
 import Document from "@tiptap/extension-document";
 import TextMenu from '@/components/Editor/Menus/TextMenu'
+import ImageMenu from '@/components/Editor/Menus/ImageMenu'
 import Button from "../Primitives/Button";
 
 import Link from "@tiptap/extension-link";
@@ -16,7 +17,7 @@ import SubmitPostModal from "../modal/submitPost";
 import { saveAs } from "file-saver";
 
 import Iframe from "./CustomExtensions/Iframe/Iframe";
-import Image from "@tiptap/extension-image";
+// import Image from "@tiptap/extension-image";
 import Gapcursor from "@tiptap/extension-gapcursor";
 import Youtube from "@tiptap/extension-youtube";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
@@ -34,7 +35,7 @@ import OrderedList from '@tiptap/extension-ordered-list'
 import Dropcursor from '@tiptap/extension-dropcursor'
 import History from "@tiptap/extension-history";
 import {Blockquote} from "@/components/Editor/CustomExtensions/CustomBlockquote";
-import Figure from "./CustomExtensions/Figure"
+import {Figure} from "./CustomExtensions/Figure"
 import Tweet from "./CustomExtensions/Tweet/Tweet"
 import Video from "./CustomExtensions/Video/Video"
 
@@ -91,12 +92,13 @@ const Editor = ({ editorType = "create" }) => {
       Link.configure({
         openOnClick: false,
       }),
+      // images are converted to figures now
       Figure.configure({
         allowBase64: true,
       }),
-      Image.configure({
-        allowBase64: true,
-      }),
+      // Image.configure({
+      //   allowBase64: true,
+      // }),
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
@@ -262,8 +264,9 @@ const Editor = ({ editorType = "create" }) => {
           <span className="m-0 p-0">Saving</span>
         </div> */}
         {editor && 
-       <MenuFloating editor={editor}/>}
+        <MenuFloating editor={editor}/>}
         <TextMenu  editor={editor} />
+        <ImageMenu  editor={editor} />
         {loading || !editorCreated ?
           <div style={{maxWidth:'100%'}} className="mx-2 h-screen absolute top-0 left-0 flex flex-col justify-center w-screen">
             <div className="-mt-32 mx-auto text-blue-800 opacity-80">
