@@ -29,7 +29,7 @@ const useLoad = (type = "create", usr) => {
   useEffect(() => {
     async function fetchData() {
       const { userPostId } = await getSlugFromArticleId(user, slug);
-      const postSlug = userPostId.slug;
+      const postSlug = userPostId?.slug;
       setArticleSlug(postSlug);
     }
     if (slug) {
