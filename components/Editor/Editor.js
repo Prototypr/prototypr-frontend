@@ -244,7 +244,7 @@ const Editor = ({
       </div>
       {previewEnabled ? (
         <div>
-          <PreviewDisplay content={content} />
+          <PreviewDisplay editor={editorInstance} content={content} />
         </div>
       ) : (
         <div className="w-full relative my-4">

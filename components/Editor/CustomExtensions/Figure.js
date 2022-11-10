@@ -98,7 +98,7 @@ export const Figure = Node.create({
       
       link: { parseHTML: (element) => {
         if(element.querySelector('a')){
-          return element.querySelector('a')?.getAttribute('title')
+          return element.querySelector('a')?.getAttribute('href')
         }
         else if(element.parentElement?.nodeName=='A') {
          var url = element.parentElement.getAttribute("href")
@@ -135,7 +135,7 @@ export const Figure = Node.create({
     ]
   },
 
-  renderHTML({ HTMLAttributes }) {
+  renderHTML({ HTMLAttributes, node }) {
 
     if (HTMLAttributes.link) {
       const linkattrs = {
@@ -157,7 +157,7 @@ export const Figure = Node.create({
     return [
       'figure',
       ['img', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false })],
-      ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:''],
+      ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:'mama'],
     ]
   },
 
@@ -252,9 +252,8 @@ export const Figure = Node.create({
   addInputRules() {
     return [
       nodeInputRule({find:inputRegex, type:this.type, match:match => {
-        const [, alt, src, title] = match
-
-        return { src, alt, title }
+        const [figcaption, alt, src, title] = match
+        return { src, alt, title, figcaption }
       }}),
     ]
   },
@@ -266,7 +265,7 @@ export const Figure = Node.create({
             handleKeyDown:(view, e)=>{
               
                let $pos = view.state.doc.resolve(view.state.selection?.$anchor.pos)
-               
+
                if($pos?.parent?.type.name=='figure'){
                   //if caret in text caption
                   if($pos.parent.firstChild?.type?.name=='text' || $pos.parent.firstChild==null){
@@ -313,6 +312,7 @@ export const Figure = Node.create({
                   .setTextSelection($pos.pos+1)
                   .run()
                 }
+                
                 }
               
             }
@@ -380,32 +380,33 @@ export const Figure = Node.create({
   addNodeView() {
     return ({ node, getPos, editor }) => {
       const { view } = editor;
-      let { src, alt, title } = node.attrs;
+      let { src, alt, title, figcaption } = node.attrs;
 
       const container = document.createElement('figure');
       container.setAttribute('draggable', 'true');
 
       const wrapper = document.createElement('div');
-      const figcaption = document.createElement('figcaption');
+      const figcaptionDiv = document.createElement('figcaption');
 
       wrapper.classList.add('figure_wrapper');
       wrapper.contentEditable = 'false';
 
-      figcaption.classList.add('editable_text');
-      figcaption.setAttribute('data-placeholder', 'Caption (optional)');
-      figcaption.setAttribute('contenteditable', true);
-      figcaption.setAttribute('draggable', 'false');
-      figcaption.ondragstart=(e)=>{
+      figcaptionDiv.classList.add('editable_text');
+      figcaptionDiv.setAttribute('data-placeholder', 'Caption (optional)');
+      figcaptionDiv.setAttribute('contenteditable', true);
+      figcaptionDiv.setAttribute('draggable', 'false');
+     
+      figcaptionDiv.ondragstart=(e)=>{
         e.preventDefault()
         return false
       }
       
       if (node.childCount === 0) {
-        figcaption.classList.add('empty');
+        figcaptionDiv.classList.add('empty');
       }
 
       container.appendChild(wrapper);
-      container.appendChild(figcaption);
+      container.appendChild(figcaptionDiv);
 
       const img = appendImgNode(src, wrapper);
       alt && img.setAttribute('alt', alt);
@@ -419,10 +420,11 @@ export const Figure = Node.create({
 
       return {
         dom: container,
-        contentDOM: figcaption,
+        contentDOM: figcaptionDiv,
         ignoreMutation(p) {
+          console.log(p)
           if (p.type === 'attributes' && p.attributeName != null) {
-            if (['src', 'title', 'alt'].includes(p.attributeName)) {
+            if (['src', 'title', 'alt', 'figcaption'].includes(p.attributeName)) {
               if (typeof getPos === 'function') {
                 view.dispatch(
                   view.state.tr.setNodeMarkup(getPos(), undefined, {
@@ -441,8 +443,11 @@ export const Figure = Node.create({
             return false;
           }
 
-          figcaption.classList.toggle('empty', updatedNode.content.size === 0);
-
+          // set the figcaption to the textcontent
+          updatedNode.attrs.figcaption = updatedNode.textContent
+          
+          figcaptionDiv.classList.toggle('empty', updatedNode.content.size === 0);
+          
           return true;
         },
       };

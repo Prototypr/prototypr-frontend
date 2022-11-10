@@ -155,6 +155,7 @@ const LinkField = ({editor, closePopup, figureNode}) =>{
     
          //update the card with the new data
          const attrs = figureNode.attrs;
+        //  console.log(attrs)
 
          if(editor.state.selection?.$anchor?.pos){
              tr.setNodeMarkup(editor.state.selection?.$anchor?.pos, undefined, {

@@ -1,4 +1,6 @@
-const PreviewDisplay = ({ content }) => {
+const PreviewDisplay = ({ content, editor }) => {
+  // use editor instead of content cos content only 
+  // reflects what is there on first load
   return (
     <div>
       <article>
@@ -6,7 +8,7 @@ const PreviewDisplay = ({ content }) => {
           <h2 className="text-5xl">Preview</h2>
           <div
             dangerouslySetInnerHTML={{
-              __html: content,
+              __html: editor.getHTML(),
             }}
           />
         </div>
