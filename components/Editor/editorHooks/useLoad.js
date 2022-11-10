@@ -4,6 +4,7 @@ const qs = require("qs");
 var axios = require("axios");
 
 import { getUserArticle } from "@/lib/api";
+import { getSlugFromArticleId } from "@/lib/api";
 
 const useLoad = (type = "create", usr) => {
   const [user] = useState(usr);
@@ -13,9 +14,11 @@ const useLoad = (type = "create", usr) => {
   const [postStatus, setStatus] = useState("draft");
   const [content, setContent] = useState(null);
   const [editorType] = useState(type);
+  const [articleSlug, setArticleSlug] = useState(null);
 
   const router = useRouter();
   const { slug } = router.query;
+  //TODO: fetch slug from backend
 
   useEffect(() => {
     setLoading(true);
@@ -23,10 +26,20 @@ const useLoad = (type = "create", usr) => {
     refetch();
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      const { userPostId } = await getSlugFromArticleId(user, slug);
+      const postSlug = userPostId.slug;
+      setArticleSlug(postSlug);
+    }
+    if (slug) {
+      fetchData();
+    }
+  }, [slug]);
+
   const refetch = () => {
     if (slug) {
       console.log("loading from backend");
-
       //load data
       getCurrentPost();
       // todo
@@ -34,7 +47,6 @@ const useLoad = (type = "create", usr) => {
       setLoading(false);
     } else {
       console.log("loading from local");
-
       let retrievedObject = localStorage.getItem("wipContent");
       if (retrievedObject) {
         setContent(JSON.parse(retrievedObject));
@@ -73,7 +85,16 @@ const useLoad = (type = "create", usr) => {
     }
   };
 
-  return { loading, content, postId, title, editorType, slug, postStatus };
+  return {
+    loading,
+    content,
+    postId,
+    title,
+    editorType,
+    slug,
+    postStatus,
+    articleSlug,
+  };
 };
 
 export default useLoad;

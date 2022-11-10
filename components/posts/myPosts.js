@@ -95,6 +95,14 @@ const PostCard = ({ post, refetch }) => {
           </button>
         </Link>
       </div>
+
+      <div>
+        <Link href={`/my-posts/stats/${post.slug}`}>
+          <button className="text-sm underline text-blue-400 hover:text-blue-500">
+            See stats
+          </button>
+        </Link>
+      </div>
       {/* )} */}
 
       <div>

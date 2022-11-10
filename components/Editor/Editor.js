@@ -60,10 +60,8 @@ const Editor = ({
     redirectIfFound: false,
   });
 
-  const { content, loading, slug, title, postId, postStatus } = useLoad(
-    editorType,
-    user
-  );
+  const { content, loading, slug, title, articleSlug, postId, postStatus } =
+    useLoad(editorType, user);
   const {
     updateExisitingPost,
     setSaving,
@@ -76,6 +74,8 @@ const Editor = ({
   const [editorCreated, setEditorCreated] = useState(false);
 
   useConfirmTabClose(hasUnsavedChanges);
+
+  console.log("article slug -> ", articleSlug);
 
   const editor = useEditor({
     extensions: [
@@ -163,7 +163,7 @@ const Editor = ({
       const postInfo = await createNewPost(user, editor);
       //set the new slug
       localStorage.removeItem("wipContent");
-      router.push(`my-posts/draft/${postInfo?.attributes?.slug}`);
+      router.push(`my-posts/draft/${postInfo?.id}`);
     }
 
     if (slug) {
@@ -176,13 +176,15 @@ const Editor = ({
     if (slug) {
       setSaving(true);
       try {
-        console.log("saving...");
-        console.log(postId);
+        console.log("saving post...");
+        // while updating the post, we are using articleSlug instead of slug
+        // This is to ensure that the slug never changes from its original slug
+
         await updateExisitingPost(
           postId,
           user,
           editor,
-          slug,
+          articleSlug,
           false,
           postStatus
         );
@@ -194,7 +196,8 @@ const Editor = ({
         const postInfo = await createNewPost(user, editor);
         //set the new slug
         localStorage.removeItem("wipContent");
-        router.push(`my-posts/draft/${postInfo?.attributes?.slug}`);
+
+        router.push(`my-posts/draft/${postInfo?.id}`);
       }
     }
   };
