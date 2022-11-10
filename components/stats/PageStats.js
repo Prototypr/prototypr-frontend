@@ -46,7 +46,7 @@ export const PageStats = () => {
   useEffect(() => {
     async function run() {
       const slug = slugger; //"/post/adobe-figma-meme";
-      console.log(slug)
+      console.log(slug);
       const monthlyAggregate = await fetchPlausibleData(slug, [
         "visits",
         "bounce_rate",
@@ -109,7 +109,7 @@ export const PageStats = () => {
           {loaded && (
             <div className="flex flex-col gap-3 mt-10">
               <div>
-                <Link href="/my-posts/stats" legacyBehavior>
+                <Link href="/dashboard/stats" legacyBehavior>
                   <button className="text-sm"> Back</button>
                 </Link>
               </div>

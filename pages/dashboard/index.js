@@ -1,6 +1,10 @@
+// import Head from "next/head";
 import dynamic from "next/dynamic";
-
+// import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
+// import Navbar from "@/components/small-nav";
+import Layout from "@/components/layout-dashboard";
+
 import useUser from "@/lib/iron-session/useUser";
 import { withIronSessionSsr } from "iron-session/next";
 import {
@@ -11,18 +15,18 @@ import { sessionOptions } from "@/lib/iron-session/session";
 // import axios from "axios";
 import { useEffect } from "react";
 // import Meta from "@/components/meta";
+// import { Cross1Icon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useState } from "react";
-import Layout from "@/components/layout-editor";
 
-import Editor from "@/components/Editor/Editor";
-const Spinner = dynamic(() => import('@/components/atom/Spinner/Spinner'))
+import MyPosts from "@/components/posts/myPosts";
+// const axios = dynamic(() => import("axios"));
+const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
+// const LoginSide = dynamic(() => import("@/components/sign-in/LoginSide"));
 
-// const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
-
-export default function Index(props) {
+export default function Index() {
   const { user } = useUser({
-    redirectTo: '/early-access',
+    // redirectTo: '/account',
     redirectIfFound: false,
   });
 
@@ -56,48 +60,46 @@ export default function Index(props) {
 
   return (
     <>
-      <div className="h-full w-full">
-        <div id="editor-container" className="w-full h-full mx-auto  relative">
-          {!user && <Fallback />}
+      {/* <div className="h-full w-full">
+        <div className="w-full h-full mx-auto  relative"> */}
+      {!user && <Fallback />}
 
-            {user && !user?.isLoggedIn ? (
-              <>
-              <Layout>
-              <div className="relative w-full h-full flex">
-               <div className="my-auto mx-auto">
-                  <Spinner />
-                </div>
-              </div>
-              </Layout>
-
-                {/* <LoginForm isSignUp={isSignUp} />
-                <div className="absolute top-[2%] right-[2%]">
-                  <div className="text-sm text-gray-700">
-                    <span>
-                      {isSignUp
-                        ? "Already got an account?"
-                        : "Not got an account yet?"}
-                    </span>
-                    <a
-                      onClick={toggleSignIn}
-                      className="text-primary-400 cursor-pointer"
-                    >
-                      {isSignUp ? " Sign in." : " Sign up"}
-                    </a>
-                  </div>
-                </div> */}
-              </>
-            ) : (
-              user &&
-              user?.isLoggedIn && (
-                <div>
-                  {/* <EditDraft/> */}
-                    <Editor editorType="edit" />
-                </div>
-              )
-            )}
+      {user && !user?.isLoggedIn ? (
+        <Layout>
+          <div className="w-full relative max-w-4xl p-4 mx-auto ">
+            <div
+              className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto mt-8"
+              style={{ maxWidth: 390 }}
+            >
+              <LoginForm isSignUp={isSignUp} />
+            </div>
           </div>
-        </div>
+          <div className="mt-4 flex justify-center">
+            <div className="text-sm text-gray-700">
+              <span>
+                {isSignUp
+                  ? "Already got an account?"
+                  : "Not got an account yet?"}
+              </span>
+              <a
+                onClick={toggleSignIn}
+                className="text-primary-400 cursor-pointer"
+              >
+                {isSignUp ? " Sign in." : " Sign up"}
+              </a>
+            </div>
+          </div>
+        </Layout>
+      ) : (
+        user &&
+        user?.isLoggedIn && (
+          <Layout navType={"simple"} background="#fff">
+            <MyPosts />
+          </Layout>
+        )
+      )}
+      {/* </div>
+      </div> */}
     </>
   );
 }
