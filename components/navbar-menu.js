@@ -82,22 +82,22 @@ const StyledButton = styled(NavigationMenuPrimitive.Link, {
 
 const NextLink = ({ children, ...props }) => {
   return (
-    <Link href={props.href} passHref>
+    <Link legacyBehavior href={props.href} passHref>
       <StyledLink asChild>
-        <a style={props.css} {...props}>
+        <span style={props.css} {...props}>
           {children}
-        </a>
+        </span>
       </StyledLink>
     </Link>
   );
 };
 const NextButton = ({ children, ...props }) => {
   return (
-    <Link href={props.href} passHref>
+    <Link href={props.href} passHref legacyBehavior>
       <StyledButton asChild>
-        <a style={props.css} {...props}>
+        <span style={props.css} {...props}>
           {children}
-        </a>
+        </span>
       </StyledButton>
     </Link>
   );
@@ -144,7 +144,7 @@ export const NavigationMenuDemo = ({
         <NavigationMenuItem
         className={`hidden mr-2 ml-4 md:block md:flex transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
       >
-        <Link href="/write">
+        <Link href="/write" legacyBehavior>
          <Button className="flex"type="" variant="confirm">
          <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.414 16L16.556 5.858l-1.414-1.414L5 14.586V16h1.414zm.829 2H3v-4.243L14.435 2.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 18zM3 20h18v2H3v-2z" fill="currentColor"/></svg>
           Write
@@ -156,7 +156,7 @@ export const NavigationMenuDemo = ({
        <NavigationMenuItem className="flex flex-col justify-center">
           {(user && user?.isLoggedIn) ? (
             <div className="ml-2 w-8">
-              <Link href="/account">
+              <Link href="/account" legacyBehavior>
                 {user && 
                   <ProfileBadge
                   user={user}

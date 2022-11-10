@@ -147,16 +147,14 @@ const UserForm = ({ info }) => {
             </span>
           )}
         </FormControl>
-        <Link href="/post/web-monetization-payment-pointer">
-        <a className='cursor-pointer'>
-        <div className="p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
+        <Link href="/post/web-monetization-payment-pointer" legacyBehavior>
+        <div className="cursor-pointer p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
           <img className="w-10 mr-4" src="https://webmonetization.org/img/wm-icon-animated.svg"/>
             <div>
             <h2 className="text-md font-primary font-medium text-gray-800">Learn about Web Monetization</h2>
             <p className="text-gray-800 text-sm">Receive tips and streamed payments with a <a className="underline text-green-900 font-medium" href="#">Payment Pointer</a> and wallet. Learn how to <a className="underline text-green-900 font-medium" href="#">set it up here</a>. →</p>
             </div>
         </div>
-        </a>
         </Link>
       </div>
       </div>

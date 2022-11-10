@@ -253,7 +253,13 @@ const MenuFloating = ({ editor, isSelecting }) => {
       })
 
     return(
-<FloatingMenu editor={editor} tippyOptions={{ duration: 100 }}>
+<FloatingMenu 
+shouldShow= {({ editor, view, state, oldState }) => {
+  if(state?.selection?.$anchor?.parent?.type?.name=='paragraph' && state?.selection?.$anchor?.parent?.textContent==''){
+    return true
+  }
+}}
+editor={editor} tippyOptions={{ duration: 100 }}>
 <div id="menu-trigger-container" className="relative z-20" style={{marginLeft:-72}}>
 <Popover  open={open}>
 {/* <Popover > */}

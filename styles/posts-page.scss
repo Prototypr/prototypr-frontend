@@ -101,7 +101,7 @@ figure{
         margin: 2.5rem auto;
         border-radius: 0.375rem;
     }
-   *, ul, ol{
+   *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
     max-width: 43rem;
     margin-right: auto;
     margin-left: auto;
@@ -362,5 +362,6 @@ figure{
     max-width: 100%!important;
 }
 .tippy-box{
+    max-width: 400px!important;
     outline:none;
 }

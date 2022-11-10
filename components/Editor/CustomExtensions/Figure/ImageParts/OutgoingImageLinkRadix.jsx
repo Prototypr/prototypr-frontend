@@ -113,7 +113,7 @@ const Text = styled('div', {
   },
 });
 
-const PopoverDemo = ({editor,node,setCanvasLoading, updateAttributes, toggleFromParent}) => {
+const OutgoingImageLink = ({editor,node,setCanvasLoading, updateAttributes, toggleFromParent}) => {
 
 const [open, setIsOpen] = useState(false)
 
@@ -157,4 +157,4 @@ return(
   </Popover>
 );}
 
-export default PopoverDemo;
+export default OutgoingImageLink;

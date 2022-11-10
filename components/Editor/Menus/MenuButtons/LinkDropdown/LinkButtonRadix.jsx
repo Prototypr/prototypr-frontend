@@ -116,7 +116,7 @@ const Text = styled('div', {
   },
 });
 
-const PopoverDemo = ({editor, showRemove}) => {
+const PopoverDemo = ({editor, showRemove, marginLeft, isFigure}) => {
 
 const [open, setIsOpen] = useState(false)
 
@@ -162,10 +162,12 @@ return(
       </IconButton>
     </CollapsibleTrigger>
     <CollapsibleContent 
+    css={{pointerEvents:'all',marginLeft:marginLeft?marginLeft:'', marginTop:-2, height:47}}
     id="link-form-content"
     onPointerDownOutside={()=>setIsOpen(false)} onEscapeKeyDown={()=>setIsOpen(false)} sideOffset={5} >
-      <Flex css={{ justifyContent:'space-between', gap: 10, marginTop:2 }}>
+      <Flex css={{ justifyContent:'space-between', gap: 10, marginTop:2, }}>
         <LinkField
+        isFigure={isFigure}
         showRemove={showRemove}
         editor={editor}
         closePopup={closePopup}

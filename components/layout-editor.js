@@ -1,5 +1,5 @@
 // import Alert from "./alert";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import Meta from "./meta";
 import EditorNav from "./EditorNav";
 
@@ -11,12 +11,13 @@ export default function Layout({
   background,
   padding,
   seo,
-  navType
+  navType,
+  editorInstance
 }) {
   return (
     <>
       <Meta seo={seo} />
-      <EditorNav activeNav={activeNav}/>
+      <EditorNav editorInstance={editorInstance} activeNav={activeNav}/>
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#fff" }}

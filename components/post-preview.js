@@ -53,8 +53,8 @@ export default function PostPreview({
       <div className="px-4 py-1 flex justify-between">
         <div className="pl-3 overflow-hidden mt-1 cursor-pointer">
           <div className="font-semibold overflow-hidden heading mt-0 h-6">
-            <Link href={`/${type ? type : route ? route : "post"}/${slug}`}>
-              <a className="">{title}</a>
+            <Link href={`/${type ? type : route ? route : "post"}/${slug}`} legacyBehavior>
+              {title}
             </Link>
           </div>
           <div className="text-xs text-gray-600 mt-0.5 uppercase">

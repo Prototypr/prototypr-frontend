@@ -7,8 +7,6 @@ import Layout from "@/components/layout";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
-let axios = require("axios");
-
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 import { fetchPlausibleData } from "@/components/stats/utils";
 
@@ -59,7 +57,7 @@ const ArticleStats = () => {
                   );
 
                   return (
-                    <Link key={i} href={url} className="cursor-pointer">
+                    <Link key={i} href={url} className="cursor-pointer" legacyBehavior>
                       <div className="w-full bg-white rounded-lg shadow-lg p-5 cursor-pointer">
                         <p>{post.title}</p>
                         <div>

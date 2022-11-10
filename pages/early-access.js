@@ -58,60 +58,56 @@ export default function Index() {
     }
   }, [user]);
 
-  return (
-    <>
-      <Head>
-        <Meta
-          seo={{
-            title: "Sign into Prototypr",
-            description: "Sign in or create an account",
-            //   image: "",
-            canonical: "https://prototypr.io/early-acess",
-            url: "https://prototypr.io/early-acess",
-          }}
-        />
-      </Head>
+  return <>
+    <Head>
+      <Meta
+        seo={{
+          title: "Sign into Prototypr",
+          description: "Sign in or create an account",
+          //   image: "",
+          canonical: "https://prototypr.io/early-acess",
+          url: "https://prototypr.io/early-acess",
+        }}
+      />
+    </Head>
 
-      <div className="h-full w-full grid md:grid-cols-12">
-        <div className="hidden w-full h-full md:block md:col-span-6 lg:col-span-4">
-          <div className="flex items-center justify-center h-full w-full relative bg-[#252636] text-white">
-            <LoginSide user={user} />
-          </div>
-        </div>
-        <div className="col-span-12 md:col-span-6 lg:col-span-8">
-          <div className="flex items-center justify-center h-full w-full relative">
-            {!user && <Fallback />}
-            
-              <div className="absolute top-[2%] left-[2%]">
-                <Link href="/" passHref prefetch={false}>
-                  <a>
-                    <Cross1Icon/>
-                  </a>
-                </Link>
-              </div>
-            {user && !user?.isLoggedIn ? (
-              <>
-                <LoginForm isSignUp={isSignUp} />
-                <div className="absolute top-[2%] right-[2%]">
-                  <div className="text-sm text-gray-700">
-                    <span>{isSignUp?'Already got an account?':'Not got an account yet?' }</span>
-                      <a 
-                      onClick={toggleSignIn}
-                      className="text-primary-400 cursor-pointer">{isSignUp?' Sign in.':' Sign up'}</a>
-                  </div>
-                </div>
-              </>
-            ) : (
-              user &&
-              user?.isLoggedIn && (
-                  <WMOnboarding/>
-              )
-            )}
-          </div>
+    <div className="h-full w-full grid md:grid-cols-12">
+      <div className="hidden w-full h-full md:block md:col-span-6 lg:col-span-4">
+        <div className="flex items-center justify-center h-full w-full relative bg-[#252636] text-white">
+          <LoginSide user={user} />
         </div>
       </div>
-    </>
-  );
+      <div className="col-span-12 md:col-span-6 lg:col-span-8">
+        <div className="flex items-center justify-center h-full w-full relative">
+          {!user && <Fallback />}
+          
+            <div className="absolute top-[2%] left-[2%]">
+              <Link href="/" passHref prefetch={false} legacyBehavior>
+                  <Cross1Icon/>
+              </Link>
+            </div>
+          {user && !user?.isLoggedIn ? (
+            <>
+              <LoginForm isSignUp={isSignUp} />
+              <div className="absolute top-[2%] right-[2%]">
+                <div className="text-sm text-gray-700">
+                  <span>{isSignUp?'Already got an account?':'Not got an account yet?' }</span>
+                    <a 
+                    onClick={toggleSignIn}
+                    className="text-primary-400 cursor-pointer">{isSignUp?' Sign in.':' Sign up'}</a>
+                </div>
+              </div>
+            </>
+          ) : (
+            user &&
+            user?.isLoggedIn && (
+                <WMOnboarding/>
+            )
+          )}
+        </div>
+      </div>
+    </div>
+  </>;
 }
 
 export const getServerSideProps = withIronSessionSsr(async function ({

@@ -277,6 +277,9 @@ a.kofi-button:active {
         max-width: 100%;
         height: auto;
     }
+    figure{
+      max-width: 100%;
+    }
 
     blockquote {
         padding-left: 1rem;
@@ -318,7 +321,43 @@ a.kofi-button:active {
 }
 
 figure.ProseMirror-selectednode{
+  img{outline:3px solid blue;}
   figcaption::selection {
       background: transparent!important;
   }
+}
+img.ProseMirror-selectednode{
+  outline:3px solid blue;
+}
+
+figcaption{
+  position:relative;
+  // text-align: center;
+}
+.editable_text.empty::after{
+  position:absolute;
+  pointer-events: none;
+  color:#b5bbc2;
+  width:100%; 
+  left:0;
+  top:0;
+  content: "Image Caption (Optional)";
+}
+.editable_text.empty{
+  opacity:0;
+  height:0px;
+  margin-top:0px!important;
+}
+figure.ProseMirror-selectednode, figure.is-empty{
+  .editable_text{
+    opacity:1;
+    height:'auto';
+    margin-top:16px!important;
+  }
+}
+button[type="submit"]{
+  background:rgb(58, 92, 204)!important;
+}
+button[type="submit"]:hover{
+  background:rgb(75, 110, 223)!important;
 }

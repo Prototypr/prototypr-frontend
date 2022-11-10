@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 // import * as Yup from 'yup';
 import React,{ useEffect,useState } from 'react';
 import normalizeUrl from 'normalize-url';
+import { TextSelection } from "prosemirror-state";
 
 
   const Fieldset = styled('fieldset', {
@@ -31,7 +32,7 @@ import normalizeUrl from 'normalize-url';
   });
 
 
-  const LinkField = ({editor,closePopup, showRemove}) =>{ 
+  const LinkField = ({editor,closePopup, showRemove, isFigure}) =>{ 
     
     const [link, setLink] = useState();
     const firstFieldRef = React.useRef(null)
@@ -39,10 +40,16 @@ import normalizeUrl from 'normalize-url';
     useEffect(()=>{
       if (editor) {
 
+        const selection = editor.state.selection
+        const isTextSelection = selection instanceof TextSelection
+
         let previousUrl = editor.getAttributes("link").href;
         
         if(editor.isActive('blockLink')){
             previousUrl = editor.getAttributes("blockLink").href;
+        }else if(editor.isActive('figure') && !isTextSelection){
+          previousUrl = editor.getAttributes("figure").link;
+
         }
         setLink(previousUrl)
 
@@ -96,13 +103,14 @@ import normalizeUrl from 'normalize-url';
           // }
     
           if(url){
-            if((url.indexOf('{{')==-1 && (url.indexOf('[')==-1 && url.indexOf(']')==-1) && (url.indexOf('{')==-1 && url.indexOf('}')==-1))){
-              url = normalizeUrl(url, {stripWWW: false, forceHttps: true} )
-            }
-            
+            const selection = editor.state.selection
+            const isTextSelection = selection instanceof TextSelection
+
               if(editor.isActive('blockLink')){
                 editor.chain().focus().updateAttributes('blockLink',{ href: url }).run();
-              }else{
+              }else if(editor.isActive('figure') && !isTextSelection){
+                editor.chain().focus().updateAttributes('figure',{ link: url }).run();
+              }else{ 
                 editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
               }
         }else{
@@ -138,7 +146,7 @@ import normalizeUrl from 'normalize-url';
       }
     
       return (
-              <form style={{width:'90%'}} onSubmit={formik.handleSubmit}>
+              <form style={{width:'90%', minWidth:150}} onSubmit={formik.handleSubmit}>
               <Fieldset>
                 <Input 
                 ref={firstFieldRef}
@@ -146,8 +154,8 @@ import normalizeUrl from 'normalize-url';
                 value={formik.values.url}
                 className='bg-gray-800'
                 defaultValue={link}
-                onFocus={(e)=>{setTimeout(()=>{e.target.select(e)},100)}}
-                onMouseUp={(e)=>{e.target.select(e)}}
+                // onFocus={(e)=>{setTimeout(()=>{e.target.select(e)},100)}}
+                // onMouseUp={(e)=>{e.target.select(e)}}
                 id="url" placeholder="https://" />
                 </Fieldset>
                 </form>

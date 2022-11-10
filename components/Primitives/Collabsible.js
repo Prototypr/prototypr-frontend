@@ -13,6 +13,7 @@ const StyledCollasibleContent = styled(CollapsiblePrimitive.Content, {
   left: 0,
   top: 0,
   width: '100%',
+  minWidth:300,
   background:blackA.blackA12,
   padding:4,
   borderRadius:10
