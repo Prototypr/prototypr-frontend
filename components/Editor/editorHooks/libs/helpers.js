@@ -30,7 +30,7 @@ export function getImageExtention(url) {
   return extention;
 }
 
-export const getPostDetails = (user, editor, slug, forReview, postStatus) => {
+export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCreate}) => {
   const html = editor.getHTML();
   const json = editor.getJSON()?.content;
 
@@ -95,7 +95,8 @@ export const getPostDetails = (user, editor, slug, forReview, postStatus) => {
     status: forReview ? "pending" : postStatus ? postStatus : "draft",
     title: title,
     content: contentToInsert,
-    user: user?.id,
+    // remove user or the post user gets changed on update (when admin edits)
+    // user: user?.id, 
     //   featuredImage: coverImage,
     legacyFeaturedImage: {
       mediaItemUrl: coverImage || "",
@@ -114,6 +115,12 @@ export const getPostDetails = (user, editor, slug, forReview, postStatus) => {
     esES: false,
     slug: postSlug,
   };
+
+  //if creating, need to send the user id
+  if(isCreate){
+    entry.user = user?.id
+  }
+
   return {
     entry,
   };

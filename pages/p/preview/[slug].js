@@ -105,7 +105,7 @@ export default function Index(props) {
   // ah no admin dashboard needed, we can see it all in strapi
   // just need a way to open the editor as an admin
   // so admins will be able to see and edit the post as a user would
-  // by visitng /edit/draft/articleid, or whatever the link is
+  // by visitng /edit/articleid, or whatever the link is
   // use is admin, or user is the owner of the doc
 
   // only author of the post and admins are allowed to view the preview

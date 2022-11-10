@@ -1,6 +1,6 @@
-import Head from "next/head";
+// import Head from "next/head";
 import dynamic from "next/dynamic";
-import Link from "next/link";
+// import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
 // import Navbar from "@/components/small-nav";
 import Layout from "@/components/layout-dashboard";
@@ -14,8 +14,8 @@ import {
 import { sessionOptions } from "@/lib/iron-session/session";
 // import axios from "axios";
 import { useEffect } from "react";
-import Meta from "@/components/meta";
-import { Cross1Icon } from "@radix-ui/react-icons";
+// import Meta from "@/components/meta";
+// import { Cross1Icon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useState } from "react";
 

@@ -7,7 +7,7 @@ const useCreate = () => {
 
 
       const createNewPost = async (user, editor) => {
-        const { entry } = getPostDetails(user, editor);
+        const { entry } = getPostDetails({user, editor, isCreate:true});
     
         let publishPostEndpointConfig = {
           method: "post",

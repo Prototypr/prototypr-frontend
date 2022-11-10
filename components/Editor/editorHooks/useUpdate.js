@@ -15,7 +15,7 @@ const useUpdate = () => {
     forReview,
     postStatus
   ) => {
-    const { entry } = getPostDetails(user, editor, slug, forReview, postStatus);
+    const { entry } = getPostDetails({user, editor, slug, forReview, postStatus});
 
     let publishPostEndpointConfig = {
       method: "put",

@@ -51,7 +51,7 @@ const ArticleStats = () => {
             <div className="flex flex-col gap-4">
               {allPosts.map((post, i) => {
                 if (post.status === "publish") {
-                  const url = `/p/stats/${post.slug}`;
+                  const url = `/dashboard/stats/${post.slug}`;
                   const currentPostViews = postViews.find(
                     (p) => p.slug === post.slug
                   );

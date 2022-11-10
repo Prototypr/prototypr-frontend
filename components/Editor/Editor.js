@@ -76,7 +76,7 @@ const Editor = ({
 
   const [editorCreated, setEditorCreated] = useState(false);
   const [editorInstance, setEditorInstance] = useState(false);
-  const [previewEnabled, togglePreview] = useState(true);
+  const [previewEnabled, togglePreview] = useState(false);
 
   useConfirmTabClose(hasUnsavedChanges);
 
@@ -172,7 +172,7 @@ const Editor = ({
       const postInfo = await createNewPost(user, editor);
       //set the new slug
       localStorage.removeItem("wipContent");
-      router.push(`p/draft/${postInfo?.id}`);
+      router.push(`p/${postInfo?.id}`);
     }
 
     if (slug) {
@@ -206,7 +206,7 @@ const Editor = ({
         //set the new slug
         localStorage.removeItem("wipContent");
 
-        router.push(`p/draft/${postInfo?.id}`);
+        router.push(`p/${postInfo?.id}`);
       }
     }
   };
@@ -232,9 +232,9 @@ const Editor = ({
 
   return (
     <>
-      <div className="fixed z-[100] bottom-10 left-10 border flex flex-col gap-2 border-black border-opacity-10 p-4 bg-white shadow-lg rounded-lg">
+      <div className="fixed z-[100] bottom-10 left-10 border flex flex-col gap-2 border-black border-opacity-10 p-4 bg-white rounded-lg">
         <p className="text-xs">
-          {previewEnabled ? "Show Editor" : "Show Preview"}
+          Preview Mode
         </p>
         <ToggleSwitch
           onToggle={() => togglePreview(!previewEnabled)}
@@ -320,7 +320,7 @@ const Editor = ({
                             <p className="text-sm leading-7 my-0 mb-4">
                               Your story will be submitted to our publication
                               editors for review. The editors will review your
-                              draft and publish it within 24hrs if it fits our
+                              draft and publish it within 1 week if it fits our
                               guidelines, or get back to you with feedback.
                               Readers will not see your story in the publication
                               until it is reviewed and published by our editors.

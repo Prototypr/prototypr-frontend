@@ -97,7 +97,7 @@ const PostCard = ({ post, refetch }) => {
       {/* {(post.status === "draft" || post.status === "pending") && ( */}
       <div className="flex flex-row gap-2">
         <div>
-          <Link href={`/p/draft/${post.id}`}>
+          <Link href={`/p/${post.id}`}>
             <button className="text-sm underline text-black p-3 rounded-full hover:bg-gray-100">
               <svg
                 width="15"
@@ -142,7 +142,7 @@ const PostCard = ({ post, refetch }) => {
 
         {post.status === "publish" && (
           <div>
-            <Link href={`/p/stats/${post.slug}`}>
+            <Link href={`/dashboard/stats/${post.slug}`}>
               <button className="text-lg underline text-black  p-3  rounded-full hover:bg-gray-100 ">
                 <svg
                   width="15"
