@@ -62,40 +62,43 @@ export default function Index() {
     <>
       {/* <div className="h-full w-full">
         <div className="w-full h-full mx-auto  relative"> */}
-          {!user && <Fallback />}
+      {!user && <Fallback />}
 
-            {user && !user?.isLoggedIn ? (
-              <Layout>
-              <div className="w-full relative max-w-4xl p-4 mx-auto ">
-              <div className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto mt-8" style={{maxWidth:390}}>
-                <LoginForm isSignUp={isSignUp} />
-                </div>
-              </div>
-              <div className="mt-4 flex justify-center">
-                  <div className="text-sm text-gray-700">
-                    <span>
-                      {isSignUp
-                        ? "Already got an account?"
-                        : "Not got an account yet?"}
-                    </span>
-                    <a
-                      onClick={toggleSignIn}
-                      className="text-primary-400 cursor-pointer"
-                    >
-                      {isSignUp ? " Sign in." : " Sign up"}
-                    </a>
-                  </div>
-                </div>
-              </Layout>
-            ) : (
-              user &&
-              user?.isLoggedIn && (
-                <Layout navType={"simple"}>
-                  <MyPosts />
-                </Layout>
-              )
-            )}
-        {/* </div>
+      {user && !user?.isLoggedIn ? (
+        <Layout>
+          <div className="w-full relative max-w-4xl p-4 mx-auto ">
+            <div
+              className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto mt-8"
+              style={{ maxWidth: 390 }}
+            >
+              <LoginForm isSignUp={isSignUp} />
+            </div>
+          </div>
+          <div className="mt-4 flex justify-center">
+            <div className="text-sm text-gray-700">
+              <span>
+                {isSignUp
+                  ? "Already got an account?"
+                  : "Not got an account yet?"}
+              </span>
+              <a
+                onClick={toggleSignIn}
+                className="text-primary-400 cursor-pointer"
+              >
+                {isSignUp ? " Sign in." : " Sign up"}
+              </a>
+            </div>
+          </div>
+        </Layout>
+      ) : (
+        user &&
+        user?.isLoggedIn && (
+          <Layout navType={"simple"} background="#fff">
+            <MyPosts />
+          </Layout>
+        )
+      )}
+      {/* </div>
       </div> */}
     </>
   );
