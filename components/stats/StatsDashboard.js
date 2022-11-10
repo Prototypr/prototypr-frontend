@@ -51,13 +51,18 @@ const ArticleStats = () => {
             <div className="flex flex-col gap-4">
               {allPosts.map((post, i) => {
                 if (post.status === "publish") {
-                  const url = `/my-posts/stats/${post.slug}`;
+                  const url = `/p/stats/${post.slug}`;
                   const currentPostViews = postViews.find(
                     (p) => p.slug === post.slug
                   );
 
                   return (
-                    <Link key={i} href={url} className="cursor-pointer" legacyBehavior>
+                    <Link
+                      key={i}
+                      href={url}
+                      className="cursor-pointer"
+                      legacyBehavior
+                    >
                       <div className="w-full bg-white rounded-lg shadow-lg p-5 cursor-pointer">
                         <p>{post.title}</p>
                         <div>

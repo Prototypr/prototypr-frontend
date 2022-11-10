@@ -171,7 +171,7 @@ const Editor = ({
       const postInfo = await createNewPost(user, editor);
       //set the new slug
       localStorage.removeItem("wipContent");
-      router.push(`my-posts/draft/${postInfo?.id}`);
+      router.push(`p/draft/${postInfo?.id}`);
     }
 
     if (slug) {
@@ -205,7 +205,7 @@ const Editor = ({
         //set the new slug
         localStorage.removeItem("wipContent");
 
-        router.push(`my-posts/draft/${postInfo?.id}`);
+        router.push(`p/draft/${postInfo?.id}`);
       }
     }
   };
