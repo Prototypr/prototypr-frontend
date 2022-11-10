@@ -16,13 +16,13 @@ import { useState } from "react";
 import Layout from "@/components/layout-editor";
 
 import Editor from "@/components/Editor/Editor";
-const Spinner = dynamic(() => import('@/components/atom/Spinner/Spinner'))
+const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
 // const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
 export default function Index(props) {
   const { user } = useUser({
-    redirectTo: '/early-access',
+    redirectTo: "/early-access",
     redirectIfFound: false,
   });
 
@@ -60,17 +60,17 @@ export default function Index(props) {
         <div id="editor-container" className="w-full h-full mx-auto  relative">
           {!user && <Fallback />}
 
-            {user && !user?.isLoggedIn ? (
-              <>
+          {user && !user?.isLoggedIn ? (
+            <>
               <Layout>
-              <div className="relative w-full h-full flex">
-               <div className="my-auto mx-auto">
-                  <Spinner />
+                <div className="relative w-full h-full flex">
+                  <div className="my-auto mx-auto">
+                    <Spinner />
+                  </div>
                 </div>
-              </div>
               </Layout>
 
-                {/* <LoginForm isSignUp={isSignUp} />
+              {/* <LoginForm isSignUp={isSignUp} />
                 <div className="absolute top-[2%] right-[2%]">
                   <div className="text-sm text-gray-700">
                     <span>
@@ -86,18 +86,18 @@ export default function Index(props) {
                     </a>
                   </div>
                 </div> */}
-              </>
-            ) : (
-              user &&
-              user?.isLoggedIn && (
-                <div>
-                  {/* <EditDraft/> */}
-                    <Editor editorType="edit" />
-                </div>
-              )
-            )}
-          </div>
+            </>
+          ) : (
+            user &&
+            user?.isLoggedIn && (
+              <div>
+                {/* <EditDraft/> */}
+                <Editor editorType="edit" />
+              </div>
+            )
+          )}
         </div>
+      </div>
     </>
   );
 }

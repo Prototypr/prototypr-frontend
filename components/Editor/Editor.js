@@ -41,6 +41,8 @@ import Video from "./CustomExtensions/Video/Video";
 
 import { useConfirmTabClose } from "./useConfirmTabClose";
 import { useCreate, useLoad, useUpdate } from "./editorHooks/index";
+import { ToggleSwitch } from "@/components/atom/Switch/switch";
+import PreviewDisplay from "./preview";
 
 import { useRouter } from "next/router";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
@@ -74,10 +76,9 @@ const Editor = ({
 
   const [editorCreated, setEditorCreated] = useState(false);
   const [editorInstance, setEditorInstance] = useState(false);
+  const [previewEnabled, togglePreview] = useState(true);
 
   useConfirmTabClose(hasUnsavedChanges);
-
-  console.log("article slug -> ", articleSlug);
 
   const editor = useEditor({
     extensions: [
@@ -230,121 +231,143 @@ const Editor = ({
   };
 
   return (
-    <div className="w-full relative my-4">
-      {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
-      {mode === "admin" && (
-        <div className="mt-16">
-          {hasEditPermission ? (
-            <div className=" p-3 text-sm bg-green-500 flex flex-row justify-center items-center">
-              Hello there Admin, you can edit this post.
-            </div>
-          ) : (
-            <div className=" p-3 text-sm bg-yellow-400 flex flex-row justify-center items-center">
-              You don't have permission to edit this.
+    <>
+      <div className="fixed z-[100] bottom-10 left-10 border flex flex-col gap-2 border-black border-opacity-10 p-4 bg-white shadow-lg rounded-lg">
+        <p className="text-xs">
+          {previewEnabled ? "Show Editor" : "Show Preview"}
+        </p>
+        <ToggleSwitch
+          onToggle={() => togglePreview(!previewEnabled)}
+          size="small"
+          checked={previewEnabled}
+        />
+      </div>
+      {previewEnabled ? (
+        <div>
+          <PreviewDisplay content={content} />
+        </div>
+      ) : (
+        <div className="w-full relative my-4">
+          {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
+          {mode === "admin" && (
+            <div className="mt-16">
+              {hasEditPermission ? (
+                <div className=" p-3 text-sm bg-green-500 flex flex-row justify-center items-center">
+                  Hello there Admin, you can edit this post.
+                </div>
+              ) : (
+                <div className=" p-3 text-sm bg-yellow-400 flex flex-row justify-center items-center">
+                  You don't have permission to edit this.
+                </div>
+              )}
             </div>
           )}
-        </div>
-      )}
 
-      <EditorNav
-        editorInstance={editorInstance}
-        postStatus={postStatus}
-        isEditor={true}
-        editorButtons={
-          <div className="my-auto flex mr-1">
-            {hasUnsavedChanges && (
-              <div className="inline mr-6 text-pink-500 text-xs my-auto">
-                Unsaved changes
-              </div>
-            )}
+          <EditorNav
+            editorInstance={editorInstance}
+            postStatus={postStatus}
+            isEditor={true}
+            editorButtons={
+              <div className="my-auto flex mr-1">
+                {hasUnsavedChanges && (
+                  <div className="inline mr-6 text-pink-500 text-xs my-auto">
+                    Unsaved changes
+                  </div>
+                )}
 
-            <>
-              {mode !== "admin" && (
-                <div>
-                  <Button
-                    variant="ghostBlue"
-                    onClick={onSave}
-                    className="text-sm"
-                  >
-                    {saving
-                      ? "Saving..."
-                      : postStatus == "publish"
-                      ? "Update"
-                      : "Save Draft"}
-                  </Button>
-                </div>
-              )}
-
-              {mode === "admin" && hasEditPermission && (
-                <div>
-                  <Button
-                    variant="ghostBlue"
-                    onClick={onSave}
-                    className="text-sm"
-                  >
-                    {saving
-                      ? "Saving..."
-                      : postStatus == "publish"
-                      ? "Update"
-                      : "Save Draft"}
-                  </Button>
-                </div>
-              )}
-
-              {slug && postStatus != "publish" && mode !== "admin" && (
-                <SubmitPostModal handleBeforeOpen={handleBeforeSubmit}>
-                  <div className="p-10">
-                    <div className="flex flex-col gap-4">
-                      <div className="flex flex-col gap-2">
-                        <h1 className="text-2xl my-0">
-                          Submit this post for review?
-                        </h1>
-
-                        <p className="text-sm leading-7 my-0 mb-4">
-                          Your story will be submitted to our publication
-                          editors for review. The editors will review your draft
-                          and publish it within 24hrs if it fits our guidelines,
-                          or get back to you with feedback. Readers will not see
-                          your story in the publication until it is reviewed and
-                          published by our editors. Feel free to continue
-                          editing even after submitting.
-                        </p>
-                      </div>
-
-                      <Button onClick={onSubmit} className="px-3 py-2 text-md">
-                        Submit
+                <>
+                  {mode !== "admin" && (
+                    <div>
+                      <Button
+                        variant="ghostBlue"
+                        onClick={onSave}
+                        className="text-sm"
+                      >
+                        {saving
+                          ? "Saving..."
+                          : postStatus == "publish"
+                          ? "Update"
+                          : "Save Draft"}
                       </Button>
                     </div>
-                  </div>
-                </SubmitPostModal>
-              )}
-            </>
+                  )}
+
+                  {mode === "admin" && hasEditPermission && (
+                    <div>
+                      <Button
+                        variant="ghostBlue"
+                        onClick={onSave}
+                        className="text-sm"
+                      >
+                        {saving
+                          ? "Saving..."
+                          : postStatus == "publish"
+                          ? "Update"
+                          : "Save Draft"}
+                      </Button>
+                    </div>
+                  )}
+
+                  {slug && postStatus != "publish" && mode !== "admin" && (
+                    <SubmitPostModal handleBeforeOpen={handleBeforeSubmit}>
+                      <div className="p-10">
+                        <div className="flex flex-col gap-4">
+                          <div className="flex flex-col gap-2">
+                            <h1 className="text-2xl my-0">
+                              Submit this post for review?
+                            </h1>
+
+                            <p className="text-sm leading-7 my-0 mb-4">
+                              Your story will be submitted to our publication
+                              editors for review. The editors will review your
+                              draft and publish it within 24hrs if it fits our
+                              guidelines, or get back to you with feedback.
+                              Readers will not see your story in the publication
+                              until it is reviewed and published by our editors.
+                              Feel free to continue editing even after
+                              submitting.
+                            </p>
+                          </div>
+
+                          <Button
+                            onClick={onSubmit}
+                            className="px-3 py-2 text-md"
+                          >
+                            Submit
+                          </Button>
+                        </div>
+                      </div>
+                    </SubmitPostModal>
+                  )}
+                </>
+              </div>
+            }
+          />
+          {/* NAVIGATION END */}
+
+          <div className="my-4 pt-16 relative pb-10 blog-content">
+            {editor && mode !== "admin" && <MenuFloating editor={editor} />}
+            {mode !== "admin" && <TextMenu editor={editor} />}
+            {mode !== "admin" && <ImageMenu editor={editor} />}
+
+            {loading || !editorCreated ? (
+              <div
+                style={{ maxWidth: "100%" }}
+                className="mx-2 h-screen absolute top-0 left-0 flex flex-col justify-center w-screen"
+              >
+                <div className="-mt-32 mx-auto text-blue-800 opacity-80">
+                  <Spinner />
+                </div>
+              </div>
+            ) : (
+              <EditorContent editor={editor} />
+            )}
+
+            <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
           </div>
-        }
-      />
-      {/* NAVIGATION END */}
-
-      <div className="my-4 pt-16 relative pb-10 blog-content">
-        {editor && mode !== "admin" && <MenuFloating editor={editor} />}
-        {mode !== "admin" && <TextMenu editor={editor} />}
-        {mode !== "admin" && <ImageMenu editor={editor} />}
-
-        {loading || !editorCreated ? (
-          <div
-            style={{ maxWidth: "100%" }}
-            className="mx-2 h-screen absolute top-0 left-0 flex flex-col justify-center w-screen"
-          >
-            <div className="-mt-32 mx-auto text-blue-800 opacity-80">
-              <Spinner />
-            </div>
-          </div>
-        ) : (
-          <EditorContent editor={editor} />
-        )}
-
-        <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 

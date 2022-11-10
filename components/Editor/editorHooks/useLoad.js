@@ -21,10 +21,12 @@ const useLoad = (type = "create", usr) => {
   //TODO: fetch slug from backend
 
   useEffect(() => {
-    setLoading(true);
+    if (user) {
+      setLoading(true);
 
-    refetch();
-  }, []);
+      refetch();
+    }
+  }, [user]);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,10 +34,10 @@ const useLoad = (type = "create", usr) => {
       const postSlug = userPostId?.slug;
       setArticleSlug(postSlug);
     }
-    if (slug) {
+    if (user && slug) {
       fetchData();
     }
-  }, [slug]);
+  }, [slug, user]);
 
   const refetch = () => {
     if (slug) {

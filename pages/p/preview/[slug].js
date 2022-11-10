@@ -17,6 +17,7 @@ import Layout from "@/components/layout-editor";
 
 import Editor from "@/components/Editor/Editor";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
+import { useLoad } from "@/components/Editor/editorHooks/index";
 
 // const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
@@ -28,6 +29,7 @@ export default function Index(props) {
 
   const [isSignUp, setSignUp] = useState(true);
   const [userHasAdminPermission, setUserHasAdminPermission] = useState(false);
+  const [previewModeEnabled, setPreviewModeEnabled] = useState(true);
 
   const toggleSignIn = () => {
     setSignUp(!isSignUp);
@@ -39,6 +41,8 @@ export default function Index(props) {
    * other users can only preview, they cant edit or publish.
    *
    */
+
+  //   console.log(content, loading);
 
   useEffect(() => {
     if (user) {
@@ -129,24 +133,6 @@ export default function Index(props) {
             user &&
             user?.isLoggedIn && (
               <div>
-                {/* <EditDraft/> */}
-                <div>
-                  {/* <div className="mt-20 p-3 bg-blue-600 flex flex-row justify-center items-center">
-                    <h3 className="text-white">
-                      Admin Preview. A place for admins to preview, edit and
-                      approve posts.
-                    </h3>
-                  </div> */}
-                  {/* {userHasAdminPermission ? (
-                    <div className=" p-3 bg-green-400 flex flex-row justify-center items-center">
-                      Hello there admin, you can edit this.
-                    </div>
-                  ) : (
-                    <div className=" p-3 bg-yellow-400 flex flex-row justify-center items-center">
-                      You cant edit this.
-                    </div>
-                  )} */}
-                </div>
                 <Editor
                   editorType="edit"
                   mode="admin"
