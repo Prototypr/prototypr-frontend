@@ -73,11 +73,11 @@ export default function Index({
     id: "sourcepanel.desc2",
   });
 
-  useEffect(()=>{
-    if(window.$crisp){
-      window.$crisp.push(['do', 'chat:show']);
+  useEffect(() => {
+    if (window.$crisp) {
+      window.$crisp.push(["do", "chat:show"]);
     }
-  },[])
+  }, []);
 
   return (
     <>
@@ -96,7 +96,7 @@ export default function Index({
           <EditorPick2 lazy={false} header={editorPickTitle} post={heroPost} />
           <ProductList posts={morePosts} />
           <div className="hidden md:block mt-32 pb-10 px-3 xl:px-0">
-            <h4 className="text-3xl text-gray-900 font-bold leading-6 text-title-1">
+            <h4 className="text-3xl  font-bold leading-6 text-title-1">
               {designToolTitle}
             </h4>
           </div>

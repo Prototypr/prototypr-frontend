@@ -27,32 +27,40 @@ export default function Author({
     ? author?.data?.attributes?.name
     : "";
 
-  return <>
-    <div className="flex items-center relative">
-      <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
-        {authorImage && (
-          <Link href={`/people/${author?.data?.attributes?.slug}`} legacyBehavior>
-            <Image
-              loader={gumletLoader}
-              src={authorImage}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-full"
-            />
-          </Link>
-        )}
+  return (
+    <>
+      <div className="flex items-center relative">
+        <div className="w-9 h-9 cursor-pointer transform transition duration-500 hover:scale-125 hover:shadow-sm rounded-full relative">
+          {authorImage && (
+            <Link
+              href={`/people/${author?.data?.attributes?.slug}`}
+              legacyBehavior
+            >
+              <Image
+                loader={gumletLoader}
+                src={authorImage}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-full"
+              />
+            </Link>
+          )}
+        </div>
+        <div
+          className={`font-normal text-base ml-3 ${
+            textColor ? textColor : "text-gray-600"
+          } hover:underline`}
+        >
+          {author?.data?.attributes?.slug && (
+            <Link
+              href={`/people/${author?.data?.attributes?.slug}`}
+              legacyBehavior
+            >
+              {name}
+            </Link>
+          )}
+        </div>
       </div>
-      <div
-        className={`font-normal text-base ml-3 ${
-          textColor ? textColor : "text-gray-600"
-        } hover:underline`}
-      >
-        {author?.data?.attributes?.slug && (
-          <Link href={`/people/${author?.data?.attributes?.slug}`} legacyBehavior>
-            {name}
-          </Link>
-        )}
-      </div>
-    </div>
-  </>;
+    </>
+  );
 }
