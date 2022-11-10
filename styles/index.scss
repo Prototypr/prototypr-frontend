@@ -226,78 +226,78 @@ a.kofi-button:active {
 
 
 
-.ProseMirror {
+// .ProseMirror {
 
-    >*+* {
-        margin-top: 0.75em;
-    }
+//     >*+* {
+//         margin-top: 0.75em;
+//     }
 
-    ul,
-    ol {
-        padding: 0 1rem;
-        list-style-type: disc;
+//     ul,
+//     ol {
+//         padding: 0 1rem;
+//         list-style-type: disc;
     
-    }
+//     }
 
-    li {
-        list-style-type: disc;
-    }
+//     li {
+//         list-style-type: disc;
+//     }
 
     
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        line-height: 1.1;
-    }
+//     h1,
+//     h2,
+//     h3,
+//     h4,
+//     h5,
+//     h6 {
+//         line-height: 1.1;
+//     }
 
-    code {
-        background-color: rgba(#616161, 0.1);
-        color: #616161;
-    }
+//     code {
+//         background-color: rgba(#616161, 0.1);
+//         color: #616161;
+//     }
 
-    pre {
-        background: #0D0D0D;
-        color: #FFF;
-        font-family: 'JetBrainsMono', monospace;
-        padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
+//     pre {
+//         background: #0D0D0D;
+//         color: #FFF;
+//         font-family: 'JetBrainsMono', monospace;
+//         padding: 0.75rem 1rem;
+//         border-radius: 0.5rem;
 
-        code {
-            color: inherit;
-            padding: 0;
-            background: none;
-            font-size: 0.8rem;
-        }
-    }
+//         code {
+//             color: inherit;
+//             padding: 0;
+//             background: none;
+//             font-size: 0.8rem;
+//         }
+//     }
 
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-    figure{
-      max-width: 100%;
-    }
+//     img {
+//         max-width: 100%;
+//         height: auto;
+//     }
+//     figure{
+//       max-width: 100%;
+//     }
 
-    blockquote {
-        padding-left: 1rem;
-        border-left: 2px solid rgba(#0D0D0D, 0.1);
-    }
+//     blockquote {
+//         padding-left: 1rem;
+//         border-left: 2px solid rgba(#0D0D0D, 0.1);
+//     }
 
-    a {
-        color: #2345de;
-        text-decoration: underline;
-    }
+//     a {
+//         color: #2345de;
+//         text-decoration: underline;
+//     }
 
-    hr {
-        border: none;
-        border-top: 2px solid rgba(#0D0D0D, 0.1);
-        margin: 2rem 0;
-    }
+//     hr {
+//         border: none;
+//         border-top: 2px solid rgba(#0D0D0D, 0.1);
+//         margin: 2rem 0;
+//     }
         
-}
+// }
 
 // .ProseMirror p.is-editor-empty:first-child::before {
 //     content: attr(data-placeholder);

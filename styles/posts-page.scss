@@ -101,11 +101,11 @@ figure{
         margin: 2.5rem auto;
         border-radius: 0.375rem;
     }
-//    *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
-//     max-width: 43rem;
-//     margin-right: auto;
-//     margin-left: auto;
-//    }
+   *:not(.tippy-content *, .tippy-box, [data-tippy-root], img), ul, ol{
+    max-width: 43rem;
+    margin-right: auto;
+    margin-left: auto;
+   }
    ul{
     list-style-type: disc;
     list-style-position: inside;
@@ -301,6 +301,9 @@ figure{
 @media only screen and (max-width: 600px) {
     figure{
         max-width:100%!important;
+    }
+    iframe{
+        max-width: 100%!important;
     }
   }
 
