@@ -69,37 +69,43 @@ const UserForm = ({ info }) => {
         });
       
       }else{
-        const text = await result.text();
-        toast.error("Error has occured.");
+        console.log(result)
+        let msg = result?.error?.message
+        // const text = await result.text();
+        toast.error(msg?msg:"Error has occured.");
+        if(msg.indexOf('Username')>-1){
+          setError('username',{message:msg?msg:"Error has occured."})
+        }
       }
     } catch (error) {
-      toast.error("Error has occured.");
-      console.log(error.message)
-      console.log(error.response)
-      error.response.data.error.details.errors.forEach((i) => {
-        if (
-          [
-            "location",
-            "firstName",
-            "secondName",
-            "website",
-            "bio",
-            "paymentPointer",
-            "email",
-          ].includes(i.path[0])
-        ) {
-          setError(
-            i.path[0],
-            i.path[0] === "location"
-              ? {
-                  message: "Location not available.",
-                }
-              : {
-                  message: i.message,
-                }
-          );
-        }
-      });
+      console.log(error)
+      toast.error('Error has occured.');
+      // console.log(error.message)
+      // console.log(error.response)
+      // error.response.data.error.details.errors.forEach((i) => {
+      //   if (
+      //     [
+      //       "location",
+      //       "firstName",
+      //       "secondName",
+      //       "website",
+      //       "bio",
+      //       "paymentPointer",
+      //       "email",
+      //     ].includes(i.path[0])
+      //   ) {
+      //     setError(
+      //       i.path[0],
+      //       i.path[0] === "location"
+      //         ? {
+      //             message: "Location not available.",
+      //           }
+      //         : {
+      //             message: i.message,
+      //           }
+      //     );
+      //   }
+      // });
     }
   };
 

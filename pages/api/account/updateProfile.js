@@ -14,7 +14,7 @@ import { updateSessionUser } from "@/lib/account/updateSessionUser";
 ) {
   try {
     const body = req.body;
-    const { data } = body;
+    let { data } = body;
 
     if (!req?.session?.user) {
       console.log('no user')
@@ -26,6 +26,13 @@ import { updateSessionUser } from "@/lib/account/updateSessionUser";
       return res.status(500).end("User is not authenticated - invalid token");
     }
 
+    //remove empty form values
+    // data = Object.fromEntries(Object.entries(data).filter(([_, v]) => v != null));
+
+    //don't submit email and username - no allow change
+    delete data.email
+    // delete data.username
+    
    const result = await axios({
     method: "POST",
     url:
@@ -37,7 +44,8 @@ import { updateSessionUser } from "@/lib/account/updateSessionUser";
     data: qs.stringify(data),
   });
   
-  if(result.status==200){
+  // console.log(result)
+  if(result?.status==200){
     console.log('success')
     //update the user session 
     const updatedSessionUser = updateSessionUser(result.data, req.session.user)
@@ -53,8 +61,9 @@ import { updateSessionUser } from "@/lib/account/updateSessionUser";
   }
    
   } catch (error) {
-    console.error(error.message);
-    res.status(500).json({error:error.message});
+    // console.log(error.toJSON())
+    const er = error.response?.data?.error;
+    return res.json({error:er, status:500});
   }
 }
 

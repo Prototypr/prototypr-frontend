@@ -163,7 +163,7 @@ export default function PeoplePage({
                             rel="nofollow"
                             href={author.url}
                           >
-                            {authorUrl}
+                            {/* {authorUrl} */}
                           </a>
                         </span>
                       </div>
@@ -381,7 +381,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       twitter: twitter ? twitter : "",
       dribbble: dribbble ? dribbble : "",
       skills,
-      authorUrl,
+      authorUrl:authorUrl?authorUrl:'',
       pageNo,
       preview,
       pagination,

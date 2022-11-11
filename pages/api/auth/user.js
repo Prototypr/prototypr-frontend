@@ -2,8 +2,8 @@
    
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { sessionOptions } from '@/lib/iron-session/session'
-import { getNextAuthSession } from '@/lib/account/getNextAuthSession'
 import axios from "axios";
+import { getNextAuthSession } from '@/lib/account/getNextAuthSession'
 import { updateSessionUser } from '@/lib/account/updateSessionUser';
 
 /**
