@@ -35,7 +35,7 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import Dropcursor from "@tiptap/extension-dropcursor";
 import History from "@tiptap/extension-history";
 import { Blockquote } from "@/components/Editor/CustomExtensions/CustomBlockquote";
-import { Figure } from "./CustomExtensions/Figure";
+import { FigCaption, Figure } from "./CustomExtensions/Figure";
 import Tweet from "./CustomExtensions/Tweet/Tweet";
 import Video from "./CustomExtensions/Video/Video";
 
@@ -107,6 +107,7 @@ const Editor = ({
         openOnClick: false,
       }),
       // images are converted to figures now
+      // FigCaption,
       Figure.configure({
         allowBase64: true,
       }),

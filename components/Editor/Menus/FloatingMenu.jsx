@@ -255,7 +255,11 @@ const MenuFloating = ({ editor, isSelecting }) => {
     return(
 <FloatingMenu 
 shouldShow= {({ editor, view, state, oldState }) => {
-  if(state?.selection?.$anchor?.parent?.type?.name=='paragraph' && state?.selection?.$anchor?.parent?.textContent==''){
+
+
+  if(state?.selection?.$anchor?.parent?.type?.name=='paragraph' && state?.selection?.$anchor?.parent?.textContent==''
+  // ||state?.selection?.$anchor?.nodeBefore?.type?.name=='horizontalRule' 
+  ){
     return true
   }
 }}
@@ -341,7 +345,11 @@ editor={editor} tippyOptions={{ duration: 100 }}>
 
         <DropdownMenuItem>
           <IconButton  onClick={()=>{  
-               editor.chain().focus().setHorizontalRule().run()
+             setIsOpen(false)
+             setTimeout(()=>{
+
+               editor.chain().focus().setHorizontalRule().setHardBreak().run()
+             },20)
             }} className="hover:cursor-pointer menu-item" aria-label="Insert Divider">
             <DividerHorizontalIcon/>
           </IconButton>

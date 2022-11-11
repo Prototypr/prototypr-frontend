@@ -13,6 +13,29 @@ import {Decoration, DecorationSet} from "prosemirror-view"
 export const inputRegex = /!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\)/
 export const ImageDecorationKey = new PluginKey('image-decoration');
 
+export const FigCaption = Node.create({
+  name: 'figcaption',
+  addOptions() {
+    return {
+      HTMLAttributes: {},
+    }
+  },
+  content: 'inline*',
+  selectable: true,
+  draggable: false,
+
+  parseHTML() {
+    return [
+      {
+        tag: 'figcaption',
+      },
+    ]
+  },
+  renderHTML({ HTMLAttributes }) {
+    return ['figcaption', mergeAttributes(HTMLAttributes), 0]
+  },
+})
+
 export const Figure = Node.create({
   name: 'figure',
 
@@ -22,27 +45,14 @@ export const Figure = Node.create({
     }
   },
 
+  group: 'block',
+  //todo, make fig captions their own component - this is a bit of a hack
+  // content: 'block figcaption',
+  content: 'inline*',
   draggable: true,
+  isolating: true,
   defining: true,
   selectable: true,
-
-  content: 'inline*',
-  isolating: true,
-
-  addOptions() {
-    return {
-      inline: false,
-      HTMLAttributes: {},
-    };
-  },
-
-  inline() {
-    return this.options.inline;
-  },
-
-  group() {
-    return this.options.inline ? 'inline' : 'block';
-  },
 
 
   addAttributes() {
@@ -92,10 +102,9 @@ export const Figure = Node.create({
       figcaption:{
         default: null,
         parseHTML: element => {
-          return element.querySelector('figcaption')?.innerText
+          return element.querySelector('figcaption')?.innerHTML
         },
       },
-      
       link: { parseHTML: (element) => {
         if(element.querySelector('a')){
           return element.querySelector('a')?.getAttribute('href')
@@ -157,7 +166,7 @@ export const Figure = Node.create({
     return [
       'figure',
       ['img', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false })],
-      ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:'mama'],
+      ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:''],
     ]
   },
 
@@ -443,8 +452,8 @@ export const Figure = Node.create({
             return false;
           }
 
-          // set the figcaption to the textcontent
-          updatedNode.attrs.figcaption = updatedNode.textContent
+          // set the figcaption to the textcontent          
+          // updatedNode.attrs.figcaption = updatedNode.textContent
           
           figcaptionDiv.classList.toggle('empty', updatedNode.content.size === 0);
           
