@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import ReactAvatarEditor from "react-avatar-editor";
 import Button from "../atom/Button/Button";
 import useUser from "@/lib/iron-session/useUser";
-// import { updateUserSession } from "@/lib/iron-session/updateUserSession";
 import { useRouter } from "next/router";
 var axios = require("axios");
 

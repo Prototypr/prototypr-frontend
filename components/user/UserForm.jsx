@@ -1,16 +1,15 @@
 import FormControl from "@/components/atom/FormControl/FormControl";
 import { accountLocations } from "@/lib/constants";
 import dynamic from "next/dynamic";
-import axios from "axios";
 // import { useSession } from "next-auth/react";
-import qs from "query-string";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useUser from '@/lib/iron-session/useUser'
 import Button from "../atom/Button/Button";
 import { useRouter } from 'next/router'
-import { updateUserSession } from "@/lib/iron-session/updateUserSession";
 import Link from 'next/link'
+import fetchJson from "@/lib/iron-session/fetchJson";
+
 // import AvatarEditor from "";
 const AvatarEditor = dynamic(() => {return import("./AvatarEditor")},{ ssr: false });
 
@@ -54,30 +53,24 @@ const UserForm = ({ info }) => {
 
   //update the session with the latest user input
   //returns true or false if the form should refresh
-  const refresh = await updateUserSession(data, mutateUser)
+  // const refresh = await updateUserSession(data, mutateUser)
 
 
     try {
-      await axios({
-        method: "POST",
-        url:
-          process.env.NEXT_PUBLIC_API_URL + "/api/users-permissions/users/me",
-        headers: {
-          Authorization: `Bearer ${user?.jwt}`,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        data: qs.stringify(data),
-      });
-
-      toast.success("Successfully updated", {
-        duration: 5000,
-      });
-      //if the user email has been changed, the account is unconfirmed.
-      //trigger a refresh so the verification form is showing
-      if(refresh){
-        setTimeout(()=>{
-          router.reload(window.location.pathname)
-        },100)
+      const body = {data};
+      const result = await fetchJson('/api/account/updateProfile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      if(result.status === 200){
+        toast.success("Successfully updated", {
+          duration: 5000,
+        });
+      
+      }else{
+        const text = await result.text();
+        toast.error("Error has occured.");
       }
     } catch (error) {
       toast.error("Error has occured.");

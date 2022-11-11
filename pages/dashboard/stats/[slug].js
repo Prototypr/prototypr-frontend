@@ -2,16 +2,6 @@ import dynamic from "next/dynamic";
 
 import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
-import { withIronSessionSsr } from "iron-session/next";
-import {
-  updateUserSessionSSR,
-  updateUserSession,
-} from "@/lib/iron-session/updateUserSession";
-import { sessionOptions } from "@/lib/iron-session/session";
-// import axios from "axios";
-import { useEffect } from "react";
-// import Meta from "@/components/meta";
-import axios from "axios";
 import { useState } from "react";
 import Layout from "@/components/layout-editor";
 
@@ -34,28 +24,6 @@ export default function Index(props) {
   const toggleSignIn = () => {
     setSignUp(!isSignUp);
   };
-
-  useEffect(() => {
-    if (user && !user.avatar) {
-      // declare the data fetching function
-      const fetchUserData = async () => {
-        const res = await axios({
-          method: "GET", // change this GET later
-          url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
-          headers: {
-            Authorization: `Bearer ${user.jwt}`,
-          },
-        });
-        if (res.data) {
-          await updateUserSession(res.data);
-        }
-      };
-      // call the function
-      fetchUserData()
-        // make sure to catch any error
-        .catch(console.error);
-    }
-  }, [user]);
 
   return (
     <>
@@ -86,49 +54,3 @@ export default function Index(props) {
     </>
   );
 }
-
-export const getServerSideProps = withIronSessionSsr(async function ({
-  req,
-  res,
-}) {
-  //iron-session user
-  const user = req.session.user;
-
-  if (user?.login?.jwt) {
-    try {
-      const res = await axios({
-        method: "GET", // change this GET later
-        url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
-        headers: {
-          Authorization: `Bearer ${user.login.jwt}`,
-        },
-      });
-      //update iron-session with this up to date data
-      await updateUserSessionSSR(req, res);
-
-      //then return it
-      return {
-        props: {
-          userData: res.data,
-          isConfirmed: res.data.confirmed,
-        }, // will be passed to the page component as props
-      };
-    } catch (e) {
-      console.log(e.message);
-      return {
-        props: {
-          user: {
-            isLoggedIn: false,
-            login: "",
-            avatarUrl: "",
-            isConfirmed: false,
-          },
-        },
-      };
-    }
-  }
-  return {
-    props: {},
-  };
-},
-sessionOptions);

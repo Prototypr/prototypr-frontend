@@ -2,45 +2,10 @@
    
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { sessionOptions } from '@/lib/iron-session/session'
-import { getSession } from "next-auth/react";
+import { getNextAuthSession } from '@/lib/account/getNextAuthSession'
+import axios from "axios";
+import { updateSessionUser } from '@/lib/account/updateSessionUser';
 
-/**
- * User needs to be standardised
- * 
- * //nextauth getSession provides:
- * //some of these properties, such as jwt are set inside nextauth
- * user:{
- *  avatar
- *  expires
- *  id
- *  jwt
- *  picture
- *  user{
- *    email
- *    image
- *    isLoggedIn
- *    name
- *  }
- * }
- * 
- *  iron-session/strapi provides everything in strapi:
- * 
- *  user:{
- *  isLoggedIn
- *  login:{
- *      jwt
- *      user{
- *        bio
- *        email
- *        username
- *        firstName
- *        secondName
- *      }
- *    }
- *  }
- * }
- * 
- */
 /**
  * combines nextauth authentication
  * with strapi passwordless auth
@@ -49,66 +14,67 @@ export default withIronSessionApiRoute(userRoute, sessionOptions)
 
 async function userRoute(req, res) {
 
-  //get the nextauth session
-  const nextAuthSession = await getSession({req})
+  /**
+   * get info from the user, if the session is 
+   * a social one, with nextauth check that first
+   */
+  //get the nextauth session user
+  const nextAuthSessionUser = await getNextAuthSession(req)
   
-  //if the user is authenticated via nextauth session
-  if(nextAuthSession && nextAuthSession.user){
-    //check if the email is in the iron-session
-    let email = nextAuthSession.user.email
-
-    if(req.session.user && req.session.user.login?.user?.email){
-      email = req.session.user.login?.user?.email
-    }
-    let avatar = ''
-    if(req.session.user?.login?.user?.avatar){
-      avatar=req.session.user.login?.user?.avatar
-    }
-    let id = null
-    if(req.session.user?.login?.user?.id){
-      id=req.session.user.login?.user?.id
-    }
-    let slug = null
-    if(req.session.user?.login?.user?.slug){
-      slug=req.session.user.login?.user?.slug
-    }
-    //save to iron-session
-    let nextAuthUser={
-      isLoggedIn:true,
-      isNextAuth:true,
-      login:{
-        jwt:nextAuthSession.jwt,
-        user:{
-          email:email,//problem - this does not get updated
-          name:nextAuthSession.user.name,
-          avatar:avatar,
-          id,
-          slug
-        }
-      }
-    }
-     req.session.user=nextAuthUser
-    await req.session.save();
-
-    res.json({
-      ...nextAuthUser.login.user,
-      jwt:nextAuthSession.jwt,
-      isLoggedIn: true,
-      isNextauth:true
-    })
+  // sessionUser, the user object iwth standardised format
+  // cos you can log in with nextauth social providers/strapi passwordless 
+  let sessionUser = null
+  let isNextAuth = false
+  if(nextAuthSessionUser?.user){
+    sessionUser = nextAuthSessionUser
+    isNextAuth = true
   }
-  //now check if there's a strapi passwordless withIronSession session
-  else if (req.session.user) {
+  /**
+   * if no nextauth session user, 
+   * but there is an iron session/strapi email login user
+   */
+  //get the strapi email session user
+  else if(req?.session?.user){
+    sessionUser = req.session.user
+  }
+  
+  // strapi passwordless or nextauth
+  if(sessionUser?.login){
+    // https://github.com/vvo/iron-session/blob/main/examples/next.js/pages/api/user.js
     // in a real world application you might read the user id from the session and then do a database request
     // to get more information on the user if needed
+
+    //update the data each load so it's always up to date
+    const strapiUserRes = await axios({
+      method: "GET", // change this GET later
+      url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
+      headers: {
+        Authorization: `Bearer ${sessionUser.login.jwt}`,
+      },
+    });
+    const {data:freshProfileData} = strapiUserRes
+
+    //copy over the new profile data to the session user
+    sessionUser = updateSessionUser(freshProfileData, sessionUser)
+
+    //make sure the req session is up to date
+    req.session.user={
+      ...sessionUser,
+    }
+    //save it
+    await req.session.save();
+    /**
+     * return the user
+     */
     res.json({
-      ...req.session.user.login.user,
-      jwt:req.session.user.login.jwt,
+      ...sessionUser.login.user,
+      jwt:sessionUser.login.jwt,
       isLoggedIn: true,
-      isNextAuth:false
+      isNextAuth
     })
   }
-  else {
+  else{
+    //nobody logged in
     res.json({
       isLoggedIn: false,
       login: '',
