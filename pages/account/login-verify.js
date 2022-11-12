@@ -19,7 +19,7 @@ export default function Login({ loginToken }) {
 
   const [loginTokenPresent, setLoginTokenPresent] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [tokenInvalid, setTokenInvalid] = useState(false);
+  const [tokenInvalid, setTokenInvalid] = useState(null);
 
   useEffect(() => {
     verifyToken();
@@ -49,9 +49,15 @@ export default function Login({ loginToken }) {
               // Router.reload()
               window.location.replace("/account");
             },200)
+          }).catch(e=>{
+            console.log(e)
+            toast.error("Token invalid, please try again!", {
+              position: "top-center",
+              duration: 5000,
+            });
           })
         );
-        setTokenInvalid(false);
+        setTokenInvalid(true);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -81,15 +87,15 @@ export default function Login({ loginToken }) {
           <>
             <p className="mb-6">
               Oh no! It looks like the email link has already been used, or is
-              expired. Try sigining in again.
+              expired. Please try signing in again, or contact support if it keeps happening.
             </p>
             <a href="/early-access">
               <Button color="primary">Back to sign in</Button>
             </a>
           </>
         ) : (
-          !loading &&
-          !tokenInvalid && (
+          (!loading &&
+          tokenInvalid!==true )&& (
             <>
               <div className="mx-2">
                 <Spinner />

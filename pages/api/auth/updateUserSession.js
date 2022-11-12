@@ -54,11 +54,11 @@ async function handler(req, res) {
 
     // in a real world application you might read the user id from the session and then do a database request
     // to get more information on the user if needed
-    res.json({
+    return res.json({
       data:req.session.user
     })
   }else{
-    res.json({
+    return res.json({
       done:true
     })
   }

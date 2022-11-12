@@ -66,7 +66,7 @@ async function userRoute(req, res) {
     /**
      * return the user
      */
-    res.json({
+    return res.json({
       ...sessionUser.login.user,
       jwt:sessionUser.login.jwt,
       isLoggedIn: true,
@@ -75,7 +75,7 @@ async function userRoute(req, res) {
   }
   else{
     //nobody logged in
-    res.json({
+    return res.json({
       isLoggedIn: false,
       login: '',
       avatarUrl: '',
