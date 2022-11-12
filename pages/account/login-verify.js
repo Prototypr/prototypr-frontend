@@ -44,6 +44,8 @@ export default function Login({ loginToken }) {
               position: "top-center",
               duration: 5000,
             });
+            setTokenInvalid(false);
+
             setTimeout(()=>{
               // Router.push('/account')
               // Router.reload()
@@ -55,11 +57,12 @@ export default function Login({ loginToken }) {
               position: "top-center",
               duration: 5000,
             });
+            setTokenInvalid(true);
+            setLoading(false);
           })
-        );
-        setTokenInvalid(true);
-        setLoading(false);
-      } catch (error) {
+          );
+          setLoading(false);
+        } catch (error) {
         setLoading(false);
         if (error) {
           setTokenInvalid(true);
