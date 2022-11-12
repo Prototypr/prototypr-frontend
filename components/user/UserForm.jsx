@@ -76,6 +76,9 @@ const UserForm = ({ info }) => {
         if(msg.indexOf('Username')>-1){
           setError('username',{message:msg?msg:"Error has occured."})
         }
+        if(msg.indexOf('Email')>-1){
+          setError('email',{message:msg?msg:"Error has occured."})
+        }
       }
     } catch (error) {
       console.log(error)
@@ -338,7 +341,7 @@ const UserForm = ({ info }) => {
             autoComplete="off"
             className="w-full"
             placeholder="John"
-            disabled={true}
+            // disabled={true}
             aria-describedby="username_error"
             aria-live="assertive"
             {...register("username", {

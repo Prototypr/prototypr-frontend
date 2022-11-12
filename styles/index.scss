@@ -361,3 +361,9 @@ button[type="submit"]{
 button[type="submit"]:hover{
   background:rgb(75, 110, 223)!important;
 }
+button[type="submit"].bg-gray-100{
+  background:rgba(156,163, 175, 0.2)!important;
+}
+button[type="submit"].bg-gray-100:hover{
+  background:rgba(141, 148, 160, 0.25)!important;
+}

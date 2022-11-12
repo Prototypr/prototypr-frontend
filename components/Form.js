@@ -1,4 +1,4 @@
-import { FormEvent } from 'react'
+// import { FormEvent } from 'react'
 import Button from '@/components/atom/Button/Button'
 
 export default function Form({
@@ -26,7 +26,7 @@ export default function Form({
       <Button
           isFullWidth
           type="submit"
-          className="justify-center h-11 font-medium"
+          className="justify-center bg-gray-100 h-11 font-medium"
           color="default"
           isLoading={isLoading}
       >

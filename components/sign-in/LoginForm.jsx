@@ -121,7 +121,8 @@ const LoginForm = ({ isSignUp }) => {
       {showLoginForm == false ? (
         <Button
           isFullWidth
-          className="text-left justify-start h-11 font-normal"
+          type="submit"
+          className="text-left bg-gray-100 justify-start h-11 font-normal"
           onClick={() => {
             setShowLoginForm(!showLoginForm);
             // signIn("email", {email:'graeme@prototypr.io'})
@@ -174,8 +175,23 @@ const LoginForm = ({ isSignUp }) => {
               e.preventDefault();
               setSent(false);
               setIsLoading(true);
+              console.log(e)
+              //create username from email
+              let username=e.target[0].value
+              //check if username is an email address
+              var emailValidator = require("email-validator");
+              if(emailValidator.validate(username)){
+                let newUsername = username.split('@')[0];
+                let timestamp = String(Date.now())
+                //last 3 digits of timestamp
+                timestamp = timestamp.substring(newUsername.length-3, newUsername.length)
+                newUsername = newUsername+timestamp
+                username = newUsername
+              }
+
               var data = JSON.stringify({
                 email: e.target[0].value,
+                username:username
               });
 
               var config = {
@@ -207,7 +223,10 @@ const LoginForm = ({ isSignUp }) => {
                   }, 800);
                 })
                 .catch(function (error) {
-                  console.log(error);
+                  setSent(false)
+                  setIsLoading(false);
+                  toast.dismiss(loadingToastId);
+                  alert('Please try again, or contact support.')
                 });
             }}
           />
