@@ -19,20 +19,15 @@ async function loginRoute(req, res) {
       },
     };
 
-
-  console.log(config)
-
     axios(config)
       .then(async function (response) {
         const user = { isLoggedIn: true, login: response.data };
 
-        console.log(user)
         req.session.user = user;
         await req.session.save();
         return res.status(200).json(user);
       })
       .catch(function (error) {
-        console.log(error.message);
         return res.status(400).json({ message: error.message });
       });
   } catch (error) {

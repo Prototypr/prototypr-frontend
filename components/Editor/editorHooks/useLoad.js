@@ -15,6 +15,7 @@ const useLoad = (type = "create", usr) => {
   const [content, setContent] = useState(null);
   const [editorType] = useState(type);
   const [articleSlug, setArticleSlug] = useState(null);
+  const [isOwner, setIsOwner] = useState(false)
 
   const router = useRouter();
   const { slug } = router.query;
@@ -39,11 +40,11 @@ const useLoad = (type = "create", usr) => {
     }
   }, [slug, user]);
 
-  const refetch = () => {
+  const refetch = async () => {
     if (slug) {
       console.log("loading from backend");
       //load data
-      getCurrentPost();
+      await getCurrentPost();
       // todo
       // setContent(content);
       setLoading(false);
@@ -75,6 +76,12 @@ const useLoad = (type = "create", usr) => {
         content = `<h1>${post?.title}</h1>${content}`;
       }
 
+      if(post.owner==user?.id){
+        setIsOwner(true)
+      }else{
+        setIsOwner(false)
+      }
+
       setPostId(post?.id);
       setContent(content);
       setTitle(post?.title);
@@ -96,6 +103,7 @@ const useLoad = (type = "create", usr) => {
     slug,
     postStatus,
     articleSlug,
+    isOwner
   };
 };
 

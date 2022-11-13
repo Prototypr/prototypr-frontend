@@ -107,7 +107,7 @@ export default function Post({ post, preview, relatedPosts }) {
           className="pt-24 md:pt-36 -mt-3 mx-auto"
           style={{ maxWidth: "1200px" }}
         >
-          {post?.id &&
+          {(post?.id && (process.env.NODE_ENV==='production')) && 
           <WMPostTracker postId={post?.id} post={post}/>}
           <Container>
             {router.isFallback ? (

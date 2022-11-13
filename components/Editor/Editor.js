@@ -55,7 +55,6 @@ const CustomDocument = Document.extend({
 const Editor = ({
   editorType = "create",
   hasEditPermission = true,
-  mode = "user",
 }) => {
   const router = useRouter();
 
@@ -63,7 +62,7 @@ const Editor = ({
     redirectIfFound: false,
   });
 
-  const { content, loading, slug, title, articleSlug, postId, postStatus } =
+  const { content, loading, slug, title, articleSlug, postId, postStatus, isOwner } =
     useLoad(editorType, user);
   const {
     updateExisitingPost,
@@ -154,7 +153,7 @@ const Editor = ({
 
   useEffect(() => {
     if (editor) {
-      if (mode === "admin") {
+      if (user?.isAdmin) {
         if (!hasEditPermission) {
           console.log("cant edit");
           editor.setEditable(false);
@@ -164,7 +163,7 @@ const Editor = ({
         }
       }
     }
-  }, [editor, hasEditPermission, mode]);
+  }, [editor, hasEditPermission, user?.isAdmin]);
 
   const onSubmit = async () => {
     // before submitting, check strapi if slug or id already exists
@@ -250,10 +249,10 @@ const Editor = ({
       ) : (
         <div className="w-full relative my-4">
           {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
-          {mode === "admin" && (
+          {user?.isAdmin && (
             <div className="mt-16">
               {hasEditPermission ? (
-                <div className=" p-3 text-sm bg-green-500 flex flex-row justify-center items-center">
+                <div className=" p-3 text-sm fixed top-[64px] w-full bg-green-200 text-green-900 flex flex-row justify-center items-center">
                   Hello there Admin, you can edit this post.
                 </div>
               ) : (
@@ -277,7 +276,7 @@ const Editor = ({
                 )}
 
                 <>
-                  {mode !== "admin" && (
+                  {!user?.isAdmin && (
                     <div>
                       <Button
                         variant="ghostBlue"
@@ -293,7 +292,7 @@ const Editor = ({
                     </div>
                   )}
 
-                  {mode === "admin" && hasEditPermission && (
+                  {(user?.isAdmin && hasEditPermission )&& (
                     <div>
                       <Button
                         variant="ghostBlue"
@@ -304,12 +303,14 @@ const Editor = ({
                           ? "Saving..."
                           : postStatus == "publish"
                           ? "Update"
-                          : "Save Draft"}
+                          : "Save Draft "}
                       </Button>
                     </div>
                   )}
 
-                  {slug && postStatus != "publish" && mode !== "admin" && (
+                  {(
+                   ( (slug && postStatus != "publish") && !user?.isAdmin) || isOwner )
+                  && (
                     <SubmitPostModal handleBeforeOpen={handleBeforeSubmit}>
                       <div className="p-10">
                         <div className="flex flex-col gap-4">
@@ -347,9 +348,12 @@ const Editor = ({
           {/* NAVIGATION END */}
 
           <div className="my-4 pt-16 relative pb-10 blog-content">
-            {editor && mode !== "admin" && <MenuFloating editor={editor} />}
-            {mode !== "admin" && <TextMenu editor={editor} />}
-            {mode !== "admin" && <ImageMenu editor={editor} />}
+            {/* {editor && !user?.isAdmin && <MenuFloating editor={editor} />}
+            {!user?.isAdmin && <TextMenu editor={editor} />}
+            {!user?.isAdmin && <ImageMenu editor={editor} />} */}
+            {editor && <MenuFloating editor={editor} />}
+            <TextMenu editor={editor} />
+            <ImageMenu editor={editor} />
 
             {loading || !editorCreated ? (
               <div

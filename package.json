@@ -71,6 +71,7 @@
     "image-validator": "^1.2.1",
     "iron-session": "^6.1.2",
     "js-cookie": "^2.2.1",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.2",
     "next": "latest",
     "next-auth": "^4.2.1",

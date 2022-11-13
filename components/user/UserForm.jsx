@@ -51,11 +51,6 @@ const UserForm = ({ info }) => {
       data.location = undefined;
     }
 
-  //update the session with the latest user input
-  //returns true or false if the form should refresh
-  // const refresh = await updateUserSession(data, mutateUser)
-
-
     try {
       const body = {data};
       const result = await fetchJson('/api/account/updateProfile', {

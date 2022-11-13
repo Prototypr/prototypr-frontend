@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { getPostDetails } from "./libs/helpers";
 import { useState } from "react";
+import { checkSessionExpired } from "@/lib/account/checkSessionExpired";
 var axios = require("axios");
 
 const useUpdate = () => {
@@ -16,6 +17,14 @@ const useUpdate = () => {
     postStatus
   ) => {
     const { entry } = getPostDetails({user, editor, slug, forReview, postStatus});
+
+    //check if session expired
+    //check if jwt is expired
+    const sessionExpired = checkSessionExpired(user?.jwt)
+    if(sessionExpired){
+      alert('Your sessions has expired. Please log in again.')
+      return false
+    }
 
     let publishPostEndpointConfig = {
       method: "put",

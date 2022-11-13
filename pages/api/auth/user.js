@@ -5,7 +5,7 @@ import { sessionOptions } from '@/lib/iron-session/session'
 import axios from "axios";
 import { getNextAuthSession } from '@/lib/account/getNextAuthSession'
 import { updateSessionUser } from '@/lib/account/updateSessionUser';
-
+import {checkSessionExpired} from  '@/lib/account/checkSessionExpired';
 /**
  * combines nextauth authentication
  * with strapi passwordless auth
@@ -40,6 +40,20 @@ async function userRoute(req, res) {
   
   // strapi passwordless or nextauth
   if(sessionUser?.login){
+
+    //check if jwt is expired
+    const sessionExpired = checkSessionExpired(sessionUser.login.jwt)
+    //if so, just log them out
+    if(sessionExpired){
+      req.session.destroy();
+      return res.json({
+        isLoggedIn: false,
+        login: '',
+        avatarUrl: '',
+      })
+    }
+
+
     // https://github.com/vvo/iron-session/blob/main/examples/next.js/pages/api/user.js
     // in a real world application you might read the user id from the session and then do a database request
     // to get more information on the user if needed
@@ -53,6 +67,12 @@ async function userRoute(req, res) {
       },
     });
     const {data:freshProfileData} = strapiUserRes
+
+    //add user role and isAdmin flag
+    if(sessionUser.login?.user){
+      sessionUser.login.user.role = freshProfileData.role?.type
+      sessionUser.login.user.isAdmin = (freshProfileData.role?.type==='admin')
+    }
 
     //copy over the new profile data to the session user
     sessionUser = updateSessionUser(freshProfileData, sessionUser)
