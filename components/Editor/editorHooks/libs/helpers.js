@@ -73,12 +73,12 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
   // We are adding a uid to the end of the slug to avoid slug collisions
 
   if (!slug) {
-    postSlug = slugify(title.toLocaleLowerCase(), {remove: /[*+~.()'"!:@]/g}) + `---${uid()}`;
+    postSlug = slugify(title.toLocaleLowerCase(), {remove: /[^\w\s]/gi}) + `---${uid()}`;
   } else {
     // in edit draft mode, use existing slug passed down from the parent component
     const slugSplit = slug.split("---");
     const prevUid = slugSplit[slugSplit.length - 1];
-    postSlug = slugify(title.toLocaleLowerCase(), {remove: /[*+~.()'"!:@]/g}) + `---${prevUid || uid()}`; //slug;
+    postSlug = slugify(title.toLocaleLowerCase(), {remove:/[^\w\s]/gi}) + `---${prevUid || uid()}`; //slug;
   }
 
   let contentToInsert = html;
