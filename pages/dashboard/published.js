@@ -8,7 +8,7 @@ import Layout from "@/components/layout-dashboard";
 import useUser from "@/lib/iron-session/useUser";
 import { useState } from "react";
 
-import Dashboard from "@/components/dashboard/Dashboard";
+import Dashboard from "@/components/Dashboard/Dashboard";
 import Navigation from "@/components/Dashboard/navigation";
 // const axios = dynamic(() => import("axios"));
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
