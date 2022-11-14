@@ -204,22 +204,22 @@ const MyPosts = () => {
       </div>
       <div>
         <div className="flex flex-row gap-3">
-          <button
+          <div
             onClick={() => setCurrentTab("drafts")}
             className={`my-3 text-sm ${
               currentTab === "drafts" ? "text-black" : "text-gray-500"
             }`}
           >
             Drafts
-          </button>
-          <button
+          </div>
+          <div
             onClick={() => setCurrentTab("publish")}
             className={`my-3 text-sm ${
               currentTab === "publish" ? "text-black" : "text-gray-500"
             }`}
           >
             Published
-          </button>
+          </div>
         </div>
 
         {currentTab === "drafts" && (
