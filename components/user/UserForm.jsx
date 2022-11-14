@@ -68,11 +68,13 @@ const UserForm = ({ info }) => {
         let msg = result?.error?.message
         // const text = await result.text();
         toast.error(msg?msg:"Error has occured.");
-        if(msg.indexOf('Username')>-1){
-          setError('username',{message:msg?msg:"Error has occured."})
-        }
-        if(msg.indexOf('Email')>-1){
-          setError('email',{message:msg?msg:"Error has occured."})
+        if(msg){
+          if(msg.indexOf('Username')>-1){
+            setError('username',{message:msg?msg:"Error has occured."})
+          }
+          if(msg.indexOf('Email')>-1){
+            setError('email',{message:msg?msg:"Error has occured."})
+          }
         }
       }
     } catch (error) {

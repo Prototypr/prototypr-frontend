@@ -23,16 +23,17 @@ import { updateSessionUser } from "@/lib/account/updateSessionUser";
 
     const user = req.session.user
     if(!user?.login?.jwt){
+      console.log('no token')
       return res.status(500).end("User is not authenticated - invalid token");
     }
 
 
     //check if jwt is expired
-    const sessionExpired = checkSessionExpired(sessionUser.login.jwt)
-    if(sessionExpired){
-      console.log('expired session')
-      return res.status(500).end("User session has expired");
-    }
+    // const sessionExpired = checkSessionExpired(sessionUser.login.jwt)
+    // if(sessionExpired){
+    //   console.log('expired session')
+    //   return res.status(500).end("User session has expired");
+    // }
 
     //remove empty form values
     // data = Object.fromEntries(Object.entries(data).filter(([_, v]) => v != null));
