@@ -39,6 +39,13 @@ const Button = styled("button", {
           cursor: "not-allowed",
         },
       },
+
+      red2: {
+        backgroundColor: red.red4,
+        color: red.red11,
+        "&:hover": { backgroundColor: red.red5 },
+        "&:focus": { boxShadow: `0 0 0 2px ${red.red7}` },
+      },
       confirmSmall:{
         backgroundColor: blue.blue11,
         color: "#fff",

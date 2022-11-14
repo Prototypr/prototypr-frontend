@@ -5,6 +5,10 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  corePlugins: {
+    // due to https://github.com/tailwindlabs/tailwindcss/issues/6602 - buttons disappear
+    preflight: false,
+  },
   theme: {
     fontFamily: {
       inter: "'Inter', sans-serif;",

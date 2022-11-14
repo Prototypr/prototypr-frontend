@@ -7,13 +7,15 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Document from "@tiptap/extension-document";
 import TextMenu from "@/components/Editor/Menus/TextMenu";
 import ImageMenu from "@/components/Editor/Menus/ImageMenu";
-import Button from "../Primitives/Button";
+import Button from "@/components/Primitives/Button";
 
 import Link from "@tiptap/extension-link";
 import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 
-import SubmitPostModal from "../modal/submitPost";
+import { Cross2Icon } from "@radix-ui/react-icons";
+import { Dialog, DialogTrigger, DialogContentLarge, DialogTitle, DialogDescription, DialogClose, IconButton } from "@/components/Primitives/Dialog";
+
 import { saveAs } from "file-saver";
 
 import Iframe from "./CustomExtensions/Iframe/Iframe";
@@ -124,9 +126,9 @@ const Editor = ({
     ],
     onCreate: ({ editor }) => {
       setEditorInstance(editor);
-      setTimeout(() => {
-        setEditorCreated(true);
-      }, 1200);
+      setEditorCreated(true);
+      // setTimeout(() => {
+      // }, 1200);
     },
     onUpdate: ({ editor }) => {
       const json = editor.getJSON();
@@ -165,7 +167,10 @@ const Editor = ({
     }
   }, [editor, hasEditPermission, user?.isAdmin]);
 
+  const [submitting, setSubmitting] = useState(null)
+  const [submitOpen, setSubmitOpen] = useState(null)
   const onSubmit = async () => {
+    setSubmitting(true)
     // before submitting, check strapi if slug or id already exists
     // if it exists, then do an update, else create a new one
     if (!slug) {
@@ -177,8 +182,19 @@ const Editor = ({
 
     if (slug) {
       await updateExisitingPost(postId, user, editor, slug, true, postStatus);
+      setSubmitting(false)
     }
   };
+
+  useEffect(()=>{
+    if(!submitting){
+      setSubmitOpen(false)
+    }
+  },[submitting])
+  
+  const toggleSubmitOpen = () =>{
+    setSubmitOpen(!submitOpen)
+  }
 
   const onSave = async () => {
     // if (editorType === "edit") {
@@ -232,7 +248,7 @@ const Editor = ({
 
   return (
     <>
-      <div className="fixed z-[100] bottom-10 left-10 border flex flex-col gap-2 border-black border-opacity-10 p-4 bg-white rounded-lg">
+      <div className="fixed z-[48] bottom-10 left-10 border flex flex-col gap-2 border-black border-opacity-10 p-4 bg-white rounded-lg">
         <p className="text-xs">
           Preview Mode
         </p>
@@ -311,35 +327,55 @@ const Editor = ({
                   {(
                    ( (slug && postStatus != "publish") && !user?.isAdmin) || isOwner )
                   && (
-                    <SubmitPostModal handleBeforeOpen={handleBeforeSubmit}>
-                      <div className="p-10">
-                        <div className="flex flex-col gap-4">
-                          <div className="flex flex-col gap-2">
-                            <h1 className="text-2xl my-0">
-                              Submit this post for review?
-                            </h1>
-
-                            <p className="text-sm leading-7 my-0 mb-4">
-                              Your story will be submitted to our publication
-                              editors for review. The editors will review your
-                              draft and publish it within 1 week if it fits our
-                              guidelines, or get back to you with feedback.
-                              Readers will not see your story in the publication
-                              until it is reviewed and published by our editors.
-                              Feel free to continue editing even after
-                              submitting.
-                            </p>
-                          </div>
-
-                          <Button
-                            onClick={onSubmit}
-                            className="px-3 py-2 text-md"
+                    <Dialog onOpenChange={toggleSubmitOpen} open={submitOpen}>
+                      <DialogTrigger asChild>
+                      <Button
+                          variant="confirm"
+                          className="text-sm"
                           >
-                            Submit
-                          </Button>
+                        Submit
+                      </Button>
+                      </DialogTrigger>
+                      <DialogContentLarge variant="big">
+                        <div>
+                        <DialogTitle>Submit for Review</DialogTitle>
+                        <DialogDescription>
+                          <p className="mb-4">
+                           Your story will be submitted to our publication
+                           editors for review. The editors will review your
+                           draft and publish it within 1 week if it fits our
+                           guidelines, or get back to you with feedback.
+                          </p>
+                          <p className="mb-4">
+                           Readers will not see your story in the publication
+                           until it is reviewed and published by our editors.
+                           Feel free to continue editing even after
+                           submitting.
+                          </p>
+                        </DialogDescription>
                         </div>
-                      </div>
-                    </SubmitPostModal>
+
+                        <div className="flex flex-row justify-start gap-2">
+                            <Button 
+                            onClick={onSubmit} 
+                            disabled={submitting}
+                            variant="confirm">
+                             {submitting?
+                              <Spinner size="sm" className="mx-auto p-1 cursor-loading "/>:
+                             'Submit'}
+                            </Button>
+
+                          <DialogClose asChild>
+                            <Button variant="gray">Cancel</Button>
+                          </DialogClose>
+                        </div>
+                        <DialogClose asChild>
+                          <IconButton aria-label="Close">
+                            <Cross2Icon />
+                          </IconButton>
+                        </DialogClose>
+                      </DialogContentLarge>
+                    </Dialog>
                   )}
                 </>
               </div>
@@ -355,7 +391,7 @@ const Editor = ({
             <TextMenu editor={editor} />
             <ImageMenu editor={editor} />
 
-            {loading || !editorCreated ? (
+            {((loading || !editorCreated)|| (!content && slug))? (
               <div
                 style={{ maxWidth: "100%" }}
                 className="mx-2 h-screen absolute top-0 left-0 flex flex-col justify-center w-screen"
