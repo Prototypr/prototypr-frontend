@@ -102,7 +102,10 @@ export const Figure = Node.create({
       figcaption:{
         default: null,
         parseHTML: element => {
-          return element.querySelector('figcaption')?.innerHTML
+          if(element.nodeName=='FIGURE'){
+
+            return element.querySelector('figcaption')?.innerHTML
+          }
         },
       },
       link: { parseHTML: (element) => {
@@ -453,7 +456,7 @@ export const Figure = Node.create({
           }
 
           // set the figcaption to the textcontent          
-          // updatedNode.attrs.figcaption = updatedNode.textContent
+          updatedNode.attrs.figcaption = updatedNode.textContent
           
           figcaptionDiv.classList.toggle('empty', updatedNode.content.size === 0);
           

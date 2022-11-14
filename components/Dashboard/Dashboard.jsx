@@ -175,7 +175,7 @@ const PostCard = ({ post, refetch }) => {
   );
 };
 
-const MyPosts = () => {
+const Dashboard = ({postStatus}) => {
   const [currentTab, setCurrentTab] = useState("drafts");
   const { user } = useUser({
     redirectIfFound: false,
@@ -190,39 +190,9 @@ const MyPosts = () => {
   } = useFetchPosts(user);
 
   return (
-    <div
-      className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 "
-      style={{ maxWidth: 1200 }}
-    >
-      <div className="flex flex-row justify-between items-baseline mt-3">
-        <h1 className="my-3 text-4xl font-semibold">My Posts</h1>
-        {/* <Link href="/write">
-          <button className="px-3 py-2 bg-blue-700 rounded text-sm text-white ">
-            Write a Post
-          </button>
-        </Link> */}
-      </div>
+  <>
       <div>
-        <div className="flex flex-row gap-3">
-          <div
-            onClick={() => setCurrentTab("drafts")}
-            className={`my-3 text-sm ${
-              currentTab === "drafts" ? "text-black" : "text-gray-500"
-            }`}
-          >
-            Drafts
-          </div>
-          <div
-            onClick={() => setCurrentTab("publish")}
-            className={`my-3 text-sm ${
-              currentTab === "publish" ? "text-black" : "text-gray-500"
-            }`}
-          >
-            Published
-          </div>
-        </div>
-
-        {currentTab === "drafts" && (
+        {postStatus === "draft" && (
           <>
             <div className="grid grid-cols-3 gap-5">
               {!loading &&
@@ -234,7 +204,7 @@ const MyPosts = () => {
           </>
         )}
 
-        {currentTab === "publish" && (
+        {postStatus === "publish" && (
           <>
             <div className="grid grid-cols-3 gap-5">
               {!loading &&
@@ -248,11 +218,11 @@ const MyPosts = () => {
           </>
         )}
       </div>
-    </div>
+  </>
   );
 };
 
-export default MyPosts;
+export default Dashboard;
 
 const EmptyState = ({ draft }) => {
   return (

@@ -159,7 +159,7 @@ const insertImage = (event, editor, user, setLoading) =>{
             removePlaceholder(editor)
             // editor.chain().focus().setFigure({src: url, caption:'enter caption'}).run()
             // editor.chain().focus().setImage({ src: url }).run();
-            editor.commands.setFigure({position:placeholderPos,src: url, alt: '', figcaption:''})
+            editor.commands.setFigure({position:placeholderPos,src: url, alt: '', figcaption:'', class:''})
           })
           .catch(function (error) {
             console.log(error);

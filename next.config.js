@@ -109,7 +109,12 @@ module.exports =
         },
         {
           source: '/p',
-          destination: '/dashboard',
+          destination: '/dashboard/drafts',
+          permanent: true,
+        },
+        {
+          source: '/dashboard',
+          destination: '/dashboard/drafts',
           permanent: true,
         },
       ];

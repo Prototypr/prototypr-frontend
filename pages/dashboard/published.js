@@ -8,7 +8,8 @@ import Layout from "@/components/layout-dashboard";
 import useUser from "@/lib/iron-session/useUser";
 import { useState } from "react";
 
-import MyPosts from "@/components/posts/myPosts";
+import Dashboard from "@/components/dashboard/Dashboard";
+import Navigation from "@/components/Dashboard/navigation";
 // const axios = dynamic(() => import("axios"));
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 // const LoginSide = dynamic(() => import("@/components/sign-in/LoginSide"));
@@ -61,7 +62,16 @@ export default function Index() {
         user &&
         user?.isLoggedIn && (
           <Layout navType={"simple"} background="#fff">
-            <MyPosts />
+              <div
+                className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 "
+                style={{ maxWidth: 1200 }}
+                >
+                    <div className="flex flex-row justify-between items-baseline mt-3">
+                        <h1 className="my-3 text-4xl font-semibold">My Posts</h1>
+                    </div>
+                    <Navigation activeTab={2}/>
+                    <Dashboard postStatus='publish' />
+                </div>
           </Layout>
         )
       )}
