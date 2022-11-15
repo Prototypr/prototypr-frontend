@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 
-import useFetchPosts from "../Dashboard/useFetchPosts";
+import useFetchAdminPosts from "./useFetchAdminPosts";
 import EmptyState from "./EmptyState";
 import PostCard from "./PostCard";
-import NewPagination from "../pagination";
+import NewPagination from "../../pagination";
 
-const Dashboard = ({postStatus}) => {
-  const [currentTab, setCurrentTab] = useState("drafts");
+const AdminDashboard = ({postStatus}) => {
   const { user } = useUser({
     redirectIfFound: false,
   });
@@ -18,7 +17,7 @@ const Dashboard = ({postStatus}) => {
     refetch,
     total,
     pageSize
-  } = useFetchPosts(user, postStatus);
+  } = useFetchAdminPosts(user, postStatus);
 
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -33,8 +32,14 @@ const Dashboard = ({postStatus}) => {
   }
   return (
   <>
-      <div>
-            <div className="grid grid-cols-3 gap-5">
+     {user?.isAdmin? <div className="-mt-5">
+      <NewPagination
+                total={total}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageNumChange={changePage}
+              />
+            <div className="grid grid-cols-3 mt-6 gap-5">
               {!loading &&
                 posts?.map((post) => (
                   <PostCard refetch={refetch} user={user} post={post} />
@@ -49,11 +54,11 @@ const Dashboard = ({postStatus}) => {
                 currentPage={currentPage}
                 onPageNumChange={changePage}
               />
-      </div>
+      </div>:'YOu no admin'}
   </>
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;
 
 

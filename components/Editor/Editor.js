@@ -9,6 +9,8 @@ import TextMenu from "@/components/Editor/Menus/TextMenu";
 import ImageMenu from "@/components/Editor/Menus/ImageMenu";
 import Button from "@/components/Primitives/Button";
 
+import AdvancedPanelTrigger from "./SidePanel/AdvancedPanelButton";
+
 import Link from "@tiptap/extension-link";
 import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
@@ -64,7 +66,7 @@ const Editor = ({
     redirectIfFound: false,
   });
 
-  const { content, loading, slug, title, articleSlug, postId, postStatus, isOwner } =
+  const { content, loading, slug, title, articleSlug, postId, postStatus, isOwner, postObject } =
     useLoad(editorType, user);
   const {
     updateExisitingPost,
@@ -78,6 +80,8 @@ const Editor = ({
   const [editorCreated, setEditorCreated] = useState(false);
   const [editorInstance, setEditorInstance] = useState(false);
   const [previewEnabled, togglePreview] = useState(false);
+
+  // console.log(postObject)
 
   useConfirmTabClose(hasUnsavedChanges);
 
@@ -258,6 +262,15 @@ const Editor = ({
           checked={previewEnabled}
         />
       </div>
+
+
+      {user?.isAdmin &&
+            <div className="fixed z-[99] top-3.5 right-10 flex flex-col gap-2 bg-white rounded-lg">
+              <AdvancedPanelTrigger user={user} editor={editor} postObject={postObject}/>
+          </div>
+      }
+
+
       {previewEnabled ? (
         <div>
           <PreviewDisplay editor={editorInstance} content={content} />
@@ -268,7 +281,7 @@ const Editor = ({
           {user?.isAdmin && (
             <div className="mt-16">
               {hasEditPermission ? (
-                <div className=" p-3 text-sm fixed top-[64px] w-full bg-green-200 text-green-900 flex flex-row justify-center items-center">
+                <div className="z-50 p-3 text-sm fixed top-[64px] w-full bg-green-100 backdrop-blur text-green-900 flex flex-row justify-center items-center">
                   Hello there Admin, you can edit this post.
                 </div>
               ) : (
@@ -382,6 +395,7 @@ const Editor = ({
             }
           />
           {/* NAVIGATION END */}
+          
 
           <div className="my-4 pt-16 relative pb-10 blog-content">
             {/* {editor && !user?.isAdmin && <MenuFloating editor={editor} />}

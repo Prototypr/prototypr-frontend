@@ -16,6 +16,7 @@ const useLoad = (type = "create", usr) => {
   const [editorType] = useState(type);
   const [articleSlug, setArticleSlug] = useState(null);
   const [isOwner, setIsOwner] = useState(false)
+  const [postObject, setPostObject] = useState(false)
 
   const router = useRouter();
   const { slug } = router.query;
@@ -76,12 +77,13 @@ const useLoad = (type = "create", usr) => {
         content = `<h1>${post?.title}</h1>${content}`;
       }
 
-      if(post.owner==user?.id){
+      if(post?.owner==user?.id){
         setIsOwner(true)
       }else{
         setIsOwner(false)
       }
 
+      setPostObject(post)
       setPostId(post?.id);
       setContent(content);
       setTitle(post?.title);
@@ -103,7 +105,8 @@ const useLoad = (type = "create", usr) => {
     slug,
     postStatus,
     articleSlug,
-    isOwner
+    isOwner,
+    postObject
   };
 };
 

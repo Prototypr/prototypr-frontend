@@ -1,4 +1,12 @@
+import { useEffect, useState } from "react";
+
 const PreviewDisplay = ({ content, editor }) => {
+ 
+  const [html, setHTML] = useState(null)
+
+  useEffect(() => {
+    setHTML(editor.getHTML())
+  }, [editor]);
   // use editor instead of content cos content only 
   // reflects what is there on first load
   return (
@@ -8,7 +16,7 @@ const PreviewDisplay = ({ content, editor }) => {
           <h2 className="text-5xl">Preview</h2>
           <div
             dangerouslySetInnerHTML={{
-              __html: editor.getHTML(),
+              __html: html,
             }}
           />
         </div>

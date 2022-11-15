@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserArticles } from "@/lib/api";
+import { getAdminArticles } from "@/lib/api";
 
 const PAGE_SIZE = 9
 
@@ -13,7 +13,7 @@ const useFetchPosts = (user, postStatus) => {
       refetch(1)
     }, []);
 
-      const refetch = async (offset) => {
+      const refetch = async (offset, userIdFilter) => {
         setLoading(true)
         
         let pageOffset = (offset-1) * PAGE_SIZE
@@ -21,10 +21,10 @@ const useFetchPosts = (user, postStatus) => {
           pageOffset = 0
         }
     
-        const data = await getUserArticles({user, postStatus, pageSize:PAGE_SIZE, offset:pageOffset});
-        const postsFromUser = data.userPosts?.posts
+        const data = await getAdminArticles({user, postStatus, pageSize:PAGE_SIZE, offset:pageOffset, userIdFilter:userIdFilter});
+        const postsFromUser = data.adminPosts?.posts
         setPosts(postsFromUser)
-        setTotal(data.userPosts?.count)
+        setTotal(data.adminPosts?.count)
 
         setLoading(false)
       };

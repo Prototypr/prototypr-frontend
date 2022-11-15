@@ -283,8 +283,27 @@ export const DropdownMenuDemo = ({ icon, user }) => {
             Help
             {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
 
+          {user?.isAdmin && 
+          <>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onSelect={() => {
+              router.push(`/admin/drafts`);
+            }}
+          >
+            👩‍✈️ Admin
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onSelect={() => {
+              window.open(`https://api.prototypr.io/admin/content-manager/collectionType/api::post.post?page=1&pageSize=10&sort=date:DESC&plugins[i18n][locale]=en`);
+            }}
+          >
+           👾 Strapi
+          </DropdownMenuItem>
+          </>
+          }
+          <DropdownMenuSeparator />
           <DropdownMenuItem
             onSelect={async () => {
               await signOut({ redirect: false });
