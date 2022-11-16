@@ -91,7 +91,6 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
     featured: false,
     type: "article",
     legacyFeaturedImage: {},
-    date: new Date(),
     status: forReview ? "pending" : postStatus ? postStatus : "draft",
     title: title,
     content: contentToInsert,
@@ -119,6 +118,11 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
   //if creating, need to send the user id
   if(isCreate){
     entry.user = user?.id
+  }
+
+  //chang the date on save only if it's a draft or pending publish
+  if((postStatus=='draft' || postStatus=='pending') || (!postStatus || isCreate)){
+    entry.date=new Date();
   }
 
   return {
