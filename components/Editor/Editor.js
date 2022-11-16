@@ -9,16 +9,14 @@ import TextMenu from "@/components/Editor/Menus/TextMenu";
 import ImageMenu from "@/components/Editor/Menus/ImageMenu";
 import Button from "@/components/Primitives/Button";
 
-import AdvancedPanelTrigger from "./SidePanel/AdvancedPanelButton";
+import SidePanelTrigger from "./SidePanel/SidePanelTrigger";
 
 import Link from "@tiptap/extension-link";
 import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 
-import { Cross2Icon } from "@radix-ui/react-icons";
-import { Dialog, DialogTrigger, DialogContentLarge, DialogTitle, DialogDescription, DialogClose, IconButton } from "@/components/Primitives/Dialog";
-
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
+import { PublishDialogButton } from "./PublishDialogButton";
 
 import Iframe from "./CustomExtensions/Iframe/Iframe";
 // import Image from "@tiptap/extension-image";
@@ -69,7 +67,7 @@ const Editor = ({
   const { content, loading, slug, title, articleSlug, postId, postStatus, isOwner, postObject } =
     useLoad(editorType, user);
   const {
-    updateExisitingPost,
+    updateExistingPost,
     setSaving,
     setHasUnsavedChanges,
     hasUnsavedChanges,
@@ -80,8 +78,6 @@ const Editor = ({
   const [editorCreated, setEditorCreated] = useState(false);
   const [editorInstance, setEditorInstance] = useState(false);
   const [previewEnabled, togglePreview] = useState(false);
-
-  // console.log(postObject)
 
   useConfirmTabClose(hasUnsavedChanges);
 
@@ -116,9 +112,6 @@ const Editor = ({
       Figure.configure({
         allowBase64: true,
       }),
-      // Image.configure({
-      //   allowBase64: true,
-      // }),
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
@@ -171,34 +164,6 @@ const Editor = ({
     }
   }, [editor, hasEditPermission, user?.isAdmin]);
 
-  const [submitting, setSubmitting] = useState(null)
-  const [submitOpen, setSubmitOpen] = useState(null)
-  const onSubmit = async () => {
-    setSubmitting(true)
-    // before submitting, check strapi if slug or id already exists
-    // if it exists, then do an update, else create a new one
-    if (!slug) {
-      const postInfo = await createNewPost(user, editor);
-      //set the new slug
-      localStorage.removeItem("wipContent");
-      router.push(`p/${postInfo?.id}`);
-    }
-
-    if (slug) {
-      await updateExisitingPost(postId, user, editor, slug, true, postStatus);
-      setSubmitting(false)
-    }
-  };
-
-  useEffect(()=>{
-    if(!submitting){
-      setSubmitOpen(false)
-    }
-  },[submitting])
-  
-  const toggleSubmitOpen = () =>{
-    setSubmitOpen(!submitOpen)
-  }
 
   const onSave = async () => {
     // if (editorType === "edit") {
@@ -208,15 +173,7 @@ const Editor = ({
         console.log("saving post...");
         // while updating the post, we are using articleSlug instead of slug
         // This is to ensure that the slug never changes from its original slug
-
-        await updateExisitingPost(
-          postId,
-          user,
-          editor,
-          articleSlug,
-          false,
-          postStatus
-        );
+        await updateExistingPost({postId,user,editor,articleSlug,forReview:false,postStatus,postObject});
       } catch (e) {
         setSaving(false);
       }
@@ -231,24 +188,18 @@ const Editor = ({
     }
   };
 
-  const onExport = async () => {
-    const json = editor.getJSON();
-    const content = json.content;
-    if (content) {
-      let blob = new Blob([JSON.stringify({ content: content })], {
-        type: "application/json",
-      });
-      const filename = slug ? `${slug}.json` : `${Date.now()}.json`;
-      saveAs(blob, filename);
-    }
-  };
-
-  const handleBeforeSubmit = async (open) => {
-    // do all editor content checks here
-    // check if post has a title
-    // check if post has a description
-    open();
-  };
+  // not using right now
+  // const onExport = async () => {
+  //   const json = editor.getJSON();
+  //   const content = json.content;
+  //   if (content) {
+  //     let blob = new Blob([JSON.stringify({ content: content })], {
+  //       type: "application/json",
+  //     });
+  //     const filename = slug ? `${slug}.json` : `${Date.now()}.json`;
+  //     saveAs(blob, filename);
+  //   }
+  // };
 
   return (
     <>
@@ -262,13 +213,6 @@ const Editor = ({
           checked={previewEnabled}
         />
       </div>
-
-
-      {user?.isAdmin &&
-            <div className="fixed z-[99] top-3.5 right-10 flex flex-col gap-2 bg-white rounded-lg">
-              <AdvancedPanelTrigger user={user} editor={editor} postObject={postObject}/>
-          </div>
-      }
 
 
       {previewEnabled ? (
@@ -303,7 +247,6 @@ const Editor = ({
                     Unsaved changes
                   </div>
                 )}
-
                 <>
                   {!user?.isAdmin && (
                     <div>
@@ -312,11 +255,7 @@ const Editor = ({
                         onClick={onSave}
                         className="text-sm"
                       >
-                        {saving
-                          ? "Saving..."
-                          : postStatus == "publish"
-                          ? "Update"
-                          : "Save Draft"}
+                        {saving ? "Saving...": postStatus == "publish"? "Update": "Save Draft"}
                       </Button>
                     </div>
                   )}
@@ -328,83 +267,39 @@ const Editor = ({
                         onClick={onSave}
                         className="text-sm"
                       >
-                        {saving
-                          ? "Saving..."
-                          : postStatus == "publish"
-                          ? "Update"
-                          : "Save Draft "}
+                        {saving? "Saving...": postStatus == "publish"? "Update": "Save Draft "}
                       </Button>
                     </div>
                   )}
 
                   {(
-                   ( (slug && postStatus != "publish") && !user?.isAdmin) || isOwner )
+                   ( (slug && postStatus != "publish") && !user?.isAdmin) || (isOwner && postStatus!='publish') )
                   && (
-                    <Dialog onOpenChange={toggleSubmitOpen} open={submitOpen}>
-                      <DialogTrigger asChild>
-                      <Button
-                          variant="confirm"
-                          className="text-sm"
-                          >
-                        Submit
-                      </Button>
-                      </DialogTrigger>
-                      <DialogContentLarge variant="big">
-                        <div>
-                        <DialogTitle>Submit for Review</DialogTitle>
-                        <DialogDescription>
-                          <p className="mb-4">
-                           Your story will be submitted to our publication
-                           editors for review. The editors will review your
-                           draft and publish it within 1 week if it fits our
-                           guidelines, or get back to you with feedback.
-                          </p>
-                          <p className="mb-4">
-                           Readers will not see your story in the publication
-                           until it is reviewed and published by our editors.
-                           Feel free to continue editing even after
-                           submitting.
-                          </p>
-                        </DialogDescription>
-                        </div>
-
-                        <div className="flex flex-row justify-start gap-2">
-                            <Button 
-                            onClick={onSubmit} 
-                            disabled={submitting}
-                            variant="confirm">
-                             {submitting?
-                              <Spinner size="sm" className="mx-auto p-1 cursor-loading "/>:
-                             'Submit'}
-                            </Button>
-
-                          <DialogClose asChild>
-                            <Button variant="gray">Cancel</Button>
-                          </DialogClose>
-                        </div>
-                        <DialogClose asChild>
-                          <IconButton aria-label="Close">
-                            <Cross2Icon />
-                          </IconButton>
-                        </DialogClose>
-                      </DialogContentLarge>
-                    </Dialog>
+                   <PublishDialogButton 
+                    slug={slug}
+                    user={user} 
+                    postId={postId}
+                    createNewPost={createNewPost}
+                    updateExistingPost={updateExistingPost}
+                    editor={editor}
+                    postStatus={postStatus}
+                    postObject={postObject}/>
                   )}
+
+                {user?.isAdmin &&
+                <div className="flex flex-col gap-2 bg-white rounded-lg">
+                  {editorInstance && <SidePanelTrigger user={user} editor={editorInstance} postObject={postObject}/>}
+                </div>
+                }
                 </>
               </div>
             }
           />
           {/* NAVIGATION END */}
-          
-
           <div className="my-4 pt-16 relative pb-10 blog-content">
-            {/* {editor && !user?.isAdmin && <MenuFloating editor={editor} />}
-            {!user?.isAdmin && <TextMenu editor={editor} />}
-            {!user?.isAdmin && <ImageMenu editor={editor} />} */}
             {editor && <MenuFloating editor={editor} />}
             <TextMenu editor={editor} />
             <ImageMenu editor={editor} />
-
             {((loading || !editorCreated)|| (!content && slug))? (
               <div
                 style={{ maxWidth: "100%" }}

@@ -30,7 +30,7 @@ export function getImageExtention(url) {
   return extention;
 }
 
-export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCreate}) => {
+export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCreate, postObject}) => {
   const html = editor.getHTML();
   const json = editor.getJSON()?.content;
 
@@ -107,8 +107,7 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
       opengraphTitle: title,
       metaDesc: firstParagraph,
       opengraphDescription: firstParagraph,
-      opengraphImage: coverImage,
-      opengraphPublishedTime: new Date(),
+      opengraphImage: postObject?.featuredImage?postObject.featuredImage:coverImage,
       //  schemaSeo: item.seo.schema.raw,
     },
     esES: false,
@@ -123,6 +122,7 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
   //chang the date on save only if it's a draft or pending publish
   if((postStatus=='draft' || postStatus=='pending') || (!postStatus || isCreate)){
     entry.date=new Date();
+    entry.seo.opengraphPublishedTime = new Date()
   }
 
   return {

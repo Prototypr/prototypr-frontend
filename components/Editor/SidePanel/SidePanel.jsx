@@ -30,7 +30,7 @@ const Input = styled('input', {
   '&:focus': { boxShadow: `0 0 0 2px ${slate.slate8}` },
 });
 
-const AdvancedPanelSidebar = ({isOpen, close, editor,postObject}) =>{
+const SidePanel = ({isOpen, close, editor,postObject}) =>{
   
     const { user } = useUser({
     redirectIfFound: false,
@@ -50,28 +50,20 @@ const AdvancedPanelSidebar = ({isOpen, close, editor,postObject}) =>{
         />)
 }
 
-export default React.memo(AdvancedPanelSidebar)
+export default React.memo(SidePanel)
+// export default SidePanel
 
 
 const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, postObject, user}) => {
 
-  const [cover, setCover] = useState(null)
-
   const [postStatus, setPostStatus] = useState(postObject.status)
   const [tier, setTier] = useState(postObject.tier)
   const [timestamp, setTimestamp] = useState(null)
-
+  const [coverImage, setCoverImage] = useState(null)
 
   const handleDateChange = (input) =>{
     setTimestamp(input)
   }
-
-  useEffect(()=>{
-
-    const json = editor?.getJSON()?.content;
-    const coverImage = json?.find((p) => p?.type === "figure")?.attrs?.src;
-    setCover(coverImage)
-  },[editor])
 
 
   useEffect(()=>{
@@ -87,6 +79,17 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
     }
 
   },[postObject])
+
+  useEffect(()=>{
+
+    const json = editor.getJSON();
+    if(!coverImage && json){
+      let content = json?.content
+      let cover = content?.find((p) => p?.type === "figure")?.attrs?.src;
+      setCoverImage(cover)
+    }
+
+  },[isOpen && editor])
 
   const updatePost =async () =>{
 
@@ -138,7 +141,7 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
 
       <div className="h-screen flex flex-col pt-6 bg-white shadow-xl" style={{ willChange: 'transform'}}>
         <div className="px-4 sm:px-6 flex justify-between">
-          <h2 id="slide-over-heading" className="text-gray-900 text-lg font-bold font-display">
+          <h2 id="slide-over-heading" className="text-gray-900 text-lg font-semibold">
             Story Settings
           </h2>
           <div 
@@ -154,18 +157,18 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
             {isAdmin && 
                <div  className="bg-white px-5 mx-auto mb-5 border-gray-100">
                  <div className="border border-gray-100 p-4 rounded-md my-3">
-                    <h2 className="font-medium text-md mb-4 font-secondary">Header Image</h2>
+                    <h2 className="font-medium text-md mb-4 font-secondary">Featured Image</h2>
                     {postObject.slug?<ImageUploader 
-                      key={'hi'}
+                      key={coverImage}
                       borderRadius={6}
                       disallowScale={true}
                       uploadOnInsert={true}
-                      placeholderImg = {postObject?.featuredImage?postObject?.featuredImage:cover?cover:"https://req.prototypr.io/https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1580577924294-Group+74.png"}
+                      placeholderImg = {postObject?.featuredImage?postObject?.featuredImage:coverImage?coverImage:"https://req.prototypr.io/https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1580577924294-Group+74.png"}
                       height={400}
                       width={400}
                       adaptable={true}
                       postObject={postObject}
-                      imageUrl={postObject?.featuredImage?postObject?.featuredImage:cover?cover:null}
+                      imageUrl={postObject?.featuredImage?postObject?.featuredImage:coverImage?coverImage:null}
                       setLogoUploadLink={()=>{return true}}
                       center={false}
                       uploadImageAPI={"/api/aws/uploadPublicationLogo"}

@@ -165,6 +165,8 @@ const ImageUploader = (props) => {
   useEffect(() => {
     let profPic = "", logoPic='';
 
+    console.log(props)
+
     if (props.imageUrl) {
       let timestamp = Date.now();
       profPic =
@@ -177,11 +179,6 @@ const ImageUploader = (props) => {
         "?timestamp=" +
         timestamp;
 
-        // props.setLogoUploadLink(
-        //   logoPic,
-        //   imageDimensions?.w?imageDimensions?.w:props.width?props.width:imageInfo?.width?imageInfo.width:90, 
-        //   imageDimensions?.h?imageDimensions?.h:props.height?props.height:90
-        // )
     }
     if (!profPic) {
       profPic =

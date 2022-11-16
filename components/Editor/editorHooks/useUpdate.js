@@ -8,15 +8,16 @@ const useUpdate = () => {
   const [saving, setSaving] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(undefined);
 
-  const updateExisitingPost = async (
-    postId,
+  const updateExistingPost = async (
+    {postId,
     user,
     editor,
     slug,
     forReview,
-    postStatus
+    postStatus,
+    postObject}
   ) => {
-    const { entry } = getPostDetails({user, editor, slug, forReview, postStatus});
+    const { entry } = getPostDetails({user, editor, slug, forReview, postStatus, postObject});
 
     //check if session expired
     //check if jwt is expired
@@ -74,7 +75,7 @@ const useUpdate = () => {
   };
 
   return {
-    updateExisitingPost,
+    updateExistingPost,
     saving,
     hasUnsavedChanges,
     setHasUnsavedChanges,
