@@ -107,6 +107,16 @@ module.exports =
           destination: '/toolbox/:slug*', // Matched parameters can be used in the destination
           permanent: true,
         },
+        {
+          source: '/p',
+          destination: '/dashboard/drafts',
+          permanent: true,
+        },
+        {
+          source: '/dashboard',
+          destination: '/dashboard/drafts',
+          permanent: true,
+        },
       ];
     },
     webpack: (config, options) => {

@@ -66,7 +66,7 @@ export default function NewsletterPage({ allPosts = [], preview, pagination = {}
 export async function getStaticProps({ preview = null, params, locale }) {
     const pageSize = PAGE_SIZE
     const page = params.pageNo
-    const allPosts = await getAllPostsForToolsPage(null, PAGE_SIZE, page, "newsletter") || [];
+    const allPosts = (await getAllPostsForToolsPage(null, PAGE_SIZE, page, "newsletter")) || [];
     const pagination = allPosts.meta.pagination
     return {
         props: { allPosts: allPosts.data, preview, pagination },
@@ -74,7 +74,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
 }
 
 export async function getStaticPaths() {
-    const allPosts = await getAllPostsForToolsPage(null, PAGE_SIZE, 0, "newsletter") || [];
+    const allPosts = (await getAllPostsForToolsPage(null, PAGE_SIZE, 0, "newsletter")) || [];
     const pagination = allPosts.meta.pagination
     const pageCount = pagination.pageCount
     const pageCountArr = new Array(pageCount).fill(' ')

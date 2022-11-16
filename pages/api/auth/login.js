@@ -9,6 +9,7 @@ export default withIronSessionApiRoute(loginRoute, sessionOptions);
 
 async function loginRoute(req, res) {
   const { token } = await req.body;
+  console.log(token)
   try {
     var config = {
       method: "get",
@@ -21,15 +22,15 @@ async function loginRoute(req, res) {
     axios(config)
       .then(async function (response) {
         const user = { isLoggedIn: true, login: response.data };
+
         req.session.user = user;
         await req.session.save();
-        res.status(200).json(user);
+        return res.status(200).json(user);
       })
       .catch(function (error) {
-        console.log(error.message);
-        res.status(400).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
       });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 }

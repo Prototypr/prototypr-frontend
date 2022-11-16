@@ -4,6 +4,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import useUser from "@/lib/iron-session/useUser";
 import { useState, useEffect } from "react";
 import jsCookie from "js-cookie";
+import UndoRedoButtons from "./Editor/UndoRedoButtons";
 const NavigationMenuDemo = dynamic(() => import("./navbar-menu"), {
   ssr: true,
 });
@@ -11,7 +12,7 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({ activeNav, editorButtons, isEditor, postStatus }) {
+export default function EditorNav({ editorInstance,activeNav, editorButtons, isEditor, postStatus }) {
 
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -104,7 +105,7 @@ export default function EditorNav({ activeNav, editorButtons, isEditor, postStat
               </button>
             </div>
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-              <Link href="/" as="/">
+              <Link href="/" as="/" legacyBehavior>
                 <div
                   className={`flex-shrink-0 flex items-center cursor-pointer transition transition-all duration-300 ease-in-out`}>
                   <img
@@ -123,6 +124,8 @@ export default function EditorNav({ activeNav, editorButtons, isEditor, postStat
               <div className="my-auto ml-3">
               {statusComponent}
               </div>
+              {/* Undo/redo */}
+              {isEditor && <UndoRedoButtons editor={editorInstance}/>}
             </div>
             <div
               className={`hidden sm:block sm:ml-6 transition transition-all duration-500 ease-in-out`}

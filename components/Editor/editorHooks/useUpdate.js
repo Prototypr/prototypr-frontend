@@ -1,84 +1,86 @@
 import toast from "react-hot-toast";
-import {getPostDetails} from './libs/helpers'
-import { useEffect, useState } from "react";
+import { getPostDetails } from "./libs/helpers";
+import { useState } from "react";
+import { checkSessionExpired } from "@/lib/account/checkSessionExpired";
 var axios = require("axios");
 
-
 const useUpdate = () => {
-    const [saving, setSaving] = useState(false);
-    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(undefined);
+  const [saving, setSaving] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(undefined);
 
-      const updateExisitingPost = async (user, editor, slug, forReview, postStatus) => {
+  const updateExistingPost = async (
+    {postId,
+    user,
+    editor,
+    slug,
+    forReview,
+    postStatus,
+    postObject}
+  ) => {
+    const { entry } = getPostDetails({user, editor, slug, forReview, postStatus, postObject});
 
-        const { entry, findPostEndpointConfigs } = getPostDetails(user, editor, slug, forReview, postStatus);
-    
-        let publishPostEndpointConfig = {
-          method: "put",
-          url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts/{id}`,
-          headers: {
-            Authorization: `Bearer ${user?.jwt}`,
-          },
-    
-          data: {
-            data: {
-              ...entry,
-            },
-          },
-        };
-    
-        try {
-          const existsResult = await axios(findPostEndpointConfigs);
-          const exists = existsResult?.data?.data?.length > 0;
-          if (exists) {
-            const postId = existsResult.data.data[0].id;
-            publishPostEndpointConfig.url = publishPostEndpointConfig.url.replace(
-              "{id}",
-              postId
-            );
-            
-            await axios(publishPostEndpointConfig)
-              .then(async function (response) {
-                setSaving(false);
-                setHasUnsavedChanges(false);
-                if(forReview){
-                  toast.success("Submitted for review!", {
-                    duration: 5000,
-                  });
-                  localStorage.removeItem("wipContent");
-                }else if (postStatus=='publish'){
-                  toast.success("Your post has been updated!", {
-                    duration: 5000,
-                  });
+    //check if session expired
+    //check if jwt is expired
+    const sessionExpired = checkSessionExpired(user?.jwt)
+    if(sessionExpired){
+      alert('Your sessions has expired. Please log in again.')
+      return false
+    }
 
-                  localStorage.removeItem("wipContent");
-                }
-                else{
+    let publishPostEndpointConfig = {
+      method: "put",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postId}`,
+      headers: {
+        Authorization: `Bearer ${user?.jwt}`,
+      },
 
-                  toast.success("Your draft has been updated!", {
-                    duration: 5000,
-                  });
+      data: {
+        data: {
+          ...entry,
+        },
+      },
+    };
 
-                  localStorage.removeItem("wipContent");
-                }
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          } else {
-            setSaving(false);
-            setHasUnsavedChanges(true);
-            toast.error("Your draft could not be saved!", {
-              duration: 5000,
-            });
-          }
-        } catch {
-          (e) => console.log(e);
+    await axios(publishPostEndpointConfig)
+      .then(async function (response) {
+        setSaving(false);
+        setHasUnsavedChanges(false);
+        if (forReview) {
+          toast.success("Submitted for review!", {
+            duration: 5000,
+          });
+          localStorage.removeItem("wipContent");
+        } else if (postStatus == "publish") {
+          toast.success("Your post has been updated!", {
+            duration: 5000,
+          });
+
+          localStorage.removeItem("wipContent");
+        } else {
+          toast.success("Your draft has been updated!", {
+            duration: 5000,
+          });
+
+          localStorage.removeItem("wipContent");
         }
-      };
-
-    return { updateExisitingPost, saving, hasUnsavedChanges, setHasUnsavedChanges, setSaving };
-
-    
+      })
+      .catch(function (error) {
+        console.log(error);
+        setSaving(false);
+        setHasUnsavedChanges(true);
+        toast.error("Your draft could not be saved!", {
+          duration: 5000,
+        });
+      });
   };
 
-export default useUpdate
+  return {
+    updateExistingPost,
+    saving,
+    hasUnsavedChanges,
+    setHasUnsavedChanges,
+    setSaving,
+  };
+};
+
+export default useUpdate;

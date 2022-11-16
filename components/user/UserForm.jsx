@@ -1,16 +1,15 @@
 import FormControl from "@/components/atom/FormControl/FormControl";
 import { accountLocations } from "@/lib/constants";
 import dynamic from "next/dynamic";
-import axios from "axios";
 // import { useSession } from "next-auth/react";
-import qs from "query-string";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useUser from '@/lib/iron-session/useUser'
 import Button from "../atom/Button/Button";
 import { useRouter } from 'next/router'
-import { updateUserSession } from "@/lib/iron-session/updateUserSession";
 import Link from 'next/link'
+import fetchJson from "@/lib/iron-session/fetchJson";
+
 // import AvatarEditor from "";
 const AvatarEditor = dynamic(() => {return import("./AvatarEditor")},{ ssr: false });
 
@@ -52,61 +51,61 @@ const UserForm = ({ info }) => {
       data.location = undefined;
     }
 
-  //update the session with the latest user input
-  //returns true or false if the form should refresh
-  const refresh = await updateUserSession(data, mutateUser)
-
-
     try {
-      await axios({
-        method: "POST",
-        url:
-          process.env.NEXT_PUBLIC_API_URL + "/api/users-permissions/users/me",
-        headers: {
-          Authorization: `Bearer ${user?.jwt}`,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        data: qs.stringify(data),
-      });
-
-      toast.success("Successfully updated", {
-        duration: 5000,
-      });
-      //if the user email has been changed, the account is unconfirmed.
-      //trigger a refresh so the verification form is showing
-      if(refresh){
-        setTimeout(()=>{
-          router.reload(window.location.pathname)
-        },100)
+      const body = {data};
+      const result = await fetchJson('/api/account/updateProfile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      if(result.status === 200){
+        toast.success("Successfully updated", {
+          duration: 5000,
+        });
+      
+      }else{
+        console.log(result)
+        let msg = result?.error?.message
+        // const text = await result.text();
+        toast.error(msg?msg:"Error has occured.");
+        if(msg){
+          if(msg.indexOf('Username')>-1){
+            setError('username',{message:msg?msg:"Error has occured."})
+          }
+          if(msg.indexOf('Email')>-1){
+            setError('email',{message:msg?msg:"Error has occured."})
+          }
+        }
       }
     } catch (error) {
-      toast.error("Error has occured.");
-      console.log(error.message)
-      console.log(error.response)
-      error.response.data.error.details.errors.forEach((i) => {
-        if (
-          [
-            "location",
-            "firstName",
-            "secondName",
-            "website",
-            "bio",
-            "paymentPointer",
-            "email",
-          ].includes(i.path[0])
-        ) {
-          setError(
-            i.path[0],
-            i.path[0] === "location"
-              ? {
-                  message: "Location not available.",
-                }
-              : {
-                  message: i.message,
-                }
-          );
-        }
-      });
+      console.log(error)
+      toast.error('Error has occured.');
+      // console.log(error.message)
+      // console.log(error.response)
+      // error.response.data.error.details.errors.forEach((i) => {
+      //   if (
+      //     [
+      //       "location",
+      //       "firstName",
+      //       "secondName",
+      //       "website",
+      //       "bio",
+      //       "paymentPointer",
+      //       "email",
+      //     ].includes(i.path[0])
+      //   ) {
+      //     setError(
+      //       i.path[0],
+      //       i.path[0] === "location"
+      //         ? {
+      //             message: "Location not available.",
+      //           }
+      //         : {
+      //             message: i.message,
+      //           }
+      //     );
+      //   }
+      // });
     }
   };
 
@@ -147,16 +146,14 @@ const UserForm = ({ info }) => {
             </span>
           )}
         </FormControl>
-        <Link href="/post/web-monetization-payment-pointer">
-        <a className='cursor-pointer'>
-        <div className="p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
+        <Link href="/post/web-monetization-payment-pointer" legacyBehavior>
+        <div className="cursor-pointer p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
           <img className="w-10 mr-4" src="https://webmonetization.org/img/wm-icon-animated.svg"/>
             <div>
             <h2 className="text-md font-primary font-medium text-gray-800">Learn about Web Monetization</h2>
             <p className="text-gray-800 text-sm">Receive tips and streamed payments with a <a className="underline text-green-900 font-medium" href="#">Payment Pointer</a> and wallet. Learn how to <a className="underline text-green-900 font-medium" href="#">set it up here</a>. →</p>
             </div>
         </div>
-        </a>
         </Link>
       </div>
       </div>
@@ -341,7 +338,7 @@ const UserForm = ({ info }) => {
             autoComplete="off"
             className="w-full"
             placeholder="John"
-            disabled={true}
+            // disabled={true}
             aria-describedby="username_error"
             aria-live="assertive"
             {...register("username", {

@@ -35,7 +35,9 @@ figure{
     }
     p{
         margin-bottom: 1.25rem;
+        min-height: 1.5em;
     }
+
     h1{
         // font-family:'Noto Serif';
         font-weight: 600;
@@ -101,7 +103,7 @@ figure{
         margin: 2.5rem auto;
         border-radius: 0.375rem;
     }
-   *, ul, ol{
+   *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
     max-width: 43rem;
     margin-right: auto;
     margin-left: auto;
@@ -301,6 +303,12 @@ figure{
 @media only screen and (max-width: 600px) {
     figure{
         max-width:100%!important;
+        img{
+            max-width:100%!important;
+        }
+    }
+    iframe{
+        max-width: 100%!important;
     }
   }
 
@@ -360,4 +368,8 @@ figure{
 }
 #imageEditorNode{
     max-width: 100%!important;
+}
+.tippy-box{
+    max-width: 400px!important;
+    outline:none;
 }

@@ -46,6 +46,7 @@ const StyledContent = styled(PopoverPrimitive.Content, {
   paddingLeft: 20,
   background:'#fff',
   width:1000,
+  outline:'none',
   "@media (prefers-reduced-motion: no-preference)": {
     animationDuration: "400ms",
     animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
@@ -158,7 +159,7 @@ const insertImage = (event, editor, user, setLoading) =>{
             removePlaceholder(editor)
             // editor.chain().focus().setFigure({src: url, caption:'enter caption'}).run()
             // editor.chain().focus().setImage({ src: url }).run();
-            editor.commands.setFigure({position:placeholderPos,src: url, alt: '', caption:'', class:'w-full'})
+            editor.commands.setFigure({position:placeholderPos,src: url, alt: '', figcaption:'', class:''})
           })
           .catch(function (error) {
             console.log(error);
@@ -237,21 +238,57 @@ const MenuFloating = ({ editor, isSelecting }) => {
       });
 
       const [loading, setLoading] = useState(false);
+      const [open, setIsOpen] = useState(false)
+      const toggleOpen = () =>{
+        setIsOpen(!open)
+      }
 
+      useEffect(()=>{
+        function handleKeyUp(event) {
+          setIsOpen(false)
+        }
+      
+        window.addEventListener("keyup", handleKeyUp);
+        return () => window.removeEventListener("keyup", handleKeyUp);      
+      })
 
     return(
-<FloatingMenu editor={editor} tippyOptions={{ duration: 100 }}>
-<div style={{marginLeft:-72}}>
-<Popover>
-    <PopoverTrigger asChild>
-      <IconButton className="hover:cursor-pointer" aria-label="Update dimensions">
+<FloatingMenu 
+shouldShow= {({ editor, view, state, oldState }) => {
+
+
+  if(state?.selection?.$anchor?.parent?.type?.name=='paragraph' && state?.selection?.$anchor?.parent?.textContent==''
+  // ||state?.selection?.$anchor?.nodeBefore?.type?.name=='horizontalRule' 
+  ){
+    return true
+  }
+}}
+editor={editor} tippyOptions={{ duration: 100 }}>
+<div id="menu-trigger-container" className="relative z-20" style={{marginLeft:-72}}>
+<Popover  open={open}>
+{/* <Popover > */}
+    <PopoverTrigger autoFocus={false}  asChild>
+      <IconButton onMouseDown={(e)=>{
+        // e.target.closest('#menu-trigger-container').focus()
+        toggleOpen()
+        // e.target.parentElement.click()
+        // tcontent.click()
+      }} className="hover:cursor-pointer" aria-label="Update dimensions">
         <PlusIcon />
       </IconButton>
     </PopoverTrigger>
-    <PopoverContent side="right" sideOffset={5}>
+    <PopoverContent
+    sticky="always"
+    onPointerDownOutside={(e)=>{
+      if(!e.target.closest('#menu-trigger-container') && !e.target.closest('.menu-item')){
+        setIsOpen(false)
+      }
+      }}
+    onFocusOutside={(e)=>e.preventDefault()}
+     side="right" sideOffset={5}>
       <Flex css={{ flexDirection: "row", gap: 10 }}>
         <DropdownMenuItem>
-          <IconButton aria-label="Customise options">
+          <IconButton className="menu-item">
           <>   
           <label
             for="img-upload"
@@ -275,9 +312,9 @@ const MenuFloating = ({ editor, isSelecting }) => {
           <IconButton  onClick={()=>{
                 const url = prompt('Enter Twitter URL')
                 if(url){
-                    editor.chain().focus().insertTweet(url).run()
+                    editor.chain().insertTweet(url).run()
                 }
-            }}  className="hover:cursor-pointer" aria-label="Insert Code Block">
+            }}  className="hover:cursor-pointer menu-item" aria-label="Insert Code Block">
             <TwitterLogoIcon/>
           </IconButton>
         </DropdownMenuItem>
@@ -291,7 +328,7 @@ const MenuFloating = ({ editor, isSelecting }) => {
                         height: 400,
                       })
                 }
-            }}  className="hover:cursor-pointer" aria-label="Insert Code Block">
+            }}  className="hover:cursor-pointer menu-item" aria-label="Insert Code Block">
             <VideoIcon/>
           </IconButton>
         </DropdownMenuItem>
@@ -301,15 +338,19 @@ const MenuFloating = ({ editor, isSelecting }) => {
 
             editor.chain().focus().setCodeBlock().run()
          }} 
-          className="hover:cursor-pointer" aria-label="Insert Code Block">
+          className="hover:cursor-pointer menu-item" aria-label="Insert Code Block">
             <CodeIcon/>
           </IconButton>
         </DropdownMenuItem>
 
         <DropdownMenuItem>
           <IconButton  onClick={()=>{  
-               editor.chain().focus().setHorizontalRule().run()
-            }} className="hover:cursor-pointer" aria-label="Insert Divider">
+             setIsOpen(false)
+             setTimeout(()=>{
+
+               editor.chain().focus().setHorizontalRule().setHardBreak().run()
+             },20)
+            }} className="hover:cursor-pointer menu-item" aria-label="Insert Divider">
             <DividerHorizontalIcon/>
           </IconButton>
         </DropdownMenuItem>

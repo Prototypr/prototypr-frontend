@@ -3,8 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;0,500;&display=swap');
 
 @tailwind base;
+
+@import './tailwind-preflight.scss';
+
 @tailwind components;
 @tailwind utilities;
+
 
 .grayscale {
   filter: grayscale(1);
@@ -227,75 +231,78 @@ a.kofi-button:active {
 
 
 
-.ProseMirror {
+// .ProseMirror {
 
-    >*+* {
-        margin-top: 0.75em;
-    }
+//     >*+* {
+//         margin-top: 0.75em;
+//     }
 
-    ul,
-    ol {
-        padding: 0 1rem;
-        list-style-type: disc;
+//     ul,
+//     ol {
+//         padding: 0 1rem;
+//         list-style-type: disc;
     
-    }
+//     }
 
-    li {
-        list-style-type: disc;
-    }
+//     li {
+//         list-style-type: disc;
+//     }
 
     
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        line-height: 1.1;
-    }
+//     h1,
+//     h2,
+//     h3,
+//     h4,
+//     h5,
+//     h6 {
+//         line-height: 1.1;
+//     }
 
-    code {
-        background-color: rgba(#616161, 0.1);
-        color: #616161;
-    }
+//     code {
+//         background-color: rgba(#616161, 0.1);
+//         color: #616161;
+//     }
 
-    pre {
-        background: #0D0D0D;
-        color: #FFF;
-        font-family: 'JetBrainsMono', monospace;
-        padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
+//     pre {
+//         background: #0D0D0D;
+//         color: #FFF;
+//         font-family: 'JetBrainsMono', monospace;
+//         padding: 0.75rem 1rem;
+//         border-radius: 0.5rem;
 
-        code {
-            color: inherit;
-            padding: 0;
-            background: none;
-            font-size: 0.8rem;
-        }
-    }
+//         code {
+//             color: inherit;
+//             padding: 0;
+//             background: none;
+//             font-size: 0.8rem;
+//         }
+//     }
 
-    img {
-        max-width: 100%;
-        height: auto;
-    }
+//     img {
+//         max-width: 100%;
+//         height: auto;
+//     }
+//     figure{
+//       max-width: 100%;
+//     }
 
-    blockquote {
-        padding-left: 1rem;
-        border-left: 2px solid rgba(#0D0D0D, 0.1);
-    }
+//     blockquote {
+//         padding-left: 1rem;
+//         border-left: 2px solid rgba(#0D0D0D, 0.1);
+//     }
 
-    a {
-        color: #2345de;
-        text-decoration: underline;
-    }
+//     a {
+//         color: #2345de;
+//         text-decoration: underline;
+//     }
 
-    hr {
-        border: none;
-        border-top: 2px solid rgba(#0D0D0D, 0.1);
-        margin: 2rem 0;
-    }
+//     hr {
+//         border: none;
+//         border-top: 2px solid rgba(#0D0D0D, 0.1);
+//         margin: 2rem 0;
+//     }
         
-}
+// }
 
 // .ProseMirror p.is-editor-empty:first-child::before {
 //     content: attr(data-placeholder);
@@ -319,6 +326,7 @@ a.kofi-button:active {
 }
 
 figure.ProseMirror-selectednode{
+  img{outline:3px solid blue;}
   figcaption::selection {
       background: transparent!important;
   }
@@ -327,4 +335,46 @@ figure.ProseMirror-selectednode{
 .inter-font{
     font-family: 'Inter', sans-serif;
     font-style: normal;
+}
+
+img.ProseMirror-selectednode{
+  outline:3px solid blue;
+}
+
+figcaption{
+  position:relative;
+  // text-align: center;
+}
+.editable_text.empty::after{
+  position:absolute;
+  pointer-events: none;
+  color:#b5bbc2;
+  width:100%; 
+  left:0;
+  top:0;
+  content: "Image Caption (Optional)";
+}
+.editable_text.empty{
+  opacity:0;
+  height:0px;
+  margin-top:0px!important;
+}
+figure.ProseMirror-selectednode, figure.is-empty{
+  .editable_text{
+    opacity:1;
+    height:auto;
+    margin-top:16px!important;
+  }
+}
+// button[type="submit"]{
+//   background:rgb(58, 92, 204)!important;
+// }
+// button[type="submit"]:hover{
+//   background:rgb(75, 110, 223)!important;
+// }
+button[type="submit"].bg-gray-100{
+  background:rgba(156,163, 175, 0.2)!important;
+}
+button[type="submit"].bg-gray-100:hover{
+  background:rgba(141, 148, 160, 0.25)!important;
 }

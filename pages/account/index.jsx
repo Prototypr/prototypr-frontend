@@ -7,10 +7,7 @@ import axios from "axios";
 import {useState} from "react"
 // import toast from "react-hot-toast";
 
-import { sessionOptions } from '@/lib/iron-session/session'
-import { withIronSessionSsr } from 'iron-session/next'
 import useUser from "@/lib/iron-session/useUser";
-import { updateUserSessionSSR } from "@/lib/iron-session/updateUserSession";
 
 
 const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
@@ -18,7 +15,7 @@ const Form = dynamic(() => import('@/components/Form'), { ssr: true })
 const UserForm = dynamic(() => import('@/components/user/UserForm'), { ssr: true })
 
 
-const AccountPage = ({ preview, userData, isConfirmed }) => {
+const AccountPage = ({ preview }) => {
 
   const {user} = useUser({
     redirectTo: '/',
@@ -38,7 +35,7 @@ const AccountPage = ({ preview, userData, isConfirmed }) => {
         <Head>
           <title>Account Settings</title>
         </Head>
-        {userData && isConfirmed? <div className="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
+        {user && user.confirmed? <div className="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="pt-6 pb-10 md:pt-10 px-3 xl:px-0">
             <div className="bg-white shadow-md rounded-lg py-6 px-4">
               <h1 className="font-semibold">Public Profile</h1>
@@ -47,16 +44,16 @@ const AccountPage = ({ preview, userData, isConfirmed }) => {
               </span>
               <UserForm
                 info={{
-                  firstName: userData.firstName,
-                  secondName: userData.secondName,
-                  location: userData.location,
-                  website: userData.website,
-                  bio: userData.bio,
-                  paymentPointer: userData.paymentPointer,
+                  firstName: user.firstName,
+                  secondName: user.secondName,
+                  location: user.location,
+                  website: user.website,
+                  bio: user.bio,
+                  paymentPointer: user.paymentPointer,
 
                   // ask about these later
                   email: user?.email,//this is always updated in the iron session when the user submits the form
-                  username: userData?.username?userData?.username:user.name,
+                  username: user?.username?user?.username:user.name,
                 }}
               />
             </div>
@@ -132,58 +129,6 @@ const AccountPage = ({ preview, userData, isConfirmed }) => {
 <div>Unauthenticated, whoops!</div>
     </Layout>)
 };
-
-export const getServerSideProps = withIronSessionSsr(async function ({
-  req,
-  res,
-}) {
-  //iron-session user
-  const user = req.session.user
-
-   if (user === undefined) {
-    res.setHeader('location', '/early-access')
-    res.statusCode = 302
-    res.end()
-    return {
-      props: {
-        user: { isLoggedIn: false, login: '', avatarUrl: '' },
-      },
-    }
-  }else{
-    if(user?.login?.jwt){
-      try{
-        const res = await axios({
-            method: "GET", // change this GET later
-            url: process.env.NEXT_PUBLIC_API_URL + "/api/users/me",
-            headers: {
-              Authorization: `Bearer ${user.login.jwt}`,
-            },
-          });
-          //update iron-session with this up to date data
-          await updateUserSessionSSR(req,res)
-
-          //then return it
-          return {
-            props: {
-              userData: res.data,
-              isConfirmed:res.data.confirmed
-            }, // will be passed to the page component as props
-          };
-      }catch(e){
-        console.log(e.message)
-        return {
-          props: {
-            user: { isLoggedIn: false, login: '', avatarUrl: '', isConfirmed:false },
-          },
-        }
-      }
-    }
-  }
-  return {
-    props: { userData:req.session.user.login.user },
-  }
-},
-sessionOptions)
 
 export default AccountPage;
 

@@ -213,16 +213,15 @@ export const DropdownMenuDemo = ({ icon, user }) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent sideOffset={5}>
-
-        <DropdownMenuItem
+          <DropdownMenuItem
             onSelect={() => {
-              router.push("/my-posts");
+              router.push("/p");
             }}
           >
             My Posts
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          
+
           <DropdownMenuItem
             onSelect={() => {
               router.push("/account");
@@ -256,7 +255,6 @@ export const DropdownMenuDemo = ({ icon, user }) => {
           </DropdownMenuItemBanner>
           <DropdownMenuSeparator />
 
-         
           {/* <DropdownMenuItem
             onSelect={() => {
               router.push("/write");
@@ -265,8 +263,6 @@ export const DropdownMenuDemo = ({ icon, user }) => {
             Write a Post
           </DropdownMenuItem>
           <DropdownMenuSeparator /> */}
-
-       
 
           <DropdownMenuItem
             onSelect={() => {
@@ -280,15 +276,34 @@ export const DropdownMenuDemo = ({ icon, user }) => {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-          onSelect={() => {
-            window.open(`https://help.prototypr.io`);
-          }}
-          >            
+            onSelect={() => {
+              window.open(`https://help.prototypr.io`);
+            }}
+          >
             Help
             {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
+
+          {user?.isAdmin && 
+          <>
           <DropdownMenuSeparator />
-         
+          <DropdownMenuItem
+            onSelect={() => {
+              router.push(`/admin/drafts`);
+            }}
+          >
+            👩‍✈️ Admin
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onSelect={() => {
+              window.open(`https://api.prototypr.io/admin/content-manager/collectionType/api::post.post?page=1&pageSize=10&sort=date:DESC&plugins[i18n][locale]=en`);
+            }}
+          >
+           👾 Strapi
+          </DropdownMenuItem>
+          </>
+          }
+          <DropdownMenuSeparator />
           <DropdownMenuItem
             onSelect={async () => {
               await signOut({ redirect: false });

@@ -27,7 +27,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
   const tagSlug = tagArr && tagArr.length ? tagArr[0].attributes.slug : "";
 
   return (
-    <Link href={`/post/${slug}`}>
+    <Link href={`/post/${slug}`} legacyBehavior>
       <div className="cursor-pointer py-6 px-1 inline-block w-full group relative">
         <figure
           className={`relative h-64 ${
@@ -45,7 +45,7 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
           </div>
         </figure>
 
-        <Link href={`/posts/${tagSlug}`}>
+        <Link href={`/posts/${tagSlug}`} legacyBehavior>
           <div className="mt-3 flex">
             <div className="font-base hover:cursor-pointer hover:underline text-sm leading-6 tracking-wide uppercase text-gray-500 mr-2">
               {tagName}{" "}
@@ -53,8 +53,8 @@ export default function FeedItem({ height = 20, post = {}, index = 0 }) {
           </div>
         </Link>
         <h4 className="text-black-1 font-semibold text-lg leading-normal mt-2">
-          <Link href={`/post/${slug}`}>
-            <a className="font-noto-serif">{title}</a>
+          <Link href={`/post/${slug}`} legacyBehavior>
+            <span className="font-noto-serif">{title}</span>
           </Link>
         </h4>
         <div className="mt-3">

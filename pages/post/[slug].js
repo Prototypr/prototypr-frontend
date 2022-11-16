@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "@/components/container";
+import useUser from "@/lib/iron-session/useUser";
+
 const TopicTopItem = dynamic(
   () => import("@/components/new-index/TopicTopItem"),
   { ssr: true }
@@ -27,13 +29,24 @@ const NoticeTranslation = dynamic(
 
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
+import Link from "next/link";
+const WMPostTracker = dynamic(() => import("@/components/WebMonetization/WMPostTracker"), {
+  ssr: false,
+});
 
 export default function Post({ post, preview, relatedPosts }) {
   const router = useRouter();
+
+  const { user, isLoading } = useUser({
+    redirectIfFound: false,
+  });
+
+
   if (!router.isFallback && !post?.attributes?.slug) {
     return <ErrorPage statusCode={404} />;
   }
 
+  console.log(post.id)
   const title = post?.attributes?.seo?.opengraphTitle
     ? post?.attributes?.seo?.opengraphTitle
     : post?.attributes?.title && post.attributes.title;
@@ -98,11 +111,22 @@ export default function Post({ post, preview, relatedPosts }) {
         className={`min-h-screen px-3 md:px-8`}
         style={{ background: "#fff" }}
       >
+        {user?.isAdmin &&
+        <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white ml-16 left-0 p-4 rounded shadow">
+        <p className="text-sm">Hi, Admin 👩‍✈️</p>
+        <button className="p-1 mt-3 px-3 text-sm text-white bg-purple-600 shadow rounded">
+            <Link href={`/p/${post?.id}`}>Edit</Link>
+        </button>
+        </div>
+        }
+        
         {/* <Alert preview={preview} /> */}
         <main
           className="pt-24 md:pt-36 -mt-3 mx-auto"
           style={{ maxWidth: "1200px" }}
         >
+          {(post?.id && (process.env.NODE_ENV==='production')) && 
+          <WMPostTracker postId={post?.id} post={post}/>}
           <Container>
             {router.isFallback ? (
               <h1 className="text-6xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
