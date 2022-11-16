@@ -38,7 +38,7 @@ export default function Index() {
                         <h1 className="my-3 text-4xl font-semibold">Admin: Draft Posts</h1>
                     </div>
                     <Navigation activeTab={1}/>
-                    <Dashboard postStatus='draft' />
+                    <Dashboard postStatus={['draft', 'pending']} />
                 </div>
           </Layout>
         )

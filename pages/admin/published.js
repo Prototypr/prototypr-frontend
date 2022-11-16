@@ -6,7 +6,7 @@ import Fallback from "@/components/atom/Fallback/Fallback";
 import Layout from "@/components/layout-dashboard";
 
 import useUser from "@/lib/iron-session/useUser";
-import { useState } from "react";
+// import { useState } from "react";
 
 import Dashboard from "@/components/admin/Dashboard/AdminDashboard";
 import Navigation from "@/components/admin/Dashboard/navigation";
@@ -38,7 +38,7 @@ export default function Index() {
                         <h1 className="my-3 text-4xl font-semibold">Admin: Pubished Posts</h1>
                     </div>
                     <Navigation activeTab={2}/>
-                    <Dashboard postStatus='publish' />
+                    <Dashboard postStatus={['publish']} />
                 </div>
           </Layout>
         )

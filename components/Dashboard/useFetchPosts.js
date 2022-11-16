@@ -21,7 +21,7 @@ const useFetchPosts = (user, postStatus) => {
           pageOffset = 0
         }
     
-        const data = await getUserArticles({user, postStatus, pageSize:PAGE_SIZE, offset:pageOffset});
+        const data = await getUserArticles({user, postStatus:postStatus, pageSize:PAGE_SIZE, offset:pageOffset});
         const postsFromUser = data.userPosts?.posts
         setPosts(postsFromUser)
         setTotal(data.userPosts?.count)

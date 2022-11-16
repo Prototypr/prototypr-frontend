@@ -70,7 +70,7 @@ export default function Index() {
                         <h1 className="my-3 text-4xl font-semibold">My Posts</h1>
                     </div>
                     <Navigation activeTab={2}/>
-                    <Dashboard postStatus='publish' />
+                    <Dashboard postStatus={['publish']} />
                 </div>
           </Layout>
         )
