@@ -1,4 +1,13 @@
-const people = [...Array(9)];
+const people = [
+  { img: "/static/images/people/graeme.webp" },
+  { img: "/static/images/people/clo.webp" },
+  { img: "/static/images/people/victor.webp" },
+  { img: "/static/images/people/dj.webp" },
+  { img: "/static/images/people/thalion.webp" },
+  { img: "/static/images/people/naima.webp" },
+  { img: undefined },
+  { img: undefined },
+];
 
 const PitchSection = () => {
   return (
@@ -17,13 +26,18 @@ const PitchSection = () => {
                   streaming micropayments based on the amount of time that
                   visitors spend on their digital content.
                 </p>
-                <div className="flex flex-row gap-4 md:gap-5 flex-wrap max-w-3xl">
+                <div className="flex flex-row gap-4 md:gap-5 flex-wrap max-w-3xl mt-5">
                   {people.map((peep, i) => {
                     return (
-                      <div
-                        key={i}
-                        className=" lg:w-[120px] lg:h-[120px] w-[100px] h-[100px] rounded-full border bg-white bg-opacity-10 border-white border-opacity-10"
-                      ></div>
+                      <div className=" overflow-hidden lg:w-[120px] border-4 cursor-pointer  lg:h-[120px] w-[100px] h-[100px] rounded-full bg-white bg-opacity-10 border-white border-opacity-10">
+                        {peep?.img && (
+                          <img
+                            key={i}
+                            className="relative hover:scale-125 transition ease-in-out"
+                            src={peep?.img}
+                          ></img>
+                        )}
+                      </div>
                     );
                   })}
                 </div>
