@@ -373,3 +373,54 @@ figure{
     max-width: 400px!important;
     outline:none;
 }
+
+.guide-layout{
+    .blog-content>div, .blog-content{
+        width: 100%;
+        max-width: 100%;
+    }
+    >div{
+        max-width: 100%!important;
+    }
+    .full-width{
+        width:100%!important;
+    }
+    .blog-content{
+        *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
+            max-width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            .flex{
+                figure{
+                    margin-bottom: auto;
+                    // margin:0 0;
+                    // max-width: 50%;
+                }
+            }
+        }
+        p, h1, h2, h3, h4, ol, li{
+            max-width: 43rem!important;
+        }
+        .flex figcaption {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #2D3748;
+        // margin-top: rem;
+        }
+    }
+}
+@media (max-width: 700px) {
+    .guide-layout{
+        .blog-content{
+            *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
+                .flex{
+                    figure{
+                        margin-bottom: 2rem!important;
+                        // margin:0 0;
+                        // max-width: 50%;
+                    }
+                }
+            }
+        }
+    }
+  }
