@@ -410,7 +410,26 @@ figure{
         }
     }
 }
-@media (max-width: 1200px) {
+@media (max-width: 600px) {
+    .guide-layout{
+        margin-top: -180px;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-top: 1px;
+        .blog-content{
+            *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
+                .flex{
+                    figure{
+                        margin-bottom: 2rem!important;
+                        // margin:0 0;
+                        // max-width: 50%;
+                    }
+                }
+            }
+        }
+    }
+  }
+  @media (max-width: 1200px) {
     .guide-layout{
         margin-top: -160px;
         margin-left: 20px;

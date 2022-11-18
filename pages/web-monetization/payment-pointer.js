@@ -70,7 +70,7 @@ export default function Post({ post, preview, relatedPosts }) {
       activeNav={"posts"}
     >
       <div
-        className={`min-h-screen px-3 md:px-8`}
+        className={`min-h-screen px-2 md:px-8`}
         style={{ background: "#fff" }}
       >        
         <main
@@ -87,12 +87,12 @@ export default function Post({ post, preview, relatedPosts }) {
                   <PostHeader
                     slug={''}
                     title={'How to Set up a Digital Wallet'}
-                    coverImage={"https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/1fb1a9677ddb118f4dbeba3bf1f51590.png"}
+                    coverImage={"https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/725185bb6c4bb16f695df44eb7f98526.png"}
                     // date={post.attributes.date}
                     // author={post.attributes?.author?.data?.attributes}
                     template={3}
                   />
-                  <div className="guide-layout px-12 md:px-6 pt-12 bg-white max-w-5xl mx-auto md:-mt-[240px] rounded-xl shadow-lg max-w-2xl mx-auto blog-content">
+                  <div className="guide-layout px-8 md:px-6 pt-6 md:pt-12 bg-white max-w-5xl mx-auto md:-mt-[240px] rounded-xl shadow-lg max-w-2xl mx-auto blog-content">
                     <div
                       dangerouslySetInnerHTML={{
                         __html: uphold_html,
