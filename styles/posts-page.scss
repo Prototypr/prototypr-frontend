@@ -29,7 +29,7 @@ figure{
             line-height:30px;
             font-size:18px;
     }
-     a{
+     a:not(.headline){
         color:#2384de;
         text-decoration:underline;
     }
@@ -386,6 +386,7 @@ figure{
         width:100%!important;
     }
     .blog-content{
+       
         *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
             max-width: 100%;
             margin-right: auto;
@@ -409,8 +410,12 @@ figure{
         }
     }
 }
-@media (max-width: 700px) {
+@media (max-width: 1200px) {
     .guide-layout{
+        margin-top: -160px;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding-top: 10px;
         .blog-content{
             *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
                 .flex{

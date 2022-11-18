@@ -41,7 +41,7 @@ export default function PostHeader({
 		<p className="text-sm mb-3 md:text-base text-green-500 font-bold">Web Monetization Guide <span className="text-gray-900">/</span> Uphold</p>
 		<h1 className="font-noto-serif font-bold break-normal text-gray-900 text-3xl md:text-6xl">{title}</h1>
 	</div>
-  <div className="container rounded-xl w-full max-w-6xl mx-auto bg-white bg-cover mt-10 h-[180px] md:h-[400px]" style={{backgroundImage:`linear-gradient(to bottom, rgba(255,255,255,0.15),rgba(0,0,0,0.2), rgba(0,0,0,0.34)),url('${coverImage}')`}}></div>
+  <div className="container rounded-xl w-full max-w-6xl mx-auto bg-white bg-cover mt-10 h-[280px] md:h-[400px]" style={{backgroundImage:`linear-gradient(to bottom, rgba(255,255,255,0.15),rgba(0,0,0,0.2), rgba(0,0,0,0.34)),url('${coverImage}')`}}></div>
   
     {/* <div className="w-full absolute mt-[65px] left-0 top-0 h-56 md:h-[600px] mb-4 md:mb-0" style={{borderBottomLeftRadius:'200px'}}>
         <Image

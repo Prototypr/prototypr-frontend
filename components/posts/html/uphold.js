@@ -1,11 +1,11 @@
 export const uphold_html = `
-<h2>New to <span class="boreder-b border-b-2 border-green-600 hover:text-green-600 cursor-pointer">Web Monetization</span>? This is a step-by-step guide for creating an <span class="boreder-b border-b-2 border-green-600 hover:text-green-600 cursor-pointer">Uphold account</span> so you can get a payment pointer to embed in your articles.</h2>
+<h2>New to <span class="boreder-b border-b-2 border-green-600 hover:text-green-600 cursor-pointer">Web Monetization</span>? This is a step-by-step guide for creating an <a href="https://uphold.com" style="text-decoration:none;" target="_blank" class="headline boreder-b border-b-2 border-green-600 hover:text-green-600 cursor-pointer">Uphold account</a> so you can get a payment pointer to embed in your articles.</h2>
 <div class="max-w-2xl mx-auto blog-content pb-36 pt-3 mb-32">
    <div>
       <p>To collect micropayments, you need a digital wallet in which to receive the money. Here at Prototypr, we let content creators use our digital wallet, so you don’t have to sign up for one yourself. You can still set up your own digital wallet if you prefer, for instance if you’re also collecting micropayments from content on other websites. This guide will explain how to do it.</p>
       <figure class="mt-8">
-         <img src="https://prototyprio.gumlet.io/strapi/528a56d535e51e267621a4479a535c2a.png?format=webp&w=1920&dpr=1.0" alt="" style="height:220px;object-fit:contain;" class="w-full rounded border">
-         <figcaption><a href="https://commons.wikimedia.org/wiki/File:Uphold-logo-horizontal-color-small.jpg">Todo: Replace with illo :)</a></figcaption>
+         <img src="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/c1807bb6756d86fab4b8b292cfbe54f4.png" alt="" style="object-fit:cover;" class="w-full rounded-xl shadow-sm">
+         <figcaption style="max-width:36rem;">Uphold wallets receive micropayments from Web Monetized sites (e.g. Prototypr, Kult.pt, Dev.to, CodePen, and many more) via Coil.</figcaption>
       </figure>
       <p>The digital wallets that work with Web Monetization are Uphold and Gatehub. Uphold has no withdrawal fees so we’ll go with them for this guide.</p>
       <p>Uphold is a platform for trading cryptocurrencies like bitcoin. It hasn’t been designed with Web Monetization in mind, so the platform has a lot of functionality that you’re probably not going to use, and the site can seem a bit overwhelming if you’re not into trading cryptocurrencies.</p>
