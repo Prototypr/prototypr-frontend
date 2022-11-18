@@ -5,7 +5,7 @@ const people = [
   { img: "/static/images/people/dj.webp" },
   { img: "/static/images/people/thalion.webp" },
   { img: "/static/images/people/naima.webp" },
-  { img: undefined },
+  { img: "/static/images/people/vik.webp" },
   { img: undefined },
 ];
 
@@ -46,7 +46,7 @@ const PitchSection = () => {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0">
+      <div className="absolute bottom-0 w-full ">
         <img
           className="w-full translate-y-[4px] z-0"
           src="/static/images/tilt-section.svg"
