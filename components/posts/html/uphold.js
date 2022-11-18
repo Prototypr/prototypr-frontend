@@ -4,7 +4,7 @@ export const uphold_html = `
    <div>
       <p>To collect micropayments, you need a digital wallet in which to receive the money. Here at Prototypr, we let content creators use our digital wallet, so you don’t have to sign up for one yourself. You can still set up your own digital wallet if you prefer, for instance if you’re also collecting micropayments from content on other websites. This guide will explain how to do it.</p>
       <figure class="mt-8">
-         <img src="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/c1807bb6756d86fab4b8b292cfbe54f4.png" alt="" style="object-fit:cover;" class="w-full rounded-xl shadow-sm">
+         <img src="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/7b0fd1ecf66bd1c9789e0069e7c7ad1e.png" alt="" style="object-fit:cover;" class="w-full rounded-xl shadow-sm">
          <figcaption style="max-width:36rem;">Uphold wallets receive micropayments from Web Monetized sites (e.g. Prototypr, Kult.pt, Dev.to, CodePen, and many more) via Coil.</figcaption>
       </figure>
       <p>The digital wallets that work with Web Monetization are Uphold and Gatehub. Uphold has no withdrawal fees so we’ll go with them for this guide.</p>

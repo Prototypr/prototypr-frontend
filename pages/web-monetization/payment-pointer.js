@@ -1,26 +1,22 @@
 import dynamic from "next/dynamic";
 
 import { useRouter } from "next/router";
-import ErrorPage from "next/error";
+// import ErrorPage from "next/error";
 import Container from "@/components/container";
 import useUser from "@/lib/iron-session/useUser";
 
-import ProductItem from "@/components/new-index/ProductItem";
+// import ProductItem from "@/components/new-index/ProductItem";
 
 const PostHeader = dynamic(() => import("@/components/post-header"), {
   ssr: true,
 });
-const AuthorBio = dynamic(() => import("@/components/authorBio"), {
-  ssr: true,
-});
-const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 import { useIntl } from "react-intl";
 
 import Layout from "@/components/layout-post";
-const NoticeTranslation = dynamic(
-  () => import("@/components/notice-translation"),
-  { ssr: true }
-);
+// const NoticeTranslation = dynamic(
+//   () => import("@/components/notice-translation"),
+//   { ssr: true }
+// );
 
 import { useEffect } from "react";
 const WMPostTracker = dynamic(() => import("@/components/WebMonetization/WMPostTracker"), {
@@ -65,7 +61,7 @@ export default function Post({ post, preview, relatedPosts }) {
       seo={{
         title: `How to Set up a Digital Wallet at Uphold`,
         description: `To collect micropayments, you need a digital wallet in which to receive the money. Here at Prototypr, we let content creators use our digital wallet, so you don’t have to sign up for one yourself.`,
-        image: `https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/56f0f065cc196885641cf0404d4ec90c.png`,
+        image: `https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/7b0fd1ecf66bd1c9789e0069e7c7ad1e.png`,
         canonical: `https://prototypr.io/web-monetization/payment-pointer`,
         url: `https://prototypr.io/web-monetization/payment-pointer`,
         monetization: `$ilp.uphold.com/KFf2ZdYLXnj9`,
@@ -91,7 +87,7 @@ export default function Post({ post, preview, relatedPosts }) {
                   <PostHeader
                     slug={''}
                     title={'How to Set up a Digital Wallet'}
-                    coverImage={"https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/725185bb6c4bb16f695df44eb7f98526.png"}
+                    coverImage={"https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/1fb1a9677ddb118f4dbeba3bf1f51590.png"}
                     // date={post.attributes.date}
                     // author={post.attributes?.author?.data?.attributes}
                     template={3}
