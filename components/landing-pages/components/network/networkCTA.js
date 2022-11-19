@@ -3,7 +3,7 @@ import CTAButton from "./../common/button";
 const NetworkCTA = () => {
   return (
     <div className="w-full bg-[#CCE6FF] relative h-auto sky-gradient ">
-      <div className="w-full bg-[#F8B700] p-10 rounded-b-[30px] -translate-y-1"></div>
+      <div className="w-full bg-[#fff] p-3 rounded-b-[40px] -translate-y-1"></div>
       <div className="px-5">
         <div className="absolute p-10 pointer-events-none z-[0]">
           <img className="w-full" src="/static/images/stars.svg" />

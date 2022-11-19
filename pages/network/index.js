@@ -17,11 +17,12 @@ const NetworkPage = () => {
       <Header />
       <Meta seo={{}} />
       <Hero />
-      <Features/>
+      <Features />
       <PitchSection />
       <MissionSection />
-      <NetworkCTA />
       <NewsContent />
+
+      <NetworkCTA />
       <Footer />
     </div>
   );

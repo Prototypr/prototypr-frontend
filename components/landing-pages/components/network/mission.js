@@ -30,10 +30,11 @@ const MissionSection = () => {
     <div className="w-full pb-40 bg-[#F8B700] px-5 ">
       <div className="w-full max-w-6xl mx-auto  ">
         <div className="max-w-3xl pt-20 md:pt-32">
-          <h3 className="text-[#723636] text-[40px] leading-[50px] md:text-[60px] md:leading-[70px] font-semibold font-inter">
+          <h3 className="text-[#723636] text-[40px] leading-[50px] md:text-[56px] md:leading-[70px] font-semibold font-inter">
             {/* Our mission is to make Design Open for all, just like Open Source
             Code. */}
-            We're creating a more open, fair, and inclusive publishing platform for designers. 
+            We're creating a more open, fair, and inclusive publishing platform
+            for designers.
           </h3>
           <h3 className="text-[#723636] text-[24px] leading-[70px] font-semibold font-inter my-3 md:my-5">
             Be part of a change
