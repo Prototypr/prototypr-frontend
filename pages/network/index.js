@@ -7,6 +7,7 @@ import MissionSection from "@/components/landing-pages/components/network/missio
 import NetworkCTA from "@/components/landing-pages/components/network/networkCTA";
 import Header from "@/components/landing-pages/components/common/header";
 import NewsContent from "@/components/landing-pages/components/network/news";
+import Features from "@/components/landing-pages/components/network/features";
 
 const Footer = dynamic(() => import("@/components/footer"));
 
@@ -16,10 +17,11 @@ const NetworkPage = () => {
       <Header />
       <Meta seo={{}} />
       <Hero />
-      <NewsContent />
+      <Features/>
       <PitchSection />
       <MissionSection />
       <NetworkCTA />
+      <NewsContent />
       <Footer />
     </div>
   );

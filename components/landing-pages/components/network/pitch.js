@@ -18,13 +18,15 @@ const PitchSection = () => {
             <div className="w-full bg-[#195DE2] h-auto rounded-[32px] px-5 py-10 md:py-32 md:px-10">
               <div className="max-w-6xl mx-auto  flex flex-col gap-5">
                 <h2 className="md:text-[50px] text-[30px] max-w-2xl leading-[40px] md:leading-[60px] font-semibold font-inter text-white">
-                  A place to meet like minded writers, share ideas and spread
-                  knowledge
+                  {/* A place to meet like minded writers, share ideas and spread
+                  knowledge */}
+                   The signal amongst<br/>all the noise
+                  {/* Mindful designers, building towards a calmer, fairer, and more open web.  */}
+                  {/* Thoughts into words. Words into designs. Designs into the hands of users. */}
                 </h2>
                 <p className="text-[#C4D7FD] max-w-lg text-[18px] font-inter leading-[32px]">
-                  Web Monetization is a way that content creators can earn from
-                  streaming micropayments based on the amount of time that
-                  visitors spend on their digital content.
+                 We're a network built to share purposeful stories from creators and web custodians, when they want to be heard – not when an algorithm decides. 
+                 No more algorithm-driven engagement, no more unnecessary noise. 
                 </p>
                 <div className="flex flex-row gap-4 md:gap-5 flex-wrap max-w-3xl mt-5">
                   {people.map((peep, i) => {
