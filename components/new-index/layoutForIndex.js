@@ -1,7 +1,13 @@
 import Meta from "../meta";
 import Navbar from "../navbar2";
 
-export default function Layout({ preview, children, activeNav, seo }) {
+export default function Layout({
+  preview,
+  children,
+  activeNav,
+  seo,
+  CustomHeader = undefined,
+}) {
   return (
     <>
       <Meta seo={seo} />
