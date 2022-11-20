@@ -1,27 +1,22 @@
 const Benefits = [
   {
-    title: "Distribution",
-    description: `There has been a rise in centralized publishing platforms
-    optimizing for paywalled business models that create a barrier to
-    free learning.`,
+    title: "Quality over quantity",
+    description: `Corporate-run platforms force engagement to please algorithms, resulting in clickbait titles and shallow articles.
+     Our human curators and editors ensure thoughts worth sharing are heard, regardless of 'likes' or follower counts.`,
   },
   {
-    title: "Find Writing Gigs",
-    description: `There has been a rise in centralized publishing platforms
-    optimizing for paywalled business models that create a barrier to
-    free learning.`,
+    title: "Privacy-first",
+    description: `Free, unbiased, and quality design material is increasingly hard to come by with the rise in paywalls and privacy-invasive ads. We're exploring new business models for the web that keep content open, whilst rewarding writers.`,
   },
   {
-    title: "Get Paid to Write",
-    description: `There has been a rise in centralized publishing platforms
-    optimizing for paywalled business models that create a barrier to
-    free learning.`,
+    title: "Built to reward writers",
+    description: `Prototypr is built by writers, for writers. We write for passion, but we also know first-hand what it's like to make a living through writing in design. With that, we're working to bring more paid gigs to the writers network.`,
   },
   {
-    title: "Build your Audience",
-    description: `There has been a rise in centralized publishing platforms
-    optimizing for paywalled business models that create a barrier to
-    free learning.`,
+    title: "Open source and Inclusive",
+    description: `With the rise in corporate platforms
+    optimizing for paywalled business models, our open source platform keeps educational content available to all readers.
+    We also translate articles to include wider groups and cultures.`,
   },
 ];
 
@@ -33,11 +28,10 @@ const MissionSection = () => {
           <h3 className="text-[#723636] text-[40px] leading-[50px] md:text-[56px] md:leading-[70px] font-semibold font-inter">
             {/* Our mission is to make Design Open for all, just like Open Source
             Code. */}
-            We're creating a more open, fair, and inclusive publishing platform
-            for designers.
+            We're creating a more mindful, open, and fair publishing platform.
           </h3>
           <h3 className="text-[#723636] text-[24px] leading-[70px] font-semibold font-inter my-3 md:my-5">
-            Be part of a change
+            Built in the open for design, code, and tech
           </h3>
         </div>
         <div className="flex flex-row flex-wrap gap-7 md:gap-10 my-5">

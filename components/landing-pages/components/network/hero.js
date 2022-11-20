@@ -17,7 +17,7 @@ const Hero = () => {
               {/* A network for writers to share and receive feedback. On a platform
               where quality is rewarded, not clicks. We are an Open Source
               design platform, driven by humans, not algorithms or 'likes'.  */}
-              A Network for writers to share and receive feedback. We are an
+              A network for writers to share and receive feedback. We are an
               Open Source design platform where quality is rewarded, not clicks.
               Driven by humans, not algorithms. Join us.
             </p>

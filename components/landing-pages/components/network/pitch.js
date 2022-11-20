@@ -1,12 +1,12 @@
 const people = [
-  { img: "/static/images/people/graeme.webp" },
+  { img: "/static/images/people/vik.webp" },
   { img: "/static/images/people/clo.webp" },
   { img: "/static/images/people/victor.webp" },
-  { img: "/static/images/people/dj.webp" },
-  { img: "/static/images/people/thalion.webp" },
   { img: "/static/images/people/naima.webp" },
-  { img: "/static/images/people/vik.webp" },
-  { img: undefined },
+  { img: "/static/images/people/dj.webp" },
+  { img: "/static/images/people/graeme.webp" },
+  { img: "/static/images/people/soph.webp" },
+  { img: "/static/images/people/thalion.webp" },
 ];
 
 const PitchSection = () => {
@@ -20,13 +20,13 @@ const PitchSection = () => {
                 <h2 className="md:text-[50px] text-[30px] max-w-2xl leading-[40px] md:leading-[60px] font-semibold font-inter text-white">
                   {/* A place to meet like minded writers, share ideas and spread
                   knowledge */}
-                   The signal amongst<br/>all the noise
+                   Be the signal<br/> through the noise
                   {/* Mindful designers, building towards a calmer, fairer, and more open web.  */}
                   {/* Thoughts into words. Words into designs. Designs into the hands of users. */}
                 </h2>
                 <p className="text-[#C4D7FD] max-w-lg text-[18px] font-inter leading-[32px]">
-                 We're a network built to share purposeful stories from creators and web custodians, when they want to be heard – not when an algorithm decides. 
-                 No more algorithm-driven engagement, no more unnecessary noise. 
+                 A platform built to surface purposeful stories from designers, developers, and creators, when they want to be heard – not when an algorithm decides. 
+                 There's no forced engagement here – a reliable network to get the word out.
                 </p>
                 <div className="flex flex-row gap-4 md:gap-5 flex-wrap max-w-3xl mt-5">
                   {people.map((peep, i) => {
@@ -35,7 +35,7 @@ const PitchSection = () => {
                         {peep?.img && (
                           <img
                             key={i}
-                            className="relative hover:scale-125 transition ease-in-out"
+                            className="relative hover:scale-125 object-cover h-full transition ease-in-out"
                             src={peep?.img}
                           ></img>
                         )}

@@ -1,6 +1,6 @@
-const BlogPostCard = () => {
+const BlogPostCard = ({img}) => {
   return (
-    <div className="bg-[#E6F2FF] cursor-pointer transition ease-in-out w-full h-[240px] rounded-lg border border-black border-opacity-5"></div>
+    <div style={{backgroundImage:`url("${img}")`, backgroundPosition:'center', backgroundSize:'cover'}} className=" cursor-pointer transition ease-in-out w-full h-[240px] rounded-lg border border-black border-opacity-5"></div>
   );
 };
 
@@ -15,9 +15,9 @@ const NewsContent = () => {
             More about <br /> Open Design →
           </h2>
           <div className="flex flex-col lg:flex-nowrap lg:flex lg:flex-row md:flex md:flex-wrap md:flex-col gap-5 py-2 ">
-            <BlogPostCard />
-            <BlogPostCard />
-            <BlogPostCard />
+            <BlogPostCard img={'/static/images/cursorlock.png'} />
+            <BlogPostCard img={'/static/images/globepen.png'} />
+            <BlogPostCard img={`https://prototyprio.gumlet.io/strapi/2272daa0caea148d74b94bc636722b51.png?format=webp&w=700&dpr=2.0`} />
           </div>
         </div>
       </div>
