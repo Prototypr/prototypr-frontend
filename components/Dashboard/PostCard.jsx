@@ -111,7 +111,7 @@ const PostCard = ({ post, refetch, user }) => {
   
           {post.status === "publish" && (
             <div>
-              <a target={"_blank"} href={`/poist/${post.slug}`}>
+              <a target={"_blank"} href={`/post/${post.slug}`}>
                 <button className="text-lg underline text-black  p-3  rounded-full hover:bg-gray-100 ">
                   <svg
                     width="15"

@@ -7,6 +7,9 @@
     }
 }
 .blog-content{
+    *{
+        overflow-wrap: break-word;
+    }
     
     .wp-caption-text{margin-top:10px!important;}
 

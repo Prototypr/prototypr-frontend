@@ -1,8 +1,8 @@
 const Benefits = [
   {
     title: "Quality over quantity",
-    description: `Corporate-run platforms force engagement to please algorithms, resulting in clickbait titles and shallow articles.
-     Our human curators and editors ensure thoughts worth sharing are heard, regardless of 'likes' or follower counts.`,
+    description: `Attention hungry platforms force engagement to please algorithms, resulting in clickbait and shallow articles.
+     We're not in a 'content' rat-race – join a network where quality rises over hype, regardless of 'likes' and follower counts.`,
   },
   {
     title: "Privacy-first",
@@ -16,7 +16,7 @@ const Benefits = [
     title: "Open source and Inclusive",
     description: `With the rise in corporate platforms
     optimizing for paywalled business models, our open source platform keeps educational content available to all readers.
-    We also translate articles to include wider groups and cultures.`,
+    Articles are also translated to reach wider groups and cultures.`,
   },
 ];
 

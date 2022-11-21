@@ -60,6 +60,7 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
   const [tier, setTier] = useState(postObject.tier)
   const [timestamp, setTimestamp] = useState(null)
   const [coverImage, setCoverImage] = useState(null)
+  const [slug, setSlug] = useState(postObject.slug)
 
   const handleDateChange = (input) =>{
     setTimestamp(input)
@@ -70,6 +71,7 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
 
     setPostStatus(postObject?.status)
     setTier(postObject?.tier)
+    setSlug(postObject?.slug)
     
     if(postObject.published_at){
       let dateObj = new Date(postObject.published_at)
@@ -100,11 +102,16 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
     if(tier){
       data.tier = parseInt(tier)
     }
+    if(slug){
+      data.slug = slug
+    }
     if(timestamp){
       data.publishedAt = timestamp
     }else{
       data.publishedAt= null
     }
+
+    console.log(data)
 
     let publishPostEndpointConfig = {
       method: "put",
@@ -156,6 +163,15 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
             <div>
             {isAdmin && 
                <div  className="bg-white px-5 mx-auto mb-5 border-gray-100">
+                <div className="border border-gray-100 p-4 rounded-md my-3">
+                    <h2 className="font-medium text-md mb-4 font-secondary">Url slug</h2>
+                    <Input style={{width:'86%'}} onChange={(e)=>{
+                      setSlug(e.target.value)
+                    }} defaultValue={slug}/>
+                    <p className="mt-3 text-xs text-gray-400"> 
+                       (If slug is taken, it will just give error)
+                      </p>
+                </div>
                  <div className="border border-gray-100 p-4 rounded-md my-3">
                     <h2 className="font-medium text-md mb-4 font-secondary">Featured Image</h2>
                     {postObject.slug?<ImageUploader 
@@ -221,6 +237,9 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
                 {/* ADMIN SETTINGS END */}
            </div>
            <div  className="px-5 flex fixed w-full bg-white -mt-20 bottom-0 justify-start border-t py-3 border-gray-300">
+            {postObject.published_at && <Button className="mr-2.5" variant={'ghostBlue'} onClick={()=>{
+              window.open(`/post/${postObject.slug}`)
+            }}>View</Button>}
             <Button onClick={updatePost}>Save Settings</Button>
             </div>
           </div>
