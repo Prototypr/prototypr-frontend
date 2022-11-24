@@ -347,11 +347,11 @@ figcaption{
   top:0;
   content: "Image Caption (Optional)";
 }
-.editable_text.empty{
-  opacity:0;
-  height:0px;
-  margin-top:0px!important;
-}
+// .editable_text.empty{
+//   opacity:0;
+//   height:0px;
+//   margin-top:0px!important;
+// }
 figure.ProseMirror-selectednode, figure.is-empty{
   .editable_text{
     opacity:1;

@@ -4,10 +4,12 @@ import EditorNav from "../EditorNav";
 import dynamic from "next/dynamic";
 
 import Placeholder from "@tiptap/extension-placeholder";
+// import Placeholder from "./CustomExtensions/Figure2/Placeholder";
 import Document from "@tiptap/extension-document";
 import TextMenu from "@/components/Editor/Menus/TextMenu";
 import ImageMenu from "@/components/Editor/Menus/ImageMenu";
 import Button from "@/components/Primitives/Button";
+
 
 import SidePanelTrigger from "./SidePanel/SidePanelTrigger";
 
@@ -19,7 +21,6 @@ import useUser from "@/lib/iron-session/useUser";
 import { PublishDialogButton } from "./PublishDialogButton";
 
 import Iframe from "./CustomExtensions/Iframe/Iframe";
-// import Image from "@tiptap/extension-image";
 import Gapcursor from "@tiptap/extension-gapcursor";
 import Youtube from "@tiptap/extension-youtube";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
@@ -37,7 +38,16 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import Dropcursor from "@tiptap/extension-dropcursor";
 import History from "@tiptap/extension-history";
 import { Blockquote } from "@/components/Editor/CustomExtensions/CustomBlockquote";
-import { FigCaption, Figure } from "./CustomExtensions/Figure";
+// import { FigCaption, Figure } from "./CustomExtensions/Figure";
+// import { FigCaption } from "./CustomExtensions/Figure";
+
+// import Image from "@tiptap/extension-image";
+import {Image} from "./CustomExtensions/Figure2/CustomImage";
+
+import Figure from "./CustomExtensions/Figure2/Figure";
+import FigCaption from "./CustomExtensions/Figure2/Figcaption";
+import { PasteFilter } from "./CustomExtensions/PasteFilter";
+
 import Tweet from "./CustomExtensions/Tweet/Tweet";
 import Video from "./CustomExtensions/Video/Video";
 
@@ -108,13 +118,24 @@ const Editor = ({
         openOnClick: false,
       }),
       // images are converted to figures now
-      // FigCaption,
-      Figure.configure({
+      Figure,
+      Image.configure({
         allowBase64: true,
       }),
+      FigCaption,
+      PasteFilter,
+      // Figure.configure({
+      //   allowBase64: true,
+      // }),
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
+            return "What's the title?";
+          }
+          if (node.type.name === "figcaption") {
+            return "What's the title?";
+          }
+          if (node.type.name === "figure") {
             return "What's the title?";
           }
           return "Tell a story...";

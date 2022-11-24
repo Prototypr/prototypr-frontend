@@ -67,7 +67,7 @@ const ImageMenu = ({ editor, isSelecting }) => {
             return false
           }
 
-          return (editor.isActive('figure') || editor.isActive('image')) 
+          return (editor.isActive('figure')) 
          
           }}
 

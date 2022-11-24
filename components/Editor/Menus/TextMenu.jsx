@@ -68,7 +68,7 @@ const MenuBar = ({ editor, isSelecting }) => {
 
           if(isTextSelection){
             return (editor.isActive('paragraph') || editor.isActive('heading'))
-            //  || (editor.isActive('figure') 
+             || editor.isActive('figcaption') 
              || editor.isActive('image')
             //  )
 

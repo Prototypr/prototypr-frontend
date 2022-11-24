@@ -451,3 +451,35 @@ figure{
         }
     }
   }
+
+  .ProseMirror{
+    figure.ProseMirror-selectednode{
+        figcaption *::selection {
+            background-color: transparent;
+            background: transparent!important;
+            
+        }
+    }
+    figure{
+        cursor:default;
+        figcaption{
+            cursor:text;
+            a{
+                pointer-events: all;
+            }
+        }
+        img{
+            pointer-events: none;
+            -khtml-user-select: none;
+            -o-user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            
+        }
+
+        a{
+            pointer-events: none;
+        }
+    }
+  }

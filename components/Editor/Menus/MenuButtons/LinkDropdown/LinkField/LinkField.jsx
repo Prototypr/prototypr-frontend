@@ -48,7 +48,7 @@ import { TextSelection } from "prosemirror-state";
         if(editor.isActive('blockLink')){
             previousUrl = editor.getAttributes("blockLink").href;
         }else if(editor.isActive('figure') && !isTextSelection){
-          previousUrl = editor.getAttributes("figure").link;
+          previousUrl = editor.getAttributes("image").link;
 
         }
         setLink(previousUrl)
@@ -109,14 +109,20 @@ import { TextSelection } from "prosemirror-state";
               if(editor.isActive('blockLink')){
                 editor.chain().focus().updateAttributes('blockLink',{ href: url }).run();
               }else if(editor.isActive('figure') && !isTextSelection){
-                editor.chain().focus().updateAttributes('figure',{ link: url }).run();
+                editor.chain().focus().updateAttributes('image',{ link: url }).run();
               }else{ 
                 editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
               }
         }else{
+          const selection = editor.state.selection
+          const isTextSelection = selection instanceof TextSelection
+
           if(editor.isActive('blockLink')){
             editor.chain().focus().updateAttributes('blockLink',{ href: '' }).run();
          }
+          if(editor.isActive('figure') && !isTextSelection){
+          editor.chain().focus().updateAttributes('image',{ link: '' }).run();
+        }
          else{
             editor.chain().focus().extendMarkRange("link").unsetLink().run();
          }
