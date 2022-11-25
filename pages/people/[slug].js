@@ -139,8 +139,7 @@ export default function PeoplePage({
                 <div className="">
                   <div className="mb-3">
                     <h1 className="text-2xl pt-6 font-semibold leading-normal text-gray-800 mb-3">
-                    {`${author?.firstName ? author?.firstName:''}
-                    ${author?.lastName ? ' '+author?.lastName:''}
+                    {`${author?.firstName ? author?.firstName:''} ${author?.lastName ? author?.lastName:''}
                     ${(!author?.firstName && !author?.lastName) ? author?.name:''}`}
                     </h1>
                     {author && author.location && (
