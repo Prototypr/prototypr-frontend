@@ -80,13 +80,9 @@ export default function PostHeader({
                 <Avatar
                   date={date}
                   name={
-                    author?.name
-                      ? author?.name
-                      : author?.displayName
-                      ? author?.displayName
-                      : author?.firstName
-                      ? author?.firstName
-                      : ""
+                   `${author?.firstName ? author?.firstName:''}
+                    ${author?.lastName ? ' '+author?.lastName:''}
+                    ${(!author?.firstName && !author?.lastName) ? author?.name:''}`
                   }
                   picture={avatar}
                 />

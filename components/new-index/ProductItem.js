@@ -70,8 +70,10 @@ export default function ProductItem({ post = {} }) {
                   href={`/people/${author?.data?.attributes?.slug}`}
                   className="hover:underline hover:text-gray-800"
                 >
-                  {author?.data?.attributes?.name}
-                </Link>
+                  {`${author?.data?.attributes?.firstName ? author?.data?.attributes?.firstName:''} `}
+                  {`${author?.data?.attributes?.lastName ? author?.data?.attributes?.lastName:''}`}
+                  {`${(!author?.data?.attributes?.firstName && !author?.data?.attributes?.lastName) ? author?.data?.attributes?.name:''}`}
+               </Link>
               )}
             </div>
           </div>

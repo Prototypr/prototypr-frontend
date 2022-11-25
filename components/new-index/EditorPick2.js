@@ -127,7 +127,10 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                       legacyBehavior
                     >
                       <span className="font-medium text-neutral-700 hover:text-gray-900 transition duration-150 ease-in-out">
-                        {author?.data?.attributes?.name}
+                        {/* {author?.data?.attributes?.name} */}
+                        {`${author?.data?.attributes?.firstName ? author?.data?.attributes?.firstName:''} `}
+                  {`${author?.data?.attributes?.lastName ? author?.data?.attributes?.lastName:''}`}
+                  {`${(!author?.data?.attributes?.firstName && !author?.data?.attributes?.lastName) ? author?.data?.attributes?.name:''}`}
                       </span>
                     </Link>
                   </div>

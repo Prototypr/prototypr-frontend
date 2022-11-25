@@ -52,7 +52,11 @@ export default function AspiringItem({ post = {} }) {
             className="hover:underline hover:text-gray-800"
             href={`/people/${author?.data?.attributes?.slug}/page/1`}
             legacyBehavior>
-            <span>{author?.data?.attributes?.name}</span>
+            <span>
+            {`${author?.data?.attributes?.firstName ? author?.data?.attributes?.firstName:''} `}
+                  {`${author?.data?.attributes?.lastName ? author?.data?.attributes?.lastName:''}`}
+                  {`${(!author?.data?.attributes?.firstName && !author?.data?.attributes?.lastName) ? author?.data?.attributes?.name:''}`}
+            </span>
           </Link>
         </div>
 
