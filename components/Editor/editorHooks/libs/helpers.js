@@ -116,15 +116,18 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
 
   //change the date on save only if it's a draft or pending publish
   if((postStatus=='draft' || postStatus=='pending') || (!postStatus || isCreate)){
-    entry.date=new Date();
-    entry.slug= postSlug
-    entry.featured = false
-    entry.excerpt= firstParagraph,
+    if(postObject.status!=='publish'){
 
-    //SEO
-    entry.seo.opengraphPublishedTime = new Date()
-    entry.seo.metaDesc = firstParagraph
-    entry.seo.opengraphDescription = firstParagraph
+      entry.date=new Date();
+      entry.slug= postSlug
+      entry.featured = false
+      entry.excerpt= firstParagraph,
+  
+      //SEO
+      entry.seo.opengraphPublishedTime = new Date()
+      entry.seo.metaDesc = firstParagraph
+      entry.seo.opengraphDescription = firstParagraph
+    }
 
   }
 
