@@ -9,7 +9,7 @@ import Document from "@tiptap/extension-document";
 import TextMenu from "@/components/Editor/Menus/TextMenu";
 import ImageMenu from "@/components/Editor/Menus/ImageMenu";
 import Button from "@/components/Primitives/Button";
-
+// import LinkMenu from "./Menus/LinkMenu";
 
 import SidePanelTrigger from "./SidePanel/SidePanelTrigger";
 
@@ -320,6 +320,7 @@ const Editor = ({
           <div className="my-4 pt-16 relative pb-10 blog-content">
             {editor && <MenuFloating editor={editor} />}
             <TextMenu editor={editor} />
+            {/* <LinkMenu editor={editor} /> */}
             <ImageMenu editor={editor} />
             {((loading || !editorCreated)|| (!content && slug))? (
               <div
