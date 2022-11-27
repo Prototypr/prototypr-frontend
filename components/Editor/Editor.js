@@ -116,6 +116,11 @@ const Editor = ({
       Blockquote,
       Link.configure({
         openOnClick: false,
+        HTMLAttributes: {
+          target: '_blank',
+          rel: null,
+          class: null,
+        },
       }),
       // images are converted to figures now
       Figure,
