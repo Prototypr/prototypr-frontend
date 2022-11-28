@@ -53,8 +53,7 @@ export default function PostListItem({
             : postItem.type == "inspiratin"
             ? "/inspiration/" + postItem.slug
             : "#"
-        }
-        legacyBehavior>
+        }>
           <div className={"px-4 md:px-4 flex h-full relative mb-3 md:mb-0"}>
             <div className="cursor-pointer rounded-lg relative flex md:my-4 h-16 w-16 md:h-16 flex-none">
               {img ? (

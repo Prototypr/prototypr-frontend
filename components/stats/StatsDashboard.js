@@ -61,7 +61,6 @@ const ArticleStats = () => {
                       key={i}
                       href={url}
                       className="cursor-pointer"
-                      legacyBehavior
                     >
                       <div className="w-full bg-white rounded-lg shadow-lg p-5 cursor-pointer">
                         <p>{post.title}</p>

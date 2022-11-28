@@ -70,7 +70,11 @@ export default function PeoplePage({
   return (
     <Layout
       seo={{
-        title: `${author?.name}, member profile at Prototypr`,
+        title: `
+        ${author?.firstName ? author?.firstName:''}
+                    ${author?.lastName ? ' '+author?.lastName:''}
+                    ${(!author?.firstName && !author?.lastName) ? author?.name:''}
+        , member profile at Prototypr`,
         description: `Say hi to ${author?.name} on Prototypr - check out their profile!`,
         image: author.avatar?.data?.attributes?.url
           ? author.avatar?.data?.attributes?.url
@@ -135,7 +139,8 @@ export default function PeoplePage({
                 <div className="">
                   <div className="mb-3">
                     <h1 className="text-2xl pt-6 font-semibold leading-normal text-gray-800 mb-3">
-                      {author?.name}
+                    {`${author?.firstName ? author?.firstName:''} ${author?.lastName ? author?.lastName:''}
+                    ${(!author?.firstName && !author?.lastName) ? author?.name:''}`}
                     </h1>
                     {author && author.location && (
                       <div className="text-sm flex leading-normal mt-0 text-gray-600 font-normal uppercase">

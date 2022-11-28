@@ -87,8 +87,6 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
   }
 
   let entry = {
-    excerpt: firstParagraph,
-    featured: false,
     type: "article",
     legacyFeaturedImage: {},
     status: forReview ? "pending" : postStatus ? postStatus : "draft",
@@ -104,14 +102,11 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
       medium: `${coverImage}-768x336.${getImageExtention(coverImage || "")}`,
     },
     seo: {
-      opengraphTitle: title,
-      metaDesc: firstParagraph,
-      opengraphDescription: firstParagraph,
+      opengraphTitle: title,     
       opengraphImage: postObject?.featuredImage?postObject.featuredImage:coverImage,
       //  schemaSeo: item.seo.schema.raw,
     },
-    esES: false,
-    slug: postSlug,
+    esES: false
   };
 
   //if creating, need to send the user id
@@ -119,10 +114,21 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
     entry.user = user?.id
   }
 
-  //chang the date on save only if it's a draft or pending publish
+  //change the date on save only if it's a draft or pending publish
   if((postStatus=='draft' || postStatus=='pending') || (!postStatus || isCreate)){
-    entry.date=new Date();
-    entry.seo.opengraphPublishedTime = new Date()
+    if(postObject.status!=='publish'){
+
+      entry.date=new Date();
+      entry.slug= postSlug
+      entry.featured = false
+      entry.excerpt= firstParagraph,
+  
+      //SEO
+      entry.seo.opengraphPublishedTime = new Date()
+      entry.seo.metaDesc = firstParagraph
+      entry.seo.opengraphDescription = firstParagraph
+    }
+
   }
 
   return {

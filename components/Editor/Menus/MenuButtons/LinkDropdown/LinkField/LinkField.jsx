@@ -11,6 +11,7 @@ import { TextSelection } from "prosemirror-state";
   const Fieldset = styled('fieldset', {
     all: 'unset',
     // marginBottom: 15,
+    position:'relative',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -20,8 +21,9 @@ import { TextSelection } from "prosemirror-state";
   const Input = styled('input', {
     all: 'unset',
     flex: '1 0 auto',
-    // borderRadius: 4,
-    padding: '0px 0 0 10px',
+    borderRadius: 6,
+    padding: '0px 36px 0 10px',
+    // text-overflow:'ellipsis',
     fontSize: 15,
     lineHeight: 1,
     color: slate.slate6,
@@ -48,7 +50,7 @@ import { TextSelection } from "prosemirror-state";
         if(editor.isActive('blockLink')){
             previousUrl = editor.getAttributes("blockLink").href;
         }else if(editor.isActive('figure') && !isTextSelection){
-          previousUrl = editor.getAttributes("figure").link;
+          previousUrl = editor.getAttributes("image").link;
 
         }
         setLink(previousUrl)
@@ -109,14 +111,20 @@ import { TextSelection } from "prosemirror-state";
               if(editor.isActive('blockLink')){
                 editor.chain().focus().updateAttributes('blockLink',{ href: url }).run();
               }else if(editor.isActive('figure') && !isTextSelection){
-                editor.chain().focus().updateAttributes('figure',{ link: url }).run();
+                editor.chain().focus().updateAttributes('image',{ link: url }).run();
               }else{ 
                 editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
               }
         }else{
+          const selection = editor.state.selection
+          const isTextSelection = selection instanceof TextSelection
+
           if(editor.isActive('blockLink')){
             editor.chain().focus().updateAttributes('blockLink',{ href: '' }).run();
          }
+          if(editor.isActive('figure') && !isTextSelection){
+          editor.chain().focus().updateAttributes('image',{ link: '' }).run();
+        }
          else{
             editor.chain().focus().extendMarkRange("link").unsetLink().run();
          }
@@ -137,10 +145,10 @@ import { TextSelection } from "prosemirror-state";
       const removeLink = () =>{
         if(editor.isActive('blockLink')){
           editor.chain().focus().updateAttributes('blockLink',{ href: '' }).focus().run();
-          alert('Link cleared')
-        }else{
-
-        editor.chain().focus().unsetLink().run();
+        }
+        else{
+          editor.chain().focus().unsetLink().run();
+          editor.chain().focus().updateAttributes('image',{ link: '' }).run();
         }
         onCancel()
       }
@@ -157,6 +165,10 @@ import { TextSelection } from "prosemirror-state";
                 // onFocus={(e)=>{setTimeout(()=>{e.target.select(e)},100)}}
                 // onMouseUp={(e)=>{e.target.select(e)}}
                 id="url" placeholder="https://" />
+               {link && <div onClick={removeLink} className="absolute right-0 p-2 pr-2 text-gray-300 hover:text-gray-100">
+               <svg style={{width:'18px', height:'18px', marginTop:'-1px'}}className="cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M17.657 14.828l-1.414-1.414L17.657 12A4 4 0 1 0 12 6.343l-1.414 1.414-1.414-1.414 1.414-1.414a6 6 0 0 1 8.485 8.485l-1.414 1.414zm-2.829 2.829l-1.414 1.414a6 6 0 1 1-8.485-8.485l1.414-1.414 1.414 1.414L6.343 12A4 4 0 1 0 12 17.657l1.414-1.414 1.414 1.414zm0-9.9l1.415 1.415-7.071 7.07-1.415-1.414 7.071-7.07zM5.775 2.293l1.932-.518L8.742 5.64l-1.931.518-1.036-3.864zm9.483 16.068l1.931-.518 1.036 3.864-1.932.518-1.035-3.864zM2.293 5.775l3.864 1.036-.518 1.931-3.864-1.035.518-1.932zm16.068 9.483l3.864 1.035-.518 1.932-3.864-1.036.518-1.931z" fill="currentColor"/></svg>
+                </div>}
+
                 </Fieldset>
                 </form>
         

@@ -19,21 +19,22 @@ export default function RelatedPosts({ relatedPosts, title="More posts", type='t
 
        return (
          <div key={`related_post_${index}`}>
-            <Link href={`/${type}/${post.slug}`} legacyBehavior>
             <div
               className="flex h-full relative mb-3 md:mb-0 border-b border-gray-50 cursor-pointer"
               key={`relatedPost_${index}`}
             >
               <div className="rounded-lg relative flex md:my-4 h-16 w-16 md:h-16 flex-none">
                 {img &&
+            <Link href={`/${type}/${post.slug}`}>
                 <Image
                   objectFit="cover"
                   width={66}
                   height={66}
                   alt={post.title}
                   src={img}
-                  className="cardImage flex-shrink-0 shine h-16 w-16 md:h-16 rounded-md border border-gray-100"
-                />}
+                  className="cardImage cursor-pointer flex-shrink-0 shine h-16 w-16 md:h-16 rounded-md border border-gray-100"
+                />
+                </Link>}
               </div>
 
               <div className=" sm:w-auto pl-3 py-4 md:pl-3">
@@ -41,11 +42,12 @@ export default function RelatedPosts({ relatedPosts, title="More posts", type='t
                         className="cursor-pointer text-sm text-gray-800 leading-tight"
                         style={{ overflow: "hidden" }}
                     >
+                      <Link href={`/${type}/${post.slug}`}>
                       {post.title}
+                      </Link>
                     </div>
               </div>
             </div>
-            </Link>
           </div>
        );
       })}

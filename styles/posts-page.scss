@@ -7,6 +7,9 @@
     }
 }
 .blog-content{
+    *{
+        overflow-wrap: break-word;
+    }
     
     .wp-caption-text{margin-top:10px!important;}
 
@@ -29,7 +32,7 @@ figure{
             line-height:30px;
             font-size:18px;
     }
-     a{
+     a:not(.headline){
         color:#2384de;
         text-decoration:underline;
     }
@@ -373,3 +376,110 @@ figure{
     max-width: 400px!important;
     outline:none;
 }
+
+.guide-layout{
+    .blog-content>div, .blog-content{
+        width: 100%;
+        max-width: 100%;
+    }
+    >div{
+        max-width: 100%!important;
+    }
+    .full-width{
+        width:100%!important;
+    }
+    .blog-content{
+       
+        *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
+            max-width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            .flex{
+                figure{
+                    margin-bottom: auto;
+                    // margin:0 0;
+                    // max-width: 50%;
+                }
+            }
+        }
+        p, h1, h2, h3, h4, ol, li{
+            max-width: 43rem!important;
+        }
+        .flex figcaption {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #2D3748;
+        // margin-top: rem;
+        }
+    }
+}
+@media (max-width: 600px) {
+    .guide-layout{
+        margin-top: -180px;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-top: 1px;
+        .blog-content{
+            *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
+                .flex{
+                    figure{
+                        margin-bottom: 2rem!important;
+                        // margin:0 0;
+                        // max-width: 50%;
+                    }
+                }
+            }
+        }
+    }
+  }
+  @media (max-width: 1200px) {
+    .guide-layout{
+        margin-top: -160px;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding-top: 10px;
+        .blog-content{
+            *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
+                .flex{
+                    figure{
+                        margin-bottom: 2rem!important;
+                        // margin:0 0;
+                        // max-width: 50%;
+                    }
+                }
+            }
+        }
+    }
+  }
+
+  .ProseMirror{
+    figure.ProseMirror-selectednode{
+        figcaption *::selection {
+            background-color: transparent;
+            background: transparent!important;
+            
+        }
+    }
+    figure{
+        cursor:default;
+        figcaption{
+            cursor:text;
+            a{
+                pointer-events: all;
+            }
+        }
+        img{
+            pointer-events: none;
+            -khtml-user-select: none;
+            -o-user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            
+        }
+
+        a{
+            pointer-events: none;
+        }
+    }
+  }

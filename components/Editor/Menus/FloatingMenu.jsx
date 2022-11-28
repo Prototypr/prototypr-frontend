@@ -16,7 +16,7 @@ import {
   VideoIcon
 } from "@radix-ui/react-icons";
 
-import { ImageDecorationKey } from "@/components/Editor/CustomExtensions/Figure";
+import { ImageDecorationKey } from "@/components/Editor/CustomExtensions/Figure2/CustomImage";
 
 let axios = require("axios");
 
@@ -156,10 +156,10 @@ const insertImage = (event, editor, user, setLoading) =>{
               duration: 5000,
             });
             const url = response?.data?.url;
-            removePlaceholder(editor)
             // editor.chain().focus().setFigure({src: url, caption:'enter caption'}).run()
             // editor.chain().focus().setImage({ src: url }).run();
             editor.commands.setFigure({position:placeholderPos,src: url, alt: '', figcaption:'', class:''})
+            removePlaceholder(editor)
           })
           .catch(function (error) {
             console.log(error);

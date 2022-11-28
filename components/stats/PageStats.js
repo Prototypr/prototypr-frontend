@@ -109,7 +109,7 @@ export const PageStats = () => {
           {loaded && (
             <div className="flex flex-col gap-3 mt-10">
               <div>
-                <Link href="/dashboard/published" legacyBehavior>
+                <Link href="/dashboard/published">
                   <button className="text-sm bg-transparent"> Back</button>
                 </Link>
               </div>

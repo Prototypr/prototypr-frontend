@@ -20,10 +20,10 @@ export default function AspiringItem({ post = {} }) {
     ? legacyFeaturedImage?.mediaItemUrl
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
   return (
-    <Link href={`/post/${slug}`} legacyBehavior>
-      <div className="grid-cols-1 cursor-pointer group">
+      <div className="grid-cols-1 group">
         <figure className="relative w-full h-64 border border-gray-100 overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
-          <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+          <div className="absolute cursor-pointer w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+          <Link href={`/post/${slug}`}>
             <Image
               loader={gumletLoader}
               objectFit="cover"
@@ -31,6 +31,7 @@ export default function AspiringItem({ post = {} }) {
               layout="fill"
               src={ftImage}
             />
+            </Link>
           </div>
         </figure>
 
@@ -43,16 +44,19 @@ export default function AspiringItem({ post = {} }) {
           </Link>
         </div> */}
         <h4 className="text-black-1 font-semibold text-lg leading-6 mt-4">
-          <Link href={`/post/${slug}`} legacyBehavior>
-            <span className="font-noto-serif">{title}</span>
+          <Link href={`/post/${slug}`}>
+            <span className="cursor-pointer font-noto-serif">{title}</span>
           </Link>
         </h4>
         <div className="font-base font-normal hover:underline hover:text-gray-800 text-base text-neutral-700 leading-5 mt-2">
           <Link
-            className="hover:underline hover:text-gray-800"
-            href={`/people/${author?.data?.attributes?.slug}/page/1`}
-            legacyBehavior>
-            <span>{author?.data?.attributes?.name}</span>
+            className="hover:underline cursor-pointer hover:text-gray-800"
+            href={`/people/${author?.data?.attributes?.slug}/page/1`}>
+            <span>
+            {`${author?.data?.attributes?.firstName ? author?.data?.attributes?.firstName:''} `}
+                  {`${author?.data?.attributes?.lastName ? author?.data?.attributes?.lastName:''}`}
+                  {`${(!author?.data?.attributes?.firstName && !author?.data?.attributes?.lastName) ? author?.data?.attributes?.name:''}`}
+            </span>
           </Link>
         </div>
 
@@ -61,6 +65,5 @@ export default function AspiringItem({ post = {} }) {
           dangerouslySetInnerHTML={{ __html: excerpt }}
         ></p>
       </div>
-    </Link>
   );
 }

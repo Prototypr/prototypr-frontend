@@ -16,7 +16,7 @@ export default function Layout({
 }) {
   return (
     <>
-      <Meta seo={seo} />
+      {/* <Meta seo={seo} /> */}
       <EditorNav editorInstance={editorInstance} activeNav={activeNav}/>
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}

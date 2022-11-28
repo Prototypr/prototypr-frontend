@@ -183,8 +183,12 @@ const onOpenChange = (open) =>{
     const selection = editor?.state?.selection
     const figure_node = selection?.$anchor?.nodeAfter
     if(figure_node?.type?.name=='figure'){
-        setFigureNode(figure_node)
-        setImgSrc(figure_node?.attrs?.src)
+     //use image inside figure
+     if(figure_node.firstChild?.type?.name=='image'){
+      let img_node = figure_node.firstChild
+       setFigureNode(img_node)
+       setImgSrc(img_node?.attrs?.src)
+     }
     }
     setModalOpen(open)
   }else{

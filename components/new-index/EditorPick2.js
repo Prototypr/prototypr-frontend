@@ -52,12 +52,11 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
         </h3>
       )}
       <section className="flex group flex-col justify-center antialiased text-gray-900 rounded-lg">
-        <Link href={`/post/${slug}`} legacyBehavior>
-          <div className="cursor-pointer max-w-6xl p-6 sm:p-8 md:pr-12 h-full rounded-lg shadow-md hover:shadow-lg bg-white hover:transition duration-300 ease-in-out">
+          <div className="max-w-6xl p-6 sm:p-8 md:pr-12 h-full rounded-lg shadow-md hover:shadow-lg bg-white hover:transition duration-300 ease-in-out">
             {/* Blog post */}
             <article className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
-              <a className="relative block">
-                <figure className="rounded-lg relative rounded-lg h-56 sm:h-64 md:h-80 overflow-hidden transform transition duration-700 ease-out">
+                <Link href={`/post/${slug}`}>
+                <figure className="cursor-pointer rounded-lg relative rounded-lg h-56 sm:h-64 md:h-80 overflow-hidden transform transition duration-700 ease-out">
                   <div className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
                     <Image
                       className="rounded-lg"
@@ -73,14 +72,14 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                     />
                   </div>
                 </figure>
-              </a>
+                </Link>
               <div>
                 <header>
                   <div className="mb-3">
                     <ul className="flex flex-wrap text-xs font-medium -m-1">
                       <li className="m-1">
-                        <Link href={`/posts/${tagSlug}`} legacyBehavior>
-                          <span className="font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-2 font-semibold tracking-[.05em]">
+                        <Link href={`/posts/${tagSlug}`}>
+                          <span className="cursor-pointer font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-2 font-semibold tracking-[.05em]">
                             {tagName ? tagName : "design"}
                           </span>
                         </Link>
@@ -88,8 +87,8 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                     </ul>
                   </div>
                   <h3 className="text-2xl lg:text-4xl font-semibold mb-4 max-w-md">
-                    <Link href={`/post/${slug}`} legacyBehavior>
-                      <span className="font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
+                    <Link href={`/post/${slug}`}>
+                      <span className="cursor-pointer font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
                         {title}
                       </span>
                     </Link>
@@ -106,9 +105,8 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                     {authorImage && (
                       <Link
                         href={`/people/${author?.data?.attributes?.slug}`}
-                        legacyBehavior
                       >
-                        <div className="mr-4 relative flex-shrink-0 hover:cursor-pointer">
+                        <div className="mr-4 cursor-pointer relative flex-shrink-0 hover:cursor-pointer">
                           <Image
                             className="rounded-full"
                             src={authorImage}
@@ -124,10 +122,12 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                   <div>
                     <Link
                       href={`/people/${author?.data?.attributes?.slug}`}
-                      legacyBehavior
                     >
-                      <span className="font-medium text-neutral-700 hover:text-gray-900 transition duration-150 ease-in-out">
-                        {author?.data?.attributes?.name}
+                      <span className="font-medium cursor-pointer text-neutral-700 hover:text-gray-900 transition duration-150 ease-in-out">
+                        {/* {author?.data?.attributes?.name} */}
+                        {`${author?.data?.attributes?.firstName ? author?.data?.attributes?.firstName:''} `}
+                  {`${author?.data?.attributes?.lastName ? author?.data?.attributes?.lastName:''}`}
+                  {`${(!author?.data?.attributes?.firstName && !author?.data?.attributes?.lastName) ? author?.data?.attributes?.name:''}`}
                       </span>
                     </Link>
                   </div>
@@ -135,7 +135,6 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
               </div>
             </article>
           </div>
-        </Link>
       </section>
     </div>
   );

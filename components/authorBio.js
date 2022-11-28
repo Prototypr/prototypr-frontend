@@ -48,7 +48,10 @@ export default function AuthorBio({ author, slug, title }) {
               <p className="uppercase text-sm text-gray-600">Written by</p>
 
               <h1 className="text-xl mt-1 font-semibold leading-normal text-gray-800">
-                {author?.name ? author?.name : ""}
+                {/* {author?.name ? author?.name : ""} */}
+                {`${author?.firstName ? author?.firstName:''}
+                  ${author?.lastName ? ' '+author?.lastName:''}
+                  ${(!author?.firstName && !author?.lastName) ? author?.name:''}`}
               </h1>
 
               {author?.jobrole && (

@@ -123,7 +123,7 @@ export default function Navbar({ activeNav }) {
               </button>
             </div>
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-              <Link href="/" as="/" legacyBehavior>
+              <Link href="/" as="/">
                 <div
                   className={`${
                     showNav ? "opacity-1" : "md:opacity-0 md:mt-16 md:-z-1"

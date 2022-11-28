@@ -205,7 +205,7 @@ const NextLink = ({ children, ...props }) => {
   const router = useRouter();
   const isActive = Boolean(router.asPath.indexOf(props.href) > -1);
   return (
-    <Link legacyBehavior href={props.href} passHref>
+    <Link href={props.href} passHref>
       <StyledLink asChild>
         <span
           style={props.css}
@@ -408,7 +408,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
       className={`hidden md:flex justify-between space-x-4 w-full transition transition-all duration-700 ease-in-out relative py-2 uppercase text-sm`}
     >
       <NavigationMenu>
-        <Link href="/" legacyBehavior>
+        <Link href="/">
           <img
             className={`cursor-pointer my-auto h-8 ${
               collapse ? "w-0 opacity-0" : "w-8 opacity-1"
@@ -418,7 +418,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
             alt="Prototypr Logo"
           />
         </Link>
-        <Link href="/" legacyBehavior>
+        <Link href="/">
           <p
             className={`cursor-pointer font-noto-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
               collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"

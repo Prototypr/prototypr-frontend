@@ -7,7 +7,7 @@ export default function Contributors() {
       <div className="p-5 bg-white rounded-lg">
         <h1 className="text-sm font-semibold mb-6">Contributors</h1>
         <WriterGrid size={11} />
-          <Link href="/write-for-us" legacyBehavior>
+          <Link href="/write-for-us">
             <h1 className="ml-1 cursor-pointer hover:underline text-sm font-medium text-blue-600">
               Write with us →
             </h1>

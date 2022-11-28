@@ -120,7 +120,6 @@ export default function DesignTool({ allTools = [] }) {
             ? allTools.map((item, index) => {
                 const showItem = item?.attributes;
                 return (
-                  <Link href={`/toolbox/${showItem.slug}`} legacyBehavior>
                     <div
                       key={`h_item_${index}`}
                       style={{ width: `${ITEM_WIDTH}px` }}
@@ -130,6 +129,7 @@ export default function DesignTool({ allTools = [] }) {
                         {showItem.legacyFeaturedImage.mediaItemUrl ? (
                           <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
                             <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
+                            <Link href={`/toolbox/${showItem.slug}`}>
                               <Image
                                 loader={gumletLoader}
                                 className="rounded-lg contrast-115"
@@ -139,13 +139,14 @@ export default function DesignTool({ allTools = [] }) {
                                   showItem.legacyFeaturedImage.mediaItemUrl
                                 }
                               />
+                              </Link>
                             </div>
                           </figure>
                         ) : (
                           showItem.featuredImage?.data?.attributes?.url && (
                             <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
                               <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
-                                <Link href={`/toolbox/${showItem.slug}`} legacyBehavior>
+                                <Link href={`/toolbox/${showItem.slug}`}>
                                   <Image
                                     loader={gumletLoader}
                                     className="rounded-lg contrast-115"
@@ -161,6 +162,7 @@ export default function DesignTool({ allTools = [] }) {
                             </figure>
                           )
                         )}
+                        <Link href={`/toolbox/${showItem.slug}`}>
                         <div
                           className="absolute border-2 border-solid border-white bg-white w-10 h-10 rounded-full -bottom-3 bg-100 bg-no-repeat bg-center"
                           style={{
@@ -171,7 +173,6 @@ export default function DesignTool({ allTools = [] }) {
                           }}
                         >
                           {showItem.legacyFeaturedImage.logoNew && (
-                            <Link href={`/toolbox/${showItem.slug}`} legacyBehavior>
                               <Image
                                 loader={gumletLoader}
                                 className="rounded-full"
@@ -179,15 +180,16 @@ export default function DesignTool({ allTools = [] }) {
                                 layout="fill"
                                 src={showItem.legacyFeaturedImage.logoNew}
                               />
-                            </Link>
-                          )}
+                              )}
                         </div>
+                              </Link>
                       </div>
                       <div className="mt-7 flex justify-between">
-                        <Link href={`/toolbox/${showItem.slug}`} legacyBehavior>
                           <div className="px-3 w-full">
                             <div className="font-noto-serif text-gray-1 hover:underline truncate text-lg font-bold leading-6">
+                            <Link href={`/toolbox/${showItem.slug}`}>
                               {showItem.title}
+                            </Link>
                             </div>
                             {showItem.tags?.data[0] && (
                               <div className="font-normal text-xs leading-6 tracking-wide uppercase text-gray-500 mt-1">
@@ -195,10 +197,8 @@ export default function DesignTool({ allTools = [] }) {
                               </div>
                             )}
                           </div>
-                        </Link>
                       </div>
                     </div>
-                  </Link>
                 );
               })
             : null}
@@ -206,7 +206,7 @@ export default function DesignTool({ allTools = [] }) {
       </div>
     </div>
     <div className="hidden bg-gray-4 w-full relative md:flex items-center justify-center pt-14 pb-24 md:pb-32">
-      <Link href="/toolbox/page/1" legacyBehavior>
+      <Link href="/toolbox/page/1">
         <Button variant="ghostBlue" className="h-14 w-52 rounded-lg">
           {intl.formatMessage({ id: "designtool.button.browsemore" })}
         </Button>

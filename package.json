@@ -108,6 +108,7 @@
     "react-router-dom": "^6.3.0",
     "react-timeago": "^4.4.0",
     "react-web-monetization": "0.0.13",
+    "sanitize-html": "^2.7.3",
     "sharp": "^0.30.4",
     "slugify": "^1.6.5",
     "string-hash": "^1.1.3",
