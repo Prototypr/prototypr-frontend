@@ -89,11 +89,11 @@ export default function Index({ allPosts, preview }) {
       </Head> */}
       <Container>
         <div className="pt-5 text-md text-gray-700 pb-8">
-          <Link href={`/`} legacyBehavior>
+          <Link href={`/`}>
             <span className="hover:underline">Home</span>
           </Link>{" "}
           →{" "}
-          <Link href={`/topics`} legacyBehavior>
+          <Link href={`/topics`}>
             <span className="underline">Topics</span>
           </Link>
         </div>
@@ -108,7 +108,7 @@ export default function Index({ allPosts, preview }) {
           {topics.map((topic, i) => (
             <div
               key={i}
-              className={`group relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
+              className={`group flex relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
             >
               {/* <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 sm:h-80 lg:aspect-none">
                 <img
@@ -117,16 +117,11 @@ export default function Index({ allPosts, preview }) {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               </div> */}
-              <div className="mt-4 mb-4 flex justify-between">
+              <div className="my-auto mx-auto flex justify-between">
                 <div>
                   <h3 className="text-2xl text-white">
-                    <Link href={`/posts/${topic.slug}/page/1`} legacyBehavior>
-                        <span
-                          aria-hidden="true"
-                          className="absolute inset-0"
-                        >
+                    <Link href={`/posts/${topic.slug}/page/1`}>
                         {intl.formatMessage({ id: topic.name })}
-                        </span>
                     </Link>
                   </h3>
                 </div>

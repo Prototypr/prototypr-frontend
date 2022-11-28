@@ -23,7 +23,7 @@ export default function WriterGrid({buttonText = ""}) {
                 })}
             </div>
             <div  className="borderRadius-l" style={{marginTop:'-5px'}} >
-                <Link href="/post/write-for-us" legacyBehavior>
+                <Link href="/post/write-for-us">
                     <button aria-label={buttonText} size="small" hover="secondary">{buttonText}</button>
                 </Link>
             </div>

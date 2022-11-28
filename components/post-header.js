@@ -75,7 +75,7 @@ export default function PostHeader({
       <div className="flex justify-between">
         <div className="max-w-2xl">
           {author && template !== 2 && (
-            <Link href={`/people/${author.slug}`} legacyBehavior>
+            <Link href={`/people/${author.slug}`}>
               <div className="cursor-pointer block mb-6">
                 <Avatar
                   date={date}

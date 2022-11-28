@@ -6,7 +6,7 @@ const Header = () => {
       <div className="w-full max-w-6xl mx-auto h-auto mt-10 pointer-events-auto cursor-pointer">
         <div className="w-full h-full p-6 bg-white rounded-[12px] border border-black border-opacity-5 ">
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <Link href="/" as="/" legacyBehavior>
+            <Link href="/" as="/">
               <div
                 className={`${
                   true ? "opacity-1" : "md:opacity-0 md:mt-16 md:-z-1"

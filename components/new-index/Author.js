@@ -34,7 +34,6 @@ export default function Author({
           {authorImage && (
             <Link
               href={`/people/${author?.data?.attributes?.slug}`}
-              legacyBehavior
             >
               <Image
                 loader={gumletLoader}
@@ -54,7 +53,6 @@ export default function Author({
           {author?.data?.attributes?.slug && (
             <Link
               href={`/people/${author?.data?.attributes?.slug}`}
-              legacyBehavior
             >
               {name}
             </Link>

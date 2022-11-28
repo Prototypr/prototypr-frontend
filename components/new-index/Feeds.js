@@ -34,7 +34,7 @@ export default function Feeds({ posts = [] }) {
 
       <div className="mt-10 flex items-center justify-center">
         <Button variant="ghostBlue" className="h-14 w-52 rounded-lg">
-          <Link href="/topics" legacyBehavior>{moreButtonText}</Link>
+          <Link href="/topics">{moreButtonText}</Link>
         </Button>
       </div>
     </section>

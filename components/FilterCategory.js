@@ -23,7 +23,7 @@ export default function FilterCategory({
                   className="cursor-pointer text-md"
                   key={`toolbox_cat_${sIndex}`}
                 >
-                  <Link href={`${urlRoot}/${sItem.key}/page/1`} legacyBehavior>
+                  <Link href={`${urlRoot}/${sItem.key}/page/1`}>
                     <div
                       className={`hover:text-blue-500 py-1.5 rounded ${
                         sItem.key == slug
@@ -38,7 +38,7 @@ export default function FilterCategory({
               );
             })}
             {item.moreLink && (
-              <Link href={item.moreLink.url} legacyBehavior>
+              <Link href={item.moreLink.url}>
                 <span className="inline-block text-gray-500 underline mt-3 mb-6 text-md">
                   {item.moreLink.text}
                 </span>

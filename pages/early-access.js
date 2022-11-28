@@ -49,7 +49,7 @@ export default function Index() {
           {!user && <Fallback />}
           
             <div className="absolute top-[2%] left-[2%]">
-              <Link href="/" passHref prefetch={false} legacyBehavior>
+              <Link href="/" passHref prefetch={false}>
                   <Cross1Icon/>
               </Link>
             </div>
