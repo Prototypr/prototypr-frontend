@@ -67,7 +67,7 @@ const Index = () => {
       );
       let jobEntriesConfig = {
         method: "get",
-        url: `${process.env.NEXT_PUBLIC_API_URL}/api/job-entries?${query}`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/api/jobs?${query}`,
         headers: {},
       };
       const { data } = await axios(jobEntriesConfig);

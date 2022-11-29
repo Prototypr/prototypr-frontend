@@ -3,7 +3,7 @@ export const FormInput = ({ children, id, label, error }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <label for={id} className="text-xs">
+      <label for={id} className="text-md font-medium">
         {label}
       </label>
       {children}

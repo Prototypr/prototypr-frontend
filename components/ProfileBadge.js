@@ -218,7 +218,7 @@ export const DropdownMenuDemo = ({ icon, user }) => {
               router.push("/p");
             }}
           >
-            My Posts
+            Dashboard
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
