@@ -1,9 +1,11 @@
 // import dynamic from "next/dynamic";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Layout from "@/components/layout";
 import Container from "@/components/container";
 // import axios from "axios";
 import useUser from '@/lib/iron-session/useUser'
+import Spinner from "@/components/atom/Spinner/Spinner";
+import { useLoad } from "@/components/Jobs/jobHooks";
 
 export default function PaymentSuccess({}) {
  
@@ -12,11 +14,21 @@ export default function PaymentSuccess({}) {
     redirectIfFound: false,
   })
 
+  const { 
+    loading:postLoading,
+    content,
+    postId,
+    title,
+    isOwner,
+    postObject} =useLoad(user);
+  
+
+  const [loading, setLoading] = useState(true)
+  const [reloaded, setReloaded] = useState(false)
+
     useEffect(()=>{
-        
-      if(user?.isLoggedIn){
-        return false
-      }
+
+     
 
         const getProdSuccess = async()=>{
             const params = new URLSearchParams(document.location.search);
@@ -33,7 +45,7 @@ export default function PaymentSuccess({}) {
             }),
           })
             .then((response) => response.json())
-            .then((response) => {
+            .then(async(response) => {
               if (response.payment_status === "paid") {
                 if (
                   window.performance
@@ -42,11 +54,16 @@ export default function PaymentSuccess({}) {
                     .includes("reload")
                 ) {
                   console.info("website reloded");
+                  setTimeout(()=>{
+                    setReloaded(true)
+                    setLoading(false)
+                  },500)
                 } else {
                   console.log(response)
+                  setLoading(true)
                   // store payment in strapi
                   const stripePaymentUrl = baseUrl + "/strapi-stripe/stripePayment";
-                  fetch(stripePaymentUrl, {
+                 let res = await fetch(stripePaymentUrl, {
                     method: "post",
                     body: JSON.stringify({
                       txnDate: new Date(),
@@ -66,19 +83,20 @@ export default function PaymentSuccess({}) {
                       "Content-Type": "application/json",
                     }),
                   });
+                  
+                  setTimeout(()=>{
+                    setLoading(false)
+                  },500)
                 }
               }
             });
         }
         
-        // this used to be in the strapi script, but we do it directly on the front end instead
-        // const s = document.createElement("script");
-        // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-        // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-        // s.setAttribute("async", "true");
-        // document.head.appendChild(s);
-        
-        getProdSuccess()
+
+        if(user?.isLoggedIn){
+          // return false
+          getProdSuccess()
+        }
      
       },[user?.isLoggedIn])
     
@@ -96,8 +114,30 @@ export default function PaymentSuccess({}) {
       activeNav={"toolbox"}
     >
       <Container>
-       <h1 className="text-xl">Payment Success</h1>
- 
+        <div className="max-w-2xl mt-3">
+        <h1 className="text-xl font-bold mb-3">{(!loading && !reloaded)?'Payment Successful':(!loading && reloaded)?'This page has expired':'Updating your job...'}</h1>
+          {loading && <Spinner/>}
+
+          {(!loading && !reloaded)?
+          <div className="text-md">
+            <p>
+              Thanks for your purchase. Your job post will be reviewed and scheduled within 24 hrs.
+            </p>
+            <p>
+              You'll receive an email when it goes live. If you need any help or have any questions, we're waiting to help in the support chat.
+            </p>
+          </div>
+          :(!loading && reloaded) &&
+          <div className="text-md">
+            <p>
+              It looks like the checkout session is no longer valid.
+            </p>
+            <p>
+              You'll receive an email when your job post goes live. If you need any help or have any questions, we're waiting to help in the support chat.
+            </p>
+          </div>
+          }
+        </div>
       </Container>
     </Layout>
   );

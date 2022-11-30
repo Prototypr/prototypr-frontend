@@ -238,7 +238,7 @@ const JobPostForm = ({user, defaultCompany}) => {
           })
           .catch(function (error) {
             console.log(error)
-            toast.error("Your Job Post has been rejected!", {
+            toast.error("Your Job Post has been saved!", {
               duration: 5000,
             });
           });

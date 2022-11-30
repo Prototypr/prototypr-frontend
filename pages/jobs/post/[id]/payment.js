@@ -5,6 +5,10 @@ import Container from "@/components/container";
 import axios from "axios";
 import useUser from '@/lib/iron-session/useUser'
 import { useLoad } from "@/components/Jobs/jobHooks";
+import Button from "@/components/Primitives/Button";
+import { useRouter } from "next/router";
+
+const PRODUCT_ID = 2
 
 export default function JobPaymentPage({}) {
 
@@ -19,32 +23,31 @@ export default function JobPaymentPage({}) {
     postId,
     title,
     isOwner,
-    postObject} =
-  useLoad(user);
+    postObject} =useLoad(user);
+   
+
+    const router = useRouter()
+   
+
+    useEffect(()=>{
+      if(postObject?.active){
+        router.push('/')
+      }
+
+    },[postObject])
 
 
     const [available, setAvailable] = useState(true)
     
-    useEffect(()=>{
-        // <script type="text/javascript" src="http://localhost:1337/plugins/strapi-stripe/static/stripe.js" > </script>
-        
+    useEffect(()=>{        
         const getProd = async()=>{
-            const response = await axios.get( "http://localhost:1337/strapi-stripe/getProduct/2" )
-
-
+            
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/strapi-stripe/getProduct/${PRODUCT_ID}`)
             if(response.data.availability===false){
               setAvailable(false)
             }
             console.log(response)
         }
-        
-        // used to be in the strapi script, but doing it directly on the front end
-        // const s = document.createElement("script");
-        // // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-        // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-        // s.setAttribute("async", "true");
-        // document.head.appendChild(s);
-        
         getProd()
      
       },[])
@@ -62,19 +65,24 @@ export default function JobPaymentPage({}) {
       activeNav={"toolbox"}
     >
       <Container>
-       <h1 className="text-xl">Sponsor Prototypr</h1>
-       {!user?.isLoggedIn && <p>Please log in or create an account to buy a sponsorship.</p>}
-       <p>{available?'Open for booking':'Sold!'}</p>
-       {available && <button 
+        <div className="max-w-2xl pt-3 mb-3">
+
+       <h1 className="text-xl mb-3 font-bold">Complete your purchase</h1>
+       <p>Once you complete your purchase, your post will be reviewed by our team and scheduled at the nearest date. Your job post is saved, so you can come back and pay later. </p>
+        </div>
+       {/* {!user?.isLoggedIn && <p>Please log in or create an account to buy a sponsorship.</p>} */}
+
+       {available && 
+       <Button 
        onClick={()=>{
-        const strapiStripe = document.querySelector("#SS_ProductCheckout");
-        const productId = strapiStripe.dataset.id;
-        console.log(productId);
-        const baseUrl = strapiStripe.dataset.url;
-        localStorage.setItem("strapiStripeUrl", baseUrl);
-        const getProductApi = baseUrl + "/strapi-stripe/getProduct/" + productId;
-        const checkoutSessionUrl = baseUrl + "/strapi-stripe/createCheckoutSession/";
-        // console.log(getProductApi, checkoutSessionUrl);
+        
+
+        localStorage.setItem("strapiStripeUrl", process.env.NEXT_PUBLIC_API_URL);
+        const getProductApi = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/getProduct/" + PRODUCT_ID;
+        const checkoutSessionUrl = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/createCheckoutSession/";
+        const successUrl = `${process.env.NEXT_PUBLIC_HOME_URL}/jobs/post/${postId}/payment-success`;
+        const cancelUrl = `${process.env.NEXT_PUBLIC_HOME_URL}/jobs/post/${postId}/payment-failure`;
+
         fetch(getProductApi, {
           method: "get",
           mode: "cors",
@@ -91,6 +99,10 @@ export default function JobPaymentPage({}) {
                 stripePriceId: response.stripePriceId,
                 productId: response.id,
                 productName: response.title,
+                postId:postId,
+                postType:'job',
+                successUrl,
+                cancelUrl
               }),
               mode: "cors",
               headers: new Headers({
@@ -101,12 +113,12 @@ export default function JobPaymentPage({}) {
               .then((response) => response.json())
               .then((response) => {
                 if (response.id) {
+                  //the response.url is the strapi checkout 
                   window.location.replace(response.url);
                 }
               });
           });
-       }}
-       class="css style" type="button" id="SS_ProductCheckout" data-id="2" data-url="http://localhost:1337"> Buy Now </button>}
+       }} type="button">Complete Purchase</Button>}
       </Container>
     </Layout>
   );
