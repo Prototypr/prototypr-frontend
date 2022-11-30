@@ -7,6 +7,7 @@ import useUser from '@/lib/iron-session/useUser'
 import { useLoad } from "@/components/Jobs/jobHooks";
 import Button from "@/components/Primitives/Button";
 import { useRouter } from "next/router";
+import Spinner from "@/components/atom/Spinner/Spinner";
 
 const PRODUCT_ID = 2
 
@@ -29,12 +30,12 @@ export default function JobPaymentPage({}) {
     const router = useRouter()
    
 
-    useEffect(()=>{
-      if(postObject?.active){
-        router.push('/')
-      }
+    // useEffect(()=>{
+    //   if(postObject?.active){
+    //     router.push('/')
+    //   }
 
-    },[postObject])
+    // },[postObject])
 
 
     const [available, setAvailable] = useState(true)
@@ -46,7 +47,6 @@ export default function JobPaymentPage({}) {
             if(response.data.availability===false){
               setAvailable(false)
             }
-            console.log(response)
         }
         getProd()
      
@@ -64,6 +64,13 @@ export default function JobPaymentPage({}) {
       }}
       activeNav={"toolbox"}
     >
+     {loading?
+      <div className="relative w-full h-full pt-10 flex">
+      <div className="my-auto mx-auto">
+        <Spinner />
+      </div>
+      </div>
+     :(available && !postObject?.active) ?
       <Container>
         <div className="max-w-2xl pt-3 mb-3">
 
@@ -72,7 +79,7 @@ export default function JobPaymentPage({}) {
         </div>
        {/* {!user?.isLoggedIn && <p>Please log in or create an account to buy a sponsorship.</p>} */}
 
-       {available && 
+       
        <Button 
        onClick={()=>{
         
@@ -118,8 +125,16 @@ export default function JobPaymentPage({}) {
                 }
               });
           });
-       }} type="button">Complete Purchase</Button>}
-      </Container>
+       }} type="button">Complete Purchase</Button>
+      </Container>:
+       <Container>
+      <div className="max-w-2xl pt-3 mb-3">
+
+      <h1 className="text-xl mb-3 font-bold">Payment is complete</h1>
+      <p>Payment for this job has already been made. </p>
+       </div>
+       </Container>
+      }
     </Layout>
   );
 }

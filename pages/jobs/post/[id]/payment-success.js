@@ -28,8 +28,6 @@ export default function PaymentSuccess({}) {
 
     useEffect(()=>{
 
-     
-
         const getProdSuccess = async()=>{
             const params = new URLSearchParams(document.location.search);
             const checkoutSessionId = params.get("sessionId");
@@ -93,12 +91,20 @@ export default function PaymentSuccess({}) {
         }
         
 
-        if(user?.isLoggedIn){
+        if(user?.isLoggedIn && !postLoading){
           // return false
-          getProdSuccess()
+          if(!postObject.active){
+
+            getProdSuccess()
+          }else{
+            console.log('already a payment')
+            setReloaded(true)
+            setLoading(false)
+
+          }
         }
      
-      },[user?.isLoggedIn])
+      },[user?.isLoggedIn, postLoading])
     
 
   return (
