@@ -25,10 +25,17 @@ export default function PaymentSuccess({}) {
 
   const [loading, setLoading] = useState(true)
   const [reloaded, setReloaded] = useState(false)
+  const [processingPayment, setProcessingPayment] = useState(false)
 
     useEffect(()=>{
 
         const getProdSuccess = async()=>{
+          if(processingPayment){
+            setReloaded(true)
+            setLoading(false)
+            return false
+          }
+          setProcessingPayment(true)
             const params = new URLSearchParams(document.location.search);
             const checkoutSessionId = params.get("sessionId");
             const baseUrl = localStorage.getItem("strapiStripeUrl");

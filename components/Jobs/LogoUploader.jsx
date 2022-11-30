@@ -64,7 +64,6 @@ const LogoUploader = ({setFormValue}) => {
 
     //pass the blob back up to form
     editor.getImage().toBlob(async (blob) => {
-        console.log(blob)
         setImageFormData(blob)
         setIsSubmitting(false)
     });
@@ -85,7 +84,6 @@ const LogoUploader = ({setFormValue}) => {
 
   useEffect(() => {
     let profPic = "";
-    console.log(defaultCompany)
     if (defaultCompany?.logo) {
       profPic = "https://req.prototypr.io/" + defaultCompany?.logo;
     }

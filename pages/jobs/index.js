@@ -56,7 +56,6 @@ const Index = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      console.log("hello");
       const query = qs.stringify(
         {
           populate: "*",
