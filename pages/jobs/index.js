@@ -1,19 +1,20 @@
+import Container from "@/components/container";
 import Layout from "@/components/layout-dashboard";
-import fetchJson from "@/lib/iron-session/fetchJson";
+import Button from "@/components/Primitives/Button";
 
 import { getAllJobs } from "@/lib/api";
 
 import Link from "next/link";
-import { useEffect } from "react";
-const qs = require("qs");
-var axios = require("axios");
+import { useRouter } from "next/router";
+// import { useEffect } from "react";
+// import { useState } from "react";
 // import useUser from "@/lib/iron-session/useUser";
-import { useState } from "react";
 
 const PAGE_SIZE = 12;
 
 
 const JobPostCard = ({ job }) => {
+  const router = useRouter()
   // const tags = job.tags.split(",");
   const company = job?.company?.data?.attributes;
   return (
@@ -43,15 +44,21 @@ const JobPostCard = ({ job }) => {
           </div>
 
           <div className="flex flex-row gap-2">
-            <span className="text-base inter-font font-medium">
-              {job.SalaryRange}
+            <span className="text-gray-600 inter-font font-base text-sm">
+              ${job.salarymin?.toLocaleString()} – ${job.salarymax?.toLocaleString()}
             </span>
           </div>
         </div>
 
         <div>
-          <button className="px-6 py-2 bg-[#3C4FFF] font-medium inter-font text-base text-white rounded-[6px]">
-            Apply
+          <button
+          onClick={()=>{
+            router.push(`/jobs/${job.id}`)
+          }}
+          className="px-6 py-2 bg-[#3C4FFF] font-medium inter-font text-base text-white rounded-[6px]">
+            {/* <Button variant={"confirm"}> */}
+              Apply
+            {/* </Button> */}
           </button>
         </div>
       </div>
@@ -63,9 +70,12 @@ const Index = ({jobs}) => {
 
   return (
     <Layout background="#EFF2F8">
-      <div className=" w-full h-full ">
+      <Container>
+
+      
+      <div className=" w-full h-full">
         <div className="w-full max-w-7xl mx-auto  h-full grid grid-cols-4 gap-5">
-          <div className="w-full h-full col-start-1 col-end-4 flex flex-col gap-5  pb-10">
+          <div className="w-full h-full col-start-1 col-end-5 md:col-start-1 md:col-end-4 flex flex-col gap-5  pb-10">
             {/* {jobs.map((job, i) => {
               return <JobPostCard job={job.attributes} key={i} />;
             })} */}
@@ -73,7 +83,7 @@ const Index = ({jobs}) => {
               return <JobPostCard job={job} key={i} />;
             })}
           </div>
-          <div className="w-full h-full col-start-4 col-end-5 ">
+          <div className="w-full h-full col-start-1 col-end-5 md:col-start-4 md:col-end-5 ">
             <div className="w-full bg-[#2C04CA] h-[150px] rounded-md p-5">
               <Link href="/jobs/post">
                 <button className="px-5 text-sm py-2 bg-white text-black rounded">
@@ -84,6 +94,7 @@ const Index = ({jobs}) => {
           </div>
         </div>
       </div>
+      </Container>
     </Layout>
   );
 };
