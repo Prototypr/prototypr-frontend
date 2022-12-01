@@ -54,8 +54,8 @@ const GlobeIcon = () => {
 
 const WebStandard = () => {
   return (
-    <div className="py-0 bg-[#fff]">
-      <div className="bg-[#00028C] pt-20 md:pt-40 p-10 rounded-t-[40px] overflow-hidden">
+    <div className="py-0 bg-[#22AA79]">
+      <div className="bg-[#00028C] pt-20 md:pt-40 p-10 rounded-t-[10px] md:rounded-t-[40px] overflow-hidden">
         <div className="w-full h-auto max-w-7xl mx-auto flex flex-col gap-10 py-10">
           <div className="flex flex-col md:flex-row gap-10 md:gap-0">
             <div className="flex flex-col gap-2">
