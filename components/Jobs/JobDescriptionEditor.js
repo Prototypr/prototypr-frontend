@@ -181,7 +181,7 @@ const MenuBar = ({ editor }) => {
   )
 }
 
-export default ({setDescription}) => {
+export default ({setDescription, initialContent=''}) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -200,7 +200,7 @@ export default ({setDescription}) => {
         },
       }),
     ],
-    content: ``,
+    content: initialContent,
     onUpdate: ({ editor }) => {
         setDescription(editor.getHTML())
       },

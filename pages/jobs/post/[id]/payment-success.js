@@ -6,9 +6,12 @@ import Container from "@/components/container";
 import useUser from '@/lib/iron-session/useUser'
 import Spinner from "@/components/atom/Spinner/Spinner";
 import { useLoad } from "@/components/Jobs/jobHooks";
+import Button from "@/components/Primitives/Button";
+import { useRouter } from "next/router";
 
 export default function PaymentSuccess({}) {
  
+  const router= useRouter()
   const {user, mutateUser} = useUser({
     // redirectTo: '/',
     redirectIfFound: false,
@@ -127,7 +130,7 @@ export default function PaymentSuccess({}) {
       activeNav={"toolbox"}
     >
       <Container>
-        <div className="max-w-2xl mt-3">
+        <div className="max-w-2xl mt-3 mb-4">
         <h1 className="text-xl font-bold mb-3">{(!loading && !reloaded)?'Payment Successful':(!loading && reloaded)?'This page has expired':'Updating your job...'}</h1>
           {loading && <Spinner/>}
 
@@ -148,9 +151,15 @@ export default function PaymentSuccess({}) {
             <p>
               You'll receive an email when your job post goes live. If you need any help or have any questions, we're waiting to help in the support chat.
             </p>
+            
           </div>
           }
         </div>
+          {!loading && <Button onClick={()=>{
+              router.push(`/jobs/post/${postId}/edit`)
+            }}>
+              Edit listing
+            </Button>}
       </Container>
     </Layout>
   );

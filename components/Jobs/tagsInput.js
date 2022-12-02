@@ -28,10 +28,9 @@ enforceWhitelist:true,
   callbacks: {}
 };
 
-const TagField = ({ options,placeholder,max,id,field, updateField }) =>
+const TagField = ({ options,placeholder,max,id,field, updateField,initialSelected }) =>
 {
     const [tags, setTags] = useState(false)
-
 
   const handleChange = e => {
     setTags(e.detail.tagify.value.map(item => item.value))
@@ -40,9 +39,22 @@ const TagField = ({ options,placeholder,max,id,field, updateField }) =>
 
   useEffect(()=>{
     let tags = []
-    
-      setTags(tags)
+  
+    setTags(tags)
+    // setTags(tags)
   },[])
+
+  useEffect(()=>{
+
+    if(initialSelected?.length){
+      let selctd = []
+      for(var x = 0;x<initialSelected.length;x++){
+        selctd.push(initialSelected[x]?.value)
+      }
+      updateField(selctd)
+    }
+
+  },[initialSelected])
 
   const settings = {
     ...baseTagifySettings,
@@ -73,7 +85,9 @@ const TagField = ({ options,placeholder,max,id,field, updateField }) =>
       id={`${id}_tagify`}
       className="rounded text-sm -mt-6 mx-auto w-full border-gray-500"
       settings={settings} 
-      defaultValue={tags} />}
+      defaultValue={initialSelected} 
+      />
+      }
       <p className="text-xs mt-2 text-gray-400">(choose {max} maximum)</p>
     </div>
   );
@@ -81,11 +95,11 @@ const TagField = ({ options,placeholder,max,id,field, updateField }) =>
 
 // ================= APP ======================
 
-const TagsInput = ({options,field,placeholder, updateField, max,id}) => {
+const TagsInput = ({options,field,placeholder, updateField, max,id, initialSelected}) => {
 
   return (
     <div className="App">
-      <TagField id={id} options={options} field={field} max={max} placeholder={placeholder}updateField={updateField}/>
+      <TagField id={id} options={options} field={field} max={max} initialSelected={initialSelected} placeholder={placeholder}updateField={updateField}/>
     </div>
   );
 }

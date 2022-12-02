@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
 import Layout from '@/components/layout'
-import { getAllJobsWithId, getAllPostsWithSlug, getJobPage, getNewsAndMoreNews } from '@/lib/api'
+import { getAllJobsWithId, getJobPage } from '@/lib/api'
 // import markdownToHtml from '@/lib/markdownToHtml'
 
 import dynamic from 'next/dynamic'

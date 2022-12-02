@@ -1,5 +1,5 @@
 import Layout from "@/components/layout-dashboard";
-import { jobTypes, SKILLS , jobLocations} from "@/lib/constants";
+import { jobTypes} from "@/lib/constants";
 import { useRouter } from "next/router";
 
 import React, { useEffect, useState } from "react";
@@ -14,6 +14,8 @@ import TagsInput from "@/components/Jobs/tagsInput";
 import LogoUploader from "@/components/Jobs/LogoUploader";
 import useGetLocations from "@/components/Jobs/jobHooks/useGetLocations";
 import useGetSkills from "@/components/Jobs/jobHooks/useGetSkills";
+import { useLoad } from "@/components/Jobs/jobHooks";
+import Fallback from "@/components/atom/Fallback/Fallback";
 
 let axios = require("axios");
 
@@ -43,6 +45,14 @@ const PostJobPage = () =>{
 
   const [defaultCompany, setDefaultCompany] = useState(null)
 
+  const { 
+    loading,
+    content,
+    postId,
+    title,
+    isOwner,
+    postObject} =useLoad(user);
+
   useEffect(()=>{
     if(user?.isLoggedIn){
       if(user?.companies[0]?.name){
@@ -54,47 +64,31 @@ const PostJobPage = () =>{
     }
   },[user])
 
+  if(loading){
+    return(
+       <Fallback/>
+    )
+  }
 
   return(
     <>
     {/* only show job post form if user is logged in, so we can prefill it if they have a company */}
-    {(defaultCompany!==null && typeof defaultCompany!==undefined) && 
-    <JobPostForm user={user} defaultCompany={defaultCompany}/>
+    {(user && !isOwner)?
+    <p>You are not owner of this post</p>
+    :
+    (defaultCompany!==null && typeof defaultCompany!==undefined) && 
+    <JobPostForm postObject={postObject} user={user} defaultCompany={defaultCompany}/>
     }
     </>
   )
 }
 
-const JobPostForm = ({user, defaultCompany}) => {
+const JobPostForm = ({user, defaultCompany, postObject}) => {
   const router = useRouter();
   const [available, setAvailable] = useState(true)
 
   const {locations} = useGetLocations()
   const {skills} = useGetSkills()
-    
-  useEffect(()=>{
-      // <script type="text/javascript" src="http://localhost:1337/plugins/strapi-stripe/static/stripe.js" > </script>
-      
-      const getProd = async()=>{
-          const response = await axios.get( "http://localhost:1337/strapi-stripe/getProduct/1" )
-
-
-          if(response.data.availability===false){
-            setAvailable(false)
-          }
-      }
-      
-      // used to be in the strapi script, but doing it directly on the front end
-      // const s = document.createElement("script");
-      // // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-      // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-      // s.setAttribute("async", "true");
-      // document.head.appendChild(s);
-      
-      getProd()
-   
-    },[])
-
   
     const [salaryMinOptions] = useState(()=>{
       let salaries = [{name:'Minimum per year', value:0}]
@@ -121,6 +115,8 @@ const JobPostForm = ({user, defaultCompany}) => {
       return salaries
     }) 
 
+    // console.log(postObject)
+
 
   const FormSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -146,15 +142,14 @@ const JobPostForm = ({user, defaultCompany}) => {
   const formik = useFormik({
     validateOnChange:errores?true:false,
     initialValues: {
-      title: "",
-      location: "",
-      description: "",
-      salaryMin: "",
-      salaryMax: "",
-      image: "",
-      url: "",
-      skills: "",
-      type: "fulltime",
+      title: postObject?.title?postObject.title:'',
+      location: postObject?.location?postObject.location:'',
+      description: postObject?.description?postObject.description:'',
+      salaryMin: postObject?.salarymin?postObject.salarymin:'',
+      salaryMax:postObject?.salarymax?postObject.salarymax:'',
+      url: postObject?.url?postObject.url:'',
+      skills: postObject?.skills?postObject.skills:'',
+      type: postObject?.type?postObject.type:'',
       companyLogo:defaultCompany.logo?defaultCompany.logo:"",
       companyName: defaultCompany.name?defaultCompany.name:"",
       companyWebsite: defaultCompany.url?defaultCompany.url:"",
@@ -162,11 +157,14 @@ const JobPostForm = ({user, defaultCompany}) => {
     },
     validationSchema: FormSchema,
     onSubmit: (values) => {
+      values.jobId=postObject.id
+
+      console.log(values)
 
       async function submit() {
         let configUpload = {
           method: "post",
-          url: `${process.env.NEXT_PUBLIC_API_URL}/api/users-permissions/users/createJobPost`,
+          url: `${process.env.NEXT_PUBLIC_API_URL}/api/users-permissions/users/updateJobPost`,
           headers: {
             Authorization: `Bearer ${user?.jwt}`,
           },
@@ -174,6 +172,7 @@ const JobPostForm = ({user, defaultCompany}) => {
             ...values,
           },
         };
+
 
         await axios(configUpload)
           .then(async function (response) {
@@ -225,7 +224,7 @@ const JobPostForm = ({user, defaultCompany}) => {
                   });
               }
 
-              toast.success("Your Job Post has been submitted!", {
+              toast.success("Your Job Post has been updated!", {
                 duration: 3000,
               });
 
@@ -271,6 +270,7 @@ const JobPostForm = ({user, defaultCompany}) => {
     }
   }, [errors]);
 
+
   return (
     <Layout background="#EFF2F8">
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
@@ -283,6 +283,7 @@ const JobPostForm = ({user, defaultCompany}) => {
           <form
           onSubmit={(e) => {
             e.preventDefault();
+            console.log(errors)
             if ((errors && isEmptyObject(errors)) || !errors) {
               setDisabled(false);
               formik.handleSubmit();
@@ -317,7 +318,7 @@ const JobPostForm = ({user, defaultCompany}) => {
                   aria-live="assertive"
                 >
                   {jobTypes.map((i, index) => (
-                    <option key={'type_'+index} value={i.value}>
+                    <option key={'type_'+index} selected={i.value==postObject?.type} value={i.value}>
                       {i.Name}
                     </option>
                   ))}
@@ -328,7 +329,7 @@ const JobPostForm = ({user, defaultCompany}) => {
                 <label className="text-md font-medium mt-4">
                   Job Description
                 </label>
-                <JobDescriptionEditor setDescription={(html)=>{
+                <JobDescriptionEditor initialContent={postObject?.description?postObject.description:''} setDescription={(html)=>{
                     formik.setFieldValue("description",html)
                 }}/>
                 {formik.errors.description && <span className="text-red-600 text-xs">{formik.errors.description}</span>}
@@ -349,8 +350,10 @@ const JobPostForm = ({user, defaultCompany}) => {
                 <label className="text-md font-medium pb-0 mb-0 mt-4">
                   Skills
                 </label>
-                {skills && <TagsInput 
+                {skills &&
+                 <TagsInput 
                 max={3} 
+                initialSelected={postObject?.skills}
                 updateField={(selected)=>{
                   formik.setFieldValue("skills",JSON.stringify(selected))
                 }}
@@ -374,7 +377,7 @@ const JobPostForm = ({user, defaultCompany}) => {
                   aria-live="assertive"
                 >
                   {salaryMinOptions?.map((i, index) => (
-                    <option key={'min_'+index} value={i.value}>
+                    <option key={'min_'+index} selected={i.value==postObject?.salarymin} value={i.value}>
                       {i.name}
                     </option>
                   ))}
@@ -394,7 +397,7 @@ const JobPostForm = ({user, defaultCompany}) => {
                   aria-live="assertive"
                 >
                   {salaryMaxOptions?.map((i, index) => (
-                    <option key={'min_'+index} value={i.value}>
+                    <option selected={i.value==postObject?.salarymax} key={'min_'+index} value={i.value}>
                       {i.name}
                     </option>
                   ))}
@@ -411,8 +414,9 @@ const JobPostForm = ({user, defaultCompany}) => {
                 Location
               </label>
 
-              {locations?.length &&
+              {(locations?.length) &&
               <TagsInput 
+              initialSelected={postObject?.locations}
               updateField={(selected)=>{
                 formik.setFieldValue("location",JSON.stringify(selected))
               }}
@@ -515,7 +519,7 @@ const JobPostForm = ({user, defaultCompany}) => {
               // disabled={errores}
               className="w-full p-4 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
-             Save and Continue
+             Update
             </button>
             </form>
         </div>
