@@ -76,6 +76,23 @@ const Button = styled("button", {
           cursor: "not-allowed",
         },
       },
+      fullWidthJob: {
+        fontWeight:500,
+        backgroundColor: blue.blue11,
+        borderRadius:6,
+        color: "#fff",
+        width:'100%',
+        padding: "5px 15px",
+        fontSize:16,
+        // boxShadow: `0 2px 10px ${blackA.blackA7}`,
+        "&:hover": { backgroundColor: blue.blue10 },
+        "&:focus": { boxShadow: `0 0 0 2px ${blue.blue12}` },
+        "&[disabled]": {
+          // disabled styles
+          opacity: 0.5,
+          cursor: "not-allowed",
+        },
+      },
       blue: {
         backgroundColor: 'white',
         color: blue.blue11,

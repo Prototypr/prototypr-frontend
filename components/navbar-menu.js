@@ -116,7 +116,8 @@ export const NavigationMenuDemo = ({
   userLoading,
   userLoggedInCookie,
   hideLocaleSwitcher,
-  editor
+  editor,
+  showWriteButton
 }) => {
   const intl = useIntl();
   const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
@@ -140,7 +141,7 @@ export const NavigationMenuDemo = ({
           </NavigationMenuLink>}
         </NavigationMenuItem>
         
-        :(user && !editor) &&
+        :((user && !editor) && showWriteButton!==false)&&
         <NavigationMenuItem
         className={`hidden mr-2 ml-4 md:block md:flex transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
       >

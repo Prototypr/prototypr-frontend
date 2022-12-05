@@ -272,7 +272,7 @@ const JobPostForm = ({user, defaultCompany}) => {
   }, [errors]);
 
   return (
-    <Layout background="#EFF2F8">
+    <Layout showWriteButton={false} background="#EFF2F8">
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
         <div className="max-w-3xl w-full">
         <div className="my-2 mb-5">
