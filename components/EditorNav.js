@@ -12,7 +12,7 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({ editorInstance,activeNav, editorButtons, isEditor, postStatus }) {
+export default function EditorNav({ editorInstance,showWriteButton,activeNav, editorButtons, isEditor, postStatus }) {
 
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -134,6 +134,7 @@ export default function EditorNav({ editorInstance,activeNav, editorButtons, isE
 
                 {editorButtons}
                 <NavigationMenuDemo
+                  showWriteButton={showWriteButton}
                   hideLocaleSwitcher={true}
                   user={user}
                   userLoading={isLoading}
