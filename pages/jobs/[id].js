@@ -21,8 +21,8 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
   
 
     let seoDescription = 'Job post on Prototypr'
-  if(post?.attributes.content){
-    seoDescription = truncate(post?.attributes.description, 400)
+  if(post?.attributes?.content){
+    seoDescription = truncate(post?.attributes?.description, 400)
   }
   
   if (!router.isFallback && !post?.id) {
@@ -32,13 +32,12 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
   const title = post?.attributes?.title
   const description = seoDescription
   const image = post?.attributes?.seo?.opengraphImage?post?.attributes?.seo?.opengraphImage:  post?.attributes?.featuredImage?.data?.attributes?.url ? post?.attributes?.featuredImage?.data?.attributes?.url:post?.legacyFeaturedImage?post?.legacyFeaturedImage?.mediaItemUrl:post?.ogImage?post?.ogImage.opengraphImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
-  const canonical = post?.attributes?.id && `https://prototypr.io/jobs/${post?.attributes.id}`
-  const url = post?.attributes?.id && `https://prototypr.io/jobs/${post?.attributes.id}`
+  const canonical = post?.attributes?.id && `https://prototypr.io/jobs/${post?.attributes?.id}`
+  const url = post?.attributes?.id && `https://prototypr.io/jobs/${post?.attributes?.id}`
 
-  const locations = post.attributes?.locations?.data
-  const skills = post.attributes?.skills?.data
+  const locations = post?.attributes?.locations?.data
+  const skills = post?.attributes?.skills?.data
   
-  console.log(post)
   return (
     <Layout 
     seo={{
@@ -61,11 +60,11 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
             {/**Description */}
             <div className="mb-8">
               <div className="mb-6 relative bg-white px-6 py-6 rounded-lg w-full">
-                {post.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url?
-                <img style={{width:95, height:95}} className="rounded-full border border-gray-100 mb-6" src={post.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url}/>:''}
+                {post?.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url?
+                <img style={{width:95, height:95}} className="rounded-full border border-gray-100 mb-6" src={post?.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url}/>:''}
                 <h1 className="text-3xl mb-2 max-w-2xl font-medium">{post?.attributes.title}</h1>
                 <div className='flex'>
-                <h2 className='text-xl mb-1 font-medium'>{post.attributes?.company?.data?.attributes?.name}</h2>
+                <h2 className='text-xl mb-1 font-medium'>{post?.attributes?.company?.data?.attributes?.name}</h2>
              
                 </div>
                 <div className='flex'>
@@ -112,14 +111,14 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                 <div className='mt-8 pt-8 border-t border-gray-100'>
                   <h3 className='text-2xl font-medium mb-2 text-gray-900'>Job description</h3>
                   <span className="inline text-gray-500 text-md font-base">Posted </span>
-                  {post.attributes?.date?
+                  {post?.attributes?.date?
                   <TimeAgo
                   className="text-gray-500 text-md font-base"
-                  date={post.attributes?.date}
+                  date={post?.attributes?.date}
                 />:''}
                 </div>
                 
-                {post && post.attributes && post.attributes.author && (
+                {post && post?.attributes && post?.attributes?.author && (
                   <div className="sm:hidden lg:block">
                     <AuthorNewsCredit author={post.attributes.author} postDate={postDate} domain={domain} link={link} />
                   </div>
@@ -140,7 +139,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
           <div className="w-full mb-6 pt-4 pb-6 px-6 rounded-lg bg-white col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
           <div className="w-full">
             <h3 className='text-xl font-medium mb-2 text-gray-900'>Apply Today</h3>
-            <p className="text-base text-gray-600 mb-4">{post.attributes?.company?.data?.attributes?.name} accepts applications on their company website.</p>
+            <p className="text-base text-gray-600 mb-4">{post?.attributes?.company?.data?.attributes?.name} accepts applications on their company website.</p>
               <Link href={post?.attributes?.url}>
                 <Button variant="fullWidthJob" className="px-0 py-1">
                   Apply Now
@@ -209,7 +208,7 @@ export async function getStaticPaths() {
     
     return {
       paths: allPosts && allPosts.data?.map((post) =>{ 
-        return `/jobs/${post.id}`}) || [],
+        return `/jobs/${post?.id}`}) || [],
       fallback: true,
     }
   }
