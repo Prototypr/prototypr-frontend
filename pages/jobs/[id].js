@@ -181,11 +181,10 @@ export async function getStaticProps({ params, preview = null, type = 'protobite
       revalidate:30
     }
   }
-  console.log(data?.jobs)
   
-  let link = data?.jobs.data[0].attributes.link
+  let link = data?.jobs?.data[0]?.attributes?.link
   if(!link){
-    link = data?.jobs.data[0].attributes.legacyAttributes?.link ? data?.jobs.data[0].attributes.legacyAttributes?.link:'#'
+    link = data?.jobs?.data[0]?.attributes?.legacyAttributes?.link ? data?.jobs?.data[0]?.attributes?.legacyAttributes?.link:'#'
   }
 
 
@@ -195,7 +194,7 @@ export async function getStaticProps({ params, preview = null, type = 'protobite
     props: {
       preview,
       post: {
-        ...data?.jobs.data[0],
+        ...data?.jobs?.data[0],
         id:params.id
       },
       link,
