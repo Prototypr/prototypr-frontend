@@ -2,15 +2,26 @@ const articles = [
   {
     url: "https://prototypr.io/post/the-freemium-web-youve-read-all-your-free-articles-this-month",
     src: "/static/images/web-mon-web3.png",
+    title:"You've read all your free articles this month"
   },
   {
-    url: "https://prototypr.io/post/big-techs-broken-promises-which-path-will-you-choose",
-    src: "/static/images/web-mon-bt.webp",
+    url: "https://prototypr.io/post/imagining-an-ad-free-internet-web-monetization-for-designers",
+    src: "/static/images/ad-free.jpg",
+    title:"Imagining an ad-free Internet"
   },
+  // {
+  //   url: "https://prototypr.io/post/big-techs-broken-promises-which-path-will-you-choose",
+  //   src: "/static/images/web-mon-bt.webp",
+  // },
   {
-    url: "https://prototypr.io/post/the-rise-of-designer-communities-has-the-algorithm-lost-its-rhythm",
-    src: "/static/images/web-mon-com.png",
+    url: "https://prototypr.io/web-monetization/payment-pointer",
+    src: "/static/images/coins.png",
+    title:'How to set up a payment pointer'
   },
+  // {
+  //   url: "https://prototypr.io/post/the-rise-of-designer-communities-has-the-algorithm-lost-its-rhythm",
+  //   src: "/static/images/web-mon-com.png",
+  // },
 ];
 
 const GlobeIcon = () => {
@@ -56,7 +67,7 @@ const WebStandard = () => {
   return (
     <div className="py-0 bg-[#22AA79]">
       <div className="bg-[#00028C] pt-20 md:pt-40 p-10 rounded-t-[10px] md:rounded-t-[40px] overflow-hidden">
-        <div className="w-full h-auto max-w-7xl mx-auto flex flex-col gap-10 py-10">
+        <div className="w-full h-auto max-w-6xl mx-auto flex flex-col gap-10 py-10">
           <div className="flex flex-col md:flex-row gap-10 md:gap-0">
             <div className="flex flex-col gap-2">
               <GlobeIcon />
@@ -69,29 +80,30 @@ const WebStandard = () => {
                 </h3>
                 <div className="max-w-3xl flex flex-col gap-5 font-inter leading-[34px] text-[18px] text-[#9FBDDF]">
                   <p>
-                    In a community that has knowledge sharing at its core, Web
-                    Monetization provides a new model for rewarding creators,
-                    whilst keeping the web open.
+                    Web Monetization is a proposed W3C standard that encourages fairer revenue models for the web.
                   </p>
-                  <p>
-                    By integrating Web Monetization into the Prototypr platform.
-                    We can create a privacy-friendly and unbiased place for
-                    creators to earn from their content, whilst keeping it
-                    accessible to anyone with internet access.
+                  {/* <p>
+                    Web Monetization is an open-source technology, and proposed W3C standard that encourages open and fairer revenue models for the web.
+                  </p> */}
+                  <p>It starts with <a target="_blank" className="underline text-gray-200" href="https://coil.com?ref=prototypr">payment providers like Coil</a>. 
+                  Like Patreon supporters, readers contribute $5 a month on Coil to 
+                  support a collective of creators across the web - not just 1 site. 
+                  Content creators receive micropayments streamed at <span className="font-medium italic text-gray-200">$0.36 per hour</span> when a
+                  Coil member spends time on their content.
                   </p>
                 </div>
                 <a
-                  href="https://open.prototypr.io/publications"
+                  href="https://help.coil.com/docs/general-info/intro-to-coil"
                   className="text-white font-inter"
                   target={"_blank"}
                 >
-                  Learn more →
+                  Learn about Coil →
                 </a>
               </div>
             </div>
             <div className=" px-3 w-full scale-100 lg:scale-[120%]  md:-translate-y-0">
               <img
-                className="w-full md:translate-x-52 scale-100 md:scale-75  md:-translate-y-10 pointer-events-none"
+                className="w-full md:translate-x-52 scale-100 md:scale-75 pointer-events-none"
                 src="/static/images/web-mon-ppl.svg"
               />
             </div>
@@ -107,6 +119,7 @@ const WebStandard = () => {
                     }}
                     className="w-full overflow-hidden  bg-white bg-opacity-10 rounded-lg cursor-pointer h-[200px] md:h-[250px]"
                   ></div>
+                  <p className="px-2 py-3 text-gray-300">{x.title}</p>
                 </a>
               );
             })}

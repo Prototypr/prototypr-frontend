@@ -1,19 +1,18 @@
 const Hero = () => {
   return (
     <div className="w-full bg-[#22AA79] h-auto flex flex-row relative px-10">
-      <div className="relative max-w-7xl mx-auto w-full h-full z-[2] flex flex-col md:flex-row py-10 md:py-0">
+      <div className="relative max-w-6xl mx-auto w-full h-full z-[2] flex flex-col md:flex-row py-10 md:py-0">
         <div className="w-full flex flex-col gap-4 pt-32 md:pt-52 py-20 md:py-32">
           <h1 className="text-[30px] sm:text-[40px] md:text-[60px] font-inter text-[#113E33] leading-[44px] md:leading-[64px] font-semibold">
-            Better business <br /> models for the web
+            Introduction to <br /> Web Monetization
           </h1>
-          <p className="text-[#116244] text-[18px] leading-[34px] max-w-lg font-medium font-inter">
-            Web Monetization is a way that content creators can earn from
-            streaming micropayments based on the amount of time that visitors
-            spend on their digital content.
+          <p className="text-[#1f322b] text-[18px] leading-[34px] max-w-lg font-medium font-inter">
+            Web Monetization provides an open, native, efficient, and automatic way to compensate creators 
+            through payment providers like <span className="font-bold text-black">Coil</span>. Finally, an alternative to intrusive ads.
           </p>
           <div className="my-4">
             <a
-              href="https://coil.com/?ref=prototypr.io"
+              href="https://coil.com/about?ref=prototypr.io"
               target={"_blank"}
               className="px-10 py-5 bg-black rounded-full text-sm text-white "
             >
