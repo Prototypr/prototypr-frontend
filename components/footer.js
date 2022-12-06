@@ -24,9 +24,9 @@ export default function Footer() {
                 {intl.formatMessage({ id: "footer.subtitle" })} 💌
               </p>
 
-              <SignupHorizontal className="sm:flex w-11/12 mt-5" />
+              <SignupHorizontal className="sm:flex w-11/12 mt-5 mb-6" />
               {/* <HookForm onSubmit={onSubmit} buttonText={buttonText} /> */}
-              <p className="text-sm mt-6 text-gray-800 font-semibold">
+              {/* <p className="text-sm mt-6 text-gray-800 font-semibold">
                 {intl.formatMessage({ id: "footer.author1" })}{" "}
                 <a
                   className="text-blue-800 underline"
@@ -56,7 +56,7 @@ export default function Footer() {
                   Mimi
                 </a>
                 .
-              </p>
+              </p> */}
               <p className="text-sm text-gray-700 font-semibold mt-2">
                 {" "}
                 © 2022 Prototpyr,{" "}
