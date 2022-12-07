@@ -185,7 +185,7 @@ export async function getStaticProps({ params, preview = null, type = 'protobite
       props: {
         post: null,
       },
-      revalidate:30
+      // revalidate:30
     }
   }
   
