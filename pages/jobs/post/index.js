@@ -1,6 +1,7 @@
 import Layout from "@/components/layout-dashboard";
-import { jobTypes, SKILLS , jobLocations} from "@/lib/constants";
+import { jobTypes} from "@/lib/constants";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
@@ -14,6 +15,7 @@ import TagsInput from "@/components/Jobs/tagsInput";
 import LogoUploader from "@/components/Jobs/LogoUploader";
 import useGetLocations from "@/components/Jobs/jobHooks/useGetLocations";
 import useGetSkills from "@/components/Jobs/jobHooks/useGetSkills";
+const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
 let axios = require("axios");
 
@@ -34,10 +36,18 @@ function isEmptyObject(obj) {
   );
 }
 
+const seo={
+  title:`Post a job on Prototypr`,
+  description:`A jobs board for designers. Find your next designer, developer, or creative person.`,
+  // image:``,
+  canonical: `https://prototypr.io/jobs`,
+  url: `https://prototypr.io/jobs`
+}
+
 const PostJobPage = () =>{
 
   const { user } = useUser({
-    redirectTo: "/",
+    // redirectTo: "/",
     redirectIfFound: false,
   });
 
@@ -53,6 +63,44 @@ const PostJobPage = () =>{
       }
     }
   },[user])
+
+  const [isSignUp, setSignUp] = useState(true);
+
+  const toggleSignIn = () => {
+    setSignUp(!isSignUp);
+  };
+
+  if(!user || user?.isLoggedIn==false){
+    return(
+      <Layout seo={seo}>
+      <div className="w-full relative max-w-4xl p-4 mx-auto ">
+        <div
+          className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto mt-8"
+          style={{ maxWidth: 390 }}
+        >
+          <LoginForm 
+          title="Sign up to post a job" 
+          isSignUp={isSignUp} />
+        </div>
+      </div>
+      <div className="mt-4 flex justify-center">
+        <div className="text-sm text-gray-700">
+          <span>
+            {isSignUp
+              ? "Already got an account?"
+              : "Not got an account yet?"}
+          </span>
+          <a
+            onClick={toggleSignIn}
+            className="text-primary-400 cursor-pointer"
+          >
+            {isSignUp ? " Sign in." : " Sign up"}
+          </a>
+        </div>
+      </div>
+    </Layout>
+    )
+  }
 
 
   return(
@@ -272,7 +320,7 @@ const JobPostForm = ({user, defaultCompany}) => {
   }, [errors]);
 
   return (
-    <Layout showWriteButton={false} background="#EFF2F8">
+    <Layout seo={seo} showWriteButton={false} background="#EFF2F8">
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
         <div className="max-w-3xl w-full">
         <div className="my-2 mb-5">
