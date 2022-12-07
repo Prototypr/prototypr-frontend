@@ -183,7 +183,7 @@ const LogoUploader = ({setFormValue}) => {
           onChange={handleNewImage}
         />
       </div>
-      {hasChanged && (
+      {/* {hasChanged && (
         <div className="mb-3 mt-1">
           <Button
             className="text-sm"
@@ -195,7 +195,7 @@ const LogoUploader = ({setFormValue}) => {
             Crop and save
           </Button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
