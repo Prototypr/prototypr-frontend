@@ -8,7 +8,7 @@ const FooterCTA = () => {
           </h3>
           <p className="text-gray-200 mb-2 text-center max-w-lg">
             Coil is a Web Monetization provider that provides a way for members to access web monetized content.
-            Coil suscribers on Prototypr get an Ad-free reading experience.
+            Coil subscribers on Prototypr get an Ad-free reading experience.
             </p>
           <div className="my-4">
             <a
