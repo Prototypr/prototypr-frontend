@@ -31,13 +31,21 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
 
   const title = post?.attributes?.title
   const description = seoDescription
-  const image = post?.attributes?.seo?.opengraphImage?post?.attributes?.seo?.opengraphImage:  post?.attributes?.featuredImage?.data?.attributes?.url ? post?.attributes?.featuredImage?.data?.attributes?.url:post?.legacyFeaturedImage?post?.legacyFeaturedImage?.mediaItemUrl:post?.ogImage?post?.ogImage.opengraphImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
   const canonical = post?.attributes?.id && `https://prototypr.io/jobs/${post?.attributes?.id}`
   const url = post?.attributes?.id && `https://prototypr.io/jobs/${post?.attributes?.id}`
-
+  
   const locations = post?.attributes?.locations?.data
   const skills = post?.attributes?.skills?.data
   
+  const companyName = post?.attributes?.company?.data?.attributes?.name
+  const companyLogo = post?.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url
+
+  let salaryText = ''
+  if(post?.attributes?.salarymin && post?.attributes?.salarymax){
+    salaryText = `$${post.attributes.salarymin/1000}k – $${(post.attributes.salarymax/1000)}k`
+  }
+
+  const image = `${process.env.NEXT_PUBLIC_HOME_URL}/api/og?title=${title}&companyName=${$companyName}&companyLogo=${companyLogo}&salary=${salaryText}`
   return (
     <Layout 
     seo={{
@@ -62,9 +70,9 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
               <div className="mb-6 relative bg-white px-6 py-6 rounded-lg w-full">
                 {post?.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url?
                 <img style={{width:95, height:95}} className="rounded-full border border-gray-100 mb-6" src={post?.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url}/>:''}
-                <h1 className="text-3xl mb-2 max-w-2xl font-medium">{post?.attributes.title}</h1>
+                <h1 className="text-3xl mb-2 max-w-2xl font-medium">{title}</h1>
                 <div className='flex'>
-                <h2 className='text-xl mb-1 font-medium'>{post?.attributes?.company?.data?.attributes?.name}</h2>
+                <h2 className='text-xl mb-1 font-medium'>{companyName}</h2>
              
                 </div>
                 <div className='flex'>
@@ -82,12 +90,12 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                   )
                     }
                     <span className="text-gray-600">•</span>
-                  {(post?.attributes?.salarymin && post?.attributes?.salarymax)? 
+                  {salaryText? 
               <>
               <div className="flex ml-2 flex-row gap-0.5">
                 <MoneyIcon/>
                 <div className="ml-1 text-gray-600 my-auto text-md font-base">
-                  {`$${post.attributes.salarymin/1000}k – $${(post.attributes.salarymax/1000)}k`}
+                {salaryText}
                 </div>
               </div>
               </>

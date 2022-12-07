@@ -96,7 +96,7 @@ export default function Meta({ seo, articleJsonLd, productJsonLd }) {
           cardType: "summary_large_image",
         }}
       />
-      {articleJsonLd && (
+      {/* {articleJsonLd && (
         <ArticleJsonLd
           url="https://example.com/article"
           title="Article headline"
@@ -112,8 +112,8 @@ export default function Meta({ seo, articleJsonLd, productJsonLd }) {
           publisherLogo="https://www.example.com/photos/logo.jpg"
           description="This is a mighty good description of this article."
         />
-      )}
-      {productJsonLd && (
+      )} */}
+      {/* {productJsonLd && (
         <ProductJsonLd
           url="https://example.com/article"
           title="Article headline"
@@ -129,7 +129,7 @@ export default function Meta({ seo, articleJsonLd, productJsonLd }) {
           publisherLogo="https://www.example.com/photos/logo.jpg"
           description="This is a mighty good description of this article."
         />
-      )}
+      )} */}
       {/* {typeof window &&<script type="text/javascript" async="async" dangerouslySetInnerHTML={{ __html: `var _paq = window._paq = window._paq || []; _paq.push(["trackPageView"]); _paq.push(["enableLinkTracking"]);  function embedTrackingCode() { var u="https://analytics.prototypr.io/";    _paq.push(["setTrackerUrl", u+"matomo.php"]);    _paq.push(["setSiteId", "1"]);     var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);     }  if (window.addEventListener) { window.addEventListener("load", embedTrackingCode, false);  } else if (window.attachEvent) {  window.attachEvent("onload",embedTrackingCode);  } else { embedTrackingCode(); }` }} />} */}
       {typeof window &&<script type="text/javascript" async="async" dangerouslySetInnerHTML={{ __html: `window.GUMLET_CONFIG={srcset: false, hosts:[{current:"prototypr-media.sfo2.digitaloceanspaces.com",gumlet:"prototyprio.gumlet.io"}], lazy_load: true, auto_webp:true},d=document,s=d.createElement("script"),s.src="https://cdn.gumlet.com/gumlet.js/2.1/gumlet.min.js",s.async=1,d.getElementsByTagName("head")[0].appendChild(s);` }} />}
       {/* CODEPEN AND TWITTER EMBED */}

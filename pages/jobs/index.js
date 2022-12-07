@@ -6,22 +6,15 @@ const TimeAgo = dynamic(() => import("react-timeago"), { ssr: false });
 import { getAllJobs } from "@/lib/api";
 
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { ClockIcon, LocationIcon, MoneyIcon } from "@/components/icons";
 import Button from "@/components/Primitives/Button";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import Contributors from "@/components/toolbox/Contributors";
-// import { useEffect } from "react";
-// import { useState } from "react";
-// import useUser from "@/lib/iron-session/useUser";
 
 const PAGE_SIZE = 12;
 
 
 const JobPostCard = ({ job }) => {
-  // const router = useRouter()
-  // const tags = job.tags.split(",");
-  // const company = job?.company?.data?.attributes;
   return (
     <Link href={`/jobs/${job.id}`}>
     <div className="w-full relative group cursor-pointer shadow-sm hover:shadow-lg transition transition-all duration-300 ease-in-out h-auto px-6 py-6 bg-white rounded-[10px] flex flex-col md:flex-row gap-5 border border-gray-300">
@@ -98,10 +91,17 @@ const JobPostCard = ({ job }) => {
   );
 };
 
+const seo = {
+  title: "Designer Jobs Board",
+  description:"A job board for designers, developers, and creative people. Find your next remote job, or one in your location.",
+  url:"https://prototypr.io/jobs",
+  image:"https://prototypr.io/static/images/jobs-seo.png"
+}
+
 const Index = ({jobs}) => {
 
   return (
-    <Layout showWriteButton={false} background="#fafafa">
+    <Layout seo={seo} showWriteButton={false} background="#fafafa">
       <Container>
       <div className=" w-full h-full">
         <div className="pt-6 w-full max-w-7xl mx-auto  h-full grid grid-cols-6 gap-5">
