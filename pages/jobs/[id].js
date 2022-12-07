@@ -45,7 +45,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
     salaryText = `$${post.attributes.salarymin/1000}k – $${(post.attributes.salarymax/1000)}k`
   }
 
-  const image = `${process.env.NEXT_PUBLIC_HOME_URL}/api/og?title=${title}&companyName=${companyName}&companyLogo=${companyLogo}&salary=${salaryText}`
+  const image = (`${process.env.NEXT_PUBLIC_HOME_URL}/api/og?title=${encodeURIComponent(title)}&companyName=${encodeURIComponent(companyName)}&companyLogo=${(companyLogo)}&salary=${encodeURIComponent(salaryText)}`)
   return (
     <Layout 
     seo={{
