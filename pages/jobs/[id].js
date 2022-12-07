@@ -133,7 +133,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                 )}
                 <div
                   style={{ color: "#4a5568"}}
-                  className="py-3 mt-4 max-w-3xl text-md mb-2"
+                  className="py-3 mt-4 max-w-3xl blog-content text-md mb-2"
                   dangerouslySetInnerHTML={{ __html: post?.attributes?.description }}
                 ></div>
                 
