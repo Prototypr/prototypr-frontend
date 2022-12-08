@@ -29,10 +29,10 @@ const WebMonetizationSection = () => (
             walled gardens. Paywalls help creators paid, but they restrict innovation.
           </p>
           <p className="leading-[34px] text-[18px] font-inter font-normal">
-            Web Monetization is a system that rewards creators for their work whilst facilitating a 
+            <span className="font-semibold text-gray-700">Web Monetization</span> is a new system making it possible to reward creators through tips and live micropayments for first time on the web. 
+            Powered by payment providers like Coil, the goal is to facilite a 
             fairer, ad-free, open web. 
-            Powered by Interledger, a protocol for transferring money, native monetization is 
-            possible for the first time on the web.
+            {/* With Coil, creators can receive tips and for the first time on the web, live micropayments based on engagement. */}
           </p>
         </div>
       </div>

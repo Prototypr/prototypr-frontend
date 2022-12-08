@@ -74,7 +74,7 @@ export default function Post({ post, preview, relatedPosts }) {
         style={{ background: "#fff" }}
       >        
         <main
-          className="pt-24 md:pt-36 -mt-3 mx-auto"
+          className="pt-24 md:pt-24 -mt-3 mx-auto"
           style={{ maxWidth: "1200px" }}
         >
           {(post?.id && (process.env.NODE_ENV==='production')) && 

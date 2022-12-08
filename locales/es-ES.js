@@ -22,7 +22,8 @@ const ES = {
   "intro.link": "Saber más sobre Prototypr",
   "navbar.webmonetization.title": "Ad-free Web",
   "navbar.webmonetization.desc":
-    "No more paywalls or ads. Learn more about Web Monetization and Prototypr.",
+  "No more paywalls or ads. Learn more about Web Monetization and Prototypr.",
+  "navbar.home": "Inicio",
   "navbar.menu.title1": "Más",
   "navbar.menu.title2": "Toolbox",
   "navbar.menu.title3": "Escribe para nosotros",

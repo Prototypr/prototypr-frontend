@@ -20,6 +20,7 @@ const EN = {
   "intro.button.updates": "Sign up",
   "intro.description": "Open source. Free to all. No paywall.",
   "intro.link": "Learn about Prototypr",
+  "navbar.home": "Home",
   "navbar.menu.title1": "More",
   "navbar.menu.title2": "Toolbox",
   "navbar.menu.title3": "Write for us",

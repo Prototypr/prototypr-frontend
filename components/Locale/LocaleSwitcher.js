@@ -166,9 +166,7 @@ const LocaleSwitcher = ({ collapsed }) => {
   const [shortLocale] = locale ? locale.split("-") : ["en"];
   return (
     <Box
-      className={`mr-3 ${
-        !collapsed ? "md:opacity-0 md:flex md:invisible" : "md:flex"
-      } transition transition-all duration-500 ease-in-out`}
+      className={`mr-0 md:mr-3 md:flex transition transition-all duration-500 ease-in-out`}
     >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

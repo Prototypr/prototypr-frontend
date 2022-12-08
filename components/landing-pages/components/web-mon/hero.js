@@ -4,11 +4,13 @@ const Hero = () => {
       <div className="relative max-w-6xl mx-auto w-full h-full z-[2] flex flex-col md:flex-row py-10 md:py-0">
         <div className="w-full flex flex-col gap-4 pt-32 md:pt-52 py-20 md:py-32">
           <h1 className="text-[30px] sm:text-[40px] md:text-[60px] font-inter text-[#113E33] leading-[44px] md:leading-[64px] font-semibold">
-            Introduction to <br /> Web Monetization
+          A new way for creators to earn
           </h1>
           <p className="text-[#1f322b] text-[18px] leading-[34px] max-w-lg font-medium font-inter">
-            Web Monetization provides an open, native, efficient, and automatic way to compensate creators 
-            through payment providers like <span className="font-bold text-black">Coil</span>. Finally, an alternative to intrusive ads.
+          With our Web-Monetized platform, you can earn tips and micropayments directly from readers, powered by payment providers like <span className="font-bold text-black">Coil</span>.
+          {/* Micro payments are a new and exciting way to earn money with your website. With web monetization you can offer premium content to your users, as well as set up micro payment systems. When your website visitors use these payment methods, they aren't charged any extra fees. This is great if you want to offer subscriptions or premium content on demand. */}
+            {/* Web Monetization provides an open, native, efficient, and automatic way to compensate creators 
+            through payment providers like <span className="font-bold text-black">Coil</span>. Finally, an alternative to intrusive ads. */}
           </p>
           <div className="my-4">
             <a
