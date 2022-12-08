@@ -112,7 +112,7 @@ const Index = ({jobs}) => {
           <div className="w-full">
               <Link href="/jobs/post">
                 <Button variant="fullWidthJob" className="px-0 py-1">
-                  Post a Job
+                  Post a Job for $200
                 </Button>
               </Link>
             </div>
