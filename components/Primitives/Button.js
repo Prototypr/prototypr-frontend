@@ -27,6 +27,21 @@ const Button = styled("button", {
           cursor: "not-allowed",
         },
       },
+      confirmRounded: {
+        backgroundColor: blue.blue11,
+        background: blue.blue11,
+        color: "#fff",
+        padding: "0.05rem 1rem",
+        borderRadius:20,
+        // boxShadow: `0 2px 10px ${blackA.blackA7}`,
+        "&:hover": { backgroundColor: blue.blue10 },
+        "&:focus": { boxShadow: `0 0 0 2px ${blue.blue12}` },
+        "&[disabled]": {
+          // disabled styles
+          opacity: 0.5,
+          cursor: "not-allowed",
+        },
+      },
       red: {
         backgroundColor: red.red11,
         color: "#fff",

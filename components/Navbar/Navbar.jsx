@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
+import WMButton from "./parts/WMButton";
 
 const WMCounter = dynamic(() => import("@/components/WebMonetization/Counter"), {
   ssr: false,
@@ -77,12 +78,17 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            
+            <div className={`hidden mr-2 md:block my-auto`}>
+                <WMButton />
+              </div>
             <NavigationMenu>
               <NavigationMenuList>
                 <LocationMenu
                   user={user}
                   hideLocaleSwitcher={hideLocaleSwitcher}
                   collapsed={collapsed}
+                  showWriteButton={showWriteButton}
                 />
               </NavigationMenuList>
             </NavigationMenu>

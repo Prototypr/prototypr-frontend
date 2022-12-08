@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, keyframes } from '@stitches/react';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { violet, blackA } from '@radix-ui/colors';
+import { gray, blackA } from '@radix-ui/colors';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
 const slideUpAndFade = keyframes({
@@ -27,10 +27,10 @@ const slideLeftAndFade = keyframes({
 const StyledContent = styled(TooltipPrimitive.Content, {
   borderRadius: 4,
   padding: '10px 15px',
-  fontSize: 15,
+  fontSize: 13,
   lineHeight: 1,
   zIndex:999,
-  color: violet.violet11,
+  color: gray.gray11,
   backgroundColor: 'white',
   boxShadow: 'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   userSelect: 'none',

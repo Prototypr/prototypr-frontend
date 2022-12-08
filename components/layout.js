@@ -11,12 +11,13 @@ export default function Layout({
   activeNav,
   background,
   padding,
-  seo
+  seo,
+  showWriteButton
 }) {
   return (
     <>
       <Meta seo={seo} />
-      <Navbar activeNav={activeNav} />
+      <Navbar showWriteButton={showWriteButton} activeNav={activeNav} />
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#F3F4F6" }}
