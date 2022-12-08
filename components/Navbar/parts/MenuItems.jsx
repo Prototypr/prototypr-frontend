@@ -1,6 +1,6 @@
 import React from "react";
 import { keyframes } from "@stitches/react";
-import { styled } from "../stitches.config";
+import { styled } from "../../../stitches.config";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { indigo, mauve, green, teal } from "@radix-ui/colors";
@@ -115,12 +115,24 @@ const StyledCaret = styled(CaretDownIcon, {
 });
 
 const StyledTriggerWithCaret = React.forwardRef(
-  ({ children, ...props }, forwardedRef) => (
-    <CustomTrigger {...props} ref={forwardedRef}>
+  ({ children, ...props }, forwardedRef) => 
+  
+  {
+    const router = useRouter();
+    let isActive = Boolean(router.asPath==(props.href));
+
+    if(props.href=='toolbox' && (router.asPath.indexOf('/toolbox')>-1 || router.asPath.indexOf('/prototyping')>-1)){
+        isActive = true
+    }
+    if(props.href=='articles' && (router.asPath.indexOf('/posts')>-1 || router.asPath.indexOf('/topics')>-1)){
+        isActive = true
+    }
+    return(
+    <CustomTrigger active={isActive} {...props} ref={forwardedRef}>
       {children}
       <StyledCaret aria-hidden />
     </CustomTrigger>
-  )
+  )}
 );
 
 const StyledLink = styled(NavigationMenuPrimitive.Link, {
@@ -203,7 +215,15 @@ const StyledViewport = styled(NavigationMenuPrimitive.Viewport, {
 
 const NextLink = ({ children, ...props }) => {
   const router = useRouter();
-  const isActive = Boolean(router.asPath.indexOf(props.href) > -1);
+  let isActive = Boolean(router.asPath==(props.href));
+
+  if(props.href.indexOf('toolbox')>-1 && router.asPath=='/toolbox'){
+    isActive = true
+  }
+  if(props.href=='toolbox' && router.asPath.indexOf('toolbox')>-1){
+    isActive = true
+}
+
   return (
     <Link href={props.href} passHref>
       <StyledLink asChild>
@@ -403,66 +423,24 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
   const submenu2Title6 = intl.formatMessage({ id: "navbar.submenu2.title6" });
   const submenu2Desc6 = intl.formatMessage({ id: "navbar.submenu2.desc6" });
 
+  const homeMenuText = intl.formatMessage({ id: "navbar.home" });
   return (
     <div
-      className={`hidden md:flex justify-between space-x-4 w-full transition transition-all duration-700 ease-in-out relative py-2 uppercase text-sm`}
+      className={`hidden md:flex justify-between space-x-4 w-full transition transition-all duration-700 ease-in-out relative py-2 text-sm`}
     >
       <NavigationMenu>
-        <Link href="/">
-          <img
-            className={`cursor-pointer my-auto h-8 ${
-              collapse ? "w-0 opacity-0" : "w-8 opacity-1"
-            } transition transition-all duration-300 ease-in-out`}
-            src="/static/images/logo-small.svg"
-            data-gumlet="false"
-            alt="Prototypr Logo"
-          />
-        </Link>
-        <Link href="/">
-          <p
-            className={`cursor-pointer font-noto-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
-              collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"
-            } transition transition-all duration-150 ease-in-out`}
-          >
-            <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-default to-blue-dark">
-              <FormattedMessage id="navbar.tagline.small.piece1" />
-            </span>
-            <br />
-            <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-default to-blue-dark">
-              <FormattedMessage id="navbar.tagline.small.piece2" />
-            </span>
-          </p>
-        </Link>
-        <div
-          className={`${
-            collapse ? "" : "ml-10"
-          } transition transition-all duration-300 ease-in-out`}
-        >
           <NavigationMenuList>
             <NavigationMenuItem className="hidden -ml-4 text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/posts/accessibility">
-                {submenuTitle4}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/posts/interview">
-                {submenuTitle3}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/posts/ux">
-                {submenuTitle2}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/posts/ui">
-                {submenuTitle5}
+              <NavigationMenuLink href="/">
+                {/* {submenuTitle4} */}
+                {homeMenuText}
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="flex text-xs md:text-sm xl:mr-2.5 flex-col justify-center">
               {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
-              <NavigationMenuTrigger active={""}>
-                {title1}
+              <NavigationMenuTrigger href="articles">
+                {/* {title1} */}
+                Articles
               </NavigationMenuTrigger>
               <NavigationMenuContent className="normal-case">
                 <ContentList layout="three">
@@ -503,9 +481,8 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 </ContentList>
               </NavigationMenuContent>
             </NavigationMenuItem>
-
             <NavigationMenuItem className="flex flex-col text-xs md:text-sm xl:mr-2.5 justify-center">
-              <NavigationMenuTrigger active={activeNav === "toolbox"}>
+              <NavigationMenuTrigger href="toolbox">
                 {title2}
               </NavigationMenuTrigger>
               <NavigationMenuContent className="normal-case">
@@ -549,8 +526,16 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 </ContentList>
               </NavigationMenuContent>
             </NavigationMenuItem>
+            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+              <NavigationMenuLink href="/jobs">
+                {/* {submenuTitle5} */}
+                Jobs
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          
+
+         
           </NavigationMenuList>
-        </div>
         <NavigationMenuIndicator />
         <ViewportPosition className="ml-0 ml-36">
           <NavigationMenuViewport />

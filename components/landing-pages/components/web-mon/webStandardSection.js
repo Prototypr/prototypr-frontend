@@ -85,11 +85,11 @@ const WebStandard = () => {
                   {/* <p>
                     Web Monetization is an open-source technology, and proposed W3C standard that encourages open and fairer revenue models for the web.
                   </p> */}
-                  <p>It starts with <a target="_blank" className="underline text-gray-200" href="https://coil.com?ref=prototypr">payment providers like Coil</a>. 
-                  Like Patreon supporters, readers contribute $5 a month on Coil to 
-                  support a collective of creators across the web - not just 1 site. 
-                  Content creators receive micropayments streamed at <span className="font-medium italic text-gray-200">$0.36 per hour</span> when a
-                  Coil member spends time on their content.
+                  <p>It starts with <a target="_blank" className="underline text-gray-200" href="https://coil.com?ref=prototypr">payment providers such as Coil</a>. 
+                  Like Patreon supporters, readers contribute $5 a month to 
+                  support a collective of websites - not just 1. 
+                  Content creators receive micropayments at <span className="font-medium italic text-gray-200">$0.36 per hour</span> when a
+                  Coil member views their content. Readers also receive perks across all participating websites.
                   </p>
                 </div>
                 <a

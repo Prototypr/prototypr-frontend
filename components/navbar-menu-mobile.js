@@ -165,7 +165,7 @@ export const NavigationMenuDemo = ({
         </NavigationMenuItem>
 
         <NavigationMenuItem className="block flex py-2 flex-col justify-center">
-          <NavigationMenuLink href="/post/web-monetization-payment-pointer">
+          <NavigationMenuLink href="/web-monetization">
             Web Monetization
           </NavigationMenuLink>
         </NavigationMenuItem>

@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   try {
     const { entry } = req.body;
     // revalidate posts
-    if (entry.type=='post' && (entry.status === "publish" || entry.publishedAt)) {
+    if (entry.type=='article' && (entry.status === "publish" || entry.publishedAt)) {
       console.log("revalidating published post :", entry.slug);
       const url = `/post/${entry.slug}`;
       await res.revalidate(url);

@@ -1,5 +1,5 @@
 import Meta from "../meta";
-import Navbar from "../navbar2";
+import Navbar from "../Navbar/Navbar";
 
 export default function Layout({
   preview,
@@ -13,7 +13,7 @@ export default function Layout({
       <Meta seo={seo} />
       <Navbar activeNav={activeNav} />
       <div className="bg-gray-4 overflow-hidden">
-        <main className="pt-32 md:pt-46 -mt-3 mx-auto">{children}</main>
+        <main className="pt-32 md:pt-32 -mt-3 mx-auto">{children}</main>
       </div>
     </>
   );
