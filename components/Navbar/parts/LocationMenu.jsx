@@ -28,7 +28,7 @@ export const LocationMenu = ({
        {!hideLocaleSwitcher && <LocaleSwitcher showWriteButton={showWriteButton} collapsed={collapsed} />}
 
         {(!user || !user?.isLoggedIn)?<NavigationMenuItem
-          className={`hidden md:block md:flex transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
+          className={`hidden md:block md:flex md:flex-col md:justify-center`}
         >
          {!hideLocaleSwitcher &&  <NavigationMenuLink href="/post/write-for-us">
             {title3}
@@ -37,7 +37,7 @@ export const LocationMenu = ({
         
         :((user && !editor) && showWriteButton!==false)&&
         <NavigationMenuItem
-        className={`hidden ml-4 md:block md:flex transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
+        className={`hidden ml-4 md:block md:flex md:flex-col md:justify-center`}
       >
         <Link href="/write">
          <Button className="flex"type="" variant="confirmRounded">

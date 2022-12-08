@@ -426,7 +426,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
   const homeMenuText = intl.formatMessage({ id: "navbar.home" });
   return (
     <div
-      className={`hidden md:flex justify-between space-x-4 w-full transition transition-all duration-700 ease-in-out relative py-2 text-sm`}
+      className={`hidden md:flex justify-between space-x-4 w-full relative py-2 text-sm`}
     >
       <NavigationMenu>
           <NavigationMenuList>

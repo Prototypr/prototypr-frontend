@@ -68,7 +68,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
                 </>
               </Link>
               <div
-                className={`hidden md:block my-auto transition transition-all duration-300 ease-in-out`}
+                className={`hidden md:block my-auto duration-300 ease-in-out`}
               >
                 <WMCounter />
               </div>
