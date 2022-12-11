@@ -7,7 +7,9 @@ import Link from "next/link";
 import Button from "@/components/Primitives/Button";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import Contributors from "@/components/toolbox/Contributors";
-import JobPostCard from "@/components/Jobs/JobCard";
+
+import { currentWeekNumber } from "@/components/Sponsor/lib/weekNumber";
+import { useEffect, useState } from "react";
 
 const PAGE_SIZE = 12;
 
@@ -18,7 +20,14 @@ const seo = {
   image:"https://prototypr.io/static/images/jobs-seo.png"
 }
 
-const Index = ({jobs}) => {
+const Index = () => {
+
+    const [weekNumber, setWeekNumber] = useState()
+    
+    useEffect(()=>{
+        const week = currentWeekNumber()
+        setWeekNumber(week)
+    },[])
 
   return (
     <Layout seo={seo} showWriteButton={false} background="#fafafa">
@@ -26,7 +35,7 @@ const Index = ({jobs}) => {
       <div className=" w-full h-full">
         <div className="pt-6 w-full max-w-7xl mx-auto  h-full grid grid-cols-6 gap-5">
           <div className="mb-2 col-start-1 col-end-4 md:col-start-1 md:col-end-5">
-            <h1 className="text-lg md:text-xl font-medium">Now Hiring</h1>
+            <h1 className="text-lg md:text-xl font-medium">Sponsor Prototypr</h1>
           </div>
           <div className="w-full h-full col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
           <div className="w-full">
@@ -38,9 +47,7 @@ const Index = ({jobs}) => {
             </div>
           </div>
           <div className="w-full h-full col-start-1 col-end-7 md:col-start-1 md:col-end-5 flex flex-col gap-5  pb-10">
-            {jobs.map((job, i) => {
-              return <JobPostCard job={job} key={i} />;
-            })}
+                The current week is {weekNumber}
           </div>
           <div className="w-full h-full col-start-1 col-end-7 md:col-start-5 md:col-end-7 ">
             {/* <div className="w-full bg-[#2C04CA] h-[150px] <rounded-md p-5">

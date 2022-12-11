@@ -1,75 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactAvatarEditor from "react-avatar-editor";
-import Button from "../atom/Button/Button";
 import useUser from "@/lib/iron-session/useUser";
-import { useRouter } from "next/router";
-var axios = require("axios");
+import { convertImgToBase64URL } from "./lib/convertToBase64";
 
-const LogoUploader = ({setFormValue}) => {
-  const router = useRouter();
+const ImageUploader = ({w, h,setFormValue, companyLogoIsDefault=false, id}) => {
 
-  const { user, mutateUser } = useUser({
+  const { user } = useUser({
     redirectIfFound: false,
   });
 
   const [image, setImage] = useState("avatar.jpg");
   const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
   const [scale, setScale] = useState(1);
-  const [hasChanged, setHasChanged] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [editor, setEditor] = useState(null);
-//   const [uploadedImage, setUploadedImage] = useState(null);
-  const [imageFormData, setImageFormData] = useState(null);
-
-  const setEditorRef = (editor) => setEditor(editor);
-
-//   useEffect(()=>{
-//     if(uploadedImage?.id){
-//         let imageId = parseInt(uploadedImage.id,10)
-//         setFormValue(imageId)
-//     }
-//   },[uploadedImage])
-
-  useEffect(()=>{
-    if(imageFormData){
-        setFormValue(imageFormData)
-    }
-  },[imageFormData])
-  
-
-  const convertImgToBase64URL = (url, callback, outputFormat) => {
-    var img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.onload = function () {
-      var canvas = document.createElement("CANVAS"),
-        ctx = canvas.getContext("2d"),
-        dataURL;
-      canvas.height = img.height;
-      canvas.width = img.width;
-      ctx.drawImage(img, 0, 0);
-      dataURL = canvas.toDataURL(outputFormat);
-      callback(dataURL);
-      canvas = null;
-    };
-    img.src = url;
-  };
-
-  const uploadImage = () => {
-    setIsSubmitting(true);
-
-    if (!editor) {
-      alert("Image upload failed - contact support.");
-      return false;
-    }
-
-    //pass the blob back up to form
-    editor.getImage().toBlob(async (blob) => {
-        setImageFormData(blob)
-        setIsSubmitting(false)
-    });
-  };
-
   const [defaultCompany, setDefaultCompany] = useState(null)
+  
+  //when multiple image uploaders on one page
+  const [imageEditorInstance, setImageEditorInstance] = useState(null);
+  const setEditorRef = (imageEditor) => setImageEditorInstance(imageEditor);
+  const inputRef = useRef(id);
 
   useEffect(()=>{
     if(user){
@@ -83,59 +31,77 @@ const LogoUploader = ({setFormValue}) => {
   },[user])
 
   useEffect(() => {
-    let profPic = "";
-    if (defaultCompany?.logo) {
-      profPic = "https://req.prototypr.io/" + defaultCompany?.logo;
-    }
-    if (!profPic) {
-      profPic =
-        "https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png";
-    }
-    convertImgToBase64URL(profPic, async function (base64Img) {
-      const base64Response = await fetch(base64Img);
-      const blobby = await base64Response.blob();
-
-      // var blobby = b64toBlob(base64Img, 'image/png')
-      var blobUrl = URL.createObjectURL(blobby);
-
-      setImage(blobUrl);
-    });
+      let defaultImage = "";
+      if (companyLogoIsDefault && defaultCompany?.logo) {
+        defaultImage = "https://req.prototypr.io/" + defaultCompany?.logo;
+      }
+      if (!defaultImage) {
+        defaultImage =
+          "https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png";
+      }
+      convertImgToBase64URL(defaultImage, async function (base64Img) {
+        const base64Response = await fetch(base64Img);
+        const blobby = await base64Response.blob();
+  
+        // var blobby = b64toBlob(base64Img, 'image/png')
+        var blobUrl = URL.createObjectURL(blobby);
+  
+        setImage(blobUrl);
+      });
   }, [defaultCompany]);
 
+  const updateFormBlobValue = async() =>{
+    // https://github.com/mosch/react-avatar-editor
+    const dataUrl = imageEditorInstance.getImage().toDataURL()
+    const res = await fetch(dataUrl)
+    const blob = await res.blob()
+    setFormValue(blob)
+  }
+  /**
+   * when the image changes, set
+   * the parent field
+   */
+  useEffect(()=>{
+    if(imageEditorInstance){
+      updateFormBlobValue()
+    }
+  },[position, scale])
+
   const handleNewImage = (e) => {
-    setHasChanged(true);
     setImage(e.target.files[0]);
+    setTimeout(()=>{
+      updateFormBlobValue()
+    },50)
   };
 
   const handleScale = (e) => {
-    setHasChanged(true);
     const scale = parseFloat(e.target.value);
     setScale(scale);
   };
 
   const handlePositionChange = (position) => {
-    setHasChanged(true);
     setPosition(position);
   };
 
   return (
     <div>
-      <div className="-mt-2 mb-2 relative" style={{ width: "140px" }}>
+      <div key={id} className="-mt-2 mb-2 relative" style={{ width: (w?(w+50):90+50) }}>
         <ReactAvatarEditor
           ref={setEditorRef}
           scale={parseFloat(scale)}
-          width={90}
-          height={90}
+          width={w?w:90}
+          height={h?h:90}
           position={position}
           onPositionChange={handlePositionChange}
-          borderRadius={100}
+          // borderRadius={100}
           image={image}
           className="rounded-lg"
         />
         <div
-          className="absolute z-10 bottom-0 right-0 w-8 h-7 bg-white rounded-tl-lg rounded-br-lg border border-1 border-gray-100 shadow-xs cursor-pointer"
+          className="absolute z-10 bottom-0 right-0 w-8 h-7 bg-blue-500 rounded-tl-lg rounded-br-lg border border-1 border-blue-500 shadow-xs cursor-pointer"
           onClick={() => {
-            var avatarInput = document.getElementById("avatar-select");
+            //use the ID to select the right canvas when there's multiple
+            var avatarInput = document.getElementById(`${id}_uploader-input`);
             avatarInput.click();
           }}
         >
@@ -150,7 +116,7 @@ const LogoUploader = ({setFormValue}) => {
             >
               <path
                 d="M7.81825 1.18188C7.64251 1.00615 7.35759 1.00615 7.18185 1.18188L4.18185 4.18188C4.00611 4.35762 4.00611 4.64254 4.18185 4.81828C4.35759 4.99401 4.64251 4.99401 4.81825 4.81828L7.05005 2.58648V9.49996C7.05005 9.74849 7.25152 9.94996 7.50005 9.94996C7.74858 9.94996 7.95005 9.74849 7.95005 9.49996V2.58648L10.1819 4.81828C10.3576 4.99401 10.6425 4.99401 10.8182 4.81828C10.994 4.64254 10.994 4.35762 10.8182 4.18188L7.81825 1.18188ZM2.5 9.99997C2.77614 9.99997 3 10.2238 3 10.5V12C3 12.5538 3.44565 13 3.99635 13H11.0012C11.5529 13 12 12.5528 12 12V10.5C12 10.2238 12.2239 9.99997 12.5 9.99997C12.7761 9.99997 13 10.2238 13 10.5V12C13 13.104 12.1062 14 11.0012 14H3.99635C2.89019 14 2 13.103 2 12V10.5C2 10.2238 2.22386 9.99997 2.5 9.99997Z"
-                fill="currentColor"
+                fill="#fff"
                 fill-rule="evenodd"
                 clip-rule="evenodd"
               ></path>
@@ -174,7 +140,9 @@ const LogoUploader = ({setFormValue}) => {
       </div>
       <div className="text-sm">
         <input
-          id="avatar-select"
+          key={id}
+          id={`${id}_uploader-input`}
+          inputRef={inputRef}
           name="newImage"
           type="file"
           style={{ width: "225px" }}
@@ -183,21 +151,8 @@ const LogoUploader = ({setFormValue}) => {
           onChange={handleNewImage}
         />
       </div>
-      {/* {hasChanged && (
-        <div className="mb-3 mt-1">
-          <Button
-            className="text-sm"
-            onClick={uploadImage}
-            isLoading={isSubmitting}
-            type="submit"
-            color="primary"
-          >
-            Crop and save
-          </Button>
-        </div>
-      )} */}
     </div>
   );
 };
 
-export default LogoUploader;
+export default ImageUploader;
