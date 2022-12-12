@@ -31,14 +31,14 @@ export default function Layout({
   return (
     <>
       <Meta seo={seo} />
-      {/* <Navbar activeNav={activeNav} /> */}
+      <Navbar activeNav={activeNav} />
 
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#F3F4F6" }}
       >
         <main
-          className=" mx-auto"
+          className="mx-auto "
           //   style={{ maxWidth: padding == false ? "" : "1200px" }}
         >
           {children}

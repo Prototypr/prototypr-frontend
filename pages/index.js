@@ -18,6 +18,7 @@ const TopicSpotlights = dynamic(() =>
 );
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
+import { getAllJobs } from "@/lib/api";
 
 import {
   getCombinedPostsForHome,
@@ -101,16 +102,39 @@ const SponsorCard = ({ data }) => {
   );
 };
 
+const PrototyprNetworkCTA = ({ data }) => {
+  return (
+    <div className="flex flex-col gap-1 justify-end items-end">
+      <div className="w-full rounded-[12px] h-auto bg-[#100E89] p-6 flex flex-col gap-3 ">
+        <div className="flex flex-col gap-2">
+          <p className="text-white text-2xl font-inter">
+            A Network <br /> for Writers
+          </p>
+          <div>
+            <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-600 text-sm">
+              Start Writing
+            </button>
+          </div>
+        </div>
+        <img
+          className="w-full"
+          src="/static/images/proto-little-peeps.svg"
+        ></img>
+      </div>
+    </div>
+  );
+};
+
 const TabSwitchter = ({ selectedTab, onTabChange }) => {
   return (
-    <div className="h-[50px]">
+    <div className="h-[50px] my-3">
       <div className="overflow-x-scroll overflow-y-hidden no-scrollbar flex w-full ">
         <div className="flex">
           {Tabs.map((tab) => {
             return (
               <span
                 onClick={() => onTabChange(tab)}
-                className={`px-6 block font-medium cursor-pointer min-w-max cursor w-full text-xs py-2 mx-2 rounded-full ${
+                className={`px-3 py-2 block font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full text-base  mx-2 rounded-full ${
                   selectedTab === tab.id
                     ? "bg-blue-600 text-white"
                     : "bg-transparent text-gray-500"
@@ -126,67 +150,136 @@ const TabSwitchter = ({ selectedTab, onTabChange }) => {
   );
 };
 
-const Sidebar = ({ title, content = [] }) => {
+const Sidebar = ({ title, content = [], type }) => {
   const sponsorData = {
     src: "/static/images/placeholder/sponsor-cat.png",
     heading: "A playful todolist to help you get your stuff done.",
     url: "https://catadoo.com/",
   };
 
-  let slicedList = content.slice(0, 4);
+  let slicedList = [...content.slice(0, 4)];
 
   return (
     <div className="relative min-h-screen col-span-2">
       <aside className=" border-l border-opacity-20 h-screen px-5  sticky top-0 py-0">
         <div className="flex flex-col gap-10 py-10">
-          <SponsorCard data={sponsorData} />
+          <PrototyprNetworkCTA data={sponsorData} />
           <div className="w-full flex flex-col gap-2">
-            <div className="flex flex-row justify-between items-baseline">
-              <h3 className="font-inter my-2 font-medium text-sm">{title}</h3>
-              <a className="font-inter text-sm text-gray-500 cursor-pointer">
-                See more {title} {"->"}
-              </a>
-            </div>
-            <div className="flex flex-col gap-3">
-              {slicedList.map((item, i) => {
-                const { title, legacyFeaturedImage, tags } = item.attributes;
-                return (
-                  <div
-                    key={i}
-                    className="w-full h-[100px] bg-white py-4 px-4 rounded-lg border border-opacity-5 border-black flex flex-col gap-2"
+            {type === "tools" && (
+              <>
+                <div className="flex flex-row justify-between items-baseline">
+                  <h3 className="font-inter my-2 font-medium text-sm">
+                    {title}
+                  </h3>
+                  <a
+                    href={type === "jobs" ? "/jobs" : "/toolbox"}
+                    className="font-inter text-sm text-gray-500 cursor-pointer"
                   >
-                    <div className="flex flex-row gap-2">
-                      <div className="w-12 h-12 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
-                        <img
-                          className="relative"
-                          src={legacyFeaturedImage?.logoNew}
-                        />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <p className="text-sm font-inter">{title}</p>
+                    See more {title} {"->"}
+                  </a>
+                </div>
+                <div className="flex flex-col gap-3">
+                  {slicedList.map((item, i) => {
+                    const { title, legacyFeaturedImage, tags } =
+                      item.attributes;
+                    return (
+                      <div
+                        key={i}
+                        className="w-full h-[100px] bg-white py-4 px-4 rounded-lg border border-opacity-5 border-black flex flex-col gap-2"
+                      >
+                        <div className="flex flex-row gap-2">
+                          <div className="w-12 h-12 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
+                            <img
+                              className="relative"
+                              src={legacyFeaturedImage?.logoNew}
+                            />
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <p className="text-sm font-inter">{title}</p>
 
-                        <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex gap-1 w-full ">
-                          <div className="flex gap-2">
-                            {tags?.data?.map((x, i) => {
-                              const item = x?.attributes;
+                            <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex gap-1 w-full ">
+                              <div className="flex gap-2">
+                                {tags?.data?.map((x, i) => {
+                                  const item = x?.attributes;
 
-                              return (
-                                <span
-                                  key={i}
-                                  className={`px-3 block rounded-sm bg-gray-200 font-inter cursor-pointer min-w-max cursor w-full text-[10px] py-[2px] `}
-                                >
-                                  {item.name}
-                                </span>
-                              );
-                            })}
+                                  return (
+                                    <span
+                                      key={i}
+                                      className={`px-3 block rounded-sm bg-gray-200 font-inter cursor-pointer min-w-max cursor w-full text-[10px] py-[2px] `}
+                                    >
+                                      {item.name}
+                                    </span>
+                                  );
+                                })}
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+
+            {type === "jobs" && (
+              <div className="flex rounded-lg flex-col gap-0 p-4">
+                <div className="flex flex-row justify-between items-baseline">
+                  <h3 className="font-inter my-1 font-medium text-sm">
+                    {title}
+                  </h3>
+                  <a
+                    href={type === "jobs" ? "/jobs" : "/toolbox"}
+                    className="font-inter text-sm text-gray-500 cursor-pointer"
+                  >
+                    See more {title} {"->"}
+                  </a>
+                </div>
+                <div className="flex flex-col gap-4 my-2">
+                  {slicedList.map((item, i) => {
+                    const {
+                      title,
+                      companyName,
+                      salaryText,
+                      companyLogo,
+                      locations,
+                    } = item;
+                    return (
+                      <>
+                        <div
+                          key={i}
+                          className="w-full h-auto cursor-pointer flex flex-col"
+                        >
+                          <div className="flex flex-row gap-2 bg-white  p-4 rounded-lg">
+                            <div className="w-12 h-12 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
+                              <img className="relative" src={companyLogo} />
+                            </div>
+                            <div className="flex flex-col gap-1 justify-center">
+                              <p className="text-xs font-inter">{title}</p>
+                              <div className="flex flex-row gap-1 text-xs text-gray-500">
+                                <p className=" font-inter">{companyName},</p>
+                                <p className=" font-inter">
+                                  {locations[0].name}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          {/* {i !== slicedList.length - 1 && (
+                            <div className="border-b border-black border-opacity-10 w-[100%] mx-auto"></div>
+                          )} */}
+                        </div>
+                      </>
+                    );
+                  })}
+                </div>
+                <a
+                  href={"/jobs/post"}
+                  className="w-full flex flex-row justify-end font-inter text-gray-500 hover:underline cursor-pointer my-2"
+                >
+                  <span className="text-xs">Hiring? Post a Job {"->"}</span>
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </aside>
@@ -197,8 +290,9 @@ const Sidebar = ({ title, content = [] }) => {
 export default function Index({
   preview,
   allTools,
-  otherPosts,
-  interviewPosts,
+  jobs,
+  //   otherPosts,
+  //   interviewPosts,
   topicRes,
   heroPost,
   morePosts,
@@ -222,7 +316,6 @@ export default function Index({
       setViewablePosts(morePosts);
     } else {
       const posts = topicRes[tab.slug];
-      console.log("setting new posts -", tab.slug, posts);
       setViewablePosts(posts);
     }
   };
@@ -252,7 +345,7 @@ export default function Index({
               <HeroGrid postData={{ hero: heroPost, posts: viewablePosts }} />
             </div>
 
-            <Sidebar title="Jobs" />
+            <Sidebar title="Jobs" type="jobs" content={jobs} />
           </div>
         </Container>
 
@@ -266,7 +359,7 @@ export default function Index({
               <HeroGrid postData={{ hero: heroPost, posts: morePosts }} />
             </div>
 
-            <Sidebar title="Tools" content={allTools} />
+            <Sidebar title="Tools" type="tools" content={allTools} />
           </div>
         </Container>
 
@@ -297,6 +390,8 @@ export async function getStaticProps({ preview = null, locale }) {
   let otherPosts = (await getCombinedPostsForHome(preview, 9, 8, sort)) || [];
   const interviews =
     (await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
+  let jobs = (await getAllJobs(null, 4, 1)) || [];
+
   let topicRes = {};
 
   for (let index = 0; index < TAB_ITEMS.length; index++) {
@@ -319,6 +414,7 @@ export async function getStaticProps({ preview = null, locale }) {
       interviewPosts: interviews.data,
       topicRes,
       preview,
+      jobs,
     },
     revalidate: 20,
   };

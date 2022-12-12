@@ -47,13 +47,33 @@ const AuthorCard = ({ data }) => {
   );
 };
 
-const MetaInfo = () => {
+const MetaInfo = ({ tags = [] }) => {
+  const tagContent = tags?.data || [];
   return (
     <div className="flex flex-row justify-between">
-      <span className="text-xs font-inter px-4 py-1 bg-orange-200 text-black rounded-full">
-        Topic
+      {/* {tagContent?.map((tag) => {
+        const n = tag?.attributes.name || "";
+        return (
+          <span className="text-xs  font-inter px-6 py-2  bg-orange-100 text-black rounded-full">
+            {n}
+          </span>
+        );
+      })} */}
+
+      {tagContent[0]?.attributes?.name && (
+        <span className="text-xs  font-inter px-6 py-2  bg-orange-100 text-black rounded-full">
+          {tagContent[0]?.attributes?.name}
+        </span>
+      )}
+
+      <span
+        style={{
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.10)",
+        }}
+        className="text-xs font-normal text-gray-600 font-inter px-3 py-2 rounded-full"
+      >
+        Aug 30,2022
       </span>
-      <span className="text-xs font-inter">Aug 30,2022</span>
     </div>
   );
 };
@@ -75,9 +95,8 @@ const LargeCardWithImage = ({ data }) => {
     legacyFeaturedImage,
     slug,
     author,
+    tags,
   } = data?.attributes;
-
-  console.log("this ->", title, featuredImage, data?.attributes);
 
   const coverImage = featuredImage?.data?.attributes?.url
     ? featuredImage?.data?.attributes?.url
@@ -93,11 +112,11 @@ const LargeCardWithImage = ({ data }) => {
         }}
         className="w-full h-full bg-gray-200 relative"
       >
-        <Credits />
+        {/* <Credits /> */}
       </div>
       <div className="w-full h-full p-8 flex flex-col justify-between">
         <div className="flex flex-col gap-3">
-          <MetaInfo />
+          <MetaInfo tags={tags} />
           <h1 className="text-lg leading-[27px] font-medium font-inter">
             {title}
           </h1>
@@ -113,6 +132,7 @@ const LargeCardWithImage = ({ data }) => {
 
 const SmallCardWithImage = ({ src = img2, data }) => {
   let post = data?.attributes;
+  const { tags } = data.attributes;
   const coverImage = post?.featuredImage?.data?.attributes?.url
     ? post.featuredImage?.data?.attributes?.url
     : post?.legacyFeaturedImage?.mediaItemUrl;
@@ -127,11 +147,11 @@ const SmallCardWithImage = ({ src = img2, data }) => {
         }}
         className="w-full h-[50%] max-h-[135px] bg-gray-200 relative"
       >
-        <Credits />
+        {/* <Credits /> */}
       </div>
 
       <div className="w-full h-auto flex flex-col gap-4 p-5 ">
-        <MetaInfo />
+        <MetaInfo tags={tags} />
         <div className="flex flex-col ">
           <h1 className="text-lg leading-[27px] font-medium font-inter h-[56px] overflow-clip m-0 p-0 tracking-tight">
             {post?.title}

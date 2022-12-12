@@ -13,9 +13,12 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 import WMButton from "./parts/WMButton";
 
-const WMCounter = dynamic(() => import("@/components/WebMonetization/Counter"), {
-  ssr: false,
-});
+const WMCounter = dynamic(
+  () => import("@/components/WebMonetization/Counter"),
+  {
+    ssr: false,
+  }
+);
 
 const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
   const { user, isLoading } = useUser({
@@ -28,8 +31,8 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
   };
 
   return (
-    <nav className="bg-white fixed w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur">
-      <div className="mx-auto max-w-[1200px] px-2 sm:px-6 lg:px-8">
+    <nav className="bg-white font-inter relative w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur">
+      <div className="mx-auto max-w-[1400px] px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           {/* movil menu button */}
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -78,10 +81,9 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            
             <div className={`hidden mr-2 md:block my-auto`}>
-                <WMButton />
-              </div>
+              <WMButton />
+            </div>
             <NavigationMenu>
               <NavigationMenuList>
                 <LocationMenu
