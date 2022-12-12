@@ -39,7 +39,7 @@ const ImageUploader = ({w, h,setFormValue, initialImage,companyLogoIsDefault=fal
       }
       if (!defaultImage) {
         defaultImage =
-          "https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png";
+        "https://req.prototypr.io/" +  "https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png";
       }
       convertImgToBase64URL(defaultImage, async function (base64Img) {
         const base64Response = await fetch(base64Img);
