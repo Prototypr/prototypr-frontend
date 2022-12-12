@@ -138,7 +138,6 @@ const JobPostForm = ({user, defaultCompany}) => {
 
 
   const FormSchema = Yup.object().shape({
-    // type: Yup.string().required("Job type is required"),
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
     link: Yup.string().url("Invalid Link").required("Sponsored link is required"),
@@ -158,7 +157,7 @@ const JobPostForm = ({user, defaultCompany}) => {
 
   const [errores, setErrores] = useState(false)
 
-  const [uploadNewCompanyImage, setUploadNewCompanyImage] = useState(true)
+  const [uploadNewCompanyImage, setUploadNewCompanyImage] = useState(false)
   const [uploadNewFeaturedImage, setUploadNewFeaturedImage] = useState(true)
   const [uploadNewBanner, setUploadNewBanner] = useState(true)
 

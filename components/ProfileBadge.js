@@ -303,6 +303,18 @@ export const DropdownMenuDemo = ({ icon, user }) => {
           </DropdownMenuItem>
           </>
           }
+          {user?.companies?.length && 
+          <>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onSelect={() => {
+              router.push(`/dashboard/partner`);
+            }}
+          >
+           💙 Partners
+          </DropdownMenuItem>
+          </>
+          }
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onSelect={async () => {

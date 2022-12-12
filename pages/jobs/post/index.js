@@ -190,6 +190,7 @@ const JobPostForm = ({user, defaultCompany}) => {
   });
 
   const [errores, setErrores] = useState(false)
+  const [uploadNewCompanyImage, setUploadNewCompanyImage] = useState(false)
 
   const formik = useFormik({
     validateOnChange:errores?true:false,
@@ -231,11 +232,11 @@ const JobPostForm = ({user, defaultCompany}) => {
               /**
                * upload company logo
                */
-               if(imageBlob){     
+               if(values.companyLogo && uploadNewCompanyImage==true){     
                 toast.loading("Uploading your company logo...", {
                   duration: 3000,
                 });
-                const file = new File([imageBlob], `companylogo_.png`, {
+                const file = new File([values.companyLogo], `companylogo_.png`, {
                   type: "image/png",
                 });
                 
@@ -301,7 +302,6 @@ const JobPostForm = ({user, defaultCompany}) => {
 
   const { dirty, errors, isValid } = formik;
   const [disabled, setDisabled] = useState(false);
-  const [imageBlob, setImageBlob] = useState(false);
 
   useEffect(()=>{
     if(defaultCompany?.logo){
@@ -498,10 +498,18 @@ const JobPostForm = ({user, defaultCompany}) => {
                 <label htmlFor="image" className="text-md font-medium">
                 Your logo
               </label>
-              <ImageUploader initialImage={defaultCompany?.logo} setFormValue={(blob) =>{
+              <ImageUploader 
+              id={3}
+              companyLogoIsDefault={true} 
+              initialImage={defaultCompany?.logo} 
+              setFormValue={(blob) =>{
+                setUploadNewCompanyImage(true)
+                formik.setFieldValue("companyLogo",blob)
+              }}/>
+              {/* <ImageUploader initialImage={defaultCompany?.logo} setFormValue={(blob) =>{
                 setImageBlob(blob)
                 formik.setFieldValue("image",blob)
-              }}/>
+              }}/> */}
               {formik.errors.image && <span className="text-red-600 text-xs">{formik.errors.image}</span>}
 
                 {/* <div className="flex p-6 -mt-2 border border-gray-300 rounded-lg items-center space-x-6">

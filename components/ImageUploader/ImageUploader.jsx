@@ -3,7 +3,7 @@ import ReactAvatarEditor from "react-avatar-editor";
 import useUser from "@/lib/iron-session/useUser";
 import { convertImgToBase64URL } from "./lib/convertToBase64";
 
-const ImageUploader = ({w, h,setFormValue, companyLogoIsDefault=false, id}) => {
+const ImageUploader = ({w, h,setFormValue, initialImage,companyLogoIsDefault=false, id}) => {
 
   const { user } = useUser({
     redirectIfFound: false,
@@ -34,6 +34,8 @@ const ImageUploader = ({w, h,setFormValue, companyLogoIsDefault=false, id}) => {
       let defaultImage = "";
       if (companyLogoIsDefault && defaultCompany?.logo) {
         defaultImage = "https://req.prototypr.io/" + defaultCompany?.logo;
+      }else if (initialImage){
+        defaultImage = "https://req.prototypr.io/" + initialImage;
       }
       if (!defaultImage) {
         defaultImage =

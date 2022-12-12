@@ -5,7 +5,7 @@ import Container from "@/components/container";
 // import axios from "axios";
 import useUser from '@/lib/iron-session/useUser'
 import Spinner from "@/components/atom/Spinner/Spinner";
-import { useLoad } from "@/components/Jobs/jobHooks";
+import { useLoad } from "@/components/Sponsor/sponsorHooks";
 import Button from "@/components/Primitives/Button";
 import { useRouter } from "next/router";
 import axios from "axios";
