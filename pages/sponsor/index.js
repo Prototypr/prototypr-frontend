@@ -14,10 +14,11 @@ import { useEffect, useState } from "react";
 const PAGE_SIZE = 12;
 
 const seo = {
-  title: "Designer Jobs Board",
-  description:"A job board for designers, developers, and creative people. Find your next remote job, or one in your location.",
-  url:"https://prototypr.io/jobs",
-  image:"https://prototypr.io/static/images/jobs-seo.png"
+  title:`Sponsor Prototypr`,
+  description:`Sponsor the Prototypr weekly newsletter and support the platform.`,
+  // image:``,
+  canonical: `https://prototypr.io/sponsor`,
+  url: `https://prototypr.io/sponsor`
 }
 
 const Index = () => {

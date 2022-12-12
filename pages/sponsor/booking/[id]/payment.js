@@ -15,7 +15,7 @@ import Link from "next/link";
 
 export default function SponsorPaymentPage({}) {
 
-  const [PRODUCT_ID, setProductId] = useState(1)
+  const [PRODUCT_SLUG, setProductSlug] = useState('banner')
 
 
   const {user, mutateUser} = useUser({
@@ -34,9 +34,9 @@ export default function SponsorPaymentPage({}) {
 
   useEffect(()=>{
     if(postObject.type=='banner'){
-      setProductId(1)
+      setProductSlug('featured-banner')
     }else if(postObject.type == 'link'){
-      setProductId(3)
+      setProductSlug('newsletter-link')
     }
 
   },[postObject])
@@ -47,7 +47,7 @@ export default function SponsorPaymentPage({}) {
     useEffect(()=>{        
         const getProd = async()=>{
             
-          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/strapi-stripe/getProduct/${PRODUCT_ID}`)
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/strapi-stripe/getProductBySlug/${PRODUCT_SLUG}`)
             if(response.data.availability===false){
               setAvailable(false)
             }
@@ -111,7 +111,7 @@ export default function SponsorPaymentPage({}) {
           return false
         }
         localStorage.setItem("strapiStripeUrl", process.env.NEXT_PUBLIC_API_URL);
-        const getProductApi = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/getProduct/" + PRODUCT_ID;
+        const getProductApi = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/getProductBySlug/" + PRODUCT_SLUG;
         const checkoutSessionUrl = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/createCheckoutSession/";
         const successUrl = `${process.env.NEXT_PUBLIC_HOME_URL}/sponsor/booking/${postId}/payment-success`;
         const cancelUrl = `${process.env.NEXT_PUBLIC_HOME_URL}/sponsor/booking/${postId}/payment-failure`;
@@ -176,8 +176,8 @@ const Slots = ({type, setSelectedSlots, selectedSlots}) =>{
   const [options, setOptions] = useState(null)
 
   useEffect(()=>{
-    // const week = currentWeekNumber()
-    const week = 40
+    const week = currentWeekNumber() + 1
+    // const week = 40
 
     //build the options based off the current week to start with
     //present options for the upcoming 8 weeks

@@ -9,9 +9,12 @@ import Button from "@/components/Primitives/Button";
 import { useRouter } from "next/router";
 import Spinner from "@/components/atom/Spinner/Spinner";
 
-const PRODUCT_ID = 2
+// const PRODUCT_ID = 2
 
 export default function JobPaymentPage({}) {
+
+  const [PRODUCT_SLUG, setProductSlug] = useState('job-post')
+
 
   const {user, mutateUser} = useUser({
     // redirectTo: '/',
@@ -43,7 +46,7 @@ export default function JobPaymentPage({}) {
     useEffect(()=>{        
         const getProd = async()=>{
             
-          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/strapi-stripe/getProduct/${PRODUCT_ID}`)
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/strapi-stripe/getProductBySlug/${PRODUCT_SLUG}`)
             if(response.data.availability===false){
               setAvailable(false)
             }
@@ -85,7 +88,7 @@ export default function JobPaymentPage({}) {
         
 
         localStorage.setItem("strapiStripeUrl", process.env.NEXT_PUBLIC_API_URL);
-        const getProductApi = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/getProduct/" + PRODUCT_ID;
+        const getProductApi = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/getProductBySlug/" + PRODUCT_SLUG;
         const checkoutSessionUrl = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/createCheckoutSession/";
         const successUrl = `${process.env.NEXT_PUBLIC_HOME_URL}/jobs/post/${postId}/payment-success`;
         const cancelUrl = `${process.env.NEXT_PUBLIC_HOME_URL}/jobs/post/${postId}/payment-failure`;

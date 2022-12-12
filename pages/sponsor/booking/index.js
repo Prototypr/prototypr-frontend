@@ -36,11 +36,11 @@ function isEmptyObject(obj) {
 }
 
 const seo={
-  title:`Post a job on Prototypr`,
-  description:`A jobs board for designers. Find your next designer, developer, or creative person.`,
+  title:`Sponsor Prototypr`,
+  description:`Sponsor the Prototypr weekly newsletter and support the platform.`,
   // image:``,
-  canonical: `https://prototypr.io/jobs`,
-  url: `https://prototypr.io/jobs`
+  canonical: `https://prototypr.io/sponsor`,
+  url: `https://prototypr.io/sponsor`
 }
 
 const SponsorBookingPage = () =>{
@@ -78,7 +78,7 @@ const SponsorBookingPage = () =>{
           style={{ maxWidth: 390 }}
         >
           <LoginForm 
-          title="Sign up to post a job" 
+          title="Sign up to sponsor us" 
           isSignUp={isSignUp} />
         </div>
       </div>
