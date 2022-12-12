@@ -1,0 +1,205 @@
+import { useState } from "react";
+
+const img1 =
+  "https://i.pinimg.com/474x/0e/48/0e/0e480e53e54f4c08f2af5899051c653b.jpg";
+
+const img2 =
+  "https://prototyprio.gumlet.io/strapi/8792f817d423d392ab9139ba41b92d8a.webp?w=384&q=75&format=webp&compress=true&dpr=2";
+
+const img3 =
+  "https://i.pinimg.com/474x/1f/d3/60/1fd3601b9937f89e727aec5d04c1edd4.jpg";
+
+const img4 =
+  "https://i.pinimg.com/474x/a4/54/7f/a4547f64df62554f4735b53357240b35.jpg";
+
+const img5 =
+  "https://i.pinimg.com/474x/7e/3a/20/7e3a207f605da5b2dca934284407bf86.jpg";
+
+const img6 =
+  "https://i.pinimg.com/474x/65/bc/8d/65bc8dfdc0019d5670d167b1a5d86c34.jpg";
+
+const img7 =
+  "https://i.pinimg.com/474x/3b/e7/eb/3be7eb7937b70a55431daf30e60cb796.jpg";
+
+const AuthorCard = ({ data }) => {
+  return (
+    <>
+      <div className="flex flex-row items-center gap-3 border-t border-black pt-4 border-opacity-5">
+        <div
+          style={{
+            backgroundImage: `url(${
+              data?.attributes?.avatar?.data?.attributes?.url || img3
+            })`,
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+          }}
+          className="w-6 h-6 rounded-full bg-gray-200 relative"
+        ></div>
+        {data?.attributes?.firstName ? (
+          <p className="text-sm font-inter">
+            {data?.attributes?.firstName} {data?.attributes?.lastName}
+          </p>
+        ) : (
+          <p className="text-sm font-inter">Unknown</p>
+        )}
+      </div>
+    </>
+  );
+};
+
+const MetaInfo = () => {
+  return (
+    <div className="flex flex-row justify-between">
+      <span className="text-xs font-inter px-4 py-1 bg-orange-200 text-black rounded-full">
+        Topic
+      </span>
+      <span className="text-xs font-inter">Aug 30,2022</span>
+    </div>
+  );
+};
+
+const Credits = () => {
+  return (
+    <p className="px-4 py-1 bg-opacity-50 backdrop-blur-md bg-white absolute rounded-full bottom-5 right-5 text-[10px]">
+      Artwork by @Ziggy
+    </p>
+  );
+};
+
+const LargeCardWithImage = ({ data }) => {
+  const {
+    title,
+    excerpt,
+    featured,
+    featuredImage,
+    legacyFeaturedImage,
+    slug,
+    author,
+  } = data?.attributes;
+
+  console.log("this ->", title, featuredImage, data?.attributes);
+
+  const coverImage = featuredImage?.data?.attributes?.url
+    ? featuredImage?.data?.attributes?.url
+    : legacyFeaturedImage?.mediaItemUrl;
+
+  return (
+    <div className="w-full h-[330px] flex flex-row bg-white border-opacity-[4%] border-black hover:border col-span-2 rounded-[14px] overflow-hidden border hover:shadow-none cursor-pointer">
+      <div
+        style={{
+          backgroundImage: `url(${coverImage || null})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+        className="w-full h-full bg-gray-200 relative"
+      >
+        <Credits />
+      </div>
+      <div className="w-full h-full p-8 flex flex-col justify-between">
+        <div className="flex flex-col gap-3">
+          <MetaInfo />
+          <h1 className="text-lg leading-[27px] font-medium font-inter">
+            {title}
+          </h1>
+          <p className="text-base leading-[24px] font-inter h-[70px] overflow-clip text-[#505561] tracking-[-2%]">
+            {excerpt}
+          </p>
+        </div>
+        <AuthorCard data={author?.data} />
+      </div>
+    </div>
+  );
+};
+
+const SmallCardWithImage = ({ src = img2, data }) => {
+  let post = data?.attributes;
+  const coverImage = post?.featuredImage?.data?.attributes?.url
+    ? post.featuredImage?.data?.attributes?.url
+    : post?.legacyFeaturedImage?.mediaItemUrl;
+
+  return (
+    <div className="w-full min-h-[330px] bg-white  border-opacity-[4%] border-black hover:border  rounded-[14px] flex flex-col overflow-hidden border  hover:shadow-none cursor-pointer">
+      <div
+        style={{
+          backgroundImage: `url(${coverImage || ""})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+        className="w-full h-[50%] max-h-[135px] bg-gray-200 relative"
+      >
+        <Credits />
+      </div>
+
+      <div className="w-full h-auto flex flex-col gap-4 p-5 ">
+        <MetaInfo />
+        <div className="flex flex-col ">
+          <h1 className="text-lg leading-[27px] font-medium font-inter h-[56px] overflow-clip m-0 p-0 tracking-tight">
+            {post?.title}
+          </h1>
+        </div>
+
+        {post && <AuthorCard data={post?.author?.data} />}
+      </div>
+    </div>
+  );
+};
+
+const HeroGrid = ({ postData }) => {
+  const { hero, posts } = postData;
+  const secondRowPost = posts.filter((x, i) => i === 0);
+
+  const gridPosts = posts.filter((x, i) => i !== 0);
+  return (
+    <div className="flex flex-col flex-nowrap gap-2">
+      <div className="flex flex-col gap-8">
+        <div className="w-full h-auto grid grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
+          <LargeCardWithImage data={hero} src={img1} />
+          <div
+            style={{
+              backgroundImage: `url('/static/images/placeholder/letter-ad.png')`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
+            className="w-full h-full overflow-hidden rounded-[10px] p-8 flex items-end"
+          ></div>
+        </div>
+
+        <div className="w-full h-auto grid grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
+          <div className="w-full bg-blue-200 rounded-2xl overflow-hidden p-10 min-h-[300px] col-span-2 flex flex-col gap-3 ">
+            <h3 className="text-3xl font-inter max-w-md text-black font-bold">
+              The Prototypr Weekly
+            </h3>
+            <p className="font-inter text-base leading-[24px] text-black text-opacity-70">
+              Join 25,000+ creatives to enjoy a regular dose of inspiration and
+              motivation, delivered to your inbox every Tuesday.
+            </p>
+            <div className="flex flex-col gap-4 ">
+              <input
+                className="w-full max-w-sm p-4 rounded-2xl  border-blue-600"
+                placeholder="email"
+              ></input>
+              <div>
+                <button className="bg-blue-600 text-white font-medium px-8 py-4 text-base font-inter rounded-xl">
+                  Sign me up!
+                </button>
+              </div>
+            </div>
+          </div>
+          <SmallCardWithImage data={secondRowPost[0]} src={img7} />
+        </div>
+
+        <div className="w-full h-auto grid grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
+          {gridPosts.map((post, index) => {
+            return index === 4 ? (
+              <LargeCardWithImage data={post} src={img6} />
+            ) : (
+              <SmallCardWithImage data={post} src={img2} />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HeroGrid;

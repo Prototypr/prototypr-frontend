@@ -84,133 +84,107 @@ export default function DesignTool({ allTools = [] }) {
       scroll.refresh();
     }
   };
-  return <>
-    <div
-      className="hidden md:block z-10 bg-gray-4 w-full relative h-74 fade-out-edges mx-auto"
-      style={{ maxWidth: "1600px" }}
-    >
-      {/**button block is within container */}
-      <div className="container relative mx-auto flex items-center justify-between h-full">
-        {/** 64 * 64 */}
-        <div
-          tabIndex={0}
-          id="prev"
-          className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50"
-          onKeyDown={keyboardPrev}
-          onClick={() => navHis(-1)}
-        >
-          <img src="/static/images/icons/prev.svg" data-gumlet="false" />
+  return (
+    <div className="bg-white py-10 border-t border-b border-opacity-10">
+      <div className="max-w-7xl mx-auto mb-6 flex flex-col gap-2">
+        <div>
+          <h2 className="text-lg text-black font-medium font-inter">
+            Prototypr Toolbox
+          </h2>
+          <p className="text-base text-[#808080] font-inter">
+            Find tools, make your thing.
+          </p>
         </div>
-        <div
-          tabIndex={0}
-          id="next"
-          className="w-16 h-16 rounded-full z-50 bg-black opacity-70 flex items-center justify-center cursor-pointer hover:opacity-50"
-          onKeyDown={keyboardNext}
-          onClick={() => navHis(1)}
-        >
-          <img src="/static/images/icons/next.svg" data-gumlet="false" />
+        <div className="flex flex-row gap-3">
+          <button className="px-5 py-2 bg-blue-400 rounded-md text-sm text-white font-inter">
+            Submit Tool
+          </button>
+          <button className="px-5 py-2 bg-blue-900 rounded-md text-sm text-white font-inter">
+            Open Toolbox
+          </button>
         </div>
       </div>
       <div
-        ref={wrapper}
-        className="absolute left-0 h-full w-full top-0  pb-1 overflow-hidden"
+        className="hidden md:block z-10 w-full relative h-40 max-w-7xl mx-auto"
+        // style={{ maxWidth: "1600px" }}
       >
-        <div ref={cont} className="relative flex h-full">
-          {allTools.length
-            ? allTools.map((item, index) => {
-                const showItem = item?.attributes;
-                return (
+        {/**button block is within container */}
+        <div className="container relative mx-auto flex items-center justify-between h-full">
+          {/** 64 * 64 */}
+          <div
+            tabIndex={0}
+            id="prev"
+            className="w-12 h-12 rounded-full z-50 bg-blue-600 flex items-center justify-center cursor-pointer "
+            onKeyDown={keyboardPrev}
+            onClick={() => navHis(-1)}
+          >
+            <img src="/static/images/icons/prev.svg" data-gumlet="false" />
+          </div>
+          <div
+            tabIndex={0}
+            id="next"
+            className="w-12 h-12 rounded-full z-50 bg-blue-600 flex items-center justify-center cursor-pointer"
+            onKeyDown={keyboardNext}
+            onClick={() => navHis(1)}
+          >
+            <img src="/static/images/icons/next.svg" data-gumlet="false" />
+          </div>
+        </div>
+        <div
+          ref={wrapper}
+          className="absolute left-0 h-full w-full top-0  pb-1 overflow-hidden no-scrollbar"
+        >
+          <div ref={cont} className="relative flex gap-5 h-full">
+            {allTools.length
+              ? allTools.map((item, index) => {
+                  const showItem = item?.attributes;
+                  return (
                     <div
                       key={`h_item_${index}`}
                       style={{ width: `${ITEM_WIDTH}px` }}
-                      className="h-full mx-5 group hover:shadow-md transition duration-500 rounded-lg bg-white px-4 pt-4 flex flex-col cursor-pointer"
+                      className="h-auto border border-opacity-5 border-black transition duration-200 rounded-xl bg-white px-4 pt-4 flex flex-col cursor-pointer"
                     >
-                      <div className="w-full rounded-lg h-46 relative bg-no-repeat bg-100">
-                        {showItem.legacyFeaturedImage.mediaItemUrl ? (
-                          <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
-                            <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
-                            <Link href={`/toolbox/${showItem.slug}`}>
-                              <Image
-                                loader={gumletLoader}
-                                className="rounded-lg contrast-115"
-                                objectFit="cover"
-                                layout="fill"
-                                src={
-                                  showItem.legacyFeaturedImage.mediaItemUrl
-                                }
-                              />
-                              </Link>
-                            </div>
-                          </figure>
-                        ) : (
-                          showItem.featuredImage?.data?.attributes?.url && (
-                            <figure className="relative w-full h-full overflow-hidden rounded-lg transform group-hover:translate-x-0 group-hover:shadow group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden">
-                              <div className="absolute  w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition duration-700 ease-out cursor-pointer">
-                                <Link href={`/toolbox/${showItem.slug}`}>
-                                  <Image
-                                    loader={gumletLoader}
-                                    className="rounded-lg contrast-115"
-                                    objectFit="cover"
-                                    layout="fill"
-                                    src={
-                                      showItem.featuredImage?.data?.attributes
-                                        ?.url
-                                    }
-                                  />
-                                </Link>
-                              </div>
-                            </figure>
-                          )
-                        )}
-                        <Link href={`/toolbox/${showItem.slug}`}>
-                        <div
-                          className="absolute border-2 border-solid border-white bg-white w-10 h-10 rounded-full -bottom-3 bg-100 bg-no-repeat bg-center"
-                          style={{
-                            // border: "3px",
-                            left: "12px",
-                            right: "76.47%",
-                            bottom: "-18px",
-                          }}
-                        >
+                      <div className=" flex flex-col gap-2 justify-between">
+                        <div className="w-12 h-12 border relative border-opacity-5 rounded-xl border-black overflow-hidden">
                           {showItem.legacyFeaturedImage.logoNew && (
-                              <Image
-                                loader={gumletLoader}
-                                className="rounded-full"
-                                objectFit="cover"
-                                layout="fill"
-                                src={showItem.legacyFeaturedImage.logoNew}
-                              />
-                              )}
+                            <Image
+                              loader={gumletLoader}
+                              className=""
+                              objectFit="cover"
+                              layout="fill"
+                              src={showItem.legacyFeaturedImage.logoNew}
+                            />
+                          )}
                         </div>
-                              </Link>
-                      </div>
-                      <div className="mt-7 flex justify-between">
-                          <div className="px-3 w-full">
-                            <div className="font-noto-serif text-gray-1 hover:underline truncate text-lg font-bold leading-6">
+                        <div className="w-full flex flex-col gap-1">
+                          <div className="text-gray-1 font-inter hover:underline truncate text-base font-medium">
                             <Link href={`/toolbox/${showItem.slug}`}>
                               {showItem.title}
                             </Link>
-                            </div>
-                            {showItem.tags?.data[0] && (
-                              <div className="font-normal text-xs leading-6 tracking-wide uppercase text-gray-500 mt-1">
-                                # {showItem.tags?.data[0].attributes?.name}
-                              </div>
-                            )}
                           </div>
+                          {showItem.tags?.data[0] && (
+                            <div>
+                              <span className="font-normal text-xs bg-gray-100 px-5 py-1 border border-opacity-5 border-black rounded-full w-auto text-gray-500">
+                                {showItem.tags?.data[0].attributes?.name}
+                              </span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
-                );
-              })
-            : null}
+                  );
+                })
+              : null}
+          </div>
         </div>
       </div>
+      {/* <div className="hidden bg-gray-4 w-full relative md:flex items-center justify-center pt-14 pb-24 md:pb-32">
+        <Link href="/toolbox/page/1">
+          <Button variant="ghostBlue" className="h-14 w-52 rounded-lg">
+            {intl.formatMessage({ id: "designtool.button.browsemore" })}
+          </Button>
+        </Link>
+      </div> */}
     </div>
-    <div className="hidden bg-gray-4 w-full relative md:flex items-center justify-center pt-14 pb-24 md:pb-32">
-      <Link href="/toolbox/page/1">
-        <Button variant="ghostBlue" className="h-14 w-52 rounded-lg">
-          {intl.formatMessage({ id: "designtool.button.browsemore" })}
-        </Button>
-      </Link>
-    </div>
-  </>;
+  );
 }
