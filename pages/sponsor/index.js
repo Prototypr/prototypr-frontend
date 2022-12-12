@@ -48,7 +48,7 @@ const Index = () => {
               </div>
             </div>
             <div className="w-full">
-              <Link href="/sponsor/booking">
+              <Link href="/sponsor/booking?type=banner">
                   <Button variant="confirm">
                     Buy for $600
                   </Button>
@@ -63,7 +63,7 @@ const Index = () => {
 
             </div>
             <div className="w-full">
-              <Link href="/sponsor/booking">
+              <Link href="/sponsor/booking?type=link">
                   <Button variant="confirm">
                     Buy for $300
                   </Button>

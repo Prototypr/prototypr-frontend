@@ -191,7 +191,7 @@ export default function PaymentSuccess({}) {
           }
         </div>
           {!loading && <Button onClick={()=>{
-              router.push(`/jobs/post/${postId}/edit`)
+              router.push(`/sponsor/booking/${postId}/edit`)
             }}>
               Edit listing
             </Button>}

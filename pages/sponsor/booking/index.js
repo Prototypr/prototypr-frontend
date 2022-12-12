@@ -11,6 +11,9 @@ import { FormContainer } from "@/components/Jobs/FormStepper";
 import { FormInput } from "@/components/Jobs/FormInput";
 import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
+import { sponsorTypes} from "@/lib/constants";
+
+
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
 let axios = require("axios");
@@ -113,6 +116,7 @@ const JobPostForm = ({user, defaultCompany}) => {
   const router = useRouter();
   const [available, setAvailable] = useState(true)
 
+
     
   useEffect(()=>{
       
@@ -167,10 +171,11 @@ const JobPostForm = ({user, defaultCompany}) => {
     }
   },[defaultCompany?.logo])
 
+
   const formik = useFormik({
     validateOnChange:errores?true:false,
     initialValues: {
-      type: "combo",
+      type: router?.query?.type=='banner'?"banner":router?.query?.type=='link'?'link':'banner',
       title: "",
       description: "",
       link: "",
@@ -427,6 +432,23 @@ const JobPostForm = ({user, defaultCompany}) => {
             <FormContainer>
               <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
                 <h1 className="text-xl font-medium mb-2">Add your sponsorship assets</h1>
+                
+                <select
+                  defaultValue={router?.query?.type}
+                  id="type"
+                  name="type"
+                  className="w-full -mt-2 bg-white border border-gray-300"
+                  onChange={formik.handleChange}
+                  aria-describedby="type_error"
+                  aria-live="assertive"
+                >
+                  {sponsorTypes.map((i, index) => (
+                    <option key={'type_'+index} value={i.value}>
+                      {i.Name}
+                    </option>
+                  ))}
+                </select>
+                
                 <FormInput id="title" label="Headline" error={formik.errors}>
                   <input
                     id="title"

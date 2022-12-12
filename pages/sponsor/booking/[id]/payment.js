@@ -10,30 +10,13 @@ import Button from "@/components/Primitives/Button";
 import Spinner from "@/components/atom/Spinner/Spinner";
 import { currentWeekNumber } from "@/components/Sponsor/lib/weekNumber";
 import { cloneDeep } from "lodash"
+import Link from "next/link";
 
-const PRODUCT_ID = 1
 
 export default function SponsorPaymentPage({}) {
 
-  const [weekNumber, setWeekNumber] = useState()
-  const [options, setOptions] = useState(null)
-    
-    useEffect(()=>{
-        const week = 40
+  const [PRODUCT_ID, setProductId] = useState(1)
 
-        //build the options based off the current week to start with
-        //present options for the upcoming 8 weeks
-        const totalWeeks = 8 + 1
-        const opts = []
-        for(var x = 0 ;x<totalWeeks;x++){
-          opts.push({
-            week:week + x,
-            available:true
-          })
-        }
-        setOptions(opts)
-        setWeekNumber(week)
-    },[])
 
   const {user, mutateUser} = useUser({
     // redirectTo: '/',
@@ -48,38 +31,16 @@ export default function SponsorPaymentPage({}) {
     isOwner,
     postObject} =useLoad(user);
 
-  const {slots, loading:loadingSlots} = useGetUpcomingSponsorSlots({type:'combo'})
 
-  
   useEffect(()=>{
-    //now we got the slots, mark the booked ones as unavailable
-    if((slots?.length && options?.length)){
-      let posts = cloneDeep(options)
-      //create an array of every booked slot
-      const bookedWeeks = []
-      for(var x = 0;x<slots.length;x++){
-        let post = slots[x]
-        if(post?.weeks?.length){
-          for(var y = 0; y<post.weeks.length;y++){
-            bookedWeeks.push(post.weeks[y])
-          }
-        }     
-      }
-       //set the booked weeks to disabled
-      if(bookedWeeks?.length){
-        for(var x = 0;x<bookedWeeks.length;x++){
-          for(var y = 0 ;y<posts.length;y++){
-            if(bookedWeeks[x]==posts[y]?.week){
-              posts[y].available=false
-            }
-          }
-        }
-      }
-      setOptions(posts)
+    if(postObject.type=='banner'){
+      setProductId(1)
+    }else if(postObject.type == 'link'){
+      setProductId(3)
     }
 
-  },[slots])
-     
+  },[postObject])
+  
 
     const [available, setAvailable] = useState(true)
     
@@ -97,21 +58,7 @@ export default function SponsorPaymentPage({}) {
 
       const [selectedSlots, setSelectedSlots] = useState(null)
 
-      // https://www.delftstack.com/howto/react/react-checkbox-onchange/
-      const updateSelections = (e) =>{
-        let selections = cloneDeep(selectedSlots)
-        const val = e.target.value
-
-        if(!selections?.length){
-          selections = []
-        }
-          if(!selections.includes(val)){          //checking weather array contain the id
-            selections.push(val);               //adding to array because value doesnt exists
-          }else{
-            selections.splice(selections.indexOf(val), 1);  //deleting
-          }
-        setSelectedSlots(selections)
-      }
+      
 
   return (
     <Layout
@@ -135,33 +82,27 @@ export default function SponsorPaymentPage({}) {
       <Container>
         <div className="max-w-2xl pt-3 mb-3">
        <h1 className="text-xl mb-3 font-bold">Complete your purchase</h1>
-       <p>Once you complete your purchase, your sponsored post will be reviewed by our team and scheduled at the nearest date. 
+
+        {postObject?.type=='banner'?
+        <div className="p-2 bg-blue-100 mb-4 rounded-lg">
+        <p>
+          Full package sponsorship: newsletter banner, and website placements for 1 week.
         </p>
-        <p>Your sponsor details are saved, so you can come back and pay later. </p>
+        <p>Unit Price is $600, book as many as you like.</p>
+        </div>  
+        :postObject?.type=='link' &&
+        <div  className="p-2 bg-blue-100 mb-4 rounded-lg">
+        <p>
+          1 sponsored link in the Prototypr weekly newsletter.
+        </p>
+        <p>Unit Price is $400, book as many as you like.</p>
+        </div>  
+        }
+
+       <p>Once you complete your purchase, your sponsored post will be reviewed by our team and scheduled. </p>
         </div>
        {/* {!user?.isLoggedIn && <p>Please log in or create an account to buy a sponsorship.</p>} */}
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-2 mt-4">
-            Choose a slot
-          </h2>
-          {options.map((option, index)=>{
-           return ( 
-           <>
-           <div class="mb-1">
-            <input 
-            onChange={updateSelections}
-            disabled={!options[index].available} 
-            id={options[index].week} 
-            name={`${options[index].week}`} 
-            value={options[index].week} 
-            class={`${!options[index].available?'opacity-50 cursor-not-allowed':'cursor-pointer'} appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2`} type="checkbox"/>
-            <label class={`${!options[index].available?'opacity-50 cursor-not-allowed':''} inline-block text-gray-800`} for={options[index].week}>
-              Week {options[index].week}
-            </label>
-          </div>
-            </>)
-          })}
-        </div>
+        <Slots selectedSlots={selectedSlots} setSelectedSlots={setSelectedSlots} type={postObject?.type}/>
        
        <Button 
        onClick={()=>{
@@ -212,6 +153,8 @@ export default function SponsorPaymentPage({}) {
               });
           });
        }} type="button">Complete purchase</Button>
+          <p className="mt-3 max-w-2xl text-gray-500">You can come back and pay later, your sponsored post details are available on your <Link href="/dashboard/partner"><span className="text-blue-500">partners dashboard</span></Link>. </p>
+
       </Container>:
        <Container>
       <div className="max-w-2xl pt-3 mb-3">
@@ -223,4 +166,105 @@ export default function SponsorPaymentPage({}) {
       }
     </Layout>
   );
+}
+
+
+const Slots = ({type, setSelectedSlots, selectedSlots}) =>{
+
+
+  const [weekNumber, setWeekNumber] = useState()
+  const [options, setOptions] = useState(null)
+
+  useEffect(()=>{
+    // const week = currentWeekNumber()
+    const week = 40
+
+    //build the options based off the current week to start with
+    //present options for the upcoming 8 weeks
+    const totalWeeks = 8 + 1
+    const opts = []
+    for(var x = 0 ;x<totalWeeks;x++){
+      opts.push({
+        week:week + x,
+        available:true
+      })
+    }
+    setOptions(opts)
+    setWeekNumber(week)
+},[])
+
+  const {slots, loading} = useGetUpcomingSponsorSlots({type})
+
+  useEffect(()=>{
+    //now we got the slots, mark the booked ones as unavailable
+    if((slots?.length && options?.length)){
+      let posts = cloneDeep(options)
+      //create an array of every booked slot
+      const bookedWeeks = []
+      for(var x = 0;x<slots.length;x++){
+        let post = slots[x]
+        if(post?.weeks?.length){
+          for(var y = 0; y<post.weeks.length;y++){
+            bookedWeeks.push(post.weeks[y])
+          }
+        }     
+      }
+       //set the booked weeks to disabled
+      if(bookedWeeks?.length){
+        for(var x = 0;x<bookedWeeks.length;x++){
+          for(var y = 0 ;y<posts.length;y++){
+            if(bookedWeeks[x]==posts[y]?.week){
+              posts[y].available=false
+            }
+          }
+        }
+      }
+      setOptions(posts)
+    }
+
+  },[slots])
+
+  // https://www.delftstack.com/howto/react/react-checkbox-onchange/
+  const updateSelections = (e) =>{
+    let selections = cloneDeep(selectedSlots)
+    const val = e.target.value
+
+    if(!selections?.length){
+      selections = []
+    }
+      if(!selections.includes(val)){          //checking weather array contain the id
+        selections.push(val);               //adding to array because value doesnt exists
+      }else{
+        selections.splice(selections.indexOf(val), 1);  //deleting
+      }
+    setSelectedSlots(selections)
+  }
+
+  return(
+    <>
+<div className="mb-6 mt-3 p-4 bg-white max-w-2xl mt-3 rounded-lg">
+          <h2 className="text-xl font-semibold mb-2">
+            Choose a slot
+          </h2>
+          {options?.map((option, index)=>{
+           return ( 
+           <>
+           <div class="mb-1">
+            <input 
+            onChange={updateSelections}
+            disabled={!options[index].available} 
+            id={options[index].week} 
+            name={`${options[index].week}`} 
+            value={options[index].week} 
+            class={`${!options[index].available?'opacity-50 cursor-not-allowed':'cursor-pointer'} appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2`} type="checkbox"/>
+            <label class={`${!options[index].available?'opacity-50 cursor-not-allowed':''} inline-block text-gray-800`} for={options[index].week}>
+              Week {options[index].week}
+            </label>
+          </div>
+            </>)
+          })}
+        </div>
+    </>
+  )
+
 }

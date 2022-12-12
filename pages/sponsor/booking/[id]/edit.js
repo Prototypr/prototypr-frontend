@@ -1,5 +1,5 @@
 import Layout from "@/components/layout-dashboard";
-import { jobTypes} from "@/lib/constants";
+import { sponsorTypes} from "@/lib/constants";
 import { useRouter } from "next/router";
 
 import React, { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import { useLoad } from "@/components/Sponsor/sponsorHooks";
 import Fallback from "@/components/atom/Fallback/Fallback";
+import Link from "next/link";
 
 let axios = require("axios");
 
@@ -111,7 +112,7 @@ const EditForm = ({user, defaultCompany, postObject}) => {
    const formik = useFormik({
     validateOnChange:errores?true:false,
     initialValues: {
-      type: "combo",
+      type: postObject?.type?postObject.type:"",
       title:postObject?.title?postObject.title:'',
       description:postObject?.description?postObject.description:'',
       link:postObject?.link?postObject.link:'',
@@ -350,7 +351,7 @@ const EditForm = ({user, defaultCompany, postObject}) => {
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
         <div className="max-w-3xl w-full">
         <div className="my-2 mb-5">
-        <h1 className="text-2xl font-bold mx-auto mb-2">Book a sponsorship</h1>
+        <h1 className="text-2xl font-bold mx-auto mb-2">Edit your sponsorship</h1>
         <p className="text-gray-600">Sponsor our newsletter of ~25k subscribers.</p>
         </div>
         <div className="bg-white p-10 pt-12 rounded-xl">
@@ -370,6 +371,25 @@ const EditForm = ({user, defaultCompany, postObject}) => {
             <FormContainer>
               <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
               <h1 className="text-xl font-medium mb-2">Add your sponsorship assets</h1>
+
+              <select
+                  disabled={true}
+                  id="type"
+                  name="type"
+                  className="w-full -mt-2 bg-white border border-gray-300"
+                  onChange={formik.handleChange}
+                  aria-describedby="type_error"
+                  aria-live="assertive"
+                >
+                  {sponsorTypes.map((i, index) => (
+                    <option key={'type_'+index} selected={postObject?.type==i.value} value={i.value}>
+                      {i.Name}
+                    </option>
+                  ))}
+                </select>
+                <p class="text-xs -mt-3 text-gray-400">Start with a new sponsorship for <Link href="/sponsor/"><span className="text-gray-400 underline">other options</span></Link>.</p>
+
+
                 <FormInput id="title" label="Headline" error={formik.errors}>
                   <input
                     id="title"
