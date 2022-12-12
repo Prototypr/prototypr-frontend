@@ -21,6 +21,9 @@ const img6 =
 const img7 =
   "https://i.pinimg.com/474x/3b/e7/eb/3be7eb7937b70a55431daf30e60cb796.jpg";
 
+const placeholderAuthorImg =
+  "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png?w=3840&q=75&format=auto&compress=true&dpr=2";
+
 const AuthorCard = ({ data }) => {
   return (
     <>
@@ -28,7 +31,8 @@ const AuthorCard = ({ data }) => {
         <div
           style={{
             backgroundImage: `url(${
-              data?.attributes?.avatar?.data?.attributes?.url || img3
+              data?.attributes?.avatar?.data?.attributes?.url ||
+              placeholderAuthorImg
             })`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
@@ -98,12 +102,17 @@ const LargeCardWithImage = ({ data }) => {
     tags,
   } = data?.attributes;
 
+  console.log(slug);
+
   const coverImage = featuredImage?.data?.attributes?.url
     ? featuredImage?.data?.attributes?.url
     : legacyFeaturedImage?.mediaItemUrl;
 
   return (
-    <div className="w-full h-[330px] flex flex-row bg-white border-opacity-[4%] border-black hover:border col-span-2 rounded-[14px] overflow-hidden border hover:shadow-none cursor-pointer">
+    <a
+      href={`/post/${slug}`}
+      className="w-full h-[330px] flex flex-row bg-white border-opacity-[4%] border-black hover:border col-span-2 rounded-[14px] overflow-hidden border hover:shadow-none cursor-pointer"
+    >
       <div
         style={{
           backgroundImage: `url(${coverImage || null})`,
@@ -126,19 +135,22 @@ const LargeCardWithImage = ({ data }) => {
         </div>
         <AuthorCard data={author?.data} />
       </div>
-    </div>
+    </a>
   );
 };
 
 const SmallCardWithImage = ({ src = img2, data }) => {
   let post = data?.attributes;
-  const { tags } = data.attributes;
+  const { tags, slug } = data.attributes;
   const coverImage = post?.featuredImage?.data?.attributes?.url
     ? post.featuredImage?.data?.attributes?.url
     : post?.legacyFeaturedImage?.mediaItemUrl;
 
   return (
-    <div className="w-full min-h-[330px] bg-white  border-opacity-[4%] border-black hover:border  rounded-[14px] flex flex-col overflow-hidden border  hover:shadow-none cursor-pointer">
+    <a
+      href={`/post/${slug}`}
+      className="w-full min-h-[330px] bg-white  border-opacity-[4%] border-black hover:border  rounded-[14px] flex flex-col overflow-hidden border  hover:shadow-none cursor-pointer"
+    >
       <div
         style={{
           backgroundImage: `url(${coverImage || ""})`,
@@ -160,7 +172,7 @@ const SmallCardWithImage = ({ src = img2, data }) => {
 
         {post && <AuthorCard data={post?.author?.data} />}
       </div>
-    </div>
+    </a>
   );
 };
 
