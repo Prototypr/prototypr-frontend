@@ -184,7 +184,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       relatedPosts:relatedPostsData,
       // morePosts: data?.morePosts.data,
     },
-    revalidate: 20
+    // revalidate: 20
   };
 }
 

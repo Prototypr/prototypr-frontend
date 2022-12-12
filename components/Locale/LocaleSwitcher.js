@@ -160,15 +160,13 @@ const switchLanguage = (itemLocale, router) => {
   router.push(router.asPath, router.asPath, { locale: itemLocale });
 };
 
-const LocaleSwitcher = ({ collapsed }) => {
+const LocaleSwitcher = ({ collapsed, showWriteButton }) => {
   const router = useRouter();
   const { locale } = useRouter();
   const [shortLocale] = locale ? locale.split("-") : ["en"];
   return (
     <Box
-      className={`mr-3 ${
-        !collapsed ? "md:opacity-0 md:flex md:invisible" : "md:flex"
-      } transition transition-all duration-500 ease-in-out`}
+      className={`mr-0 ${showWriteButton==false?'':'md:mr-3'} md:flex transition transition-all duration-500 ease-in-out`}
     >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

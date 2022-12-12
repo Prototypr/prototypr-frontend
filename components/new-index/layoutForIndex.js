@@ -1,5 +1,5 @@
 import Meta from "../meta";
-import Navbar from "../navbar2";
+import Navbar from "../Navbar/Navbar";
 
 // export default function Layout({
 //   preview,

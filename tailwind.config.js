@@ -9,6 +9,12 @@ module.exports = {
     // due to https://github.com/tailwindlabs/tailwindcss/issues/6602 - buttons disappear
     preflight: false,
   },
+  variants: {
+    extend:{
+      opacity: ['group-hover', 'hover'],
+      background:['group-hover', 'hover'],
+    }
+  },
   theme: {
     fontFamily: {
       inter: "'Inter', sans-serif;",

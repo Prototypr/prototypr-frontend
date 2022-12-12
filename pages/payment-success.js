@@ -58,6 +58,7 @@ export default function PaymentSuccess({}) {
                       customerName: response.customer_details.name,
                       customerEmail: response.customer_details.email,
                       stripeProduct: response.metadata.productId,
+                      job:response.metadata.postId
                     }),
                     mode: "cors",
                     headers: new Headers({

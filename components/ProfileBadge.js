@@ -215,10 +215,10 @@ export const DropdownMenuDemo = ({ icon, user }) => {
         <DropdownMenuContent sideOffset={5}>
           <DropdownMenuItem
             onSelect={() => {
-              router.push("/p");
+              router.push("/dashboard/drafts");
             }}
           >
-            My Posts
+            Dashboard
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
@@ -233,7 +233,7 @@ export const DropdownMenuDemo = ({ icon, user }) => {
 
           <DropdownMenuItemBanner
             onSelect={() => {
-              router.push(`/post/web-monetization-payment-pointer`);
+              router.push(`/web-monetization`);
             }}
           >
             <div className="p-3 rounded-lg flex">
@@ -300,6 +300,18 @@ export const DropdownMenuDemo = ({ icon, user }) => {
             }}
           >
            👾 Strapi
+          </DropdownMenuItem>
+          </>
+          }
+          {user?.companies?.length && 
+          <>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onSelect={() => {
+              router.push(`/dashboard/partner`);
+            }}
+          >
+           💙 Partners
           </DropdownMenuItem>
           </>
           }

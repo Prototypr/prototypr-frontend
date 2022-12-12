@@ -9,13 +9,28 @@ export default async function handler(req, res) {
 
   try {
     const { entry } = req.body;
-
-    if (entry.status === "publish") {
+    // revalidate posts
+    if (entry.type=='article' && (entry.status === "publish" || entry.publishedAt)) {
       console.log("revalidating published post :", entry.slug);
       const url = `/post/${entry.slug}`;
       await res.revalidate(url);
       return res.json({ revalidated: true });
-    } else {
+    } 
+    //revalidate jobs
+    else if(entry.salarymin>0 && entry.publishedAt){
+      console.log("revalidating job post :", entry.slug);
+      const url = `/jobs/${entry.id}`;
+      await res.revalidate(url);
+      return res.json({ revalidated: true });
+    }
+    // revalidate tools
+    else if(entry.type=='tool' && entry.publishedAt){
+      console.log("revalidating tool post :", entry.slug);
+      const url = `/toolbox/${entry.slug}`;
+      await res.revalidate(url);
+      return res.json({ revalidated: true });
+    }
+    else {
       return res.json({ revalidated: false });
     }
   } catch (err) {

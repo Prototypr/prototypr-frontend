@@ -307,7 +307,7 @@ const ContentListItemCallout = React.forwardRef(
     <ListItem css={{ gridRow: "span 3" }}>
       <NavigationMenuLink
         {...props}
-        href="/post/web-monetization-payment-pointer"
+        href="/web-monetization"
         ref={forwardedRef}
         css={{
           display: "flex",

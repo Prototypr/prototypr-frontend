@@ -7,7 +7,8 @@ const Form = dynamic(() => import("@/components/Form"), { ssr: true });
 // const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 import toast from "react-hot-toast";
 
-const LoginForm = ({ isSignUp }) => {
+const LoginForm = ({ isSignUp, title="Get early access",
+ }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [sent, setSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -15,11 +16,10 @@ const LoginForm = ({ isSignUp }) => {
   return (
     <div className="flex flex-col">
       <h2 className="text-xl text-gray-800 font-bold text-center mb-2">
-        {isSignUp ? "Get early access" : "Welcome back"}
+        {isSignUp ? title : "Welcome back"}
       </h2>
       <p className="text-sm text-gray-600 whitespace-nowrap text-center">
-        Be the first to join an inclusive design platform. <br />
-        No Paywalls. No intrusive ads. Help shape it!
+        
       </p>
       <div className="flex flex-col gap-2 flex-grow mt-6">
         <Button

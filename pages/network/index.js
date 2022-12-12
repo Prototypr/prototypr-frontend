@@ -11,11 +11,18 @@ import Features from "@/components/landing-pages/components/network/features";
 
 const Footer = dynamic(() => import("@/components/footer"));
 
+const seo = {
+  title: "Writers Network for Designers",
+  description:"A network for writers to share and receive feedback. We are an Open Source design platform where quality is rewarded, not clicks. Driven by humans, not algorithms. Get draft feedback. Write for meaning. Join us. ",
+  url:"https://prototypr.io/network",
+  image:"https://prototypr.io/static/images/writers-card.png"
+}
+
 const NetworkPage = () => {
   return (
     <div className="bg-[#CCE6FF]">
       <Header />
-      <Meta seo={{}} />
+      <Meta seo={seo} />
       <Hero />
       <Features />
       <PitchSection />
