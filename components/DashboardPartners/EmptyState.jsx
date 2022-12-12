@@ -1,4 +1,4 @@
-const EmptyState = ({ draft }) => {
+const EmptyState = ({type, draft }) => {
     return (
       <div className="mt-6 mx-auto rounded-lg border border-gray-300">
         <div className="pt-20 pb-20 px-6">
@@ -20,6 +20,26 @@ const EmptyState = ({ draft }) => {
                 href="/write"
               >
                 New draft
+              </a>
+            </div>
+          )}
+          {type=='sponsor' && (
+            <div class="flex justify-center w-full my-3">
+              <a
+                class="inline-block bg-blue-600 hover:bg-blue-500 mx-auto text-white font-semibold  py-2 px-6 rounded-full shadow hover:shadow-lg"
+                href="/sponsor/booking"
+              >
+                Book a sponsorship
+              </a>
+            </div>
+          )}
+          {type=='job' && (
+            <div class="flex justify-center w-full my-3">
+              <a
+                class="inline-block bg-blue-600 hover:bg-blue-500 mx-auto text-white font-semibold  py-2 px-6 rounded-full shadow hover:shadow-lg"
+                href="/jobs/post"
+              >
+                Post a Job
               </a>
             </div>
           )}

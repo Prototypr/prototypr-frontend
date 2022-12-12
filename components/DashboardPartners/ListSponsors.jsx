@@ -41,7 +41,7 @@ const ListSponsors = ({postStatus}) => {
                 ))}
             </div>
             {!loading && !posts?.length && (
-              <EmptyState draft={false} />
+              <EmptyState type="sponsor" draft={false} />
             )}
              <NewPagination
                 total={total}

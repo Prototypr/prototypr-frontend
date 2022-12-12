@@ -41,7 +41,7 @@ const ListJobs = ({postStatus}) => {
                 ))}
             </div>
             {!loading && !posts?.length && (
-              <EmptyState draft={false} />
+              <EmptyState type="job" draft={false} />
             )}
              <NewPagination
                 total={total}

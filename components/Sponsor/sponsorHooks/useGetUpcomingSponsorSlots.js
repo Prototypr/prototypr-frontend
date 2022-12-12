@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUpcomingSponsorSlots } from "@/lib/api";
 
-const useGetUpcomingSponsorSlots = (user) => {
+const useGetUpcomingSponsorSlots = ({user, type}) => {
   const [slots, setSlots] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -24,7 +24,8 @@ const useGetUpcomingSponsorSlots = (user) => {
     setLoading(true);
 
     try {
-      const allSponsorSlots = await getUpcomingSponsorSlots();        
+      const allSponsorSlots = await getUpcomingSponsorSlots({type});     
+      console.log(allSponsorSlots)   
       setSlots(allSponsorSlots)
 
       setLoading(false);

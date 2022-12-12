@@ -48,7 +48,7 @@ export default function SponsorPaymentPage({}) {
     isOwner,
     postObject} =useLoad(user);
 
-  const {slots, loading:loadingSlots} = useGetUpcomingSponsorSlots()
+  const {slots, loading:loadingSlots} = useGetUpcomingSponsorSlots({type:'combo'})
 
   
   useEffect(()=>{
@@ -134,14 +134,13 @@ export default function SponsorPaymentPage({}) {
      :(available && !postObject?.active) ?
       <Container>
         <div className="max-w-2xl pt-3 mb-3">
-      <div>Sponsor reference {postId}</div>
        <h1 className="text-xl mb-3 font-bold">Complete your purchase</h1>
        <p>Once you complete your purchase, your sponsored post will be reviewed by our team and scheduled at the nearest date. 
         </p>
         <p>Your sponsor details are saved, so you can come back and pay later. </p>
         </div>
        {/* {!user?.isLoggedIn && <p>Please log in or create an account to buy a sponsorship.</p>} */}
-        <div>
+        <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2 mt-4">
             Choose a slot
           </h2>
@@ -163,11 +162,10 @@ export default function SponsorPaymentPage({}) {
             </>)
           })}
         </div>
-        <p>The current week number is {weekNumber}</p>
        
        <Button 
        onClick={()=>{
-        if(!selectedSlots){
+        if(!selectedSlots || !selectedSlots?.length){
           alert('Please choose the date(s) for your sponsorship.')
           return false
         }
@@ -213,7 +211,7 @@ export default function SponsorPaymentPage({}) {
                 }
               });
           });
-       }} type="button">Complete Purchase</Button>
+       }} type="button">Complete purchase</Button>
       </Container>:
        <Container>
       <div className="max-w-2xl pt-3 mb-3">
