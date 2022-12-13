@@ -20,9 +20,12 @@ const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
 import { getAllJobs } from "@/lib/api";
 
+import useUser from "@/lib/iron-session/useUser";
+
 import {
   getCombinedPostsForHome,
   getAllToolsForHome,
+  getRandomPostsForHome,
   getCommonQuery,
 } from "@/lib/api";
 import { useIntl } from "react-intl";
@@ -105,9 +108,9 @@ const SponsorCard = ({ data }) => {
 const PrototyprNetworkCTA = ({ data }) => {
   return (
     <div className="flex flex-col gap-1 justify-end items-end">
-      <div className="w-full rounded-[12px] h-auto bg-[#100E89] p-6 flex flex-col gap-3 ">
+      <div className="w-full rounded-[12px] h-auto bg-[#fff] p-6 flex flex-col gap-3 ">
         <div className="flex flex-col gap-2">
-          <p className="text-white text-2xl font-inter">
+          <p className="text-black text-2xl font-inter">
             A Network <br /> for Writers
           </p>
           <div>
@@ -120,6 +123,26 @@ const PrototyprNetworkCTA = ({ data }) => {
           className="w-full"
           src="/static/images/proto-little-peeps.svg"
         ></img>
+      </div>
+    </div>
+  );
+};
+
+const NavBar = () => {
+  return (
+    <div className="h-[50px] my-0">
+      <div className="overflow-x-scroll overflow-y-hidden no-scrollbar flex w-full ">
+        <div className="flex">
+          {["Home", "Jobs", "Toolbox"].map((tab) => {
+            return (
+              <span
+                className={`px-10 py-4 block font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full text-base mx-2 rounded-full bg-transparent text-gray-500 border border-black border-opacity-40`}
+              >
+                {tab}
+              </span>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -291,6 +314,7 @@ export default function Index({
   preview,
   allTools,
   jobs,
+  randomPosts,
   //   otherPosts,
   //   interviewPosts,
   topicRes,
@@ -320,6 +344,8 @@ export default function Index({
     }
   };
 
+  console.log("ok ->", randomPosts);
+
   return (
     <>
       <Layout
@@ -338,6 +364,7 @@ export default function Index({
           {/* <Intro /> */}
           <div className="w-full h-full grid grid-cols-8 gap-1  ">
             <div className="flex flex-col pb-20 gap-2 col-span-6  pr-4 py-10">
+              {/* <NavBar /> */}
               <TabSwitchter
                 selectedTab={currentTab}
                 onTabChange={onTabChange}
@@ -356,7 +383,10 @@ export default function Index({
         <Container>
           <div className="w-full h-full  grid grid-cols-8 gap-1">
             <div className="flex flex-col gap-4 col-span-6  pr-4 py-10">
-              <HeroGrid postData={{ hero: heroPost, posts: morePosts }} />
+              <HeroGrid
+                type="random"
+                postData={{ hero: heroPost, posts: randomPosts }}
+              />
             </div>
 
             <Sidebar title="Tools" type="tools" content={allTools} />
@@ -385,12 +415,13 @@ export async function getStaticProps({ preview = null, locale }) {
   }
 
   let allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
+  let randomPosts = (await getRandomPostsForHome()) || [];
   let allTools =
     (await getAllToolsForHome(preview, PAGE_SIZE, 0, ["date:desc"])) || [];
   let otherPosts = (await getCombinedPostsForHome(preview, 9, 8, sort)) || [];
   const interviews =
     (await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
-  let jobs = (await getAllJobs(null, 4, 1)) || [];
+  let jobs = []; // (await getAllJobs(null, 4, 1)) || [];
 
   let topicRes = {};
 
@@ -415,6 +446,7 @@ export async function getStaticProps({ preview = null, locale }) {
       topicRes,
       preview,
       jobs,
+      randomPosts: randomPosts.slice(0, 6),
     },
     revalidate: 20,
   };

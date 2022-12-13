@@ -25,14 +25,24 @@ const placeholderAuthorImg =
   "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png?w=3840&q=75&format=auto&compress=true&dpr=2";
 
 const AuthorCard = ({ data }) => {
+  console.log(
+    data?.attributes.firstName,
+    data?.attributes?.legacyAvatar,
+    data?.attributes?.avatar
+  );
+  const profileImg = data?.attributes?.avatar?.data?.attributes?.url;
+
   return (
     <>
       <div className="flex flex-row items-center gap-3 border-t border-black pt-4 border-opacity-5">
         <div
           style={{
             backgroundImage: `url(${
-              data?.attributes?.avatar?.data?.attributes?.url ||
-              placeholderAuthorImg
+              profileImg
+                ? profileImg
+                : data?.attributes?.legacyAvatar
+                ? data?.attributes?.legacyAvatar
+                : placeholderAuthorImg
             })`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
@@ -90,27 +100,26 @@ const Credits = () => {
   );
 };
 
-const LargeCardWithImage = ({ data }) => {
-  const {
-    title,
-    excerpt,
-    featured,
-    featuredImage,
-    legacyFeaturedImage,
-    slug,
-    author,
-    tags,
-  } = data?.attributes;
+const LargeCardWithImage = ({ data, type = "regular" }) => {
+  let coverImage;
 
-  console.log(slug);
+  coverImage = data?.featuredImage?.data?.attributes?.url
+    ? data.featuredImage?.data?.attributes?.url
+    : data?.legacyFeaturedImage?.mediaItemUrl;
 
-  const coverImage = featuredImage?.data?.attributes?.url
-    ? featuredImage?.data?.attributes?.url
-    : legacyFeaturedImage?.mediaItemUrl;
+  console.log("HERE ", coverImage, data.featuredImage);
+
+  //   if (type === "regular") {
+
+  //   } else {
+  //     coverImage = data?.featuredImage?.data?.attributes?.url
+  //       ? data.featuredImage?.data?.attributes?.url
+  //       : data?.legacyFeaturedImage?.mediaItemUrl;
+  //   }
 
   return (
     <a
-      href={`/post/${slug}`}
+      href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
       className="w-full h-[330px] flex flex-row bg-white border-opacity-[4%] border-black hover:border col-span-2 rounded-[14px] overflow-hidden border hover:shadow-none cursor-pointer"
     >
       <div
@@ -125,30 +134,42 @@ const LargeCardWithImage = ({ data }) => {
       </div>
       <div className="w-full h-full p-8 flex flex-col justify-between">
         <div className="flex flex-col gap-3">
-          <MetaInfo tags={tags} />
+          <MetaInfo
+            tags={type === "regular" ? data?.attributes?.tags : data.tags || []}
+          />
           <h1 className="text-lg leading-[27px] font-medium font-inter">
-            {title}
+            {type === "regular" ? data?.title : data?.title}
           </h1>
           <p className="text-base leading-[24px] font-inter h-[70px] overflow-clip text-[#505561] tracking-[-2%]">
-            {excerpt}
+            {type === "regular" ? data?.excerpt : data?.attributes?.excerpt}
           </p>
         </div>
-        <AuthorCard data={author?.data} />
+        {data && type === "regular" ? (
+          <AuthorCard data={data?.author?.data} />
+        ) : (
+          <AuthorCard data={data?.author?.data} />
+        )}{" "}
       </div>
     </a>
   );
 };
 
-const SmallCardWithImage = ({ src = img2, data }) => {
+const SmallCardWithImage = ({ src = img2, data, type }) => {
   let post = data?.attributes;
-  const { tags, slug } = data.attributes;
-  const coverImage = post?.featuredImage?.data?.attributes?.url
-    ? post.featuredImage?.data?.attributes?.url
-    : post?.legacyFeaturedImage?.mediaItemUrl;
+  let coverImage;
+  if (type === "regular") {
+    coverImage = post?.featuredImage?.data?.attributes?.url
+      ? post.featuredImage?.data?.attributes?.url
+      : post?.legacyFeaturedImage?.mediaItemUrl;
+  } else {
+    coverImage = data?.featuredImage?.data?.attributes?.url
+      ? data.featuredImage?.data?.attributes?.url
+      : data?.legacyFeaturedImage?.mediaItemUrl;
+  }
 
   return (
     <a
-      href={`/post/${slug}`}
+      href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
       className="w-full min-h-[330px] bg-white  border-opacity-[4%] border-black hover:border  rounded-[14px] flex flex-col overflow-hidden border  hover:shadow-none cursor-pointer"
     >
       <div
@@ -163,29 +184,37 @@ const SmallCardWithImage = ({ src = img2, data }) => {
       </div>
 
       <div className="w-full h-auto flex flex-col gap-4 p-5 ">
-        <MetaInfo tags={tags} />
+        <MetaInfo
+          tags={type === "regular" ? data?.attributes?.tags : data.tags || []}
+        />
         <div className="flex flex-col ">
           <h1 className="text-lg leading-[27px] font-medium font-inter h-[56px] overflow-clip m-0 p-0 tracking-tight">
-            {post?.title}
+            {type === "regular" ? post?.title : data?.title}
           </h1>
         </div>
 
-        {post && <AuthorCard data={post?.author?.data} />}
+        {post && type === "regular" ? (
+          <AuthorCard data={post?.author?.data} />
+        ) : (
+          <AuthorCard data={data?.author?.data} />
+        )}
       </div>
     </a>
   );
 };
 
-const HeroGrid = ({ postData }) => {
+const HeroGrid = ({ postData, type = "regular" }) => {
   const { hero, posts } = postData;
   const secondRowPost = posts.filter((x, i) => i === 0);
+
+  console.log("hero ->", hero);
 
   const gridPosts = posts.filter((x, i) => i !== 0);
   return (
     <div className="flex flex-col flex-nowrap gap-2">
       <div className="flex flex-col gap-8">
         <div className="w-full h-auto grid grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
-          <LargeCardWithImage data={hero} src={img1} />
+          <LargeCardWithImage type={type} data={hero} src={img1} />
           <div
             style={{
               backgroundImage: `url('/static/images/placeholder/letter-ad.png')`,
@@ -223,9 +252,9 @@ const HeroGrid = ({ postData }) => {
         <div className="w-full h-auto grid grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
           {gridPosts.map((post, index) => {
             return index === 4 ? (
-              <LargeCardWithImage data={post} src={img6} />
+              <LargeCardWithImage type={type} data={post} src={img6} />
             ) : (
-              <SmallCardWithImage data={post} src={img2} />
+              <SmallCardWithImage type={type} data={post} src={img2} />
             );
           })}
         </div>
