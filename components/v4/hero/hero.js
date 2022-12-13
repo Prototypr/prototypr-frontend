@@ -1,3 +1,4 @@
+import SignupHomepage from "@/components/newsletter/SignupHomepage";
 import { useState } from "react";
 
 const img1 =
@@ -235,7 +236,8 @@ const HeroGrid = ({ postData, type = "regular" }) => {
               motivation, delivered to your inbox every Tuesday.
             </p>
             <div className="flex flex-col gap-4 ">
-              <input
+              <SignupHomepage/>
+              {/* <input
                 className="w-full max-w-sm p-4 rounded-2xl  border-blue-600"
                 placeholder="email"
               ></input>
@@ -243,7 +245,7 @@ const HeroGrid = ({ postData, type = "regular" }) => {
                 <button className="bg-blue-600 text-white font-medium px-8 py-4 text-base font-inter rounded-xl">
                   Sign me up!
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           <SmallCardWithImage data={secondRowPost[0]} src={img7} />
