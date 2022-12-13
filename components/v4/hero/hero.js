@@ -145,7 +145,7 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
           <h1 className="text-lg leading-[27px] font-medium font-inter">
             {type === "regular" ? data?.attributes?.title : data?.title}
           </h1>
-          <p className="text-base leading-[24px] font-inter h-[70px] overflow-clip text-[#505561] tracking-[-2%]">
+          <p className="text-base leading-[24px] font-inter h-[70px] overflow-clip text-[#626A6E] tracking-[-2%]">
             {type === "regular" ? data?.attributes?.excerpt : data?.excerpt}
           </p>
         </div>
