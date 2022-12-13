@@ -85,7 +85,7 @@ export default function DesignTool({ allTools = [] }) {
     }
   };
   return (
-    <div className="bg-white py-10 border-t border-b border-opacity-10">
+    <div className="bg-white py-10 border-t border-b border-opacity-10 px-10">
       <div className="max-w-7xl mx-auto mb-6 flex flex-col gap-2">
         <div>
           <h2 className="text-lg text-black font-medium font-inter">

@@ -180,10 +180,10 @@ const Sidebar = ({ title, content = [], type }) => {
     url: "https://catadoo.com/",
   };
 
-  let slicedList = [...content.slice(0, 4)];
+  let slicedList = [...content.slice(0, 3)];
 
   return (
-    <div className="relative min-h-screen col-span-2">
+    <div className="relative min-h-screen col-span-2 hidden lg:block">
       <aside className=" border-l border-opacity-20 h-screen px-5  sticky top-0 py-0">
         <div className="flex flex-col gap-10 py-10">
           <PrototyprNetworkCTA data={sponsorData} />
@@ -220,7 +220,7 @@ const Sidebar = ({ title, content = [], type }) => {
                           <div className="flex flex-col gap-2">
                             <p className="text-sm font-inter">{title}</p>
 
-                            <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex gap-1 w-full ">
+                            {/* <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex gap-1 w-full ">
                               <div className="flex gap-2">
                                 {tags?.data?.map((x, i) => {
                                   const item = x?.attributes;
@@ -235,7 +235,7 @@ const Sidebar = ({ title, content = [], type }) => {
                                   );
                                 })}
                               </div>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -315,14 +315,14 @@ export default function Index({
   allTools,
   jobs,
   randomPosts,
-  //   otherPosts,
-  //   interviewPosts,
+
   topicRes,
   heroPost,
   morePosts,
 }) {
   const intl = useIntl();
   const [currentTab, setCurrentTab] = useState("top_picks");
+  const [heroCardPost, setHeroPost] = useState(heroPost);
   const [viewablePosts, setViewablePosts] = useState(morePosts);
 
   const titleText = intl.formatMessage({ id: "index.header.title" });
@@ -337,14 +337,18 @@ export default function Index({
   const onTabChange = (tab) => {
     setCurrentTab(tab.id);
     if (tab.slug === "top_picks") {
+      setHeroPost(heroPost);
       setViewablePosts(morePosts);
     } else {
       const posts = topicRes[tab.slug];
-      setViewablePosts(posts);
+      setHeroPost(posts[0]);
+      setViewablePosts(posts.slice(1, 7));
     }
   };
 
-  console.log("ok ->", randomPosts);
+  //   console.log(randomPosts);
+  const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
+  const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
 
   return (
     <>
@@ -363,13 +367,15 @@ export default function Index({
         <Container>
           {/* <Intro /> */}
           <div className="w-full h-full grid grid-cols-8 gap-1  ">
-            <div className="flex flex-col pb-20 gap-2 col-span-6  pr-4 py-10">
+            <div className="flex flex-col pb-20 gap-2 col-span-8 lg:col-span-6  pr-4 py-10">
               {/* <NavBar /> */}
               <TabSwitchter
                 selectedTab={currentTab}
                 onTabChange={onTabChange}
               />
-              <HeroGrid postData={{ hero: heroPost, posts: viewablePosts }} />
+              <HeroGrid
+                postData={{ hero: heroCardPost, posts: viewablePosts }}
+              />
             </div>
 
             <Sidebar title="Jobs" type="jobs" content={jobs} />
@@ -382,26 +388,19 @@ export default function Index({
 
         <Container>
           <div className="w-full h-full  grid grid-cols-8 gap-1">
-            <div className="flex flex-col gap-4 col-span-6  pr-4 py-10">
+            <div className="flex flex-col gap-4 col-span-8 lg:col-span-6   pr-4 py-10">
               <HeroGrid
                 type="random"
-                postData={{ hero: heroPost, posts: randomPosts }}
+                postData={{
+                  hero: HeroPostRandomSection[0],
+                  posts: OtherPostsRandomSection,
+                }}
               />
             </div>
 
             <Sidebar title="Tools" type="tools" content={allTools} />
           </div>
         </Container>
-
-        {/* <BrowserView>
-          <TopicSpotlights tabs={TAB_ITEMS} topics={topicRes} />
-        </BrowserView> */}
-        {/* <Container>
-          <SourcePanel title={sourcePanelTitle} desc={sourcePanelDescription} />
-
-          <Aspiring posts={interviewPosts} />
-          <Feeds posts={otherPosts} />
-        </Container> */}
       </Layout>
       <Footer />
     </>
@@ -421,15 +420,17 @@ export async function getStaticProps({ preview = null, locale }) {
   let otherPosts = (await getCombinedPostsForHome(preview, 9, 8, sort)) || [];
   const interviews =
     (await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
-  let jobs = []; // (await getAllJobs(null, 4, 1)) || [];
+  let jobs = (await getAllJobs(null, 4, 1)) || [];
 
   let topicRes = {};
 
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].slug;
     const res =
-      (await getCommonQuery(preview, [tag], "article", 6, 0, sort)) || [];
+      (await getCommonQuery(preview, [tag], "article", 9, 0, sort)) || [];
     topicRes[tag] = res.data;
+
+    console.log(res.data.length);
   }
 
   allPosts = transformPostListOld(allPosts.data, locale);
@@ -446,7 +447,7 @@ export async function getStaticProps({ preview = null, locale }) {
       topicRes,
       preview,
       jobs,
-      randomPosts: randomPosts.slice(0, 6),
+      randomPosts: randomPosts.slice(0, 7),
     },
     revalidate: 20,
   };

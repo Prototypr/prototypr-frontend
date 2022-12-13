@@ -26,11 +26,11 @@ const placeholderAuthorImg =
   "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png?w=3840&q=75&format=auto&compress=true&dpr=2";
 
 const AuthorCard = ({ data }) => {
-  console.log(
-    data?.attributes.firstName,
-    data?.attributes?.legacyAvatar,
-    data?.attributes?.avatar
-  );
+  //   console.log(
+  //     data?.attributes.firstName,
+  //     data?.attributes?.legacyAvatar,
+  //     data?.attributes?.avatar
+  //   );
   const profileImg = data?.attributes?.avatar?.data?.attributes?.url;
 
   return (
@@ -76,11 +76,16 @@ const MetaInfo = ({ tags = [] }) => {
       })} */}
 
       {tagContent[0]?.attributes?.name && (
-        <span className="text-xs  font-inter px-6 py-2  bg-orange-100 text-black rounded-full">
+        <span
+          //   style={{
+          //     boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.10)",
+          //   }}
+          className="text-xs capitalize  font-inter px-4 py-2 border border-black border-opacity-5  bg-black bg-opacity-5 text-black rounded-full"
+        >
           {tagContent[0]?.attributes?.name}
         </span>
       )}
-
+      {/* 
       <span
         style={{
           boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.10)",
@@ -88,7 +93,7 @@ const MetaInfo = ({ tags = [] }) => {
         className="text-xs font-normal text-gray-600 font-inter px-3 py-2 rounded-full"
       >
         Aug 30,2022
-      </span>
+      </span> */}
     </div>
   );
 };
@@ -104,19 +109,18 @@ const Credits = () => {
 const LargeCardWithImage = ({ data, type = "regular" }) => {
   let coverImage;
 
-  coverImage = data?.featuredImage?.data?.attributes?.url
-    ? data.featuredImage?.data?.attributes?.url
-    : data?.legacyFeaturedImage?.mediaItemUrl;
-
-  console.log("HERE ", coverImage, data.featuredImage);
-
-  //   if (type === "regular") {
-
-  //   } else {
-  //     coverImage = data?.featuredImage?.data?.attributes?.url
-  //       ? data.featuredImage?.data?.attributes?.url
-  //       : data?.legacyFeaturedImage?.mediaItemUrl;
-  //   }
+  if (type === "regular") {
+    // hero section
+    let url = data?.attributes?.featuredImage?.data?.attributes?.url;
+    coverImage = url
+      ? url
+      : data?.attributes?.legacyFeaturedImage?.mediaItemUrl;
+  } else {
+    // works for random section on the home page
+    coverImage = data?.featuredImage?.data?.attributes?.url
+      ? data.featuredImage?.data?.attributes?.url
+      : data?.legacyFeaturedImage?.mediaItemUrl;
+  }
 
   return (
     <a
@@ -139,14 +143,14 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
             tags={type === "regular" ? data?.attributes?.tags : data.tags || []}
           />
           <h1 className="text-lg leading-[27px] font-medium font-inter">
-            {type === "regular" ? data?.title : data?.title}
+            {type === "regular" ? data?.attributes?.title : data?.title}
           </h1>
           <p className="text-base leading-[24px] font-inter h-[70px] overflow-clip text-[#505561] tracking-[-2%]">
-            {type === "regular" ? data?.excerpt : data?.attributes?.excerpt}
+            {type === "regular" ? data?.attributes?.excerpt : data?.excerpt}
           </p>
         </div>
         {data && type === "regular" ? (
-          <AuthorCard data={data?.author?.data} />
+          <AuthorCard data={data?.attributes?.author?.data} />
         ) : (
           <AuthorCard data={data?.author?.data} />
         )}{" "}
@@ -206,15 +210,13 @@ const SmallCardWithImage = ({ src = img2, data, type }) => {
 
 const HeroGrid = ({ postData, type = "regular" }) => {
   const { hero, posts } = postData;
-  const secondRowPost = posts.filter((x, i) => i === 0);
-
-  console.log("hero ->", hero);
-
+  const secondRowPost = posts.filter((x, i) => i === 0)[0];
   const gridPosts = posts.filter((x, i) => i !== 0);
+
   return (
     <div className="flex flex-col flex-nowrap gap-2">
       <div className="flex flex-col gap-8">
-        <div className="w-full h-auto grid grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
+        <div className="w-full h-auto flex flex-col sm:grid sm:grid-cols-1 md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
           <LargeCardWithImage type={type} data={hero} src={img1} />
           <div
             style={{
@@ -226,7 +228,7 @@ const HeroGrid = ({ postData, type = "regular" }) => {
           ></div>
         </div>
 
-        <div className="w-full h-auto grid grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
+        <div className="w-full h-auto flex flex-col flex-wrap md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
           <div className="w-full bg-blue-200 rounded-2xl overflow-hidden p-10 min-h-[300px] col-span-2 flex flex-col gap-3 ">
             <h3 className="text-3xl font-inter max-w-md text-black font-bold">
               The Prototypr Weekly
@@ -236,22 +238,13 @@ const HeroGrid = ({ postData, type = "regular" }) => {
               motivation, delivered to your inbox every Tuesday.
             </p>
             <div className="flex flex-col gap-4 ">
-              <SignupHomepage/>
-              {/* <input
-                className="w-full max-w-sm p-4 rounded-2xl  border-blue-600"
-                placeholder="email"
-              ></input>
-              <div>
-                <button className="bg-blue-600 text-white font-medium px-8 py-4 text-base font-inter rounded-xl">
-                  Sign me up!
-                </button>
-              </div> */}
+              <SignupHomepage />
             </div>
           </div>
-          <SmallCardWithImage data={secondRowPost[0]} src={img7} />
+          <SmallCardWithImage type={type} data={secondRowPost} src={img7} />
         </div>
 
-        <div className="w-full h-auto grid grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
+        <div className="w-full h-auto flex flex-col flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
           {gridPosts.map((post, index) => {
             return index === 4 ? (
               <LargeCardWithImage type={type} data={post} src={img6} />

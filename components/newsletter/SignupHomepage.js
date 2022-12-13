@@ -53,9 +53,7 @@ export default function SignupHomepage({ className }) {
           </>
         ) : error ? (
           <>
-            <h2
-              className={`text-base text-gray-800 text-white font-semibold mb-2`}
-            >
+            <h2 className={`text-base text-gray-800  font-semibold mb-2`}>
               {intl.formatMessage({ id: "signup.tip.again" })} &nbsp;{" "}
               <div className="inline -mt-1">🤖</div>
             </h2>
@@ -66,17 +64,17 @@ export default function SignupHomepage({ className }) {
             </div>
           </>
         ) : (
-          <>
-            <h2 className={`text-2xl text-gray-800 font-semibold mb-2 mt-10`}>
+          <div className="p-6 bg-blue-400 rounded-md mb-2 mt-10">
+            <h2 className={`text-base text-gray-800 font-semibold font-inter `}>
               {intl.formatMessage({ id: "signup.input.check" })} &nbsp;{" "}
               <div className="inline -mt-1">🎉</div>
             </h2>
             <div
-              className={`block text-lg mb-10 leading-6 font-base text-gray-800 text-white`}
+              className={`block text-base  leading-6 font-base text-gray-800 font-inter`}
             >
               {intl.formatMessage({ id: "signup.input.click" })}
             </div>
-          </>
+          </div>
         )}
       </div>
     </>
@@ -101,14 +99,15 @@ function HookForm(props) {
             <FormattedMessage id="intro.input.placeholder" />
           </label>
           <input
-          id="Email"
-        //   type="text"
-          placeholder={intl.formatMessage({ id: "intro.input.placeholder" })}
-          {...register("emailRequired", {
-            required: true,
-            pattern: /^\S+@\S+$/i,
-          })}
-        className="w-full max-w-sm p-4 rounded-2xl mb-4 border-blue-600"></input>
+            id="Email"
+            //   type="text"
+            placeholder={intl.formatMessage({ id: "intro.input.placeholder" })}
+            {...register("emailRequired", {
+              required: true,
+              pattern: /^\S+@\S+$/i,
+            })}
+            className="w-full max-w-sm p-4 rounded-2xl mb-4 border-blue-600"
+          ></input>
           {/* <input
             id="Email"
             style={{ fontSize: ".875rem" }}
@@ -141,7 +140,7 @@ function HookForm(props) {
         </div>
         {/* <div className="flex flex-col ml-2"> */}
         <button className="bg-blue-600 text-white font-medium px-8 py-4 text-base font-inter rounded-xl">
-            Sign me up!
+          Sign me up!
         </button>
         {/* </div> */}
       </form>

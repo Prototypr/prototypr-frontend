@@ -31,7 +31,7 @@ export default function Layout({
   return (
     <>
       <Meta seo={seo} />
-      {/* <Navbar activeNav={activeNav} /> */}
+      <Navbar activeNav={activeNav} />
 
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
