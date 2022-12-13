@@ -259,7 +259,7 @@ const Sidebar = ({ title, content = [], type }) => {
                               <div className="flex flex-row gap-1 text-xs text-gray-500">
                                 <p className=" font-inter">{companyName},</p>
                                 <p className=" font-inter">
-                                  {locations[0].name}
+                                  {locations[0]?.name}
                                 </p>
                               </div>
                             </div>
