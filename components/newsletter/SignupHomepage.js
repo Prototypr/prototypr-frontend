@@ -144,9 +144,9 @@ function HookForm(props) {
         </button>
         {/* </div> */}
       </form>
-      <div className="px-1 w-10/12 mx-auto">
+      <div className="px-1 w-10/12 font-inter">
         {errors.emailRequired && errors.emailRequired.type === "required" && (
-          <p className="text-pink-600 mt-2 text-sm text-left">
+          <p className="text-white mt-2 text-sm text-left px-4 py-2 bg-red-500 border rounded-lg">
             <FormattedMessage id="signup.input.validation" />
           </p>
         )}

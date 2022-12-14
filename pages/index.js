@@ -99,15 +99,17 @@ const SponsorCard = ({ data }) => {
 const PrototyprNetworkCTA = ({ data }) => {
   return (
     <div className="flex flex-col gap-1 justify-end items-end">
-      <div className="w-full rounded-[12px] h-auto bg-[#245FEB] p-6 flex flex-col gap-3 ">
+      <div className="w-full rounded-[12px] h-auto bg-white p-6 flex flex-col gap-3 ">
         <div className="flex flex-col gap-2">
-          <p className="text-white text-2xl font-inter">
+          <p className="text-black text-2xl font-inter">
             An Open Platform <br /> for Writers
           </p>
           <div>
-            <button className="px-4 py-2 text-black rounded-lg font-inter bg-[#fff] text-sm">
-              Start Writing
-            </button>
+            <a href="/write">
+              <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm">
+                Start Writing
+              </button>
+            </a>
           </div>
         </div>
         <img

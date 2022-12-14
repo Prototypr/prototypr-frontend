@@ -53,6 +53,7 @@ export const HomePageNewNavBar = () => {
               { label: "Home", url: "/" },
               { label: "Jobs", url: "/jobs" },
               { label: "Toolbox", url: "/toolbox" },
+              { label: "Sponsor", url: "/sponsor" },
             ].map((tab) => {
               return (
                 <div>
@@ -70,16 +71,7 @@ export const HomePageNewNavBar = () => {
               <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />
               </div>
-              <NavigationMenu>
-                {/* <NavigationMenuList>
-                  <LocationMenu
-                    user={user}
-                    hideLocaleSwitcher={hideLocaleSwitcher}
-                    collapsed={collapsed}
-                    showWriteButton={showWriteButton}
-                  />
-                </NavigationMenuList> */}
-              </NavigationMenu>
+              <NavigationMenu></NavigationMenu>
               <div className="relative ml-3">
                 <UserMenu userLoading={isLoading} user={user} />
               </div>
@@ -112,6 +104,7 @@ export const HomePageNewNavBar = () => {
           <MobileActiveLink href={"/"}>Home</MobileActiveLink>
           <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
           <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>
+          <MobileActiveLink href={"/sponsor"}>Sponsor</MobileActiveLink>
           <MobileActiveLink href={"/web-monetization"}>
             Web Monetization
           </MobileActiveLink>
