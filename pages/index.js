@@ -360,7 +360,7 @@ export default function Index({
         <Container>
           {/* <Intro /> */}
           <div className="w-full h-full grid grid-cols-8 gap-1  ">
-            <div className="flex flex-col pb-20 gap-2 col-span-8 lg:col-span-6  pr-4 py-10">
+            <div className="flex flex-col pb-20 gap-2 col-span-8 lg:col-span-6  md:pr-4 py-10">
               {/* <NavBar /> */}
               <TabSwitchter
                 selectedTab={currentTab}
@@ -382,7 +382,7 @@ export default function Index({
 
         <Container>
           <div className="w-full h-full  grid grid-cols-8 gap-1">
-            <div className="flex flex-col grid gap-4 col-span-8 lg:col-span-6   pr-4 py-10">
+            <div className="flex flex-col grid gap-4 col-span-8 lg:col-span-6 md:pr-4 py-10">
               <HeroGrid
                 type="random"
                 postData={{

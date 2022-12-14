@@ -130,11 +130,11 @@ function HookForm(props) {
             autoComplete="nope"
           />
         </div>
-        <div className="flex flex-col ml-2">
+        <div className="flex flex-col md:ml-2">
           <Button
             aria-label="Sign up for newsletter"
             style={{height:47}}
-            className="px-5 ml-2 rounded-lg"
+            className="px-5 md:ml-2 mt-3 md:mt-0 rounded-lg"
             type=""
           >
             {props.buttonText}
