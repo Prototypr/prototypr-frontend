@@ -1,4 +1,6 @@
+import gumletLoader from "@/components/new-index/gumletLoader";
 import SignupHomepage from "@/components/newsletter/SignupHomepage";
+import Image from "next/image";
 import { useState } from "react";
 
 const img1 =
@@ -208,7 +210,7 @@ const SmallCardWithImage = ({ src = img2, data, type }) => {
   );
 };
 
-const HeroGrid = ({ postData, type = "regular" }) => {
+const HeroGrid = ({ postData, type = "regular", sponsor }) => {
   const { hero, posts } = postData;
   const secondRowPost = posts.filter((x, i) => i === 0)[0];
   const gridPosts = posts.filter((x, i) => i !== 0);
@@ -218,14 +220,25 @@ const HeroGrid = ({ postData, type = "regular" }) => {
       <div className="flex flex-col gap-8">
         <div className="w-full h-auto flex flex-col sm:grid sm:grid-cols-1 md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
           <LargeCardWithImage type={type} data={hero} src={img1} />
+          
+          
           <div
-            style={{
-              backgroundImage: `url('/static/images/placeholder/letter-ad.png')`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-            }}
-            className="w-full h-full overflow-hidden rounded-[10px] p-8 flex items-end"
-          ></div>
+            className="w-full relative h-full cursor-pointer overflow-hidden rounded-[10px] flex items-end"
+          >
+          <a href={sponsor?.link?sponsor.link:'https://letter.so'} target="_blank">
+          <Image
+            loader={gumletLoader}
+            priority={`true`}
+            data-priority={`true`}
+            objectFit="cover"
+            layout="fill"
+            data-gmlazy={`false`}
+            className="object-cover relative w-full h-full overflow-hidden rounded-[10px]"
+            src={sponsor?.featuredImage?sponsor.featuredImage:'/static/images/placeholder/letter-ad.png'}
+          />
+          </a>
+
+          </div>
         </div>
 
         <div className="w-full h-auto flex flex-col flex-wrap md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">

@@ -6,18 +6,9 @@ import Layout from "@/components/new-index/layoutForIndex";
 /**new index components */
 import { BrowserView } from "react-device-detect";
 
-// const Intro = dynamic(() => import("@/components/new-index/Intro"));
 const Footer = dynamic(() => import("@/components/footer"));
-const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
-// import EditorPick2 from "@/components/new-index/EditorPick2";
-const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
-const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
-const TopicSpotlights = dynamic(() =>
-  import("@/components/new-index/TopicSpotlights")
-);
-const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
-const Feeds = dynamic(() => import("@/components/new-index/Feeds"));
+
 import { getAllJobs } from "@/lib/api";
 
 import useUser from "@/lib/iron-session/useUser";
@@ -27,6 +18,7 @@ import {
   getAllToolsForHome,
   getRandomPostsForHome,
   getCommonQuery,
+  getActiveSponsors
 } from "@/lib/api";
 import { useIntl } from "react-intl";
 import { transformPostListOld } from "@/lib/locale/transformLocale";
@@ -315,6 +307,7 @@ export default function Index({
   allTools,
   jobs,
   randomPosts,
+  sponsors,
 
   topicRes,
   heroPost,
@@ -350,6 +343,7 @@ export default function Index({
   const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
   const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
 
+  console.log(sponsors)
   return (
     <>
       <Layout
@@ -375,6 +369,7 @@ export default function Index({
               />
               <HeroGrid
                 postData={{ hero: heroCardPost, posts: viewablePosts }}
+                sponsor={sponsors?.length?sponsors[0]:null}
               />
             </div>
 
@@ -395,6 +390,7 @@ export default function Index({
                   hero: HeroPostRandomSection[0],
                   posts: OtherPostsRandomSection,
                 }}
+                sponsor={(sponsors?.length && sponsors.length>1)?sponsors[1]:null}
               />
             </div>
 
@@ -417,10 +413,11 @@ export async function getStaticProps({ preview = null, locale }) {
   let randomPosts = (await getRandomPostsForHome()) || [];
   let allTools =
     (await getAllToolsForHome(preview, PAGE_SIZE, 0, ["date:desc"])) || [];
-  let otherPosts = (await getCombinedPostsForHome(preview, 9, 8, sort)) || [];
-  const interviews =
-    (await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
+  // let otherPosts = (await getCombinedPostsForHome(preview, 9, 8, sort)) || [];
+  // const interviews =(await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
   let jobs = (await getAllJobs(null, 4, 1)) || [];
+
+  let sponsors = await getActiveSponsors()
 
   let topicRes = {};
 
@@ -429,25 +426,24 @@ export async function getStaticProps({ preview = null, locale }) {
     const res =
       (await getCommonQuery(preview, [tag], "article", 9, 0, sort)) || [];
     topicRes[tag] = res.data;
-
-    console.log(res.data.length);
   }
 
   allPosts = transformPostListOld(allPosts.data, locale);
   allTools = transformPostListOld(allTools.data, locale);
-  otherPosts = transformPostListOld(otherPosts.data, locale);
-
+  // otherPosts = transformPostListOld(otherPosts.data, locale);
+console.log(sponsors.posts)
   return {
     props: {
       heroPost: allPosts[0],
       morePosts: allPosts.slice(1),
       allTools: allTools,
-      otherPosts: otherPosts,
-      interviewPosts: interviews.data,
+      // otherPosts: otherPosts,
+      // interviewPosts: interviews.data,
       topicRes,
       preview,
       jobs,
       randomPosts: randomPosts.slice(0, 7),
+      sponsors:sponsors?.posts?.length?sponsors?.posts:[]
     },
     revalidate: 20,
   };
