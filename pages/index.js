@@ -343,7 +343,6 @@ export default function Index({
   const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
   const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
 
-  console.log(sponsors)
   return (
     <>
       <Layout
@@ -431,7 +430,6 @@ export async function getStaticProps({ preview = null, locale }) {
   allPosts = transformPostListOld(allPosts.data, locale);
   allTools = transformPostListOld(allTools.data, locale);
   // otherPosts = transformPostListOld(otherPosts.data, locale);
-console.log(sponsors.posts)
   return {
     props: {
       heroPost: allPosts[0],
