@@ -178,7 +178,7 @@ const SmallCardWithImage = ({ src = img2, data, type }) => {
   return (
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
-      className="w-full mb-8 md:mb-0 min-h-[330px] bg-white  border-opacity-[4%] border-black hover:border  rounded-[14px] flex flex-col overflow-hidden border  hover:shadow-none cursor-pointer"
+      className="w-full mb-8 sm:mb-0 min-h-[330px] bg-white  border-opacity-[4%] border-black hover:border  rounded-[14px] flex flex-col overflow-hidden border  hover:shadow-none cursor-pointer"
     >
       {/* <div
         style={{
@@ -232,8 +232,8 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
 
   return (
     <div className="flex flex-col flex-nowrap gap-2">
-      <div className="flex flex-col grid gap-8">
-        <div className="w-full h-auto flex flex-col sm:grid sm:grid-cols-1 md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
+      <div className="flex flex-col grid md:gap-8 gap-8">
+        <div className="w-full h-auto flex flex-col sm:grid sm:grid-cols-1 md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] md:gap-8">
           <LargeCardWithImage type={type} data={hero} src={img1} />
           
           
@@ -256,8 +256,8 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
           </div>
         </div>
 
-        <div className="w-full h-auto flex flex-col flex-wrap md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
-          <div className="mb-8 md:mb-0 w-full bg-blue-200 rounded-2xl overflow-hidden p-10 min-h-[300px] col-span-2 flex flex-col grid gap-3 ">
+        <div className="w-full h-auto flex flex-col flex-wrap md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] md:gap-8 ">
+          <div className="w-full bg-blue-200 rounded-2xl overflow-hidden p-10 min-h-[300px] col-span-2 flex flex-col grid gap-3 ">
             <h3 className="text-3xl font-inter max-w-md text-black font-bold">
               The Prototypr Weekly
             </h3>
@@ -269,10 +269,12 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
               <SignupHomepage />
             </div>
           </div>
+          <div className="mt-8 md:mt-0">
           <SmallCardWithImage type={type} data={secondRowPost} src={img7} />
+          </div>
         </div>
 
-        <div className="w-full -mt-8 md:mt-0 h-auto flex flex-col md:grid flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
+        <div className="w-full -mt-8 sm:mt-0 h-auto flex flex-col md:grid flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] sm:gap-8 md:gap-8">
           {gridPosts.map((post, index) => {
             return index === 4 ? (
               <LargeCardWithImage type={type} data={post} src={img6} />
