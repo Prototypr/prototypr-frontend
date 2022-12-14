@@ -1,6 +1,7 @@
 import gumletLoader from "@/components/new-index/gumletLoader";
 import SignupHomepage from "@/components/newsletter/SignupHomepage";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const img1 =
@@ -175,19 +176,33 @@ const SmallCardWithImage = ({ src = img2, data, type }) => {
   }
 
   return (
-    <a
+    <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
       className="w-full min-h-[330px] bg-white  border-opacity-[4%] border-black hover:border  rounded-[14px] flex flex-col overflow-hidden border  hover:shadow-none cursor-pointer"
     >
-      <div
+      {/* <div
         style={{
           backgroundImage: `url(${coverImage || ""})`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
         }}
         className="w-full h-[50%] max-h-[135px] bg-gray-200 relative"
-      >
+      > */}
         {/* <Credits /> */}
+      {/* </div> */}
+      <div
+        className="w-full h-[135px] max-h-[135px] bg-gray-200 relative"
+      > 
+      <Image
+        loader={gumletLoader}
+        priority={`true`}
+        data-priority={`true`}
+        objectFit="cover"
+        layout="fill"
+        data-gmlazy={`false`}
+        className="object-cover relative w-full h-full overflow-hidden"
+        src={coverImage||'/static/images/placeholder/letter-ad.png'}
+      />
       </div>
 
       <div className="w-full h-auto flex flex-col gap-4 p-5 ">
@@ -206,7 +221,7 @@ const SmallCardWithImage = ({ src = img2, data, type }) => {
           <AuthorCard data={data?.author?.data} />
         )}
       </div>
-    </a>
+    </Link>
   );
 };
 
@@ -223,7 +238,7 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
           
           
           <div
-            className="w-full relative h-full cursor-pointer overflow-hidden rounded-[10px] flex items-end"
+            className="w-full relative cursor-pointer overflow-hidden rounded-[10px] flex items-end"
           >
           <a href={sponsor?.link?sponsor.link:'https://letter.so'} target="_blank">
           <Image
