@@ -1,6 +1,8 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
+import {Waypoint} from 'react-waypoint'
+
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 /**new index components */
@@ -146,7 +148,7 @@ const TabSwitchter = ({ selectedTab, onTabChange }) => {
   );
 };
 
-const Sidebar = ({ title, content = [], type }) => {
+const Sidebar = ({ title, content = [], type, paddingTop }) => {
   const sponsorData = {
     src: "/static/images/placeholder/sponsor-cat.png",
     heading: "A playful todolist to help you get your stuff done.",
@@ -155,12 +157,56 @@ const Sidebar = ({ title, content = [], type }) => {
 
   let slicedList = [...content.slice(0, 3)];
 
+  // useEffect(()=>{
+
+  //   const sidebar =  document.getElementById('sidebar')
+
+  //   function add_class_on_scroll() {
+  //     sidebar.classList.add("pt-16");
+  //   }
+  //   function remove_class_on_scroll() {
+  //    sidebar.classList.remove("pt-16");
+  //   }
+
+  //   function paddingToggle(){ 
+  //     //Here you forgot to update the value
+  //     let scrollpos = window.scrollY;
+
+  //     if(scrollpos > 100){
+  //         add_class_on_scroll();
+  //     }
+  //     else {
+  //         remove_class_on_scroll();
+  //     }
+  //   }
+
+  //     window.addEventListener('scroll', paddingToggle);
+
+  //     return ()=>{
+  //       window.removeEventListener('scroll',paddingToggle)
+  //     }
+  // },[])
+  const [stickyPaddingTop, setStickyPaddingTop] = useState('pt-0') 
+
+  const _handleWaypointEnter = () =>{
+    setStickyPaddingTop('pt-0')
+  }
+  const _handleWaypointLeave = () =>{
+    setStickyPaddingTop('pt-16')
+
+  }
+
   return (
-    <div className="relative min-h-screen col-span-2 hidden lg:block">
-      <aside className=" border-l border-opacity-20 h-screen px-5  sticky top-0 py-0">
+    <div  className={`${paddingTop} relative col-span-2 border-l border-opacity-20`}>
+      <Waypoint
+            onEnter={_handleWaypointEnter}
+            onLeave={_handleWaypointLeave}
+          />
+    <div className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}>
+      <aside className="  h-screen px-5 sticky top-0 py-0">
         <div className="flex flex-col grid gap-10 py-10">
           {type === "jobs" ? (
-            <div className="mt-[154px]">
+            <div>
               <PrototyprNetworkCTA data={sponsorData} />
             </div>
           ) : (
@@ -292,6 +338,8 @@ const Sidebar = ({ title, content = [], type }) => {
         </div>
       </aside>
     </div>
+    {/* </Waypoint> */}
+    </div>
   );
 };
 
@@ -365,7 +413,8 @@ export default function Index({
               />
             </div>
 
-            <Sidebar title="Jobs" type="jobs" content={jobs} />
+            
+            <Sidebar paddingTop='pt-[154px]' title="Jobs" type="jobs" content={jobs} />
           </div>
         </Container>
 
