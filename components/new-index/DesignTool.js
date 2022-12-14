@@ -109,12 +109,16 @@ export default function DesignTool({ allTools = [] }) {
             </h2>
           </div>
           <div className="flex flex-row flex-wrap gap-2">
-            <button className="px-8 mr-3 py-5 font-medium bg-[#345FF8] rounded-2xl text-sm text-white font-inter">
-              Submit Tool
-            </button>
-            <button className="px-8 py-5 bg-[#67CBFC] font-medium rounded-2xl text-sm text-white font-inter">
-              Open Toolbox
-            </button>
+            <Link href="/toolbox">
+              <button className="px-8 mr-3 py-5 font-medium bg-[#345FF8] rounded-2xl text-sm text-white font-inter">
+                Submit Tool
+              </button>
+            </Link>
+            <Link href="/toolbox">
+              <button className="px-8 py-5 bg-[#67CBFC] font-medium rounded-2xl text-sm text-white font-inter">
+                Open Toolbox
+              </button>
+            </Link>
           </div>
         </div>
         <img
