@@ -37,7 +37,7 @@ const Index = ({jobs}) => {
               </Link>
             </div>
           </div>
-          <div className="w-full h-full col-start-1 col-end-7 md:col-start-1 md:col-end-5 flex flex-col gap-5  pb-10">
+          <div className="w-full h-full col-start-1 col-end-7 md:col-start-1 md:col-end-5 flex flex-col grid gap-5  pb-10">
             {jobs.map((job, i) => {
               return <JobPostCard job={job} key={i} />;
             })}

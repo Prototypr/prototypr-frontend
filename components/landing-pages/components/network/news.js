@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const BlogPostCard = ({img, title, link}) => {
   return (
-    <div className="w-full">
+    <div className="w-full my-5 md:my-0">
     <Link href={link}>
     <div style={{backgroundImage:`url("${img}")`, backgroundPosition:'center', backgroundSize:'cover'}} className=" cursor-pointer transition ease-in-out w-full h-[240px] rounded-lg border border-black border-opacity-5"></div>
     </Link>
@@ -23,7 +23,7 @@ const NewsContent = () => {
           <h2 className="text-[24px] my-4 text-[#0F1F40] font-semibold font-inter max-w-md leading-[32px]">
             More about <br /> Open Design →
           </h2>
-          <div className="flex flex-col lg:flex-nowrap lg:flex lg:flex-row md:flex md:flex-wrap md:flex-col gap-5 py-2 ">
+          <div className="flex flex-col lg:flex-nowrap lg:flex lg:flex-row md:flex md:flex-wrap md:flex-col md:space-x-5 py-2 ">
             <BlogPostCard link="/post/open-web" title="What is Open Design?" img={'/static/images/unlock2.png'} />
             <BlogPostCard link="/post/open-design" title="What is the Open Web?" img={'/static/images/globepen.png'} />
             <BlogPostCard link="/post/future-design-open-source-figma" title="The Future of Design is Open Source" img={`https://prototyprio.gumlet.io/strapi/2272daa0caea148d74b94bc636722b51.png?format=webp&w=700&dpr=2.0`} />

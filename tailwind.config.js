@@ -204,5 +204,6 @@ module.exports = {
   plugins: [
     require("@tailwindcss/forms"),
     require("tailwindcss-border-gradient-radius"),
+    require('@tailwindcss/line-clamp'),
   ],
 };

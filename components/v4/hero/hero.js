@@ -38,7 +38,7 @@ const AuthorCard = ({ data }) => {
 
   return (
     <>
-      <div className="flex flex-row items-center gap-3 border-t border-black pt-4 border-opacity-5">
+      <div className="flex flex-row items-center border-t border-black pt-4 border-opacity-5">
         <div
           style={{
             backgroundImage: `url(${
@@ -51,7 +51,7 @@ const AuthorCard = ({ data }) => {
             backgroundSize: "cover",
             backgroundPosition: "center center",
           }}
-          className="w-6 h-6 rounded-full bg-gray-200 relative"
+          className="w-6 h-6 mr-3 rounded-full bg-gray-200 relative"
         ></div>
         {data?.attributes?.firstName ? (
           <p className="text-sm font-inter">
@@ -141,14 +141,14 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
         {/* <Credits /> */}
       </div>
       <div className="w-full h-full p-8 flex flex-col justify-between">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col grid gap-3">
           <MetaInfo
             tags={type === "regular" ? data?.attributes?.tags : data.tags || []}
           />
           <h1 className="text-lg leading-[27px] font-medium font-inter">
             {type === "regular" ? data?.attributes?.title : data?.title}
           </h1>
-          <p className="text-base leading-[24px] font-inter h-[70px] overflow-clip text-[#626A6E] tracking-[-2%]">
+          <p className="text-base leading-[24px] font-inter h-[70px] line-clamp-3 text-[#626A6E] tracking-[-2%]">
             {type === "regular" ? data?.attributes?.excerpt : data?.excerpt}
           </p>
         </div>
@@ -205,7 +205,7 @@ const SmallCardWithImage = ({ src = img2, data, type }) => {
       />
       </div>
 
-      <div className="w-full h-auto flex flex-col gap-4 p-5 ">
+      <div className="w-full h-auto grid flex flex-col grid gap-4 p-5 ">
         <MetaInfo
           tags={type === "regular" ? data?.attributes?.tags : data.tags || []}
         />
@@ -232,7 +232,7 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
 
   return (
     <div className="flex flex-col flex-nowrap gap-2">
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col space-y-8">
         <div className="w-full h-auto flex flex-col sm:grid sm:grid-cols-1 md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
           <LargeCardWithImage type={type} data={hero} src={img1} />
           
@@ -257,7 +257,7 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
         </div>
 
         <div className="w-full h-auto flex flex-col flex-wrap md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
-          <div className="w-full bg-blue-200 rounded-2xl overflow-hidden p-10 min-h-[300px] col-span-2 flex flex-col gap-3 ">
+          <div className="w-full bg-blue-200 rounded-2xl overflow-hidden p-10 min-h-[300px] col-span-2 flex flex-col grid gap-3 ">
             <h3 className="text-3xl font-inter max-w-md text-black font-bold">
               The Prototypr Weekly
             </h3>
@@ -265,7 +265,7 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
               Join 25,000+ creatives to enjoy a regular dose of inspiration and
               motivation, delivered to your inbox every Tuesday.
             </p>
-            <div className="flex flex-col gap-4 ">
+            <div className="flex flex-col grid gap-4 ">
               <SignupHomepage />
             </div>
           </div>

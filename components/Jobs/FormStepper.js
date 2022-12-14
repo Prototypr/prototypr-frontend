@@ -51,7 +51,7 @@ export const FormStepper = ({ children, onSubmit, formik }) => {
         }
       }}
     >
-      <div className="flex flex-col gap-5 max-w-lg">
+      <div className="flex flex-col grid gap-5 max-w-lg">
         <div className="flex flex-row gap-2">
           {stepsArray.map((child, index) => {
             return <ProgressTile key={index} isComplete={step + 1 > index} />;
