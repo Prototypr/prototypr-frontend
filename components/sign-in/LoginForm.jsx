@@ -21,7 +21,7 @@ const LoginForm = ({ isSignUp, title="Get early access",
       <p className="text-sm text-gray-600 whitespace-nowrap text-center">
         
       </p>
-      <div className="flex flex-col gap-2 flex-grow mt-6">
+      <div className="flex flex-col grid gap-2 flex-grow mt-6">
         <Button
           isFullWidth
           className="text-left justify-start h-11 font-normal"

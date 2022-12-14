@@ -229,7 +229,7 @@ const Editor = ({
 
   return (
     <>
-      <div className="fixed z-[48] bottom-10 left-10 border flex flex-col gap-2 border-black border-opacity-10 p-4 bg-white rounded-lg">
+      <div className="fixed z-[48] bottom-10 left-10 border flex flex-col grid gap-2 border-black border-opacity-10 p-4 bg-white rounded-lg">
         <p className="text-xs">
           Preview Mode
         </p>
@@ -313,7 +313,7 @@ const Editor = ({
                   )}
 
                 {user?.isAdmin &&
-                <div className="flex flex-col gap-2 bg-white rounded-lg">
+                <div className="flex flex-col grid gap-2 bg-white rounded-lg">
                   {editorInstance && <SidePanelTrigger user={user} editor={editorInstance} postObject={postObject}/>}
                 </div>
                 }

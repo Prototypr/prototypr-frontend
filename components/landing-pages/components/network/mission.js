@@ -34,10 +34,10 @@ const MissionSection = () => {
             Built in the open for design, code, and tech
           </h3>
         </div>
-        <div className="flex flex-row flex-wrap gap-7 md:gap-10 my-5">
+        <div className="flex grid md:grid-cols-2 flex-row flex-wrap gap-7 md:gap-10 my-5">
           {Benefits.map((items, i) => {
             return (
-              <div key={i} className="max-w-lg flex flex-col gap-3">
+              <div key={i} className="max-w-lg grid flex flex-col grid gap-3">
                 <h3 className="font-semibold font-inter text-[18px] text-[#723636]">
                   {items.title}
                 </h3>

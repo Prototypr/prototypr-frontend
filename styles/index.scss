@@ -9,6 +9,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    box-sizing: border-box;
+}
+
 
 .grayscale {
   filter: grayscale(1);
@@ -383,3 +387,27 @@ button[type="submit"].bg-gray-100:hover{
 background: linear-gradient(180deg, #1288FE 11.07%, rgba(255, 255, 255, 0) 83.98%), #CCE6FF;
 }
 
+
+.repeating-envolope {
+    overflow: hidden;
+    color: pink;
+    border: 4px solid pink;
+    border-image:  repeating-linear-gradient(-45deg,
+                #3574F0 0 20px,
+                #FE9BE8 20px 40px) 10;
+}
+
+.bg-grad-orange {
+    background: radial-gradient(63.84% 63.84% at 90.66% 13.62%, #0E9A35 61.23%, #FF4117 100%)
+            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+            , #FF553E;
+}
+
+// .repeating-linear:hover {
+//     border-image: repeating-linear-gradient(45deg, purple, purple 1%, pink 1%, pink 8%) 10;
+//     color: purple;
+// }
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}

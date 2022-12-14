@@ -4,7 +4,7 @@ import axios from "axios";
 import { FormattedMessage, useIntl } from "react-intl";
 import Button from "../Primitives/Button";
 
-export default function SignupHorizontal({ className }) {
+export default function SignupHomepage({ className }) {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
   const intl = useIntl();
@@ -53,9 +53,7 @@ export default function SignupHorizontal({ className }) {
           </>
         ) : error ? (
           <>
-            <h2
-              className={`text-base text-gray-800 text-white font-semibold mb-2`}
-            >
+            <h2 className={`text-base text-gray-800  font-semibold mb-2`}>
               {intl.formatMessage({ id: "signup.tip.again" })} &nbsp;{" "}
               <div className="inline -mt-1">🤖</div>
             </h2>
@@ -66,17 +64,17 @@ export default function SignupHorizontal({ className }) {
             </div>
           </>
         ) : (
-          <>
-            <h2 className={`text-2xl text-gray-800 font-semibold mb-2 mt-10`}>
+          <div className="p-6 bg-blue-400 rounded-md mb-2 mt-10">
+            <h2 className={`text-base text-gray-800 font-semibold font-inter `}>
               {intl.formatMessage({ id: "signup.input.check" })} &nbsp;{" "}
               <div className="inline -mt-1">🎉</div>
             </h2>
             <div
-              className={`block text-lg mb-10 leading-6 font-base text-gray-800 text-white`}
+              className={`block text-base  leading-6 font-base text-gray-800 font-inter`}
             >
               {intl.formatMessage({ id: "signup.input.click" })}
             </div>
-          </>
+          </div>
         )}
       </div>
     </>
@@ -96,11 +94,21 @@ function HookForm(props) {
   return (
     <div>
       <form className={`${props.className}`} onSubmit={handleSubmit(onSubmit)}>
-        <div className="sm:flex-1 sm:max-w-xs w-full">
+        <div className="sm:flex-1 sm:max-w-sm w-full">
           <label htmlFor="Email" className="sr-only	">
             <FormattedMessage id="intro.input.placeholder" />
           </label>
           <input
+            id="Email"
+            //   type="text"
+            placeholder={intl.formatMessage({ id: "intro.input.placeholder" })}
+            {...register("emailRequired", {
+              required: true,
+              pattern: /^\S+@\S+$/i,
+            })}
+            className="w-full max-w-sm p-4 rounded-2xl mb-4 border-blue-600"
+          ></input>
+          {/* <input
             id="Email"
             style={{ fontSize: ".875rem" }}
             type="text"
@@ -112,7 +120,7 @@ function HookForm(props) {
             })}
             // ref={...register({ required: true, pattern: /^\S+@\S+$/i })}
             className="border-transparent border-solid border-2 border-gradient-br-blue-darkblue-gray-50 hover:border-gradient-tl-blue-darkblue-gray-50 gradient-border-3 w-full h-full p-3 text-gray-800 bg-white rounded-lg"
-          />
+          /> */}
         </div>
         {/* <input type="checkbox" placeholder="Consent" name="consent" ref={register({ required: true })} /> */}
         {errors.consent && errors.consent.type === "required" && (
@@ -130,39 +138,20 @@ function HookForm(props) {
             autoComplete="nope"
           />
         </div>
-        <div className="flex flex-col md:ml-2">
-          <Button
-            aria-label="Sign up for newsletter"
-            style={{height:47}}
-            className="px-5 md:ml-2 mt-3 md:mt-0 rounded-lg"
-            type=""
-          >
-            {props.buttonText}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="flex-shrink-0 w-4 h-4 ml-3"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </Button>
-        </div>
+        {/* <div className="flex flex-col ml-2"> */}
+        <button className="bg-blue-600 text-white font-medium px-8 py-4 text-base font-inter rounded-xl">
+          Sign me up!
+        </button>
+        {/* </div> */}
       </form>
-      <div className="px-1 w-10/12 mx-auto">
+      <div className=" w-10/12 font-inter">
         {errors.emailRequired && errors.emailRequired.type === "required" && (
-          <p className="text-pink-600 mt-2 text-sm text-left">
+          <p className="text-white text-sm mt-2 text-left px-4 py-3 bg-red-400 border rounded-xl">
             <FormattedMessage id="signup.input.validation" />
           </p>
         )}
         {errors.emailRequired && errors.emailRequired.type === "pattern" && (
-          <p className="text-pink-600 mt-2 text-sm text-left">
+          <p className="text-white text-sm mt-2 text-left px-4 py-3 bg-red-400 border rounded-xl">
             <FormattedMessage id="signup.input.error" />
           </p>
         )}

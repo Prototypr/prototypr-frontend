@@ -67,18 +67,18 @@ const WebStandard = () => {
   return (
     <div className="py-0 bg-[#22AA79]">
       <div className="bg-[#00028C] pt-20 md:pt-40 p-10 rounded-t-[10px] md:rounded-t-[40px] overflow-hidden">
-        <div className="w-full h-auto max-w-6xl mx-auto flex flex-col gap-10 py-10">
+        <div className="w-full h-auto max-w-6xl mx-auto flex flex-col grid gap-10 py-10">
           <div className="flex flex-col md:flex-row gap-10 md:gap-0">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col grid gap-2">
               <GlobeIcon />
-              <div className="flex flex-col gap-10 md:py-10">
+              <div className="flex flex-col grid gap-10 md:py-10">
                 <h3 className="text-[28px] sm:text-[32px] md:text-[40px] leading-[42px] md:leading-[60px] text-white font-inter font-medium">
                   A New Standard <br /> for the Web that <br />{" "}
                   <span className="italic text-[#309BFE]">
                     Rewards Creators
                   </span>
                 </h3>
-                <div className="max-w-3xl flex flex-col gap-5 font-inter leading-[34px] text-[18px] text-[#9FBDDF]">
+                <div className="max-w-3xl flex flex-col grid gap-5 font-inter leading-[34px] text-[18px] text-[#9FBDDF]">
                   <p>
                     Web Monetization is a proposed W3C standard that encourages fairer revenue models for the web.
                   </p>
@@ -101,7 +101,7 @@ const WebStandard = () => {
                 </a>
               </div>
             </div>
-            <div className=" px-3 w-full scale-100 lg:scale-[120%]  md:-translate-y-0">
+            <div className="my-5 md:my-0 px-3 w-full scale-100 lg:scale-[120%]  md:-translate-y-0">
               <img
                 className="w-full md:translate-x-52 scale-100 md:scale-75 pointer-events-none"
                 src="/static/images/web-mon-ppl.svg"
@@ -111,6 +111,7 @@ const WebStandard = () => {
           <div className="w-full grid grid-cols-1 grid-rows-3 md:grid-rows-1 md:grid-cols-3 flex-wrap gap-5">
             {articles.map((x) => {
               return (
+                <div className="my-4 md:my-0">
                 <a href={x.url} target="_blank" className="hover:scale-105">
                   <div
                     style={{
@@ -119,8 +120,9 @@ const WebStandard = () => {
                     }}
                     className="w-full overflow-hidden  bg-white bg-opacity-10 rounded-lg cursor-pointer h-[200px] md:h-[250px]"
                   ></div>
-                  <p className="px-2 py-3 text-gray-300">{x.title}</p>
+                  <p className="text-[16px] mt-3 font-medium text-gray-300 font-inter">{x.title}</p>
                 </a>
+                </div>
               );
             })}
           </div>

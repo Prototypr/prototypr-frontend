@@ -10,10 +10,10 @@ module.exports = {
     preflight: false,
   },
   variants: {
-    extend:{
-      opacity: ['group-hover', 'hover'],
-      background:['group-hover', 'hover'],
-    }
+    extend: {
+      opacity: ["group-hover", "hover"],
+      background: ["group-hover", "hover"],
+    },
   },
   theme: {
     fontFamily: {
@@ -204,5 +204,6 @@ module.exports = {
   plugins: [
     require("@tailwindcss/forms"),
     require("tailwindcss-border-gradient-radius"),
+    require("@tailwindcss/line-clamp"),
   ],
 };

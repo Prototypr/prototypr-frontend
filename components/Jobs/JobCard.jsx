@@ -22,9 +22,9 @@ const JobPostCard = ({ job }) => {
           :<div className="w-[66px] h-[66px] bg-[#CEE2FF] rounded"></div>
         }
         {/* content */}
-        <div className="flex flex-col gap-3 flex-grow">
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2">
+        <div className="flex flex-col grid gap-3 grid flex-grow">
+          <div className="flex flex-col grid gap-6">
+            <div className="flex flex-col grid gap-2">
               <h1 className="text-xl m-0 inter-font font-medium">{job.title}</h1>
               <div className="flex flex-row gap-3 text-base inter-font font-regular text-[#A3ACC2]">
                 <span className="text-gray-800 font-medium text-md">{job.companyName}</span>
