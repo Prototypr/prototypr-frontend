@@ -160,7 +160,7 @@ const Sidebar = ({ title, content = [], type }) => {
       <aside className=" border-l border-opacity-20 h-screen px-5  sticky top-0 py-0">
         <div className="flex flex-col grid gap-10 py-10">
           {type === "jobs" ? (
-            <div className="mt-[164px]">
+            <div className="mt-[154px]">
               <PrototyprNetworkCTA data={sponsorData} />
             </div>
           ) : (
@@ -353,8 +353,8 @@ export default function Index({
         <Container>
           {/* <Intro /> */}
           <div className="w-full h-full grid grid-cols-8 gap-1  ">
-            <div className="flex flex-col pb-20 gap-2 col-span-8 lg:col-span-6  md:pr-4 py-10">
-              <HomePageNewNavBar />
+            <div className="flex flex-col pt-28 pb-20 gap-2 col-span-8 lg:col-span-6  md:pr-4 py-10">
+              {/* <HomePageNewNavBar /> */}
               <TabSwitchter
                 selectedTab={currentTab}
                 onTabChange={onTabChange}

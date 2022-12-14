@@ -30,8 +30,8 @@ export const HomePageNewNavBar = () => {
     setMobileNavOpen(!mobileNavOpen);
   };
   return (
-    <>
-      <div className="w-[100%] max-w-[1400px] mx-auto h-auto bg-white bg-opacity-60 border border-black border-opacity-10 backdrop-blur-lg sticky top-10 rounded-full z-50">
+    <div className="sticky top-10 z-50 ">
+      <div className="w-[100%] max-w-[1400px] mx-auto h-auto bg-white bg-opacity-60 border border-black border-opacity-10 backdrop-blur-lg rounded-full z-50">
         <div className="flex flex-row gap-2 p-2 px-6 justify-between">
           <div className="flex  flex-shrink-0 items-center">
             <Link href="/" as="/">
@@ -51,6 +51,7 @@ export const HomePageNewNavBar = () => {
           <div className="hidden sm:flex flex-row gap-2 p-2">
             {[
               { label: "Home", url: "/" },
+              { label: "Topics", url: "/topics" },
               { label: "Jobs", url: "/jobs" },
               { label: "Toolbox", url: "/toolbox" },
               { label: "Sponsor", url: "/sponsor" },
@@ -97,11 +98,15 @@ export const HomePageNewNavBar = () => {
         </div>
       </div>
       <div
-        className={`sm:hidden ${!mobileNavOpen ? "h-0 overflow-hidden" : ""}`}
+        className={`sm:hidden relative mt-5 rounded-lg bg-white z-[100] ${
+          !mobileNavOpen ? "h-0 overflow-hidden" : ""
+        }`}
         id="mobile-menu"
       >
-        <div className="space-y-1 px-2 pt-2 pb-3">
+        <div className="space-y-1 px-2 pt-2 pb-3 text-sm font-inter">
           <MobileActiveLink href={"/"}>Home</MobileActiveLink>
+          <MobileActiveLink href={"/topics"}>Topics</MobileActiveLink>
+
           <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
           <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>
           <MobileActiveLink href={"/sponsor"}>Sponsor</MobileActiveLink>
@@ -110,7 +115,7 @@ export const HomePageNewNavBar = () => {
           </MobileActiveLink>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

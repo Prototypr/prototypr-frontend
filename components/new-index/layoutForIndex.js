@@ -33,7 +33,9 @@ export default function Layout({
     <>
       <Meta seo={seo} />
       {/* <Navbar activeNav={activeNav} /> */}
-      {/* <HomePageNewNavBar /> */}
+      <div className="fixed top-4 w-full z-50">
+        <HomePageNewNavBar />
+      </div>
 
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
