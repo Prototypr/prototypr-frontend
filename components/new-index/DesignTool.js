@@ -11,7 +11,7 @@ import Button from "../Primitives/Button";
 
 const ITEM_WIDTH = 300;
 
-const colors = ["#345FF8", "#44BFFB", "#FD88F1", "#FFCC44"];
+const colors = ["#345FF8", "#FA8F12", "#FE9BE8", "#F6B700"];
 
 function repeatFor(arr, size) {
   var newArr = new Array(size);
@@ -100,8 +100,8 @@ export default function DesignTool({ allTools = [] }) {
   let arrayColor = repeatFor(colors, allTools.length);
 
   return (
-    <div className="bg-white pt-32 pb-16 h-auto  rounded-[50px]  px-10">
-      <div className="flex flex-row flex-wrap w-full justify-between max-w-7xl mx-auto mb-10">
+    <div className="bg-white py-16 h-auto  rounded-[50px]  px-10">
+      <div className="flex flex-row flex-wrap w-full justify-between  items-end max-w-7xl mx-auto mb-10">
         <div className=" mb-6 flex flex-col gap-7 my-10">
           <div>
             <h2 className="text-[40px] leading-[50px] md:text-[60px] max-w-lg md:leading-[68px] text-black font-bold font-inter">
@@ -184,7 +184,7 @@ export default function DesignTool({ allTools = [] }) {
                                   {showItem.tags?.data.map((tab) => {
                                     return (
                                       <span
-                                        className={`px-5 py-2 block text-[12px] bg-white bg-opacity-20 capitalize text-white font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full  rounded-full`}
+                                        className={`px-5 py-[6px] block text-[12px] backdrop-blur-md border border-white border-opacity-10 bg-white bg-opacity-20 capitalize text-white font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full  rounded-full`}
                                       >
                                         {tab.attributes.name}
                                       </span>
@@ -200,12 +200,12 @@ export default function DesignTool({ allTools = [] }) {
                               {" "}
                               {showItem.title}
                             </h3>
-                            <p className="line-clamp-3 font-normal text-white text-opacity-60 text-[14px] leading-[22px] font-inter">
+                            <p className="line-clamp-3 font-normal text-white text-opacity-70 text-[14px] leading-[22px] font-inter">
                               {" "}
                               {showItem.excerpt}
                             </p>
                           </div>
-                          <button className="w-full bg-white text-sm text-black rounded-md font-inter py-3 px-5">
+                          <button className="w-full bg-white text-sm text-black rounded-2xl font-inter py-3 px-5">
                             Show Tool
                           </button>
                         </div>

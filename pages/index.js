@@ -1,6 +1,8 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
+import { Waypoint } from "react-waypoint";
+
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 /**new index components */
@@ -10,7 +12,7 @@ const Footer = dynamic(() => import("@/components/footer"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 
 import { getAllJobs } from "@/lib/api";
-import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
+// import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 
 import {
   getCombinedPostsForHome,
@@ -24,6 +26,7 @@ import { transformPostListOld } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
 
 import HeroGrid from "@/components/v4/hero/hero";
+import Link from "next/link";
 
 const Tabs = [
   { label: "Top Picks", color: "#4053FF", id: "top_picks", slug: "top_picks" },
@@ -89,9 +92,9 @@ const SponsorCard = ({ data }) => {
           </div>
         </div>
       </a>
-      <a href={"/sponsor"}>
+      <Link href={"/sponsor"}>
         <span className="text-[12px] text-gray-500">Want to sponsor?</span>
-      </a>
+      </Link>
     </div>
   );
 };
@@ -104,17 +107,17 @@ const PrototyprNetworkCTA = ({ data }) => {
           <p className="text-black text-2xl font-inter">
             An Open Platform <br /> for Writers
           </p>
-          <div className="flex flex-row ">
-            <a href="/write">
-              <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 hover:bg-blue-400 text-sm">
+          <div>
+            <Link href="/write">
+              <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm">
                 Start Writing
               </button>
-            </a>
-            <a href="/post/write-for-us">
+            </Link>
+            <Link href="/post/write-for-us">
               <button className="px-4 ml-2 py-2 text-black rounded-lg font-inter bg-gray-200 hover:bg-gray-100 text-sm">
                 Learn more
               </button>
-            </a>
+            </Link>
           </div>
         </div>
         <img
@@ -151,7 +154,7 @@ const TabSwitchter = ({ selectedTab, onTabChange }) => {
   );
 };
 
-const Sidebar = ({ title, content = [], type }) => {
+const Sidebar = ({ title, content = [], type, paddingTop }) => {
   const sponsorData = {
     src: "/static/images/placeholder/sponsor-cat.png",
     heading: "A playful todolist to help you get your stuff done.",
@@ -160,142 +163,165 @@ const Sidebar = ({ title, content = [], type }) => {
 
   let slicedList = [...content.slice(0, 3)];
 
+  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
+
+  const _handleWaypointEnter = () => {
+    setStickyPaddingTop("pt-0");
+  };
+  const _handleWaypointLeave = () => {
+    setStickyPaddingTop("pt-16");
+  };
+
   return (
-    <div className="relative min-h-screen col-span-2 hidden lg:block">
-      <aside className=" border-l border-opacity-20 h-screen px-5  sticky top-0 py-0">
-        <div className="flex flex-col grid gap-10 py-10">
-          {type === "jobs" ? (
-            <div className="mt-[154px]">
-              <PrototyprNetworkCTA data={sponsorData} />
-            </div>
-          ) : (
-            <div className="mt-[0]">
-              <PrototyprNetworkCTA data={sponsorData} />
-            </div>
-          )}
-
-          <div className="w-full flex flex-col grid gap-2">
-            {type === "tools" && (
-              <>
-                <div className="flex flex-row justify-between items-baseline">
-                  <h3 className="font-inter my-2 font-medium text-sm">
-                    {title}
-                  </h3>
-                  <a
-                    href={type === "jobs" ? "/jobs" : "/toolbox"}
-                    className="font-inter text-sm text-gray-500 cursor-pointer"
-                  >
-                    See more {title} {"->"}
-                  </a>
-                </div>
-                <div className="flex flex-col grid gap-3">
-                  {slicedList.map((item, i) => {
-                    const { title, legacyFeaturedImage, tags } =
-                      item.attributes;
-                    return (
-                      <div
-                        key={i}
-                        className="w-full h-[100px] bg-white py-4 px-4 rounded-lg border border-opacity-5 border-black flex flex-col grid gap-2"
-                      >
-                        <div className="flex flex-row">
-                          <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
-                            <img
-                              className="relative"
-                              src={legacyFeaturedImage?.logoNew}
-                            />
-                          </div>
-                          <div className="flex flex-col grid gap-2">
-                            <p className="text-sm font-inter">{title}</p>
-
-                            {/* <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex grid gap-1 w-full ">
-                              <div className="flex grid gap-2">
-                                {tags?.data?.map((x, i) => {
-                                  const item = x?.attributes;
-
-                                  return (
-                                    <span
-                                      key={i}
-                                      className={`px-3 block rounded-sm bg-gray-200 font-inter cursor-pointer min-w-max cursor w-full text-[10px] py-[2px] `}
-                                    >
-                                      {item.name}
-                                    </span>
-                                  );
-                                })}
-                              </div>
-                            </div> */}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </>
-            )}
-
-            {type === "jobs" && (
-              <div className="flex rounded-lg flex-col gap-0 p-4">
-                <div className="flex flex-row justify-between items-baseline">
-                  <h3 className="font-inter my-1 font-medium text-sm">
-                    {title}
-                  </h3>
-                  <a
-                    href={type === "jobs" ? "/jobs" : "/toolbox"}
-                    className="font-inter text-sm text-gray-500 cursor-pointer"
-                  >
-                    See more {title} {"->"}
-                  </a>
-                </div>
-                <div className="flex flex-col grid gap-4 my-2">
-                  {slicedList.map((item, i) => {
-                    const {
-                      title,
-                      companyName,
-                      salaryText,
-                      companyLogo,
-                      locations,
-                    } = item;
-                    return (
-                      <>
-                        <div
-                          key={i}
-                          className="w-full h-auto cursor-pointer flex flex-col"
-                        >
-                          <div className="flex flex-row bg-white  p-4 rounded-lg">
-                            <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
-                              <img className="relative" src={companyLogo} />
-                            </div>
-                            <div className="flex flex-col grid gap-1 justify-center">
-                              <p className="text-xs font-inter">{title}</p>
-                              <div className="flex flex-row gap-1 text-xs text-gray-500">
-                                <p className=" font-inter">{companyName},</p>
-                                <p className=" font-inter">
-                                  {locations[0]?.name}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          {/* {i !== slicedList.length - 1 && (
-                            <div className="border-b border-black border-opacity-10 w-[100%] mx-auto"></div>
-                          )} */}
-                        </div>
-                      </>
-                    );
-                  })}
-                </div>
-                <a
-                  href={"/jobs/post"}
-                  className="w-full flex flex-row justify-end font-inter text-gray-500 hover:underline cursor-pointer my-2"
-                >
-                  <div className="text-xs inline-flex">
-                    <div className="mr-1">Hiring? Post a Job</div>
-                    <div>{"->"}</div>
-                  </div>
-                </a>
+    <div
+      className={`${paddingTop} relative col-span-2 border-l border-opacity-20`}
+    >
+      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
+      <div
+        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
+      >
+        <aside className="  h-screen px-5 sticky top-0 py-0">
+          <div className="flex flex-col grid gap-10 py-10">
+            {type === "jobs" ? (
+              <div>
+                <PrototyprNetworkCTA data={sponsorData} />
+              </div>
+            ) : (
+              <div className="mt-[0]">
+                <PrototyprNetworkCTA data={sponsorData} />
               </div>
             )}
+
+            <div className="w-full flex flex-col grid gap-2">
+              {type === "tools" && (
+                <>
+                  <div className="flex flex-row justify-between items-baseline">
+                    <h3 className="font-inter my-2 font-medium text-sm">
+                      {title}
+                    </h3>
+                    <Link
+                      href={type === "jobs" ? "/jobs" : "/toolbox"}
+                      className="font-inter text-sm text-gray-500 cursor-pointer"
+                    >
+                      See more {title} {"->"}
+                    </Link>
+                  </div>
+                  <div className="flex flex-col grid gap-3">
+                    {slicedList.map((item, i) => {
+                      const { title, legacyFeaturedImage, tags, slug } =
+                        item.attributes;
+                      return (
+                        <div
+                          key={i}
+                          className="w-full cursor-pointer h-[100px] bg-white py-4 px-4 rounded-lg border border-opacity-5 border-black flex flex-col grid gap-2"
+                        >
+                          <Link href={`/toolbox/${slug}`}>
+                            <div className="flex flex-row">
+                              <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
+                                <img
+                                  className="relative"
+                                  src={legacyFeaturedImage?.logoNew}
+                                />
+                              </div>
+                              <div className="flex flex-col grid gap-2">
+                                <p className="text-sm font-inter">{title}</p>
+
+                                {/* <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex grid gap-1 w-full ">
+                                <div className="flex grid gap-2">
+                                  {tags?.data?.map((x, i) => {
+                                    const item = x?.attributes;
+
+                                    return (
+                                      <span
+                                        key={i}
+                                        className={`px-3 block rounded-sm bg-gray-200 font-inter cursor-pointer min-w-max cursor w-full text-[10px] py-[2px] `}
+                                      >
+                                        {item.name}
+                                      </span>
+                                    );
+                                  })}
+                                </div>
+                              </div> */}
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+
+              {type === "jobs" && (
+                <div className="flex rounded-lg flex-col gap-0 p-4">
+                  <div className="flex flex-row justify-between items-baseline">
+                    <h3 className="font-inter my-1 font-medium text-sm">
+                      {title}
+                    </h3>
+                    <Link
+                      href={type === "jobs" ? "/jobs" : "/toolbox"}
+                      className="font-inter text-sm text-gray-500 cursor-pointer"
+                    >
+                      See more {title} {"->"}
+                    </Link>
+                  </div>
+                  <div className="flex flex-col grid gap-4 my-2">
+                    {slicedList.map((item, i) => {
+                      const {
+                        title,
+                        companyName,
+                        salaryText,
+                        id,
+                        companyLogo,
+                        locations,
+                      } = item;
+                      return (
+                        <>
+                          <Link href={`/jobs/${id}`}>
+                            <div
+                              key={i}
+                              className="w-full h-auto cursor-pointer flex flex-col"
+                            >
+                              <div className="flex flex-row bg-white  p-4 rounded-lg">
+                                <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
+                                  <img className="relative" src={companyLogo} />
+                                </div>
+                                <div className="flex flex-col grid gap-1 justify-center">
+                                  <p className="text-xs font-inter">{title}</p>
+                                  <div className="flex flex-row gap-1 text-xs text-gray-500">
+                                    <p className=" font-inter">
+                                      {companyName},
+                                    </p>
+                                    <p className=" font-inter">
+                                      {locations[0]?.name}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              {/* {i !== slicedList.length - 1 && (
+                            <div className="border-b border-black border-opacity-10 w-[100%] mx-auto"></div>
+                          )} */}
+                            </div>
+                          </Link>
+                        </>
+                      );
+                    })}
+                  </div>
+                  <Link
+                    href={"/jobs/post"}
+                    className="w-full flex flex-row justify-end font-inter text-gray-500 hover:underline cursor-pointer my-2"
+                  >
+                    <div className="text-xs inline-flex">
+                      <div className="mr-1">Hiring? Post a Job</div>
+                      <div>{"->"}</div>
+                    </div>
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </aside>
+        </aside>
+      </div>
     </div>
   );
 };
@@ -371,7 +397,12 @@ export default function Index({
               />
             </div>
 
-            <Sidebar title="Jobs" type="jobs" content={jobs} />
+            <Sidebar
+              paddingTop="pt-[154px]"
+              title="Jobs"
+              type="jobs"
+              content={jobs}
+            />
           </div>
         </Container>
 

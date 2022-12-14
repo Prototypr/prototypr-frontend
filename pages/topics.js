@@ -106,27 +106,18 @@ export default function Index({ allPosts, preview }) {
 
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 pb-24">
           {topics.map((topic, i) => (
+            <Link key={i} href={`/posts/${topic.slug}/page/1`}>
             <div
-              key={i}
-              className={`group flex relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
+              
+              className={`group cursor-pointer flex relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
             >
-              {/* <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 sm:h-80 lg:aspect-none">
-                <img
-                  src={topic.imageSrc}
-                  alt={topic.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              </div> */}
-              <div className="my-auto mx-auto flex justify-between">
-                <div>
-                  <h3 className="text-2xl text-white">
-                    <Link href={`/posts/${topic.slug}/page/1`}>
-                        {intl.formatMessage({ id: topic.name })}
-                    </Link>
-                  </h3>
-                </div>
+              <div className="my-auto mx-auto flex justify-between" >
+                    <h3 className="text-lg font-bold text-white">                    
+                          {intl.formatMessage({ id: topic.name })}
+                    </h3>
               </div>
             </div>
+            </Link>
           ))}
         </div>
         {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}

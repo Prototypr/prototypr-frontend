@@ -2099,6 +2099,11 @@
   "resolved" "https://registry.npmjs.org/console-control-strings/-/console-control-strings-1.1.0.tgz"
   "version" "1.1.0"
 
+"consolidated-events@^1.1.0 || ^2.0.0":
+  "integrity" "sha512-2/uRVMdRypf5z/TW/ncD/66l75P5hH2vM/GR8Jf8HLc2xnfJtmina6F6du8+v4Z2vTrMo7jC+W1tmEEuuELgkQ=="
+  "resolved" "https://registry.npmjs.org/consolidated-events/-/consolidated-events-2.0.2.tgz"
+  "version" "2.0.2"
+
 "cookie@^0.4.1", "cookie@^0.4.2":
   "integrity" "sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA=="
   "resolved" "https://registry.npmjs.org/cookie/-/cookie-0.4.2.tgz"
@@ -3692,7 +3697,7 @@
   "resolved" "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-2.0.1.tgz"
   "version" "2.0.1"
 
-"prop-types@^15.5.8", "prop-types@^15.6.2", "prop-types@^15.7.0", "prop-types@^15.7.2", "prop-types@>=15.5.10":
+"prop-types@^15.0.0", "prop-types@^15.5.8", "prop-types@^15.6.2", "prop-types@^15.7.0", "prop-types@^15.7.2", "prop-types@>=15.5.10":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -4049,6 +4054,11 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
+"react-is@^17.0.1 || ^18.0.0":
+  "integrity" "sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w=="
+  "resolved" "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
+  "version" "18.2.0"
+
 "react-lazyload@^3.2.0":
   "integrity" "sha512-zJlrG8QyVZz4+xkYZH5v1w3YaP5wEFaYSUWC4CT9UXfK75IfRAIEdnyIUF+dXr3kX2MOtL1lUaZmaQZqrETwgw=="
   "resolved" "https://registry.npmjs.org/react-lazyload/-/react-lazyload-3.2.0.tgz"
@@ -4165,6 +4175,16 @@
   "integrity" "sha512-Zj8RchTqZEH27LAANemzMR2RpotbP2aMd+UIajfYMZ9KW4dMcViUVKzC7YmqfiqlFfz8B0bjDw2xUBjmcxDngA=="
   "resolved" "https://registry.npmjs.org/react-timeago/-/react-timeago-4.4.0.tgz"
   "version" "4.4.0"
+
+"react-waypoint@^10.3.0":
+  "integrity" "sha512-iF1y2c1BsoXuEGz08NoahaLFIGI9gTUAAOKip96HUmylRT6DUtpgoBPjk/Y8dfcFVmfVDvUzWjNXpZyKTOV0SQ=="
+  "resolved" "https://registry.npmjs.org/react-waypoint/-/react-waypoint-10.3.0.tgz"
+  "version" "10.3.0"
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "consolidated-events" "^1.1.0 || ^2.0.0"
+    "prop-types" "^15.0.0"
+    "react-is" "^17.0.1 || ^18.0.0"
 
 "react-web-monetization@0.0.13":
   "integrity" "sha512-Alu8mIzKxsQnSIgJtey3NdqmVcdk7f1gs22ivQAQM1S8tyCOBFevPrIj8L54YWIdnxjjZK8U3o63EhqOz4CITw=="

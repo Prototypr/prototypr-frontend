@@ -58,13 +58,13 @@ export const HomePageNewNavBar = () => {
             ].map((tab) => {
               return (
                 <div>
-                  <a href={tab.url}>
+                  <Link href={tab.url}>
                     <span
                       className={`px-6 hover:bg-gray-200 py-2 text-center block font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full text-base rounded-full bg-transparent text-gray-500  `}
                     >
                       {tab.label}
                     </span>
-                  </a>
+                  </Link>
                 </div>
               );
             })}
@@ -72,7 +72,7 @@ export const HomePageNewNavBar = () => {
               <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />
               </div>
-              <NavigationMenu></NavigationMenu>
+              {/* <NavigationMenu></NavigationMenu> */}
               <div className="relative ml-3">
                 <UserMenu userLoading={isLoading} user={user} />
               </div>
@@ -130,7 +130,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
   };
 
   return (
-    <nav className="bg-white font-inter relative w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur">
+    <nav className="bg-white font-inter fixed w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur">
       <div className="mx-auto max-w-[1400px] px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           {/* movil menu button */}
