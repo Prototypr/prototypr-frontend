@@ -203,7 +203,9 @@ const StyledViewport = styled(NavigationMenuPrimitive.Viewport, {
 
 const NextLink = ({ children, ...props }) => {
   const router = useRouter();
-  const isActive = Boolean(router.asPath.indexOf(props.href) > -1);
+  // const isActive = Boolean(router.asPath.indexOf(props.href) > -1);
+  // dunno why , but this makes all subnavs blue (menu popdown things), seems to work without
+  const isActive = false
   return (
     <Link href={props.href} passHref>
       <StyledLink asChild>

@@ -2,7 +2,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 import SignupHomepage from "@/components/newsletter/SignupHomepage";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+// import { useState } from "react";
 
 const placeholderAuthorImg =
   "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png?w=3840&q=75&format=auto&compress=true&dpr=2";
@@ -77,7 +77,7 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
   }
 
   return (
-    <a
+    <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
       className="w-full h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] border-black hover:border col-span-2 rounded-[14px] overflow-hidden border hover:shadow-none cursor-pointer"
     >
@@ -111,7 +111,7 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
           <AuthorCard data={data?.author?.data} />
         )}{" "}
       </div>
-    </a>
+    </Link>
   );
 };
 

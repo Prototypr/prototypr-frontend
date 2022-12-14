@@ -12,7 +12,7 @@ const Footer = dynamic(() => import("@/components/footer"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 
 import { getAllJobs } from "@/lib/api";
-import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
+// import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 
 import {
   getCombinedPostsForHome,
@@ -26,6 +26,7 @@ import { transformPostListOld } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
 
 import HeroGrid from "@/components/v4/hero/hero";
+import Link from "next/link";
 
 const Tabs = [
   { label: "Top Picks", color: "#4053FF", id: "top_picks", slug: "top_picks" },
@@ -91,9 +92,9 @@ const SponsorCard = ({ data }) => {
           </div>
         </div>
       </a>
-      <a href={"/sponsor"}>
+      <Link href={"/sponsor"}>
         <span className="text-[12px] text-gray-500">Want to sponsor?</span>
-      </a>
+      </Link>
     </div>
   );
 };
@@ -107,11 +108,11 @@ const PrototyprNetworkCTA = ({ data }) => {
             An Open Platform <br /> for Writers
           </p>
           <div>
-            <a href="/write">
+            <Link href="/write">
               <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm">
                 Start Writing
               </button>
-            </a>
+            </Link>
           </div>
         </div>
         <img
@@ -157,35 +158,6 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
 
   let slicedList = [...content.slice(0, 3)];
 
-  // useEffect(()=>{
-
-  //   const sidebar =  document.getElementById('sidebar')
-
-  //   function add_class_on_scroll() {
-  //     sidebar.classList.add("pt-16");
-  //   }
-  //   function remove_class_on_scroll() {
-  //    sidebar.classList.remove("pt-16");
-  //   }
-
-  //   function paddingToggle(){ 
-  //     //Here you forgot to update the value
-  //     let scrollpos = window.scrollY;
-
-  //     if(scrollpos > 100){
-  //         add_class_on_scroll();
-  //     }
-  //     else {
-  //         remove_class_on_scroll();
-  //     }
-  //   }
-
-  //     window.addEventListener('scroll', paddingToggle);
-
-  //     return ()=>{
-  //       window.removeEventListener('scroll',paddingToggle)
-  //     }
-  // },[])
   const [stickyPaddingTop, setStickyPaddingTop] = useState('pt-0') 
 
   const _handleWaypointEnter = () =>{
@@ -222,50 +194,52 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                   <h3 className="font-inter my-2 font-medium text-sm">
                     {title}
                   </h3>
-                  <a
+                  <Link
                     href={type === "jobs" ? "/jobs" : "/toolbox"}
                     className="font-inter text-sm text-gray-500 cursor-pointer"
                   >
                     See more {title} {"->"}
-                  </a>
+                  </Link>
                 </div>
                 <div className="flex flex-col grid gap-3">
                   {slicedList.map((item, i) => {
-                    const { title, legacyFeaturedImage, tags } =
+                    const { title, legacyFeaturedImage, tags, slug } =
                       item.attributes;
                     return (
                       <div
                         key={i}
-                        className="w-full h-[100px] bg-white py-4 px-4 rounded-lg border border-opacity-5 border-black flex flex-col grid gap-2"
+                        className="w-full cursor-pointer h-[100px] bg-white py-4 px-4 rounded-lg border border-opacity-5 border-black flex flex-col grid gap-2"
                       >
-                        <div className="flex flex-row">
-                          <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
-                            <img
-                              className="relative"
-                              src={legacyFeaturedImage?.logoNew}
-                            />
-                          </div>
-                          <div className="flex flex-col grid gap-2">
-                            <p className="text-sm font-inter">{title}</p>
+                        <Link href={`/toolbox/${slug}`}>
+                          <div className="flex flex-row">
+                            <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
+                              <img
+                                className="relative"
+                                src={legacyFeaturedImage?.logoNew}
+                              />
+                            </div>
+                            <div className="flex flex-col grid gap-2">
+                              <p className="text-sm font-inter">{title}</p>
 
-                            {/* <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex grid gap-1 w-full ">
-                              <div className="flex grid gap-2">
-                                {tags?.data?.map((x, i) => {
-                                  const item = x?.attributes;
+                              {/* <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex grid gap-1 w-full ">
+                                <div className="flex grid gap-2">
+                                  {tags?.data?.map((x, i) => {
+                                    const item = x?.attributes;
 
-                                  return (
-                                    <span
-                                      key={i}
-                                      className={`px-3 block rounded-sm bg-gray-200 font-inter cursor-pointer min-w-max cursor w-full text-[10px] py-[2px] `}
-                                    >
-                                      {item.name}
-                                    </span>
-                                  );
-                                })}
-                              </div>
-                            </div> */}
+                                    return (
+                                      <span
+                                        key={i}
+                                        className={`px-3 block rounded-sm bg-gray-200 font-inter cursor-pointer min-w-max cursor w-full text-[10px] py-[2px] `}
+                                      >
+                                        {item.name}
+                                      </span>
+                                    );
+                                  })}
+                                </div>
+                              </div> */}
+                            </div>
                           </div>
-                        </div>
+                        </Link>
                       </div>
                     );
                   })}
@@ -279,12 +253,12 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                   <h3 className="font-inter my-1 font-medium text-sm">
                     {title}
                   </h3>
-                  <a
+                  <Link
                     href={type === "jobs" ? "/jobs" : "/toolbox"}
                     className="font-inter text-sm text-gray-500 cursor-pointer"
                   >
                     See more {title} {"->"}
-                  </a>
+                  </Link>
                 </div>
                 <div className="flex flex-col grid gap-4 my-2">
                   {slicedList.map((item, i) => {
@@ -292,11 +266,13 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                       title,
                       companyName,
                       salaryText,
+                      id,
                       companyLogo,
                       locations,
                     } = item;
                     return (
                       <>
+                      <Link href={`/jobs/${id}`}>
                         <div
                           key={i}
                           className="w-full h-auto cursor-pointer flex flex-col"
@@ -319,11 +295,12 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                             <div className="border-b border-black border-opacity-10 w-[100%] mx-auto"></div>
                           )} */}
                         </div>
+                        </Link>
                       </>
                     );
                   })}
                 </div>
-                <a
+                <Link
                   href={"/jobs/post"}
                   className="w-full flex flex-row justify-end font-inter text-gray-500 hover:underline cursor-pointer my-2"
                 >
@@ -331,14 +308,13 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                     <div className="mr-1">Hiring? Post a Job</div>
                     <div>{"->"}</div>
                   </div>
-                </a>
+                </Link>
               </div>
             )}
           </div>
         </div>
       </aside>
     </div>
-    {/* </Waypoint> */}
     </div>
   );
 };
