@@ -99,15 +99,20 @@ const SponsorCard = ({ data }) => {
 const PrototyprNetworkCTA = ({ data }) => {
   return (
     <div className="flex flex-col gap-1 justify-end items-end">
-      <div className="w-full rounded-[12px] h-auto bg-white p-6 flex flex-col gap-3 ">
+      <div className="w-full rounded-[12px] h-auto bg-white border border-black border-opacity-10 p-6 flex flex-col gap-3 ">
         <div className="flex flex-col gap-2">
           <p className="text-black text-2xl font-inter">
             An Open Platform <br /> for Writers
           </p>
-          <div>
+          <div className="flex flex-row ">
             <a href="/write">
-              <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm">
+              <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 hover:bg-blue-400 text-sm">
                 Start Writing
+              </button>
+            </a>
+            <a href="/post/write-for-us">
+              <button className="px-4 ml-2 py-2 text-black rounded-lg font-inter bg-gray-200 hover:bg-gray-100 text-sm">
+                Learn more
               </button>
             </a>
           </div>
@@ -355,6 +360,7 @@ export default function Index({
           <div className="w-full h-full grid grid-cols-8 gap-1  ">
             <div className="flex flex-col pt-28 pb-20 gap-2 col-span-8 lg:col-span-6  md:pr-4 py-10">
               {/* <HomePageNewNavBar /> */}
+
               <TabSwitchter
                 selectedTab={currentTab}
                 onTabChange={onTabChange}

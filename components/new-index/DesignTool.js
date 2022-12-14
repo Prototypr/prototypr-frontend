@@ -11,6 +11,18 @@ import Button from "../Primitives/Button";
 
 const ITEM_WIDTH = 300;
 
+const colors = ["#345FF8", "#44BFFB", "#FD88F1", "#FFCC44"];
+
+function repeatFor(arr, size) {
+  var newArr = new Array(size);
+
+  for (var i = 0; i < size; i++) {
+    newArr[i] = arr[i % arr.length];
+  }
+
+  return newArr;
+}
+
 export default function DesignTool({ allTools = [] }) {
   const intl = useIntl();
   const locale = intl.locale ? intl.locale : "en-US";
@@ -84,37 +96,48 @@ export default function DesignTool({ allTools = [] }) {
       scroll.refresh();
     }
   };
+
+  let arrayColor = repeatFor(colors, allTools.length);
+
   return (
-    <div className="bg-white py-10 border-t border-b border-opacity-10 px-10">
-      <div className="max-w-7xl mx-auto mb-6 flex flex-col grid gap-2">
-        <div>
-          <h2 className="text-lg text-black font-medium font-inter">
-            Prototypr Toolbox
-          </h2>
-          <p className="text-base text-[#808080] font-inter">
-            Find tools, make your thing.
+    <div className="bg-white pt-32 pb-16 h-auto  rounded-[50px]  px-10">
+      <div className="flex flex-row flex-wrap w-full justify-between max-w-7xl mx-auto mb-10">
+        <div className=" mb-6 flex flex-col gap-7 my-10">
+          <div>
+            <h2 className="text-[40px] leading-[50px] md:text-[60px] max-w-lg md:leading-[68px] text-black font-bold font-inter">
+              Best Tools for your Design Workflow.
+            </h2>
+          </div>
+          <div className="flex flex-row flex-wrap gap-2">
+            <button className="px-8 mr-3 py-5 font-medium bg-[#345FF8] rounded-2xl text-sm text-white font-inter">
+              Submit Tool
+            </button>
+            <button className="px-8 py-5 bg-[#67CBFC] font-medium rounded-2xl text-sm text-white font-inter">
+              Open Toolbox
+            </button>
+          </div>
+        </div>
+        <img
+          src={
+            "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/7432cc558c73394df5d2c21a3ee18cd5.png?updated_at=2022-12-14T17:59:46.805Z"
+          }
+        />
+      </div>
+
+      <div>
+        <div className="max-w-7xl mx-auto my-4">
+          <p className="text-[20px] max-w-lg text-medium font-semibold font-inter">
+            Recent Tools {"->"}
           </p>
         </div>
-        <div className="flex flex-row">
-          <button className="px-5 mr-3 py-2 bg-blue-400 rounded-md text-sm text-white font-inter">
-            Submit Tool
-          </button>
-          <button className="px-5 py-2 bg-blue-900 rounded-md text-sm text-white font-inter">
-            Open Toolbox
-          </button>
-        </div>
       </div>
-      <div
-        className="hidden md:block z-10 w-full relative h-40 max-w-7xl mx-auto"
-        // style={{ maxWidth: "1600px" }}
-      >
-        {/**button block is within container */}
+
+      <div className="block z-10 w-full relative h-[350px] max-w-7xl mx-auto">
         <div className="container relative mx-auto flex items-center justify-between h-full">
-          {/** 64 * 64 */}
           <div
             tabIndex={0}
             id="prev"
-            className="w-12 h-12 rounded-full z-50 bg-blue-600 flex items-center justify-center cursor-pointer "
+            className="w-12 h-12 rounded-full z-50 bg-black flex items-center justify-center cursor-pointer "
             onKeyDown={keyboardPrev}
             onClick={() => navHis(-1)}
           >
@@ -123,7 +146,7 @@ export default function DesignTool({ allTools = [] }) {
           <div
             tabIndex={0}
             id="next"
-            className="w-12 h-12 rounded-full z-50 bg-blue-600 flex items-center justify-center cursor-pointer"
+            className="w-12 h-12 rounded-full z-50 bg-black flex items-center justify-center cursor-pointer"
             onKeyDown={keyboardNext}
             onClick={() => navHis(1)}
           >
@@ -134,57 +157,66 @@ export default function DesignTool({ allTools = [] }) {
           ref={wrapper}
           className="absolute left-0 h-full w-full top-0  pb-1 overflow-hidden no-scrollbar"
         >
-          <div ref={cont} className="relative flex h-full">
+          <div ref={cont} className="relative flex flex-row gap-5 h-full">
             {allTools.length
               ? allTools.map((item, index) => {
                   const showItem = item?.attributes;
+
                   return (
-                    <div
-                      key={`h_item_${index}`}
-                      style={{ width: `${ITEM_WIDTH}px` }}
-                      className="h-auto mr-5 border border-opacity-5 border-black transition duration-200 rounded-xl bg-white px-4 pt-4 flex flex-col cursor-pointer"
-                    >
-                      <div className=" flex flex-col grid gap-2 justify-between">
-                        <div className="w-12 h-12 border relative border-opacity-5 rounded-xl border-black overflow-hidden">
-                          {showItem.legacyFeaturedImage.logoNew && (
-                            <Image
-                              loader={gumletLoader}
-                              className=""
-                              objectFit="cover"
-                              layout="fill"
-                              src={showItem.legacyFeaturedImage.logoNew}
-                            />
-                          )}
-                        </div>
-                        <div className="w-full flex flex-col grid gap-1">
-                          <div className="text-gray-1 font-inter hover:underline truncate text-base font-medium">
-                            <Link href={`/toolbox/${showItem.slug}`}>
-                              {showItem.title}
-                            </Link>
-                          </div>
-                          {showItem.tags?.data[0] && (
-                            <div>
-                              <span className="font-normal text-xs bg-gray-100 px-5 py-1 border border-opacity-5 border-black rounded-full w-auto text-gray-500">
-                                {showItem.tags?.data[0].attributes?.name}
-                              </span>
+                    <Link href={`/toolbox/${showItem.slug}`}>
+                      <div
+                        key={`h_item_${index}`}
+                        style={{
+                          width: `${ITEM_WIDTH}px`,
+                          backgroundColor: arrayColor[index],
+                        }}
+                        className="h-[310px] rounded-[18px]  p-6 pt-10"
+                      >
+                        <div className="flex flex-col gap-3">
+                          <div className="flex flex-col gap-1">
+                            <p className="text-white text-xs font-semibold">
+                              #{index + 1}
+                            </p>
+
+                            <div className="h-auto my-3">
+                              <div className="overflow-x-scroll overflow-y-hidden no-scrollbar flex w-full ">
+                                <div className="flex flex-row gap-2">
+                                  {showItem.tags?.data.map((tab) => {
+                                    return (
+                                      <span
+                                        className={`px-5 py-2 block text-[12px] bg-white bg-opacity-20 capitalize text-white font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full  rounded-full`}
+                                      >
+                                        {tab.attributes.name}
+                                      </span>
+                                    );
+                                  })}
+                                </div>
+                              </div>
                             </div>
-                          )}
+                          </div>
+
+                          <div>
+                            <h3 className="font-inter text-[20px] font-bold text-white line-clamp-1 flex flex-row gap-3">
+                              {" "}
+                              {showItem.title}
+                            </h3>
+                            <p className="line-clamp-3 font-normal text-white text-opacity-60 text-[14px] leading-[22px] font-inter">
+                              {" "}
+                              {showItem.excerpt}
+                            </p>
+                          </div>
+                          <button className="w-full bg-white text-sm text-black rounded-md font-inter py-3 px-5">
+                            Show Tool
+                          </button>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })
               : null}
           </div>
         </div>
       </div>
-      {/* <div className="hidden bg-gray-4 w-full relative md:flex items-center justify-center pt-14 pb-24 md:pb-32">
-        <Link href="/toolbox/page/1">
-          <Button variant="ghostBlue" className="h-14 w-52 rounded-lg">
-            {intl.formatMessage({ id: "designtool.button.browsemore" })}
-          </Button>
-        </Link>
-      </div> */}
     </div>
   );
 }
