@@ -38,6 +38,8 @@ const slideLeftAndFade = keyframes({
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
   minWidth: 220,
   backgroundColor: "white",
+  top: "-30px",
+  left: "-40px",
   borderRadius: 6,
   padding: 5,
   boxShadow:
@@ -212,7 +214,13 @@ export const DropdownMenuDemo = ({ icon, user }) => {
           <IconButton aria-label="Customise options">{icon}</IconButton>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent sideOffset={5}>
+        <DropdownMenuContent
+          side={"bottom"}
+          align={"center"}
+          alignOffset={-10}
+          avoidCollisions={true}
+          sideOffset={-36}
+        >
           <DropdownMenuItem
             onSelect={() => {
               router.push("/dashboard/drafts");
@@ -284,37 +292,39 @@ export const DropdownMenuDemo = ({ icon, user }) => {
             {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
 
-          {user?.isAdmin && 
-          <>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onSelect={() => {
-              router.push(`/admin/drafts`);
-            }}
-          >
-            👩‍✈️ Admin
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => {
-              window.open(`https://api.prototypr.io/admin/content-manager/collectionType/api::post.post?page=1&pageSize=10&sort=date:DESC&plugins[i18n][locale]=en`);
-            }}
-          >
-           👾 Strapi
-          </DropdownMenuItem>
-          </>
-          }
-          {user?.companies?.length && 
-          <>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onSelect={() => {
-              router.push(`/dashboard/partner`);
-            }}
-          >
-           💙 Partners
-          </DropdownMenuItem>
-          </>
-          }
+          {user?.isAdmin && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onSelect={() => {
+                  router.push(`/admin/drafts`);
+                }}
+              >
+                👩‍✈️ Admin
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onSelect={() => {
+                  window.open(
+                    `https://api.prototypr.io/admin/content-manager/collectionType/api::post.post?page=1&pageSize=10&sort=date:DESC&plugins[i18n][locale]=en`
+                  );
+                }}
+              >
+                👾 Strapi
+              </DropdownMenuItem>
+            </>
+          )}
+          {user?.companies?.length && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onSelect={() => {
+                  router.push(`/dashboard/partner`);
+                }}
+              >
+                💙 Partners
+              </DropdownMenuItem>
+            </>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onSelect={async () => {

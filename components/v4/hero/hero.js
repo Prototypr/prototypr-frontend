@@ -4,36 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const img1 =
-  "https://i.pinimg.com/474x/0e/48/0e/0e480e53e54f4c08f2af5899051c653b.jpg";
-
-const img2 =
-  "https://prototyprio.gumlet.io/strapi/8792f817d423d392ab9139ba41b92d8a.webp?w=384&q=75&format=webp&compress=true&dpr=2";
-
-const img3 =
-  "https://i.pinimg.com/474x/1f/d3/60/1fd3601b9937f89e727aec5d04c1edd4.jpg";
-
-const img4 =
-  "https://i.pinimg.com/474x/a4/54/7f/a4547f64df62554f4735b53357240b35.jpg";
-
-const img5 =
-  "https://i.pinimg.com/474x/7e/3a/20/7e3a207f605da5b2dca934284407bf86.jpg";
-
-const img6 =
-  "https://i.pinimg.com/474x/65/bc/8d/65bc8dfdc0019d5670d167b1a5d86c34.jpg";
-
-const img7 =
-  "https://i.pinimg.com/474x/3b/e7/eb/3be7eb7937b70a55431daf30e60cb796.jpg";
-
 const placeholderAuthorImg =
   "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png?w=3840&q=75&format=auto&compress=true&dpr=2";
 
 const AuthorCard = ({ data }) => {
-  //   console.log(
-  //     data?.attributes.firstName,
-  //     data?.attributes?.legacyAvatar,
-  //     data?.attributes?.avatar
-  //   );
   const profileImg = data?.attributes?.avatar?.data?.attributes?.url;
 
   return (
@@ -69,34 +43,11 @@ const MetaInfo = ({ tags = [] }) => {
   const tagContent = tags?.data || [];
   return (
     <div className="flex flex-row justify-between">
-      {/* {tagContent?.map((tag) => {
-        const n = tag?.attributes.name || "";
-        return (
-          <span className="text-xs  font-inter px-6 py-2  bg-orange-100 text-black rounded-full">
-            {n}
-          </span>
-        );
-      })} */}
-
       {tagContent[0]?.attributes?.name && (
-        <span
-          //   style={{
-          //     boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.10)",
-          //   }}
-          className="text-xs capitalize  font-inter px-4 py-2 border border-black border-opacity-5  bg-black bg-opacity-5 text-black rounded-full"
-        >
+        <span className="text-xs capitalize  font-inter px-4 py-2 border border-black border-opacity-5  bg-black bg-opacity-5 text-black rounded-full">
           {tagContent[0]?.attributes?.name}
         </span>
       )}
-      {/* 
-      <span
-        style={{
-          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.10)",
-        }}
-        className="text-xs font-normal text-gray-600 font-inter px-3 py-2 rounded-full"
-      >
-        Aug 30,2022
-      </span> */}
     </div>
   );
 };
@@ -104,7 +55,7 @@ const MetaInfo = ({ tags = [] }) => {
 const Credits = () => {
   return (
     <p className="px-4 py-1 bg-opacity-50 backdrop-blur-md bg-white absolute rounded-full bottom-5 right-5 text-[10px]">
-      Artwork by @Ziggy
+      Artwork by @prototypr
     </p>
   );
 };
@@ -128,27 +79,29 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
   return (
     <a
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
-      className="w-full h-[330px] flex flex-row bg-white border-opacity-[4%] border-black hover:border col-span-2 rounded-[14px] overflow-hidden border hover:shadow-none cursor-pointer"
+      className="w-full h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] border-black hover:border col-span-2 rounded-[14px] overflow-hidden border hover:shadow-none cursor-pointer"
     >
-      <div
-        style={{
-          backgroundImage: `url(${coverImage || null})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-        }}
-        className="w-full h-full bg-gray-200 relative"
-      >
-        {/* <Credits /> */}
+      <div className="w-full h-[250px] sm:h-full bg-gray-200 relative">
+        <Image
+          loader={gumletLoader}
+          priority={`true`}
+          data-priority={`true`}
+          objectFit="cover"
+          layout="fill"
+          data-gmlazy={`false`}
+          className="object-cover relative w-full h-full overflow-hidden"
+          src={coverImage || "/static/images/placeholder/letter-ad.png"}
+        />
       </div>
       <div className="w-full h-full p-8 flex flex-col justify-between">
         <div className="flex flex-col gap-3">
           <MetaInfo
             tags={type === "regular" ? data?.attributes?.tags : data.tags || []}
           />
-          <h1 className="text-lg leading-[27px] font-medium font-inter">
+          <h1 className="text-lg leading-[27px] text-[#222] tracking-tight font-medium font-inter line-clamp-2">
             {type === "regular" ? data?.attributes?.title : data?.title}
           </h1>
-          <p className="text-base leading-[24px] font-inter h-[70px] overflow-clip text-[#626A6E] tracking-[-2%]">
+          <p className="text-base leading-[24px] font-inter  overflow-clip text-[#626A6E] tracking-[-2%] line-clamp-3">
             {type === "regular" ? data?.attributes?.excerpt : data?.excerpt}
           </p>
         </div>
@@ -162,7 +115,7 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
   );
 };
 
-const SmallCardWithImage = ({ src = img2, data, type }) => {
+const SmallCardWithImage = ({ src, data, type }) => {
   let post = data?.attributes;
   let coverImage;
   if (type === "regular") {
@@ -180,29 +133,17 @@ const SmallCardWithImage = ({ src = img2, data, type }) => {
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
       className="w-full min-h-[330px] bg-white  border-opacity-[4%] border-black hover:border  rounded-[14px] flex flex-col overflow-hidden border  hover:shadow-none cursor-pointer"
     >
-      {/* <div
-        style={{
-          backgroundImage: `url(${coverImage || ""})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-        }}
-        className="w-full h-[50%] max-h-[135px] bg-gray-200 relative"
-      > */}
-        {/* <Credits /> */}
-      {/* </div> */}
-      <div
-        className="w-full h-[135px] max-h-[135px] bg-gray-200 relative"
-      > 
-      <Image
-        loader={gumletLoader}
-        priority={`true`}
-        data-priority={`true`}
-        objectFit="cover"
-        layout="fill"
-        data-gmlazy={`false`}
-        className="object-cover relative w-full h-full overflow-hidden"
-        src={coverImage||'/static/images/placeholder/letter-ad.png'}
-      />
+      <div className="w-full h-[135px] max-h-[135px] bg-gray-200 relative">
+        <Image
+          loader={gumletLoader}
+          priority={`true`}
+          data-priority={`true`}
+          objectFit="cover"
+          layout="fill"
+          data-gmlazy={`false`}
+          className="object-cover relative w-full h-full overflow-hidden"
+          src={coverImage || "/static/images/placeholder/letter-ad.png"}
+        />
       </div>
 
       <div className="w-full h-auto flex flex-col gap-4 p-5 ">
@@ -210,7 +151,7 @@ const SmallCardWithImage = ({ src = img2, data, type }) => {
           tags={type === "regular" ? data?.attributes?.tags : data.tags || []}
         />
         <div className="flex flex-col ">
-          <h1 className="text-lg leading-[27px] font-medium font-inter h-[56px] overflow-clip m-0 p-0 tracking-tight">
+          <h1 className="text-lg leading-[27px] text-[#222] font-medium font-inter m-0 p-0 tracking-tight line-clamp-2">
             {type === "regular" ? post?.title : data?.title}
           </h1>
         </div>
@@ -234,25 +175,27 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
     <div className="flex flex-col flex-nowrap gap-2">
       <div className="flex flex-col gap-8">
         <div className="w-full h-auto flex flex-col sm:grid sm:grid-cols-1 md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
-          <LargeCardWithImage type={type} data={hero} src={img1} />
-          
-          
-          <div
-            className="w-full relative cursor-pointer overflow-hidden rounded-[10px] flex items-end"
-          >
-          <a href={sponsor?.link?sponsor.link:'https://letter.so'} target="_blank">
-          <Image
-            loader={gumletLoader}
-            priority={`true`}
-            data-priority={`true`}
-            objectFit="cover"
-            layout="fill"
-            data-gmlazy={`false`}
-            className="object-cover relative w-full h-full overflow-hidden rounded-[10px]"
-            src={sponsor?.featuredImage?sponsor.featuredImage:'/static/images/placeholder/letter-ad.png'}
-          />
-          </a>
+          <LargeCardWithImage type={type} data={hero} />
 
+          <div className="w-full relative cursor-pointer overflow-hidden rounded-[10px] flex items-end">
+            <a
+              href={sponsor?.link ? sponsor.link : "https://letter.so"}
+              target="_blank"
+            >
+              <Image
+                loader={gumletLoader}
+                priority={`true`}
+                data-priority={`true`}
+                fill={true}
+                data-gmlazy={`false`}
+                className="object-cover relative w-full h-full overflow-hidden rounded-[10px]"
+                src={
+                  sponsor?.featuredImage
+                    ? sponsor.featuredImage
+                    : "/static/images/placeholder/letter-ad.png"
+                }
+              />
+            </a>
           </div>
         </div>
 
@@ -269,15 +212,15 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
               <SignupHomepage />
             </div>
           </div>
-          <SmallCardWithImage type={type} data={secondRowPost} src={img7} />
+          <SmallCardWithImage type={type} data={secondRowPost} />
         </div>
 
         <div className="w-full h-auto flex flex-col flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
           {gridPosts.map((post, index) => {
             return index === 4 ? (
-              <LargeCardWithImage type={type} data={post} src={img6} />
+              <LargeCardWithImage type={type} data={post} />
             ) : (
-              <SmallCardWithImage type={type} data={post} src={img2} />
+              <SmallCardWithImage type={type} data={post} />
             );
           })}
         </div>

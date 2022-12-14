@@ -27,6 +27,7 @@
     "@reach/dialog": "^0.17.0",
     "@stitches/react": "^1.2.8",
     "@supabase/supabase-js": "^2.0.0",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@tippyjs/react": "^4.2.6",
     "@tiptap/extension-blockquote": "^2.0.0-beta.199",
     "@tiptap/extension-bold": "^2.0.0-beta.28",

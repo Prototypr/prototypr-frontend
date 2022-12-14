@@ -1,5 +1,6 @@
 import Meta from "../meta";
 import Navbar from "../Navbar/Navbar";
+import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 
 // export default function Layout({
 //   preview,
@@ -31,7 +32,8 @@ export default function Layout({
   return (
     <>
       <Meta seo={seo} />
-      <Navbar activeNav={activeNav} />
+      {/* <Navbar activeNav={activeNav} /> */}
+      {/* <HomePageNewNavBar /> */}
 
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}

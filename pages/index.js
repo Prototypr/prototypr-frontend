@@ -10,15 +10,14 @@ const Footer = dynamic(() => import("@/components/footer"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 
 import { getAllJobs } from "@/lib/api";
-
-import useUser from "@/lib/iron-session/useUser";
+import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 
 import {
   getCombinedPostsForHome,
   getAllToolsForHome,
   getRandomPostsForHome,
   getCommonQuery,
-  getActiveSponsors
+  getActiveSponsors,
 } from "@/lib/api";
 import { useIntl } from "react-intl";
 import { transformPostListOld } from "@/lib/locale/transformLocale";
@@ -100,13 +99,13 @@ const SponsorCard = ({ data }) => {
 const PrototyprNetworkCTA = ({ data }) => {
   return (
     <div className="flex flex-col gap-1 justify-end items-end">
-      <div className="w-full rounded-[12px] h-auto bg-[#fff] p-6 flex flex-col gap-3 ">
+      <div className="w-full rounded-[12px] h-auto bg-[#245FEB] p-6 flex flex-col gap-3 ">
         <div className="flex flex-col gap-2">
-          <p className="text-black text-2xl font-inter">
-            A Network <br /> for Writers
+          <p className="text-white text-2xl font-inter">
+            An Open Platform <br /> for Writers
           </p>
           <div>
-            <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-600 text-sm">
+            <button className="px-4 py-2 text-black rounded-lg font-inter bg-[#fff] text-sm">
               Start Writing
             </button>
           </div>
@@ -115,26 +114,6 @@ const PrototyprNetworkCTA = ({ data }) => {
           className="w-full"
           src="/static/images/proto-little-peeps.svg"
         ></img>
-      </div>
-    </div>
-  );
-};
-
-const NavBar = () => {
-  return (
-    <div className="h-[50px] my-0">
-      <div className="overflow-x-scroll overflow-y-hidden no-scrollbar flex w-full ">
-        <div className="flex">
-          {["Home", "Jobs", "Toolbox"].map((tab) => {
-            return (
-              <span
-                className={`px-10 py-4 block font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full text-base mx-2 rounded-full bg-transparent text-gray-500 border border-black border-opacity-40`}
-              >
-                {tab}
-              </span>
-            );
-          })}
-        </div>
       </div>
     </div>
   );
@@ -178,7 +157,9 @@ const Sidebar = ({ title, content = [], type }) => {
     <div className="relative min-h-screen col-span-2 hidden lg:block">
       <aside className=" border-l border-opacity-20 h-screen px-5  sticky top-0 py-0">
         <div className="flex flex-col gap-10 py-10">
-          <PrototyprNetworkCTA data={sponsorData} />
+          <div className={type === "jobs" ? "mt-[164px]" : "mt-0"}>
+            <PrototyprNetworkCTA data={sponsorData} />
+          </div>
           <div className="w-full flex flex-col gap-2">
             {type === "tools" && (
               <>
@@ -361,6 +342,8 @@ export default function Index({
           {/* <Intro /> */}
           <div className="w-full h-full grid grid-cols-8 gap-1  ">
             <div className="flex flex-col pb-20 gap-2 col-span-8 lg:col-span-6  pr-4 py-10">
+              <HomePageNewNavBar />
+
               {/* <NavBar /> */}
               <TabSwitchter
                 selectedTab={currentTab}
@@ -368,7 +351,7 @@ export default function Index({
               />
               <HeroGrid
                 postData={{ hero: heroCardPost, posts: viewablePosts }}
-                sponsor={sponsors?.length?sponsors[0]:null}
+                sponsor={sponsors?.length ? sponsors[0] : null}
               />
             </div>
 
@@ -389,7 +372,9 @@ export default function Index({
                   hero: HeroPostRandomSection[0],
                   posts: OtherPostsRandomSection,
                 }}
-                sponsor={(sponsors?.length && sponsors.length>1)?sponsors[1]:null}
+                sponsor={
+                  sponsors?.length && sponsors.length > 1 ? sponsors[1] : null
+                }
               />
             </div>
 
@@ -412,11 +397,10 @@ export async function getStaticProps({ preview = null, locale }) {
   let randomPosts = (await getRandomPostsForHome()) || [];
   let allTools =
     (await getAllToolsForHome(preview, PAGE_SIZE, 0, ["date:desc"])) || [];
-  // let otherPosts = (await getCombinedPostsForHome(preview, 9, 8, sort)) || [];
-  // const interviews =(await getCommonQuery(preview, ["interview"], "article", 4, 0, sort)) || [];
+
   let jobs = (await getAllJobs(null, 4, 1)) || [];
 
-  let sponsors = await getActiveSponsors()
+  let sponsors = await getActiveSponsors();
 
   let topicRes = {};
 
@@ -441,7 +425,7 @@ export async function getStaticProps({ preview = null, locale }) {
       preview,
       jobs,
       randomPosts: randomPosts.slice(0, 7),
-      sponsors:sponsors?.posts?.length?sponsors?.posts:[]
+      sponsors: sponsors?.posts?.length ? sponsors?.posts : [],
     },
     revalidate: 20,
   };
