@@ -79,7 +79,8 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
   return (
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
-      className="w-full h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] border-black hover:border col-span-2 rounded-[14px] overflow-hidden border hover:shadow-none cursor-pointer"
+      style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
+      className="w-full h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] col-span-2 rounded-[20px] overflow-hidden  hover:shadow-none cursor-pointer"
     >
       <div className="w-full h-[250px] sm:h-full bg-gray-200 relative">
         <Image
@@ -131,7 +132,8 @@ const SmallCardWithImage = ({ src, data, type }) => {
   return (
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
-      className="w-full mb-8 sm:mb-0 min-h-[330px] bg-white  border-opacity-[4%] border-black hover:border  rounded-[14px] flex flex-col overflow-hidden border  hover:shadow-none cursor-pointer"
+      style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
+      className="w-full mb-8 sm:mb-0 min-h-[330px] bg-white  border-opacity-[4%] border-black  rounded-[16px] flex flex-col overflow-hidden cursor-pointer"
     >
       <div className="w-full h-[135px] max-h-[135px] bg-gray-200 relative">
         <Image
