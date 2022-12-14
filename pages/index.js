@@ -157,7 +157,16 @@ const Sidebar = ({ title, content = [], type }) => {
     <div className="relative min-h-screen col-span-2 hidden lg:block">
       <aside className=" border-l border-opacity-20 h-screen px-5  sticky top-0 py-0">
         <div className="flex flex-col grid gap-10 py-10">
-          <PrototyprNetworkCTA data={sponsorData} />
+          {type === "jobs" ? (
+            <div className="mt-[164px]">
+              <PrototyprNetworkCTA data={sponsorData} />
+            </div>
+          ) : (
+            <div className="mt-[0]">
+              <PrototyprNetworkCTA data={sponsorData} />
+            </div>
+          )}
+
           <div className="w-full flex flex-col grid gap-2">
             {type === "tools" && (
               <>
