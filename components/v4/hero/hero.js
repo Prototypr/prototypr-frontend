@@ -232,7 +232,7 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
 
   return (
     <div className="flex flex-col flex-nowrap gap-2">
-      <div className="flex flex-col space-y-8">
+      <div className="flex flex-col grid gap-8">
         <div className="w-full h-auto flex flex-col sm:grid sm:grid-cols-1 md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
           <LargeCardWithImage type={type} data={hero} src={img1} />
           
@@ -265,14 +265,14 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
               Join 25,000+ creatives to enjoy a regular dose of inspiration and
               motivation, delivered to your inbox every Tuesday.
             </p>
-            <div className="flex flex-col grid gap-4 ">
+            <div className="flex flex-col md:grid grid gap-4 ">
               <SignupHomepage />
             </div>
           </div>
           <SmallCardWithImage type={type} data={secondRowPost} src={img7} />
         </div>
 
-        <div className="w-full h-auto flex flex-col flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
+        <div className="w-full -mt-8 md:mt-0 h-auto flex flex-col md:grid flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] gap-8">
           {gridPosts.map((post, index) => {
             return index === 4 ? (
               <LargeCardWithImage type={type} data={post} src={img6} />
