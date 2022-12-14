@@ -158,7 +158,7 @@ const UserForm = ({ info }) => {
       </div>
       </div>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col grid gap-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormControl inValid={!!errors.firstName}>
             <label htmlFor="firstName" className="text-sm">

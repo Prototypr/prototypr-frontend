@@ -71,13 +71,13 @@ const PAGE_SIZE = 12;
 
 const SponsorCard = ({ data }) => {
   return (
-    <div className="flex flex-col gap-1 justify-end items-end">
+    <div className="flex flex-col grid gap-1 justify-end items-end">
       <a href={data.url} target="_blank" className="w-full">
         <div className="w-full rounded-[12px] h-auto bg-white border border-opacity-10 p-3 grid grid-cols-3 gap-2">
           <div className="w-20 h-20 relative bg-gray-100 rounded-lg overflow-hidden col-span-1">
             <img src={data.src} />
           </div>
-          <div className="w-full col-span-2 flex flex-col gap-1">
+          <div className="w-full col-span-2 flex flex-col grid gap-1">
             <p className="w-auto max-w-[150px] text-[#6B6B6B] font-medium tracking-[-0.1px] text-[13px] font-inter ">
               {data.heading}
             </p>
@@ -156,11 +156,9 @@ const Sidebar = ({ title, content = [], type }) => {
   return (
     <div className="relative min-h-screen col-span-2 hidden lg:block">
       <aside className=" border-l border-opacity-20 h-screen px-5  sticky top-0 py-0">
-        <div className="flex flex-col gap-10 py-10">
-          <div className={type === "jobs" ? "mt-[164px]" : "mt-0"}>
-            <PrototyprNetworkCTA data={sponsorData} />
-          </div>
-          <div className="w-full flex flex-col gap-2">
+        <div className="flex flex-col grid gap-10 py-10">
+          <PrototyprNetworkCTA data={sponsorData} />
+          <div className="w-full flex flex-col grid gap-2">
             {type === "tools" && (
               <>
                 <div className="flex flex-row justify-between items-baseline">
@@ -174,27 +172,27 @@ const Sidebar = ({ title, content = [], type }) => {
                     See more {title} {"->"}
                   </a>
                 </div>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col grid gap-3">
                   {slicedList.map((item, i) => {
                     const { title, legacyFeaturedImage, tags } =
                       item.attributes;
                     return (
                       <div
                         key={i}
-                        className="w-full h-[100px] bg-white py-4 px-4 rounded-lg border border-opacity-5 border-black flex flex-col gap-2"
+                        className="w-full h-[100px] bg-white py-4 px-4 rounded-lg border border-opacity-5 border-black flex flex-col grid gap-2"
                       >
-                        <div className="flex flex-row gap-2">
-                          <div className="w-12 h-12 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
+                        <div className="flex flex-row">
+                          <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
                             <img
                               className="relative"
                               src={legacyFeaturedImage?.logoNew}
                             />
                           </div>
-                          <div className="flex flex-col gap-2">
+                          <div className="flex flex-col grid gap-2">
                             <p className="text-sm font-inter">{title}</p>
 
-                            {/* <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex gap-1 w-full ">
-                              <div className="flex gap-2">
+                            {/* <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex grid gap-1 w-full ">
+                              <div className="flex grid gap-2">
                                 {tags?.data?.map((x, i) => {
                                   const item = x?.attributes;
 
@@ -231,7 +229,7 @@ const Sidebar = ({ title, content = [], type }) => {
                     See more {title} {"->"}
                   </a>
                 </div>
-                <div className="flex flex-col gap-4 my-2">
+                <div className="flex flex-col grid gap-4 my-2">
                   {slicedList.map((item, i) => {
                     const {
                       title,
@@ -246,11 +244,11 @@ const Sidebar = ({ title, content = [], type }) => {
                           key={i}
                           className="w-full h-auto cursor-pointer flex flex-col"
                         >
-                          <div className="flex flex-row gap-2 bg-white  p-4 rounded-lg">
-                            <div className="w-12 h-12 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
+                          <div className="flex flex-row bg-white  p-4 rounded-lg">
+                            <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
                               <img className="relative" src={companyLogo} />
                             </div>
-                            <div className="flex flex-col gap-1 justify-center">
+                            <div className="flex flex-col grid gap-1 justify-center">
                               <p className="text-xs font-inter">{title}</p>
                               <div className="flex flex-row gap-1 text-xs text-gray-500">
                                 <p className=" font-inter">{companyName},</p>
@@ -272,7 +270,10 @@ const Sidebar = ({ title, content = [], type }) => {
                   href={"/jobs/post"}
                   className="w-full flex flex-row justify-end font-inter text-gray-500 hover:underline cursor-pointer my-2"
                 >
-                  <span className="text-xs">Hiring? Post a Job {"->"}</span>
+                  <div className="text-xs inline-flex">
+                    <div className="mr-1">Hiring? Post a Job</div>
+                    <div>{"->"}</div>
+                  </div>
                 </a>
               </div>
             )}
@@ -341,10 +342,8 @@ export default function Index({
         <Container>
           {/* <Intro /> */}
           <div className="w-full h-full grid grid-cols-8 gap-1  ">
-            <div className="flex flex-col pb-20 gap-2 col-span-8 lg:col-span-6  pr-4 py-10">
+            <div className="flex flex-col pb-20 gap-2 col-span-8 lg:col-span-6  md:pr-4 py-10">
               <HomePageNewNavBar />
-
-              {/* <NavBar /> */}
               <TabSwitchter
                 selectedTab={currentTab}
                 onTabChange={onTabChange}
@@ -365,7 +364,7 @@ export default function Index({
 
         <Container>
           <div className="w-full h-full  grid grid-cols-8 gap-1">
-            <div className="flex flex-col gap-4 col-span-8 lg:col-span-6   pr-4 py-10">
+            <div className="flex flex-col grid gap-4 col-span-8 lg:col-span-6 md:pr-4 py-10">
               <HeroGrid
                 type="random"
                 postData={{

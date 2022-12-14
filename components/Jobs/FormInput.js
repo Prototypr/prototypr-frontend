@@ -2,7 +2,7 @@ export const FormInput = ({ children, id, label, error }) => {
   const err = error[id];
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col grid gap-2">
       <label for={id} className="text-md font-medium">
         {label}
       </label>

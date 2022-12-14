@@ -86,7 +86,7 @@ export default function DesignTool({ allTools = [] }) {
   };
   return (
     <div className="bg-white py-10 border-t border-b border-opacity-10 px-10">
-      <div className="max-w-7xl mx-auto mb-6 flex flex-col gap-2">
+      <div className="max-w-7xl mx-auto mb-6 flex flex-col grid gap-2">
         <div>
           <h2 className="text-lg text-black font-medium font-inter">
             Prototypr Toolbox
@@ -95,8 +95,8 @@ export default function DesignTool({ allTools = [] }) {
             Find tools, make your thing.
           </p>
         </div>
-        <div className="flex flex-row gap-3">
-          <button className="px-5 py-2 bg-blue-400 rounded-md text-sm text-white font-inter">
+        <div className="flex flex-row">
+          <button className="px-5 mr-3 py-2 bg-blue-400 rounded-md text-sm text-white font-inter">
             Submit Tool
           </button>
           <button className="px-5 py-2 bg-blue-900 rounded-md text-sm text-white font-inter">
@@ -134,7 +134,7 @@ export default function DesignTool({ allTools = [] }) {
           ref={wrapper}
           className="absolute left-0 h-full w-full top-0  pb-1 overflow-hidden no-scrollbar"
         >
-          <div ref={cont} className="relative flex gap-5 h-full">
+          <div ref={cont} className="relative flex h-full">
             {allTools.length
               ? allTools.map((item, index) => {
                   const showItem = item?.attributes;
@@ -142,9 +142,9 @@ export default function DesignTool({ allTools = [] }) {
                     <div
                       key={`h_item_${index}`}
                       style={{ width: `${ITEM_WIDTH}px` }}
-                      className="h-auto border border-opacity-5 border-black transition duration-200 rounded-xl bg-white px-4 pt-4 flex flex-col cursor-pointer"
+                      className="h-auto mr-5 border border-opacity-5 border-black transition duration-200 rounded-xl bg-white px-4 pt-4 flex flex-col cursor-pointer"
                     >
-                      <div className=" flex flex-col gap-2 justify-between">
+                      <div className=" flex flex-col grid gap-2 justify-between">
                         <div className="w-12 h-12 border relative border-opacity-5 rounded-xl border-black overflow-hidden">
                           {showItem.legacyFeaturedImage.logoNew && (
                             <Image
@@ -156,7 +156,7 @@ export default function DesignTool({ allTools = [] }) {
                             />
                           )}
                         </div>
-                        <div className="w-full flex flex-col gap-1">
+                        <div className="w-full flex flex-col grid gap-1">
                           <div className="text-gray-1 font-inter hover:underline truncate text-base font-medium">
                             <Link href={`/toolbox/${showItem.slug}`}>
                               {showItem.title}

@@ -45,7 +45,7 @@ const SponsorCard = ({ post, refetch, user }) => {
   
     return (
       <div className="flex flex-col justify-between p-6 h-full rounded-lg border border-black border-opacity-5 hover:border-opacity-10 cursor-default bg-white hover:transition duration-300 ease-in-out">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col grid gap-2">
           {/* {(post.status!=='publish' && post.status!=='draft') &&
           <div>
             <span

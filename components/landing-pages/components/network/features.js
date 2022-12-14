@@ -108,7 +108,7 @@ const FeaturesContent = () => {
   return (
     <div className="w-full px-0 md:px-5 bg-transparent max-w-7xl mx-auto">
       <div className="p-5 md:p-10 bg-white  rounded-none md:rounded-3xl mb-20 max-w-7xl mx-auto shadow-sm">
-        <div className="flex flex-col lg:flex-nowrap lg:flex lg:flex-row md:flex md:flex-wrap md:flex-col gap-5 py-2 ">
+        <div className="flex flex-col lg:flex-nowrap lg:flex lg:flex-row md:flex md:flex-wrap md:flex-col md:space-x-5 py-2 ">
           {content.map((x, i) => {
             const showBorder = i !== content.length - 1;
             return (

@@ -48,7 +48,7 @@ const ArticleStats = () => {
         <h1 className="text-lg font-medium">Your Article Stats</h1>
         <div className="my-2">
           {!loading ? (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col grid gap-4">
               {allPosts.map((post, i) => {
                 if (post.status === "publish") {
                   const url = `/dashboard/stats/${post.slug}`;

@@ -107,7 +107,7 @@ export const PageStats = () => {
       <div>
         <div className="p-10">
           {loaded && (
-            <div className="flex flex-col gap-3 mt-10">
+            <div className="flex flex-col grid gap-3 mt-10">
               <div>
                 <Link href="/dashboard/published">
                   <button className="text-sm bg-transparent"> Back</button>
@@ -118,7 +118,7 @@ export const PageStats = () => {
                 /posts/{slugger}
               </p>
 
-              <div className="w-full bg-[#EFF2F8] rounded-lg border border-opacity-10 h-auto p-10 flex flex-col gap-2">
+              <div className="w-full bg-[#EFF2F8] rounded-lg border border-opacity-10 h-auto p-10 flex flex-col grid gap-2">
                 <div className="flex flex-row gap-4">
                   {Object.keys(metrics.monthlyAggregate).map((data, i) => {
                     const value = metrics.monthlyAggregate[data].value;
