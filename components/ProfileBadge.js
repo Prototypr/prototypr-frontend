@@ -38,8 +38,9 @@ const slideLeftAndFade = keyframes({
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
   minWidth: 220,
   backgroundColor: "white",
-  top: "-30px",
-  left: "-40px",
+  // top: "-30px",
+  marginTop:40,
+  // marginLeft: -40,
   borderRadius: 6,
   padding: 5,
   boxShadow:
@@ -153,6 +154,7 @@ const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
 const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
   fill: "white",
 });
+
 
 // Exports
 export const DropdownMenu = DropdownMenuPrimitive.Root;

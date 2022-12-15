@@ -8,7 +8,7 @@ const TimeAgo = dynamic(() => import("react-timeago"), { ssr: false });
 const JobPostCard = ({ job }) => {
     return (
       <Link href={`/jobs/${job.id}`}>
-      <div className="w-full relative group cursor-pointer shadow-sm hover:shadow-lg transition transition-all duration-300 ease-in-out h-auto px-6 py-6 bg-white rounded-[10px] flex flex-col md:flex-row gap-5 border border-gray-300">
+      <div className="w-full mb-5 relative group cursor-pointer shadow-sm hover:shadow-lg transition transition-all duration-300 ease-in-out h-auto px-6 py-6 bg-white rounded-[10px] flex flex-col md:flex-row gap-5 border border-gray-300">
   
         <div className="hidden md:block opacity-0 group-hover:opacity-100 transition transition-opacity duration-200 absolute mt-5 mr-5 right-0 top-0">
             <Button>

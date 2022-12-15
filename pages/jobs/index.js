@@ -37,12 +37,12 @@ const Index = ({jobs}) => {
               </Link>
             </div>
           </div>
-          <div className="w-full h-full col-start-1 col-end-7 md:col-start-1 md:col-end-5 flex flex-col grid gap-5  pb-10">
+          <div className="w-full h-full col-start-1 col-end-7 md:col-start-1 md:col-end-5 flex flex-col pb-10">
             {jobs.map((job, i) => {
               return <JobPostCard job={job} key={i} />;
             })}
           </div>
-          <div className="w-full h-full col-start-1 col-end-7 md:col-start-5 md:col-end-7 ">
+          <div className="w-full h-full mb-5 col-start-1 col-end-7 md:col-start-5 md:col-end-7 ">
             {/* <div className="w-full bg-[#2C04CA] h-[150px] <rounded-md p-5">
               <Link href="/jobs/post">
                 <button className="px-5 text-sm py-2 bg-white text-black rounded">
