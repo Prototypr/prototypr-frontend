@@ -80,6 +80,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                   <LocationIcon/>:''}
                   {locations[0]?.attributes?.name && 
                   locations.map((location, index)=>
+                  <>
                     <div className="ml-1 flex my-auto rounded-lg">
                     
                     <p className="mr-2 text-gray-600 my-auto text-md font-base">
@@ -87,19 +88,16 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                     </p>
                     {/* {(index<location.length )? <span>•</span>:''} */}
                   </div>
+                  <span className="mr-2 inline-block text-gray-600">•</span>
+                  </>
                   )
                     }
-                    <span className="text-gray-600">•</span>
-                  {salaryText? 
-              <>
-              <div className="flex ml-2 flex-row gap-0.5">
+              <div className="flex flex-row gap-0.5">
                 <MoneyIcon/>
-                <div className="ml-1 text-gray-600 my-auto text-md font-base">
-                {salaryText}
+                <div className="text-gray-600 ml-1 my-auto text-md font-base">
+                {salaryText?salaryText:'Undisclosed'}
                 </div>
               </div>
-              </>
-              :''}
                 </div>
                   
                   
@@ -133,7 +131,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                 )}
                 <div
                   style={{ color: "#4a5568"}}
-                  className="py-3 mt-4 max-w-3xl blog-content text-md mb-2"
+                  className="py-3 mt-4 lg:-ml-10 max-w-3xl blog-content text-md mb-2"
                   dangerouslySetInnerHTML={{ __html: post?.attributes?.description }}
                 ></div>
                 

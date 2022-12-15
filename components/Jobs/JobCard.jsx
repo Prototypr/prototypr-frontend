@@ -43,7 +43,7 @@ const JobPostCard = ({ job }) => {
                <div className="flex flex-row gap-0.5">
                 <MoneyIcon/>
                 <div className="ml-1 text-gray-500 my-auto text-md font-base">
-                  {job.salaryText}
+                  {job.salaryText?.indexOf('$0k – $0k')>-1?'Undisclosed':job.salaryText}
                 </div>
               </div>
                </>

@@ -27,6 +27,8 @@ import { useEffect } from "react";
 
 import HeroGrid from "@/components/v4/hero/hero";
 import Link from "next/link";
+import Image from "next/image";
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 const Tabs = [
   { label: "Top Picks", color: "#4053FF", id: "top_picks", slug: "top_picks" },
@@ -284,7 +286,17 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                             >
                               <div className="flex flex-row bg-white  p-4 rounded-lg">
                                 <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
-                                  <img className="relative" src={companyLogo} />
+                                  
+                               {companyLogo? <Image
+                                  tabIndex={0}
+                                  loader={gumletLoader}
+                                  layout="fill"
+                                  objectFit="cover"
+                                  src={companyLogo}
+                                  className="object-cover"
+                                  alt="Author profile picture"
+                                />:''}
+                                  {/* <img className="relative" src={companyLogo} /> */}
                                 </div>
                                 <div className="flex flex-col grid gap-1 justify-center">
                                   <p className="text-sm font-inter">{title}</p>
