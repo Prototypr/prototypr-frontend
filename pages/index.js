@@ -398,7 +398,7 @@ export default function Index({
             </div>
 
             <Sidebar
-              paddingTop="pt-[154px]"
+              paddingTop="hidden md:block pt-[154px]"
               title="Jobs"
               type="jobs"
               content={jobs}
