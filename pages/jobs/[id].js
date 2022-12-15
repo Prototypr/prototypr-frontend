@@ -9,6 +9,8 @@ import dynamic from 'next/dynamic'
 import { LocationIcon, MoneyIcon } from '@/components/icons'
 import Button from '@/components/Primitives/Button'
 import Link from 'next/link'
+import Image from 'next/image'
+import gumletLoader from '@/components/new-index/gumletLoader'
 const RelatedPosts = dynamic(() => import('@/components/related-posts'), { ssr: true })
 const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true })
 const SponsorCard = dynamic(() => import('@/components/toolbox/SponsorCard'), { ssr: true })
@@ -69,7 +71,19 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
             <div className="mb-8">
               <div className="mb-6 relative bg-white px-6 py-6 rounded-lg w-full">
                 {post?.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url?
-                <img style={{width:95, height:95}} className="rounded-full border border-gray-100 mb-6" src={post?.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url}/>:''}
+                <div className="relative w-[95px] h-[95px] bg-[#CEE2FF] rounded-full border mb-6 border-gray-100">
+                <Image
+                 loader={gumletLoader}
+                 priority={`false`}
+                 data-priority={`false`}
+                 data-gmlazy={`true`}
+                 className="rounded-full object-cover"
+                 objectFit="cover"
+                 layout="fill"
+                 src={post?.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url}
+               />
+               </div>
+                :''}
                 <h1 className="text-3xl mb-2 max-w-2xl font-medium">{title}</h1>
                 <div className='flex'>
                 <h2 className='text-xl mb-1 font-medium'>{companyName}</h2>

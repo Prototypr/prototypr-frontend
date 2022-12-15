@@ -2,6 +2,8 @@ import dynamic from "next/dynamic";
 import { ClockIcon, LocationIcon, MoneyIcon } from "@/components/icons";
 import Link from "next/link";
 import Button from "@/components/Primitives/Button";
+import gumletLoader from "../new-index/gumletLoader";
+import Image from "next/image";
 
 const TimeAgo = dynamic(() => import("react-timeago"), { ssr: false });
 
@@ -18,7 +20,19 @@ const JobPostCard = ({ job }) => {
        
         {/* image */}
         {job.companyLogo?
-          <img className="w-[56px] h-[56px] md:w-[66px] md:h-[66px] bg-[#CEE2FF] rounded-full border border-gray-100" src={job.companyLogo}/>
+        <div className="relative w-[56px] h-[56px] md:w-[66px] md:h-[66px] bg-[#CEE2FF] rounded-full border border-gray-100">
+        {job.companyLogo?<Image
+        loader={gumletLoader}
+        priority={`false`}
+        data-priority={`false`}
+        data-gmlazy={`true`}
+        className="rounded-full object-cover"
+        objectFit="cover"
+        layout="fill"
+        src={job.companyLogo}
+      />:''}
+      </div>
+          // <img className="w-[56px] h-[56px] md:w-[66px] md:h-[66px] bg-[#CEE2FF] rounded-full border border-gray-100" src={job.companyLogo}/>
           :<div className="w-[66px] h-[66px] bg-[#CEE2FF] rounded"></div>
         }
         {/* content */}
