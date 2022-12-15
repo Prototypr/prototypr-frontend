@@ -299,12 +299,12 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                                   {/* <img className="relative" src={companyLogo} /> */}
                                 </div>
                                 <div className="flex flex-col grid gap-1 justify-center">
-                                  <p className="text-sm font-inter">{title}</p>
+                                  <p className=" h-[18px] overflow-hidden line-clamp-1 inline font-inter text-sm">{title}</p>
                                   <div className="flex flex-row gap-1 text-sm text-gray-500">
-                                    <p className=" font-inter">
+                                    <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline font-inter">
                                       {companyName},
                                     </p>
-                                    <p className=" font-inter">
+                                    <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline font-inter">
                                       {locations[0]?.name}
                                     </p>
                                   </div>
