@@ -104,8 +104,11 @@ export default function DesignTool({ allTools = [] }) {
       <div className="flex flex-row flex-wrap w-full justify-between  items-end max-w-7xl mx-auto mb-10">
         <div className=" mb-6 flex flex-col gap-7 my-10">
           <div>
-            <h2 className="text-[40px] leading-[50px] md:text-[60px] max-w-lg md:leading-[68px] text-black font-bold font-inter">
-              The best tools for your design workflow.
+            <h2 className="text-[40px] leading-[50px] md:text-[60px] max-w-xl md:leading-[68px] text-black font-bold font-inter">
+              {/* The best tools for your design workflow. */}
+              {/* The best design tools, handpicked every week. */}
+              The best design tools, handpicked every week
+              {/* A hand-picked collection of design tools to help you design faster. */}
             </h2>
           </div>
           <div className="flex flex-row flex-wrap gap-2">
