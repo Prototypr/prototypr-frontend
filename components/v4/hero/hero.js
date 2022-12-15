@@ -13,7 +13,27 @@ const AuthorCard = ({ data }) => {
   return (
     <>
       <div className="flex flex-row items-center border-t border-black pt-4 border-opacity-5">
-        <div
+      <div className="w-6 h-6 mr-3 rounded-full bg-gray-200 ">
+        <Image
+          loader={gumletLoader}
+          priority={`true`}
+          data-priority={`true`}
+          // objectFit="cover"
+          // layout="fill"
+          data-gmlazy={`false`}
+          width={20}
+          height={20}
+          className="w-6 h-6 mr-3 rounded-full bg-gray-200 object-cover relative overflow-hidden"
+          src={`${
+            profileImg
+              ? profileImg
+              : data?.attributes?.legacyAvatar
+              ? data?.attributes?.legacyAvatar
+              : placeholderAuthorImg
+          }`}
+        />
+      </div>
+        {/* <div
           style={{
             backgroundImage: `url(${
               profileImg
@@ -26,7 +46,8 @@ const AuthorCard = ({ data }) => {
             backgroundPosition: "center center",
           }}
           className="w-6 h-6 mr-3 rounded-full bg-gray-200 relative"
-        ></div>
+        ></div> */}
+        
         {data?.attributes?.firstName ? (
           <p className="text-sm font-inter">
             {data?.attributes?.firstName} {data?.attributes?.lastName}

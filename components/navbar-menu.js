@@ -41,7 +41,7 @@ const itemStyles = {
   padding: "8px 12px",
   outline: "none",
   userSelect: "none",
-  fontWeight: 500,
+  fontWeight: 400,
   lineHeight: 1,
   borderRadius: 4,
   fontSize: 15,

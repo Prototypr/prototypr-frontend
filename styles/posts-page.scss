@@ -25,12 +25,12 @@ figure{
     font-size:1.14rem;
     font-weight: 400;
     h1,h2,h3,h4,h5{
-        font-family:'Noto Serif', serif;
+        font-family:"Inter", serif;
     }
     p,li,ol, ul{
-        // font-family:'Noto Serif', serif;
             line-height:30px;
             font-size:18px;
+            font-family:"Inter", serif!important;
     }
      a:not(.headline){
         color:#2384de;
@@ -42,7 +42,6 @@ figure{
     }
 
     h1{
-        // font-family:'Noto Serif';
         font-weight: 600;
         margin-top: 3.2rem;
         margin-bottom: 2.6rem;
@@ -159,7 +158,6 @@ figure{
         //    font-style:normal;
            font-size:1.75rem;
            line-height:2.5rem;
-        //    font-family:"Noto Sans";
        }
    }
    .table-display {

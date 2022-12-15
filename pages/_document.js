@@ -8,7 +8,7 @@ export default class MyDocument extends Document {
         <Head>
           <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
         </Head>
-        <body className="font-noto-sans">
+        <body className="font-inter">
           <Main />
           <NextScript />
         </body>

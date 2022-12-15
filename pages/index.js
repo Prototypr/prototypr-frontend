@@ -109,12 +109,12 @@ const PrototyprNetworkCTA = ({ data }) => {
           </p>
           <div>
             <Link href="/write">
-              <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm">
+              <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm font-semibold">
                 Start Writing
               </button>
             </Link>
             <Link href="/post/write-for-us">
-              <button className="px-4 ml-2 py-2 text-black rounded-lg font-inter bg-gray-200 hover:bg-gray-100 text-sm">
+              <button className="px-4 ml-2 py-2 text-black rounded-lg font-inter font-semibold bg-gray-200 hover:bg-gray-100 text-sm">
                 Learn more
               </button>
             </Link>
@@ -287,8 +287,8 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                                   <img className="relative" src={companyLogo} />
                                 </div>
                                 <div className="flex flex-col grid gap-1 justify-center">
-                                  <p className="text-xs font-inter">{title}</p>
-                                  <div className="flex flex-row gap-1 text-xs text-gray-500">
+                                  <p className="text-sm font-inter">{title}</p>
+                                  <div className="flex flex-row gap-1 text-sm text-gray-500">
                                     <p className=" font-inter">
                                       {companyName},
                                     </p>

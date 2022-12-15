@@ -42,7 +42,7 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
         <div className="w-full mt-6 md:mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
           {/* left sidebar */}
           {router.isFallback ? (
-            <h1 className="text-6xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
+            <h1 className="text-6xl font-inter-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
             Loading...
           </h1>
         ) : (

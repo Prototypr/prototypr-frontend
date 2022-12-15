@@ -45,7 +45,7 @@ export default function Post({ post, morePosts, preview }) {
             <article>
             <div style={{maxWidth:'600px'}} className="mx-auto">
             { post?.attributes && 
-                <h1 className="text-3xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter my-6 mt-12 text-center md:text-left">
+                <h1 className="text-3xl font-inter-serif font-semibold tracking-tighter leading-tight md:leading-tighter my-6 mt-12 text-center md:text-left">
                 {post.attributes.title}
                 </h1>}
             </div>
