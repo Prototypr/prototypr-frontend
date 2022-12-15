@@ -68,7 +68,7 @@ export const HomePageNewNavBar = () => {
                 </div>
               );
             })}
-            <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <div className=" flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />
               </div>
@@ -179,7 +179,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
               <MenuItems />
             </div>
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className=" flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <div className={`hidden mr-2 md:block my-auto`}>
               <WMButton />
             </div>

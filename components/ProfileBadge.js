@@ -38,9 +38,6 @@ const slideLeftAndFade = keyframes({
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
   minWidth: 220,
   backgroundColor: "white",
-  // top: "-30px",
-  marginTop:40,
-  // marginLeft: -40,
   borderRadius: 6,
   padding: 5,
   boxShadow:
@@ -219,9 +216,9 @@ export const DropdownMenuDemo = ({ icon, user }) => {
         <DropdownMenuContent
           side={"bottom"}
           align={"center"}
-          alignOffset={-10}
+          // alignOffset={-10}
           avoidCollisions={true}
-          sideOffset={-36}
+          // sideOffset={-36}
         >
           <DropdownMenuItem
             onSelect={() => {
@@ -294,7 +291,7 @@ export const DropdownMenuDemo = ({ icon, user }) => {
             {/* <RightSlot>⌘+T</RightSlot> */}
           </DropdownMenuItem>
 
-          {user?.isAdmin && (
+          {user?.isAdmin? (
             <>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -314,8 +311,8 @@ export const DropdownMenuDemo = ({ icon, user }) => {
                 👾 Strapi
               </DropdownMenuItem>
             </>
-          )}
-          {user?.companies?.length && (
+          ):''}
+          {user?.companies?.length ? (
             <>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -326,7 +323,7 @@ export const DropdownMenuDemo = ({ icon, user }) => {
                 💙 Partners
               </DropdownMenuItem>
             </>
-          )}
+          ):''}
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onSelect={async () => {
