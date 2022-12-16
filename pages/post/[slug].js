@@ -20,7 +20,7 @@ const AuthorBio = dynamic(() => import("@/components/authorBio"), {
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 import { useIntl } from "react-intl";
 
-import Layout from "@/components/layout-post";
+import Layout from "@/components/new-index/layoutForIndex";
 import { getAllPostsWithSlug, getPost } from "@/lib/api";
 const NoticeTranslation = dynamic(
   () => import("@/components/notice-translation"),
@@ -28,8 +28,10 @@ const NoticeTranslation = dynamic(
 );
 
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Waypoint } from "react-waypoint";
+import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 const WMPostTracker = dynamic(() => import("@/components/WebMonetization/WMPostTracker"), {
   ssr: false,
 });
@@ -107,12 +109,11 @@ export default function Post({ post, preview, relatedPosts }) {
       activeNav={"posts"}
       preview={preview}
     >
-      <div
-        className={`min-h-screen px-3 md:px-8`}
-        style={{ background: "#fff" }}
-      >
+      <Container>
+
+      <div className="w-full h-full grid grid-cols-12 gap-1  ">
         {user?.isAdmin &&
-        <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white ml-16 left-0 p-4 rounded shadow">
+        <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white mr-16 right-0 p-4 rounded shadow">
         <p className="text-sm">Hi, Admin 👩‍✈️</p>
         <button className="p-1 mt-3 px-3 text-sm text-white bg-purple-600 shadow rounded">
             <Link href={`/p/${post?.id}`}>Edit</Link>
@@ -121,10 +122,7 @@ export default function Post({ post, preview, relatedPosts }) {
         }
         
         {/* <Alert preview={preview} /> */}
-        <main
-          className="pt-24 md:pt-24 -mt-3 mx-auto"
-          style={{ maxWidth: "1200px" }}
-        >
+        <main className="pt-28 pb-20 gap-2 col-span-12 lg:col-span-8  md:pr-4 py-10">
           {(post?.id && (process.env.NODE_ENV==='production')) && 
           <WMPostTracker postId={post?.id} post={post}/>}
           <Container>
@@ -156,7 +154,7 @@ export default function Post({ post, preview, relatedPosts }) {
                     author={post.attributes?.author?.data?.attributes}
                     template={post.attributes?.template}
                   />
-                  <div className="max-w-2xl mx-auto blog-content">
+                  <div className="max-w-[45rem] mx-auto blog-content">
                     <div
                       dangerouslySetInnerHTML={{
                         __html: post.attributes?.content,
@@ -185,6 +183,11 @@ export default function Post({ post, preview, relatedPosts }) {
             )}
           </Container>
         </main>
+
+        <Sidebar
+        relatedPosts={relatedPosts}
+        paddingTop="hidden md:block pt-[96px]"
+      />
       </div>
       <section className="bg-gray-100">
         <hr className="border-accent-2" />
@@ -206,9 +209,53 @@ export default function Post({ post, preview, relatedPosts }) {
           </div>
         </div>
       </section>
+
+      </Container>
     </Layout>
   );
 }
+
+const Sidebar = ({ relatedPosts, paddingTop }) => {
+
+  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
+
+  const _handleWaypointEnter = () => {
+    setStickyPaddingTop("pt-0");
+  };
+  const _handleWaypointLeave = () => {
+    setStickyPaddingTop("pt-16");
+  };
+
+  return (
+    <div
+      className={`${paddingTop} relative col-span-2 border-l border-opacity-20`}
+    >
+      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
+      <div
+        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
+      >
+        <aside className="  h-screen px-5 sticky top-0 py-0">
+          <div className="flex flex-col grid gap-10 py-10">
+          <div className="mt-[0]">
+                <PrototyprNetworkCTA  />
+              </div>
+
+            <div className="w-full flex flex-col grid gap-2">
+
+            {relatedPosts?.data?.length > 0 &&
+              relatedPosts.data.map((item, index) => {
+                return (
+                  <ProductItem key={`product_item_${index}`} post={item} />
+                  // <TopicTopItem key={index} topic={item}/>
+                );
+              })}
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+};
 
 export async function getStaticProps({ params, preview = null, locale }) {
   const data = await getPost(params.slug, preview);

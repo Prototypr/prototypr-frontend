@@ -28,8 +28,8 @@ figure{
         font-family:"Inter", serif;
     }
     p,li,ol, ul{
-            line-height:30px;
-            font-size:18px;
+            line-height:33px;
+            font-size:20px;
             font-family:"Inter", serif!important;
     }
      a:not(.headline){
@@ -76,6 +76,8 @@ figure{
         border-bottom-right-radius:6px;
         border-left: 3px solid #1d3d7d;
         margin: 1.5em 10px;
+        margin-top:2.5em!important;
+        margin-bottom:2.5em!important;
         padding: 0.5em 10px;
         quotes: "\201C" "\201D" "\2018" "\2019";
         color: #1d3d7d;
@@ -106,9 +108,9 @@ figure{
         border-radius: 0.375rem;
     }
    *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
-    max-width: 43rem;
-    margin-right: auto;
-    margin-left: auto;
+    max-width: 44rem;
+    // margin-right: auto;
+    // margin-left: auto;
    }
    ul{
     list-style-type: disc;
@@ -148,13 +150,22 @@ figure{
    figure>img{
        margin-bottom:0px!important;
    }
+   hr{
+    margin-top:2.4rem;
+    margin-bottom:2.4rem;
+   }
+   figure img{
+    border-radius:16px;
+    // box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    border: 1px solid #edeef9;
+   }
    figure>img.w-full, figure.size-large>img{
-       width:46rem;
+       width:44rem;
    }
    blockquote.wp-block-quote, figure.wp-block-image.size-large.full-size, figure.wp-block-image.size-full{
-       max-width:46rem;
+       max-width:44rem;
        p{
-           max-width: 46rem;
+           max-width: 44rem;
         //    font-style:normal;
            font-size:1.75rem;
            line-height:2.5rem;
@@ -202,7 +213,7 @@ figure{
     }
    }
    blockquote.wp-block-quote{
-    margin: 2.5em auto;
+    // margin: 2.5em auto;
     font-size:1.5rem;
     a{
         color:#1d3d7d;
@@ -336,7 +347,7 @@ figure{
     font-family: "JetBrainsMono", monospace;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
-    max-width: 43rem;
+    max-width: 44rem;
 }
 
  /*** Works on common browsers ***/
@@ -401,7 +412,7 @@ figure{
             }
         }
         p, h1, h2, h3, h4, ol, li{
-            max-width: 43rem!important;
+            max-width: 44rem!important;
         }
         .flex figcaption {
         text-align: center;
