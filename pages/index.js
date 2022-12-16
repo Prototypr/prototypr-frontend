@@ -284,8 +284,10 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                               key={i}
                               className="w-full h-auto cursor-pointer flex flex-col"
                             >
-                              <div className="flex flex-row bg-white  p-4 rounded-lg">
-                                <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
+                              <div className="flex flex-row bg-white justify-between p-4 rounded-lg">
+                                <div
+                                  style={{flex: '0 0 3em'}}
+                                 className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
                                   
                                {companyLogo? <Image
                                   tabIndex={0}
