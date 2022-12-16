@@ -43,7 +43,7 @@ export default function ProductItem({ post = {} }) {
         </Link>
         <h4 className="font-semibold text-lg sm:text-xl leading-6 text-gray-1 pr-7 mt-4">
           <Link href={`/post/${slug}`}>
-            <span className="font-noto-serif">{title}</span>
+            <span className="font-inter-serif">{title}</span>
           </Link>
         </h4>
         <div className="mt-4 flex items-center">

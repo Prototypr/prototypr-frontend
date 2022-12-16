@@ -82,7 +82,7 @@ const useLoad = (type = "create", usr) => {
       }else{
         setIsOwner(false)
       }
-
+    
       setPostObject(post)
       setPostId(post?.id);
       setContent(content);

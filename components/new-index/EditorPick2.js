@@ -88,7 +88,7 @@ export default function EditorPick({ post = {}, header = false, lazy = true }) {
                 </div>
                 <h3 className="text-2xl lg:text-4xl font-semibold mb-4 max-w-md">
                   <Link href={`/post/${slug}`}>
-                    <span className="cursor-pointer font-noto-serif hover:text-gray-900 transition duration-150 ease-in-out">
+                    <span className="cursor-pointer font-inter-serif hover:text-gray-900 transition duration-150 ease-in-out">
                       {title}
                     </span>
                   </Link>

@@ -111,7 +111,7 @@ export default function Post({ post, preview, relatedPosts }) {
                   <SourcePanel
                     titleSize={"lg:text-5xl"}
                     className={
-                      "w-full font-noto-serif mb-4 mt-16 border rounded-lg pb-0 pt-8 border-gray-100"
+                      "w-full font-inter-serif mb-4 mt-16 border rounded-lg pb-0 pt-8 border-gray-100"
                     }
                     title={intl.formatMessage({ id: "newsletterPanel.title3" })}
                     desc={intl.formatMessage({ id: "newsletterPanel.desc3" })}
@@ -127,7 +127,7 @@ export default function Post({ post, preview, relatedPosts }) {
           style={{ maxWidth: "1200px" }}
           className="px-6 md:px-0 mx-auto pb-20 mt-20"
         >
-          <h1 className="text-4xl font-noto-serif font-semibold -mt-3 mb-12">
+          <h1 className="text-4xl font-inter-serif font-semibold -mt-3 mb-12">
             Related Posts
           </h1>
           <div className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">

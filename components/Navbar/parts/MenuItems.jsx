@@ -70,7 +70,7 @@ const itemStyles = {
   padding: "8px 12px",
   outline: "none",
   userSelect: "none",
-  fontWeight: 500,
+  fontWeight: 400,
   lineHeight: 1,
   borderRadius: 4,
   // fontSize: 15,
@@ -430,13 +430,13 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
     >
       <NavigationMenu>
           <NavigationMenuList>
-            <NavigationMenuItem className="hidden -ml-4 text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuItem className="hidden -ml-4 text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/">
                 {/* {submenuTitle4} */}
                 {homeMenuText}
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem className="flex text-xs md:text-sm xl:mr-2.5 flex-col justify-center">
+            <NavigationMenuItem className="flex text-sm md:text-base xl:mr-2.5 flex-col justify-center">
               {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
               <NavigationMenuTrigger href="articles">
                 {/* {title1} */}
@@ -481,7 +481,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 </ContentList>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuItem className="flex flex-col text-xs md:text-sm xl:mr-2.5 justify-center">
+            <NavigationMenuItem className="flex flex-col text-sm md:text-base xl:mr-2.5 justify-center">
               <NavigationMenuTrigger href="toolbox">
                 {title2}
               </NavigationMenuTrigger>
@@ -526,7 +526,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 </ContentList>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuItem className="hidden text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/jobs">
                 {/* {submenuTitle5} */}
                 Jobs
@@ -544,7 +544,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
 
       {/* tagline */}
       <p
-        className={`my-auto font-noto-serif hidden xl:block normal-case font-semibold ${
+        className={`my-auto font-inter-serif hidden xl:block normal-case font-semibold ${
           !collapse
             ? "opacity-0 -z-10 absolute right-0 pt-3.5 text-gray-50 -mr-12 text-xs"
             : "text-base"

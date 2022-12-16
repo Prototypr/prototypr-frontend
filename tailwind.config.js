@@ -18,8 +18,8 @@ module.exports = {
   theme: {
     fontFamily: {
       inter: "'Inter', sans-serif;",
-      "noto-sans": "'Noto Sans', sans-serif;",
-      "noto-serif": "'Noto Serif', serif;",
+      // "noto-sans": "'Noto Sans', sans-serif;",
+      // "noto-serif": "'Noto Serif', serif;",
     },
     extend: {
       contrast: {

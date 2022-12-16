@@ -17,7 +17,7 @@ export default function Alert({ preview }) {
                 <>
                   <div className="md:w-[585px] w-full px-10 lg:px-0 text-left">
                     <div className="flex justify-center mx-auto mb-1">
-                      <h2 className="text-3xl font-noto-serif text-gray-800 font-bold text-center">
+                      <h2 className="text-3xl font-inter-serif text-gray-800 font-bold text-center">
                         Let's change the web!
                       </h2>
                       <img
@@ -25,7 +25,7 @@ export default function Alert({ preview }) {
                         src="https://webmonetization.org/img/wm-icon-animated.svg"
                       />
                     </div>
-                    {/* <h3 className="text-lg font-noto-serif text-gray-600 text-center mb-6">
+                    {/* <h3 className="text-lg font-inter-serif text-gray-600 text-center mb-6">
                                   Introducing a new prototypr
                                 </h3> */}
                     <p className="text-gray-600 mt-3">
@@ -101,7 +101,7 @@ export default function Alert({ preview }) {
                       alt="Abstract illustration of a browser screen with 3 dollar bills taking up the screen"
                     ></img>
                     <div>
-                      <h1 className="text-2xl text-gray-900 font-bold font-noto-serif mb-3 ">
+                      <h1 className="text-2xl text-gray-900 font-bold font-inter-serif mb-3 ">
                         No Paywalls and Popups
                       </h1>
                     </div>
@@ -167,7 +167,7 @@ export default function Alert({ preview }) {
                       alt="Internationalisation and Localisation concept illustration, showing little cursor arrows on a screen"
                     />
                     <div>
-                      <h1 className="text-2xl text-gray-900 font-bold font-noto-serif mb-3 ">
+                      <h1 className="text-2xl text-gray-900 font-bold font-inter-serif mb-3 ">
                         Built for Global Audiences
                       </h1>
                     </div>
@@ -234,7 +234,7 @@ export default function Alert({ preview }) {
                       alt="Illustration of a cartoon person holding a book, surrounded by spooky hands"
                     />
                     <div>
-                      <h1 className="text-2xl text-gray-900 font-bold font-noto-serif mb-3 ">
+                      <h1 className="text-2xl text-gray-900 font-bold font-inter-serif mb-3 ">
                         Contribute to Open Source
                       </h1>
                     </div>
@@ -288,7 +288,7 @@ export default function Alert({ preview }) {
               render={({ previous }) => (
                 <div className="md:w-[585px] w-full px-10 lg:px-0">
                   <div>
-                    <h1 className="text-2xl font-noto-serif text-gray-900 font-bold mb-3">
+                    <h1 className="text-2xl font-inter-serif text-gray-900 font-bold mb-3">
                       Sound good? Get involved!
                     </h1>
                   </div>

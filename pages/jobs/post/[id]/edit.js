@@ -125,7 +125,7 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
     type: Yup.string().required("Job type is required"),
     salaryMin: Yup.number().required("Salary from value is required"),
     salaryMax: Yup.number().required("Salary to value is required"),
-    image: Yup.mixed().required("Please add your company's logo"),
+    companyLogo: Yup.mixed().required("Please add your company's logo"),
     url: Yup.string().url("Invalid URL").required("Job URL is required"),
     skills: Yup.string().required("Skills are required"),
     companyName: Yup.string().required("Company Name is required"),
@@ -254,7 +254,7 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
 
   useEffect(()=>{
     if(defaultCompany?.logo){
-      formik.setFieldValue("image",defaultCompany?.logo)
+      formik.setFieldValue("companyLogo",defaultCompany?.logo)
     }
 
   },[defaultCompany?.logo])

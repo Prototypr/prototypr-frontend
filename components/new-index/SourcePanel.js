@@ -44,10 +44,10 @@ export default function SourcePanel({ desc, title, className, titleSize }) {
                 >
                   {title}
                 </h3>
-                <p className="font-base font-noto-sans text-lg leading-normal">
+                <p className="font-base font-inter text-lg leading-normal">
                   {desc}
                 </p>
-                <SignupHorizontal className="sm:flex w-full mt-5 font-noto-sans" />
+                <SignupHorizontal className="sm:flex w-full mt-5 font-inter" />
                 {/* <HookForm onSubmit={onSubmit} buttonText={buttonText} /> */}
               </>
             ) : error ? (
@@ -56,7 +56,7 @@ export default function SourcePanel({ desc, title, className, titleSize }) {
                   {intl.formatMessage({ id: "signup.tip.again" })} &nbsp;{" "}
                   <div className="inline -mt-1">🤖</div>
                 </h3>
-                <p className="font-noto-sans font-base text-lg leading-normal">
+                <p className="font-inter font-base text-lg leading-normal">
                   {intl.formatMessage({ id: "signup.res.error" })}
                 </p>
               </>
@@ -66,7 +66,7 @@ export default function SourcePanel({ desc, title, className, titleSize }) {
                   {intl.formatMessage({ id: "signup.input.check" })} &nbsp;{" "}
                   <div className="inline -mt-1">🎉</div>
                 </h3>
-                <p className="font-base font-noto-sans text-lg leading-normal">
+                <p className="font-base font-inter text-lg leading-normal">
                   {intl.formatMessage({ id: "signup.input.click" })}
                 </p>
               </>

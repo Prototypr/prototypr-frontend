@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       return res.json({ revalidated: true });
     } 
     //revalidate jobs
-    else if(entry.salarymin>0 && entry.publishedAt){
+    else if(entry.publishedAt){
       console.log("revalidating job post :", entry.slug);
       const url = `/jobs/${entry.id}`;
       await res.revalidate(url);

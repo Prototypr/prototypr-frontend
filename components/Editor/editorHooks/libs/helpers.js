@@ -86,6 +86,12 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
     contentToInsert = div?.innerHTML;
   }
 
+  let seo = postObject?.seo?postObject.seo:{}
+  seo.opengraphTitle = title
+  seo.opengraphImage = postObject?.featuredImage?postObject.featuredImage:coverImage
+  seo.twitterImage = postObject?.twitterImage?postObject.twitterImage:coverImage
+  seo.twitterTitle = title
+
   let entry = {
     type: "article",
     legacyFeaturedImage: {},
@@ -101,11 +107,7 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
       thumb: `${coverImage}-150x150.${getImageExtention(coverImage || "")}`,
       medium: `${coverImage}-768x336.${getImageExtention(coverImage || "")}`,
     },
-    seo: {
-      opengraphTitle: title,     
-      opengraphImage: postObject?.featuredImage?postObject.featuredImage:coverImage,
-      //  schemaSeo: item.seo.schema.raw,
-    },
+    seo: seo,
     esES: false
   };
 
@@ -127,6 +129,7 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
       entry.seo.opengraphPublishedTime = new Date()
       entry.seo.metaDesc = firstParagraph
       entry.seo.opengraphDescription = firstParagraph
+      entry.seo.twitterDescription = firstParagraph
     }
 
   }

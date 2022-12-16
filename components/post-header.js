@@ -30,7 +30,7 @@ export default function PostHeader({
           src={coverImage}
         />
         {/* <div className="absolute top-1/2 -mt-8 text-center w-full left-0">
-      <h1 className="text-6xl font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center ">
+      <h1 className="text-6xl font-inter-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center ">
         {title}
       </h1>
     </div> */}
@@ -39,7 +39,7 @@ export default function PostHeader({
     <>
 <div className="text-center pt-16 md:pt-16">
 		<p className="text-sm mb-3 md:text-base text-green-500 font-bold">Web Monetization Guide <span className="text-gray-900">/</span> Uphold</p>
-		<h1 className="font-noto-serif font-bold break-normal text-gray-900 text-3xl md:text-6xl">{title}</h1>
+		<h1 className="font-inter-serif font-bold break-normal text-gray-900 text-3xl md:text-6xl">{title}</h1>
 	</div>
   <div className="container rounded-xl w-full max-w-6xl mx-auto bg-white bg-cover mt-10 h-[280px] md:h-[400px]" style={{backgroundImage:`linear-gradient(to bottom, rgba(255,255,255,0.15),rgba(0,0,0,0.2), rgba(0,0,0,0.34)),url('${coverImage}')`}}></div>
   
@@ -53,7 +53,7 @@ export default function PostHeader({
           style={{borderBottomLeftRadius:'400px', borderBottomRightRadius:0}}
         />
          <div className="absolute top-1/2 -mt-12 px-12 md:-mt-8 text-center w-full left-0">
-          <h1 className="text-4xl md:text-6xl text-gray-100 font-noto-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center ">
+          <h1 className="text-4xl md:text-6xl text-gray-100 font-inter-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center ">
             {title}
           </h1>
         </div>

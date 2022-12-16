@@ -422,7 +422,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
         </Link>
         <Link href="/">
           <p
-            className={`cursor-pointer font-noto-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
+            className={`cursor-pointer font-inter-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
               collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"
             } transition transition-all duration-150 ease-in-out`}
           >
@@ -441,27 +441,27 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
           } transition transition-all duration-300 ease-in-out`}
         >
           <NavigationMenuList>
-            <NavigationMenuItem className="hidden -ml-4 text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuItem className="hidden -ml-4 text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/posts/accessibility">
                 {submenuTitle4}
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuItem className="hidden text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/posts/interview">
                 {submenuTitle3}
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuItem className="hidden text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/posts/ux">
                 {submenuTitle2}
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-xs md:text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuItem className="hidden text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/posts/ui">
                 {submenuTitle5}
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem className="flex text-xs md:text-sm xl:mr-2.5 flex-col justify-center">
+            <NavigationMenuItem className="flex text-sm md:text-base xl:mr-2.5 flex-col justify-center">
               {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
               <NavigationMenuTrigger active={""}>
                 {title1}
@@ -506,7 +506,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
               </NavigationMenuContent>
             </NavigationMenuItem>
 
-            <NavigationMenuItem className="flex flex-col text-xs md:text-sm xl:mr-2.5 justify-center">
+            <NavigationMenuItem className="flex flex-col text-sm md:text-base xl:mr-2.5 justify-center">
               <NavigationMenuTrigger active={activeNav === "toolbox"}>
                 {title2}
               </NavigationMenuTrigger>
@@ -561,7 +561,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
 
       {/* tagline */}
       <p
-        className={`my-auto font-noto-serif hidden xl:block normal-case font-semibold ${
+        className={`my-auto font-inter-serif hidden xl:block normal-case font-medium ${
           !collapse
             ? "opacity-0 -z-10 absolute right-0 pt-3.5 text-gray-50 -mr-12 text-xs"
             : "text-base"
