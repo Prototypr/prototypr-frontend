@@ -107,7 +107,7 @@ export default function DesignTool({ allTools = [] }) {
             <h2 className="text-[40px] leading-[50px] md:text-[60px] max-w-xl md:leading-[68px] text-black font-bold font-inter">
               {/* The best tools for your design workflow. */}
               {/* The best design tools, handpicked every week. */}
-              The best design tools, handpicked every week
+              The best Design Tools, handpicked every week.
               {/* A hand-picked collection of design tools to help you design faster. */}
             </h2>
           </div>

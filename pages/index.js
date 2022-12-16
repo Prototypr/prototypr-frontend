@@ -7,7 +7,7 @@ import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 /**new index components */
 import { BrowserView } from "react-device-detect";
-import { SnowWithLights } from "@/components/xmas/snow";
+import { SnowWithLights, SmallCardSnow } from "@/components/xmas/snow";
 
 const Footer = dynamic(() => import("@/components/footer"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
@@ -110,7 +110,7 @@ const PrototyprNetworkCTA = ({ data }) => {
       </div>
 
       <div className="flex flex-col gap-1 justify-end items-end">
-        <div className="w-full rounded-[12px] h-auto bg-blue-300 border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">
+        <div className="w-full rounded-[12px] h-auto bg-white border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">
           <div className="flex flex-col grid gap-2">
             <p className="text-black text-2xl mb-1 font-inter">
               Get noticed in the design community
@@ -143,11 +143,11 @@ const TabSwitchter = ({ selectedTab, onTabChange }) => {
     <div className="h-[50px] my-3">
       <div className="overflow-x-scroll overflow-y-hidden no-scrollbar flex w-full ">
         <div className="flex">
-          {Tabs.map((tab) => {
+          {Tabs.map((tab, i) => {
             return (
               <span
                 onClick={() => onTabChange(tab)}
-                className={`px-3 py-2 block font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full text-base  mx-2 rounded-full ${
+                className={`px-4 py-2 block font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full text-sm  mx-2 rounded-full ${
                   selectedTab === tab.id
                     ? "bg-blue-600 text-white"
                     : "bg-transparent text-gray-500"
@@ -234,23 +234,6 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                               </div>
                               <div className="flex flex-col grid gap-2">
                                 <p className="text-sm font-inter">{title}</p>
-
-                                {/* <div className="overflow-x-scroll max-w-[200px] overflow-y-hidden no-scrollbar flex grid gap-1 w-full ">
-                                <div className="flex grid gap-2">
-                                  {tags?.data?.map((x, i) => {
-                                    const item = x?.attributes;
-
-                                    return (
-                                      <span
-                                        key={i}
-                                        className={`px-3 block rounded-sm bg-gray-200 font-inter cursor-pointer min-w-max cursor w-full text-[10px] py-[2px] `}
-                                      >
-                                        {item.name}
-                                      </span>
-                                    );
-                                  })}
-                                </div>
-                              </div> */}
                               </div>
                             </div>
                           </Link>
