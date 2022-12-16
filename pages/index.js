@@ -7,6 +7,7 @@ import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 /**new index components */
 import { BrowserView } from "react-device-detect";
+import { SnowWithLights } from "@/components/xmas/snow";
 
 const Footer = dynamic(() => import("@/components/footer"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
@@ -103,29 +104,35 @@ const SponsorCard = ({ data }) => {
 
 const PrototyprNetworkCTA = ({ data }) => {
   return (
-    <div className="flex flex-col gap-1 justify-end items-end">
-      <div className="w-full rounded-[12px] h-auto bg-white border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">
-        <div className="flex flex-col grid gap-2">
-          <p className="text-black text-2xl mb-1 font-inter">
-         Get noticed in the design community
-          </p>
-          <div>
-            <Link href="/write">
-              <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm font-semibold">
-                Start Writing
-              </button>
-            </Link>
-            <Link href="/post/write-for-us">
-              <button className="px-4 ml-2 py-2 text-black rounded-lg font-inter font-semibold bg-gray-200 hover:bg-gray-100 text-sm">
-                Learn more
-              </button>
-            </Link>
+    <div className="relative">
+      <div className="absolute top-0 right-0 -translate-y-2 translate-x-2">
+        <SnowWithLights />
+      </div>
+
+      <div className="flex flex-col gap-1 justify-end items-end">
+        <div className="w-full rounded-[12px] h-auto bg-blue-300 border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">
+          <div className="flex flex-col grid gap-2">
+            <p className="text-black text-2xl mb-1 font-inter">
+              Get noticed in the design community
+            </p>
+            <div>
+              <Link href="/write">
+                <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm font-semibold">
+                  Start Writing
+                </button>
+              </Link>
+              <Link href="/post/write-for-us">
+                <button className="px-4 ml-2 py-2 text-black rounded-lg font-inter font-semibold bg-gray-200 hover:bg-gray-100 text-sm">
+                  Learn more
+                </button>
+              </Link>
+            </div>
           </div>
+          <img
+            className="w-full"
+            src="/static/images/proto-little-peeps.svg"
+          ></img>
         </div>
-        <img
-          className="w-full"
-          src="/static/images/proto-little-peeps.svg"
-        ></img>
       </div>
     </div>
   );
@@ -286,22 +293,28 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                             >
                               <div className="flex flex-row bg-white justify-between p-4 rounded-lg">
                                 <div
-                                  style={{flex: '0 0 3em'}}
-                                 className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
-                                  
-                               {companyLogo? <Image
-                                  tabIndex={0}
-                                  loader={gumletLoader}
-                                  layout="fill"
-                                  objectFit="cover"
-                                  src={companyLogo}
-                                  className="object-cover"
-                                  alt="Author profile picture"
-                                />:''}
+                                  style={{ flex: "0 0 3em" }}
+                                  className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden"
+                                >
+                                  {companyLogo ? (
+                                    <Image
+                                      tabIndex={0}
+                                      loader={gumletLoader}
+                                      layout="fill"
+                                      objectFit="cover"
+                                      src={companyLogo}
+                                      className="object-cover"
+                                      alt="Author profile picture"
+                                    />
+                                  ) : (
+                                    ""
+                                  )}
                                   {/* <img className="relative" src={companyLogo} /> */}
                                 </div>
                                 <div className="flex flex-col grid gap-1 justify-center">
-                                  <p className=" h-[18px] overflow-hidden line-clamp-1 inline font-inter text-sm">{title}</p>
+                                  <p className=" h-[18px] overflow-hidden line-clamp-1 inline font-inter text-sm">
+                                    {title}
+                                  </p>
                                   <div className="flex flex-row gap-1 text-sm text-gray-500">
                                     <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline font-inter">
                                       {companyName},
