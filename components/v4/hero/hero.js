@@ -71,7 +71,7 @@ const MetaInfo = ({ tags = [] }) => {
   return (
     <div className="flex flex-row justify-between">
       {tagContent[0]?.attributes?.name && (
-        <span className="text-xs capitalize  font-inter px-4 py-2 border border-black border-opacity-5  bg-black bg-opacity-5 text-black rounded-full">
+        <span className="text-xs capitalize bg-orange-100  font-inter px-4 py-1 border border-black border-opacity-5  text-black rounded-full">
           {tagContent[0]?.attributes?.name}
         </span>
       )}
@@ -106,8 +106,8 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
   return (
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
-      style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
-      className="w-full relative h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] col-span-2 rounded-[20px]  hover:shadow-none cursor-pointer"
+      //   style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
+      className="w-full relative h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] col-span-2 rounded-[20px] shadow-xl  hover:shadow-none cursor-pointer"
     >
       <div className="z-40 hidden sm:block absolute -translate-x-6 -translate-y-2 pointer-events-none">
         <LargeCardSnow />
@@ -166,8 +166,8 @@ const SmallCardWithImage = ({ src, data, type }) => {
   return (
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
-      style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
-      className="w-full mb-8 sm:mb-0 min-h-[330px] bg-white  border-opacity-[4%] border-black  rounded-[16px] flex flex-col overflow-hidden cursor-pointer"
+      //   style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
+      className="w-full mb-8 sm:mb-0 min-h-[330px] bg-white  border-opacity-[4%] border-black  rounded-[16px] flex flex-col shadow-xl  hover:shadow-none overflow-hidden cursor-pointer"
     >
       <div className="w-full h-[135px] max-h-[135px] bg-gray-200 relative">
         <Image
@@ -246,7 +246,8 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
             {/* <div className="absolute top-0  pointer-events-none">
               <SnowMiddle />
             </div> */}
-            <div className="absolute hidden sm:block top-0 right-0 -translate-y-2 pointer-events-none">
+
+            <div className="absolute hidden sm:block top-0 -right-3 -translate-y-2 pointer-events-none">
               <SnowWithLights />
             </div>
             <div className="w-full bg-blue-200 rounded-2xl overflow-hidden flex flex-col gap-3 p-10  ">
