@@ -214,7 +214,7 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
           <LargeCardWithImage type={type} data={hero} />
 
           <div className="relative w-full flex items-end">
-            <div className="absolute z-20 top-0 right-0 translate-x-2 -translate-y-2 pointer-events-none">
+            <div className="absolute hidden md:block z-20 top-0 right-0 translate-x-2 -translate-y-2 pointer-events-none">
               <SmallCardSnow />
             </div>
 
@@ -246,7 +246,7 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
             {/* <div className="absolute top-0  pointer-events-none">
               <SnowMiddle />
             </div> */}
-            <div className="absolute top-0 right-0 -translate-y-2 pointer-events-none">
+            <div className="absolute hidden sm:block top-0 right-0 -translate-y-2 pointer-events-none">
               <SnowWithLights />
             </div>
             <div className="w-full bg-blue-200 rounded-2xl overflow-hidden flex flex-col gap-3 p-10  ">
