@@ -322,7 +322,7 @@ const Editor = ({
             }
           />
           {/* NAVIGATION END */}
-          <div className="my-4 pt-16 relative pb-10 blog-content">
+          <div className="my-4 pt-16 max-w-[44rem] mx-auto relative pb-10 blog-content">
             {editor && <MenuFloating editor={editor} />}
             <TextMenu editor={editor} />
             {/* <LinkMenu editor={editor} /> */}
