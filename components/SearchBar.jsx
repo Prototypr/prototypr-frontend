@@ -5,14 +5,18 @@ import {
   InfiniteHits,
   SearchBox,
   Stats,
-  Highlight
+  Highlight,
+  Configure
 } from "react-instantsearch-dom";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import Link from "next/link";
 
 const originalSearchClient = instantMeiliSearch(
   process.env.NEXT_PUBLIC_MEILISEARCH_URL,
-  process.env.NEXT_PUBLIC_MEILISEARCH_KEY
+  process.env.NEXT_PUBLIC_MEILISEARCH_KEY,
+//   {
+//     filters: "(type:article OR type:tool)",
+//   }
   );
 const searchClient = {
     ...originalSearchClient,
@@ -44,14 +48,43 @@ const searchClient = {
     }
   };
 
+const filter_options = [
+    {name:'All',filter:'(type=tool OR type=article)'},
+    {name:'Article', filter:'type=article'},
+    {name:'Tool',filter:'type=tool'}]
+
 const SearchBar = (props) =>{
+
+    const [activeFilter, setActiveFilter] = useState(filter_options[0]?.filter)
 
     return(
     <div className="relative ml-4">
-    <InstantSearch  indexName="post" searchClient={searchClient}>
+    <InstantSearch indexName="post" searchClient={searchClient}>
+        <Configure
+        // analytics={false}
+        filters={`${activeFilter}`}
+        hitsPerPage={8}
+      />
       <SearchBox placeholder="Search for design tools and articles" />
       <div id="meilisearch-results" className="fixed bg-white top-0 mt-[64px] h-[80vh] overflow-auto w-full md:max-w-xl rounded-xl shadow-xl p-4 left-0 md:left-[112px]">
-      <Stats />
+      <div className="flex justify-between">
+        <div className="flex flex-col justify-center">
+            <Stats />
+        </div>
+      <select
+        id="location"
+        className="w-[100px]"
+        onChange={(e)=>{
+           setActiveFilter(filter_options[parseInt(e.target.value,10)]?.filter) 
+        }}
+    >
+        {filter_options.map((i, index) => (
+        <option key={'filter_'+index} value={index}>
+            {i.name}
+        </option>
+        ))}
+    </select>
+      </div>
       <div className="mt-3">
       <InfiniteHits hitComponent={Hit} />
       </div>
