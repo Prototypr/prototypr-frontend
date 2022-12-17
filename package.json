@@ -12,6 +12,7 @@
   "dependencies": {
     "@geist-ui/icons": "^1.0.2",
     "@heroicons/react": "^1.0.5",
+    "@meilisearch/instant-meilisearch": "^0.8.1",
     "@next/bundle-analyzer": "^12.1.5",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-collapsible": "^1.0.0",
@@ -71,6 +72,7 @@
     "framer-motion": "^7.6.6",
     "fs": "0.0.1-security",
     "image-validator": "^1.2.1",
+    "instantsearch.css": "^7.4.5",
     "iron-session": "^6.1.2",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.1.2",
@@ -103,6 +105,7 @@
     "react-hook-form": "^7.29.0",
     "react-hot-toast": "^2.2.0",
     "react-icons": "^4.4.0",
+    "react-instantsearch-dom": "^6.30.3",
     "react-intl": "^5.24.8",
     "react-lazyload": "^3.2.0",
     "react-moment": "^1.1.2",

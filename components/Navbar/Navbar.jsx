@@ -13,6 +13,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 import WMButton from "./parts/WMButton";
 import { SnowMiddle, SmallSideSnow } from "../xmas/snow";
+import SearchBar from "../SearchBar";
 
 const WMCounter = dynamic(
   () => import("@/components/WebMonetization/Counter"),
@@ -33,7 +34,7 @@ export const HomePageNewNavBar = () => {
   return (
     <div className="relative">
       <div className="absolute z-[60] hidden sm:block -top-1 left-[5%]">
-        <SnowMiddle />
+        {/* <SnowMiddle /> */}
       </div>
       <div className="absolute z-[60] hidden sm:block -top-1 left-[80%] pointer-events-none">
         <SmallSideSnow />
@@ -65,6 +66,7 @@ export const HomePageNewNavBar = () => {
               >
                 <WMCounter />
               </div>
+              <SearchBar/>
             </div>
             <div className="hidden sm:flex flex-row gap-2 p-2">
               {[
