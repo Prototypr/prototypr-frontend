@@ -35,6 +35,7 @@ import { Waypoint } from "react-waypoint";
 import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
+import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 const WMPostTracker = dynamic(() => import("@/components/WebMonetization/WMPostTracker"), {
   ssr: false,
 });
@@ -389,9 +390,13 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Want more?</h3>
               <p className="text-base text-gray-500 mb-6">Get a curated selection of the best articles from Prototypr in your inbox.</p>
                   <SignupSidebar/>
-                  </div>
+          </div>
+
+          <SponsorSidebarCard/>
+
 
            </div>
+
             {/* <div className="w-full flex flex-col grid gap-2">
 
             {relatedPosts?.data?.length > 0 &&
