@@ -8,6 +8,7 @@ import {
   Highlight
 } from "react-instantsearch-dom";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
+import Link from "next/link";
 
 const originalSearchClient = instantMeiliSearch(
   process.env.NEXT_PUBLIC_MEILISEARCH_URL,
@@ -47,8 +48,8 @@ const SearchBar = (props) =>{
 
     return(
     <div className="relative ml-4">
-    <InstantSearch indexName="post" searchClient={searchClient}>
-      <SearchBox />
+    <InstantSearch  indexName="post" searchClient={searchClient}>
+      <SearchBox placeholder="Search for design tools and articles" />
       <div id="meilisearch-results" className="fixed bg-white top-0 mt-[64px] h-[80vh] overflow-auto w-full md:max-w-xl rounded-xl shadow-xl p-4 left-0 md:left-[112px]">
       <Stats />
       <div className="mt-3">
@@ -65,18 +66,21 @@ export default SearchBar
 const Hit = ({ hit }) => {
 
     const image = getImage(hit)
+    const link = getLink(hit)
     return(
-        <div className="flex" key={hit.id}>
-            {image?<SearchResultImage hit={hit} image={image}/>:''}
-        <div className="flex flex-col hit-name">
-            <Highlight className="text-base text-gray-800 line-clamp-2 font-medium" attribute="title" hit={hit} />
-            <div className="mt-1.5">
-                <span className="capitalize text-xs capitalize bg-gray-100 font-inter px-3 py-0.5 border border-black border-opacity-5 text-gray-500 rounded-full">
-                    {hit.type}
-                </span>
+        <Link href={link?link:'#'}>
+            <div className="flex" key={hit.id}>
+                {image?<SearchResultImage hit={hit} image={image}/>:''}
+            <div className="flex flex-col hit-name">
+                <Highlight className="text-base text-gray-800 line-clamp-2 font-medium" attribute="title" hit={hit} />
+                <div className="mt-1.5">
+                    <span className="capitalize text-xs capitalize bg-gray-100 font-inter px-3 py-0.5 border border-black border-opacity-5 text-gray-500 rounded-full">
+                        {hit.type}
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
+        </Link>
   );
 }
 
@@ -113,4 +117,14 @@ const SearchResultImage = ({image, hit}) =>{
         }
     }
 
+  }
+
+  const getLink = (hit) =>{
+
+    if(hit.type=='article'){
+        return `${process.env.NEXT_PUBLIC_HOME_URL}/post/${hit.slug}`
+    }
+    if(hit.type=='tool'){
+        return `${process.env.NEXT_PUBLIC_HOME_URL}/toolbox/${hit.slug}`
+    }
   }
