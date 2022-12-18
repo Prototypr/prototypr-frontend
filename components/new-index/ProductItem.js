@@ -34,7 +34,7 @@ export default function ProductItem({ post = {} }) {
     tagArr && tagArr.length ? tagArr[0].attributes.name : "design";
   const tagSlug = tagArr && tagArr.length ? tagArr[0].attributes.slug : "";
   return (
-    <div className="grid-cols-1 flex items-top p-8 group bg-white border-b border-gray-200">
+    <div className="grid-cols-1 flex items-top p-8 group bg-white border-b border-gray-100">
       <div className="flex-1 ml-0 h-full">
         <Link href={`/posts/${tagSlug}`}>
           <div className="font-base hover:cursor-pointer hover:text-primary-700 hover:transition-all text-xs leading-none tracking-wide uppercase text-primary-400 mr-1 font-semibold tracking-[.05em]">
@@ -91,9 +91,9 @@ export default function ProductItem({ post = {} }) {
       </div>
       <figure
         //   style={{ width: 162, height: 124 }}
-        className="relative w-[105px] h-[80px] sm:w-[132px] sm:h-[124px] overflow-hidden rounded-lg transform group-hover:translate-x-0  group-hover:translate-y-0 transition duration-700 ease-out overflow-hidden"
+        className="relative w-[105px] h-[80px] sm:w-[148px] sm:h-[126px] rounded-xl"
       >
-        <div className="absolute  w-full h-full rounded-lg transform border cursor-pointer">
+        <div className="absolute  w-full h-full rounded-xl transform border border-gray-100 cursor-pointer">
           <Link
             href={`/post/${slug}`}
             className="hover:underline hover:text-gray-800"
@@ -103,7 +103,7 @@ export default function ProductItem({ post = {} }) {
               objectFit="cover"
               width={162}
               height={124}
-              className="rounded-lg contrast-115 object-cover w-[100px] h-[75px] sm:w-[132px] sm:h-[124px]"
+              className="rounded-xl contrast-115 object-cover w-[100px] h-[75px] sm:w-[148px] sm:h-[124px]"
               // layout="fill"
               src={ftImage}
             />

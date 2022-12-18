@@ -127,7 +127,7 @@ export default function Post({ post, preview, relatedPosts }) {
         }
         
         {/* <Alert preview={preview} /> */}
-        <main className="pt-28 pb-20 gap-2 col-span-12 lg:col-span-8  md:pr-4 py-10">
+        <main className="pt-28 pb-20 gap-2 col-span-12 lg:col-span-8  px-3 md:px-8 xl:px-0 py-10">
           {(post?.id && (process.env.NODE_ENV==='production')) && 
           <WMPostTracker postId={post?.id} post={post}/>}
             {router.isFallback ? (
@@ -263,7 +263,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
            <div>
            {author? (
            
-              <div className="border border-gray-200 flex p-5 rounded rounded-xl flex-col mt-8 pb-4">
+              <div className="border border-gray-200 flex p-5 rounded-xl flex-col mt-8 pb-4">
                 <div className="w-[80px] h-[80px] relative border border-gray-100 rounded-full shadow-sm mb-3">
                   {avatar? (
                      <Link href={`/people/${author.slug}`}>

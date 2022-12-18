@@ -9,6 +9,10 @@ import Button from "@/components/Primitives/Button";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import Contributors from "@/components/toolbox/Contributors";
 import JobPostCard from "@/components/Jobs/JobCard";
+import { useState } from "react";
+import { Waypoint } from "react-waypoint";
+import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
+import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 
 const PAGE_SIZE = 12;
 
@@ -22,35 +26,35 @@ const seo = {
 const Index = ({jobs}) => {
 
   return (
-    <Layout seo={seo} showWriteButton={false} background="#fafafa">
+    <Layout seo={seo} showWriteButton={false} background="#eff4fb">
       <Container>
-      <div className=" w-full h-full">
-        <div className="pt-32 w-full max-w-7xl mx-auto  h-full grid grid-cols-6 gap-5">
-          <div className="mb-2 col-start-1 col-end-4 md:col-start-1 md:col-end-5">
-            <h1 className="text-lg md:text-xl font-medium">Now Hiring</h1>
-          </div>
-          <div className="w-full h-full col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
-          <div className="w-full">
-              <Link href="/jobs/post">
-                <Button variant="fullWidthJob" className="px-0 py-1">
-                  Post a Job for $200
-                </Button>
+      <div className="w-full h-full grid grid-cols-12 gap-1  ">
+        <div className="max-w-[46rem] mx-auto pt-28 pb-20  px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8 py-10">
+          <div className="pt-5 text-md text-gray-700 pb-8">
+              <Link href={`/`}>
+                <span className="hover:underline">Home</span>
+              </Link>{" "}
+              →{" "}
+              <Link href={`/jobs`}>
+                <span className="underline">Jobs</span>
               </Link>
             </div>
+          <div className="mb-6 col-start-1 col-end-4 md:col-start-1 md:col-end-5">
+            <h1 className="text-lg md:text-xl font-medium">Now Hiring</h1>
           </div>
           <div className="w-full h-full col-start-1 col-end-7 md:col-start-1 md:col-end-5 flex flex-col pb-10 lg:pr-6">
             {jobs.map((job, i) => {
               return <JobPostCard job={job} key={i} />;
             })}
           </div>
-          <div className="w-full h-full mb-5 col-start-1 col-end-7 md:col-start-5 md:col-end-7 ">
-            {/* <div className="w-full bg-[#2C04CA] h-[150px] <rounded-md p-5">
-              <Link href="/jobs/post">
-                <button className="px-5 text-sm py-2 bg-white text-black rounded">
-                  Post a Job
-                </button>
-              </Link>
-            </div> */}
+        </div>
+        <Sidebar
+            // author={post.attributes?.author?.data?.attributes}
+            // relatedPosts={relatedPosts}
+            paddingTop="hidden md:block pt-[132px]"
+          />
+        {/* <div className="w-full h-full mb-5 col-start-1 col-end-7 md:col-start-5 md:col-end-7 ">
+         
             <div className="w-full bg-blue-50 rounded-md p-5 border border-gray-300">
               <h3 className="text-xl font-medium mb-2 text-gray-900">Get Prototypr Weekly</h3>
               <p className="text-base text-gray-600 mb-6">Stay up to date with design news, tools, and jobs.</p>
@@ -58,8 +62,7 @@ const Index = ({jobs}) => {
 
             </div>
             <Contributors className="border border-gray-300 rounded"/>
-          </div>
-        </div>
+          </div> */}
       </div>
       </Container>
     </Layout>
@@ -67,6 +70,69 @@ const Index = ({jobs}) => {
 };
 
 export default Index;
+
+const Sidebar = ({ relatedPosts, paddingTop, author }) => {
+
+  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
+
+  const _handleWaypointEnter = () => {
+    setStickyPaddingTop("pt-0");
+  };
+  const _handleWaypointLeave = () => {
+    setStickyPaddingTop("pt-32");
+  };
+
+
+  return (
+    <div
+      className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
+    >
+      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
+      <div
+        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
+      >
+        <aside className="h-screen px-10 sticky top-0 py-0">
+          <div className="w-full mb-8">
+              <Link href="/jobs/post">
+                <Button variant="fullWidthJob" className="px-0 py-1">
+                  Post a Job for $200
+                </Button>
+              </Link>
+            </div>
+         
+          <div className="flex flex-col grid gap-6">
+                <PrototyprNetworkCTA/>
+           <div>
+
+           {/* EMAIL FORM */}
+           <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">Get the roundup</h3>
+              <p className="text-base text-gray-500 mb-6">Get a curated selection of the best articles and topics from Prototypr in your inbox.</p>
+                  <SignupSidebar/>
+          </div>
+
+          <SponsorSidebarCard/>
+
+
+           </div>
+
+            {/* <div className="w-full flex flex-col grid gap-2">
+
+            {relatedPosts?.data?.length > 0 &&
+              relatedPosts.data.map((item, index) => {
+                return (
+                  <ProductItem key={`product_item_${index}`} post={item} />
+                  // <TopicTopItem key={index} topic={item}/>
+                );
+              })}
+            </div> */}
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+};
+
 
 export async function getStaticProps({ preview = null, params }) {
   const pageSize = PAGE_SIZE;

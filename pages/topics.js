@@ -49,7 +49,7 @@ export default function Index({ allPosts, preview }) {
         <section className="flex-col md:flex-row flex items-center md:justify-between">
 
           <h1 className="text-4xl font-bold tracking-tighter leading-tight mb-4">
-            {intl.formatMessage({ id: "topics.title" })}.
+            {intl.formatMessage({ id: "topics.title" })}
           </h1>
         </section>
 
@@ -92,7 +92,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
     setStickyPaddingTop("pt-0");
   };
   const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-32");
+    setStickyPaddingTop("pt-36");
   };
 
 
@@ -105,13 +105,13 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
         className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
       >
         <aside className="h-screen px-10 sticky top-0 py-0">
-          <div className="flex flex-col grid gap-10">
+          <div className="flex flex-col grid gap-6">
                 <PrototyprNetworkCTA/>
            <div>
 
            {/* EMAIL FORM */}
            <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">Get the weekly</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">Get the roundup</h3>
               <p className="text-base text-gray-500 mb-6">Get a curated selection of the best articles and topics from Prototypr in your inbox.</p>
                   <SignupSidebar/>
           </div>

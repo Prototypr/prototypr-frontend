@@ -70,7 +70,7 @@ export default function PostsPage({
       >
         <Container>
           <div className="w-full h-full grid grid-cols-12 gap-1  ">
-            <div className="pt-28 max-w-[46rem] w-full mx-auto pb-20 gap-2 col-span-12 lg:col-span-8 py-10">
+            <div className="pt-28 max-w-[46rem]  px-3 md:px-8 xl:px-0 w-full mx-auto pb-20 gap-2 col-span-12 lg:col-span-8 py-10">
             <div className="pt-5 text-md text-gray-700">
               <Link href={`/`}>
                 <span className="hover:underline">Home</span>
@@ -78,7 +78,7 @@ export default function PostsPage({
               →{" "}
               <Link href={`/topics`}>
                 <span className="hover:underline">Topics</span>
-              </Link>
+              </Link>{" "}
               →{" "}
               <Link href={`/posts/${{tagName}}/page/1`}>
                 <span className="underline capitalize">{tagName}</span>
@@ -150,13 +150,13 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
         className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
       >
         <aside className="h-screen px-10 sticky top-0 py-0">
-          <div className="flex flex-col grid gap-10">
+          <div className="flex flex-col grid gap-6">
           <PrototyprNetworkCTA />
            <div>
 
            {/* EMAIL FORM */}
            <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">Get the weekly</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">Get the roundup</h3>
               <p className="text-base text-gray-500 mb-6">Get a curated selection of the best articles and topics from Prototypr in your inbox.</p>
                   <SignupSidebar/>
           </div>
