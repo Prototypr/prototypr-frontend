@@ -40,7 +40,7 @@ export default function Layout({
 
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
-        style={{ background: background ? background : "#F3F4F6" }}
+        style={{ background: background ? background : "#eff4fb" }}
       >
         <main
           className="mx-auto "

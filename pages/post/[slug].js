@@ -130,7 +130,6 @@ export default function Post({ post, preview, relatedPosts }) {
         <main className="pt-28 pb-20 gap-2 col-span-12 lg:col-span-8  md:pr-4 py-10">
           {(post?.id && (process.env.NODE_ENV==='production')) && 
           <WMPostTracker postId={post?.id} post={post}/>}
-          <Container>
             {router.isFallback ? (
               <h1 className="text-6xl font-inter-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
                 Loading
@@ -176,7 +175,6 @@ export default function Post({ post, preview, relatedPosts }) {
                 </div>
               </>
             )}
-          </Container>
         </main>
 
         <Sidebar

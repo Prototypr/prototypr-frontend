@@ -1,77 +1,21 @@
 import Container from "@/components/container";
 // import Layout from "@/components/layout";
 import Layout from "@/components/layoutForBlogPost";
+import SignupSidebar from "@/components/newsletter/SignupSidebar";
+import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 
 // import { getAllPostsForPostsPage } from "@/lib/api";
-import Head from "next/head";
+// import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import { useIntl } from "react-intl";
+import { Waypoint } from "react-waypoint";
+import { topics } from "@/lib/constants";
+import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
+
 export default function Index({ allPosts, preview }) {
   const intl = useIntl();
-  const topics = [
-    {
-      name: "navbar.submenu1.title4",
-      slug: "accessibility",
-      imageSrc:
-        "https://images.unsplash.com/photo-1574887427561-d3d5d58c9273?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80",
-      imageAlt: "UX topic",
-      color: "from-blue-default to-purple-500",
-    },
-    {
-      name: "navbar.submenu1.title6",
-      slug: "code",
-      imageSrc:
-        "https://images.unsplash.com/photo-1566837945700-30057527ade0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-      imageAlt: "Coding",
-      color: "from-teal-600 to-blue-600",
-    },
-    // {
-    //   name: "Generative Coding",
-    //   slug: "generative",
-    //   imageSrc:
-    //     "https://images.unsplash.com/photo-1599059919177-1960faea6655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-    //   imageAlt: "UX topic",
-    // },
-    {
-      name: "navbar.submenu1.title5",
-      slug: "ui",
-      imageSrc:
-        "https://images.unsplash.com/photo-1545235617-7a424c1a60cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
-      imageAlt: "UX topic",
-      color: "from-purple-600 to-red-600",
-    },
-    {
-      name: "navbar.submenu1.title2",
-      slug: "ux",
-      imageSrc:
-        "https://images.unsplash.com/photo-1629752187687-3d3c7ea3a21b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80",
-      imageAlt: "UX topic",
-      color: "from-green-600 to-blue-600",
-    },
-    {
-      name: "topicSpotlight.tabs.userResearch",
-      slug: "user-research",
-      imageSrc:
-        "https://images.unsplash.com/photo-1573497491208-6b1acb260507?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-      imageAlt: "UX topic",
-      color: "from-orange-600 to-red-400",
-    },
-    {
-      name: "topicSpotlight.tabs.vr",
-      slug: "vr",
-      imageSrc:
-        "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dnJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      imageAlt: "UX topic",
-      color: "from-red-500 to-yellow-600",
-    },
-    // {
-    //   name: "Web 3",
-    //   slug: "web3",
-    //   imageSrc:
-    //     "https://images.unsplash.com/photo-1644215529308-7877e68eb0b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2232&q=80",
-    //   imageAlt: "UX topic",
-    // },
-  ];
+
 
   return <>
     <Layout
@@ -90,18 +34,21 @@ export default function Index({ allPosts, preview }) {
         <title>{intl.formatMessage({ id: "topics.header" })}.</title>
       </Head> */}
       <Container>
-        <div className="pt-5 text-md text-gray-700 pb-8">
-          <Link href={`/`}>
-            <span className="hover:underline">Home</span>
-          </Link>{" "}
-          →{" "}
-          <Link href={`/topics`}>
-            <span className="underline">Topics</span>
-          </Link>
-        </div>
+      <div className="w-full h-full grid grid-cols-12 gap-1  ">
+        <div className="pt-28 pb-20 gap-2 col-span-12 lg:col-span-8 md:pr-8 py-10">
+          <div className="pt-5 text-md text-gray-700 pb-8">
+            <Link href={`/`}>
+              <span className="hover:underline">Home</span>
+            </Link>{" "}
+            →{" "}
+            <Link href={`/topics`}>
+              <span className="underline">Topics</span>
+            </Link>
+          </div>
+        
+        <section className="flex-col md:flex-row flex items-center md:justify-between">
 
-        <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
-          <h1 className="text-4xl font-bold tracking-tighter leading-tight md:pr-8">
+          <h1 className="text-4xl font-bold tracking-tighter leading-tight mb-4">
             {intl.formatMessage({ id: "topics.title" })}.
           </h1>
         </section>
@@ -114,7 +61,7 @@ export default function Index({ allPosts, preview }) {
               className={`group cursor-pointer flex relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
             >
               <div className="my-auto mx-auto flex justify-between" >
-                    <h3 className="text-lg font-bold text-white">                    
+                    <h3 className="text-lg font-bold text-center text-white">                    
                           {intl.formatMessage({ id: topic.name })}
                     </h3>
               </div>
@@ -122,11 +69,75 @@ export default function Index({ allPosts, preview }) {
             </Link>
           ))}
         </div>
+        </div>
         {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
+
+
+          <Sidebar
+            // author={post.attributes?.author?.data?.attributes}
+            // relatedPosts={relatedPosts}
+            paddingTop="hidden md:block pt-[132px]"
+          />
+        </div>
       </Container>
     </Layout>
   </>;
 }
+
+const Sidebar = ({ relatedPosts, paddingTop, author }) => {
+
+  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
+
+  const _handleWaypointEnter = () => {
+    setStickyPaddingTop("pt-0");
+  };
+  const _handleWaypointLeave = () => {
+    setStickyPaddingTop("pt-32");
+  };
+
+
+  return (
+    <div
+      className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
+    >
+      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
+      <div
+        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
+      >
+        <aside className="h-screen px-10 sticky top-0 py-0">
+          <div className="flex flex-col grid gap-10">
+                <PrototyprNetworkCTA/>
+           <div>
+
+           {/* EMAIL FORM */}
+           <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">Get the weekly</h3>
+              <p className="text-base text-gray-500 mb-6">Get a curated selection of the best articles and topics from Prototypr in your inbox.</p>
+                  <SignupSidebar/>
+          </div>
+
+          <SponsorSidebarCard/>
+
+
+           </div>
+
+            {/* <div className="w-full flex flex-col grid gap-2">
+
+            {relatedPosts?.data?.length > 0 &&
+              relatedPosts.data.map((item, index) => {
+                return (
+                  <ProductItem key={`product_item_${index}`} post={item} />
+                  // <TopicTopItem key={index} topic={item}/>
+                );
+              })}
+            </div> */}
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+};
+
 
 // export async function getStaticProps({ preview = null }) {
 //   const allPosts = (await getAllPostsForPostsPage(preview)) || [];
