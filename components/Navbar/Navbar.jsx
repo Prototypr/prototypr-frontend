@@ -14,6 +14,7 @@ import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 import WMButton from "./parts/WMButton";
 import { SnowMiddle, SmallSideSnow } from "../xmas/snow";
 import SearchBar from "../SearchBar";
+import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
 
 const WMCounter = dynamic(
   () => import("@/components/WebMonetization/Counter"),
@@ -73,18 +74,14 @@ export const HomePageNewNavBar = () => {
                 { label: "Home", url: "/" },
                 { label: "Topics", url: "/topics" },
                 { label: "Jobs", url: "/jobs" },
-                { label: "Toolbox", url: "/toolbox" },
+                { label: "Toolbox", url: "/toolbox/page/1" },
                 { label: "Sponsor", url: "/sponsor" },
               ].map((tab) => {
                 return (
                   <div>
-                    <Link href={tab.url}>
-                      <span
-                        className={`px-6 hover:bg-gray-200 py-2 text-center block font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full text-base rounded-full bg-transparent text-gray-500  `}
-                      >
+                    <ActiveLinkNewMenu href={tab.url}>
                         {tab.label}
-                      </span>
-                    </Link>
+                    </ActiveLinkNewMenu>
                   </div>
                 );
               })}

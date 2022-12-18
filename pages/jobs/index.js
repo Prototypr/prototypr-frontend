@@ -1,5 +1,6 @@
 import Container from "@/components/container";
-import Layout from "@/components/layout";
+// import Layout from "@/components/layout";
+import Layout from "@/components/layoutForBlogPost";
 
 import { getAllJobs } from "@/lib/api";
 
@@ -24,7 +25,7 @@ const Index = ({jobs}) => {
     <Layout seo={seo} showWriteButton={false} background="#fafafa">
       <Container>
       <div className=" w-full h-full">
-        <div className="pt-6 w-full max-w-7xl mx-auto  h-full grid grid-cols-6 gap-5">
+        <div className="pt-32 w-full max-w-7xl mx-auto  h-full grid grid-cols-6 gap-5">
           <div className="mb-2 col-start-1 col-end-4 md:col-start-1 md:col-end-5">
             <h1 className="text-lg md:text-xl font-medium">Now Hiring</h1>
           </div>
@@ -37,7 +38,7 @@ const Index = ({jobs}) => {
               </Link>
             </div>
           </div>
-          <div className="w-full h-full col-start-1 col-end-7 md:col-start-1 md:col-end-5 flex flex-col pb-10">
+          <div className="w-full h-full col-start-1 col-end-7 md:col-start-1 md:col-end-5 flex flex-col pb-10 lg:pr-6">
             {jobs.map((job, i) => {
               return <JobPostCard job={job} key={i} />;
             })}

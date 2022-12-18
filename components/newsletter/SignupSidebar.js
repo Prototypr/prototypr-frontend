@@ -96,7 +96,7 @@ function HookForm(props) {
   return (
     <div>
       <form className={`${props.className}`} onSubmit={handleSubmit(onSubmit)}>
-        <div className="sm:flex-1 sm:max-w-xs w-full">
+        <div className="w-full">
           <label htmlFor="Email" className="sr-only	">
             <FormattedMessage id="intro.input.placeholder" />
           </label>

@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
-import Layout from '@/components/layout'
+// import Layout from '@/components/layout'
+import Layout from "@/components/layoutForBlogPost";
 import { getAllJobsWithId, getJobPage } from '@/lib/api'
 // import markdownToHtml from '@/lib/markdownToHtml'
 
@@ -59,13 +60,13 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
     }}
     activeNav={"posts"} preview={preview}>
       <Container>
-        <div className="w-full mt-6 grid grid-rows-1 grid-cols-12 lg:gap-6">
+        <div className="w-full xl:px-16 pt-32 lg:pt-36 grid grid-rows-1 grid-cols-12 lg:gap-6">
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
           {/* center sidebar */}
-          <div className="relative col-span-full lg:col-span-9">
+          <div className="relative col-span-full lg:col-span-8">
 
             {/**Description */}
             <div className="mb-8">
@@ -155,7 +156,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
           </div>
 
           {/* RIGHT SIDEBAR START */}
-          <div className="col-span-full mb-6 lg:mb-0 lg:col-span-3 order-last lg:order-last lg:block">
+          <div className="col-span-full mb-6 lg:mb-0 lg:col-span-4 order-last lg:order-last lg:block">
           <div className="w-full mb-6 pt-4 pb-6 px-6 rounded-lg bg-white col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
           <div className="w-full">
             <h3 className='text-xl font-medium mb-2 text-gray-900'>Apply Today</h3>

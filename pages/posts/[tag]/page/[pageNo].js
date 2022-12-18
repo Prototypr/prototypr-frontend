@@ -2,9 +2,11 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
 const NewPagination = dynamic(() => import("@/components/pagination"));
-import Layout from '@/components/layout'
+// import Layout from '@/components/layout'
+import Layout from "@/components/layoutForBlogPost";
+
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
-import Head from 'next/head'
+// import Head from 'next/head'
 import { transformPostList } from "@/lib/locale/transformLocale";
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
@@ -42,25 +44,27 @@ export default function PostsPage({allPosts = [], heroPost=null,morePosts=[], pr
         }}
            activeNav={"posts"} preview={preview}>
             <Container>
-            <h2 className='font-bold text-5xl md:text-6.5xl tracking-wide text-center mt-6 md:mt-10 md:my-8'>
-                {tagName}
-            </h2>            
-            
-            <section className={`mt-10`}>
-            {firstPost?.length>0 &&  firstPost.map((item, index) => {
-                return <EditorPick2 post={item} showTitle={false} />
-                    // return <TopicTopItem key={`topic_${index}`} topic={item} />
-                })}
-            </section>
-            {heroPost && <EditorPick2 post={heroPost} showTitle={false} />}
-            {morePosts && <ProductList posts={morePosts} />}
-           
-            <NewPagination 
-                total={pagination?.total}
-                pageSize={PAGE_SIZE}
-                currentPage={pagination?.page}
-                onPageNumChange={(pageNum, tag) => {onPageNumChange(pageNum, tag)}}
-            />
+              <div className="pt-24 xl:px-24">
+                <h2 className='font-bold text-5xl md:text-6.5xl tracking-wide text-center mt-6 md:mt-10 md:my-8'>
+                    {tagName}
+                </h2>            
+                
+                <section className={`mt-10`}>
+                {firstPost?.length>0 &&  firstPost.map((item, index) => {
+                    return <EditorPick2 post={item} showTitle={false} />
+                        // return <TopicTopItem key={`topic_${index}`} topic={item} />
+                    })}
+                </section>
+                {heroPost && <EditorPick2 post={heroPost} showTitle={false} />}
+                {morePosts && <ProductList posts={morePosts} />}
+              
+                <NewPagination 
+                    total={pagination?.total}
+                    pageSize={PAGE_SIZE}
+                    currentPage={pagination?.page}
+                    onPageNumChange={(pageNum, tag) => {onPageNumChange(pageNum, tag)}}
+                />
+              </div>
 
             </Container>
           </Layout>
