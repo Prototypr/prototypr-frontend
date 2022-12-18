@@ -72,9 +72,9 @@ export const HomePageNewNavBar = () => {
             <div className="hidden sm:flex flex-row gap-2 p-2">
               {[
                 { label: "Home", url: "/" },
+                { label: "Toolbox", url: "/toolbox/page/1" },
                 { label: "Topics", url: "/topics" },
                 { label: "Jobs", url: "/jobs" },
-                { label: "Toolbox", url: "/toolbox/page/1" },
                 { label: "Sponsor", url: "/sponsor" },
               ].map((tab) => {
                 return (
