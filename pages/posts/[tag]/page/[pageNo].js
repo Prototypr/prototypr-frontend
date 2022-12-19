@@ -90,9 +90,9 @@ export default function PostsPage({
                   {tagName}
                 </h2>
                 <div className="flex flex-col justify-center">
-                  <a href="/" className="text-gray-800 hover:bg-blue-50 font-normal hover:text-blue-600 bg-gray-200 px-6 hover:bg-gray-200 py-2 text-center font-inter tracking-tight cursor-pointer cursor w-full text-base rounded-full text-gray-500  " style={{borderColor: "rgb(235, 239, 246)"}}>
+                  <span className="text-gray-800 hover:bg-blue-50 font-normal hover:text-blue-600 bg-gray-200 px-6 hover:bg-gray-200 py-2 text-center font-inter tracking-tight cursor-pointer cursor w-full text-base rounded-full text-gray-500  " style={{borderColor: "rgb(235, 239, 246)"}}>
                     Follow topic
-                    </a>
+                    </span>
                 </div>
                 </div>
 

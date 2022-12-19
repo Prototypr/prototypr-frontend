@@ -1,6 +1,8 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import Layout from "@/components/layout";
+// import Layout from "@/components/layout";
+import Layout from "@/components/layoutForBlogPost";
+
 import Container from "@/components/container";
 const MoreStories = dynamic(() => import("@/components/more-stories"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
@@ -11,6 +13,7 @@ import PostTitle from '@/components/post-title'
 import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from "@/lib/api";
 
 import ALL_SLUGS_GROUPS from '@/lib/menus/allTools'
+import Link from "next/link";
 
 const PAGE_SIZE = 12;
 
@@ -51,32 +54,28 @@ export default function ToolboxPage({
         ) :
         <>        
         {allPosts.length > 0 && (
-          <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-            <div className="grid-cols-1 hidden lg:block">
-              <div className="w-full min-h-screen  flex flex-col">
-              <Breadcrumbs 
-                    urlRoot={'/toolbox'}
-                    title={BREADCRUMBS.pageTitle}
+          <div className="w-full h-full grid grid-cols-12 gap-1  ">
+            <Sidebar/>
+            <div className="xl:max-w-[56rem] md:max-w-[48rem] w-full px-3 md:px-8 lg:px-0 mx-auto pt-28 pb-20 gap-2 col-span-12 md:col-span-10 py-10">
+                <div className="pt-5 text-md text-gray-700 pb-8">
+                    <Breadcrumbs 
+                    urlRoot={'/'}
+                    title={'All Tools'}
+                    currentSlug={`toolbox`}
                     links={BREADCRUMBS.links}
                     />
-              <FilterCategory
-               urlRoot={'/toolbox'}
-               items={ALL_SLUGS_GROUPS} 
-               key={'uxtools_item_'} 
-               slug={'/toolbox'}/>
-
-              </div>
+                  </div>
+              <div className="col-span-3">
+                <MoreStories posts={allPosts} type="toolbox" />
+                <NewPagination
+                  total={pagination?.total}
+                  pageSize={PAGE_SIZE}
+                  currentPage={pagination?.page}
+                  onPageNumChange={(pageNum) => {
+                    onPageNumChange(pageNum);
+                  }}
+                />
             </div>
-            <div className="col-span-3">
-              <MoreStories posts={allPosts} type="toolbox" />
-              <NewPagination
-                total={pagination?.total}
-                pageSize={PAGE_SIZE}
-                currentPage={pagination?.page}
-                onPageNumChange={(pageNum) => {
-                  onPageNumChange(pageNum);
-                }}
-              />
             </div>
           </div>
         )}
@@ -120,4 +119,22 @@ export async function getStaticPaths() {
       [],
     fallback: true,
   };
+}
+
+
+const Sidebar = () =>{
+  return(
+    <div className="hidden md:block relative col-span-2 max-w-[410px] border-r border-opacity-20">
+              <div className="w-full min-h-screen pt-32 flex flex-col">
+             
+              <div className="pt-24">
+                <FilterCategory
+                urlRoot={'/toolbox'}
+                items={ALL_SLUGS_GROUPS} 
+                key={'uxtools_item_'} 
+                slug={'/toolbox'}/>
+              </div>
+              </div>
+            </div>
+  )
 }

@@ -115,7 +115,7 @@ export const HomePageNewNavBar = () => {
           </div>
         </div>
         <div
-          className={`sm:hidden relative mt-5 rounded-lg bg-white z-[100] ${
+          className={`sm:hidden relative mt-2 shadow-lg rounded-lg bg-white z-[100] ${
             !mobileNavOpen ? "h-0 overflow-hidden" : ""
           }`}
           id="mobile-menu"
