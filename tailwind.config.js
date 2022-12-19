@@ -4,6 +4,7 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./lib/constants.js",
   ],
   corePlugins: {
     // due to https://github.com/tailwindlabs/tailwindcss/issues/6602 - buttons disappear

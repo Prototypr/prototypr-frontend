@@ -35,7 +35,7 @@ export default function Index({ allPosts, preview }) {
       </Head> */}
       <Container>
       <div className="w-full h-full grid grid-cols-12 gap-1  ">
-        <div className="pt-28 pb-20 gap-2 col-span-12 lg:col-span-8 md:pr-8 py-10">
+        <div className="xl:px-10 md:px-8 pt-28 pb-20 gap-2 col-span-12 lg:col-span-8 py-10">
           <div className="pt-5 text-md text-gray-700 pb-8">
             <Link href={`/`}>
               <span className="hover:underline">Home</span>
@@ -53,7 +53,7 @@ export default function Index({ allPosts, preview }) {
           </h1>
         </section>
 
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 pb-24">
+        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-24">
           {topics.map((topic, i) => (
             <Link key={i} href={`/posts/${topic.slug}/page/1`}>
             <div

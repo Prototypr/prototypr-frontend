@@ -284,7 +284,7 @@ export async function getStaticPaths() {
                   </Button>
                 </Link>
               </div> */}
-          {/* <div className="w-full mb-6 pt-4 pb-6 px-6 rounded-lg bg-white col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
+          <div className="w-full mb-6 pt-4 pb-6 px-6 rounded-lg bg-white col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
           <div className="w-full">
             <h3 className='text-xl font-medium mb-2 text-gray-900'>Apply Today</h3>
             <p className="text-base text-gray-600 mb-4">{post?.attributes?.company?.data?.attributes?.name} accepts applications on their company website.</p>
@@ -294,7 +294,7 @@ export async function getStaticPaths() {
                 </Button>
               </Link>
             </div>
-          </div> */}
+          </div>
            
             <div className="flex flex-col grid gap-6">
                   {/* <PrototyprNetworkCTA/> */}
