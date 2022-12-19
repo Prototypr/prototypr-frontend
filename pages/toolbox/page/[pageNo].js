@@ -59,7 +59,7 @@ export default function ToolboxPage({
             <div className="xl:max-w-[56rem] md:max-w-[48rem] w-full px-3 md:px-8 lg:px-0 mx-auto pt-28 pb-20 gap-2 col-span-12 md:col-span-10 py-10">
                 <div className="pt-5 text-md text-gray-700 pb-8">
                     <Breadcrumbs 
-                    urlRoot={'/'}
+                    urlRoot={''}
                     title={'All Tools'}
                     currentSlug={`toolbox`}
                     links={BREADCRUMBS.links}
