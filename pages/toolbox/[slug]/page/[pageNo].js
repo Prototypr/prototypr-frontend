@@ -1,42 +1,24 @@
-import dynamic from "next/dynamic";
-import { useEffect } from "react";
-import { useRouter } from 'next/router'
-import Layout from '@/components/layout'
-import Container from '@/components/container'
-const MoreStories = dynamic(() => import("@/components/more-stories"));
-const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
-const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
-
-const NewPagination = dynamic(() => import("@/components/pagination"));
-import PostTitle from '@/components/post-title'
+import Layout from "@/components/layoutForBlogPost";
 
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 import ALL_SLUGS_GROUPS from '@/lib/menus/allTools'
 import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
+import { useEffect } from "react";
 
 const PAGE_SIZE = 12;
 
 const BREADCRUMBS = {
     pageTitle:'Toolbox',
     links:[
-        {name:'Home', slug:'/'},
-        {name:'Toolbox', slug:'/toolbox/page/1'}
+      {name:'Home', slug:'/', svg:<svg className="w-4 h-4 inline my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19zm2-4h8v2H8v-2z" fill="currentColor"/></svg>},
+      {name:'Toolbox', slug:'/toolbox/page/1'}
     ]
 }
 
 export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
-    //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
-    const router = useRouter()
 
-    const onPageNumChange = (pageNo) => {
-        router.push({
-            pathname:`/toolbox/[tag]/page/${pageNo}`,
-            query: {
-                tag
-            }
-        })
-      }
 
       useEffect(()=>{
         if(window.$crisp){
@@ -55,45 +37,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
         url: `https://prototypr.io/toolbox/${tag}/page/${pagination?.page}`,
       }}
         activeNav={'toolbox'} preview={preview}>
-            <Container>
-            {router.isFallback ? (
-                 <PostTitle>Loading…</PostTitle>
-                ) :
-                <>  
-                {
-                allPosts.length > 0 && 
-                    (<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-                    <div className="grid-cols-1 hidden lg:block">
-                    <div className="w-full min-h-screen  flex flex-col">
-                   
-                    <Breadcrumbs 
-                    urlRoot={'/toolbox'}
-                    title={BREADCRUMBS.pageTitle}
-                    links={BREADCRUMBS.links}
-                    currentSlug={tag}
-                    />
-                    <FilterCategory 
-                        urlRoot={'/toolbox'}
-                        items={ALL_SLUGS_GROUPS} 
-                        key={'uxtools_item_'} 
-                        slug={tag}/>
-              </div>
-                       
-                    </div>
-                    <div className="col-span-3">
-                        <MoreStories posts={allPosts} type="toolbox" />
-                    </div>
-                </div>)
-            }
-            </>}
-            
-            <NewPagination 
-                total={pagination?.total}
-                pageSize={PAGE_SIZE}
-                currentPage={pagination?.page}
-                onPageNumChange={(pageNum) => {onPageNumChange(pageNum)}}
-            />
-            </Container>
+            <ToolboxIndexPage 
+        filterCategories={ALL_SLUGS_GROUPS}
+        urlRoot={`/toolbox`}
+        title={`${tag?.replace('_',' ')}`}
+        currentSlug={tag}
+        description="All your design tools in one place, updated weekly"
+        pagination={pagination}
+        pageSize={PAGE_SIZE} 
+        allPosts={allPosts} 
+        breadcrumbs={BREADCRUMBS}/>
         </Layout>
     )
 }

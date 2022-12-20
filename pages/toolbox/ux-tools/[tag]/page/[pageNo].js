@@ -1,41 +1,23 @@
-import dynamic from "next/dynamic";
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import Layout from '@/components/layout'
-import Container from '@/components/container'
-const MoreStories = dynamic(() => import("@/components/more-stories"));
-const NewPagination = dynamic(() => import("@/components/pagination"));
-const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
-const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
+import Layout from "@/components/layoutForBlogPost";
+
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 import ALL_SLUGS_GROUPS from "@/lib/menus/uxTools";
 import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 20;
 
 const BREADCRUMBS = {
   pageTitle:'UX Tools',
   links:[
-      {name:'Home', slug:'/'},
-      {name:'Toolbox', slug:'/toolbox/page/1'},
+    {name:'Home', slug:'/', svg:<svg className="w-4 h-4 inline my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19zm2-4h8v2H8v-2z" fill="currentColor"/></svg>},
+    {name:'Toolbox', slug:'/toolbox/page/1'},
       {name:'UX Tools', slug:'/toolbox/ux-tools/page/1'}
   ]
 }
 
 export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
-    //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
-    const router = useRouter()
-
-    const [selectedFilter, setSelectedFilter] = useState("")
-    const onPageNumChange = (pageNo) => {
-        router.push({
-            pathname:`/toolbox/ux-tools/[tag]/page/${pageNo}`,
-            query: {
-                tag
-            }
-        })
-      }
 
     return (
         <Layout 
@@ -48,39 +30,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
         url: `https://prototypr.io/toolbox/ux-tools/page/${tag}/${pagination?.page}`,
       }}
         activeNav={'toolbox'} preview={preview}>
-            <Container>
-            {
-                    allPosts.length > 0 && 
-                    (<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-                    <div className="grid-cols-1 hidden lg:block">
-                        <div className='w-full min-h-screen  flex flex-col'>
-                        <Breadcrumbs 
-                        urlRoot={'/toolbox/ux-tools'}
-                        title={BREADCRUMBS.pageTitle}
-                        links={BREADCRUMBS.links}
-                        currentSlug={tag}
-                        />
-                        <FilterCategory
-                         urlRoot={'/toolbox/ux-tools'}
-                         items={ALL_SLUGS_GROUPS} 
-                         key={'uxtools_item_'} 
-                         slug={tag}
-                         />
-                    </div>
-                    </div>
-                    <div className="col-span-3">
-                        <MoreStories posts={allPosts} type="toolbox" />
-                    </div>
-                </div>)
-            }
-            
-            <NewPagination 
-                total={pagination?.total}
-                pageSize={PAGE_SIZE}
-                currentPage={pagination?.page}
-                onPageNumChange={(pageNum) => {onPageNumChange(pageNum)}}
-            />
-            </Container>
+           <ToolboxIndexPage 
+        filterCategories={ALL_SLUGS_GROUPS}
+        urlRoot={`/toolbox/ux-tools`}
+        title={`${tag?.replace('_',' ')}`}
+        currentSlug={tag}
+        description="The best User Experience tools: Research, Heatmaps, Analytics, Collaboration and more."
+        pagination={pagination}
+        pageSize={PAGE_SIZE} 
+        allPosts={allPosts} 
+        breadcrumbs={BREADCRUMBS}/>
         </Layout>
     )
 }

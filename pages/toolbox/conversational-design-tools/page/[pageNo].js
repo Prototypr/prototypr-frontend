@@ -1,23 +1,20 @@
-import { useRouter } from 'next/router'
-import dynamic from "next/dynamic";
-import Layout from '@/components/layout'
-import Container from '@/components/container'
-const MoreStories = dynamic(() => import("@/components/more-stories"));
-const NewPagination = dynamic(() => import("@/components/pagination"));
-import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
-const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
-const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
-import PostTitle from '@/components/post-title'
 
-const PAGE_SIZE = 12;
+import Layout from "@/components/layoutForBlogPost";
+
+
+import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
+
 
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/chatTools'
 
+const PAGE_SIZE = 20;
+
 const BREADCRUMBS = {
     pageTitle:'Conversational Design',
     links:[
-        {name:'Home', slug:'/'},
+        {name:'Home', slug:'/', svg:<svg className="w-4 h-4 inline my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19zm2-4h8v2H8v-2z" fill="currentColor"/></svg>},
         {name:'Toolbox', slug:'/toolbox/page/1'},
         // {name:'UX Tools', slug:'/toolbox/ux-tools/page/1'}
     ]
@@ -25,12 +22,6 @@ const BREADCRUMBS = {
 
 export default function ToolboxPage({allPosts = [], preview, pagination}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
-
-    const router = useRouter()
-
-    const onPageNumChange = (pageNo) => {
-        router.push(`/toolbox/conversational-design-tools/page/${pageNo}`)
-      }
 
     return (
         <Layout 
@@ -43,47 +34,15 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
         url: `https://prototypr.io/toolbox/conversational-design-tools/page/${pagination?.page}`,
       }}
         activeNav={'toolbox'} preview={preview}>
-            <Container>
-            {router.isFallback ? (
-                 <PostTitle>Loading…</PostTitle>
-                ) :
-                <>  
-                {
-                allPosts.length > 0 &&
-                (
-                    <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-                        <div className="grid-cols-1 hidden lg:block">
-                            <div className='w-full min-h-screen  flex flex-col'>
-                            <div className="display-none mb-8 lg:block text-gray-800">
-                            <Breadcrumbs 
-                                urlRoot={'/toolbox/conversational-design-tools'}
-                                title={BREADCRUMBS.pageTitle}
-                                links={BREADCRUMBS.links}
-                                />
-                                <FilterCategory
-                                urlRoot={'/toolbox/conversational-design-tools'}
-                                items={ALL_SLUGS_CATEGORY} 
-                                key={'uxtools_item_'} 
-                                // slug={slug}
-                                />
-                        </div>
-                    </div>
-                    </div>
-                    <div className="col-span-3">
-                        <MoreStories posts={allPosts} type="toolbox" />
-                    </div>
-                </div>
-                )
-            }
-            </>}
-            
-            <NewPagination 
-                total={pagination?.total}
-                pageSize={PAGE_SIZE}
-                currentPage={pagination?.page}
-                onPageNumChange={(pageNum) => {onPageNumChange(pageNum)}}
-            />
-            </Container>
+        <ToolboxIndexPage 
+        filterCategories={ALL_SLUGS_CATEGORY}
+        urlRoot={`/toolbox/conversational-design-tools`}
+        title="Conversational design tools"
+        description="From chatbots to messaging tools, discover tools for conversation."
+        pagination={pagination}
+        pageSize={PAGE_SIZE} 
+        allPosts={allPosts} 
+        breadcrumbs={BREADCRUMBS}/>
         </Layout>
     )
 }

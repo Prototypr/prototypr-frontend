@@ -1,27 +1,22 @@
-import dynamic from "next/dynamic";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Layout from "@/components/layout";
-import Container from "@/components/container";
-const MoreStories = dynamic(() => import("@/components/more-stories"));
-const NewPagination = dynamic(() => import("@/components/pagination"));
-const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
-const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
+import Layout from "@/components/layoutForBlogPost";
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
+
 import {
   getAllPostsForToolsSubcategoryPage,
   getPostsByPageForToolsSubcategoryPage,
 } from "@/lib/api";
 
+
 import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
 
-
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 20;
 import ALL_SLUGS_CATEGORY from "@/lib/menus/prototyping";
 
 const BREADCRUMBS = {
     pageTitle:'Prototyping',
     links:[
-        {name:'Home', slug:'/'},
+        {name:'Home', slug:'/', svg:<svg className="w-4 h-4 inline my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19zm2-4h8v2H8v-2z" fill="currentColor"/></svg>},
+        {name:'Toolbox', slug:'/toolbox/page/1'},
         {name:'Prototyping', slug:'/prototyping/page/1'}
     ]
 }
@@ -33,16 +28,6 @@ export default function ToolboxPage({
   tag,
 }) {
   //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
-  const router = useRouter();
-
-  const onPageNumChange = pageNo => {
-    router.push({
-      pathname: `/prototyping/[tag]/page/${pageNo}`,
-      query: {
-        tag,
-      },
-    });
-  };
 
   return (
     <Layout 
@@ -55,39 +40,18 @@ export default function ToolboxPage({
         url: `https://prototypr.io/prototyping/${tag}/page/${pagination?.page}`,
       }}
     activeNav={"toolbox"} preview={preview}>
-      <Container>
-        {allPosts.length > 0 && (
-          <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-            <div className="grid-cols-1 hidden lg:block">
-              <div className="w-full min-h-screen  flex flex-col">
-                <Breadcrumbs 
-                    urlRoot={'/prototyping'}
-                    title={BREADCRUMBS.pageTitle}
-                    links={BREADCRUMBS.links}
-                    currentSlug={tag}
-                    />
-                <FilterCategory 
-                    urlRoot={'/prototyping'}
-                    items={ALL_SLUGS_CATEGORY} 
-                    key={'prototyping_item_'} 
-                    slug={tag}/>
-              </div>
-            </div>
-            <div className="col-span-3">
-              <MoreStories posts={allPosts} type="toolbox" />
-            </div>
-          </div>
-        )}
-
-        <NewPagination
-          total={pagination?.total}
-          pageSize={PAGE_SIZE}
-          currentPage={pagination?.page}
-          onPageNumChange={pageNum => {
-            onPageNumChange(pageNum);
-          }}
+      
+      <ToolboxIndexPage 
+        filterCategories={ALL_SLUGS_CATEGORY}
+        urlRoot={`/prototyping`}
+        title={`${tag} tools`}
+        description="All the tools for prototyping apps and web products."
+        pagination={pagination}
+        pageSize={PAGE_SIZE} 
+        allPosts={allPosts} 
+        breadcrumbs={BREADCRUMBS}
+        currentSlug={tag}
         />
-      </Container>
     </Layout>
   );
 }

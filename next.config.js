@@ -22,6 +22,11 @@ module.exports =
           permanent: true,
         },
         {
+          source: "/toolbox",
+          destination: "/toolbox/page/1",
+          permanent: true,
+        },
+        {
           source: "/prototyping-tools",
           destination: "/toolbox",
           permanent: true,
