@@ -1,27 +1,18 @@
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-// import Layout from "@/components/layout";
+
 import Layout from "@/components/layoutForBlogPost";
 
-import Container from "@/components/container";
-const MoreStories = dynamic(() => import("@/components/more-stories"));
-const NewPagination = dynamic(() => import("@/components/pagination"));
-const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
-const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
-import PostTitle from '@/components/post-title'
 
 import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from "@/lib/api";
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
+import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 
-import ALL_SLUGS_GROUPS from '@/lib/menus/allTools'
-import Link from "next/link";
-
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 20;
 
 
 const BREADCRUMBS = {
   pageTitle:'Toolbox',
   links:[
-      {name:'Home', slug:'/'},
+      {name:'Home', slug:'/', svg:<svg className="w-4 h-4 inline my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19zm2-4h8v2H8v-2z" fill="currentColor"/></svg>},
   ]
 }
 
@@ -31,11 +22,6 @@ export default function ToolboxPage({
   pagination = {},
 }) {
   //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
-  const router = useRouter();
-
-  const onPageNumChange = (pageNo) => {
-    router.push(`/toolbox/page/${pageNo}`);
-  };
 
   return (
     <Layout
@@ -47,41 +33,18 @@ export default function ToolboxPage({
         canonical:`https://prototypr.io/toolbox/${pagination?.page}`,
         url: `https://prototypr.io/toolbox/${pagination?.page}`,
       }}
-     activeNav={"toolbox"} preview={preview}>
-      <Container>
-      {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) :
-        <>        
-        {allPosts.length > 0 && (
-          <div className="w-full h-full grid grid-cols-12 gap-1  ">
-            <Sidebar/>
-            <div className="xl:max-w-[56rem] md:max-w-[48rem] w-full px-3 md:px-8 lg:px-0 mx-auto pt-28 pb-20 gap-2 col-span-12 md:col-span-10 py-10">
-                <div className="pt-5 text-md text-gray-700 pb-8">
-                    <Breadcrumbs 
-                    urlRoot={''}
-                    title={'All Tools'}
-                    currentSlug={`toolbox`}
-                    links={BREADCRUMBS.links}
-                    />
-                  </div>
-              <div className="col-span-3">
-                <MoreStories posts={allPosts} type="toolbox" />
-                <NewPagination
-                  total={pagination?.total}
-                  pageSize={PAGE_SIZE}
-                  currentPage={pagination?.page}
-                  onPageNumChange={(pageNum) => {
-                    onPageNumChange(pageNum);
-                  }}
-                />
-            </div>
-            </div>
-          </div>
-        )}
-        </>}
-
-      </Container>
+     activeNav={"toolbox"}>
+      <ToolboxIndexPage 
+      filterCategories={ALL_SLUGS_GROUPS}
+      urlRoot={`/toolbox`}
+      paginationRoot={`/toolbox`}
+      title="Weekly Curated Design Tools"
+      description="All your design tools in one place, updated weekly"
+      pagination={pagination}
+      pageSize={PAGE_SIZE} 
+      currentSlug={'toolbox'}
+      allPosts={allPosts} 
+      breadcrumbs={BREADCRUMBS}/>
     </Layout>
   );
 }
@@ -119,22 +82,4 @@ export async function getStaticPaths() {
       [],
     fallback: true,
   };
-}
-
-
-const Sidebar = () =>{
-  return(
-    <div className="hidden md:block relative col-span-2 max-w-[410px] border-r border-opacity-20">
-              <div className="w-full min-h-screen pt-32 flex flex-col">
-             
-              <div className="pt-24">
-                <FilterCategory
-                urlRoot={'/toolbox'}
-                items={ALL_SLUGS_GROUPS} 
-                key={'uxtools_item_'} 
-                slug={'/toolbox'}/>
-              </div>
-              </div>
-            </div>
-  )
 }

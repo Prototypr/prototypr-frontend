@@ -1,42 +1,26 @@
-import { useRouter } from 'next/router'
-import dynamic from "next/dynamic";
-import Layout from '@/components/layout'
-import Container from '@/components/container'
-const MoreStories = dynamic(() => import("@/components/more-stories"));
-const NewPagination = dynamic(() => import("@/components/pagination"));
-const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
+import Layout from "@/components/layoutForBlogPost";
+
+
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
-const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
-import PostTitle from '@/components/post-title'
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
+
 
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/prototyping'
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 20;
 
 const BREADCRUMBS = {
     pageTitle:'Prototyping',
     links:[
-        {name:'Home', slug:'/'},
+        {name:'Home', slug:'/', svg:<svg className="w-4 h-4 inline my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19zm2-4h8v2H8v-2z" fill="currentColor"/></svg>},
+        {name:'Toolbox', slug:'/toolbox/page/1'}
         // {name:'Prototyping', slug:'/prototyping/page/1'}
     ]
 }
 
 export default function ToolboxPage({allPosts = [], preview, pagination}) {
-    //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
-    // let heroPost;
-    // let morePosts;
-    // let coverImage;
-    // if (allPosts && allPosts.length) {
-    //     heroPost = allPosts[0]
-    //     morePosts = allPosts.slice(1)
-    //     coverImage = heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:''
-    // }
-    const router = useRouter()
 
-    const onPageNumChange = (pageNo) => {
-        router.push(`/prototyping/page/${pageNo}`)
-      }
 
     return (
         <Layout 
@@ -49,47 +33,16 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
         url: `https://prototypr.io/prototyping/page/${pagination?.page}`,
       }}
         activeNav={'toolbox'} preview={preview}>
-            <Container>
-            {router.isFallback ? (
-                 <PostTitle>Loading…</PostTitle>
-                ) :
-                <>  
-                {allPosts.length > 0 &&
-                (
-                    <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-                        <div className="grid-cols-1 hidden lg:block">
-                            <div className='w-full min-h-screen  flex flex-col'>
-                            <Breadcrumbs 
-                            urlRoot={'/prototyping'}
-                            title={BREADCRUMBS.pageTitle}
-                            links={BREADCRUMBS.links}
-                            // currentSlug={slug}
-                            />
-                            <FilterCategory 
-                            urlRoot={'/prototyping'}
-                            items={ALL_SLUGS_CATEGORY} 
-                            key={'prototyping_item_'} 
-                            // slug={slug}
-                            />
-                    </div>
-                    </div>
-                    <div className="col-span-3">
-                        <MoreStories posts={allPosts} type="toolbox" />
-                    </div>
-                </div>
-                )}
-                </>
-            }
-
-            
-            
-            <NewPagination 
-                total={pagination?.total}
-                pageSize={PAGE_SIZE}
-                currentPage={pagination?.page}
-                onPageNumChange={(pageNum) => {onPageNumChange(pageNum)}}
-            />
-            </Container>
+          <ToolboxIndexPage 
+          paginationRoot={`/prototyping`}
+        filterCategories={ALL_SLUGS_CATEGORY}
+        urlRoot={`/prototyping`}
+        title="All Prototyping Tools"
+        description="All the tools for prototyping apps and web products."
+        pagination={pagination}
+        pageSize={PAGE_SIZE} 
+        allPosts={allPosts} 
+        breadcrumbs={BREADCRUMBS}/>
         </Layout>
     )
 }

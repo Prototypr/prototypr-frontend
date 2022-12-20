@@ -7,9 +7,9 @@ export default function MoreStories({ posts, type, route }) {
       <div
         className={`grid grid-cols-1 ${
           type === "toolbox"
-            ? " sm:grid-cols-2 lg:grid-cols-3"
+            ? " sm:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4 px-6"
             : " md:grid-cols-2"
-        }  gap-y-10 xl:gap-y-10 md:gap-y-6 gap-x-10 md:gap-x-6 xl:gap-x-10`}
+        } -mx-6 md:mx-0 gap-y-10 xl:gap-y-6 md:gap-y-6 gap-x-10 md:gap-x-6 xl:gap-x-6`}
       >
         {posts.map((post, i) => {
             return (
