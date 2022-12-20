@@ -16,76 +16,73 @@ import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 export default function Index({ allPosts, preview }) {
   const intl = useIntl();
 
-
-  return <>
-    <Layout
-      seo={{
-        title: "Prototypr Topics - Design, UX, UI, accessibility...",
-        description:
-          "Browse design topics on Prototoypr. Discover the category you want to learn about.",
-        //   image: "",
-        canonical: "https://prototypr.io/toolbox",
-        url: "https://prototypr.io/toolbox",
-      }}
-      activeNav={"posts"}
-      preview={preview}
-    >
-      {/* <Head>
+  return (
+    <>
+      <Layout
+        seo={{
+          title: "Prototypr Topics - Design, UX, UI, accessibility...",
+          description:
+            "Browse design topics on Prototoypr. Discover the category you want to learn about.",
+          //   image: "",
+          canonical: "https://prototypr.io/toolbox",
+          url: "https://prototypr.io/toolbox",
+        }}
+        activeNav={"posts"}
+        preview={preview}
+      >
+        {/* <Head>
         <title>{intl.formatMessage({ id: "topics.header" })}.</title>
       </Head> */}
-      <Container>
-      <div className="w-full h-full grid grid-cols-12 gap-1  ">
-        <div className="xl:px-10 md:px-8 pt-28 pb-20 gap-2 col-span-12 lg:col-span-8 py-10">
-          <div className="pt-5 text-md text-gray-700 pb-8">
-            <Link href={`/`}>
-              <span className="hover:underline">Home</span>
-            </Link>{" "}
-            →{" "}
-            <Link href={`/topics`}>
-              <span className="underline">Topics</span>
-            </Link>
-          </div>
-        
-        <section className="flex-col md:flex-row flex items-center md:justify-between">
+        <Container>
+          <div className="w-full h-full grid grid-cols-12 gap-1  ">
+            <div className="xl:px-10 md:px-8 pt-28 pb-20 gap-2 col-span-12 lg:col-span-8 py-10">
+              <div className="pt-5 text-md text-gray-700 pb-8">
+                <Link href={`/`}>
+                  <span className="hover:underline">Home</span>
+                </Link>{" "}
+                →{" "}
+                <Link href={`/topics`}>
+                  <span className="underline">Topics</span>
+                </Link>
+              </div>
 
-          <h1 className="text-4xl font-bold tracking-tighter leading-tight mb-4">
-            {intl.formatMessage({ id: "topics.title" })}
-          </h1>
-        </section>
+              <section className="flex-col md:flex-row flex items-center md:justify-between">
+                <h1 className="text-4xl font-bold tracking-tighter leading-tight mb-4">
+                  {intl.formatMessage({ id: "topics.title" })}
+                </h1>
+              </section>
 
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-24">
-          {topics.map((topic, i) => (
-            <Link key={i} href={`/posts/${topic.slug}/page/1`}>
-            <div
-              
-              className={`group cursor-pointer flex relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
-            >
-              <div className="my-auto mx-auto flex justify-between" >
-                    <h3 className="text-lg font-bold text-center text-white">                    
+              <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-24">
+                {topics.map((topic, i) => (
+                  <Link key={i} href={`/posts/${topic.slug}/page/1`}>
+                    <div
+                      className={`group cursor-pointer flex relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
+                    >
+                      <div className="my-auto mx-auto flex justify-between">
+                        <h3 className="text-lg font-bold text-center text-white">
                           {intl.formatMessage({ id: topic.name })}
-                    </h3>
+                        </h3>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
-            </Link>
-          ))}
-        </div>
-        </div>
-        {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
+            {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
 
-
-          <Sidebar
-            // author={post.attributes?.author?.data?.attributes}
-            // relatedPosts={relatedPosts}
-            paddingTop="hidden md:block pt-[132px]"
-          />
-        </div>
-      </Container>
-    </Layout>
-  </>;
+            <Sidebar
+              // author={post.attributes?.author?.data?.attributes}
+              // relatedPosts={relatedPosts}
+              paddingTop="hidden md:block pt-[132px]"
+            />
+          </div>
+        </Container>
+      </Layout>
+    </>
+  );
 }
 
 const Sidebar = ({ relatedPosts, paddingTop, author }) => {
-
   const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
 
   const _handleWaypointEnter = () => {
@@ -94,7 +91,6 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
   const _handleWaypointLeave = () => {
     setStickyPaddingTop("pt-36");
   };
-
 
   return (
     <div
@@ -106,20 +102,24 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
       >
         <aside className="h-screen px-10 sticky top-0 py-0">
           <div className="flex flex-col grid gap-6">
-                <PrototyprNetworkCTA/>
-           <div>
+            <PrototyprNetworkCTA />
+            <div>
+              {/* EMAIL FORM */}
+              <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                  Get the roundup
+                </h3>
+                <p className="text-base text-gray-500 mb-6">
+                  Get a curated selection of the best articles and topics from
+                  Prototypr in your inbox.
+                </p>
+                <SignupSidebar />
+              </div>
 
-           {/* EMAIL FORM */}
-           <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">Get the roundup</h3>
-              <p className="text-base text-gray-500 mb-6">Get a curated selection of the best articles and topics from Prototypr in your inbox.</p>
-                  <SignupSidebar/>
-          </div>
-
-          <SponsorSidebarCard/>
-
-
-           </div>
+              <div className="mt-6">
+                <SponsorSidebarCard />
+              </div>
+            </div>
 
             {/* <div className="w-full flex flex-col grid gap-2">
 
@@ -137,7 +137,6 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
     </div>
   );
 };
-
 
 // export async function getStaticProps({ preview = null }) {
 //   const allPosts = (await getAllPostsForPostsPage(preview)) || [];

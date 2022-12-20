@@ -4,19 +4,19 @@ import Link from "next/link";
 const PrototyprNetworkCTA = ({ data }) => {
   return (
     <div className="relative">
-      <div className="absolute top-0 right-0 -translate-y-2 translate-x-2">
+      {/* <div className="absolute top-0 right-0 -translate-y-2 translate-x-2">
         <SnowWithLights />
-      </div>
+      </div> */}
 
       <div className="flex flex-col gap-1 justify-end items-end">
         <div className="w-full rounded-[12px] h-auto bg-white border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">
           <div className="flex flex-col grid gap-2">
-            <p className="text-black text-[20px] mb-1 font-inter">
-              Help and Grow together Design Community.
+            <p className="text-black max-w-[200px] text-[16px] mb-1 font-inter">
+              Help and Grow together in the Design Community.
             </p>
             <div>
               <Link href="/write">
-                <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm font-semibold">
+                <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 hover:bg-blue-400 text-sm font-semibold">
                   Start Writing
                 </button>
               </Link>

@@ -13,6 +13,7 @@ const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 
 import { getAllJobs } from "@/lib/api";
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
+import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 
 import {
   getCombinedPostsForHome,
@@ -104,7 +105,7 @@ const SponsorCard = ({ data }) => {
 
 const TabSwitchter = ({ selectedTab, onTabChange }) => {
   return (
-    <div className="h-[50px] my-3">
+    <div className="h-[50px] my-3  px-5">
       <div className="overflow-x-scroll overflow-y-hidden no-scrollbar flex w-full ">
         <div className="flex">
           {Tabs.map((tab, i) => {
@@ -147,14 +148,16 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
 
   return (
     <div
-      className={`${paddingTop} relative col-span-2 border-l border-opacity-20`}
+      className={`${paddingTop} relative col-span-3 border-l border-opacity-20`}
     >
       <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
       <div
-        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
+        className={`${stickyPaddingTop} transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
       >
         <aside className="  h-screen px-5 sticky top-0 py-0">
           <div className="flex flex-col grid gap-10 py-10">
+            <SponsorSidebarCard />
+
             {type === "jobs" ? (
               <div>
                 <PrototyprNetworkCTA data={sponsorData} />
@@ -238,7 +241,7 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                               key={i}
                               className="w-full h-auto cursor-pointer flex flex-col"
                             >
-                              <div className="flex flex-row bg-white justify-between p-4 rounded-lg">
+                              <div className="flex flex-row bg-white  p-4 rounded-lg">
                                 <div
                                   style={{ flex: "0 0 3em" }}
                                   className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden"
@@ -272,9 +275,6 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                                   </div>
                                 </div>
                               </div>
-                              {/* {i !== slicedList.length - 1 && (
-                            <div className="border-b border-black border-opacity-10 w-[100%] mx-auto"></div>
-                          )} */}
                             </div>
                           </Link>
                         </>
@@ -333,20 +333,22 @@ export default function Index({
     } else {
       const posts = topicRes[tab.slug];
       setHeroPost(posts[0]);
-      setViewablePosts(posts.slice(1, 7));
+      setViewablePosts(posts.slice(1, 8));
     }
   };
 
   //   console.log(randomPosts);
   const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
   const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
+  const heroJob = jobs.filter((item, i) => i === 0);
+  const jobsSidebar = jobs.filter((item, i) => i !== 0);
 
   return (
     <>
       <Layout
         padding={false}
         preview={preview}
-        background={"#F9FAFA"}
+        background={"#EFF4FB"}
         seo={{
           title: titleText,
           description: descriptionText,
@@ -357,8 +359,8 @@ export default function Index({
       >
         <Container>
           {/* <Intro /> */}
-          <div className="w-full h-full grid grid-cols-8 gap-1  ">
-            <div className="flex flex-col pt-28 pb-20 gap-2 col-span-8 lg:col-span-6  md:pr-4 py-10">
+          <div className="w-full h-full grid grid-cols-10  gap-1  ">
+            <div className="flex flex-col pt-28 pb-20 gap-2 col-span-10 lg:col-span-7  md:pr-4 py-10">
               {/* <HomePageNewNavBar /> */}
 
               <TabSwitchter
@@ -368,6 +370,7 @@ export default function Index({
               <HeroGrid
                 postData={{ hero: heroCardPost, posts: viewablePosts }}
                 sponsor={sponsors?.length ? sponsors[0] : null}
+                jobFeature={heroJob}
               />
             </div>
 
@@ -375,7 +378,7 @@ export default function Index({
               paddingTop="hidden md:block pt-[154px]"
               title="Jobs"
               type="jobs"
-              content={jobs}
+              content={jobsSidebar}
             />
           </div>
         </Container>
@@ -385,14 +388,15 @@ export default function Index({
         </BrowserView>
 
         <Container>
-          <div className="w-full h-full  grid grid-cols-8 gap-1">
-            <div className="flex flex-col grid gap-4 col-span-8 lg:col-span-6 md:pr-4 py-10">
+          <div className="w-full h-full  grid grid-cols-10 gap-1">
+            <div className="flex flex-col grid gap-4 col-span-10 lg:col-span-7 md:pr-4 py-10">
               <HeroGrid
                 type="random"
                 postData={{
                   hero: HeroPostRandomSection[0],
                   posts: OtherPostsRandomSection,
                 }}
+                jobFeature={heroJob}
                 sponsor={
                   sponsors?.length && sponsors.length > 1 ? sponsors[1] : null
                 }
@@ -414,7 +418,7 @@ export async function getStaticProps({ preview = null, locale }) {
     sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
   }
 
-  let allPosts = (await getCombinedPostsForHome(preview, 7, 0, sort)) || [];
+  let allPosts = (await getCombinedPostsForHome(preview, 8, 0, sort)) || [];
   let randomPosts = (await getRandomPostsForHome()) || [];
   let allTools =
     (await getAllToolsForHome(preview, PAGE_SIZE, 0, ["date:desc"])) || [];
@@ -445,7 +449,7 @@ export async function getStaticProps({ preview = null, locale }) {
       topicRes,
       preview,
       jobs,
-      randomPosts: randomPosts.slice(0, 7),
+      randomPosts: randomPosts.slice(0, 8),
       sponsors: sponsors?.posts?.length ? sponsors?.posts : [],
     },
     revalidate: 20,
