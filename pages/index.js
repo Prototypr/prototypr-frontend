@@ -7,7 +7,6 @@ import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 /**new index components */
 import { BrowserView } from "react-device-detect";
-import { SnowWithLights, SmallCardSnow } from "@/components/xmas/snow";
 
 const Footer = dynamic(() => import("@/components/footer"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
@@ -30,6 +29,7 @@ import HeroGrid from "@/components/v4/hero/hero";
 import Link from "next/link";
 import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
+import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 
 const Tabs = [
   { label: "Top Picks", color: "#4053FF", id: "top_picks", slug: "top_picks" },
@@ -98,42 +98,6 @@ const SponsorCard = ({ data }) => {
       <Link href={"/sponsor"}>
         <span className="text-[12px] text-gray-500">Want to sponsor?</span>
       </Link>
-    </div>
-  );
-};
-
-const PrototyprNetworkCTA = ({ data }) => {
-  return (
-    <div className="relative">
-      <div className="absolute top-0 right-0 -translate-y-2 translate-x-2">
-        <SnowWithLights />
-      </div>
-
-      <div className="flex flex-col gap-1 justify-end items-end">
-        <div className="w-full rounded-[12px] h-auto bg-white border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">
-          <div className="flex flex-col grid gap-2">
-            <p className="text-black text-[20px] mb-1 font-inter">
-              Help and Grow together Design Community.
-            </p>
-            <div>
-              <Link href="/write">
-                <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 text-sm font-semibold">
-                  Start Writing
-                </button>
-              </Link>
-              <Link href="/post/write-for-us">
-                <button className="px-4 ml-2 py-2 text-black rounded-lg font-inter font-semibold bg-gray-200 hover:bg-gray-100 text-sm">
-                  Learn more
-                </button>
-              </Link>
-            </div>
-          </div>
-          <img
-            className=" w-[200px]"
-            src="/static/images/prototypr-ppl.png"
-          ></img>
-        </div>
-      </div>
     </div>
   );
 };

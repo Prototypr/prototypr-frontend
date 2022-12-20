@@ -96,7 +96,7 @@ function HookForm(props) {
   return (
     <div>
       <form className={`${props.className}`} onSubmit={handleSubmit(onSubmit)}>
-        <div className="sm:flex-1 sm:max-w-xs w-full">
+        <div className="w-full">
           <label htmlFor="Email" className="sr-only	">
             <FormattedMessage id="intro.input.placeholder" />
           </label>
@@ -111,7 +111,7 @@ function HookForm(props) {
               pattern: /^\S+@\S+$/i,
             })}
             // ref={...register({ required: true, pattern: /^\S+@\S+$/i })}
-            className="border-transparent border-solid border-2 border-blue-300 w-full h-full p-3 text-gray-800 bg-white rounded-lg"
+            className="border border-gray-300 w-full h-full p-3 text-gray-800 bg-white rounded-lg"
           />
         </div>
         {/* <input type="checkbox" placeholder="Consent" name="consent" ref={register({ required: true })} /> */}

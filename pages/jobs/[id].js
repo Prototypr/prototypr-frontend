@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
-import Layout from '@/components/layout'
+// import Layout from '@/components/layout'
+import Layout from "@/components/layoutForBlogPost";
 import { getAllJobsWithId, getJobPage } from '@/lib/api'
 // import markdownToHtml from '@/lib/markdownToHtml'
 
@@ -11,6 +12,11 @@ import Button from '@/components/Primitives/Button'
 import Link from 'next/link'
 import Image from 'next/image'
 import gumletLoader from '@/components/new-index/gumletLoader'
+import { useState } from 'react';
+import { Waypoint } from 'react-waypoint';
+import PrototyprNetworkCTA from '@/components/Sidebar/NetworkCTA';
+import SignupSidebar from '@/components/newsletter/SignupSidebar';
+import SponsorSidebarCard from '@/components/SponsorSidebarCard';
 const RelatedPosts = dynamic(() => import('@/components/related-posts'), { ssr: true })
 const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true })
 const SponsorCard = dynamic(() => import('@/components/toolbox/SponsorCard'), { ssr: true })
@@ -59,17 +65,31 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
     }}
     activeNav={"posts"} preview={preview}>
       <Container>
-        <div className="w-full mt-6 grid grid-rows-1 grid-cols-12 lg:gap-6">
+      <div className="w-full h-full grid grid-cols-12 gap-1  ">
+        <div className="max-w-[46rem] mx-auto pt-28 pb-20 gap-2 col-span-12 px-3 md:px-8 xl:px-0 lg:col-span-8 py-10">
+          <div className="pt-5 text-md text-gray-700 pb-8">
+              <Link href={`/`}>
+                <span className="hover:underline">Home</span>
+              </Link>{" "}
+              →{" "}
+              <Link href={`/jobs`}>
+                <span className="hover:underline">Jobs</span>
+              </Link>{" "}
+              →{" "}
+              <Link href={`#`}>
+                <span className="underline">{title}</span>
+              </Link>
+            </div>
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
           {/* center sidebar */}
-          <div className="relative col-span-full lg:col-span-9">
+          <div className="relative col-span-full lg:col-span-8">
 
             {/**Description */}
             <div className="mb-8">
-              <div className="mb-6 relative bg-white px-6 py-6 rounded-lg w-full">
+              <div className="mb-6 relative border border-gray-100 bg-white px-6 md:px-12 py-6 md:py-12 rounded-lg w-full">
                 {post?.attributes?.company?.data?.attributes?.logo?.data?.attributes?.url?
                 <div className="relative w-[95px] h-[95px] bg-[#CEE2FF] rounded-full border mb-6 border-gray-100">
                 <Image
@@ -86,7 +106,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                 :''}
                 <h1 className="text-3xl mb-2 max-w-2xl font-medium">{title}</h1>
                 <div className='flex'>
-                <h2 className='text-xl mb-1 font-medium'>{companyName}</h2>
+                <h2 className='text-xl mb-6 font-medium'>{companyName}</h2>
              
                 </div>
                 <div className='flex'>
@@ -145,7 +165,7 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                 )}
                 <div
                   style={{ color: "#4a5568"}}
-                  className="py-3 mt-4 lg:-ml-10 max-w-3xl blog-content text-md mb-2"
+                  className="py-3 mt-4 max-w-3xl blog-content text-md mb-2"
                   dangerouslySetInnerHTML={{ __html: post?.attributes?.description }}
                 ></div>
                 
@@ -154,9 +174,14 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
             </div>
           </div>
 
+
+          </>
+        )}
+        </div>
           {/* RIGHT SIDEBAR START */}
-          <div className="col-span-full mb-6 lg:mb-0 lg:col-span-3 order-last lg:order-last lg:block">
-          <div className="w-full mb-6 pt-4 pb-6 px-6 rounded-lg bg-white col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
+          {/* <div className="col-span-full mb-6 lg:mb-0 lg:col-span-4 order-last lg:order-last lg:block"> */}
+          <Sidebar post={post} paddingTop="pt-32"/>
+          {/* <div className="w-full mb-6 pt-4 pb-6 px-6 rounded-lg bg-white col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
           <div className="w-full">
             <h3 className='text-xl font-medium mb-2 text-gray-900'>Apply Today</h3>
             <p className="text-base text-gray-600 mb-4">{post?.attributes?.company?.data?.attributes?.name} accepts applications on their company website.</p>
@@ -177,12 +202,9 @@ export default function Post({ post, morePosts, preview, domain,link, postDate }
                   type={'post'}
                   title={'Top Stories'}
                 />
-              }
+              } */}
           </div>
-
-          </>
-        )}
-        </div>
+        {/* </div> */}
       </Container>
     </Layout>
   )
@@ -232,3 +254,77 @@ export async function getStaticPaths() {
       fallback: true,
     }
   }
+
+
+  const Sidebar = ({ relatedPosts, paddingTop, post }) => {
+
+    const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
+  
+    const _handleWaypointEnter = () => {
+      setStickyPaddingTop("pt-0");
+    };
+    const _handleWaypointLeave = () => {
+      setStickyPaddingTop("pt-32");
+    };
+  
+  
+    return (
+      <div
+        className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
+      >
+        <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
+        <div
+          className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
+        >
+          <aside className="h-screen px-10 sticky top-0 py-0">
+            {/* <div className="w-full mb-8">
+                <Link href="/jobs/post">
+                  <Button variant="fullWidthJob" className="px-0 py-1">
+                    Post a Job for $200
+                  </Button>
+                </Link>
+              </div> */}
+          {post?.attributes?.url ?<div className="w-full mb-6 pt-4 pb-6 px-6 rounded-lg bg-white col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
+          <div className="w-full">
+            <h3 className='text-xl font-medium mb-2 text-gray-900'>Apply Today</h3>
+            <p className="text-base text-gray-600 mb-4">{post?.attributes?.company?.data?.attributes?.name} accepts applications on their company website.</p>
+              <Link href={post?.attributes?.url}>
+                <Button variant="fullWidthJob" className="px-0 py-1">
+                  Apply Now
+                </Button>
+              </Link>
+            </div>
+          </div>:''}
+           
+            <div className="flex flex-col grid gap-6">
+                  {/* <PrototyprNetworkCTA/> */}
+             <div>
+  
+             {/* EMAIL FORM */}
+             <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">Get the roundup</h3>
+                <p className="text-base text-gray-500 mb-6">Get a curated selection of the best articles and topics from Prototypr in your inbox.</p>
+                    <SignupSidebar post={post}/>
+            </div>
+  
+            <SponsorSidebarCard/>
+  
+  
+             </div>
+  
+              {/* <div className="w-full flex flex-col grid gap-2">
+  
+              {relatedPosts?.data?.length > 0 &&
+                relatedPosts.data.map((item, index) => {
+                  return (
+                    <ProductItem key={`product_item_${index}`} post={item} />
+                    // <TopicTopItem key={index} topic={item}/>
+                  );
+                })}
+              </div> */}
+            </div>
+          </aside>
+        </div>
+      </div>
+    );
+  };

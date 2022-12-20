@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Date from "@/components/date";
+import gumletLoader from "./new-index/gumletLoader";
 
 export default function Avatar({ name, picture, date }) {
   const url = picture;
@@ -16,6 +17,7 @@ export default function Avatar({ name, picture, date }) {
             layout="fill"
             className="rounded-full"
             alt={name}
+            loader={gumletLoader}
           />
         )}
       </div>

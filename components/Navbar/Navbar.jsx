@@ -13,6 +13,8 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 import WMButton from "./parts/WMButton";
 import { SnowMiddle, SmallSideSnow } from "../xmas/snow";
+import SearchBar from "../SearchBar";
+import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
 
 const WMCounter = dynamic(
   () => import("@/components/WebMonetization/Counter"),
@@ -33,7 +35,7 @@ export const HomePageNewNavBar = () => {
   return (
     <div className="relative">
       <div className="absolute z-[60] hidden sm:block -top-1 left-[5%]">
-        <SnowMiddle />
+        {/* <SnowMiddle /> */}
       </div>
       <div className="absolute z-[60] hidden sm:block -top-1 left-[80%] pointer-events-none">
         <SmallSideSnow />
@@ -65,24 +67,21 @@ export const HomePageNewNavBar = () => {
               >
                 <WMCounter />
               </div>
+              <SearchBar/>
             </div>
             <div className="hidden sm:flex flex-row gap-2 p-2">
               {[
                 { label: "Home", url: "/" },
+                { label: "Toolbox", url: "/toolbox/page/1" },
                 { label: "Topics", url: "/topics" },
                 { label: "Jobs", url: "/jobs" },
-                { label: "Toolbox", url: "/toolbox" },
                 { label: "Sponsor", url: "/sponsor" },
               ].map((tab) => {
                 return (
                   <div>
-                    <Link href={tab.url}>
-                      <span
-                        className={`px-6 hover:bg-gray-200 py-2 text-center block font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full text-base rounded-full bg-transparent text-gray-500  `}
-                      >
+                    <ActiveLinkNewMenu href={tab.url}>
                         {tab.label}
-                      </span>
-                    </Link>
+                    </ActiveLinkNewMenu>
                   </div>
                 );
               })}
@@ -116,7 +115,7 @@ export const HomePageNewNavBar = () => {
           </div>
         </div>
         <div
-          className={`sm:hidden relative mt-5 rounded-lg bg-white z-[100] ${
+          className={`sm:hidden relative mt-2 shadow-lg rounded-lg bg-white z-[100] ${
             !mobileNavOpen ? "h-0 overflow-hidden" : ""
           }`}
           id="mobile-menu"

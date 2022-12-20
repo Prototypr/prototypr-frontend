@@ -12,6 +12,7 @@ import { FormInput } from "@/components/Jobs/FormInput";
 import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import { sponsorTypes} from "@/lib/constants";
+import Link from "next/link";
 
 
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
@@ -412,6 +413,19 @@ const JobPostForm = ({user, defaultCompany}) => {
     <Layout seo={seo} showWriteButton={false} background="#EFF2F8">
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
         <div className="max-w-3xl w-full">
+        <div className="pt-5 text-md text-gray-700 pb-8">
+              <Link href={`/`}>
+                <span className="hover:underline">Home</span>
+              </Link>{" "}
+              →{" "}
+              <Link href={`/sponsor`}>
+                <span className="hover:underline">Sponsor</span>
+              </Link>{" "}
+              →{" "}
+              <Link href={`/booking`}>
+                <span className="underline">Booking</span>
+              </Link>
+            </div>
         <div className="my-2 mb-6">
           <h1 className="text-2xl font-bold mx-auto mb-2">Book a sponsorship</h1>
           <p className="text-gray-600">Sponsor our newsletter of ~25k subscribers.</p>

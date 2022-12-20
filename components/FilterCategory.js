@@ -28,10 +28,10 @@ export default function FilterCategory({
                       className={`hover:text-blue-500 py-1.5 rounded ${
                         sItem.key == slug
                           ? "text-blue-600 font-semibold"
-                          : "text-gray-800 font-light"
+                          : "text-gray-600 font-base"
                       }`}
                     >
-                      # {sItem.name}
+                      {sItem.name}
                     </div>
                   </Link>
                 </div>
@@ -39,7 +39,7 @@ export default function FilterCategory({
             })}
             {item.moreLink && (
               <Link href={item.moreLink.url}>
-                <span className="inline-block text-gray-500 underline mt-3 mb-6 text-md">
+                <span className="inline-block text-gray-600 hover:text-blue-600 font-medium underline mt-4 mb-6 text-md">
                   {item.moreLink.text}
                 </span>
               </Link>
