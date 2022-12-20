@@ -36,7 +36,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
           <ToolboxIndexPage 
         filterCategories={ALL_SLUGS_CATEGORY}
         urlRoot={`/prototyping`}
-        title="Prototyping tools"
+        title="All Prototyping Tools"
         description="All the tools for prototyping apps and web products."
         pagination={pagination}
         pageSize={PAGE_SIZE} 

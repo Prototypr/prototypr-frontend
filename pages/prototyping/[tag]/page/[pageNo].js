@@ -26,6 +26,7 @@ export default function ToolboxPage({
   preview,
   pagination,
   tag,
+  title
 }) {
   //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
 
@@ -44,7 +45,7 @@ export default function ToolboxPage({
       <ToolboxIndexPage 
         filterCategories={ALL_SLUGS_CATEGORY}
         urlRoot={`/prototyping`}
-        title={`${tag} tools`}
+        title={title}
         description="All the tools for prototyping apps and web products."
         pagination={pagination}
         pageSize={PAGE_SIZE} 
@@ -81,6 +82,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       preview,
       pagination,
       tag,
+      title:foundSlug?.title?foundSlug.title:'Design Tools'
     },revalidate: 20,
   };
 }

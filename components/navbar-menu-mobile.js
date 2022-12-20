@@ -155,7 +155,7 @@ export const NavigationMenuDemo = ({
           <NavigationMenuLink href="/posts/ui">UI Design</NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem className="block flex py-2 flex-col justify-center">
-          <NavigationMenuLink href="/toolbox">Toolbox</NavigationMenuLink>
+          <NavigationMenuLink href="/toolbox/page/1">Toolbox</NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem className="block flex py-2 flex-col justify-center">

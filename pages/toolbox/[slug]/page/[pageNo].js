@@ -17,7 +17,7 @@ const BREADCRUMBS = {
     ]
 }
 
-export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
+export default function ToolboxPage({title,allPosts = [], preview, pagination,tag}) {
 
 
       useEffect(()=>{
@@ -40,7 +40,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
             <ToolboxIndexPage 
         filterCategories={ALL_SLUGS_GROUPS}
         urlRoot={`/toolbox`}
-        title={`${tag?.replace('_',' ')}`}
+        title={title}
         currentSlug={tag}
         description="All your design tools in one place, updated weekly"
         pagination={pagination}
@@ -67,7 +67,9 @@ export async function getStaticProps({ preview = null, params}) {
     const pagination = allPosts.meta.pagination
     return {
         props: {
-            allPosts: allPosts.data, preview, pagination,tag
+            allPosts: allPosts.data, preview, pagination,tag,
+            title:foundSlug?.title?foundSlug.title:'Design Tools'
+
         },revalidate: 20,
     }
   }

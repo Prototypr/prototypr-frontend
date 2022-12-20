@@ -62,8 +62,8 @@ export default function JobPaymentPage({}) {
         description:
           "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
         //   image: "",
-        canonical: "https://prototypr.io/toolbox",
-        url: "https://prototypr.io/toolbox",
+        // canonical: "https://prototypr.io/toolbox",
+        // url: "https://prototypr.io/toolbox",
       }}
       activeNav={"toolbox"}
     >

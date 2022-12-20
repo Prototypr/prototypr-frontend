@@ -38,7 +38,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
             <ToolboxIndexPage 
         filterCategories={ALL_SLUGS_CATEGORY}
         urlRoot={`/toolbox/augmented-reality-tools`}
-        title="AR/VR tools"
+        title="All AR/VR Design Tools"
         description="Everything AR, VR, 3D, and Mixed reality."
         pagination={pagination}
         pageSize={PAGE_SIZE} 

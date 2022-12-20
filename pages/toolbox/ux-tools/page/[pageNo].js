@@ -38,7 +38,7 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
       <ToolboxIndexPage 
         filterCategories={ALL_SLUGS_GROUPS}
         urlRoot={`/toolbox/ux-tools`}
-        title="UX tools"
+        title="All UX Tools"
         description="Everything user research, testing, analysis and more."
         pagination={pagination}
         pageSize={PAGE_SIZE} 
