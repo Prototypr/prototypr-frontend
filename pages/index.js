@@ -112,8 +112,8 @@ const PrototyprNetworkCTA = ({ data }) => {
       <div className="flex flex-col gap-1 justify-end items-end">
         <div className="w-full rounded-[12px] h-auto bg-white border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">
           <div className="flex flex-col grid gap-2">
-            <p className="text-black text-2xl mb-1 font-inter">
-              Get noticed in the design community
+            <p className="text-black text-[20px] mb-1 font-inter">
+              Help and Grow together Design Community.
             </p>
             <div>
               <Link href="/write">
@@ -129,8 +129,8 @@ const PrototyprNetworkCTA = ({ data }) => {
             </div>
           </div>
           <img
-            className="w-full"
-            src="/static/images/proto-little-peeps.svg"
+            className=" w-[200px]"
+            src="/static/images/prototypr-ppl.png"
           ></img>
         </div>
       </div>
@@ -382,7 +382,7 @@ export default function Index({
       <Layout
         padding={false}
         preview={preview}
-        background={"#EFF4FB"}
+        background={"#F9FAFA"}
         seo={{
           title: titleText,
           description: descriptionText,

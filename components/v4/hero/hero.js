@@ -107,7 +107,7 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
       //   style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
-      className="w-full relative h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] col-span-2 rounded-[20px] shadow-xl  hover:shadow-none cursor-pointer"
+      className="w-full relative h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] col-span-2 rounded-[20px] hover:shadow-none cursor-pointer"
     >
       <div className="z-40 hidden sm:block absolute -translate-x-6 -translate-y-2 pointer-events-none">
         <LargeCardSnow />
@@ -167,7 +167,7 @@ const SmallCardWithImage = ({ src, data, type }) => {
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
       //   style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
-      className="w-full mb-8 sm:mb-0 min-h-[330px] bg-white  border-opacity-[4%] border-black  rounded-[16px] flex flex-col shadow-xl  hover:shadow-none overflow-hidden cursor-pointer"
+      className="w-full mb-8 sm:mb-0 min-h-[330px] bg-white  border-opacity-[4%] border-black  rounded-[16px] flex flex-col  hover:shadow-none overflow-hidden cursor-pointer"
     >
       <div className="w-full h-[135px] max-h-[135px] bg-gray-200 relative">
         <Image
@@ -218,26 +218,28 @@ const HeroGrid = ({ postData, type = "regular", sponsor }) => {
               <SmallCardSnow />
             </div>
 
-            <div className="w-full  cursor-pointer overflow-hidden rounded-[10px] flex items-end">
-              <a
-                href={sponsor?.link ? sponsor.link : "https://letter.so"}
-                target="_blank"
-              >
-                <Image
-                  loader={gumletLoader}
-                  priority={`true`}
-                  data-priority={`true`}
-                  objectFit="cover"
-                  layout="fill"
-                  data-gmlazy={`false`}
-                  className="object-cover relative w-full h-full overflow-hidden rounded-[10px]"
-                  src={
-                    sponsor?.featuredImage
-                      ? sponsor.featuredImage
-                      : "/static/images/placeholder/letter-ad.png"
-                  }
-                />
-              </a>
+            <div className="w-full h-full bg-white p-10  rounded-lg cursor-pointer overflow-hidden  flex items-end">
+              <div className="rounded-md overflow-hidden">
+                <a
+                  href={sponsor?.link ? sponsor.link : "https://letter.so"}
+                  target="_blank"
+                  className="rounded-md"
+                >
+                  <Image
+                    loader={gumletLoader}
+                    priority={`true`}
+                    data-priority={`true`}
+                    layout="fill"
+                    data-gmlazy={`false`}
+                    className=" p-5 rounded-sm relative w-full h-full "
+                    src={
+                      sponsor?.featuredImage
+                        ? sponsor.featuredImage
+                        : "/static/images/placeholder/letter-ad.png"
+                    }
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>
