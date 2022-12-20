@@ -35,7 +35,6 @@ export default function ToolboxPage({
       }}
      activeNav={"toolbox"}>
       <ToolboxIndexPage 
-      
       filterCategories={ALL_SLUGS_GROUPS}
       urlRoot={`/toolbox`}
       paginationRoot={`/toolbox`}

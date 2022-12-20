@@ -26,8 +26,8 @@ const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, a
                      
                     </div> */}
             <div className="glassmorphism pt-32 -mt-2 relative -mx-8 px-6 pb-7 overflow-hidden relative">
-                 <div className="max-w-[1440px] relative flex mx-auto px-6 text-xs">
-                  <div className="absolute pl-8 mt-1 left-0">
+                 <div className="max-w-[1440px] relative flex flex-col mx-auto md:px-6 text-xs">
+                  <div className="relative md:absolute pl-8 mb-6 md:mb-0 md:mt-1 left-0">
                     <Breadcrumbs 
                           urlRoot={urlRoot}
                           title={title}
@@ -36,7 +36,7 @@ const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, a
                           pageNo={pagination?.page}
                           />
                   </div>
-                  <h1 className="text-xl mx-auto text-center font-bold tracking-tighter leading-tight capitalize">
+                  <h1 className="text-xl px-8 md:px-0 pb-3 mt-1 md:pb-0 md:mx-auto text-left md:text-center font-bold tracking-tighter leading-tight capitalize">
                     {title}
                   </h1>
                   {/* <div className="absolute pr-12 mt-1 right-0">
