@@ -10,12 +10,12 @@ const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
 
 
 
-const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, allPosts, pageSize, filterCategories, currentSlug}) =>{
+const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, allPosts, pageSize, filterCategories, currentSlug, paginationRoot}) =>{
 
     const router = useRouter();
 
     const onPageNumChange = (pageNo) => {
-      router.push(`${urlRoot}/page/${pageNo}`);
+      router.push(`${paginationRoot}/${pageNo}`);
     };
 
     return(
@@ -50,7 +50,7 @@ const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, a
           {allPosts.length > 0 && (
             
             <div className="w-full h-full grid grid-cols-12 gap-1">
-              <Sidebar urlRoot={urlRoot} filterCategories={filterCategories} slug={currentSlug}/>
+              <Sidebar paginationRoot={paginationRoot} urlRoot={urlRoot} filterCategories={filterCategories} slug={currentSlug}/>
               <div className="w-full px-3 md:px-8 lg:px-0 pt-8 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10">
                 <div className="col-span-3">
                   <MoreStories posts={allPosts} type="toolbox" />
@@ -75,12 +75,13 @@ const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, a
 
 export default ToolboxIndexPage
 
-const Sidebar = ({filterCategories, urlRoot, slug}) =>{
+const Sidebar = ({filterCategories, paginationRoot, urlRoot, slug}) =>{
     return(
       <div className="hidden md:block relative col-span-2 max-w-[410px] border-r border-opacity-20">
                 <div className="w-full min-h-screen pt-8 flex flex-col">
                   <FilterCategory
                   urlRoot={urlRoot}
+                  paginationRoot={paginationRoot}
                   items={filterCategories} 
                   key={'uxtools_item_'} 
                   slug={slug}/>

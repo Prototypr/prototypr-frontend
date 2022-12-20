@@ -33,6 +33,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
       }}
         activeNav={'toolbox'} preview={preview}>
             <ToolboxIndexPage 
+            paginationRoot={`/toolbox/conversational-design-tools`}
         filterCategories={ALL_SLUGS_CATEGORY}
         urlRoot={`/toolbox/conversational-design-tools`}
         title={`${tag?.replace('_',' ')}`}

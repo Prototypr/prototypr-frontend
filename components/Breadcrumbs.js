@@ -34,7 +34,7 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug='', ur
 
         <div className="inline p-1.5 px-3 rounded-full bg-white bg-opacity-50">
         <Link href={`${urlRoot}/page/1`}>
-            <span className="capitalize text-bold">{title}</span>
+            <span className="capitalize  font-semibold text-blue-600 text-bold">{title}</span>
         </Link>
         </div>
         }

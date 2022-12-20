@@ -36,6 +36,7 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
       }}
     activeNav={"toolbox"} preview={preview}>
       <ToolboxIndexPage 
+      paginationRoot={`/toolbox/ux-tools`}
         filterCategories={ALL_SLUGS_GROUPS}
         urlRoot={`/toolbox/ux-tools`}
         title="UX tools"

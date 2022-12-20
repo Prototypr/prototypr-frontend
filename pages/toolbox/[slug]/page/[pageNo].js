@@ -38,6 +38,8 @@ export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
       }}
         activeNav={'toolbox'} preview={preview}>
             <ToolboxIndexPage 
+
+        paginationRoot={`/toolbox`}
         filterCategories={ALL_SLUGS_GROUPS}
         urlRoot={`/toolbox`}
         title={`${tag?.replace('_',' ')}`}
