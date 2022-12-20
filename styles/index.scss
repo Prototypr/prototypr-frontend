@@ -388,9 +388,9 @@ background: linear-gradient(180deg, #1288FE 11.07%, rgba(255, 255, 255, 0) 83.98
 
 .glassmorphism{
   background: rgba( 255, 255, 255, 0.25 );
-  box-shadow: 0 1px 0.5px 0 rgba( 31, 38, 135, 0.02 );
+  // box-shadow: 0 1px 0.5px 0 rgba( 31, 38, 135, 0.02 );
   backdrop-filter: blur( 4px );
   -webkit-backdrop-filter: blur( 4px );
   // border-radius: 10px;
-  border-bottom: 1px solid rgba( 255, 255, 255, 0.05 );
+  // border-bottom: 1px solid rgba( 255, 255, 255, 0.05 );
 }

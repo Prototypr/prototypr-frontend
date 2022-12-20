@@ -12,7 +12,7 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug='', ur
             return (
                 <div className="inline" key={index}>
                     {" "} 
-                    <div className="inline rounded-full p-1.5 px-3 bg-white bg-opacity-50">
+                    <div className="inline border border-gray-900 border-opacity-10 rounded-full p-1.5 px-3 bg-white bg-opacity-50">
                     <Link href={`${item.slug}`} key={`breadcrumb_${title}_${index}`}>
                      {!item.svg?<span className="hover:underline">{item.name}</span>:<>{item.svg}</>}
                      </Link>
@@ -23,7 +23,7 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug='', ur
          })}
         {
             currentSlug=='toolbox'?
-            <div className="inline rounded-full p-1.5 px-3 bg-white bg-opacity-50">
+            <div className="inline border border-gray-900 border-opacity-10 rounded-full p-1.5 px-3 bg-white bg-opacity-50">
             <Link
                 href={`${urlRoot}/page/1`}
                 // className={`capitalize ${pageNo?'':'text-bold'}`}>
@@ -34,7 +34,7 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug='', ur
             :
         
         currentSlug?
-        <div className="inline rounded-full p-1.5 px-3 bg-white bg-opacity-50">
+        <div className="inline border border-gray-900 border-opacity-10 rounded-full p-1.5 px-3 bg-white bg-opacity-50">
         <Link
             href={`${urlRoot}/${currentSlug}/page/1`}
             // className={`capitalize ${pageNo?'':'text-bold'}`}>
@@ -44,7 +44,7 @@ export default function Breadcrumbs ({title = "", links = [], currentSlug='', ur
         </div>
         :
 
-        <div className="inline p-1.5 px-3 rounded-full bg-white bg-opacity-50">
+        <div className="inline p-1.5 px-3 border border-gray-900 border-opacity-10 rounded-full bg-white bg-opacity-50">
         <Link href={`${urlRoot}/page/1`}>
             <span className="capitalize font-semibold text-blue-600 text-bold">{title}</span>
         </Link>

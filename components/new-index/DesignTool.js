@@ -102,7 +102,7 @@ export default function DesignTool({ allTools = [] }) {
   return (
     <div className="bg-white py-16 h-auto  rounded-[50px]  px-10">
       <div className="flex flex-row flex-wrap w-full justify-between  items-end max-w-7xl mx-auto mb-10">
-        <div className=" mb-6 flex flex-col gap-7 my-10">
+        <div className=" mb-6 flex flex-col grid gap-7 my-10">
           <div>
             <h2 className="text-[40px] leading-[50px] md:text-[60px] max-w-xl md:leading-[68px] text-black font-bold font-inter">
               {/* The best tools for your design workflow. */}

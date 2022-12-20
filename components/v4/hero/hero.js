@@ -193,9 +193,9 @@ const JobFeatureCard = ({ item }) => {
         className="w-full h-full max-h-[150px] bg-[#fff] rounded-[16px] p-6"
       >
         <div className="flex flex-row justify-between  rounded-lg">
-          <div className="flex flex-col gap-2 justify-center">
+          <div className="flex flex-co grid gap-2 justify-center">
             <div className="flex flex-col ">
-              <p className="text-base font-medium  text-[#333] overflow-hidden line-clamp-3 font-inter">
+              <p className="text-base line-clamp-2 font-medium  text-[#333] overflow-hidden line-clamp-3 font-inter">
                 <span className="">{companyName}</span>, is looking for a{" "}
                 {title} in {locations[0]?.name}.
               </p>

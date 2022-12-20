@@ -25,9 +25,9 @@ const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, a
           {/* <div className="my-4 inline-block text-sm text-gray-800 ">
                      
                     </div> */}
-            <div className="glassmorphism pt-32 -mt-2 relative -mx-8 px-6 pb-7 overflow-hidden relative">
-                 <div className="max-w-[1440px] relative flex flex-col mx-auto md:px-6 text-xs">
-                  <div className="relative md:absolute pl-8 mb-6 md:mb-0 md:mt-1 left-0">
+            <div className="glassmorphism border-b border-gray-900 border-opacity-10 pt-32 relative -mx-8 px-6 pb-9 overflow-hidden relative">
+                 <div className="max-w-[1440px] relative flex flex-col mx-auto md:px-6 text-sm">
+                  <div className="relative md:absolute pl-8 mb-6 md:mb-0 md:mt-0.5 left-0">
                     <Breadcrumbs 
                           urlRoot={urlRoot}
                           title={title}
@@ -43,7 +43,7 @@ const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, a
                     Follow Topic
                   </div> */}
                  </div>
-                <div className="-z-10 opacity-20 from-blue-600 to-blue-200 bg-gradient-to-br opacity-80 absolute w-full h-full top-0 left-0"/>
+                <div className="-z-10 opacity-10 from-gray-50 to-blue-400 bg-gradient-to-bl absolute w-full h-full top-0 left-0"/>
                   {/* <p className="text-base my-auto text-left">{description}</p> */}
                 {/* <img src="/static/images/smudge.jpeg" alt="" className="opacity-10 -z-10 absolute -top-[6rem] ml-[9rem]  w-full w-[900px] h-[400px] "/> */}
 

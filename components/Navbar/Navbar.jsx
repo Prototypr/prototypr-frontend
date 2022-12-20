@@ -69,7 +69,7 @@ export const HomePageNewNavBar = () => {
               </div>
               <SearchBar/>
             </div>
-            <div className="hidden sm:flex flex-row gap-2 p-2">
+            <div className="hidden sm:flex flex-row p-2">
               {[
                 { label: "Home", url: "/" },
                 { label: "Toolbox", url: "/toolbox/page/1" },
@@ -78,7 +78,7 @@ export const HomePageNewNavBar = () => {
                 { label: "Sponsor", url: "/sponsor" },
               ].map((tab) => {
                 return (
-                  <div>
+                  <div className="mx-1">
                     <ActiveLinkNewMenu href={tab.url}>
                         {tab.label}
                     </ActiveLinkNewMenu>
