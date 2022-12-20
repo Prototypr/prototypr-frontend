@@ -18,28 +18,27 @@ import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 const PAGE_SIZE = 12;
 
 const seo = {
-  title:`Sponsor Prototypr`,
-  description:`Sponsor the Prototypr weekly newsletter and support the platform.`,
+  title: `Sponsor Prototypr`,
+  description: `Sponsor the Prototypr weekly newsletter and support the platform.`,
   // image:``,
   canonical: `https://prototypr.io/sponsor`,
-  url: `https://prototypr.io/sponsor`
-}
+  url: `https://prototypr.io/sponsor`,
+};
 
 const Index = () => {
+  const [weekNumber, setWeekNumber] = useState();
 
-    const [weekNumber, setWeekNumber] = useState()
-    
-    useEffect(()=>{
-        const week = currentWeekNumber()
-        setWeekNumber(week)
-    },[])
+  useEffect(() => {
+    const week = currentWeekNumber();
+    setWeekNumber(week);
+  }, []);
 
   return (
     <Layout seo={seo} showWriteButton={false} background="#eff4fb">
       <Container>
-      <div className="w-full h-full grid grid-cols-12 gap-1  ">
-      <div className="max-w-[46rem] mx-auto pt-28 pb-20  px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8 py-10">
-          <div className="pt-5 text-md text-gray-700 pb-8">
+        <div className="w-full h-full grid grid-cols-12 gap-1  ">
+          <div className="max-w-[46rem] mx-auto pt-28 pb-20  px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8 py-10">
+            <div className="pt-5 text-md text-gray-700 pb-8">
               <Link href={`/`}>
                 <span className="hover:underline">Home</span>
               </Link>{" "}
@@ -48,54 +47,74 @@ const Index = () => {
                 <span className="underline">Sponsor</span>
               </Link>
             </div>
-      <div className=" w-full">
-        <div className="flex w-full">
-          <div className="w-full">
-          <h1 className="text-4xl font-bold tracking-tighter leading-tight mb-4">Sponsor Us</h1>
-          <p className="mb-8 text-lg">
-            Got an product you'd like to share with the Prototypr audience? We run 2 sponsor packages, which you can book and schedule directly:</p>
-          <div className="mb-8">
-            <div className="mb-6 rounded-lg bg-white shadow border border-gray-200 p-4">
-              <h1 className="text-lg mb-1 md:text-xl font-medium">Featured package</h1>
-              <p className="mb-6">The large banner in the newsletter, and featured on the website:</p>
-              <div className="flex flex-col xl:flex-row">
-              <img style={{maxWidth:300}} className="mb-6 xl:mb-0 md:mr-3 object-cover rounded border border-gray-200 shadow" src="https://ucarecdn.com/2963e430-e355-473d-bada-a5b9f2499d01/screenshot-2020-09-22-at-20.56.18.png"/>
-              <img className="xl:max-h-[180px] height-auto rounded border border-gray-200 shadow" src="https://ucarecdn.com/c855f91d-3882-4611-98c0-e62e0f2f4504/single-pages.png"/>
+            <div className=" w-full">
+              <div className="flex w-full">
+                <div className="w-full">
+                  <h1 className="text-4xl font-bold tracking-tighter leading-tight mb-4">
+                    Sponsor Us
+                  </h1>
+                  <p className="mb-8 text-lg">
+                    Got an product you'd like to share with the Prototypr
+                    audience? We run 2 sponsor packages, which you can book and
+                    schedule directly:
+                  </p>
+                  <div className="mb-8">
+                    <div className="mb-6 rounded-lg bg-white shadow border border-gray-200 p-4">
+                      <h1 className="text-lg mb-1 md:text-xl font-medium">
+                        Featured package
+                      </h1>
+                      <p className="mb-6">
+                        The large banner in the newsletter, and featured on the
+                        website:
+                      </p>
+                      <div className="flex flex-col xl:flex-row">
+                        <img
+                          style={{ maxWidth: 300 }}
+                          className="mb-6 xl:mb-0 md:mr-3 object-cover rounded border border-gray-200 shadow"
+                          src="https://ucarecdn.com/2963e430-e355-473d-bada-a5b9f2499d01/screenshot-2020-09-22-at-20.56.18.png"
+                        />
+                        <img
+                          className="xl:max-h-[180px] height-auto rounded border border-gray-200 shadow"
+                          src="https://ucarecdn.com/c855f91d-3882-4611-98c0-e62e0f2f4504/single-pages.png"
+                        />
+                      </div>
+                      <div className="w-full mt-7 mb-1">
+                        <Link href="/sponsor/booking?type=banner">
+                          <Button variant="confirm">Buy for $600</Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="mb-6 rounded-lg bg-white shadow border border-gray-200 p-4">
+                      <h1 className="text-lg mb-1 md:text-xl font-medium">
+                        Promoted link
+                      </h1>
+                      <p className="mb-6">
+                        A promoted article or tool only in the newsletter:
+                      </p>
+                      <img
+                        style={{ maxWidth: 300 }}
+                        className="rounded border border-gray-200 shadow"
+                        src="https://ucarecdn.com/27e76335-6f67-4d5b-a037-310a25b07711/featured-article-sponsor.png"
+                      />
 
+                      <div className="w-full mt-7 mb-1">
+                        <Link href="/sponsor/booking?type=link">
+                          <Button variant="confirm">Buy for $400</Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            <div className="w-full mt-7 mb-1">
-              <Link href="/sponsor/booking?type=banner">
-                  <Button variant="confirm">
-                    Buy for $600
-                  </Button>
-                </Link>
-            </div>
             </div>
           </div>
-          <div>
-            <div className="mb-6 rounded-lg bg-white shadow border border-gray-200 p-4">
-              <h1 className="text-lg mb-1 md:text-xl font-medium">Promoted link</h1>
-              <p className="mb-6">A promoted article or tool only in the newsletter:</p>
-              <img style={{maxWidth:300}} className="rounded border border-gray-200 shadow" src="https://ucarecdn.com/27e76335-6f67-4d5b-a037-310a25b07711/featured-article-sponsor.png"/>
 
-            <div className="w-full mt-7 mb-1">
-              <Link href="/sponsor/booking?type=link">
-                  <Button variant="confirm">
-                    Buy for $400
-                  </Button>
-                </Link>
-            </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      </div>
-
-      {/* <Sidebar
+          {/* <Sidebar
       paddingTop="hidden md:block pt-[132px]"
       /> */}
-      </div>
+        </div>
       </Container>
     </Layout>
   );
@@ -106,22 +125,21 @@ export default Index;
 export async function getStaticProps({ preview = null, params }) {
   const pageSize = PAGE_SIZE;
   const page = 0;
-  let allPosts =(await getAllJobs(preview, pageSize, page)) || [];
- 
+  let allPosts = (await getAllJobs(preview, pageSize, page)) || [];
+
   const pagination = allPosts?.meta?.pagination;
   return {
-    props: { 
-      // jobs: allPosts?.data?allPosts.data:null, 
-      jobs: allPosts, 
-      preview, 
-      pagination:pagination?pagination:null
+    props: {
+      // jobs: allPosts?.data?allPosts.data:null,
+      jobs: allPosts,
+      preview,
+      pagination: pagination ? pagination : null,
     },
-    revalidate:40
+    revalidate: 40,
   };
 }
 
 const Sidebar = ({ relatedPosts, paddingTop, author }) => {
-
   const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
 
   const _handleWaypointEnter = () => {
@@ -130,7 +148,6 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
   const _handleWaypointLeave = () => {
     setStickyPaddingTop("pt-32");
   };
-
 
   return (
     <div
@@ -141,22 +158,25 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
         className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
       >
         <aside className="h-screen px-10 sticky top-0 py-0">
-         
           <div className="flex flex-col grid gap-6">
-                <PrototyprNetworkCTA/>
-           <div>
+            <PrototyprNetworkCTA />
+            <div>
+              {/* EMAIL FORM */}
+              <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                  Get the roundup
+                </h3>
+                <p className="text-base text-gray-500 mb-6">
+                  Get a curated selection of the best articles and topics from
+                  Prototypr in your inbox.
+                </p>
+                <SignupSidebar />
+              </div>
 
-           {/* EMAIL FORM */}
-           <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">Get the roundup</h3>
-              <p className="text-base text-gray-500 mb-6">Get a curated selection of the best articles and topics from Prototypr in your inbox.</p>
-                  <SignupSidebar/>
-          </div>
-
-          <SponsorSidebarCard/>
-
-
-           </div>
+              <div className="mt-6">
+                <SponsorSidebarCard />
+              </div>
+            </div>
 
             {/* <div className="w-full flex flex-col grid gap-2">
 

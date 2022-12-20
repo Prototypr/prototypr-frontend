@@ -9,6 +9,7 @@ import {
   SnowMiddle,
   SnowWithLights,
 } from "@/components/xmas/snow";
+import { SponsorHomeCard } from "@/components/SponsorSidebarCard";
 
 const placeholderAuthorImg =
   "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png?w=3840&q=75&format=auto&compress=true&dpr=2";
@@ -18,8 +19,8 @@ const AuthorCard = ({ data }) => {
 
   return (
     <>
-      <div className="flex flex-row items-center border-t border-black pt-4 border-opacity-5">
-        <div className="w-6 h-6 mr-3 rounded-full bg-gray-200 ">
+      <div className="flex flex-row items-center  text-[#858585] font-normal border-black border-opacity-5">
+        <div className="w-8 h-8 mr-3 rounded-full bg-gray-200 ">
           <Image
             loader={gumletLoader}
             priority={`true`}
@@ -29,7 +30,7 @@ const AuthorCard = ({ data }) => {
             data-gmlazy={`false`}
             width={20}
             height={20}
-            className="w-6 h-6 mr-3 rounded-full bg-gray-200 object-cover relative overflow-hidden"
+            className="w-8 h-8 mr-3 rounded-full bg-gray-200 object-cover relative overflow-hidden"
             src={`${
               profileImg
                 ? profileImg
@@ -39,27 +40,13 @@ const AuthorCard = ({ data }) => {
             }`}
           />
         </div>
-        {/* <div
-          style={{
-            backgroundImage: `url(${
-              profileImg
-                ? profileImg
-                : data?.attributes?.legacyAvatar
-                ? data?.attributes?.legacyAvatar
-                : placeholderAuthorImg
-            })`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-          }}
-          className="w-6 h-6 mr-3 rounded-full bg-gray-200 relative"
-        ></div> */}
 
         {data?.attributes?.firstName ? (
-          <p className="text-sm font-inter">
+          <p className="text-base font-inter ">
             {data?.attributes?.firstName} {data?.attributes?.lastName}
           </p>
         ) : (
-          <p className="text-sm font-inter">Unknown</p>
+          <p className="text-base font-inter">Unknown</p>
         )}
       </div>
     </>
@@ -107,7 +94,7 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
       //   style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
-      className="w-full relative h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] col-span-2 rounded-[20px] shadow-xl  hover:shadow-none cursor-pointer"
+      className="w-full relative h-auto sm:h-[330px] flex flex-col sm:flex-row bg-white border-opacity-[4%] col-span-2 rounded-[20px] hover:shadow-none cursor-pointer"
     >
       <div className="z-40 hidden sm:block absolute -translate-x-6 -translate-y-2 pointer-events-none">
         <LargeCardSnow />
@@ -166,28 +153,23 @@ const SmallCardWithImage = ({ src, data, type }) => {
   return (
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
-      //   style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
-      className="w-full mb-8 sm:mb-0 min-h-[330px] bg-white  border-opacity-[4%] border-black  rounded-[16px] flex flex-col shadow-xl  hover:shadow-none overflow-hidden cursor-pointer"
+      style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}
+      className="w-full sm:max-w-[420px] mb-8 sm:mb-0 min-h-[350px] bg-white  border-opacity-[4%] border-black  rounded-[22px] flex flex-col  overflow-hidden cursor-pointer"
     >
-      <div className="w-full h-[135px] max-h-[135px] bg-gray-200 relative">
+      <div className="w-full h-[210px] max-h-[210px] bg-gray-200 relative">
         <Image
           loader={gumletLoader}
           priority={`true`}
           data-priority={`true`}
-          objectFit="cover"
           layout="fill"
           data-gmlazy={`false`}
           className="object-cover relative w-full h-full overflow-hidden"
           src={coverImage || "/static/images/placeholder/letter-ad.png"}
         />
       </div>
-
-      <div className="w-full h-auto grid flex flex-col grid gap-4 p-5 ">
-        <MetaInfo
-          tags={type === "regular" ? data?.attributes?.tags : data.tags || []}
-        />
+      <div className="w-full h-auto grid flex flex-col grid gap-4 px-6 py-5 ">
         <div className="flex flex-col ">
-          <h1 className="text-lg leading-[27px] text-[#222] font-medium font-inter m-0 p-0 tracking-tight line-clamp-2">
+          <h1 className="text-base leading-[24px] text-[#545454] font-medium font-inter m-0 p-0 line-clamp-2">
             {type === "regular" ? post?.title : data?.title}
           </h1>
         </div>
@@ -202,79 +184,70 @@ const SmallCardWithImage = ({ src, data, type }) => {
   );
 };
 
-const HeroGrid = ({ postData, type = "regular", sponsor }) => {
+const JobFeatureCard = ({ item }) => {
+  const { title, companyName, salaryText, id, companyLogo, locations } = item;
+  return (
+    <Link href={`/jobs/${id}`}>
+      <div
+        key={id}
+        className="w-full h-full max-h-[150px] bg-[#fff] rounded-[16px] p-6"
+      >
+        <div className="flex flex-row justify-between  rounded-lg">
+          <div className="flex flex-col gap-2 justify-center">
+            <div className="flex flex-col ">
+              <p className="text-base font-medium  text-[#333] overflow-hidden line-clamp-3 font-inter">
+                <span className="">{companyName}</span>, is looking for a{" "}
+                {title} in {locations[0]?.name}.
+              </p>
+            </div>
+            <div className="text-sm max-w-[100px] font-medium p-3 w-auto  text-center rounded-full bg-gray-200 hover:bg-gray-300">
+              Apply
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+const HeroGrid = ({
+  postData,
+  type = "regular",
+  sponsor,
+  jobFeature = null,
+}) => {
   const { hero, posts } = postData;
   const secondRowPost = posts.filter((x, i) => i === 0)[0];
   const gridPosts = posts.filter((x, i) => i !== 0);
 
   return (
     <div className="flex flex-col flex-nowrap gap-2">
-      <div className="flex flex-col grid md:gap-8 gap-8">
-        <div className="w-full h-auto flex flex-col sm:grid sm:grid-cols-1 md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] md:gap-8">
-          <LargeCardWithImage type={type} data={hero} />
-
-          <div className="relative w-full flex items-end">
-            <div className="absolute hidden md:block z-20 top-0 right-0 translate-x-2 -translate-y-2 pointer-events-none">
-              <SmallCardSnow />
-            </div>
-
-            <div className="w-full  cursor-pointer overflow-hidden rounded-[10px] flex items-end">
-              <a
-                href={sponsor?.link ? sponsor.link : "https://letter.so"}
-                target="_blank"
-              >
-                <Image
-                  loader={gumletLoader}
-                  priority={`true`}
-                  data-priority={`true`}
-                  objectFit="cover"
-                  layout="fill"
-                  data-gmlazy={`false`}
-                  className="object-cover relative w-full h-full overflow-hidden rounded-[10px]"
-                  src={
-                    sponsor?.featuredImage
-                      ? sponsor.featuredImage
-                      : "/static/images/placeholder/letter-ad.png"
-                  }
-                />
-              </a>
-            </div>
-          </div>
+      <div className="flex flex-col grid gap-1 sm:gap-8">
+        <div className="w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2  max-w-4xl mx-auto gap-1  sm:gap-6">
+          {/* <LargeCardWithImage type={type} data={hero} /> */}
+          <SmallCardWithImage type={type} data={hero} />
+          <SmallCardWithImage type={type} data={secondRowPost} />
         </div>
-        <div className="w-full h-auto flex flex-col flex-wrap md:grid md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] md:gap-8 ">
-          <div className="w-full min-h-[300px] col-span-2 flex flex-col grid relative ">
-            {/* <div className="absolute top-0  pointer-events-none">
-              <SnowMiddle />
-            </div> */}
-
-            <div className="absolute hidden sm:block top-0 -right-3 -translate-y-2 pointer-events-none">
-              <SnowWithLights />
-            </div>
-            <div className="w-full bg-blue-200 rounded-2xl overflow-hidden flex flex-col gap-3 p-10  ">
-              <h3 className="text-3xl font-inter max-w-md text-black font-bold">
-                The Prototypr Weekly
-              </h3>
-              <p className="font-inter text-base leading-[24px] text-black text-opacity-70">
-                Join 25,000+ creatives to enjoy a regular dose of inspiration
-                and motivation, delivered to your inbox every Tuesday.
-              </p>
-              <div className="flex flex-col md:grid grid gap-4 ">
-                <SignupHomepage />
-              </div>
-            </div>
+        <div className="w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2  max-w-4xl mx-auto gap-4 mb-8 sm:mb-0 sm:gap-8">
+          <div
+            style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}
+            className="w-full max-w-[420px] h-[150px] bg-white rounded-[16px] p-4"
+          >
+            <SponsorHomeCard />
           </div>
-          <div className="mt-8 md:mt-0">
-            <SmallCardWithImage type={type} data={secondRowPost} />
-          </div>
+          {jobFeature && (
+            <div
+              style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}
+              className="w-full max-w-[420px] bg-white rounded-[16px]"
+            >
+              <JobFeatureCard item={jobFeature[0]} />
+            </div>
+          )}
         </div>
 
-        <div className="w-full -mt-8 sm:mt-0 h-auto flex flex-col md:grid flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-3 grid-flow-row auto-rows-[minmax(0, 330px)] sm:gap-8 md:gap-8">
+        <div className="w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2  max-w-4xl mx-auto gap-1  sm:gap-8">
           {gridPosts.map((post, index) => {
-            return index === 4 ? (
-              <LargeCardWithImage type={type} data={post} />
-            ) : (
-              <SmallCardWithImage type={type} data={post} />
-            );
+            return <SmallCardWithImage type={type} data={post} />;
           })}
         </div>
       </div>
