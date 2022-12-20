@@ -175,7 +175,7 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                       {title}
                     </h3>
                     <Link
-                      href={type === "jobs" ? "/jobs" : "/toolbox"}
+                      href={type === "jobs" ? "/jobs" : "/toolbox/page/1"}
                       className="font-inter text-sm text-gray-500 cursor-pointer"
                     >
                       See more {title} {"->"}
@@ -217,7 +217,7 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
                       {title}
                     </h3>
                     <Link
-                      href={type === "jobs" ? "/jobs" : "/toolbox"}
+                      href={type === "jobs" ? "/jobs" : "/toolbox/page/1"}
                       className="font-inter text-sm text-gray-500 cursor-pointer"
                     >
                       See more {title} {"->"}

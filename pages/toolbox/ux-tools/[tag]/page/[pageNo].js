@@ -17,7 +17,7 @@ const BREADCRUMBS = {
   ]
 }
 
-export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
+export default function ToolboxPage({allPosts = [], title,preview, pagination,tag}) {
 
     return (
         <Layout 
@@ -34,7 +34,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
            paginationRoot={`/toolbox/ux-tools`}
         filterCategories={ALL_SLUGS_GROUPS}
         urlRoot={`/toolbox/ux-tools`}
-        title={`${tag?.replace('_',' ')}`}
+        title={title}
         currentSlug={tag}
         description="The best User Experience tools: Research, Heatmaps, Analytics, Collaboration and more."
         pagination={pagination}
@@ -52,12 +52,15 @@ export async function getStaticProps({ preview = null, params}) {
     //     return slug === SLUG.key
     // })
     const foundSlug = find_page_slug_from_menu(ALL_SLUGS_GROUPS, tag)
-
     const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, foundSlug.tags )) || []
     const pagination = allPosts.meta.pagination
     return {
         props: {
-            allPosts: allPosts.data, preview, pagination,tag
+            allPosts: allPosts.data, 
+            preview, 
+            pagination,
+            tag,
+            title:foundSlug?.title?foundSlug.title:'Design Tools'
         },revalidate: 20,
     }
   }

@@ -18,7 +18,7 @@ const BREADCRUMBS = {
     ]
 }
 
-export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
+export default function ToolboxPage({title,allPosts = [], preview, pagination,tag}) {
 
     return (
         <Layout 
@@ -35,7 +35,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
            paginationRoot={`/toolbox/augmented-reality-tools`}
         filterCategories={ALL_SLUGS_CATEGORY}
         urlRoot={`/toolbox/augmented-reality-tools`}
-        title={`${tag?.replace('_',' ')}`}
+        title={title}
         description="Find the best design tools for Augmented Reality, Virtual reality, Mixed Reality, and more."
         pagination={pagination}
         pageSize={PAGE_SIZE} 
@@ -57,7 +57,8 @@ export async function getStaticProps({ preview = null, params}) {
     const pagination = allPosts.meta.pagination
     return {
         props: {
-            allPosts: allPosts.data, preview, pagination,tag
+            allPosts: allPosts.data, preview, pagination,tag,
+            title:foundSlug?.title?foundSlug.title:'Design Tools'
         },revalidate: 20,
     }
   }

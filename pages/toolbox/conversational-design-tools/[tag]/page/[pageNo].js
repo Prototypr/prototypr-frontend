@@ -18,7 +18,7 @@ const BREADCRUMBS = {
   }
 
 
-export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
+export default function ToolboxPage({allPosts = [],title, preview, pagination,tag}) {
     //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
 
     return (
@@ -36,7 +36,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination,tag}) {
             paginationRoot={`/toolbox/conversational-design-tools`}
         filterCategories={ALL_SLUGS_CATEGORY}
         urlRoot={`/toolbox/conversational-design-tools`}
-        title={`${tag?.replace('_',' ')}`}
+        title={title}
         currentSlug={tag}
         description= "The best conversational design tools: chatbots, messaging and more."
         pagination={pagination}
@@ -57,7 +57,8 @@ export async function getStaticProps({ preview = null, params}) {
     const pagination = allPosts.meta.pagination
     return {
         props: {
-            allPosts: allPosts.data, preview, pagination,tag
+            allPosts: allPosts.data, preview, pagination,tag,
+            title:foundSlug?.title?foundSlug.title:'Design Tools'
         },revalidate: 20,
     }
   }

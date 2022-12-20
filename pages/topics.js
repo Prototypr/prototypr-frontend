@@ -24,8 +24,8 @@ export default function Index({ allPosts, preview }) {
         description:
           "Browse design topics on Prototoypr. Discover the category you want to learn about.",
         //   image: "",
-        canonical: "https://prototypr.io/toolbox",
-        url: "https://prototypr.io/toolbox",
+        canonical: "https://prototypr.io/topics",
+        url: "https://prototypr.io/topics",
       }}
       activeNav={"posts"}
       preview={preview}

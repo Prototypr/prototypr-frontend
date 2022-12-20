@@ -37,9 +37,9 @@ export default function ToolboxPage({
       <ToolboxIndexPage 
       
       filterCategories={ALL_SLUGS_GROUPS}
-      urlRoot={`/`}
+      urlRoot={`/toolbox`}
       paginationRoot={`/toolbox`}
-      title="Toolbox"
+      title="Weekly Curated Design Tools"
       description="All your design tools in one place, updated weekly"
       pagination={pagination}
       pageSize={PAGE_SIZE} 
