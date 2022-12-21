@@ -9,7 +9,7 @@ const TrendingFullWidth = ({ tools, sponsor }) => {
       <Container maxWidth='max-w-[984px] pt-28 px-6 lg:px-3 '>
               <h1 className="font-semibold mt-2">Trending tools</h1>
 
-              <div className="overflow-hidden overflow-x-scroll">
+              <div className="overflow-hidden overflow-x-scroll md:overflow-x-hidden">
                 <div className="flex flex-row-reverse w-[140%] md:w-full mt-4 flex-row md:grid md:grid-cols-12 md:gap-4 justify-end items-end">
                 {tools.map((item, index) => {
                   const { title, legacyFeaturedImage, tags, slug } =
@@ -19,7 +19,7 @@ const TrendingFullWidth = ({ tools, sponsor }) => {
                   const logo = legacyFeaturedImage?.logoNew?legacyFeaturedImage?.logoNew:'/static/images/placeholder/letter-ad.png'
               // return  <LargeCardWithImage type={type} data={post} />
               return  (
-                <Link className="w-1/3 mr-3 md:mr-0 md:col-span-3 rounded-xl overflow-hidden" href={`/toolbox/${slug}`}>
+                <Link className="w-1/3 md:w-auto mr-3 md:mr-0 md:col-span-3 rounded-xl overflow-hidden" href={`/toolbox/${slug}`}>
                   <div className="h-[156px] w-full overflow-hidden relative rounded" >
                     <div className="w-full h-full absolute z-10 bg-gradient-to-b from-gray-800 to-black opacity-50"/>
                     <Image
@@ -52,7 +52,7 @@ const TrendingFullWidth = ({ tools, sponsor }) => {
                 
                 )
               })}
-                <a target="_blank" className="w-1/3 mr-4 md:mr-0 col-span-4 md:col-span-3 rounded-xl overflow-hidden" href={sponsor?.link?sponsor.link:`https://letter.so`}>
+                <a target="_blank" className="w-1/3 md:w-auto mr-4 md:mr-0 col-span-4 md:col-span-3 rounded-xl overflow-hidden" href={sponsor?.link?sponsor.link:`https://letter.so`}>
                   <div className="h-[156px] w-full overflow-hidden relative rounded" >
                     <div className="w-full h-full absolute z-10 bg-black opacity-50"/>
                     <Image

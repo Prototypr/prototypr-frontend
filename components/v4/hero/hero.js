@@ -256,12 +256,12 @@ const HeroGrid = ({
     <div className="flex flex-col flex-nowrap gap-2">
       <div className="flex flex-col">
         <div className="flex flex-col sm:flex-row lg:flex-col">
-          <div className="sm:w-1/2 mb-8 px-4 lg:px-0 lg:w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2  max-w-4xl mx-auto gap-1  sm:gap-10">
+          <div className="sm:w-1/2 mb-8 px-4 lg:px-0 lg:w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2 gap-1  sm:gap-10">
             <LargeCardWithImage type={type} data={hero} />
             {/* <SmallCardWithImage type={type} data={hero} />
             <SmallCardWithImage type={type} data={secondRowPost} /> */}
           </div>
-          <div className="sm:w-1/2 px-4 mb-8 lg:px-0 lg:w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2  max-w-4xl mx-auto gap-1  sm:gap-10">
+          <div className="sm:w-1/2 px-4 mb-8 lg:px-0 lg:w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2 gap-1  sm:gap-10">
             <LargeCardWithImage type={type} data={secondRowPost} />
             {/* <SmallCardWithImage type={type} data={hero} />
             <SmallCardWithImage type={type} data={secondRowPost} /> */}
@@ -302,7 +302,7 @@ const HeroGrid = ({
             return  <SmallCardWithImage type={type} data={post} />
           })}
         </div>
-        <div className="px-4">
+        <div className="px-4 sm:mt-8 lg:px-0 lg:mt-0">
           <div
           className="w-full h-full bg-pink-200 w-full lg:mt-8 rounded-[16px] p-6"
         >
