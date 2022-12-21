@@ -148,7 +148,7 @@ export default function Index({
         <Container maxWidth='max-w-[984px]'>
         <div className="w-full mt-8 h-full grid grid-cols-12 flex justify-center">
             <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-8 lg:pr-8 py-3">
-            <h1 className="font-semibold mb-3">More to explore</h1>
+            <h1 className="font-semibold mb-3 px-4 md:px-0">More to explore</h1>
 
               <HeroGrid
                 showTrending={true}
