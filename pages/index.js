@@ -1,19 +1,18 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
-import { Waypoint } from "react-waypoint";
 
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
+import TrendingFullWidth from "@/components/homepage/TrendingFullWidth";
 /**new index components */
 import { BrowserView } from "react-device-detect";
-
+import Sidebar from "@/components/homepage/Sidebar";
 const Footer = dynamic(() => import("@/components/footer"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 
 import { getAllJobs } from "@/lib/api";
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
-import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 
 import {
   getCombinedPostsForHome,
@@ -27,30 +26,7 @@ import { transformPostListOld } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
 
 import HeroGrid from "@/components/v4/hero/hero";
-import Link from "next/link";
-import Image from "next/image";
-import gumletLoader from "@/components/new-index/gumletLoader";
-import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
-
-const Tabs = [
-  { label: "Top Picks", color: "#4053FF", id: "top_picks", slug: "top_picks" },
-  { label: "Branding", color: "#FFC10F", id: "branding", slug: "branding" },
-  {
-    label: "Product Design",
-    color: "#FE9BE8",
-    id: "product_design",
-    slug: "product-design",
-  },
-  { label: "UX Design", color: "#9360FF", id: "ux", slug: "ux" },
-
-  { label: "AI", color: "#4053FF", id: "vr", slug: "ai" },
-  {
-    label: "Psychology",
-    color: "#22AA79",
-    id: "service",
-    slug: "design-psychology",
-  },
-];
+import TabSwitcher from "@/components/homepage/TabSwitcher";
 
 const TAB_ITEMS = [
   {
@@ -76,229 +52,7 @@ const TAB_ITEMS = [
 ];
 const PAGE_SIZE = 12;
 
-const SponsorCard = ({ data }) => {
-  return (
-    <div className="flex flex-col grid gap-1 justify-end items-end">
-      <a href={data.url} target="_blank" className="w-full">
-        <div className="w-full rounded-[12px] h-auto bg-white border border-opacity-10 p-3 grid grid-cols-3 gap-2">
-          <div className="w-20 h-20 relative bg-gray-100 rounded-lg overflow-hidden col-span-1">
-            <img src={data.src} />
-          </div>
-          <div className="w-full col-span-2 flex flex-col grid gap-1">
-            <p className="w-auto max-w-[150px] text-[#6B6B6B] font-medium tracking-[-0.1px] text-[13px] font-inter ">
-              {data.heading}
-            </p>
-            <div>
-              <span className="text-[10px] px-3 py-1 bg-[#FFF7E1] border border-yellow-700 border-opacity-10 rounded-full">
-                Sponsored
-              </span>
-            </div>
-          </div>
-        </div>
-      </a>
-      <Link href={"/sponsor"}>
-        <span className="text-[12px] text-gray-500">Want to sponsor?</span>
-      </Link>
-    </div>
-  );
-};
 
-const TabSwitchter = ({ selectedTab, onTabChange }) => {
-  return (
-    <div className="h-[50px] my-3  px-5">
-      <div className="overflow-x-scroll overflow-y-hidden no-scrollbar flex w-full ">
-        <div className="flex">
-          {Tabs.map((tab, i) => {
-            return (
-              <span
-                onClick={() => onTabChange(tab)}
-                className={`px-4 py-2 block font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full text-sm  mx-2 rounded-full ${
-                  selectedTab === tab.id
-                    ? "bg-blue-600 text-white"
-                    : "bg-transparent text-gray-500"
-                }  border hover:bg-blue-600 hover:text-white`}
-              >
-                {tab.label}
-              </span>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Sidebar = ({ title, content = [], type, paddingTop }) => {
-  const sponsorData = {
-    src: "/static/images/placeholder/sponsor-cat.png",
-    heading: "A playful todolist to help you get your stuff done.",
-    url: "https://catadoo.com/",
-  };
-
-  let slicedList = [...content.slice(0, 3)];
-
-  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
-
-  const _handleWaypointEnter = () => {
-    setStickyPaddingTop("pt-0");
-  };
-  const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-16");
-  };
-
-  return (
-    <div
-      className={`${paddingTop} relative col-span-3 border-l border-opacity-20`}
-    >
-      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
-      <div
-        className={`${stickyPaddingTop} transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
-      >
-        <aside className="  h-screen px-5 sticky top-0 py-0">
-          <div className="flex flex-col grid gap-10 py-10">
-            <SponsorSidebarCard />
-
-            {type === "jobs" ? (
-              <div>
-                <PrototyprNetworkCTA data={sponsorData} />
-              </div>
-            ) : (
-              <div className="mt-[0]">
-                <PrototyprNetworkCTA data={sponsorData} />
-              </div>
-            )}
-
-            <div className="w-full flex flex-col grid gap-2">
-              {type === "tools" && (
-                <>
-                  <div className="flex flex-row justify-between items-baseline">
-                    <h3 className="font-inter my-2 font-medium text-sm">
-                      {title}
-                    </h3>
-                    <Link
-                      href={type === "jobs" ? "/jobs" : "/toolbox/page/1"}
-                      className="font-inter text-sm text-gray-500 cursor-pointer"
-                    >
-                      See more {title} {"->"}
-                    </Link>
-                  </div>
-                  <div className="flex flex-col grid gap-3">
-                    {slicedList.map((item, i) => {
-                      const { title, legacyFeaturedImage, tags, slug } =
-                        item.attributes;
-                      return (
-                        <div
-                          key={i}
-                          className="w-full cursor-pointer h-[100px] bg-white py-4 px-4 rounded-lg border border-opacity-5 border-black flex flex-col grid gap-2"
-                        >
-                          <Link href={`/toolbox/${slug}`}>
-                            <div className="flex flex-row">
-                              <div className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden">
-                                <img
-                                  className="relative"
-                                  src={legacyFeaturedImage?.logoNew}
-                                />
-                              </div>
-                              <div className="flex flex-col grid gap-2">
-                                <p className="text-sm font-inter">{title}</p>
-                              </div>
-                            </div>
-                          </Link>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </>
-              )}
-
-              {type === "jobs" && (
-                <div className="flex rounded-lg flex-col gap-0 p-4">
-                  <div className="flex flex-row justify-between items-baseline">
-                    <h3 className="font-inter my-1 font-medium text-sm">
-                      {title}
-                    </h3>
-                    <Link
-                      href={type === "jobs" ? "/jobs" : "/toolbox/page/1"}
-                      className="font-inter text-sm text-gray-500 cursor-pointer"
-                    >
-                      See more {title} {"->"}
-                    </Link>
-                  </div>
-                  <div className="flex flex-col grid gap-4 my-2">
-                    {slicedList.map((item, i) => {
-                      const {
-                        title,
-                        companyName,
-                        salaryText,
-                        id,
-                        companyLogo,
-                        locations,
-                      } = item;
-                      return (
-                        <>
-                          <Link href={`/jobs/${id}`}>
-                            <div
-                              key={i}
-                              className="w-full h-auto cursor-pointer flex flex-col"
-                            >
-                              <div className="flex flex-row bg-white  p-4 rounded-lg">
-                                <div
-                                  style={{ flex: "0 0 3em" }}
-                                  className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-lg overflow-hidden"
-                                >
-                                  {companyLogo ? (
-                                    <Image
-                                      tabIndex={0}
-                                      loader={gumletLoader}
-                                      layout="fill"
-                                      objectFit="cover"
-                                      src={companyLogo}
-                                      className="object-cover"
-                                      alt="Author profile picture"
-                                    />
-                                  ) : (
-                                    ""
-                                  )}
-                                  {/* <img className="relative" src={companyLogo} /> */}
-                                </div>
-                                <div className="flex flex-col grid gap-1 justify-center">
-                                  <p className=" h-[18px] overflow-hidden line-clamp-1 inline font-inter text-sm">
-                                    {title}
-                                  </p>
-                                  <div className="flex flex-row gap-1 text-sm text-gray-500">
-                                    <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline font-inter">
-                                      {companyName},
-                                    </p>
-                                    <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline font-inter">
-                                      {locations[0]?.name}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
-                        </>
-                      );
-                    })}
-                  </div>
-                  <Link
-                    href={"/jobs/post"}
-                    className="w-full flex flex-row justify-end font-inter text-gray-500 hover:underline cursor-pointer my-2"
-                  >
-                    <div className="text-xs inline-flex">
-                      <div className="mr-1">Hiring? Post a Job</div>
-                      <div>{"->"}</div>
-                    </div>
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </aside>
-      </div>
-    </div>
-  );
-};
 
 export default function Index({
   preview,
@@ -343,12 +97,16 @@ export default function Index({
   const heroJob = jobs.filter((item, i) => i === 0);
   const jobsSidebar = jobs.filter((item, i) => i !== 0);
 
+  const first3Tools = allTools.slice(0, 3)
+  const toolsList = allTools.slice(3, allTools.length)
+
   return (
     <>
       <Layout
         padding={false}
         preview={preview}
-        background={"#EFF4FB"}
+        // background={"#EFF4FB"}
+        background={"#ffffff"}
         seo={{
           title: titleText,
           description: descriptionText,
@@ -357,13 +115,13 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        <Container>
+        <TrendingFullWidth sponsor={sponsors?.length ? sponsors[0] : null} tools={first3Tools}/>
+        <Container maxWidth='max-w-[984px]'>
           {/* <Intro /> */}
-          <div className="w-full h-full grid grid-cols-10  gap-1  ">
-            <div className="flex flex-col pt-28 pb-20 gap-2 col-span-10 lg:col-span-7  md:pr-4 py-10">
+          <div className="w-full h-full grid grid-cols-12 flex justify-center">
+            <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-8 lg:pr-8 py-3">
               {/* <HomePageNewNavBar /> */}
-
-              <TabSwitchter
+              <TabSwitcher
                 selectedTab={currentTab}
                 onTabChange={onTabChange}
               />
@@ -375,7 +133,7 @@ export default function Index({
             </div>
 
             <Sidebar
-              paddingTop="hidden md:block pt-[154px]"
+              paddingTop="hidden ml-4 md:block pt-10"
               title="Jobs"
               type="jobs"
               content={jobsSidebar}
@@ -384,13 +142,16 @@ export default function Index({
         </Container>
 
         <BrowserView>
-          <DesignTool allTools={allTools} />
+          <DesignTool allTools={toolsList} />
         </BrowserView>
 
-        <Container>
-          <div className="w-full h-full  grid grid-cols-10 gap-1">
-            <div className="flex flex-col grid gap-4 col-span-10 lg:col-span-7 md:pr-4 py-10">
+        <Container maxWidth='max-w-[984px]'>
+        <div className="w-full mt-8 h-full grid grid-cols-12 flex justify-center">
+            <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-8 lg:pr-8 py-3">
+            <h1 className="font-semibold mb-3">More to explore</h1>
+
               <HeroGrid
+                showTrending={true}
                 type="random"
                 postData={{
                   hero: HeroPostRandomSection[0],
@@ -403,7 +164,9 @@ export default function Index({
               />
             </div>
 
-            <Sidebar title="Tools" type="tools" content={allTools} />
+            <Sidebar 
+            paddingTop="hidden ml-4 md:block pt-12 mt-2"
+            title="Tools" type="tools" content={toolsList} />
           </div>
         </Container>
       </Layout>
@@ -423,7 +186,7 @@ export async function getStaticProps({ preview = null, locale }) {
   let allTools =
     (await getAllToolsForHome(preview, PAGE_SIZE, 0, ["date:desc"])) || [];
 
-  let jobs = (await getAllJobs(null, 4, 1)) || [];
+  let jobs = (await getAllJobs(null, 5, 1)) || [];
 
   let sponsors = await getActiveSponsors();
 

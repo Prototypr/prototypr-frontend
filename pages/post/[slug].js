@@ -248,7 +248,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
 
   return (
     <div
-      className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
+      className={`${paddingTop} relative col-span-4 max-w-[410px]`}
     >
       <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
       <div
@@ -258,7 +258,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
           <div className="flex flex-col grid gap-10">
             <div>
               {author ? (
-                <div className="border border-gray-200 flex p-5 rounded-xl flex-col mt-8 pb-4">
+                <div className="flex p-5 rounded-xl flex-col mt-8 pb-4">
                   <div className="w-[80px] h-[80px] relative border border-gray-100 rounded-full shadow-sm mb-3">
                     {avatar ? (
                       <Link href={`/people/${author.slug}`}>

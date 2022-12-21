@@ -41,7 +41,7 @@ export default function SignupHomepage({ className }) {
 
   return (
     <>
-      <div className={`rounded-md mb-12 lg:mb-0`}>
+      <div className={`rounded-md lg:mb-0`}>
         {registered == false ? (
           <>
             <HookForm

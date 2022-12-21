@@ -11,10 +11,10 @@ const PrototyprNetworkCTA = ({ data }) => {
       <div className="flex flex-col gap-1 justify-end items-end">
         <div className="w-full rounded-[12px] h-auto bg-white border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">
           <div className="flex flex-col grid gap-2">
-            <p className="text-black max-w-[200px] text-[16px] mb-1 font-inter">
-              Help and Grow together in the Design Community.
+            <p className="text-gray-800 font-medium max-w-[200px] text-[16px] mb-3 font-inter">
+              Share and Grow together in the Design Community.
             </p>
-            <div>
+            <div className="mb-2">
               <Link href="/write">
                 <button className="px-4 py-2 text-white rounded-lg font-inter bg-blue-500 hover:bg-blue-400 text-sm font-semibold">
                   Start Writing
@@ -28,7 +28,7 @@ const PrototyprNetworkCTA = ({ data }) => {
             </div>
           </div>
           <img
-            className=" w-[200px]"
+            className=" w-[190px]"
             src="/static/images/prototypr-ppl.png"
           ></img>
         </div>

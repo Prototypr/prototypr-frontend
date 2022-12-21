@@ -13,7 +13,7 @@ const SponsorSidebarCard = ({
     <div className="flex flex-col grid gap-4">
       <>
         <Link href={`${sponsorLink}`}>
-          <div className="w-full h-auto bg-[#fff] border-gray-200 border rounded-xl cursor-pointer flex flex-col">
+          <div className="w-full h-auto bg-gray-50 rounded-xl cursor-pointer flex flex-col">
             <div className="flex flex-row p-4 rounded-xl">
               <div
                 style={{ flex: "0 0 3em" }}

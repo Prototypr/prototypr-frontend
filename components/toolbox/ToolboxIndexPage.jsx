@@ -43,7 +43,7 @@ const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, a
                     Follow Topic
                   </div> */}
                  </div>
-                <div className="-z-10 opacity-10 from-gray-50 to-blue-400 bg-gradient-to-bl absolute w-full h-full top-0 left-0"/>
+                {/* <div className="-z-10 opacity-10 from-gray-50 to-blue-400 bg-gradient-to-bl absolute w-full h-full top-0 left-0"/> */}
                   {/* <p className="text-base my-auto text-left">{description}</p> */}
                 {/* <img src="/static/images/smudge.jpeg" alt="" className="opacity-10 -z-10 absolute -top-[6rem] ml-[9rem]  w-full w-[900px] h-[400px] "/> */}
 
