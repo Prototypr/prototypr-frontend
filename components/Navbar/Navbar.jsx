@@ -228,7 +228,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton, maxWid
               })}
             </div>
           </div>
-          <div className={`items-center sm:static sm:inset-auto flex ${user?.isLoggedin?'mr-16':'lg:mr-0'} mr-16`}>
+          <div className={`items-center sm:static sm:inset-auto flex ${user?.isLoggedin?'mr-[52px] sm:mr-16':'lg:mr-0'} mr-[52px] sm:mr-16`}>
             <div className={`hidden mr-2 md:block my-auto`}>
               <WMButton />
             </div>

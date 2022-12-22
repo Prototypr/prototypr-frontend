@@ -33,7 +33,7 @@ export default function NewsLetter({
             👾.
           </title>
         </Head>
-        <Container>
+        <Container maxWidth={'max-w-[986px] pt-3'}>
           {/* <TitleBlock /> */}
           <div>
             <SourcePanel
