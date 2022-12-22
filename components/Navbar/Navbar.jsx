@@ -251,11 +251,6 @@ const Navbar = ({
               <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />
               </div>
-              <div
-                className={`items-center sm:static sm:inset-auto flex ${
-                  user?.isLoggedin ? "mr-16" : "lg:mr-0"
-                } mr-16`}
-              >
                 {/* <div className={`hidden mr-2 md:block my-auto`}>
                   <WMButton />
                 </div> */}
@@ -273,7 +268,6 @@ const Navbar = ({
                   <UserMenu userLoading={isLoading} user={user} />
                 </div>
               </div>
-            </div>
           </div>
         </div>
 
