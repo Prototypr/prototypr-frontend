@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { Waypoint } from "react-waypoint";
-import { topics } from "@/lib/constants";
+import { SIDEBAR_STICKY_OFFSET, topics } from "@/lib/constants";
 import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 
 export default function Index({ allPosts, preview }) {
@@ -19,6 +19,7 @@ export default function Index({ allPosts, preview }) {
   return (
     <>
       <Layout
+        maxWidth={'max-w-[1380px] search-wide'}
         seo={{
           title: "Prototypr Topics - Design, UX, UI, accessibility...",
           description:
@@ -88,7 +89,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
     setStickyPaddingTop("pt-0");
   };
   const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-36");
+    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
   };
 
   return (

@@ -76,7 +76,7 @@ const Credits = () => {
   );
 };
 
-const LargeCardWithImage = ({ data, type = "regular" }) => {
+const LargeCardWithImage = ({ data, type = "regular", colSpan }) => {
   let coverImage;
 
   // let postDate =  format(new Date(data?.attributes?.date), "LLLL d, yyyy")
@@ -99,7 +99,7 @@ const LargeCardWithImage = ({ data, type = "regular" }) => {
     <Link
       href={`/post/${type === "regular" ? data?.attributes?.slug : data?.slug}`}
       //   style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)" }}
-      className="w-full border border-gray-200 relative h-auto flex flex-col sm:flex-row bg-white col-span-2 rounded-[20px] cursor-pointer"
+      className={`w-full border border-gray-200 relative h-auto flex flex-col sm:flex-row bg-white ${colSpan?colSpan:'col-span-2'} rounded-[20px] cursor-pointer`}
     >
       {/* <div className="z-40 hidden sm:block absolute -translate-x-6 -translate-y-2 pointer-events-none">
         <LargeCardSnow />
@@ -296,9 +296,9 @@ const HeroGrid = ({
             </div>
           )} */}
 
-        <div className="w-full h-auto flex flex-row flex-wrap px-4 lg:px-0 sm:grid sm:grid-cols-2 mx-auto gap-1  sm:gap-8">
+        <div className="w-full h-auto flex flex-row flex-wrap px-4 lg:px-0 grid grid-cols-2 mx-auto gap-1  sm:gap-8">
           {gridPosts.map((post, index) => {
-            return  <LargeCardWithImage type={type} data={post} />
+            return  <LargeCardWithImage colSpan='col-span-2 sm:col-span-1 lg:col-span-2 mb-8 sm:mb-0' type={type} data={post} />
             // return  <SmallCardWithImage type={type} data={post} />
           })}
         </div>

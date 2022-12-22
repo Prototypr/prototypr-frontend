@@ -30,6 +30,7 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
 
   return (
     <Layout 
+    maxWidth={'max-w-[1200px] search-wide'}
     seo={{
         title:`${post?.attributes?.seo?.opengraphTitle?post?.attributes?.seo?.opengraphTitle: post?.attributes?.title && post.attributes.title}`,
         description:`${post?.attributes?.seo?.opengraphDescription?post?.attributes?.seo?.opengraphDescription: post?.attributes?.excerpt && post.attributes.excerpt}`,

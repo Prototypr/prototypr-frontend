@@ -5,6 +5,7 @@ import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import Link from "next/link";
+import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 const Sidebar = ({ title, content = [], type, paddingTop }) => {
     const sponsorData = {
       src: "/static/images/placeholder/sponsor-cat.png",
@@ -22,7 +23,7 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
       setAdClass("opacity-0 h-0 mb-0");
     };
     const _handleWaypointLeave = () => {
-      setStickyPaddingTop("pt-20");
+      setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
       setAdClass("opacity-100 h-auto mb-6");
     };
   

@@ -14,6 +14,7 @@ import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import { Waypoint } from "react-waypoint";
 import Link from "next/link";
+import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
@@ -58,6 +59,7 @@ export default function PostsPage({
   return (
     <>
       <Layout
+          maxWidth={'max-w-[1380px] search-wide'}
         seo={{
           title: `${tagName} | design articles on Prototypr | Page ${pagination?.page}`,
           description: `Articles on ${tagName} - design content open and accessible to everyone, no paywall here.`,
@@ -138,7 +140,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
     setStickyPaddingTop("pt-0");
   };
   const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-24");
+    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
   };
 
   return (

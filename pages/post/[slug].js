@@ -36,6 +36,7 @@ import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
+import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 const WMPostTracker = dynamic(
   () => import("@/components/WebMonetization/WMPostTracker"),
   {
@@ -102,6 +103,7 @@ export default function Post({ post, preview, relatedPosts }) {
 
   return (
     <Layout
+    maxWidth={'max-w-[1380px] search-wide'}
       padding={false}
       seo={{
         title: `${title}`,
@@ -233,7 +235,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
     setStickyPaddingTop("pt-0");
   };
   const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-24");
+    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
   };
 
   const avatar = author?.avatar?.data?.attributes?.url

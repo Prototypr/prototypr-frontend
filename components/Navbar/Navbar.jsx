@@ -135,7 +135,7 @@ export const HomePageNewNavBar = () => {
   );
 };
 
-const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
+const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton, maxWidth }) => {
   const { user, isLoading } = useUser({
     redirectIfFound: false,
   });
@@ -160,8 +160,8 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
 
   return (
     <>
-    <nav className={`bg-white font-inter fixed w-full z-50 bg-white bg-opacity-60 backdrop-blur-lg`}>
-      <div className={`w-[100%] border-opacity-10 mx-auto border-b border-black px-2 sm:px-6 lg:px-8 2xl:px-32`}>
+    <nav className={`font-inter fixed top-3.5 w-full z-50`}>
+      <div className={`w-[97%] ${maxWidth?maxWidth:'max-w-[1020px]'} bg-white bg-opacity-60 backdrop-blur-lg border-opacity-10 mx-auto border rounded-[60px] border-black px-6`}>
         <div className="relative flex h-16 items-center justify-between">
           {/* movil menu button */}
           <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
@@ -186,15 +186,15 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
               <Link href="/" as="/">
                 <>
                   <img
-                    className="block h-8 w-auto xl:hidden"
+                    className="block h-8 w-auto"
                     src="/static/images/logo-small.svg"
                     alt="Prototypr Logo"
                   />
-                  <img
+                  {/* <img
                     className="hidden h-8 w-auto xl:block"
                     src={`/static/images/logo.svg`}
                     alt="Prototypr Logo"
-                  />
+                  /> */}
                 </>
               </Link>
               <div
@@ -226,7 +226,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
               })}
             </div>
           </div>
-          <div className="items-center sm:static sm:inset-auto flex mr-16 sm:pr-0">
+          <div className={`items-center sm:static sm:inset-auto flex ${user?.isLoggedin?'mr-16':'lg:mr-0'} mr-16`}>
             <div className={`hidden mr-2 md:block my-auto`}>
               <WMButton />
             </div>
@@ -240,7 +240,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
                 />
               </NavigationMenuList>
             </NavigationMenu>
-            <div className="relative ml-3">
+            <div className="relative">
               <UserMenu userLoading={isLoading} user={user} />
             </div>
           </div>

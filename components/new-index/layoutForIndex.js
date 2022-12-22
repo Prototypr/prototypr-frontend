@@ -1,3 +1,4 @@
+import { NAV_OFFSET } from "@/lib/constants";
 import Meta from "../meta";
 import Navbar, { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 
@@ -37,7 +38,7 @@ export default function Layout({
       {/* </div> */}
 
       <div
-        className={`min-h-screen pt-20 ${padding == false ? "" : "px-3 md:px-8"}`}
+        className={`min-h-screen ${NAV_OFFSET} ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#F3F4F6" }}
       >
         <main

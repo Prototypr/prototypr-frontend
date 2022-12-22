@@ -69,10 +69,10 @@ const WebMonetizationCounter = () =>{
 
     return(
         <>
-      <Provider delayDuration={1}>
+      {count ?<Provider delayDuration={1}>
         <Tooltip>
           <TooltipTrigger asChild>
-          {count &&<div className="hover:cursor-pointer rounded-full shadow w-2 h-2 ml-4 mr-4 mt-1 bg-teal-500"/>}
+          <div className="hover:cursor-pointer rounded-full shadow w-2 h-2 ml-4 mr-4 mt-1 bg-teal-500"/>
             {/* <IconButton>
               <PlusIcon />
             </IconButton> */}
@@ -85,7 +85,9 @@ const WebMonetizationCounter = () =>{
           </div>
           </TooltipContent>
         </Tooltip>
-      </Provider>
+      </Provider>:
+          <div className="hover:cursor-pointer w-1 h-1 ml-2 mr-2 mt-1 bg-transparent"/>
+          }
         </>
         
     )

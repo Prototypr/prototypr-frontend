@@ -33,6 +33,8 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
     return (
         <>
           <Layout 
+              maxWidth={'max-w-[1380px] search-wide'}
+
           seo={{
           title: `Prototypr Design articles – free for everyone | Page ${pagination?.page}`,
           description:

@@ -17,6 +17,7 @@ import { Waypoint } from "react-waypoint";
 import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
+import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 const RelatedPosts = dynamic(() => import("@/components/related-posts"), {
   ssr: true,
 });
@@ -311,7 +312,7 @@ const Sidebar = ({ relatedPosts, paddingTop, post }) => {
     setStickyPaddingTop("pt-0");
   };
   const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-24");
+    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
   };
 
   return (

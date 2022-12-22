@@ -58,7 +58,7 @@ const SearchBar = (props) =>{
     const [activeFilter, setActiveFilter] = useState(filter_options[0]?.filter)
 
     return(
-    <div className="relative ml-4">
+    <div className="relative ml-3 sm:ml-1">
     <InstantSearch indexName="post" searchClient={searchClient}>
         <Configure
         // analytics={false}

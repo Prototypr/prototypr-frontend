@@ -1,5 +1,5 @@
 
-import Layout from "@/components/layoutForBlogPost";
+import Layout from "@/components/layoutForToolboxIndex";
 
 
 import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from "@/lib/api";
@@ -25,6 +25,7 @@ export default function ToolboxPage({
 
   return (
     <Layout
+    maxWidth={'max-w-[1400px] search-wide'}
     seo={{
         title: `Prototypr Toolbox - new design, UX and coding tools | Page ${pagination?.page}`,
         description:

@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { Waypoint } from "react-waypoint";
 import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
+import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 
 const PAGE_SIZE = 12;
 
@@ -34,7 +35,9 @@ const Index = () => {
   }, []);
 
   return (
-    <Layout seo={seo} showWriteButton={false} background="#eff4fb">
+    <Layout 
+    maxWidth={'max-w-[1380px] search-wide'}
+    seo={seo} showWriteButton={false} background="#eff4fb">
       <Container>
         <div className="w-full h-full grid grid-cols-12 gap-1  ">
           <div className="max-w-[46rem] mx-auto pb-20 px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
@@ -146,7 +149,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
     setStickyPaddingTop("pt-0");
   };
   const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-24");
+    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
   };
 
   return (
