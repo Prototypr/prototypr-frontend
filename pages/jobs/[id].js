@@ -221,7 +221,7 @@ export default function Post({
           </div>
           {/* RIGHT SIDEBAR START */}
           {/* <div className="col-span-full mb-6 lg:mb-0 lg:col-span-4 order-last lg:order-last lg:block"> */}
-          <Sidebar post={post} paddingTop="pt-32" />
+          <Sidebar post={post} paddingTop="pt-6" />
           {/* <div className="w-full mb-6 pt-4 pb-6 px-6 rounded-lg bg-white col-start-5 col-end-7 md:col-start-5 md:col-end-7 ">
           <div className="w-full">
             <h3 className='text-xl font-medium mb-2 text-gray-900'>Apply Today</h3>

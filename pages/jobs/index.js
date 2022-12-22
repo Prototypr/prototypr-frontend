@@ -51,7 +51,7 @@ const Index = ({ jobs }) => {
           <Sidebar
             // author={post.attributes?.author?.data?.attributes}
             // relatedPosts={relatedPosts}
-            paddingTop="hidden md:block pt-12"
+            paddingTop="hidden md:block pt-6"
           />
           {/* <div className="w-full h-full mb-5 col-start-1 col-end-7 md:col-start-5 md:col-end-7 ">
          

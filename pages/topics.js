@@ -72,7 +72,7 @@ export default function Index({ allPosts, preview }) {
             <Sidebar
               // author={post.attributes?.author?.data?.attributes}
               // relatedPosts={relatedPosts}
-              paddingTop="hidden md:block pt-12"
+              paddingTop="hidden md:block pt-6"
             />
           </div>
         </Container>
