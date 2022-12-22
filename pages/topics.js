@@ -19,7 +19,7 @@ export default function Index({ allPosts, preview }) {
   return (
     <>
       <Layout
-        maxWidth={'max-w-[1380px] search-wide'}
+        maxWidth={"max-w-[1380px] search-wide"}
         seo={{
           title: "Prototypr Topics - Design, UX, UI, accessibility...",
           description:
@@ -117,7 +117,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
               </div>
 
               <div className="mt-6">
-                <SponsorSidebarCard />
+                <SponsorSidebarCard sponsorLocation="topics" page={"/topics"} />
               </div>
             </div>
 

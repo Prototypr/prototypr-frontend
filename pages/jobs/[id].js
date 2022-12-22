@@ -368,7 +368,7 @@ const Sidebar = ({ relatedPosts, paddingTop, post }) => {
               </div>
 
               <div className="mt-6">
-                <SponsorSidebarCard />
+                <SponsorSidebarCard sponsorLocation="jobs" page={"/jobs/*"} />
               </div>
             </div>
 

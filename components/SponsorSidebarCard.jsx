@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { usePlausible } from "next-plausible";
 
 const { default: Image } = require("next/image");
 const { default: gumletLoader } = require("./new-index/gumletLoader");
@@ -8,11 +9,27 @@ const SponsorSidebarCard = ({
   sponsorLink = "http://bit.ly/3WvKT1P", // letter conversion tracking
   title = "Build newsletters faster with Letter",
   sponsorName = "Letter",
+  sponsorLocation = undefined,
+  sponsorPage = undefined,
 }) => {
+  const plausible = usePlausible();
+
   return (
-    <div className="flex flex-col grid gap-4">
+    <div>
       <>
-        <Link href={`${sponsorLink}`}>
+        <a
+          target={"_blank"}
+          href={`${sponsorLink}`}
+          onClick={() => {
+            plausible("sponsorCard", {
+              props: {
+                location: sponsorLocation ? sponsorLocation : "none",
+                page: sponsorPage ? sponsorPage : "none",
+              },
+            });
+          }}
+          className="flex flex-col grid gap-4"
+        >
           <div className="w-full h-auto bg-gray-50 rounded-xl cursor-pointer flex flex-col">
             <div className="flex flex-row p-4 rounded-xl">
               <div
@@ -48,7 +65,7 @@ const SponsorSidebarCard = ({
               </div>
             </div>
           </div>
-        </Link>
+        </a>
       </>
     </div>
   );

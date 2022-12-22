@@ -103,7 +103,7 @@ export default function Post({ post, preview, relatedPosts }) {
 
   return (
     <Layout
-    maxWidth={'max-w-[1380px] search-wide'}
+      maxWidth={"max-w-[1380px] search-wide"}
       padding={false}
       seo={{
         title: `${title}`,
@@ -249,9 +249,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
   const dribbble = getDribbbleHandle(author?.dribbble);
 
   return (
-    <div
-      className={`${paddingTop} relative col-span-4 max-w-[410px]`}
-    >
+    <div className={`${paddingTop} relative col-span-4 max-w-[410px]`}>
       <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
       <div
         className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
@@ -398,7 +396,10 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
               </div>
 
               <div className="mt-6">
-                <SponsorSidebarCard />
+                <SponsorSidebarCard
+                  sponsorLocation="article"
+                  page={"/article/*"}
+                />
               </div>
             </div>
 
