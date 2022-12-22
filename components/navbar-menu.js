@@ -134,7 +134,7 @@ export const NavigationMenuDemo = ({
         {(!user || !user?.isLoggedIn)?<NavigationMenuItem
           className={`hidden mr-3 md:block ${
             !collapsed ? "md:opacity-0 md:flex md:invisible" : "md:flex"
-          } transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
+          } md:flex-col md:justify-center`}
         >
          {/* {!hideLocaleSwitcher &&  <NavigationMenuLink href="/post/write-for-us">
             {title3}
@@ -143,7 +143,7 @@ export const NavigationMenuDemo = ({
         
         :((user && !editor) && showWriteButton!==false)&&
         <NavigationMenuItem
-        className={`hidden mr-2 ml-4 md:block md:flex transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
+        className={`hidden mr-2 ml-4 md:block md:flex md:flex-col md:justify-center`}
       >
         <Link href="/write">
          <Button className="flex"type="" variant="confirmRounded">
@@ -156,7 +156,7 @@ export const NavigationMenuDemo = ({
        {clientMounted? 
        <NavigationMenuItem className="flex flex-col justify-center">
           {(user && user?.isLoggedIn) ? (
-            <div className="ml-2 w-8">
+            <div className="ml-2 w-8 relative">
               <Link href="/account">
                 {user && 
                   <ProfileBadge

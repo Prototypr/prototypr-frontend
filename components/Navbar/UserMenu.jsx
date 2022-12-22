@@ -31,7 +31,7 @@ const UserMenu = ({ user, userLoading }) => {
   return (
     <>
       {clientMounted ? (
-        <NavigationMenuItem className="flex flex-col justify-center">
+        <NavigationMenuItem className="flex flex-col justify-center" style={{zIndex:999}}>
           {user && user?.isLoggedIn ? (
             <div className="ml-2 w-8">
               {user && (

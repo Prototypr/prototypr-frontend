@@ -213,132 +213,135 @@ export const DropdownMenuDemo = ({ icon, user }) => {
           <IconButton aria-label="Customise options">{icon}</IconButton>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent
-          side={"bottom"}
-          align={"center"}
-          // alignOffset={-10}
-          avoidCollisions={true}
-          // sideOffset={-36}
-        >
-          <DropdownMenuItem
-            onSelect={() => {
-              router.push("/dashboard/drafts");
-            }}
-          >
-            Dashboard
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
+        <DropdownMenuPrimitive.DropdownMenuPortal container={document.getElementById('main-nav')}>
 
-          <DropdownMenuItem
-            onSelect={() => {
-              router.push("/account");
-            }}
+          <DropdownMenuContent
+            side={"bottom"}
+            align={"center"}
+            // alignOffset={-10}
+            avoidCollisions={true}
+            // sideOffset={-36}
           >
-            Profile settings
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onSelect={() => {
+                router.push("/dashboard/drafts");
+              }}
+            >
+              Dashboard
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
 
-          <DropdownMenuItemBanner
-            onSelect={() => {
-              router.push(`/web-monetization`);
-            }}
-          >
-            <div className="p-3 rounded-lg flex">
-              <div className="flex flex-col justify-start mr-2 w-20">
-                <img
-                  className="w-20 "
-                  src="https://webmonetization.org/img/wm-icon-animated.svg"
-                />
+            <DropdownMenuItem
+              onSelect={() => {
+                router.push("/account");
+              }}
+            >
+              Profile settings
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItemBanner
+              onSelect={() => {
+                router.push(`/web-monetization`);
+              }}
+            >
+              <div className="p-3 rounded-lg flex">
+                <div className="flex flex-col justify-start mr-2 w-20">
+                  <img
+                    className="w-20 "
+                    src="https://webmonetization.org/img/wm-icon-animated.svg"
+                  />
+                </div>
+                <div>
+                  <h2 className="text-md font-primary font-medium mb-1">
+                    Learn Web Monetization
+                  </h2>
+                  <p className="text-sm opacity-70">
+                    Receive streamed payments and tips on your articles.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-md font-primary font-medium mb-1">
-                  Learn Web Monetization
-                </h2>
-                <p className="text-sm opacity-70">
-                  Receive streamed payments and tips on your articles.
-                </p>
-              </div>
-            </div>
-          </DropdownMenuItemBanner>
-          <DropdownMenuSeparator />
+            </DropdownMenuItemBanner>
+            <DropdownMenuSeparator />
 
-          {/* <DropdownMenuItem
-            onSelect={() => {
-              router.push("/write");
-            }}
-          >
-            Write a Post
-          </DropdownMenuItem>
-          <DropdownMenuSeparator /> */}
+            {/* <DropdownMenuItem
+              onSelect={() => {
+                router.push("/write");
+              }}
+            >
+              Write a Post
+            </DropdownMenuItem>
+            <DropdownMenuSeparator /> */}
 
-          <DropdownMenuItem
-            onSelect={() => {
-              router.push(`/early-access`);
-            }}
-          >
-            {/* <Link href="/account"> */}
-            Welcome guide
-            {/* </Link> */}
-            {/* <RightSlot>⌘+T</RightSlot> */}
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onSelect={() => {
-              window.open(`https://help.prototypr.io`);
-            }}
-          >
-            Help
-            {/* <RightSlot>⌘+T</RightSlot> */}
-          </DropdownMenuItem>
+            <DropdownMenuItem
+              onSelect={() => {
+                router.push(`/early-access`);
+              }}
+            >
+              {/* <Link href="/account"> */}
+              Welcome guide
+              {/* </Link> */}
+              {/* <RightSlot>⌘+T</RightSlot> */}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onSelect={() => {
+                window.open(`https://help.prototypr.io`);
+              }}
+            >
+              Help
+              {/* <RightSlot>⌘+T</RightSlot> */}
+            </DropdownMenuItem>
 
-          {user?.isAdmin? (
-            <>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onSelect={() => {
-                  router.push(`/admin/drafts`);
-                }}
-              >
-                👩‍✈️ Admin
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onSelect={() => {
-                  window.open(
-                    `https://api.prototypr.io/admin/content-manager/collectionType/api::post.post?page=1&pageSize=10&sort=date:DESC&plugins[i18n][locale]=en`
-                  );
-                }}
-              >
-                👾 Strapi
-              </DropdownMenuItem>
-            </>
-          ):''}
-          {user?.companies?.length ? (
-            <>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onSelect={() => {
-                  router.push(`/dashboard/partner`);
-                }}
-              >
-                💙 Partners
-              </DropdownMenuItem>
-            </>
-          ):''}
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onSelect={async () => {
-              await signOut({ redirect: false });
-              mutateUser(
-                await fetchJson("/api/auth/logout", { method: "POST" }),
-                false
-              );
-            }}
-          >
-            Sign out
-          </DropdownMenuItem>
+            {user?.isAdmin? (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onSelect={() => {
+                    router.push(`/admin/drafts`);
+                  }}
+                >
+                  👩‍✈️ Admin
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onSelect={() => {
+                    window.open(
+                      `https://api.prototypr.io/admin/content-manager/collectionType/api::post.post?page=1&pageSize=10&sort=date:DESC&plugins[i18n][locale]=en`
+                    );
+                  }}
+                >
+                  👾 Strapi
+                </DropdownMenuItem>
+              </>
+            ):''}
+            {user?.companies?.length ? (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onSelect={() => {
+                    router.push(`/dashboard/partner`);
+                  }}
+                >
+                  💙 Partners
+                </DropdownMenuItem>
+              </>
+            ):''}
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onSelect={async () => {
+                await signOut({ redirect: false });
+                mutateUser(
+                  await fetchJson("/api/auth/logout", { method: "POST" }),
+                  false
+                );
+              }}
+            >
+              Sign out
+            </DropdownMenuItem>
 
-          <DropdownMenuArrow offset={12} />
-        </DropdownMenuContent>
+            <DropdownMenuArrow offset={12} />
+          </DropdownMenuContent>
+        </DropdownMenuPrimitive.DropdownMenuPortal>
       </DropdownMenu>
     </Box>
   );
