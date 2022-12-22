@@ -160,7 +160,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton, maxWid
 
   return (
     <>
-    <nav className={`font-inter fixed top-3.5 w-full z-50 bg-white shadow-lg xl:shadow-none xl:bg-transparent`}>
+    <nav className={`font-inter fixed top-3.5 w-full z-50`}>
       <div className={`w-[97%] ${maxWidth?maxWidth:'max-w-[1020px]'} bg-white bg-opacity-60 backdrop-blur-lg border-opacity-10 mx-auto border rounded-[60px] border-black px-6`}>
         <div className="relative flex h-16 items-center justify-between">
           {/* movil menu button */}
@@ -251,7 +251,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton, maxWid
 
       {/* movil menu */}
       <div
-        className={`xl:hidden ${!mobileNavOpen ? "h-0 overflow-hidden" : ""}`}
+        className={`xl:hidden ${!mobileNavOpen ? "h-0 overflow-hidden" : "mx-3 border border-gray-100 mt-1 bg-white shadow-lg"} rounded-xl`}
         id="mobile-menu"
       >
         <div className="space-y-1 px-2 pt-2 pb-3">
