@@ -160,7 +160,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton, maxWid
 
   return (
     <>
-    <nav className={`font-inter fixed top-3.5 w-full z-50`}>
+    <nav className={`font-inter fixed top-3.5 w-full z-50 bg-white shadow-lg xl:shadow-none xl:bg-transparent`}>
       <div className={`w-[97%] ${maxWidth?maxWidth:'max-w-[1020px]'} bg-white bg-opacity-60 backdrop-blur-lg border-opacity-10 mx-auto border rounded-[60px] border-black px-6`}>
         <div className="relative flex h-16 items-center justify-between">
           {/* movil menu button */}
@@ -186,8 +186,10 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton, maxWid
               <Link href="/" as="/">
                 <>
                   <img
-                    className="block h-8 w-auto"
-                    src="/static/images/logo-small.svg"
+                    // className="block h-8 w-auto"
+                    // src="/static/images/logo-small.svg"
+                    className="block h-10 w-auto mb-2"
+                    src="/static/images/logo-small-xmas.svg"
                     alt="Prototypr Logo"
                   />
                   {/* <img
