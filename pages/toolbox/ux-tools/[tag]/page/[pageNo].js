@@ -1,4 +1,4 @@
-import Layout from "@/components/layoutForBlogPost";
+import Layout from "@/components/layoutForToolboxIndex";
 
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
@@ -21,6 +21,7 @@ export default function ToolboxPage({allPosts = [], title,preview, pagination,ta
 
     return (
         <Layout 
+       maxWidth={"search-wide max-w-[1380px]"}
         seo={{
         title: `${tag} - UX Tools | Page: ${pagination?.page}`,
         description:

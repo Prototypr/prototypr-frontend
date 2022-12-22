@@ -1,4 +1,4 @@
-import Layout from "@/components/layoutForBlogPost";
+import Layout from "@/components/layoutForToolboxIndex";
 
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
@@ -28,6 +28,7 @@ export default function ToolboxPage({title,allPosts = [], preview, pagination,ta
 
     return (
         <Layout 
+       maxWidth={"search-wide max-w-[1380px]"}
         seo={{
         title: `${tag} – design tools | Prototypr Toolbox | Page ${pagination?.page}`,
         description:
