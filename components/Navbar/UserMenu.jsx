@@ -66,9 +66,11 @@ const UserMenu = ({ user, userLoading }) => {
           <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
         </NavigationMenuItem>
       ) : (
-        <NavigationMenuItem className="flex flex-col justify-center">
-          <NewsletterNav collapsed={false} />
-        </NavigationMenuItem>
+        <a href="/write">
+        <button className="py-2 px-4 sm:px-6 bg-blue-600 text-white rounded-full text-xs sm:text-sm font-inter">
+          Write
+        </button>
+      </a>
       )}
     </>
   );
