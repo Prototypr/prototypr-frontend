@@ -3,9 +3,9 @@ import jsCookie from "js-cookie";
 import { useState, useEffect } from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 const ProfileBadge = dynamic(() => import("../ProfileBadge"));
-const NewsletterNav = dynamic(() => import("../NewsletterNav"), {
-  ssr: true,
-});
+// const NewsletterNav = dynamic(() => import("../NewsletterNav"), {
+//   ssr: true,
+// });
 // Exports
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
