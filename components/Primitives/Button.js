@@ -7,9 +7,9 @@ const Button = styled("button", {
   justifyContent: "center",
   borderRadius: 4,
   padding: "0 15px",
-  fontSize: 14,
+  fontSize: 15,
   lineHeight: 1,
-  fontWeight: 600,
+  fontWeight: 500,
   height: 34,
   cursor: "pointer",
   variants: {

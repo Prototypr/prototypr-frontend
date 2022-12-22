@@ -36,7 +36,7 @@ export default function Post({ post, morePosts, preview }) {
       url: `${url}`
     }}
     activeNav={"posts"} preview={preview}>
-      <Container>
+      <Container maxWidth="max-w-[986px]">
         {/* <Header title="Newsletter"/> */}
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
