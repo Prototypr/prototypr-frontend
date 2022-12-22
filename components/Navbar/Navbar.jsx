@@ -177,63 +177,70 @@ const Navbar = ({
             maxWidth ? maxWidth : "max-w-[1020px]"
           } bg-white bg-opacity-60 backdrop-blur-lg border-opacity-10 mx-auto border rounded-[60px] border-black px-6`}
         >
-          <div className="flex flex-row justify-between">
-            <div className="relative flex h-16 items-center justify-between">
-              {/* movil menu button */}
-              <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
-                <button
-                  type="button"
-                  onClick={toggleMobileNav}
-                  className="inline-flex items-center justify-center rounded-md p-2 text-gray-500 bg-gray-50 hover:bg-gray-100 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                  aria-controls="mobile-menu"
-                  aria-expanded="false"
+          <div className="relative flex h-16 items-center justify-between">
+            {/* movil menu button */}
+            <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
+              <button
+                type="button"
+                onClick={toggleMobileNav}
+                className="inline-flex items-center justify-center rounded-md p-2 text-gray-500 bg-gray-50 hover:bg-gray-100 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+              >
+                <span className="sr-only">Open main menu</span>
+
+                {mobileNavOpen ? (
+                  <XIcon className="block h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                )}
+              </button>
+            </div>
+            <div className="flex flex-1 items-center justify-center items-stretch justify-between">
+              <div className="flex mr-3 flex-shrink-0 items-center">
+                <Link href="/" as="/">
+                  <>
+                    <img
+                      // className="block h-8 w-auto"
+                      // src="/static/images/logo-small.svg"
+                      className="block h-10 w-auto mb-2"
+                      src="/static/images/logo-small-xmas.svg"
+                      alt="Prototypr Logo"
+                    />
+                    {/* <img
+                    className="hidden h-8 w-auto xl:block"
+                    src={`/static/images/logo.svg`}
+                    alt="Prototypr Logo"
+                  /> */}
+                  </>
+                </Link>
+                <div
+                  className={`hidden md:block my-auto duration-300 ease-in-out`}
                 >
-                  <span className="sr-only">Open main menu</span>
+                  <WMCounter />
+                </div>
 
-                  {mobileNavOpen ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </button>
+                <SearchBar />
               </div>
-              <div className="flex flex-1 items-center justify-center items-stretch justify-between">
-                <div className="flex mr-3 flex-shrink-0 items-center">
-                  <Link href="/" as="/">
-                    <>
-                      <img
-                        className="block h-10 w-auto mb-2"
-                        src="/static/images/logo-small-xmas.svg"
-                        alt="Prototypr Logo"
-                      />
-                    </>
-                  </Link>
-                  <div
-                    className={`hidden md:block my-auto duration-300 ease-in-out`}
-                  >
-                    <WMCounter />
-                  </div>
-
-                  <SearchBar />
-                </div>
-
-                <div className="justify-end hidden xl:flex mr-6">
-                  {[
-                    { label: "Home", url: "/" },
-                    { label: "Toolbox", url: "/toolbox/page/1" },
-                    { label: "Topics", url: "/topics" },
-                    { label: "Jobs", url: "/jobs" },
-                    // { label: "Sponsor", url: "/sponsor" },
-                  ].map((tab) => {
-                    return (
-                      <div className="mx-1 flex flex-col justify-center">
-                        <ActiveLinkNewMenu href={tab.url}>
-                          {tab.label}
-                        </ActiveLinkNewMenu>
-                      </div>
-                    );
-                  })}
-                </div>
+              {/* <div className="hidden sm:ml-6 sm:block">
+              <MenuItems />
+            </div> */}
+              <div className="justify-end hidden xl:flex mr-6">
+                {[
+                  { label: "Home", url: "/" },
+                  { label: "Toolbox", url: "/toolbox/page/1" },
+                  { label: "Topics", url: "/topics" },
+                  { label: "Jobs", url: "/jobs" },
+                  // { label: "Sponsor", url: "/sponsor" },
+                ].map((tab) => {
+                  return (
+                    <div className="mx-1 flex flex-col justify-center">
+                      <ActiveLinkNewMenu href={tab.url}>
+                        {tab.label}
+                      </ActiveLinkNewMenu>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div
@@ -241,17 +248,17 @@ const Navbar = ({
                 user?.isLoggedin ? "mr-[52px] sm:mr-16" : "lg:mr-0"
               } mr-[52px] sm:mr-16`}
             >
-              {/* <div className={`hidden mr-2 md:block my-auto`}>
+              <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />
-              </div> */}
+              </div>
               <div
                 className={`items-center sm:static sm:inset-auto flex ${
                   user?.isLoggedin ? "mr-16" : "lg:mr-0"
                 } mr-16`}
               >
-                <div className={`hidden mr-2 md:block my-auto`}>
+                {/* <div className={`hidden mr-2 md:block my-auto`}>
                   <WMButton />
-                </div>
+                </div> */}
                 <NavigationMenu>
                   <NavigationMenuList>
                     <LocationMenu
@@ -291,9 +298,6 @@ const Navbar = ({
           </div>
         </div>
       </nav>
-      {/* <div className="mt-20">
-      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
-    </div> */}
     </>
   );
 };
