@@ -12,9 +12,10 @@ import { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 import WMButton from "./parts/WMButton";
-import { SnowMiddle, SmallSideSnow } from "../xmas/snow";
+// import { SnowMiddle, SmallSideSnow } from "../xmas/snow";
 import SearchBar from "../SearchBar";
 import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
+// import { Waypoint } from "react-waypoint";
 
 const WMCounter = dynamic(
   () => import("@/components/WebMonetization/Counter"),
@@ -28,21 +29,18 @@ export const HomePageNewNavBar = () => {
     redirectIfFound: false,
   });
 
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const toggleMobileNav = () => {
-    setMobileNavOpen(!mobileNavOpen);
-  };
+ 
   return (
     <div className="relative">
       <div className="absolute z-[60] hidden sm:block -top-1 left-[5%]">
         {/* <SnowMiddle /> */}
       </div>
-      <div className="absolute z-[60] hidden sm:block -top-1 left-[80%] pointer-events-none">
+      {/* <div className="absolute z-[60] hidden sm:block -top-1 left-[80%] pointer-events-none">
         <SmallSideSnow />
-      </div>
+      </div> */}
 
-      <div className="sticky top-10 z-50 ">
-        <div className="w-[100%] max-w-[1400px] mx-auto h-auto bg-white bg-opacity-60 border border-black border-opacity-10 backdrop-blur-lg rounded-full z-50">
+      <div className="sticky top-0 z-50 ">
+        <div className="top-0 w-[100%] max-w-[1300px] mx-auto h-auto bg-white bg-opacity-90 border border-black border-opacity-10 backdrop-blur z-50">
           <div className="flex flex-row gap-2 p-2 px-6 justify-between">
             <div className="flex  flex-shrink-0 items-center">
               <Link href="/" as="/">
@@ -147,12 +145,26 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
     setMobileNavOpen(!mobileNavOpen);
   };
 
+  // const [navScrolledClass, setNavScrolledClass] = useState("border-opacity-0");
+  // const [wrapperClass, setWrapperClass] = useState("top-0");
+  
+  // const _handleWaypointEnter = () => {
+  //   setNavScrolledClass("border-opacity-0");
+  //   // setWrapperClass("top-0");
+  // };
+  // const _handleWaypointLeave = () => {
+  //   setNavScrolledClass("border-opacity-5");
+  //   // setWrapperClass("top-2");
+  // };
+  
+
   return (
-    <nav className="bg-white font-inter fixed w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur">
-      <div className="mx-auto max-w-[1400px] px-2 sm:px-6 lg:px-8">
+    <>
+    <nav className={`bg-white font-inter fixed w-full z-50 bg-white bg-opacity-60 backdrop-blur-lg`}>
+      <div className={`w-[100%] border-opacity-10 mx-auto border-b border-black px-2 sm:px-6 lg:px-8 2xl:px-32`}>
         <div className="relative flex h-16 items-center justify-between">
           {/* movil menu button */}
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
             <button
               type="button"
               onClick={toggleMobileNav}
@@ -169,19 +181,17 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
               )}
             </button>
           </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="flex flex-1 items-center justify-center items-stretch justify-between">
             <div className="flex mr-3 flex-shrink-0 items-center">
               <Link href="/" as="/">
                 <>
-                  {/* pantalla grande */}
                   <img
-                    className="block h-8 w-auto lg:hidden"
+                    className="block h-8 w-auto xl:hidden"
                     src="/static/images/logo-small.svg"
                     alt="Prototypr Logo"
                   />
-                  {/* movil */}
                   <img
-                    className="hidden h-8 w-auto lg:block"
+                    className="hidden h-8 w-auto xl:block"
                     src={`/static/images/logo.svg`}
                     alt="Prototypr Logo"
                   />
@@ -192,12 +202,31 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
               >
                 <WMCounter />
               </div>
+
+              <SearchBar/>
             </div>
-            <div className="hidden sm:ml-6 sm:block">
+            {/* <div className="hidden sm:ml-6 sm:block">
               <MenuItems />
+            </div> */}
+            <div className="justify-end hidden xl:flex mr-6">
+              {[
+                { label: "Home", url: "/" },
+                { label: "Toolbox", url: "/toolbox/page/1" },
+                { label: "Topics", url: "/topics" },
+                { label: "Jobs", url: "/jobs" },
+                // { label: "Sponsor", url: "/sponsor" },
+              ].map((tab) => {
+                return (
+                  <div className="mx-1 flex flex-col justify-center">
+                    <ActiveLinkNewMenu href={tab.url}>
+                        {tab.label}
+                    </ActiveLinkNewMenu>
+                  </div>
+                );
+              })}
             </div>
           </div>
-          <div className=" flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className="items-center sm:static sm:inset-auto flex mr-16 sm:pr-0">
             <div className={`hidden mr-2 md:block my-auto`}>
               <WMButton />
             </div>
@@ -220,7 +249,7 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
 
       {/* movil menu */}
       <div
-        className={`sm:hidden ${!mobileNavOpen ? "h-0 overflow-hidden" : ""}`}
+        className={`xl:hidden ${!mobileNavOpen ? "h-0 overflow-hidden" : ""}`}
         id="mobile-menu"
       >
         <div className="space-y-1 px-2 pt-2 pb-3">
@@ -233,6 +262,10 @@ const Navbar = ({ collapsed, hideLocaleSwitcher, editor, showWriteButton }) => {
         </div>
       </div>
     </nav>
+    {/* <div className="mt-20">
+      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
+    </div> */}
+      </>
   );
 };
 

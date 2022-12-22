@@ -25,14 +25,14 @@ export const LocationMenu = ({
 
   return (
    <>
-       {!hideLocaleSwitcher && <LocaleSwitcher showWriteButton={showWriteButton} collapsed={collapsed} />}
+       {/* {!hideLocaleSwitcher && <LocaleSwitcher showWriteButton={showWriteButton} collapsed={collapsed} />} */}
 
         {(!user || !user?.isLoggedIn)?<NavigationMenuItem
           className={`hidden md:block md:flex md:flex-col md:justify-center`}
         >
-         {!hideLocaleSwitcher &&  <NavigationMenuLink href="/post/write-for-us">
+         {/* {!hideLocaleSwitcher &&  <NavigationMenuLink href="/post/write-for-us">
             {title3}
-          </NavigationMenuLink>}
+          </NavigationMenuLink>} */}
         </NavigationMenuItem>
         
         :((user && !editor) && showWriteButton!==false)&&

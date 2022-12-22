@@ -330,7 +330,8 @@ background: linear-gradient(180deg, #1288FE 11.07%, rgba(255, 255, 255, 0) 83.98
 
 // meilisearch box
 .ais-SearchBox{
-  width:350px;
+  width:460px;
+  max-width: 100%;
   input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color:rgb(107 114 128)!important;
     opacity: 1; /* Firefox */
@@ -380,11 +381,26 @@ background: linear-gradient(180deg, #1288FE 11.07%, rgba(255, 255, 255, 0) 83.98
   background: #dfeafb!important;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1310px) {
   .ais-SearchBox{
-    width:200px!important;
+    width:400px!important;
   }
 }
+@media (max-width: 1230px) {
+  .ais-SearchBox{
+    width:340px!important;
+  }
+}
+@media (max-width: 1000px) {
+  .ais-SearchBox{
+    width:280px!important;
+  }
+}
+// @media (max-width: 600px) {
+//   .ais-SearchBox{
+//     width:200px!important;
+//   }
+// }
 
 .glassmorphism{
   background: rgba( 255, 255, 255, 0.25 );

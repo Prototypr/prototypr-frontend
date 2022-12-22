@@ -37,7 +37,7 @@ const Index = () => {
     <Layout seo={seo} showWriteButton={false} background="#eff4fb">
       <Container>
         <div className="w-full h-full grid grid-cols-12 gap-1  ">
-          <div className="max-w-[46rem] mx-auto pt-28 pb-20  px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8 py-10">
+          <div className="max-w-[46rem] mx-auto pb-20 px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
             <div className="pt-5 text-md text-gray-700 pb-8">
               <Link href={`/`}>
                 <span className="hover:underline">Home</span>
@@ -112,7 +112,7 @@ const Index = () => {
           </div>
 
           {/* <Sidebar
-      paddingTop="hidden md:block pt-[132px]"
+      paddingTop="hidden md:block pt-12"
       /> */}
         </div>
       </Container>
@@ -146,7 +146,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
     setStickyPaddingTop("pt-0");
   };
   const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-32");
+    setStickyPaddingTop("pt-24");
   };
 
   return (

@@ -1,6 +1,6 @@
 import Meta from "./meta";
 // import Navbar from "../Navbar/Navbar";
-import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
+import Navbar, { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 import Footer from "./footer";
 
 // export default function Layout({
@@ -34,12 +34,12 @@ export default function Layout({
     <>
       <Meta seo={seo} />
       {/* <Navbar activeNav={activeNav} /> */}
-      <div className="fixed top-4 w-full z-50">
-        <HomePageNewNavBar />
+      <div className="fixed w-full z-50">
+        <Navbar />
       </div>
 
       <div
-        className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
+        className={`min-h-screen pt-20 ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#eff4fb" }}
       >
         <main

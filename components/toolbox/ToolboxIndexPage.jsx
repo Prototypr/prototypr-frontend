@@ -25,7 +25,7 @@ const ToolboxIndexPage = ({title, description,pagination,urlRoot, breadcrumbs, a
           {/* <div className="my-4 inline-block text-sm text-gray-800 ">
                      
                     </div> */}
-            <div className="glassmorphism border-b border-gray-900 border-opacity-10 pt-32 relative -mx-8 px-6 pb-9 overflow-hidden relative">
+            <div className="glassmorphism border-b border-gray-900 border-opacity-10 -mt-6 pt-10 relative -mx-8 px-6 pb-8 overflow-hidden relative">
                  <div className="max-w-[1440px] relative flex flex-col mx-auto md:px-6 text-sm">
                   <div className="relative md:absolute pl-8 mb-6 md:mb-0 md:mt-0.5 left-0">
                     <Breadcrumbs 

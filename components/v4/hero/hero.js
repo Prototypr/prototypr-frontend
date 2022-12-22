@@ -298,8 +298,8 @@ const HeroGrid = ({
 
         <div className="w-full h-auto flex flex-row flex-wrap px-4 lg:px-0 sm:grid sm:grid-cols-2 mx-auto gap-1  sm:gap-8">
           {gridPosts.map((post, index) => {
-            // return  <LargeCardWithImage type={type} data={post} />
-            return  <SmallCardWithImage type={type} data={post} />
+            return  <LargeCardWithImage type={type} data={post} />
+            // return  <SmallCardWithImage type={type} data={post} />
           })}
         </div>
         <div className="px-4 sm:mt-8 lg:px-0 lg:mt-0">

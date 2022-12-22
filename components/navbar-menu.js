@@ -136,9 +136,9 @@ export const NavigationMenuDemo = ({
             !collapsed ? "md:opacity-0 md:flex md:invisible" : "md:flex"
           } transition transition-all duration-500 ease-in-out md:flex-col md:justify-center`}
         >
-         {!hideLocaleSwitcher &&  <NavigationMenuLink href="/post/write-for-us">
+         {/* {!hideLocaleSwitcher &&  <NavigationMenuLink href="/post/write-for-us">
             {title3}
-          </NavigationMenuLink>}
+          </NavigationMenuLink>} */}
         </NavigationMenuItem>
         
         :((user && !editor) && showWriteButton!==false)&&

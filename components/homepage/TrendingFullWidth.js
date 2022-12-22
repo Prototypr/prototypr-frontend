@@ -6,7 +6,7 @@ import Image from "next/image";
 const TrendingFullWidth = ({ tools, sponsor }) => {
   console.log(sponsor)
     return (
-      <Container maxWidth='max-w-[984px] pt-28 px-6 lg:px-3 '>
+      <Container maxWidth='max-w-[984px] px-6 lg:px-3 '>
               <h1 className="font-semibold mt-2">Trending tools</h1>
 
               <div className="overflow-hidden overflow-x-scroll md:overflow-x-hidden">

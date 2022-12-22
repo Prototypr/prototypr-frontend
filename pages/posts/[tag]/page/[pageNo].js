@@ -70,7 +70,7 @@ export default function PostsPage({
       >
         <Container>
           <div className="w-full h-full grid grid-cols-12 gap-1  ">
-            <div className="pt-28 max-w-[46rem]  px-3 md:px-8 xl:px-0 w-full mx-auto pb-20 gap-2 col-span-12 lg:col-span-8 py-10">
+            <div className="pt-20 max-w-[46rem] px-3 md:px-8 xl:px-0 w-full mx-auto pb-20 gap-2 col-span-12 lg:col-span-8">
               <div className="pt-5 text-md text-gray-700">
                 <Link href={`/`}>
                   <span className="hover:underline">Home</span>
@@ -138,7 +138,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
     setStickyPaddingTop("pt-0");
   };
   const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-32");
+    setStickyPaddingTop("pt-24");
   };
 
   return (

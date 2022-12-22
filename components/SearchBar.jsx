@@ -66,7 +66,7 @@ const SearchBar = (props) =>{
         hitsPerPage={8}
       />
       <SearchBox placeholder="Search for design tools and articles" />
-      <div id="meilisearch-results" className="fixed hidden bg-white top-0 mt-[64px] h-[80vh] overflow-auto w-full md:max-w-xl rounded-xl shadow-xl p-4 left-0 md:left-[112px]">
+      <div id="meilisearch-results" className="absolute hidden bg-white top-0 mt-[48px] h-[80vh] overflow-auto w-full md:max-w-xl w-[426px] rounded-xl shadow-xl p-4 left-0">
       <div className="flex justify-between">
         <div className="flex flex-col justify-center">
             <Stats />

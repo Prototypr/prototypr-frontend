@@ -22,7 +22,7 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
       setAdClass("opacity-0 h-0 mb-0");
     };
     const _handleWaypointLeave = () => {
-      setStickyPaddingTop("pt-28");
+      setStickyPaddingTop("pt-20");
       setAdClass("opacity-100 h-auto mb-6");
     };
   

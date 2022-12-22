@@ -158,11 +158,11 @@ export const NavigationMenuDemo = ({
           <NavigationMenuLink href="/toolbox/page/1">Toolbox</NavigationMenuLink>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className="block flex py-2 flex-col justify-center">
+        {/* <NavigationMenuItem className="block flex py-2 flex-col justify-center">
           <NavigationMenuLink href="/post/write-for-us">
             {title3}
           </NavigationMenuLink>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
 
         <NavigationMenuItem className="block flex py-2 flex-col justify-center">
           <NavigationMenuLink href="/web-monetization">

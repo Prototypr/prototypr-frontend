@@ -127,7 +127,7 @@ export default function Post({ post, preview, relatedPosts }) {
           )}
 
           {/* <Alert preview={preview} /> */}
-          <main className="pt-28 pb-20 gap-2 col-span-12 lg:col-span-8  px-3 md:px-8 xl:px-0 py-10">
+          <main className="pb-20 gap-2 col-span-12 lg:col-span-8  px-3 md:px-8 xl:px-0 py-10">
             {post?.id && process.env.NODE_ENV === "production" && (
               <WMPostTracker postId={post?.id} post={post} />
             )}
@@ -233,7 +233,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
     setStickyPaddingTop("pt-0");
   };
   const _handleWaypointLeave = () => {
-    setStickyPaddingTop("pt-20");
+    setStickyPaddingTop("pt-24");
   };
 
   const avatar = author?.avatar?.data?.attributes?.url

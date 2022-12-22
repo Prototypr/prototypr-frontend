@@ -34,7 +34,7 @@ export default function Index({ allPosts, preview }) {
       </Head> */}
         <Container>
           <div className="w-full h-full grid grid-cols-12 gap-1  ">
-            <div className="xl:px-10 md:px-8 pt-28 pb-20 gap-2 col-span-12 lg:col-span-8 py-10">
+            <div className="xl:px-10 md:px-8 pb-20 gap-2 col-span-12 lg:col-span-8">
               <div className="pt-5 text-md text-gray-700 pb-8">
                 <Link href={`/`}>
                   <span className="hover:underline">Home</span>
@@ -72,7 +72,7 @@ export default function Index({ allPosts, preview }) {
             <Sidebar
               // author={post.attributes?.author?.data?.attributes}
               // relatedPosts={relatedPosts}
-              paddingTop="hidden md:block pt-[132px]"
+              paddingTop="hidden md:block pt-12"
             />
           </div>
         </Container>

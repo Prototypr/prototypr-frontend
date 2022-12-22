@@ -1,5 +1,5 @@
 import Fallback from "@/components/atom/Fallback/Fallback";
-import Layout from "@/components/layout";
+import Layout from "@/components/layoutForBlogPost";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 
