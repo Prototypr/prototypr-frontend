@@ -112,6 +112,10 @@ module.exports =
             "/post/announcing-prototypr-grant-for-the-web-flagship-project-f09f8e89",
           permanent: true,
         },
+        { source:'/post/microsoft-designer-ai-prompt-design-principles---lbzz9kvwx9e13fo5rj',
+          destination:'/post/microsoft-designer-ai-prompt-design-principles',
+          permanent:true
+        },
         {
           source: '/prototyping-tool/:slug*',
           destination: '/toolbox/:slug*', // Matched parameters can be used in the destination
