@@ -50,6 +50,10 @@ const AccountPage = ({ preview }) => {
                   website: user.website,
                   bio: user.bio,
                   paymentPointer: user.paymentPointer,
+                  twitter: user.twitter,
+                  dribbble: user.dribbble,
+                  github: user.github,
+                  kofi: user.kofi,
 
                   // ask about these later
                   email: user?.email,//this is always updated in the iron session when the user submits the form

@@ -38,6 +38,10 @@ const UserForm = ({ info }) => {
       paymentPointer: info.paymentPointer,
       email: info.email,
       username: info.username,
+      twitter: info.twitter,
+      dribbble: info.dribbble,
+      github: info.github,
+      kofi: info.kofi,
     },
   });
   
@@ -328,6 +332,8 @@ const UserForm = ({ info }) => {
           )}
         </FormControl> */}
 
+
+
         <FormControl inValid={!!errors.username}>
           <label htmlFor="username" className="text-sm">
             Username
@@ -355,6 +361,114 @@ const UserForm = ({ info }) => {
             </span>
           )}
         </FormControl>
+
+        <FormControl inValid={!!errors.twitter}>
+          <label htmlFor="twitter" className="text-sm">
+            Twitter
+          </label>
+          <input
+            id="twitter"
+            type="text"
+            autoComplete="off"
+            className="w-4/5"
+            placeholder="twitter"
+            disabled={isSubmitting}
+            aria-describedby="twitter_error"
+            aria-live="assertive"
+            {...register("twitter", {
+              maxLength: {
+                message: "Maximum length can be up to 50 characters",
+                value: 50,
+              },
+            })}
+          />
+          {errors.twitter && (
+            <span className="error" role="alert" id="twitter_error">
+              {errors.twitter.message}
+            </span>
+          )}
+        </FormControl>
+        <FormControl inValid={!!errors.dribbble}>
+          <label htmlFor="dribbble" className="text-sm">
+            Dribbble
+          </label>
+          <input
+            id="dribbble"
+            type="text"
+            autoComplete="off"
+            className="w-4/5"
+            placeholder="dribbble"
+            disabled={isSubmitting}
+            aria-describedby="dribbble_error"
+            aria-live="assertive"
+            {...register("dribbble", {
+              maxLength: {
+                message: "Maximum length can be up to 50 characters",
+                value: 50,
+              },
+            })}
+          />
+          {errors.dribbble && (
+            <span className="error" role="alert" id="dribbble_error">
+              {errors.dribbble.message}
+            </span>
+          )}
+        </FormControl>
+
+        <FormControl inValid={!!errors.github}>
+          <label htmlFor="github" className="text-sm">
+            Github
+          </label>
+          <input
+            id="github"
+            type="text"
+            autoComplete="off"
+            className="w-4/5"
+            placeholder="github"
+            disabled={isSubmitting}
+            aria-describedby="github_error"
+            aria-live="assertive"
+            {...register("github", {
+              maxLength: {
+                message: "Maximum length can be up to 50 characters",
+                value: 50,
+              },
+            })}
+          />
+          {errors.github && (
+            <span className="error" role="alert" id="github_error">
+              {errors.github.message}
+            </span>
+          )}
+        </FormControl>
+
+        <FormControl inValid={!!errors.kofi}>
+          <label htmlFor="kofi" className="text-sm">
+            Kofi
+          </label>
+          <input
+            id="kofi"
+            type="text"
+            autoComplete="off"
+            className="w-4/5"
+            placeholder="kofi"
+            disabled={isSubmitting}
+            aria-describedby="kofi_error"
+            aria-live="assertive"
+            {...register("kofi", {
+              maxLength: {
+                message: "Maximum length can be up to 50 characters",
+                value: 50,
+              },
+            })}
+          />
+          {errors.kofi && (
+            <span className="error" role="alert" id="kofi_error">
+              {errors.kofi.message}
+            </span>
+          )}
+        </FormControl>
+
 
         <div className="mt-6 flex items-center gap-3">
           <Button
