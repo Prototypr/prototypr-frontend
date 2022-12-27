@@ -1,5 +1,7 @@
 # Prototypr Front End Application
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y71QU45)
+
 This site uses Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using [Strapi](https://strapi.io/) as the data source.
 
 [Learn more about how the app was created over here](https://prototypr-gftw.vercel.app/front-end).
