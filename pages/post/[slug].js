@@ -43,6 +43,8 @@ const WMPostTracker = dynamic(
     ssr: false,
   }
 );
+const KoFiButton = dynamic(() => import('@/components/ko-fi-button/Ko-Fi-Button'), { ssr: false })
+
 
 export default function Post({ post, preview, relatedPosts }) {
   const router = useRouter();
@@ -247,6 +249,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
   const github = getGithubHandle(author?.github);
   const twitter = getTwitterHandle(author?.twitter);
   const dribbble = getDribbbleHandle(author?.dribbble);
+  const kofi = getKofiHandle(author?.kofi);
 
   return (
     <div className={`${paddingTop} relative col-span-4 max-w-[410px]`}>
@@ -258,7 +261,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
           <div className="flex flex-col grid gap-10">
             <div>
               {author ? (
-                <div className="flex p-5 rounded-xl flex-col mt-8 pb-4">
+                <div className="flex rounded-xl flex-col mt-8 pb-4">
                   <div className="w-[80px] h-[80px] relative border border-gray-100 rounded-full shadow-sm mb-3">
                     {avatar ? (
                       <Link href={`/people/${author.slug}`}>
@@ -362,6 +365,11 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
                           />
                         </a>
                       )}
+                      {kofi?
+                      <div className="mb-3 inline-block" >
+                        <KoFiButton color="#53b1e6" label={'Buy me a coffee'} kofiId={kofi} />
+                      </div>:''
+                    }
                     </div>
                     {author?.availability == "1" && (
                       <a
@@ -497,6 +505,20 @@ function getDribbbleHandle(string) {
   var result = string.replace(/(^\w+:|^)\/\//, "");
   result = result.replace(/\//g, "");
   result = result.replace("dribbble.com", "");
+  result = result.replace("www.", "");
+  result = result.replace("@", "");
+
+  return result;
+}
+function getKofiHandle(string) {
+  if (!string) {
+    return false;
+  }
+  //https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
+  //remove protocols
+  var result = string.replace(/(^\w+:|^)\/\//, "");
+  result = result.replace(/\//g, "");
+  result = result.replace("kofi.com", "");
   result = result.replace("www.", "");
   result = result.replace("@", "");
 

@@ -8,7 +8,7 @@ import { indigo, gray } from "@radix-ui/colors";
 import Link from "next/link";
 import {useState, useEffect} from 'react'
 
-const ProfileBadge = dynamic(() => import("./ProfileBadge"));
+// const ProfileBadge = dynamic(() => import("./ProfileBadge"));
 
 const LocaleSwitcher = dynamic(() => import("./Locale/LocaleSwitcher"), {
   ssr: true,
@@ -18,6 +18,7 @@ const NewsletterNav = dynamic(() => import("./NewsletterNav"), {
 });
 
 import { useIntl } from "react-intl";
+import UserMenu from "@/components/Navbar/UserMenu";
 
 const StyledMenu = styled(NavigationMenuPrimitive.Root, {
   position: "relative",
@@ -157,8 +158,13 @@ export const NavigationMenuDemo = ({
        <NavigationMenuItem className="flex flex-col justify-center">
           {(user && user?.isLoggedIn) ? (
             <div className="ml-2 w-8 relative">
-              <Link href="/account">
-                {user && 
+              {/* <Link href="/account"> */}
+              {user?
+            
+            <UserMenu userLoading={userLoading} user={user} />  
+            :''
+            }
+                {/* {user && 
                   <ProfileBadge
                   user={user}
                     icon={
@@ -167,8 +173,8 @@ export const NavigationMenuDemo = ({
                         src={user?.avatar?.url?user.avatar.url:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}
                       />
                     }
-                  />}
-              </Link>
+                  />} */}
+              {/* </Link> */}
             </div>
           ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
