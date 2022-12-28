@@ -5,6 +5,7 @@ import Layout from "@/components/layoutForToolboxIndex";
 import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from "@/lib/api";
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
+import generateToolsRSS from "@/lib/rss/generateToolsRSS";
 
 const PAGE_SIZE = 20;
 
@@ -59,6 +60,11 @@ export async function getStaticProps({ preview = null, params,locale }) {
   const page = params.pageNo;
   const allPosts =
     (await getPostsByPageForToolsPage(preview, pageSize, page, sort)) || [];
+
+    if(page==1){
+      await generateToolsRSS(allPosts?.data)
+    }
+
   const pagination = allPosts.meta.pagination;
   return {
     props: {
@@ -71,6 +77,7 @@ export async function getStaticProps({ preview = null, params,locale }) {
 
 export async function getStaticPaths() {
   const allPosts = (await getAllPostsForToolsPage(null, PAGE_SIZE, 0, "tool")) || [];
+
   const pagination = allPosts.meta.pagination;
   const pageCount = pagination.pageCount;
   const pageCountArr = new Array(pageCount).fill(" ");

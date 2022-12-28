@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Prototypr posts | RSS Feed]]></title>
+        <description><![CDATA[Latest design articles on Prototypr!]]></description>
+        <link>http://localhost:3000</link>
+        <image>
+            <url>http://localhost:3000/static/images/logo-small.svg</url>
+            <title>Prototypr posts | RSS Feed</title>
+            <link>http://localhost:3000</link>
+        </image>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Wed, 28 Dec 2022 00:49:35 GMT</lastBuildDate>
+        <atom:link href="http://localhost:3000/feed.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Wed, 28 Dec 2022 00:49:35 GMT</pubDate>
+        <copyright><![CDATA[All rights reserved 2022, Prototypr]]></copyright>
+        <item>
+            <title><![CDATA[Your hand as a mouse —saskino iuoasd]]></title>
+            <description><![CDATA[grjiaopgji]]></description>
+            <link>http://localhost:3000/post/your-hand-as-a-mouse</link>
+            <guid isPermaLink="true">http://localhost:3000/post/your-hand-as-a-mouse</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/fc04b40bcc10842490cbe57b0db334fb.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[will it work]]></title>
+            <description><![CDATA[i don't know]]></description>
+            <link>http://localhost:3000/post/will-it-work---7510</link>
+            <guid isPermaLink="true">http://localhost:3000/post/will-it-work---7510</guid>
+            <enclosure url="https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[papao]]></title>
+            <description><![CDATA[ajfieopa wfjieopa wjfiopea]]></description>
+            <link>http://localhost:3000/post/papao---ladav6pczh24m9lrsao</link>
+            <guid isPermaLink="true">http://localhost:3000/post/papao---ladav6pczh24m9lrsao</guid>
+            <enclosure url="https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[homky]]></title>
+            <description><![CDATA[fjeioawp gjiroea pjgioprea]]></description>
+            <link>http://localhost:3000/post/homky---7475</link>
+            <guid isPermaLink="true">http://localhost:3000/post/homky---7475</guid>
+            <enclosure url="https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[jiop jiop]]></title>
+            <description><![CDATA[jkio jiop jipo j]]></description>
+            <link>http://localhost:3000/post/jiop-jiop---7442</link>
+            <guid isPermaLink="true">http://localhost:3000/post/jiop-jiop---7442</guid>
+            <enclosure url="https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[This si tha tatis]]></title>
+            <description><![CDATA[gjiaop gjiroaep gjioprae jgiopre ajiogprejaipog jreiapog]]></description>
+            <link>http://localhost:3000/post/this-is-puabliehd-l8siug2p91um32633mp</link>
+            <guid isPermaLink="true">http://localhost:3000/post/this-is-puabliehd-l8siug2p91um32633mp</guid>
+            <enclosure url="https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[jfioap jiogp]]></title>
+            <description><![CDATA[grjiaeop gjrioape g]]></description>
+            <link>http://localhost:3000/post/jfioap-jiogp---lai41xbkkp1z98ghax8</link>
+            <guid isPermaLink="true">http://localhost:3000/post/jfioap-jiogp---lai41xbkkp1z98ghax8</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/7d5f09f718773930c8e9ce977e48b45b.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Are UI Tips the New Clickbait for Designers?✨]]></title>
+            <description><![CDATA[UI Tips are everywhere – is it me, or is it my twitter feed? Since around 2020, I’m seeing lots and lots of ‘UI/UX Tips’. Lists of ]]></description>
+            <link>http://localhost:3000/post/are-ui-tips-the-new-clickbait-for-designers---lajhxqoobpq7a3lpjk</link>
+            <guid isPermaLink="true">http://localhost:3000/post/are-ui-tips-the-new-clickbait-for-designers---lajhxqoobpq7a3lpjk</guid>
+            <enclosure url="https://prototyprio.gumlet.io/wp-content/uploads/2021/07/Frame-1-22-1.png?format=webp&amp;w=700&amp;dpr=2.0" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[11 Realities on Finding Your First Job]]></title>
+            <description><![CDATA[Recently I’ve been interviewing a lot of junior UX designers for roles in London and Paris. Some are clearly ‘in the know’ — I can tell that they’ve been coached by their family, school, or network. Others are quite clueless about how to get hired.]]></description>
+            <link>http://localhost:3000/post/11-realities-on-finding-your-first-job---11-realities-on-finding-your-first-job</link>
+            <guid isPermaLink="true">http://localhost:3000/post/11-realities-on-finding-your-first-job---11-realities-on-finding-your-first-job</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2022/05/1.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Copy Work to Improve Your Design Skills Fast]]></title>
+            <description><![CDATA[<p>Spilling the secret, you need to get better at visual UI design. Copy work illustration by the author I want to share my secret that helped me tremendously improve my visual design skills, and it can also help you. How can you get better at visual user interface design? The secret is copy work. Copy [&hellip;]</p>
+]]></description>
+            <link>http://localhost:3000/post/copy-work-to-improve-your-design-skills-fast</link>
+            <guid isPermaLink="true">http://localhost:3000/post/copy-work-to-improve-your-design-skills-fast</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2022/05/im1.jpeg" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Design Through a Neurodiverse Lens: Exclusive vs Inclusive]]></title>
+            <description><![CDATA[<p>The Source is a fortnightly letter from Prototypr for its community of ~600k viewers. Written by Sophie Clifton-Tucker, The Source tackles taboo topics, exposes unseen truths, and gets the scoop on the latest in the tech and design sphere. It’s estimated that between 15-20% of us are neurodiverse, so a product that isn’t optimised for [&hellip;]</p>
+]]></description>
+            <link>http://localhost:3000/post/design-through-a-neurodiverse-lens-exclusive-vs-inclusive</link>
+            <guid isPermaLink="true">http://localhost:3000/post/design-through-a-neurodiverse-lens-exclusive-vs-inclusive</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2022/05/proto_neurodiversity.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Neurodiversity and Inclusion: Choosing Kinder Design]]></title>
+            <description><![CDATA[<p>‘Neurodiversity’ refers to the myriad beautiful ways in which people experience, and interact with, the world. It is the idea that although all brain differences are ‘normal’ (whatever normal may be), no two brains are the same &#8211; and thank goodness for that! From night mode to alt tags, Medium’s text-to-speech function and Twitter’s font [&hellip;]</p>
+]]></description>
+            <link>http://localhost:3000/post/neurodiversity-and-inclusion-choosing-kinder-design</link>
+            <guid isPermaLink="true">http://localhost:3000/post/neurodiversity-and-inclusion-choosing-kinder-design</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2022/05/A6E37491-A0FB-4EE3-9E7E-8542137F5D5A.jpeg" length="0" type="image/png"/>
+        </item>
+    </channel>
+</rss>

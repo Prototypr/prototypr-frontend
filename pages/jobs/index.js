@@ -7,13 +7,14 @@ import { getAllJobs } from "@/lib/api";
 import Link from "next/link";
 import Button from "@/components/Primitives/Button";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
-import Contributors from "@/components/toolbox/Contributors";
+// import Contributors from "@/components/toolbox/Contributors";
 import JobPostCard from "@/components/Jobs/JobCard";
 import { useState } from "react";
 import { Waypoint } from "react-waypoint";
 import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
+import generateJobsRSS from "@/lib/rss/generateJobsRSS";
 
 const PAGE_SIZE = 12;
 
@@ -147,6 +148,11 @@ export async function getStaticProps({ preview = null, params }) {
   let allPosts = (await getAllJobs(preview, pageSize, page)) || [];
 
   const pagination = allPosts?.meta?.pagination;
+
+  if(page==0){
+    await generateJobsRSS(allPosts)
+  }
+
   return {
     props: {
       // jobs: allPosts?.data?allPosts.data:null,
