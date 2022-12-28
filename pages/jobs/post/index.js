@@ -178,7 +178,15 @@ const JobPostForm = ({user, defaultCompany}) => {
     salaryMin: Yup.number().required("Salary from value is required"),
     salaryMax: Yup.number().required("Salary to value is required"),
     companyLogo: Yup.mixed().required("Please add your company's logo"),
-  
+    url: Yup.string().url("Invalid URL").required("Job URL is required"),
+    skills: Yup.string().required("Skills are required"),
+    companyName: Yup.string().required("Company Name is required"),
+    companyWebsite: Yup.string()
+      .url("Invalid URL")
+      .required("Company Website is required"),
+    contactEmail: Yup.string()
+      .email("Not Proper email")
+      .required("Contact Email is required"),
   });
 
   const [errores, setErrores] = useState(false)
@@ -310,7 +318,6 @@ const JobPostForm = ({user, defaultCompany}) => {
       // setDisabled(true);
     }
   }, [errors]);
-   console.log("errrs", errors)
 
   return (
     <Layout seo={seo} showWriteButton={false} background="#EFF2F8">
