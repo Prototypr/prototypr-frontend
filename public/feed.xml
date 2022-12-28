@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title><![CDATA[Prototypr posts | RSS Feed]]></title>
-        <description><![CDATA[Latest design articles on Prototypr!]]></description>
+        <title><![CDATA[Prototypr Design Discovery Feed]]></title>
+        <description><![CDATA[Latest design articles and tools on Prototypr!]]></description>
         <link>http://localhost:3000</link>
         <image>
             <url>http://localhost:3000/static/images/logo-small.svg</url>
-            <title>Prototypr posts | RSS Feed</title>
+            <title>Prototypr Design Discovery Feed</title>
             <link>http://localhost:3000</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 28 Dec 2022 00:49:35 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 28 Dec 2022 02:28:25 GMT</lastBuildDate>
         <atom:link href="http://localhost:3000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 28 Dec 2022 00:49:35 GMT</pubDate>
+        <pubDate>Wed, 28 Dec 2022 02:28:25 GMT</pubDate>
         <copyright><![CDATA[All rights reserved 2022, Prototypr]]></copyright>
         <item>
             <title><![CDATA[Your hand as a mouse —saskino iuoasd]]></title>
@@ -70,35 +70,76 @@
             <enclosure url="https://prototyprio.gumlet.io/wp-content/uploads/2021/07/Frame-1-22-1.png?format=webp&amp;w=700&amp;dpr=2.0" length="0" type="image/png"/>
         </item>
         <item>
-            <title><![CDATA[11 Realities on Finding Your First Job]]></title>
-            <description><![CDATA[Recently I’ve been interviewing a lot of junior UX designers for roles in London and Paris. Some are clearly ‘in the know’ — I can tell that they’ve been coached by their family, school, or network. Others are quite clueless about how to get hired.]]></description>
-            <link>http://localhost:3000/post/11-realities-on-finding-your-first-job---11-realities-on-finding-your-first-job</link>
-            <guid isPermaLink="true">http://localhost:3000/post/11-realities-on-finding-your-first-job---11-realities-on-finding-your-first-job</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2022/05/1.png" length="0" type="image/png"/>
+            <title><![CDATA[Isometrica – 3D Illustration Constructor]]></title>
+            <link>http://localhost:3000/toolbox/isometrica-3d-illustration-constructor</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/isometrica-3d-illustration-constructor</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-20-768x576.png" length="0" type="image/png"/>
         </item>
         <item>
-            <title><![CDATA[Copy Work to Improve Your Design Skills Fast]]></title>
-            <description><![CDATA[<p>Spilling the secret, you need to get better at visual UI design. Copy work illustration by the author I want to share my secret that helped me tremendously improve my visual design skills, and it can also help you. How can you get better at visual user interface design? The secret is copy work. Copy [&hellip;]</p>
-]]></description>
-            <link>http://localhost:3000/post/copy-work-to-improve-your-design-skills-fast</link>
-            <guid isPermaLink="true">http://localhost:3000/post/copy-work-to-improve-your-design-skills-fast</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2022/05/im1.jpeg" length="0" type="image/png"/>
+            <title><![CDATA[Polish – UX Writing Tool]]></title>
+            <link>http://localhost:3000/toolbox/polish-ux-writing-tool</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/polish-ux-writing-tool</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-5-1-768x576.png" length="0" type="image/png"/>
         </item>
         <item>
-            <title><![CDATA[Design Through a Neurodiverse Lens: Exclusive vs Inclusive]]></title>
-            <description><![CDATA[<p>The Source is a fortnightly letter from Prototypr for its community of ~600k viewers. Written by Sophie Clifton-Tucker, The Source tackles taboo topics, exposes unseen truths, and gets the scoop on the latest in the tech and design sphere. It’s estimated that between 15-20% of us are neurodiverse, so a product that isn’t optimised for [&hellip;]</p>
-]]></description>
-            <link>http://localhost:3000/post/design-through-a-neurodiverse-lens-exclusive-vs-inclusive</link>
-            <guid isPermaLink="true">http://localhost:3000/post/design-through-a-neurodiverse-lens-exclusive-vs-inclusive</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2022/05/proto_neurodiversity.png" length="0" type="image/png"/>
+            <title><![CDATA[FlowBite – Figma UI kit]]></title>
+            <link>http://localhost:3000/toolbox/flowbite-figma-ui-kit</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/flowbite-figma-ui-kit</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-6-1-768x576.png" length="0" type="image/png"/>
         </item>
         <item>
-            <title><![CDATA[Neurodiversity and Inclusion: Choosing Kinder Design]]></title>
-            <description><![CDATA[<p>‘Neurodiversity’ refers to the myriad beautiful ways in which people experience, and interact with, the world. It is the idea that although all brain differences are ‘normal’ (whatever normal may be), no two brains are the same &#8211; and thank goodness for that! From night mode to alt tags, Medium’s text-to-speech function and Twitter’s font [&hellip;]</p>
-]]></description>
-            <link>http://localhost:3000/post/neurodiversity-and-inclusion-choosing-kinder-design</link>
-            <guid isPermaLink="true">http://localhost:3000/post/neurodiversity-and-inclusion-choosing-kinder-design</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2022/05/A6E37491-A0FB-4EE3-9E7E-8542137F5D5A.jpeg" length="0" type="image/png"/>
+            <title><![CDATA[Forma – No-code platform]]></title>
+            <link>http://localhost:3000/toolbox/forma-no-code-platform</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/forma-no-code-platform</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-2-1-768x576.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Ready UI – Web Development Templates]]></title>
+            <link>http://localhost:3000/toolbox/ready-ui-web-development-templates</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/ready-ui-web-development-templates</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-36-768x576.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[GetIllustrations – Simple Vector Illustrations]]></title>
+            <link>http://localhost:3000/toolbox/getillustrations-simple-vector-illustrations</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/getillustrations-simple-vector-illustrations</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-28-768x576.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[eBook Kit for Figma]]></title>
+            <link>http://localhost:3000/toolbox/ebook-kit-for-figma</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/ebook-kit-for-figma</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-37-768x576.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Nucleo 3 – Icon Manager for Mac and Windows]]></title>
+            <link>http://localhost:3000/toolbox/nucleo-3-icon-manager-for-mac-and-windows</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/nucleo-3-icon-manager-for-mac-and-windows</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-14-1-768x576.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Colors]]></title>
+            <link>http://localhost:3000/toolbox/colors</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/colors</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-24-768x576.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Iconoir]]></title>
+            <link>http://localhost:3000/toolbox/iconoir</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/iconoir</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-11-1-768x576.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Premast – Presentation Templates]]></title>
+            <link>http://localhost:3000/toolbox/premast-presentation-templates</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/premast-presentation-templates</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/Product-Header-_-Prototypr-Toolbox-14-768x576.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Claritee]]></title>
+            <link>http://localhost:3000/toolbox/claritee</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/claritee</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/wp-content/uploads/2021/07/1-HP-768x403.jpg" length="0" type="image/png"/>
         </item>
     </channel>
 </rss>
