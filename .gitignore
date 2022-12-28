@@ -40,5 +40,5 @@ yarn-error.log*
 /public/sitemap-0.xml
 
 # rss
-/public/feed.xml
-/public/rss/*.*
+#/public/feed.xml
+#/public/rss/*.*
