@@ -9,13 +9,12 @@
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
     "serve-storybook": "serve storybook-static",
-    
     "storybook": "concurrently \"npm run watch:*\"",
-   "build-storybook": "concurrently \"npm run build:*\"",
-   "build:css": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/globaltailwind.css",
-   "build:storybook": "build-storybook -s public build",
-   "watch:css": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/globaltailwind.css --watch",
-   "watch:storybook": "start-storybook -p 6006 -s public"
+    "build-storybook": "concurrently \"npm run build:*\"",
+    "build:css": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/globaltailwind.css",
+    "build:storybook": "build-storybook -s public build",
+    "watch:css": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/globaltailwind.css --watch",
+    "watch:storybook": "start-storybook -p 6006 -s ./public"
   },
   "dependencies": {
     "@geist-ui/icons": "^1.0.2",

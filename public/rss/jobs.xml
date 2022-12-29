@@ -9,9 +9,9 @@
             <link>http://localhost:3000</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 28 Dec 2022 03:19:32 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 29 Dec 2022 02:04:22 GMT</lastBuildDate>
         <atom:link href="http://localhost:3000/rss/jobs.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 28 Dec 2022 03:19:32 GMT</pubDate>
+        <pubDate>Thu, 29 Dec 2022 02:04:22 GMT</pubDate>
         <copyright><![CDATA[All rights reserved 2022, Prototypr]]></copyright>
         <item>
             <title><![CDATA[Senior Machine Learning Engineer, Speak]]></title>

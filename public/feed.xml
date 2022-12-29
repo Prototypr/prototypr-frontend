@@ -9,9 +9,9 @@
             <link>http://localhost:3000</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 28 Dec 2022 12:49:03 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 29 Dec 2022 02:13:00 GMT</lastBuildDate>
         <atom:link href="http://localhost:3000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 28 Dec 2022 12:49:03 GMT</pubDate>
+        <pubDate>Thu, 29 Dec 2022 02:13:00 GMT</pubDate>
         <copyright><![CDATA[All rights reserved 2022, Prototypr]]></copyright>
         <item>
             <title><![CDATA[Microsoft Designer: AI Prompt Design Principles]]></title>
@@ -46,7 +46,7 @@
             <description><![CDATA[It’s very important for a teacher or mentor to have a passion for it, as much as teaching or mentoring is not just about the teachers themselves. Instead, it’s about the students, mentees or participants. To clarify, the term... ]]></description>
             <link>http://localhost:3000/post/about-teaching-ux-design</link>
             <guid isPermaLink="true">http://localhost:3000/post/about-teaching-ux-design</guid>
-            <enclosure url="https://cdn-images-1.medium.com/max/1600/1*FFSq230Tzl4Bxc-GyyUrcQ.jpeg" length="0" type="image/png"/>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/766b35b739b33299e1f77591258db8e2.jpeg" length="0" type="image/png"/>
         </item>
         <item>
             <title><![CDATA[8 best practices for UI card design]]></title>
@@ -68,6 +68,13 @@
             <link>http://localhost:3000/post/the-dark-psychology-behind-social-media-addiction</link>
             <guid isPermaLink="true">http://localhost:3000/post/the-dark-psychology-behind-social-media-addiction</guid>
             <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/a2fb8d23e3d46739501e412a17ecc966.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[AI tools to assist your design and development workflow]]></title>
+            <description><![CDATA[The rise of AI has been accompanied by a lot of hype and fear. People are excited that it will completely transform the creative industry, while others are...]]></description>
+            <link>http://localhost:3000/post/ai-tools-design-and-development</link>
+            <guid isPermaLink="true">http://localhost:3000/post/ai-tools-design-and-development</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/8792f817d423d392ab9139ba41b92d8a.webp" length="0" type="image/png"/>
         </item>
         <item>
             <title><![CDATA[Microsoft Bing Image Creator]]></title>

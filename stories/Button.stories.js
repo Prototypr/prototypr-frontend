@@ -1,36 +1,39 @@
 import Button from "../components/Primitives/Button";
 
 export default {
-  title: "Button",
+  title: "Components/ Button",
   component: Button,
-  argTypes:{
-    onClick:{action:'OnClick'},
+  argTypes: {
+    onClick: { action: "OnClick" },
     variant: {
-      options: ['confirm', 'red', 'confirmRounded'],
-      control: { type: 'select' },
+      description: "Based on Radix variants in the button component.",
+      options: ["confirm", "red", "confirmRounded"],
+      control: { type: "select" },
     },
-  }
-}
+  },
+};
 
-const Template = args => (
-  <div className="font-inter">  
-  <Button variant="" {...args}>{args.label}</Button>
-  </div> 
-)
+const Template = (args) => (
+  <div className="font-inter">
+    <Button variant="" {...args}>
+      {args.children}
+    </Button>
+  </div>
+);
 
-
-export const Confirm = Template.bind({})
+export const Confirm = Template.bind({});
 Confirm.args = {
-  variant:'confirm',
-  label:'Confirm'
-}
-export const Warning = Template.bind({})
+  variant: "confirm",
+  children: "Confirm",
+};
+export const Warning = Template.bind({});
 Warning.args = {
-  variant:'red',
-  label:'Warning'
-}
-export const Rounded = Template.bind({})
+  variant: "red",
+  label: "Warning",
+  children: "Warning",
+};
+export const Rounded = Template.bind({});
 Rounded.args = {
-  variant:'confirmRounded',
-  label:'Confirm Rounded'
-}
+  variant: "confirmRounded",
+  children: "Confirm",
+};

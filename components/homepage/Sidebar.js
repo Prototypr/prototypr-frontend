@@ -28,7 +28,7 @@ const Sidebar = ({ title, content = [], type, paddingTop }) => {
   };
 
   return (
-    <div className={`${paddingTop} relative col-span-4`}>
+    <div className={`${paddingTop} relative col-span-3`}>
       <div className={`hidden lg:block mb-8`}>
         {type === "jobs" ? (
           <div>

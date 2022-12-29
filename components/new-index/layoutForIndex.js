@@ -34,11 +34,13 @@ export default function Layout({
       <Meta seo={seo} />
       {/* <Navbar activeNav={activeNav} /> */}
       {/* <div className="fixed w-full z-50"> */}
-        <Navbar />
+      <Navbar maxWidth={"max-w-[1380px]"} />
       {/* </div> */}
 
       <div
-        className={`min-h-screen ${NAV_OFFSET} ${padding == false ? "" : "px-3 md:px-8"}`}
+        className={`min-h-screen ${NAV_OFFSET} ${
+          padding == false ? "" : "px-3 md:px-8"
+        }`}
         style={{ background: background ? background : "#F3F4F6" }}
       >
         <main

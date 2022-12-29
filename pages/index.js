@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
-
+import LargePostGrid from "@/components/v4/layout/LargePostGrid";
 
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
@@ -53,8 +53,6 @@ const TAB_ITEMS = [
 ];
 const PAGE_SIZE = 12;
 
-
-
 export default function Index({
   preview,
   allTools,
@@ -98,8 +96,8 @@ export default function Index({
   const heroJob = jobs.filter((item, i) => i === 0);
   const jobsSidebar = jobs.filter((item, i) => i !== 0);
 
-  const first3Tools = allTools.slice(0, 3)
-  const toolsList = allTools.slice(3, allTools.length)
+  const first3Tools = allTools.slice(0, 3);
+  const toolsList = allTools.slice(3, allTools.length);
 
   return (
     <>
@@ -116,21 +114,28 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        <TrendingFullWidth sponsor={sponsors?.length ? sponsors[0] : null} tools={first3Tools}/>
-        <Container maxWidth='max-w-[984px]'>
+        <TrendingFullWidth
+          sponsor={sponsors?.length ? sponsors[0] : null}
+          tools={first3Tools}
+        />
+        <Container maxWidth="max-w-[1380px]">
           {/* <Intro /> */}
           <div className="w-full h-full grid grid-cols-12 flex justify-center">
-            <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-8 lg:pr-8 py-3">
+            <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-9 py-3">
               {/* <HomePageNewNavBar /> */}
-              <TabSwitcher
-                selectedTab={currentTab}
-                onTabChange={onTabChange}
+              {/* <TabSwitcher selectedTab={currentTab} onTabChange={onTabChange} /> */}
+              <h2 className="text-2xl my-4 font-medium text-gray-900">
+                Discover <span className="text-gray-400">the latest</span>
+              </h2>
+              <LargePostGrid
+                largePost={heroCardPost}
+                smallPosts={viewablePosts}
               />
-              <HeroGrid
+              {/* <HeroGrid
                 postData={{ hero: heroCardPost, posts: viewablePosts }}
                 sponsor={sponsors?.length ? sponsors[0] : null}
                 jobFeature={heroJob}
-              />
+              /> */}
             </div>
 
             <Sidebar
@@ -146,10 +151,12 @@ export default function Index({
           <DesignTool allTools={toolsList} />
         </BrowserView>
 
-        <Container maxWidth='max-w-[984px]'>
-        <div className="w-full mt-8 h-full grid grid-cols-12 flex justify-center">
+        <Container maxWidth="max-w-[984px]">
+          <div className="w-full mt-8 h-full grid grid-cols-12 flex justify-center">
             <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-8 lg:pr-8 py-3">
-            <h1 className="font-semibold mb-3 px-4 md:px-0">More to explore</h1>
+              <h1 className="font-semibold mb-3 px-4 md:px-0">
+                More to explore
+              </h1>
 
               <HeroGrid
                 showTrending={true}
@@ -165,9 +172,12 @@ export default function Index({
               />
             </div>
 
-            <Sidebar 
-            paddingTop="hidden ml-4 md:block pt-12 mt-2"
-            title="Tools" type="tools" content={toolsList} />
+            <Sidebar
+              paddingTop="hidden ml-4 md:block pt-12 mt-2"
+              title="Tools"
+              type="tools"
+              content={toolsList}
+            />
           </div>
         </Container>
       </Layout>
@@ -182,7 +192,7 @@ export async function getStaticProps({ preview = null, locale }) {
     sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
   }
 
-  let allPosts = (await getCombinedPostsForHome(preview, 8, 0, sort)) || [];
+  let allPosts = (await getCombinedPostsForHome(preview, 9, 0, sort)) || [];
   let randomPosts = (await getRandomPostsForHome()) || [];
   let allTools =
     (await getAllToolsForHome(preview, PAGE_SIZE, 0, ["date:desc"])) || [];
@@ -203,7 +213,7 @@ export async function getStaticProps({ preview = null, locale }) {
   allPosts = transformPostListOld(allPosts.data, locale);
   allTools = transformPostListOld(allTools.data, locale);
 
-  await generateCombinedRSS({allPosts,allTools })
+  await generateCombinedRSS({ allPosts, allTools });
 
   // otherPosts = transformPostListOld(otherPosts.data, locale);
   return {
