@@ -9,10 +9,17 @@
             <link>http://localhost:3000</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 28 Dec 2022 03:19:42 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 29 Dec 2022 17:21:21 GMT</lastBuildDate>
         <atom:link href="http://localhost:3000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 28 Dec 2022 03:19:42 GMT</pubDate>
+        <pubDate>Thu, 29 Dec 2022 17:21:21 GMT</pubDate>
         <copyright><![CDATA[All rights reserved 2022, Prototypr]]></copyright>
+        <item>
+            <title><![CDATA[Sticking to UI/UX trends is a losing strategy]]></title>
+            <description><![CDATA[If you have been following my blog for a while, you might feel a bit perplexed at seeing this title. After all, I do have an extensive article about UI/UX trends...]]></description>
+            <link>http://localhost:3000/post/sticking-to-uiux-trends-is-a-losing-strategy</link>
+            <guid isPermaLink="true">http://localhost:3000/post/sticking-to-uiux-trends-is-a-losing-strategy</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/1d87545fb25cc1fd4f863555b25a02d1.webp" length="0" type="image/png"/>
+        </item>
         <item>
             <title><![CDATA[Microsoft Designer: AI Prompt Design Principles]]></title>
             <description><![CDATA[Observations on Microsoft Designer and OpenAI's DALLE-2, forming some UX Principles for Prompt Design when generating AI images.]]></description>
@@ -46,7 +53,7 @@
             <description><![CDATA[It’s very important for a teacher or mentor to have a passion for it, as much as teaching or mentoring is not just about the teachers themselves. Instead, it’s about the students, mentees or participants. To clarify, the term... ]]></description>
             <link>http://localhost:3000/post/about-teaching-ux-design</link>
             <guid isPermaLink="true">http://localhost:3000/post/about-teaching-ux-design</guid>
-            <enclosure url="https://cdn-images-1.medium.com/max/1600/1*FFSq230Tzl4Bxc-GyyUrcQ.jpeg" length="0" type="image/png"/>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/766b35b739b33299e1f77591258db8e2.jpeg" length="0" type="image/png"/>
         </item>
         <item>
             <title><![CDATA[8 best practices for UI card design]]></title>
@@ -61,13 +68,6 @@
             <link>http://localhost:3000/post/color-intensity-and-purpose</link>
             <guid isPermaLink="true">http://localhost:3000/post/color-intensity-and-purpose</guid>
             <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/eab80b6566661c39b40f263260fa967f.png" length="0" type="image/png"/>
-        </item>
-        <item>
-            <title><![CDATA[The Dark Psychology Behind Social Media Addiction]]></title>
-            <description><![CDATA[Social media platforms provide a convenient way for people to connect with friends and family and stay in the know of current events, but although...]]></description>
-            <link>http://localhost:3000/post/the-dark-psychology-behind-social-media-addiction</link>
-            <guid isPermaLink="true">http://localhost:3000/post/the-dark-psychology-behind-social-media-addiction</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/a2fb8d23e3d46739501e412a17ecc966.png" length="0" type="image/png"/>
         </item>
         <item>
             <title><![CDATA[Microsoft Bing Image Creator]]></title>
