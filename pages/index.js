@@ -27,7 +27,7 @@ import { useEffect } from "react";
 
 import HeroGrid from "@/components/v4/hero/hero";
 import TabSwitcher from "@/components/homepage/TabSwitcher";
-import generateCombinedRSS from "@/lib/rss/generateAllRSS";
+// import generateCombinedRSS from "@/lib/rss/generateAllRSS";
 
 const TAB_ITEMS = [
   {
@@ -202,8 +202,6 @@ export async function getStaticProps({ preview = null, locale }) {
 
   allPosts = transformPostListOld(allPosts.data, locale);
   allTools = transformPostListOld(allTools.data, locale);
-
-  await generateCombinedRSS({allPosts,allTools })
 
   // otherPosts = transformPostListOld(otherPosts.data, locale);
   return {

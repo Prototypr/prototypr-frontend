@@ -9,7 +9,6 @@ const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 import { useIntl } from "react-intl";
 
 import { getPostsByPageForPostsPage } from "@/lib/api";
-import generatePostsRSS from "@/lib/rss/generatePostsRSS";
 // import Head from "next/head";
 const PAGE_SIZE = 12;
 export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
@@ -93,9 +92,6 @@ export async function getStaticProps({ preview = null, params }) {
     (await getPostsByPageForPostsPage(preview, pageSize, page)) || [];
   allPosts = allPosts[0];
 
-  if(page==1){
-    await generatePostsRSS(allPosts?.data, 'post')
-  }
   
   const pagination = allPosts.meta.pagination;
   return {
