@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { usePlausible } from "next-plausible";
-
 const { default: Image } = require("next/image");
 const { default: gumletLoader } = require("./new-index/gumletLoader");
 
@@ -28,10 +27,10 @@ const SponsorSidebarCard = ({
               },
             });
           }}
-          className="flex flex-col grid gap-4"
+          className="flex px-1 flex-col grid gap-4"
         >
-          <div className="w-full h-auto bg-gray-50 rounded-xl cursor-pointer flex flex-col">
-            <div className="flex flex-row p-4 rounded-xl">
+          <div className="w-full h-auto bg-opacity-70 rounded-xl cursor-pointer flex flex-col">
+            <div className="flex flex-row rounded-xl">
               <div
                 style={{ flex: "0 0 3em" }}
                 className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-xl overflow-hidden"
@@ -51,17 +50,17 @@ const SponsorSidebarCard = ({
                 )}
               </div>
               <div className="flex flex-col grid gap-1 justify-center">
-                <p className=" h-[18px] overflow-hidden line-clamp-1 inline font-inter text-sm">
+                <p className=" overflow-hidden line-clamp-2 inline my-auto font-inter text-sm">
                   {title}
+                  <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
+                    Promoted
+                  </span>
                 </p>
-                <div className="flex flex-row gap-1 text-sm text-gray-500">
-                  {/* <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline font-inter">
-                    {sponsorName}
-                  </p> */}
+                {/* <div className="flex flex-row gap-1 text-sm text-gray-500">
                   <span className="text-xs mt-1 capitalize bg-gray-100 font-inter px-3.5 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                     Sponsored
                   </span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

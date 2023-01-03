@@ -86,6 +86,7 @@
     "normalize-url": "^7.2.0",
     "nprogress": "^0.2.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
+    "phosphor-react": "^1.4.1",
     "probe-image-size": "^7.2.3",
     "qs": "^6.11.0",
     "query-string": "^7.1.1",
@@ -112,6 +113,7 @@
     "react-portal": "^4.2.2",
     "react-router-dom": "^6.3.0",
     "react-timeago": "^4.4.0",
+    "react-tsparticles": "^2.7.1",
     "react-waypoint": "^10.3.0",
     "react-web-monetization": "0.0.13",
     "rss": "^1.2.2",
@@ -124,6 +126,7 @@
     "swr": "^1.3.0",
     "tailwindcss-border-gradient-radius": "^3.0.1",
     "tinycolor2": "^1.4.1",
+    "tsparticles": "^2.7.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

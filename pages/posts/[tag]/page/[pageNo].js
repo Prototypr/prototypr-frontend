@@ -59,7 +59,7 @@ export default function PostsPage({
   return (
     <>
       <Layout
-          maxWidth={'max-w-[1380px] search-wide'}
+          maxWidth={'max-w-[1320px] search-wide'}
         seo={{
           title: `${tagName} | design articles on Prototypr | Page ${pagination?.page}`,
           description: `Articles on ${tagName} - design content open and accessible to everyone, no paywall here.`,

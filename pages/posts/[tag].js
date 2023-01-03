@@ -35,7 +35,7 @@ export default function PostsPage({heroPost=null,morePosts=[], preview, paginati
     return (
         <>
           <Layout 
-              maxWidth={'max-w-[1380px] search-wide'}
+              maxWidth={'max-w-[1320px] search-wide'}
           seo={{
           title: "Prototypr Design articles – free for everyone.",
           description:

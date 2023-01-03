@@ -12,7 +12,6 @@ import { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 import WMButton from "./parts/WMButton";
-// import { SnowMiddle, SmallSideSnow } from "../xmas/snow";
 import SearchBar from "../SearchBar";
 import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
 // import { Waypoint } from "react-waypoint";
@@ -84,10 +83,10 @@ const Navbar = ({
                 <Link href="/" as="/">
                   <>
                     <img
-                      // className="block h-8 w-auto"
-                      // src="/static/images/logo-small.svg"
-                      className="block h-10 w-auto mb-2"
-                      src="/static/images/logo-small-xmas.svg"
+                      className="block h-8 w-auto"
+                      src="/static/images/logo-small.svg"
+                      // className="block h-10 w-auto mb-2"
+                      // src="/static/images/logo-small-xmas.svg"
                       alt="Prototypr Logo"
                     />
                     {/* <img
