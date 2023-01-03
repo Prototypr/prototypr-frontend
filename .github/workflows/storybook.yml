@@ -1,0 +1,20 @@
+name: Build and Deploy Storybook
+on: 
+  push:
+    branches:
+      - 'dev' # Trigger the action only pushed to a specific branch
+      - '!main' # Ignore if pushed to a specific branch
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Merge dev -> storybook-deploy 🚀
+        uses: devmasx/merge-branch@1.4.0
+        with:
+          type: now
+          from_branch: dev
+          target_branch: storybook-deploy
+          github_token: ${{ github.token }}
