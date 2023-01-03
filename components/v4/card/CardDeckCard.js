@@ -14,7 +14,8 @@ const CardDeckCard = ({
 }) => {
   return (
     <div
-      className={`z-[${zIndex}] group/card hover:z-10 group-hover/cardDeck:z-back transition transition-all duration-[200ms]`}
+    style={{zIndex:zIndex}}
+      className={`group/card hover:z-10 group-hover/cardDeck:z-back transition transition-all duration-[200ms]`}
     >
       <div
         className={`cardDeckCard rounded-3xl ${
