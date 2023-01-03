@@ -6,7 +6,7 @@ const LargePostGrid = ({ largePost, smallPosts }) => {
     ? url
     : largePost?.attributes?.legacyFeaturedImage?.mediaItemUrl;
 
-    let authorData = largePost.attributes?.author?.data?.attributes
+    let authorData = largePost?.attributes?.author?.data?.attributes
     const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
     let largePostAvatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
   return (
