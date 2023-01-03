@@ -20,7 +20,7 @@ const DiscoverSection = ({ heroCardPost, viewablePosts, jobsSidebar }) => {
           <LargePostGrid largePost={heroCardPost} smallPosts={viewablePosts} />
         </div>
         <SidebarDiscover
-          paddingTop="hidden ml-4 pl-6 md:block pt-12"
+          paddingTop="hidden ml-4 pl-6 lg:block pt-12"
           content={jobsSidebar}
         />
       </div>
