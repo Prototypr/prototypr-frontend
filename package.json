@@ -7,7 +7,14 @@
     "start": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
+    "serve-storybook": "serve storybook-static",
+    "storybook": "concurrently \"npm run watch:*\"",
+    "build-storybook": "concurrently \"npm run build:*\"",
+    "build:css": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/globaltailwind.css",
+    "build:storybook": "build-storybook -s public build",
+    "watch:css": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/globaltailwind.css --watch",
+    "watch:storybook": "start-storybook -p 6006 -s ./public"
   },
   "dependencies": {
     "@geist-ui/icons": "^1.0.2",
@@ -129,10 +136,24 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.7",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-interactions": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/builder-webpack5": "^6.5.15",
+    "@storybook/manager-webpack5": "^6.5.15",
+    "@storybook/react": "^6.5.15",
+    "@storybook/testing-library": "0.0.13",
     "@tailwindcss/forms": "^0.5.0",
     "autoprefixer": "^10.4.2",
+    "babel-loader": "^8.3.0",
+    "concurrently": "^7.6.0",
+    "css-loader": "^6.7.3",
     "postcss": "^8.4.6",
     "sass": "^1.49.9",
-    "tailwindcss": "^3.0.23"
+    "sass-loader": "^13.2.0",
+    "tailwindcss": "^3.2.4",
+    "tailwindcss-scoped-groups": "^2.0.0"
   }
 }
