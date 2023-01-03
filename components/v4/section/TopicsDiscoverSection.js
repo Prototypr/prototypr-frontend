@@ -1,5 +1,6 @@
 import Container from "@/components/container";
-import TopicCard from "@/components/v4/card/TopicCard";
+import TopicIconCard from "@/components/v4/card/TopicIconCard";
+import {Robot} from 'phosphor-react'
 
 const TopicsDiscoverSection = ({ topics }) => {
   return (
@@ -11,7 +12,7 @@ const TopicsDiscoverSection = ({ topics }) => {
         {topics.map((topic, index) => {
           return (
             <div key={index}>
-              <TopicCard title={topic.name} topic={topic} />
+              <TopicIconCard icon={topic.icon} title={topic.name} topic={topic} />
             </div>
           );
         })}

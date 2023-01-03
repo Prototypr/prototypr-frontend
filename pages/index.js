@@ -31,29 +31,38 @@ import generateCombinedRSS from "@/lib/rss/generateAllRSS";
 import TopicSection from "@/components/v4/section/TopicSection";
 import TopicsDiscoverSection from "@/components/v4/section/TopicsDiscoverSection";
 
+import {Robot, Swatches, HandEye, Wheelchair, FlowArrow} from 'phosphor-react'
+
+
 const PAGE_SIZE = 12;
 
+const ICON_SIZE = 34
 const TAB_ITEMS = [
   {
     slug: "branding",
     name: "topicSpotlight.tabs.branding",
+    icon:<Swatches size={ICON_SIZE} />
   },
   {
     slug: "design-psychology",
     name: "topicSpotlight.tabs.psychology",
+    icon:<HandEye size={ICON_SIZE} />
   },
   {
     slug: "ai",
     name: "topicSpotlight.tabs.ai",
+    icon:<Robot size={ICON_SIZE}/>
   },
   {
     slug: "accessibility",
     name: "topicSpotlight.tabs.accessibility",
+    icon:<Wheelchair size={ICON_SIZE} />
   },
 
   {
     slug: "product-design",
     name: "topicSpotlight.tabs.productDesign",
+    icon:<FlowArrow size={ICON_SIZE} />
   },
   // {
   //   slug: "ux",
@@ -84,8 +93,8 @@ export default function Index({
     }
   }, []);
 
-  const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
-  const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
+  // const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
+  // const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
   const heroJob = jobs.filter((item, i) => i === 0);
   const jobsSidebar = jobs.filter((item, i) => i !== 0);
 
@@ -129,6 +138,7 @@ export default function Index({
         <SectionDivider />
         {TAB_ITEMS?.map((topic, index) => {
           return (
+            <>
             <TopicSection
               title={topic.name}
               HeroPostRandomSection={topicRes[topic.slug][0]}
@@ -137,6 +147,8 @@ export default function Index({
               sponsors={sponsors}
               toolsList={toolsList}
             />
+            <SectionDivider />
+            </>
           );
         })}
       </Layout>

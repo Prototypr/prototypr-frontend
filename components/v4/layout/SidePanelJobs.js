@@ -1,5 +1,6 @@
 import Link from "next/link";
 import JobListItem from "@/components/v4/listItem/JobListItem";
+import {CaretRight} from 'phosphor-react'
 
 const SidePanelJobs = ({ list }) => {
   return (
@@ -27,7 +28,10 @@ const SidePanelJobs = ({ list }) => {
         })}
 
         <Link href={"/jobs"}>
-          <div className="font-inter font-medium mt-3 text-gray-600 cursor-pointer text-xs">{`See All ->`}</div>
+          <div className="font-inter mt-1 text-gray-600 cursor-pointer text-xs flex">
+            <div className="my-auto">See All</div>
+          <CaretRight className="my-auto" size={12} />
+          </div>
         </Link>
       </div>
     </div>
