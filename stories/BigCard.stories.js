@@ -1,4 +1,4 @@
-import BigCard from "../components/v4/card/BigCard";
+import BigCard from "../components/v4/card/BigCard/BigCard";
 
 export default {
   title: "Components/Card/Big Card",

@@ -34,6 +34,7 @@ module.exports = {
       
       'lg': '1024px',
       // => @media (min-width: 1024px) { ... }
+      '2lg':'1140px',
 
       'xl': '1280px',
       // => @media (min-width: 1280px) { ... }
@@ -42,6 +43,9 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      scale: {
+        '114': '1.14',
+      },
       contrast: {
         110: "1.10",
         115: "1.15",

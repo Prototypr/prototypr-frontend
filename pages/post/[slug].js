@@ -105,7 +105,7 @@ export default function Post({ post, preview, relatedPosts }) {
 
   return (
     <Layout
-      maxWidth={"max-w-[1380px] search-wide"}
+      maxWidth={"max-w-[1320px] search-wide"}
       padding={false}
       seo={{
         title: `${title}`,

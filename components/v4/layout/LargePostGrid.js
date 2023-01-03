@@ -1,14 +1,12 @@
-import BigCard from "../card/BigCard";
-import SmallCard from "../card/SmallCard";
+import BigCard from "../card/BigCard/BigCardB";
+import SmallCard from "../card/SmallCard/SmallCardE";
 const LargePostGrid = ({ largePost, smallPosts }) => {
-  console.log(largePost);
-  console.log(smallPosts);
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;
   const largeCoverImage = url
     ? url
     : largePost?.attributes?.legacyFeaturedImage?.mediaItemUrl;
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-w-[1320px]">
       <div>
         <BigCard
           avatar={

@@ -9,10 +9,10 @@
             <link>http://localhost:3000</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 29 Dec 2022 02:04:22 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 03 Jan 2023 00:24:35 GMT</lastBuildDate>
         <atom:link href="http://localhost:3000/rss/jobs.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 29 Dec 2022 02:04:22 GMT</pubDate>
-        <copyright><![CDATA[All rights reserved 2022, Prototypr]]></copyright>
+        <pubDate>Tue, 03 Jan 2023 00:24:35 GMT</pubDate>
+        <copyright><![CDATA[All rights reserved 2023, Prototypr]]></copyright>
         <item>
             <title><![CDATA[Senior Machine Learning Engineer, Speak]]></title>
             <description><![CDATA[Senior Machine Learning Engineer, Speak at undefined. Salary range: $0k – $0k. Job type: undefined]]></description>

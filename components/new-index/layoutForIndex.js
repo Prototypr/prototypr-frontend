@@ -34,7 +34,7 @@ export default function Layout({
       <Meta seo={seo} />
       {/* <Navbar activeNav={activeNav} /> */}
       {/* <div className="fixed w-full z-50"> */}
-      <Navbar maxWidth={"max-w-[1380px]"} />
+      <Navbar maxWidth={"max-w-[1320px]"} />
       {/* </div> */}
 
       <div

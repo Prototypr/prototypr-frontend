@@ -9,10 +9,17 @@
             <link>http://localhost:3000</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 29 Dec 2022 02:13:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 03 Jan 2023 02:58:35 GMT</lastBuildDate>
         <atom:link href="http://localhost:3000/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 29 Dec 2022 02:13:00 GMT</pubDate>
-        <copyright><![CDATA[All rights reserved 2022, Prototypr]]></copyright>
+        <pubDate>Tue, 03 Jan 2023 02:58:35 GMT</pubDate>
+        <copyright><![CDATA[All rights reserved 2023, Prototypr]]></copyright>
+        <item>
+            <title><![CDATA[How I use Notion to run Online Businesses as a Creator and Founder]]></title>
+            <description><![CDATA[As a creator and founder myself, I write business insights and build micro-products for a living. For fun, I build article tool, event app, meal box app, SaaS tracker...]]></description>
+            <link>http://localhost:3000/post/how-i-use-notion-to-run-online-businesses-as-a-creator-and-founder</link>
+            <guid isPermaLink="true">http://localhost:3000/post/how-i-use-notion-to-run-online-businesses-as-a-creator-and-founder</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/dbb7f972219d120351bb559d5f973e79.png" length="0" type="image/png"/>
+        </item>
         <item>
             <title><![CDATA[Microsoft Designer: AI Prompt Design Principles]]></title>
             <description><![CDATA[Observations on Microsoft Designer and OpenAI's DALLE-2, forming some UX Principles for Prompt Design when generating AI images.]]></description>
@@ -21,25 +28,11 @@
             <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/f5e2f0cd67f899d4e42b922166398733.png" length="0" type="image/png"/>
         </item>
         <item>
-            <title><![CDATA[Open Design Ownership: Why You Need a License – and What Kind to Use]]></title>
-            <description><![CDATA[Copyright for Designers Working in the Open: From Creative Commons to MIT licenses. What are you allowed to do with other designers' material and at what point does the inspiration become plagiarism. ]]></description>
-            <link>http://localhost:3000/post/open-design-ownership-cc-mit-licenses</link>
-            <guid isPermaLink="true">http://localhost:3000/post/open-design-ownership-cc-mit-licenses</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/a4da415b1554c8f4c45a2fd1cae07bfa.png" length="0" type="image/png"/>
-        </item>
-        <item>
-            <title><![CDATA[7 Great AI Opportunities for Any App Startup, by ChatGPT 👀]]></title>
-            <description><![CDATA[This article is an experiment with ChatGPT, which was used to write the article. I asked it to predict 7 opportunities for AI. At first, the answers were good, but not as good as a human in that it misses cultural references without nudging it. I had to rephrase my inputs only couple times to get to this:]]></description>
-            <link>http://localhost:3000/post/chatpgt-7-startup-ai-opportunities</link>
-            <guid isPermaLink="true">http://localhost:3000/post/chatpgt-7-startup-ai-opportunities</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/9a620488e62ef62444d21e3b38eaf744.png" length="0" type="image/png"/>
-        </item>
-        <item>
-            <title><![CDATA[What is Open Design?]]></title>
-            <description><![CDATA[If you're a designer or someone who's come close to any type of design process, chances are you've used some of the open design tools and...]]></description>
-            <link>http://localhost:3000/post/what-is-open-design</link>
-            <guid isPermaLink="true">http://localhost:3000/post/what-is-open-design</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/6617c5932c8567a725d6deeaf3a52aa1.png" length="0" type="image/png"/>
+            <title><![CDATA[Sticking to UI/UX trends is a losing strategy]]></title>
+            <description><![CDATA[If you have been following my blog for a while, you might feel a bit perplexed at seeing this title. After all, I do have an extensive article about UI/UX trends...]]></description>
+            <link>http://localhost:3000/post/sticking-to-uiux-trends-is-a-losing-strategy</link>
+            <guid isPermaLink="true">http://localhost:3000/post/sticking-to-uiux-trends-is-a-losing-strategy</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/1d87545fb25cc1fd4f863555b25a02d1.webp" length="0" type="image/png"/>
         </item>
         <item>
             <title><![CDATA[About teaching UX design]]></title>
@@ -49,32 +42,11 @@
             <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/766b35b739b33299e1f77591258db8e2.jpeg" length="0" type="image/png"/>
         </item>
         <item>
-            <title><![CDATA[8 best practices for UI card design]]></title>
-            <description><![CDATA[What is important for you in the UI card design? I’d like to share with you the best practices that I’ve collected. Before that, let’s start with a basic UI card overview and where cards are commonly used.]]></description>
-            <link>http://localhost:3000/post/8-best-practices-for-ui-card-design</link>
-            <guid isPermaLink="true">http://localhost:3000/post/8-best-practices-for-ui-card-design</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/e198898749d10fd71337bb2d0978be8d.webp" length="0" type="image/png"/>
-        </item>
-        <item>
-            <title><![CDATA[Color, Intensity, and Purpose]]></title>
-            <description><![CDATA[I was experiencing this for a few years now but it took me quite a while to notice the subtlety and a little more time understand why it was designed...]]></description>
-            <link>http://localhost:3000/post/color-intensity-and-purpose</link>
-            <guid isPermaLink="true">http://localhost:3000/post/color-intensity-and-purpose</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/eab80b6566661c39b40f263260fa967f.png" length="0" type="image/png"/>
-        </item>
-        <item>
-            <title><![CDATA[The Dark Psychology Behind Social Media Addiction]]></title>
-            <description><![CDATA[Social media platforms provide a convenient way for people to connect with friends and family and stay in the know of current events, but although...]]></description>
-            <link>http://localhost:3000/post/the-dark-psychology-behind-social-media-addiction</link>
-            <guid isPermaLink="true">http://localhost:3000/post/the-dark-psychology-behind-social-media-addiction</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/a2fb8d23e3d46739501e412a17ecc966.png" length="0" type="image/png"/>
-        </item>
-        <item>
-            <title><![CDATA[AI tools to assist your design and development workflow]]></title>
-            <description><![CDATA[The rise of AI has been accompanied by a lot of hype and fear. People are excited that it will completely transform the creative industry, while others are...]]></description>
-            <link>http://localhost:3000/post/ai-tools-design-and-development</link>
-            <guid isPermaLink="true">http://localhost:3000/post/ai-tools-design-and-development</guid>
-            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/8792f817d423d392ab9139ba41b92d8a.webp" length="0" type="image/png"/>
+            <title><![CDATA[Open Design Ownership: Why You Need a License – and What Kind to Use]]></title>
+            <description><![CDATA[Copyright for Designers Working in the Open: From Creative Commons to MIT licenses. What are you allowed to do with other designers' material and at what point does the inspiration become plagiarism. ]]></description>
+            <link>http://localhost:3000/post/open-design-ownership-cc-mit-licenses</link>
+            <guid isPermaLink="true">http://localhost:3000/post/open-design-ownership-cc-mit-licenses</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/a4da415b1554c8f4c45a2fd1cae07bfa.png" length="0" type="image/png"/>
         </item>
         <item>
             <title><![CDATA[Microsoft Bing Image Creator]]></title>
@@ -159,6 +131,62 @@
             <link>http://localhost:3000/toolbox/html-to-design-chrome-extension</link>
             <guid isPermaLink="true">http://localhost:3000/toolbox/html-to-design-chrome-extension</guid>
             <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/a55c9dd74e7165b11fb538c98e28f900.png?updated_at=2022-12-08T00:50:02.368Z" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Formsly]]></title>
+            <description><![CDATA[Build fully responsive forms in minutes!  Formsly is an intuitive, no-code form and survey builder. It includes both classic and interactive forms...]]></description>
+            <link>http://localhost:3000/toolbox/formsly</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/formsly</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/1c0fa019bfb06fa96abf03f04fb0846c.png?updated_at=2022-12-07T11:28:42.774Z" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Colorss]]></title>
+            <description><![CDATA[Find the perfect color palette to match your brand! Colorss features hand-picked color palettes based on different emotions. From young-like...]]></description>
+            <link>http://localhost:3000/toolbox/colorss</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/colorss</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/6bf5575bccf0199e9d90f3ce19817d9d.png?updated_at=2022-12-08T00:22:17.845Z" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Alternatives]]></title>
+            <description><![CDATA[If you're unsure which style your website should have this tool is for you. Alternatives is a website builder that returns multiple pages and styles, so...]]></description>
+            <link>http://localhost:3000/toolbox/alternatives</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/alternatives</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/fc27588464fe60f203060adbecf2e8cd.png?updated_at=2022-12-08T00:09:36.066Z" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[FONTZ]]></title>
+            <description><![CDATA[FONTZ is a collection of high-quality 3D fonts. Add some fun into your products landing pages, social media and other marketing assets. The...]]></description>
+            <link>http://localhost:3000/toolbox/fontz</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/fontz</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/8b895f74699c2039a5d615fadc434218.png?updated_at=2022-12-08T00:57:23.659Z" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Venngage's Accessible Color Palette]]></title>
+            <description><![CDATA[Venngage is an inclusive and accessible color palette generator. The colour pairings follow WCAG and have enough contrast to use with normal...]]></description>
+            <link>http://localhost:3000/toolbox/venngages-accessible-color-palette</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/venngages-accessible-color-palette</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/8dcc5b48c5e6a4c96c03f6f04d209d2e.png?updated_at=2022-12-08T00:37:14.909Z" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Futurepedia]]></title>
+            <description><![CDATA[Futurepedia helps you keep up to date with the newest AI tools out there. It currently is the largest AI tool directory on the web. Thanks to its refined...]]></description>
+            <link>http://localhost:3000/toolbox/futurepedia</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/futurepedia</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/3eb029fa2b450099490eef9b51b962a9.png?updated_at=2022-12-07T23:43:22.756Z" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Boolpic]]></title>
+            <description><![CDATA[Boolpic is a unique, free AI-powered toolkit that will make your photo editing process much more efficient. The editor lets you remover and change...]]></description>
+            <link>http://localhost:3000/toolbox/boolpic-ai-toolkit</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/boolpic-ai-toolkit</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/421a70fad1f038dc4128d6680bfcff7f.png?updated_at=2022-12-07T23:57:16.631Z" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[StoriesForKids.ai]]></title>
+            <description><![CDATA[A design tool to bring parents and kids together! StoriesForKids.ai helps parents and children read and create unique stories together. Running out...]]></description>
+            <link>http://localhost:3000/toolbox/storiesforkids.ai</link>
+            <guid isPermaLink="true">http://localhost:3000/toolbox/storiesforkids.ai</guid>
+            <enclosure url="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/cd0249876797af5a7aa56a29765aad76.png?updated_at=2022-12-07T11:17:46.429Z" length="0" type="image/png"/>
         </item>
     </channel>
 </rss>

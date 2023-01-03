@@ -19,7 +19,7 @@ export default function Index({ allPosts, preview }) {
   return (
     <>
       <Layout
-        maxWidth={"max-w-[1380px] search-wide"}
+        maxWidth={"max-w-[1320px] search-wide"}
         seo={{
           title: "Prototypr Topics - Design, UX, UI, accessibility...",
           description:

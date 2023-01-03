@@ -1,4 +1,4 @@
-import SmallCard from "../components/v4/card/SmallCard";
+import SmallCard from "../components/v4/card/SmallCard/SmallCard";
 
 export default {
   title: "Components/Card/Small Card",

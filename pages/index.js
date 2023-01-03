@@ -1,17 +1,19 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import LargePostGrid from "@/components/v4/layout/LargePostGrid";
-
+import DiscoverSection from "@/components/v4/section/DiscoverSection";
+import SectionDivider from "@/components/v4/section/SectionDivider";
+import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 import TrendingFullWidth from "@/components/homepage/TrendingFullWidth";
+import IntroBanner from "@/components/v4/hero/IntroBanner";
 /**new index components */
 import { BrowserView } from "react-device-detect";
-import Sidebar from "@/components/homepage/Sidebar";
 const Footer = dynamic(() => import("@/components/footer"));
 const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 
 import { getAllJobs } from "@/lib/api";
+
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 
 import {
@@ -25,47 +27,51 @@ import { useIntl } from "react-intl";
 import { transformPostListOld } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
 
-import HeroGrid from "@/components/v4/hero/hero";
-import TabSwitcher from "@/components/homepage/TabSwitcher";
 import generateCombinedRSS from "@/lib/rss/generateAllRSS";
+import TopicSection from "@/components/v4/section/TopicSection";
+import TopicsDiscoverSection from "@/components/v4/section/TopicsDiscoverSection";
+
+const PAGE_SIZE = 12;
 
 const TAB_ITEMS = [
   {
     slug: "branding",
-    name: "topicSpotlight.tabs.accessibility",
-  },
-  {
-    slug: "product-design",
-    name: "topicSpotlight.tabs.userResearch",
-  },
-  {
-    slug: "ux",
-    name: "topicSpotlight.tabs.userWriting",
-  },
-  {
-    slug: "ai",
-    name: "topicSpotlight.tabs.vr",
+    name: "topicSpotlight.tabs.branding",
   },
   {
     slug: "design-psychology",
-    name: "topicSpotlight.tabs.code",
+    name: "topicSpotlight.tabs.psychology",
   },
+  {
+    slug: "ai",
+    name: "topicSpotlight.tabs.ai",
+  },
+  {
+    slug: "accessibility",
+    name: "topicSpotlight.tabs.accessibility",
+  },
+
+  {
+    slug: "product-design",
+    name: "topicSpotlight.tabs.productDesign",
+  },
+  // {
+  //   slug: "ux",
+  //   name: "topicSpotlight.tabs.userWriting",
+  // },
 ];
-const PAGE_SIZE = 12;
 
 export default function Index({
   preview,
   allTools,
+  topicRes,
   jobs,
   randomPosts,
   sponsors,
-
-  topicRes,
   heroPost,
   morePosts,
 }) {
   const intl = useIntl();
-  const [currentTab, setCurrentTab] = useState("top_picks");
   const [heroCardPost, setHeroPost] = useState(heroPost);
   const [viewablePosts, setViewablePosts] = useState(morePosts);
 
@@ -78,26 +84,13 @@ export default function Index({
     }
   }, []);
 
-  const onTabChange = (tab) => {
-    setCurrentTab(tab.id);
-    if (tab.slug === "top_picks") {
-      setHeroPost(heroPost);
-      setViewablePosts(morePosts);
-    } else {
-      const posts = topicRes[tab.slug];
-      setHeroPost(posts[0]);
-      setViewablePosts(posts.slice(1, 8));
-    }
-  };
-
-  //   console.log(randomPosts);
   const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
   const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
   const heroJob = jobs.filter((item, i) => i === 0);
   const jobsSidebar = jobs.filter((item, i) => i !== 0);
 
-  const first3Tools = allTools.slice(0, 3);
-  const toolsList = allTools.slice(3, allTools.length);
+  const first3Tools = allTools.slice(0, 5);
+  const toolsList = allTools.slice(5, allTools.length);
 
   return (
     <>
@@ -105,7 +98,8 @@ export default function Index({
         padding={false}
         preview={preview}
         // background={"#EFF4FB"}
-        background={"#ffffff"}
+        background={"#F7F7F8"}
+        // background={"#ffffff"}
         seo={{
           title: titleText,
           description: descriptionText,
@@ -114,72 +108,37 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        <TrendingFullWidth
+        <IntroBanner
           sponsor={sponsors?.length ? sponsors[0] : null}
           tools={first3Tools}
         />
-        <Container maxWidth="max-w-[1380px]">
-          {/* <Intro /> */}
-          <div className="w-full h-full grid grid-cols-12 flex justify-center">
-            <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-9 py-3">
-              {/* <HomePageNewNavBar /> */}
-              {/* <TabSwitcher selectedTab={currentTab} onTabChange={onTabChange} /> */}
-              <h2 className="text-2xl my-4 font-medium text-gray-900">
-                Discover <span className="text-gray-400">the latest</span>
-              </h2>
-              <LargePostGrid
-                largePost={heroCardPost}
-                smallPosts={viewablePosts}
-              />
-              {/* <HeroGrid
-                postData={{ hero: heroCardPost, posts: viewablePosts }}
-                sponsor={sponsors?.length ? sponsors[0] : null}
-                jobFeature={heroJob}
-              /> */}
-            </div>
+        <DiscoverSection
+          heroCardPost={heroCardPost}
+          viewablePosts={viewablePosts}
+          jobsSidebar={jobsSidebar}
+        />
 
-            <Sidebar
-              paddingTop="hidden ml-4 md:block pt-10"
-              title="Jobs"
-              type="jobs"
-              content={jobsSidebar}
-            />
-          </div>
-        </Container>
-
-        <BrowserView>
+        <SectionDivider />
+        <ToolIconCardRow tools={toolsList} />
+        <SectionDivider />
+        <TopicsDiscoverSection topics={TAB_ITEMS} />
+        {/* <BrowserView>
           <DesignTool allTools={toolsList} />
-        </BrowserView>
+        </BrowserView> */}
 
-        <Container maxWidth="max-w-[984px]">
-          <div className="w-full mt-8 h-full grid grid-cols-12 flex justify-center">
-            <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-8 lg:pr-8 py-3">
-              <h1 className="font-semibold mb-3 px-4 md:px-0">
-                More to explore
-              </h1>
-
-              <HeroGrid
-                showTrending={true}
-                type="random"
-                postData={{
-                  hero: HeroPostRandomSection[0],
-                  posts: OtherPostsRandomSection,
-                }}
-                jobFeature={heroJob}
-                sponsor={
-                  sponsors?.length && sponsors.length > 1 ? sponsors[1] : null
-                }
-              />
-            </div>
-
-            <Sidebar
-              paddingTop="hidden ml-4 md:block pt-12 mt-2"
-              title="Tools"
-              type="tools"
-              content={toolsList}
+        <SectionDivider />
+        {TAB_ITEMS?.map((topic, index) => {
+          return (
+            <TopicSection
+              title={topic.name}
+              HeroPostRandomSection={topicRes[topic.slug][0]}
+              OtherPostsRandomSection={topicRes[topic.slug].slice(1, 5)}
+              heroJob={heroJob}
+              sponsors={sponsors}
+              toolsList={toolsList}
             />
-          </div>
-        </Container>
+          );
+        })}
       </Layout>
       <Footer />
     </>
@@ -192,10 +151,11 @@ export async function getStaticProps({ preview = null, locale }) {
     sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
   }
 
-  let allPosts = (await getCombinedPostsForHome(preview, 9, 0, sort)) || [];
+  let allPosts = (await getCombinedPostsForHome(preview, 5, 0, sort)) || [];
   let randomPosts = (await getRandomPostsForHome()) || [];
+  let toolCount = 20;
   let allTools =
-    (await getAllToolsForHome(preview, PAGE_SIZE, 0, ["date:desc"])) || [];
+    (await getAllToolsForHome(preview, toolCount, 0, ["date:desc"])) || [];
 
   let jobs = (await getAllJobs(null, 5, 1)) || [];
 
@@ -206,7 +166,7 @@ export async function getStaticProps({ preview = null, locale }) {
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].slug;
     const res =
-      (await getCommonQuery(preview, [tag], "article", 9, 0, sort)) || [];
+      (await getCommonQuery(preview, [tag], "article", 5, 0, sort)) || [];
     topicRes[tag] = res.data;
   }
 

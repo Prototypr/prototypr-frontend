@@ -9,10 +9,10 @@
             <link>http://localhost:3000</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 28 Dec 2022 03:19:47 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 02 Jan 2023 23:45:06 GMT</lastBuildDate>
         <atom:link href="http://localhost:3000/rss/tools.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 28 Dec 2022 03:19:47 GMT</pubDate>
-        <copyright><![CDATA[All rights reserved 2022, Prototypr]]></copyright>
+        <pubDate>Mon, 02 Jan 2023 23:45:06 GMT</pubDate>
+        <copyright><![CDATA[All rights reserved 2023, Prototypr]]></copyright>
         <item>
             <title><![CDATA[Microsoft Bing Image Creator]]></title>
             <description><![CDATA[Image Creator by Microsoft helps users generate AI images with DALL-E. It feels just like bing search, but you generate a set of images based on a given a text prompt.]]></description>
