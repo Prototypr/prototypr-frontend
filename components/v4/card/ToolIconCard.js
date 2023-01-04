@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { usePlausible } from "next-plausible";
 
-const { default: Image } = require("next/image");
+import Image from "next/image";
 const {
   default: gumletLoader,
 } = require("@/components/new-index/gumletLoader");
