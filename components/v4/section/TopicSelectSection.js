@@ -1,8 +1,7 @@
 import Container from "@/components/container";
 import TopicIconCard from "@/components/v4/card/TopicIconCard";
-import {Robot} from 'phosphor-react'
 
-const TopicsDiscoverSection = ({ topics }) => {
+const TopicSelectSection = ({ topics }) => {
   return (
     <Container maxWidth="max-w-[1320px]">
       <h2 className="text-xl mb-6 font-medium text-gray-900">
@@ -21,4 +20,4 @@ const TopicsDiscoverSection = ({ topics }) => {
   );
 };
 
-export default TopicsDiscoverSection;
+export default TopicSelectSection;

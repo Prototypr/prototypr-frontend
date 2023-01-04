@@ -11,12 +11,19 @@ const ToolIconCard = ({ tool }) => {
 
   const plausible = usePlausible();
 
-  const coverImage = tool.featuredImage?.data?.attributes?.url
+
+  let coverImage =   
+  // tool.legacyMedia?.logoNew?tool.legacyMedia?.logoNew:
+  // tool.legacyMedia?.mediaItemUrl?tool.legacyMedia?.mediaItemUrl:
+  // tool.legacyMedia?.imgUrl?tool.legacyMedia?.imgUrl:
+  tool.featuredImage?.data?.attributes?.url
     ? tool.featuredImage.data.attributes.url
     : tool.legacyFeaturedImage
     ? tool.legacyFeaturedImage
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-
+    
+    coverImage = (tool?.legacyMedia?.logoNew || coverImage?.logoNew || tool.legacyMedia?.mediaItemUrl)
+    
   return (
     <div>
       <Link
@@ -37,13 +44,13 @@ const ToolIconCard = ({ tool }) => {
               style={{ flex: "0 0 3em" }}
               className="w-12 h-12 mr-2 relative border border-opacity-10 border-black rounded-xl overflow-hidden"
             >
-              {coverImage?.logoNew ? (
+              {coverImage ? (
                 <Image
                   tabIndex={0}
                   loader={gumletLoader}
                   layout="fill"
                   objectFit="cover"
-                  src={coverImage?.logoNew}
+                  src={coverImage}
                   className="object-cover"
                   alt="Author profile picture"
                 />
@@ -59,7 +66,7 @@ const ToolIconCard = ({ tool }) => {
                 </span> */}
               </div>
               {tags?.data?.length ? (
-                <Link href={`/toolbox/${tags?.data[0]?.attributes?.slug}`}>
+                // <Link href={`/toolbox/${tags?.data[0]?.attributes?.slug}`}>
                   <div className="flex flex-row text-sm text-gray-500">
                     {/* <span className="text-xs mt-1 capitalize bg-gray-100 font-inter px-2 py-0.5 border border-black border-opacity-5 text-black rounded-full"> */}
                     <span className="text-xs capitalize text-gray-500">
@@ -67,7 +74,7 @@ const ToolIconCard = ({ tool }) => {
                     </span>
                     {/* </span> */}
                   </div>
-                </Link>
+                // </Link>
               ) : (
                 ""
               )}

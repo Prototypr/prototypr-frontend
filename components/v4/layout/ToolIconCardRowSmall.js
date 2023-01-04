@@ -1,14 +1,13 @@
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
-import Container from "@/components/container";
 import Link from "next/link";
 import {CaretRight} from 'phosphor-react'
 
-const ToolIconCardRow = ({ tools }) => {
+const ToolIconCardRow = ({ tools, topic }) => {
   return (
-    <Container maxWidth="max-w-[1320px] w-full">
+    <div className="w-full mb-12">
       <div className="flex justify-between">
         <h3 className="font-semibold text-lg mb-6 px-1">
-          Latest tools <span className="text-gray-400">hand picked</span>
+          {topic} <span className="">tools</span>
         </h3>
           <Link href='/toolbox'>
             <div className="flex">
@@ -18,7 +17,7 @@ const ToolIconCardRow = ({ tools }) => {
           </Link>
 
       </div>
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-6 px-1`}>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 px-1`}> 
         {tools.map((tool, index) => {
           return (
             <div key={index}>
@@ -27,7 +26,7 @@ const ToolIconCardRow = ({ tools }) => {
           );
         })}
       </div>
-    </Container>
+    </div>
   );
 };
 
