@@ -21,7 +21,7 @@ const ToolIconCardRow = ({ tools, topic }) => {
         {tools.map((tool, index) => {
           return (
             <div key={index}>
-              <ToolIconCard tool={tool?.attributes} />
+              <ToolIconCard withBackground={true} tool={tool?.attributes} />
             </div>
           );
         })}
