@@ -6,7 +6,7 @@ const {
   default: gumletLoader,
 } = require("@/components/new-index/gumletLoader");
 
-const ToolIconCard = ({ tool }) => {
+const ToolIconCard = ({ tool, withBackground }) => {
   const { slug, title, tags } = tool;
 
   const plausible = usePlausible();
@@ -38,7 +38,7 @@ const ToolIconCard = ({ tool }) => {
         }}
         className="flex"
       >
-        <div className="w-full h-auto bg-opacity-70 rounded-xl cursor-pointer flex flex-col">
+        <div className={`${withBackground?'bg-[#EAE9F5] p-2':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex flex-row rounded-xl">
             <div
               style={{ flex: "0 0 3em" }}
