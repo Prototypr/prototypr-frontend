@@ -1,5 +1,5 @@
-const { default: Container } = require("@/components/container")
-const { default: SignupHomepage } = require("@/components/newsletter/SignupHomepage")
+import Container  from "@/components/container"
+import SignupHomepage from "@/components/newsletter/SignupHomepage"
 
 const NewsletterSection = () =>{
 

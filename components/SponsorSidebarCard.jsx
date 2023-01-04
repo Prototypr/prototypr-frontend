@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { usePlausible } from "next-plausible";
-const { default: Image } = require("next/image");
-const { default: gumletLoader } = require("./new-index/gumletLoader");
+import Image from "next/image";
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 const SponsorSidebarCard = ({
   sponsorLogo = "/static/images/placeholder/letter-logo.png",
