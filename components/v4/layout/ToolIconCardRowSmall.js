@@ -17,7 +17,7 @@ const ToolIconCardRow = ({ tools, topic }) => {
           </Link>
 
       </div>
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 px-1`}> 
+      {tools?.length?<div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 px-1`}> 
         {tools.map((tool, index) => {
           return (
             <div key={index}>
@@ -25,7 +25,7 @@ const ToolIconCardRow = ({ tools, topic }) => {
             </div>
           );
         })}
-      </div>
+      </div>:''}
     </div>
   );
 };

@@ -3,9 +3,11 @@ import { useRouter } from "next/router";
 import Container from "@/components/container";
 const NewPagination = dynamic(() => import("@/components/pagination"));
 // import Layout from '@/components/layout'
-import Layout from "@/components/layoutForBlogPost";
-import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
+// import Layout from "@/components/layoutForBlogPost";
+import Layout from "@/components/new-index/layoutForIndex";
 
+import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
+import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from "@/lib/api";
 // import Head from 'next/head'
 import { transformPostList } from "@/lib/locale/transformLocale";
@@ -13,11 +15,11 @@ import { useState } from "react";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import { Waypoint } from "react-waypoint";
-import Link from "next/link";
 import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
-const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
-const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
-const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
+import TopicSection from "@/components/v4/section/TopicSection";
+// const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
+// const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+// const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 // const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
 
 const PAGE_SIZE = 10;
@@ -59,7 +61,7 @@ export default function PostsPage({
   return (
     <>
       <Layout
-          maxWidth={'max-w-[1320px] search-wide'}
+          // maxWidth={'max-w-[1320px] search-wide'}
         seo={{
           title: `${tagName} | design articles on Prototypr | Page ${pagination?.page}`,
           description: `Articles on ${tagName} - design content open and accessible to everyone, no paywall here.`,
@@ -70,64 +72,27 @@ export default function PostsPage({
         activeNav={"posts"}
         preview={preview}
       >
-        <Container>
-          <div className="w-full h-full grid grid-cols-12 gap-1  ">
-            <div className="max-w-[46rem] px-3 md:px-8 xl:px-0 w-full mx-auto pb-20 gap-2 col-span-12 lg:col-span-8">
-              <div className="pt-5 text-md text-gray-700">
-                <Link href={`/`}>
-                  <span className="hover:underline">Home</span>
-                </Link>{" "}
-                →{" "}
-                <Link href={`/topics`}>
-                  <span className="hover:underline">Topics</span>
-                </Link>{" "}
-                →{" "}
-                <Link href={`/posts/${{ tagName }}/page/1`}>
-                  <span className="underline capitalize">{tagName}</span>
-                </Link>
-              </div>
-              <div className="flex justify-between">
-                <h2 className="font-bold text-3xl md:text-5xl text-left my-8">
-                  {tagName}
-                </h2>
-                <div className="flex flex-col justify-center">
-                  <span
-                    className="text-gray-800 hover:bg-blue-50 font-normal hover:text-blue-600 bg-gray-200 px-6 hover:bg-gray-200 py-2 text-center font-inter tracking-tight cursor-pointer cursor w-full text-base rounded-full text-gray-500  "
-                    style={{ borderColor: "rgb(235, 239, 246)" }}
-                  >
-                    Follow topic
-                  </span>
-                </div>
-              </div>
-
-              {/* <section className={`mt-10`}>
-                  {firstPost?.length > 0 &&
-                    firstPost.map((item, index) => {
-                      return <EditorPick2 post={item} showTitle={false} />;
-                      // return <TopicTopItem key={`topic_${index}`} topic={item} />
-                    })}
-                </section> */}
-              {/* {heroPost && <EditorPick2 post={heroPost} showTitle={false} />} */}
-              {morePosts && <ProductList posts={morePosts} />}
-
-              <NewPagination
+        <BreadCrumbs tagName={tagName}/>
+        {allPosts?.length?<TopicSection
+              icon={null}
+              title={tagName}
+              HeroPostRandomSection={allPosts[0]}
+              OtherPostsRandomSection={allPosts?.slice(1, 5)}
+              paginationComponent={ <NewPagination
                 total={pagination?.total}
                 pageSize={PAGE_SIZE}
                 currentPage={pagination?.page}
                 onPageNumChange={(pageNum, tag) => {
                   onPageNumChange(pageNum, tag);
                 }}
-              />
-            </div>
-            {/* <div className="hidden md:block pt-[64px] relative col-span-4 max-w-[410px] border-l border-opacity-20"> */}
-            <Sidebar
-              // author={post.attributes?.author?.data?.attributes}
-              // relatedPosts={relatedPosts}
-              paddingTop="hidden md:block pt-6"
-            />
-            {/* </div> */}
-          </div>
-        </Container>
+              />}
+              // heroJob={heroJob}
+              // sponsors={sponsors}
+              // toolsList={topicRes[topic.slug]?.tools.slice(0, 8)}
+              // authorsList={topicRes[topic.slug]?.authors}
+            />:''}
+            {/* todo show loading state above */}
+        
       </Layout>
     </>
   );

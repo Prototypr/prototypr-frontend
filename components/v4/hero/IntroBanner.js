@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Button from "@/components/Primitives/Button";
 import Container from "@/components/container";
-import gumletLoader from "../../new-index/gumletLoader";
+// import gumletLoader from "../../new-index/gumletLoader";
 // import Image from "next/image";
 import { usePlausible } from "next-plausible";
-import CardDeckRow from "@/components/v4/layout/CardDeckRow";
+// import CardDeckRow from "@/components/v4/layout/CardDeckRow";
 import ParticlesContainer from "@/components/v4/particles/ParticlesContainer";
 import SponsorBubble from "@/components/v4/particles/SponsorBubble";
 
@@ -37,9 +37,11 @@ const IntroBanner = ({ tools, sponsor }) => {
             you can bring new ideas to spark a brighter future.
           </p>
           <div className="flex mt-4">
-            <Button className="" variant="confirmRounded">
-              Sign up
-            </Button>
+            <Link href="/early-access">
+              <Button className="" variant="confirmRounded">
+                Sign up
+              </Button>
+            </Link>
             {/* <Button variant="confirmRoundedLight">
               Sign up
             </Button> */}
