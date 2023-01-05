@@ -15,7 +15,8 @@ const TopicSection = ({
   toolsList,
   authorsList,
   title,
-  icon
+  icon,
+  paginationComponent
 }) => {
   const intl = useIntl();
 
@@ -30,7 +31,7 @@ const TopicSection = ({
           {/* <HomePageNewNavBar /> */}
           {/* <TabSwitcher selectedTab={currentTab} onTabChange={onTabChange} /> */}
           <div className="flex">
-            <h2 className="text-2xl mb-4 font-bold mt-4 text-gray-900">
+            <h2 className="text-3xl capitalize md:text-5xl mt-8 mb-8 font-bold text-gray-900">
               {heading}
             </h2>
             {/* <div className="opacity-50 ml-1">
@@ -43,6 +44,8 @@ const TopicSection = ({
           />
         <Divider/>
         <ToolIconCardRowSmall topic={heading} tools={toolsList} />
+
+        {paginationComponent}
         </div>
 
         <SidebarTopic

@@ -32,6 +32,7 @@ import TopicSelectSection from "@/components/v4/section/TopicSelectSection";
 
 import {Robot, Swatches, HandEye, Wheelchair, FlowArrow} from 'phosphor-react'
 import NewsletterSection from "@/components/v4/section/NewsletterSection";
+import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 
 
 const PAGE_SIZE = 12;
@@ -197,17 +198,9 @@ export async function getStaticProps({ preview = null, locale }) {
     const topicToolsRes =
       (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 12, 0, sort)) || [];
 
-    //extract authors from the postss while we don't have an endpoint for it
-    const authors = []
-    for(var x =0;x<res?.data?.length;x++){
-      const author = res.data[x].attributes?.author?.data?.attributes
-      //don't feature me
-      if(author?.slug!=='graeme'){
-          if(!authorExists(authors,author?.slug)){
-            authors.push(res.data[x].attributes?.author?.data?.attributes)
-          }
-      }
-    }
+      //extract authors from the postss while we don't have an endpoint for it
+    const authors = makeAuthorList(res)
+   
     //shuffle so it's different each time
     shuffleArray(res.data)
     shuffleArray(authors)
@@ -243,21 +236,4 @@ export async function getStaticProps({ preview = null, locale }) {
     },
     revalidate: 20,
   };
-}
-
-function authorExists(authors, slug) {
-  if(authors.some(author => author.slug === slug)){
-   return true
-  }
-
-  return false
-}
-// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-  }
 }
