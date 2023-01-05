@@ -8,7 +8,7 @@ import Layout from "@/components/new-index/layoutForIndex";
 
 import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
-import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from "@/lib/api";
+import { getAllPostsForPostsPage, getCommonQuery, getPostsByPageForPostsPage } from "@/lib/api";
 // import Head from 'next/head'
 import { transformPostList } from "@/lib/locale/transformLocale";
 import { useState } from "react";
@@ -17,6 +17,7 @@ import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import { Waypoint } from "react-waypoint";
 import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 import TopicSection from "@/components/v4/section/TopicSection";
+import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 // const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 // const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 // const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
@@ -36,6 +37,7 @@ const ALL_TAGS = [
 ];
 export default function PostsPage({
   allPosts = [],
+  tools=[],
   heroPost = null,
   morePosts = [],
   preview,
@@ -44,6 +46,7 @@ export default function PostsPage({
   tag = "",
   pageNo = 1,
   tagName = "",
+  authors=[]
 }) {
   const router = useRouter();
 
@@ -76,6 +79,7 @@ export default function PostsPage({
         {allPosts?.length?<TopicSection
               icon={null}
               title={tagName}
+              authorsList={authors}
               HeroPostRandomSection={allPosts[0]}
               OtherPostsRandomSection={allPosts?.slice(1, 5)}
               paginationComponent={ <NewPagination
@@ -88,7 +92,7 @@ export default function PostsPage({
               />}
               // heroJob={heroJob}
               // sponsors={sponsors}
-              // toolsList={topicRes[topic.slug]?.tools.slice(0, 8)}
+              toolsList={tools?.slice(0, 8)}
               // authorsList={topicRes[topic.slug]?.authors}
             />:''}
             {/* todo show loading state above */}
@@ -171,6 +175,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       sort
     )) || [];
 
+
   let tags = allPosts[1];
   allPosts = allPosts[0];
   const pagination = allPosts.meta.pagination;
@@ -180,6 +185,13 @@ export async function getStaticProps({ preview = null, params, locale }) {
     heroPost = null;
 
   allPosts = transformPostList(allPosts.data, locale);
+
+  
+  const topicToolsRes =
+  (await getCommonQuery(null, [tag], "tool", 12, 0, sort)) || [];
+
+  const authors = makeAuthorList(allPosts)
+  shuffleArray(authors)
 
   // otherwise, just send back the list without splicing
   // firstPost = allPosts.slice(0, 1);
@@ -198,6 +210,8 @@ export async function getStaticProps({ preview = null, params, locale }) {
       pageNo,
       morePosts,
       heroPost,
+      tools:topicToolsRes?.data,
+      authors:authors
     },
     revalidate: 20,
   };
@@ -214,6 +228,7 @@ export async function getStaticPaths() {
   for (var z = 0; z < ALL_TAGS.length; z++) {
     const allPosts =
       (await getAllPostsForPostsPage(null, PAGE_SIZE, 0, [ALL_TAGS[z]])) || [];
+
     const pagination = allPosts.meta.pagination;
     const pageCount = pagination.pageCount;
     let arr = new Array(pageCount).fill("");
