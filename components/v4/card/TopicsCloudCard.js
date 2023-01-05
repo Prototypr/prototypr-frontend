@@ -38,10 +38,10 @@ const tags = [
   },
 ];
 
-const TopicsCloudCard = () => {
+const TopicsCloudCard = ({title="Hot topics"}) => {
   return (
     <div className="font-inter">
-      <h3 className="font-semibold text-sm mb-5">Hot topics</h3>
+      <h3 className="font-semibold text-sm mb-5">{title}</h3>
       <div className="flex flex-wrap">
         {tags.map((tag, index) => {
           return <BigTag link={`${tag?.link || "/"}`}>{tag.name}</BigTag>;
