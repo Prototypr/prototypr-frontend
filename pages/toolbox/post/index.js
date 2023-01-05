@@ -147,6 +147,7 @@ const JobPostForm = ({user}) => {
     excerpt: Yup.string().required("Excerpt is required"),
     slug: Yup.string().required("Slug is required"),
     link: Yup.string().required("Link is required"),
+    logo: Yup.string().required("Logo is required"),
  
   });
 
@@ -160,7 +161,8 @@ const JobPostForm = ({user}) => {
       content: "",
       excerpt: "",
       slug: "",
-      link: ""
+      link: "",
+      logo: "",
     },
     validationSchema: FormSchema,
 
@@ -171,7 +173,7 @@ const JobPostForm = ({user}) => {
     console.log("values", values)
     const submit = async () => {
 
-    let entry = {
+    const entry = {
 	    type: "tool",
 	    title: values.title,
 	    content: values.content,
@@ -188,6 +190,12 @@ const JobPostForm = ({user}) => {
   };
 
 
+  const formData = new FormData();
+  	formData.append('files.logo', values.logo)
+	formData.append('data', JSON.stringify({...entry,
+              publishedAt:null
+            }));
+
   let publishPostEndpointConfig = {
           method: "post",
           url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts`,
@@ -195,12 +203,7 @@ const JobPostForm = ({user}) => {
             Authorization: `Bearer ${user?.jwt}`,
           },
     
-          data: {
-            data: {
-              ...entry,
-              publishedAt:null
-            },
-          },
+          data: formData
         };
 
 try {
@@ -223,8 +226,7 @@ try {
           });
           (e) => console.log(e);
         }
-      }
-
+    }
       submit();
     },
   });
@@ -350,6 +352,25 @@ try {
                   />
                 </FormInput>
  				{formik.errors.link && <span className="text-red-600 text-xs">{formik.errors.link}</span>}
+
+
+              <label htmlFor="image" className="text-md font-medium">
+                Logo
+              </label>
+              <ImageUploader 
+              id={3}
+              companyLogoIsDefault={true} 
+              initialImage="" 
+              setFormValue={(blob) =>{
+                setUploadNewCompanyImage(true)
+                formik.setFieldValue("logo",blob)
+              }}/>
+              {/* <ImageUploader initialImage={defaultCompany?.logo} setFormValue={(blob) =>{
+                setImageBlob(blob)
+                formik.setFieldValue("image",blob)
+              }}/> */}
+              {formik.errors.logo && <span className="text-red-600 text-xs">{formik.errors.logo}</span>}
+
 
     
 
