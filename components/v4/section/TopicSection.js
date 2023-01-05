@@ -6,10 +6,15 @@ import { useIntl } from "react-intl";
 // import SectionDivider from "@/components/v4/section/SectionDivider";
 import ToolIconCardRowSmall from "@/components/v4/layout/ToolIconCardRowSmall";
 import Divider from "../layout/Divider";
+import { Tag } from "phosphor-react/dist";
+import SmallPostsGroup from "../layout/SmallPostsSection";
 
 const TopicSection = ({
   HeroPostRandomSection,
   OtherPostsRandomSection,
+  extendedPosts,
+  showTitle,
+  showTopicCloud,
   // heroJob,
   // sponsors,
   toolsList,
@@ -30,27 +35,42 @@ const TopicSection = ({
         <div className="w-full max-w-full flex flex-col gap-2 col-span-12 lg:col-span-9">
           {/* <HomePageNewNavBar /> */}
           {/* <TabSwitcher selectedTab={currentTab} onTabChange={onTabChange} /> */}
-          <div className="flex">
-            <h2 className="text-3xl capitalize md:text-5xl mt-8 mb-8 font-bold text-gray-900">
+          {showTitle!==false?<div className="flex">
+            <Tag className="my-auto mr-2" size={32}/>
+            <h2 className="text-2xl capitalize md:text-5xl mt-8 mb-8 font-bold text-gray-900">
               {heading}
             </h2>
             {/* <div className="opacity-50 ml-1">
               {icon}
             </div> */}
-          </div>
+          </div>:''}
           <LargePostGrid
             largePost={HeroPostRandomSection}
             smallPosts={OtherPostsRandomSection}
           />
+        {toolsList.length>3 ?
+        <>
         <Divider/>
         <ToolIconCardRowSmall topic={heading} tools={toolsList} />
+        </>:''
+      }
+        {extendedPosts?
+        <div className={`${toolsList.length<4?'-mt-4':''}`}>
+         {toolsList.length>2 ?
+          <h3 className="font-semibold text-lg mb-6 px-1">
+          More {heading} articles
+        </h3>:''}
+            <SmallPostsGroup smallPosts={extendedPosts}/>
+          </div>
+      :''}
 
         {paginationComponent}
         </div>
 
         <SidebarTopic
+          showTopicCloud={showTopicCloud}
           topic={heading}
-          paddingTop="hidden ml-4 pl-6 md:block pt-2"
+          paddingTop={`hidden ml-4 pl-6 md:block ${showTopicCloud?'pt-0':'pt-12'}`}
           content={toolsList}
           authorsList={authorsList}
         />

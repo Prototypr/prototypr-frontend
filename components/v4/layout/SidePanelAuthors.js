@@ -7,7 +7,7 @@ const SidePanelAuthors = ({ list, topic }) => {
     <div className="flex rounded-lg flex-col gap-0 px-2">
       <div className="flex flex-row justify-between items-baseline">
         <h3 className="font-inter my-0.5 font-bold text-gray-800 text-sm">
-        Writers in <span className="">{topic}</span>
+        <span className="capitalize">{topic}</span> contributors
         </h3>
       </div>
       <div className="flex flex-col grid my-2">

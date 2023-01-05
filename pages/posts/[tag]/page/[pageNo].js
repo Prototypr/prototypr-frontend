@@ -1,10 +1,11 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import Container from "@/components/container";
 const NewPagination = dynamic(() => import("@/components/pagination"));
 // import Layout from '@/components/layout'
 // import Layout from "@/components/layoutForBlogPost";
 import Layout from "@/components/new-index/layoutForIndex";
+import Container from "@/components/container";
+import Footer from "@/components/footer";
 
 import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
@@ -18,12 +19,15 @@ import { Waypoint } from "react-waypoint";
 import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 import TopicSection from "@/components/v4/section/TopicSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
+import { Tag } from "phosphor-react/dist";
+import SmallPostsGroup from "@/components/v4/layout/SmallPostsSection";
+// import Image from "next/image";
 // const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 // const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 // const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 // const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 11;
 const ALL_TAGS = [
   "ux",
   "user-research",
@@ -72,32 +76,67 @@ export default function PostsPage({
           canonical: `https://prototypr.io/posts/${tag}/page/${pagination?.page}`,
           url: `https://prototypr.io/posts/page/${tag}/${pagination?.page}`,
         }}
+        padding={false}
         activeNav={"posts"}
         preview={preview}
       >
-        <BreadCrumbs tagName={tagName}/>
-        {allPosts?.length?<TopicSection
-              icon={null}
-              title={tagName}
-              authorsList={authors}
-              HeroPostRandomSection={allPosts[0]}
-              OtherPostsRandomSection={allPosts?.slice(1, 5)}
-              paginationComponent={ <NewPagination
-                total={pagination?.total}
-                pageSize={PAGE_SIZE}
-                currentPage={pagination?.page}
-                onPageNumChange={(pageNum, tag) => {
-                  onPageNumChange(pageNum, tag);
-                }}
-              />}
-              // heroJob={heroJob}
-              // sponsors={sponsors}
-              toolsList={tools?.slice(0, 8)}
-              // authorsList={topicRes[topic.slug]?.authors}
-            />:''}
+      <div className="mb-8 top-0 w-full">
+        <Container maxWidth="max-w-[1320px]" >
+          <div className="bg-gray-500 relative bg-opacity-5 overflow-hidden p-6 border-gray-200 rounded-2xl">
+            {/* <div className="z-20 relative"> */}
+            <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
+              <BreadCrumbs tagName={tagName}/>
+                <div className="inline-flex my-4">
+                  {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
+                    <Tag className="my-auto mx-auto mr-2.5 my-auto" size={24}/>
+                  {/* </div> */}
+                  <h2 className="text-5xl my-auto font-bold text-gray-900 capitalize">{tagName}</h2>
+                </div>
+              </div>
+            {/* </div> */}
+            {/* <div className="z-0 w-full h-full top-0 left-0 absolute">
+              <Image  
+              quality={100}
+              fill={true}
+              className="object-cover opacity-60 z-0"
+              // objectFit="cover"
+              src="/static/images/espi1400.png"/>
+            </div> */}
+          </div>
+        </Container>
+      </div>
+      {/* <div className="h-[232px]"/> */}
+        {allPosts?.length?
+        <div className="pb-10">
+            <TopicSection
+                  showTitle={false}
+                  showTopicCloud={true}
+                  icon={null}
+                  title={tagName}
+                  authorsList={authors}
+                  HeroPostRandomSection={allPosts[0]}
+                  OtherPostsRandomSection={allPosts?.slice(1, 5)}
+                  // show more posts underneath the tools section if there's enough to show
+                  extendedPosts={allPosts?.length>5?allPosts.slice(5,allPosts.length):false}
+                  paginationComponent={ <NewPagination
+                    total={pagination?.total}
+                    pageSize={PAGE_SIZE}
+                    currentPage={pagination?.page}
+                    onPageNumChange={(pageNum, tag) => {
+                      onPageNumChange(pageNum, tag);
+                    }}
+                  />}
+                  // heroJob={heroJob}
+                  // sponsors={sponsors}
+                  toolsList={tools?.slice(0, 8)}
+                  // authorsList={topicRes[topic.slug]?.authors}
+                />
+        </div>:''}
             {/* todo show loading state above */}
         
       </Layout>
+
+        <Footer />
     </>
   );
 }

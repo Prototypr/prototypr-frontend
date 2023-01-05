@@ -5,9 +5,10 @@ import SidePanelAuthors from "@/components/v4/layout/SidePanelAuthors";
 import Divider from "@/components/v4/layout/Divider";
 import { Waypoint } from "react-waypoint";
 import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
+import TopicsCloudCard from "../card/TopicsCloudCard";
 
-const SidebarDiscover = ({ authorsList = [], paddingTop, topic }) => {
-  let slicedList = [...authorsList.slice(0, 5)];
+const SidebarDiscover = ({ authorsList = [], paddingTop, topic, showTopicCloud }) => {
+  let slicedList = [...authorsList.slice(0, 4)];
 
   const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-3");
 
@@ -30,6 +31,13 @@ const SidebarDiscover = ({ authorsList = [], paddingTop, topic }) => {
               <SidePanelAuthors list={slicedList} topic={topic} />
             </div>
           </div>
+         {showTopicCloud?
+         <>
+          <Divider/>
+         <TopicsCloudCard title={'More topics'} />
+         </>
+         :''}
+
           <Divider/>
           <SponsorSidebarCard
             sponsorLocation="homepage_bottom_sidebar"
