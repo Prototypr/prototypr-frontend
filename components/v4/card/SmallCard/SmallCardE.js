@@ -8,7 +8,7 @@ const SmallCard = ({link, title, image, tags, date, avatar, author }) => {
     <div className="flex hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-row font-inter w-full max-w-[470px]">
       {image ? (
         <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[195px] xs:h-[124px] relative rounded-2xl overflow-hidden border border-gray-100">
-          <Link href={link}>
+          <Link href={link??''}>
             <Image
               className="object-cover cursor-pointer"
               layout="fill"
@@ -39,7 +39,7 @@ const SmallCard = ({link, title, image, tags, date, avatar, author }) => {
               : ""}
           </div>
         <div>
-          <Link href={link}>
+          <Link href={link??''}>
             <h2 className="text-base text-lg font-semibold leading-snug line-clamp-3">
               {title}
             </h2>
