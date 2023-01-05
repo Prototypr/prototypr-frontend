@@ -14,7 +14,7 @@ const Breadcrumbs = ({tagName}) =>{
                   <span className="hover:underline">Topics</span>
                 </Link>{" "}
                 →{" "}
-                <Link href={`/posts/${{ tagName }}/page/1`}>
+                <Link href={`/posts/${ tagName }/page/1`}>
                   <span className="underline capitalize">{tagName}</span>
                 </Link>
               </div>

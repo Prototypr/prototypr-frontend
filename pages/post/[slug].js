@@ -462,7 +462,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const allPosts = await getAllPostsWithSlug("article", 5000);
+  const allPosts = await getAllPostsWithSlug("article", (process.env.NODE_ENV || (process.env.NEXT_PUBLIC_HOME_URL.indexOf('localhost')>-1))?20:5000);
   // const homePosts = await getCombinedPostsForHomeStatic()
 
   // let mergedSlugs = {

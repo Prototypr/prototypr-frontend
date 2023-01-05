@@ -79,7 +79,7 @@ export const SponsorHomeCard = ({
   return (
     <div className="flex h-full flex-col grid items-center gap-4">
       <>
-        <Link href={`${sponsorLink}`}>
+        <Link href={`${sponsorLink??''}`}>
           <div className="w-full h-auto rounded-xl cursor-pointer flex flex-col">
             <div className="flex flex-row p-4 rounded-xl">
               <div
