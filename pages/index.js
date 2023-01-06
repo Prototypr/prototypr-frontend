@@ -142,6 +142,7 @@ export default function Index({
           return (
             <>
             <TopicSection
+              slug={topic.slug}
               icon={topic.icon}
               title={topic.name}
               HeroPostRandomSection={topicRes[topic.slug]?.posts[0]}
