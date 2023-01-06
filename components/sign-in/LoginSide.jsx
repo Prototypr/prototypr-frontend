@@ -1,25 +1,25 @@
-const LoginSide = ({user}) => {
+const LoginSide = ({ user }) => {
   return (
-    <div className="flex flex-col items-center">
-      <a href="/">
-      <img src={`/static/images/logo-small.svg`} 
-      data-gumlet="false"
-      alt="Prototypr Logo" />
-      </a>
-      <h1 className="text-2xl font-semibold mt-2">{!user?.email?'Join Prototypr':'Publish with us'}</h1>
-      <p className="text-sm text-gray-400 mt-4 mb-5">
-        Be part of the next generation of web publishing.
-      </p>
-      <div className="text-sm font-light text-gray-200">
-        <p className="mb-1">
-          <span>👉 </span> Share your knowledge
-        </p>
-        <p className="mb-1">
-          <span>👉 </span> Build your online presence
-        </p>
-        <p className="mb-1">
-          <span>👉 </span> Earn rewards for contributing
-        </p>
+    <div className="flex flex-col w-full h-full overflow-hidden relative">
+      <div className="px-10 pt-20 flex flex-col gap-2">
+        <a href="/">
+          <div className="w-16 h-16 p-4 bg-white rounded-2xl">
+            <img
+              src={`/static/images/logo-small.svg`}
+              data-gumlet="false"
+              alt="Prototypr Logo"
+            />
+          </div>
+        </a>
+        <h1 className="text-5xl text-white font-bold font-inter">
+          Be part of the next generation of Web Publishing.
+        </h1>
+      </div>
+      <div className="translate-y-[200px] scale-[1.5]">
+        <img
+          className=" rotate-[-20deg]"
+          src={`/static/images/signup-publishing-showcase.png`}
+        ></img>
       </div>
     </div>
   );

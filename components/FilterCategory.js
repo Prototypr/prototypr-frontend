@@ -6,7 +6,7 @@ export default function FilterCategory({
   items = [],
   key,
   urlRoot,
-  paginationRoot
+  paginationRoot,
 }) {
   return (
     <div className="display-none mb-8 lg:block text-gray-800">
@@ -14,7 +14,7 @@ export default function FilterCategory({
         return (
           <div key={`${key}${index}`} className="mb-8 text-gray-800">
             <div className="">
-              <h1 className="font-bold pb-2 mb-2 border-b border-gray-200 pr-3 text-md uppercase text-gray-900">
+              <h1 className="font-bold pb-2 mb-2 border-b border-gray-200 pr-3 text-sm uppercase text-gray-900">
                 {item.title}
               </h1>
             </div>
@@ -29,7 +29,7 @@ export default function FilterCategory({
                       className={`hover:text-blue-500 py-1.5 rounded ${
                         sItem.key == slug
                           ? "text-blue-600 font-semibold"
-                          : "text-gray-600 font-base"
+                          : "text-[#A1A1A1] font-base"
                       }`}
                     >
                       {sItem.name}
@@ -40,7 +40,7 @@ export default function FilterCategory({
             })}
             {item.moreLink && (
               <Link href={item.moreLink.url}>
-                <span className="inline-block text-gray-600 hover:text-blue-600 font-medium underline mt-4 mb-6 text-md">
+                <span className="inline-block text-[#A1A1A1] hover:text-blue-600 font-medium underline mt-4 mb-6 text-sm">
                   {item.moreLink.text}
                 </span>
               </Link>

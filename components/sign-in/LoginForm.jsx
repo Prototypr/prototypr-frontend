@@ -7,24 +7,20 @@ const Form = dynamic(() => import("@/components/Form"), { ssr: true });
 // const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 import toast from "react-hot-toast";
 
-const LoginForm = ({ isSignUp, title="Get early access",
- }) => {
+const LoginForm = ({ isSignUp, title = "Sign In" }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [sent, setSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div className="flex flex-col">
-      <h2 className="text-xl text-gray-800 font-bold text-center mb-2">
+    <div className="flex flex-col bg-[#fff] rounded-3xl px-10 py-10  md:p-18">
+      <h2 className="text-[32px] font-inter text-gray-800 font-bold">
         {isSignUp ? title : "Welcome back"}
       </h2>
-      <p className="text-sm text-gray-600 whitespace-nowrap text-center">
-        
-      </p>
-      <div className="flex flex-col grid gap-2 flex-grow mt-6">
+      <div className="flex flex-col gap-4 flex-grow mt-6">
         <Button
           isFullWidth
-          className="text-left justify-start h-11 font-normal"
+          className="text-left w-full text-sm justify-start h-11 p-8 md:px-20 rounded-full font-normal"
           color="twitter"
           leftIcon={
             <div className="bg-white p-1 rounded-md">
@@ -44,7 +40,7 @@ const LoginForm = ({ isSignUp, title="Get early access",
         </Button>
         <Button
           isFullWidth
-          className="text-left justify-start h-11 font-normal"
+          className="text-left w-full text-sm  justify-start h-11 p-8 md:px-20 rounded-full font-normal"
           color="github"
           leftIcon={
             <div className="bg-white p-1 rounded-md">
@@ -66,7 +62,7 @@ const LoginForm = ({ isSignUp, title="Get early access",
         </Button>
         <Button
           isFullWidth
-          className="text-left justify-start h-11 font-normal"
+          className="text-left w-full text-sm  justify-start h-11 p-8 md:px-20 rounded-full font-normal"
           color="google"
           leftIcon={
             <div className="bg-white p-1 rounded-md">
@@ -122,7 +118,7 @@ const LoginForm = ({ isSignUp, title="Get early access",
         <Button
           isFullWidth
           type="submit"
-          className="text-left bg-gray-100 justify-start h-11 font-normal"
+          className="text-left bg-gray-100 justify-start h-11 p-8 md:px-20 rounded-full font-normal"
           onClick={() => {
             setShowLoginForm(!showLoginForm);
             // signIn("email", {email:'graeme@prototypr.io'})
@@ -175,23 +171,26 @@ const LoginForm = ({ isSignUp, title="Get early access",
               e.preventDefault();
               setSent(false);
               setIsLoading(true);
-              console.log(e)
+              console.log(e);
               //create username from email
-              let username=e.target[0].value
+              let username = e.target[0].value;
               //check if username is an email address
               var emailValidator = require("email-validator");
-              if(emailValidator.validate(username)){
-                let newUsername = username.split('@')[0];
-                let timestamp = String(Date.now())
+              if (emailValidator.validate(username)) {
+                let newUsername = username.split("@")[0];
+                let timestamp = String(Date.now());
                 //last 3 digits of timestamp
-                timestamp = timestamp.substring(newUsername.length-3, newUsername.length)
-                newUsername = newUsername+timestamp
-                username = newUsername
+                timestamp = timestamp.substring(
+                  newUsername.length - 3,
+                  newUsername.length
+                );
+                newUsername = newUsername + timestamp;
+                username = newUsername;
               }
 
               var data = JSON.stringify({
                 email: e.target[0].value,
-                username:username
+                username: username,
               });
 
               var config = {
@@ -223,10 +222,10 @@ const LoginForm = ({ isSignUp, title="Get early access",
                   }, 800);
                 })
                 .catch(function (error) {
-                  setSent(false)
+                  setSent(false);
                   setIsLoading(false);
                   toast.dismiss(loadingToastId);
-                  alert('Please try again, or contact support.')
+                  alert("Please try again, or contact support.");
                 });
             }}
           />
