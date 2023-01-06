@@ -28,9 +28,6 @@ import {
 
 const ToolContent = ({ post, gallery, relatedPosts }) => {
   const { user } = useUser();
-  console.log(user);
-  //   const mainImage = gallery[1]?.original;
-  console.log(post);
   const tags = post.attributes.tags.data;
   return (
     <>
@@ -40,9 +37,9 @@ const ToolContent = ({ post, gallery, relatedPosts }) => {
             backgroundColor: stc(post?.attributes?.title),
             backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
           }}
-          className="h-auto max-h-[450px] bg-purple-300 w-full p-5 md:p-10 "
+          className="h-[450px] w-full p-5 md:p-10 flex flex-col justify-center "
         >
-          <div className="max-w-4xl mx-auto px-5">
+          <div className="max-w-4xl w-full mx-auto px-5">
             <div className="flex flex-col gap-2 justify-between">
               <div className="w-[70px] h-[70px] shadow-md rounded-3xl bg-white">
                 <Image

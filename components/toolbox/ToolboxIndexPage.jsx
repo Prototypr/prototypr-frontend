@@ -45,8 +45,8 @@ const ToolboxIndexPage = ({
         >
           <div className="max-w-[1440px] relative flex flex-col mx-auto md:px-6 text-sm">
             <div className="flex flex-col gap-4 w-auto py-20 px-4 md:px-0">
-              <div className="w-[100px] h-[100px] bg-white rounded-3xl shadow-md"></div>
-              <h1 className="text-5xl text-white font-bold tracking-tighter leading-tight capitalize">
+              {/* <div className="w-[100px] h-[100px] bg-white rounded-3xl shadow-md"></div> */}
+              <h1 className="text-5xl text-white font-bold tracking-tighter leading-tight capitalize pt-10">
                 {title}
               </h1>
               <div>

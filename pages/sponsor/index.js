@@ -26,8 +26,51 @@ const seo = {
   url: `https://prototypr.io/sponsor`,
 };
 
+const SponsorPackages = {
+  newsletter: [
+    {
+      image: "/static/images/sponsor-nl-main-cover.png",
+      title: "Featured Sponsor (One Week)",
+      desp: "A large banner that is featured in the newsletter.",
+      ctaText: "Book for $600",
+      link: "/sponsor/booking?type=banner",
+    },
+    {
+      image: "/static/images/sponsor-nl-link-cover.png",
+      title: "Sponsored Link (One Week)",
+      desp: "A sponsored article or tool in the newsletter",
+      ctaText: "Book for $300",
+      link: "/sponsor/booking?type=link",
+    },
+  ],
+  website: [
+    {
+      image: "/static/images/sponsor-web-main.png",
+      title: "Main Sponsor  (One Week)",
+      desp: "A sponsor card on the homepage and article pages",
+      ctaText: "Book for $900",
+      link: "",
+    },
+    {
+      image: "/static/images/sponsor-web-topic.png",
+      title: "Topic Sponsor (One Week)",
+      desp: "A sponsor card on a topic page and related articles.",
+      ctaText: "Book for $500",
+      link: "",
+    },
+    {
+      image: "/static/images/sponsor-web-tool.png",
+      title: "Sponsored Tool (One Week)",
+      desp: "A sponsored tool in the toolbox. Showed on every toolbox page.",
+      ctaText: "Book for $100",
+      link: "",
+    },
+  ],
+};
+
 const Index = () => {
   const [weekNumber, setWeekNumber] = useState();
+  const [selectedPackage, setSelectedPackage] = useState("Newsletter");
 
   useEffect(() => {
     const week = currentWeekNumber();
@@ -42,9 +85,9 @@ const Index = () => {
       background="#eff4fb"
     >
       <Container>
-        <div className="w-full h-full grid grid-cols-12 gap-1  ">
+        <div className="w-full h-full grid grid-cols-1 gap-1  ">
           <div className="max-w-[46rem] mx-auto pb-20 px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
-            <div className="pt-5 text-md text-gray-700 pb-8">
+            {/* <div className="pt-5 text-md text-gray-700 pb-8">
               <Link href={`/`}>
                 <span className="hover:underline">Home</span>
               </Link>{" "}
@@ -52,20 +95,146 @@ const Index = () => {
               <Link href={`/sponsor`}>
                 <span className="underline">Sponsor</span>
               </Link>
-            </div>
+            </div> */}
             <div className=" w-full">
               <div className="flex w-full">
-                <div className="w-full">
-                  <h1 className="text-4xl font-bold tracking-tighter leading-tight mb-4">
-                    Sponsor Us
-                  </h1>
-                  <p className="mb-8 text-lg">
-                    Got an product you'd like to share with the Prototypr
-                    audience? We run 2 sponsor packages, which you can book and
-                    schedule directly:
-                  </p>
-                  <div className="mb-8">
-                    <div className="mb-6 rounded-lg bg-white shadow border border-gray-200 p-4">
+                <div className="w-full bg-white p-5 md:p-10 rounded-2xl">
+                  <div className=" w-full flex flex-col gap-5 mb-5">
+                    <h1 className="text-2xl md:text-4xl max-w-3xl font-bold tracking-tighter leading-tight">
+                      Reach your Target <br /> Audience on Prototypr
+                    </h1>
+                    <p className=" text-base text-[#807F7F] max-w-lg">
+                      Got an article or product you'd like to share with the
+                      Prototypr audience? We run 2 sponsor packages - a featured
+                      placement, or a sponsored link.
+                    </p>
+                    <p className="w-full bg-[#F8A4FF] text-opacity-80 text-white border rounded-xl border-[#E19DDF] px-5 py-3">
+                      This is an automated booking system. To book a slot,
+                      please sign up. After you sign up, you can pick a slot
+                      based on the availability. For any queries, contact
+                      <span className="underline text-white">
+                        {" "}
+                        graeme@prototypr.io{" "}
+                      </span>{" "}
+                    </p>
+                  </div>
+                  <hr />
+                  <div className="flex flex-col gap-4 py-10">
+                    <h2 className="text-2xl max-w-xs font-bold">
+                      Where would you like to reach your audience?
+                    </h2>
+                    <div className="w-full flex flex-row gap-2">
+                      <button
+                        onClick={() => setSelectedPackage("Newsletter")}
+                        className={`w-full h-20  ${
+                          selectedPackage === "Newsletter"
+                            ? "border-[#5380D6] border bg-[#DCEEFF] text-[#5380D6]"
+                            : "border-[#D1D1D1] border bg-gray-50 text-[#B8B4B4]"
+                        } rounded-lg`}
+                      >
+                        Newsletter
+                      </button>
+                      <button
+                        onClick={() => setSelectedPackage("Website")}
+                        className={`w-full h-20  ${
+                          selectedPackage === "Website"
+                            ? "border-[#5380D6] border bg-[#DCEEFF] text-[#5380D6]"
+                            : "border-[#D1D1D1] border bg-gray-50 text-[#B8B4B4]"
+                        } rounded-lg`}
+                      >
+                        Website
+                      </button>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="w-full py-5">
+                    {selectedPackage === "Newsletter" ? (
+                      <div>
+                        <div className="flex flex-col gap-4">
+                          <h2 className="text-3xl font-bold">Newsletter</h2>
+                          <p className=" text-base text-[#807F7F] max-w-lg">
+                            Reach an audience of 25k+ subscribers consisting of
+                            developers, designers and marketers who are looking
+                            for the latest tools and articles that can help them
+                            grow.
+                          </p>
+                          <div className="grid grid-col-1 md:grid-cols-2 gap-4 ">
+                            {SponsorPackages.newsletter.map((pk, i) => {
+                              return (
+                                <div className="bg-white h-auto flex flex-col justify-center items-center gap-4 w-full rounded-2xl p-4 border border-opacity-20">
+                                  <div
+                                    style={{
+                                      backgroundImage: `url("${pk.image}")`,
+                                      backgroundSize: "cover",
+                                      backgroundPosition: "center center",
+                                    }}
+                                    className="w-full h-[200px] bg-gray-100 rounded-lg relative overflow-hidden"
+                                  ></div>
+                                  <div className="flex flex-col gap-2">
+                                    <h3 className="text-base font-semibold">
+                                      {pk.title}
+                                    </h3>
+                                    <p className="text-[#7A7A7A] text-base">
+                                      {pk.desp}
+                                    </p>
+                                    <a href={pk.link}>
+                                      <button className="w-full py-4 rounded-lg bg-[#0F8CFF] text-white">
+                                        {pk.ctaText}
+                                      </button>
+                                    </a>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="flex flex-col gap-4">
+                          <h2 className="text-3xl font-bold">Website</h2>
+                          <p className=" text-base text-[#807F7F] max-w-lg">
+                            Reach an audience of 50k+ monthly viewers consisting
+                            of developers, designers and marketers who are
+                            looking for the latest tools and articles that can
+                            help them grow. Place highly targeted ads for topics
+                            like AI, Product Design etc.
+                          </p>
+                          <div className="grid grid-col-1 md:grid-cols-2 gap-4 ">
+                            {SponsorPackages.website.map((pk, i) => {
+                              return (
+                                <div className="bg-white h-auto flex flex-col justify-center items-center gap-4 w-full rounded-2xl p-4 border border-opacity-20">
+                                  <div
+                                    style={{
+                                      backgroundImage: `url("${pk.image}")`,
+                                      backgroundSize: "cover",
+                                      backgroundPosition: "center center",
+                                    }}
+                                    className="w-full h-[200px] bg-gray-100 rounded-lg relative overflow-hidden"
+                                  ></div>
+                                  <div className="flex flex-col gap-2">
+                                    <h3 className="text-base font-semibold">
+                                      {pk.title}
+                                    </h3>
+                                    <p className="text-[#7A7A7A] text-base">
+                                      {pk.desp}
+                                    </p>
+                                    <a href={pk.link}>
+                                      <button className="w-full py-4 rounded-lg bg-[#0F8CFF] text-white">
+                                        {pk.ctaText}
+                                      </button>
+                                    </a>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  {/* <div className="mb-8">
+                    <div className="mb-6 rounded-lg p-4">
                       <h1 className="text-lg mb-1 md:text-xl font-medium">
                         Featured package
                       </h1>
@@ -111,7 +280,7 @@ const Index = () => {
                         </Link>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
