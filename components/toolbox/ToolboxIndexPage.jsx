@@ -6,96 +6,13 @@ import PostTitle from "@/components/post-title";
 import Image from "next/image";
 import Link from "next/link";
 import gumletLoader from "@/components/new-index/gumletLoader";
+import { ToolBoxDisplay } from "./ToolboxGrid";
+import stc from "string-to-color";
 
 const MoreStories = dynamic(() => import("@/components/more-stories"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
 const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
-
-const ToolBoxDisplay = ({ posts, type }) => {
-  return (
-    <div className="grid grid-cols-2 p-6 gap-6 w-full flex-wrap">
-      {posts.map((post, i) => {
-        const coverImage = post.attributes.featuredImage?.data?.attributes?.url
-          ? post.attributes.featuredImage.data.attributes.url
-          : post.attributes.legacyFeaturedImage
-          ? post.attributes.legacyFeaturedImage
-          : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-
-        return (
-          <div
-            key={post.attributes.slug}
-            className="w-auto flex flex-row justify-between gap-6 p-5 bg-white rounded-2xl border border-black border-opacity-10"
-          >
-            <div className="flex flex-row gap-4">
-              {coverImage?.logoNew && (
-                <div
-                  className="p-1 rounded-2xl overflow-hidden bg-gray-50"
-                  style={{ height: "75px", width: "75px" }}
-                >
-                  <Image
-                    loader={gumletLoader}
-                    priority={false < 2 ? `true` : `false`}
-                    data-priority={false < 2 ? `true` : `false`}
-                    fetchpriority={false < 2 ? "true" : "false"}
-                    data-gmlazy={false < 2 ? `false` : `true`}
-                    width="100"
-                    height="100"
-                    alt="Brand logo for external website's link"
-                    className=" border rounded-2xl bg-white"
-                    src={coverImage?.logoNew}
-                  />
-                </div>
-              )}
-
-              <div className="flex flex-col gap-1">
-                <p className="font-semibold line-clamp-3">
-                  {post.attributes.title}
-                </p>
-                <p className="text-[#989898]">Pro Editing for everyone</p>
-              </div>
-            </div>
-            <div>
-              <Link href={`/toolbox/${post.attributes.slug}`}>
-                <button className="px-8 py-2 text-base bg-blue-600 hover:bg-blue-700 text-white rounded-full">
-                  Get
-                </button>
-              </Link>
-            </div>
-          </div>
-          // <PostPreview
-          //   key={post.attributes.slug}
-          //   title={post.attributes.title}
-          //   coverImage={
-          //     post.attributes.featuredImage?.data?.attributes?.url
-          //       ? post.attributes.featuredImage.data.attributes.url
-          //       : post.attributes.legacyFeaturedImage
-          //       ? post.attributes.legacyFeaturedImage
-          //       : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-          //   }
-          //   date={post.attributes.date}
-          //   author={
-          //     post.attributes.author && post.attributes.author.data
-          //       ? post.attributes.author.data.attributes
-          //       : null
-          //   }
-          //   slug={post.attributes.slug}
-          //   excerpt={post.attributes.excerpt}
-          //   type={type}
-          //   route={route}
-          //   tag={
-          //     post.attributes.tags &&
-          //     post.attributes.tags.data &&
-          //     post.attributes.tags.data[0]
-          //       ? post.attributes.tags.data[0]
-          //       : null
-          //   }
-          // />
-        );
-      })}
-    </div>
-  );
-};
 
 const ToolboxIndexPage = ({
   title,
@@ -108,6 +25,7 @@ const ToolboxIndexPage = ({
   filterCategories,
   currentSlug,
   paginationRoot,
+  color,
 }) => {
   const router = useRouter();
 
@@ -119,11 +37,14 @@ const ToolboxIndexPage = ({
     <>
       <div className="">
         <div
-          style={{ backgroundImage: `url(${"/static/images/proto-bg.svg"})` }}
-          className={`border-b h-auto bg-[#22866D] border-gray-900 border-opacity-10 -mt-6 pt-10 -mx-8 px-6 pb-9 overflow-hidden relative`}
+          style={{
+            backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
+            backgroundColor: color ? color : stc(title),
+          }}
+          className={`border-b h-auto border-gray-900 border-opacity-10 -mt-6 pt-10 -mx-8 px-6 pb-9 overflow-hidden relative`}
         >
           <div className="max-w-[1440px] relative flex flex-col mx-auto md:px-6 text-sm">
-            <div className="flex flex-col gap-4 w-auto py-20">
+            <div className="flex flex-col gap-4 w-auto py-20 px-4 md:px-0">
               <div className="w-[100px] h-[100px] bg-white rounded-3xl shadow-md"></div>
               <h1 className="text-5xl text-white font-bold tracking-tighter leading-tight capitalize">
                 {title}
@@ -158,7 +79,9 @@ const ToolboxIndexPage = ({
                 />
                 <div className="w-full px-3 md:px-8 lg:px-0 pt-8 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10">
                   <div className="col-span-3">
-                    <ToolBoxDisplay posts={allPosts} type="toolbox" />
+                    <div className="md:p-10">
+                      <ToolBoxDisplay posts={allPosts} type="toolbox" />
+                    </div>
                     <NewPagination
                       total={pagination?.total}
                       pageSize={pageSize}

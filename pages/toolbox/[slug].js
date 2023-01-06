@@ -2,9 +2,17 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 
+import Image from "next/image";
+
 import ErrorPage from "next/error";
 import Container from "@/components/container";
 import Layout from "@/components/layout";
+import stc from "string-to-color";
+
+import { ToolBoxDisplay } from "../../components/toolbox/ToolboxGrid";
+import gumletLoader from "@/components/new-index/gumletLoader";
+import useUser from "@/lib/iron-session/useUser";
+
 const PopupGallery = dynamic(() => import("@/components/gallery/PopupGallery"));
 const AuthorCard = dynamic(() => import("@/components/toolbox/AuthorCard"));
 const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"));
@@ -17,6 +25,120 @@ import {
   getTool,
   getAllToolsForHomeStatic,
 } from "@/lib/api";
+
+const ToolContent = ({ post, gallery, relatedPosts }) => {
+  const { user } = useUser();
+  console.log(user);
+  //   const mainImage = gallery[1]?.original;
+  console.log(post);
+  const tags = post.attributes.tags.data;
+  return (
+    <>
+      <div className="w-full">
+        <div
+          style={{
+            backgroundColor: stc(post?.attributes?.title),
+            backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
+          }}
+          className="h-auto max-h-[450px] bg-purple-300 w-full p-5 md:p-10 "
+        >
+          <div className="max-w-4xl mx-auto px-5">
+            <div className="flex flex-col gap-2 justify-between">
+              <div className="w-[70px] h-[70px] shadow-md rounded-3xl bg-white">
+                <Image
+                  loader={gumletLoader}
+                  priority={false < 2 ? `true` : `false`}
+                  data-priority={false < 2 ? `true` : `false`}
+                  fetchpriority={false < 2 ? "true" : "false"}
+                  data-gmlazy={false < 2 ? `false` : `true`}
+                  width="100"
+                  height="100"
+                  alt="Brand logo for external website's link"
+                  className=" border rounded-2xl bg-white"
+                  src={post?.attributes?.legacyFeaturedImage?.logoNew}
+                />
+              </div>
+              <div className="flex flex-col gap-3 justify-between">
+                <h1 className="text-4xl my-0 py-0 text-white font-bold">
+                  {post?.attributes?.title}
+                </h1>
+                {/* {post?.attributes?.author && (
+                  <div className="sm:hidden lg:block">
+                    <AuthorCard
+                      author={post.attributes.author}
+                      avatar={post.attributes?.author}
+                    />
+                  </div>
+                )} */}
+                <div className="flex flex-row gap-2">
+                  {tags.map((tag) => {
+                    return (
+                      <span className="px-4 py-0.5 text-sm capitalize rounded-full text-white border border-opacity-25 border-white bg-white bg-opacity-20 backdrop-blur-md">
+                        {tag.attributes.name}
+                      </span>
+                    );
+                  })}
+                </div>
+                <div>
+                  <a
+                    target={"_blank"}
+                    href={post?.attributes?.link + "?ref=prototypr.io"}
+                  >
+                    <button className="max-w-[200px] w-full py-4 bg-white rounded-full">
+                      Visit Site
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="max-w-4xl mx-auto py-5 px-5 h-full">
+          {post?.attributes && (
+            <PopupGallery
+              item={post.attributes}
+              gallery={gallery}
+              rounded={true}
+              arrows={false}
+            />
+          )}
+          <div
+            style={{ color: "#333", marginBottom: "1rem", fontSize: "18px" }}
+            className="py-10 popup-modal-content"
+            dangerouslySetInnerHTML={{
+              __html: post.attributes.content,
+            }}
+          ></div>
+          <div className="my-5">
+            <hr />
+          </div>
+          <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-3">
+              <h2 className="text-3xl font-bold">
+                Discover more <br /> Similar Tools
+              </h2>
+              <ToolBoxDisplay posts={relatedPosts} type="toolboxContentPage" />
+            </div>
+            <div className="my-3">
+              <hr />
+            </div>
+            {/* <div className="flex flex-col gap-3 pb-5">
+              <h2 className="text-3xl font-bold">
+                Discover more <br /> Related Content
+              </h2>
+              <div className="w-full grid grid-cols-2 gap-5">
+                <div className="w-full h-[100px] bg-gray-100"></div>
+                <div className="w-full h-[100px] bg-gray-100"></div>
+                <div className="w-full h-[100px] bg-gray-100"></div>
+                <div className="w-full h-[100px] bg-gray-100"></div>
+              </div>
+            </div> */}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default function Post({ post, relatedPosts, gallery, preview }) {
   const router = useRouter();
@@ -33,6 +155,8 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
 
   return (
     <Layout
+      padding={false}
+      background={"#fff"}
       maxWidth={"max-w-[1200px] search-wide"}
       seo={{
         title: `${
@@ -72,75 +196,20 @@ export default function Post({ post, relatedPosts, gallery, preview }) {
       activeNav={"toolbox"}
       preview={preview}
     >
-      <Container>
+      {/* <Container>
         <div className="w-full mt-6 md:mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
-          {/* left sidebar */}
           {router.isFallback ? (
             <h1 className="text-6xl font-inter-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
               Loading...
             </h1>
           ) : (
-            <>
-              <div className="md:col-span-5 hidden lg:block">
-                {post?.attributes?.author && (
-                  <div className="sm:hidden lg:block">
-                    <AuthorCard
-                      author={post.attributes.author}
-                      avatar={post.attributes?.author}
-                    />
-                  </div>
-                )}
-                <div className="mt-6 sm:hidden block lg:block lg:mt-6">
-                  <SponsorCard position="left" />
-                </div>
-                {/**Contributors */}
-                <Contributors />
-              </div>
-              {/* center sidebar */}
-              <div className="col-span-full lg:col-span-13">
-                {/* {post?.attributes && (
-                  <PopupGallery
-                    item={post.attributes}
-                    gallery={gallery}
-                    rounded={true}
-                    arrows={false}
-                  />
-                )} */}
-
-                {/**Description */}
-                <div className="mb-8">
-                  <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full">
-                    <div
-                      style={{ color: "#4a5568", marginBottom: "1rem" }}
-                      className="py-3 popup-modal-content"
-                      dangerouslySetInnerHTML={{
-                        __html: post.attributes.content,
-                      }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              {/* RIGHT SIDEBAR START */}
-              {/* <div className="col-span-full mb-6 lg:mb-0 lg:col-span-6 order-first lg:order-last lg:block">
-                <VisitCard
-                  tags={post?.attributes.tags}
-                  title={post.attributes.title}
-                  link={post?.attributes.link}
-                  useNextImage={true}
-                  logoNew={post?.attributes.legacyFeaturedImage?.logoNew}
-                />
-                {relatedPosts && (
-                  <RelatedPosts
-                    title={"Related tools"}
-                    relatedPosts={relatedPosts}
-                    img={post.attributes?.legacyFeaturedImage?.logoNew}
-                  />
-                )}
-              </div> */}
-            </>
+            <ToolContent post={post} />
           )}
         </div>
-      </Container>
+      </Container> */}
+      {/* <div className="w-full mt-6 md:mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6"> */}
+      <ToolContent post={post} gallery={gallery} relatedPosts={relatedPosts} />
+      {/* </div> */}
     </Layout>
   );
 }

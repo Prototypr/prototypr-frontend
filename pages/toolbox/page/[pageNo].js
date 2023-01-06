@@ -62,6 +62,7 @@ export default function ToolboxPage({
         currentSlug={"toolbox"}
         allPosts={allPosts}
         breadcrumbs={BREADCRUMBS}
+        color={"#3574F0"}
       />
     </Layout>
   );
