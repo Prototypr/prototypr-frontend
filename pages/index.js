@@ -33,6 +33,7 @@ import TopicSelectSection from "@/components/v4/section/TopicSelectSection";
 import {Robot, Swatches, HandEye, Wheelchair, FlowArrow} from 'phosphor-react'
 import NewsletterSection from "@/components/v4/section/NewsletterSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
+import useUser from "@/lib/iron-session/useUser";
 
 
 const PAGE_SIZE = 12;
@@ -99,6 +100,9 @@ export default function Index({
     }
   }, []);
 
+  const { user, isLoading } = useUser({
+    redirectIfFound: false,
+  });
   // const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
   // const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
   const heroJob = jobs.filter((item, i) => i === 0);
@@ -123,11 +127,12 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        <IntroBanner
+        {(!user?.isLoggedIn)?<IntroBanner
           sponsor={sponsors?.length ? sponsors[0] : null}
           tools={first3Tools}
-        />
+        />:''}
         <DiscoverSection
+          user={user}
           heroCardPost={heroCardPost}
           viewablePosts={viewablePosts}
           jobsSidebar={jobsSidebar}
