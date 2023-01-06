@@ -1,17 +1,19 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
-
-
-import Container from "@/components/container";
+import DiscoverSection from "@/components/v4/section/DiscoverSection";
+import SectionDivider from "@/components/v4/section/SectionDivider";
+import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
+// import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
-import TrendingFullWidth from "@/components/homepage/TrendingFullWidth";
+// import TrendingFullWidth from "@/components/homepage/TrendingFullWidth";
+import IntroBanner from "@/components/v4/hero/IntroBanner";
 /**new index components */
-import { BrowserView } from "react-device-detect";
-import Sidebar from "@/components/homepage/Sidebar";
+// import { BrowserView } from "react-device-detect";
 const Footer = dynamic(() => import("@/components/footer"));
-const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
+// const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 
 import { getAllJobs } from "@/lib/api";
+
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 
 import {
@@ -25,49 +27,67 @@ import { useIntl } from "react-intl";
 import { transformPostListOld } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
 
-import HeroGrid from "@/components/v4/hero/hero";
-import TabSwitcher from "@/components/homepage/TabSwitcher";
-// import generateCombinedRSS from "@/lib/rss/generateAllRSS";
+import TopicSection from "@/components/v4/section/TopicSection";
+import TopicSelectSection from "@/components/v4/section/TopicSelectSection";
 
+import {Robot, Swatches, HandEye, Wheelchair, FlowArrow} from 'phosphor-react'
+import NewsletterSection from "@/components/v4/section/NewsletterSection";
+import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
+import useUser from "@/lib/iron-session/useUser";
+
+
+const PAGE_SIZE = 12;
+
+const ICON_SIZE = 32
 const TAB_ITEMS = [
   {
     slug: "branding",
-    name: "topicSpotlight.tabs.accessibility",
-  },
-  {
-    slug: "product-design",
-    name: "topicSpotlight.tabs.userResearch",
-  },
-  {
-    slug: "ux",
-    name: "topicSpotlight.tabs.userWriting",
-  },
-  {
-    slug: "ai",
-    name: "topicSpotlight.tabs.vr",
+    toolSlug:'color',
+    name: "topicSpotlight.tabs.branding",
+    icon:<Swatches size={ICON_SIZE} />
   },
   {
     slug: "design-psychology",
-    name: "topicSpotlight.tabs.code",
+    toolSlug:'analytics',
+    name: "topicSpotlight.tabs.psychology",
+    icon:<HandEye size={ICON_SIZE} />
   },
+  {
+    slug: "ai",
+    toolSlug:'ai',
+    name: "topicSpotlight.tabs.ai",
+    icon:<Robot size={ICON_SIZE}/>
+  },
+  {
+    slug: "accessibility",
+    toolSlug:'accessibility',
+    name: "topicSpotlight.tabs.accessibility",
+    icon:<Wheelchair size={ICON_SIZE} />
+  },
+
+  {
+    slug: "product-design",
+    toolSlug:'resource',
+    name: "topicSpotlight.tabs.productDesign",
+    icon:<FlowArrow size={ICON_SIZE} />
+  },
+  // {
+  //   slug: "ux",
+  //   name: "topicSpotlight.tabs.userWriting",
+  // },
 ];
-const PAGE_SIZE = 12;
-
-
 
 export default function Index({
   preview,
   allTools,
+  topicRes,
   jobs,
   randomPosts,
   sponsors,
-
-  topicRes,
   heroPost,
   morePosts,
 }) {
   const intl = useIntl();
-  const [currentTab, setCurrentTab] = useState("top_picks");
   const [heroCardPost, setHeroPost] = useState(heroPost);
   const [viewablePosts, setViewablePosts] = useState(morePosts);
 
@@ -80,26 +100,16 @@ export default function Index({
     }
   }, []);
 
-  const onTabChange = (tab) => {
-    setCurrentTab(tab.id);
-    if (tab.slug === "top_picks") {
-      setHeroPost(heroPost);
-      setViewablePosts(morePosts);
-    } else {
-      const posts = topicRes[tab.slug];
-      setHeroPost(posts[0]);
-      setViewablePosts(posts.slice(1, 8));
-    }
-  };
-
-  //   console.log(randomPosts);
-  const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
-  const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
+  const { user, isLoading } = useUser({
+    redirectIfFound: false,
+  });
+  // const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
+  // const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
   const heroJob = jobs.filter((item, i) => i === 0);
   const jobsSidebar = jobs.filter((item, i) => i !== 0);
 
-  const first3Tools = allTools.slice(0, 3)
-  const toolsList = allTools.slice(3, allTools.length)
+  const first3Tools = allTools.slice(0, 5);
+  const toolsList = allTools.slice(5, allTools.length);
 
   return (
     <>
@@ -107,7 +117,8 @@ export default function Index({
         padding={false}
         preview={preview}
         // background={"#EFF4FB"}
-        background={"#ffffff"}
+        background={"#F7F7F8"}
+        // background={"#ffffff"}
         seo={{
           title: titleText,
           description: descriptionText,
@@ -116,60 +127,51 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        <TrendingFullWidth sponsor={sponsors?.length ? sponsors[0] : null} tools={first3Tools}/>
-        <Container maxWidth='max-w-[984px]'>
-          {/* <Intro /> */}
-          <div className="w-full h-full grid grid-cols-12 flex justify-center">
-            <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-8 lg:pr-8 py-3">
-              {/* <HomePageNewNavBar /> */}
-              <TabSwitcher
-                selectedTab={currentTab}
-                onTabChange={onTabChange}
-              />
-              <HeroGrid
-                postData={{ hero: heroCardPost, posts: viewablePosts }}
-                sponsor={sponsors?.length ? sponsors[0] : null}
-                jobFeature={heroJob}
-              />
-            </div>
+        {(!user?.isLoggedIn)?<IntroBanner
+          sponsor={sponsors?.length ? sponsors[0] : null}
+          tools={first3Tools}
+        />:''}
+        <DiscoverSection
+          user={user}
+          heroCardPost={heroCardPost}
+          viewablePosts={viewablePosts}
+          jobsSidebar={jobsSidebar}
+        />
 
-            <Sidebar
-              paddingTop="hidden ml-4 md:block pt-10"
-              title="Jobs"
-              type="jobs"
-              content={jobsSidebar}
+        <SectionDivider />
+        <ToolIconCardRow tools={toolsList} />
+        <SectionDivider />
+        <TopicSelectSection topics={TAB_ITEMS} />
+        <SectionDivider />
+        {TAB_ITEMS?.map((topic, index) => {
+          return (
+            <>
+            <TopicSection
+              slug={topic.slug}
+              icon={topic.icon}
+              title={topic.name}
+              HeroPostRandomSection={topicRes[topic.slug]?.posts[0]}
+              OtherPostsRandomSection={topicRes[topic.slug]?.posts?.slice(1, 5)}
+              heroJob={heroJob}
+              sponsors={sponsors}
+              toolsList={topicRes[topic.slug]?.tools.slice(0, 8)}
+              authorsList={topicRes[topic.slug]?.authors}
             />
-          </div>
-        </Container>
-
-        <BrowserView>
+              {index!==TAB_ITEMS.length-1?
+                <SectionDivider />:<div className="w-full pb-16"></div>}
+               {index==1?
+               <div className="-mt-8">
+                  <NewsletterSection/>
+                <SectionDivider />
+                </div>:''
+            }
+            </>
+          );
+        })}
+          {/* <BrowserView>
           <DesignTool allTools={toolsList} />
-        </BrowserView>
+        </BrowserView> */}
 
-        <Container maxWidth='max-w-[984px]'>
-        <div className="w-full mt-8 h-full grid grid-cols-12 flex justify-center">
-            <div className="w-full max-w-full flex flex-col pb-20 gap-2 col-span-12 lg:col-span-8 lg:pr-8 py-3">
-            <h1 className="font-semibold mb-3 px-4 md:px-0">More to explore</h1>
-
-              <HeroGrid
-                showTrending={true}
-                type="random"
-                postData={{
-                  hero: HeroPostRandomSection[0],
-                  posts: OtherPostsRandomSection,
-                }}
-                jobFeature={heroJob}
-                sponsor={
-                  sponsors?.length && sponsors.length > 1 ? sponsors[1] : null
-                }
-              />
-            </div>
-
-            <Sidebar 
-            paddingTop="hidden ml-4 md:block pt-12 mt-2"
-            title="Tools" type="tools" content={toolsList} />
-          </div>
-        </Container>
       </Layout>
       <Footer />
     </>
@@ -182,26 +184,47 @@ export async function getStaticProps({ preview = null, locale }) {
     sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
   }
 
-  let allPosts = (await getCombinedPostsForHome(preview, 8, 0, sort)) || [];
+  let allPosts = (await getCombinedPostsForHome(preview, 5, 0, sort)) || [];
+
   let randomPosts = (await getRandomPostsForHome()) || [];
+  let toolCount = 20;
   let allTools =
-    (await getAllToolsForHome(preview, PAGE_SIZE, 0, ["date:desc"])) || [];
+    (await getAllToolsForHome(preview, toolCount, 0, ["date:desc"])) || [];
 
   let jobs = (await getAllJobs(null, 5, 1)) || [];
-
   let sponsors = await getActiveSponsors();
 
+  // topic sections
   let topicRes = {};
-
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].slug;
     const res =
-      (await getCommonQuery(preview, [tag], "article", 9, 0, sort)) || [];
-    topicRes[tag] = res.data;
+      (await getCommonQuery(preview, [tag], "article", 12, 0, sort)) || [];
+    
+    const topicToolsRes =
+      (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 12, 0, sort)) || [];
+
+      //extract authors from the postss while we don't have an endpoint for it
+    const authors = makeAuthorList(res)
+   
+    //shuffle so it's different each time
+    shuffleArray(res.data)
+    shuffleArray(authors)
+    shuffleArray(topicToolsRes.data)
+     
+    const topicData = {authors:authors, posts:res.data, tools:topicToolsRes.data}
+    topicRes[tag] = topicData
   }
 
+
   allPosts = transformPostListOld(allPosts.data, locale);
+  if(locale!=='es-ES'){
+    shuffleArray(allPosts)
+  }
   allTools = transformPostListOld(allTools.data, locale);
+  shuffleArray(allTools)
+
+  // await generateCombinedRSS({ allPosts, allTools });
 
   // otherPosts = transformPostListOld(otherPosts.data, locale);
   return {

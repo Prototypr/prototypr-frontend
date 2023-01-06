@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import Layout from "@/components/layout";
+import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 import Image from "next/image";
 import { transformPostList } from "@/lib/locale/transformLocale";
@@ -96,7 +96,7 @@ export default function PeoplePage({
         <>
           <>
             <section
-              className="relative -mt-20  block"
+              className="relative -mt-24  block"
               style={{ height: "260px" }}
             >
               <div
@@ -107,7 +107,7 @@ export default function PeoplePage({
               ></div>
             </section>
           </>
-          <Container>
+          <Container maxWidth="max-w-[1320px]" >
             <div className="mt-0 flex flex-col md:flex-row px-4 md:px-6">
               <div className="w-full md:w-1/4 lg:block">
                 <div className="relative">
@@ -296,6 +296,39 @@ export default function PeoplePage({
                   )}
                 </div>
               </div>
+
+{/* todo: replace with new components - doesn't work when tools are mixed in author profile! */}
+              {/* <div className="mt-10 flex-1 md:ml-20">
+                <div className="py-6 px-2 mx-auto bg-white rounded-lg border border-gray-200 mb-20 max-w-4xl">
+                  {allPosts.length ?<div className="">
+            <TopicSection
+                  showTitle={false}
+                  showTopicCloud={true}
+                  showSidebar={false}
+                  icon={null}
+                  title={false}
+                  authorsList={false}
+                  HeroPostRandomSection={allPosts[0]}
+                  OtherPostsRandomSection={allPosts?.slice(1, 5)}
+                  // show more posts underneath the tools section if there's enough to show
+                  extendedPosts={allPosts?.length>5?allPosts.slice(5,allPosts.length):false}
+                  paginationComponent={ <NewPagination
+                    total={pagination?.total}
+                    pageSize={PAGE_SIZE}
+                    currentPage={pagination?.page}
+                    onPageNumChange={(pageNum, tag) => {
+                      onPageNumChange(pageNum, tag);
+                    }}
+                  />}
+                  // heroJob={heroJob}
+                  // sponsors={sponsors}
+                  // toolsList={tools?.slice(0, 8)}
+                  // authorsList={topicRes[topic.slug]?.authors}
+                />
+              </div>:''}
+                </div>
+              </div> */}
+
             </div>
           </Container>
         </>

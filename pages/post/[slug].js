@@ -105,7 +105,7 @@ export default function Post({ post, preview, relatedPosts }) {
 
   return (
     <Layout
-      maxWidth={"max-w-[1380px] search-wide"}
+      maxWidth={"max-w-[1320px] search-wide"}
       padding={false}
       seo={{
         title: `${title}`,
@@ -185,7 +185,7 @@ export default function Post({ post, preview, relatedPosts }) {
           <Sidebar
             author={post.attributes?.author?.data?.attributes}
             relatedPosts={relatedPosts}
-            paddingTop="hidden md:block pt-[96px]"
+            paddingTop="hidden md:block pt-[76px]"
           />
         </div>
       </Container>
@@ -261,7 +261,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
           <div className="flex flex-col grid gap-10">
             <div>
               {author ? (
-                <div className="flex rounded-xl flex-col mt-8 pb-4">
+                <div className="flex rounded-xl flex-col">
                   <div className="w-[80px] h-[80px] relative border border-gray-100 rounded-full shadow-sm mb-3">
                     {avatar ? (
                       <Link href={`/people/${author.slug}`}>
@@ -403,7 +403,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
                 <SignupSidebar />
               </div>
 
-              <div className="mt-6">
+              <div className="mt-8">
                 <SponsorSidebarCard
                   sponsorLocation="article"
                   page={"/article/*"}
@@ -462,7 +462,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const allPosts = await getAllPostsWithSlug("article", 5000);
+  const allPosts = await getAllPostsWithSlug("article", (process.env.NODE_ENV || (process.env.NEXT_PUBLIC_HOME_URL.indexOf('localhost')>-1))?20:5000);
   // const homePosts = await getCombinedPostsForHomeStatic()
 
   // let mergedSlugs = {

@@ -28,7 +28,7 @@ const seo = {
 const Index = ({ jobs }) => {
   return (
     <Layout
-      maxWidth={"max-w-[1380px] search-wide"}
+      maxWidth={"max-w-[1320px] search-wide"}
       seo={seo}
       showWriteButton={false}
       background="#eff4fb"

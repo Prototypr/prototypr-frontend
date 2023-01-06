@@ -1,12 +1,8 @@
-import { SnowWithLights, SmallCardSnow } from "@/components/xmas/snow";
 import Link from "next/link";
 
 const PrototyprNetworkCTA = ({ data }) => {
   return (
     <div className="relative">
-      {/* <div className="absolute top-0 right-0 -translate-y-2 translate-x-2">
-        <SnowWithLights />
-      </div> */}
 
       <div className="flex flex-col gap-1 justify-end items-end">
         <div className="w-full rounded-[12px] h-auto bg-white border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">

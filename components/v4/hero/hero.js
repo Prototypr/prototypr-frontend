@@ -4,12 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Moment from "react-moment";
 // import { useState } from "react";
-// import {
-//   LargeCardSnow,
-//   SmallCardSnow,
-//   SnowMiddle,
-//   SnowWithLights,
-// } from "@/components/xmas/snow";
 // import { SponsorHomeCard } from "@/components/SponsorSidebarCard";
 import TrendingSectionMiddle from "@/components/homepage/TrendingSectionMiddle";
 

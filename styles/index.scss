@@ -417,9 +417,42 @@ background: linear-gradient(180deg, #1288FE 11.07%, rgba(255, 255, 255, 0) 83.98
 
 .glassmorphism{
   background: rgba( 255, 255, 255, 0.25 );
-  // box-shadow: 0 1px 0.5px 0 rgba( 31, 38, 135, 0.02 );
+  box-shadow: 0 1px 0.5px 0 rgba( 31, 38, 135, 0.02 );
   backdrop-filter: blur( 4px );
   -webkit-backdrop-filter: blur( 4px );
   // border-radius: 10px;
   // border-bottom: 1px solid rgba( 255, 255, 255, 0.05 );
+}
+.cardDeckCard{
+box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+ // filter: drop-shadow(-24px 0px 45px rgba(0, 0, 0, 0.2));
+}
+.cardDeckCard:hover{
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+// box-shadow: rgb(85, 91, 255) 0px 0px 0px 9px, rgb(31, 193, 27) 0px 0px 0px 18px, rgb(255, 217, 19) 0px 0px 0px 27px, rgb(255, 156, 85) 0px 0px 0px 36px, rgb(255, 85, 85) 0px 0px 0px 45px;
+
+}
+
+.group\/card:hover {
+   opacity:100%!important; 
+}
+
+.group-hover\/cardDeck\:z-back:hover {
+   z-index:0; 
+}
+
+.group-hover\/card\:skew-y-0:hover{
+    transform: skewY(0deg);
+}
+
+@keyframes slide {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(-260px); /* The image width */
+  }
+}
+.scrolling-image {
+  animation: slide 12s linear infinite;
 }

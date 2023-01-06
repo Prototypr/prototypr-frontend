@@ -9,7 +9,6 @@ export default withIronSessionApiRoute(loginRoute, sessionOptions);
 
 async function loginRoute(req, res) {
   const { token } = await req.body;
-  console.log(token)
   try {
     var config = {
       method: "get",

@@ -5,7 +5,6 @@ import Image from "next/image";
 import { usePlausible } from "next-plausible";
 
 const TrendingFullWidth = ({ tools, sponsor }) => {
-  console.log(sponsor);
   const plausible = usePlausible();
 
   return (

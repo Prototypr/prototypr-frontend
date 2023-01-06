@@ -80,7 +80,7 @@ export default function Post({
   )}&companyLogo=${companyLogo}&salary=${encodeURIComponent(salaryText)}`;
   return (
     <Layout
-    maxWidth={'search-wide max-w-[1380px]'}
+    maxWidth={'search-wide max-w-[1320px]'}
       seo={{
         title: `${title}`,
         description: `${description}`,
