@@ -35,9 +35,12 @@ const Index = () => {
   }, []);
 
   return (
-    <Layout 
-    maxWidth={'max-w-[1380px] search-wide'}
-    seo={seo} showWriteButton={false} background="#eff4fb">
+    <Layout
+      maxWidth={"max-w-[1380px] search-wide"}
+      seo={seo}
+      showWriteButton={false}
+      background="#eff4fb"
+    >
       <Container>
         <div className="w-full h-full grid grid-cols-12 gap-1  ">
           <div className="max-w-[46rem] mx-auto pb-20 px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
