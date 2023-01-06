@@ -185,7 +185,7 @@ export default function Post({ post, preview, relatedPosts }) {
           <Sidebar
             author={post.attributes?.author?.data?.attributes}
             relatedPosts={relatedPosts}
-            paddingTop="hidden md:block pt-[96px]"
+            paddingTop="hidden md:block pt-[76px]"
           />
         </div>
       </Container>
@@ -261,7 +261,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
           <div className="flex flex-col grid gap-10">
             <div>
               {author ? (
-                <div className="flex rounded-xl flex-col mt-8 pb-4">
+                <div className="flex rounded-xl flex-col">
                   <div className="w-[80px] h-[80px] relative border border-gray-100 rounded-full shadow-sm mb-3">
                     {avatar ? (
                       <Link href={`/people/${author.slug}`}>
@@ -403,7 +403,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
                 <SignupSidebar />
               </div>
 
-              <div className="mt-6">
+              <div className="mt-8">
                 <SponsorSidebarCard
                   sponsorLocation="article"
                   page={"/article/*"}

@@ -11,7 +11,7 @@ const SidePanelAuthors = ({ list, topic }) => {
         </h3>
       </div>
       <div className="flex flex-col grid my-2">
-        {list.map((item, i) => {
+        {list && list.map((item, i) => {
           return (
             <AuthorListItem
               author={item}

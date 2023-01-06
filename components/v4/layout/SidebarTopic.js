@@ -8,7 +8,7 @@ import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 import TopicsCloudCard from "../card/TopicsCloudCard";
 
 const SidebarDiscover = ({ authorsList = [], paddingTop, topic, showTopicCloud }) => {
-  let slicedList = [...authorsList.slice(0, 4)];
+  let slicedList = authorsList && [...authorsList.slice(0, 4)];
 
   const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-3");
 
