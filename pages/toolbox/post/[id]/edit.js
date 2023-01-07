@@ -1,7 +1,6 @@
 import Layout from "@/components/layout-dashboard";
 import { jobTypes} from "@/lib/constants";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
@@ -15,17 +14,10 @@ import TagsInput from "@/components/Jobs/tagsInput";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import useGetLocations from "@/components/Jobs/jobHooks/useGetLocations";
 import useGetSkills from "@/components/Jobs/jobHooks/useGetSkills";
-
-const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
+import { useLoad } from "@/components/Jobs/jobHooks";
+import Fallback from "@/components/atom/Fallback/Fallback";
 
 let axios = require("axios");
-
-const slugify = require("slugify");
-
-const uid = function () {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2);
-};
-
 
 const styles = {
   input:
@@ -44,129 +36,98 @@ function isEmptyObject(obj) {
   );
 }
 
-const seo={
-  title:`Post a job on Prototypr`,
-  description:`A jobs board for designers. Find your next designer, developer, or creative person.`,
-  // image:``,
-  canonical: `https://prototypr.io/jobs`,
-  url: `https://prototypr.io/jobs`
-}
-
 const PostToolPage = () =>{
 
-  const { user } = useUser({
-    // redirectTo: "/",
-    redirectIfFound: false,
-  });
 
-
-
-  const [isSignUp, setSignUp] = useState(true);
-  const name ="kemi"
-  const id = "4"
-
-
-
-   const original = {
-    allTags:  [ 
-        { name: "Tag1", elements : [ 
+   const category = [ 
+        { name: "Cat1", elements : [ 
             { name: name, id: id } ] 
         },
-        { name: "Tag5", elements : [ 
+        { name: "Cat2", elements : [ 
             { name: name, id: id },
             { name: name, id: id },
             { name: name, id: id } ] 
         }, 
-        { name: "Tag3", elements : [ 
+        { name: "Cat3", elements : [ 
             { name: name, id: id },
             { name: name, id: id } ] 
         }
     ]
-}
 
-    const sorted_allTags = original.allTags.sort(function (one, other) {
+    const sorted_categories = original.category.sort(function (one, other) {
    return one.elements.length - other.elements.length;
 });
 
-     
-    console.log("Asorted", sorted_allTags.reverse())
 
-  const toggleSignIn = () => {
-    setSignUp(!isSignUp);
-  };
+    console.log("sorted", sorted_categories)
 
-  if(!user || user?.isLoggedIn==false){
+  const { user } = useUser({
+    redirectTo: "/",
+    redirectIfFound: false,
+  });
+
+  // const [defaultCompany, setDefaultCompany] = useState(null)
+
+  const { 
+    loading,
+    content,
+    postId,
+    title,
+    isOwner,
+    postObject} =useLoad(user);
+
+    console.log("postObject",postObject)
+
+
+  if(loading){
     return(
-      <Layout seo={seo}>
-      <div className="w-full relative max-w-4xl p-4 mx-auto ">
-        <div
-          className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto mt-8"
-          style={{ maxWidth: 390 }}
-        >
-          <LoginForm 
-          title="Sign up to post a job" 
-          isSignUp={isSignUp} />
-        </div>
-      </div>
-      <div className="mt-4 flex justify-center">
-        <div className="text-sm text-gray-700">
-          <span>
-            {isSignUp
-              ? "Already got an account?"
-              : "Not got an account yet?"}
-          </span>
-          <a
-            onClick={toggleSignIn}
-            className="text-primary-400 cursor-pointer"
-          >
-            {isSignUp ? " Sign in." : " Sign up"}
-          </a>
-        </div>
-      </div>
-    </Layout>
+       <Fallback/>
     )
   }
-
 
   return(
     <>
 
-    <JobPostForm user={user} />
+
+    <JobPostForm postObject={postObject} user={user} />
     
     </>
   )
 }
 
-const JobPostForm = ({user}) => {
+const JobPostForm = ({user, postObject}) => {
   const router = useRouter();
   const [available, setAvailable] = useState(true)
 
-    
-  useEffect(()=>{
-      // <script type="text/javascript" src="http://localhost:1337/plugins/strapi-stripe/static/stripe.js" > </script>
-      
-      const getProd = async()=>{
-          const response = await axios.get( "http://localhost:1337/strapi-stripe/getProduct/1" )
-
-
-          if(response.data.availability===false){
-            setAvailable(false)
-          }
-      }
-      
-      // used to be in the strapi script, but doing it directly on the front end
-      // const s = document.createElement("script");
-      // // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-      // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-      // s.setAttribute("async", "true");
-      // document.head.appendChild(s);
-      
-      getProd()
-   
-    },[])
-
+  // const {locations} = useGetLocations()
+  // const {skills} = useGetSkills()
   
+    // const [salaryMinOptions] = useState(()=>{
+    //   let salaries = [{name:'Minimum per year', value:0}]
+    //   for(var x =0;x<2010000;x+=10000){
+    //     if(x){
+    //       salaries.push({
+    //         name:`USD ${x.toLocaleString()} per year`,
+    //         value:x
+    //       })
+    //     }
+    //   }
+    //   return salaries
+    // }) 
+    // const [salaryMaxOptions] = useState(()=>{
+    //   let salaries = [{name:'Maximum per year', value:0}]
+    //   for(var x =0;x<2010000;x+=10000){
+    //     if(x){
+    //       salaries.push({
+    //         name:`USD ${x.toLocaleString()} per year`,
+    //         value:x
+    //       })
+    //     }
+    //   }
+    //   return salaries
+    // }) 
 
+    // console.log(postObject)
 
 
   const FormSchema = Yup.object().shape({
@@ -176,85 +137,110 @@ const JobPostForm = ({user}) => {
     slug: Yup.string().required("Slug is required"),
     link: Yup.string().required("Link is required"),
     logo: Yup.string().required("Logo is required"),
- 
+
   });
 
   const [errores, setErrores] = useState(false)
   const [uploadNewCompanyImage, setUploadNewCompanyImage] = useState(false)
 
   const formik = useFormik({
-  	validateOnChange:errores?true:false,
+    validateOnChange:errores?true:false,
     initialValues: {
-      title: "",
-      content: "",
-      excerpt: "",
-      slug: "",
-      link: "",
-      logo: "",
+      title: postObject?.title?postObject.title:'',
+      content: postObject?.content?postObject.content:'',
+      excerpt: postObject?.excerpt?postObject.excerpt:'',
+      slug: postObject?.slug?postObject.slug:'',
+      link: postObject?.link?postObject.link:'',
+      logo: postObject?.logo?postObject.logo:'',
     },
     validationSchema: FormSchema,
-
-
-
     onSubmit: (values) => {
+      values.jobId=postObject.id
 
-    console.log("values", values)
-    const submit = async () => {
-
-    const entry = {
-	    type: "tool",
-	    title: values.title,
-	    content: values.content,
-	    excerpt: values.excerpt,
-		link: values.link,
-		slug: values.slug,
-	    seo: {
-				opengraphTitle:values.title,
-				opengraphDescription: values.excerpt,
-				metaDesc:values.excerpt,
-				twitterDescription:values.excerpt,
-			},
-	    esES: false
-  };
-
-
-  const formData = new FormData();
-  	formData.append('files.logo', values.logo)
-	formData.append('data', JSON.stringify({...entry,
-              publishedAt:null
-            }));
-
-  let publishPostEndpointConfig = {
+      async function submit() {
+        let configUpload = {
           method: "post",
-          url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts`,
+          url: `${process.env.NEXT_PUBLIC_API_URL}/api/users-permissions/users/updateJobPost`,
           headers: {
             Authorization: `Bearer ${user?.jwt}`,
           },
-    
-          data: formData
+          data: {
+            ...values,
+          },
         };
 
-try {
-           let postResult =  await axios(publishPostEndpointConfig)
-              .then(async function (response) {
-                toast.success("Your draft has been saved!", {
-                  duration: 5000,
+
+        await axios(configUpload)
+          .then(async function (response) {
+
+            if(response?.data?.posted==true){
+
+              /**
+               * upload company logo
+               */
+               if(values.companyLogo && uploadNewCompanyImage==true){     
+                toast.loading("Uploading your company logo...", {
+                  duration: 3000,
                 });
-                return response?.data?.data
-                console.log("response", response)
-              })
-              .catch(function (error) {
-                console.log(error);
+                const file = new File([values.companyLogo], `companylogo_.png`, {
+                  type: "image/png",
+                });
+                
+                const data = {}
+                const formData = new FormData();
+                formData.append("files", file, 'logo');
+                formData.append('data', JSON.stringify(data));
+                formData.append('refId', response?.data?.companyId);
+                formData.append('field', 'logo');
+                formData.append('ref', 'api::company.company');
+
+      
+                var imageConfig = {
+                  method: "post",
+                  url: `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
+                  headers: {
+                    Authorization: `Bearer ${user?.jwt}`,
+                  },
+                  data: formData,
+                };
+
+      
+                await axios(imageConfig)
+                  .then(async function (response) {
+                      //set field value to id of image, which is used to attach to post
+                      toast.success("Upload complete!", {
+                        duration: 3000,
+                      });
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                    toast.console.warn("The company logo failed to save.", {
+                      duration: 3000,
+                    });
+                  });
+              }
+
+              toast.success("Your Job Post has been updated!", {
+                duration: 3000,
               });
 
-              return postResult
-        } catch {
-          toast.error("Error creating draft! Please contact support for help.", {
-            duration: 5000,
+              router.push(`/jobs/post/${response?.data.id}/payment`);
+              // formik.resetForm();
+            }else{
+              toast.error(response?.data?.message?response?.data?.message:'Something went wrong submitting your post!', {
+                duration: 5000,
+              });
+            }
+            console.log("Done! ->", response);
+          })
+          .catch(function (error) {
+            console.log(error)
+            toast.error("Your Job Post has been saved!", {
+              duration: 5000,
+            });
           });
-          (e) => console.log(e);
-        }
-    }
+      }
+
       submit();
     },
   });
@@ -263,8 +249,13 @@ try {
   const { dirty, errors, isValid } = formik;
   const [disabled, setDisabled] = useState(false);
 
+  // useEffect(()=>{
+  //   if(defaultCompany?.logo){
+  //     formik.setFieldValue("companyLogo",defaultCompany?.logo)
+  //   }
 
-
+  // },[defaultCompany?.logo])
+  
   useEffect(() => {
     if (errors && isEmptyObject(errors)) {
       setErrores(false);
@@ -275,39 +266,24 @@ try {
   }, [errors]);
 
 
-  useEffect(() => {
-
-
-   	formik.setFieldValue("slug", slugify(formik.values.title.toLocaleLowerCase(), {remove: /[^\w\s]/gi}))
-
-
-  }, [formik.values.title]);
-
-
-                      	
-
-
-
-     console.log("errrs", errors)
-
   return (
-    <Layout seo={seo} showWriteButton={false} background="#EFF2F8">
+    <Layout background="#EFF2F8">
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
         <div className="max-w-3xl w-full">
-        <div className="my-2 mb-6">
-          <h1 className="text-2xl font-bold mx-auto mb-2">Post a Tool</h1>
-          <p className="text-gray-600">Create a tool for designers, developers, or creatives.</p>
+        <div className="my-2 mb-5">
+          <h1 className="text-2xl font-bold mx-auto ">Post a Job</h1>
+          <p className="text-gray-600">Find your next designer, developer, or creative person.</p>
         </div>
         <div className="bg-white p-10 pt-12 rounded-xl">
           <form
           onSubmit={(e) => {
             e.preventDefault();
+            console.log(errors)
             if ((errors && isEmptyObject(errors)) || !errors) {
               setDisabled(false);
               formik.handleSubmit();
             } else {
               // setDisabled(true);
-                       formik.handleSubmit();
               toast.error("Hmmmm, it seems like some of the fields are empty.");
             }
           }}
@@ -315,22 +291,18 @@ try {
             <FormContainer>
               <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
                 <h1 className="text-xl font-medium mb-2">Tell us about the tool</h1>
-                <FormInput id="title" label="Title" error={formik.errors}>
+                <FormInput id="title" label="Position" error={formik.errors}>
                   <input
                     id="title"
                     name="title"
                     type="text"
                     onChange={formik.handleChange}
-                    // onChange={(e) => { 
-                    // 	formik.setFieldValue("title", e.target.value)
-                    // 	formik.setFieldValue("slug", slugify(formik.values.title.toLocaleLowerCase(), {remove: /[^\w\s]/gi}))
-                    // }}
                     value={formik.values.title}
                     placeholder="Product Designer, Design Systems"
                     className={styles.input}
                   />
                 </FormInput>
-            
+
 
                 <label className="text-md font-medium mt-4">
                   Content
@@ -379,7 +351,7 @@ try {
                     className={styles.input}
                   />
                 </FormInput>
- 				{formik.errors.link && <span className="text-red-600 text-xs">{formik.errors.link}</span>}
+        {formik.errors.link && <span className="text-red-600 text-xs">{formik.errors.link}</span>}
 
 
               <label htmlFor="image" className="text-md font-medium">
@@ -400,7 +372,6 @@ try {
               {formik.errors.logo && <span className="text-red-600 text-xs">{formik.errors.logo}</span>}
 
 
-    
 
             </div>
             </FormContainer>
@@ -412,17 +383,24 @@ try {
               // disabled={errores}
               className="w-full p-4 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
-             Save and Continue
+             Update
             </button>
             </form>
         </div>
 
         </div>
+        {/* <div className="hidden md:block lg:px-20">
+          Your job will be posted on our jobs board, plus:
+        <ul>
+          <li>Sent out in our newsletter</li>
+          <li>Sent out in our newsletter</li>
+          <li>Sent out in our newsletter</li>
+        </ul>
+        </div> */}
       </div>
     </Layout>
   );
 };
 
 export default PostToolPage;
-
 
