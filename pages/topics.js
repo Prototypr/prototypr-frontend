@@ -71,7 +71,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
         <title>{intl.formatMessage({ id: "topics.header" })}.</title>
       </Head> */}
        <Container maxWidth="max-w-[1320px]" >
-       <h2 className="text-xl font-semibold mt-4">Most popular</h2>
+       <h2 className="text-xl font-semibold mt-8">Most popular</h2>
         <div className="pt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
                 {popularTags.map((topic, i) => (
                  <CategoriesIconCard withBackground={true} key={i} index={i} topic={topic}/>
@@ -81,7 +81,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
 
         <SectionDivider/>
        <Container maxWidth="max-w-[1320px]" >
-        <h2 className="text-xl font-semibold mt-4">Open Web Spotlight</h2>
+        <h2 className="text-xl font-semibold mt-1">Open Web Spotlight</h2>
         <div className="mt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
                 {featuredSections.map((section, i) => (
                   <Link
@@ -107,7 +107,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
               </div>
         </Container> */}
         <SectionDivider/>
-        <Container maxWidth="max-w-[1320px] pb-24 mt-4" >
+        <Container maxWidth="max-w-[1320px] pb-24 mt-1" >
        <h2 className="text-xl font-semibold">Discover more</h2>
         <div className="pt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
                 {morePopularTags.map((topic, i) => (

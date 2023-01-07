@@ -26,7 +26,7 @@ export const particleOptions = {
         value: 0.8,
       },
       size: {
-        value: { min: 14, max: 20 },
+        value: { min: 14, max: 18 },
         animation: {
             enable: false,
             speed: 3,
