@@ -15,13 +15,13 @@ const IntroBanner = ({ tools, sponsor }) => {
     <Container maxWidth="max-w-[1320px]">
       <div
         // style={{background: 'linear-gradient(179.7deg, #040444, rgb(3 3 63))'}}
-        className="flex bg-gray-200 text-gray-800 overflow-hidden overflow-x-scroll bg-opacity-60 border border-gray-100 md:overflow-x-hidden rounded rounded-3xl"
+        className="flex bg-[#EAE9F5] text-gray-800 overflow-hidden overflow-x-scroll bg-opacity-60 border border-gray-100 md:overflow-x-hidden rounded rounded-3xl"
       >
         <div className="w-full font-inter p-2 2md:w-full relative flex flex-col">
           <SponsorBubble/>
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
-          className="bg-gray-100 pointer-events-auto bg-opacity-60 backdrop-blur-sm p-4 rounded-3xl z-10" style={{width:'fit-content'}}>
+          className="bg-[#EAE9F5] pointer-events-auto bg-opacity-60 backdrop-blur-sm p-4 rounded-3xl z-10" style={{width:'fit-content'}}>
           <div
             className="h-7 text-base font-semibold leading-7"
             aria-hidden="true"
