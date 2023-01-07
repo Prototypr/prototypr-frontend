@@ -1,23 +1,42 @@
 import Container from "@/components/container";
 // import Layout from "@/components/layout";
 import Layout from "@/components/new-index/layoutForIndex";
-import SignupSidebar from "@/components/newsletter/SignupSidebar";
-import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
-
-// import { getAllPostsForPostsPage } from "@/lib/api";
-// import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+
 import { useIntl } from "react-intl";
-import { Waypoint } from "react-waypoint";
-import { SIDEBAR_STICKY_OFFSET, topics } from "@/lib/constants";
-import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
 import { getPopularTopics } from "@/lib/api";
 import { Tag } from "phosphor-react";
+import SectionDivider from "@/components/v4/section/SectionDivider";
+import Footer from "@/components/footer";
+import CategoriesIconCardLarge from "@/components/v4/card/CategoriesIconCardLarge";
 
-export default function Index({ popularTags, preview }) {
+const featuredSections = [
+  {
+    tagline:'Inclusivity',
+    title:'Localisation and Internationalisation',
+    description:'Designing and building for different cultures.',
+    image:'/static/images/localization.webp',
+    slug:'localization'
+  },
+{
+  tagline:'Open Web',
+  title:'Web Monetization',
+  description:'Building an open, fairer web for everyone.',
+  image:'/static/images/web-mon.webp',
+  slug:'web-monetization'
+},
+{
+  tagline:'Roundups',
+  title:'The Source Letters',
+  description:'Stories on building a better, more inclusive web.',
+  image:'/static/images/proto_neurodiversity.webp',
+  slug:'the-source'
+},
+]
+
+export default function Index({ popularTags,popularToolTags, morePopularTags }) {
   const intl = useIntl();
 
   return (
@@ -32,10 +51,9 @@ export default function Index({ popularTags, preview }) {
           url: "https://prototypr.io/topics",
         }}
         activeNav={"posts"}
-        preview={preview}
       >
         <Container maxWidth="max-w-[1320px]" >
-          <div className="bg-gray-500 relative bg-opacity-5 overflow-hidden p-6 border-gray-200 rounded-2xl">
+          <div className="bg-[#EAE9F5] relative bg-opacity-50 overflow-hidden p-6 border-gray-200 rounded-2xl">
             {/* <div className="z-20 relative"> */}
             <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
             <BreadCrumbs tagName={false}/>
@@ -48,82 +66,68 @@ export default function Index({ popularTags, preview }) {
               </div>
           </div>
         </Container>
+        {/* <SectionDivider/> */}
         {/* <Head>
         <title>{intl.formatMessage({ id: "topics.header" })}.</title>
       </Head> */}
        <Container maxWidth="max-w-[1320px]" >
-        <div className="mt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 pb-24">
+       <h2 className="text-xl font-semibold mt-8">Most popular</h2>
+        <div className="pt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
                 {popularTags.map((topic, i) => (
                  <CategoriesIconCard withBackground={true} key={i} index={i} topic={topic}/>
                 ))}
               </div>
         </Container>
+
+        <SectionDivider/>
+       <Container maxWidth="max-w-[1320px]" >
+        <h2 className="text-xl font-semibold mt-1">Open Web Spotlight</h2>
+        <div className="mt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
+                {featuredSections.map((section, i) => (
+                  <Link
+                  href={`/posts/${section.slug}/page/1`}>
+                  <div className="flex flex-col">
+                    <img className="w-full h-[212px] object-cover rounded-xl" src={section.image}/>
+                    <h4 className="text-xs text-gray-500 uppercase font-medium mt-3">{section.tagline}</h4>
+                    <h3 className="text-xl font-medium mt-1">{section.title}</h3>
+                    <p className="text-sm text-gray-500 mt-1">{section.description}</p>
+                  </div>
+                  </Link>
+                ))}
+        </div>
+        </Container>
+
+        {/* <SectionDivider/>
+       <Container maxWidth="max-w-[1320px] mt-4" >
+       <h2 className="text-xl font-semibold mb-6">Top App Categories</h2>
+        <div className="rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
+                {popularToolTags.map((topic, i) => (
+                  <CategoriesIconCardLarge withBackground={true} key={i} index={i} topic={topic}/>
+                  ))}
+              </div>
+        </Container> */}
+        <SectionDivider/>
+        <Container maxWidth="max-w-[1320px] pb-24 mt-1" >
+       <h2 className="text-xl font-semibold">Discover more</h2>
+        <div className="pt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
+                {morePopularTags.map((topic, i) => (
+                 <CategoriesIconCard showCount={false} withBackground={true} key={i} index={i} topic={topic}/>
+                ))}
+              </div>
+        </Container>
       </Layout>
+      <Footer/>
     </>
   );
 }
 
-const Sidebar = ({ relatedPosts, paddingTop, author }) => {
-  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
-
-  const _handleWaypointEnter = () => {
-    setStickyPaddingTop("pt-0");
-  };
-  const _handleWaypointLeave = () => {
-    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
-  };
-
-  return (
-    <div
-      className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
-    >
-      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
-      <div
-        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
-      >
-        <aside className="h-screen px-10 sticky top-0 py-0">
-          <div className="flex flex-col grid gap-6">
-            <PrototyprNetworkCTA />
-            <div>
-              {/* EMAIL FORM */}
-              <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                  Get the roundup
-                </h3>
-                <p className="text-base text-gray-500 mb-6">
-                  Get a curated selection of the best articles and topics from
-                  Prototypr in your inbox.
-                </p>
-                <SignupSidebar />
-              </div>
-
-              <div className="mt-6">
-                <SponsorSidebarCard sponsorLocation="topics" page={"/topics"} />
-              </div>
-            </div>
-
-            {/* <div className="w-full flex flex-col grid gap-2">
-
-            {relatedPosts?.data?.length > 0 &&
-              relatedPosts.data.map((item, index) => {
-                return (
-                  <ProductItem key={`product_item_${index}`} post={item} />
-                  // <TopicTopItem key={index} topic={item}/>
-                );
-              })}
-            </div> */}
-          </div>
-        </aside>
-      </div>
-    </div>
-  );
-};
-
 export async function getStaticProps() {
-  const popularTags = (await getPopularTopics({postType:'article'})) || [];
+  const popularTags = (await getPopularTopics({postType:'article', pageSize:8})) || [];
+  const popularToolTags = (await getPopularTopics({postType:'tool', pageSize:9})) || [];
+  const morePopularTags = (await getPopularTopics({postType:'article', pageSize:16, offset:9})) || [];
 
   return {
-    props: { popularTags: popularTags },
+    props: { popularTags, popularToolTags, morePopularTags },
     revalidate:8640//24 hrs
   };
 }

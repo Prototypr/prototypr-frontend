@@ -26,15 +26,15 @@ const AvatarLine = ({ size, author, src, date }) => {
         </div>
         <div className="pl-1.5 flex my-auto flex-wrap">
           {author?.firstName ? (
-            <h2 className={`line-clamp-1 text-base font-regular ${titleClass}`}>
+            <h2 className={`line-clamp-1 font-regular ${titleClass}`}>
               {author?.firstName} {author?.lastName ? author?.lastName : ""}
             </h2>
           ) : author?.displayName ? (
-            <h2 className={`line-clamp-1 text-base font-regular ${titleClass}`}>
+            <h2 className={`line-clamp-1 font-regular ${titleClass}`}>
               {author?.displayName}
             </h2>
           ) : (
-            <h2 className={`line-clamp-1 text-base font-regular ${titleClass}`}>
+            <h2 className={`line-clamp-1 font-regular ${titleClass}`}>
               Unknown
             </h2>
           )}
