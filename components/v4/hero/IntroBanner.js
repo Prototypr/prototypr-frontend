@@ -28,10 +28,10 @@ const IntroBanner = ({ tools, sponsor }) => {
           >
             A better world. Designed by you.
           </div>
-          <h1 className="max-w-[32rem] mt-4 text-4xl font-semibold tracking-tight sm:text-55xl leading-tight">
+          <h1 className="max-w-[32rem] mt-4 text-4xl font-black tracking-tight sm:text-5xl leading-tight">
             Design and build the future, together.
           </h1>
-          <p className="mt-4 max-w-[32rem]">
+          <p className="mt-4 text-gray-600 max-w-[32rem]">
             We're an open-source platform where creative people come together.
             Prototypr is a canvas for creativity, curiosity and openness where
             you can bring new ideas to spark a brighter future.
