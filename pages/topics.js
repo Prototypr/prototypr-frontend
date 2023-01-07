@@ -1,8 +1,9 @@
 import Container from "@/components/container";
 // import Layout from "@/components/layout";
-import Layout from "@/components/layoutForBlogPost";
+import Layout from "@/components/new-index/layoutForIndex";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
+import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
 
 // import { getAllPostsForPostsPage } from "@/lib/api";
 // import Head from "next/head";
@@ -12,8 +13,11 @@ import { useIntl } from "react-intl";
 import { Waypoint } from "react-waypoint";
 import { SIDEBAR_STICKY_OFFSET, topics } from "@/lib/constants";
 import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
+import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
+import { getPopularTopics } from "@/lib/api";
+import { Tag } from "phosphor-react";
 
-export default function Index({ allPosts, preview }) {
+export default function Index({ popularTags, preview }) {
   const intl = useIntl();
 
   return (
@@ -30,52 +34,29 @@ export default function Index({ allPosts, preview }) {
         activeNav={"posts"}
         preview={preview}
       >
+        <Container maxWidth="max-w-[1320px]" >
+          <div className="bg-gray-500 relative bg-opacity-5 overflow-hidden p-6 border-gray-200 rounded-2xl">
+            {/* <div className="z-20 relative"> */}
+            <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
+            <BreadCrumbs tagName={false}/>
+                <div className="inline-flex my-4">
+                  {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
+                    <Tag className="my-auto mx-auto mr-2.5 my-auto" size={24}/>
+                  {/* </div> */}
+                  <h2 className="text-5xl my-auto font-bold text-gray-900 capitalize">{intl.formatMessage({ id: "topics.title" })}</h2>
+                </div>
+              </div>
+          </div>
+        </Container>
         {/* <Head>
         <title>{intl.formatMessage({ id: "topics.header" })}.</title>
       </Head> */}
-        <Container>
-          <div className="w-full h-full grid grid-cols-12 gap-1  ">
-            <div className="xl:px-10 md:px-8 pb-20 gap-2 col-span-12 lg:col-span-8">
-              <div className="pt-5 text-md text-gray-700 pb-8">
-                <Link href={`/`}>
-                  <span className="hover:underline">Home</span>
-                </Link>{" "}
-                →{" "}
-                <Link href={`/topics`}>
-                  <span className="underline">Topics</span>
-                </Link>
-              </div>
-
-              <section className="flex-col md:flex-row flex items-center md:justify-between">
-                <h1 className="text-4xl font-bold tracking-tighter leading-tight mb-4">
-                  {intl.formatMessage({ id: "topics.title" })}
-                </h1>
-              </section>
-
-              <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-24">
-                {topics.map((topic, i) => (
-                  <Link key={i} href={`/posts/${topic.slug}/page/1`}>
-                    <div
-                      className={`group cursor-pointer flex relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
-                    >
-                      <div className="my-auto mx-auto flex justify-between">
-                        <h3 className="text-lg font-bold text-center text-white">
-                          {intl.formatMessage({ id: topic.name })}
-                        </h3>
-                      </div>
-                    </div>
-                  </Link>
+       <Container maxWidth="max-w-[1320px]" >
+        <div className="mt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 pb-24">
+                {popularTags.map((topic, i) => (
+                 <CategoriesIconCard withBackground={true} key={i} index={i} topic={topic}/>
                 ))}
               </div>
-            </div>
-            {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
-
-            <Sidebar
-              // author={post.attributes?.author?.data?.attributes}
-              // relatedPosts={relatedPosts}
-              paddingTop="hidden md:block pt-6"
-            />
-          </div>
         </Container>
       </Layout>
     </>
@@ -138,10 +119,11 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
   );
 };
 
-// export async function getStaticProps({ preview = null }) {
-//   const allPosts = (await getAllPostsForPostsPage(preview)) || [];
+export async function getStaticProps() {
+  const popularTags = (await getPopularTopics({postType:'article'})) || [];
 
-//   return {
-//     props: { allPosts: allPosts.data, preview },
-//   };
-// }
+  return {
+    props: { popularTags: popularTags },
+    revalidate:8640//24 hrs
+  };
+}

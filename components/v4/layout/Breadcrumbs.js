@@ -12,12 +12,16 @@ const Breadcrumbs = ({tagName}) =>{
                 </Link>
                 <CaretRight size={12} className="mx-2 my-auto"/>
                 <Link href={`/topics`}>
-                  <span className="hover:underline">Topics</span>
+                  <span className={`hover:underline ${!tagName?'font-semibold text-blue-700':''}`}>Topics</span>
                 </Link>
+               { tagName?
+               <>
                 <CaretRight size={12} className="mx-2 my-auto"/>
-                <Link href={`/posts/${ tagName }/page/1`}>
-                  <span className="font-semibold text-blue-700 capitalize">{tagName}</span>
-                </Link>
+                  <Link href={`/posts/${ tagName }/page/1`}>
+                    <span className="font-semibold text-blue-700 capitalize">{tagName}</span>
+                  </Link>
+               </>
+                :''}
               </div>
         </Container>
     )

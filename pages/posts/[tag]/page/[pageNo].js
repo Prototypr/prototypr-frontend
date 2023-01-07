@@ -93,15 +93,6 @@ export default function PostsPage({
                   <h2 className="text-5xl my-auto font-bold text-gray-900 capitalize">{tagName}</h2>
                 </div>
               </div>
-            {/* </div> */}
-            {/* <div className="z-0 w-full h-full top-0 left-0 absolute">
-              <Image  
-              quality={100}
-              fill={true}
-              className="object-cover opacity-60 z-0"
-              // objectFit="cover"
-              src="/static/images/espi1400.png"/>
-            </div> */}
           </div>
         </Container>
       </div>
