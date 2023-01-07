@@ -10,7 +10,7 @@ const CategoriesIconCardLarge = ({ topic, withBackground }) => {
   return (
     <div>
       <Link
-        href={`/posts/${topic.slug}/page/1`}
+        href={`/toolbox/${topic.slug}/page/1`}
         onClick={() => {
           plausible("toolIconCard", {
             props: {
@@ -25,10 +25,10 @@ const CategoriesIconCardLarge = ({ topic, withBackground }) => {
           <div className="flex flex-row rounded-xl">
           <div
               // style={{ flex: "0 0 3em" }}
-              className="w-20 h-20 my-auto mr-3 relative rounded-xl overflow-hidden"
+              className="w-20 h-20 my-auto mr-3 bg-white p-3.5 relative rounded-xl overflow-hidden"
             >
               {topic.icon?
-              <img className="w-full h-full" src={topic.icon}/>:''}
+              <img className="w-full h-full opacity-70 bg-white" src={topic.icon}/>:''}
             </div>
             <div className="flex flex-col pl-1 justify-center">
               <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base">

@@ -25,10 +25,10 @@ const CategoriesIconCard = ({ topic, withBackground, showCount }) => {
           <div className="flex flex-row rounded-xl">
           <div
               // style={{ flex: "0 0 3em" }}
-              className="w-10 h-10 my-auto mr-3 relative rounded-xl overflow-hidden"
+              className="w-10 h-10 my-auto mr-3 opacity-70 relative rounded-xl overflow-hidden"
             >
               {topic.icon?
-              <img className="w-full h-full text-red-600" src={topic.icon}/>:''}
+              <img className="w-full h-full" src={topic.icon}/>:''}
             </div>
             <div className="flex flex-col pl-1 justify-center">
               <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base">
