@@ -10,6 +10,7 @@ import { Tag } from "phosphor-react";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import Footer from "@/components/footer";
 import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
+import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 // import CategoriesIconCardLarge from "@/components/v4/card/CategoriesIconCardLarge";
 
 
@@ -47,14 +48,12 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
         {/* <Head>
         <title>{intl.formatMessage({ id: "topics.header" })}.</title>
       </Head> */}
-       <Container maxWidth="max-w-[1320px]" >
-       <h2 className="text-xl font-semibold mt-8">Most popular</h2>
-        <div className="pt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
-                {popularTags.map((topic, i) => (
-                 <CategoriesIconCard withBackground={true} key={i} index={i} topic={topic}/>
-                ))}
-              </div>
-        </Container>
+      <Container maxWidth="max-w-[1320px]">
+        <div className="mt-8">
+          <h2 className="text-xl mb-6 font-semibold">Most popular</h2>
+          <PopularTagsSection popularTags={popularTags}/>
+        </div>
+      </Container>
 
         <SectionDivider/>
       <TopicSpotlightSection/>
