@@ -2,7 +2,6 @@ import Container from "@/components/container";
 // import Layout from "@/components/layout";
 import Layout from "@/components/new-index/layoutForIndex";
 import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
-import Link from "next/link";
 
 import { useIntl } from "react-intl";
 import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
@@ -10,31 +9,9 @@ import { getPopularTopics } from "@/lib/api";
 import { Tag } from "phosphor-react";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import Footer from "@/components/footer";
-import CategoriesIconCardLarge from "@/components/v4/card/CategoriesIconCardLarge";
+import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
+// import CategoriesIconCardLarge from "@/components/v4/card/CategoriesIconCardLarge";
 
-const featuredSections = [
-  {
-    tagline:'Inclusivity',
-    title:'Localisation and Internationalisation',
-    description:'Designing and building for different cultures.',
-    image:'/static/images/localization.webp',
-    slug:'localization'
-  },
-{
-  tagline:'Open Web',
-  title:'Web Monetization',
-  description:'Building an open, fairer web for everyone.',
-  image:'/static/images/web-mon.webp',
-  slug:'web-monetization'
-},
-{
-  tagline:'Roundups',
-  title:'The Source Letters',
-  description:'Stories on building a better, more inclusive web.',
-  image:'/static/images/proto_neurodiversity.webp',
-  slug:'the-source'
-},
-]
 
 export default function Index({ popularTags,popularToolTags, morePopularTags }) {
   const intl = useIntl();
@@ -80,22 +57,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
         </Container>
 
         <SectionDivider/>
-       <Container maxWidth="max-w-[1320px]" >
-        <h2 className="text-xl font-semibold mt-1">Open Web Spotlight</h2>
-        <div className="mt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
-                {featuredSections.map((section, i) => (
-                  <Link
-                  href={`/posts/${section.slug}/page/1`}>
-                  <div className="flex flex-col">
-                    <img className="w-full h-[212px] object-cover rounded-xl" src={section.image}/>
-                    <h4 className="text-xs text-gray-500 uppercase font-medium mt-3">{section.tagline}</h4>
-                    <h3 className="text-xl font-medium mt-1">{section.title}</h3>
-                    <p className="text-sm text-gray-500 mt-1">{section.description}</p>
-                  </div>
-                  </Link>
-                ))}
-        </div>
-        </Container>
+      <TopicSpotlightSection/>
 
         {/* <SectionDivider/>
        <Container maxWidth="max-w-[1320px] mt-4" >
@@ -123,11 +85,14 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
 
 export async function getStaticProps() {
   const popularTags = (await getPopularTopics({postType:'article', pageSize:8})) || [];
-  const popularToolTags = (await getPopularTopics({postType:'tool', pageSize:9})) || [];
+  // const popularToolTags = (await getPopularTopics({postType:'tool', pageSize:9})) || [];
   const morePopularTags = (await getPopularTopics({postType:'article', pageSize:16, offset:9})) || [];
 
   return {
-    props: { popularTags, popularToolTags, morePopularTags },
+    props: { popularTags, 
+      // popularToolTags, 
+      morePopularTags
+     },
     revalidate:8640//24 hrs
   };
 }

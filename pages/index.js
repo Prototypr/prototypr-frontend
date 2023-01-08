@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import DiscoverSection from "@/components/v4/section/DiscoverSection";
+import DiscoverSection from "@/components/v4/section/DiscoverSectionB";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
 // import Container from "@/components/container";
@@ -34,6 +34,9 @@ import {Robot, Swatches, HandEye, Wheelchair, FlowArrow} from 'phosphor-react'
 import NewsletterSection from "@/components/v4/section/NewsletterSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 import useUser from "@/lib/iron-session/useUser";
+import TagsNavRow from "@/components/v4/section/TagsNavRow";
+import SponsorBannerFull from "@/components/v4/banner/SponsorBannerFull";
+import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
 
 
 const PAGE_SIZE = 12;
@@ -131,6 +134,7 @@ export default function Index({
           sponsor={sponsors?.length ? sponsors[0] : null}
           tools={first3Tools}
         />:''}
+        <TagsNavRow/>
         <DiscoverSection
           user={user}
           heroCardPost={heroCardPost}
@@ -138,6 +142,10 @@ export default function Index({
           jobsSidebar={jobsSidebar}
         />
 
+        <SectionDivider />
+        <SponsorBannerFull/>
+        {/* <SectionDivider />
+        <TopicSpotlightSection/> */}
         <SectionDivider />
         <ToolIconCardRow tools={toolsList} />
         <SectionDivider />
