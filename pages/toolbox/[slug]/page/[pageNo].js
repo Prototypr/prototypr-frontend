@@ -37,7 +37,7 @@ const BREADCRUMBS = {
         </svg>
       ),
     },
-    { name: "Toolbox", slug: "/toolbox/page/1" },
+    { name: "Toolbox", slug: "/toolbox" },
   ],
 };
 
@@ -124,7 +124,7 @@ export async function getStaticPaths() {
   const all_slugs = get_slugs_from_menu(ALL_SLUGS_GROUPS);
   //now just same as the .map
   for (var z = 0; z < all_slugs.length; z++) {
-    var itemTags = all_slugs[z].tags;
+    var itemTags = all_slugs[z]?.tags;
     const allPosts =
       (await getAllPostsForToolsSubcategoryPage(
         null,

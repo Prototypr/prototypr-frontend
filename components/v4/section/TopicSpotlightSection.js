@@ -12,13 +12,13 @@ const featuredSections = [
   {
     tagline:'Web Monetization',
     title:'Funding an Open Web',
-    description:'Building an open, fairer web for everyone.',
+    description:'A new way to earn money on the web.',
     image:'/static/images/web-mon.webp',
     slug:'web-monetization'
   },
   {
-    tagline:'The Source',
-    title:'Open Web Letters',
+    tagline:'Open Web Roundups',
+    title:'The Source',
     description:'Stories on building a better, more inclusive web.',
     image:'/static/images/proto_neurodiversity.webp',
     slug:'the-source'
@@ -33,7 +33,7 @@ const TopicSpotlightSection = ({title='Open Web Spotlight', tagline}) =>{
                   <Link
                   href={`/posts/${section.slug}/page/1`}>
                   <div className="flex flex-col">
-                    <img className="w-full h-[212px] object-cover rounded-xl" src={section.image}/>
+                    <img className="w-full h-[190px] object-cover rounded-xl" src={section.image}/>
                     <h4 className="text-xs text-gray-500 uppercase font-medium mt-3">{section.tagline}</h4>
                     <h3 className="text-xl font-medium mt-1">{section.title}</h3>
                     <p className="text-sm text-gray-500 mt-1">{section.description}</p>

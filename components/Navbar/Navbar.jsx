@@ -114,7 +114,7 @@ const Navbar = ({
               <div className="justify-end hidden xl:flex mr-6">
                 {[
                   { label: "Home", url: "/" },
-                  { label: "Toolbox", url: "/toolbox/page/1" },
+                  { label: "Toolbox", url: "/toolbox" },
                   { label: "Topics", url: "/topics" },
                   { label: "Jobs", url: "/jobs" },
                   // { label: "Sponsor", url: "/sponsor" },
@@ -168,7 +168,7 @@ const Navbar = ({
         >
           <div className="space-y-1 px-2 pt-2 pb-3">
             <MobileActiveLink href={"/"}>Home</MobileActiveLink>
-            <MobileActiveLink href={"/toolbox/page/1"}>
+            <MobileActiveLink href={"/toolbox"}>
               Toolbox
             </MobileActiveLink>
             <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>

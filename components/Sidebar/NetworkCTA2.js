@@ -6,14 +6,14 @@ const PrototyprNetworkCTA = ({ data }) => {
     <div className="relative">
 
       <div className="flex flex-col gap-1 justify-end items-end">
-        <div className="w-full flex space-between rounded-[12px] h-auto bg-[#EAE9F5] bg-opacity-70 p-5">
+        <div className="w-full flex space-between rounded-[12px] h-auto bg-[#EAE9F5] bg-opacity-50 p-5">
           <div className="w-2/3 flex flex-col grid gap-2">
             <div>
                 <h2 className="text-gray-800 font-semibold text-lg mb-1 font-inter">
                 Join us on Discord
                 </h2>
                 <p className='text-sm text-gray-500 mb-3'>
-                Become a contributor and get writing feedback.
+                Become a contributor and get draft feedback.
                 </p>
                 <div className="">
                 <Link href="/network">

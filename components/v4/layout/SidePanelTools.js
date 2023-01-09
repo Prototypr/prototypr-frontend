@@ -15,7 +15,7 @@ const SidePanelTools = ({list}) =>{
                       Latest Tools
                     </h3>
                     <Link
-                      href={"/toolbox/page/1"}
+                      href={"/toolbox"}
                       className="font-inter text-xs font-semibold text-gray-800 cursor-pointer"
                     >
                       See all
@@ -37,7 +37,7 @@ const SidePanelTools = ({list}) =>{
             );
           })}
 
-          <Link href={"/toolbox/page/1"}>
+          <Link href={"/toolbox"}>
             <div className="font-inter font-medium mt-3 text-gray-600 cursor-pointer text-xs">{`See All ->`}</div>
           </Link>
         </div>
