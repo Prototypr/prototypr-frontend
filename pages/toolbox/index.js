@@ -12,23 +12,30 @@ import { CaretRight } from "phosphor-react";
 import TopicSection from "@/components/v4/section/TopicSection";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import NewsletterSection from "@/components/v4/section/NewsletterSection";
+import HeadingSeeAllRow from "@/components/v4/text/HeadingSeeAllRow";
+import { useIntl } from "react-intl";
+import Footer from "@/components/footer";
+
 const TAB_ITEMS = [
   {
     slug: "ai",
     toolSlug:'ai',
     name: "topicSpotlight.tabs.ai",
+    subheader:"Here come the bots!"
     // icon:<Robot size={ICON_SIZE}/>
   },
   {
     slug: "accessibility",
     toolSlug:'accessibility',
     name: "topicSpotlight.tabs.accessibility",
+    subheader:"Make your interfaces usable for all"
     // icon:<Wheelchair size={ICON_SIZE} />
   },
   {
     slug: "design-systems",
     toolSlug:'design-systems',
-    name: "topicSpotlight.tabs.accessibility",
+    name: "topicSpotlight.tabs.designSystems",
+    subheader:"Everything starts with a component"
     // icon:<Wheelchair size={ICON_SIZE} />
   },
 ];
@@ -63,8 +70,11 @@ export default function ToolboxPage({
   allPosts = [],
   topicPosts=[],
 }) {
+  const intl = useIntl();
+
 
   return (
+    <>
     <Layout
       maxWidth={"max-w-[1400px] search-wide"}
       seo={{
@@ -78,19 +88,12 @@ export default function ToolboxPage({
       activeNav={"toolbox"}
     >
       <ToolsTagsNavRow/>
-      <Container maxWidth="max-w-[1320px]">
-      <div className="flex justify-between">
-        <h3 className="font-bold text-2xl mt-6 mb-6 px-1">
-          Featured tools <span className="text-gray-400">for creators</span>
-        </h3>
-          <Link href='/toolbox/page/1'>
-            <div className="flex mt-6">
-              <div className="text-sm my-auto  text-black opacity-60">See all</div>
-              <CaretRight className="opacity-60 my-auto" size={16} />
-            </div>
-          </Link>
-
-      </div>
+      <Container maxWidth="max-w-[1320px] pb-20">
+      <HeadingSeeAllRow
+      link="/toolbox/page/1"
+      title="Featured tools"
+      extraTextHighlight="for creators"/>
+      
       {allPosts.length > 0 && (
               <>
                 <TwoColumnCards posts={allPosts.slice(0,2)}/>
@@ -103,20 +106,29 @@ export default function ToolboxPage({
                 <SectionDivider />
                 </div>
         {TAB_ITEMS?.map((topic, index) => {
+          const titleText = intl.formatMessage({ id: topicPosts[topic.slug].title });
+          const subheading = intl.formatMessage({ id: topicPosts[topic.slug].subheader });
           return (
             <>
-            {topicPosts[topic.slug]?.length > 0 && (
+            {topicPosts[topic.slug]?.posts?.length > 0 && (
               <>
-                <TwoColumnCards posts={topicPosts[topic.slug].slice(0,2)}/>
-                <ToolsLayout posts={topicPosts[topic.slug].slice(2,allPosts.length)} type="toolbox" />
+                <HeadingSeeAllRow
+                  link="/toolbox/page/1"
+                  title={titleText}
+                  subheader={subheading}
+                  />
+                <TwoColumnCards posts={topicPosts[topic.slug].posts?.slice(0,2)}/>
+                <ToolsLayout posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" />
+                <SectionDivider/>
               </>
             )}
             </>
           );
         })}
       </Container>
-      
     </Layout>
+      <Footer/>
+      </>
   );
 }
 
@@ -137,7 +149,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       const topicToolsRes =
         (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 8, 0, sort)) || [];
          
-      topicRes[tag] = topicToolsRes.data
+      topicRes[tag] = {posts:topicToolsRes.data, title:TAB_ITEMS[index].name, subheader:TAB_ITEMS[index].subheader}
     }
 
   return {
