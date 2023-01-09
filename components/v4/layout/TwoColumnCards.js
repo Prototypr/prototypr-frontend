@@ -11,8 +11,10 @@ const TwoColumnCards = ({posts}) =>{
                    let tags = post?.attributes?.tags?.data.slice(0, 2);
                   let coverImage = post?.attributes?.featuredImage?.data
             ? post?.attributes?.featuredImage?.data
-            : post?.attributes?.legacyFeaturedImage?.mediaItemUrl;
-                return (
+            : post?.attributes?.legacyFeaturedImage?.mediaItemUrl?post?.attributes?.legacyFeaturedImage?.mediaItemUrl
+            :post?.attributes?.legacyMedia?.mediaItemUrl
+
+            return (
                   <Link className="col-span-12 md:col-span-6"
                   href={`/toolbox/${slug}`}>
                   <div className="flex w-full flex-col ">

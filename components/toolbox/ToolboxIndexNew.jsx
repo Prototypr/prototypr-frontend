@@ -11,6 +11,7 @@ import stc from "string-to-color";
 import { Tag } from "phosphor-react";
 import TwoColumnCards from "../v4/layout/TwoColumnCards";
 import ToolsTagsNavRow from "../v4/section/ToolsTagsNavRow";
+import Footer from "../footer";
 
 const MoreStories = dynamic(() => import("@/components/more-stories"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
@@ -89,6 +90,7 @@ const ToolboxIndexPage = ({
           </>
         )}
       </Container>
+      <Footer/>
     </>
   );
 };

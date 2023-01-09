@@ -75,6 +75,7 @@ const ES = {
   "topicSpotlight.title": "Destacados del tema",
   "topicSpotlight.tabs.accessibility": "Accesibilidad",
   "topicSpotlight.tabs.userResearch": "Investigación de usuarios",
+  "topicSpotlight.tabs.designSystems": "Sistemas de diseño",
   "topicSpotlight.tabs.userWriting": "UX Writing",
   "topicSpotlight.tabs.branding": "Diseño de marca",
   "topicSpotlight.tabs.psychology": "Psicología",
