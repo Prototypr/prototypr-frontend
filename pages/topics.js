@@ -1,19 +1,20 @@
 import Container from "@/components/container";
 // import Layout from "@/components/layout";
-import Layout from "@/components/layoutForBlogPost";
-import SignupSidebar from "@/components/newsletter/SignupSidebar";
-import SponsorSidebarCard from "@/components/SponsorSidebarCard";
+import Layout from "@/components/new-index/layoutForIndex";
+import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
 
-// import { getAllPostsForPostsPage } from "@/lib/api";
-// import Head from "next/head";
-import Link from "next/link";
-import { useState } from "react";
 import { useIntl } from "react-intl";
-import { Waypoint } from "react-waypoint";
-import { SIDEBAR_STICKY_OFFSET, topics } from "@/lib/constants";
-import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
+import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
+import { getPopularTopics } from "@/lib/api";
+import { Tag } from "phosphor-react";
+import SectionDivider from "@/components/v4/section/SectionDivider";
+import Footer from "@/components/footer";
+import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
+import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
+// import CategoriesIconCardLarge from "@/components/v4/card/CategoriesIconCardLarge";
 
-export default function Index({ allPosts, preview }) {
+
+export default function Index({ popularTags,popularToolTags, morePopularTags }) {
   const intl = useIntl();
 
   return (
@@ -28,120 +29,69 @@ export default function Index({ allPosts, preview }) {
           url: "https://prototypr.io/topics",
         }}
         activeNav={"posts"}
-        preview={preview}
       >
+        <Container maxWidth="max-w-[1320px]" >
+          <div className="bg-[#EAE9F5] relative bg-opacity-50 overflow-hidden p-6 border-gray-200 rounded-2xl">
+            {/* <div className="z-20 relative"> */}
+            <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
+            <BreadCrumbs tagName={false}/>
+                <div className="inline-flex my-4">
+                  {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
+                    <Tag className="my-auto mx-auto mr-2.5 my-auto" size={24}/>
+                  {/* </div> */}
+                  <h2 className="text-5xl my-auto font-bold text-gray-900 capitalize">{intl.formatMessage({ id: "topics.title" })}</h2>
+                </div>
+              </div>
+          </div>
+        </Container>
+        {/* <SectionDivider/> */}
         {/* <Head>
         <title>{intl.formatMessage({ id: "topics.header" })}.</title>
       </Head> */}
-        <Container>
-          <div className="w-full h-full grid grid-cols-12 gap-1  ">
-            <div className="xl:px-10 md:px-8 pb-20 gap-2 col-span-12 lg:col-span-8">
-              <div className="pt-5 text-md text-gray-700 pb-8">
-                <Link href={`/`}>
-                  <span className="hover:underline">Home</span>
-                </Link>{" "}
-                →{" "}
-                <Link href={`/topics`}>
-                  <span className="underline">Topics</span>
-                </Link>
+      <Container maxWidth="max-w-[1320px]">
+        <div className="mt-8">
+          <h2 className="text-xl mb-6 font-semibold">Most popular</h2>
+          <PopularTagsSection popularTags={popularTags}/>
+        </div>
+      </Container>
+
+        <SectionDivider/>
+      <TopicSpotlightSection/>
+
+        {/* <SectionDivider/>
+       <Container maxWidth="max-w-[1320px] mt-4" >
+       <h2 className="text-xl font-semibold mb-6">Top App Categories</h2>
+        <div className="rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
+                {popularToolTags.map((topic, i) => (
+                  <CategoriesIconCardLarge withBackground={true} key={i} index={i} topic={topic}/>
+                  ))}
               </div>
-
-              <section className="flex-col md:flex-row flex items-center md:justify-between">
-                <h1 className="text-4xl font-bold tracking-tighter leading-tight mb-4">
-                  {intl.formatMessage({ id: "topics.title" })}
-                </h1>
-              </section>
-
-              <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-24">
-                {topics.map((topic, i) => (
-                  <Link key={i} href={`/posts/${topic.slug}/page/1`}>
-                    <div
-                      className={`group cursor-pointer flex relative ${topic.color} bg-gradient-to-br w-full p-4 rounded-lg h-32`}
-                    >
-                      <div className="my-auto mx-auto flex justify-between">
-                        <h3 className="text-lg font-bold text-center text-white">
-                          {intl.formatMessage({ id: topic.name })}
-                        </h3>
-                      </div>
-                    </div>
-                  </Link>
+        </Container> */}
+        <SectionDivider/>
+        <Container maxWidth="max-w-[1320px] pb-24 mt-1" >
+       <h2 className="text-xl font-semibold">Discover more</h2>
+        <div className="pt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
+                {morePopularTags.map((topic, i) => (
+                 <CategoriesIconCard showCount={false} withBackground={true} key={i} index={i} topic={topic}/>
                 ))}
               </div>
-            </div>
-            {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
-
-            <Sidebar
-              // author={post.attributes?.author?.data?.attributes}
-              // relatedPosts={relatedPosts}
-              paddingTop="hidden md:block pt-6"
-            />
-          </div>
         </Container>
       </Layout>
+      <Footer/>
     </>
   );
 }
 
-const Sidebar = ({ relatedPosts, paddingTop, author }) => {
-  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
+export async function getStaticProps() {
+  const popularTags = (await getPopularTopics({postType:'article', pageSize:8})) || [];
+  // const popularToolTags = (await getPopularTopics({postType:'tool', pageSize:9})) || [];
+  const morePopularTags = (await getPopularTopics({postType:'article', pageSize:16, offset:9})) || [];
 
-  const _handleWaypointEnter = () => {
-    setStickyPaddingTop("pt-0");
+  return {
+    props: { popularTags, 
+      // popularToolTags, 
+      morePopularTags
+     },
+    revalidate:8640//24 hrs
   };
-  const _handleWaypointLeave = () => {
-    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
-  };
-
-  return (
-    <div
-      className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
-    >
-      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
-      <div
-        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
-      >
-        <aside className="h-screen px-10 sticky top-0 py-0">
-          <div className="flex flex-col grid gap-6">
-            <PrototyprNetworkCTA />
-            <div>
-              {/* EMAIL FORM */}
-              <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                  Get the roundup
-                </h3>
-                <p className="text-base text-gray-500 mb-6">
-                  Get a curated selection of the best articles and topics from
-                  Prototypr in your inbox.
-                </p>
-                <SignupSidebar />
-              </div>
-
-              <div className="mt-6">
-                <SponsorSidebarCard sponsorLocation="topics" page={"/topics"} />
-              </div>
-            </div>
-
-            {/* <div className="w-full flex flex-col grid gap-2">
-
-            {relatedPosts?.data?.length > 0 &&
-              relatedPosts.data.map((item, index) => {
-                return (
-                  <ProductItem key={`product_item_${index}`} post={item} />
-                  // <TopicTopItem key={index} topic={item}/>
-                );
-              })}
-            </div> */}
-          </div>
-        </aside>
-      </div>
-    </div>
-  );
-};
-
-// export async function getStaticProps({ preview = null }) {
-//   const allPosts = (await getAllPostsForPostsPage(preview)) || [];
-
-//   return {
-//     props: { allPosts: allPosts.data, preview },
-//   };
-// }
+}

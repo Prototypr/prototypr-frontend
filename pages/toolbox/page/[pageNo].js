@@ -1,10 +1,12 @@
-import Layout from "@/components/layoutForToolboxIndex";
+import Layout from "@/components/new-index/layoutForIndex";
 
 import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from "@/lib/api";
-import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexNew";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 15;
+
+
 
 const BREADCRUMBS = {
   pageTitle: "Toolbox",
@@ -55,7 +57,7 @@ export default function ToolboxPage({
         filterCategories={ALL_SLUGS_GROUPS}
         urlRoot={`/toolbox`}
         paginationRoot={`/toolbox`}
-        title="Weekly Curated Design Tools"
+        title="All tools"
         description="All your design tools in one place, updated weekly"
         pagination={pagination}
         pageSize={PAGE_SIZE}
@@ -78,6 +80,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
   const allPosts =
     (await getPostsByPageForToolsPage(preview, pageSize, page, sort)) || [];
 
+
   const pagination = allPosts.meta.pagination;
   return {
     props: {
@@ -85,7 +88,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       preview,
       pagination,
     },
-    revalidate: 20,
+    revalidate: 86400,
   };
 }
 

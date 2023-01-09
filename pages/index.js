@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import DiscoverSection from "@/components/v4/section/DiscoverSection";
+import DiscoverSection from "@/components/v4/section/DiscoverSectionB";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
 // import Container from "@/components/container";
@@ -12,7 +12,7 @@ import IntroBanner from "@/components/v4/hero/IntroBanner";
 const Footer = dynamic(() => import("@/components/footer"));
 // const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
 
-import { getAllJobs } from "@/lib/api";
+import { getAllJobs, getPopularTopics } from "@/lib/api";
 
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 
@@ -28,12 +28,17 @@ import { transformPostListOld } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
 
 import TopicSection from "@/components/v4/section/TopicSection";
-import TopicSelectSection from "@/components/v4/section/TopicSelectSection";
+// import TopicSelectSection from "@/components/v4/section/TopicSelectSection";
 
 import {Robot, Swatches, HandEye, Wheelchair, FlowArrow} from 'phosphor-react'
 import NewsletterSection from "@/components/v4/section/NewsletterSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 import useUser from "@/lib/iron-session/useUser";
+import TagsNavRow from "@/components/v4/section/TagsNavRow";
+import SponsorBannerFull from "@/components/v4/banner/SponsorBannerFull";
+import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
+import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
+import Container from "@/components/container";
 
 
 const PAGE_SIZE = 12;
@@ -86,6 +91,7 @@ export default function Index({
   sponsors,
   heroPost,
   morePosts,
+  popularTags
 }) {
   const intl = useIntl();
   const [heroCardPost, setHeroPost] = useState(heroPost);
@@ -117,8 +123,8 @@ export default function Index({
         padding={false}
         preview={preview}
         // background={"#EFF4FB"}
-        background={"#F7F7F8"}
-        // background={"#ffffff"}
+        // background={"#F7F7F8"}
+        background={"#ffffff"}
         seo={{
           title: titleText,
           description: descriptionText,
@@ -131,6 +137,7 @@ export default function Index({
           sponsor={sponsors?.length ? sponsors[0] : null}
           tools={first3Tools}
         />:''}
+        <TagsNavRow/>
         <DiscoverSection
           user={user}
           heroCardPost={heroCardPost}
@@ -138,10 +145,21 @@ export default function Index({
           jobsSidebar={jobsSidebar}
         />
 
+       
         <SectionDivider />
         <ToolIconCardRow tools={toolsList} />
         <SectionDivider />
-        <TopicSelectSection topics={TAB_ITEMS} />
+        <SponsorBannerFull/>
+        <SectionDivider />
+        {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
+        <Container  maxWidth="max-w-[1320px]">
+          <h2 className="text-2xl mb-6 font-bold text-gray-900">
+          Browse <span className="text-gray-400">topics</span>
+          </h2>
+          <PopularTagsSection popularTags={popularTags}/>
+        </Container>
+         <SectionDivider />
+        <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/>
         <SectionDivider />
         {TAB_ITEMS?.map((topic, index) => {
           return (
@@ -216,6 +234,8 @@ export async function getStaticProps({ preview = null, locale }) {
     topicRes[tag] = topicData
   }
 
+  const popularTags = (await getPopularTopics({postType:'article', pageSize:8})) || [];
+
 
   allPosts = transformPostListOld(allPosts.data, locale);
   if(locale!=='es-ES'){
@@ -232,6 +252,7 @@ export async function getStaticProps({ preview = null, locale }) {
       heroPost: allPosts[0],
       morePosts: allPosts.slice(1),
       allTools: allTools,
+      popularTags,
       // otherPosts: otherPosts,
       // interviewPosts: interviews.data,
       topicRes,

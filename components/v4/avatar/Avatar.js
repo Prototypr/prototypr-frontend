@@ -28,15 +28,15 @@ const Avatar = ({ size, author, src, date }) => {
         </div>
         <div className="pl-2 my-auto">
           {author?.firstName ? (
-            <h2 className={`line-clamp-1 text-base font-medium ${titleClass}`}>
+            <h2 className={`line-clamp-1 font-medium ${titleClass}`}>
               {author?.firstName} {author?.lastName ? author?.lastName : ""}
             </h2>
           ) : author?.displayName ? (
-            <h2 className={`line-clamp-1 text-base font-medium ${titleClass}`}>
+            <h2 className={`line-clamp-1 font-medium ${titleClass}`}>
               {author?.displayName}
             </h2>
           ) : (
-            <h2 className={`line-clamp-1 text-base font-medium ${titleClass}`}>
+            <h2 className={`line-clamp-1 font-medium ${titleClass}`}>
               Unknown
             </h2>
           )}

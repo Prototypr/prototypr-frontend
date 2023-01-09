@@ -24,7 +24,7 @@ const SmallCard = ({link, title, image, tags, date, avatar, author }) => {
             {tags?.length
               ? tags.slice(0, 2).map((tag, index) => {
                 //2 long tags make break the layout, so remove word 'design'
-                let name = tag.attributes?.name.replace('design', '')
+                let name = tag.attributes?.name.replace('Design', '')
                 name = name.replace('-', ' ')
                   return (
                     <SmallTag

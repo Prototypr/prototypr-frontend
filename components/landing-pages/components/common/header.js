@@ -103,7 +103,7 @@ const Header = ({collapsed, hideLocaleSwitcher, editor, showWriteButton}) => {
             >
               <div className="space-y-1 px-2 pt-2 pb-3">
                 <MobileActiveLink href={"/"}>Home</MobileActiveLink>
-                <MobileActiveLink href={"/toolbox/page/1"}>Toolbox</MobileActiveLink>
+                <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
                 <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>
                 <MobileActiveLink href={"/web-monetization"}>
                   Web Monetization
