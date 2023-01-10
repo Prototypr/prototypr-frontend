@@ -99,7 +99,9 @@ export default function ToolboxPage({
       {allPosts.length > 0 && (
               <>
                 <TwoColumnCards posts={allPosts.slice(0,2)}/>
-                <ToolCard posts={allPosts.slice(2,allPosts.length)} type="toolbox" />
+                <div className="py-6">
+                  <ToolCard posts={allPosts.slice(2,allPosts.length)} type="toolbox" />
+                </div>
               </>
             )}
         <SectionDivider />
@@ -121,7 +123,9 @@ export default function ToolboxPage({
                   />
                 <TwoColumnCards posts={topicPosts[topic.slug].posts?.slice(0,2)}/>
                 {/* <ToolsLayout posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" /> */}
-                <ToolCard posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" />
+                <div className="py-6">
+                  <ToolCard posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" />
+                </div>
                 {index!==TAB_ITEMS.length-1?<SectionDivider/>:''}
               </>
             )}
