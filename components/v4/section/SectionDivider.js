@@ -1,10 +1,10 @@
 import Container from "@/components/container";
 
-const SectionDivider = () => {
+const SectionDivider = ({transparentLine}) => {
   return (
     <Container maxWidth="max-w-[1320px]">
-      <div className="py-8">
-        <div className="h-[1px] bg-opacity-10 bg-black w-full" />
+      <div className={`${transparentLine?'py-4':'py-8'}`}>
+        <div className={`h-[1px] ${transparentLine?'bg-opacity-0':'bg-opacity-10'} bg-black w-full"`} />
       </div>
     </Container>
   );

@@ -7,7 +7,7 @@ const NewsletterSection = () =>{
         <Container maxWidth="max-w-[1320px]">
             <div className=" sm:mt-8 lg:px-0 lg:mt-0">
             <div
-            className="w-full relative flex h-full bg-blue-100 w-full lg:mt-8 rounded-[16px] p-6"
+            className="w-full relative flex h-full bg-teal-400 w-full lg:mt-8 rounded-[16px] p-6"
             >
             <div className="max-w-xl lg:max-w-xl">
                 <h3 className="text-xl lg:text-3xl mb-2 font-inter text-black font-bold">The best design articles, every week</h3>

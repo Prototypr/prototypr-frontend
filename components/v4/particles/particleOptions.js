@@ -23,20 +23,20 @@ export const particleOptions = {
         image:dummyData        
       },
       opacity: {
-        value: 0.8,
+        value: 1,
       },
       size: {
-        value: { min: 14, max: 18 },
+        value: { min: 13, max: 19 },
         animation: {
-            enable: false,
+            enable: true,
             speed: 3,
             minimumValue: 12,
-            sync: false
+            sync: true
         },
       },
       links: {
         enable: true,
-        distance: 120,
+        distance: 100,
         color: "#ffffff",
         opacity: 1,
         width: 1,
@@ -44,7 +44,7 @@ export const particleOptions = {
       move: {
         enable: true,
         collisions: true,
-        speed: 0.6,
+        speed: 0.2,
         direction: "random",
         random: true,
         straight: false,

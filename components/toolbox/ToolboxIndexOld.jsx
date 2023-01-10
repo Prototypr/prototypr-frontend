@@ -39,7 +39,10 @@ const ToolboxIndexPage = ({
 
   return (
     <>
-     <Container maxWidth="max-w-[1320px]" >
+    {/* <div className="mt-2">
+      <ToolsTagsNavRow active={'All'}/>
+    </div> */}
+     <Container maxWidth="max-w-[1320px] mt-3 mb-6" >
           <div className="bg-[#EAE9F5] relative bg-opacity-50 overflow-hidden p-6 border-gray-200 rounded-2xl">
             {/* <div className="z-20 relative"> */}
             <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
@@ -59,36 +62,45 @@ const ToolboxIndexPage = ({
               </div>
           </div>
         </Container>
-      <ToolsTagsNavRow active={'All'}/>
-      <Container maxWidth="max-w-[1320px]">
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            {allPosts.length > 0 && (
-              <>
-              {pagination?.page==1?
-              <>
-                <TwoColumnCards posts={allPosts.slice(0,2)}/>
-                <ToolsLayout posts={allPosts} type="toolbox" />
-              </>
-                :
-                 <ToolsLayout posts={allPosts} type="toolbox" />
-              }
+      
+      <Container maxWidth="max-w-[1320px] flex grid grid-cols-12">
+      <Sidebar
+                  paginationRoot={paginationRoot}
+                  urlRoot={urlRoot}
+                  filterCategories={filterCategories}
+                  slug={currentSlug}
+                />
+        <div className="w-full px-3 md:pr-0 md:pl-12 -mt-6 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10">
+          {router.isFallback ? (
+            <PostTitle>Loading…</PostTitle>
+          ) : (
+            <>
+              {allPosts.length > 0 && (
+                <>
+                {pagination?.page==1?
+                <>
+                  {/* <TwoColumnCards posts={allPosts.slice(0,2)}/> */}
+                  {/* <ToolsLayout posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" /> */}
+                  <ToolsLayout posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
+                </>
+                  :
+                  <ToolsLayout posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
+                }
 
-              <NewPagination
-                      total={pagination?.total}
-                      pageSize={pageSize}
-                      currentPage={pagination?.page}
-                      onPageNumChange={(pageNum) => {
-                        onPageNumChange(pageNum);
-                      }}
-                    />
+                <NewPagination
+                        total={pagination?.total}
+                        pageSize={pageSize}
+                        currentPage={pagination?.page}
+                        onPageNumChange={(pageNum) => {
+                          onPageNumChange(pageNum);
+                        }}
+                      />
 
-              </>
-            )}
-          </>
-        )}
+                </>
+              )}
+            </>
+          )}
+        </div>
       </Container>
       <Footer/>
     </>
@@ -96,3 +108,19 @@ const ToolboxIndexPage = ({
 };
 
 export default ToolboxIndexPage;
+
+const Sidebar = ({ filterCategories, paginationRoot, urlRoot, slug }) => {
+  return (
+    <div className="hidden md:block relative col-span-2 max-w-[410px] border-r border-opacity-20">
+      <div className="w-full min-h-screen flex flex-col">
+        <FilterCategory
+          urlRoot={urlRoot}
+          paginationRoot={paginationRoot}
+          items={filterCategories}
+          key={"uxtools_item_"}
+          slug={slug}
+        />
+      </div>
+    </div>
+  );
+};

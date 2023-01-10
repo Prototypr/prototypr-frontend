@@ -1,5 +1,5 @@
 import Layout from "@/components/new-index/layoutForIndex";
-import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexNew";
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 import {
   getAllPostsForToolsSubcategoryPage,

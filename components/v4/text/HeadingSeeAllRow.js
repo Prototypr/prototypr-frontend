@@ -11,8 +11,8 @@ const HeadingSeeAllRow = ({link="/",title='Featured tools', extraTextHighlight='
         </div>
           <Link href={link}>
             <div className="flex mt-6">
-              <div className="text-sm my-auto  text-black opacity-60">See all</div>
-              <CaretRight className="opacity-60 my-auto" size={16} />
+              <div className="text-base my-auto  text-blue-600">See all</div>
+              <CaretRight color="rgb(37,99,235)" className=" my-auto" size={16} />
             </div>
           </Link>
 

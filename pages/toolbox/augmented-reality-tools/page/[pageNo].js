@@ -1,4 +1,4 @@
-import Layout from "@/components/layoutForToolboxIndex";
+import Layout from "@/components/new-index/layoutForIndex";
 
 
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
