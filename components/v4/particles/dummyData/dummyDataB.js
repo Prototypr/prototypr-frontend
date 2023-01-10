@@ -126,12 +126,12 @@ export const dummyData =
         position:{x:82, y:52}
         
     },
-    {   
-        src:'/static/particles/topics/twitter.png',
-        slug:'/posts/social-media/page/1',
-        position:{x:68, y:48},
-        topic:true
-    },
+    // {   
+    //     src:'/static/particles/topics/twitter.png',
+    //     slug:'/posts/social-media/page/1',
+    //     position:{x:68, y:48},
+    //     topic:true
+    // },
     {   
         src:'/static/particles/tools/chatsonic.png',
         slug:'/toolbox/chatsonic',

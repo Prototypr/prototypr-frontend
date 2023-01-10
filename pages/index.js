@@ -6,7 +6,7 @@ import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
 // import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 // import TrendingFullWidth from "@/components/homepage/TrendingFullWidth";
-import IntroBanner from "@/components/v4/hero/IntroBanner";
+import IntroBanner from "@/components/v4/hero/IntroBanner2";
 /**new index components */
 // import { BrowserView } from "react-device-detect";
 const Footer = dynamic(() => import("@/components/footer"));

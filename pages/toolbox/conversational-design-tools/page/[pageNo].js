@@ -8,6 +8,7 @@ import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/chatTools'
+import Footer from "@/components/footer";
 
 const PAGE_SIZE = 20;
 
@@ -24,6 +25,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
 
     return (
+        <>
         <Layout 
        maxWidth={"search-wide max-w-[1320px]"}
         seo={{
@@ -46,6 +48,8 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
         allPosts={allPosts} 
         breadcrumbs={BREADCRUMBS}/>
         </Layout>
+    <Footer/>
+    </>
     )
 }
 

@@ -12,6 +12,7 @@ import {
   get_slugs_from_menu,
 } from "@/lib/menus/lib/getAllTagsFromMenu";
 import { useEffect } from "react";
+import Footer from "@/components/footer";
 
 const PAGE_SIZE = 12;
 
@@ -55,6 +56,7 @@ export default function ToolboxPage({
   }, []);
 
   return (
+    <>
     <Layout
       maxWidth={"search-wide max-w-[1380px]"}
       seo={{
@@ -81,6 +83,9 @@ export default function ToolboxPage({
         breadcrumbs={BREADCRUMBS}
       />
     </Layout>
+
+<Footer/>
+</>
   );
 }
 

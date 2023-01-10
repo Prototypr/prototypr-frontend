@@ -3,17 +3,18 @@ import { useRouter } from "next/router";
 import Container from "@/components/container";
 import PostTitle from "@/components/post-title";
 
-import Image from "next/image";
-import Link from "next/link";
-import gumletLoader from "@/components/new-index/gumletLoader";
-import ToolsLayout from "@/components/v4/layout/toolbox/ToolsLayout";
+// import Image from "next/image";
+// import Link from "next/link";
+// import gumletLoader from "@/components/new-index/gumletLoader";
+// import ToolsLayout from "@/components/v4/layout/toolbox/ToolsLayout";
 import stc from "string-to-color";
-import { Tag } from "phosphor-react";
-import TwoColumnCards from "../v4/layout/TwoColumnCards";
-import ToolsTagsNavRow from "../v4/section/ToolsTagsNavRow";
-import Footer from "../footer";
+// import { Tag } from "phosphor-react";
+// import TwoColumnCards from "../v4/layout/TwoColumnCards";
+// import ToolsTagsNavRow from "../v4/section/ToolsTagsNavRow";
+import ToolCard from "../v4/card/ToolCard";
+import NewsletterSection from "../v4/section/NewsletterSection";
 
-const MoreStories = dynamic(() => import("@/components/more-stories"));
+// const MoreStories = dynamic(() => import("@/components/more-stories"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
 const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
@@ -42,8 +43,14 @@ const ToolboxIndexPage = ({
     {/* <div className="mt-2">
       <ToolsTagsNavRow active={'All'}/>
     </div> */}
-     <Container maxWidth="max-w-[1320px] mt-3 mb-6" >
-          <div className="bg-[#EAE9F5] relative bg-opacity-50 overflow-hidden p-6 border-gray-200 rounded-2xl">
+     <Container maxWidth="max-w-[1320px] mt-3 mb-6">
+          <div 
+          style={{
+            backgroundColor: stc(`${title}`),
+            backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
+          }}
+          className="relative overflow-hidden p-6 border-gray-200 rounded-2xl">
+            <div className="bg-black opacity-[15%] w-full h-full absolute left-0 top-0"/>
             {/* <div className="z-20 relative"> */}
             <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
             <Breadcrumbs
@@ -57,7 +64,7 @@ const ToolboxIndexPage = ({
                   {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
                     {/* <Tag className="my-auto mx-auto mr-2.5 my-auto" size={24}/> */}
                   {/* </div> */}
-                  <h2 className="text-5xl my-auto font-bold text-gray-900 capitalize">{title}</h2>
+                  <h2 className="text-5xl my-auto font-bold text-white capitalize">{title}</h2>
                 </div>
               </div>
           </div>
@@ -81,10 +88,10 @@ const ToolboxIndexPage = ({
                 <>
                   {/* <TwoColumnCards posts={allPosts.slice(0,2)}/> */}
                   {/* <ToolsLayout posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" /> */}
-                  <ToolsLayout posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
+                  <ToolCard posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
                 </>
                   :
-                  <ToolsLayout posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
+                  <ToolCard posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
                 }
 
                 <NewPagination
@@ -98,11 +105,12 @@ const ToolboxIndexPage = ({
 
                 </>
               )}
+            <NewsletterSection title={'Get a weekly list of the best tools'} padding={false}/>
+
             </>
           )}
         </div>
       </Container>
-      <Footer/>
     </>
   );
 };

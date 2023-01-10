@@ -11,7 +11,7 @@ export const manualParticles = (dummyData, sponsor) => {
                     y: dummyData[x]?.position?.y
                 },
                 options: {
-                    size: { value: { min: 15, max: 15 }},//for topics make size standard
+                    size: { value: { min: 13, max: 16 }},//for topics make size standard
                     shape: {
                     options: {
                         image: dummyData[x]
@@ -61,6 +61,40 @@ export const manualParticles = (dummyData, sponsor) => {
                 }
             },
     )
+    // robotito
+    // particles.push(
+    //      {
+    //         position: {
+    //             x: 150,
+    //             y: 50
+    //         },
+    //         options: {
+    //             links:{
+    //                 enable:false
+    //             },
+    //             move: {
+    //                 direction: "none",
+    //                 enable: true,
+    //                 outMode: "bounce",
+    //                 random: false,
+    //                 speed: 0.1,
+    //                 straight: false,
+    //               },
+    //             size: { value: { min: 90, max: 90 }},
+    //             shape: {
+    //             options: {
+    //                 image:    {   
+    //                     height:1302,
+    //                     src:'/static/images/robotitosuelto.png',
+    //                     // slug:'/people/graeme',
+    //                     width:991,
+    //                 },
+    //             },
+    //             type: "image"
+    //             },
+    //             }
+    //         },
+    // )
     
     return particles
     

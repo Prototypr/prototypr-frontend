@@ -301,7 +301,7 @@ const HeroGrid = ({
           className="w-full h-full bg-pink-200 w-full lg:mt-8 rounded-[16px] p-6"
         >
           <h3 className="text-2xl mb-2 font-inter max-w-md text-black font-bold">The best design articles, every week</h3>
-          <p className="font-inter mb-4 text-base leading-[24px] text-black text-opacity-70">Join 25,000+ creatives who enjoy a regular dose of inspiration and motivation, delivered to your inbox every Tuesday.</p>
+          <p className="font-inter mb-4 text-base leading-[24px] text-black text-opacity-70">Join 25,000+ creatives who enjoy a regular dose of inspiration and motivation, delivered to your inbox every week.</p>
           <SignupHomepage/>
         </div>
         </div>

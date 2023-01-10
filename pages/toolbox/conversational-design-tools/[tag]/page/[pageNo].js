@@ -7,6 +7,7 @@ import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/g
 const PAGE_SIZE = 20;
 
 import ALL_SLUGS_CATEGORY from '@/lib/menus/chatTools'
+import Footer from "@/components/footer";
 
 const BREADCRUMBS = {
     pageTitle:'Conversational',
@@ -22,6 +23,7 @@ export default function ToolboxPage({allPosts = [],title, preview, pagination,ta
     //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
 
     return (
+        <>
         <Layout 
        maxWidth={"search-wide max-w-[1320px]"}
         seo={{
@@ -45,6 +47,8 @@ export default function ToolboxPage({allPosts = [],title, preview, pagination,ta
         allPosts={allPosts} 
         breadcrumbs={BREADCRUMBS}/>
         </Layout>
+    <Footer/>
+    </>
     )
 }
 

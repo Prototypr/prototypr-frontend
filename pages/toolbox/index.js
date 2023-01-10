@@ -6,6 +6,7 @@ import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 import ToolsTagsNavRow from "@/components/v4/section/ToolsTagsNavRow";
 import TwoColumnCards from "@/components/v4/layout/TwoColumnCards";
 import ToolsLayout from "@/components/v4/layout/toolbox/ToolsLayout";
+import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import Container from "@/components/container";
 import Link from "next/link";
 import { CaretRight } from "phosphor-react";
@@ -15,6 +16,7 @@ import NewsletterSection from "@/components/v4/section/NewsletterSection";
 import HeadingSeeAllRow from "@/components/v4/text/HeadingSeeAllRow";
 import { useIntl } from "react-intl";
 import Footer from "@/components/footer";
+import ToolCard from "@/components/v4/card/ToolCard";
 
 const TAB_ITEMS = [
   {
@@ -97,7 +99,7 @@ export default function ToolboxPage({
       {allPosts.length > 0 && (
               <>
                 <TwoColumnCards posts={allPosts.slice(0,2)}/>
-                <ToolsLayout posts={allPosts.slice(2,allPosts.length)} type="toolbox" />
+                <ToolCard posts={allPosts.slice(2,allPosts.length)} type="toolbox" />
               </>
             )}
         <SectionDivider />
@@ -118,7 +120,8 @@ export default function ToolboxPage({
                   subheader={subheading}
                   />
                 <TwoColumnCards posts={topicPosts[topic.slug].posts?.slice(0,2)}/>
-                <ToolsLayout posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" />
+                {/* <ToolsLayout posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" /> */}
+                <ToolCard posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" />
                 {index!==TAB_ITEMS.length-1?<SectionDivider/>:''}
               </>
             )}
