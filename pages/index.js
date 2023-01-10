@@ -39,6 +39,7 @@ import SponsorBannerFull from "@/components/v4/banner/SponsorBannerFull";
 import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
 import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 import Container from "@/components/container";
+import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
 
 
 const PAGE_SIZE = 12;
@@ -133,10 +134,15 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        {(!user?.isLoggedIn)?<IntroBanner
+        {(!user?.isLoggedIn)?
+        <>
+        <IntroBanner
           sponsor={sponsors?.length ? sponsors[0] : null}
           tools={first3Tools}
-        />:''}
+        />
+        <SectionDivider transparentLine={true} />
+        </>
+        :''}
         <TagsNavRow/>
         <DiscoverSection
           user={user}
@@ -146,20 +152,26 @@ export default function Index({
         />
 
        
-        <SectionDivider />
+        <SectionDivider  />
+        <Container  maxWidth="max-w-[1320px]">
+        <TwoColumnCards posts={morePosts.slice(0,2)}/> 
+        </Container>
+        <SectionDivider transparentLine={true} />
         <ToolIconCardRow tools={toolsList} />
         <SectionDivider />
         <SponsorBannerFull/>
         <SectionDivider />
+        <SectionDivider transparentLine={true} />
         {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
         <Container  maxWidth="max-w-[1320px]">
-          <h2 className="text-2xl mb-6 font-bold text-gray-900">
-          Browse <span className="text-gray-400">topics</span>
+          <h2 className="text-3xl mb-6 font-bold text-gray-900">
+          Browse by <span className="text-gray-500">topic</span>
           </h2>
           <PopularTagsSection popularTags={popularTags}/>
         </Container>
-         <SectionDivider />
-        <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/>
+         {/* <SectionDivider />
+        <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/> */}
+        <SectionDivider transparentLine={true} />
         <SectionDivider />
         {TAB_ITEMS?.map((topic, index) => {
           return (

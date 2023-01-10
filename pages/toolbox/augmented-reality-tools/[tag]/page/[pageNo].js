@@ -1,4 +1,4 @@
-import Layout from "@/components/layoutForToolboxIndex";
+import Layout from "@/components/new-index/layoutForIndex";
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 

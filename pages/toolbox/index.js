@@ -1,7 +1,7 @@
 import Layout from "@/components/new-index/layoutForIndex";
 
 import { getAllPostsForToolsPage, getCommonQuery, getPostsByPageForToolsPage } from "@/lib/api";
-import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexNew";
+// import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 import ToolsTagsNavRow from "@/components/v4/section/ToolsTagsNavRow";
 import TwoColumnCards from "@/components/v4/layout/TwoColumnCards";
@@ -32,8 +32,8 @@ const TAB_ITEMS = [
     // icon:<Wheelchair size={ICON_SIZE} />
   },
   {
-    slug: "design-systems",
-    toolSlug:'design-systems',
+    slug: "design-system",
+    toolSlug:'design-system',
     name: "topicSpotlight.tabs.designSystems",
     subheader:"Everything starts with a component"
     // icon:<Wheelchair size={ICON_SIZE} />
@@ -119,7 +119,7 @@ export default function ToolboxPage({
                   />
                 <TwoColumnCards posts={topicPosts[topic.slug].posts?.slice(0,2)}/>
                 <ToolsLayout posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" />
-                <SectionDivider/>
+                {index!==TAB_ITEMS.length-1?<SectionDivider/>:''}
               </>
             )}
             </>
@@ -147,7 +147,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
     for (let index = 0; index < TAB_ITEMS.length; index++) {
       const tag = TAB_ITEMS[index].slug;
       const topicToolsRes =
-        (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 8, 0, sort)) || [];
+        (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 11, 0, sort)) || [];
          
       topicRes[tag] = {posts:topicToolsRes.data, title:TAB_ITEMS[index].name, subheader:TAB_ITEMS[index].subheader}
     }

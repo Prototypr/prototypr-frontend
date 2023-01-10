@@ -1,10 +1,10 @@
 import Layout from "@/components/new-index/layoutForIndex";
 
 import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from "@/lib/api";
-import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexNew";
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 14;
 
 
 

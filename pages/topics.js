@@ -30,33 +30,32 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
         }}
         activeNav={"posts"}
       >
-        <Container maxWidth="max-w-[1320px]" >
+        {/* <Container maxWidth="max-w-[1320px]" >
           <div className="bg-[#EAE9F5] relative bg-opacity-50 overflow-hidden p-6 border-gray-200 rounded-2xl">
-            {/* <div className="z-20 relative"> */}
             <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
             <BreadCrumbs tagName={false}/>
                 <div className="inline-flex my-4">
-                  {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
                     <Tag className="my-auto mx-auto mr-2.5 my-auto" size={24}/>
-                  {/* </div> */}
                   <h2 className="text-5xl my-auto font-bold text-gray-900 capitalize">{intl.formatMessage({ id: "topics.title" })}</h2>
                 </div>
               </div>
           </div>
-        </Container>
+        </Container> */}
         {/* <SectionDivider/> */}
         {/* <Head>
         <title>{intl.formatMessage({ id: "topics.header" })}.</title>
       </Head> */}
       <Container maxWidth="max-w-[1320px]">
-        <div className="mt-8">
-          <h2 className="text-xl mb-6 font-semibold">Most popular</h2>
+        <div className="mt-2">
+          <h2 className="text-lg mb-4 font-semibold">Most popular</h2>
           <PopularTagsSection popularTags={popularTags}/>
         </div>
       </Container>
 
         <SectionDivider/>
-      <TopicSpotlightSection/>
+      <TopicSpotlightSection 
+      tagline="Open Web"
+      headingSize={'text-lg mb-4'}/>
 
         {/* <SectionDivider/>
        <Container maxWidth="max-w-[1320px] mt-4" >
@@ -69,8 +68,8 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
         </Container> */}
         <SectionDivider/>
         <Container maxWidth="max-w-[1320px] pb-24 mt-1" >
-       <h2 className="text-xl font-semibold">Discover more</h2>
-        <div className="pt-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
+       <h2 className="text-lg font-semibold">Discover more</h2>
+        <div className="pt-4 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
                 {morePopularTags.map((topic, i) => (
                  <CategoriesIconCard showCount={false} withBackground={true} key={i} index={i} topic={topic}/>
                 ))}
@@ -87,10 +86,14 @@ export async function getStaticProps() {
   // const popularToolTags = (await getPopularTopics({postType:'tool', pageSize:9})) || [];
   const morePopularTags = (await getPopularTopics({postType:'article', pageSize:16, offset:9})) || [];
 
+  // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+  let alphabetical = morePopularTags.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+
+
   return {
     props: { popularTags, 
       // popularToolTags, 
-      morePopularTags
+      morePopularTags:alphabetical
      },
     revalidate:8640//24 hrs
   };

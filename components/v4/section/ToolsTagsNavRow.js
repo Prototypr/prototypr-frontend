@@ -5,10 +5,16 @@ import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 
 const ToolsTagsNavRow = ({tags, active}) => {
   return (
-    <Container maxWidth="max-w-[1320px] mt-6 ">
+    <Container maxWidth="max-w-[1320px]">
       <div className="flex flex-wrap">
         {ALL_SLUGS_GROUPS.map((tag, index) => {
-          return <GiantTag active={active==tag.title} link={`${tag?.moreLink?.url || "/"}`}>{tag.title}</GiantTag>;
+          
+          return (
+            <>
+            {tag.subItems?
+              <GiantTag active={active==tag.title} link={`${tag?.moreLink?.url || "/"}`}>{tag.title}</GiantTag>
+            :''}
+            </>)
         })}
       </div>
     </Container>

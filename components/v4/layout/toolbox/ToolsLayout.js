@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const ToolsLayout = ({ posts, type }) => {
+const ToolsLayout = ({ posts, type, columns }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 py-6 gap-6 w-full flex-wrap">
+    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} py-6 gap-6 w-full flex-wrap`}>
       {posts.map((post, i) => {
         let title, slug, coverImage, tags;
 

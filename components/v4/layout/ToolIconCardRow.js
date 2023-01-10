@@ -8,7 +8,7 @@ const ToolIconCardRow = ({ tools }) => {
     <Container maxWidth="max-w-[1320px] w-full">
       <div className="flex justify-between">
         <h3 className="font-bold text-lg mb-6 px-1">
-          Latest tools <span className="text-gray-400">for creators</span>
+          Latest tools <span className="text-gray-400">hand picked</span>
         </h3>
           <Link href='/toolbox'>
             <div className="flex">
