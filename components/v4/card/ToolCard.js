@@ -6,7 +6,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const ToolCard = ({ posts, type, columns }) => {
   return (
-    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} py-6 gap-6 w-full flex-wrap`}>
+    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-6 w-full flex-wrap`}>
       {posts.map((post, i) => {
         let title, slug, coverImage, tags;
 
@@ -29,12 +29,25 @@ const ToolCard = ({ posts, type, columns }) => {
           title = post?.attributes?.title;
           slug = post.attributes?.slug;
           tags = post?.attributes?.tags?.data.slice(0, 2);
+
+          // let tool = post.attributes
+
+          // let coverImage =   
+          // tool.featuredImage?.data?.attributes?.url
+          //   ? tool.featuredImage.data.attributes.url
+          //   : tool.legacyFeaturedImage
+          //   ? tool.legacyFeaturedImage
+          //   : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+            
+          //   coverImage = (tool?.legacyMedia?.logoNew || coverImage?.logoNew || tool.legacyMedia?.mediaItemUrl)
+            
+
           coverImage = post.attributes?.featuredImage?.data?.attributes?.url
             ? post.attributes.featuredImage.data.attributes.url
             : post.attributes?.legacyFeaturedImage
             ? post.attributes?.legacyFeaturedImage
             : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-            coverImage = (post?.attributes?.legacyMedia?.logoNew || coverImage?.logoNew || post.legacyMedia?.mediaItemUrl)
+            coverImage = (post?.attributes?.legacyMedia?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl)
 
           }
 
@@ -47,7 +60,7 @@ const ToolCard = ({ posts, type, columns }) => {
             <div className="flex flex-col justify-center sm:flex-row gap-4">
               {coverImage ? (
                 <div
-                  className="p-1 rounded-2xl overflow-hidden bg-gray-50"
+                  className=" relative rounded-2xl overflow-hidden "
                   style={{ height: "75px", width: "75px",
                  flex: `0 0 75px`
                 }}
@@ -58,10 +71,11 @@ const ToolCard = ({ posts, type, columns }) => {
                     data-priority={false < 2 ? `true` : `false`}
                     fetchpriority={false < 2 ? "true" : "false"}
                     data-gmlazy={false < 2 ? `false` : `true`}
-                    width="100"
-                    height="100"
+                    fill={true}
+                    // width="100"
+                    // height="100"
                     alt="Brand logo for external website's link"
-                    className=" border rounded-2xl bg-white"
+                    className="p-1 bg-gray-50 border object-cover rounded-2xl bg-white"
                     src={coverImage}
                   />
                 </div>

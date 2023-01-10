@@ -36,7 +36,7 @@ import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 import useUser from "@/lib/iron-session/useUser";
 import TagsNavRow from "@/components/v4/section/TagsNavRow";
 import SponsorBannerFull from "@/components/v4/banner/SponsorBannerFull";
-import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
+// import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
 import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 import Container from "@/components/container";
 import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
@@ -124,8 +124,8 @@ export default function Index({
         padding={false}
         preview={preview}
         // background={"#EFF4FB"}
-        // background={"#F7F7F8"}
-        background={"#ffffff"}
+        background={"#F7F7F8"}
+        // background={"#ffffff"}
         seo={{
           title: titleText,
           description: descriptionText,

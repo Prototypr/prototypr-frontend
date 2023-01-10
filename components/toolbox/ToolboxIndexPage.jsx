@@ -88,10 +88,14 @@ const ToolboxIndexPage = ({
                 <>
                   {/* <TwoColumnCards posts={allPosts.slice(0,2)}/> */}
                   {/* <ToolsLayout posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" /> */}
-                  <ToolCard posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
+                  <div className="py-6">
+                    <ToolCard posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
+                  </div>
                 </>
                   :
-                  <ToolCard posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
+                  <div className="py-6">
+                      <ToolCard posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" />
+                  </div>
                 }
 
                 <NewPagination
