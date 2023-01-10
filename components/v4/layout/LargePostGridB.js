@@ -28,7 +28,7 @@ const LargePostGrid = ({ largePost, smallPosts }) => {
           tags={largePost?.attributes?.tags?.data}
         />
       </div>
-      <SmallPostsGroup smallPosts={smallPosts?.slice(0,3)}/>
+      <SmallPostsGroup smallPosts={smallPosts?.slice(0,2)}/>
     </div>
     </>
   );

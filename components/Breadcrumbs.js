@@ -10,7 +10,7 @@ export default function Breadcrumbs({
   pageNo = null,
 }) {
   return (
-    <div className="w-auto ">
+    <div className="w-auto bg-white p-2.5 rounded-xl" style={{width:'fit-content'}}>
       {links.map((item, index) => {
         return (
           <div className="inline" key={index}>

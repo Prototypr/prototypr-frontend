@@ -23,7 +23,7 @@ import { loadFull } from "tsparticles";
 // import { loadTwinkleUpdater } from "tsparticles-updater-twinkle";
 // import { loadWobbleUpdater } from "tsparticles-updater-wobble";
 import {useRouter} from 'next/router'
-import {particleOptions} from './particleOptions'
+import {particleOptions} from './particleOptionsB'
 
 
 const ParticlesContainer = () => {
@@ -43,7 +43,7 @@ const ParticlesContainer = () => {
         // console.log(particle)
         if(particle.shapeData.sponsor){  
           window.open (particle.shapeData.slug, '_ blank');
-        }else{
+        }else if (particle?.shapeData?.slug){
           router.push(particle.shapeData.slug)
         }
 
