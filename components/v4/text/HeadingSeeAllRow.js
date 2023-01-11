@@ -5,7 +5,7 @@ const HeadingSeeAllRow = ({link="/",title='Featured tools', extraTextHighlight='
         <div className="flex justify-between">
         <div className="mt-6 mb-6 px-1">
             <h3 className="font-bold mb-1 text-xl md:text-2xl">
-            {title} {extraTextHighlight?<span className="hidden md:block text-gray-400">{extraTextHighlight}</span>:''}
+            {title} {extraTextHighlight?<span className="hidden md:inline text-gray-400">{extraTextHighlight}</span>:''}
             </h3>
             {subheader?<p className="text-gray-600 text-sm max-w-[230px] sm:max-w-full md:text-lg">{subheader}</p>:''}
         </div>
