@@ -62,10 +62,10 @@ const IntroBanner = ({ tools, sponsor }) => {
         </div> */}
       
       </div>
-      <div className="hidden md:block absolute top-0 left-0 w-full h-full grid grid-cols-12 ">
+      <div className="absolute top-0 left-0 w-full h-full grid grid-cols-12 ">
         <div className="col-span-5"/>
       <div className="col-span-2 relative z-20">
-        <img src="/static/images/robotitosuelto.png" className="absolute w-[165px] z-10 bottom-0 -mb-[12px] right-0 -mr-[20px]"
+        <img src="/static/images/robotitosuelto.png" className="hidden sm:block absolute w-[165px] z-10 bottom-0 -mb-[12px] right-0 -mr-[240px] md:-mr-[20px]"
               style={{filter: 'drop-shadow(0 25px 25px rgb(0 0 0 / 0.45))', transform: 'scaleX(-1)'}}/>
 
           </div>
