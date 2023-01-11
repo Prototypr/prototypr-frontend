@@ -7,7 +7,7 @@ const SmallPostsGroupB = ({smallPosts}) =>{
     return(
         <div className="flex w-full lg:w-1/2 md:pl-6 flex-col lg:-mt-3">
 
-            <PrototyprNetworkCTA2 />
+            {/* <PrototyprNetworkCTA2 /> */}
         {smallPosts?.length ? (
           smallPosts.map((post, index) => {
             let url = post?.attributes?.featuredImage?.data?.attributes?.url;

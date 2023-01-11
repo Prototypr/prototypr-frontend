@@ -159,8 +159,10 @@ export default function Index({
         <SectionDivider transparentLine={true} />
         <ToolIconCardRow tools={toolsList} />
         <SectionDivider />
-        <SponsorBannerFull/>
-        <SectionDivider />
+        <div className="hidden md:block">
+          <SponsorBannerFull/>
+          <SectionDivider />
+        </div>
         <SectionDivider transparentLine={true} />
         {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
         <Container  maxWidth="max-w-[1320px]">

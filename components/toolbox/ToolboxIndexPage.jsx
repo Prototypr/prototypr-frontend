@@ -77,7 +77,7 @@ const ToolboxIndexPage = ({
                   filterCategories={filterCategories}
                   slug={currentSlug}
                 />
-        <div className="w-full px-3 md:pr-0 md:pl-12 -mt-6 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10">
+        <div className="w-full px-0 md:pr-0 md:pl-12 -mt-6 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10">
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
           ) : (
