@@ -39,27 +39,6 @@ function isEmptyObject(obj) {
 const PostToolPage = () =>{
 
 
-   const category = [ 
-        { name: "Cat1", elements : [ 
-            { name: name, id: id } ] 
-        },
-        { name: "Cat2", elements : [ 
-            { name: name, id: id },
-            { name: name, id: id },
-            { name: name, id: id } ] 
-        }, 
-        { name: "Cat3", elements : [ 
-            { name: name, id: id },
-            { name: name, id: id } ] 
-        }
-    ]
-
-    const sorted_categories = original.category.sort(function (one, other) {
-   return one.elements.length - other.elements.length;
-});
-
-
-    console.log("sorted", sorted_categories)
 
   const { user } = useUser({
     redirectTo: "/",
@@ -87,10 +66,13 @@ const PostToolPage = () =>{
 
   return(
     <>
-
-
+    {/* only show job post form if user is logged in, so we can prefill it if they have a company */}
+    {(user && !isOwner)?
+    <p>You are not owner of this post</p>
+    :
+    (defaultCompany!==null && typeof defaultCompany!==undefined) && 
     <JobPostForm postObject={postObject} user={user} />
-    
+    }
     </>
   )
 }

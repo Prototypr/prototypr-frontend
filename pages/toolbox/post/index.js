@@ -66,31 +66,6 @@ const PostToolPage = () =>{
   const id = "4"
 
 
-
-   const original = {
-    allTags:  [ 
-        { name: "Tag1", elements : [ 
-            { name: name, id: id } ] 
-        },
-        { name: "Tag5", elements : [ 
-            { name: name, id: id },
-            { name: name, id: id },
-            { name: name, id: id } ] 
-        }, 
-        { name: "Tag3", elements : [ 
-            { name: name, id: id },
-            { name: name, id: id } ] 
-        }
-    ]
-}
-
-    const sorted_allTags = original.allTags.sort(function (one, other) {
-   return one.elements.length - other.elements.length;
-});
-
-     
-    console.log("Asorted", sorted_allTags.reverse())
-
   const toggleSignIn = () => {
     setSignUp(!isSignUp);
   };
@@ -176,6 +151,9 @@ const JobPostForm = ({user}) => {
     slug: Yup.string().required("Slug is required"),
     link: Yup.string().required("Link is required"),
     logo: Yup.string().required("Logo is required"),
+    image1: Yup.string().required("This image is required"),
+    image2: Yup.string().required("This image is required"),
+    image3: Yup.string().required("This image is required"),
  
   });
 
@@ -191,6 +169,9 @@ const JobPostForm = ({user}) => {
       slug: "",
       link: "",
       logo: "",
+      image1: "",
+      image2: "",
+      image3: "",
     },
     validationSchema: FormSchema,
 
@@ -220,6 +201,9 @@ const JobPostForm = ({user}) => {
 
   const formData = new FormData();
   	formData.append('files.logo', values.logo)
+  	formData.append('files.image1', values.image1)
+  	formData.append('files.image2', values.image2)
+  	formData.append('files.image3', values.image3)
 	formData.append('data', JSON.stringify({...entry,
               publishedAt:null
             }));
@@ -399,8 +383,44 @@ try {
               }}/> */}
               {formik.errors.logo && <span className="text-red-600 text-xs">{formik.errors.logo}</span>}
 
-
-    
+              <label htmlFor="image" className="text-md font-medium">
+                Gallery
+              </label>
+              <div className="flex flex-row ">
+	              <div className="mr-6">
+		              <ImageUploader 
+			              id={4}
+			              companyLogoIsDefault={true} 
+			              initialImage="" 
+			              setFormValue={(blob) =>{
+			                setUploadNewCompanyImage(true)
+			                formik.setFieldValue("image1",blob)
+			              }}
+		              />
+		           </div>
+		           <div className="mr-6">
+		              <ImageUploader 
+			              id={5}
+			              companyLogoIsDefault={true} 
+			              initialImage="" 
+			              setFormValue={(blob) =>{
+			                setUploadNewCompanyImage(true)
+			                formik.setFieldValue("image2",blob)
+			              }}
+		              />
+		            </div>
+		            <div className="mr-6">
+		              <ImageUploader 
+			              id={6}
+			              companyLogoIsDefault={true} 
+			              initialImage="" 
+			              setFormValue={(blob) =>{
+			                setUploadNewCompanyImage(true)
+			                formik.setFieldValue("image3",blob)
+			              }}
+		              />
+		            </div>
+              </div> 
 
             </div>
             </FormContainer>
