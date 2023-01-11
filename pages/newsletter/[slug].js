@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '@/components/container'
-import Layout from '@/components/layout'
+import Layout from "@/components/new-index/layoutForIndex";
 import { getAllPostsWithSlug, getNewsletter } from '@/lib/api'
 import { FormattedMessage } from "react-intl";
 

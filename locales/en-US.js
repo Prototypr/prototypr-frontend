@@ -75,6 +75,7 @@ const EN = {
   "topicSpotlight.tabs.accessibility": "Accessibility",
   "topicSpotlight.tabs.userResearch": "User Research",
   "topicSpotlight.tabs.productDesign": "Product Design",
+  "topicSpotlight.tabs.designSystems": "Design Systems",
   "topicSpotlight.tabs.branding": "Branding",
   "topicSpotlight.tabs.userWriting": "UX Writing",
   "topicSpotlight.tabs.vr": "VR",

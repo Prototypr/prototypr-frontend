@@ -514,7 +514,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 <ContentList layout="two">
                   <ContentListItem
                     title={submenu2Title1}
-                    href="/toolbox/page/1"
+                    href="/toolbox"
                   >
                     {submenu2Desc1}
                   </ContentListItem>

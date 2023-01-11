@@ -11,7 +11,7 @@ export default function Layout({
   padding,
   seo,
   navType,
-  maxWidth
+  maxWidth,
 }) {
   return (
     <>

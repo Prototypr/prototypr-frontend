@@ -1,7 +1,7 @@
 import BigCard from "../card/BigCard/BigCardB";
 // import SmallCard from "../card/SmallCard/SmallCardE";
 import SmallPostsGroup from "./SmallPostsSection";
-const LargePostGrid = ({ largePost, smallPosts }) => {
+const LargePostGridB = ({ largePost, smallPosts }) => {
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;
   const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
   const largeCoverImage = url
@@ -28,4 +28,4 @@ const LargePostGrid = ({ largePost, smallPosts }) => {
     </div>
   );
 };
-export default LargePostGrid;
+export default LargePostGridB;

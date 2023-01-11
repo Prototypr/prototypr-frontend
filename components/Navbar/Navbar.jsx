@@ -14,6 +14,7 @@ import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 import WMButton from "./parts/WMButton";
 import SearchBar from "../SearchBar";
 import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
+import NavSponsor from "../v4/badge/NavSponsor";
 // import { Waypoint } from "react-waypoint";
 
 const WMCounter = dynamic(
@@ -55,7 +56,7 @@ const Navbar = ({
     <>
       <nav id="main-nav" className={`font-inter fixed top-3.5 w-full z-50`}>
         <div
-          className={`w-[97%] ${
+          className={`w-[97%] search-wide ${
             maxWidth ? maxWidth : "max-w-[1020px]"
           } bg-white bg-opacity-60 backdrop-blur-lg border-opacity-10 mx-auto border rounded-[60px] border-black px-6`}
         >
@@ -83,26 +84,29 @@ const Navbar = ({
                 <Link href="/" as="/">
                   <>
                     <img
-                      className="block h-8 w-auto"
+                      className="xl:hidden h-8 w-auto"
                       src="/static/images/logo-small.svg"
                       // className="block h-10 w-auto mb-2"
                       // src="/static/images/logo-small-xmas.svg"
                       alt="Prototypr Logo"
                     />
-                    {/* <img
+                    <img
                     className="hidden h-8 w-auto xl:block"
                     src={`/static/images/logo.svg`}
                     alt="Prototypr Logo"
-                  /> */}
+                  />
                   </>
                 </Link>
-                <div
+                {!user?.isLoggedIn?<NavSponsor/>:<div className="mx-1.5"/>}
+                {/* <div
                   className={`hidden md:block my-auto duration-300 ease-in-out`}
                 >
                   <WMCounter />
-                </div>
+                </div> */}
 
-                <SearchBar />
+                <div className="hidden sm:block">
+                  <SearchBar />
+                </div>
               </div>
               {/* <div className="hidden sm:ml-6 sm:block">
               <MenuItems />
@@ -110,7 +114,7 @@ const Navbar = ({
               <div className="justify-end hidden xl:flex mr-6">
                 {[
                   { label: "Home", url: "/" },
-                  { label: "Toolbox", url: "/toolbox/page/1" },
+                  { label: "Toolbox", url: "/toolbox" },
                   { label: "Topics", url: "/topics" },
                   { label: "Jobs", url: "/jobs" },
                   // { label: "Sponsor", url: "/sponsor" },
@@ -164,7 +168,7 @@ const Navbar = ({
         >
           <div className="space-y-1 px-2 pt-2 pb-3">
             <MobileActiveLink href={"/"}>Home</MobileActiveLink>
-            <MobileActiveLink href={"/toolbox/page/1"}>
+            <MobileActiveLink href={"/toolbox"}>
               Toolbox
             </MobileActiveLink>
             <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>

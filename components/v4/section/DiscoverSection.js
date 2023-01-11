@@ -8,7 +8,7 @@ const DiscoverSection = ({user, heroCardPost, viewablePosts, jobsSidebar }) => {
       <div className="w-full h-full grid grid-cols-12 flex justify-center">
         <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 lg:col-span-9 py-3 ${!user?.isLoggedIn?'pt-8':''}`}>
           <div className="flex px-1">
-            <h2 className="text-3xl md:text-3xl my-4 font-semibold text-gray-900">
+            <h2 className="text-3xl md:text-3xl mb-4 font-semibold text-gray-900">
               Discover <span className="text-gray-400">the latest</span>
             </h2>
             <div className="flex ml-2 -mt-1 flex-col justify-center">
