@@ -3,7 +3,7 @@ import Link from "next/link";
 const TwoColumnCards = ({posts}) =>{
 
     return(
-        <div className="flex flex-col grid gap-8 grid-cols-12">
+        <div className="flex flex-col grid md:gap-x-8 gap-y-8 grid-cols-12">
              {posts.map((post, i) =>{ 
               console.log(post)
                    const title = post?.attributes?.title;

@@ -117,7 +117,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         </div>
         
         <div className="grid grid-cols-12 p-6 h-full">
-        <div className="col-span-8">
+        <div className="col-span-12 xl:col-span-8">
           <div className=" max-w-[48rem]">
             <div
                 style={{ color: "#333", fontSize: "20px", lineHeight: '33px' }}
@@ -136,7 +136,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
             )}
           </div>
         </div>
-        <div className="col-span-4">
+        <div className="col-span-12 xl:col-span-4">
             <div className="flex flex-col gap-10">
               <div className="font-inter">
                   <h3 className="text-lg font-bold mb-3">Tags</h3>
