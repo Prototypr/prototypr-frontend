@@ -35,31 +35,48 @@ const TAB_ITEMS = [
     subheader: "Here come the bots!",
     image: "/static/images/toolbox/bot-pattern.svg",
     color: "#ED7DFF",
+    content: {
+      title: "Explore AI Products",
+      description: "Automate your workflow with AI.",
+    },
   },
   {
     slug: "accessibility",
     toolSlug: "accessibility",
     name: "topicSpotlight.tabs.accessibility",
-    subheader: "Make your interfaces usable for all",
+    subheader: "Make your interfaces usable for all.",
     image: "/static/images/toolbox/leaf-pattern.svg",
     color: "#2F9A75",
+    content: {
+      title: "Accessibility all the way!",
+      description: "Build accessible products with these accessibility tools.",
+    },
   },
   {
     slug: "design-system",
     toolSlug: "design-system",
     name: "topicSpotlight.tabs.designSystems",
-    subheader: "Everything starts with a component",
+    subheader: "Everything starts with a component.",
     image: "/static/images/toolbox/planet-pattern.svg",
     color: "#06195E",
+    content: {
+      title: "Design System Tools",
+      description: "Tools to make and manage your design systems better.",
+    },
   },
 
   {
     slug: "ux-tools",
     toolSlug: "ux",
     name: "topicSpotlight.tabs.uxTools",
-    subheader: "Everything starts with a component",
+    subheader: "Everything starts with research.",
     image: "/static/images/toolbox/shape-pattern.svg",
     color: "#353535",
+    content: {
+      title: "UX Tools",
+      description:
+        "Build better products and keep users happy with these UX tools.",
+    },
   },
 ];
 const PAGE_SIZE = 20;
@@ -156,6 +173,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [] }) {
                   posts={topicPosts[topic.slug].posts?.slice(0, 2)}
                   image={topic.image}
                   color={topic.color}
+                  content={topic.content}
                 />
                 {/* <ToolsLayout posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" /> */}
                 <div className="py-6">
