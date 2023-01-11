@@ -55,9 +55,9 @@ const ToolCard = ({ posts, type, columns }) => {
             <Link href={`/toolbox/${slug}`}>
             <div
             key={slug}
-            className="w-auto flex flex-col md:flex-row justify-between gap-6 p-5 bg-white rounded-2xl border border-black border-opacity-10"
+            className="w-auto group flex md:flex-row justify-between gap-6 p-5 bg-white rounded-2xl border border-black border-opacity-10"
           >
-            <div className="flex flex-col justify-center sm:flex-row gap-4">
+            <div className="flex justify-center sm:flex-row gap-4">
               {coverImage ? (
                 <div
                   className=" relative rounded-2xl overflow-hidden "
@@ -75,7 +75,7 @@ const ToolCard = ({ posts, type, columns }) => {
                     // width="100"
                     // height="100"
                     alt="Brand logo for external website's link"
-                    className="p-1 bg-gray-50 border object-cover rounded-2xl bg-white"
+                    className="border object-cover rounded-2xl bg-white"
                     src={coverImage}
                   />
                 </div>
@@ -102,8 +102,8 @@ const ToolCard = ({ posts, type, columns }) => {
                 {/* <p className="text-[#989898]">Pro Editing for everyone</p> */}
               </div>
             </div>
-            <div className="flex flex-col justify-center">
-                <button className="px-4 py-1 text-sm bg-transparent border  border-blue-600 hover:bg-blue-700 text-blue-600 rounded-full">
+            <div className="hidden md:flex flex-col justify-center">
+                <button className="px-4 py-1 text-sm bg-transparent border  border-blue-600 group-hover:bg-blue-700 hover:bg-blue-700 group-hover:text-white hover:text-white text-blue-600 rounded-full">
                   Get
                 </button>
             </div>
