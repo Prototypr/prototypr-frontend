@@ -171,7 +171,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         </div>
         </div>
       </div>
-      <div className="px-3">
+      <div className="px-0 md:px-3">
         
         <div className="mb-8">
           <NewsletterSection padding={false} title="Get the best tools every week"/>
