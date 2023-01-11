@@ -383,6 +383,20 @@ try {
               }}/> */}
               {formik.errors.logo && <span className="text-red-600 text-xs">{formik.errors.logo}</span>}
 
+{/*              <label htmlFor="image" className="text-md font-medium">
+                Logo 1
+              </label>
+              <ImageUploader 
+	              id={7}
+	              companyLogoIsDefault={true} 
+	              initialImage="" 
+	              setFormValue={(blob) =>{
+	                setUploadNewCompanyImage(true)
+	                formik.setFieldValue("logo1",blob)
+	              }}
+              />
+*/}
+
               <label htmlFor="image" className="text-md font-medium">
                 Gallery
               </label>
