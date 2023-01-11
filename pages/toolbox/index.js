@@ -1,6 +1,10 @@
 import Layout from "@/components/new-index/layoutForIndex";
 
-import { getAllPostsForToolsPage, getCommonQuery, getPostsByPageForToolsPage } from "@/lib/api";
+import {
+  getAllPostsForToolsPage,
+  getCommonQuery,
+  getPostsByPageForToolsPage,
+} from "@/lib/api";
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexNew";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 import ToolsTagsNavRow from "@/components/v4/section/ToolsTagsNavRow";
@@ -15,27 +19,28 @@ import NewsletterSection from "@/components/v4/section/NewsletterSection";
 import HeadingSeeAllRow from "@/components/v4/text/HeadingSeeAllRow";
 import { useIntl } from "react-intl";
 import Footer from "@/components/footer";
+import SearchBar from "@/components/SearchBar";
 
 const TAB_ITEMS = [
   {
     slug: "ai",
-    toolSlug:'ai',
+    toolSlug: "ai",
     name: "topicSpotlight.tabs.ai",
-    subheader:"Here come the bots!"
+    subheader: "Here come the bots!",
     // icon:<Robot size={ICON_SIZE}/>
   },
   {
     slug: "accessibility",
-    toolSlug:'accessibility',
+    toolSlug: "accessibility",
     name: "topicSpotlight.tabs.accessibility",
-    subheader:"Make your interfaces usable for all"
+    subheader: "Make your interfaces usable for all",
     // icon:<Wheelchair size={ICON_SIZE} />
   },
   {
     slug: "design-systems",
-    toolSlug:'design-systems',
+    toolSlug: "design-systems",
     name: "topicSpotlight.tabs.designSystems",
-    subheader:"Everything starts with a component"
+    subheader: "Everything starts with a component",
     // icon:<Wheelchair size={ICON_SIZE} />
   },
 ];
@@ -66,69 +71,129 @@ const BREADCRUMBS = {
   ],
 };
 
-export default function ToolboxPage({
-  allPosts = [],
-  topicPosts=[],
-}) {
-  const intl = useIntl();
+const ToolBoxHero = () => {
+  return (
+    <div className="w-full h-full bg-white">
+      <div className="w-full h-[600px] ">
+        <div className="max-w-7xl mx-auto grid place-items-center h-full">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-[52px] leading-[63px] font-bold">
+              Discover Tools, <br /> make life easier.
+            </h1>
+            <div>
+              <input
+                style={{
+                  boxShadow:
+                    "0px 100px 80px rgba(0, 0, 0, 0.00696822), 0px 30.1471px 24.1177px rgba(0, 0, 0, 0.01), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.0130318), 0px 4.5288px 3.62304px rgba(0, 0, 0, 0.02)",
+                }}
+                type="text"
+                className="max-w-[400px] rounded-[12px] h-[72px] px-4 w-[400px] border-2 border-[#E6E6E6] bg-white"
+                placeholder="Search over 15,000+ Tools..."
+              ></input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full max-w-full py-5 h-auto flex flex-col gap-2">
+        <div className="grid grid-cols-5 gap-4">
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+        </div>
+        <div className="grid grid-cols-5 gap-4">
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  );
+};
 
+export default function ToolboxPage({ allPosts = [], topicPosts = [] }) {
+  const intl = useIntl();
 
   return (
     <>
-    <Layout
-      maxWidth={"max-w-[1400px] search-wide"}
-      seo={{
-        title: `Prototypr Toolbox - new design, UX and coding tools`,
-        description:
-          "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
-        //   image: "",
-        canonical: `https://prototypr.io/toolbox`,
-        url: `https://prototypr.io/toolbox`,
-      }}
-      activeNav={"toolbox"}
-    >
-      <ToolsTagsNavRow/>
-      <Container maxWidth="max-w-[1320px] pb-20">
-      <HeadingSeeAllRow
-      link="/toolbox/page/1"
-      title="Featured tools"
-      extraTextHighlight="for creators"/>
-      
-      {allPosts.length > 0 && (
-              <>
-                <TwoColumnCards posts={allPosts.slice(0,2)}/>
-                <ToolsLayout posts={allPosts.slice(2,allPosts.length)} type="toolbox" />
-              </>
-            )}
-        <SectionDivider />
-        <div className="-mt-8">
-                  <NewsletterSection/>
-                <SectionDivider />
-                </div>
-        {TAB_ITEMS?.map((topic, index) => {
-          const titleText = intl.formatMessage({ id: topicPosts[topic.slug].title });
-          const subheading = intl.formatMessage({ id: topicPosts[topic.slug].subheader });
-          return (
+      <Layout
+        background={"#F1F3F9"}
+        maxWidth={"max-w-[1400px] search-wide"}
+        padding={false}
+        seo={{
+          title: `Prototypr Toolbox - new design, UX and coding tools`,
+          description:
+            "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
+          //   image: "",
+          canonical: `https://prototypr.io/toolbox`,
+          url: `https://prototypr.io/toolbox`,
+        }}
+        activeNav={"toolbox"}
+      >
+        <ToolBoxHero />
+        <ToolsTagsNavRow />
+
+        <Container maxWidth="max-w-[1200px] pb-20">
+          <HeadingSeeAllRow
+            link="/toolbox/page/1"
+            title="Featured tools"
+            extraTextHighlight="for creators"
+          />
+
+          {allPosts.length > 0 && (
             <>
-            {topicPosts[topic.slug]?.posts?.length > 0 && (
-              <>
-                <HeadingSeeAllRow
-                  link="/toolbox/page/1"
-                  title={titleText}
-                  subheader={subheading}
-                  />
-                <TwoColumnCards posts={topicPosts[topic.slug].posts?.slice(0,2)}/>
-                <ToolsLayout posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" />
-                <SectionDivider/>
-              </>
-            )}
+              <TwoColumnCards posts={allPosts.slice(0, 2)} />
+              <ToolsLayout
+                posts={allPosts.slice(2, allPosts.length)}
+                type="toolbox"
+              />
             </>
-          );
-        })}
-      </Container>
-    </Layout>
-      <Footer/>
-      </>
+          )}
+          <SectionDivider />
+          <div className="-mt-8">
+            <NewsletterSection />
+            <SectionDivider />
+          </div>
+          {TAB_ITEMS?.map((topic, index) => {
+            const titleText = intl.formatMessage({
+              id: topicPosts[topic.slug].title,
+            });
+            const subheading = intl.formatMessage({
+              id: topicPosts[topic.slug].subheader,
+            });
+            return (
+              <>
+                {topicPosts[topic.slug]?.posts?.length > 0 && (
+                  <>
+                    <HeadingSeeAllRow
+                      link="/toolbox/page/1"
+                      title={titleText}
+                      subheader={subheading}
+                    />
+                    <TwoColumnCards
+                      posts={topicPosts[topic.slug].posts?.slice(0, 2)}
+                    />
+                    <ToolsLayout
+                      posts={topicPosts[topic.slug].posts?.slice(
+                        2,
+                        allPosts.length
+                      )}
+                      type="toolbox"
+                    />
+                    <SectionDivider />
+                  </>
+                )}
+              </>
+            );
+          })}
+        </Container>
+      </Layout>
+      <Footer />
+    </>
   );
 }
 
@@ -140,17 +205,29 @@ export async function getStaticProps({ preview = null, params, locale }) {
   }
   const pageSize = 8;
   const page = 1;
-  const allPosts =(await getPostsByPageForToolsPage(preview, pageSize, page, sort)) || [];
+  const allPosts =
+    (await getPostsByPageForToolsPage(preview, pageSize, page, sort)) || [];
 
-    // topic sections
-    let topicRes = {};
-    for (let index = 0; index < TAB_ITEMS.length; index++) {
-      const tag = TAB_ITEMS[index].slug;
-      const topicToolsRes =
-        (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 8, 0, sort)) || [];
-         
-      topicRes[tag] = {posts:topicToolsRes.data, title:TAB_ITEMS[index].name, subheader:TAB_ITEMS[index].subheader}
-    }
+  // topic sections
+  let topicRes = {};
+  for (let index = 0; index < TAB_ITEMS.length; index++) {
+    const tag = TAB_ITEMS[index].slug;
+    const topicToolsRes =
+      (await getCommonQuery(
+        preview,
+        [TAB_ITEMS[index].toolSlug],
+        "tool",
+        8,
+        0,
+        sort
+      )) || [];
+
+    topicRes[tag] = {
+      posts: topicToolsRes.data,
+      title: TAB_ITEMS[index].name,
+      subheader: TAB_ITEMS[index].subheader,
+    };
+  }
 
   return {
     props: {

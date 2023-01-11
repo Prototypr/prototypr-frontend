@@ -33,13 +33,13 @@ const ToolContent = ({ post, gallery, relatedPosts }) => {
     <>
       <div className="w-full">
         <div
-          style={{
-            backgroundColor: stc(post?.attributes?.title),
-            backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
-          }}
-          className="h-[450px] w-full p-5 md:p-10 flex flex-col justify-center "
+          //   style={{
+          //     backgroundColor: stc(post?.attributes?.title),
+          //     backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
+          //   }}
+          className="h-auto w-full p-5 md:p-10 flex flex-col justify-center "
         >
-          <div className="max-w-4xl w-full mx-auto px-5">
+          <div className="max-w-4xl w-full mx-auto px-5 mt-20">
             <div className="flex flex-col gap-2 justify-between">
               <div className="w-[70px] h-[70px] shadow-md rounded-3xl bg-white">
                 <Image
@@ -56,21 +56,14 @@ const ToolContent = ({ post, gallery, relatedPosts }) => {
                 />
               </div>
               <div className="flex flex-col gap-3 justify-between">
-                <h1 className="text-4xl my-0 py-0 text-white font-bold">
+                <h1 className="text-4xl my-0 py-0 text-black font-bold">
                   {post?.attributes?.title}
                 </h1>
-                {/* {post?.attributes?.author && (
-                  <div className="sm:hidden lg:block">
-                    <AuthorCard
-                      author={post.attributes.author}
-                      avatar={post.attributes?.author}
-                    />
-                  </div>
-                )} */}
+
                 <div className="flex flex-row gap-2">
                   {tags.map((tag) => {
                     return (
-                      <span className="px-4 py-0.5 text-sm capitalize rounded-full text-white border border-opacity-25 border-white bg-white bg-opacity-20 backdrop-blur-md">
+                      <span className="px-4 py-0.5 text-sm capitalize rounded-full text-black border border-opacity-10 border-black bg-blue-500 bg-opacity-10 backdrop-blur-md">
                         {tag.attributes.name}
                       </span>
                     );
@@ -81,7 +74,7 @@ const ToolContent = ({ post, gallery, relatedPosts }) => {
                     target={"_blank"}
                     href={post?.attributes?.link + "?ref=prototypr.io"}
                   >
-                    <button className="max-w-[200px] w-full py-4 bg-white rounded-full">
+                    <button className="max-w-[200px] w-full py-4 bg-blue-500 text-white rounded-[14px]">
                       Visit Site
                     </button>
                   </a>
