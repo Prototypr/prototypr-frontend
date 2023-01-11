@@ -10,10 +10,10 @@ const PrototyprNetworkCTA = ({ data }) => {
           <div className="w-2/3 flex flex-col">
             <div>
                 <h2 className="text-gray-800 font-semibold text-lg font-inter">
-                Build with us
+                By creators, for creators
                 </h2>
                 <p className='text-sm text-gray-500 max-w-[250px]'>
-                We're an open-source platform, designed and built in public.
+                We're open-source – build with us on GitHub, or Figma!
                 </p>
             </div>
           </div>

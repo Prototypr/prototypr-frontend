@@ -97,7 +97,7 @@ const Navbar = ({
                   />
                   </>
                 </Link>
-                <NavSponsor/>
+                {!user?.isLoggedIn?<NavSponsor/>:<div className="mx-1.5"/>}
                 {/* <div
                   className={`hidden md:block my-auto duration-300 ease-in-out`}
                 >
