@@ -27,7 +27,7 @@ import { useIntl } from "react-intl";
 import { transformPostListOld } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
 
-import TopicSection from "@/components/v4/section/TopicSection";
+import TopicSection from "@/components/v4/section/TopicSectionB";
 // import TopicSelectSection from "@/components/v4/section/TopicSelectSection";
 
 import {Robot, Swatches, HandEye, Wheelchair, FlowArrow} from 'phosphor-react'
@@ -40,6 +40,7 @@ import SponsorBannerFull from "@/components/v4/banner/SponsorBannerFull";
 import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 import Container from "@/components/container";
 import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
+import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
 
 
 const PAGE_SIZE = 12;
@@ -50,32 +51,37 @@ const TAB_ITEMS = [
     slug: "branding",
     toolSlug:'color',
     name: "topicSpotlight.tabs.branding",
-    icon:<Swatches size={ICON_SIZE} />
+    icon:<Swatches size={ICON_SIZE} />,
+    tagline:'Tell your story'
   },
   {
     slug: "design-psychology",
     toolSlug:'analytics',
     name: "topicSpotlight.tabs.psychology",
-    icon:<HandEye size={ICON_SIZE} />
+    icon:<HandEye size={ICON_SIZE} />,
+    tagline:`Analyze your user`
   },
   {
     slug: "ai",
     toolSlug:'ai',
     name: "topicSpotlight.tabs.ai",
-    icon:<Robot size={ICON_SIZE}/>
+    icon:<Robot size={ICON_SIZE}/>,
+    tagline:'The bots are here!'
   },
   {
     slug: "accessibility",
     toolSlug:'accessibility',
     name: "topicSpotlight.tabs.accessibility",
-    icon:<Wheelchair size={ICON_SIZE} />
+    icon:<Wheelchair size={ICON_SIZE} />,
+    tagline:'Design inclusively'
   },
 
   {
     slug: "product-design",
     toolSlug:'resource',
     name: "topicSpotlight.tabs.productDesign",
-    icon:<FlowArrow size={ICON_SIZE} />
+    icon:<FlowArrow size={ICON_SIZE} />,
+    tagline:'Kick it off'
   },
   // {
   //   slug: "ux",
@@ -158,27 +164,32 @@ export default function Index({
         </Container>
         <SectionDivider transparentLine={true} />
         <ToolIconCardRow tools={toolsList} />
-        <SectionDivider />
+        {/* <SectionDivider />
         <div className="hidden md:block">
           <SponsorBannerFull/>
           <SectionDivider />
-        </div>
+        </div> */}
+        <SectionDivider />
         <SectionDivider transparentLine={true} />
         {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
         <Container  maxWidth="max-w-[1320px]">
           <h2 className="text-3xl mb-6 font-bold text-gray-900">
           Browse by <span className="text-gray-500">topic</span>
           </h2>
-          <PopularTagsSection popularTags={popularTags}/>
+          <JumboTagsSection popularTags={popularTags}/>
+          {/* <PopularTagsSection popularTags={popularTags}/> */}
         </Container>
          {/* <SectionDivider />
         <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/> */}
         <SectionDivider transparentLine={true} />
         <SectionDivider />
         {TAB_ITEMS?.map((topic, index) => {
+          console.log(topic)
           return (
             <>
             <TopicSection
+              tagline={topic.tagline}
+              showSidebar={false}
               slug={topic.slug}
               icon={topic.icon}
               title={topic.name}
