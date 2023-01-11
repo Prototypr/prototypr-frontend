@@ -28,6 +28,7 @@ export default function Layout({
   padding,
   seo,
   navType,
+  topPadding = true,
 }) {
   return (
     <>
@@ -38,7 +39,7 @@ export default function Layout({
       {/* </div> */}
 
       <div
-        className={`min-h-screen ${NAV_OFFSET} ${
+        className={`min-h-screen ${topPadding ? NAV_OFFSET : ""} ${
           padding == false ? "" : "px-3 md:px-8"
         }`}
         style={{ background: background ? background : "#F3F4F6" }}

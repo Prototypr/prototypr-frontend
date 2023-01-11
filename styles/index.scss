@@ -457,3 +457,29 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 .scrolling-image {
   animation: slide 12s linear infinite;
 }
+
+.toolboxheroGradient {
+    background-image:linear-gradient(179.36deg, rgba(255, 255, 255, 0) 55.45%, #F1F3F9 63.72%),url("/static/images/toolbox-grid.svg"),;
+}
+
+.gridBg {
+    background-image: url("/static/images/toolbox/white-grid.svg") ;
+    background-repeat: repeat;
+    background-size: 50%;
+}
+
+
+
+.marquee {
+    position: relative;
+    width: 100vw;
+    max-width: 100%;
+    height: 100px;
+    overflow-x: hidden;
+}
+
+.track {
+    position: absolute;
+    white-space: nowrap;
+}
+
