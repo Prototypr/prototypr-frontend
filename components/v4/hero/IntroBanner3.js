@@ -15,38 +15,41 @@ const IntroBanner = ({ tools, sponsor }) => {
     <Container maxWidth="max-w-[1320px]">
       <div
         // style={{background: 'linear-gradient(179.7deg, #040444, rgb(3 3 63))'}}
-        className="flex bg-[#EAE9F5] text-gray-800 overflow-hidden overflow-x-scroll bg-opacity-60 border border-gray-100 md:overflow-x-hidden rounded rounded-3xl"
+        className="flex bg-blue-700 text-white text-left text-gray-800 overflow-hidden overflow-x-scroll border border-gray-100 md:overflow-x-hidden rounded rounded-3xl"
       >
-        <div className="w-full z-10 font-inter p-2 2md:w-full relative flex flex-col">
+        <div className="w-full z-10 font-inter p-0 2md:w-full relative flex flex-col">
           {/* <SponsorBubble/> */}
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
-          className="bg-[#EAE9F5] pointer-events-auto bg-opacity-60 backdrop-blur-sm p-4 rounded-3xl z-10" style={{width:'fit-content'}}>
-          <div
+          className="relative pointer-events-auto p-4 text-white rounded-3xl z-10" style={{width:'fit-content'}}>
+          {/* <div
             className="h-7 text-base font-semibold leading-7"
             aria-hidden="true"
           >
             A better world. Designed by you.
-          </div>
-          <h1 className="max-w-[32rem] mt-4 text-4xl font-black tracking-tight sm:text-5xl leading-tight">
-            Design and build the future, together.
-          </h1>
-          <p className="mt-4 text-gray-600 max-w-[32rem]">
-            We're an open-source platform where creative people come together.
-            Prototypr is a canvas for creativity, curiosity and openness where
-            you can bring new ideas to spark a brighter future.
-          </p>
-          <div className="flex mt-4">
-            <Link href="/early-access">
-              <Button className="" variant="confirmRounded">
+          </div> */}
+          <div className="z-10">
+            <h1 className="max-w-[32rem] backdrop- z-10 rounded-2xl p-2 mt-4 text-4xl font-black tracking-tight sm:text-5xl leading-tight">
+                Design and build the future, together.
+            </h1>
+            <p className="mt-4 rounded-2xl p-2 backdrop- text-gray-50 max-w-[32rem]">
+            Prototypr is an open source publishing platform for creators.<br/>A place to learn, discover, and experiment with new technology.
+
+            </p>
+            <div className="flex flex-row justify-start mt-4">
+                <Link href="/early-access">
+                <Button className="bg-white text-blue-600" variant="confirmRounded">
+                    Sign up
+                </Button>
+                </Link>
+                {/* <Button variant="confirmRoundedLight">
                 Sign up
-              </Button>
-            </Link>
-            {/* <Button variant="confirmRoundedLight">
-              Sign up
-            </Button> */}
-            {/* <Button className="ml-3" variant="ghost">Learn more</Button> */}
+                </Button> */}
+                {/* <Button className="ml-3" variant="ghost">Learn more</Button> */}
           </div>
+          </div>
+          <div style={{zIndex:-1}} className="bg-gradient-to-r from-[#0a2254] to-transparent w-full absolute h-full top-0 left-0"/>
+
           </div>
            <div className="w-full h-full">
             <ParticlesContainer tools={tools} sponsor={sponsor} />

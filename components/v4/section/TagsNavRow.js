@@ -43,7 +43,7 @@ const tags = [
 
 const TagsNavRow = () => {
   return (
-    <Container maxWidth="max-w-[1320px] mt-6 ">
+    <Container maxWidth="max-w-[1320px]">
       <div className="flex flex-wrap">
         {tags.map((tag, index) => {
           return <GiantTag link={`${tag?.link || "/"}`}>{tag.name}</GiantTag>;

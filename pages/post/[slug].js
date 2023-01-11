@@ -393,8 +393,8 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
 
               {/* EMAIL FORM */}
               <div className="w-full mt-6 rounded-xl p-5 border border-gray-200">
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                  Want more?
+                <h3 className="text-lg font-semibold mb-2 text-gray-900">
+                  Dive deeper
                 </h3>
                 <p className="text-base text-gray-500 mb-6">
                   Get a curated selection of the best articles from Prototypr in

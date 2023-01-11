@@ -119,7 +119,7 @@ export default function PostsPage({
                   />}
                   // heroJob={heroJob}
                   // sponsors={sponsors}
-                  toolsList={tools?.slice(0, 8)}
+                  toolsList={tools?.slice(0, 4)}
                   // authorsList={topicRes[topic.slug]?.authors}
                 />
         </div>:''}

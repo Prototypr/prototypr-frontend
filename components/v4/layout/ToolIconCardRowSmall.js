@@ -1,6 +1,7 @@
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import Link from "next/link";
 import {CaretRight} from 'phosphor-react'
+import ToolCard from "../card/ToolCard";
 
 const ToolIconCardRow = ({ tools, topic }) => {
   return (
@@ -17,15 +18,20 @@ const ToolIconCardRow = ({ tools, topic }) => {
           </Link>
 
       </div>
-      {tools?.length?<div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 px-1`}> 
+      {tools?.length?
+      <>
+      <ToolCard posts={tools} columns={'lg:grid-cols-2'} type="toolbox" />
+      {/* <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 px-1`}> 
         {tools.map((tool, index) => {
-          return (
-            <div key={index}>
-              <ToolIconCard withBackground={true} tool={tool?.attributes} />
-            </div>
-          );
-        })}
-      </div>:''}
+           return (
+             <div key={index}>
+               <ToolIconCard small={true} withBackground={true} tool={tool?.attributes} />
+             </div>
+           );
+         })}
+       </div> */}
+      </>
+      :''}
     </div>
   );
 };

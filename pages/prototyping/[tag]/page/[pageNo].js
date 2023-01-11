@@ -1,5 +1,6 @@
+import Footer from "@/components/footer";
 import Layout from "@/components/new-index/layoutForIndex";
-import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexNew";
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 import {
   getAllPostsForToolsSubcategoryPage,
@@ -31,6 +32,7 @@ export default function ToolboxPage({
   //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
 
   return (
+    <>
     <Layout 
     maxWidth={"max-w-[1320px] search-wide"}
     seo={{
@@ -56,6 +58,8 @@ export default function ToolboxPage({
         currentSlug={tag}
         />
     </Layout>
+    <Footer/>
+    </>
   );
 }
 

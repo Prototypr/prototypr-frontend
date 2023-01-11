@@ -1,4 +1,4 @@
-import Layout from "@/components/layoutForToolboxIndex";
+import Layout from "@/components/new-index/layoutForIndex";
 
 
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
@@ -9,6 +9,7 @@ const PAGE_SIZE = 20;
 
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/realityTools'
+import Footer from "@/components/footer";
 
 
 const BREADCRUMBS = {
@@ -25,6 +26,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
 
 
     return (
+        <>
         <Layout 
        maxWidth={"search-wide max-w-[1320px]"}
         seo={{
@@ -47,6 +49,9 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
         allPosts={allPosts} 
         breadcrumbs={BREADCRUMBS}/>
         </Layout>
+
+    <Footer/>
+    </>
     )
 }
 

@@ -1,5 +1,5 @@
 
-import {dummyData} from './dummyData/dummyData'
+import {dummyData} from './dummyData/dummyDataB'
 import {dummySponsor} from './dummyData/dummySponsor'
 import {manualParticles} from './manualParticles'
 
@@ -15,7 +15,7 @@ export const particleOptions = {
         value: 0,
         density: {
           enable: true,
-          area: 600,
+        //   area: 1000000,
         },
       },
       shape: {
@@ -26,7 +26,7 @@ export const particleOptions = {
         value: 1,
       },
       size: {
-        value: { min: 13, max: 19 },
+        value: { min: 13, max: 20 },
         animation: {
             enable: true,
             speed: 3,
@@ -36,7 +36,7 @@ export const particleOptions = {
       },
       links: {
         enable: true,
-        distance: 100,
+        distance: 57,
         color: "#ffffff",
         opacity: 1,
         width: 1,
@@ -44,18 +44,19 @@ export const particleOptions = {
       move: {
         enable: true,
         collisions: true,
-        speed: 0.2,
+        speed: 0.5,
         direction: "random",
-        random: true,
-        straight: false,
+        random: false,
+        straight: true,
         outModes: "bounce",
+        // outModes: "out",
       },
     },
     // PARTICLES END
     interactivity: {
       events: {
         onHover: {
-          enable: true,
+          enable: false,
           mode: "slow",
         },
         onClick:{
@@ -86,7 +87,7 @@ export const particleOptions = {
             distance: 400,
             size: 40,
             duration: 2,
-            opacity: 0.8
+            opacity: 1
         },
         push: {
           quantity: 1,

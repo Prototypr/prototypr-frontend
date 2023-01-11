@@ -1,17 +1,17 @@
 import Container  from "@/components/container"
 import SignupHomepage from "@/components/newsletter/SignupHomepage"
 
-const NewsletterSection = () =>{
+const NewsletterSection = ({title,padding}) =>{
 
     return(
-        <Container maxWidth="max-w-[1320px]">
+        <Container padding={padding} maxWidth="max-w-[1320px]">
             <div className=" sm:mt-8 lg:px-0 lg:mt-0">
             <div
-            className="w-full relative flex h-full bg-blue-100 w-full lg:mt-8 rounded-[16px] p-6"
+            className="w-full relative flex h-full bg-teal-500 w-full lg:mt-8 rounded-[16px] p-6"
             >
             <div className="max-w-xl lg:max-w-xl">
-                <h3 className="text-xl lg:text-3xl mb-2 font-inter text-black font-bold">The best design articles, every week</h3>
-                <p className="font-inter mb-4 text-base leading-[24px] text-black text-opacity-70">Join 25,000+ creatives who enjoy a regular dose of inspiration and motivation, delivered to your inbox every Tuesday.</p>
+                <h3 className="text-xl lg:text-3xl mb-2 font-inter text-white font-bold">{title?title:'The best design articles, every week'}</h3>
+                <p className="font-inter mb-4 text-base leading-[24px] text-white text-opacity-80">Join 25,000+ creatives who enjoy a regular dose of inspiration and motivation, delivered to your inbox every week.</p>
                 <SignupHomepage/>
             </div>
             <div>

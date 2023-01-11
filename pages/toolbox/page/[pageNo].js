@@ -1,10 +1,11 @@
 import Layout from "@/components/new-index/layoutForIndex";
 
 import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from "@/lib/api";
-import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexNew";
+import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
+import Footer from "@/components/footer";
 
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 14;
 
 
 
@@ -41,6 +42,7 @@ export default function ToolboxPage({
   //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
 
   return (
+    <>
     <Layout
       maxWidth={"max-w-[1400px] search-wide"}
       seo={{
@@ -67,6 +69,8 @@ export default function ToolboxPage({
         color={"#3574F0"}
       />
     </Layout>
+    <Footer/>
+    </>
   );
 }
 

@@ -10,7 +10,7 @@ export default function Breadcrumbs({
   pageNo = null,
 }) {
   return (
-    <div className="w-auto ">
+    <div className="w-auto bg-white p-2.5 rounded-xl" style={{width:'fit-content'}}>
       {links.map((item, index) => {
         return (
           <div className="inline" key={index}>
@@ -31,15 +31,29 @@ export default function Breadcrumbs({
         );
       })}
       {currentSlug == "toolbox" ? (
+        <>
+        <div className="inline  border-gray-900 border-opacity-10 rounded-full p-1.5 px-3 bg-white bg-opacity-50">
+          <Link
+            href={`${urlRoot}`}
+            // className={`capitalize ${pageNo?'':'text-bold'}`}>
+            className={`capitalize`}
+          >
+            Toolbox
+          </Link>
+        </div>
+        <div className="inline mx-1">
+              <ChevronRightIcon className="inline" />
+            </div>
         <div className="inline  border-gray-900 border-opacity-10 rounded-full p-1.5 px-3 bg-white bg-opacity-50">
           <Link
             href={`${urlRoot}/page/1`}
             // className={`capitalize ${pageNo?'':'text-bold'}`}>
             className={`capitalize font-semibold text-blue-600`}
           >
-            {currentSlug}
+            All
           </Link>
         </div>
+        </>
       ) : currentSlug ? (
         <div className="inline  border-gray-900 border-opacity-10 rounded-full p-1.5 px-3 bg-white bg-opacity-50">
           <Link

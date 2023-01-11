@@ -1,4 +1,4 @@
-import Layout from "@/components/new-index/layoutForIndex";
+import Layout from "@/components/layoutForToolboxIndex";
 
 import {
   getAllPostsForToolsSubcategoryPage,
@@ -12,86 +12,53 @@ import {
   get_slugs_from_menu,
 } from "@/lib/menus/lib/getAllTagsFromMenu";
 import { useEffect } from "react";
-import Footer from "@/components/footer";
 
-const PAGE_SIZE = 12;
-
-const BREADCRUMBS = {
-  pageTitle: "Toolbox",
-  links: [
-    {
-      name: "Home",
-      slug: "/",
-      svg: (
-        <svg
-          className="w-4 h-4 inline my-auto"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path
-            d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19zm2-4h8v2H8v-2z"
-            fill="currentColor"
-          />
-        </svg>
-      ),
-    },
-    { name: "Toolbox", slug: "/toolbox" },
-  ],
-};
-
-export default function ToolboxPage({
+const ToolboxHomepage = ({
   title,
   allPosts = [],
   preview,
   pagination,
   tag,
-}) {
-  useEffect(() => {
-    if (window.$crisp) {
-      window.$crisp.push(["do", "chat:show"]);
-    }
-  }, []);
-
+}) => {
   return (
-    <>
-    <Layout
-      maxWidth={"search-wide max-w-[1380px]"}
-      seo={{
-        title: `${tag} – design tools | Prototypr Toolbox | Page ${pagination?.page}`,
-        description:
-          "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
-        //   image: "",
-        canonical: `https://prototypr.io/toolbox/${tag}/page/${pagination?.page}`,
-        url: `https://prototypr.io/toolbox/${tag}/page/${pagination?.page}`,
-      }}
-      activeNav={"toolbox"}
-      preview={preview}
-    >
-      <ToolboxIndexPage
-        paginationRoot={`/toolbox`}
-        filterCategories={ALL_SLUGS_GROUPS}
-        urlRoot={`/toolbox`}
-        title={title}
-        currentSlug={tag}
-        description="All your design tools in one place, updated weekly"
-        pagination={pagination}
-        pageSize={PAGE_SIZE}
-        allPosts={allPosts}
-        breadcrumbs={BREADCRUMBS}
-      />
-    </Layout>
-
-<Footer/>
-</>
+    <div className="w-full h-full">
+      <div className="w-full h-[600px]  bg-red-500">
+        <div className="max-w-7xl mx-auto grid place-items-center bg-red-800 h-full">
+          <h1 className="text-[52px] font-bold">
+            Discover Tools, <br /> make life easier.
+          </h1>
+        </div>
+      </div>
+      <div className="w-full max-w-full py-5 h-auto flex flex-col gap-2 bg-green-500">
+        <div className="grid grid-cols-5 gap-4">
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+        </div>
+        <div className="grid grid-cols-5 gap-4">
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+          <div className="w-full h-[100px] bg-gray-400"></div>
+        </div>
+      </div>
+      <div></div>
+    </div>
   );
-}
+};
+
+export default ToolboxHomepage;
+
+const PAGE_SIZE = 12;
 
 export async function getStaticProps({ preview = null, params }) {
   const pageSize = PAGE_SIZE;
   const { pageNo, slug } = params;
+  //   const { pageNo, slug } = { pageNo: 1, slug: "toolbox" };
+
   // const foundSlug = ALL_SLUGS.find((SLUG, index) => {
   //     return slug === SLUG.key
   // })
@@ -129,7 +96,7 @@ export async function getStaticPaths() {
   const all_slugs = get_slugs_from_menu(ALL_SLUGS_GROUPS);
   //now just same as the .map
   for (var z = 0; z < all_slugs.length; z++) {
-    var itemTags = all_slugs[z]?.tags;
+    var itemTags = all_slugs[z].tags;
     const allPosts =
       (await getAllPostsForToolsSubcategoryPage(
         null,

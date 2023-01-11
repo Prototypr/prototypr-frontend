@@ -1,4 +1,5 @@
-import Layout from "@/components/layoutForToolboxIndex";
+import Footer from "@/components/footer";
+import Layout from "@/components/new-index/layoutForIndex";
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 
@@ -21,6 +22,7 @@ const BREADCRUMBS = {
 export default function ToolboxPage({title,allPosts = [], preview, pagination,tag}) {
 
     return (
+        <>
         <Layout 
        maxWidth={"search-wide max-w-[1320px]"}
         seo={{
@@ -45,6 +47,9 @@ export default function ToolboxPage({title,allPosts = [], preview, pagination,ta
         currentSlug={tag}
         />
         </Layout>
+
+    <Footer/>
+    </>
     )
 }
 

@@ -6,10 +6,17 @@ import {
   getPostsByPageForToolsPage,
 } from "@/lib/api";
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexNew";
+import {
+  getAllPostsForToolsPage,
+  getCommonQuery,
+  getPostsByPageForToolsPage,
+} from "@/lib/api";
+// import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 import ToolsTagsNavRow from "@/components/v4/section/ToolsTagsNavRow";
 import TwoColumnCards from "@/components/v4/layout/TwoColumnCards";
 import ToolsLayout from "@/components/v4/layout/toolbox/ToolsLayout";
+import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import Container from "@/components/container";
 import Link from "next/link";
 import { CaretRight } from "phosphor-react";
@@ -20,6 +27,7 @@ import HeadingSeeAllRow from "@/components/v4/text/HeadingSeeAllRow";
 import { useIntl } from "react-intl";
 import Footer from "@/components/footer";
 import SearchBar from "@/components/SearchBar";
+import ToolCard from "@/components/v4/card/ToolCard";
 
 const TAB_ITEMS = [
   {
@@ -37,8 +45,8 @@ const TAB_ITEMS = [
     // icon:<Wheelchair size={ICON_SIZE} />
   },
   {
-    slug: "design-systems",
-    toolSlug: "design-systems",
+    slug: "design-system",
+    toolSlug: "design-system",
     name: "topicSpotlight.tabs.designSystems",
     subheader: "Everything starts with a component",
     // icon:<Wheelchair size={ICON_SIZE} />
@@ -121,9 +129,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [] }) {
   return (
     <>
       <Layout
-        background={"#F1F3F9"}
         maxWidth={"max-w-[1400px] search-wide"}
-        padding={false}
         seo={{
           title: `Prototypr Toolbox - new design, UX and coding tools`,
           description:
@@ -134,10 +140,8 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [] }) {
         }}
         activeNav={"toolbox"}
       >
-        <ToolBoxHero />
         <ToolsTagsNavRow />
-
-        <Container maxWidth="max-w-[1200px] pb-20">
+        <Container maxWidth="max-w-[1320px] pb-20">
           <HeadingSeeAllRow
             link="/toolbox/page/1"
             title="Featured tools"
@@ -147,12 +151,40 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [] }) {
           {allPosts.length > 0 && (
             <>
               <TwoColumnCards posts={allPosts.slice(0, 2)} />
-              <ToolsLayout
-                posts={allPosts.slice(2, allPosts.length)}
-                type="toolbox"
-              />
+              <div className="py-6">
+                <ToolCard
+                  posts={allPosts.slice(2, allPosts.length)}
+                  type="toolbox"
+                />
+              </div>
             </>
           )}
+          <SectionDivider />
+          <div className="-mt-8">
+            <NewsletterSection />
+            <SectionDivider />
+          </div>
+
+          <div>
+            {TAB_ITEMS.map((topic, index) => {
+              const titleText = intl.formatMessage({
+                id: topicPosts[topic.slug].title,
+              });
+              const subheading = intl.formatMessage({
+                id: topicPosts[topic.slug].subheader,
+              });
+              return (
+                <>
+                  <TwoColumnCards posts={allPosts.slice(0, 2)} />
+                  <ToolsLayout
+                    posts={allPosts.slice(2, allPosts.length)}
+                    type="toolbox"
+                  />
+                </>
+              );
+            })}
+          </div>
+
           <SectionDivider />
           <div className="-mt-8">
             <NewsletterSection />
@@ -167,26 +199,25 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [] }) {
             });
             return (
               <>
-                {topicPosts[topic.slug]?.posts?.length > 0 && (
-                  <>
-                    <HeadingSeeAllRow
-                      link="/toolbox/page/1"
-                      title={titleText}
-                      subheader={subheading}
-                    />
-                    <TwoColumnCards
-                      posts={topicPosts[topic.slug].posts?.slice(0, 2)}
-                    />
-                    <ToolsLayout
-                      posts={topicPosts[topic.slug].posts?.slice(
-                        2,
-                        allPosts.length
-                      )}
-                      type="toolbox"
-                    />
-                    <SectionDivider />
-                  </>
-                )}
+                <HeadingSeeAllRow
+                  link="/toolbox/page/1"
+                  title={titleText}
+                  subheader={subheading}
+                />
+                <TwoColumnCards
+                  posts={topicPosts[topic.slug].posts?.slice(0, 2)}
+                />
+                {/* <ToolsLayout posts={topicPosts[topic.slug].posts?.slice(2,allPosts.length)} type="toolbox" /> */}
+                <div className="py-6">
+                  <ToolCard
+                    posts={topicPosts[topic.slug].posts?.slice(
+                      2,
+                      allPosts.length
+                    )}
+                    type="toolbox"
+                  />
+                </div>
+                {index !== TAB_ITEMS.length - 1 ? <SectionDivider /> : ""}
               </>
             );
           })}
@@ -217,7 +248,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
         preview,
         [TAB_ITEMS[index].toolSlug],
         "tool",
-        8,
+        11,
         0,
         sort
       )) || [];

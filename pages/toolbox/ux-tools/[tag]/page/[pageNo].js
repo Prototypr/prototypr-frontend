@@ -1,10 +1,11 @@
-import Layout from "@/components/layoutForToolboxIndex";
+import Layout from "@/components/new-index/layoutForIndex";
 
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 import ALL_SLUGS_GROUPS from "@/lib/menus/uxTools";
 import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
+import Footer from "@/components/footer";
 
 const PAGE_SIZE = 20;
 
@@ -20,6 +21,7 @@ const BREADCRUMBS = {
 export default function ToolboxPage({allPosts = [], title,preview, pagination,tag}) {
 
     return (
+      <>
         <Layout 
        maxWidth={"search-wide max-w-[1320px]"}
         seo={{
@@ -43,6 +45,8 @@ export default function ToolboxPage({allPosts = [], title,preview, pagination,ta
         allPosts={allPosts} 
         breadcrumbs={BREADCRUMBS}/>
         </Layout>
+    <Footer/>
+    </>
     )
 }
 

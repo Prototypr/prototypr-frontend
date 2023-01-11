@@ -1,4 +1,4 @@
-import Layout from "@/components/layoutForBlogPost";
+import Layout from "@/components/new-index/layoutForIndex";
 
 
 import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPage } from '@/lib/api'
@@ -7,6 +7,7 @@ import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/prototyping'
+import Footer from "@/components/footer";
 
 const PAGE_SIZE = 20;
 
@@ -23,6 +24,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
 
 
     return (
+        <>
         <Layout 
         seo={{
         title: "Prototypr Prototyping Toolbox.",
@@ -44,6 +46,9 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
         allPosts={allPosts} 
         breadcrumbs={BREADCRUMBS}/>
         </Layout>
+
+    <Footer/>
+    </>
     )
 }
 
