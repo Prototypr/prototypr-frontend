@@ -92,7 +92,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                     />
                   </div>
                 )} */}
-                <div className="flex flex-row gap-2">
+                <div className="hidden md:flex flex-row gap-2">
                   {tags.map((tag) => {
                     return (
                       <span className="px-4 py-0.5 text-sm capitalize rounded-full text-gray-600 border border-opacity-10 border-white bg-black bg-opacity-5 backdrop-blur-md">
