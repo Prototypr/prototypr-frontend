@@ -37,7 +37,7 @@ const IntroBanner = ({ tools, sponsor }) => {
           </p>
           <div className="flex mt-4">
             <Link href="/early-access">
-              <Button className="bg-white text-blue-600" variant="confirmRounded">
+              <Button className="bg-white hover:text-white text-blue-600" variant="confirmRounded">
                 Sign up
               </Button>
             </Link>
