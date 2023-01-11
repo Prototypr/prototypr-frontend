@@ -1,4 +1,5 @@
 import { MotionSlider } from "@/components/toolbox/ToolboxCarouselAnimation";
+import { SearchBarToolbox } from "@/components/toolbox/toolboxSearchBox";
 
 const MotionSliderToolCard = ({ title, subtext, image }) => {
   return (
@@ -98,19 +99,11 @@ const ToolBoxHero = () => {
                 alt="Prototypr Logo"
               />
             </div>
-            <h1 className="text-[52px] leading-[63px] font-bold">
+            <h1 className="text-[40px] md:text-[52px] text-center leading-[52px] md:leading-[63px] font-bold">
               Discover Tools, <br /> make life easier.
             </h1>
             <div>
-              <input
-                style={{
-                  boxShadow:
-                    "0px 100px 80px rgba(0, 0, 0, 0.00696822), 0px 30.1471px 24.1177px rgba(0, 0, 0, 0.01), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.0130318), 0px 4.5288px 3.62304px rgba(0, 0, 0, 0.02)",
-                }}
-                type="text"
-                className="max-w-[400px] rounded-[12px] h-[72px] px-4 w-[400px] border-2 border-[#E6E6E6] bg-white"
-                placeholder="Search over 15,000+ Tools..."
-              ></input>
+              <SearchBarToolbox />
             </div>
           </div>
         </div>

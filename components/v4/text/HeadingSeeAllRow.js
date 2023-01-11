@@ -10,7 +10,7 @@ const HeadingSeeAllRow = ({
   return (
     <div className="flex justify-between">
       <div className="mt-6 mb-6 px-1">
-        <h3 className="font-bold mb-1 text-[36px]">
+        <h3 className="font-bold mb-1 text-[24px] md:text-[36px]">
           {title}{" "}
           {extraTextHighlight ? (
             <span className="hidden md:block text-gray-400">
@@ -21,7 +21,7 @@ const HeadingSeeAllRow = ({
           )}
         </h3>
         {subheader ? (
-          <p className="text-[#757575] text-[24px] max-w-[230px] sm:max-w-full">
+          <p className="text-[#757575] text-[16px] md:text-[24px] max-w-[230px] sm:max-w-full">
             {subheader}
           </p>
         ) : (

@@ -101,7 +101,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [] }) {
         activeNav={"toolbox"}
       >
         <ToolBoxHero />
-        <div className="w-full pb-14">
+        <div className="w-full pb-14 px-4">
           <div className="w-full h-auto gridBg rounded-2xl bg-[#3574F0] max-w-7xl mx-auto p-5">
             <div className="flex flex-col gap-2 justify-between ">
               <h3 className="font-normal text-[24px] text-white text-opacity-70">
@@ -144,7 +144,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [] }) {
                 <ToolCard
                   posts={allPosts.slice(2, allPosts.length)}
                   type="toolbox"
-                  columns={"grid-cols-2"}
+                  columns={"lg:grid-cols-2"}
                 />
               </div>
             </>
@@ -182,7 +182,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [] }) {
                       2,
                       allPosts.length
                     )}
-                    columns={"grid-cols-2"}
+                    columns={"lg:grid-cols-2"}
                     type="toolbox"
                   />
                 </div>
