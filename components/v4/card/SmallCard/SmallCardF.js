@@ -7,7 +7,7 @@ const SmallCard = ({link, title, image, tags, date, avatar, author }) => {
   return (
     <div className="flex hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-row font-inter w-full">
       {image ? (
-        <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[250px] xs:h-[146px] relative rounded-2xl overflow-hidden border border-gray-100">
+        <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[190px] xs:h-[125px] relative rounded-2xl overflow-hidden border border-gray-100">
           <Link href={link??''}>
             <Image
               className="object-cover cursor-pointer"

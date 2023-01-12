@@ -6,7 +6,7 @@ import MediumTag from "../../tag/MediumTag";
 const BigCard = ({ link,title, excerpt, image, tags, date, avatar, author }) => {
   return (
     <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col font-inter w-full max-w-[985px]">
-      <div className="w-full mb-4 sm:mb-0 w-full relative h-[224px] sm:h-[224px] md:h-[250px] rounded-2xl overflow-hidden border border-gray-200">
+      <div className="w-full mb-4 sm:mb-0 w-full relative h-[224px] sm:h-[224px] md:h-[270px] rounded-2xl overflow-hidden border border-gray-200">
         <Link href={link??''}>
           <Image
             className="object-cover cursor-pointer"
