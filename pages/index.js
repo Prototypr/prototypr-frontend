@@ -227,7 +227,7 @@ export default function Index({
               OtherPostsRandomSection={topicRes[topic.slug]?.posts?.slice(1, 5)}
               heroJob={heroJob}
               sponsors={sponsors}
-              toolsList={topicRes[topic.slug]?.tools.slice(0, 8)}
+              toolsList={topicRes[topic.slug]?.tools.slice(0, 7)}
               authorsList={topicRes[topic.slug]?.authors}
             />
               {index!==TAB_ITEMS.length-1?

@@ -31,7 +31,7 @@ const JumboTagsSection = ({popularTags}) =>{
 
                     <div className="col-span-3">
                             <Link href={`/topics`}>
-                        <div className="rounded-2xl h-[180px] bg-gradient-to-r from-blue-800/90 to-blue-800/80">
+                        <div className="rounded-2xl shadow-sm h-[180px] bg-gradient-to-r from-blue-800/90 to-blue-800/80">
                             <div className={`flex h-full relative rounded-2xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>
                             <img className="absolute left-0 top-0 w-full h-full object-cover opacity-70" src="/static/images/topicpattern.svg"/>
                             </div>

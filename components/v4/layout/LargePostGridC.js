@@ -6,6 +6,7 @@ import SmallPostsGroupC from "./SmallPostGroupC";
 // import RSSTitle from "../text/RSSTitle";
 import { CaretRight, Tag } from "phosphor-react";
 import Link from "next/link";
+import Button from "@/components/Primitives/Button";
 const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, heading }) => {
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;
   const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
@@ -25,18 +26,25 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
                 {heading}
               </h2>
             </div>
-            <div className="my-auto">
+            {/* <div className="my-auto">
             <Link href={`/posts/${slug}/page/1`}>
             <div className="font-inter mt-1 text-sm my-auto text-black opacity-60 cursor-pointer text-sm flex">
-              {/* <div className="my-auto">More <span className="capitalize">{heading}</span></div> */}
               <div className="my-auto">See all</div>
             <CaretRight className="my-auto" size={14} />
             </div>
           </Link>
-            </div>
+            </div> */}
           </div>:''}
     <div className="flex flex-col lg:flex-row justify-between">
         <div className="w-full lg:w-1/2">
+        <div className="flex relative p-2 mb-1">
+            <div className="text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+              Top reads
+            </div>
+            {/* <div className="bg-blue-200/90 ml-3 flex justify-center my-auto h-6 w-6 rounded-full">
+                <ArrowRight weight="bold" size={14} color="rgb(0,0,0)" className="my-auto"/>
+            </div> */}
+          </div>
             <BigCard
             link={`/post/${largePost?.attributes?.slug}`}
             avatar={largePostAvatar}
@@ -48,6 +56,14 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
             tags={largePost?.attributes?.tags?.data}
             />
         <SmallPostsGroupC tools={tools} smallPosts={smallPosts?.slice(0,3)}/>
+        <div className="flex mt-10">
+            <Link href={`/posts/${slug}/page/1`}>
+              <Button className="rounded-full bg-blue-600 text-white" variant="confirmBig">
+                {/* More {heading} */}
+                More articles
+              </Button>
+            </Link>
+          </div>  
         </div>
       <div className="w-1/2">
       {tools?.length>3 ?

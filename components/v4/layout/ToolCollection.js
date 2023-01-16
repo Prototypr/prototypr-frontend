@@ -1,11 +1,24 @@
 // import ToolIconCard from "@/components/v4/card/ToolIconCard";
 // import Link from "next/link";
 // import {CaretRight} from 'phosphor-react'
+import Link from "next/link";
 import ToolCardSimple from "../card/ToolCardSimple";
+import { ArrowRight } from "phosphor-react";
 
 const ToolCollection = ({ tools, topic, tagline }) => {
   return (
     <div className="w-full pl-6 mb-12">
+      <div className="flex relative p-2 mb-1">
+            <div className=" text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+             <span className="capitalize">{topic}</span> tools
+            </div>
+              <Link href="/toolbox">
+            <div className="bg-blue-200/90 ml-3 flex justify-center my-auto h-6 w-6 rounded-full">
+                <ArrowRight weight="bold" size={14} color="rgb(0,0,0)" className="my-auto"/>
+            </div>
+              </Link>
+          </div>
+
       {/* <div className="flex justify-between">
         
           <Link href='/toolbox'>

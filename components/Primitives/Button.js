@@ -16,7 +16,7 @@ const Button = styled("button", {
     variant: {
       confirmBig:{
         height:'auto',
-        padding:'1.25rem 2.5rem',
+        padding:'1.2rem 2.4rem',
         background:white,
         "&:hover": { backgroundColor: blue.blue10 },
         "&:focus": { boxShadow: `0 0 0 2px ${blue.blue12}` },
