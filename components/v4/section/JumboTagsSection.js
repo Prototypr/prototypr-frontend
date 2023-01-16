@@ -11,7 +11,7 @@ const JumboTagsSection = ({popularTags}) =>{
                     {/* <h2 className="text-xl mb-6 font-bold text-gray-900">
                 Browse by <span className="text-gray-500">topic</span>
                 </h2> */}
-                <div className="grid grid-cols-12 gap-12">
+                <div className="grid grid-cols-12 xs:gap-4 md:gap-6 lg:gap-12">
                 {/* <div className="col-span-6">
                             <Link href={`/topics`}>
                         <div className="rounded-2xl h-[210px] bg-gradient-to-r from-blue-800/90 to-blue-800/80">
@@ -29,7 +29,7 @@ const JumboTagsSection = ({popularTags}) =>{
                     <JumboTag withBackground={true} key={i} index={i} topic={topic}/>
                     ))}
 
-                    <div className="col-span-3">
+                    <div className="mt-4 md:mt-0 col-span-12 xs:col-span-6 md:col-span-4 lg:col-span-3">
                             <Link href={`/topics`}>
                         <div className="rounded-2xl shadow-sm h-[180px] bg-gradient-to-r from-blue-800/90 to-blue-800/80">
                             <div className={`flex h-full relative rounded-2xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>

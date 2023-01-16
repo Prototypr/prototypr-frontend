@@ -5,7 +5,7 @@ import Avatar from "../../avatar/AvatarLine";
 const BigCard = ({ link,title, excerpt, image, tags, date, avatar, author }) => {
   return (
     <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col sm:flex-row font-inter w-full pr-6">
-      <div  style={{ flex: `0 0 180px` }} className="w-full mb-4 sm:mb-0 relative h-[128px] w-[190px] rounded-2xl overflow-hidden border border-gray-200">
+      <div  style={{ flex: `0 0 180px` }} className="w-full mb-4 sm:mb-0 relative h-[128px] w-full md:w-[190px] rounded-2xl overflow-hidden border border-gray-200">
         <Link href={link??''}>
           <Image
             className="object-cover cursor-pointer"

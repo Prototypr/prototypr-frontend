@@ -7,9 +7,10 @@ import { ArrowRight } from "phosphor-react";
 
 const ToolCollection = ({ tools, topic, tagline }) => {
   return (
-    <div className="w-full pl-6 mb-12">
+    <div className="border-t border-black border-opacity-5 pt-12 mt-12 lg:pt-0 lg:mt-0 w-full lg:pl-6 mb-12">
+    
       <div className="flex relative p-2 mb-1">
-            <div className=" text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+            <div className="text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
              <span className="capitalize">{topic}</span> tools
             </div>
               <Link href="/toolbox">
@@ -31,7 +32,7 @@ const ToolCollection = ({ tools, topic, tagline }) => {
       </div> */}
       {tools?.length?
       <>
-      <ToolCardSimple posts={tools} columns={'lg:grid-cols-2'} type="toolbox" />
+      <ToolCardSimple posts={tools} columns={'xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-2'} type="toolbox" />
       {/* <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-6`}> 
       <div className="flex flex-col justify-center">
         <div className="text-gray-500 uppercase text-xs">

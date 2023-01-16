@@ -18,11 +18,11 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
     let largePostAvatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
   return (
     <>
-    <div className="bg-white p-10 rounded-xl max-w-[1320px] shadow-sm">
+    <div className="bg-white p-6 md:p-10 rounded-xl max-w-[1320px] shadow-sm">
         {showHeading!==false?<div className="flex w-full justify-between">
             <div className="flex mb-6">
               <Tag className="my-auto mr-3" size={32}/>
-              <h2 className="text-xl capitalize md:text-3xl font-bold text-gray-900">
+              <h2 className="text-3xl capitalize font-semibold text-gray-900">
                 {heading}
               </h2>
             </div>
@@ -37,10 +37,10 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
           </div>:''}
     <div className="flex flex-col lg:flex-row justify-between">
         <div className="w-full lg:w-1/2">
-        <div className="flex relative p-2 mb-1">
-            <div className="text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+        <div className="hidden md:inline flex relative p-2 mb-1">
+            <h3 className="text-lg overflow-hidden line-clamp-1 font-medium font-inter">
               Top reads
-            </div>
+            </h3>
             {/* <div className="bg-blue-200/90 ml-3 flex justify-center my-auto h-6 w-6 rounded-full">
                 <ArrowRight weight="bold" size={14} color="rgb(0,0,0)" className="my-auto"/>
             </div> */}
@@ -59,13 +59,13 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
         <div className="flex mt-10">
             <Link href={`/posts/${slug}/page/1`}>
               <Button className="rounded-full bg-blue-600 text-white" variant="confirmBig">
-                {/* More {heading} */}
-                More articles
+                More {heading}
+                {/* More articles */}
               </Button>
             </Link>
           </div>  
         </div>
-      <div className="w-1/2">
+      <div className="w-full lg:w-1/2">
       {tools?.length>3 ?
         <>
         <ToolCollection tagline={false} topic={heading} tools={tools} />

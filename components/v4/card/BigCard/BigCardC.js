@@ -5,8 +5,8 @@ import MediumTag from "../../tag/MediumTag";
 
 const BigCard = ({ link,title, excerpt, image, tags, date, avatar, author }) => {
   return (
-    <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col font-inter w-full max-w-[985px]">
-      <div className="w-full mb-4 sm:mb-0 w-full relative h-[224px] sm:h-[224px] md:h-[270px] rounded-2xl overflow-hidden border border-gray-200">
+    <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col sm:flex-row lg:flex-col font-inter w-full max-w-[985px]">
+      <div className="w-full w-full relative h-[180px] sm:h-[224px] md:h-[270px] rounded-2xl overflow-hidden border border-gray-200">
         <Link href={link??''}>
           <Image
             className="object-cover cursor-pointer"
@@ -15,7 +15,7 @@ const BigCard = ({ link,title, excerpt, image, tags, date, avatar, author }) => 
           />
         </Link>
       </div>
-      <div className="w-full px-0 flex flex-col justify-center">
+      <div className="w-full px-0 sm:px-6 lg:px-0 flex flex-col justify-center">
         <div className="flex text-xs mb-2 mt-3">
           {tags?.length
             ? tags.slice(0, 2).map((tag, index) => {

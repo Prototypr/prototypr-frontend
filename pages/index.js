@@ -167,7 +167,7 @@ export default function Index({
         </Container>
         <SectionDivider py='py-6' transparentLine={true} />
         <Container maxWidth="max-w-[1320px] z-30 relative">
-          <div className="p-10 bg-white relative overflow-hidden rounded-xl shadow-sm">
+          <div className="p-6 md:p-10 bg-white relative overflow-hidden rounded-xl shadow-sm">
               <ToolLargeCardRow tools={toolsList.slice(0,5)} />
               <SectionDivider py="py-6" transparentLine={true}  />
               <ToolIconCardRow tools={toolsList.slice(5,15)} />       
@@ -202,7 +202,7 @@ export default function Index({
 
           <div className="max-w-[1320px] mx-auto px-6 rounded-b-[3.5rem] pb-28 ">
             <div className="flex justify-start w-full">
-              <h2 className="md:text-[32px] text-left mb-10 pt-4 text-[20px] max-w-lg leading-[40px] md:leading-[48px] font-semibold font-inter text-[#0F1F40] ">
+              <h2 className="md:text-[32px] text-left mb-10 pt-4 text-[20px] max-w-lg leading-snug md:leading-[40px] md:leading-[48px] font-semibold font-inter text-[#0F1F40] ">
            From design to code, and everything in between 
             </h2>
             </div>

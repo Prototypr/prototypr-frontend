@@ -6,7 +6,7 @@ const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototy
 const SmallPostsGroupB = ({smallPosts}) =>{
 
     return(
-        <div className="flex w-full lg:w-1/2 md:pl-6 flex-col lg:-mt-3">
+        <div className="flex w-full lg:w-1/2 lg:pl-6 flex-col mt-4 lg:-mt-3">
 {/* <SingleFancyCard/> */}
             {/* <PrototyprNetworkCTA2 /> */}
         {smallPosts?.length ? (

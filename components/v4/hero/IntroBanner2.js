@@ -33,33 +33,21 @@ const IntroBanner = ({ tools, sponsor }) => {
       backgroundPosition: 'center center',
       backgroundSize: 'cover'}}
       >
-      {/* <div className="pt-[96px] collab-cursor p-0 overflow-hidden justify-stretch bg-[#F7F7F8] text-gray-800 "> */}
         <div className="max-w-[1320px] mx-auto relative grid grid-cols-12">
-         {/* <img style={{opacity:'0.6', pointerEvents:'none'}}className="absolute w-full h-full top-0 left-0 object-cover" 
-          src="/static/images/checks.svg"/> */}
-          <div className="hidden 2xl:block absolute z-10 opacity-100 w-[53%] h-[120%] bg-gradient-to-r to-[#CCE6FF] from-transparent via-transparent z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover"></div>
-          <img className="absolute opacity-100 w-[53%] h-[120%] z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover" 
+          <div className="hidden 2xl:block absolute z-10 opacity-100 w-[620px] h-[500px] -mr-[20%] bg-gradient-to-r to-[#CCE6FF] from-transparent via-transparent z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover"></div>
+          <img className="hidden md:block absolute opacity-100 w-[620px] h-[500px] z-10 h-full top-0 right-0 -mt-[20px] -mr-[225px] sm:-mr-[40%] 2md:-mr-[20%] xl:-mr-[200px] 2xl:-mr-[20%] object-cover" 
           src="/static/images/gradient15.svg"  style={{ zIndex:1, borderTopLeftRadius:'30%'}}/>
         <div className="md:col-span-6 pb-10 pt-8 px-7 relative col-span-12 font-inter p-2  relative flex flex-col">
-          
-          {/* <div className="absolute w-[146%] bg-blue-800 h-[180%] -mt-[8%] -ml-[46%] left-0" style={{borderRadius:'100%'}}/> */}         
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
           className="pointer-events-auto md:pr-0 md:pb-12 md:pt-6 rounded-3xl z-10" style={{width:'fit-content'}}>
-          {/* <div
-            className="h-6 text-base text-blue-100 font-semibold leading-7"
-            aria-hidden="true"
-          >
-            A design discovery universe
-          </div> */}
-          {/* <h1 className="max-w-[50rem] mt-2 mb-5 text-[#0F1F40] text-4xl font-semibold tracking-tight md:text-[56px] lg:leading-tight md:leading-tight"> */}
-          <h1 className="max-w-[50rem] mt-2 mb-5 text-[#0F1F40] text-4xl font-semibold tracking-tight md:text-[56px] lg:leading-tight md:leading-tight">
+          <h1 className="max-w-[50rem] mt-2 mb-5 text-[#0F1F40] text-5xl font-semibold tracking-tight xl:text-[56px] lg:leading-tight md:leading-tight">
           Learn. Create. Publish.
           </h1>
           <p className="mb-5 text-[#436586] md:leading-[32px] leading-[28px] text-[16px] md:text-[18px] font-inter md:pr-6 max-w-[32rem]">
             Discover the people, ideas, and process behind designing and building great products.
           </p>
-          <div className="flex mt-4">
+          <div className="flex mt-4 mb-6 sm:mb-0">
             <Link href="/early-access">
               <Button className="rounded-full bg-blue-600 text-white" variant="confirmBig">
                 Sign up
@@ -69,29 +57,17 @@ const IntroBanner = ({ tools, sponsor }) => {
           </div>
         </div>
         <div className="col-span-1 relative z-20">
-          </div>
-           <div className="col-span-5 hidden relative md:block h-full">
-           
-                {/* <div className="absolute w-[148%] bg-gradient-to-r z-10 to-pink-200/30 from-blue-400/30 h-[180%] -mr-[46%] right-0" style={{borderRadius:'32%', zIndex:1}}/> */}
-              
-                {/* <img className="absolute opacity-90  w-[800px]  h-[180%]  z-10 h-full top-0 left-0 object-cover" 
-          src="/static/images/Gradient.svg"  style={{borderRadius:'32%', zIndex:1}}/> */}
-                      {/* <div className="bg-gradient-to-l z-10 from-[#0a2254] to-transparent w-full absolute h-full top-0 right-0"/> */}
-          </div>
-        {/* <div className="hidden 2md:block w-1/2 relative h-full overflow-visible">
-          <div className="absolute left-0 top-0 -mt-[3.3rem] w-[110%] py-20 overflow-x-auto pl-20 -ml-16">
-            <CardDeckRow tools={tools} sponsor={sponsor} />
-          </div>
-        </div> */}
-      
+        </div>
+        <div className="col-span-5 hidden relative md:block h-full">
+        </div>
       </div>
       
       </div>
       <div className="absolute top-0 left-0 w-full h-full grid grid-cols-12 " style={{pointerEvents:'none'}}>
       
         <div className="col-span-6"/>
-      <div className="col-span-2 relative z-20">
-        <div className="hidden sm:block boto absolute bottom-0  right-0 -mr-[240px] md:-mr-[20px]">
+      <div className="col-span-2 relative z-30">
+        <div className="hidden 2md:block boto absolute bottom-0  right-0 -mr-[240px] md:-mr-[20px]">
           <div className="relative">
               <img src="/static/images/robotitosuelto.png" className="w-[165px] collab-cursor z-10"
                     style={{filter: 'drop-shadow(0 25px 25px rgb(0 0 0 / 0.45))', transform: 'scaleX(-1)', pointerEvents:'all'}}/>
@@ -112,11 +88,8 @@ const IntroBanner = ({ tools, sponsor }) => {
         </div>
 
           </div>
-          <div className="col-span-4 mt-[88px] relative z-5" style={{pointerEvents:'all'}}>
-                            {/* <div className="absolute w-[148%] bg-gradient-to-r z-10 from-[#c0cadd]/30 to-[#c0cadd]/10 h-[180%] mt-[3%] -mr-[46%] right-0" style={{borderRadius:'12%', zIndex:1}}/> */}
-                            <ParticlesContainer tools={tools} sponsor={sponsor} />
-                         
-          {/* <div className="absolute w-[148%] collab-cursor bg-white border-gray-200 z-10 h-[84%] mb-1 bottom-0 -mr-[46%] right-0" style={{borderRadius:'3rem',zIndex:1}}/> */}
+          <div className="hidden md:block col-span-4 mt-[88px] relative z-5" style={{pointerEvents:'all'}}>
+                            <ParticlesContainer tools={tools} sponsor={sponsor} />                         
           </div>
           </div>
     </Container>

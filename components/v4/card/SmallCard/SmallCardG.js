@@ -5,9 +5,9 @@ import Avatar from "../../avatar/AvatarLine";
 
 const SmallCard = ({link, title, image, tags, date, avatar, author, excerpt }) => {
   return (
-    <div className="flex mt-3 hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-row font-inter w-full pr-6">
+    <div className="flex mt-3 hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-col sm:flex-row font-inter w-full pr-6">
       {image ? (
-        <div style={{ flex: `0 0 100px` }} className="w-full shrink-0 h-[84px] w-[100px] relative rounded-2xl overflow-hidden border border-gray-100">
+        <div className="w-full shrink-0 h-[160px] sm:h-[84px] sm:w-[100px] sm:basis-[100px] relative rounded-2xl overflow-hidden border border-gray-100">
           <Link href={link??''}>
             <Image
               className="object-cover cursor-pointer"
@@ -19,7 +19,7 @@ const SmallCard = ({link, title, image, tags, date, avatar, author, excerpt }) =
       ) : (
         ""
       )}
-      <div className="shrink px-4 pr-5 flex flex-col justify-center">
+      <div className="shrink px-0 mt-2 sm:mt-0 sm:px-4 pr-5 flex flex-col justify-center">
         <div>
           <Link href={link??''}>
             <h2 className="text-lg font-semibold leading-snug line-clamp-3">

@@ -9,6 +9,8 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
   const plausible = usePlausible();
     
   return (
+    <div className="mt-4 md:mt-0 col-span-12 xs:col-span-6 md:col-span-4 lg:col-span-3">
+      
       <Link
         href={`/posts/${topic.slug}/page/1`}
         onClick={() => {
@@ -19,7 +21,7 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
             },
           });
         }}
-        className="flex flex-col col-span-3 "
+        className="flex flex-col"
       >
         <div className={`relative overflow-hidden ${withBackground?'bg-gradient-to-br from-blue-800/80 to-blue-800/90':''} w-full h-[180px] justify-center rounded-xl shadow-sm cursor-pointer flex flex-col`}>
           <img className="absolute opacity-20 w-full h-full top-0 left-0 object-cover" 
@@ -51,6 +53,7 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
                 ""
               )} */}
       </Link>
+      </div>
   );
 };
 export default JumboTag;
