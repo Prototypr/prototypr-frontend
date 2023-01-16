@@ -27,8 +27,8 @@ const IntroBanner = ({ tools, sponsor }) => {
   };
 
   return (
-    <Container padding={false} maxWidth="mb-4 relative grid">
-      <div className="pt-[96px] justify-stretch bg-[#CCE6FF]/90 text-gray-800"
+    <Container padding={false} maxWidth="relative grid">
+      <div className="justify-stretch bg-[#CCE6FF]/90 text-gray-800"
       style={{WebkitMask:'url(/static/images/bendy9.svg) center bottom / cover no-repeat;', 
       backgroundPosition: 'center center',
       backgroundSize: 'cover'}}

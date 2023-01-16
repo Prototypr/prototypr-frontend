@@ -144,14 +144,16 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        {(!user?.isLoggedIn)?
-        <>
-        <IntroBanner
-          sponsor={sponsors?.length ? sponsors[0] : null}/>
-        <SectionDivider transparentLine={true} />
-        </>
-        :''}
-        <TagsNavRow/>
+        <div className="pt-[100px]">
+          {/* {(!user?.isLoggedIn)?
+          <>
+          <IntroBanner
+            sponsor={sponsors?.length ? sponsors[0] : null}/>
+          <SectionDivider transparentLine={true} />
+          </>
+          :''} */}
+          <TagsNavRow/>
+        </div>
         <SectionDivider py='py-3.5' transparentLine={true} />
         <DiscoverSection
           user={user}
