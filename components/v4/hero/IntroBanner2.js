@@ -28,15 +28,13 @@ const IntroBanner = ({ tools, sponsor }) => {
 
   return (
     <Container padding={false} maxWidth="relative grid">
-      <div className="justify-stretch bg-[#CCE6FF]/90 text-gray-800"
-      style={{WebkitMask:'url(/static/images/bendy9.svg) center bottom / cover no-repeat;', 
-      backgroundPosition: 'center center',
-      backgroundSize: 'cover'}}
+      <div className="pt-[96px] justify-stretch bg-[#CCE6FF]/90 text-gray-800"
       >
+        <img src="/static/images/bendy9.svg" className="absolute bottom-0 -mb-[12%] xs:-mb-[15%] md:-mb-[15%] z-40 left-0 w-full"/>
         <div className="max-w-[1320px] mx-auto relative grid grid-cols-12">
-          <div className="hidden 2xl:block absolute z-10 opacity-100 w-[620px] h-[500px] -mr-[20%] bg-gradient-to-r to-[#CCE6FF] from-transparent via-transparent z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover"></div>
+        <div className="hidden 2xl:block absolute z-10 opacity-100 w-[620px] h-[500px] -mr-[20%] bg-gradient-to-r to-[#d1e8ff] from-transparent via-[#d1e8ff]/10 z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover"></div>
           <img className="hidden md:block absolute opacity-100 w-[620px] h-[500px] z-10 h-full top-0 right-0 -mt-[20px] -mr-[225px] sm:-mr-[40%] 2md:-mr-[20%] xl:-mr-[200px] 2xl:-mr-[20%] object-cover" 
-          src="/static/images/gradient15.svg"  style={{ zIndex:1, borderTopLeftRadius:'30%'}}/>
+          src="/static/images/gradient15c.png"  style={{ zIndex:1, borderTopLeftRadius:'30%'}}/>
         <div className="md:col-span-6 pb-10 pt-8 px-7 relative col-span-12 font-inter p-2  relative flex flex-col">
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
@@ -66,11 +64,11 @@ const IntroBanner = ({ tools, sponsor }) => {
       <div className="absolute top-0 left-0 w-full h-full grid grid-cols-12 " style={{pointerEvents:'none'}}>
       
         <div className="col-span-6"/>
-      <div className="col-span-2 relative z-30">
+      <div className="col-span-2 relative z-50">
         <div className="hidden 2md:block boto absolute bottom-0  right-0 -mr-[240px] md:-mr-[20px]">
           <div className="relative">
               <img src="/static/images/robotitosuelto.png" className="w-[165px] collab-cursor z-10"
-                    style={{filter: 'drop-shadow(0 25px 25px rgb(0 0 0 / 0.45))', transform: 'scaleX(-1)', pointerEvents:'all'}}/>
+                    style={{filter: 'drop-shadow(0 15px 10px rgb(0 0 0 / 0.3))', transform: 'scaleX(-1)', pointerEvents:'all'}}/>
 
           <div className="eyes-follow-tired absolute z-20 top-0 mt-[48px] md:mt-[42px] 2md:mt-[48px] right-[66px] md:right-[60px] 2md:right-[66px]">
             <div className="container">

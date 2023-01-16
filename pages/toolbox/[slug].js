@@ -65,8 +65,8 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         >
             {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
           <div className="w-full z-10 mx-auto">
-            <div className="flex flex-col gap-2 justify-between">
-              <div className="w-[70px] h-[70px] shadow-md rounded-3xl bg-white">
+            <div className="flex flex-col justify-between">
+              <div className="mb-2 w-[70px] h-[70px] shadow-md rounded-3xl bg-white">
                 <Image
                   loader={gumletLoader}
                   priority={false < 2 ? `true` : `false`}
@@ -80,8 +80,8 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                   src={coverImage}
                 />
               </div>
-              <div className="flex flex-col gap-3 justify-between">
-                <h1 className="text-4xl my-0 py-0 text-gray-900 font-bold">
+              <div className="flex flex-col justify-between">
+                <h1 className="text-4xl mb-3 my-0 py-0 text-gray-900 font-bold">
                   {post?.attributes?.title}
                 </h1>
                 {/* {post?.attributes?.author && (
@@ -92,10 +92,10 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                     />
                   </div>
                 )} */}
-                <div className="hidden md:flex flex-row gap-2">
+                <div className="hidden md:flex mb-3 flex-row">
                   {tags.map((tag) => {
                     return (
-                      <span className="px-4 py-0.5 text-sm capitalize rounded-full text-gray-600 border border-opacity-10 border-white bg-black bg-opacity-5 backdrop-blur-md">
+                      <span className="px-4 py-0.5 text-sm mr-2 capitalize rounded-full text-gray-600 border border-opacity-10 border-white bg-black bg-opacity-5 backdrop-blur-md">
                         {tag.attributes.name}
                       </span>
                     );
@@ -106,7 +106,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                     target={"_blank"}
                     href={post?.attributes?.link + "?ref=prototypr.io"}
                   >
-                    <button className="max-w-[200px] w-full py-4 bg-blue-600 text-white rounded-full">
+                    <button className="max-w-[200px] mt-1 w-full py-4 bg-blue-600 text-white rounded-full">
                       Visit Site
                     </button>
                   </a>
@@ -150,8 +150,8 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                     })}
                   </div>
                 </div>
-              <div className="flex flex-col gap-3">
-                <h2 className="text-lg font-bold">
+              <div className="flex flex-col">
+                <h2 className="text-lg mb-3 mt-6 font-bold">
                   Related to {post?.attributes?.title}
                 </h2>
                 <ToolCard posts={relatedPosts} columns={'grid-cols-1'} type="toolboxContentPage" />

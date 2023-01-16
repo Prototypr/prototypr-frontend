@@ -57,10 +57,10 @@ const ToolCard = ({ posts, type, columns }) => {
             key={slug}
             className="w-auto group flex md:flex-row justify-between gap-6 p-5 bg-white rounded-2xl border border-black border-opacity-10"
           >
-            <div className="flex justify-center sm:flex-row gap-4">
+            <div className="flex justify-center sm:flex-row">
               {coverImage ? (
                 <div
-                  className=" relative rounded-2xl overflow-hidden "
+                  className="mr-4 relative rounded-2xl overflow-hidden "
                   style={{ height: "75px", width: "75px",
                  flex: `0 0 75px`
                 }}
@@ -86,13 +86,13 @@ const ToolCard = ({ posts, type, columns }) => {
                 ></div>
               )}
 
-              <div className="flex flex-col justify-center gap-1">
-                <p className="font-semibold line-clamp-3">{title}</p>
+              <div className="flex flex-col justify-center ">
+                <p className="font-semibold line-clamp-3 mb-1">{title}</p>
                 {tags && (
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap">
                     {tags.map((x) => {
                       return (
-                        <span className="px-3 py-1 rounded-full bg-gray-100 text-xs capitalize">
+                        <span className="px-3 mr-1 py-1 rounded-full bg-gray-100 text-xs capitalize">
                           {x.attributes.name}
                         </span>
                       );
