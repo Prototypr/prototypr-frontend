@@ -37,7 +37,7 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
           </div>:''}
     <div className="flex flex-col lg:flex-row justify-between">
         <div className="w-full lg:w-1/2">
-        <div className="hidden md:inline flex relative p-2 mb-1">
+        <div className="hidden md:block flex relative p-2 mb-1">
             <h3 className="text-lg overflow-hidden line-clamp-1 font-medium font-inter">
               Top reads
             </h3>

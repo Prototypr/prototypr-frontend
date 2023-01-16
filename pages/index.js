@@ -144,16 +144,17 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        <div className="pt-[100px]">
-          {/* {(!user?.isLoggedIn)?
+        
+          {(!user?.isLoggedIn)?
           <>
           <IntroBanner
             sponsor={sponsors?.length ? sponsors[0] : null}/>
-          <SectionDivider transparentLine={true} />
+          <SectionDivider py={'py-1 sm:py-2 md:py-5'} transparentLine={true} />
           </>
-          :''} */}
+          :<div className="pt-[100px]"/>}
+        <div className="z-50 relative bg-[#EFF4FB]">
+
           <TagsNavRow/>
-        </div>
         <SectionDivider py='py-3.5' transparentLine={true} />
         <DiscoverSection
           user={user}
@@ -161,6 +162,7 @@ export default function Index({
           viewablePosts={viewablePosts}
           jobsSidebar={jobsSidebar}
         />
+        </div>
 
        
         <SectionDivider py='py-6' transparentLine={true}  />

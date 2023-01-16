@@ -57,10 +57,10 @@ const ToolCardSimple = ({ posts, type, columns }) => {
             key={slug}
             className="w-auto group h-full flex md:flex-row justify-between gap-6 p-3 bg-white rounded-2xl border border-black border-opacity-10"
           >
-            <div className="flex justify-center sm:flex-row gap-4">
+            <div className="flex justify-center sm:flex-row">
               {coverImage ? (
                 <div
-                  className=" relative rounded-2xl overflow-hidden "
+                  className="mr-3 relative rounded-2xl overflow-hidden "
                   style={{ height: "60px", width: "60px",
                  flex: `0 0 60px`
                 }}
@@ -89,10 +89,10 @@ const ToolCardSimple = ({ posts, type, columns }) => {
               <div className="flex flex-col justify-center gap-1">
                 <p className="font-semibold line-clamp-1">{title}</p>
                 {tags && (
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap">
                     {tags.slice(0,1).map((x) => {
                       return (
-                        <span className="text-xs text-gray-500 capitalize">
+                        <span className="text-xs mr-1 text-gray-500 capitalize">
                           {x.attributes.name}
                         </span>
                       );
