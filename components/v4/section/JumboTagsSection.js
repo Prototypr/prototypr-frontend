@@ -1,31 +1,61 @@
-import Container from "@/components/container"
-import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
-import JumboTags from "../card/JumboTag";
+// import Container from "@/components/container"
+// import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
+import { ArrowRight } from "phosphor-react";
+import JumboTag from "../card/JumboTag";
+import Link from "next/link";
 
 const JumboTagsSection = ({popularTags}) =>{
     return(
-        <div>
-            <div className="flex">
-                <div className="w-1/2 pr-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-1">
-                        {popularTags.slice(1,5).map((topic, i) => (
-                        <JumboTags withBackground={true} key={i} index={i} topic={topic}/>
-                        ))}
-                    </div>
-                    <div className="w-1/2">
-                        {popularTags.slice(0,1).map((topic, i) => (
-                            <div className="p-6 col-span-2 h-[200px] bg-blue-600 rounded-xl">
-                            <h1 className="text-xl">{topic?.name}</h1>
+    <div className="rounded-xl grid gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-12 grid-cols-12">
+             <div className="col-span-12 ">
+                    {/* <h2 className="text-xl mb-6 font-bold text-gray-900">
+                Browse by <span className="text-gray-500">topic</span>
+                </h2> */}
+                <div className="grid grid-cols-12 gap-12">
+                {/* <div className="col-span-6">
+                            <Link href={`/topics`}>
+                        <div className="rounded-2xl h-[210px] bg-gradient-to-r from-blue-800/90 to-blue-800/80">
+                            <div className={`flex h-full relative rounded-2xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>
+                            <img className="absolute right-0 top-0 w-2/3 h-full object-cover opacity-70" src="/static/images/topicpattern.svg"/>
+                            <div className="max-w-[264px] sm:max-w-[280px]">
+                                <h3 className="text-2xl font-medium mt-1">Browse all topics</h3>
+                                <p className="text-base text-gray-100 mt-1">See more categories, from Artificial Intelligence to Virtual Reality.</p>
                             </div>
-                        ))}
+                            </div>
+                        </div>
+                            </Link>
+                    </div> */}
+                    {popularTags.slice(0,6).map((topic, i) => (
+                    <JumboTag withBackground={true} key={i} index={i} topic={topic}/>
+                    ))}
+
+                    <div className="col-span-3">
+                            <Link href={`/topics`}>
+                        <div className="rounded-2xl h-[180px] bg-gradient-to-r from-blue-800/90 to-blue-800/80">
+                            <div className={`flex h-full relative rounded-2xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>
+                            <img className="absolute left-0 top-0 w-full h-full object-cover opacity-70" src="/static/images/topicpattern.svg"/>
+                            </div>
+                        </div>
+                            </Link>
+                            <div className="flex justify-between p-2">
+                            <div className="capitalize text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+                                All topics
+                            </div>
+                            <div className="bg-blue-500 relative flex justify-center my-auto h-6 w-6 rounded-full">
+                                <ArrowRight weight="bold" size={14} color="rgba(255,255,255,0.8)" className="my-auto"/>
+                            </div>
+                            </div>
                     </div>
+                    
+                    {/* {popularTags.slice(2,6).map((topic, i) => (
+                    <JumboTag withBackground={true} key={i} index={i} topic={topic}/>
+                    ))} */}
+                </div>
             </div>
-            <div className="w-full pr-6 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
-                        {popularTags.slice(5,8).map((topic, i) => (
-                        <JumboTags withBackground={true} key={i} index={i} topic={topic}/>
-                        ))}
-                    </div>
+           
+           
         </div>
-    )
+        )
 }
 
 export default JumboTagsSection

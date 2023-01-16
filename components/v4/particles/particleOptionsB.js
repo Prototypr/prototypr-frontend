@@ -34,23 +34,6 @@ export const particleOptions = {
             sync: true
         },
       },
-      links: {
-        enable: true,
-        distance: 57,
-        color: "#ffffff",
-        opacity: 1,
-        width: 1,
-      },
-      move: {
-        enable: true,
-        collisions: true,
-        speed: 0.5,
-        direction: "random",
-        random: false,
-        straight: true,
-        outModes: "bounce",
-        // outModes: "out",
-      },
     },
     // PARTICLES END
     interactivity: {

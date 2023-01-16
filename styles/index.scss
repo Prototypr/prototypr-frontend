@@ -457,3 +457,62 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 .scrolling-image {
   animation: slide 12s linear infinite;
 }
+
+.collab-cursor{
+  cursor:url("/static/images/arrow.svg"), auto;
+}
+
+//
+.eyes-follow-tired {
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .eyes {
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .eye {
+        border-radius: 50%;
+        height: 26px;
+        width: 26px; 
+        margin-right:3px;
+        background-color: #fff;
+
+        .pupil {
+          position: absolute;
+          background-color: #382e25;
+          border-radius: 50%;
+          width: 12px;
+          height: 12px;
+          left: 13px;
+          top: 5px;
+        }
+      }
+    }
+  }
+
+  .tiredness {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+
+    .header {
+      font-size: 23px;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    input {
+      transform: scale(1.3);
+    }
+  }
+}

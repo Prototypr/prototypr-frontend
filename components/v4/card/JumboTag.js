@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { usePlausible } from "next-plausible";
+import { ArrowRight } from "phosphor-react";
 // import Image from "next/image";
 // import gumletLoader from "@/components/new-index/gumletLoader";
 
-const JumboTags = ({ topic, withBackground, showCount }) => {
+const JumboTag = ({ topic, withBackground, showCount }) => {
 
   const plausible = usePlausible();
     
   return (
-    <div>
       <Link
         href={`/posts/${topic.slug}/page/1`}
         onClick={() => {
@@ -19,42 +19,38 @@ const JumboTags = ({ topic, withBackground, showCount }) => {
             },
           });
         }}
-        className="flex"
+        className="flex flex-col col-span-3 "
       >
-        <div className={`${withBackground?'bg-[#EAE9F5] p-4':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
-          <div className="flex flex-row rounded-xl">
-          <div
-              // style={{ flex: "0 0 3em" }}
-              className="w-12 h-12 bg-white bg-opacity-30 p-3 my-auto mr-3 relative rounded-xl overflow-hidden"
-            >
-              {topic.icon?
-              <img className="w-full h-full" src={topic.icon}/>:''}
-            </div>
-            <div className="flex flex-col pl-1 justify-center">
-              <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base">
-                {topic?.name}
-                {/* <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
-                  Promoted
-                </span> */}
-              </div>
-              {(topic?.name && showCount!==false) ? (
-                // <Link href={`/toolbox/${tags?.data[0]?.attributes?.slug}`}>
-                  <div className="flex flex-row text-sm text-gray-500">
-                    {/* <span className="text-xs mt-1 capitalize bg-gray-100 font-inter px-2 py-0.5 border border-black border-opacity-5 text-black rounded-full"> */}
-                    <span className="text-xs text-gray-500">
-                      {topic.count} articles
-                    </span>
-                    {/* </span> */}
-                  </div>
-                // </Link>
-              ) : (
-                ""
-              )}
+        <div className={`relative overflow-hidden ${withBackground?'bg-gradient-to-br from-blue-800/80 to-blue-800/90':''} w-full h-[180px] justify-center rounded-xl shadow-sm cursor-pointer flex flex-col`}>
+          <img className="absolute opacity-20 w-full h-full top-0 left-0 object-cover" 
+          src="/static/images/app-icon.svg"/>
+          <div className="flex flex-row justify-center rounded-full">
+              <div className="w-[64px] h-[64px] bg-white bg-opacity-5 backdrop-blur-sm p-3 my-auto relative rounded-full overflow-hidden">
+                {topic.icon?
+                <img className="w-full h-full opacity-90" 
+                style={{filter:'invert(100%)'}} 
+                src={topic.icon}/>:''}
             </div>
           </div>
         </div>
+          <div className="flex relative justify-between p-2">
+            <div className="capitalize text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+              {topic?.name}
+            </div>
+            <div className="bg-blue-500 flex justify-center my-auto h-6 w-6 rounded-full">
+                <ArrowRight weight="bold" size={14} color="rgba(255,255,255,0.8)" className="my-auto"/>
+            </div>
+          </div>
+              {/* {(topic?.name && showCount!==false) ? (
+                  <div className="flex flex-row text-sm text-gray-500">
+                    <span className="text-xs text-gray-500">
+                      {topic.count} articles
+                    </span>
+                  </div>
+              ) : (
+                ""
+              )} */}
       </Link>
-    </div>
   );
 };
-export default JumboTags;
+export default JumboTag;

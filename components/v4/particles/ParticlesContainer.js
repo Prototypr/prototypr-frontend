@@ -81,7 +81,7 @@ const ParticlesContainer = () => {
       width="100%"
       height="100%"
       style={{
-        zIndex:5,
+        zIndex:20,
         // padding:'100px',
         position: "absolute",
         top: "0",

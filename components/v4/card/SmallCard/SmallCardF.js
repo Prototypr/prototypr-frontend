@@ -40,7 +40,7 @@ const SmallCard = ({link, title, image, tags, date, avatar, author }) => {
           </div>
         <div>
           <Link href={link??''}>
-            <h2 className="text-xl font-semibold leading-snug line-clamp-3">
+            <h2 className="text-lg font-semibold leading-snug line-clamp-3">
               {title}
             </h2>
           </Link>

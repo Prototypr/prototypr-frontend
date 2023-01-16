@@ -1,5 +1,5 @@
 import { styled } from "@stitches/react";
-import { blackA, blue, mauve, slate, pinkDark, red, orange} from "@radix-ui/colors";
+import { blackA, blue, mauve,white, slate, pinkDark, red, orange} from "@radix-ui/colors";
 const Button = styled("button", {
   all: "unset",
   display: "inline-flex",
@@ -14,6 +14,22 @@ const Button = styled("button", {
   cursor: "pointer",
   variants: {
     variant: {
+      confirmBig:{
+        height:'auto',
+        padding:'1.25rem 2.5rem',
+        background:white,
+        "&:hover": { backgroundColor: blue.blue10 },
+        "&:focus": { boxShadow: `0 0 0 2px ${blue.blue12}` },
+        fontSize: '1rem',
+        fontWeight: 'bold',
+        lineHeight: '1.1em',
+        maxWidth: '20.4375rem',
+        "&[disabled]": {
+          // disabled styles
+          opacity: 0.5,
+          cursor: "not-allowed",
+        },
+      },
       confirm: {
         backgroundColor: blue.blue11,
         background: blue.blue11,
