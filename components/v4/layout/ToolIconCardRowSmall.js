@@ -3,13 +3,11 @@ import Link from "next/link";
 import {CaretRight} from 'phosphor-react'
 import ToolCard from "../card/ToolCard";
 
-const ToolIconCardRow = ({ tools, topic }) => {
+const ToolIconCardRow = ({ tools, topic, tagline }) => {
   return (
     <div className="w-full mb-12">
-      <div className="flex justify-between">
-        <h3 className="font-semibold text-lg mb-6 px-1">
-          {topic} <span className="">tools</span>
-        </h3>
+      {/* <div className="flex justify-between">
+        
           <Link href='/toolbox'>
             <div className="flex">
               <div className="text-sm my-auto text-black opacity-60">See all</div>
@@ -17,19 +15,33 @@ const ToolIconCardRow = ({ tools, topic }) => {
             </div>
           </Link>
 
-      </div>
+      </div> */}
       {tools?.length?
       <>
-      <ToolCard posts={tools} columns={'lg:grid-cols-2'} type="toolbox" />
-      {/* <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 px-1`}> 
-        {tools.map((tool, index) => {
+      {/* <ToolCard posts={tools} columns={'lg:grid-cols-2'} type="toolbox" /> */}
+      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-6`}> 
+      <div className="flex flex-col justify-center">
+        <div className="text-gray-500 uppercase text-xs">
+          {tagline}
+        </div>
+        <h3 className="font-medium text-base">
+        {topic} <span className="">tools</span>
+        </h3>
+        <Link href='/toolbox'>
+            <div className="flex mt-2">
+              <div className="text-sm my-auto text-black opacity-50">See all</div>
+              <CaretRight className="opacity-60 my-auto" size={16} />
+            </div>
+          </Link>
+      </div>
+        {tools?.slice(0,4).map((tool, index) => {
            return (
              <div key={index}>
-               <ToolIconCard small={true} withBackground={true} tool={tool?.attributes} />
+               <ToolIconCard small={false} withBackground={false} tool={tool?.attributes} />
              </div>
            );
          })}
-       </div> */}
+       </div>
       </>
       :''}
     </div>

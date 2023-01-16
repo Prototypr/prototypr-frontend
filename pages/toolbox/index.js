@@ -141,7 +141,7 @@ export default function ToolboxPage({
 
 export async function getStaticProps({ preview = null, params, locale }) {
   // let sort = ["featured:desc","promoted:asc", "tier:asc","date:desc"];
-  let sort = ["featured:asc", "date:desc"];
+  let sort = ["featured:desc", "date:desc"];
   if (locale === "es-ES") {
     sort = ["esES:asc", "date:desc"];
   }

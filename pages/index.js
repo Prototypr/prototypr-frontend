@@ -27,7 +27,7 @@ import { useIntl } from "react-intl";
 import { transformPostListOld } from "@/lib/locale/transformLocale";
 import { useEffect } from "react";
 
-import TopicSection from "@/components/v4/section/TopicSection";
+import TopicSectionC from "@/components/v4/section/TopicSectionC";
 // import TopicSelectSection from "@/components/v4/section/TopicSelectSection";
 
 import {Robot, Swatches, HandEye, Wheelchair, FlowArrow} from 'phosphor-react'
@@ -37,9 +37,13 @@ import useUser from "@/lib/iron-session/useUser";
 import TagsNavRow from "@/components/v4/section/TagsNavRow";
 import SponsorBannerFull from "@/components/v4/banner/SponsorBannerFull";
 // import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
-import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
+// import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 import Container from "@/components/container";
 import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
+import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
+import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
+import Link from "next/link";
+import Button from "@/components/Primitives/Button";
 
 
 const PAGE_SIZE = 12;
@@ -50,32 +54,37 @@ const TAB_ITEMS = [
     slug: "branding",
     toolSlug:'color',
     name: "topicSpotlight.tabs.branding",
-    icon:<Swatches size={ICON_SIZE} />
+    icon:<Swatches size={ICON_SIZE} />,
+    tagline:'Tell your story'
   },
   {
     slug: "design-psychology",
     toolSlug:'analytics',
     name: "topicSpotlight.tabs.psychology",
-    icon:<HandEye size={ICON_SIZE} />
+    icon:<HandEye size={ICON_SIZE} />,
+    tagline:`Analyze your user`
   },
   {
     slug: "ai",
     toolSlug:'ai',
     name: "topicSpotlight.tabs.ai",
-    icon:<Robot size={ICON_SIZE}/>
+    icon:<Robot size={ICON_SIZE}/>,
+    tagline:'The bots are here!'
   },
   {
     slug: "accessibility",
     toolSlug:'accessibility',
     name: "topicSpotlight.tabs.accessibility",
-    icon:<Wheelchair size={ICON_SIZE} />
+    icon:<Wheelchair size={ICON_SIZE} />,
+    tagline:'Design inclusively'
   },
 
   {
     slug: "product-design",
     toolSlug:'resource',
     name: "topicSpotlight.tabs.productDesign",
-    icon:<FlowArrow size={ICON_SIZE} />
+    icon:<FlowArrow weight="duotone" size={ICON_SIZE} />,
+    tagline:'Kick it off'
   },
   // {
   //   slug: "ux",
@@ -115,16 +124,17 @@ export default function Index({
   const heroJob = jobs.filter((item, i) => i === 0);
   const jobsSidebar = jobs.filter((item, i) => i !== 0);
 
-  const first3Tools = allTools.slice(0, 5);
-  const toolsList = allTools.slice(5, allTools.length);
+  const toolsList = allTools
 
   return (
     <>
       <Layout
+        navOffset={false}
         padding={false}
         preview={preview}
-        // background={"#EFF4FB"}
-        background={"#F7F7F8"}
+        background={"#EFF4FB"}
+        // background={"#f7f9fd"}
+        // background={"#F7F7F8"}
         // background={"#ffffff"}
         seo={{
           title: titleText,
@@ -137,13 +147,12 @@ export default function Index({
         {(!user?.isLoggedIn)?
         <>
         <IntroBanner
-          sponsor={sponsors?.length ? sponsors[0] : null}
-          tools={first3Tools}
-        />
+          sponsor={sponsors?.length ? sponsors[0] : null}/>
         <SectionDivider transparentLine={true} />
         </>
         :''}
         <TagsNavRow/>
+        <SectionDivider py='py-3.5' transparentLine={true} />
         <DiscoverSection
           user={user}
           heroCardPost={heroCardPost}
@@ -152,33 +161,65 @@ export default function Index({
         />
 
        
-        <SectionDivider  />
+        <SectionDivider py='py-6' transparentLine={true}  />
         <Container  maxWidth="max-w-[1320px]">
-        <TwoColumnCards posts={morePosts.slice(0,2)}/> 
+        <TwoColumnCards/> 
         </Container>
-        <SectionDivider transparentLine={true} />
-        <ToolIconCardRow tools={toolsList} />
-        <SectionDivider />
+        <SectionDivider py='py-6' transparentLine={true} />
+        <Container maxWidth="max-w-[1320px] z-30 relative">
+          <div className="p-6 md:p-10 bg-white relative overflow-hidden rounded-xl shadow-sm">
+              <ToolLargeCardRow tools={toolsList.slice(0,5)} />
+              <SectionDivider py="py-6" transparentLine={true}  />
+              <ToolIconCardRow tools={toolsList.slice(5,15)} />       
+
+              
+          <div className="flex mt-10">
+            <Link href="/toolbox">
+              <Button className="rounded-full bg-blue-600 text-white" variant="confirmBig">
+                Open toolbox
+              </Button>
+            </Link>
+          </div>     
+          </div>
+        </Container>
+        {/* <SectionDivider />
         <div className="hidden md:block">
           <SponsorBannerFull/>
           <SectionDivider />
-        </div>
-        <SectionDivider transparentLine={true} />
+        </div> */}
+        <SectionDivider py="py-6" transparentLine={true} />
+        <Container padding={false} maxWidth="relative z-0">
+        <div class="absolute bottom-0 w-full z-0">
+          <img class="w-full translate-y-[4px] z-0" src="/static/images/tilt-section2.svg"/>
+          <div class="w-full h-[100px] md:h-[100px] translate-y-[2px] bg-[#CCE6FF]">
+            </div>
+          </div>
+        </Container>
         {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
-        <Container  maxWidth="max-w-[1320px]">
-          <h2 className="text-3xl mb-6 font-bold text-gray-900">
-          Browse by <span className="text-gray-500">topic</span>
-          </h2>
-          <PopularTagsSection popularTags={popularTags}/>
+        <Container maxWidth="w-full bg-[#CCE6FF] rounded-b-[3.5rem] relative relative z-20">
+        {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[200px] left-0 w-full h-[124%] object-cover"/> */}
+        {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[150px] left-0 w-full h-[124%] object-cover"/> */}
+
+          <div className="max-w-[1320px] mx-auto px-6 rounded-b-[3.5rem] pb-28 ">
+            <div className="flex justify-start w-full">
+              <h2 className="md:text-[32px] text-left mb-10 pt-4 text-[20px] max-w-lg leading-snug md:leading-[40px] md:leading-[48px] font-semibold font-inter text-[#0F1F40] ">
+           From design to code, and everything in between 
+            </h2>
+            </div>
+            <JumboTagsSection popularTags={popularTags}/>
+            {/* <PopularTagsSection popularTags={popularTags}/> */}
+          </div>
         </Container>
          {/* <SectionDivider />
         <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/> */}
-        <SectionDivider transparentLine={true} />
-        <SectionDivider />
+        <SectionDivider py='py-6' transparentLine={true} />
+        {/* <SectionDivider /> */}
         {TAB_ITEMS?.map((topic, index) => {
           return (
             <>
-            <TopicSection
+            <TopicSectionC
+              tagline={topic.tagline}
+              showSidebar={false}
               slug={topic.slug}
               icon={topic.icon}
               title={topic.name}
@@ -186,15 +227,21 @@ export default function Index({
               OtherPostsRandomSection={topicRes[topic.slug]?.posts?.slice(1, 5)}
               heroJob={heroJob}
               sponsors={sponsors}
-              toolsList={topicRes[topic.slug]?.tools.slice(0, 8)}
+              toolsList={topicRes[topic.slug]?.tools.slice(0, 7)}
               authorsList={topicRes[topic.slug]?.authors}
             />
               {index!==TAB_ITEMS.length-1?
-                <SectionDivider />:<div className="w-full pb-16"></div>}
+                <>
+                {/* <SectionDivider /> */}
+                <div className="w-full pb-16"></div>
+                </>
+                :<div className="w-full pb-16"></div>
+                }
                {index==1?
                <div className="-mt-8">
                   <NewsletterSection/>
-                <SectionDivider />
+                {/* <SectionDivider /> */}
+                <div className="w-full pb-16"></div>
                 </div>:''
             }
             </>
@@ -221,7 +268,7 @@ export async function getStaticProps({ preview = null, locale }) {
   let randomPosts = (await getRandomPostsForHome()) || [];
   let toolCount = 20;
   let allTools =
-    (await getAllToolsForHome(preview, toolCount, 0, ["date:desc"])) || [];
+    (await getAllToolsForHome(preview, toolCount, 0, ["featured:desc","date:desc"])) || [];
 
   let jobs = (await getAllJobs(null, 5, 1)) || [];
   let sponsors = await getActiveSponsors();
@@ -256,10 +303,8 @@ export async function getStaticProps({ preview = null, locale }) {
     shuffleArray(allPosts)
   }
   allTools = transformPostListOld(allTools.data, locale);
-  shuffleArray(allTools)
-
+  // shuffleArray(allTools)
   // await generateCombinedRSS({ allPosts, allTools });
-
   // otherPosts = transformPostListOld(otherPosts.data, locale);
   return {
     props: {

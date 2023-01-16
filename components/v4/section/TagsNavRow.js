@@ -39,6 +39,14 @@ const tags = [
       name: "Web Monetization",
       link: "/posts/web-monetization/page/1",
     },
+    {
+      name: "Psychology",
+      link: "/posts/design-psychology/page/1",
+    },
+    // {
+    //   name: "Career",
+    //   link: "/posts/career/page/1",
+    // },
   ];
 
 const TagsNavRow = () => {

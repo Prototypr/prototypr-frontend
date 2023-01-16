@@ -1,12 +1,13 @@
-import PrototyprNetworkCTA2 from "@/components/Sidebar/NetworkCTA2";
+// import PrototyprNetworkCTA2 from "@/components/Sidebar/NetworkCTA2";
 import SmallCard from "../card/SmallCard/SmallCardF";
 const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
+// import SingleFancyCard from "./SingleFancyCard";
 
 const SmallPostsGroupB = ({smallPosts}) =>{
 
     return(
-        <div className="flex w-full lg:w-1/2 md:pl-6 flex-col lg:-mt-3">
-
+        <div className="flex w-full lg:w-1/2 lg:pl-6 flex-col mt-4 lg:-mt-3">
+{/* <SingleFancyCard/> */}
             {/* <PrototyprNetworkCTA2 /> */}
         {smallPosts?.length ? (
           smallPosts.map((post, index) => {

@@ -7,7 +7,7 @@ const TopicSelectSection = ({ topics }) => {
       <h2 className="text-2xl mb-6 font-bold text-gray-900">
         Browse <span className="text-gray-400">topics</span>
       </h2>
-      <div className="grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-6 px-1">
+      <div className="grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-6">
         {topics.map((topic, index) => {
           return (
             <div key={index}>

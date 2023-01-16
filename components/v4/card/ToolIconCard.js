@@ -41,8 +41,8 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
         <div className={`${withBackground?'bg-[#EAE9F5] p-2':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex flex-row rounded-xl">
             <div
-              style={{ flex: `0 0 ${small?'3em':'64px'}` }}
-              className={`${small?'h-12 w-12':'w-[64px] h-[64px]'} mr-2 relative border border-opacity-10 border-black rounded-xl overflow-hidden`}
+              style={{ flex: `0 0 ${small?'3em':'70px'}` }}
+              className={`${small?'h-12 w-12':'w-[70px] h-[70px]'} mr-2 relative border border-opacity-5 border-black rounded-xl overflow-hidden`}
             >
               {coverImage ? (
                 <Image
@@ -59,7 +59,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
               )}
             </div>
             <div className="flex flex-col pl-1 justify-center">
-              <div className=" overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-sm">
+              <div className=" overflow-hidden line-clamp-1 inline font-medium py-0 mb-0 font-inter text-base">
                 {title}
                 {/* <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                   Promoted

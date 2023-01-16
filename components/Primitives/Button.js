@@ -14,6 +14,22 @@ const Button = styled("button", {
   cursor: "pointer",
   variants: {
     variant: {
+      confirmBig:{
+        height:'auto',
+        padding:'1.2rem 2.4rem',
+        background:'#fff',
+        "&:hover": { backgroundColor: blue.blue10 },
+        "&:focus": { boxShadow: `0 0 0 2px ${blue.blue12}` },
+        fontSize: '1rem',
+        fontWeight: 'bold',
+        lineHeight: '1.1em',
+        maxWidth: '20.4375rem',
+        "&[disabled]": {
+          // disabled styles
+          opacity: 0.5,
+          cursor: "not-allowed",
+        },
+      },
       confirm: {
         backgroundColor: blue.blue11,
         background: blue.blue11,
@@ -125,7 +141,7 @@ const Button = styled("button", {
         },
       },
       blue: {
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         color: blue.blue11,
         boxShadow: `0 2px 10px ${blackA.blackA7}`,
         '&:hover': { backgroundColor: mauve.mauve3 },
