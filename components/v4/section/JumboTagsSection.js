@@ -36,15 +36,15 @@ const JumboTagsSection = ({popularTags}) =>{
                             <img className="absolute left-0 top-0 w-full h-full object-cover opacity-70" src="/static/images/topicpattern.svg"/>
                             </div>
                         </div>
+                        <div className="flex justify-between p-2">
+                        <div className="capitalize text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+                            All topics
+                        </div>
+                        <div className="bg-blue-500 relative flex justify-center my-auto h-6 w-6 rounded-full">
+                            <ArrowRight weight="bold" size={14} color="rgba(255,255,255,0.8)" className="my-auto"/>
+                        </div>
+                        </div>
                             </Link>
-                            <div className="flex justify-between p-2">
-                            <div className="capitalize text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
-                                All topics
-                            </div>
-                            <div className="bg-blue-500 relative flex justify-center my-auto h-6 w-6 rounded-full">
-                                <ArrowRight weight="bold" size={14} color="rgba(255,255,255,0.8)" className="my-auto"/>
-                            </div>
-                            </div>
                     </div>
                     
                     {/* {popularTags.slice(2,6).map((topic, i) => (

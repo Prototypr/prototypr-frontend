@@ -2,7 +2,7 @@ import Container from "@/components/container";
 // import LargePostGrid from "@/components/v4/layout/LargePostGrid";
 import LargePostGridC from "@/components/v4/layout/LargePostGridC";
 // import HeroGrid from "@/components/v4/hero/hero";
-import SidebarTopic from "@/components/v4/layout/SidebarTopic";
+// import SidebarTopic from "@/components/v4/layout/SidebarTopic";
 import { useIntl } from "react-intl";
 // import SectionDivider from "@/components/v4/section/SectionDivider";
 import SmallPostsGroup from "../layout/SmallPostsSection";
@@ -57,13 +57,13 @@ const TopicSection = ({
         {paginationComponent}
         </div>
 
-        {showSidebar!==false?<SidebarTopic
+        {/* {showSidebar!==false?<SidebarTopic
           showTopicCloud={showTopicCloud}
           topic={heading}
           paddingTop={`hidden ml-4 pl-6 md:block ${showTopicCloud?'pt-0':'pt-6'}`}
           content={toolsList}
           authorsList={authorsList}
-        />:''}
+        />:''} */}
       </div>
     </Container>
     </>

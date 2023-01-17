@@ -28,7 +28,7 @@ import { Tag } from "phosphor-react/dist";
 // const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 // const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
 
-const PAGE_SIZE = 11;
+const PAGE_SIZE = 12;
 const ALL_TAGS = [
   "ux",
   "user-research",
@@ -139,61 +139,61 @@ export default function PostsPage({
   );
 }
 
-const Sidebar = ({ relatedPosts, paddingTop, author }) => {
-  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
+// const Sidebar = ({ relatedPosts, paddingTop, author }) => {
+//   const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
 
-  const _handleWaypointEnter = () => {
-    setStickyPaddingTop("pt-0");
-  };
-  const _handleWaypointLeave = () => {
-    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
-  };
+//   const _handleWaypointEnter = () => {
+//     setStickyPaddingTop("pt-0");
+//   };
+//   const _handleWaypointLeave = () => {
+//     setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
+//   };
 
-  return (
-    <div
-      className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
-    >
-      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
-      <div
-        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
-      >
-        <aside className="h-screen px-10 sticky top-0 py-0">
-          <div className="flex flex-col grid gap-6">
-            <PrototyprNetworkCTA />
-            <div>
-              {/* EMAIL FORM */}
-              <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                  Get the roundup
-                </h3>
-                <p className="text-base text-gray-500 mb-6">
-                  Get a curated selection of the best articles and topics from
-                  Prototypr in your inbox.
-                </p>
-                <SignupSidebar />
-              </div>
+//   return (
+//     <div
+//       className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
+//     >
+//       <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
+//       <div
+//         className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
+//       >
+//         <aside className="h-screen px-10 sticky top-0 py-0">
+//           <div className="flex flex-col grid gap-6">
+//             <PrototyprNetworkCTA />
+//             <div>
+//               {/* EMAIL FORM */}
+//               <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
+//                 <h3 className="text-xl font-semibold mb-2 text-gray-900">
+//                   Get the roundup
+//                 </h3>
+//                 <p className="text-base text-gray-500 mb-6">
+//                   Get a curated selection of the best articles and topics from
+//                   Prototypr in your inbox.
+//                 </p>
+//                 <SignupSidebar />
+//               </div>
 
-              <div className="mt-6">
-                <SponsorSidebarCard />
-              </div>
-            </div>
+//               <div className="mt-6">
+//                 <SponsorSidebarCard />
+//               </div>
+//             </div>
 
-            {/* <div className="w-full flex flex-col grid gap-2">
+//             {/* <div className="w-full flex flex-col grid gap-2">
 
-            {relatedPosts?.data?.length > 0 &&
-              relatedPosts.data.map((item, index) => {
-                return (
-                  <ProductItem key={`product_item_${index}`} post={item} />
-                  // <TopicTopItem key={index} topic={item}/>
-                );
-              })}
-            </div> */}
-          </div>
-        </aside>
-      </div>
-    </div>
-  );
-};
+//             {relatedPosts?.data?.length > 0 &&
+//               relatedPosts.data.map((item, index) => {
+//                 return (
+//                   <ProductItem key={`product_item_${index}`} post={item} />
+//                   // <TopicTopItem key={index} topic={item}/>
+//                 );
+//               })}
+//             </div> */}
+//           </div>
+//         </aside>
+//       </div>
+//     </div>
+//   );
+// };
 
 export async function getStaticProps({ preview = null, params, locale }) {
   let sort = ["featured:desc", "tier:asc", "date:desc"];
