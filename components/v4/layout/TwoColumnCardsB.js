@@ -15,9 +15,11 @@ description:'Cutting edge design tools and technology, curated every week.'}]
 
 const TwoColumnCards = ({posts}) =>{
 
+  let data = posts?posts:dummyData
+
     return(
         <div className="flex flex-col grid gap-4 md:gap-8 xl:gap-12 grid-cols-12">
-             {dummyData.map((post, i) =>{ 
+             {data.map((post, i) =>{ 
 
             return (
                   <a target="_blank" className="col-span-12 md:col-span-6"

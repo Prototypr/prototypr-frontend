@@ -27,7 +27,7 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
           <img className="absolute opacity-20 w-full h-full top-0 left-0 object-cover" 
           src="/static/images/app-icon.svg"/>
           <div className="flex flex-row justify-center rounded-full">
-              <div className="w-[64px] h-[64px] bg-black bg-opacity-5 backdrop-blur-sm p-3 my-auto relative rounded-full overflow-hidden">
+              <div className="w-[64px] h-[64px] bg-white bg-opacity-5 backdrop-blur-sm p-3 my-auto relative rounded-full overflow-hidden">
                 {topic.icon?
                 <img className="w-full h-full opacity-90" 
                 style={{filter:'invert(100%)'}} 

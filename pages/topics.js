@@ -9,12 +9,51 @@ import { getPopularTopics } from "@/lib/api";
 import { Tag } from "phosphor-react";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import Footer from "@/components/footer";
-import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
-import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
-import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
+// import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
+// import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
+// import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
 import JumboTagB from "@/components/v4/card/JumboTagB";
+// import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
 // import CategoriesIconCardLarge from "@/components/v4/card/CategoriesIconCardLarge";
 
+
+const featuredSections = [
+  {
+    image:'/static/images/localization.webp',
+    slug:'/posts/localization/page/1',
+    class:'bg-[#017169]',
+    title:'Localization',
+    description:'Designing and building for different cultures and backgrounds.'
+    },
+  {
+    image:'/static/images/wmpink.png',
+    slug:'/posts/web-monetization/page/1',
+    class:'bg-[#E281E4]',
+    title:'Web Monetization',
+    description:'A new way to send money on the web with micropayments.'
+    },
+//   {
+//     tagline:'Inclusivity',
+//     title:'Localization',
+//     description:'Designing and building for different cultures.',
+//     image:'/static/images/localization.webp',
+//     slug:'localization'
+//   },
+// {
+//   tagline:'Funding an Open Web',
+//   title:'Web Monetization',
+//   description:'A new way to earn money on the web.',
+//   image:'/static/images/web-mon.webp',
+//   slug:'web-monetization'
+// },
+// {
+//   tagline:'Community',
+//   title:'Open Source',
+//   description:'Stories on building a better, more inclusive web.',
+//   image:'/static/images/proto_neurodiversity.webp',
+//   slug:'open-source'
+// },
+]
 
 export default function Index({ popularTags,popularToolTags, morePopularTags }) {
   const intl = useIntl();
@@ -47,9 +86,13 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
         {/* <Head>
         <title>{intl.formatMessage({ id: "topics.header" })}.</title>
       </Head> */}
-      <Container maxWidth="max-w-[1320px]">
-        <div className="mt-2 rounded-xl">
-          <h2 className="text-lg mb-3 font-semibold">Most popular</h2>
+        {/* <TopicSpotlightSection 
+      tagline="Open Web"
+      headingSize={'text-2xl mb-4'}/> */}
+
+<Container maxWidth="max-w-[1320px]">
+        <div className="mt-2 rounded-xl bg-white p-10">
+          <h2 className="text-lg mb-6 font-semibold">Most popular</h2>
           {/* <PopularTagsSection popularTags={popularTags}/> */}
             {/* <JumboTagsSection popularTags={popularTags}/> */}
             <div className="grid grid-cols-10 xs:gap-4 md:gap-6 lg:gap-6">
@@ -59,11 +102,30 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
               </div>
         </div>
       </Container>
+      <SectionDivider transparentLine={true}/>
 
-        <SectionDivider transparentLine={true}/>
-      <TopicSpotlightSection 
-      tagline="Open Web"
-      headingSize={'text-lg mb-4'}/>
+      <Container maxWidth="max-w-[1320px]">
+      {/* <h2 className={`text-xl mb-6 font-medium`}>
+        Featured Topics
+      </h2> */}
+      <div className="flex flex-col grid gap-4 md:gap-8 xl:gap-12 grid-cols-12">
+             {featuredSections.map((post, i) =>{ 
+            return (
+                  <a target="_blank" className="col-span-12 md:col-span-6"
+                  href={`${post.slug}`}>
+                  <div className={`flex h-[220px] ${post.class} relative shadow-sm rounded-xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>
+                    <img src={post.image} className="w-2/3 h-auto absolute right-0 -mr-20"/>
+                    <div className="max-w-[200px] z-10 sm:max-w-[280px]">
+                      <h3 className="text-2xl text-white font-medium">{post.title}</h3>
+                      <p className="text-base text-gray-50 mt-1">{post.description}</p>
+                    </div>
+                  </div>
+                  </a>
+                )})}
+        </div>
+        </Container>
+      <SectionDivider transparentLine={true}/>
+
 
         {/* <SectionDivider/>
        <Container maxWidth="max-w-[1320px] mt-4" >
@@ -74,7 +136,6 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
                   ))}
               </div>
         </Container> */}
-        <SectionDivider/>
         <Container maxWidth="max-w-[1320px] pb-24 mt-1" >
           <div className="rounded-xl p-6 md:p-10 shadow bg-white">
           <h2 className="text-lg font-semibold">The A-Z</h2>
