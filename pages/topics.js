@@ -13,6 +13,7 @@ import Footer from "@/components/footer";
 // import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 // import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
 import JumboTagB from "@/components/v4/card/JumboTagB";
+import Link from "next/link";
 // import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
 // import CategoriesIconCardLarge from "@/components/v4/card/CategoriesIconCardLarge";
 
@@ -91,7 +92,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
       headingSize={'text-2xl mb-4'}/> */}
 
 <Container maxWidth="max-w-[1320px]">
-        <div className="mt-2 rounded-xl bg-white p-10">
+        <div className="mt-2 rounded-xl bg-white shadow-sm p-6 md:p-10">
           <h2 className="text-lg mb-6 font-semibold">Most popular</h2>
           {/* <PopularTagsSection popularTags={popularTags}/> */}
             {/* <JumboTagsSection popularTags={popularTags}/> */}
@@ -111,7 +112,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
       <div className="flex flex-col grid gap-4 md:gap-8 xl:gap-12 grid-cols-12">
              {featuredSections.map((post, i) =>{ 
             return (
-                  <a target="_blank" className="col-span-12 lg:col-span-6"
+                  <Link className="col-span-12 lg:col-span-6"
                   href={`${post.slug}`}>
                   <div className={`flex h-[220px] ${post.class} relative shadow-sm rounded-xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>
                     <img src={post.image} className="w-2/3 h-auto absolute right-0 -mr-20"/>
@@ -120,7 +121,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
                       <p className="text-base text-gray-50 mt-1">{post.description}</p>
                     </div>
                   </div>
-                  </a>
+                  </Link>
                 )})}
         </div>
         </Container>
