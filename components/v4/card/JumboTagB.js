@@ -9,7 +9,7 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
   const plausible = usePlausible();
     
   return (
-    <div className={`mt-4 md:mt-0 col-span-12 xs:col-span-6 md:col-span-4 lg:col-span-3`}>
+    <div className={`mt-4 md:mt-0 col-span-12 xs:col-span-6 md:col-span-4 lg:col-span-2`}>
       
       <Link
         href={`/posts/${topic.slug}/page/1`}
@@ -23,7 +23,7 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
         }}
         className="flex flex-col"
       >
-        <div className={`relative overflow-hidden ${withBackground?'bg-gradient-to-br from-blue-800/80 to-blue-800/90':''} w-full h-[180px] justify-center rounded-xl shadow-sm cursor-pointer flex flex-col`}>
+        <div className={`relative overflow-hidden ${withBackground?'bg-gradient-to-br from-blue-800/80 to-blue-800/90':''} w-full h-[180px] justify-center rounded-xl overflow-hidden shadow-sm cursor-pointer flex flex-col`}>
           <img className="absolute opacity-20 w-full h-full top-0 left-0 object-cover" 
           src="/static/images/app-icon.svg"/>
           <div className="flex flex-row justify-center rounded-full">
@@ -34,15 +34,17 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
                 src={topic.icon}/>:''}
             </div>
           </div>
-        </div>
-          <div className="flex relative justify-between p-2">
-            <div className="capitalize text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+          <div className="flex absolute bottom-0 w-full left-0 bg-black/10 justify-between p-2">
+            <div className="w-[97%] mx-1 h-[80%] bg-red-black/20 absolute left-0 top-0 backdrop-blur-sm"/>
+            <div className="capitalize z-10 text-base text-white overflow-hidden line-clamp-1 inline font-medium font-inter">
               {topic?.name}
             </div>
-            <div className="bg-blue-500 flex justify-center my-auto h-6 w-6 rounded-full">
+            <div className="bg-blue-500 z-10 flex justify-center my-auto h-6 w-6 rounded-full">
                 <ArrowRight weight="bold" size={14} color="rgba(255,255,255,0.8)" className="my-auto"/>
             </div>
           </div>
+        </div>
+          
               {/* {(topic?.name && showCount!==false) ? (
                   <div className="flex flex-row text-sm text-gray-500">
                     <span className="text-xs text-gray-500">

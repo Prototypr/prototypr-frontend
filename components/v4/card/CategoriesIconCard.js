@@ -21,11 +21,11 @@ const CategoriesIconCard = ({ topic, withBackground, showCount }) => {
         }}
         className="flex"
       >
-        <div className={`${withBackground?'bg-[#EAE9F5] p-4':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
+        <div className={`${withBackground?'bg-white border border-black rounded-xl border-opacity-10 p-5':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex flex-row rounded-xl">
           <div
               // style={{ flex: "0 0 3em" }}
-              className="w-12 h-12 bg-white bg-opacity-30 p-3 my-auto mr-3 relative rounded-xl overflow-hidden"
+              className="w-12 h-12 bg-gray-100 p-3 my-auto mr-3 relative rounded-xl overflow-hidden"
             >
               {topic.icon?
               <img className="w-full h-full" src={topic.icon}/>:''}
