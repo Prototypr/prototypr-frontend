@@ -6,6 +6,7 @@ const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 import Footer from "@/components/footer";
+import LargePostGridB from "@/components/v4/layout/LargePostGridB";
 
 import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
@@ -20,7 +21,7 @@ import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 import TopicSection from "@/components/v4/section/TopicSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 import { Tag } from "phosphor-react/dist";
-import SmallPostsGroup from "@/components/v4/layout/SmallPostsSection";
+// import SmallPostsGroup from "@/components/v4/layout/SmallPostsSection";
 // import Image from "next/image";
 // const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
 // const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
@@ -68,6 +69,7 @@ export default function PostsPage({
   return (
     <>
       <Layout
+        navOffset={false}
           // maxWidth={'max-w-[1320px] search-wide'}
         seo={{
           title: `${tagName} | design articles on Prototypr | Page ${pagination?.page}`,
@@ -81,16 +83,19 @@ export default function PostsPage({
         preview={preview}
       >
       <div className="mb-8 top-0 w-full">
-        <Container maxWidth="max-w-[1320px]" >
-          <div className="bg-gray-500 relative bg-opacity-5 overflow-hidden p-6 border-gray-200 rounded-2xl">
+        <Container padding={false} maxWidth="w-full" >
+          <div className="pt-[120px] pb-[120px] bg-[#CCE6FF]/90 relative overflow-hidden p-6 border-gray-200">
+            
+            <img src="/static/images/angleshape.svg" className="absolute -mb-[2%] w-full bottom-0 z-40 left-0"/>
+
             {/* <div className="z-20 relative"> */}
-            <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
-              <BreadCrumbs tagName={tagName}/>
+            <div className="w-full max-w-[1320px] px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
+              <BreadCrumbs background={false}tagName={tagName}/>
                 <div className="inline-flex my-4">
                   {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
-                    <Tag className="my-auto mx-auto mr-2.5 my-auto" size={24}/>
+                    <Tag className="mt-6 mx-auto mr-3 my-auto opacity-60" size={38}/>
                   {/* </div> */}
-                  <h2 className="text-5xl my-auto font-bold text-gray-900 capitalize">{tagName}</h2>
+                  <h2 className="text-[#0F1F40] max-w-md mb-8 mt-3 md:max-w-lg font-semibold text-5xl md:text-[56px] font-inter leading-[50px] md:leading-[60px] capitalize">{tagName}</h2>
                 </div>
               </div>
           </div>
@@ -98,17 +103,19 @@ export default function PostsPage({
       </div>
       {/* <div className="h-[232px]"/> */}
         {allPosts?.length?
-        <div className="pb-10">
+        <div className="pb-10 -mt-32 z-50 relative">
             <TopicSection
                   showTitle={false}
+                  showSidebar={false}
                   showTopicCloud={true}
                   icon={null}
                   title={tagName}
                   authorsList={authors}
                   HeroPostRandomSection={allPosts[0]}
-                  OtherPostsRandomSection={allPosts?.slice(1, 5)}
+                  currentPage={pagination?.page}
+                  OtherPostsRandomSection={allPosts?.slice(0, 6)}
                   // show more posts underneath the tools section if there's enough to show
-                  extendedPosts={allPosts?.length>5?allPosts.slice(5,allPosts.length):false}
+                  extendedPosts={allPosts?.length>5?allPosts.slice(6,allPosts.length):false}
                   paginationComponent={ <NewPagination
                     total={pagination?.total}
                     pageSize={PAGE_SIZE}

@@ -1,20 +1,23 @@
 import Container from "@/components/container";
 import LargePostGrid from "@/components/v4/layout/LargePostGrid";
 // import HeroGrid from "@/components/v4/hero/hero";
-import SidebarTopic from "@/components/v4/layout/SidebarTopic";
+// import SidebarTopic from "@/components/v4/layout/SidebarTopic";
 import { useIntl } from "react-intl";
 // import SectionDivider from "@/components/v4/section/SectionDivider";
-import ToolIconCardRowSmall from "@/components/v4/layout/ToolIconCardRowSmall";
+import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
 import Divider from "../layout/Divider";
 import { CaretRight, Tag } from "phosphor-react/dist";
 import SmallPostsGroup from "../layout/SmallPostsSection";
 import Link from "next/link";
+import LargePostGridD from "@/components/v4/layout/LargePostGridD";
+import SectionDivider from "./SectionDivider";
 
 const TopicSection = ({
   HeroPostRandomSection,
   OtherPostsRandomSection,
   extendedPosts,
   showTitle,
+  currentPage,
   showTopicCloud,
   showSidebar,
   slug,
@@ -32,7 +35,7 @@ const TopicSection = ({
 
   return (
     <>
-    <Container maxWidth="max-w-[1320px]">
+    <Container padding={false} maxWidth="mx-auto max-w-[1320px]">
       {/* <Intro /> */}
       <div className="w-full h-full grid grid-cols-12 flex justify-center">
         <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 ${showSidebar==false?'':'lg:col-span-9'}`}>
@@ -55,14 +58,33 @@ const TopicSection = ({
           </Link>
             </div>
           </div>:''}
-          <LargePostGrid
+          <Container padding={false} maxWidth="max-w-[1320px]">
+      <div className="w-full h-full grid grid-cols-12 flex justify-center">
+        <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 ${showTitle?'py-3':''} `}>
+          <LargePostGridD
+            title={false}
+            showHeading={showTitle}
+            largePost={HeroPostRandomSection}
+            smallPosts={OtherPostsRandomSection} />
+        </div>
+        {/* <SidebarDiscover
+          paddingTop="hidden ml-4 pl-6 lg:block pt-12"
+          content={jobsSidebar}
+        /> */}
+      </div>
+    </Container>
+          {/* <LargePostGrid
             largePost={HeroPostRandomSection}
             smallPosts={OtherPostsRandomSection}
-          />
+          /> */}
         {toolsList?.length>3 ?
         <>
-        <Divider/>
-        <ToolIconCardRowSmall topic={heading} tools={toolsList} />
+        <SectionDivider transparentLine={true}/>
+        <Container maxWidth="max-w-[1320px] w-full z-30 relative">
+          <div className="">
+            <ToolIconCardRow title={'Related tools'} topic={heading} tools={toolsList} />
+          </div>
+        </Container>
         </>:''
       }
         {extendedPosts?
@@ -78,13 +100,13 @@ const TopicSection = ({
         {paginationComponent}
         </div>
 
-        {showSidebar!==false?<SidebarTopic
+        {/* {showSidebar!==false?<SidebarTopic
           showTopicCloud={showTopicCloud}
           topic={heading}
           paddingTop={`hidden ml-4 pl-6 md:block ${showTopicCloud?'pt-0':'pt-6'}`}
           content={toolsList}
           authorsList={authorsList}
-        />:''}
+        />:''} */}
       </div>
     </Container>
     </>

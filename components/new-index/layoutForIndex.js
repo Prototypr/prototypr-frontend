@@ -42,7 +42,7 @@ export default function Layout({
         className={`min-h-screen overflow-hidden ${navOffset==false?'':NAV_OFFSET} ${
           padding == false ? "" : "px-3 md:px-8"
         }`}
-        style={{ background: background ? background : "#F3F4F6" }}
+        style={{ background: background ? background : "#EFF4FB" }}
       >
         <main
           className="mx-auto "

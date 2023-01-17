@@ -54,7 +54,7 @@ const Navbar = ({
 
   return (
     <>
-      <nav id="main-nav" className={`font-inter fixed top-3.5 w-full z-50`}>
+      <nav id="main-nav" className={`font-inter fixed top-3.5 w-full`} style={{zIndex:99}}>
         <div
           className={`w-[97%] search-wide ${
             maxWidth ? maxWidth : "max-w-[1020px]"
