@@ -58,7 +58,7 @@ const TopicSection = ({
           </Link>
             </div>
           </div>:''}
-          <Container maxWidth="mx-auto relative z-20 max-w-[1320px]">
+          <Container padding={false} maxWidth="px-3 md:px-8 xl:px-3 mx-auto relative z-20 max-w-[1320px]">
       <div className="w-full h-full grid grid-cols-12 flex justify-center">
         <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 ${showTitle?'py-3':''} `}>
           <LargePostGridD

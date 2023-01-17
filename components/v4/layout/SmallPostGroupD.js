@@ -18,7 +18,7 @@ const SmallPostsGroupB = ({smallPosts}) =>{
               let authorData = post.attributes?.author?.data?.attributes
               let avatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
             return (
-              <div key={index} className={`col-span-6`}>
+              <div key={index} className={`col-span-12 lg:col-span-6`}>
                 <SmallCard
                   link={`/post/${post?.attributes?.slug}`}
                   avatar={avatar}
