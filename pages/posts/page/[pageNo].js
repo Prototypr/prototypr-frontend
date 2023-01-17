@@ -10,7 +10,7 @@ import { useIntl } from 'react-intl';
 import PostTitle from '@/components/post-title'
 
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
-import Head from 'next/head'
+// import Head from 'next/head'
 const PAGE_SIZE = 12;
 export default function PostsPage({allPosts = [], preview, pagination = {}}) {
     let heroPost;

@@ -38,7 +38,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
         }}
         className="flex"
       >
-        <div className={`${withBackground?'bg-[#EAE9F5] p-2':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
+        <div className={`${withBackground?' border border-black bg-white border-opacity-10 hover:bg-white p-4':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex flex-row rounded-xl">
             <div
               style={{ flex: `0 0 ${small?'3em':'70px'}` }}

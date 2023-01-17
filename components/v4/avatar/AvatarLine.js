@@ -7,7 +7,7 @@ const AvatarLine = ({ size, author, src, date }) => {
   let titleClass = "text-xs";
   let dateClass = "text-xs";
   if (size == "lg") {
-    avatarSize = "h-[22px] w-[22px] rounded-full";
+    avatarSize = "h-[28px] w-[28px] rounded-full";
   }
   if (size == "sm") {
     avatarSize = "h-[22px] w-[22px] rounded-full";
