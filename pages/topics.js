@@ -111,7 +111,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
       <div className="flex flex-col grid gap-4 md:gap-8 xl:gap-12 grid-cols-12">
              {featuredSections.map((post, i) =>{ 
             return (
-                  <a target="_blank" className="col-span-12 md:col-span-6"
+                  <a target="_blank" className="col-span-12 lg:col-span-6"
                   href={`${post.slug}`}>
                   <div className={`flex h-[220px] ${post.class} relative shadow-sm rounded-xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>
                     <img src={post.image} className="w-2/3 h-auto absolute right-0 -mr-20"/>
