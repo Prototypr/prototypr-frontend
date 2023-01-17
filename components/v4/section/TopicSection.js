@@ -81,17 +81,17 @@ const TopicSection = ({
         <>
         <SectionDivider transparentLine={true}/>
 
-        <Container padding={false} maxWidth="relative z-0">
+        {/* <Container padding={false} maxWidth="relative z-0">
         <div class="absolute bottom-0 w-full z-0">
           <img class="w-full translate-y-[4px] z-0 opacity-40" style={{marginBottom:'2px'}} src="/static/images/tilt-section2.svg"/>
           <div class="w-full h-[40px] translate-y-[2px] bg-[#CCE6FF]/40">
             </div>
           </div>
-        </Container>
+        </Container> */}
 
         <div style={{marginTop:'-6px'}}>
-          <Container padding={false} maxWidth="mb-3 pt-2 bg-[#CCE6FF]/40 pb-16 rounded-b-[2rem] w-full relative">
-            <div className="max-w-[1320px] px-3 mx-auto">
+          <Container padding={false} maxWidth="mb-3 max-w-[1320px] mx-auto bg-[#CCE6FF]/40 p-10 rounded-2xl w-full relative">
+            <div className="">
               <div className="flex justify-between">
                 <h3 className="font-medium text-2xl mb-8">
                 Related Tools
