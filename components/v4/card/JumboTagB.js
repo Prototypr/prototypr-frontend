@@ -9,7 +9,7 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
   const plausible = usePlausible();
     
   return (
-    <div className={`mt-4 md:mt-0 col-span-12 xs:col-span-6 md:col-span-4 lg:col-span-2`}>
+    <div className={`mt-4 md:mt-0 col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4 xl:col-span-2`}>
       
       <Link
         href={`/posts/${topic.slug}/page/1`}

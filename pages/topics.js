@@ -95,7 +95,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
           <h2 className="text-lg mb-6 font-semibold">Most popular</h2>
           {/* <PopularTagsSection popularTags={popularTags}/> */}
             {/* <JumboTagsSection popularTags={popularTags}/> */}
-            <div className="grid grid-cols-10 xs:gap-4 md:gap-6 lg:gap-6">
+            <div className="grid grid-cols-12 xl:grid-cols-10 xs:gap-4 md:gap-6 lg:gap-6">
             {popularTags.slice(0,5).map((topic, i) => (
                     <JumboTagB withBackground={true} key={i} index={i} topic={topic}/>
                     ))}
