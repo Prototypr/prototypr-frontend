@@ -133,16 +133,16 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
             title="Featured tools"
             subheader="Discover handpicked weekly tools."
           /> */}
-          <div className="max-w-[1320px] pt-12 mx-auto flex flex-col md:flex-row justify-between">
-            <div className="px-1 w-full md:w-1/2 flex flex-col justify-center mb-8 md:mb-0 pr-0 md:pr-10">
+          <div className="max-w-[1320px] pt-12 mx-auto flex flex-col lg:flex-row justify-between">
+            <div className="md:px-1 w-full lg:w-1/2 flex flex-col justify-center mb-8 pr-0 lg:pr-10">
                 <h3 className="font-bold mb-1 text-[24px] md:text-[36px]">
                   New in the Toolbox
                 </h3>
-                <p className="text-[#757575] text-[16px] md:text-[21px] w-full  sm:max-w-full md:max-w-[420px]">
+                <p className="text-[#757575] text-[16px] md:text-[21px] max-w-[480px] pr-6 md:pr-0 md:max-w-[420px]">
                  The best tools for designers, developers, and product makers, hand picked weekly by a small team of humans.
                 </p>
             </div>
-            <div className="w-full md:w-1/2">
+            <div className="w-full lg:w-1/2">
 
             {allPosts.length > 0 && (
             <>
@@ -150,7 +150,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
                     posts={allPosts.slice(0, 6)}
                     tagNumber={1}
                     type="toolbox"
-                    columns={"xl:grid-cols-2"}
+                    columns={"md:grid-cols-2"}
                   />
             </>
           )}

@@ -109,7 +109,7 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
                 {/* <p className="text-[#989898]">Pro Editing for everyone</p> */}
               </div>
             </div>
-            <div className="hidden md:flex flex-col justify-center">
+            <div className="flex md:flex lg:hidden xl:flex flex-col justify-center">
                 <button className="px-4 py-1 text-sm bg-transparent border  border-blue-600 group-hover:bg-blue-700 hover:bg-blue-700 group-hover:text-white hover:text-white text-blue-600 rounded-full">
                   Get
                 </button>
