@@ -35,7 +35,7 @@ const ToolboxIndexPage = ({
   const router = useRouter();
 
   const onPageNumChange = (pageNo) => {
-    router.push(`/${urlRoot}/page/${pageNo}`);
+    router.push(`/${paginationRoot}/page/${pageNo}`);
   };
 
   return (

@@ -25,7 +25,7 @@ export default function FilterCategory({
                     className="cursor-pointer text-md"
                     key={`toolbox_cat_${sIndex}`}
                   >
-                    <Link href={`${paginationRoot}/${sItem.key}/page/1`}>
+                    <Link href={`${urlRoot}/${sItem.key}/page/1`}>
                       <div
                         className={`hover:text-blue-500 py-1.5 rounded ${
                           sItem.key == slug

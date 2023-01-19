@@ -27,7 +27,7 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
             ? post.legacyFeaturedImage
             : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
             
-            coverImage = (post?.legacyMedia?.logoNew || coverImage?.logoNew || post.legacyMedia?.mediaItemUrl)
+            coverImage = (post?.legacyMedia?.logoNew || coverImage?.logoNew || post.legacyMedia?.mediaItemUrl ||post.attributes?.legacyFeaturedImage?.mediaItemUrl)
             
         } else {
           title = post?.attributes?.title;
@@ -54,7 +54,7 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
             : post.attributes?.legacyFeaturedImage
             ? post.attributes?.legacyFeaturedImage
             : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-            coverImage = (post?.attributes?.legacyMedia?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl)
+            coverImage = (post?.attributes?.legacyMedia?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl ||post.attributes?.legacyFeaturedImage?.mediaItemUrl)
 
           }
 

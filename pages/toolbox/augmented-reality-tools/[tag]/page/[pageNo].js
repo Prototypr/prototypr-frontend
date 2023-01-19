@@ -35,7 +35,7 @@ export default function ToolboxPage({title,allPosts = [], preview, pagination,ta
       }}
         activeNav={'toolbox'} preview={preview}>
            <ToolboxIndexPage 
-           paginationRoot={`/toolbox/augmented-reality-tools`}
+           paginationRoot={`/toolbox/augmented-reality-tools/${tag}`}
         filterCategories={ALL_SLUGS_CATEGORY}
         urlRoot={`/toolbox/augmented-reality-tools`}
         title={title}

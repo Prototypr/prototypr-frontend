@@ -71,7 +71,7 @@ export default function ToolboxPage({
       preview={preview}
     >
       <ToolboxIndexPage
-        paginationRoot={`/toolbox`}
+        paginationRoot={`/toolbox/${tag}`}
         filterCategories={ALL_SLUGS_GROUPS}
         urlRoot={`/toolbox`}
         title={title}
