@@ -6,25 +6,29 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const ToolsLayout = ({ posts, type, columns }) => {
   return (
-    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} py-6 gap-6 w-full flex-wrap`}>
+    <div
+      className={`grid grid-cols-1 ${
+        columns ? columns : "lg:grid-cols-3"
+      } py-6 gap-6 w-full flex-wrap`}
+    >
       {posts.map((post, i) => {
         let title, slug, coverImage, tags;
-
 
         if (type === "toolboxContentPage") {
           title = post.title;
           slug = post.slug;
           tags = post.tags.data.slice(0, 2);
 
-          coverImage =   
-          post.featuredImage?.data?.attributes?.url
+          coverImage = post.featuredImage?.data?.attributes?.url
             ? post.featuredImage.data.attributes.url
             : post.legacyFeaturedImage
             ? post.legacyFeaturedImage
             : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-            
-            coverImage = (post?.legacyMedia?.logoNew || coverImage?.logoNew || post.legacyMedia?.mediaItemUrl)
-            
+
+          coverImage =
+            post?.legacyMedia?.logoNew ||
+            coverImage?.logoNew ||
+            post.legacyMedia?.mediaItemUrl;
         } else {
           title = post?.attributes?.title;
           slug = post.attributes?.slug;
@@ -34,9 +38,11 @@ const ToolsLayout = ({ posts, type, columns }) => {
             : post.attributes?.legacyFeaturedImage
             ? post.attributes?.legacyFeaturedImage
             : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-            coverImage = (post?.attributes?.legacyMedia?.logoNew || coverImage?.logoNew || post.legacyMedia?.mediaItemUrl)
-
-          }
+          coverImage =
+            post?.attributes?.legacyMedia?.logoNew ||
+            coverImage?.logoNew ||
+            post.legacyMedia?.mediaItemUrl;
+        }
 
         return (
           <div
@@ -82,7 +88,6 @@ const ToolsLayout = ({ posts, type, columns }) => {
                     })}
                   </div>
                 )}
-                {/* <p className="text-[#989898]">Pro Editing for everyone</p> */}
               </div>
             </div>
             <div>
@@ -99,4 +104,4 @@ const ToolsLayout = ({ posts, type, columns }) => {
   );
 };
 
-export default ToolsLayout
+export default ToolsLayout;

@@ -91,13 +91,17 @@ const Navbar = ({
                       alt="Prototypr Logo"
                     />
                     <img
-                    className="hidden h-8 w-auto xl:block"
-                    src={`/static/images/logo.svg`}
-                    alt="Prototypr Logo"
-                  />
+                      className="hidden h-8 w-auto xl:block"
+                      src={`/static/images/logo.svg`}
+                      alt="Prototypr Logo"
+                    />
                   </>
                 </Link>
-                {!user?.isLoggedIn?<NavSponsor/>:<div className="mx-1.5"/>}
+                {!user?.isLoggedIn ? (
+                  <NavSponsor />
+                ) : (
+                  <div className="mx-1.5" />
+                )}
                 {/* <div
                   className={`hidden md:block my-auto duration-300 ease-in-out`}
                 >
@@ -137,23 +141,23 @@ const Navbar = ({
               <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />
               </div>
-                {/* <div className={`hidden mr-2 md:block my-auto`}>
+              {/* <div className={`hidden mr-2 md:block my-auto`}>
                   <WMButton />
                 </div> */}
-                <NavigationMenu>
-                  <NavigationMenuList>
-                    <LocationMenu
-                      user={user}
-                      hideLocaleSwitcher={hideLocaleSwitcher}
-                      collapsed={collapsed}
-                      showWriteButton={showWriteButton}
-                    />
-                  </NavigationMenuList>
-                </NavigationMenu>
-                <div className="relative">
-                  <UserMenu userLoading={isLoading} user={user} />
-                </div>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <LocationMenu
+                    user={user}
+                    hideLocaleSwitcher={hideLocaleSwitcher}
+                    collapsed={collapsed}
+                    showWriteButton={showWriteButton}
+                  />
+                </NavigationMenuList>
+              </NavigationMenu>
+              <div className="relative">
+                <UserMenu userLoading={isLoading} user={user} />
               </div>
+            </div>
           </div>
         </div>
 
@@ -168,9 +172,7 @@ const Navbar = ({
         >
           <div className="space-y-1 px-2 pt-2 pb-3">
             <MobileActiveLink href={"/"}>Home</MobileActiveLink>
-            <MobileActiveLink href={"/toolbox"}>
-              Toolbox
-            </MobileActiveLink>
+            <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
             <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>
             <MobileActiveLink href={"/web-monetization"}>
               Web Monetization

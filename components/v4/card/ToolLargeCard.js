@@ -6,7 +6,7 @@ const {
   default: gumletLoader,
 } = require("@/components/new-index/gumletLoader");
 
-const ToolIconCard = ({ tool, withBackground, small }) => {
+const ToolIconCard = ({ tool, withBackground, small, cardHeight, logoHeight }) => {
   const { slug, title, tags } = tool;
 
   const plausible = usePlausible();
@@ -44,8 +44,8 @@ const coverImage = tool.legacyFeaturedImage?.mediaItemUrl
         <div className={`${withBackground?'bg-[#EAE9F5] p-2':''} mt-3 md:mt-0 w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex">
             <div className="flex flex-col w-full">
-                <div className="overflow-hidden rounded-xl border border-black border-opacity-5 mb-2">
-                    <div className="w-full relative h-[180px] md:h-[134px] object-cover">
+                <div className={`overflow-hidden rounded-xl border border-black border-opacity-5 ${cardHeight?'mb-3':'mb-2'}`}>
+                    <div className={`w-full relative ${cardHeight?cardHeight:'h-[180px] md:h-[134px]'} object-cover`}>
                     <Image
                         tabIndex={0}
                         loader={gumletLoader}
@@ -59,8 +59,8 @@ const coverImage = tool.legacyFeaturedImage?.mediaItemUrl
                 </div>
                 <div className="flex">
                     <div
-                    style={{ flex: `0 0 ${small?'3em':'44px'}` }}
-                    className={`${small?'h-12 w-12':'w-[44px] h-[44px]'} mr-2 relative border border-opacity-5 border-black bg-white rounded-xl overflow-hidden`}
+                    style={{ flex: `0 0 ${small?'3em':logoHeight?'66px':'44px'}` }}
+                    className={`${small?'h-12 w-12':logoHeight?logoHeight:'w-[44px] h-[44px]'} mr-2 relative border border-opacity-5 border-black bg-white rounded-xl overflow-hidden`}
                     >
                     {logo ? (
                         <Image

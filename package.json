@@ -75,7 +75,7 @@
     "email-validator": "^2.0.4",
     "file-saver": "^2.0.5",
     "formik": "^2.2.9",
-    "framer-motion": "^7.6.6",
+    "framer-motion": "^8.4.0",
     "fs": "0.0.1-security",
     "image-validator": "^1.2.1",
     "instantsearch.css": "^7.4.5",

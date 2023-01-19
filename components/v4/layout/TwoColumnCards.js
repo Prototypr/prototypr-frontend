@@ -1,32 +1,59 @@
 import Link from "next/link";
 
-const TwoColumnCards = ({posts}) =>{
+const TwoColumnCards = ({
+  posts,
+  image = "",
+  color = "#2F9A75",
+  repeat = true,
+  imageSize = "40%",
+  height='h-auto',
+  backgroundPosition = "center center,",
+  content = {
+    title: "Placeholder title",
+    description: "Discover tools, automate everything.",
+  },
+  link
+}) => {
+  return (
+    <Link href={link || '#'}>
+    <div
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: imageSize ? imageSize : "40%",
+        backgroundRepeat: repeat ? "repeat" : "no-repeat",
+        backgroundPosition: backgroundPosition
+          ? backgroundPosition
+          : "center center",
+      }}
+      className={`flex flex-col w-full overflow-hidden rounded-3xl ${height}`}
+    >
+  
+      <div
+        style={{
+          backgroundImage: `linear-gradient(91.39deg, ${color} 50.49%, rgba(48, 155, 118,0) 80.61%)`,
+        }}
+        className="w-[200%] sm:w-[100%] h-full p-6 sm:p-10 flex flex-col gap-2"
+      >
+        <div className="flex flex-col justify-center h-full">
+          <div className="flex flex-col mb-4 gap-0">
+            <h3 className="font-bold text-white text-[24px] sm:text-[36px]">
+              {content.title}
+            </h3>
 
-    return(
-        <div className="flex flex-col grid md:gap-x-8 gap-y-8 grid-cols-12">
-             {posts.map((post, i) =>{ 
-              console.log(post)
-                   const title = post?.attributes?.title;
-                   let slug = post.attributes?.slug;
-                   let tags = post?.attributes?.tags?.data.slice(0, 2);
-                  let coverImage = post?.attributes?.featuredImage?.data
-            ? post?.attributes?.featuredImage?.data
-            : post?.attributes?.legacyFeaturedImage?.mediaItemUrl?post?.attributes?.legacyFeaturedImage?.mediaItemUrl
-            :post?.attributes?.legacyMedia?.mediaItemUrl
-
-            return (
-                  <Link className="col-span-12 md:col-span-6"
-                  href={`/toolbox/${slug}`}>
-                  <div className="flex w-full flex-col ">
-                    <img className="w-full h-[220px] object-cover rounded-xl" src={coverImage}/>
-                    {/* <h4 className="text-xs text-gray-500 uppercase font-medium mt-3">{section.tagline}</h4> */}
-                    {/* <h3 className="text-xl font-medium mt-1">{section.title}</h3>
-                    <p className="text-sm text-gray-500 mt-1">{section.description}</p> */}
-                  </div>
-                  </Link>
-                )})}
+            <p className="text-white max-w-[300px] sm:max-w-md text-opacity-70 text-[16px] sm:text-[24px]">
+              {content.description}
+            </p>
+          </div>
+          <div>
+            <button className="px-6 py-4 font-medium bg-white rounded-full text-black text-xs">
+              Explore Tools {"->"}
+            </button>
+          </div>
         </div>
-    )
-}
+      </div>
+      </div>
+      </Link>
+  );
+};
 
-export default TwoColumnCards
+export default TwoColumnCards;

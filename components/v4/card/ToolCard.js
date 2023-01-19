@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const ToolCard = ({ posts, type, columns }) => {
+const ToolCard = ({ posts, type, columns, tagNumber }) => {
   return (
     <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-6 w-full flex-wrap`}>
       {posts.map((post, i) => {
@@ -14,7 +14,11 @@ const ToolCard = ({ posts, type, columns }) => {
         if (type === "toolboxContentPage") {
           title = post.title;
           slug = post.slug;
-          tags = post.tags.data.slice(0, 2);
+          if(tagNumber==1){
+            tags = post.tags.data.slice(0, 1);
+          }else{
+            tags = post.tags.data.slice(0, 2);
+          }
 
           coverImage =   
           post.featuredImage?.data?.attributes?.url
@@ -28,8 +32,11 @@ const ToolCard = ({ posts, type, columns }) => {
         } else {
           title = post?.attributes?.title;
           slug = post.attributes?.slug;
-          tags = post?.attributes?.tags?.data.slice(0, 2);
-
+          if(tagNumber==1){
+            tags = post?.attributes?.tags?.data.slice(0, 1);
+          }else{
+            tags = post?.attributes?.tags?.data.slice(0, 2);
+          }
           // let tool = post.attributes
 
           // let coverImage =   
@@ -87,12 +94,12 @@ const ToolCard = ({ posts, type, columns }) => {
               )}
 
               <div className="flex flex-col justify-center ">
-                <p className="font-semibold line-clamp-3 mb-1">{title}</p>
+                <p className="font-semibold line-clamp-2 mb-1">{title}</p>
                 {tags && (
                   <div className="flex flex-wrap">
                     {tags.map((x) => {
                       return (
-                        <span className="px-3 mr-1 py-1 rounded-full bg-gray-100 text-xs capitalize">
+                        <span className="px-3 mr-1 py-1 h-[1.42rem] leading-wide line-clamp-1 overflow-hidden rounded-full bg-gray-100 text-xs capitalize">
                           {x.attributes.name}
                         </span>
                       );
