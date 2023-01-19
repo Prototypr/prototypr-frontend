@@ -168,6 +168,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
                     repeat={false}
                     imageSize={"cover"}
                     backgroundPosition={"center center"}
+                    link={`/toolbox/page/1`}
                     content={{
                       title: "Explore all tools",
                       description:
