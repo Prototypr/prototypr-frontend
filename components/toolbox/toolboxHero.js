@@ -6,8 +6,8 @@ const MotionSliderToolCard = ({ title, subtext, image, slug }) => {
   return (
     <div className="w-[450px] h-auto cursor-pointer relative rounded-2xl border border-opacity-20 bg-white grid grid-items-center p-4">
         <Link href={`/toolbox/${slug}`}>
-        <div className="flex flex-row gap-3">
-          <div className="w-18 h-18 bg-gray-100 border border-black border-opacity-10 overflow-hidden rounded-xl relative">
+        <div className="flex flex-row">
+          <div className="mr-3 w-18 h-18 bg-gray-100 border border-black border-opacity-10 overflow-hidden rounded-xl relative">
             <img src={image} className="w-full h-full"></img>
           </div>
           <div className="w-full max-w-[200px] flex flex-col gap-0">
@@ -122,7 +122,7 @@ const ToolBoxHero = () => {
         </div>
       </div>
       <div className="w-full max-w-full relative py-5 flex flex-col gap-2  overflow-hidden">
-        <div className=" flex flex-col items-center max-w-7xl mx-auto gap-5 top-0 w-full ">
+        <div className=" flex flex-col items-center max-w-7xl mx-auto grid gap-5 top-0 w-full ">
           <MotionSlider
             duration={50}
             slides={ProductListData.map((data, i) => {

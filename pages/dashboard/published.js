@@ -37,7 +37,7 @@ export default function Index() {
           <div className="w-full relative max-w-4xl p-4 mx-auto ">
             <div
               className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto mt-8"
-              style={{ maxWidth: 390 }}
+              style={{ maxWidth: 650 }}
             >
               <LoginForm isSignUp={isSignUp} />
             </div>

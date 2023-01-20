@@ -5,7 +5,7 @@ import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 
 const ToolsTagsNavRow = ({ tags, active }) => {
   return (
-      <div className="flex flex-wrap gap-3 bg-white px-8 py-10 rounded-[30px]">
+      <div className="flex flex-wrap bg-white px-8 py-10 rounded-[30px]">
         <GiantPillTag active={active == "All"} link={`/toolbox/page/1`}>
           All
         </GiantPillTag>

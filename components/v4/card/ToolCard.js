@@ -97,9 +97,9 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
                 <p className="font-semibold line-clamp-2 mb-1">{title}</p>
                 {tags && (
                   <div className="flex flex-wrap">
-                    {tags.map((x) => {
+                    {tags.map((x, i) => { 
                       return (
-                        <span className="px-3 mr-1 py-1 h-[1.42rem] leading-wide line-clamp-1 overflow-hidden rounded-full bg-gray-100 text-xs capitalize">
+                        <span className={`${i>0?'hidden md:inline-block md:line-clamp-1':''} px-3 mr-1 py-1 h-[1.42rem] leading-wide overflow-hidden rounded-full bg-gray-100 text-xs capitalize`}>
                           {x.attributes.name}
                         </span>
                       );
@@ -109,7 +109,7 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
                 {/* <p className="text-[#989898]">Pro Editing for everyone</p> */}
               </div>
             </div>
-            <div className="flex md:flex lg:hidden xl:flex flex-col justify-center">
+            <div className="flex hidden xs:flex md:flex lg:hidden xl:flex flex-col justify-center">
                 <button className="px-4 py-1 text-sm bg-transparent border  border-blue-600 group-hover:bg-blue-700 hover:bg-blue-700 group-hover:text-white hover:text-white text-blue-600 rounded-full">
                   Get
                 </button>

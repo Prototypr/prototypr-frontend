@@ -31,14 +31,14 @@ const SponsorPackages = {
     {
       image: "/static/images/sponsor-nl-main-cover.png",
       title: "Featured Sponsor (One Week)",
-      desp: "A large banner that is featured in the newsletter.",
+      desp: "A large banner featured in it's own section of the newsletter, plus your logo on the site-wide navbar.",
       ctaText: "Book for $600",
       link: "/sponsor/booking?type=banner",
     },
     {
       image: "/static/images/sponsor-nl-link-cover.png",
       title: "Sponsored Link (One Week)",
-      desp: "A sponsored article or tool in the newsletter",
+      desp: "A sponsored article or tool in a section of the newsletter as a link with your logo.",
       ctaText: "Book for $300",
       link: "/sponsor/booking?type=link",
     },
@@ -101,7 +101,7 @@ const Index = () => {
                 <div className="w-full bg-white p-5 md:p-10 rounded-2xl">
                   <div className=" w-full flex flex-col gap-5 mb-5">
                     <h1 className="text-2xl md:text-4xl max-w-3xl font-bold tracking-tighter leading-tight">
-                      Reach your Target <br /> Audience on Prototypr
+                      Promote your product <br /> to Prototypr readers 
                     </h1>
                     <p className=" text-base text-[#807F7F] max-w-lg">
                       Got an article or product you'd like to share with the
@@ -111,15 +111,22 @@ const Index = () => {
                     <p className="w-full bg-[#F8A4FF] text-opacity-80 text-white border rounded-xl border-[#E19DDF] px-5 py-3">
                       This is an automated booking system. To book a slot,
                       please sign up. After you sign up, you can pick a slot
-                      based on the availability. For any queries, contact
-                      <span className="underline text-white">
+                      based on the availability. For any queries, {' '}
+                      <div className="inline underline cursor-pointer text-white font-medium"
+                      onClick={()=>{
+                        if(window.$crisp){
+                          window.$crisp.push(['do', 'chat:open']);
+                        }
+                      }}
+                      >click here to chat</div>, or email
+                      <span className="text-white">
                         {" "}
                         graeme@prototypr.io{" "}
-                      </span>{" "}
+                      </span>{" "}.
                     </p>
                   </div>
-                  <hr />
-                  <div className="flex flex-col gap-4 py-10">
+                  {/* <hr /> */}
+                  {/* <div className="flex flex-col gap-4 py-10">
                     <h2 className="text-2xl max-w-xs font-bold">
                       Where would you like to reach your audience?
                     </h2>
@@ -145,13 +152,14 @@ const Index = () => {
                         Website
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                   <hr />
                   <div className="w-full py-5">
                     {selectedPackage === "Newsletter" ? (
                       <div>
                         <div className="flex flex-col gap-4">
-                          <h2 className="text-3xl font-bold">Newsletter</h2>
+                          {/* <h2 className="text-3xl font-bold">Newsletter</h2> */}
+                          <h2 className="text-3xl font-bold">Placement Options</h2>
                           <p className=" text-base text-[#807F7F] max-w-lg">
                             Reach an audience of 25k+ subscribers consisting of
                             developers, designers and marketers who are looking
