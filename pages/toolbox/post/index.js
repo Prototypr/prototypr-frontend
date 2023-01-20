@@ -15,6 +15,14 @@ import TagsInput from "@/components/Jobs/tagsInput";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import useGetLocations from "@/components/Jobs/jobHooks/useGetLocations";
 import useGetSkills from "@/components/Jobs/jobHooks/useGetSkills";
+import { FilePond, registerPlugin } from 'react-filepond';
+import 'filepond/dist/filepond.min.css';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+
+registerPlugin(FilePondPluginImagePreview);
+
+
 
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
@@ -115,6 +123,7 @@ const PostToolPage = () =>{
 const JobPostForm = ({user}) => {
   const router = useRouter();
   const [available, setAvailable] = useState(true)
+  const [files, setFiles] = useState([])
 
     
   useEffect(()=>{
@@ -151,9 +160,10 @@ const JobPostForm = ({user}) => {
     slug: Yup.string().required("Slug is required"),
     link: Yup.string().required("Link is required"),
     logo: Yup.string().required("Logo is required"),
-    image1: Yup.string().required("This image is required"),
-    image2: Yup.string().required("This image is required"),
-    image3: Yup.string().required("This image is required"),
+    // gallery: Yup.string().required("Gallery is required"),
+    // image1: Yup.string().required("This image is required"),
+    // image2: Yup.string().required("This image is required"),
+    // image3: Yup.string().required("This image is required"),
  
   });
 
@@ -169,9 +179,10 @@ const JobPostForm = ({user}) => {
       slug: "",
       link: "",
       logo: "",
-      image1: "",
-      image2: "",
-      image3: "",
+      gallery: "",
+      // image1: "",
+      // image2: "",
+      // image3: "",
     },
     validationSchema: FormSchema,
 
@@ -189,6 +200,7 @@ const JobPostForm = ({user}) => {
 	    excerpt: values.excerpt,
 		link: values.link,
 		slug: values.slug,
+		// gallery: values.gallery,
 	    seo: {
 				opengraphTitle:values.title,
 				opengraphDescription: values.excerpt,
@@ -200,10 +212,13 @@ const JobPostForm = ({user}) => {
 
 
   const formData = new FormData();
-  	formData.append('files.logo', values.logo)
-  	formData.append('files.image1', values.image1)
-  	formData.append('files.image2', values.image2)
-  	formData.append('files.image3', values.image3)
+    formData.append('files.logo', values.logo)
+    files.map((file, i) => {
+    	formData.append('files.gallery', file.file)
+    })
+  	// formData.append('files.gallery', values.image1)
+  	// formData.append('files.gallery', values.image2)
+  	// formData.append('files.gallery', values.image3)
 	formData.append('data', JSON.stringify({...entry,
               publishedAt:null
             }));
@@ -272,7 +287,7 @@ try {
 
 
 
-     console.log("errrs", errors)
+     console.log("gil", files)
 
   return (
     <Layout seo={seo} showWriteButton={false} background="#EFF2F8">
@@ -369,14 +384,24 @@ try {
               <label htmlFor="image" className="text-md font-medium">
                 Logo
               </label>
+
               <ImageUploader 
+			              id={12}
+			              initialImage="" 
+			              setFormValue={(file) =>{
+			                // setUploadNewCompanyImage(true)
+			                console.log("blob", file)
+			                formik.setFieldValue("logo",file)
+			              }}
+		              />
+{/*              <ImageUploader 
               id={3}
               companyLogoIsDefault={true} 
               initialImage="" 
               setFormValue={(blob) =>{
                 setUploadNewCompanyImage(true)
                 formik.setFieldValue("logo",blob)
-              }}/>
+              }}/>*/}
               {/* <ImageUploader initialImage={defaultCompany?.logo} setFormValue={(blob) =>{
                 setImageBlob(blob)
                 formik.setFieldValue("image",blob)
@@ -400,41 +425,16 @@ try {
               <label htmlFor="image" className="text-md font-medium">
                 Gallery
               </label>
-              <div className="flex flex-row ">
-	              <div className="mr-6">
-		              <ImageUploader 
-			              id={4}
-			              companyLogoIsDefault={true} 
-			              initialImage="" 
-			              setFormValue={(blob) =>{
-			                setUploadNewCompanyImage(true)
-			                formik.setFieldValue("image1",blob)
+
+              <FilePond
+		        files={files}
+		        onupdatefiles={async (files)   => {
+			                console.log("files")
+			                await setFiles(files)
+			                formik.setFieldValue("gallery",files)
 			              }}
-		              />
-		           </div>
-		           <div className="mr-6">
-		              <ImageUploader 
-			              id={5}
-			              companyLogoIsDefault={true} 
-			              initialImage="" 
-			              setFormValue={(blob) =>{
-			                setUploadNewCompanyImage(true)
-			                formik.setFieldValue("image2",blob)
-			              }}
-		              />
-		            </div>
-		            <div className="mr-6">
-		              <ImageUploader 
-			              id={6}
-			              companyLogoIsDefault={true} 
-			              initialImage="" 
-			              setFormValue={(blob) =>{
-			                setUploadNewCompanyImage(true)
-			                formik.setFieldValue("image3",blob)
-			              }}
-		              />
-		            </div>
-              </div> 
+		        allowMultiple={true}
+		      />
 
             </div>
             </FormContainer>
