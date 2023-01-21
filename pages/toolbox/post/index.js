@@ -15,6 +15,7 @@ import TagsInput from "@/components/Jobs/tagsInput";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import useGetLocations from "@/components/Jobs/jobHooks/useGetLocations";
 import useGetSkills from "@/components/Jobs/jobHooks/useGetSkills";
+import GalleryUpload from "@/components/GalleryUpload/GalleryUpload";
 
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
@@ -79,7 +80,7 @@ const PostToolPage = () =>{
           style={{ maxWidth: 390 }}
         >
           <LoginForm 
-          title="Sign up to post a job" 
+          title="Sign up to post a tool" 
           isSignUp={isSignUp} />
         </div>
       </div>
@@ -151,14 +152,15 @@ const JobPostForm = ({user}) => {
     slug: Yup.string().required("Slug is required"),
     link: Yup.string().required("Link is required"),
     logo: Yup.string().required("Logo is required"),
-    image1: Yup.string().required("This image is required"),
-    image2: Yup.string().required("This image is required"),
-    image3: Yup.string().required("This image is required"),
+    gallery: Yup.string().required("This image is required"),
+    // image2: Yup.string().required("This image is required"),
+    // image3: Yup.string().required("This image is required"),
  
   });
 
   const [errores, setErrores] = useState(false)
-  const [uploadNewCompanyImage, setUploadNewCompanyImage] = useState(false)
+  const [uploadNewCompanyImage, setUploadLogo] = useState(false)
+  const [galleryFiles, setGalleryFiles] = useState(false)
 
   const formik = useFormik({
   	validateOnChange:errores?true:false,
@@ -169,9 +171,7 @@ const JobPostForm = ({user}) => {
       slug: "",
       link: "",
       logo: "",
-      image1: "",
-      image2: "",
-      image3: "",
+      gallery:''
     },
     validationSchema: FormSchema,
 
@@ -188,7 +188,8 @@ const JobPostForm = ({user}) => {
 	    content: values.content,
 	    excerpt: values.excerpt,
 		link: values.link,
-		slug: values.slug,
+		// slug: values.slug,
+    status:'draft',
 	    seo: {
 				opengraphTitle:values.title,
 				opengraphDescription: values.excerpt,
@@ -201,9 +202,12 @@ const JobPostForm = ({user}) => {
 
   const formData = new FormData();
   	formData.append('files.logo', values.logo)
-  	formData.append('files.image1', values.image1)
-  	formData.append('files.image2', values.image2)
-  	formData.append('files.image3', values.image3)
+    if(galleryFiles?.length){
+      for(var x= 0;x<galleryFiles.length;x++){
+        formData.append('files.gallery', galleryFiles[x])
+      }
+    }
+  
 	formData.append('data', JSON.stringify({...entry,
               publishedAt:null
             }));
@@ -291,7 +295,7 @@ try {
               formik.handleSubmit();
             } else {
               // setDisabled(true);
-                       formik.handleSubmit();
+              formik.handleSubmit();
               toast.error("Hmmmm, it seems like some of the fields are empty.");
             }
           }}
@@ -310,7 +314,7 @@ try {
                     // 	formik.setFieldValue("slug", slugify(formik.values.title.toLocaleLowerCase(), {remove: /[^\w\s]/gi}))
                     // }}
                     value={formik.values.title}
-                    placeholder="Product Designer, Design Systems"
+                    placeholder="Unicorn Platform"
                     className={styles.input}
                   />
                 </FormInput>
@@ -320,6 +324,7 @@ try {
                   Content
                 </label>
                 <MiniEditor
+                placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: 🤑 Stripe payments, 📊 Google Sheets, ✍️ Blogging (beta), and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
                 title=""
                 setDescription={(html)=>{
                     formik.setFieldValue("content",html)
@@ -331,12 +336,13 @@ try {
                 </label>
                 <MiniEditor
                 title=""
+                placeholder="Unicorn platform is a landing page builder for SaaS products. Build and launch your marketing site in no time!"
                 setDescription={(html)=>{
                     formik.setFieldValue("excerpt",html)
                 }}/>
                 {formik.errors.excerpt && <span className="text-red-600 text-xs">{formik.errors.excerpt}</span>}
 
-               <FormInput id="title" label="Slug" error={formik.errors}>
+               {/* <FormInput id="title" label="Slug" error={formik.errors}>
                   <input
                     id="slug"
                     name="slug"
@@ -347,7 +353,7 @@ try {
 
 
                   />
-                </FormInput>
+                </FormInput> */}
 
 
                  
@@ -359,7 +365,7 @@ try {
                     type="text"
                     onChange={formik.handleChange}
                     value={formik.values.link}
-                    placeholder="Link for a tool"
+                    placeholder="Link to your website, (e.g. https://unicornplatform.com)"
                     className={styles.input}
                   />
                 </FormInput>
@@ -374,7 +380,7 @@ try {
               companyLogoIsDefault={true} 
               initialImage="" 
               setFormValue={(blob) =>{
-                setUploadNewCompanyImage(true)
+                setUploadLogo(true)
                 formik.setFieldValue("logo",blob)
               }}/>
               {/* <ImageUploader initialImage={defaultCompany?.logo} setFormValue={(blob) =>{
@@ -383,59 +389,21 @@ try {
               }}/> */}
               {formik.errors.logo && <span className="text-red-600 text-xs">{formik.errors.logo}</span>}
 
-{/*              <label htmlFor="image" className="text-md font-medium">
-                Logo 1
-              </label>
-              <ImageUploader 
-	              id={7}
-	              companyLogoIsDefault={true} 
-	              initialImage="" 
-	              setFormValue={(blob) =>{
-	                setUploadNewCompanyImage(true)
-	                formik.setFieldValue("logo1",blob)
-	              }}
-              />
-*/}
 
               <label htmlFor="image" className="text-md font-medium">
                 Gallery
               </label>
-              <div className="flex flex-row ">
-	              <div className="mr-6">
-		              <ImageUploader 
-			              id={4}
-			              companyLogoIsDefault={true} 
-			              initialImage="" 
-			              setFormValue={(blob) =>{
-			                setUploadNewCompanyImage(true)
-			                formik.setFieldValue("image1",blob)
-			              }}
-		              />
-		           </div>
-		           <div className="mr-6">
-		              <ImageUploader 
-			              id={5}
-			              companyLogoIsDefault={true} 
-			              initialImage="" 
-			              setFormValue={(blob) =>{
-			                setUploadNewCompanyImage(true)
-			                formik.setFieldValue("image2",blob)
-			              }}
-		              />
-		            </div>
-		            <div className="mr-6">
-		              <ImageUploader 
-			              id={6}
-			              companyLogoIsDefault={true} 
-			              initialImage="" 
-			              setFormValue={(blob) =>{
-			                setUploadNewCompanyImage(true)
-			                formik.setFieldValue("image3",blob)
-			              }}
-		              />
-		            </div>
-              </div> 
-
+              <GalleryUpload updateField={(files)=>{
+                //  setUploadNewCompanyImage(true)
+                // formik.setFieldValue("logo",files)
+                if(files){
+                  setGalleryFiles(files)
+                  formik.setFieldValue("gallery",'added')
+                }else{
+                  setGalleryFiles(null)
+                  formik.setFieldValue("gallery",'')
+                }
+              }}/>
             </div>
             </FormContainer>
             <div className="flex flex-col mx-auto max-w-2xl border-t my-8 border-gray-100 w-auto"/>
