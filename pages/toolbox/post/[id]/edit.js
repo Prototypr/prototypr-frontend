@@ -1,5 +1,6 @@
 import Layout from "@/components/layout-dashboard";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
@@ -14,6 +15,7 @@ import useLoad from "@/components/toolbox/hooks/useLoad";
 import Fallback from "@/components/atom/Fallback/Fallback";
 
 import GalleryUpload from "@/components/GalleryUpload/GalleryUpload";
+const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 const slugify = require("slugify");
 
 let axios = require("axios");
@@ -73,7 +75,8 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
   const [uploadNewLogo, setUploadNewLogo] = useState(false)
   const [galleryChanged, setGalleryChanged] = useState(false)
   const [galleryFiles, setGalleryFiles] = useState(false)
-  
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const formik = useFormik({
     validateOnChange:errores?true:false,
     initialValues: {
@@ -86,7 +89,10 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
     },
     validationSchema: FormSchema,
     onSubmit: (values) => {
-
+      setIsSubmitting(true)
+      // toast.loading("Updating your tool and images...", {
+      //   duration: 5000,
+      // });
       let updatedGallery = []
       //update gallery by unlinking any removed images
       if(galleryChanged){
@@ -154,6 +160,7 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                       toast.success("Upload complete!", {
                         duration: 3000,
                       });
+
                   })
                   .catch(function (error) {
                     console.log(error);
@@ -211,11 +218,12 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                 }
               }
 
+              setIsSubmitting(false)
               toast.success("Your tool has been updated!", {
                 duration: 3000,
               });
 
-              router.push(`/jobs/post/${response?.data.id}/payment`);
+              // router.push(`/jobs/post/${response?.data.id}/payment`);
               // formik.resetForm();
             console.log("Done! ->", response);
           })
@@ -391,10 +399,16 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
             
             <button
               type="submit"
+              disabled={isSubmitting}
               // disabled={errores}
               className="w-full p-4 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
-             Update
+             {isSubmitting?
+             <div className="mx-auto w-6">
+               <Spinner />
+             </div>
+             :
+             `Save and Continue`}
             </button>
             </form>
         </div>
