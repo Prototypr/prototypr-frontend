@@ -79,6 +79,7 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
                     fetchpriority={false < 2 ? "true" : "false"}
                     data-gmlazy={false < 2 ? `false` : `true`}
                     fill={true}
+                    layout="fill"
                     // width="100"
                     // height="100"
                     alt="Brand logo for external website's link"

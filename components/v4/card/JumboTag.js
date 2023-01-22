@@ -23,6 +23,7 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
         }}
         className="flex flex-col"
       >
+        <>
         <div className={`relative overflow-hidden ${withBackground?'bg-gradient-to-br from-blue-800/80 to-blue-800/90':''} w-full h-[180px] justify-center rounded-xl shadow-sm cursor-pointer flex flex-col`}>
           <img className="absolute opacity-20 w-full h-full top-0 left-0 object-cover" 
           src="/static/images/app-icon.svg"/>
@@ -52,6 +53,7 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
               ) : (
                 ""
               )} */}
+        </>
       </Link>
       </div>
   );
