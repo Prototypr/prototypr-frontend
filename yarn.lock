@@ -2568,6 +2568,11 @@
   "resolved" "https://registry.npmjs.org/file-saver/-/file-saver-2.0.5.tgz"
   "version" "2.0.5"
 
+"filepond-plugin-file-poster@^2.5.1":
+  "integrity" "sha512-WMB6Iww//U7KJR9Yt/zZ3cxC7SVySXGTrWPnAQokYSFfDp4uD31JLtyjYAVJnEg6T+niJvNwH48jKn/X3o75og=="
+  "resolved" "https://registry.npmjs.org/filepond-plugin-file-poster/-/filepond-plugin-file-poster-2.5.1.tgz"
+  "version" "2.5.1"
+
 "filepond-plugin-image-exif-orientation@^1.0.11":
   "integrity" "sha512-hLBc12Fk6Zkj3L8mSAn+elugHOqT5rLUbgVXQQIQjMe0FsGjtpoxqeVR6jt4IWHGat2L9sFAgU2TGmd1mqosCg=="
   "resolved" "https://registry.npmjs.org/filepond-plugin-image-exif-orientation/-/filepond-plugin-image-exif-orientation-1.0.11.tgz"

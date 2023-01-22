@@ -227,6 +227,11 @@ const Editor = ({
   //   }
   // };
 
+  if(user && !isOwner)
+    return(
+      <p>You are not owner of this post</p>
+    )
+
   return (
     <>
       <div className="fixed z-[48] bottom-10 left-10 border flex flex-col grid gap-2 border-black border-opacity-10 p-4 bg-white rounded-lg">

@@ -1,5 +1,4 @@
 import Layout from "@/components/layout-dashboard";
-import { jobTypes} from "@/lib/constants";
 import { useRouter } from "next/router";
 
 import React, { useEffect, useState } from "react";
@@ -10,12 +9,11 @@ import toast from "react-hot-toast";
 import { FormContainer } from "@/components/Jobs/FormStepper";
 import { FormInput } from "@/components/Jobs/FormInput";
 import MiniEditor from "@/components/MiniEditor/MiniEditor";
-import TagsInput from "@/components/Jobs/tagsInput";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
-import useGetLocations from "@/components/Jobs/jobHooks/useGetLocations";
-import useGetSkills from "@/components/Jobs/jobHooks/useGetSkills";
-import { useLoad } from "@/components/Jobs/jobHooks";
+import useLoad from "@/components/toolbox/hooks/useLoad";
 import Fallback from "@/components/atom/Fallback/Fallback";
+import GalleryUpload from "@/components/GalleryUpload/GalleryUpload";
+const slugify = require("slugify");
 
 let axios = require("axios");
 
@@ -44,73 +42,20 @@ const PostToolPage = () =>{
     redirectTo: "/",
     redirectIfFound: false,
   });
-
-  // const [defaultCompany, setDefaultCompany] = useState(null)
-
-  const { 
-    loading,
-    content,
-    postId,
-    title,
-    isOwner,
-    postObject} =useLoad(user);
-
-    console.log("postObject",postObject)
-
-
-  if(loading){
-    return(
-       <Fallback/>
-    )
-  }
+  const { loading, postObject, isOwner } =
+  useLoad(user);
 
   return(
-    <>
-    {/* only show job post form if user is logged in, so we can prefill it if they have a company */}
-    {(user && !isOwner)?
-    <p>You are not owner of this post</p>
-    :
-    (defaultCompany!==null && typeof defaultCompany!==undefined) && 
-    <JobPostForm postObject={postObject} user={user} />
-    }
-    </>
+    !user && loading?<Fallback/>:
+    postObject? 
+    <ToolPostForm isOwner={isOwner} postObject={postObject} user={user} />:null
   )
+
 }
 
-const JobPostForm = ({user, postObject}) => {
+const ToolPostForm = ({user, isOwner, postObject}) => {
   const router = useRouter();
   const [available, setAvailable] = useState(true)
-
-  // const {locations} = useGetLocations()
-  // const {skills} = useGetSkills()
-  
-    // const [salaryMinOptions] = useState(()=>{
-    //   let salaries = [{name:'Minimum per year', value:0}]
-    //   for(var x =0;x<2010000;x+=10000){
-    //     if(x){
-    //       salaries.push({
-    //         name:`USD ${x.toLocaleString()} per year`,
-    //         value:x
-    //       })
-    //     }
-    //   }
-    //   return salaries
-    // }) 
-    // const [salaryMaxOptions] = useState(()=>{
-    //   let salaries = [{name:'Maximum per year', value:0}]
-    //   for(var x =0;x<2010000;x+=10000){
-    //     if(x){
-    //       salaries.push({
-    //         name:`USD ${x.toLocaleString()} per year`,
-    //         value:x
-    //       })
-    //     }
-    //   }
-    //   return salaries
-    // }) 
-
-    // console.log(postObject)
-
 
   const FormSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -118,17 +63,20 @@ const JobPostForm = ({user, postObject}) => {
     excerpt: Yup.string().required("Excerpt is required"),
     slug: Yup.string().required("Slug is required"),
     link: Yup.string().required("Link is required"),
-    logo: Yup.string().required("Logo is required"),
+    logo: Yup.mixed().required("Please add your logo"),
 
   });
+  
 
   const [errores, setErrores] = useState(false)
-  const [uploadNewCompanyImage, setUploadNewCompanyImage] = useState(false)
-
+  const [uploadNewLogo, setUploadNewLogo] = useState(false)
+  const [galleryChanged, setGalleryChanged] = useState(false)
+  const [galleryFiles, setGalleryFiles] = useState(false)
+  
   const formik = useFormik({
     validateOnChange:errores?true:false,
     initialValues: {
-      title: postObject?.title?postObject.title:'',
+      title: postObject?.title?postObject?.title:'',
       content: postObject?.content?postObject.content:'',
       excerpt: postObject?.excerpt?postObject.excerpt:'',
       slug: postObject?.slug?postObject.slug:'',
@@ -137,34 +85,46 @@ const JobPostForm = ({user, postObject}) => {
     },
     validationSchema: FormSchema,
     onSubmit: (values) => {
-      values.jobId=postObject.id
 
+      let updatedGallery = []
+      //update gallery by unlinking any removed images
+      if(galleryChanged){
+        for(var x = 0;x<galleryFiles.length;x++){
+          const found = postObject?.gallery?.find(el => el.id === galleryFiles[x].id?el:false);
+          if(found){
+            updatedGallery.push(found)
+          }
+        }
+      }else{
+        updatedGallery = postObject.gallery
+      }
       async function submit() {
-        let configUpload = {
-          method: "post",
-          url: `${process.env.NEXT_PUBLIC_API_URL}/api/users-permissions/users/updateJobPost`,
+        let publishPostEndpointConfig = {
+          method: "put",
+          url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postObject.id}`,
           headers: {
             Authorization: `Bearer ${user?.jwt}`,
           },
+    
           data: {
-            ...values,
+            data: {
+              ...values,
+              gallery:updatedGallery
+            },
           },
         };
 
 
-        await axios(configUpload)
+        await axios(publishPostEndpointConfig)
           .then(async function (response) {
-
-            if(response?.data?.posted==true){
-
               /**
-               * upload company logo
+               * upload new logo
                */
-               if(values.companyLogo && uploadNewCompanyImage==true){     
-                toast.loading("Uploading your company logo...", {
+               if(values.logo && uploadNewLogo==true){     
+                toast.loading("Uploading new logo...", {
                   duration: 3000,
                 });
-                const file = new File([values.companyLogo], `companylogo_.png`, {
+                const file = new File([values.logo], `logo_.png`, {
                   type: "image/png",
                 });
                 
@@ -172,9 +132,9 @@ const JobPostForm = ({user, postObject}) => {
                 const formData = new FormData();
                 formData.append("files", file, 'logo');
                 formData.append('data', JSON.stringify(data));
-                formData.append('refId', response?.data?.companyId);
+                formData.append('refId', postObject.id);
                 formData.append('field', 'logo');
-                formData.append('ref', 'api::company.company');
+                formData.append('ref', 'api::post.post');
 
       
                 var imageConfig = {
@@ -196,23 +156,66 @@ const JobPostForm = ({user, postObject}) => {
                   })
                   .catch(function (error) {
                     console.log(error);
-                    toast.console.warn("The company logo failed to save.", {
+                    toast.console.warn("The logo failed to save.", {
                       duration: 3000,
                     });
                   });
               }
 
-              toast.success("Your Job Post has been updated!", {
+              /**
+               * upload new gallery
+               */
+              if(values.gallery && galleryChanged){
+                const galleryData = {}
+                const galleryFormData = new FormData();
+                //upload any new gallery images
+                let isNewUpload = false
+                if(galleryFiles?.length){
+                  // galleryFormData.append("files", file, 'logo');
+                  for(var x= 0;x<galleryFiles.length;x++){
+                    //if it's a new file object
+                    if(galleryFiles[x] instanceof File){
+                      galleryFormData.append('files', galleryFiles[x])
+                      isNewUpload= true
+                    }
+                  }
+                  if(isNewUpload){
+                    galleryFormData.append('data', JSON.stringify(galleryData));
+                    galleryFormData.append('refId', postObject.id);
+                    galleryFormData.append('field', 'gallery');
+                    galleryFormData.append('ref', 'api::post.post');
+                   
+                    var galleryConfig = {
+                      method: "post",
+                      url: `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
+                      headers: {
+                        Authorization: `Bearer ${user?.jwt}`,
+                      },
+                      data: galleryFormData,
+                    };
+                    await axios(galleryConfig)
+                      .then(async function (response) {
+                          //set field value to id of image, which is used to attach to post
+                          toast.success("Gallery uploads complete!", {
+                            duration: 3000,
+                          });
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                        toast.console.warn("The gallery failed to update.", {
+                          duration: 3000,
+                        });
+                      });
+                  }
+                }
+              }
+
+              toast.success("Your tool has been updated!", {
                 duration: 3000,
               });
 
               router.push(`/jobs/post/${response?.data.id}/payment`);
               // formik.resetForm();
-            }else{
-              toast.error(response?.data?.message?response?.data?.message:'Something went wrong submitting your post!', {
-                duration: 5000,
-              });
-            }
             console.log("Done! ->", response);
           })
           .catch(function (error) {
@@ -227,6 +230,13 @@ const JobPostForm = ({user, postObject}) => {
     },
   });
 
+  useEffect(() => {
+
+
+    formik.setFieldValue("slug", slugify(formik.values.title.toLocaleLowerCase(), {remove: /[^\w\s]/gi}))
+
+
+ }, [formik.values.title]);
 
   const { dirty, errors, isValid } = formik;
   const [disabled, setDisabled] = useState(false);
@@ -253,8 +263,8 @@ const JobPostForm = ({user, postObject}) => {
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
         <div className="max-w-3xl w-full">
         <div className="my-2 mb-5">
-          <h1 className="text-2xl font-bold mx-auto ">Post a Job</h1>
-          <p className="text-gray-600">Find your next designer, developer, or creative person.</p>
+          <h1 className="text-2xl font-bold mx-auto mb-2">Post a Tool</h1>
+          <p className="text-gray-600">Edit your tool for review.</p>
         </div>
         <div className="bg-white p-10 pt-12 rounded-xl">
           <form
@@ -273,24 +283,26 @@ const JobPostForm = ({user, postObject}) => {
             <FormContainer>
               <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
                 <h1 className="text-xl font-medium mb-2">Tell us about the tool</h1>
-                <FormInput id="title" label="Position" error={formik.errors}>
+                <FormInput id="title" label="Name" error={formik.errors}>
                   <input
                     id="title"
                     name="title"
                     type="text"
                     onChange={formik.handleChange}
                     value={formik.values.title}
-                    placeholder="Product Designer, Design Systems"
+                    placeholder="Unicorn Platform"
                     className={styles.input}
                   />
                 </FormInput>
 
 
                 <label className="text-md font-medium mt-4">
-                  Content
+                Description
                 </label>
                 <MiniEditor
+                 placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: 🤑 Stripe payments, 📊 Google Sheets, ✍️ Blogging (beta), and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
                 title=""
+                initialContent={postObject?.content?postObject.content:''} 
                 setDescription={(html)=>{
                     formik.setFieldValue("content",html)
                 }}/>
@@ -301,12 +313,14 @@ const JobPostForm = ({user, postObject}) => {
                 </label>
                 <MiniEditor
                 title=""
+                placeholder="Unicorn platform is a landing page builder for SaaS products. Build and launch your marketing site in no time!"
+                initialContent={postObject?.excerpt?postObject.excerpt:''} 
                 setDescription={(html)=>{
                     formik.setFieldValue("excerpt",html)
                 }}/>
                 {formik.errors.excerpt && <span className="text-red-600 text-xs">{formik.errors.excerpt}</span>}
 
-               <FormInput id="title" label="Slug" error={formik.errors}>
+               {/* <FormInput id="title" label="Slug" error={formik.errors}>
                   <input
                     id="slug"
                     name="slug"
@@ -317,7 +331,7 @@ const JobPostForm = ({user, postObject}) => {
 
 
                   />
-                </FormInput>
+                </FormInput> */}
 
 
                  
@@ -341,10 +355,10 @@ const JobPostForm = ({user, postObject}) => {
               </label>
               <ImageUploader 
               id={3}
-              companyLogoIsDefault={true} 
-              initialImage="" 
+              companyLogoIsDefault={false} 
+              initialImage={postObject?.logo?postObject.logo?.url:''} 
               setFormValue={(blob) =>{
-                setUploadNewCompanyImage(true)
+                setUploadNewLogo(true)
                 formik.setFieldValue("logo",blob)
               }}/>
               {/* <ImageUploader initialImage={defaultCompany?.logo} setFormValue={(blob) =>{
@@ -353,6 +367,20 @@ const JobPostForm = ({user, postObject}) => {
               }}/> */}
               {formik.errors.logo && <span className="text-red-600 text-xs">{formik.errors.logo}</span>}
 
+              <label htmlFor="image" className="text-md font-medium">
+                Gallery
+              </label>
+              <GalleryUpload gallery={postObject?.gallery} updateField={(files)=>{
+                 setGalleryChanged(true)
+                // formik.setFieldValue("logo",files)
+                if(files){
+                  setGalleryFiles(files)
+                  formik.setFieldValue("gallery",'added')
+                }else{
+                  setGalleryFiles(null)
+                  formik.setFieldValue("gallery",'')
+                }
+              }}/>
 
 
             </div>

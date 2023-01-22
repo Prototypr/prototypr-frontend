@@ -180,7 +180,6 @@ const JobPostForm = ({user}) => {
 
     onSubmit: (values) => {
 
-    console.log("values", values)
     const submit = async () => {
 
     const entry = {
@@ -188,7 +187,9 @@ const JobPostForm = ({user}) => {
 	    title: values.title,
 	    content: values.content,
 	    excerpt: values.excerpt,
+      date:new Date(),
 		link: values.link,
+    user:user.id,
 		// slug: values.slug,
     status:'draft',
 	    seo: {
@@ -230,7 +231,6 @@ try {
                   duration: 5000,
                 });
                 return response?.data?.data
-                console.log("response", response)
               })
               .catch(function (error) {
                 console.log(error);
@@ -272,20 +272,13 @@ try {
 
   }, [formik.values.title]);
 
-
-                      	
-
-
-
-     console.log("gil", files)
-
   return (
     <Layout seo={seo} showWriteButton={false} background="#EFF2F8">
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
         <div className="max-w-3xl w-full">
         <div className="my-2 mb-6">
           <h1 className="text-2xl font-bold mx-auto mb-2">Post a Tool</h1>
-          <p className="text-gray-600">Create a tool for designers, developers, or creatives.</p>
+          <p className="text-gray-600">Submit your tool for review.</p>
         </div>
         <div className="bg-white p-10 pt-12 rounded-xl">
           <form
@@ -322,7 +315,7 @@ try {
             
 
                 <label className="text-md font-medium mt-4">
-                  Content
+                  Description
                 </label>
                 <MiniEditor
                 placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: 🤑 Stripe payments, 📊 Google Sheets, ✍️ Blogging (beta), and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
@@ -379,6 +372,7 @@ try {
 
               <ImageUploader 
 			              id={12}
+                    companyLogoIsDefault={false} 
 			              initialImage="" 
 			              setFormValue={(file) =>{
 			                // setUploadNewCompanyImage(true)
@@ -386,18 +380,6 @@ try {
 			                formik.setFieldValue("logo",file)
 			              }}
 		              />
-{/*              <ImageUploader 
-              id={3}
-              companyLogoIsDefault={true} 
-              initialImage="" 
-              setFormValue={(blob) =>{
-                setUploadLogo(true)
-                formik.setFieldValue("logo",blob)
-              }}/>*/}
-              {/* <ImageUploader initialImage={defaultCompany?.logo} setFormValue={(blob) =>{
-                setImageBlob(blob)
-                formik.setFieldValue("image",blob)
-              }}/> */}
               {formik.errors.logo && <span className="text-red-600 text-xs">{formik.errors.logo}</span>}
 
 

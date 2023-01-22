@@ -152,7 +152,7 @@ const LoginForm = ({ isSignUp, title="Get early access",
       ) : (
         <div className="max-w-xs">
           <Form
-            buttonText={"Sign up"}
+            buttonText={isSignUp ? 'Sign up' : "Sign in"}
             disabled={sent ? true : false}
             disabledMessage={
               <div className="text-center">

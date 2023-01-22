@@ -76,6 +76,7 @@ export default function EditorNav({ editorInstance,showWriteButton,activeNav, ed
   return (
     <div
       as="nav"
+      id="main-nav"
       className={`bg-white fixed w-full top-0 z-50 border-b border-1 border-gray-100 backdrop-blur`}
       style={{
         background: `rgba(255, 255, 255, ${0.9})`,
