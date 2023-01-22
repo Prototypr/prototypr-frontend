@@ -16,6 +16,7 @@ import ImageUploader from "@/components/ImageUploader/ImageUploader";
 // import useGetLocations from "@/components/Jobs/jobHooks/useGetLocations";
 // import useGetSkills from "@/components/Jobs/jobHooks/useGetSkills";
 import GalleryUpload from "@/components/GalleryUpload/GalleryUpload";
+const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
@@ -162,6 +163,7 @@ const JobPostForm = ({user}) => {
   const [errores, setErrores] = useState(false)
   const [uploadNewCompanyImage, setUploadLogo] = useState(false)
   const [galleryFiles, setGalleryFiles] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const formik = useFormik({
   	validateOnChange:errores?true:false,
@@ -181,6 +183,11 @@ const JobPostForm = ({user}) => {
     onSubmit: (values) => {
 
     const submit = async () => {
+
+      setIsSubmitting(true)
+      toast.loading("Submitting your tool and images...", {
+        duration: 5000,
+      });
 
     const entry = {
 	    type: "tool",
@@ -227,7 +234,7 @@ const JobPostForm = ({user}) => {
 try {
            let postResult =  await axios(publishPostEndpointConfig)
               .then(async function (response) {
-                toast.success("Your draft has been saved!", {
+                toast.success("Your tool has been submitted!", {
                   duration: 5000,
                 });
                 return response?.data?.data
@@ -236,8 +243,14 @@ try {
                 console.log(error);
               });
 
+              //redirect to success page
+              router.push(`/toolbox/post/success`);
+              setIsSubmitting(false)
+
               return postResult
         } catch {
+
+          setIsSubmitting(false)
           toast.error("Error creating draft! Please contact support for help.", {
             duration: 5000,
           });
@@ -300,6 +313,7 @@ try {
                 <FormInput id="title" label="Title" error={formik.errors}>
                   <input
                     id="title"
+                    disabled={isSubmitting}
                     name="title"
                     type="text"
                     onChange={formik.handleChange}
@@ -320,6 +334,7 @@ try {
                 <MiniEditor
                 placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: 🤑 Stripe payments, 📊 Google Sheets, ✍️ Blogging (beta), and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
                 title=""
+                disabled={isSubmitting}
                 setDescription={(html)=>{
                     formik.setFieldValue("content",html)
                 }}/>
@@ -330,6 +345,7 @@ try {
                 </label>
                 <MiniEditor
                 title=""
+                disabled={isSubmitting}
                 placeholder="Unicorn platform is a landing page builder for SaaS products. Build and launch your marketing site in no time!"
                 setDescription={(html)=>{
                     formik.setFieldValue("excerpt",html)
@@ -357,6 +373,7 @@ try {
                     id="link"
                     name="link"
                     type="text"
+                    disabled={isSubmitting}
                     onChange={formik.handleChange}
                     value={formik.values.link}
                     placeholder="Link to your website, (e.g. https://unicornplatform.com)"
@@ -404,10 +421,15 @@ try {
             
             <button
               type="submit"
-              // disabled={errores}
+              disabled={isSubmitting}
               className="w-full p-4 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
-             Save and Continue
+             {isSubmitting?
+             <div className="mx-auto w-6">
+               <Spinner />
+             </div>
+             :
+             `Save and Continue`}
             </button>
             </form>
         </div>
