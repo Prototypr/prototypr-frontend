@@ -227,7 +227,8 @@ const Editor = ({
   //   }
   // };
 
-  if(user && !isOwner)
+
+  if((!loading && (user?.isLoggedIn && !isOwner)) && editorType!=='create')
     return(
       <p>You are not owner of this post</p>
     )
