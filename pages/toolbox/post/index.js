@@ -15,9 +15,6 @@ import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 // import useGetLocations from "@/components/Jobs/jobHooks/useGetLocations";
 // import useGetSkills from "@/components/Jobs/jobHooks/useGetSkills";
-import 'filepond/dist/filepond.min.css'
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css'
 import GalleryUpload from "@/components/GalleryUpload/GalleryUpload";
 
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));

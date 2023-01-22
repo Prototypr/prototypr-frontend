@@ -12,9 +12,6 @@ import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import useLoad from "@/components/toolbox/hooks/useLoad";
 import Fallback from "@/components/atom/Fallback/Fallback";
-import 'filepond/dist/filepond.min.css'
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css'
 
 import GalleryUpload from "@/components/GalleryUpload/GalleryUpload";
 const slugify = require("slugify");
