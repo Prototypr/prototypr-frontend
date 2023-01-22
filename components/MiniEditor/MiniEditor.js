@@ -9,7 +9,7 @@ import Link from '@tiptap/extension-link'
 
 import MenuBar from './MenuBar';
 
-export default ({setDescription, initialContent='', height=250}) => {
+export default ({setDescription, initialContent='', height=250, placeholder}) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -24,7 +24,7 @@ export default ({setDescription, initialContent='', height=250}) => {
       }),
       Placeholder.configure({
         placeholder: ({ node }) => {
-            return "e.g. We're looking for an mid-level UI designer to help part-time with an onboarding flow. The position is remote friendly!";
+            return placeholder?placeholder:"e.g. We're looking for an mid-level UI designer to help part-time with an onboarding flow. The position is remote friendly!";
         },
       }),
     ],

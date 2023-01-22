@@ -6,7 +6,7 @@ import EmptyState from "./EmptyState";
 import PostCard from "./PostCard";
 import NewPagination from "../pagination";
 
-const Dashboard = ({postStatus}) => {
+const Dashboard = ({postStatus, postType}) => {
   const [currentTab, setCurrentTab] = useState("drafts");
   const { user } = useUser({
     redirectIfFound: false,
@@ -18,7 +18,7 @@ const Dashboard = ({postStatus}) => {
     refetch,
     total,
     pageSize
-  } = useFetchPosts(user, postStatus);
+  } = useFetchPosts(user, postStatus, postType);
 
   const [currentPage, setCurrentPage] = useState(1)
 

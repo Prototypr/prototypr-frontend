@@ -19,7 +19,7 @@ const SmallCard = ({link, title, image, tags, date, avatar, author }) => {
       ) : (
         ""
       )}
-      <div className="shrink mt-3 sm:mt-0 sm:px-4 md:pr-0 flex flex-col justify-center">
+      <div className="shrink mt-3 sm:mt-0 sm:px-4 md:pr-0 max-w-[500px] flex flex-col justify-center">
           <div className="flex  text-xs mb-1.5">
             {tags?.length
               ? tags.slice(0, 2).map((tag, index) => {

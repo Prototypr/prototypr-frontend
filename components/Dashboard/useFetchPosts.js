@@ -3,7 +3,7 @@ import { getUserArticles } from "@/lib/api";
 
 const PAGE_SIZE = 9
 
-const useFetchPosts = (user, postStatus) => {
+const useFetchPosts = (user, postStatus, postType) => {
 
     const [total, setTotal] = useState(null);
     const [posts, setPosts] = useState(null);
@@ -21,7 +21,7 @@ const useFetchPosts = (user, postStatus) => {
           pageOffset = 0
         }
     
-        const data = await getUserArticles({user, postStatus:postStatus, pageSize:PAGE_SIZE, offset:pageOffset});
+        const data = await getUserArticles({user, postStatus:postStatus, pageSize:PAGE_SIZE, offset:pageOffset, type:postType});
         const postsFromUser = data.userPosts?.posts
         setPosts(postsFromUser)
         setTotal(data.userPosts?.count)

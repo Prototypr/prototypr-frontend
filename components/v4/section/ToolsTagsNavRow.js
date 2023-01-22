@@ -1,32 +1,42 @@
 import Container from "@/components/container";
 // import BigTag from "@/components/v4/tag/BigTag";
-import GiantTag from "../tag/GiantTag";
+import { GiantPillTag } from "../tag/GiantTag";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 
-const ToolsTagsNavRow = ({tags, active}) => {
+const ToolsTagsNavRow = ({ tags, active }) => {
   return (
-    <Container maxWidth="max-w-[1320px]">
-      <div className="flex flex-wrap">
-      <GiantTag active={active=='All'} link={`/toolbox/page/1`}>All</GiantTag>
+      <div className="flex flex-wrap bg-white px-8 py-10 rounded-[30px]">
+        <GiantPillTag active={active == "All"} link={`/toolbox/page/1`}>
+          All
+        </GiantPillTag>
         {ALL_SLUGS_GROUPS.map((tag, index) => {
-          
           return (
             <>
-            {tag.moreLink?
-              <GiantTag active={active==tag.title} link={`${tag?.moreLink?.url || "/"}`}>{tag.title}</GiantTag>
-            :
-            tag.subItems?tag.subItems.map((tag,index)=>{
-              return(
-                <>
-                <GiantTag active={active==tag.title} link={`/toolbox/${tag?.tags[0]}/page/1`}>{tag.title}</GiantTag>
-                </>
-              )
-            })
-            :''}
-            </>)
+              {tag.moreLink ? (
+                <GiantPillTag
+                  active={active == tag.title}
+                  link={`${tag?.moreLink?.url || "/"}`}
+                >
+                  {tag.title}
+                </GiantPillTag>
+              ) : tag.subItems ? (
+                tag.subItems.map((tag, index) => {
+                  return (
+                    <GiantPillTag
+                      active={active == tag.title}
+                      link={`/toolbox/${tag?.tags[0]}/page/1`}
+                    >
+                      {tag.title}
+                    </GiantPillTag>
+                  );
+                })
+              ) : (
+                ""
+              )}
+            </>
+          );
         })}
       </div>
-    </Container>
   );
 };
 export default ToolsTagsNavRow;

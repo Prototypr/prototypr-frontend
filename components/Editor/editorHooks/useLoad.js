@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-const qs = require("qs");
-var axios = require("axios");
 
 import { getUserArticle } from "@/lib/api";
 import { getSlugFromArticleId } from "@/lib/api";
@@ -76,8 +74,8 @@ const useLoad = (type = "create", usr) => {
       if (post?.title && content.indexOf(post?.title) == -1) {
         content = `<h1>${post?.title}</h1>${content}`;
       }
-
-      if(post?.owner==user?.id){
+      //only allow owner of post, and post type article
+      if(post?.owner==user?.id && post?.type==='article'){
         setIsOwner(true)
       }else{
         setIsOwner(false)

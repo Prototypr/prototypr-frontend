@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const ToolCard = ({ posts, type, columns }) => {
+const ToolCard = ({ posts, type, columns, tagNumber }) => {
   return (
     <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-6 w-full flex-wrap`}>
       {posts.map((post, i) => {
@@ -14,7 +14,11 @@ const ToolCard = ({ posts, type, columns }) => {
         if (type === "toolboxContentPage") {
           title = post.title;
           slug = post.slug;
-          tags = post.tags.data.slice(0, 2);
+          if(tagNumber==1){
+            tags = post.tags.data.slice(0, 1);
+          }else{
+            tags = post.tags.data.slice(0, 2);
+          }
 
           coverImage =   
           post.featuredImage?.data?.attributes?.url
@@ -23,13 +27,16 @@ const ToolCard = ({ posts, type, columns }) => {
             ? post.legacyFeaturedImage
             : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
             
-            coverImage = (post?.legacyMedia?.logoNew || coverImage?.logoNew || post.legacyMedia?.mediaItemUrl)
+            coverImage = (post?.legacyMedia?.logoNew || coverImage?.logoNew || post.legacyMedia?.mediaItemUrl ||post.attributes?.legacyFeaturedImage?.mediaItemUrl)
             
         } else {
           title = post?.attributes?.title;
           slug = post.attributes?.slug;
-          tags = post?.attributes?.tags?.data.slice(0, 2);
-
+          if(tagNumber==1){
+            tags = post?.attributes?.tags?.data.slice(0, 1);
+          }else{
+            tags = post?.attributes?.tags?.data.slice(0, 2);
+          }
           // let tool = post.attributes
 
           // let coverImage =   
@@ -47,7 +54,7 @@ const ToolCard = ({ posts, type, columns }) => {
             : post.attributes?.legacyFeaturedImage
             ? post.attributes?.legacyFeaturedImage
             : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-            coverImage = (post?.attributes?.legacyMedia?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl)
+            coverImage = (post?.attributes?.legacyMedia?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl ||post.attributes?.legacyFeaturedImage?.mediaItemUrl)
 
           }
 
@@ -87,12 +94,12 @@ const ToolCard = ({ posts, type, columns }) => {
               )}
 
               <div className="flex flex-col justify-center ">
-                <p className="font-semibold line-clamp-3 mb-1">{title}</p>
+                <p className="font-semibold line-clamp-2 mb-1">{title}</p>
                 {tags && (
                   <div className="flex flex-wrap">
-                    {tags.map((x) => {
+                    {tags.map((x, i) => { 
                       return (
-                        <span className="px-3 mr-1 py-1 rounded-full bg-gray-100 text-xs capitalize">
+                        <span className={`${i>0?'hidden md:inline-block md:line-clamp-1':''} px-3 mr-1 py-1 h-[1.42rem] leading-wide overflow-hidden rounded-full bg-gray-100 text-xs capitalize`}>
                           {x.attributes.name}
                         </span>
                       );
@@ -102,7 +109,7 @@ const ToolCard = ({ posts, type, columns }) => {
                 {/* <p className="text-[#989898]">Pro Editing for everyone</p> */}
               </div>
             </div>
-            <div className="hidden md:flex flex-col justify-center">
+            <div className="flex hidden xs:flex md:flex lg:hidden xl:flex flex-col justify-center">
                 <button className="px-4 py-1 text-sm bg-transparent border  border-blue-600 group-hover:bg-blue-700 hover:bg-blue-700 group-hover:text-white hover:text-white text-blue-600 rounded-full">
                   Get
                 </button>

@@ -46,7 +46,7 @@ export default function ToolboxPage({
     activeNav={"toolbox"} preview={preview}>
       
       <ToolboxIndexPage 
-        paginationRoot={`/prototyping`}
+        paginationRoot={`/prototyping/${tag}`}
         filterCategories={ALL_SLUGS_CATEGORY}
         urlRoot={`/prototyping`}
         title={title}

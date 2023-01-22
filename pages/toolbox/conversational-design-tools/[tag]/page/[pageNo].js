@@ -36,7 +36,7 @@ export default function ToolboxPage({allPosts = [],title, preview, pagination,ta
       }}
         activeNav={'toolbox'} preview={preview}>
             <ToolboxIndexPage 
-            paginationRoot={`/toolbox/conversational-design-tools`}
+            paginationRoot={`/toolbox/conversational-design-tools/${tag}`}
         filterCategories={ALL_SLUGS_CATEGORY}
         urlRoot={`/toolbox/conversational-design-tools`}
         title={title}
