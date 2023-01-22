@@ -12,9 +12,6 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
 
-import 'filepond/dist/filepond.min.css'
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css'
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFilePoster)

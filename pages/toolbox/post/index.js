@@ -15,6 +15,9 @@ import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 // import useGetLocations from "@/components/Jobs/jobHooks/useGetLocations";
 // import useGetSkills from "@/components/Jobs/jobHooks/useGetSkills";
+import 'filepond/dist/filepond.min.css'
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css'
 import GalleryUpload from "@/components/GalleryUpload/GalleryUpload";
 
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
@@ -77,7 +80,7 @@ const PostToolPage = () =>{
       <div className="w-full relative max-w-4xl p-4 mx-auto ">
         <div
           className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto mt-8"
-          style={{ maxWidth: 390 }}
+          style={{ maxWidth: 690 }}
         >
           <LoginForm 
           title="Sign up to post a tool" 
