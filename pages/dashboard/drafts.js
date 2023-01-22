@@ -70,7 +70,8 @@ export default function Index() {
                         <h1 className="my-3 text-4xl font-semibold">Dashboard</h1>
                     </div>
                     <Navigation activeTab={1}/>
-                    <Dashboard postStatus={['draft', 'pending']}/>
+                    {/* set post type to empty so it gets tools too */}
+                    <Dashboard postStatus={['draft', 'pending']} postType=''/>
                 </div>
           </Layout>
         )

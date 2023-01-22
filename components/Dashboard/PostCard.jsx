@@ -80,6 +80,9 @@ const PostCard = ({ post, refetch, user }) => {
             <h3 className="text-lg font-medium max-w-md font-inter">
               {post.title}
             </h3>
+            {post.type?<p className="text-sm capitalize mb-3 text-gray-500">
+            {post.type}
+            </p>:''}
             <p className="text-sm text-gray-500 mb-10">
               {format(new Date(post.date), "LLLL d, yyyy")}
             </p>
@@ -89,7 +92,7 @@ const PostCard = ({ post, refetch, user }) => {
         {/* {(post.status === "draft" || post.status === "pending") && ( */}
         <div className="flex flex-row gap-2">
           <div>
-            <Link href={`/p/${post.id}`}>
+            <Link href={post.type=='article'?`/p/${post.id}`:`/toolbox/post/${post.id}/edit`}>
               <button className="text-sm underline text-black p-3 rounded-full hover:bg-gray-100">
                 <svg
                   width="15"
