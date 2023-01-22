@@ -12,6 +12,7 @@ import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import useLoad from "@/components/toolbox/hooks/useLoad";
 import Fallback from "@/components/atom/Fallback/Fallback";
+
 import GalleryUpload from "@/components/GalleryUpload/GalleryUpload";
 const slugify = require("slugify");
 

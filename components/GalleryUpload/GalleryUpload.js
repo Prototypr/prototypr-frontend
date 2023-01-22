@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 // https://github.com/pqina/react-filepond
 // Import React FilePond
-import { FilePond, File, registerPlugin } from 'react-filepond'
+import { FilePond, registerPlugin } from 'react-filepond'
 
 // Import FilePond styles
-import 'filepond/dist/filepond.min.css'
 
 // Import the Image EXIF Orientation and Image Preview plugins
 // Note: These need to be installed separately
@@ -12,9 +11,10 @@ import 'filepond/dist/filepond.min.css'
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
-
+import 'filepond/dist/filepond.min.css';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css'
+
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFilePoster)
