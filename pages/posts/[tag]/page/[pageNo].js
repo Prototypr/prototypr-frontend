@@ -6,18 +6,18 @@ const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 import Footer from "@/components/footer";
-import LargePostGridB from "@/components/v4/layout/LargePostGridB";
+// import LargePostGridB from "@/components/v4/layout/LargePostGridB";
 
-import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
+// import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
 import { getAllPostsForPostsPage, getCommonQuery, getPostsByPageForPostsPage } from "@/lib/api";
 // import Head from 'next/head'
 import { transformPostList } from "@/lib/locale/transformLocale";
-import { useState } from "react";
-import SignupSidebar from "@/components/newsletter/SignupSidebar";
-import SponsorSidebarCard from "@/components/SponsorSidebarCard";
-import { Waypoint } from "react-waypoint";
-import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
+// import { useState } from "react";
+// import SignupSidebar from "@/components/newsletter/SignupSidebar";
+// import SponsorSidebarCard from "@/components/SponsorSidebarCard";
+// import { Waypoint } from "react-waypoint";
+// import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 import TopicSection from "@/components/v4/section/TopicSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 import { Tag } from "phosphor-react/dist";

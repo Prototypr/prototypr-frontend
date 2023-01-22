@@ -49,9 +49,7 @@ export default function Breadcrumbs({
             href={`${urlRoot}/page/1`}
             // className={`capitalize ${pageNo?'':'text-bold'}`}>
             className={`capitalize font-semibold text-blue-600`}
-          >
-            All
-          </Link>
+          >All</Link>
         </div>
         </>
       ) : currentSlug ? (
@@ -60,9 +58,7 @@ export default function Breadcrumbs({
             href={`${urlRoot}/${currentSlug}/page/1`}
             // className={`capitalize ${pageNo?'':'text-bold'}`}>
             className={`capitalize font-semibold text-blue-600`}
-          >
-            {currentSlug}
-          </Link>
+          >{currentSlug}</Link>
         </div>
       ) : (
         <div className="inline p-1.5 px-3 border border-gray-900 border-opacity-10 rounded-full bg-white bg-opacity-50">

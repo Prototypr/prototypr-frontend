@@ -20,8 +20,7 @@ const CategoriesIconCard = ({ topic, withBackground, showCount }) => {
           });
         }}
         className="flex"
-      >
-        <div className={`${withBackground?'bg-white border border-black rounded-xl border-opacity-10 p-5':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
+      ><div className={`${withBackground?'bg-white border border-black rounded-xl border-opacity-10 p-5':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex flex-row rounded-xl">
           <div
               // style={{ flex: "0 0 3em" }}
