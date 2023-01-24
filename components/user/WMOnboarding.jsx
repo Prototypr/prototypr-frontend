@@ -1,9 +1,68 @@
 import { Wizard, Steps, Step } from "react-albus";
 import { Line } from "rc-progress";
 // import { useRouter } from 'next/router'
+import ToggleComponent from "../Primitives/Toggle";
+import CategoriesOption from "../v4/card/CategoriesOption";
+import Spinner from "../atom/Spinner/Spinner";
+import Button from "../Primitives/Button";
+import { useState } from "react";
+import { cloneDeep } from "lodash"
 
-export default function Alert({ preview }) {
+const options = [
+  {
+  name:'Discover job opportunities',
+  slug:'availability'
+  },
+  {
+  name:'Become a mentor',
+  slug:'mentor'
+  },
+  {
+  name:'Find a mentor',
+  slug:'grashopper'
+  },
+  {
+  name:'Earn money from writing',
+  slug:'monetization'
+  },
+  {
+  name:'Become a writer',
+  slug:'writer'
+  },
+  {
+  name:"Connect with people",
+  slug:'discord'
+  },
+  {
+  name:'Share your work',
+  slug:'monetization'
+  },
+]
+
+export default function Alert({ allTags }) {
   // const router = useRouter()
+
+ const [selectedTopics, setSelectedTopics] = useState(null)
+ const [submitting, setSubmitting] = useState(false)
+
+  const saveTopicsToUser = (next) =>{
+      next()
+  }
+  const updateSelected = (option, isChosen) =>{
+
+    let chosenTopics = cloneDeep(selectedTopics)
+    if(!chosenTopics?.length && isChosen){
+      chosenTopics = [option]
+    }else if(chosenTopics?.length){
+      const index = chosenTopics.findIndex(object => object.slug === option.slug);
+      if (index === -1 && isChosen) {
+        chosenTopics.push(option);
+      }else{
+        chosenTopics.splice(index, 1)
+      }
+    }
+    setSelectedTopics(chosenTopics)
+  }
 
   return (
     <Wizard
@@ -15,20 +74,32 @@ export default function Alert({ preview }) {
               id="step1"
               render={({ next }) => (
                 <>
-                  <div className="md:w-[585px] w-full px-10 lg:px-0 text-left">
+                  <div className="w-[300px] sm:w-[400px] xl:w-[750px] px-10 lg:px-0 text-left">
                     <div className="flex justify-center mx-auto mb-1">
                       <h2 className="text-3xl font-inter-serif text-gray-800 font-bold text-center">
-                        Let's change the web!
+                        Join Prototypr   
                       </h2>
-                      <img
+                      {/* <img
                         className="w-10 ml-2"
                         src="https://webmonetization.org/img/wm-icon-animated.svg"
-                      />
+                      /> */}
                     </div>
-                    {/* <h3 className="text-lg font-inter-serif text-gray-600 text-center mb-6">
-                                  Introducing a new prototypr
-                                </h3> */}
-                    <p className="text-gray-600 mt-3">
+                    <h3 className="text-lg font-inter-serif text-gray-500 text-center mb-6">
+                        Choose your favourite topics
+                    </h3>
+                    <div className="md:p-6 max-h-[400px] overflow-y-auto rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-6 md:gap-x-10 sm:grid-cols-2 xl:grid-cols-3">
+                    {allTags.map((topic, i) => (
+                      <>
+                      <div className="col-span-1 ">
+                        <ToggleComponent onPressChanged={(pressed)=>updateSelected(topic, pressed)}>
+                            <CategoriesOption showCount={false} withBackground={true} key={i} index={i} topic={topic}/>
+                        </ToggleComponent>
+                      </div>
+                    {/* <CategoriesIconCard showCount={false} withBackground={true} key={i} index={i} topic={topic}/> */}
+                      </>
+                    ))}
+                  </div>
+                    {/* <p className="text-gray-600 mt-3">
                       Welcome to a new Prototypr – together we can create a more{" "}
                       <span className="font-bold">open</span>,{" "}
                       <span className="font-bold">fair</span>, and{" "}
@@ -52,8 +123,8 @@ export default function Alert({ preview }) {
                       ' – finally, a solution to paywalls and intrusive ads.
                       Learn about what we're doing, and set up your profile to
                       be amongst the first credited members:
-                    </p>
-                    <ul className="list-disc px-12 text-gray-600 my-6 text-left">
+                    </p> */}
+                    {/* <ul className="list-disc px-12 text-gray-600 my-6 text-left">
                       <li className="my-2">
                         <span className="font-semibold">Change the web</span>:
                         No paywalls. Privacy-first, and built for people of
@@ -71,20 +142,16 @@ export default function Alert({ preview }) {
                         : Prototypr is an MIT Open License project for anyone to
                         remix and learn from.
                       </li>
-                    </ul>
+                    </ul> */}
                     <div className="w-full text-center relative flex justify-center mt-6">
-                      <button
-                        aria-label="Get started"
-                        onClick={next}
-                        className={`text-base z-10 px-4 py-3 mt-2 focus:outline-none focus:ring focus:ring-blue-400 flex justify-center rounded-md cursor-pointer 
-                                  hover:bg-blue-600
-                                  bg-blue-500  
-                                  text-white text-sm font-semibold leading-5
-                                  duration-200 ease-in-out 
-                                  transition`}
-                      >
-                        Get started
-                      </button>
+                    <Button 
+                      variant="confirm"
+                      onClick={()=>saveTopicsToUser(next)} 
+                      disabled={submitting}>
+                       {submitting?
+                        <Spinner size="sm" className="mx-auto p-1 cursor-loading "/>:
+                       'Continue'}
+                      </Button>
                     </div>
                   </div>
                 </>
@@ -95,17 +162,25 @@ export default function Alert({ preview }) {
               render={({ next, previous }) => (
                 <div className="md:w-[585px] w-full px-10 lg:px-0">
                   <div className="w-full p-8 text-center">
-                    <img
+                    {/* <img
                       className="mx-auto w-64 h-56  object-cover mb-6 rounded-lg"
                       src="https://open.prototypr.io/money.jpeg"
                       alt="Abstract illustration of a browser screen with 3 dollar bills taking up the screen"
-                    ></img>
+                    ></img> */}
                     <div>
-                      <h1 className="text-2xl text-gray-900 font-bold font-inter-serif mb-3 ">
-                        No Paywalls and Popups
-                      </h1>
+                      <h2 className="text-3xl font-inter-serif text-gray-800 font-bold text-center">
+                        Why are you here?   
+                      </h2>
+                      {/* <img
+                        className="w-10 ml-2"
+                        src="https://webmonetization.org/img/wm-icon-animated.svg"
+                      /> */}
+                    <h3 className="text-lg font-inter-serif text-gray-500 text-center mb-6">
+                        Let us know a little about your goals
+                    </h3>
                     </div>
-                    <p className="text-gray-600 mt-3">
+
+                    {/* <p className="text-gray-600 mt-3">
                       Free, unbiased, and quality design material is
                       increasingly hard to come by with the rise in paywalls and
                       privacy-invasive ads. The Open Source,{" "}
@@ -118,7 +193,7 @@ export default function Alert({ preview }) {
                       </a>{" "}
                       Prototypr platform explores an alternative model that
                       keeps the web open to readers, whilst rewarding writers.
-                    </p>
+                    </p> */}
                     {/* <ul className="list-disc pl-8 text-gray-600 mt-3">
                                 <li className="my-2"><span className="font-semibold">Accessible and Inclusive</span>: No more paywalls. Built for people of different abilities, and <a className="underline text-blue-600" target="_blank" href="https://open.prototypr.io/i18n">internationalised</a> for people of different backgrounds.</li>
                                 <li className="my-2"><span className="font-semibold">Reward and Reach</span>: Join a network to distribute your work, and make earnings based on the time people engage with it.</li>
@@ -356,8 +431,8 @@ export default function Alert({ preview }) {
           </Steps>
           <div
             className={`${
-              step.id == "step1" || step.id == "step5" ? "opacity-0" : ""
-            } flex flex-col align-center items-center mx-auto px-3 justify-center -mt-5`}
+               step.id == "step5" ? "opacity-0" : ""
+            }  ${ step.id == "step1"?'mt-10':'-mt-5'} flex flex-col align-center items-center mx-auto px-3 justify-center`}
             style={{ maxWidth: "250px" }}
           >
             {/* <p className="text-xs text-blue-default mb-2">{steps.indexOf(step) + 1} of {steps.length}</p> */}

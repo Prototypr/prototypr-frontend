@@ -6,11 +6,12 @@ import useUser from "@/lib/iron-session/useUser";
 import Meta from "@/components/meta";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { useState } from "react";
+import { getPopularTopics } from "@/lib/api";
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 const LoginSide = dynamic(() => import("@/components/sign-in/LoginSide"));
 const WMOnboarding = dynamic(() => import("@/components/user/WMOnboarding"));
 
-export default function Index() {
+export default function Index({allTags}) {
   const { user } = useUser({
     // redirectTo: '/account',
     redirectIfFound: false,
@@ -46,11 +47,11 @@ export default function Index() {
           <div className="flex items-center justify-center h-full w-full relative">
             {!user && <Fallback />}
 
-            <div className="absolute top-[2%] left-[2%]">
+            {/* <div className="absolute top-[2%] left-[2%]">
               <Link href="/" passHref prefetch={false}>
                 <Cross1Icon />
               </Link>
-            </div>
+            </div> */}
             {user && !user?.isLoggedIn ? (
               <div className="w-full h-full bg-[#F4F4F4] grid place-items-center">
                 <div className="max-w-[500px] mx-auto">
@@ -73,11 +74,31 @@ export default function Index() {
                 </div>
               </div>
             ) : (
-              user && user?.isLoggedIn && <WMOnboarding />
+              user && user?.isLoggedIn && <WMOnboarding allTags={allTags} />
             )}
           </div>
         </div>
       </div>
     </>
   );
+}
+
+
+export async function getStaticProps() {
+  // const popularToolTags = (await getPopularTopics({postType:'tool', pageSize:9})) || [];
+  const allTags = (await getPopularTopics({postType:'article', pageSize:30, offset:0})) || [];
+
+  // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+  // let alphabetical = morePopularTags.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+  allTags.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))
+
+
+
+  return {
+    props: {  
+      // popularToolTags, 
+      allTags:allTags
+     },
+    revalidate:8640//24 hrs
+  };
 }

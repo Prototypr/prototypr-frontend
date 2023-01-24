@@ -75,7 +75,7 @@ const useLoad = (type = "create", usr) => {
         content = `<h1>${post?.title}</h1>${content}`;
       }
       //only allow owner of post, and post type article
-      if(post?.owner==user?.id && post?.type==='article'){
+      if((post?.owner==user?.id && post?.type==='article') || user.isAdmin){
         setIsOwner(true)
       }else{
         setIsOwner(false)

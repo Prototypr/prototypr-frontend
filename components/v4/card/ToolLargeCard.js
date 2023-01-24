@@ -11,8 +11,6 @@ const ToolIconCard = ({ tool, withBackground, small, cardHeight, logoHeight }) =
 
   const plausible = usePlausible();
 
-
-  console.log(tool)
   let logo =   
   // tool.legacyMedia?.logoNew?tool.legacyMedia?.logoNew:
   // tool.legacyMedia?.mediaItemUrl?tool.legacyMedia?.mediaItemUrl:
