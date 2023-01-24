@@ -33,6 +33,7 @@ import NewsletterSection from "@/components/v4/section/NewsletterSection";
 import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
 import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 import SectionDivider from "@/components/v4/section/SectionDivider";
+import Link from "next/link";
 
 const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
   const { user } = useUser();
@@ -142,10 +143,13 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                   <h3 className="text-lg font-bold mb-3">Tags</h3>
                   <div className="flex flex-wrap">
                     {tags.map((tag, index) => {
+                      console.log(tag)
                       return (
-                        <div className={`inline-block text-sm px-3 py-1.5 bg-[#eef1f8] bg-opacity-60 border border-gray-200 rounded-full mr-3 mb-3`}>
-                        {tag?.attributes?.name}
-                    </div>
+                        // <Link href={`/toolbox/tag/${tag?.attributes?.slug}/page/1`}>
+                          <div className={`inline-block text-sm px-3 py-1.5 bg-[#eef1f8] bg-opacity-60 border border-gray-200 rounded-full mr-3 mb-3`}>
+                          {tag?.attributes?.name}
+                      </div>
+                        // </Link>
                       );
                     })}
                   </div>

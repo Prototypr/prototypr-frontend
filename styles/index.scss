@@ -541,3 +541,13 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
     white-space: nowrap;
 }
 
+[data-state="on"]{
+  .onboard-option-icon{
+    background:#95B4F5;
+  }
+  .onboard-option{
+    border:1px solid #2352BA;
+    color:#2352BA;
+    font-weight: bolder;
+  }
+}
