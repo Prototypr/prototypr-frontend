@@ -15,6 +15,7 @@ import WMButton from "./parts/WMButton";
 import SearchBar from "../SearchBar";
 import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
 import NavSponsor from "../v4/badge/NavSponsor";
+import SearchModal from "../SearchModal";
 // import { Waypoint } from "react-waypoint";
 
 const WMCounter = dynamic(
@@ -108,8 +109,8 @@ const Navbar = ({
                   <WMCounter />
                 </div> */}
 
-                <div className="hidden sm:block">
-                  <SearchBar />
+                <div className="">
+                  <SearchModal />
                 </div>
               </div>
               {/* <div className="hidden sm:ml-6 sm:block">

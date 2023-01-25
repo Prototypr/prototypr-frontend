@@ -381,35 +381,35 @@ background: linear-gradient(180deg, #1288FE 11.07%, rgba(255, 255, 255, 0) 83.98
   font-weight: 800;
   background: #dfeafb!important;
 }
-.ais-SearchBox{
-  width:260px!important;
-}
-.search-wide{
-  .ais-SearchBox{
-    width:460px!important;
-  }
-}
-@media (max-width: 1310px) {
-  .search-wide{ .ais-SearchBox{
-    width:400px!important;
-  }}
-}
-@media (max-width: 1230px) {
-  .search-wide{ .ais-SearchBox{
-    width:340px!important;
-  }}
-}
-@media (max-width: 1000px) {
-  .search-wide{ .ais-SearchBox{
-    width:280px!important;
-  }}
-}
+// .ais-SearchBox{
+//   width:260px!important;
+// }
+// .search-wide{
+//   .ais-SearchBox{
+//     width:460px!important;
+//   }
+// }
+// @media (max-width: 1310px) {
+//   .search-wide{ .ais-SearchBox{
+//     width:400px!important;
+//   }}
+// }
+// @media (max-width: 1230px) {
+//   .search-wide{ .ais-SearchBox{
+//     width:340px!important;
+//   }}
+// }
+// @media (max-width: 1000px) {
+//   .search-wide{ .ais-SearchBox{
+//     width:280px!important;
+//   }}
+// }
 @media (max-width: 600px) {
   .ais-SearchBox-input{
     padding:0.9rem 0.9rem 1rem 2.2rem!important;
   }
   .ais-SearchBox, .search-wide .ais-SearchBox{
-    width:140px!important;
+    // width:140px!important;
     input::placeholder {
      font-size: 12px!important;
     }
