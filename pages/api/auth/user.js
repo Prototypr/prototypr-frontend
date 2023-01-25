@@ -25,6 +25,8 @@ async function userRoute(req, res) {
   // cos you can log in with nextauth social providers/strapi passwordless 
   let sessionUser = null
   let isNextAuth = false
+  let userObject = nextAuthSessionUser?.user
+  
   if(nextAuthSessionUser?.user){
     sessionUser = nextAuthSessionUser
     isNextAuth = true
@@ -75,8 +77,8 @@ async function userRoute(req, res) {
     }
 
     //copy over the new profile data to the session user
-    sessionUser = updateSessionUser(freshProfileData, sessionUser)
-
+    userObject = updateSessionUser(freshProfileData, sessionUser)
+    
     //make sure the req session is up to date
     req.session.user={
       ...sessionUser,
@@ -90,6 +92,7 @@ async function userRoute(req, res) {
       ...sessionUser.login.user,
       jwt:sessionUser.login.jwt,
       isLoggedIn: true,
+      profile:userObject.login.user,
       isNextAuth
     })
   }

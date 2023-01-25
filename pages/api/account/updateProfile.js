@@ -27,7 +27,6 @@ import { updateSessionUser } from "@/lib/account/updateSessionUser";
       return res.status(500).end("User is not authenticated - invalid token");
     }
 
-
     //check if jwt is expired
     // const sessionExpired = checkSessionExpired(sessionUser.login.jwt)
     // if(sessionExpired){

@@ -116,8 +116,8 @@ const AvatarEditor = () => {
 
   useEffect(() => {
     let profPic = "";
-    if (user?.avatar?.url) {
-      profPic = "https://req.prototypr.io/" + user.avatar.url;
+    if (user?.profile?.avatar?.url) {
+      profPic = "https://req.prototypr.io/" + user.profile.avatar.url;
     }
     if (!profPic) {
       profPic =
