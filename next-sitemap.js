@@ -5,7 +5,7 @@ module.exports = {
     generateRobotsTxt: true, // (optional)
     sitemapSize: 5000,
     exclude: ['/server-sitemap-index.xml', '/sitemap-tools.xml',
-    '/account', '/account/*','/early-access','/sponsor','/payment-success','/payment-failure',
+    '/account', '/account/*','/onboard','/sponsor','/payment-success','/payment-failure',
      '/posts/sitemap.xml', '/posts/sitemap/*',
      '/toolbox/sitemap.xml', '/toolbox/sitemap/*',
      '/newsletter/sitemap.xml', '/newsletter/sitemap/*',

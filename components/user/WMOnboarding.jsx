@@ -16,7 +16,7 @@ export default function Onboarding({ allTags, user }) {
 
   return (
     <Wizard
-      basename="/early-access"
+      basename="/onboard"
       render={({ step, steps }) => (
         <div className="">
           <Steps>

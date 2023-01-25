@@ -14,7 +14,7 @@ export default function Index(props) {
   const router = useRouter();
 
   const { user } = useUser({
-    redirectTo: "/early-access",
+    redirectTo: "/onboard",
     redirectIfFound: false,
   });
 

@@ -37,7 +37,7 @@ const IntroBanner = ({ tools, sponsor }) => {
 
             </p>
             <div className="flex flex-row justify-start mt-4">
-                <Link href="/early-access">
+                <Link href="/onboard">
                 <Button className="bg-white text-blue-600" variant="confirmRounded">
                     Sign up
                 </Button>

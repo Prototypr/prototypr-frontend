@@ -12,7 +12,7 @@ import ArticleStats from "@/components/stats/StatsDashboard";
 
 export default function Index(props) {
   const { user } = useUser({
-    redirectTo: "/early-access",
+    redirectTo: "/onboard",
     redirectIfFound: false,
   });
 
