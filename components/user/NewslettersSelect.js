@@ -45,9 +45,11 @@ const NewslettersSelect = ({user,next, previous, selectedOptions, setSelectedOpt
      const initSelectedOptions = () =>{
       let selected = []
       for(var x = 0; x<options.length;x++){
+        if(user?.profile?.newsletters){
           if(user['profile']['newsletters'][options[x].slug]==true){
               selected.push(options[x])
           }
+        }
        
       }  
       setSelectedOptions(selected)
@@ -123,10 +125,10 @@ const NewslettersSelect = ({user,next, previous, selectedOptions, setSelectedOpt
                     </div>
                     <div className="md:p-6 border border-black/10 max-h-[400px] overflow-y-auto rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-6 md:gap-x-10 sm:grid-cols-2 xl:grid-cols-2">
                       {options.map((option,i) =>{
-                        let userAlreadyChosen
-                        if(!selectedOptions){
+                        let userAlreadyChosen = -1
+                        if(!selectedOptions && user?.profile?.newsletters){
                           userAlreadyChosen = (user['profile']['newsletters'][option.slug]==true)?1:-1
-                        }else{
+                        }else if(selectedOptions?.length){
                           userAlreadyChosen = selectedOptions?.findIndex(object =>object.slug === option.slug);
                         }
                         return(
