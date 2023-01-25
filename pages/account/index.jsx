@@ -44,20 +44,20 @@ const AccountPage = ({ preview }) => {
               </span>
               <UserForm
                 info={{
-                  firstName: user.firstName,
-                  secondName: user.secondName,
-                  location: user.location,
-                  website: user.website,
-                  bio: user.bio,
-                  paymentPointer: user.paymentPointer,
-                  twitter: user.twitter,
-                  dribbble: user.dribbble,
-                  github: user.github,
-                  kofi: user.kofi,
+                  firstName: user?.profile.firstName,
+                  secondName: user?.profile.secondName,
+                  location: user?.profile.location,
+                  website: user?.profile.website,
+                  bio: user?.profile.bio,
+                  paymentPointer: user?.profile.paymentPointer,
+                  twitter: user?.profile.twitter,
+                  dribbble: user?.profile.dribbble,
+                  github: user?.profile.github,
+                  kofi: user?.profile.kofi,
 
                   // ask about these later
                   email: user?.email,//this is always updated in the iron session when the user submits the form
-                  username: user?.username?user?.username:user.name,
+                  username: user?.profile?.username?user?.profile?.username:user?.profile.name,
                 }}
               />
             </div>

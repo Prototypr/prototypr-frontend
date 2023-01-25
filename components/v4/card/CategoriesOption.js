@@ -8,13 +8,13 @@ const CategoriesOption = ({ topic, withBackground, showCount }) => {
           <div className="flex flex-row rounded-xl">
           <div
               // style={{ flex: "0 0 3em" }}
-              className="w-12 h-12 onboard-option-icon flex-basis-12 bg-gray-100 p-3 my-auto mr-2 relative rounded-xl overflow-hidden"
+              className="w-[42px] h-[42px] onboard-option-icon flex-basis-12 bg-gray-100 p-1 my-auto mr-2 relative rounded-lg overflow-hidden"
             >
               {topic.icon?
               <img className="w-full h-full" src={topic.icon}/>:''}
             </div>
             <div className="flex flex-col pl-1 justify-center">
-              <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base">
+              <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 font-inter text-sm text-gray-800">
                 {topic?.name}
                 {/* <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                   Promoted

@@ -41,8 +41,8 @@ const UserMenu = ({ user, userLoading }) => {
                     <img
                       className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer object-cover"
                       src={
-                        user?.avatar?.url
-                          ? user.avatar.url
+                        user?.profile?.avatar?.url
+                          ? user.profile?.avatar.url
                           : "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/4f9713374ad556ff3b8ca33e241f6c43.png?updated_at=2022-12-14T10:55:38.818Z"
                       }
                     />

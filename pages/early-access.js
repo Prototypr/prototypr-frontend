@@ -74,7 +74,7 @@ export default function Index({allTags}) {
                 </div>
               </div>
             ) : (
-              user && user?.isLoggedIn && <WMOnboarding allTags={allTags} />
+              user && user?.isLoggedIn && <WMOnboarding user={user} allTags={allTags} />
             )}
           </div>
         </div>
@@ -90,7 +90,7 @@ export async function getStaticProps() {
 
   // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
   // let alphabetical = morePopularTags.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
-  allTags.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))
+  // allTags.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))
 
 
 

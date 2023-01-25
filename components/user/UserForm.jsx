@@ -68,7 +68,6 @@ const UserForm = ({ info }) => {
         });
       
       }else{
-        console.log(result)
         let msg = result?.error?.message
         // const text = await result.text();
         toast.error(msg?msg:"Error has occured.");

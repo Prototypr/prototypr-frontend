@@ -92,7 +92,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
       preview,
       pagination,
     },
-    revalidate: 86400,
+    revalidate: 60,
   };
 }
 
