@@ -27,8 +27,8 @@ const TopicsSelect = ({
 
  const initSelectedTopics = () =>{
   let selected = []
-  for(var x = 0; x<user?.tags?.length;x++){
-    const userAlreadyChosen = allTags?.findIndex(object =>parseInt(object.tag_id, 10) === parseInt(user?.tags[x].id, 10));
+  for(var x = 0; x<user?.profile?.tags?.length;x++){
+    const userAlreadyChosen = allTags?.findIndex(object =>parseInt(object.tag_id, 10) === parseInt(user?.profile?.tags[x].id, 10));
     selected.push(allTags[userAlreadyChosen])
   }  
   setSelectedTopics(selected)
@@ -98,7 +98,7 @@ const TopicsSelect = ({
                           {allTags.map((topic, i) => {
                             let userAlreadyChosen
                             if(!selectedTopics){
-                              userAlreadyChosen = user?.tags?.findIndex(object =>parseInt(object.id, 10) === parseInt(topic.tag_id, 10));
+                              userAlreadyChosen = user?.profile?.tags?.findIndex(object =>parseInt(object.id, 10) === parseInt(topic.tag_id, 10));
                             }else{
                               userAlreadyChosen = selectedTopics?.findIndex(object =>parseInt(object.tag_id, 10) === parseInt(topic.tag_id, 10));
                             }

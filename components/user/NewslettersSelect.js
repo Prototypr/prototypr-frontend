@@ -45,7 +45,7 @@ const NewslettersSelect = ({user,next, previous, selectedOptions, setSelectedOpt
      const initSelectedOptions = () =>{
       let selected = []
       for(var x = 0; x<options.length;x++){
-          if(user['newsletters'][options[x].slug]==true){
+          if(user['profile']['newsletters'][options[x].slug]==true){
               selected.push(options[x])
           }
        
@@ -125,7 +125,7 @@ const NewslettersSelect = ({user,next, previous, selectedOptions, setSelectedOpt
                       {options.map((option,i) =>{
                         let userAlreadyChosen
                         if(!selectedOptions){
-                          userAlreadyChosen = (user['newsletters'][option.slug]==true)?1:-1
+                          userAlreadyChosen = (user['profile']['newsletters'][option.slug]==true)?1:-1
                         }else{
                           userAlreadyChosen = selectedOptions?.findIndex(object =>object.slug === option.slug);
                         }

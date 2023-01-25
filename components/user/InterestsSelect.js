@@ -66,7 +66,7 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
        const initSelectedOptions = () =>{
         let selected = []
         for(var x = 0; x<options.length;x++){
-            if(user[options[x].slug]==true){
+            if(user['profile'][options[x].slug]==true){
                 selected.push(options[x])
             }
          
@@ -145,7 +145,7 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
                       {options.map((option,i) =>{
                         let userAlreadyChosen
                         if(!selectedOptions){
-                          userAlreadyChosen = (user[option.slug]==true)?1:-1
+                          userAlreadyChosen = (user['profile'][option.slug]==true)?1:-1
                         }else{
                           userAlreadyChosen = selectedOptions?.findIndex(object =>object.slug === option.slug);
                         }
