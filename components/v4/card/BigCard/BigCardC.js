@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Avatar from "../../avatar/Avatar";
 import MediumTag from "../../tag/MediumTag";
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 const BigCard = ({ link,title, excerpt, image, tags, date, avatar, author }) => {
   return (
@@ -9,9 +10,11 @@ const BigCard = ({ link,title, excerpt, image, tags, date, avatar, author }) => 
       <div className="w-full w-full relative h-[180px] sm:h-[224px] md:h-[270px] rounded-2xl overflow-hidden border border-gray-200">
         <Link href={link??''}>
           <Image
+            loader={gumletLoader}
             className="object-cover cursor-pointer"
             layout="fill"
             src={image}
+            alt={title}
           />
         </Link>
       </div>

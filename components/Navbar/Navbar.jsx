@@ -12,11 +12,11 @@ import { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 import WMButton from "./parts/WMButton";
-import SearchBar from "../SearchBar";
 import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
 import NavSponsor from "../v4/badge/NavSponsor";
 import SearchModal from "../SearchModal";
 // import { Waypoint } from "react-waypoint";
+import MenuItems from "@/components/Navbar/parts/MenuItems";
 
 const WMCounter = dynamic(
   () => import("@/components/WebMonetization/Counter"),
@@ -80,7 +80,8 @@ const Navbar = ({
                 )}
               </button>
             </div>
-            <div className="flex flex-1 items-center justify-center items-stretch justify-between">
+            {/* <div className="flex flex-1 items-center justify-center items-stretch justify-between"> */}
+            <div className="flex flex-1 items-center">
               <div className="flex mr-3 flex-shrink-0 items-center">
                 <Link href="/" as="/">
                   <>
@@ -98,25 +99,21 @@ const Navbar = ({
                     />
                   </>
                 </Link>
-                {!user?.isLoggedIn ? (
-                  <NavSponsor />
-                ) : (
-                  <div className="mx-1.5" />
-                )}
+                <NavSponsor />
                 {/* <div
                   className={`hidden md:block my-auto duration-300 ease-in-out`}
                 >
                   <WMCounter />
                 </div> */}
 
-                <div className="">
+                <div className="xl:mx-3">
                   <SearchModal />
                 </div>
               </div>
-              {/* <div className="hidden sm:ml-6 sm:block">
+              <div className="hidden sm:ml-6 sm:block">
               <MenuItems />
-            </div> */}
-              <div className="justify-end hidden xl:flex mr-6">
+            </div>
+              {/* <div className="justify-end hidden xl:flex mr-6">
                 {[
                   { label: "Home", url: "/" },
                   { label: "Toolbox", url: "/toolbox" },
@@ -132,7 +129,7 @@ const Navbar = ({
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
             <div
               className={`items-center sm:static sm:inset-auto flex ${
