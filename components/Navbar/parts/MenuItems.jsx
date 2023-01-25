@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { FormattedMessage, useIntl } from "react-intl";
+import { DotsThree } from "phosphor-react";
 const enterFromRight = keyframes({
   from: { transform: "translateX(200px)", opacity: 0 },
   to: { transform: "translateX(0)", opacity: 1 },
@@ -72,11 +73,11 @@ const itemStyles = {
   userSelect: "none",
   fontWeight: 400,
   lineHeight: 1,
-  borderRadius: 4,
+  borderRadius: 16,
   // fontSize: 15,
   //   color: indigo.indigo11,
   "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${indigo.indigo8}` },
-  "&:hover": { backgroundColor: indigo.indigo3, color: indigo.indigo11 },
+  "&:hover": { backgroundColor: indigo.indigo3, color: indigo.indigo11, borderRadius:'16px' },
 };
 
 const StyledTrigger = styled(NavigationMenuPrimitive.Trigger, {
@@ -93,7 +94,9 @@ const CustomTrigger = ({ children, to, ...props }) => {
 
   return (
     <div
-      className="rounded-md"
+      className={"rounded-full"+( isActive
+      ? "bg-blue-50 rounded-full border border-blue-100 border-1 text-blue-default"
+      : "rounded-full")}
       style={{
         background: isActive ? indigo.indigo3 : "",
         color: isActive ? indigo.indigo9 : "",
@@ -130,7 +133,7 @@ const StyledTriggerWithCaret = React.forwardRef(
     return(
     <CustomTrigger active={isActive} {...props} ref={forwardedRef}>
       {children}
-      <StyledCaret aria-hidden />
+      {props.showCaret!==false?<StyledCaret aria-hidden />:''}
     </CustomTrigger>
   )}
 );
@@ -217,7 +220,7 @@ const NextLink = ({ children, ...props }) => {
   const router = useRouter();
   let isActive = Boolean(router.asPath==(props.href));
 
-  if(props.href.indexOf('toolbox')>-1 && router.asPath=='/toolbox'){
+  if(props.href==('/toolbox') && router.asPath=='/toolbox'){
     isActive = true
   }
   if(props.href=='toolbox' && router.asPath.indexOf('toolbox')>-1){
@@ -231,8 +234,8 @@ const NextLink = ({ children, ...props }) => {
           style={props.css}
           className={
             isActive
-              ? "bg-blue-50 border border-blue-100 border-1 text-blue-default"
-              : ""
+              ? "bg-blue-50 rounded-full border border-blue-100 border-1 text-blue-default"
+              : "rounded-full"
           }
           {...props}
         >
@@ -532,7 +535,48 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 Jobs
               </NavigationMenuLink>
             </NavigationMenuItem>
-          
+
+            <NavigationMenuItem className="flex flex-col text-sm md:text-base xl:mr-2.5 justify-center">
+                <div className="-ml-1">
+              <NavigationMenuTrigger showCaret={false}  href="toolbox">
+                  <DotsThree weight="bold" size="22" color="rgba(0,0,0,0.5)"/>
+              </NavigationMenuTrigger>
+                </div>
+              <NavigationMenuContent showCaret={false} className="normal-case">
+                <ContentList layout="two">
+                  <ContentListItem
+                    title={'Newsletter'}
+                    href="/newsletter"
+                  >
+                    Subscribe to the Prototypr Weekly newsletter and see past issues.
+                  </ContentListItem>
+                  <ContentListItem
+                    title={'Publish with us'}
+                    href="/post/write-for-us"
+                  >
+                    Find out how to publish on Prototypr and get featured.
+                  </ContentListItem>
+                  <ContentListItem
+                    title={'Network'}
+                    href="/network"
+                  >
+                    Get feedback on your writing, and meet like minded creators.
+                  </ContentListItem>
+                  <ContentListItem
+                    title={'Earn micropayments'}
+                    href="/web-monetization"
+                  >
+                    Earn money based on the amount of time readers spend on your work.
+                  </ContentListItem>
+                  <ContentListItem
+                    title={'Open Source'}
+                    href="https://open.prototypr.io"
+                  >
+                    Learn how we built this platform by looking at the code and design.
+                  </ContentListItem>
+                </ContentList>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
 
          
           </NavigationMenuList>

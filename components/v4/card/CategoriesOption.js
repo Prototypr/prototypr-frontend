@@ -5,7 +5,7 @@ const CategoriesOption = ({ topic, withBackground, showCount }) => {
 
     
   return (
-          <div className="flex flex-row rounded-xl">
+          <div className="flex cursor-pointer flex-row rounded-xl">
           <div
               // style={{ flex: "0 0 3em" }}
               className="w-[42px] h-[42px] onboard-option-icon flex-basis-12 bg-gray-100 p-1 my-auto mr-2 relative rounded-lg overflow-hidden"
