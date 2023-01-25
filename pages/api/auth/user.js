@@ -70,15 +70,15 @@ async function userRoute(req, res) {
     });
     const {data:freshProfileData} = strapiUserRes
 
+    
+    //copy over the new profile data to the session user
+    userObject = updateSessionUser(freshProfileData, sessionUser)
+    
     //add user role and isAdmin flag
     if(sessionUser.login?.user){
       sessionUser.login.user.role = freshProfileData.role?.type
       sessionUser.login.user.isAdmin = (freshProfileData.role?.type==='admin')
     }
-
-    //copy over the new profile data to the session user
-    userObject = updateSessionUser(freshProfileData, sessionUser)
-    
     //make sure the req session is up to date
     req.session.user={
       ...sessionUser,
