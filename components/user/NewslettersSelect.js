@@ -66,6 +66,7 @@ const NewslettersSelect = ({user,next, previous, selectedOptions, setSelectedOpt
             data[options[x]?.slug] = false
           }
       }
+      data.onboardComplete = true
       const body = {data:{
         ...data
       }};

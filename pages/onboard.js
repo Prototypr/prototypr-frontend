@@ -4,18 +4,27 @@ import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
 import Meta from "@/components/meta";
-import { Cross1Icon } from "@radix-ui/react-icons";
-import { useState } from "react";
+// import { Cross1Icon } from "@radix-ui/react-icons";
+import { useEffect, useState } from "react";
 import { getPopularTopics } from "@/lib/api";
+import { useRouter } from "next/router";
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 const LoginSide = dynamic(() => import("@/components/sign-in/LoginSide"));
 const WMOnboarding = dynamic(() => import("@/components/user/WMOnboarding"));
 
 export default function Index({allTags}) {
+  const router = useRouter();
+
   const { user } = useUser({
     // redirectTo: '/account',
     redirectIfFound: false,
   });
+
+  useEffect(()=>{
+    if((user?.profile?.onboardComplete==true) && !router?.query?.onboard){
+      router.push("/");
+    }
+  },[user])
 
   const [isSignUp, setSignUp] = useState(true);
 

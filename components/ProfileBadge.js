@@ -275,7 +275,7 @@ export const DropdownMenuDemo = ({ icon, user }) => {
 
             <DropdownMenuItem
               onSelect={() => {
-                router.push(`/early-access`);
+                router.push(`/onboard?onboard=true`);
               }}
             >
               {/* <Link href="/account"> */}

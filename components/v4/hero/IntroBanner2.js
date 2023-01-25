@@ -46,7 +46,7 @@ const IntroBanner = ({ tools, sponsor }) => {
             Discover the people, ideas, and process behind designing and building great products.
           </p>
           <div className="flex mt-4 mb-6 sm:mb-0">
-            <Link href="/early-access">
+            <Link href="/onboard">
               <Button className="rounded-full bg-blue-600 text-white" variant="confirmBig">
                 Sign up
               </Button>

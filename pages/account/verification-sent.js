@@ -20,7 +20,7 @@ export default function Login({ email }) {
           A magic link has been sent you your email address
           {email && `, ${email}`}. Click the link to sign in.
         </p>
-        <a href="/early-acess">
+        <a href="/onboard">
           <Button color="primary">Back to sign in</Button>
         </a>
       </div>

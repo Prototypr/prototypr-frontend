@@ -11,7 +11,7 @@ const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
 export default function Index(props) {
   const { user } = useUser({
-    redirectTo: "/early-access",
+    redirectTo: "/onboard",
     redirectIfFound: false,
   });
 

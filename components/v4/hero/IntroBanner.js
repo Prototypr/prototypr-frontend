@@ -37,7 +37,7 @@ const IntroBanner = ({ tools, sponsor }) => {
             you can bring new ideas to spark a brighter future.
           </p>
           <div className="flex mt-4">
-            <Link href="/early-access">
+            <Link href="/onboard">
               <Button className="" variant="confirmRounded">
                 Sign up
               </Button>

@@ -92,7 +92,7 @@ export default function Login({ loginToken }) {
               Oh no! It looks like the email link has already been used, or is
               expired. Please try signing in again, or contact support if it keeps happening.
             </p>
-            <a href="/early-access">
+            <a href="/onboard">
               <Button color="primary">Back to sign in</Button>
             </a>
           </>
