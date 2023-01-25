@@ -70,7 +70,7 @@ export default function Onboarding({ allTags, user }) {
                     field on your profile page.
                   </p>
                   <p className="text-gray-600 max-w-md mb-3">
-                    You can also update your public profile with your avatar, name, and links to your social profiles so people.
+                    You can also update your public profile with your avatar, name, and links to your social profiles.
                   </p>
                   <div className="flex mx-auto mt-8 items-left justify-start ">
                     <a href="/account">
