@@ -538,7 +538,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
 
             <NavigationMenuItem className="flex flex-col text-sm md:text-base xl:mr-2.5 justify-center">
                 <div className="-ml-1">
-              <NavigationMenuTrigger showCaret={false}  href="toolbox">
+              <NavigationMenuTrigger showCaret={false}>
                   <DotsThree weight="bold" size="22" color="rgba(0,0,0,0.5)"/>
               </NavigationMenuTrigger>
                 </div>
@@ -557,7 +557,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                     Find out how to publish on Prototypr and get featured.
                   </ContentListItem>
                   <ContentListItem
-                    title={'Network'}
+                    title={'Join Network'}
                     href="/network"
                   >
                     Get feedback on your writing, and meet like minded creators.

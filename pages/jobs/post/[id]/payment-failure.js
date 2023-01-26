@@ -1,5 +1,5 @@
 // import dynamic from "next/dynamic";
-import Layout from "@/components/layout";
+import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 import Button from "@/components/Primitives/Button";
 import { useRouter } from "next/router";
@@ -35,7 +35,7 @@ const {
       }}
       activeNav={"toolbox"}
     >
-      <Container>
+      <Container maxWidth="max-w-[1320px] mx-auto">
       <div className="max-w-2xl pt-3 mb-3">
        <h1 className="text-xl font-bold">Payment Failure</h1>
         <p>The payment has been interruped.</p>
