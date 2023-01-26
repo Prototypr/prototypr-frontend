@@ -53,9 +53,9 @@ const SponsorEditPage = () =>{
 
   useEffect(()=>{
     if(user?.isLoggedIn){
-      if(user?.companies[0]?.name){
+      if(user?.profile?.companies[0]?.name){
         //just set to the first company, chances are ppl have 1 company to start with
-        setDefaultCompany(user.companies[0])
+        setDefaultCompany(user.profile?.companies[0])
       }else{
         setDefaultCompany({name:''})  
       }

@@ -6,13 +6,13 @@ import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
 import { useIntl } from "react-intl";
 import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
 import { getPopularTopics } from "@/lib/api";
-import { Tag } from "phosphor-react";
+// import { Tag } from "phosphor-react";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import Footer from "@/components/footer";
 // import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
 // import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 // import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
-import JumboTagB from "@/components/v4/card/JumboTagB";
+import JumboTagC from "@/components/v4/card/JumboTagC";
 import Link from "next/link";
 // import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
 // import CategoriesIconCardLarge from "@/components/v4/card/CategoriesIconCardLarge";
@@ -93,12 +93,12 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
 
 <Container maxWidth="max-w-[1320px]">
         <div className="mt-2 rounded-xl bg-white shadow-sm p-6 md:p-10">
-          <h2 className="text-lg mb-6 font-semibold">Most popular</h2>
+          <h2 className="text-lg mb-6 font-semibold">Popular topics</h2>
           {/* <PopularTagsSection popularTags={popularTags}/> */}
             {/* <JumboTagsSection popularTags={popularTags}/> */}
             <div className="grid grid-cols-12 xs:gap-4 md:gap-6 lg:gap-6">
-            {popularTags.slice(0,4).map((topic, i) => (
-                    <JumboTagB withBackground={true} key={i} index={i} topic={topic}/>
+            {popularTags.slice(0,12).map((topic, i) => (
+                    <JumboTagC withBackground={true} key={i} index={i} topic={topic}/>
                     ))}
               </div>
         </div>
@@ -154,7 +154,7 @@ export default function Index({ popularTags,popularToolTags, morePopularTags }) 
 }
 
 export async function getStaticProps() {
-  const popularTags = (await getPopularTopics({postType:'article', pageSize:8})) || [];
+  const popularTags = (await getPopularTopics({postType:'article', pageSize:12})) || [];
   // const popularToolTags = (await getPopularTopics({postType:'tool', pageSize:9})) || [];
   const morePopularTags = (await getPopularTopics({postType:'article', pageSize:30, offset:0})) || [];
 

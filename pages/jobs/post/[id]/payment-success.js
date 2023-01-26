@@ -1,6 +1,6 @@
 // import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import Layout from "@/components/layout";
+import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 // import axios from "axios";
 import useUser from '@/lib/iron-session/useUser'
@@ -129,7 +129,7 @@ export default function PaymentSuccess({}) {
       }}
       activeNav={"toolbox"}
     >
-      <Container>
+     <Container maxWidth="max-w-[1320px] mx-auto">
         <div className="max-w-2xl mt-3 mb-4">
         <h1 className="text-xl font-bold mb-3">{(!loading && !reloaded)?'Payment Successful':(!loading && reloaded)?'This page has expired':'Updating your job...'}</h1>
           {loading && <Spinner/>}

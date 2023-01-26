@@ -74,11 +74,11 @@ export default function JobPaymentPage({}) {
       </div>
       </div>
      :(available && !postObject?.active) ?
-      <Container maxWidth="max-w-[1320px] mx-auto">
+     <Container maxWidth="max-w-[1320px]">
         <div className="max-w-2xl pt-3 mb-3">
 
        <h1 className="text-xl mb-3 font-bold">Complete your purchase</h1>
-       <p>Once you complete your purchase, your job will be reviewed by our team and scheduled at the nearest date. Your job post is saved, so you can come back and pay later. </p>
+       <p>Once you complete your purchase, your post will be reviewed by our team and scheduled at the nearest date. Your job post is saved, so you can come back and pay later. </p>
         </div>
        {/* {!user?.isLoggedIn && <p>Please log in or create an account to buy a sponsorship.</p>} */}
 
