@@ -4,18 +4,29 @@ import useUser from "@/lib/iron-session/useUser";
 import Layout from "@/components/layout";
 import fetchJson from "@/lib/iron-session/fetchJson";
 import toast from "react-hot-toast";
-import Router from "next/router";
+import {useRouter} from "next/router";
 // const fetchJson = dynamic(() => import('@/lib/iron-session/fetchJson'), { ssr: true })
 // const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 const Spinner = dynamic(() => import('@/components/atom/Spinner/Spinner'))
 const Button = dynamic(() => import('@/components/atom/Button/Button'))
 
 export default function Login({ loginToken }) {
+  const router = useRouter();
+
   // here we just check if user is already logged in and redirect to profile
   const { mutateUser, user } = useUser({
-    redirectTo: "/account",
-    redirectIfFound: true,
+    // redirectTo: "/account",
+    redirectIfFound: false,
   });
+
+  useEffect(()=>{
+    if((!user?.profile || !user?.isLoggedIn)){
+    }else if (user?.profile?.onboardComplete==true){
+        router.push("/");
+    }else{
+        router.push("/onboard");
+    }
+  },[user])
 
   const [loginTokenPresent, setLoginTokenPresent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -49,7 +60,13 @@ export default function Login({ loginToken }) {
             setTimeout(()=>{
               // Router.push('/account')
               // Router.reload()
-              window.location.replace("/account");
+              if((!user?.profile || !user?.isLoggedIn)){
+              }else if (user?.profile?.onboardComplete==true){
+                  router.push("/");
+              }else{
+                  router.push("/onboard");
+              }
+              // window.location.replace("/account");
             },200)
           }).catch(e=>{
             console.log(e)

@@ -7,9 +7,9 @@ import Image from "next/image";
 import ErrorPage from "next/error";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
-import stc from "string-to-color";
+// import stc from "string-to-color";
 
-import { ToolBoxDisplay } from "../../components/toolbox/ToolboxGrid";
+// import { ToolBoxDisplay } from "../../components/toolbox/ToolboxGrid";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import useUser from "@/lib/iron-session/useUser";
 
@@ -34,6 +34,7 @@ import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
 import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import Link from "next/link";
+import Button from "@/components/Primitives/Button";
 
 const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
   const { user } = useUser();
@@ -53,7 +54,6 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
     
     coverImage = (tool?.legacyMedia?.logoNew || coverImage?.logoNew || tool.legacyMedia?.mediaItemUrl ||tool.legacyFeaturedImage?.mediaItemUrl)
     
-
   return (
     <>
       <div className="w-full">
@@ -102,15 +102,20 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                     );
                   })}
                 </div>
+                <div className="flex justify-between">
                 <div>
                   <a
                     target={"_blank"}
                     href={post?.attributes?.link + "?ref=prototypr.io"}
                   >
-                    <button className="max-w-[200px] mt-1 w-full py-4 bg-blue-600 text-white rounded-full">
+                    <Button className="rounded-full mt-3 bg-blue-600 text-white" variant={"confirmBig"}>
                       Visit Site
-                    </button>
+                    </Button>
                   </a>
+                </div>
+                <div className="absolute text-xs top-0 right-0 mr-8 mt-6 text-gray-600">
+                  Is this your tool? <Link className="underline" href={`/toolbox/post/${post.id}/claim`}>Claim this page</Link>.
+                </div>
                 </div>
               </div>
             </div>
@@ -143,7 +148,6 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                   <h3 className="text-lg font-bold mb-3">Tags</h3>
                   <div className="flex flex-wrap">
                     {tags.map((tag, index) => {
-                      console.log(tag)
                       return (
                         // <Link href={`/toolbox/tag/${tag?.attributes?.slug}/page/1`}>
                           <div className={`inline-block text-sm px-3 py-1.5 bg-[#eef1f8] bg-opacity-60 border border-gray-200 rounded-full mr-3 mb-3`}>
@@ -199,7 +203,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
 export default function Post({ post, relatedPosts, gallery, preview, popularTags }) {
   const router = useRouter();
 
-  if (!router.isFallback && !post?.attributes.slug) {
+  if (!router.isFallback && !post?.attributes?.slug) {
     return <ErrorPage statusCode={404} />;
   }
 
@@ -277,7 +281,7 @@ export default function Post({ post, relatedPosts, gallery, preview, popularTags
 export async function getStaticProps({ params, preview = null, locale }) {
   const data = await getTool(params.slug, preview);
 
-  let relatedPostsData = data.posts.data[0].attributes.relatedTools;
+  let relatedPostsData = data?.posts?.data[0]?.attributes?.relatedTools?data?.posts?.data[0]?.attributes?.relatedTools:false;
 
   //build the gallery here
   let PHOTO_SET = [];
@@ -350,7 +354,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
   // no point transforming these, cos they're all english anyway
   // relatedPostsData = transformPostList(relatedPostsData, locale)
-
+  
   return {
     props: {
       preview,
