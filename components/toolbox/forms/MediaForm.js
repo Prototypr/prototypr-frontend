@@ -44,7 +44,7 @@ const Form = ({user, postObject}) =>{
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     useEffect(()=>{
-        if(postObject?.logo || postObject.legacyMedia?.logoNew){
+        if(postObject?.logo || postObject.legacyLogo){
 
             formik.setFieldValue("logo",'exist')
         }
@@ -233,7 +233,7 @@ const [disabled, setDisabled] = useState(false);
                 <ImageUploader 
                 id={3}
                 companyLogoIsDefault={false} 
-                initialImage={postObject?.logo?postObject.logo?.url:''} 
+                initialImage={postObject?.logo?postObject.logo?.url:postObject.legacyLogo?postObject.legacyLogo:''} 
                 setFormValue={(blob) =>{
                     setUploadNewLogo(true)
                     formik.setFieldValue("logo",blob)
