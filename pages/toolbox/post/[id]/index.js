@@ -166,11 +166,21 @@ const ToolSteps = ({user, postObject}) =>{
               </>
               }
               <p className="text-xl mt-4 mb-6 text-gray-600">If you have a special offer or discount for the Prototypr audience, you can also create an offer for your tool to be featured on our Designer Deals page.</p>
-              <Link href="/dashboard">
+              <div className="flex">
+              <Link href={`/toolbox/post/${postObject?.id}/deal`}>
                 <Button variant="confirmMedium">
-                  Continue to dashboard
+                  Add a deal
                 </Button>
               </Link>
+              <div className="ml-3">
+                <Link href="/dashboard">
+                  <Button variant="confirmMediumSecondary">
+                    Continue to dashboard
+                  </Button>
+                </Link>
+              </div>
+              
+              </div>
               </div>
           </div>
         </div>

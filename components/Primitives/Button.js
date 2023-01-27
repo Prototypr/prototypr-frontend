@@ -48,6 +48,23 @@ const Button = styled("button", {
           cursor: "not-allowed",
         },
       },
+      confirmMediumSecondary:{
+        height:'auto',
+        padding:'0.875rem 1rem',
+        background:blackA.blackA3,
+        "&:hover": { backgroundColor: blackA.blackA4 },
+        "&:focus": { boxShadow: `0 0 0 2px ${blue.blue12}` },
+        fontSize: '1rem',
+        color:'#333',
+        fontWeight: 'bold',
+        lineHeight: '1.1em',
+        maxWidth: '20.4375rem',
+        "&[disabled]": {
+          // disabled styles
+          opacity: 0.5,
+          cursor: "not-allowed",
+        },
+      },
       confirm: {
         backgroundColor: blue.blue11,
         background: blue.blue11,

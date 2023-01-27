@@ -78,7 +78,7 @@ const FormSchema = Yup.object().shape({
 const formik = useFormik({
   validateOnChange:errores?true:false,
   initialValues: {
-      title: postObject?.deal?.content?postObject?.deal?.content:'',
+      title: postObject?.deal?.title?postObject?.deal?.title:'',
       link: postObject?.deal?.link?postObject.deal?.link:'',
       description: postObject?.deal?.description?postObject.deal?.description:'',
       code: postObject?.deal?.code?postObject.deal?.code:''
@@ -90,6 +90,7 @@ validationSchema: FormSchema,
 onSubmit: async(values) => {
 
   async function submit() {
+    console.log(values)
       setIsSubmitting(true)
       let publishPostEndpointConfig = {
         method: "put",
@@ -100,7 +101,9 @@ onSubmit: async(values) => {
   
         data: {
           data: {
-            ...values,
+            deal:{
+              ...values
+            }
           },
         },
       };
@@ -155,6 +158,7 @@ const [disabled, setDisabled] = useState(false);
               formik.handleSubmit();
           } else {
               // setDisabled(true);
+              console.log(formik)
               formik.handleSubmit();
               toast.error("Hmmmm, it seems like some of the fields are empty.");
           }
@@ -189,7 +193,7 @@ const [disabled, setDisabled] = useState(false);
                       setDescription(html)
                   }}/>
               </div>
-              {formik.errors.content && <span className="text-red-600 text-xs">{formik.errors.content}</span>}
+              {formik.errors.description && <span className="text-red-600 text-xs">{formik.errors.description}</span>}
 
               <FormInput id="code" label="Coupon code (optional)" error={formik.errors}>
                   <input
@@ -199,6 +203,18 @@ const [disabled, setDisabled] = useState(false);
                     onChange={formik.handleChange}
                     value={formik.values.code}
                     placeholder="PROTOTYPR50 (optional)"
+                    className={styles.input}
+                  />
+                </FormInput>
+
+              <FormInput id="link" label="Link to deal (optional)" error={formik.errors}>
+                  <input
+                    id="link"
+                    name="link"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.link}
+                    placeholder="https://unicornplatform.com/claim-deal"
                     className={styles.input}
                   />
                 </FormInput>
