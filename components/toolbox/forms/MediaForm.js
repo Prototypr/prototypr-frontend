@@ -44,7 +44,7 @@ const Form = ({user, postObject}) =>{
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     useEffect(()=>{
-        if(postObject?.logo){
+        if(postObject?.logo || postObject.legacyMedia?.logoNew){
 
             formik.setFieldValue("logo",'exist')
         }
