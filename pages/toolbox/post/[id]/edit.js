@@ -39,8 +39,6 @@ function isEmptyObject(obj) {
 
 const PostToolPage = () =>{
 
-
-
   const { user } = useUser({
     redirectTo: "/",
     redirectIfFound: false,

@@ -12,25 +12,26 @@ export default function Layout({
   background,
   padding,
   seo,
-  showWriteButton
+  showWriteButton,
+  showFooter
 }) {
   return (
     <>
       <Meta seo={seo} />
-      <EditorNav showWriteButton={showWriteButton} activeNav={activeNav}/>
+      <EditorNav padding={padding} showWriteButton={showWriteButton} activeNav={activeNav}/>
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#F3F4F6" }}
       >
         {/* <Alert preview={preview} /> */}
         <main
-          className="py-24 -mt-3 mx-auto"
+          className={`${padding==false?'':'py-24  -mt-3'} mx-auto`}
           style={{ maxWidth: padding == false ? "" : "1200px" }}
         >
           {children}
         </main>
       </div>
-      <Footer />
+      {showFooter!==false?<Footer />:''}
     </>
   );
 }

@@ -12,7 +12,7 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({ editorInstance,showWriteButton,activeNav, editorButtons, isEditor, postStatus }) {
+export default function EditorNav({ editorInstance,showWriteButton,activeNav, editorButtons, isEditor, postStatus, padding }) {
 
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -86,7 +86,7 @@ export default function EditorNav({ editorInstance,showWriteButton,activeNav, ed
       <>
         <div
           className="mx-auto text-sm px-2 sm:px-6 lg:px-8"
-          style={{ maxWidth: "1200px" }}
+          style={{ maxWidth: padding===false?'':"1200px" }}
         >
           <div
             className={` transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-16`}

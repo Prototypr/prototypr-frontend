@@ -92,7 +92,7 @@ const PostCard = ({ post, refetch, user }) => {
         {/* {(post.status === "draft" || post.status === "pending") && ( */}
         <div className="flex flex-row gap-2">
           <div>
-            <Link href={post.type=='article'?`/p/${post.id}`:`/toolbox/post/${post.id}/edit`}>
+            <Link href={post.type=='article'?`/p/${post.id}`:`/toolbox/post/${post.id}`}>
               <button className="text-sm underline text-black p-3 rounded-full hover:bg-gray-100">
                 <svg
                   width="15"
