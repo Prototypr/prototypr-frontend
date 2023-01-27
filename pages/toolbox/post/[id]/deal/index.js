@@ -13,6 +13,8 @@ import * as Yup from "yup";import toast from "react-hot-toast";
 import { FormContainer } from "@/components/Jobs/FormStepper";
 import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import { FormInput } from "@/components/Jobs/FormInput";
+import LoginSide from "@/components/sign-in/LoginSide";
+import Link from "next/link";
 
 function isEmptyObject(obj) {
   return (
@@ -50,27 +52,61 @@ const CreateDealForm = () =>{
   const { loading, postObject, isOwner } =
   useLoad(user);
 
+
+  const [submitted,setSubmitted] = useState(false)
+
+
   return(
     <Layout showFooter={false} padding={false} seo={seo} showWriteButton={false} background="#EFF2F8">
-     <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
-    {!user && loading?<Fallback/>:
-    postObject? 
-    <Form postObject={postObject} user={user} />:null}
-    </div>
+      <div className="h-full min-h-screen w-full grid md:grid-cols-12">
+      <div className="hidden w-full h-full md:block md:col-span-6 lg:col-span-4">
+            <div className="flex pt-24 items-center justify-center h-full w-full relative bg-[#195DE2] text-white">
+              <LoginSide title="Create your designer deal" user={user} />
+            </div>
+          </div>
+          <div className="col-span-12 md:col-span-6 lg:col-span-8">
+          <div className="justify-center mt-20 w-full  px-2 sm:px-6 lg:px-10">
+          <div className="flex items-center justify-center h-full w-full relative">
+        {!user && loading?<Fallback/>:
+        postObject && !submitted? 
+        <Form postObject={postObject}setSubmitted={setSubmitted} user={user} />:
+        <div className="flex pt-20 text-center flex-col">
+        <h1 className="text-3xl font-bold mx-auto mb-2">Your deal is submitted!</h1>
+        <p className="text-xl mt-4 text-gray-600">Thanks for submitting it.</p>
+        <div className="flex mt-6">
+            <Button onClick={()=>setSubmitted(false)} variant="confirmMedium">
+              Edit deal
+            </Button>
+          <div className="ml-3">
+            <Link href="/dashboard">
+              <Button variant="confirmMediumSecondary">
+                Continue to dashboard
+              </Button>
+            </Link>
+          </div>
+              
+              </div>
+      </div>
+        }
+        </div>
+        </div>
+        </div>
+      </div>
     </Layout>
   )
 
 }
 export default CreateDealForm
 
-const Form = ({user, postObject}) =>{
+const Form = ({user, postObject, setSubmitted}) =>{
+
 
   const [errores, setErrores] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
 const FormSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
-  link: Yup.string().required("Link is required"),
+  link: Yup.string().optional(),
   description: Yup.string().required("Description is required"),
   code: Yup.string().optional(),
 });
@@ -90,7 +126,6 @@ validationSchema: FormSchema,
 onSubmit: async(values) => {
 
   async function submit() {
-    console.log(values)
       setIsSubmitting(true)
       let publishPostEndpointConfig = {
         method: "put",
@@ -111,6 +146,7 @@ onSubmit: async(values) => {
       await axios(publishPostEndpointConfig)
         .then(async function (response) {
           setIsSubmitting(false)
+          setSubmitted(true)
         })
         .catch(function (error) {
           console.log(error)
@@ -143,11 +179,12 @@ const [disabled, setDisabled] = useState(false);
       setDescription(postObject?.deal?.description)
   },[postObject])
 
+
   return(
       <div className="max-w-2xl pt-20 pb-20 w-full">
           <div className="my-2 mb-6 ">
-          <h1 className="text-2xl font-bold mx-auto mb-2">Add a deal to '{postObject?.title}'</h1>
-          <p className="text-gray-600">Create an offer for your tool on our designer deals page.</p>
+          <h1 className="text-2xl font-bold mx-auto mb-2">Create a deal for '{postObject?.title}'</h1>
+          <p className="text-gray-600">Your offer will be shown on our designer deals page.</p>
           </div>
           <form
           className="p-8 shadow-sm bg-white rounded-xl"
@@ -158,7 +195,6 @@ const [disabled, setDisabled] = useState(false);
               formik.handleSubmit();
           } else {
               // setDisabled(true);
-              console.log(formik)
               formik.handleSubmit();
               toast.error("Hmmmm, it seems like some of the fields are empty.");
           }
@@ -239,134 +275,3 @@ const [disabled, setDisabled] = useState(false);
       </div>
   )
 }
-
-// export default function JobPaymentPage({}) {
-
-//   const [PRODUCT_SLUG, setProductSlug] = useState('job-post')
-
-
-//   const {user, mutateUser} = useUser({
-//     // redirectTo: '/',
-//     redirectIfFound: false,
-//   })
-
-//   const { 
-//     loading,
-//     content,
-//     postId,
-//     title,
-//     isOwner,
-//     postObject} =useLoad(user);
-   
-
-//     const router = useRouter()
-   
-
-//     // useEffect(()=>{
-//     //   if(postObject?.active){
-//     //     router.push('/')
-//     //   }
-
-//     // },[postObject])
-
-
-//     const [available, setAvailable] = useState(true)
-    
-//     useEffect(()=>{        
-//         const getProd = async()=>{
-            
-//           const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/strapi-stripe/getProductBySlug/${PRODUCT_SLUG}`)
-//             if(response.data.availability===false){
-//               setAvailable(false)
-//             }
-//         }
-//         getProd()
-     
-//       },[])
-
-//   return (
-//     <Layout
-//       seo={{
-//         title: "Prototypr Toolbox - new design, UX and coding tools.",
-//         description:
-//           "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
-//         //   image: "",
-//         // canonical: "https://prototypr.io/toolbox",
-//         // url: "https://prototypr.io/toolbox",
-//       }}
-//       activeNav={"toolbox"}
-//     >
-//      {loading?
-//       <div className="relative w-full h-full pt-10 flex">
-//       <div className="my-auto mx-auto">
-//         <Spinner />
-//       </div>
-//       </div>
-//      :(available && !postObject?.active) ?
-//      <Container maxWidth="max-w-[1320px]">
-//         <div className="max-w-2xl pt-3 mb-3">
-
-//        <h1 className="text-xl mb-3 font-bold">Complete your purchase</h1>
-//        <p>Once you complete your purchase, your post will be reviewed by our team and scheduled at the nearest date. Your job post is saved, so you can come back and pay later. </p>
-//         </div>
-//        {/* {!user?.isLoggedIn && <p>Please log in or create an account to buy a sponsorship.</p>} */}
-
-       
-//        <Button 
-//        onClick={()=>{
-        
-
-//         localStorage.setItem("strapiStripeUrl", process.env.NEXT_PUBLIC_API_URL);
-//         const getProductApi = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/getProductBySlug/" + PRODUCT_SLUG;
-//         const checkoutSessionUrl = process.env.NEXT_PUBLIC_API_URL + "/strapi-stripe/createCheckoutSession/";
-//         const successUrl = `${process.env.NEXT_PUBLIC_HOME_URL}/jobs/post/${postId}/payment-success`;
-//         const cancelUrl = `${process.env.NEXT_PUBLIC_HOME_URL}/jobs/post/${postId}/payment-failure`;
-
-//         fetch(getProductApi, {
-//           method: "get",
-//           mode: "cors",
-//           headers: new Headers({
-//             "Content-Type": "application/json",
-//           }),
-//         })
-//         .then((response) => response.json())
-
-//           .then((response) => {
-//             fetch(checkoutSessionUrl, {
-//               method: "post",
-//               body: JSON.stringify({
-//                 stripePriceId: response.stripePriceId,
-//                 productId: response.id,
-//                 productName: response.title,
-//                 postId:postId,
-//                 postType:'job',
-//                 successUrl,
-//                 cancelUrl
-//               }),
-//               mode: "cors",
-//               headers: new Headers({
-//                 //  Authorization: `Bearer ${user?.jwt}`,
-//                 "Content-Type": "application/json",
-//               }),
-//             })
-//               .then((response) => response.json())
-//               .then((response) => {
-//                 if (response.id) {
-//                   //the response.url is the strapi checkout 
-//                   window.location.replace(response.url);
-//                 }
-//               });
-//           });
-//        }} type="button">Complete Purchase</Button>
-//       </Container>:
-//        <Container>
-//       <div className="max-w-2xl pt-3 mb-3">
-
-//       <h1 className="text-xl mb-3 font-bold">Payment is complete</h1>
-//       <p>Payment for this job has already been made. </p>
-//        </div>
-//        </Container>
-//       }
-//     </Layout>
-//   );
-// }
