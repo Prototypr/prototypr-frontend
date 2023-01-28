@@ -53,134 +53,153 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
     
     coverImage = (tool?.legacyMedia?.logoNew || coverImage?.logoNew || tool.legacyMedia?.mediaItemUrl ||tool.legacyFeaturedImage?.mediaItemUrl)
-    
+
   return (
     <>
-      <div className="w-full">
-        <div
+      <div className="w-full mx-auto">
+      <Container padding={false} maxWidth="w-full relative z-0" >
+          <div className="pt-[20px] md:pt-[50px] pb-[240px] relative overflow-hidden p-6 border-gray-200">
+          <div
           style={{
             // backgroundColor:`${stc(post?.attributes?.title)}`,
             // backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
           }}
-          className="relative bg-gray-100 bg-opacity-90 overflow-hidden w-full p-5 md:p-10 flex flex-col justify-center rounded-2xl"
+          className="relative w-full max-w-[1200px] mx-auto flex flex-col justify-center"
         >
+          
             {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
           <div className="w-full z-10 mx-auto">
-            <div className="flex flex-col justify-between">
-              <div className="mb-2 w-[70px] h-[70px] shadow-md rounded-3xl bg-white">
-                <Image
-                  loader={gumletLoader}
-                  priority={false < 2 ? `true` : `false`}
-                  data-priority={false < 2 ? `true` : `false`}
-                  fetchpriority={false < 2 ? "true" : "false"}
-                  data-gmlazy={false < 2 ? `false` : `true`}
-                  width="100"
-                  height="100"
-                  alt="Brand logo for external website's link"
-                  className=" border rounded-2xl bg-white"
-                  src={coverImage}
-                />
-              </div>
-              <div className="flex flex-col justify-between">
-                <h1 className="text-4xl mb-3 my-0 py-0 text-gray-900 font-bold">
-                  {post?.attributes?.title}
-                </h1>
-                {/* {post?.attributes?.author && (
-                  <div className="sm:hidden lg:block">
-                    <AuthorCard
-                      author={post.attributes.author}
-                      avatar={post.attributes?.author}
+            <div className="flex flex-col md:flex-row justify-between">
+              <div className="flex flex-col md:flex-row">
+
+                  <div className="mr-4 mb-4 md:mb-0 w-[80px] h-[80px] shadow-md rounded-3xl bg-white">
+                    <Image
+                      loader={gumletLoader}
+                      priority={false < 2 ? `true` : `false`}
+                      data-priority={false < 2 ? `true` : `false`}
+                      fetchpriority={false < 2 ? "true" : "false"}
+                      data-gmlazy={false < 2 ? `false` : `true`}
+                      width="100"
+                      height="100"
+                      alt="Brand logo for external website's link"
+                      className=" border rounded-2xl bg-white"
+                      src={coverImage}
                     />
                   </div>
-                )} */}
-                <div className="hidden md:flex mb-3 flex-row">
-                  {tags.map((tag) => {
-                    return (
-                      <span className="px-4 py-0.5 text-sm mr-2 capitalize rounded-full text-gray-600 border border-opacity-10 border-white bg-black bg-opacity-5 backdrop-blur-md">
-                        {tag.attributes.name}
-                      </span>
-                    );
-                  })}
-                </div>
-                <div className="flex justify-between">
-                <div>
+                    <div className="flex flex-col justify-center">
+                      <h1 className="text-3xl text-gray-900 font-bold">
+                        {post?.attributes?.title}
+                      </h1>
+                      {/* {post?.attributes?.author && (
+                        <div className="sm:hidden lg:block">
+                          <AuthorCard
+                            author={post.attributes.author}
+                            avatar={post.attributes?.author}
+                          />
+                        </div>
+                      )} */}
+                      {/* <div className="hidden md:flex mb-3 flex-row">
+                        {tags.map((tag) => {
+                          return (
+                            <span className="px-4 py-0.5 text-sm mr-2 capitalize rounded-full text-gray-600 border border-opacity-10 border-white bg-black bg-opacity-5 backdrop-blur-md">
+                              {tag.attributes.name}
+                            </span>
+                          );
+                        })}
+                      </div> */}
+                      <div className="text-sm mt-1 top-0 right-0 text-gray-600">
+                        Is this your tool? <Link className="underline" href={`/toolbox/post/${post.id}/claim`}>Claim this page</Link>.
+                      </div>
+                    </div>
+              </div>
+
+              <div className="flex mt-6 md:mt-0 md:flex-col md:justify-center">
+                <div className="flex justify-end">
                   <a
                     target={"_blank"}
                     href={post?.attributes?.link + "?ref=prototypr.io"}
                   >
-                    <Button className="rounded-full mt-3 bg-blue-600 text-white" variant={"confirmBig"}>
+                    <Button className="rounded-full bg-blue-600 text-white" variant={"confirmBig"}>
                       Visit Site
                     </Button>
                   </a>
                 </div>
-                <div className="absolute text-xs top-0 right-0 mr-8 mt-6 text-gray-600">
+                {/* <div className="text-xs top-0 right-0 mt-3 text-gray-600">
                   Is this your tool? <Link className="underline" href={`/toolbox/post/${post.id}/claim`}>Claim this page</Link>.
-                </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
         </div>
-        
-        <div className="grid grid-cols-12 p-6 h-full">
-        <div className="col-span-12 xl:col-span-8">
-          <div className=" max-w-[48rem]">
-            <div
-                style={{ color: "#333", fontSize: "20px", lineHeight: '33px' }}
-                className="mt-3  max-w-[48rem] popup-modal-content"
-                dangerouslySetInnerHTML={{
-                  __html: post.attributes.content,
-                }}
-              ></div>
+            <img src="/static/images/surf.svg" className="absolute -mt-1  w-full bottom-0 z-40 left-0"/>
+    
+          </div>
+        </Container>
+        <Container maxWidth="w-full bg-[#EFF4FB] relative z-10 pt-8">
+          <div className="max-w-[1200px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 px-3 md:px-0 h-full">
+          <div className="col-span-12 lg:col-span-8">
+            <div className="bg-white -mt-[214px] p-6 rounded-xl shadow-sm border border-black/5 w-full lg:max-w-[48rem]">
+            <h3 class="text-xl font-bold mb-3">Overview</h3>
+              <div
+                  style={{ color: "#333", fontSize: "20px", lineHeight: '33px' }}
+                  className="mt-3 max-w-[48rem] popup-modal-content"
+                  dangerouslySetInnerHTML={{
+                    __html: post.attributes.content,
+                  }}
+                ></div>
+            </div>
+            <div className="bg-white mt-8 p-6 mb-6 rounded-xl shadow-sm border border-black/5 max-w-[48rem]">
+            <h3 class="text-xl font-bold">Gallery</h3>
             {post?.attributes && (
-              <PopupGallery
-                item={post.attributes}
-                gallery={gallery}
-                rounded={true}
-                arrows={false}
-              />
-            )}
-          </div>
-        </div>
-        <div className="col-span-12 xl:col-span-4">
-            <div className="flex flex-col gap-10">
-              <div className="font-inter">
-                  <h3 className="text-lg font-bold mb-3">Tags</h3>
-                  <div className="flex flex-wrap">
-                    {tags.map((tag, index) => {
-                      return (
-                        // <Link href={`/toolbox/tag/${tag?.attributes?.slug}/page/1`}>
-                          <div className={`inline-block text-sm px-3 py-1.5 bg-[#eef1f8] bg-opacity-60 border border-gray-200 rounded-full mr-3 mb-3`}>
-                          {tag?.attributes?.name}
-                      </div>
-                        // </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              <div className="flex flex-col">
-                <h2 className="text-lg mb-3 mt-6 font-bold">
-                  Related to {post?.attributes?.title}
-                </h2>
-                <ToolCard posts={relatedPosts} columns={'grid-cols-1'} type="toolboxContentPage" />
-              </div>
-              {/* <div className="flex flex-col gap-3 pb-5">
-                <h2 className="text-3xl font-bold">
-                  Discover more <br /> Related Content
-                </h2>
-                <div className="w-full grid grid-cols-2 gap-5">
-                  <div className="w-full h-[100px] bg-gray-100"></div>
-                  <div className="w-full h-[100px] bg-gray-100"></div>
-                  <div className="w-full h-[100px] bg-gray-100"></div>
-                  <div className="w-full h-[100px] bg-gray-100"></div>
-                </div>
-              </div> */}
+                <PopupGallery
+                  item={post.attributes}
+                  gallery={gallery}
+                  rounded={true}
+                  arrows={false}
+                />
+              )}
             </div>
-        </div>
-        </div>
+          </div>
+          <div className="col-span-12 lg:col-span-4">
+              <div className="flex flex-col mt-0 lg:-mt-[214px] gap-6 xl:gap-10">
+                <div className="font-inter bg-white p-6 rounded-xl shadow-sm border border-black/5">
+                    <h3 className="text-lg font-bold mb-3">Tags</h3>
+                    <div className="flex flex-wrap">
+                      {tags.map((tag, index) => {
+                        return (
+                          // <Link href={`/toolbox/tag/${tag?.attributes?.slug}/page/1`}>
+                            <div className={`inline-block text-sm px-3 py-1.5 bg-[#eef1f8] bg-opacity-60 border border-gray-200 rounded-full mr-3 mb-3`}>
+                            {tag?.attributes?.name}
+                        </div>
+                          // </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                <div className="flex mb-6 flex-col">
+                  <h2 className="text-lg mb-3 mt-3 xl:mt-6 font-bold">
+                    Related to {post?.attributes?.title}
+                  </h2>
+                  <ToolCard posts={relatedPosts} columns={'grid-cols-1'} type="toolboxContentPage" />
+                </div>
+                {/* <div className="flex flex-col gap-3 pb-5">
+                  <h2 className="text-3xl font-bold">
+                    Discover more <br /> Related Content
+                  </h2>
+                  <div className="w-full grid grid-cols-2 gap-5">
+                    <div className="w-full h-[100px] bg-gray-100"></div>
+                    <div className="w-full h-[100px] bg-gray-100"></div>
+                    <div className="w-full h-[100px] bg-gray-100"></div>
+                    <div className="w-full h-[100px] bg-gray-100"></div>
+                  </div>
+                </div> */}
+              </div>
+          </div>
+          </div>
+        </Container>
       </div>
-      <div className="px-0 md:px-3">
-        
+      <Container maxWidth=" w-full pb-16 bg-[#EFF4FB] relative z-10 pt-8">
+          <div className="max-w-[1200px] pt-6 border-t border-black/15 mx-auto px-3 md:px-0 h-full">
         <div className="mb-8">
           <NewsletterSection padding={false} title="Get the best tools every week"/>
         </div>
@@ -194,7 +213,8 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
           <h2 className="text-lg mb-4 font-semibold">Popular topics</h2>
           <PopularTagsSection popularTags={popularTags}/>
         </div>
-      </div>
+        </div>
+      </Container>
       {/* <NewsletterSection title="Get the best tools every week"/> */}
     </>
   );
@@ -216,8 +236,9 @@ export default function Post({ post, relatedPosts, gallery, preview, popularTags
   return (
     <Layout
       padding={false}
-      background={"#fff"}
-      maxWidth={"search-wide max-w-[1380px]"}
+      background={"RGBA(204, 230, 255, 0.9)"}
+      // background={"#fff"}
+      maxWidth={"search-wide"}
       seo={{
         title: `${
           post?.attributes?.seo?.opengraphTitle
@@ -268,9 +289,7 @@ export default function Post({ post, relatedPosts, gallery, preview, popularTags
         </div>
       </Container> */}
       {/* <div className="w-full mt-6 md:mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6"> */}
-       <Container maxWidth="max-w-[1320px] mt-3 mb-6 pb-16">
         <ToolContent popularTags={popularTags} post={post} gallery={gallery} relatedPosts={relatedPosts} />
-       </Container>
       {/* </div> */}
 
       <Footer/>

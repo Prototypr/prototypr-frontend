@@ -1,3 +1,12 @@
+import { useEffect, useState } from "react";
+import useUser from "@/lib/iron-session/useUser";
+import useLoad from "@/components/toolbox/hooks/useLoad";
+import { useRouter } from "next/router";
+import Layout from "@/components/layout-dashboard";
+import Spinner from "@/components/atom/Spinner/Spinner";
+import axios from "axios";
+import Container from "@/components/container";
+import Button from "@/components/Primitives/Button";
 
 
 export default function DealPaymentPage({}) {
