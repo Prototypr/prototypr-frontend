@@ -1,4 +1,5 @@
 import Layout from "@/components/new-index/layoutForIndex";
+import dynamic from "next/dynamic";
 
 import {
   // getAllPostsForToolsPage,
@@ -29,7 +30,10 @@ import ToolCard from "@/components/v4/card/ToolCard";
 // import { MotionSlider } from "@/components/toolbox/ToolboxCarouselAnimation";
 import ToolBoxHero from "@/components/toolbox/toolboxHero";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
-
+import useUser from "@/lib/iron-session/useUser";
+const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
+  ssr: false,
+});
 const TAB_ITEMS = [
   {
     slug: "ai",
@@ -90,6 +94,7 @@ const TAB_ITEMS = [
 
 export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPosts=[] }) {
   const intl = useIntl();
+  const user = useUser()
 
   return (
     <>
@@ -109,6 +114,9 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
         }}
         activeNav={"toolbox"}
       >
+        {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest tools, weekly"
+      description="Collect tools, get published, and earn rewards."
+      />}
         <ToolBoxHero />
 
         {/* <SectionDivider transparentLine={true}/> */}

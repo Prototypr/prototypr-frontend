@@ -11,13 +11,11 @@ import useUser from "@/lib/iron-session/useUser";
 // );
 import ProductItem from "@/components/new-index/ProductItem";
 
-const PostHeader = dynamic(() => import("@/components/post-header"), {
-  ssr: true,
-});
+
 const AuthorBio = dynamic(() => import("@/components/authorBio"), {
   ssr: true,
 });
-const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
+// const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 import { useIntl } from "react-intl";
 
 import Layout from "@/components/layoutForBlogPost";
@@ -37,8 +35,10 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
-import { motion } from "framer-motion";
-
+import PostHeader from "@/components/post-header";
+const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
+  ssr: false,
+});
 const WMPostTracker = dynamic(
   () => import("@/components/WebMonetization/WMPostTracker"),
   {
@@ -49,83 +49,6 @@ const KoFiButton = dynamic(
   () => import("@/components/ko-fi-button/Ko-Fi-Button"),
   { ssr: false }
 );
-
-function getScrollPercent() {
-  var h = document.documentElement,
-    b = document.body,
-    st = "scrollTop",
-    sh = "scrollHeight";
-  return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
-}
-
-const StickyFooterCTA = () => {
-  const [isVisible, setVisible] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", (event) => {
-      const p = getScrollPercent();
-
-      if (p > 4 && p < 85) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-    });
-  }, []);
-
-  return (
-    <div className="w-full grid place-items-center relative ">
-      <motion.div
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
-        variants={{
-          visible: {
-            opacity: 1,
-            y: 0,
-            transition: { type: "spring", stiffness: 300, damping: 24 },
-          },
-          hidden: { opacity: 0, y: 100, transition: { duration: 0.2 } },
-        }}
-        className="fixed bottom-0 rounded-none sm:bottom-10 max-w-2xl w-full px-5 py-4 h-auto sm:rounded-lg border border-black border-opacity-10 bg-[#3574F0] z-[100]"
-      >
-        <div className="w-full flex flex-col gap-4 sm:gap-3 sm:flex-row justify-between">
-          <div className="flex flex-row justify-center items-center gap-4 sm:gap-8">
-            <div>
-              <svg
-                width="35"
-                height="41"
-                viewBox="0 0 35 41"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0.409489 41.0005C0.182943 41.0005 0 40.8138 0 40.5827V14.9456C0 6.70841 6.54424 0.0302734 14.6184 0.0302734C14.844 0.0302734 15.0279 0.216933 15.0279 0.448081V26.0852C15.0269 34.3223 8.48268 41.0005 0.409489 41.0005Z"
-                  fill="white"
-                />
-                <path
-                  d="M20.6181 30.4709C20.3129 30.4709 20.0664 30.2185 20.0664 29.908V0.562879C20.0664 0.252426 20.3138 0 20.6181 0C28.5605 0 34.9995 6.56981 34.9995 14.6735V15.7974C34.9995 23.9011 28.5605 30.4709 20.6181 30.4709Z"
-                  fill="#61BEEC"
-                />
-              </svg>
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-sm font-medium text-white">
-                Learn. Create. Publish.
-              </h1>
-              <p className="text-sm max-w-md text-white text-opacity-80">
-                Discover the people, ideas, and process behind designing and
-                building great products.
-              </p>
-            </div>
-          </div>
-          <button className="px-7 h-10 sm:h-auto text-sm text-black shadow-sm py-0 rounded-full bg-white">
-            Sign up
-          </button>
-        </div>
-      </motion.div>
-    </div>
-  );
-};
 
 export default function Post({ post, preview, relatedPosts }) {
   const router = useRouter();
@@ -230,7 +153,7 @@ export default function Post({ post, preview, relatedPosts }) {
                   {/* <meta property="og:image" content={post.attributes.ogImage} /> */}
                   {/* </Head> */}
                   {!post.currentLocaleAvailable && <NoticeTranslation />}
-                  <StickyFooterCTA />
+                  <StickyFooterCTA buttonText="Sign up for free" />
 
                   <PostHeader
                     slug={post?.attributes?.slug}

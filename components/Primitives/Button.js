@@ -108,6 +108,20 @@ const Button = styled("button", {
           opacity: 0.5,
           cursor: "not-allowed",
         },
+      },confirmRoundedWhite: {
+        background: '#fff',
+        border:`1px solid #fff`,
+        color: "#333",
+        padding: "0.05rem 1rem",
+        borderRadius:20,
+        // boxShadow: `0 2px 10px ${blackA.blackA7}`,
+        "&:hover": { backgroundColor: blue.blue4, borderColor:blue.blue4 },
+        "&:focus": { boxShadow: `0 0 0 2px ${blue.blue11}` },
+        "&[disabled]": {
+          // disabled styles
+          opacity: 0.5,
+          cursor: "not-allowed",
+        },
       },
       red: {
         backgroundColor: red.red11,

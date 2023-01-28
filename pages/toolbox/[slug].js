@@ -13,7 +13,12 @@ import Layout from "@/components/new-index/layoutForIndex";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import useUser from "@/lib/iron-session/useUser";
 
-const PopupGallery = dynamic(() => import("@/components/gallery/PopupGallery"));
+const PopupGallery = dynamic(() => import("@/components/gallery/PopupGallery"), {
+  ssr: true,
+});
+const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
+  ssr: false,
+});
 // const AuthorCard = dynamic(() => import("@/components/toolbox/AuthorCard"));
 // const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"));
 // const RelatedPosts = dynamic(() => import("@/components/related-posts"));
@@ -215,6 +220,10 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         </div>
         </div>
       </Container>
+
+      {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest tools, weekly"
+      description="Collect tools, get published, and earn rewards."
+      />}
       {/* <NewsletterSection title="Get the best tools every week"/> */}
     </>
   );

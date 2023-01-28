@@ -22,7 +22,7 @@ const TwoColumnCards = ({posts}) =>{
              {data.map((post, i) =>{ 
 
             return (
-                  <a target="_blank" className="col-span-12 lg:col-span-6"
+                  <Link className="col-span-12 lg:col-span-6"
                   href={`${post.slug}`}>
                   <div className={`flex h-[220px] ${post.class} relative shadow-sm rounded-xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>
                     <img src={post.image} className="w-1/2 h-auto absolute right-0 -mr-20" style={{transform: i==0?'scaleX(-1)':''}}/>
@@ -33,7 +33,7 @@ const TwoColumnCards = ({posts}) =>{
                       <p className="text-base text-gray-50 mt-1">{post.description}</p>
                     </div>
                   </div>
-                  </a>
+                  </Link>
                 )})}
         </div>
     )
