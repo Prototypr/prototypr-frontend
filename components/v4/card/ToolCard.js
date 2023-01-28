@@ -98,13 +98,16 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
                 <p className="font-semibold line-clamp-2 mb-1">{title}</p>
                 {tags && (
                   <div className="flex flex-wrap">
-                    {tags.map((x, i) => { 
+                    {/* {tags.map((x, i) => { 
                       return (
                         <span className={`${i>0?'hidden md:inline-block md:line-clamp-1':''} px-3 mr-1 py-1 h-[1.42rem] leading-wide overflow-hidden rounded-full bg-gray-100 text-xs capitalize`}>
                           {x.attributes.name}
                         </span>
                       );
-                    })}
+                    })} */}
+                    <span className={`${i>0?'hidden md:inline-block md:line-clamp-1':''} px-3 mr-1 py-1 h-[1.42rem] leading-wide overflow-hidden rounded-full bg-gray-100 text-xs capitalize`}>
+                          {tags[0].attributes.name}
+                        </span>
                   </div>
                 )}
                 {/* <p className="text-[#989898]">Pro Editing for everyone</p> */}

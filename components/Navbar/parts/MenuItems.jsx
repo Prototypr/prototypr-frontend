@@ -433,13 +433,13 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
     >
       <NavigationMenu>
           <NavigationMenuList>
-            <NavigationMenuItem className="hidden -ml-4 text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuItem className="hidden -ml-4 text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/">
                 {/* {submenuTitle4} */}
                 {homeMenuText}
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem className="flex text-sm md:text-base xl:mr-2.5 flex-col justify-center">
+            <NavigationMenuItem className="flex text-sm  xl:mr-2.5 flex-col justify-center">
               {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
               <NavigationMenuTrigger href="articles">
                 {/* {title1} */}
@@ -484,7 +484,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 </ContentList>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuItem className="flex flex-col text-sm md:text-base xl:mr-2.5 justify-center">
+            <NavigationMenuItem className="flex flex-col text-sm  xl:mr-2.5 justify-center">
               <NavigationMenuTrigger href="toolbox">
                 {title2}
               </NavigationMenuTrigger>
@@ -529,14 +529,14 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 </ContentList>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/jobs">
                 {/* {submenuTitle5} */}
                 Jobs
               </NavigationMenuLink>
             </NavigationMenuItem>
 
-            <NavigationMenuItem className="flex flex-col text-sm md:text-base xl:mr-2.5 justify-center">
+            <NavigationMenuItem className="flex flex-col text-sm  xl:mr-2.5 justify-center">
                 <div className="-ml-1">
               <NavigationMenuTrigger showCaret={false}>
                   <DotsThree weight="bold" size="22" color="rgba(0,0,0,0.5)"/>

@@ -193,14 +193,14 @@ export default function Index({
         </div> */}
         <SectionDivider py="py-6" transparentLine={true} />
         <Container padding={false} maxWidth="relative z-0">
-        <div class="absolute bottom-0 w-full z-0">
+        <div class="relative bottom-0 w-full z-0">
           <img class="w-full translate-y-[4px] z-0" src="/static/images/tilt-section2.svg"/>
-          <div class="w-full h-[100px] md:h-[100px] translate-y-[2px] bg-[#CCE6FF]">
+          <div class="w-full h-[40px] md:h-[50px] translate-y-[2px] bg-[#dbeeff]">
             </div>
           </div>
         </Container>
         {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
-        <Container maxWidth="w-full bg-[#CCE6FF] rounded-b-[3.5rem] relative relative z-20">
+        <Container maxWidth="w-full bg-[#dbeeff] rounded-b-[3.5rem] relative relative z-20">
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[200px] left-0 w-full h-[124%] object-cover"/> */}
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[150px] left-0 w-full h-[124%] object-cover"/> */}
 
@@ -216,7 +216,7 @@ export default function Index({
         </Container>
          {/* <SectionDivider />
         <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/> */}
-        <SectionDivider py='py-6' transparentLine={true} />
+        <SectionDivider py='py-6 pt-12' transparentLine={true} />
         {/* <SectionDivider /> */}
         {TAB_ITEMS?.map((topic, index) => {
           return (
