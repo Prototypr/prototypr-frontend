@@ -11,7 +11,9 @@ import IntroBanner from "@/components/v4/hero/IntroBanner2";
 // import { BrowserView } from "react-device-detect";
 const Footer = dynamic(() => import("@/components/footer"));
 // const DesignTool = dynamic(() => import("@/components/new-index/DesignTool"));
-
+const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
+  ssr: false,
+});
 import { getAllJobs, getPopularTopics } from "@/lib/api";
 
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
@@ -44,6 +46,7 @@ import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
 import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
 import Link from "next/link";
 import Button from "@/components/Primitives/Button";
+// import TopicSubscription from "@/components/Settings/topicsSubscription";
 
 
 const PAGE_SIZE = 12;
@@ -256,6 +259,9 @@ export default function Index({
         </BrowserView> */}
 
       </Layout>
+      {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest stories"
+      description="Earn rewards, get published, and collect tools."
+      />}
       <Footer />
     </>
   );

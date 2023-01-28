@@ -11,13 +11,11 @@ import useUser from "@/lib/iron-session/useUser";
 // );
 import ProductItem from "@/components/new-index/ProductItem";
 
-const PostHeader = dynamic(() => import("@/components/post-header"), {
-  ssr: true,
-});
+
 const AuthorBio = dynamic(() => import("@/components/authorBio"), {
   ssr: true,
 });
-const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
+// const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 import { useIntl } from "react-intl";
 
 import Layout from "@/components/layoutForBlogPost";
@@ -37,14 +35,20 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
+import PostHeader from "@/components/post-header";
+const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
+  ssr: false,
+});
 const WMPostTracker = dynamic(
   () => import("@/components/WebMonetization/WMPostTracker"),
   {
     ssr: false,
   }
 );
-const KoFiButton = dynamic(() => import('@/components/ko-fi-button/Ko-Fi-Button'), { ssr: false })
-
+const KoFiButton = dynamic(
+  () => import("@/components/ko-fi-button/Ko-Fi-Button"),
+  { ssr: false }
+);
 
 export default function Post({ post, preview, relatedPosts }) {
   const router = useRouter();
@@ -149,6 +153,8 @@ export default function Post({ post, preview, relatedPosts }) {
                   {/* <meta property="og:image" content={post.attributes.ogImage} /> */}
                   {/* </Head> */}
                   {!post.currentLocaleAvailable && <NoticeTranslation />}
+                  <StickyFooterCTA buttonText="Sign up for free" />
+
                   <PostHeader
                     slug={post?.attributes?.slug}
                     title={post?.attributes?.title}
@@ -365,11 +371,17 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
                           />
                         </a>
                       )}
-                      {kofi?
-                      <div className="mb-3 inline-block" >
-                        <KoFiButton color="#53b1e6" label={'Buy me a coffee'} kofiId={kofi} />
-                      </div>:''
-                    }
+                      {kofi ? (
+                        <div className="mb-3 inline-block">
+                          <KoFiButton
+                            color="#53b1e6"
+                            label={"Buy me a coffee"}
+                            kofiId={kofi}
+                          />
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     {author?.availability == "1" && (
                       <a
@@ -462,7 +474,13 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const allPosts = await getAllPostsWithSlug("article", (process.env.NODE_ENV || (process.env.NEXT_PUBLIC_HOME_URL.indexOf('localhost')>-1))?20:5000);
+  const allPosts = await getAllPostsWithSlug(
+    "article",
+    process.env.NODE_ENV ||
+      process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
+      ? 20
+      : 5000
+  );
   // const homePosts = await getCombinedPostsForHomeStatic()
 
   // let mergedSlugs = {

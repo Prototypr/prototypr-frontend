@@ -96,7 +96,7 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
 
               <div className="flex flex-col justify-center ">
                 <p className="font-semibold line-clamp-2 mb-1">{title}</p>
-                {tags && (
+                {tags?.length && (
                   <div className="flex flex-wrap">
                     {/* {tags.map((x, i) => { 
                       return (

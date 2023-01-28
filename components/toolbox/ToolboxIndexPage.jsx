@@ -13,6 +13,10 @@ import stc from "string-to-color";
 // import ToolsTagsNavRow from "../v4/section/ToolsTagsNavRow";
 import ToolCard from "../v4/card/ToolCard";
 import NewsletterSection from "../v4/section/NewsletterSection";
+import useUser from "@/lib/iron-session/useUser";
+const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
+  ssr: false,
+});
 
 // const MoreStories = dynamic(() => import("@/components/more-stories"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
@@ -33,6 +37,7 @@ const ToolboxIndexPage = ({
   color,
 }) => {
   const router = useRouter();
+  const user = useUser()
 
   const onPageNumChange = (pageNo) => {
     router.push(`/${paginationRoot}/page/${pageNo}`);
@@ -81,6 +86,9 @@ const ToolboxIndexPage = ({
           slug={currentSlug}
         />
         <div className="w-full px-0 md:pr-0 md:pl-12 -mt-6 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10">
+        {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest tools, weekly"
+      description="Collect tools, get published, and earn rewards."
+      />}
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
           ) : (
