@@ -40,7 +40,7 @@ const IntroBanner = ({ tools, sponsor }) => {
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
           className="pointer-events-auto md:pr-0 md:pb-12 md:pt-6 rounded-3xl z-10" style={{width:'fit-content'}}>
           <h1 className="max-w-[50rem] mt-2 mb-5 text-[#0F1F40] text-5xl font-semibold tracking-tight xl:text-[56px] lg:leading-tight md:leading-tight">
-          Learn. Create. Publish.
+          Think It. Make It.
           </h1>
           <p className="mb-5 text-[#436586] md:leading-[32px] leading-[28px] text-[16px] md:text-[18px] font-inter md:pr-6 max-w-[32rem]">
             Discover the people, ideas, and process behind designing and building great products.
