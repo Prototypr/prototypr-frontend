@@ -96,17 +96,36 @@ export async function getStaticProps({ preview = null, params }) {
   //     return slug === SLUG.key
   // })
   //assign slug to tag
-  let tag = slug;
-
-  const foundSlug = find_page_slug_from_menu(ALL_SLUGS_GROUPS, tag);
-
-  const allPosts =
-    (await getPostsByPageForToolsSubcategoryPage(
+  let allPosts = []
+  const foundSlug = find_page_slug_from_menu(ALL_SLUGS_GROUPS, slug);
+  let tagName = ''
+  if(!foundSlug){
+    allPosts = (await getPostsByPageForToolsSubcategoryPage(
       preview,
       pageSize,
       pageNo,
-      foundSlug.tags
+      [slug]
     )) || [];
+    if(allPosts?.data?.length){
+      
+      const tags = allPosts.data[0]?.attributes?.tags?.data
+      if(tags?.length){
+        for (var x = 0 ;x<tags.length;x++){
+          if(tags[x]?.attributes?.slug==slug){
+            tagName=tags[x]?.attributes?.name
+          }
+        }
+      }
+    }
+  }else{
+     allPosts =
+      (await getPostsByPageForToolsSubcategoryPage(
+        preview,
+        pageSize,
+        pageNo,
+        foundSlug.tags
+      )) || [];
+  }
   // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
   const pagination = allPosts.meta.pagination;
   return {
@@ -114,8 +133,8 @@ export async function getStaticProps({ preview = null, params }) {
       allPosts: allPosts.data,
       preview,
       pagination,
-      tag,
-      title: foundSlug?.title ? foundSlug.title : "Design Tools",
+      slug,
+      title: foundSlug?.title ? foundSlug.title :tagName?tagName: "Design Tools",
     },
     revalidate: 20,
   };

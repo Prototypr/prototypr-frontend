@@ -172,11 +172,11 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                     <div className="flex flex-wrap">
                       {tags.map((tag, index) => {
                         return (
-                          // <Link href={`/toolbox/tag/${tag?.attributes?.slug}/page/1`}>
+                          <Link href={`/toolbox/${tag?.attributes?.slug}/page/1`}>
                             <div className={`inline-block text-sm px-3 py-1.5 bg-[#eef1f8] bg-opacity-60 border border-gray-200 rounded-full mr-3 mb-3`}>
                             {tag?.attributes?.name}
                         </div>
-                          // </Link>
+                          </Link>
                         );
                       })}
                     </div>
