@@ -24,6 +24,7 @@ export default function ToolboxPage({title,allPosts = [], preview, pagination,ta
     return (
         <>
         <Layout 
+    padding={false}
        maxWidth={"search-wide max-w-[1320px]"}
         seo={{
         title: `${tag} – AR/VR design tools | Prototypr Toolbox | Page ${pagination?.page}`,

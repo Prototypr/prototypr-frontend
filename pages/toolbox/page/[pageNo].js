@@ -56,6 +56,7 @@ export default function ToolboxPage({
       activeNav={"toolbox"}
     >
       <ToolboxIndexPage
+    padding={false}
         filterCategories={ALL_SLUGS_GROUPS}
         urlRoot={`/toolbox`}
         paginationRoot={`/toolbox`}
