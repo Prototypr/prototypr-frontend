@@ -26,6 +26,12 @@ export default function Index({allTags}) {
     }
   },[user])
 
+  useEffect(()=>{
+    if(router.query?.signin=='true'){
+      toggleSignIn()
+    }
+  },[router.query])
+
   const [isSignUp, setSignUp] = useState(true);
 
   const toggleSignIn = () => {

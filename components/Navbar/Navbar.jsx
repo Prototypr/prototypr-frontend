@@ -175,9 +175,9 @@ const Navbar = ({
             <MobileActiveLink href={"/web-monetization"}>
               Web Monetization
             </MobileActiveLink>
-            <MobileActiveLink href={"/onboard"}>
+            {!user?.isLoggedIn?<MobileActiveLink href={"/onboard"}>
               Sign in
-            </MobileActiveLink>
+            </MobileActiveLink>:''}
           </div>
         </div>
       </nav>
