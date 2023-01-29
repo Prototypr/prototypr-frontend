@@ -124,8 +124,8 @@ export default function Post({ post, preview, relatedPosts }) {
       activeNav={"posts"}
       preview={preview}
     >
-      <Container padding={false}>
-        <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto px-3 ">
+      <Container padding={false} maxWidth="max-w-[1440px] mx-auto">
+        <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto px-3 mx-auto">
           {user?.isAdmin && (
             <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white mr-16 right-0 p-4 rounded shadow">
               <p className="text-sm">Hi, Admin 👩‍✈️</p>

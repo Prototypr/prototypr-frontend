@@ -32,6 +32,7 @@ const ParticlesContainer = () => {
 
   const particlesLoaded = useCallback(async (container) => {
 
+    console.log(container)
     container.addClickHandler((event, particles) => {
       for (const particle of particles) {
         if (particle.customClicked) {
@@ -40,18 +41,18 @@ const ParticlesContainer = () => {
 
         particle.customClicked = true;
 
-        // console.log(particle)
-        if(particle.shapeData.sponsor){  
-          window.open (particle.shapeData.slug, '_ blank');
-        }else if (particle?.shapeData?.slug){
-          router.push(particle.shapeData.slug)
-        }
+        console.log(particle)
+        // if(particle.shapeData.sponsor){  
+        //   window.open (particle.shapeData.slug, '_ blank');
+        // }else if (particle?.shapeData?.slug){
+        //   router.push(particle.shapeData.slug)
+        // }
 
-        setTimeout(() => {
-          particle.size.max = 28;
-          particle.size.value = 28;
-          delete particle.customClicked;
-        }, 10);
+        // setTimeout(() => {
+        //   particle.size.max = 28;
+        //   particle.size.value = 28;
+        //   delete particle.customClicked;
+        // }, 10);
       }
     });
   }, []);
@@ -81,7 +82,7 @@ const ParticlesContainer = () => {
       width="100%"
       height="100%"
       style={{
-        zIndex:20,
+        zIndex:10,
         // padding:'100px',
         position: "absolute",
         top: "0",

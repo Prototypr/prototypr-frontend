@@ -3,6 +3,8 @@ import jsCookie from "js-cookie";
 import { useState, useEffect } from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
+import Button from "../Primitives/Button";
+import NewPostDialog from "./parts/NewPostDialog";
 const ProfileBadge = dynamic(() => import("../ProfileBadge"));
 // const NewsletterNav = dynamic(() => import("../NewsletterNav"), {
 //   ssr: true,
@@ -54,24 +56,31 @@ const UserMenu = ({ user, userLoading }) => {
           ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (
-            <Link href="/onboard">
-              <button className="py-2 px-4 sm:px-6 bg-blue-600 text-white rounded-full text-xs hidden md:block sm:text-sm font-inter">
-                New post
-              </button>
+            <div className="flex">
+              <Link className="my-auto" href="/onboard?signin=true">
+                <div className="flex cursor-pointer text-gray-700 text-sm mr-4">
+                  <div className="my-auto font-medium">Sign in</div>
+                </div>
+              </Link>
+              <Link href="/onboard">
+              <Button className="text-sm" variant={"confirmRounded"}>
+              Sign up
+            </Button>
             </Link>
+            </div>
             // <NewsletterNav collapsed={false} />
           )}
         </NavigationMenuItem>
       ) : userLoggedInCookie ? (
-        <NavigationMenuItem className="flex flex-col justify-center">
-          <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
-        </NavigationMenuItem>
+        
+        <NewPostDialog/>
       ) : (
-        <Link href="/write">
-        <button className="py-2 px-4 sm:px-6 bg-blue-600 text-white rounded-full text-xs sm:text-sm font-inter">
-        New post
-        </button>
-      </Link>
+        <></>
+      //   <Link href="/onboard">
+      //   <Button variant={"confirmRounded"}>
+      //     New post
+      //   </Button>
+      // </Link>
       )}
     </>
   );

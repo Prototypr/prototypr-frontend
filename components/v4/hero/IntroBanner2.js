@@ -48,7 +48,7 @@ const IntroBanner = ({ tools, sponsor }) => {
           <div className="flex mt-4 mb-6 sm:mb-0">
             <Link href="/onboard">
               <Button className="rounded-full bg-blue-600 text-white" variant="confirmBig">
-                Sign up
+                Get started
               </Button>
             </Link>
           </div>
