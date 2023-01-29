@@ -62,6 +62,7 @@ export default function Post({ post, preview, relatedPosts }) {
   }
 
   console.log(post.id);
+  const tags = post?.attributes?.tags?.data;
   const title = post?.attributes?.seo?.opengraphTitle
     ? post?.attributes?.seo?.opengraphTitle
     : post?.attributes?.title && post.attributes.title;
@@ -188,12 +189,18 @@ export default function Post({ post, preview, relatedPosts }) {
           </main>
 
           <Sidebar
+            tags={tags}
             author={post.attributes?.author?.data?.attributes}
             relatedPosts={relatedPosts}
             paddingTop="hidden md:block pt-[76px]"
           />
         </div>
-        {!user?.isLoggedIn && <StickyFooterCTA title="The best stories every week"buttonText="Sign up for free" />}
+        <div className="grid grid-cols-12">
+          <div className="pb-20 gap-2 col-span-12 lg:col-span-8  px-3 md:px-8 xl:px-0 py-10">
+          {!user?.isLoggedIn && <StickyFooterCTA title="The best stories every week"buttonText="Sign up for free" />}
+          </div>
+        </div>
+          
       </Container>
       <section className="bg-gray-100">
         <hr className="border-accent-2" />
@@ -236,7 +243,7 @@ export default function Post({ post, preview, relatedPosts }) {
   );
 }
 
-const Sidebar = ({ relatedPosts, paddingTop, author }) => {
+const Sidebar = ({ relatedPosts,tags, paddingTop, author }) => {
   const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
 
   const _handleWaypointEnter = () => {
@@ -245,6 +252,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
   const _handleWaypointLeave = () => {
     setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
   };
+  
 
   const avatar = author?.avatar?.data?.attributes?.url
     ? author?.avatar?.data?.attributes?.url
@@ -402,10 +410,24 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
               ) : (
                 ""
               )}
-
+              {/* tag cloud */}
+              <div className="font-inter bg-white p-6 rounded-xl border border-black/8">
+                    <h3 className="text-base font-semibold mb-3">Tags</h3>
+                    <div className="flex flex-wrap">
+                      {tags.map((tag, index) => {
+                        return (
+                          <Link href={`/posts/${tag?.attributes?.slug}/page/1`}>
+                            <div className={`inline-block text-sm px-3 py-1.5 bg-[#eef1f8] bg-opacity-60 border border-gray-200 rounded-full mr-3 mb-3`}>
+                            {tag?.attributes?.name}
+                        </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
               {/* EMAIL FORM */}
-              <div className="w-full mt-6 rounded-xl p-5 border border-gray-200">
-                <h3 className="text-lg font-semibold mb-2 text-gray-900">
+              <div className="w-full mt-6 rounded-xl p-5 border border-black/8">
+                <h3 className="text-base font-semibold mb-2 text-gray-900">
                   Dive deeper
                 </h3>
                 <p className="text-base text-gray-500 mb-6">
