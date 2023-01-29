@@ -276,7 +276,7 @@ const Sidebar = ({ relatedPosts,tags, paddingTop, author }) => {
             <div>
               {author ? (
                 <div className="flex rounded-xl flex-col">
-                  <div className="w-[80px] h-[80px] relative border border-gray-100 rounded-full shadow-sm mb-3">
+                  <div className={`${stickyPaddingTop=='pt-0'?'w-[80px] h-[80px] mb-3':'w-[44px] h-[44px] mb-1'} relative border border-gray-100 rounded-full shadow-sm `}>
                     {avatar ? (
                       <Link href={`/people/${author.slug}`}>
                         <Image
@@ -294,7 +294,7 @@ const Sidebar = ({ relatedPosts,tags, paddingTop, author }) => {
                   </div>
                   <div className="flex flex-col justify-center">
                     <Link href={`/people/${author.slug}`}>
-                      <h1 className="text-xl mt-1 font-semibold leading-normal text-gray-800">
+                      <h1 className={`${stickyPaddingTop=='pt-0'?'text-xl':'text-base'} mt-1 font-semibold leading-normal text-gray-800`}>
                         {/* {author?.name ? author?.name : ""} */}
                         {`${author?.firstName ? author?.firstName : ""}
                   ${author?.lastName ? " " + author?.lastName : ""}
