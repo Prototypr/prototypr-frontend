@@ -7,7 +7,7 @@ const Form = dynamic(() => import("@/components/Form"), { ssr: true });
 // const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 import toast from "react-hot-toast";
 
-const LoginForm = ({ isSignUp, title = "Sign In" }) => {
+const LoginForm = ({ isSignUp, title = "Sign up" }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [sent, setSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

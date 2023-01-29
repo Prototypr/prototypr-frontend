@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import jsCookie from "js-cookie";
 import { useState, useEffect } from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import Link from "next/link";
 const ProfileBadge = dynamic(() => import("../ProfileBadge"));
 // const NewsletterNav = dynamic(() => import("../NewsletterNav"), {
 //   ssr: true,
@@ -53,11 +54,11 @@ const UserMenu = ({ user, userLoading }) => {
           ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (
-            <a href="/write">
-              <button className="py-2 px-4 sm:px-6 bg-blue-600 text-white rounded-full text-xs sm:text-sm font-inter">
-                Write
+            <Link href="/onboard">
+              <button className="py-2 px-4 sm:px-6 bg-blue-600 text-white rounded-full text-xs hidden md:block sm:text-sm font-inter">
+                New post
               </button>
-            </a>
+            </Link>
             // <NewsletterNav collapsed={false} />
           )}
         </NavigationMenuItem>
@@ -66,11 +67,11 @@ const UserMenu = ({ user, userLoading }) => {
           <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
         </NavigationMenuItem>
       ) : (
-        <a href="/write">
+        <Link href="/write">
         <button className="py-2 px-4 sm:px-6 bg-blue-600 text-white rounded-full text-xs sm:text-sm font-inter">
-          Write
+        New post
         </button>
-      </a>
+      </Link>
       )}
     </>
   );

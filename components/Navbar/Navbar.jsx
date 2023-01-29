@@ -110,7 +110,7 @@ const Navbar = ({
                   <SearchModal />
                 </div>
               </div>
-              <div className="hidden sm:ml-6 sm:block">
+              <div className="hidden sm:ml-6 lg:block">
               <MenuItems />
             </div>
               {/* <div className="justify-end hidden xl:flex mr-6">
@@ -174,6 +174,9 @@ const Navbar = ({
             <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>
             <MobileActiveLink href={"/web-monetization"}>
               Web Monetization
+            </MobileActiveLink>
+            <MobileActiveLink href={"/onboard"}>
+              Sign in
             </MobileActiveLink>
           </div>
         </div>

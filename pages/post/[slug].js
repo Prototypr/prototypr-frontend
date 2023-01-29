@@ -153,7 +153,6 @@ export default function Post({ post, preview, relatedPosts }) {
                   {/* <meta property="og:image" content={post.attributes.ogImage} /> */}
                   {/* </Head> */}
                   {!post.currentLocaleAvailable && <NoticeTranslation />}
-                  <StickyFooterCTA buttonText="Sign up for free" />
 
                   <PostHeader
                     slug={post?.attributes?.slug}
@@ -177,6 +176,7 @@ export default function Post({ post, preview, relatedPosts }) {
                     />
                   </div>
                 </article>
+                {!user?.isLoggedIn && <StickyFooterCTA title="The best stories every week"buttonText="Sign up for free" />}
                 <div>
                   <AuthorBio
                     slug={post?.attributes?.slug}
