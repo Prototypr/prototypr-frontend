@@ -23,6 +23,7 @@ export default function ToolboxPage({allPosts = [], title,preview, pagination,ta
     return (
       <>
         <Layout 
+    padding={false}
        maxWidth={"search-wide max-w-[1320px]"}
         seo={{
         title: `${tag} - UX Tools | Page: ${pagination?.page}`,

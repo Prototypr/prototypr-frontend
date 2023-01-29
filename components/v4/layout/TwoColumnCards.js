@@ -36,11 +36,11 @@ const TwoColumnCards = ({
       >
         <div className="flex flex-col justify-center h-full">
           <div className="flex flex-col mb-4 gap-0">
-            <h3 className="font-bold text-white text-[24px] sm:text-[36px]">
+            <h3 className="font-medium text-white text-[24px] sm:text-[36px]">
               {content.title}
             </h3>
 
-            <p className="text-white max-w-[300px] sm:max-w-md text-opacity-70 text-[16px] sm:text-[24px]">
+            <p className="text-white max-w-[300px] sm:max-w-md text-opacity-80 text-[16px] sm:text-[24px]">
               {content.description}
             </p>
           </div>

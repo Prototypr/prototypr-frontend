@@ -31,6 +31,7 @@ import ToolCard from "@/components/v4/card/ToolCard";
 import ToolBoxHero from "@/components/toolbox/toolboxHero";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import useUser from "@/lib/iron-session/useUser";
+import Link from "next/link";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -122,20 +123,22 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
         <ToolBoxHero />
 
         {/* <SectionDivider transparentLine={true}/> */}
-        {/* <div className="w-full pb-14 px-4">
-          <div className="w-full h-auto gridBg rounded-2xl bg-[#3574F0] max-w-7xl mx-auto p-5">
-            <div className="flex flex-col gap-2 justify-between ">
-              <h3 className="font-normal text-[24px] text-white text-opacity-70">
-                Got a design or developer tool? Launch with us
-              </h3>
-              <div>
-                <button className="px-6 py-4 font-medium bg-white rounded-full text-black text-xs">
-                  Launch a Tool {"->"}
-                </button>
+        <div className="w-full pb-14 px-4">
+          <Link href="/toolbox/post">
+            <div className="w-full h-auto gridBg rounded-2xl bg-[#3574F0] max-w-7xl mx-auto p-5">
+              <div className="flex flex-col gap-2 justify-between ">
+                <h3 className="font-normal text-[24px] text-white text-opacity-80">
+                  Got a design or developer tool? Launch with us
+                </h3>
+                <div>
+                  <button className="px-6 py-4 font-medium bg-white rounded-full text-black text-xs">
+                    Post a Tool {"->"}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </div> */}
+          </Link>
+        </div>
         
         <Container maxWidth="pb-20 bg-blue-100/60  border-t border-gray-300">
           {/* <HeadingSeeAllRow

@@ -58,6 +58,7 @@ export default function ToolboxPage({
   return (
     <>
     <Layout
+    padding={false}
       maxWidth={"search-wide max-w-[1380px]"}
       seo={{
         title: `${tag} – design tools | Prototypr Toolbox | Page ${pagination?.page}`,

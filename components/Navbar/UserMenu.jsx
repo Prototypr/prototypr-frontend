@@ -56,7 +56,7 @@ const UserMenu = ({ user, userLoading }) => {
           ) : userLoading && userLoggedInCookie ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (
-            <div className="flex">
+            <div className="hidden lg:flex">
               <Link className="my-auto" href="/onboard?signin=true">
                 <div className="flex cursor-pointer text-gray-700 text-sm mr-4">
                   <div className="my-auto font-medium">Sign in</div>

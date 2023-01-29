@@ -28,6 +28,7 @@ export default function ToolboxPage({ allPosts = [], preview, pagination }) {
   return (
     <>
     <Layout 
+    padding={false}
     seo={{
         title: `Prototypr Toolbox: UX Tools | ${pagination?.page}`,
         description:

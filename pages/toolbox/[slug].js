@@ -144,7 +144,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
           <div className="max-w-[1200px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 px-3 md:px-0 h-full">
           <div className="col-span-12 lg:col-span-8">
             <div className="bg-white -mt-[214px] p-6 rounded-xl shadow-sm border border-black/5 w-full lg:max-w-[48rem]">
-            <h3 class="text-xl font-bold mb-3">Overview</h3>
+            <h3 class="text-lg font-bold mb-3">Overview</h3>
               <div
                   style={{ color: "#333", fontSize: "20px", lineHeight: '33px' }}
                   className="mt-3 max-w-[48rem] popup-modal-content"
@@ -154,7 +154,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                 ></div>
             </div>
             <div className="bg-white mt-8 p-6 mb-6 rounded-xl shadow-sm border border-black/5 max-w-[48rem]">
-            <h3 class="text-xl font-bold">Gallery</h3>
+            <h3 class="text-lg font-bold">Gallery</h3>
             {post?.attributes && (
                 <PopupGallery
                   item={post.attributes}

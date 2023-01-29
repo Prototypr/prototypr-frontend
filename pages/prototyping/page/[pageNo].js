@@ -26,6 +26,7 @@ export default function ToolboxPage({allPosts = [], preview, pagination}) {
     return (
         <>
         <Layout 
+    padding={false}
         seo={{
         title: "Prototypr Prototyping Toolbox.",
         description:
