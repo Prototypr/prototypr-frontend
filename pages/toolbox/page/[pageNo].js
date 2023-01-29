@@ -44,6 +44,7 @@ export default function ToolboxPage({
   return (
     <>
     <Layout
+    padding={false}
       maxWidth={"max-w-[1400px] search-wide"}
       seo={{
         title: `Prototypr Toolbox - new design, UX and coding tools | Page ${pagination?.page}`,
@@ -56,7 +57,6 @@ export default function ToolboxPage({
       activeNav={"toolbox"}
     >
       <ToolboxIndexPage
-    padding={false}
         filterCategories={ALL_SLUGS_GROUPS}
         urlRoot={`/toolbox`}
         paginationRoot={`/toolbox`}

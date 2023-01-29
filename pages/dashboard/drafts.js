@@ -61,7 +61,7 @@ export default function Index() {
       ) : (
         user &&
         user?.isLoggedIn && (
-          <Layout navType={"simple"} background="#fff">
+          <Layout navType={"simple"} background="#EFF4FB">
               <div
                 className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 "
                 style={{ maxWidth: 1200 }}
