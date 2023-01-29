@@ -196,7 +196,7 @@ export default function Post({ post, preview, relatedPosts }) {
           />
         </div>
         <div className="grid grid-cols-12">
-          <div className="pb-20 gap-2 col-span-12 lg:col-span-8  px-3 md:px-8 xl:px-0 py-10">
+          <div className="gap-0 col-span-12 lg:col-span-8">
           {!user?.isLoggedIn && <StickyFooterCTA title="The best stories every week"buttonText="Sign up for free" />}
           </div>
         </div>
@@ -411,7 +411,7 @@ const Sidebar = ({ relatedPosts,tags, paddingTop, author }) => {
                 ""
               )}
               {/* tag cloud */}
-              <div className="font-inter bg-white p-6 rounded-xl border border-black/8">
+              <div className="font-inter bg-white mt-3 p-6 rounded-xl border border-black/8">
                     <h3 className="text-base font-semibold mb-3">Tags</h3>
                     <div className="flex flex-wrap">
                       {tags.map((tag, index) => {
