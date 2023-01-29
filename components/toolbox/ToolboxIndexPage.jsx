@@ -37,7 +37,9 @@ const ToolboxIndexPage = ({
   color,
 }) => {
   const router = useRouter();
-  const user = useUser()
+  const { user } = useUser({
+    redirectIfFound: false,
+  });
 
   const onPageNumChange = (pageNo) => {
     router.push(`/${paginationRoot}/page/${pageNo}`);

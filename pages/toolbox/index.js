@@ -94,7 +94,9 @@ const TAB_ITEMS = [
 
 export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPosts=[] }) {
   const intl = useIntl();
-  const user = useUser()
+  const { user } = useUser({
+    redirectIfFound: false,
+  });
 
   return (
     <>

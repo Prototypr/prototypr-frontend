@@ -123,8 +123,8 @@ export default function Post({ post, preview, relatedPosts }) {
       activeNav={"posts"}
       preview={preview}
     >
-      <Container>
-        <div className="w-full h-full grid grid-cols-12 gap-1  ">
+      <Container padding={false}>
+        <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto px-3 ">
           {user?.isAdmin && (
             <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white mr-16 right-0 p-4 rounded shadow">
               <p className="text-sm">Hi, Admin 👩‍✈️</p>
@@ -176,7 +176,6 @@ export default function Post({ post, preview, relatedPosts }) {
                     />
                   </div>
                 </article>
-                {!user?.isLoggedIn && <StickyFooterCTA title="The best stories every week"buttonText="Sign up for free" />}
                 <div>
                   <AuthorBio
                     slug={post?.attributes?.slug}
@@ -194,6 +193,7 @@ export default function Post({ post, preview, relatedPosts }) {
             paddingTop="hidden md:block pt-[76px]"
           />
         </div>
+        {!user?.isLoggedIn && <StickyFooterCTA title="The best stories every week"buttonText="Sign up for free" />}
       </Container>
       <section className="bg-gray-100">
         <hr className="border-accent-2" />
