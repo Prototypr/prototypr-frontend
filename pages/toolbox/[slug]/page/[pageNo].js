@@ -133,7 +133,7 @@ export async function getStaticProps({ preview = null, params }) {
       allPosts: allPosts.data,
       preview,
       pagination,
-      slug,
+      tag:slug,
       title: foundSlug?.title ? foundSlug.title :tagName?tagName: "Design Tools",
     },
     revalidate: 20,
