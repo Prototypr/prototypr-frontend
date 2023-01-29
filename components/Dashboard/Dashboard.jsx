@@ -34,7 +34,7 @@ const Dashboard = ({postStatus, postType}) => {
   return (
   <>
       <div>
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-12 gap-6">
               {!loading &&
                 posts?.map((post) => (
                   <PostCard refetch={refetch} user={user} post={post} />
