@@ -36,8 +36,8 @@ const ProfilePageLayout = ({
 
     return(
         <Container maxWidth="max-w-[1320px]" >
-        <div className="mt-8 flex flex-col md:flex-row px-4 md:px-6">
-          <div className="w-full md:w-1/4 lg:block">
+        <div className="mt-8 flex flex-col lg:flex-row px-4 md:px-6">
+          <div className="w-full lg:w-1/4 lg:block">
             <div className="bg-white p-4 rounded-xl shadow-sm">
                 <div className="relative">
                 <div
@@ -208,7 +208,7 @@ const ProfilePageLayout = ({
            
           </div>
 
-          <div className="flex-1 pl-12">
+          <div className="flex-1 pt-6 lg:pt-0 lg:pl-12">
             <div className="mx-auto mb-20 max-w-4xl">
               {allPosts.length ?
               <div className="grid grid-cols-12 gap-6">
@@ -222,7 +222,7 @@ const ProfilePageLayout = ({
                    
                   if(post?.attributes?.type=='article'){
                       return(
-                        <div className="col-span-6 p-3 bg-white rounded-xl shadow-sm">
+                        <div className="col-span-12 xl:col-span-6 p-3 bg-white rounded-xl shadow-sm">
                         <SmallCard
                         key={index}
                         showAuthor={false}
@@ -238,7 +238,7 @@ const ProfilePageLayout = ({
                       )
                   }else{
                     return(
-                      <div className="col-span-6 p-3 bg-white rounded-xl shadow-sm">
+                        <div className="col-span-12 xl:col-span-6 p-3 bg-white rounded-xl shadow-sm">
                       <ToolLargeCardProfile
                       tool={post?.attributes}
                       />
