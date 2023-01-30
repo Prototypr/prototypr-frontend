@@ -71,7 +71,7 @@ export default function Index() {
                     </div>
                     <Navigation activeTab={1}/>
                     {/* set post type to empty so it gets tools too */}
-                    <Dashboard postStatus={['draft', 'pending']} postType=''/>
+                    <Dashboard currentTab="draft" postStatus={['draft', 'pending']} postType=''/>
                 </div>
           </Layout>
         )

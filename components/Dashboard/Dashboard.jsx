@@ -6,8 +6,7 @@ import EmptyState from "./EmptyState";
 import PostCard from "./PostCard";
 import NewPagination from "../pagination";
 
-const Dashboard = ({postStatus, postType}) => {
-  const [currentTab, setCurrentTab] = useState("drafts");
+const Dashboard = ({postStatus, postType, currentTab}) => {
   const { user } = useUser({
     redirectIfFound: false,
   });
@@ -41,7 +40,7 @@ const Dashboard = ({postStatus, postType}) => {
                 ))}
             </div>
             {!loading && !posts?.length && (
-              <EmptyState draft={false} />
+              <EmptyState currentTab={currentTab} draft={false} />
             )}
              <NewPagination
                 total={total}

@@ -85,6 +85,7 @@ export default function PeoplePage({
       ) : (
         <>
         <ProfilePageLayout
+        previewOnly={true}
         allPosts={allPosts}  
         preview={preview}
         pagination={pagination}
