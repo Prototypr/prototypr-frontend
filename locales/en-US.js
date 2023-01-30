@@ -52,7 +52,7 @@ const EN = {
   "navbar.submenu2.desc5": "Tools for building accessible User Interfaces.",
   "navbar.submenu2.desc6":
     "Tools for creating Voice User Interfaces, like chatbots.",
-  "navbar.webmonetization.title": "No more paywalls.",
+  "navbar.webmonetization.title": "Earn micropayments",
   "navbar.webmonetization.desc":
     "No paywalls, no intrusive ads. Prototypr is open and inclusive through Web Monetization.",
   "navbar.contentitem.title": "The Source",

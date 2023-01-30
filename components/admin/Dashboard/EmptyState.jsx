@@ -10,7 +10,7 @@ const EmptyState = ({ draft }) => {
           />
           <h1 className="text-lg text-gray-500 pt-0 mt-4 mb-8 text-center">
             {draft
-              ? `You've not created any drafts.`
+              ? `No drafts in progress.`
               : `You've not published anything.`}
           </h1>
           {draft && (
