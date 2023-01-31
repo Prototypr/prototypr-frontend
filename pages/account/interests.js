@@ -2,20 +2,16 @@ import Fallback from "@/components/atom/Fallback/Fallback";
 import Layout from "@/components/new-index/layoutForIndex";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import {CircleWavyCheck } from "phosphor-react";
-import Link from "next/link";
 import axios from "axios";
 // import toast from "react-hot-toast";
-
 import useUser from "@/lib/iron-session/useUser";
-import { getPostsByPageAndAuthor } from "@/lib/api";
 import { useEffect, useState } from "react";
 import AccountNavigation from "@/components/user/AccountNavigation";
+import InterestsSelect from "@/components/user/InterestsSelect";
 
 
 const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 const Form = dynamic(() => import('@/components/Form'), { ssr: true })
-const UserForm = dynamic(() => import('@/components/user/UserForm'), { ssr: true })
 
 
 const AccountPage = ({ preview }) => {
@@ -25,30 +21,9 @@ const AccountPage = ({ preview }) => {
     redirectIfFound: false,
   })
 
-  const [hasPosts, setHasPosts] = useState(true)
-  
-
-  useEffect(()=>{
-
-    const checkUserPosts= async () =>{
-      let sort = ["featured:desc", "tier:asc", "date:desc"];
-      let allPosts =
-        (await getPostsByPageAndAuthor(false, 1, 1, [user?.profile?.slug], sort)) ||
-        [];
-        let has = false
-        if(allPosts?.data?.length){
-          has = true
-        }
-        setHasPosts(has)
-    }
-    if(user){
-      checkUserPosts()
-    }
-
-  },[user])
-
   const [sent, setSent] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedOptions, setSelectedOptions] = useState(null)
 
   if (!user) {
     return <Fallback />;
@@ -62,50 +37,27 @@ const AccountPage = ({ preview }) => {
         </Head>
         {user && user.confirmed? 
         <div className="flex w-full max-w-4xl mx-auto flex-col md:flex-row">
-          <AccountNavigation activeTab={1}/>
-          <div className="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
-            {(!user?.profile?.approved && hasPosts===false)?
-              <div className="-mb-3">
-                <div className="mt-3 shadow-sm flex w-full bg-purple-300/70 p-4 px-4 rounded-xl text-purple-900">
-                <div className="mr-4 my-auto">
-                <CircleWavyCheck size="44"/>
-              </div>
-              <p className="w-full max-w-4xl">
-              Your <Link href={`/people/${user?.profile?.slug}`}><span className="underline font-semibold">profile page</span></Link> is <span className="font-semibold inline">pending approval</span>, and is <span className="font-semibold inline">not publicly visible</span> yet. 
-              <br/>Complete your profile to get approved faster. Profiles pages are granted individually for community safety, to improve quality and reduce spam. 💜
-              </p>
-              </div>
-          </div>:''}
+          <AccountNavigation activeTab={3}/>
+          <div className="w-full max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="pt-6 pb-10 px-3 xl:px-0">
               <div className="bg-white shadow-md rounded-lg py-6 px-4">
-                <h1 className="font-semibold">General Profile</h1>
+                <h1 className="font-semibold">Interests</h1>
                 <span className="text-sm text-gray-500">
-                  This information will be displayed on your public profile
+                  Interests will be displayed on your public profile
                 </span>
-                <UserForm
-                  info={{
-                    firstName: user?.profile.firstName,
-                    secondName: user?.profile.secondName,
-                    location: user?.profile.location,
-                    website: user?.profile.website,
-                    bio: user?.profile.bio,
-                    paymentPointer: user?.profile.paymentPointer,
-                    twitter: user?.profile.twitter,
-                    dribbble: user?.profile.dribbble,
-                    github: user?.profile.github,
-                    kofi: user?.profile.kofi,
-
-                    // ask about these later
-                    email: user?.email,//this is always updated in the iron session when the user submits the form
-                    username: user?.profile?.username?user?.profile?.username:user?.profile.name,
-                  }}
+                <InterestsSelect
+                user={user}
+                next={false}
+                previous={false}
+                selectedOptions={selectedOptions}
+                setSelectedOptions={setSelectedOptions}
                 />
               </div>
             </div>
           </div>
         </div>
         :
-        <div className="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div className="w-full max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="pt-6 pb-10 md:pt-10 px-3 xl:px-0">
             <div className="bg-white shadow-md rounded-lg py-6 px-4">
               <h1 className="font-semibold text-lg">Confirm your email</h1>

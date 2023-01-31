@@ -3,6 +3,7 @@ import Link from "next/link";
 import Avatar from "../../avatar/Avatar";
 import SmallTag from "../../tag/SmallTag";
 import Moment from "react-moment";
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 const SmallCard = ({ title, image, tags, date, avatar, author }) => {
   return (
@@ -13,6 +14,7 @@ const SmallCard = ({ title, image, tags, date, avatar, author }) => {
           className={`absolute h-[28px] w-[28px] bg-white rounded-lg z-10 m-1.5 top-0 left-0 border border-[1px] border-white overflow-hidden`}
           >
             <Image
+              loader={gumletLoader}
               className="object-cover"
               layout="fill"
               src={avatar ? avatar : `/static/images/storybook/avatar.png`}

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
 import Meta from "@/components/meta";
-// import { Cross1Icon } from "@radix-ui/react-icons";
+import { Cross1Icon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 import { getPopularTopics } from "@/lib/api";
 import { useRouter } from "next/router";
@@ -62,17 +62,17 @@ export default function Index({allTags}) {
           <div className="flex items-center justify-center h-full w-full relative">
             {!user && <Fallback />}
 
-            {/* <div className="absolute top-[2%] left-[2%]">
+            {!user?.isLoggedIn?<div className="absolute top-[16px] left-[16px]">
               <Link href="/" passHref prefetch={false}>
                 <Cross1Icon />
               </Link>
-            </div> */}
+            </div>:''}
             {user && !user?.isLoggedIn ? (
               <div className="w-full h-full bg-[#F4F4F4] grid place-items-center">
                 <div className="max-w-[500px] mx-auto">
                   <LoginForm isSignUp={isSignUp} />
                 </div>
-                <div className="absolute top-[2%] right-[2%]">
+                <div className="absolute top-[16px] right-[16px]">
                   <div className="text-sm text-gray-700">
                     <span>
                       {isSignUp

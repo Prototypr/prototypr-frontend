@@ -165,6 +165,7 @@ module.exports =
         "secure.gravatar.com",
         "cdn-images-1.medium.com",
         "claritee.io",
+        "sfo2.digitaloceanspaces.com",
       ],
     },
   });

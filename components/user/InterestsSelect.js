@@ -4,6 +4,7 @@ import { cloneDeep } from "lodash"
 import fetchJson from "@/lib/iron-session/fetchJson";
 import toast from "react-hot-toast";
 import Spinner from "../atom/Spinner/Spinner";
+import Button from "../Primitives/Button";
 
 const options = [
     {
@@ -96,11 +97,14 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
             body: JSON.stringify(body),
           })
           if(result.status === 200){
-            // toast.success("Successfully updated", {
-            //   duration: 5000,
-            // });
             setSubmitting(false)
-            next()
+            if(next){
+              next()
+            }else{
+              toast.success("Successfully updated", {
+                duration: 5000,
+              });
+            }
           }else{
             let msg = result?.error?.message
             toast.error(msg?msg:"Error has occured.");
@@ -132,8 +136,9 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
 
     return(
         <div className="w-full px-10 lg:px-0">
-                  <div className="w-full p-8 text-center">
-                    <div>
+            {next?
+              <div className="w-full p-8 text-center">
+                 <div>
                       <h2 className="text-3xl font-inter-serif text-gray-800 font-bold text-center">
                         What are your goals?   
                       </h2>
@@ -141,6 +146,9 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
                         Let us know what you're looking for
                     </h3>
                     </div>
+              </div>
+            :<div className="w-full py-1.5"/>}
+                   <div>
                     <div className="md:p-6 border border-black/10 max-h-[400px] overflow-y-auto rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-6 md:gap-x-10 sm:grid-cols-2 xl:grid-cols-2">
                       {options.map((option,i) =>{
                         let userAlreadyChosen
@@ -157,7 +165,7 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
                       })}
                     </div>
                   </div>
-                  <div className="flex mx-auto md:w-[585px] px-8 justify-between">
+                  {next?<div className="flex mx-auto md:w-[585px] px-8 justify-between">
                     <button
                       aria-label="Previous"
                       onClick={() =>{previous()}}
@@ -188,7 +196,17 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
                         </div>
                       </div>
                     </button>
-                  </div>
+                  </div>:
+                  <Button 
+                  className="mt-4"
+                  variant="confirmRounded"
+                  onClick={()=>saveInterestsToUser()} 
+                  disabled={submitting}>
+                   {submitting?
+                    <Spinner size="sm" className="mx-auto p-1 cursor-loading "/>:
+                   'Save interests'}
+                  </Button>
+                  }
                 </div>
     )
 }

@@ -5,15 +5,17 @@ import Container from "@/components/container";
 import { transformPostList } from "@/lib/locale/transformLocale";
 import ErrorPage from "next/error";
 
-import { getPostsByPageAndAuthor } from "@/lib/api";
+import { getPostsByPageAndAuthor, getUserBySlug } from "@/lib/api";
 import {
-  gradient,
   getTwitterHandle,
   getKofiName,
   getDribbbleHandle,
   getGithubHandle,
 } from "@/lib/profile-page/profile-page.js";
 import ProfilePageLayout from "@/components/people/ProfilePageLayout";
+import { useEffect, useState } from "react";
+import useUser from "@/lib/iron-session/useUser";
+import Spinner from "@/components/atom/Spinner/Spinner";
 
 const PostTitle = dynamic(() => import("@/components/post-title"), {
   ssr: true,
@@ -50,10 +52,50 @@ export default function PeoplePage({
   skills = [],
 }) {
   const router = useRouter();
+  const {user} = useUser()
 
+  const [isOwner, setIsOwner] = useState(null)
 
-  if (router.isFallback || !author) {
+    useEffect(()=>{
+      if(slug && user?.profile?.slug){
+        setIsOwner(user?.profile?.slug==slug)
+      }
+    },[user, slug, author])
+
+  
+  if(!author && isOwner==null){
+    return(
+      <LoadingPage/>
+    )
+  }
+
+  if ((router.isFallback || !author) && isOwner!==true) {
     return <ErrorPage statusCode={404} />;
+  }
+
+  // owner is yet to be approved, let them see preview of profile
+  if(isOwner==true && !author){
+    return(
+      <Layout>
+         <ProfilePageLayout
+        previewOnly={true}
+        allPosts={null}  
+        unapproved={true}
+        preview={preview}
+        pagination={pagination}
+        slug={slug}
+        pageNo={pageNo}
+        author = {user?.profile}
+        gradient ={gradient}
+        kofi = {kofi}
+        github = {github}
+        twitter = {twitter}
+        dribbble = {dribbble}
+        authorUrl = {user?.profile?.website}
+        skills = {skills}
+        />
+      </Layout>
+    )
   }
 
   // avatar?.data?.attributes?.avatar?.data?.attributes
@@ -90,6 +132,7 @@ export default function PeoplePage({
         preview={preview}
         pagination={pagination}
         slug={slug}
+        unapproved={false}
         pageNo={pageNo}
         author = {author}
         gradient ={gradient}
@@ -126,74 +169,49 @@ export async function getStaticProps({ preview = null, params, locale }) {
     (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug], sort)) ||
     [];
 
-  if (!allPosts.data[0]) {
+    let author = null
+  if (!allPosts?.data[0]) {
+    author = await getUserBySlug(slug)
     //if no post found, 404
-    return {
-      props: {
-        author: null,
-      },
-      revalidate: 30,
-    };
+    if(!author){
+      return {
+        props: {
+         author:null,
+         slug
+        },
+        revalidate: 30,
+      };
+    }else{
+      const authorResults = populateAuthorDetails(author?.attributes)
+      return {
+        props: {
+          ...authorResults,
+          slug
+        },
+        revalidate: 30,
+      };
+    }
   }
 
   const pagination = allPosts.meta.pagination;
-  let author =
+  author =
     allPosts.data.length && allPosts.data[0]
       ? allPosts.data[0].attributes.author
       : {};
   author = author?.data?.attributes ? author?.data?.attributes : null;
+  const authorResults = populateAuthorDetails(author)
 
-  let grad,
-    kofi,
-    github,
-    twitter,
-    authorUrl,
-    dribbble = "";
-  let skills = [];
-
-  if (author) {
-    grad = gradient(
-      author?.name
-        ? author?.name
-        : author?.displayName
-        ? author?.displayName
-        : "",
-      "horizontal"
-    );
-    kofi = getKofiName(author.kofi);
-    github = getGithubHandle(author.github);
-    twitter = getTwitterHandle(author.twitter);
-    dribbble = getDribbbleHandle(author.dribbble);
-
-    if (author.url) {
-      authorUrl = author.url.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "");
-    }
-    if (author.skills && author.skills.indexOf(",") > -1) {
-      skills = author.skills.split(",");
-    } else if (author.skills) {
-      //trin string
-      var skill = author.skills.substring(0, 22);
-      skills.push(skill);
-    }
-  }
 
   allPosts = transformPostList(allPosts.data, locale);
-
+  
   return {
     props: {
-      author: author,
-      slug,
-      kofi: kofi ? kofi : "",
-      github: github ? github : "",
-      twitter: twitter ? twitter : "",
-      dribbble: dribbble ? dribbble : "",
-      skills,
-      authorUrl:authorUrl?authorUrl:'',
+      ...authorResults,
       pageNo,
       preview,
       pagination,
       allPosts: allPosts,
-      gradient: grad ? grad : "",
+      slug
     },
     revalidate: 20,
   };
@@ -227,4 +245,51 @@ export async function getStaticPaths({ locale }) {
     paths: pageCountArr || [],
     fallback: "blocking",
   };
+}
+
+
+const populateAuthorDetails = (author) =>{
+  let 
+  kofi,
+  github,
+  twitter,
+  authorUrl='',
+  dribbble = "";
+let skills = [];
+
+if (author) {
+  kofi = getKofiName(author.kofi);
+  github = getGithubHandle(author.github);
+  twitter = getTwitterHandle(author.twitter);
+  dribbble = getDribbbleHandle(author.dribbble);
+
+  if (author?.url) {
+    authorUrl = author.url.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "");
+  }
+  if (author.skills && author.skills.indexOf(",") > -1) {
+    skills = author.skills.split(",");
+  } else if (author.skills) {
+    //trin string
+    var skill = author.skills.substring(0, 22);
+    skills.push(skill);
+  }
+}
+return {author, kofi, github, twitter, dribbble, skills, authorUrl}
+}
+
+
+const LoadingPage = () =>{
+  return(
+    <div className="h-full w-full">
+        <div id="editor-container" className="w-full h-full mx-auto  relative">
+            <Layout>
+              <div className="relative w-full h-full flex">
+                <div className="my-auto mx-auto">
+                  <Spinner />
+                </div>
+              </div>
+            </Layout>
+        </div>
+      </div>
+  )
 }

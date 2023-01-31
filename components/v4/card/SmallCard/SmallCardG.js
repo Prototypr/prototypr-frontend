@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Avatar from "../../avatar/AvatarLine";
 // import SmallTag from "../../tag/SmallTag";
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 const SmallCard = ({link, title, image, tags, date, avatar, author, excerpt }) => {
   return (
@@ -10,6 +11,7 @@ const SmallCard = ({link, title, image, tags, date, avatar, author, excerpt }) =
         <div className="w-full shrink-0 my-auto h-[160px] sm:h-[84px] sm:w-[100px] sm:basis-[100px] relative rounded-2xl overflow-hidden border border-gray-100">
           <Link href={link??''}>
             <Image
+              loader={gumletLoader}
               className="object-cover my-auto cursor-pointer"
               layout="fill"
               src={image}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import dynamic from 'next/dynamic'
 import useUser from "@/lib/iron-session/useUser";
-import Layout from "@/components/layout";
+import Layout from "@/components/new-index/layoutForIndex";
 import fetchJson from "@/lib/iron-session/fetchJson";
 import toast from "react-hot-toast";
 import {useRouter} from "next/router";
