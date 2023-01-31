@@ -300,6 +300,7 @@ const ProfilePageLayout = ({
                         {currentPage==1 || !currentPage?<h2 className="font-semibold text-base mb-3">Recent posts</h2>:<h2 className="font-semibold text-base mb-3">Page {currentPage}</h2>}
                     <div className="grid grid-cols-12 gap-6">
                         {posts?.map((post,index)=>{
+                        const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
                         let authorData = post.attributes?.author?.data?.attributes
                         let avatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
                         let url = post?.attributes?.featuredImage?.data?.attributes?.url;

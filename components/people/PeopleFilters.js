@@ -30,7 +30,7 @@ export default function PeopleFilters({
               {item?.subItems?.map((sItem, sIndex) => {
                 return (
                   <div
-                    className="cursor-pointer text-md"
+                    className="cursor-not-allowed text-md"
                     key={`toolbox_cat_${sIndex}`}
                   >
                     {/* <Link href={`${urlRoot}/${sItem.key}/page/1`}> */}
