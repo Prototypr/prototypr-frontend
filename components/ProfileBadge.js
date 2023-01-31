@@ -14,6 +14,7 @@ import fetchJson from "@/lib/iron-session/fetchJson";
 
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { useRouter } from "next/router";
+import { Article, CircleWavyCheck, UserCircle } from "phosphor-react";
 
 const slideUpAndFade = keyframes({
   "0%": { opacity: 0, transform: "translateY(2px)" },
@@ -224,19 +225,36 @@ export const DropdownMenuDemo = ({ icon, user }) => {
           >
             <DropdownMenuItem
               onSelect={() => {
+                router.push(`/people/${user?.profile?.slug}`);
+              }}
+            >
+              
+                  <UserCircle size={26} className="opacity-80 mr-3"/>
+                  Profile
+            </DropdownMenuItem>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem
+              onSelect={() => {
                 router.push("/dashboard/drafts");
               }}
             >
+              <Article size={26} className="opacity-80 mr-3"/>
               Dashboard
             </DropdownMenuItem>
             <DropdownMenuSeparator />
 
             <DropdownMenuItem
               onSelect={() => {
-                router.push("/account");
+                router.push(`/onboard?onboard=true`);
               }}
             >
-              Profile settings
+              <CircleWavyCheck size={26}  className="opacity-80 mr-3" />
+              {/* <Link href="/account"> */}
+              Setup
+              {/* </Link> */}
+              {/* <RightSlot>⌘+T</RightSlot> */}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
 
@@ -262,7 +280,6 @@ export const DropdownMenuDemo = ({ icon, user }) => {
                 </div>
               </div>
             </DropdownMenuItemBanner>
-            <DropdownMenuSeparator />
 
             {/* <DropdownMenuItem
               onSelect={() => {
@@ -272,16 +289,13 @@ export const DropdownMenuDemo = ({ icon, user }) => {
               Write a Post
             </DropdownMenuItem>
             <DropdownMenuSeparator /> */}
-
-            <DropdownMenuItem
+            <DropdownMenuSeparator />
+          <DropdownMenuItem
               onSelect={() => {
-                router.push(`/onboard?onboard=true`);
+                router.push("/account");
               }}
             >
-              {/* <Link href="/account"> */}
-              Welcome guide
-              {/* </Link> */}
-              {/* <RightSlot>⌘+T</RightSlot> */}
+              Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem

@@ -50,11 +50,15 @@ const TopicsSelect = ({
         body: JSON.stringify(body),
       })
       if(result.status === 200){
-        // toast.success("Successfully updated", {
-        //   duration: 5000,
-        // });
         setSubmitting(false)
-        next()
+        if(!next){
+          toast.success("Successfully updated", {
+            duration: 5000,
+          });
+        }else{
+          next()
+        }
+
       }else{
         let msg = result?.error?.message
         toast.error(msg?msg:"Error has occured.");
@@ -83,7 +87,9 @@ const TopicsSelect = ({
 
     return(
 <>
-                  <div className="w-[300px] sm:w-[400px] xl:w-[585px] px-10 lg:px-0 text-left">
+                  <div className={next?"w-[300px] sm:w-[400px] xl:w-[585px] px-10 lg:px-0 text-left":'w-full'}>
+                    {next?
+                    <>
                     <div className="flex justify-center mx-auto mb-1">
                       <h2 className="text-3xl font-inter-serif text-gray-800 font-bold text-center">
                         Join Prototypr   
@@ -92,6 +98,8 @@ const TopicsSelect = ({
                     <h3 className="text-lg font-inter-serif text-gray-500 text-center mb-6">
                         Choose your favourite topics
                     </h3>
+                    </>
+                    :<div className="w-full py-1.5"/>}
                     <div className="md:p-1 max-h-[500px] relative border rounded-xl border-black/10 rounded-xl">
                       <div className="h-full w-full">
                         <div className="flex p-3 flex-wrap max-h-[390px] overflow-y-auto">
@@ -115,6 +123,8 @@ const TopicsSelect = ({
                         </div>
                       </div>
                   </div>
+                    
+                    {next?
                     <div className="w-full text-center relative flex justify-center mt-6">
                     <Button 
                       variant="confirm"
@@ -125,6 +135,16 @@ const TopicsSelect = ({
                        'Continue'}
                       </Button>
                     </div>
+                    :  <Button 
+                    className="mt-4"
+                    variant="confirmRounded"
+                    onClick={()=>saveTopicsToUser()} 
+                    disabled={submitting}>
+                     {submitting?
+                      <Spinner size="sm" className="mx-auto p-1 cursor-loading "/>:
+                     'Save topics'}
+                    </Button>
+                    }
                   </div>
                 </>
     )

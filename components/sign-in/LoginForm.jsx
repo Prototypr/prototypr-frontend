@@ -13,7 +13,7 @@ const LoginForm = ({ isSignUp, title = "Sign up" }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div className="flex flex-col bg-[#fff] rounded-3xl px-10 py-10  md:p-18">
+    <div className="flex flex-col bg-[#fff] rounded-3xl p-8  md:p-18">
       <h2 className="text-[32px] font-inter text-gray-800 font-bold">
         {isSignUp ? title : "Welcome back"}
       </h2>

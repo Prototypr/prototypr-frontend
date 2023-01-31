@@ -16,11 +16,9 @@ const EmptyState = ({currentTab }) => {
               ? `No drafts in progress.`
               : `You've not published anything.`}
           </h1>
-          {currentTab=='draft' && (
             <div class="flex justify-center w-full my-3">
               <NewPostDialog button={true}/>
             </div>
-          )}
         </div>
       </div>
     );

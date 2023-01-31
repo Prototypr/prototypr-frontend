@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Avatar from "../../avatar/Avatar";
 import SmallTag from "../../tag/SmallTag";
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 const BigCard = ({ title, excerpt, image, tags, date, avatar, author }) => {
   return (
@@ -11,6 +12,7 @@ const BigCard = ({ title, excerpt, image, tags, date, avatar, author }) => {
           className="object-cover cursor-pointer"
           layout="fill"
           src={image}
+          loader={gumletLoader}
         />
       </div>
       <div className="w-full sm:w-7/12 md:w-6/12 px-0 sm:px-6 flex flex-col justify-center">

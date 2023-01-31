@@ -3,6 +3,7 @@ import Link from "next/link";
 import Avatar from "../../avatar/AvatarLine";
 import SmallTag from "../../tag/SmallTag";
 import Moment from "react-moment";
+import gumletLoader from "@/components/new-index/gumletLoader";
 
 const SmallCardB = ({ title, image, tags, date, avatar, author, showAuthor }) => {
   return (
@@ -10,9 +11,11 @@ const SmallCardB = ({ title, image, tags, date, avatar, author, showAuthor }) =>
       {image ? (
         <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[195px] xs:h-[124px] relative rounded-2xl overflow-hidden border border-gray-100">
           <Image
+            loader={gumletLoader}
             className="object-cover cursor-pointer"
             layout="fill"
             src={image}
+            alt={title}
           />
         </div>
       ) : (

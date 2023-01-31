@@ -54,6 +54,13 @@ const PAGE_SIZE = 12;
 const ICON_SIZE = 32
 const TAB_ITEMS = [
   {
+    slug: "ai",
+    toolSlug:'ai',
+    name: "topicSpotlight.tabs.ai",
+    icon:<Robot size={ICON_SIZE}/>,
+    tagline:'The bots are here!'
+  },
+  {
     slug: "branding",
     toolSlug:'color',
     name: "topicSpotlight.tabs.branding",
@@ -66,13 +73,6 @@ const TAB_ITEMS = [
     name: "topicSpotlight.tabs.psychology",
     icon:<HandEye size={ICON_SIZE} />,
     tagline:`Analyze your user`
-  },
-  {
-    slug: "ai",
-    toolSlug:'ai',
-    name: "topicSpotlight.tabs.ai",
-    icon:<Robot size={ICON_SIZE}/>,
-    tagline:'The bots are here!'
   },
   {
     slug: "accessibility",
