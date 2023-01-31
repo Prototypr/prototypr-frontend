@@ -76,7 +76,7 @@ const AccountPage = ({ preview }) => {
               </p>
               </div>
           </div>:''}
-            <div className="pt-6 pb-10 px-3 xl:px-0">
+            <div className="pt-6 pb-10 px-0 xl:px-0">
               <div className="bg-white shadow-md rounded-lg py-6 px-4">
                 <h1 className="font-semibold">General Profile</h1>
                 <span className="text-sm text-gray-500">

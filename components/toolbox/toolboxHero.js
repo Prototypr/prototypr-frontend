@@ -39,7 +39,7 @@ const ProductListData = [
   },
   {
     title: "Microsoft Bing Image Creator",
-    slug:'microsoft-image-creator-bing',
+    slug:'microsoft-bing-image-creator',
     description: "Generate AI images with DALL-E",
     image:
       "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/c41fbc86e63824c71c1d5eeb691a46b6.png?w=256&q=75&format=webp&compress=true&dpr=2",

@@ -28,7 +28,7 @@ const StickyFooterCTA = ({title, description, buttonText}) => {
     }, []);
   
     return (
-      <div className="w-full grid place-items-center relative ">
+      <div className="w-full flex justify-center relative ">
         <motion.div
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
@@ -36,9 +36,14 @@ const StickyFooterCTA = ({title, description, buttonText}) => {
             visible: {
               opacity: 1,
               y: 0,
+              // x:'50%',
+              // originX:0.5,
               transition: { type: "spring", stiffness: 300, damping: 24 },
             },
-            hidden: { opacity: 0, y: 100, transition: { duration: 0.2 } },
+            hidden: { opacity: 0, y: 100,
+              // originX:0.5,
+              // x:'50%', 
+              transition: { duration: 0.2 } },
           }}
           className="fixed bottom-0 rounded-none sm:bottom-10 max-w-3xl w-full px-5 py-4 h-auto sm:rounded-lg border border-black border-opacity-10 bg-[#3574F0] z-[100]"
         >

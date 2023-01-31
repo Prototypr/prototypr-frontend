@@ -49,7 +49,7 @@ const AccountPage = ({ preview }) => {
         <div className="flex w-full max-w-4xl mx-auto flex-col md:flex-row">
           <AccountNavigation activeTab={2}/>
           <div className="w-full max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div className="pt-6 pb-10 px-3 xl:px-0">
+            <div className="pt-6 pb-10 px-0 xl:px-0">
               <div className="bg-white shadow-md rounded-lg py-6 px-4">
                 <h1 className="font-semibold">Topics</h1>
                 <span className="text-sm text-gray-500">

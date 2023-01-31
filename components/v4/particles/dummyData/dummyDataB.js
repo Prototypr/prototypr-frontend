@@ -119,7 +119,7 @@ export const dummyData =
     },
     {   
         src:'/static/particles/tools/squares/microsoft.png',
-        slug:'/toolbox/microsoft-image-creator-bing',
+        slug:'/toolbox/microsoft-bing-image-creator',
         position:{x:53, y:54}
     },
     {   
