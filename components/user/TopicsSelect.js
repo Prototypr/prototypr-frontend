@@ -87,7 +87,7 @@ const TopicsSelect = ({
 
     return(
 <>
-                  <div className={next?"w-[300px] sm:w-[400px] xl:w-[585px] px-10 lg:px-0 text-left":'w-full'}>
+                  <div className={next?"w-[380px] max-w-full sm:w-[400px] xl:w-[585px] px-10 lg:px-0 text-left":'w-full'}>
                     {next?
                     <>
                     <div className="flex justify-center mx-auto mb-1">

@@ -7,8 +7,8 @@ import { CheckIcon } from '@radix-ui/react-icons';
 const CheckboxDetailedComponent = ({onCheckChange,defaultChecked, option}) => (
   <form>
     <Flex css={{ alignItems: 'center' }}>
-      <CheckboxRoot onCheckedChange={(val)=>onCheckChange(option, val)} defaultChecked={defaultChecked} id={option.slug}>
-        <CheckboxIndicator>
+      <CheckboxRoot className='min-w-[25px]' onCheckedChange={(val)=>onCheckChange(option, val)} defaultChecked={defaultChecked} id={option.slug}>
+        <CheckboxIndicator >
           <CheckIcon />
         </CheckboxIndicator>
       </CheckboxRoot>

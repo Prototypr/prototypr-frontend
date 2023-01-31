@@ -208,6 +208,7 @@ const Button = styled("button", {
       },
       ghostBlue: {
         backgroundColor: '',
+        borderRadius:20,
         marginRight:'8px',
         color: blue.blue11,
         outline:`1px solid ${blue.blue11}`,

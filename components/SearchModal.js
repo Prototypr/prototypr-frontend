@@ -57,11 +57,9 @@ const SearchModal = (props) => {
   return (
     <Dialog onOpenChange={toggleSubmitOpen} open={submitOpen}>
         <DialogTrigger asChild>
-        <div
-            className="rounded-full hover:bg-blue-50 cursor-pointer ml-2 bg-gray-50/20 p-2 text-sm"
-            >
+        <Button className="rounded-full w-6 h-6 hover:bg-blue-50 cursor-pointer ml-2 bg-gray-50/20 p-2 text-sm">
           <MagnifyingGlass size={20} color="#444" weight="bold"/>
-        </div>
+            </Button>
         </DialogTrigger>
         <DialogContentLarge variant="big">
           <div>

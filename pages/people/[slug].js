@@ -59,6 +59,8 @@ export default function PeoplePage({
     useEffect(()=>{
       if(slug && user?.profile?.slug){
         setIsOwner(user?.profile?.slug==slug)
+      }else if(!user && !author){
+        setIsOwner(false)
       }
     },[user, slug, author])
 

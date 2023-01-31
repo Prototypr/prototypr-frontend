@@ -108,7 +108,7 @@ export default function Onboarding({ allTags, user }) {
           <div
             className={`${
                step.id == "step4" ? "opacity-0" : ""
-            }  ${ step.id == "step1"?'mt-10':'-mt-5'} flex flex-col align-center items-center mx-auto px-3 justify-center`}
+            }  ${ step.id == "step1"?'mt-10':'lg:-mt-5 mt-6'} flex flex-col align-center items-center mx-auto px-3 justify-center`}
             style={{ maxWidth: "250px" }}
           >
             {/* <p className="text-xs text-blue-default mb-2">{steps.indexOf(step) + 1} of {steps.length}</p> */}

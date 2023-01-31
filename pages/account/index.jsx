@@ -76,8 +76,8 @@ const AccountPage = ({ preview }) => {
               </p>
               </div>
           </div>:''}
-            <div className="pt-6 pb-10 px-3 xl:px-0">
-              <div className="bg-white shadow-md rounded-lg py-6 px-4">
+            <div className="pt-6 pb-10 px-0 xl:px-0">
+              <div className="bg-white shadow-sm rounded-xl py-6 px-4">
                 <h1 className="font-semibold">General Profile</h1>
                 <span className="text-sm text-gray-500">
                   This information will be displayed on your public profile
@@ -107,7 +107,7 @@ const AccountPage = ({ preview }) => {
         :
         <div className="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="pt-6 pb-10 md:pt-10 px-3 xl:px-0">
-            <div className="bg-white shadow-md rounded-lg py-6 px-4">
+            <div className="bg-white shadow-sm rounded-xl py-6 px-4">
               <h1 className="font-semibold text-lg">Confirm your email</h1>
                 <p className="text-normal mt-3 mb-3 text-gray-800">
                 Hi {user.name}, 

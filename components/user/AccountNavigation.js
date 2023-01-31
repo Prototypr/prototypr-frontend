@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Envelope, FolderPlus, ListChecks, User } from 'phosphor-react'
 const AccountNavigation = ({activeTab}) =>{
     return(
-        <div className="flex mt-6 flex-row md:flex-col  mb-6 ">
+        <div className="flex mt-6 flex-row flex-wrap md:flex-col  md:mb-6 ">
         {/* <div className="md:w-1/4 flex flex-row md:flex-col mb-6 "> */}
             {/* <div><h1 className="text-2xl px-2 text-gray-900 font-bold mb-10 mt-3">Account</h1></div> */}
 

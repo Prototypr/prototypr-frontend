@@ -347,7 +347,7 @@ const ProfilePageLayout = ({
                     />
           </div>:pagination?.total>4?
           <Link href={`/people/${slug}/page/1`}>
-            <Button variant="ghostBlue" className="rounded-full mt-6">
+            <Button variant="ghostBlue" className="mt-6">
                 Show all
                 </Button>
           </Link>
