@@ -530,6 +530,12 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+              <NavigationMenuLink href="/people">
+                {/* {submenuTitle5} */}
+                People
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/jobs">
                 {/* {submenuTitle5} */}
                 Jobs
