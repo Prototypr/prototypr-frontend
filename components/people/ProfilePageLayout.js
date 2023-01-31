@@ -345,7 +345,7 @@ const ProfilePageLayout = ({
                         onPageNumChange(pageNum, slug);
                       }}
                     />
-          </div>:pagination?.pageCount>1?
+          </div>:pagination?.total>4?
           <Link href={`/people/${slug}/page/1`}>
             <Button variant="ghostBlue" className="rounded-full mt-6">
                 Show all

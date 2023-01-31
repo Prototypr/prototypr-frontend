@@ -139,16 +139,18 @@ export async function getStaticProps({ preview = null, params }) {
   const kofi = getKofiName(author.kofi);
   const github = getGithubHandle(author.github);
   const twitter = getTwitterHandle(author.twitter);
-  const authorUrl = author.url.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "");
+  const authorUrl = author?.url?author?.url?.replace(/(^\w+:|^)\/\//, "")?.replace(/\/+$/, ""):'';
   const dribbble = getDribbbleHandle(author.dribbble);
 
   let skills = [];
-  if (author.skills.indexOf(",") > -1) {
+  if (author?.skills?.indexOf(",") > -1) {
     skills = author.skills.split(",");
   } else {
     //trin string
-    var skill = author.skills.substring(0, 22);
-    skills.push(skill);
+    var skill = author?.skills?.substring(0, 22);
+    if(skill){
+      skills.push(skill);
+    }
   }
 
   return {
