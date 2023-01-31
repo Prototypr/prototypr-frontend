@@ -10,7 +10,7 @@ const SmallCardB = ({ title, image, tags, date, avatar, author, showAuthor, link
     <div className="flex hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-row font-inter w-full max-w-[490px]">
       {image ? (
         <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[195px] xs:h-[124px] relative rounded-2xl overflow-hidden border border-gray-100">
-            <Link href={link}>
+         <Link href={link}>
             <Image
               loader={gumletLoader}
               className="object-cover cursor-pointer"
@@ -18,8 +18,8 @@ const SmallCardB = ({ title, image, tags, date, avatar, author, showAuthor, link
               src={image}
               alt={title}
             />
-          </Link>
-          </div>
+         </Link>
+        </div>
       ) : (
         ""
       )}
@@ -31,7 +31,7 @@ const SmallCardB = ({ title, image, tags, date, avatar, author, showAuthor, link
          {tags?.length
           ? tags.slice(0, 1).map((tag, index) => {
               return (
-                <SmallTag
+                <SmallTag 
                   key={index}
                   index={index}
                   link={`/posts/${tag.attributes?.slug}/page/1/`}
