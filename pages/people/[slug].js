@@ -264,9 +264,9 @@ if (author) {
   dribbble = getDribbbleHandle(author.dribbble);
 
   if (author?.url) {
-    authorUrl = author.url.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "");
+    authorUrl = author?.url?.replace(/(^\w+:|^)\/\//, "").replace(/\/+$/, "");
   }
-  if (author.skills && author.skills.indexOf(",") > -1) {
+  if (author?.skills && author?.skills?.indexOf(",") > -1) {
     skills = author.skills.split(",");
   } else if (author.skills) {
     //trin string
