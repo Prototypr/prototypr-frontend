@@ -31,7 +31,7 @@ const SmallCardB = ({ title, image, tags, date, avatar, author, showAuthor, link
          {tags?.length
           ? tags.slice(0, 1).map((tag, index) => {
               return (
-                <SmallTag
+                <SmallTag 
                   key={index}
                   index={index}
                   link={`/posts/${tag.attributes?.slug}/page/1/`}
