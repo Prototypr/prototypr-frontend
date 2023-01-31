@@ -165,7 +165,7 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
                       })}
                     </div>
                   </div>
-                  {next?<div className="flex mx-auto md:w-[585px] px-8 justify-between">
+                  {next?<div className="flex mt-6 mx-auto md:w-[585px] px-8 justify-between">
                     <button
                       aria-label="Previous"
                       onClick={() =>{previous()}}
