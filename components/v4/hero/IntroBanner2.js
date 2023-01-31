@@ -43,7 +43,7 @@ const IntroBanner = ({ tools, sponsor }) => {
           Think It. Make It.
           </h1>
           <p className="mb-5 text-[#436586] md:leading-[32px] leading-[28px] text-[16px] md:text-[18px] font-inter md:pr-6 max-w-[32rem]">
-            Discover the people, ideas, and process behind designing and building great products.
+            Discover the people, ideas, and wisdom behind designing and building great products.
           </p>
           <div className="flex mt-4 mb-6 sm:mb-0">
             <Link href="/onboard">

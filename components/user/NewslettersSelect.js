@@ -115,11 +115,11 @@ const NewslettersSelect = ({user,next, previous, selectedOptions, setSelectedOpt
       }
 
     return(
-        <div className="w-full px-10 lg:px-0">
+        <div className="w-full px-0 md:px-10 lg:px-0">
           {next?
-              <div className="w-full p-8 text-center">
-                 <div>
-                 <h2 className="text-3xl font-inter-serif text-gray-800 font-bold text-center">
+              <div className="w-full p-8 pb-3 md:pb-8 text-center">
+              <div>
+                 <h2 className="text-3xl mb-2 font-inter-serif text-gray-800 font-bold text-center">
                         Choose newsletter updates   
                       </h2>
                     <h3 className="text-lg font-inter-serif text-gray-500 text-center mb-6">
@@ -128,8 +128,8 @@ const NewslettersSelect = ({user,next, previous, selectedOptions, setSelectedOpt
                     </div>
               </div>
             :<div className="w-full py-1.5"/>}
-                  <div>
-                    <div className="md:p-6 border border-black/10 max-h-[400px] overflow-y-auto rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-6 md:gap-x-10 sm:grid-cols-2 xl:grid-cols-2">
+                  <div className={`${next?'px-6':''}`}>
+                  <div className={`${next?"w-[380px] mx-auto max-w-full sm:w-[400px] xl:w-[585px] px-10 text-left":'w-full'} p-3 md:p-6 border border-black/10 max-h-[400px] overflow-y-auto rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-6 md:gap-x-10 grid-cols-1 lg:grid-cols-2 xl:grid-cols-2`}>
                       {options.map((option,i) =>{
                         let userAlreadyChosen = -1
                         if(!selectedOptions && user?.profile?.newsletters){
@@ -145,7 +145,7 @@ const NewslettersSelect = ({user,next, previous, selectedOptions, setSelectedOpt
                       })}
                     </div>
                   </div>
-                  {next?<div className="flex mx-auto mt-6 md:w-[585px] px-8 justify-between">
+                  {next?<div className={`${next?"w-[380px] mx-auto max-w-full sm:w-[400px] xl:w-[585px] px-10 lg:px-0 text-left":'w-full'} flex mt-6 mx-auto px-8 justify-between`}>
                     <button
                       aria-label="Previous"
                       onClick={() =>{previous()}}

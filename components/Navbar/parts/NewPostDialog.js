@@ -59,7 +59,7 @@ const NewPostDialog = ({button}) => {
         </Button>
         :<div className="flex cursor-pointer text-gray-700 text-sm mr-3">
                   <NotePencil size={22} className="mr-1.5" />
-                 <div className="my-auto font-medium">New post</div>
+                 <div className="my-auto font-medium">New</div>
               </div>}
         {/* <div
             className="rounded-full hover:bg-blue-50 cursor-pointer ml-2 bg-gray-50/20 p-2 text-sm"
