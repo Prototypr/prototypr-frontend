@@ -28,7 +28,7 @@ const Header = ({collapsed, hideLocaleSwitcher, editor, showWriteButton}) => {
   };
 
   return (
-    <div className="w-full h-auto fixed top-0 pointer-events-none z-[100] px-4">
+    <div id="main-nav" className="w-full h-auto fixed top-0 pointer-events-none z-[100] px-4">
       <div className="w-full max-w-6xl mx-auto h-auto mt-10 pointer-events-auto">
         <div className="w-full h-full px-6 py-2 bg-white rounded-[12px] border border-black border-opacity-5 ">
           <div className="">

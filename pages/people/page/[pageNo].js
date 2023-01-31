@@ -1,17 +1,17 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import Layout from "@/components/layout";
+import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 
 import PostTitle from '@/components/post-title'
 import { getPeopleByPage } from "@/lib/api";
 
 import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
+import ProfileCard from "@/components/people/ProfileCard";
 
-const PeoplePostPreview = dynamic(() => import("@/components/people/people-post-preview"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
-// const FilterCategory = dynamic(() => import("@/components/FilterCategory"));
-const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
+const PeopleFilters = dynamic(() => import("@/components/people/PeopleFilters"));
+const PeopleBreadcrumbs = dynamic(() => import("@/components/people/PeopleBreadcrumbs"));
 
 const PAGE_SIZE = 12;
 
@@ -37,33 +37,33 @@ export default function PeoplePage({
 
   return (
     <Layout activeNav={"people"} preview={preview}>
-      <Container>
+      <Container maxWidth="max-w-[1320px] mx-auto pb-16">
       {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) :
         <>        
         {allPosts.length > 0 && (
           <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-            <div className="grid-cols-1 hidden lg:block">
+          <div className="grid-cols-1 hidden lg:block">
               <div className="w-full min-h-screen  flex flex-col">
-              <Breadcrumbs 
+              <PeopleBreadcrumbs 
                     urlRoot={'/people'}
                     title={BREADCRUMBS.pageTitle}
                     links={BREADCRUMBS.links}
                     />
-              {/* <FilterCategory
+              <PeopleFilters
                urlRoot={'/people'}
                items={ALL_PEOPLE_GROUPS} 
                key={'people_item_'} 
-               slug={'/people'}/> */}
+               slug={'/people'}/>
 
               </div>
             </div>
             <div className="col-span-3">
-            <div className={`grid md:grid-cols-3 grid-cols-1 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
+            <div className={`grid md:grid-cols-2 grid-cols-1 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
 
             {allPosts.map((post, i) =>
-            <PeoplePostPreview
+            <ProfileCard
                   key={`peoplecard_${
                     post.attributes.slug ? post.attributes.slug : i
                   }`}
