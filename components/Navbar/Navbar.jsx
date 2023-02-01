@@ -17,6 +17,7 @@ import NavSponsor from "../v4/badge/NavSponsor";
 import SearchModal from "../SearchModal";
 // import { Waypoint } from "react-waypoint";
 import MenuItems from "@/components/Navbar/parts/MenuItems";
+import NewPostDialog from "./parts/NewPostDialog";
 
 const WMCounter = dynamic(
   () => import("@/components/WebMonetization/Counter"),
@@ -171,14 +172,19 @@ const Navbar = ({
           <div className="space-y-1 px-2 pt-2 pb-3">
             <MobileActiveLink href={"/"}>Home</MobileActiveLink>
             <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
-            <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>
+            <MobileActiveLink href={"/jobs"}>Opportunities</MobileActiveLink>
             <MobileActiveLink href={"/people"}>People</MobileActiveLink>
             <MobileActiveLink href={"/web-monetization"}>
-              Web Monetization
+              Earn Micropayments
             </MobileActiveLink>
             {!user?.isLoggedIn?<MobileActiveLink href={"/onboard"}>
               Sign in
             </MobileActiveLink>:''}
+            {user?.isLoggedIn?
+              <div className="px-2.5 pt-2" onClick={toggleMobileNav}>
+                <NewPostDialog/>
+              </div>
+              :''}
           </div>
         </div>
       </nav>

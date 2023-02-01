@@ -21,7 +21,7 @@ export default function ProfileCard({
     <div className="flex shadow-sm group flex-col flex-grow h-full border-black/5 border-1 hover:shadow-lg transition-shadow duration-500 bg-white relative rounded-3xl">
       <div className="p-6 flex">
             {img && (
-      <div className="basis-[96px] pr-6">
+      <div className="basis-[96px] mr-5">
               <div
                 className="rounded-full flex basis-[96px] my-auto transform group-hover:scale-110 transition duration-700 ease-out"
                 style={{ height: "96px", width: "96px" }}
@@ -38,12 +38,12 @@ export default function ProfileCard({
               </div>
           </div>
             )}
-        <div className="flex flex-col">
+        <div className="flex flex-col my-auto">
             <div className="relative flex justify-between">
             <div className="overflow-hidden">
                 <div>
                 <Link href={`/people/${slug}`}>
-                    <h1 className="text-lg font-bold cursor-pointer overflow-hidden mt-0 h-6 mt-0 text-gray-900">
+                    <h1 style={{wordWrap:'break-word', wordBreak: 'break-word'}} className="text-lg font-bold cursor-pointer overflow-hidden mt-0 h-6 mt-0 text-gray-900">
                     {title}
                     </h1>
                 </Link>
@@ -52,7 +52,7 @@ export default function ProfileCard({
                 {location}
                 </div> */}
                 <div className="text-base text-gray-700 mt-2 clamp-2">
-                <div dangerouslySetInnerHTML={{ __html: bio }} />
+                <div dangerouslySetInnerHTML={{ __html: bio }} style={{wordWrap:'break-word', wordBreak: 'break-word'}} />
                 </div>
             </div>
             </div>

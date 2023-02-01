@@ -19,7 +19,7 @@ import format from "date-fns/format";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import DeletePostButton from "@/components/modal/deletePostModal";
-import { ArrowSquareOut, ChartBar, NotePencil } from "phosphor-react";
+import { ArrowSquareOut, ChartBar, Gift, NotePencil } from "phosphor-react";
 const qs = require("qs");
 
 var axios = require("axios");
@@ -115,7 +115,7 @@ const PostCard = ({ post, refetch, user }) => {
             </div>
           )}
   
-          {post.status === "publish" && (
+          {(post.status === "publish" && post.type=='article') && (
             <div>
               <Link href={`/dashboard/stats/${post.slug}`}>
                 <button className="text-lg bg-white underline text-black  p-3  rounded-full hover:bg-gray-100 ">
@@ -124,6 +124,15 @@ const PostCard = ({ post, refetch, user }) => {
               </Link>
             </div>
           )}
+          {post.type=='tool'? (
+            <div>
+              <Link href={`/toolbox/post/${post.id}/deal`}>
+                <button className="text-lg bg-white underline text-black  p-3  rounded-full hover:bg-gray-100 ">
+                  <Gift size={18}/>
+                </button>
+              </Link>
+            </div>
+          ):''}
   
           <div>
             <DeletePostButton

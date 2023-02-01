@@ -62,6 +62,7 @@ export default function Footer() {
                 © 2022 Prototpyr,{" "}
                 {intl.formatMessage({ id: "footer.copyright" })}
               </p>
+              
             </div>
 
             <div className="w-full md:w-6/12">

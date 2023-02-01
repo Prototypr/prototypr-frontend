@@ -95,7 +95,7 @@ const CustomTrigger = ({ children, to, ...props }) => {
   return (
     <div
       className={"rounded-full"+( isActive
-      ? "bg-blue-50 rounded-full border border-blue-100 border-1 text-blue-default"
+      ? "bg-blue-50 rounded-full font-medium border border-blue-100 border-1 text-blue-default"
       : "rounded-full")}
       style={{
         background: isActive ? indigo.indigo3 : "",
@@ -234,7 +234,7 @@ const NextLink = ({ children, ...props }) => {
           style={props.css}
           className={
             isActive
-              ? "bg-blue-50 rounded-full border border-blue-100 border-1 text-blue-default"
+              ? "bg-blue-50 rounded-full font-medium border border-blue-100 border-1 text-blue-default"
               : "rounded-full"
           }
           {...props}
@@ -443,7 +443,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
               {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
               <NavigationMenuTrigger href="articles">
                 {/* {title1} */}
-                Articles
+                Writings
               </NavigationMenuTrigger>
               <NavigationMenuContent className="normal-case">
                 <ContentList layout="three">
@@ -532,13 +532,13 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
             <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/people">
                 {/* {submenuTitle5} */}
-                People
+                Creators
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/jobs">
                 {/* {submenuTitle5} */}
-                Jobs
+                Opportunities
               </NavigationMenuLink>
             </NavigationMenuItem>
 

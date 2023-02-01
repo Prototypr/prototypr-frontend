@@ -70,14 +70,14 @@ export default function Index() {
                     <div className="flex flex-row justify-between items-baseline mt-3">
                         <h1 className="my-3 text-3xl font-semibold mb-12">Partner Dashboard</h1>
                     </div>
-
-                    <h2 className="my-3 text-2xl font-semibold mb-6">Sponsorships</h2>
-                    {/* <Navigation activeTab={1}/> */}
-                    <ListSponsors/>
-                    <hr/>
-                    <h2 className="mt-12 text-2xl font-semibold mb-6">Job Posts</h2>
+                    <h2 className="text-2xl font-semibold mb-6">Job Posts</h2>
                     {/* <Navigation activeTab={1}/> */}
                     <ListJobs/>
+                    <hr/>
+                    <h2 className="mt-12 my-3 text-2xl font-semibold mb-6">Sponsorships</h2>
+                    {/* <Navigation activeTab={1}/> */}
+                    <ListSponsors/>
+                    
                 </div>
           </Layout>
         )
