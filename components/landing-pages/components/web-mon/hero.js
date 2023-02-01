@@ -7,7 +7,7 @@ const Hero = () => {
           A new way for creators to earn
           </h1>
           <p className="mb-4 text-[#1f322b] text-[18px] leading-[34px] max-w-lg font-medium font-inter">
-          With our Web-Monetized platform, you can earn tips and micropayments directly from readers, powered by payment providers like <span className="font-bold text-black">Coil</span>.
+          With our Web-Monetized platform, you can earn tips and micropayments directly from readers, thanks to payment providers like <span className="font-bold text-black">Coil</span>.
           {/* Micro payments are a new and exciting way to earn money with your website. With web monetization you can offer premium content to your users, as well as set up micro payment systems. When your website visitors use these payment methods, they aren't charged any extra fees. This is great if you want to offer subscriptions or premium content on demand. */}
             {/* Web Monetization provides an open, native, efficient, and automatic way to compensate creators 
             through payment providers like <span className="font-bold text-black">Coil</span>. Finally, an alternative to intrusive ads. */}

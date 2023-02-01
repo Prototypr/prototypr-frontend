@@ -123,8 +123,8 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
     location: Yup.string().required("Location is required"),
     description: Yup.string().required("Description is required"),
     type: Yup.string().required("Job type is required"),
-    salaryMin: Yup.number().required("Salary from value is required"),
-    salaryMax: Yup.number().required("Salary to value is required"),
+    salaryMin: Yup.number().optional("Salary from value is required"),
+    salaryMax: Yup.number().optional("Salary to value is required"),
     companyLogo: Yup.mixed().required("Please add your company's logo"),
     url: Yup.string().url("Invalid URL").required("Job URL is required"),
     skills: Yup.string().required("Skills are required"),
@@ -159,6 +159,14 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
     validationSchema: FormSchema,
     onSubmit: (values) => {
       values.jobId=postObject.id
+
+      if(values.salaryMax==''){
+        values.salaryMax=0
+      }
+      if(values.salaryMin==''){
+        values.salaryMin=0
+      }
+
 
       async function submit() {
         let configUpload = {

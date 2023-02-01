@@ -104,9 +104,9 @@ const Header = ({collapsed, hideLocaleSwitcher, editor, showWriteButton}) => {
               <div className="space-y-1 px-2 pt-2 pb-3">
                 <MobileActiveLink href={"/"}>Home</MobileActiveLink>
                 <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
-                <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>
+                <MobileActiveLink href={"/jobs"}>Opportunities</MobileActiveLink>
                 <MobileActiveLink href={"/web-monetization"}>
-                  Web Monetization
+                  Earn Micropayments
                 </MobileActiveLink>
               </div>
             </div>

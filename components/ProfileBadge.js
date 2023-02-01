@@ -328,7 +328,7 @@ export const DropdownMenuDemo = ({ icon, user }) => {
                 </DropdownMenuItem>
               </>
             ):''}
-            {user?.companies?.length ? (
+            {user?.profile?.companies?.length ? (
               <>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem

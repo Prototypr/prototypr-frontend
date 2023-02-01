@@ -3,8 +3,8 @@ import Button from "@/components/Primitives/Button";
 import { Dialog, DialogTrigger, DialogContentLarge, DialogTitle, DialogDescription, DialogClose } from "@/components/Primitives/Dialog";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Cross2Icon } from "@radix-ui/react-icons";
-import { NotePencil, Package, PenNib, SketchLogo, TextAa } from "phosphor-react";
+// import { Cross2Icon } from "@radix-ui/react-icons";
+import { Sparkle, NotePencil, Package, TextAa, Briefcase } from "phosphor-react";
 import { violet, mauve, blackA } from '@radix-ui/colors';
 import { styled, keyframes } from '@stitches/react';
 
@@ -73,9 +73,9 @@ const NewPostDialog = ({button}) => {
           <div>
           {/* <DialogTitle>Search</DialogTitle> */}
           <DialogDescription>
-          <div className="relative  flex flex-row justify-center">
+          <div className="relative  flex flex-col md:flex-row justify-center">
             <Link href="/write">
-                <div className="flex group cursor-pointer flex-col mr-8">
+                <div className="flex group cursor-pointer flex-col mb-10 md:mb-0 md:mr-10">
                     <IconButton className="bg-white mx-auto transition transition-all duration-300 group-hover:scale-110 ">
                         <TextAa weight="fill" size="44"/>
                     </IconButton>
@@ -83,11 +83,19 @@ const NewPostDialog = ({button}) => {
                 </div>
             </Link>
             <Link href="/toolbox/post">
-                <div className="flex group cursor-pointer flex-col">
+                <div className="flex group cursor-pointer flex-col mb-10 md:mb-0 md:mr-10">
                     <IconButton className="bg-blue-500 transition transition-all duration-300 group-hover:scale-110 mx-auto">
                         <Package weight="fill" size="44"/>
                     </IconButton>
                     <h3 className="text-white text-lg transition transition-all duration-300 group-hover:scale-110 mt-2 font-medium text-center">Tool</h3>
+                </div>
+            </Link>
+            <Link href="/jobs/post">
+                <div className="flex group cursor-pointer flex-col">
+                    <IconButton className="bg-purple-500 transition transition-all duration-300 group-hover:scale-110 mx-auto">
+                    <Briefcase weight="fill" size="44" />
+                    </IconButton>
+                    <h3 className="text-white text-lg transition transition-all duration-300 group-hover:scale-110 mt-2 font-medium text-center">Opportunity</h3>
                 </div>
             </Link>
            

@@ -33,32 +33,22 @@ const Index = ({ jobs }) => {
       showWriteButton={false}
       background="#eff4fb"
     >
-      <Container>
-        <div className="w-full h-full grid grid-cols-12 gap-1  ">
-          <div className="max-w-[46rem] mx-auto pb-20  px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
-            <div className="pt-5 text-md text-gray-700 pb-8">
-              <Link href={`/`}>
-                <span className="hover:underline">Home</span>
-              </Link>{" "}
-              →{" "}
-              <Link href={`/jobs`}>
-                <span className="underline">Jobs</span>
-              </Link>
-            </div>
-            <div className="mb-6 col-start-1 col-end-4 md:col-start-1 md:col-end-5">
-              <h1 className="text-lg md:text-xl font-medium">Now Hiring</h1>
-            </div>
-            <div className="w-full h-full col-start-1 col-end-7 md:col-start-1 md:col-end-5 flex flex-col pb-10 lg:pr-6">
-              {jobs.map((job, i) => {
-                return <JobPostCard job={job} key={i} />;
-              })}
+<Container maxWidth="max-w-[1320px] mx-auto pb-16">
+<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
+          <div className="col-span-3">
+            <div className=" mx-auto pb-20  px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
+            <div className={`grid md:grid-cols-2 grid-cols-1 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
+                {jobs.map((job, i) => {
+                  return <JobPostCard job={job} key={i} />;
+                })}
+              </div>
             </div>
           </div>
-          <Sidebar
-            // author={post.attributes?.author?.data?.attributes}
-            // relatedPosts={relatedPosts}
-            paddingTop="hidden md:block pt-6"
-          />
+            <Sidebar
+              // author={post.attributes?.author?.data?.attributes}
+              // relatedPosts={relatedPosts}
+              paddingTop="hidden md:block"
+            />
           {/* <div className="w-full h-full mb-5 col-start-1 col-end-7 md:col-start-5 md:col-end-7 ">
          
             <div className="w-full bg-blue-50 rounded-md p-5 border border-gray-300">
@@ -89,13 +79,13 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
 
   return (
     <div
-      className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
+      className={`${paddingTop} relative grid-cols-1 hidden lg:block`}
     >
       <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
       <div
         className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
       >
-        <aside className="h-screen px-10 sticky top-0 py-0">
+        <aside className="h-screen sticky top-0 py-0">
           <div className="w-full mb-8">
             <Link href="/jobs/post">
               <Button variant="fullWidthJob" className="px-0 py-1">

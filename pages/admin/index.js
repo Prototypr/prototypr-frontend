@@ -35,7 +35,7 @@ export default function Index() {
                 style={{ maxWidth: 1200 }}
                 >
                     <div className="flex flex-row justify-between items-baseline mt-3">
-                        <h1 className="my-3 text-4xl font-semibold">Dashboard</h1>
+                        <h1 className="my-3 text-3xl font-semibold">My posts</h1>
                     </div>
                     <Navigation activeTab={1}/>
                     <Dashboard postStatus='draft' />

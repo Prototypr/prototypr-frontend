@@ -9,14 +9,15 @@ export default function PeopleFilters({
   paginationRoot,
 }) {
     return(
-        <div className="">
-        <div className="mt-5 opacity-60">
-            <h1 className="font-semibold pb-2 mb-2 text-base text-gray-900">
-                  Filters
-            </h1>
-            <div className="p-4 text-sm bg-purple-500/20 text-purple-900 rounded-2xl">
+        <div className="opacity-80">
+           <div className="p-4 text-sm max-w-[90%] bg-purple-500/20 text-purple-900 rounded-2xl">
                 Coming Soon: Filter by topic, location, availability, and more.
             </div>
+        <div className="opacity-60">
+            {/* <h1 className="font-semibold pb-2 mb-2 text-base text-gray-900">
+                  Filters
+            </h1> */}
+           
             <div className="display-none cursor-not-allowed mb-8 mt-6 lg:block text-gray-800">
       {items?.map((item, index) => {
         return (
