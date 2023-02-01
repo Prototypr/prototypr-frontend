@@ -98,7 +98,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
             <PrototyprNetworkCTA />
             <div>
               {/* EMAIL FORM */}
-              <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
+              <div className="w-full bg-blue-100 rounded-2xl p-5 border border-black/5 shadow-sm">
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">
                   Get the roundup
                 </h3>
