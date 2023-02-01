@@ -5,7 +5,7 @@ const PrototyprNetworkCTA = ({ data }) => {
     <div className="relative">
 
       <div className="flex flex-col gap-1 justify-end items-end">
-        <div className="w-full rounded-[12px] h-auto bg-white border border-black border-opacity-10 p-6 flex flex-col grid gap-3 ">
+        <div className="w-full rounded-2xl h-auto bg-white border border-black/5 p-6 flex flex-col grid gap-3 shadow-sm">
           <div className="flex flex-col grid gap-2">
             <p className="text-gray-800 font-medium max-w-[200px] text-[16px] mb-3 font-inter">
               Share and Grow together in the Design Community.
