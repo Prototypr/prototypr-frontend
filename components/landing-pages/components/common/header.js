@@ -1,20 +1,20 @@
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import Link from "next/link";
 import useUser from "@/lib/iron-session/useUser";
 import { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
-import LocationMenu from "@/components/Navbar/parts/LocationMenu";
+// import LocationMenu from "@/components/Navbar/parts/LocationMenu";
 import MenuItems from "@/components/Navbar/parts/MenuItems";
 import UserMenu from "@/components/Navbar/UserMenu";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-} from "@/components/Primitives/Navigation";
+// import {
+//   NavigationMenu,
+//   NavigationMenuList,
+// } from "@/components/Primitives/Navigation";
 
-const WMCounter = dynamic(() => import("@/components/WebMonetization/Counter"), {
-  ssr: false,
-});
+// const WMCounter = dynamic(() => import("@/components/WebMonetization/Counter"), {
+//   ssr: false,
+// });
 
 const Header = ({collapsed, hideLocaleSwitcher, editor, showWriteButton}) => {
 
@@ -69,11 +69,11 @@ const Header = ({collapsed, hideLocaleSwitcher, editor, showWriteButton}) => {
                       />
                     </>
                   </Link>
-                  <div
+                  {/* <div
                     className={`hidden md:block my-auto transition transition-all duration-300 ease-in-out`}
                   >
                     <WMCounter />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <MenuItems />
