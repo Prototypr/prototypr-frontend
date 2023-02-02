@@ -1,4 +1,4 @@
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import useUser from "@/lib/iron-session/useUser";
 import { useState } from "react";
@@ -7,7 +7,10 @@ import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 // import LocationMenu from "@/components/Navbar/parts/LocationMenu";
 import MenuItems from "@/components/Navbar/parts/MenuItems";
 import UserMenu from "@/components/Navbar/UserMenu";
-import WMButton from "@/components/Navbar/parts/WMButton";
+const WMButton = dynamic(() => import("@/components/Navbar/parts/WMButton"), 
+{
+  ssr: false,
+});
 // import {
 //   NavigationMenu,
 //   NavigationMenuList,
