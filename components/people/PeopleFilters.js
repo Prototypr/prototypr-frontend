@@ -9,10 +9,13 @@ export default function PeopleFilters({
   paginationRoot,
 }) {
     return(
-        <div className="opacity-80">
-           <div className="p-4 text-sm max-w-[90%] bg-purple-500/20 text-purple-900 rounded-2xl">
-                Coming Soon: Filter by topic, location, availability, and more.
-            </div>
+        <div className="opacity-80 px-1">
+          <div className="flex flex-col p-2 rounded-xl border border-purple-500/40">
+            <div style={{width:'fit-content'}} className="uppercase text-[11px] mb-1 bg-purple-200 text-purple-800 px-2 py-0.5 rounded-lg">Coming Soon</div>
+            <div className="px-1 text-sm max-w-[90%] text-purple-900 rounded-2xl">
+                Filter by topic, location, availability, and more.
+              </div>
+          </div>
         <div className="opacity-60">
             {/* <h1 className="font-semibold pb-2 mb-2 text-base text-gray-900">
                   Filters

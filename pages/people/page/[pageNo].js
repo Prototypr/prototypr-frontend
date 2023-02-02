@@ -44,21 +44,6 @@ export default function PeoplePage({
         <>        
         {allPosts.length > 0 && (
           <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-          <div className="grid-cols-1 hidden lg:block">
-              <div className="w-full min-h-screen  flex flex-col">
-              <PeopleBreadcrumbs 
-                    urlRoot={'/people'}
-                    title={BREADCRUMBS.pageTitle}
-                    links={BREADCRUMBS.links}
-                    />
-              <PeopleFilters
-               urlRoot={'/people'}
-               items={ALL_PEOPLE_GROUPS} 
-               key={'people_item_'} 
-               slug={'/people'}/>
-
-              </div>
-            </div>
             <div className="col-span-3">
             <div className={`grid md:grid-cols-2 grid-cols-1 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
 
@@ -84,6 +69,21 @@ export default function PeoplePage({
                   onPageNumChange(pageNum);
                 }}
               />
+            </div>
+            <div className="grid-cols-1 hidden lg:block">
+              <div className="w-full min-h-screen  flex flex-col">
+              {/* <PeopleBreadcrumbs 
+                    urlRoot={'/people'}
+                    title={BREADCRUMBS.pageTitle}
+                    links={BREADCRUMBS.links}
+                    /> */}
+              <PeopleFilters
+               urlRoot={'/people'}
+               items={ALL_PEOPLE_GROUPS} 
+               key={'people_item_'} 
+               slug={'/people'}/>
+
+              </div>
             </div>
           </div>
         )}
