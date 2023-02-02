@@ -34,10 +34,10 @@ const Index = ({ jobs }) => {
       background="#eff4fb"
     >
 <Container maxWidth="max-w-[1320px] mx-auto pb-16">
-<div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-          <div className="col-span-3">
-            <div className=" mx-auto pb-20  px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
-            <div className={`grid md:grid-cols-2 grid-cols-1 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
+<div className="mt-6 grid grid-rows-1 grid-cols-4 grid-cols-1  gap-10">
+          <div className="col-span-4 xl:col-span-3">
+            <div className=" mx-auto pb-20  px-3 md:px-0 gap-2 col-span-12 lg:col-span-8">
+            <div className={`grid lg:grid-cols-2 grid-cols-1 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
                 {jobs.map((job, i) => {
                   return <JobPostCard job={job} key={i} />;
                 })}
@@ -79,11 +79,11 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
 
   return (
     <div
-      className={`${paddingTop} relative grid-cols-1 hidden lg:block`}
+      className={`${paddingTop} hidden relative xl:grid-cols-1 xl:block`}
     >
       <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
       <div
-        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
+        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden xl:block`}
       >
         <aside className="h-screen sticky top-0 py-0">
           <div className="w-full mb-8">
