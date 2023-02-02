@@ -33,11 +33,11 @@ const Index = ({ jobs }) => {
       showWriteButton={false}
       background="#eff4fb"
     >
-<Container maxWidth="max-w-[1320px] mx-auto pb-16">
+<Container padding={false} maxWidth="max-w-[1320px] mx-auto pb-16 px-0 xl:px-3">
 <div className="mt-6 grid grid-rows-1 grid-cols-4 grid-cols-1  gap-10">
           <div className="col-span-4 xl:col-span-3">
-            <div className=" mx-auto pb-20  px-3 md:px-0 gap-2 col-span-12 lg:col-span-8">
-            <div className={`grid lg:grid-cols-2 grid-cols-1 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
+            <div className=" mx-auto pb-20  px-2 md:px-0 gap-2 col-span-12 lg:col-span-8">
+            <div className={`grid lg:grid-cols-2 grid-cols-1 md:gap-y-10 gap-y-8 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
                 {jobs.map((job, i) => {
                   return <JobPostCard job={job} key={i} />;
                 })}
