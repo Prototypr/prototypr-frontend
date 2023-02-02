@@ -7,6 +7,7 @@ import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 // import LocationMenu from "@/components/Navbar/parts/LocationMenu";
 import MenuItems from "@/components/Navbar/parts/MenuItems";
 import UserMenu from "@/components/Navbar/UserMenu";
+import WMButton from "@/components/Navbar/parts/WMButton";
 // import {
 //   NavigationMenu,
 //   NavigationMenuList,
@@ -89,6 +90,9 @@ const Header = ({collapsed, hideLocaleSwitcher, editor, showWriteButton}) => {
                     />
                   </NavigationMenuList>
                 </NavigationMenu> */}
+                 <div className={`hidden mr-2 md:block my-auto`}>
+                <WMButton />
+              </div>
                 <div className="relative ml-3">
                   <UserMenu userLoading={isLoading} user={user} />
                 </div>

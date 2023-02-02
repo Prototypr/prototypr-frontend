@@ -1,5 +1,5 @@
 export const uphold_html = `
-<h2>New to <span class="boreder-b border-b-2 border-green-600 hover:text-green-600 cursor-pointer">Web Monetization</span>? This is a step-by-step guide for creating an <a href="https://uphold.com" style="text-decoration:none;" target="_blank" class="headline boreder-b border-b-2 border-green-600 hover:text-green-600 cursor-pointer">Uphold account</a> so you can get a payment pointer to embed in your articles.</h2>
+<h2 class="mx-auto">New to <span class="border-b border-b-2 border-green-600 hover:text-green-600 cursor-pointer">Web Monetization</span>? This is a step-by-step guide for creating an <a href="https://uphold.com" style="text-decoration:none;" target="_blank" class="headline boreder-b border-b-2 border-green-600 hover:text-green-600 cursor-pointer">Uphold account</a> so you can get a payment pointer to embed in your articles.</h2>
 <div class="max-w-2xl mx-auto blog-content pb-36 pt-3 mb-32">
    <div>
       <p>To collect micropayments, you need a digital wallet in which to receive the money. Here at Prototypr, we let content creators use our digital wallet, so you don’t have to sign up for one yourself. You can still set up your own digital wallet if you prefer, for instance if you’re also collecting micropayments from content on other websites. This guide will explain how to do it.</p>

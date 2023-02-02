@@ -12,7 +12,7 @@ const PostHeader = dynamic(() => import("@/components/post-header"), {
 });
 import { useIntl } from "react-intl";
 
-import Layout from "@/components/layout-post";
+import Layout from "@/components/new-index/layoutForIndex";
 // const NoticeTranslation = dynamic(
 //   () => import("@/components/notice-translation"),
 //   { ssr: true }
@@ -74,7 +74,7 @@ export default function Post({ post, preview, relatedPosts }) {
         style={{ background: "#fff" }}
       >        
         <main
-          className="pt-24 md:pt-24 -mt-3 mx-auto"
+          className="-mt-3 mx-auto"
           style={{ maxWidth: "1200px" }}
         >
           {(post?.id && (process.env.NODE_ENV==='production')) && 
