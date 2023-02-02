@@ -11,20 +11,23 @@ import {
 import { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
-import WMButton from "./parts/WMButton";
-import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
+// import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
 import NavSponsor from "../v4/badge/NavSponsor";
 import SearchModal from "../SearchModal";
 // import { Waypoint } from "react-waypoint";
 import MenuItems from "@/components/Navbar/parts/MenuItems";
 import NewPostDialog from "./parts/NewPostDialog";
+const WMButton = dynamic(() => import("./parts/WMButton"), 
+{
+  ssr: false,
+});
 
-const WMCounter = dynamic(
-  () => import("@/components/WebMonetization/Counter"),
-  {
-    ssr: false,
-  }
-);
+// const WMCounter = dynamic(
+//   () => import("@/components/WebMonetization/Counter"),
+//   {
+//     ssr: false,
+//   }
+// );
 
 const Navbar = ({
   collapsed,

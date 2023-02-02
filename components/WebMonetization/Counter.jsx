@@ -22,6 +22,60 @@ import { styled } from '@stitches/react';
         '&:focus': { boxShadow: `0 0 0 2px black` },
       });
       
+const WMCounterInfo = () =>{
+  const [count, setCount] = useState(()=>{
+    const storedCount = localStorage.getItem("WMFormatted")
+    if(storedCount){
+        return storedCount
+    }
+})
+useEffect(()=>{
+  let total = Number(localStorage.getItem("WMCount"));
+  if(!total){
+   localStorage.setItem("WMCount", 0);
+   total = 0
+  }
+  let scale
+  // https://webmonetization.org/docs/counter
+  if (document?.monetization) {
+      document.monetization.addEventListener('monetizationprogress', ev => {
+        // initialize currency and scale on first progress event
+        if (total === 0) {
+          scale = ev.detail.assetScale
+          localStorage.setItem("WMScale", Number(scale));
+          if(ev.detail?.assetCode=='USD'){
+              localStorage.setItem("WMCurrency", '$');
+          }
+      }
+      
+      if(!scale){
+          scale = Number(localStorage.getItem("WMScale")); 
+      }
+
+        total += Number(ev.detail.amount)
+
+        const formatted = (total * Math.pow(10, -scale)).toFixed(scale)
+
+        localStorage.setItem("WMFormatted", formatted);
+        localStorage.setItem("WMCount", Number(total));
+          setCount(formatted)
+      })
+    }
+}, [])
+
+
+return(
+  <>
+{count ?<div className="inline px-6 py-3.5 rounded-b-[10px] mt-1.5 border-t-[2px] border-teal-900/50 bg-teal-100/30 text-gray-600 text-sm flex flex-col"> 
+    <div className="mb-2 text-[11px] font-medium text-gray-600 uppercase">Micropayments</div>
+    <div className="mb-1.5 flex cursor-default p-1 px-2 bg-white/40 border border-black/10 border-1 rounded-lg text-teal-600 font-medium">{localStorage.getItem('WMCurrency')}{count}</div>
+    <div className="" style={{fontSize:11}}>💚 Thanks for your support.</div>
+    </div>:''
+    }
+  </>
+  
+)
+}
 
 const WebMonetizationCounter = () =>{
 
@@ -94,4 +148,4 @@ const WebMonetizationCounter = () =>{
 
     
 }
-export default WebMonetizationCounter
+export default WMCounterInfo
