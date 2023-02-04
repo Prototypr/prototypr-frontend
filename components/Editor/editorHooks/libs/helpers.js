@@ -113,7 +113,8 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
 
   //if creating, need to send the user id
   if(isCreate){
-    entry.user = user?.id
+    console.log(user?.profile)
+    entry.user = user?.profile?.id
   }
 
   //change the date on save only if it's a draft or pending publish

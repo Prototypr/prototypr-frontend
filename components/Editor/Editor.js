@@ -157,7 +157,7 @@ const Editor = ({
       const json = editor.getJSON();
       setHasUnsavedChanges(true);
       // send the content to an API here (if new post only)
-      if (!slug) {
+      if (!articleSlug) {
         localStorage.setItem("wipContent", JSON.stringify(json));
       }
     },
@@ -193,7 +193,7 @@ const Editor = ({
 
   const onSave = async () => {
     // if (editorType === "edit") {
-    if (slug) {
+    if (articleSlug) {
       setSaving(true);
       try {
         console.log("saving post...");
