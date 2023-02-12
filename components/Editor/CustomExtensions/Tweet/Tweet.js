@@ -34,6 +34,9 @@ const Twitter = Node.create({
       url: {
         default: null,
       },
+      tweetId: {
+        default: null,
+      },
       pasted: false,
       rawContent:{
         default:''
@@ -144,7 +147,8 @@ const Twitter = Node.create({
                 var el = document.createElement('div')
                 el.innerHTML = embed.data?.html
                 var blockquote = el.querySelector('blockquote')
-                
+                let id = url?.split('/')[5].split('?')[0];
+
                 const transaction = state.tr.setNodeMarkup(
                   getPos(), // For custom node views, this function is passed into the constructor.  It'll return the position of the node in the document.
                   undefined, // No node type change
@@ -152,7 +156,8 @@ const Twitter = Node.create({
                     ...node.attrs,
                     pasted: false,
                     url:url,
-                    rawContent:blockquote?.innerHTML
+                    rawContent:blockquote?.innerHTML,
+                    tweetId:id
                   } // Replace (update) attributes to your `video` block here
                   )
                   view.dispatch(transaction)
