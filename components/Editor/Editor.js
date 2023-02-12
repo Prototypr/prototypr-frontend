@@ -110,6 +110,7 @@ const Editor = ({
       OrderedList,
       Dropcursor,
       Tweet,
+      // Twitter,
       Video,
       Iframe,
       Youtube,
@@ -133,6 +134,7 @@ const Editor = ({
       //   allowBase64: true,
       // }),
       Placeholder.configure({
+          includeChildren: true,
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
             return "What's the title?";
@@ -143,7 +145,10 @@ const Editor = ({
           if (node.type.name === "figure") {
             return "What's the title?";
           }
-          return "Tell a story...";
+          if (node.type.name === "tweet") {
+            return "Paste a tweet link and press enter";
+          }
+            return "Tell a story...";
         },
       }),
     ],
