@@ -66,9 +66,9 @@ const Twitter = Node.create({
       nodePasteRule({
         find: TWITTER_REG_G,
         type: this.type,
-        getAttributes: (match) => {
+        getAttributes:async (match) => {
           return {
-            ['data-twitter-id']: getTweetIdFromUrl(match.input),
+            ['data-twitter-id']: await getTweetIdFromUrl(match.input),
             url: match.input,
             pasted: true,
           };
@@ -406,4 +406,18 @@ function appendTweetQuote(wrapper) {
   const blockquote = document.createElement('blockquote');
   wrapper.appendChild(blockquote);
   return blockquote;
+}
+
+const getTweetIdFromUrl =async (url) =>{
+  let embed = await axios.get('https://req.prototypr.io/https://publish.twitter.com/oembed?url='+url)
+  .then(function (response) {
+    return response
+  })
+  .catch(function (error) {
+    console.log(error);
+    alert('Try a different twitter url')
+    return false
+  });
+
+  return embed
 }
