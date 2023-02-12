@@ -7,6 +7,7 @@ const PreviewDisplay = ({ content, editor }) => {
   useEffect(() => {
     setHTML(editor.getHTML())
   }, [editor]);
+
   // use editor instead of content cos content only 
   // reflects what is there on first load
   return (

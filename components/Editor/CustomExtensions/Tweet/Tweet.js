@@ -1,4 +1,6 @@
 import { Node, mergeAttributes, nodePasteRule } from '@tiptap/core';
+import axios from 'axios'
+import {NodeSelection} from 'prosemirror-state'
 
 export const TWITTER_REG_G =
   /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(.+)?$/g;
@@ -33,6 +35,9 @@ const Twitter = Node.create({
         default: null,
       },
       pasted: false,
+      rawContent:{
+        default:''
+      }
     };
   },
 
@@ -85,9 +90,13 @@ const Twitter = Node.create({
     if (!HTMLAttributes.url) {
       return ['span'];
     }
+    let rawHTML = document.createElement('div')
+    rawHTML.innerHTML=HTMLAttributes.rawContent
     return['figure',
     // ['blockquote', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)],
-    ['blockquote', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false })],
+    ['blockquote', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false, class:'twitter-tweet' }),
+    rawHTML.firstChild
+  ],
     ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:'']]
     // return ['div', mergeAttributes({ 'data-twitter': '' }, HTMLAttributes)];
   },
@@ -95,13 +104,13 @@ const Twitter = Node.create({
   addNodeView() {
     // return ReactNodeViewRenderer(TwitterComponent);
     return ({ node, getPos, editor}) => {
-      const { view } = editor;
+      const { view, state } = editor;
       const figcaption = document.createElement('input');
 
-
-      let newUrl = ''
+      let container = document.createElement('div');
+      let loader = document.createElement('div')
+      
       if(!node.attrs.url){
-        const container = document.createElement('div');
         container.style.position='relative'
         const tweetWrapper = document.createElement('div');
         tweetWrapper.style.position='relative'
@@ -119,82 +128,91 @@ const Twitter = Node.create({
            //check link
            let url = e.target.fname?.value
            let foundTweet = false
-           console.log(url)
-           if(url && url.indexOf('/')>-1){
-             //check if twitter
-             let tweetId = url?.split('/')[5].split('?')[0];
-             let twt = await window.twttr.widgets.createTweet(tweetId, container);
-             foundTweet=true
-             if(twt){
-               editor.commands.updateAttributes('twitter', {
-                 ...node.attrs,
-                 pasted: false,
-                 url:url
-               });
-               newUrl = url
-               twitterOverlay.style.display='block'
-               form.remove()
+           if(url?.indexOf('/')>-1 && url?.indexOf('twitter')>-1){
+            let embed = await axios.get('https://req.prototypr.io/https://publish.twitter.com/oembed?url='+url)
+              .then(function (response) {
+                loader.remove()
+                return response
+              })
+              .catch(function (error) {
+                console.log(error);
+                alert('Try a different twitter url')
+                return false
+              });
 
-               
-               // wrapper.classList.add('figure_wrapper');
-               // wrapper.contentEditable = 'false';
-               
-                figcaption.setAttribute('data-placeholder', 'Caption (optional)');
-                figcaption.setAttribute('draggable', 'false');
-                figcaption.setAttribute('placeholder', 'Insert a caption (optional)');
-                figcaption.addEventListener('keydown', (e) => {
-                  newUrl=url
-                  editor.commands.updateAttributes('twitter', {
+              if(embed.data?.html){
+                var el = document.createElement('div')
+                el.innerHTML = embed.data?.html
+                var blockquote = el.querySelector('blockquote')
+                
+                const transaction = state.tr.setNodeMarkup(
+                  getPos(), // For custom node views, this function is passed into the constructor.  It'll return the position of the node in the document.
+                  undefined, // No node type change
+                  {
                     ...node.attrs,
-                    url:newUrl,
-                    figcaption: figcaption.value
-                  });
-                })
-                container.appendChild(figcaption)
+                    pasted: false,
+                    url:url,
+                    rawContent:blockquote?.innerHTML
+                  } // Replace (update) attributes to your `video` block here
+                  )
+                  view.dispatch(transaction)
+                  form.remove()
+                  let tweetId = url?.split('/')[5].split('?')[0];
+                  await window.twttr.widgets.createTweet(tweetId, container);
 
+                  //add new line
+                  editor.chain()
+                 .insertContentAt(getPos()+1, `<p></p>`, {
+                   updateSelection: true,
+                   parseOptions: {
+                     preserveWhitespace: 'full',
+                   }
+                 }).focus().run()
+                
+              }
+           }
+           else{
+             // empty content
+             if(!e.target.fname?.value){
+               const pos = getPos()
+               const from = pos
+               const to = pos
+               const tr = view.state.tr
+               tr.delete(from, to+1)
+               view.dispatch(tr);
+   
+               setTimeout(()=>{
+                 editor.chain()
+                 .insertContentAt(pos, `<p></p><p></p>`, {
+                   updateSelection: true,
+                   parseOptions: {
+                     preserveWhitespace: 'full',
+                   }
+                 }).focus().run()
+               },200)
+               // setTimeout(()=>{
+               //   editor.chain().setTextSelection(pos+2).focus().run()
+               // },200)
+             }else if(!foundTweet){
+               const pos = getPos()
+               const from = pos
+               const to = pos
+               const tr = view.state.tr
+               tr.delete(from, to+1)
+               view.dispatch(tr);
+   
+               editor.chain()
+               .insertContentAt(pos, `<p>${input.value}</p><p></p>`, {
+                 updateSelection: true,
+                 parseOptions: {
+                   preserveWhitespace: 'full',
+                 }
+               }).focus().run()
+               // setTimeout(()=>{
+               //   editor.chain().setTextSelection(pos+2).focus().run()
+               // },200)
              }
            }
-
-          // empty content
-          if(!e.target.fname?.value){
-            const pos = getPos()
-            const from = pos
-            const to = pos
-            const tr = view.state.tr
-            tr.delete(from, to+1)
-            view.dispatch(tr);
-
-            setTimeout(()=>{
-              editor.chain()
-              .insertContentAt(pos, `<p></p><p></p>`, {
-                updateSelection: true,
-                parseOptions: {
-                  preserveWhitespace: 'full',
-                }
-              }).focus().run()
-            },200)
-            // setTimeout(()=>{
-            //   editor.chain().setTextSelection(pos+2).focus().run()
-            // },200)
-          }else if(!foundTweet){
-            const pos = getPos()
-            const from = pos
-            const to = pos
-            const tr = view.state.tr
-            tr.delete(from, to+1)
-            view.dispatch(tr);
-
-            editor.chain()
-            .insertContentAt(pos, `<p>${input.value}</p><p></p>`, {
-              updateSelection: true,
-              parseOptions: {
-                preserveWhitespace: 'full',
-              }
-            }).focus().run()
-            // setTimeout(()=>{
-            //   editor.chain().setTextSelection(pos+2).focus().run()
-            // },200)
-          }
         }
         const input = document.createElement('input')
         // input.type = 'text'
@@ -223,7 +241,7 @@ const Twitter = Node.create({
                   preserveWhitespace: 'full',
                 }
               }).focus().run()
-            },100)
+            },150)
           }
           // space bar pressed
           if(e.key==' '){
@@ -260,7 +278,6 @@ const Twitter = Node.create({
           dom: container,
           // contentDOM: figcaption,
           ignoreMutation(p) {
-            console.log(p)
             return true
           },
           stopEvent(e) {
@@ -277,41 +294,66 @@ const Twitter = Node.create({
           },
         };
       }
-      // let { src, alt, title } = node.attrs;
-      const container = document.createElement('figure');
-      container.setAttribute('draggable', 'true');
 
-      container.style.height='200px'
-      container.style.width='200px'
-      container.style.background='pink'
+      container.style.position='relative'
+        const tweetWrapper = document.createElement('div');
+        tweetWrapper.style.position='relative'
+        tweetWrapper.style.width='34rem'
+        tweetWrapper.style.maxWidth='100%'
+        tweetWrapper.style.height='fit-content'
+        tweetWrapper.style.background='#e8eef9'
+        tweetWrapper.style.borderRadius='1rem'
+        tweetWrapper.setAttribute('draggable',false)
+        container.appendChild(tweetWrapper)
 
-      const wrapper = document.createElement('div');
-      // const figcaption = document.createElement('figcaption');
+        const overlay = document.createElement('div')
+        overlay.style.width='34rem'
+        overlay.style.maxWidth='100%'
+        overlay.style.height='fit-content'
+        // overlay.style.background='red'
+        overlay.style.position='absolute'
+        overlay.style.top=0
+        overlay.style.left=0
+        overlay.style.width='100%'
+        overlay.style.height='100%'
+        overlay.onmousedown= (e) =>{
+          e.preventDefault()
+          e.stopPropagation()
+        }
 
-      wrapper.classList.add('figure_wrapper');
-      wrapper.contentEditable = 'false';
+        loader.innerHTML='<div style="font-size:13px; margin-top:-5px;">Loading tweet...</div>'
+        loader.style.cssText='margin-left:24px;'
+        container.appendChild(loader)
+        // overlay.setAttribute('data-drag-handle',true)
+        // overlay.setAttribute('draggable',true)
 
-      figcaption.classList.add('editable_text');
-      figcaption.setAttribute('data-placeholder', 'Caption (optional)');
-      // figcaption.setAttribute('contenteditable', true);
-      figcaption.setAttribute('draggable', 'false');
-      figcaption.ondragstart=(e)=>{
-        e.preventDefault()
-        return false
-      }
-      figcaption.value = `feafew`
+        tweetWrapper.append(overlay)
 
-      
-      if (node.childCount === 0) {
-        figcaption.classList.add('empty');
-      }
+        const drag = tweetWrapper.appendChild(document.createElement('div'))
+        drag.style.cssText = "width: 22px; height: 22px; position: absolute; left: -24px;top:2px; cursor: grab"
+        drag.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="28" style="border:1px solid rgba(0,0,0,0.2);border-radius:4px;" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><circle cx="92" cy="60" r="12"></circle><circle cx="164" cy="60" r="12"></circle><circle cx="92" cy="128" r="12"></circle><circle cx="164" cy="128" r="12"></circle><circle cx="92" cy="196" r="12"></circle><circle cx="164" cy="196" r="12"></circle></svg>'
+        drag.contentEditable = false
+        drag.onmousedown = e => {
+          if (e.button == 0)
+            view.dispatch(view.state.tr.setSelection(NodeSelection.create(view.state.doc, getPos())))
+        }
 
-      container.appendChild(wrapper);
-      container.appendChild(figcaption);
+        const tweetFrameContainer = (document.createElement('div'))
+        tweetWrapper.append(tweetFrameContainer)
+      // const blockquote = appendTweetQuote(tweetWrapper);
+      setTimeout(async()=>{
+        let tweetId = node?.attrs?.url?.split('/')[5].split('?')[0];
+        let twt = await window.twttr.widgets.createTweet(tweetId, tweetFrameContainer);
+        loader.remove()
 
-      const blockquote = appendTweetQuote(wrapper);
-      blockquote.setAttribute('class','twitter-tweet')
-      blockquote.innerHTML = `<p>${node.textContent}</p>`
+        // foundTweet=true
+      },10)
+      // const wrapper = document.createElement('div');
+      // // const figcaption = document.createElement('figcaption');
+
+      // wrapper.classList.add('figure_wrapper');
+      // wrapper.contentEditable = 'false';
+
 
       // blockquote.onclick = () => {
       //   if (typeof getPos === 'function') {
@@ -321,22 +363,22 @@ const Twitter = Node.create({
 
       return {
         dom: container,
-        // contentDOM: figcaption,
+        // contentDOM: blockquote,
         ignoreMutation(p) {
           if (p.type === 'attributes' && p.attributeName != null) {
             if (['src', 'title', 'alt'].includes(p.attributeName)) {
-              if (typeof getPos === 'function') {
-                view.dispatch(
-                  view.state.tr.setNodeMarkup(getPos(), undefined, {
-                    [p.attributeName]: (p.target).getAttribute(p.attributeName),
-                  })
-                );
-              }
+              // if (typeof getPos === 'function') {
+              //   view.dispatch(
+              //     view.state.tr.setNodeMarkup(getPos(), undefined, {
+              //       [p.attributeName]: (p.target).getAttribute(p.attributeName),
+              //     })
+              //   );
+              // }
             }
             return true;
           }
 
-          return false;
+          return true;
         },
         update: (updatedNode) => {
           if (updatedNode.type !== this.type) {
