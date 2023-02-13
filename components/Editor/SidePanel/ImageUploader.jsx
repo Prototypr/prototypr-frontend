@@ -165,7 +165,6 @@ const ImageUploader = (props) => {
   useEffect(() => {
     let profPic = "", logoPic='';
 
-    console.log(props)
 
     if (props.imageUrl) {
       let timestamp = Date.now();

@@ -21,24 +21,30 @@ const Twitter = Node.create({
 
   addAttributes() {
     return {
-    figcaption:{
-        default: null,
-        parseHTML: element => {
-          return element.querySelector('figcaption')?.innerText
-        }
-      },
+    // figcaption:{
+    //     default: null,
+    //     parseHTML: element => {
+    //       return element.querySelector('figcaption')?.innerText
+    //     }
+    //   },
       ['data-twitter-id']: {
         default: null,
         // force correct id
-        parseHTML: (element) => element.getAttribute('data-twitter-id'),
+        parseHTML: (element) =>{
+         return element.getAttribute('data-twitter-id')},
       },
       url: {
         default: null,
       },
       tweetId: {
         default: null,
+        parseHTML: (element) =>{
+          return element.getAttribute('tweetid')
+        },
       },
-      pasted: false,
+      pasted: {
+        default:false
+      },
       rawContent:{
         default:''
       }
@@ -94,6 +100,7 @@ const Twitter = Node.create({
     if (!HTMLAttributes.url) {
       return ['span'];
     }
+    console.log(HTMLAttributes)
     let rawHTML = document.createElement('div')
     rawHTML.innerHTML=HTMLAttributes.rawContent
     return['div',
@@ -101,7 +108,8 @@ const Twitter = Node.create({
     ['blockquote', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false, class:'twitter-tweet' }),
     rawHTML.firstChild
   ],
-    ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:'']]
+    // ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:'']
+  ]
     // return ['div', mergeAttributes({ 'data-twitter': '' }, HTMLAttributes)];
   },
 
@@ -148,7 +156,8 @@ const Twitter = Node.create({
                 var el = document.createElement('div')
                 el.innerHTML = embed.data?.html
                 var blockquote = el.querySelector('blockquote')
-                let id = url?.split('/')[5].split('?')[0];
+                let tweetId = url?.split('/')[5].split('?')[0];
+
 
                 const transaction = state.tr.setNodeMarkup(
                   getPos(), // For custom node views, this function is passed into the constructor.  It'll return the position of the node in the document.
@@ -158,12 +167,11 @@ const Twitter = Node.create({
                     pasted: false,
                     url:url,
                     rawContent:blockquote?.innerHTML,
-                    tweetId:id
+                    tweetId:tweetId
                   } // Replace (update) attributes to your `video` block here
                   )
                   view.dispatch(transaction)
                   form.remove()
-                  let tweetId = url?.split('/')[5].split('?')[0];
                   await window.twttr.widgets.createTweet(tweetId, container);
 
                   //add new line
@@ -300,7 +308,7 @@ const Twitter = Node.create({
           },
         };
       }
-
+      let tweetId = node?.attrs?.url?.split('/')[5].split('?')[0];
       container.style.position='relative'
         const tweetWrapper = document.createElement('div');
         tweetWrapper.style.position='relative'
@@ -311,6 +319,11 @@ const Twitter = Node.create({
         tweetWrapper.style.borderRadius='1rem'
         tweetWrapper.setAttribute('draggable',false)
         container.appendChild(tweetWrapper)
+
+        // debugging tweet id
+        // let iddiv = document.createElement('div')
+        // iddiv.innerHTML=`<h2>${tweetId}</h2>`
+        // container.appendChild(iddiv)
 
         const overlay = document.createElement('div')
         overlay.style.width='34rem'
@@ -348,8 +361,7 @@ const Twitter = Node.create({
         tweetWrapper.append(tweetFrameContainer)
       // const blockquote = appendTweetQuote(tweetWrapper);
       setTimeout(async()=>{
-        let tweetId = node?.attrs?.url?.split('/')[5].split('?')[0];
-        let twt = await window.twttr.widgets.createTweet(tweetId, tweetFrameContainer);
+        let twt = await window?.twttr?.widgets?.createTweet(tweetId, tweetFrameContainer);
         loader.remove()
 
         // foundTweet=true
@@ -402,12 +414,6 @@ const Twitter = Node.create({
 
 export default Twitter
 
-
-function appendTweetQuote(wrapper) {
-  const blockquote = document.createElement('blockquote');
-  wrapper.appendChild(blockquote);
-  return blockquote;
-}
 
 const getTweetIdFromUrl =async (url) =>{
   let embed = await axios.get('https://req.prototypr.io/https://publish.twitter.com/oembed?url='+url)
