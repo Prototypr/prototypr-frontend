@@ -7,7 +7,7 @@ export const TWITTER_REG_G =
 
 const Twitter = Node.create({
   name: 'twitter',
-  priority:100,
+  // priority:999,
   group: 'block',
   selectable: true,
   draggable: true,
@@ -36,13 +36,12 @@ const Twitter = Node.create({
       url: {
         default: null,
         parseHTML:(element) =>{
-          if(!element.getAttribute('tweetid')){
+          if(!element?.getAttribute('tweetid')){
             //if no tweet id, check for legacy twitter blockquotes
-            let links = element.querySelectorAll('a')
+            let links = element?.querySelectorAll('a')
             //the tweet link is in the last link
-            if(links.length){
+            if(links?.length){
               let tweet = links[links.length-1]
-              console.log(tweet)
               let url = tweet.getAttribute('href')
               //strip query string
               if(url?.indexOf('?')>-1){
@@ -51,18 +50,18 @@ const Twitter = Node.create({
               return url
             }
           }
+          else return null
         }
       },
       tweetId: {
         default: null,
         parseHTML: (element) =>{
-          if(!element.getAttribute('tweetid')){
+          if(!element?.getAttribute('tweetid')){
             //if no tweet id, check for legacy twitter blockquotes
-            let links = element.querySelectorAll('a')
+            let links = element?.querySelectorAll('a')
             //the tweet link is in the last link
-            if(links.length){
+            if(links?.length){
               let tweet = links[links.length-1]
-              console.log(tweet)
               let url = tweet.getAttribute('href')
               //strip query string
               if(url?.indexOf('?')>-1){
@@ -102,16 +101,33 @@ const Twitter = Node.create({
 
     return [
       nodePasteRule({
-        find: TWITTER_REG_G,
         type: this.type,
+        find: TWITTER_REG_G,
         getAttributes:(match) => {
+
+          // let embed = await axios.get('https://req.prototypr.io/https://publish.twitter.com/oembed?url='+match?.input)
+          //     .then(function (response) {
+          //       return response
+          //     })
+          //     .catch(function (error) {
+          //       console.log(error);
+          //       return false
+          //     });
+          let rawContent = `<p lang="en" dir="ltr">This is a tweet embed <a href="${match?.input}">February 14, 2023</a>`
+          // if(embed.data?.html){
+          //   var el = document.createElement('div')
+          //   el.innerHTML = embed.data?.html
+          //   var blockquote = el.querySelector('blockquote')
+          //   rawContent =blockquote?.innerHTML
+          // }
           
           let tweetId = match?.input?.split('/')[5].split('?')[0];
           // console.log(match.input)
           return {
             pasted: true,
             tweetId,
-            url:match?.input
+            url:match?.input,
+            rawContent:rawContent
           };
         },
       }),
@@ -149,6 +165,10 @@ const Twitter = Node.create({
   addNodeView() {
     // return ReactNodeViewRenderer(TwitterComponent);
     return ({ node, getPos, editor}) => {
+      if(!editor){
+        return false
+      }
+      console.log(node)
       const { view, state } = editor;
       const figcaption = document.createElement('input');
 
@@ -156,7 +176,7 @@ const Twitter = Node.create({
        * set up twitter dom 
        */
       let container = document.createElement('div');
-      
+
       container.style.position='relative'
       const tweetWrapper = document.createElement('div');
       tweetWrapper.style.position='relative'
@@ -185,11 +205,12 @@ const Twitter = Node.create({
       //container for tweet iframe embed
       const tweetFrameContainer = (document.createElement('div'))
       tweetWrapper.append(tweetFrameContainer)
-      
-      if(!node.attrs.url && !node?.attrs?.twitterId){
+
+      if(!node.attrs.url && !node?.attrs?.tweetId){
         /**
          * if the tweet has no url yet, show the form
          */
+
         const form= document.createElement('form')
         // onsubmit
         form.onsubmit = async (e) =>{
@@ -232,8 +253,8 @@ const Twitter = Node.create({
                   //show loading
                   showLoader(container, tweetId)
                   //add the draghandle to the nodeview
-                  addDragHandle(tweetWrapper)
-                  await window.twttr.widgets.createTweet(tweetId, tweetFrameContainer);
+                  addDragHandle(tweetWrapper, view, getPos)
+                  await window?.twttr?.widgets?.createTweet(tweetId, tweetFrameContainer);
                   let loaderDiv = document.getElementById('loader_'+tweetId)
                   loaderDiv.remove()
 
@@ -360,29 +381,34 @@ const Twitter = Node.create({
           stopEvent(e) {
             return true
           },
-          update: (updatedNode) => {
-            if (updatedNode.type !== this.type) {
-              return false;
-            }
+          // update: (updatedNode) => {
+          //   if (updatedNode.type !== this.type) {
+          //     return false;
+          //   }
   
-            // figcaption.classList.toggle('empty', updatedNode.content.size === 0);
+          //   // figcaption.classList.toggle('empty', updatedNode.content.size === 0);
   
-            return true;
-          },
+          //   return true;
+          // },
         };
       }
         // debugging tweet id
         // let iddiv = document.createElement('div')
         // iddiv.innerHTML=`<h2>${tweetId}</h2>`
         // container.appendChild(iddiv)
-        
+        // if(node?.attrs?.pasted!==true){
+          
+        // }
         //show the loader if the tweet has url but not embedded yet
-        let tweetId = node?.attrs?.url?.split('/')[5].split('?')[0];
+        let tweetId = node?.attrs?.tweetId
+        if(!tweetId){
+          tweetId = node?.attrs?.url?.split('/')[5].split('?')[0];
+        }
         showLoader(container, tweetId)
         //add the draghandle to the nodeview
-        addDragHandle(tweetWrapper)
-
-      setTimeout(async()=>{
+        addDragHandle(tweetWrapper, view, getPos)
+        
+        setTimeout(async()=>{
         await window?.twttr?.widgets?.createTweet(tweetId, tweetFrameContainer);
         let loaderDiv = document.getElementById('loader_'+tweetId)
         loaderDiv.remove()
@@ -424,29 +450,16 @@ const Twitter = Node.create({
 export default Twitter
 
 
-const getTweetIdFromUrl =async (url) =>{
-  let embed = await axios.get('https://req.prototypr.io/https://publish.twitter.com/oembed?url='+url)
-  .then(function (response) {
-    return response
-  })
-  .catch(function (error) {
-    console.log(error);
-    alert('Try a different twitter url')
-    return false
-  });
-
-  return embed
-}
-
-const addDragHandle = (tweetWrapper) =>{
+const addDragHandle = (tweetWrapper, view, getPos) =>{
   // drag handle
   const drag = tweetWrapper.appendChild(document.createElement('div'))
   drag.style.cssText = "width: 22px; height: 22px; position: absolute; left: -24px;top:2px; cursor: grab"
   drag.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="28" style="border:1px solid rgba(0,0,0,0.2);border-radius:4px;" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><circle cx="92" cy="60" r="12"></circle><circle cx="164" cy="60" r="12"></circle><circle cx="92" cy="128" r="12"></circle><circle cx="164" cy="128" r="12"></circle><circle cx="92" cy="196" r="12"></circle><circle cx="164" cy="196" r="12"></circle></svg>'
   drag.contentEditable = false
   drag.onmousedown = e => {
-    if (e.button == 0)
+    if (e.button == 0){
       view.dispatch(view.state.tr.setSelection(NodeSelection.create(view.state.doc, getPos())))
+    }
   }
 }
 

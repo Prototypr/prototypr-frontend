@@ -89,6 +89,8 @@ const Editor = ({
   const [editorInstance, setEditorInstance] = useState(false);
   const [previewEnabled, togglePreview] = useState(false);
 
+
+
   useConfirmTabClose(hasUnsavedChanges);
 
   const editor = useEditor({
@@ -98,6 +100,7 @@ const Editor = ({
       History,
       Paragraph,
       Heading,
+      Tweet,
       CodeBlock,
       HorizontalRule,
       Bold,
@@ -109,7 +112,6 @@ const Editor = ({
       BulletList,
       OrderedList,
       Dropcursor,
-      Tweet,
       // Twitter,
       Video,
       Iframe,
@@ -123,6 +125,7 @@ const Editor = ({
           class: null,
         },
       }),
+
       // images are converted to figures now
       Figure,
       Image.configure({
