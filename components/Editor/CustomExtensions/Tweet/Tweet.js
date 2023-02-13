@@ -42,9 +42,7 @@ const Twitter = Node.create({
           return element.getAttribute('tweetid')
         },
       },
-      pasted: {
-        default:false
-      },
+      pasted: false,
       rawContent:{
         default:''
       }
@@ -73,11 +71,14 @@ const Twitter = Node.create({
       nodePasteRule({
         find: TWITTER_REG_G,
         type: this.type,
-        getAttributes:async (match) => {
+        getAttributes:(match) => {
+          
+          let tweetId = match?.input?.split('/')[5].split('?')[0];
+          // console.log(match.input)
           return {
-            ['data-twitter-id']: await getTweetIdFromUrl(match.input),
-            url: match.input,
             pasted: true,
+            tweetId,
+            url:match?.input
           };
         },
       }),
@@ -119,19 +120,44 @@ const Twitter = Node.create({
       const { view, state } = editor;
       const figcaption = document.createElement('input');
 
+      /**
+       * set up twitter dom 
+       */
       let container = document.createElement('div');
-      let loader = document.createElement('div')
       
-      if(!node.attrs.url){
-        container.style.position='relative'
-        const tweetWrapper = document.createElement('div');
-        tweetWrapper.style.position='relative'
+      container.style.position='relative'
+      const tweetWrapper = document.createElement('div');
+      tweetWrapper.style.position='relative'
+      tweetWrapper.style.width='34rem'
+      tweetWrapper.style.maxWidth='100%'
+      tweetWrapper.style.height='fit-content'
+      tweetWrapper.style.background='#e8eef9'
+      tweetWrapper.style.borderRadius='1rem'
+      tweetWrapper.setAttribute('draggable',false)
+      container.appendChild(tweetWrapper)
 
-        const twitterOverlay = document.createElement('div')
-        twitterOverlay.setAttribute('class', 'twitterOverlay');
-        twitterOverlay.style.display='none'
-        container.appendChild(tweetWrapper)
-        tweetWrapper.appendChild(twitterOverlay)
+      const overlay = document.createElement('div')
+      overlay.style.width='34rem'
+      overlay.style.maxWidth='100%'
+      overlay.style.height='fit-content'
+      overlay.style.position='absolute'
+      overlay.style.top=0
+      overlay.style.left=0
+      overlay.style.width='100%'
+      overlay.style.height='100%'
+      overlay.onmousedown= (e) =>{
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      tweetWrapper.append(overlay)
+      //container for tweet iframe embed
+      const tweetFrameContainer = (document.createElement('div'))
+      tweetWrapper.append(tweetFrameContainer)
+      
+      if(!node.attrs.url && !node?.attrs?.twitterId){
+        /**
+         * if the tweet has no url yet, show the form
+         */
         const form= document.createElement('form')
         // onsubmit
         form.onsubmit = async (e) =>{
@@ -143,7 +169,6 @@ const Twitter = Node.create({
            if(url?.indexOf('/')>-1 && url?.indexOf('twitter')>-1){
             let embed = await axios.get('https://req.prototypr.io/https://publish.twitter.com/oembed?url='+url)
               .then(function (response) {
-                loader.remove()
                 return response
               })
               .catch(function (error) {
@@ -172,7 +197,13 @@ const Twitter = Node.create({
                   )
                   view.dispatch(transaction)
                   form.remove()
-                  await window.twttr.widgets.createTweet(tweetId, container);
+                  //show loading
+                  showLoader(container, tweetId)
+                  //add the draghandle to the nodeview
+                  addDragHandle(tweetWrapper)
+                  await window.twttr.widgets.createTweet(tweetId, tweetFrameContainer);
+                  let loaderDiv = document.getElementById('loader_'+tweetId)
+                  loaderDiv.remove()
 
                   //add new line
                   editor.chain()
@@ -308,76 +339,22 @@ const Twitter = Node.create({
           },
         };
       }
-      let tweetId = node?.attrs?.url?.split('/')[5].split('?')[0];
-      container.style.position='relative'
-        const tweetWrapper = document.createElement('div');
-        tweetWrapper.style.position='relative'
-        tweetWrapper.style.width='34rem'
-        tweetWrapper.style.maxWidth='100%'
-        tweetWrapper.style.height='fit-content'
-        tweetWrapper.style.background='#e8eef9'
-        tweetWrapper.style.borderRadius='1rem'
-        tweetWrapper.setAttribute('draggable',false)
-        container.appendChild(tweetWrapper)
-
         // debugging tweet id
         // let iddiv = document.createElement('div')
         // iddiv.innerHTML=`<h2>${tweetId}</h2>`
         // container.appendChild(iddiv)
+        
+        //show the loader if the tweet has url but not embedded yet
+        let tweetId = node?.attrs?.url?.split('/')[5].split('?')[0];
+        showLoader(container, tweetId)
+        //add the draghandle to the nodeview
+        addDragHandle(tweetWrapper)
 
-        const overlay = document.createElement('div')
-        overlay.style.width='34rem'
-        overlay.style.maxWidth='100%'
-        overlay.style.height='fit-content'
-        // overlay.style.background='red'
-        overlay.style.position='absolute'
-        overlay.style.top=0
-        overlay.style.left=0
-        overlay.style.width='100%'
-        overlay.style.height='100%'
-        overlay.onmousedown= (e) =>{
-          e.preventDefault()
-          e.stopPropagation()
-        }
-
-        loader.innerHTML='<div style="font-size:13px; margin-top:-5px;">Loading tweet...</div>'
-        loader.style.cssText='margin-left:24px;'
-        container.appendChild(loader)
-        // overlay.setAttribute('data-drag-handle',true)
-        // overlay.setAttribute('draggable',true)
-
-        tweetWrapper.append(overlay)
-
-        const drag = tweetWrapper.appendChild(document.createElement('div'))
-        drag.style.cssText = "width: 22px; height: 22px; position: absolute; left: -24px;top:2px; cursor: grab"
-        drag.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="28" style="border:1px solid rgba(0,0,0,0.2);border-radius:4px;" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><circle cx="92" cy="60" r="12"></circle><circle cx="164" cy="60" r="12"></circle><circle cx="92" cy="128" r="12"></circle><circle cx="164" cy="128" r="12"></circle><circle cx="92" cy="196" r="12"></circle><circle cx="164" cy="196" r="12"></circle></svg>'
-        drag.contentEditable = false
-        drag.onmousedown = e => {
-          if (e.button == 0)
-            view.dispatch(view.state.tr.setSelection(NodeSelection.create(view.state.doc, getPos())))
-        }
-
-        const tweetFrameContainer = (document.createElement('div'))
-        tweetWrapper.append(tweetFrameContainer)
-      // const blockquote = appendTweetQuote(tweetWrapper);
       setTimeout(async()=>{
-        let twt = await window?.twttr?.widgets?.createTweet(tweetId, tweetFrameContainer);
-        loader.remove()
-
-        // foundTweet=true
+        await window?.twttr?.widgets?.createTweet(tweetId, tweetFrameContainer);
+        let loaderDiv = document.getElementById('loader_'+tweetId)
+        loaderDiv.remove()
       },10)
-      // const wrapper = document.createElement('div');
-      // // const figcaption = document.createElement('figcaption');
-
-      // wrapper.classList.add('figure_wrapper');
-      // wrapper.contentEditable = 'false';
-
-
-      // blockquote.onclick = () => {
-      //   if (typeof getPos === 'function') {
-      //     this.editor.commands.setNodeSelection(getPos());
-      //   }
-      // };
 
       return {
         dom: container,
@@ -427,4 +404,24 @@ const getTweetIdFromUrl =async (url) =>{
   });
 
   return embed
+}
+
+const addDragHandle = (tweetWrapper) =>{
+  // drag handle
+  const drag = tweetWrapper.appendChild(document.createElement('div'))
+  drag.style.cssText = "width: 22px; height: 22px; position: absolute; left: -24px;top:2px; cursor: grab"
+  drag.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="28" style="border:1px solid rgba(0,0,0,0.2);border-radius:4px;" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><circle cx="92" cy="60" r="12"></circle><circle cx="164" cy="60" r="12"></circle><circle cx="92" cy="128" r="12"></circle><circle cx="164" cy="128" r="12"></circle><circle cx="92" cy="196" r="12"></circle><circle cx="164" cy="196" r="12"></circle></svg>'
+  drag.contentEditable = false
+  drag.onmousedown = e => {
+    if (e.button == 0)
+      view.dispatch(view.state.tr.setSelection(NodeSelection.create(view.state.doc, getPos())))
+  }
+}
+
+const showLoader = (container, id) =>{
+  let loader = document.createElement('div')
+  loader.setAttribute('id','loader_'+id)
+  loader.innerHTML='<div style="font-size:13px; margin-top:-5px;">Loading tweet...</div>'
+        loader.style.cssText='margin-left:24px;'
+        container.appendChild(loader)
 }
