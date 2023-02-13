@@ -76,7 +76,14 @@ const Twitter = Node.create({
       },
       pasted: false,
       rawContent:{
-        default:''
+        default:'',
+        parseHTML:(element)=>{
+          if(element.getAttribute('rawContent')){
+            return element.getAttribute('rawContent')
+          }else{
+            return element.outerHTML
+          }
+        }
       }
     };
   },
@@ -168,7 +175,6 @@ const Twitter = Node.create({
       if(!editor){
         return false
       }
-      console.log(node)
       const { view, state } = editor;
       const figcaption = document.createElement('input');
 
