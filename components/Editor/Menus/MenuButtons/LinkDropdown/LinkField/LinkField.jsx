@@ -160,7 +160,8 @@ import { TextSelection } from "prosemirror-state";
                 ref={firstFieldRef}
                 onChange={formik.handleChange}
                 value={formik.values.url}
-                className='bg-gray-800'
+                style={{marginTop:0.5}}
+                className='bg-gray-800 rounded-md'
                 defaultValue={link}
                 // onFocus={(e)=>{setTimeout(()=>{e.target.select(e)},100)}}
                 // onMouseUp={(e)=>{e.target.select(e)}}

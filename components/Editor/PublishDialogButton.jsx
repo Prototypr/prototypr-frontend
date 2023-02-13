@@ -44,7 +44,7 @@ export const PublishDialogButton = ({createNewPost,updateExistingPost,postId, us
         <Dialog onOpenChange={toggleSubmitOpen} open={submitOpen}>
         <DialogTrigger asChild>
         <Button
-            variant="confirm"
+            variant="confirmRounded"
             className="text-sm"
             >
           Submit

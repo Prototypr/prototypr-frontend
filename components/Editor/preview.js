@@ -7,6 +7,21 @@ const PreviewDisplay = ({ content, editor }) => {
   useEffect(() => {
     setHTML(editor.getHTML())
   }, [editor]);
+
+  useEffect(()=>{
+    var tweets = document.getElementsByClassName('twitter-tweet')
+    console.log(tweets)
+    
+    for(var x = 0;x<tweets.length;x++){
+      let id = tweets[x]?.getAttribute('tweetId')
+      tweets[x].outerHTML=`<div class="twitter-tweet" tweetId="${id}"></div>`
+      
+      window.twttr.widgets.createTweet(id, tweets[x]);
+
+    }
+
+  },[html])
+
   // use editor instead of content cos content only 
   // reflects what is there on first load
   return (

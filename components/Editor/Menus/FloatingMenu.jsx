@@ -257,9 +257,11 @@ const MenuFloating = ({ editor, isSelecting }) => {
 shouldShow= {({ editor, view, state, oldState }) => {
 
 
-  if(state?.selection?.$anchor?.parent?.type?.name=='paragraph' && state?.selection?.$anchor?.parent?.textContent==''
-  // ||state?.selection?.$anchor?.nodeBefore?.type?.name=='horizontalRule' 
-  ){
+  // if(state?.selection?.$anchor?.parent?.type?.name=='paragraph' && state?.selection?.$anchor?.parent?.textContent==''
+  // // ||state?.selection?.$anchor?.nodeBefore?.type?.name=='horizontalRule' 
+  // ){
+  if((state?.selection?.$anchor?.parent?.type?.name=='paragraph' && state?.selection?.$anchor?.parent?.textContent=='') 
+  && (!editor.isActive('bulletList') && !editor.isActive('orderedList'))){
     return true
   }
 }}
@@ -310,10 +312,11 @@ editor={editor} tippyOptions={{ duration: 100 }}>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <IconButton  onClick={()=>{
-                const url = prompt('Enter Twitter URL')
-                if(url){
-                    editor.chain().insertTweet(url).run()
-                }
+                // const url = prompt('Enter Twitter URL')
+                // if(url){
+                //     editor.chain().insertTweet(url).run()
+                // }
+                editor.chain().insertTweet().run()
             }}  className="hover:cursor-pointer menu-item" aria-label="Insert Code Block">
             <TwitterLogoIcon/>
           </IconButton>

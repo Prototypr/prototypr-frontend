@@ -110,6 +110,7 @@ const Editor = ({
       OrderedList,
       Dropcursor,
       Tweet,
+      // Twitter,
       Video,
       Iframe,
       Youtube,
@@ -133,6 +134,7 @@ const Editor = ({
       //   allowBase64: true,
       // }),
       Placeholder.configure({
+          includeChildren: true,
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
             return "What's the title?";
@@ -143,13 +145,25 @@ const Editor = ({
           if (node.type.name === "figure") {
             return "What's the title?";
           }
-          return "Tell a story...";
+          if (node.type.name === "tweet") {
+            return "Paste a tweet link and press enter";
+          }
+            return "Tell a story...";
         },
       }),
     ],
     onCreate: ({ editor }) => {
       setEditorInstance(editor);
       setEditorCreated(true);
+
+      const s = document.createElement("script");
+      s.setAttribute("src", "https://platform.twitter.com/widgets.js");
+      s.setAttribute("id", "twitter-widget");
+      s.setAttribute("async", "true");
+  
+      if(!document.getElementById('twitter-widget')){
+        document.head.appendChild(s);
+      }
       // setTimeout(() => {
       // }, 1200);
     },
@@ -157,7 +171,7 @@ const Editor = ({
       const json = editor.getJSON();
       setHasUnsavedChanges(true);
       // send the content to an API here (if new post only)
-      if (!slug) {
+      if (!articleSlug) {
         localStorage.setItem("wipContent", JSON.stringify(json));
       }
     },
@@ -193,7 +207,7 @@ const Editor = ({
 
   const onSave = async () => {
     // if (editorType === "edit") {
-    if (slug) {
+    if (articleSlug) {
       setSaving(true);
       try {
         console.log("saving post...");
@@ -240,7 +254,20 @@ const Editor = ({
           Preview Mode
         </p>
         <ToggleSwitch
-          onToggle={() => togglePreview(!previewEnabled)}
+          onToggle={() =>{
+            togglePreview(!previewEnabled)
+            setTimeout(()=>{
+
+              const s = document.createElement("script");
+              s.setAttribute("src", "https://platform.twitter.com/widgets.js");
+              s.setAttribute("id", "twitter-widget");
+              s.setAttribute("async", "true");
+          
+              if(!document.getElementById('twitter-widget')){
+                document.head.appendChild(s);
+              }
+            },500)
+          }}
           size="small"
           checked={previewEnabled}
         />
