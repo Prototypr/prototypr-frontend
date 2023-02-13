@@ -7,6 +7,7 @@ export const TWITTER_REG_G =
 
 const Twitter = Node.create({
   name: 'twitter',
+  priority:100,
   group: 'block',
   selectable: true,
   draggable: true,
@@ -95,7 +96,7 @@ const Twitter = Node.create({
     }
     let rawHTML = document.createElement('div')
     rawHTML.innerHTML=HTMLAttributes.rawContent
-    return['figure',
+    return['div',
     // ['blockquote', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)],
     ['blockquote', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false, class:'twitter-tweet' }),
     rawHTML.firstChild
