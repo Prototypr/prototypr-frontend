@@ -31,14 +31,47 @@ const Twitter = Node.create({
         default: null,
         // force correct id
         parseHTML: (element) =>{
-         return element.getAttribute('data-twitter-id')},
+          return element.getAttribute('data-twitter-id')},
       },
       url: {
         default: null,
+        parseHTML:(element) =>{
+          if(!element.getAttribute('tweetid')){
+            //if no tweet id, check for legacy twitter blockquotes
+            let links = element.querySelectorAll('a')
+            //the tweet link is in the last link
+            if(links.length){
+              let tweet = links[links.length-1]
+              console.log(tweet)
+              let url = tweet.getAttribute('href')
+              //strip query string
+              if(url?.indexOf('?')>-1){
+                url = url.split("?")[0]
+              }
+              return url
+            }
+          }
+        }
       },
       tweetId: {
         default: null,
         parseHTML: (element) =>{
+          if(!element.getAttribute('tweetid')){
+            //if no tweet id, check for legacy twitter blockquotes
+            let links = element.querySelectorAll('a')
+            //the tweet link is in the last link
+            if(links.length){
+              let tweet = links[links.length-1]
+              console.log(tweet)
+              let url = tweet.getAttribute('href')
+              //strip query string
+              if(url?.indexOf('?')>-1){
+                url = url.split("?")[0]
+              }
+              let tweetId = url.split('/')[5].split('?')[0];
+              return tweetId
+            }
+          }
           return element.getAttribute('tweetid')
         },
       },
@@ -101,7 +134,6 @@ const Twitter = Node.create({
     if (!HTMLAttributes.url) {
       return ['span'];
     }
-    console.log(HTMLAttributes)
     let rawHTML = document.createElement('div')
     rawHTML.innerHTML=HTMLAttributes.rawContent
     return['div',
