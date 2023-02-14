@@ -156,6 +156,7 @@
     "tailwindcss-border-gradient-radius": "^3.0.1",
     "tinycolor2": "^1.4.1",
     "tsparticles": "^2.7.1",
+    "uuidv4": "^6.2.13",
     "yup": "^0.32.11"
   },
   "devDependencies": {

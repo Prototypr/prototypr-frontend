@@ -130,7 +130,8 @@ const LinkEmbed = Node.create({
         draggable: false, 
         contenteditable: false, 
         url:HTMLAttributes?.url,
-        class:'link-embed' }), rawHTML.innerHTML]
+        class:'link-embed' }),
+    ['div', rawHTML]]
         
     // ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:'']
   
@@ -146,6 +147,7 @@ const LinkEmbed = Node.create({
       const { view, state } = editor;
       const figcaption = document.createElement('input');
 
+      let meta = {}
       /**
        * set up twitter dom 
        */
@@ -362,72 +364,70 @@ const LinkEmbed = Node.create({
       }
         //show the loader if the tweet has url but not embedded yet
         let tweetId = Date.now()+'_'+node?.attrs?.url
-        showLoader(container, tweetId)
         //add the draghandle to the nodeview
         addDragHandle(tweetWrapper, view, getPos)
         
-        setTimeout(async()=>{
+        const updateMeta = async()=>{
          
-            let meta = await fetchOG(node?.attrs?.url)
-            const metadata = meta?.data?.metadata 
+            if(!node?.attrs['data-card']){
+                showLoader(container, tweetId)
+                meta = await fetchOG(node?.attrs?.url)
 
-            if((metadata?.title || metadata?.image) && meta?.data.card){
-                const transaction = state.tr.setNodeMarkup(getPos(), undefined,  { ...node.attrs, 
-                    ['data-author']:metadata?.author,
-                    ['data-image']:metadata?.image,
-                    ['data-logo']:metadata?.logo,
-                    ['data-publisher']:metadata?.publisher,
-                    ['data-description']:metadata?.description,
-                    ['data-date']:metadata?.date,
-                    ['data-title']:metadata?.title,
-                    ['data-card']:meta?.data.card
-                  })
-                    view.dispatch(transaction)
-                
-            }
-            else if((metadata?.title || metadata?.image) && !meta?.data.card){
-                const transaction = state.tr.setNodeMarkup(getPos(), undefined,  { ...node.attrs, 
-                    ['data-author']:metadata?.author,
-                    ['data-image']:metadata?.image,
-                    ['data-logo']:metadata?.logo,
-                    ['data-publisher']:metadata?.publisher,
-                    ['data-description']:metadata?.description,
-                    ['data-date']:metadata?.date,
-                    ['data-title']:metadata?.title,
-                  })
-                    view.dispatch(transaction)
-            }
-            if(meta?.data?.card){
+                if(!node?.attrs['data-card']){
+                    const metadata = meta?.data?.metadata 
+
+                    if((metadata?.title || metadata?.image) && meta?.data.card){
+                        
+                        const transaction = editor.state.tr.setNodeMarkup(editor.state.tr.mapping.map(getPos()), undefined,  { ...node.attrs, 
+                            ['data-author']:metadata?.author,
+                            ['data-image']:metadata?.image,
+                            ['data-logo']:metadata?.logo,
+                            ['data-publisher']:metadata?.publisher,
+                            ['data-description']:metadata?.description,
+                            ['data-date']:metadata?.date,
+                            ['data-title']:metadata?.title,
+                            ['data-card']:meta?.data.card
+                          })
+                            view.dispatch(transaction)
+                        
+                    }
+                    else if((metadata?.title || metadata?.image) && !meta?.data.card){
+                       
+                        const transaction = editor.state.tr.setNodeMarkup(editor.state.tr.mapping.map(getPos()), undefined,  { ...node.attrs, 
+                            ['data-author']:metadata?.author,
+                            ['data-image']:metadata?.image,
+                            ['data-logo']:metadata?.logo,
+                            ['data-publisher']:metadata?.publisher,
+                            ['data-description']:metadata?.description,
+                            ['data-date']:metadata?.date,
+                            ['data-title']:metadata?.title,
+                          })
+                            view.dispatch(transaction)
+                    }
+                }
+
+                if(meta?.data?.card){
+                    let card = document.createElement('div')
+                    card.innerHTML=meta?.data?.card
+                    container.appendChild(card)
+                }
+            }else{
                 let card = document.createElement('div')
-                card.innerHTML=meta?.data?.card
+                card.innerHTML=node?.attrs['data-card']
                 container.appendChild(card)
             }
         // await window?.twttr?.widgets?.createTweet(tweetId, tweetFrameContainer);
         let loaderDiv = document.getElementById('loader_'+tweetId)
-        loaderDiv.remove()
-      },10)
+        if(loaderDiv){
+            loaderDiv.remove()
+        }
+    }
+    updateMeta()
 
       return {
         dom: container,
-        // contentDOM: blockquote,
-        ignoreMutation(p) {
-          if (p.type === 'attributes' && p.attributeName != null) {
-            if (['src', 'title', 'alt'].includes(p.attributeName)) {
-              // if (typeof getPos === 'function') {
-              //   view.dispatch(
-              //     view.state.tr.setNodeMarkup(getPos(), undefined, {
-              //       [p.attributeName]: (p.target).getAttribute(p.attributeName),
-              //     })
-              //   );
-              // }
-            }
-            return true;
-          }
-
-          return true;
-        },
         update: (updatedNode) => {
-          if (updatedNode.type !== this.type) {
+            if (updatedNode.type !== this.type) {
             return false;
           }
 
@@ -459,7 +459,7 @@ const addDragHandle = (tweetWrapper, view, getPos) =>{
 const showLoader = (container, id) =>{
   let loader = document.createElement('div')
   loader.setAttribute('id','loader_'+id)
-  loader.innerHTML='<div style="font-size:13px; margin-top:-5px;">Loading embed...</div>'
+  loader.innerHTML='<div style="font-size:13px; margin-top:-5px; margin-bottom:30px;">Loading embed...</div>'
         loader.style.cssText='margin-left:24px;'
         container.appendChild(loader)
 }
