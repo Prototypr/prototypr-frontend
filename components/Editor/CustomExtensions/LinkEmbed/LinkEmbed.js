@@ -8,7 +8,7 @@ export const pasteRegexWithBrackets = /(?:\()https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%
 
 const LinkEmbed = Node.create({
   name: 'linkEmbed',
-  priority:1001,
+  priority:2001,
   group: 'block',
   selectable: true,
   draggable: true,
@@ -126,16 +126,14 @@ const LinkEmbed = Node.create({
     let rawHTML = document.createElement('div')
     rawHTML.innerHTML=HTMLAttributes['data-card']
 
-    return['div',
-    // ['blockquote', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)],
-    ['div', mergeAttributes( { 
+    return['div', mergeAttributes( { 
         draggable: false, 
         contenteditable: false, 
-        class:'link-embed' })],
-        ['div', rawHTML]
+        url:HTMLAttributes?.url,
+        class:'link-embed' }), rawHTML.innerHTML]
         
     // ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:'']
-  ]
+  
     // return ['div', mergeAttributes({ 'data-twitter': '' }, HTMLAttributes)];
   },
 
@@ -154,9 +152,10 @@ const LinkEmbed = Node.create({
       let container = document.createElement('div');
 
       container.style.position='relative'
+      container.contentEditable=false
       const tweetWrapper = document.createElement('div');
       tweetWrapper.style.position='relative'
-      tweetWrapper.style.width='34rem'
+      tweetWrapper.style.width='100%'
       tweetWrapper.style.maxWidth='100%'
       tweetWrapper.style.height='fit-content'
       tweetWrapper.style.background='#e8eef9'
@@ -165,7 +164,7 @@ const LinkEmbed = Node.create({
       container.appendChild(tweetWrapper)
 
       const overlay = document.createElement('div')
-      overlay.style.width='34rem'
+      overlay.style.width='100%'
       overlay.style.maxWidth='100%'
       overlay.style.height='fit-content'
       overlay.style.position='absolute'
@@ -206,6 +205,7 @@ const LinkEmbed = Node.create({
                     {
                       ...node.attrs,
                       pasted: false,
+                      url,
                       ['data-author']:metadata?.author,
                       ['data-image']:metadata?.image,
                       ['data-logo']:metadata?.logo,
