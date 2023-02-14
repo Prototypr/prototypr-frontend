@@ -130,7 +130,16 @@ const LinkEmbed = Node.create({
         draggable: false, 
         contenteditable: false, 
         url:HTMLAttributes?.url,
-        class:'link-embed' }),
+        class:'link-embed',
+        ['data-author']:HTMLAttributes['data-author'],
+        ['data-image']:HTMLAttributes['data-image'],
+        ['data-logo']:HTMLAttributes['data-logo'],
+        ['data-publisher']:HTMLAttributes['data-publisher'],
+        ['data-description']:HTMLAttributes['data-description'],
+        ['data-date']:HTMLAttributes['data-date'],
+        ['data-title']:HTMLAttributes['data-title'],
+        ['data-card']:HTMLAttributes['data-card']
+    }),
     ['div', rawHTML]]
         
     // ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:'']
@@ -366,7 +375,7 @@ const LinkEmbed = Node.create({
         let tweetId = Date.now()+'_'+node?.attrs?.url
         //add the draghandle to the nodeview
         addDragHandle(tweetWrapper, view, getPos)
-        
+            
         const updateMeta = async()=>{
          
             if(!node?.attrs['data-card']){
