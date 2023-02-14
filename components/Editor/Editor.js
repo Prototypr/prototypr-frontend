@@ -49,6 +49,7 @@ import FigCaption from "./CustomExtensions/Figure2/Figcaption";
 import { PasteFilter } from "./CustomExtensions/PasteFilter";
 
 import Tweet from "./CustomExtensions/Tweet/Tweet";
+import LinkEmbed from "./CustomExtensions/LinkEmbed/LinkEmbed";
 import Video from "./CustomExtensions/Video/Video";
 
 import { useConfirmTabClose } from "./useConfirmTabClose";
@@ -117,6 +118,7 @@ const Editor = ({
       Iframe,
       Youtube,
       Blockquote,
+      LinkEmbed,
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {

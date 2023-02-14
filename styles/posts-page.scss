@@ -510,3 +510,25 @@ figure{
     background:rgba(255,255,255,0.1);
     pointer-events: all;
 }
+
+.ProseMirror{
+    a.link-box{
+        pointer-events: none;
+    }
+    .ProseMirror-selectednode{
+        a{
+            pointer-events: none;
+        }
+        .link-embed-box{
+            border:1px solid #d3e4ff;
+            border-radius:5px;
+            overflow:hidden;
+        }
+        .twitter-tweet{
+            border:1px solid #d3e4ff;
+            border-radius:0.8rem;
+            overflow:hidden;
+            pointer-events: none;
+        }
+    }
+}
