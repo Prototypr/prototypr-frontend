@@ -6,7 +6,7 @@ import { getSlugFromArticleId } from "@/lib/api";
 import * as Sentry from "@sentry/nextjs";
 
 const useLoad = (type = "create", usr) => {
-  const [user] = useState(usr);
+  const [user, setUser] = useState(usr);
   const [postId, setPostId] = useState(true);
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState(null);
@@ -20,6 +20,12 @@ const useLoad = (type = "create", usr) => {
   const router = useRouter();
   const { slug } = router.query;
   //TODO: fetch slug from backend
+
+  useEffect(()=>{
+    if(!user){
+      setUser(usr)
+    }
+  },[usr])
 
   useEffect(() => {
     if (user) {

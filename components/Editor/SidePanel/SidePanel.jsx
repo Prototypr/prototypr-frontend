@@ -56,11 +56,11 @@ export default React.memo(SidePanel)
 
 const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, postObject, user}) => {
 
-  const [postStatus, setPostStatus] = useState(postObject.status)
-  const [tier, setTier] = useState(postObject.tier)
+  const [postStatus, setPostStatus] = useState(postObject?.status)
+  const [tier, setTier] = useState(postObject?.tier)
   const [timestamp, setTimestamp] = useState(null)
   const [coverImage, setCoverImage] = useState(null)
-  const [slug, setSlug] = useState(postObject.slug)
+  const [slug, setSlug] = useState(postObject?.slug)
 
   const handleDateChange = (input) =>{
     setTimestamp(input)
@@ -174,7 +174,7 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
                 </div>
                  <div className="border border-gray-100 p-4 rounded-md my-3">
                     <h2 className="font-medium text-md mb-4 font-secondary">Featured Image</h2>
-                    {postObject.slug?<ImageUploader 
+                    {postObject?.slug?<ImageUploader 
                       key={coverImage}
                       borderRadius={6}
                       disallowScale={true}
@@ -237,7 +237,7 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
                 {/* ADMIN SETTINGS END */}
            </div>
            <div  className="px-5 flex fixed w-full bg-white -mt-20 bottom-0 justify-start border-t py-3 border-gray-300">
-            {postObject.published_at && <Button className="mr-2.5" variant={'ghostBlue'} onClick={()=>{
+            {postObject?.published_at && <Button className="mr-2.5" variant={'ghostBlue'} onClick={()=>{
               window.open(`/post/${postObject.slug}`)
             }}>View</Button>}
             <Button onClick={updatePost}>Save Settings</Button>
