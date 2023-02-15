@@ -82,7 +82,6 @@ export const ImageDecorationKey = new PluginKey('image-decoration');
                                         
                     if($pos.parent?.type.name=='figure'){
                         let $parent = view.state.doc.resolve($pos.pos-1)
-                        console.log($parent)
                         editor.chain().focus()
                         .setNodeSelection($parent.pos)
                         .run()

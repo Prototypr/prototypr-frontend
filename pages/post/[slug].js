@@ -61,7 +61,6 @@ export default function Post({ post, preview, relatedPosts }) {
     return <ErrorPage statusCode={404} />;
   }
 
-  console.log(post.id);
   const tags = post?.attributes?.tags?.data;
   const title = post?.attributes?.seo?.opengraphTitle
     ? post?.attributes?.seo?.opengraphTitle
@@ -107,6 +106,19 @@ export default function Post({ post, preview, relatedPosts }) {
       window.$crisp.push(["do", "chat:hide"]);
     }
   }, []);
+
+  useEffect(()=>{
+    var tweets = document.getElementsByClassName('twitter-tweet')
+    
+    for(var x = 0;x<tweets.length;x++){
+      let id = tweets[x]?.getAttribute('tweetId')
+      tweets[x].outerHTML=`<div class="twitter-tweet" tweetId="${id}"></div>`
+      
+      window.twttr.widgets.createTweet(id, tweets[x]);
+
+    }
+
+  },[post.attributes?.content])
 
   return (
     <Layout

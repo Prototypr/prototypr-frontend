@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { getUserArticle } from "@/lib/api";
 import { getSlugFromArticleId } from "@/lib/api";
+import * as Sentry from "@sentry/nextjs";
 
 const useLoad = (type = "create", usr) => {
   const [user] = useState(usr);
@@ -23,8 +24,10 @@ const useLoad = (type = "create", usr) => {
   useEffect(() => {
     if (user) {
       setLoading(true);
-
+      
       refetch();
+      Sentry.captureMessage(`#33 l29 userId: ${user?.id}`, {extra:user});
+
     }
   }, [user]);
 
@@ -67,6 +70,7 @@ const useLoad = (type = "create", usr) => {
       const data = await getUserArticle(user, slug);
 
       const post = data.userPostId;
+      Sentry.captureMessage(`#33 l73 getUserArticle: ${post?.id}`, {extra:data});
 
       let content = post?.content;
 
@@ -75,9 +79,12 @@ const useLoad = (type = "create", usr) => {
         content = `<h1>${post?.title}</h1>${content}`;
       }
       //only allow owner of post, and post type article
-      if((post?.owner==user?.id && post?.type==='article') || user.isAdmin){
+      if((user && ((post?.owner==user?.id) && post?.type==='article')) || user.isAdmin){
         setIsOwner(true)
       }else{
+
+        Sentry.captureMessage(`#33 userId: ${user?.id}`, {extra:user});
+        Sentry.captureMessage(`#33 l87 postOwner: ${user?.id}`, {extra:post});
         setIsOwner(false)
       }
     

@@ -49,6 +49,7 @@ import FigCaption from "./CustomExtensions/Figure2/Figcaption";
 import { PasteFilter } from "./CustomExtensions/PasteFilter";
 
 import Tweet from "./CustomExtensions/Tweet/Tweet";
+import LinkEmbed from "./CustomExtensions/LinkEmbed/LinkEmbed";
 import Video from "./CustomExtensions/Video/Video";
 
 import { useConfirmTabClose } from "./useConfirmTabClose";
@@ -89,6 +90,8 @@ const Editor = ({
   const [editorInstance, setEditorInstance] = useState(false);
   const [previewEnabled, togglePreview] = useState(false);
 
+
+
   useConfirmTabClose(hasUnsavedChanges);
 
   const editor = useEditor({
@@ -98,6 +101,7 @@ const Editor = ({
       History,
       Paragraph,
       Heading,
+      Tweet,
       CodeBlock,
       HorizontalRule,
       Bold,
@@ -109,12 +113,12 @@ const Editor = ({
       BulletList,
       OrderedList,
       Dropcursor,
-      Tweet,
       // Twitter,
       Video,
       Iframe,
       Youtube,
       Blockquote,
+      LinkEmbed,
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
@@ -123,6 +127,7 @@ const Editor = ({
           class: null,
         },
       }),
+
       // images are converted to figures now
       Figure,
       Image.configure({
@@ -242,7 +247,7 @@ const Editor = ({
   // };
 
 
-  if(((!loading && (user?.isLoggedIn && !isOwner)) && editorType!=='create') && !user?.isAdmin)
+  if((((!loading) && (user?.isLoggedIn && !isOwner)) && editorType!=='create') && !user?.isAdmin)
     return(
       <p>You are not owner of this post</p>
     )

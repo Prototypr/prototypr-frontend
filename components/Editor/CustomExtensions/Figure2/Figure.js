@@ -45,7 +45,6 @@ import {
             element.querySelector('img')?.getAttribute('title'),
         },
       link: { parseHTML: (element) => {
-        console.log(element)
         if(element.querySelector('a')){
           return element.querySelector('a')?.getAttribute('href')
         }
