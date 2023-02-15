@@ -230,7 +230,7 @@ const LinkEmbed = Node.create({
                     form.remove()
                     //show loading
                     const tweetId = Date.now()
-                    showLoader(container, tweetId)
+                    showLoader(container, tweetId, node)
                     //add the draghandle to the nodeview
                     addDragHandle(tweetWrapper, view, getPos)
                     // await window?.twttr?.widgets?.createTweet(tweetId, tweetFrameContainer);
@@ -379,7 +379,7 @@ const LinkEmbed = Node.create({
         const updateMeta = async()=>{
          
             if(!node?.attrs['data-card']){
-                showLoader(container, tweetId)
+                showLoader(container, tweetId, node)
                 meta = await fetchOG(node?.attrs?.url)
 
                 if(!node?.attrs['data-card']){
@@ -425,7 +425,6 @@ const LinkEmbed = Node.create({
                 card.innerHTML=node?.attrs['data-card']
                 container.appendChild(card)
             }
-        // await window?.twttr?.widgets?.createTweet(tweetId, tweetFrameContainer);
         let loaderDiv = document.getElementById('loader_'+tweetId)
         if(loaderDiv){
             loaderDiv.remove()
@@ -465,11 +464,35 @@ const addDragHandle = (tweetWrapper, view, getPos) =>{
   }
 }
 
-const showLoader = (container, id) =>{
+const showLoader = (container, id, node) =>{
   let loader = document.createElement('div')
   loader.setAttribute('id','loader_'+id)
-  loader.innerHTML='<div style="font-size:13px; margin-top:-5px; margin-bottom:30px;">Loading embed...</div>'
-        loader.style.cssText='margin-left:24px;'
+  loader.innerHTML=`<div class="flex flex-row p-4 border border-gray-300 rounded-xl" style="margin-top:-5px; margin-bottom:30px;">
+  <svg
+    class="spinner my-auto sm basis-16"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <circle
+      className="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      strokeWidth="4"
+    ></circle>
+    <path
+      className="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+    />
+    <div class="my-auto line-clamp-1" style="font-size:14px;line-height:20px;margin-top:3px;margin-left:6px;">
+    <span class="font-semibold">Fetching</span>: <span class="pl-1 text-gray-500">${node?.attrs?.url}</span>
+    </div>
+  </svg>
+  </div>`
+        loader.style.cssText='margin-left:6px;'
         container.appendChild(loader)
 }
 
