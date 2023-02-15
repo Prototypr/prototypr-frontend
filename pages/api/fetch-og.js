@@ -60,7 +60,7 @@ export default async function handler(req, res) {
           let metadata = await metascraper({ html: body, url: link })
 
           //if it can't find the descripotion or date, something may be up
-            if(!metadata.description || !metadata.date){
+            if((!metadata.description || !metadata.date) || !metadata.image){
               //so fetch with pupetter
               var pageRes = await fetch(puppeteerUrl,{
                 method: 'post',
