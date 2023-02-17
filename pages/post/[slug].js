@@ -114,7 +114,7 @@ export default function Post({ post, preview, relatedPosts }) {
       let id = tweets[x]?.getAttribute('tweetId')
       tweets[x].outerHTML=`<div class="twitter-tweet" tweetId="${id}"></div>`
       
-      window.twttr.widgets.createTweet(id, tweets[x]);
+      window?.twttr?.widgets?.createTweet(id, tweets[x]);
 
     }
 

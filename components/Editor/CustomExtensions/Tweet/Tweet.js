@@ -7,7 +7,7 @@ export const TWITTER_REG_G =
 
 const Twitter = Node.create({
   name: 'twitter',
-  priority:1002,
+  priority:2002,
   group: 'block',
   selectable: true,
   draggable: true,
