@@ -53,6 +53,11 @@ module.exports =
           permanent: true,
         },
         {
+          source: "/post/the-ai-companion-who-doesnt-care---lf6ra6yx0c2fgy2pbws",
+          destination: "/post/conversational-ai-companion",
+          permanent: true,
+        },
+        {
           source: "/toolbox/gradient-hunt%E2%80%8A-%E2%80%8Abeautiful-color-gradients",
           destination: "/toolbox/gradient-hunte2808a-e2808abeautiful-color-gradients",
           permanent: true,
@@ -176,8 +181,8 @@ module.exports =
     },
   });
 
-module.exports = withSentryConfig(
+// module.exports = withSentryConfig(
   module.exports,
   { silent: true },
-  { hideSourcemaps: true },
-);
+  { hideSourcemaps: true }
+// );
