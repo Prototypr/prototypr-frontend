@@ -27,7 +27,7 @@ const metascraper = require('metascraper')([
 ]);
 const fetch = require('node-fetch');
 
-const puppeteerUrl = 'https://letter-puppeteer.vercel.app/api/getPage'
+const puppeteerUrl = 'http://p1.prototypr.io/api/getPage'
 
 
 export default async function handler(req, res) {
