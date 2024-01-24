@@ -36,6 +36,7 @@ const Twitter = Node.create({
       url: {
         default: null,
         parseHTML:(element) =>{
+          
           if(!element?.getAttribute('tweetid')){
             //if no tweet id, check for legacy twitter blockquotes
             let links = element?.querySelectorAll('a')
@@ -49,8 +50,10 @@ const Twitter = Node.create({
               }
               return url
             }
+          }else{
+            return element.getAttribute('url')
           }
-          else return null
+          // else return null
         }
       },
       tweetId: {
@@ -161,7 +164,7 @@ const Twitter = Node.create({
     rawHTML.innerHTML=HTMLAttributes.rawContent
     return['div',
     // ['blockquote', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)],
-    ['blockquote', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false, class:'twitter-tweet' }),rawHTML.firstChild],
+    ['blockquote', mergeAttributes(HTMLAttributes, { draggable: false, contenteditable: false, class:'twitter-tweet', url:HTMLAttributes.url }),rawHTML.firstChild],
     // ['figcaption', HTMLAttributes?.figcaption?HTMLAttributes.figcaption:'']
   ]
     // return ['div', mergeAttributes({ 'data-twitter': '' }, HTMLAttributes)];
