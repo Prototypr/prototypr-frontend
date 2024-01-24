@@ -1,5 +1,5 @@
 const slugify = require("slugify");
-const qs = require("qs");
+// const qs = require("qs");
 
 export const uid = function () {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);

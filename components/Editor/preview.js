@@ -10,13 +10,12 @@ const PreviewDisplay = ({ content, editor }) => {
 
   useEffect(()=>{
     var tweets = document.getElementsByClassName('twitter-tweet')
-    console.log(tweets)
     
     for(var x = 0;x<tweets.length;x++){
       let id = tweets[x]?.getAttribute('tweetId')
       tweets[x].outerHTML=`<div class="twitter-tweet" tweetId="${id}"></div>`
       
-      window.twttr.widgets.createTweet(id, tweets[x]);
+      window?.twttr?.widgets?.createTweet(id, tweets[x]);
 
     }
 

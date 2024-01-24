@@ -27,7 +27,7 @@ const metascraper = require('metascraper')([
 ]);
 const fetch = require('node-fetch');
 
-const puppeteerUrl = 'https://letter-puppeteer.vercel.app/api/getPage'
+const puppeteerUrl = 'http://p1.prototypr.io/api/getPage'
 
 
 export default async function handler(req, res) {
@@ -89,10 +89,10 @@ export default async function handler(req, res) {
             // `
             card = `
             <a href="${link}" target="_blank" contenteditable="false" class="headline link-box no-underline">
-            <div contenteditable="false" class="w-full lg:max-w-full lg:flex mb-8 link-embed-box">
-            ${metadata?.image?`<img class="object-cover h-48 md:w-48 w-full border border-1 border-gray-200 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l rounded-r-none text-center overflow-hidden" src="${metadata?.image}"/>`:''}
-            <div class="w-full border-r border-b border-l border-gray-200 h-48 lg:border-l-0 lg:border-t bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-              <div class="my-auto"> 
+            <div contenteditable="false" class="w-full lg:max-w-full sm:flex mb-8 link-embed-box">
+            ${metadata?.image?`<img class="object-cover h-48 sm:w-48 w-full border border-1 border-gray-200 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l rounded-r-none text-center overflow-hidden" src="${metadata?.image}"/>`:''}
+            <div class="w-full border-r border-b border-l border-gray-200 h-auto pb-4 sm:h-48 lg:border-l-0 lg:border-t bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+              <div class="my-auto">
                 <div class="text-gray-900 font-bold text-lg mb-2 line-clamp-2">${metadata?.title?metadata?.title:url}</div>
                 <div class="text-gray-600 line-clamp-2 text-sm">${metadata?.description}</div>
               </div>

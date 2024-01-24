@@ -12,7 +12,7 @@ const LoginSide = ({ user, title }) => {
           </div>
         </a>
         <h1 className="text-5xl text-white font-bold font-inter">
-         {title?title: 'Be part of the next generation of Web Publishing.'}
+         {title?title: 'Everyone is a Prototype.'}
         </h1>
       </div>
       <div className="translate-y-[200px] scale-[1.5]">
