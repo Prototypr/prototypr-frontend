@@ -63,9 +63,9 @@ const Navbar = ({
         <div
           className={`w-[97%] search-wide ${
             maxWidth ? maxWidth : "max-w-[1020px]"
-          } bg-white/75 backdrop-blur-lg border-opacity-10 mx-auto border rounded-[60px] border-black px-6`}
+          } bg-white/90 shadow backdrop-blur-lg mx-auto rounded-[60px] border-black px-3 pl-6`}
         >
-          <div className="relative flex h-16 items-center justify-between">
+          <div className="relative flex h-14 items-center justify-between">
             {/* movil menu button */}
             <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
               <button

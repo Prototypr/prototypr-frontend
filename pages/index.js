@@ -117,7 +117,7 @@ export default function Index({
                 {/* <SectionDivider py='py-9' transparentLine={true} /> */}
         <div className="z-50 relative pt-[40px]">
           <div className="text-xs font-medium mb-2 text-center text-gray-500/90 uppercase">Prototypr Toolbox</div>
-          <h2 className="text-3xl font-bold mb-[48px] text-center text-gray-800">Tools to shape every vision</h2>
+          <h2 className="text-3xl font-bold mb-[42px] text-center text-gray-800">Tools to shape every vision</h2>
             <div className="pb-3">
               <MotionSlider
                   duration={50}
@@ -148,6 +148,9 @@ export default function Index({
                 })}
               />
             </div>
+            <div className="w-full flex mt-2 -mb-6 justify-center">
+            <div variant="ghostSmallBlue" className="rounded-full mb-[42px] mt-4">Get the newsletter</div>
+          </div>
         </div>
         <SectionDivider py='py-4' transparentLine={true} />
         <div className="z-50 relative bg-[#EFF4FB]">

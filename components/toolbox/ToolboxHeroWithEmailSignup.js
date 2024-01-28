@@ -5,15 +5,15 @@ import SignupHorizontal from "../newsletter/SignupHorizontal";
 
 export const MotionSliderToolCard = ({ title, subtext, image, slug }) => {
   return (
-    <div className="w-[450px] h-[96px] cursor-pointer relative rounded-2xl border border-opacity-20 bg-white grid grid-items-center p-4">
+    <div className="w-[400px] h-[90px] cursor-pointer relative rounded-3xl border border-opacity-10 bg-white grid grid-items-center shadow-xs p-3">
         <Link href={`/toolbox/${slug}`}>
         <div className="flex flex-row">
-          <div className="mr-3 w-[64px] h-[64px] bg-gray-100 border border-black border-opacity-10 overflow-hidden rounded-xl relative">
+          <div className="mr-3 w-[64px] h-[64px] bg-gray-100 overflow-hidden rounded-[12px] relative">
             <img src={image} className="w-full h-full"></img>
           </div>
           <div className="w-full max-w-[200px] my-auto flex flex-col gap-0">
-            <p className="text-base font-medium line-clamp-1">{title}</p>
-            <p className="text-base font-normal text-gray-500 line-clamp-1">
+            <p className="text-base font-semibold line-clamp-1">{title}</p>
+            <p className="text-sm font-normal text-gray-600 line-clamp-1">
               {subtext}
             </p>
           </div>

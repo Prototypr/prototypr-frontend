@@ -28,12 +28,24 @@ const IntroBanner = ({ tools, sponsor }) => {
 
   return (
     <Container padding={false} maxWidth="relative grid z-0">
+      
       <div className="pt-[96px] justify-stretch bg-[#CCE6FF]/90 text-gray-800"
       >
+         <svg className="bg-gradient-to-r opacity-25 from-blue-500  via-blue-400/50 via-blue-300/10 to-blue-100/10" style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} viewBox='0 0 600 200' xmlns='http://www.w3.org/2000/svg'>
+                              <filter id='noiseFilter'>
+                                <feTurbulence 
+                                  type='fractalNoise' 
+                                  baseFrequency='1.5' 
+                                  numOctaves='3' 
+                                  stitchTiles='stitch'/>
+                              </filter>
+                              
+                              <rect width='100%' height='100%' filter='url(#noiseFilter)'/>
+                            </svg>
         <img src="/static/images/bendy9.svg" className="absolute bottom-0 -mb-[12%] xs:-mb-[15%] md:-mb-[15%] z-40 left-0 w-full"/>
         <div className="max-w-[1320px] mx-auto relative grid grid-cols-12">
         <div className="hidden 2xl:block absolute z-10 opacity-100 w-[620px] h-[500px] -mr-[20%] bg-gradient-to-r to-[#d1e8ff] from-transparent via-[#d1e8ff]/10 z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover"></div>
-          <img className="hidden md:block absolute opacity-100 w-[620px] h-[500px] z-10 h-full top-0 right-0 -mt-[20px] -mr-[225px] sm:-mr-[40%] 2md:-mr-[20%] xl:-mr-[200px] 2xl:-mr-[20%] object-cover" 
+          <img className="hidden md:block absolute opacity-80 w-[620px] h-[500px] z-10 h-full top-0 right-0 -mt-[20px] -mr-[225px] sm:-mr-[40%] 2md:-mr-[20%] xl:-mr-[200px] 2xl:-mr-[20%] object-cover" 
           src="/static/images/gradient15c.png"  style={{ zIndex:1, borderTopLeftRadius:'30%'}}/>
         <div className="md:col-span-6 pb-10 pt-8 px-7 relative col-span-12 font-inter p-2  relative flex flex-col">
           <div 
