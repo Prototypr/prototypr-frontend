@@ -27,7 +27,7 @@ const IntroBanner = ({ tools, sponsor }) => {
   };
 
   return (
-    <Container padding={false} maxWidth="relative grid">
+    <Container padding={false} maxWidth="relative grid z-0">
       <div className="pt-[96px] justify-stretch bg-[#CCE6FF]/90 text-gray-800"
       >
         <img src="/static/images/bendy9.svg" className="absolute bottom-0 -mb-[12%] xs:-mb-[15%] md:-mb-[15%] z-40 left-0 w-full"/>
@@ -39,16 +39,16 @@ const IntroBanner = ({ tools, sponsor }) => {
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
           className="pointer-events-auto md:pr-0 md:pb-12 md:pt-6 rounded-3xl z-10" style={{width:'fit-content'}}>
-          <h1 className="max-w-[50rem] mt-2 mb-5 text-[#0F1F40] text-5xl font-semibold tracking-tight xl:text-[56px] lg:leading-tight md:leading-tight">
-          Think It. Make It.
+          <h1 className="max-w-[50rem] mt-2 mb-5 text-[#0F1F40] text-5xl font-semibold tracking-tight xl:text-[48px] lg:leading-tight md:leading-tight">
+          Everything is a prototype
           </h1>
-          <p className="mb-5 text-[#436586] md:leading-[32px] leading-[28px] text-[16px] md:text-[18px] font-inter md:pr-6 max-w-[32rem]">
+          <p className="mb-5 text-gray-700 md:leading-[32px] leading-[28px] text-[16px] md:text-[18px] font-inter md:pr-6 max-w-[32rem]">
             Discover the people, ideas, and wisdom behind designing and building great products.
           </p>
           <div className="flex mt-4 mb-6 sm:mb-0">
             <Link href="/onboard">
-              <Button className="rounded-full bg-blue-600 text-white" variant="confirmBig">
-                Get started
+              <Button className="px-6 py-4 leading-none rounded-full bg-blue-600 text-white" variant="confirmBig">
+                Create account
               </Button>
             </Link>
           </div>

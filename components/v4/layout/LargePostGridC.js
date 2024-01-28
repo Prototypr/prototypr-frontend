@@ -58,9 +58,15 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
         <SmallPostsGroupC tools={tools} smallPosts={smallPosts?.slice(0,3)}/>
         <div className="flex mt-10">
             <Link href={`/posts/${slug}/page/1`}>
-              <Button className="rounded-full bg-blue-600 text-white" variant="confirmBig">
-                More {heading}
-                {/* More articles */}
+            {/* <div className="font-inter cursor-pointer flex">
+              <div className="text-blue-600 text-md font-base">
+                See more {heading}
+              </div>
+              <CaretRight className="my-auto text-blue-600" size={14} />
+            </div> */}
+              
+              <Button className="rounded-full  leading-none" variant="ghostBlue">
+                See more {heading}
               </Button>
             </Link>
           </div>  
@@ -68,7 +74,7 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
       <div className="w-full lg:w-1/2">
       {tools?.length>3 ?
         <>
-        <ToolCollection tagline={false} topic={heading} tools={tools} />
+        <ToolCollection tagline={false} slug={slug} topic={heading} tools={tools} />
         </>:''
       }
       </div>

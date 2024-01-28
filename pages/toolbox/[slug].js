@@ -124,7 +124,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                     target={"_blank"}
                     href={post?.attributes?.link + "?ref=prototypr.io"}
                   >
-                    <Button className="rounded-full bg-blue-600 text-white" variant={"confirmBig"}>
+                    <Button className="rounded-full bg-blue-600 text-white px-6 py-4 leading-none" variant={"confirmBig"}>
                       Visit Site
                     </Button>
                   </a>

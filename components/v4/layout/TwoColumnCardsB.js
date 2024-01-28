@@ -4,14 +4,14 @@ const dummyData = [{
 image:'/static/images/jobs1.png',
 slug:'/network',
 class:'bg-blue-800',
-title:'Share your story',
-description:'Join the Prototypr Discord community and write with us.'
+title:'Post an article',
+description:'Share your story with us and get featured in the newsletter.'
 },
 {image:'/static/images/robo2.svg',
 slug:'/toolbox',
 class:'bg-teal-600',
-title:'Discover design tools',
-description:'Cutting edge design tools and technology, curated every week.'}]
+title:'Submit a product',
+description:'List your tool in the Prototypr Toolbox and claim your page.'}]
 
 const TwoColumnCards = ({posts}) =>{
 

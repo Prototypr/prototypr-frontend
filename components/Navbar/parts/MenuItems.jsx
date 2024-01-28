@@ -443,11 +443,11 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
               {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
               <NavigationMenuTrigger href="articles">
                 {/* {title1} */}
-                Writings
+                Articles
               </NavigationMenuTrigger>
               <NavigationMenuContent className="normal-case">
                 <ContentList layout="three">
-                  <ContentListItemCallout />
+                  {/* <ContentListItemCallout /> */}
                   <ContentListItem href="/topics" title={submenuTitle1}>
                     {submenuDesc1}
                   </ContentListItem>
@@ -532,13 +532,13 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
             <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/people">
                 {/* {submenuTitle5} */}
-                Creators
+                People
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/jobs">
                 {/* {submenuTitle5} */}
-                Opportunities
+                Jobs
               </NavigationMenuLink>
             </NavigationMenuItem>
 
@@ -568,12 +568,12 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                   >
                     Get feedback on your writing, and meet like minded creators.
                   </ContentListItem>
-                  <ContentListItem
+                  {/* <ContentListItem
                     title={'Earn micropayments'}
                     href="/web-monetization"
                   >
                     Earn money based on the amount of time readers spend on your work.
-                  </ContentListItem>
+                  </ContentListItem> */}
                   <ContentListItem
                     title={'Open Source'}
                     href="https://open.prototypr.io"

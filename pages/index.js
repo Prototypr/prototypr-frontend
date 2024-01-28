@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useState } from "react";
+// import { useState } from "react";
 import DiscoverSection from "@/components/v4/section/DiscoverSectionB";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
@@ -17,6 +17,7 @@ const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
 import { getAllJobs, getPopularTopics } from "@/lib/api";
 
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
+import {CaretRight} from 'phosphor-react'
 
 import {
   getCombinedPostsForHome,
@@ -32,68 +33,25 @@ import { useEffect } from "react";
 import TopicSectionC from "@/components/v4/section/TopicSectionC";
 // import TopicSelectSection from "@/components/v4/section/TopicSelectSection";
 
-import {Robot, Swatches, HandEye, Wheelchair, FlowArrow} from 'phosphor-react'
 import NewsletterSection from "@/components/v4/section/NewsletterSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 import useUser from "@/lib/iron-session/useUser";
 import TagsNavRow from "@/components/v4/section/TagsNavRow";
-import SponsorBannerFull from "@/components/v4/banner/SponsorBannerFull";
+// import SponsorBannerFull from "@/components/v4/banner/SponsorBannerFull";
 // import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";
 // import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 import Container from "@/components/container";
 import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
-import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
+// import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
 import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
 import Link from "next/link";
 import Button from "@/components/Primitives/Button";
+import { MotionSlider } from "@/components/toolbox/ToolboxCarouselAnimation";
+import { MotionSliderToolCard } from "@/components/toolbox/ToolboxHeroWithEmailSignup";
+// import GiantTag from "@/components/v4/tag/GiantTag";
+// import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
 // import TopicSubscription from "@/components/Settings/topicsSubscription";
-
-
-const PAGE_SIZE = 12;
-
-const ICON_SIZE = 32
-const TAB_ITEMS = [
-  {
-    slug: "ai",
-    toolSlug:'ai',
-    name: "topicSpotlight.tabs.ai",
-    icon:<Robot size={ICON_SIZE}/>,
-    tagline:'The bots are here!'
-  },
-  {
-    slug: "branding",
-    toolSlug:'color',
-    name: "topicSpotlight.tabs.branding",
-    icon:<Swatches size={ICON_SIZE} />,
-    tagline:'Tell your story'
-  },
-  {
-    slug: "design-psychology",
-    toolSlug:'analytics',
-    name: "topicSpotlight.tabs.psychology",
-    icon:<HandEye size={ICON_SIZE} />,
-    tagline:`Analyze your user`
-  },
-  {
-    slug: "accessibility",
-    toolSlug:'accessibility',
-    name: "topicSpotlight.tabs.accessibility",
-    icon:<Wheelchair size={ICON_SIZE} />,
-    tagline:'Design inclusively'
-  },
-
-  {
-    slug: "product-design",
-    toolSlug:'resource',
-    name: "topicSpotlight.tabs.productDesign",
-    icon:<FlowArrow weight="duotone" size={ICON_SIZE} />,
-    tagline:'Kick it off'
-  },
-  // {
-  //   slug: "ux",
-  //   name: "topicSpotlight.tabs.userWriting",
-  // },
-];
+import { TAB_ITEMS, ProductListData, ProductListData2 } from "@/lib/constants";
 
 export default function Index({
   preview,
@@ -107,8 +65,6 @@ export default function Index({
   popularTags
 }) {
   const intl = useIntl();
-  const [heroCardPost, setHeroPost] = useState(heroPost);
-  const [viewablePosts, setViewablePosts] = useState(morePosts);
 
   const titleText = intl.formatMessage({ id: "index.header.title" });
   const descriptionText = intl.formatMessage({ id: "intro.description" });
@@ -155,24 +111,57 @@ export default function Index({
           <SectionDivider py={'py-1 sm:py-2 md:py-5'} transparentLine={true} />
           </>
           :<div className="pt-[100px]"/>}
+          <div className='relative z-50 -mt-2'>
+            <TagsNavRow/>
+          </div>
+                {/* <SectionDivider py='py-9' transparentLine={true} /> */}
+        <div className="z-50 relative pt-[40px]">
+          <div className="text-xs font-medium mb-2 text-center text-gray-500/90 uppercase">Prototypr Toolbox</div>
+          <h2 className="text-3xl font-bold mb-[48px] text-center text-gray-800">Tools to shape every vision</h2>
+            <div className="pb-3">
+              <MotionSlider
+                  duration={50}
+                  slides={ProductListData.map((data, i) => {
+                    return (
+                      <MotionSliderToolCard
+                        title={data.title}
+                        slug={data.slug}
+                        subtext={data.description}
+                        image={data.image}
+                      />
+                    );
+                  })}
+                />
+            </div>
+            <div className="pt- ">
+              <MotionSlider
+                duration={35}
+                slides={ProductListData2.map((data, i) => {
+                  return (
+                    <MotionSliderToolCard
+                      slug={data.slug}
+                      title={data.title}
+                      subtext={data.description}
+                      image={data.image}
+                    />
+                  );
+                })}
+              />
+            </div>
+        </div>
+        <SectionDivider py='py-4' transparentLine={true} />
         <div className="z-50 relative bg-[#EFF4FB]">
-
-          <TagsNavRow/>
-        <SectionDivider py='py-3.5' transparentLine={true} />
-        <DiscoverSection
-          user={user}
-          heroCardPost={heroCardPost}
-          viewablePosts={viewablePosts}
-          jobsSidebar={jobsSidebar}
-        />
+          <SectionDivider py='py-3.5' transparentLine={true} />
+            <DiscoverSection
+              user={user}
+              heroCardPost={heroPost}
+              viewablePosts={morePosts}
+              jobsSidebar={jobsSidebar}
+            />
         </div>
 
-       
-        <SectionDivider py='py-6' transparentLine={true}  />
-        <Container  maxWidth="max-w-[1320px]">
-        <TwoColumnCards/> 
-        </Container>
         <SectionDivider py='py-6' transparentLine={true} />
+        
         <Container maxWidth="max-w-[1320px] z-30 relative">
           <div className="p-6 md:p-10 bg-white relative overflow-hidden rounded-xl shadow-sm">
               <ToolLargeCardRow tools={toolsList.slice(0,5)} />
@@ -182,12 +171,17 @@ export default function Index({
               
           <div className="flex mt-10">
             <Link href="/toolbox">
-              <Button className="rounded-full bg-blue-600 text-white" variant="confirmBig">
+              <Button className="rounded-full bg-blue-600 px-6 py-4 leading-none text-white" variant="confirmBig">
                 Open toolbox
               </Button>
             </Link>
           </div>     
           </div>
+        </Container>
+        
+        <SectionDivider py='py-6' transparentLine={true}  />
+        <Container  maxWidth="max-w-[1320px]">
+        <TwoColumnCards/> 
         </Container>
         {/* <SectionDivider />
         <div className="hidden md:block">
@@ -195,6 +189,7 @@ export default function Index({
           <SectionDivider />
         </div> */}
         <SectionDivider py="py-6" transparentLine={true} />
+        
         <Container padding={false} maxWidth="relative z-0">
         <div class="relative bottom-0 w-full z-0">
           <img class="w-full translate-y-[4px] z-0" src="/static/images/tilt-section2.svg"/>
@@ -203,17 +198,43 @@ export default function Index({
           </div>
         </Container>
         {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
-        <Container maxWidth="w-full bg-[#dbeeff] rounded-b-[3.5rem] relative relative z-20">
+        <Container maxWidth="w-full bg-[#dbeeff]  rounded-b-[3.5rem] relative relative z-10">
+        {/* <img src="/static/images/bendy9.svg" className="absolute bottom-0 -mb-[12%] mb-12 z-20 left-0 w-full"/> */}
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[200px] left-0 w-full h-[124%] object-cover"/> */}
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[150px] left-0 w-full h-[124%] object-cover"/> */}
 
-          <div className="max-w-[1320px] mx-auto px-6 rounded-b-[3.5rem] pb-28 ">
-            <div className="flex justify-start w-full">
-              <h2 className="md:text-[32px] text-left mb-10 pt-4 text-[20px] max-w-lg leading-snug md:leading-[40px] md:leading-[48px] font-semibold font-inter text-[#0F1F40] ">
-           From design to code, and everything in between 
-            </h2>
+          <div className="max-w-[1320px] mx-auto px-6 pb-16 ">
+          <div className="flex justify-between mb-8">
+              <h3 className="text-[24px] text-[#0F1F40] font-semibold font-inter max-w-md leading-[32px]">
+              Explore Topics
+              </h3>
+                <div className="my-auto">
+                <Link href='/topics'>
+                  <div className="flex">
+                    <div className="text-sm my-auto text-black opacity-60">See all topics</div>
+                    <CaretRight className="opacity-60 my-auto" size={16} />
+                  </div>
+                </Link>
+                </div>
+
             </div>
-            <JumboTagsSection popularTags={popularTags}/>
+            {/* <div className="flex justify-start w-full">
+              <h2 className="md:text-[28px] text-left mb-10 pt-4 text-[20px] max-w-lg leading-snug md:leading-[40px] md:leading-[48px] font-semibold font-inter text-[#0F1F40] ">
+           Explore Topics 
+            </h2>
+            </div> */}
+            <div className="pt-4 rounded-xl flex flex-wrap">
+              {popularTags.map((topic, i) => (
+                <div key={`topic_${i}`}>
+                      <Link href={`/posts/${topic?.slug}/page/1/`}>
+                    <div  className={`inline-block capitalize text-sm px-4 py-2 cursor-pointer bg-[#d0e3fe] rounded-full mr-3 mb-3 text-gray-800 font-medium`}>
+                      {topic?.name}
+                    </div>
+                  </Link>
+                </div>
+                      ))}
+            </div>
+            {/* <JumboTagsSection popularTags={popularTags}/> */}
             {/* <PopularTagsSection popularTags={popularTags}/> */}
           </div>
         </Container>
@@ -223,7 +244,7 @@ export default function Index({
         {/* <SectionDivider /> */}
         {TAB_ITEMS?.map((topic, index) => {
           return (
-            <>
+            <div key={`topicsection_${index}`} className="z-40">
             <TopicSectionC
               tagline={topic.tagline}
               showSidebar={false}
@@ -251,7 +272,7 @@ export default function Index({
                 <div className="w-full pb-16"></div>
                 </div>:''
             }
-            </>
+            </div>
           );
         })}
           {/* <BrowserView>
@@ -305,7 +326,7 @@ export async function getStaticProps({ preview = null, locale }) {
     topicRes[tag] = topicData
   }
 
-  const popularTags = (await getPopularTopics({postType:'article', pageSize:8})) || [];
+  const popularTags = (await getPopularTopics({postType:'article', pageSize:34})) || [];
 
 
   allPosts = transformPostListOld(allPosts.data, locale);

@@ -14,6 +14,9 @@ import stc from "string-to-color";
 import ToolCard from "../v4/card/ToolCard";
 import NewsletterSection from "../v4/section/NewsletterSection";
 import useUser from "@/lib/iron-session/useUser";
+import ToolImageCard from "../v4/card/ToolImageCard";
+import ToolBoxHero from "./toolboxHero";
+import ToolBoxHeroWithSignup from "./ToolboxHeroWithEmailSignup";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -50,16 +53,14 @@ const ToolboxIndexPage = ({
       {/* <div className="mt-2">
       <ToolsTagsNavRow active={'All'}/>
     </div> */}
-      <Container maxWidth="max-w-[1320px] mt-3 mb-6">
+      {/* <Container maxWidth="max-w-[1320px] mt-3 mb-6">
         <div
-          style={{
-            backgroundColor: stc(`${title}`),
-            backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
-          }}
-          className="relative overflow-hidden p-6 border-gray-200 rounded-2xl"
+          // style={{
+          //   backgroundColor: stc(`${title}`),
+          //   backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
+          // }}
+          className="relative overflow-hidden p-6 border-gray-200 bg-blue-100/80 bg-blur-lg rounded-2xl"
         >
-          <div className="bg-black opacity-[15%] w-full h-full absolute left-0 top-0" />
-          {/* <div className="z-20 relative"> */}
           <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
             <Breadcrumbs
               urlRoot={urlRoot}
@@ -69,17 +70,14 @@ const ToolboxIndexPage = ({
               pageNo={pagination?.page}
             />
             <div className="inline-flex my-4">
-              {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
-              {/* <Tag className="my-auto mx-auto mr-2.5 my-auto" size={24}/> */}
-              {/* </div> */}
-              <h2 className="text-5xl my-auto font-bold text-white capitalize">
+              <h2 className="text-5xl my-auto font-bold text-gray-800 capitalize">
                 {title}
               </h2>
             </div>
           </div>
         </div>
-      </Container>
-
+      </Container> */}
+     {pagination?.page == 1 && <ToolBoxHeroWithSignup user={user} />}
       <Container maxWidth="max-w-[1320px] flex grid grid-cols-12">
         <Sidebar
           paginationRoot={paginationRoot}
@@ -87,7 +85,7 @@ const ToolboxIndexPage = ({
           filterCategories={filterCategories}
           slug={currentSlug}
         />
-        <div className="w-full px-0 md:pr-0 md:pl-12 -mt-6 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10">
+        <div className="w-full px-0 md:pr-0 md:pl-6 -mt-6 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10">
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
           ) : (
@@ -99,18 +97,18 @@ const ToolboxIndexPage = ({
                       {/* <TwoColumnCards posts={allPosts.slice(0,2)}/> */}
                       {/* <ToolsLayout posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" /> */}
                       <div className="py-6">
-                        <ToolCard
+                        <ToolImageCard
                           posts={allPosts}
-                          columns={"lg:grid-cols-2"}
+                          columns={"lg:grid-cols-3"}
                           type="toolbox"
                         />
                       </div>
                     </>
                   ) : (
                     <div className="py-6">
-                      <ToolCard
+                      <ToolImageCard
                         posts={allPosts}
-                        columns={"lg:grid-cols-2"}
+                        columns={"lg:grid-cols-3"}
                         type="toolbox"
                       />
                     </div>

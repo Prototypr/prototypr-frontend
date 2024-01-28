@@ -8,13 +8,13 @@ import Link from 'next/link'
 //         </Link>
 //     )
 // }
-const GiantTag = ({ link, children, index, active }) => {
+const GiantTag = ({ link, children, index, active, classes }) => {
   return (
     <Link href={`${link ? link : "/"}`}>
       <div
-        className={`inline-block text-base px-5 py-2 cursor-pointer ${
+        className={`inline-block text-base px-4 py-2 cursor-pointer ${
           active ? "bg-blue-600 text-white" : "bg-[#d8e5f8]/70"
-        } rounded-full mr-3 mb-3 text-base text-black/70 text-[15px]`}
+        } rounded-full mr-3 mb-3 text-base text-black/80 text-[15px] font-medium ${classes}`}
       >
         {children}
       </div>
@@ -29,7 +29,7 @@ export const GiantPillTag = ({ link, children, index, active }) => {
         <div
           className={`inline-block text-sm md:text-xl px-5 py-2 md:px-14 md:py-4 cursor-pointer ${
             active ? "bg-blue-600 text-white" : "bg-transparent "
-          } border border-[#ACACAC] text-[#ACACAC] font-normal rounded-full mr-3 mb-3`}
+          } border border-[#ACACAC] text-[#ACACAC] font-normal rounded-full mr-3 mb-3 font-medium`}
         >
           {children}
         </div>

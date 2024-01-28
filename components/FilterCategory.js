@@ -13,7 +13,7 @@ export default function FilterCategory({
       {items?.map((item, index) => {
         return (
           <>
-          {item?.subItems? <div key={`${key}${index}`} className="text-gray-800">
+          {item?.subItems? <div key={`${key}${index}`} className="text-gray-800 mb-10">
               <div className="">
                 <h1 className="font-bold pb-2 mb-2 border-b border-gray-200 pr-3 text-sm uppercase text-gray-900">
                   {item.title}
@@ -27,10 +27,10 @@ export default function FilterCategory({
                   >
                     <Link href={`${urlRoot}/${sItem.key}/page/1`}>
                       <div
-                        className={`hover:text-blue-500 py-1.5 rounded ${
+                        className={`text-sm hover:text-blue-500 py-1.5 rounded ${
                           sItem.key == slug
                             ? "text-blue-600 font-semibold"
-                            : "text-[#A1A1A1] font-base"
+                            : "text-gray-700 font-base"
                         }`}
                       >
                         {sItem.name}
@@ -41,7 +41,7 @@ export default function FilterCategory({
               })}
               {item.moreLink?.text ? (
                 <Link href={item.moreLink.url}>
-                  <span className="inline-block text-[#A1A1A1] hover:text-blue-600 font-medium underline mt-4 mb-6 text-sm">
+                  <span className="inline-block text-gray-700 hover:text-blue-600 font-medium underline mt-4 mb-6 text-sm">
                     {item.moreLink.text}
                   </span>
                 </Link>

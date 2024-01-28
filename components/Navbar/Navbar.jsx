@@ -86,7 +86,7 @@ const Navbar = ({
             </div>
             {/* <div className="flex flex-1 items-center justify-center items-stretch justify-between"> */}
             <div className="flex flex-1 items-center">
-              <div className="flex mr-3 flex-shrink-0 items-center">
+              <div className="flex flex-shrink-0 items-center">
                 <Link href="/" as="/">
                   <>
                     <img
@@ -103,7 +103,7 @@ const Navbar = ({
                     />
                   </>
                 </Link>
-                <NavSponsor />
+                {/* <NavSponsor /> */}
                 {/* <div
                   className={`hidden md:block my-auto duration-300 ease-in-out`}
                 >
@@ -140,12 +140,13 @@ const Navbar = ({
                 user?.isLoggedin ? "mr-[52px] sm:mr-16" : "lg:mr-0"
               } mr-[52px] sm:mr-16`}
             >
-              <div className={`hidden mr-2 md:block my-auto`}>
+              {/* <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />
-              </div>
+              </div> */}
               {/* <div className={`hidden mr-2 md:block my-auto`}>
                   <WMButton />
                 </div> */}
+                 <NavSponsor />
               <NavigationMenu>
                 <NavigationMenuList>
                   <LocationMenu
@@ -177,9 +178,9 @@ const Navbar = ({
             <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
             <MobileActiveLink href={"/jobs"}>Opportunities</MobileActiveLink>
             <MobileActiveLink href={"/people"}>People</MobileActiveLink>
-            <MobileActiveLink href={"/web-monetization"}>
+            {/* <MobileActiveLink href={"/web-monetization"}>
               Earn Micropayments
-            </MobileActiveLink>
+            </MobileActiveLink> */}
             {!user?.isLoggedIn?<MobileActiveLink href={"/onboard"}>
               Sign in
             </MobileActiveLink>:''}

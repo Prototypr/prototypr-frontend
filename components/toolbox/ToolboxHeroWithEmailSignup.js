@@ -1,18 +1,19 @@
 import { MotionSlider } from "@/components/toolbox/ToolboxCarouselAnimation";
 import { SearchBarToolbox } from "@/components/toolbox/toolboxSearchBox";
 import Link from "next/link";
+import SignupHorizontal from "../newsletter/SignupHorizontal";
 
-const MotionSliderToolCard = ({ title, subtext, image, slug }) => {
+export const MotionSliderToolCard = ({ title, subtext, image, slug }) => {
   return (
-    <div className="w-[450px] h-auto cursor-pointer relative rounded-2xl border border-opacity-20 bg-white grid grid-items-center p-4">
+    <div className="w-[450px] h-[96px] cursor-pointer relative rounded-2xl border border-opacity-20 bg-white grid grid-items-center p-4">
         <Link href={`/toolbox/${slug}`}>
         <div className="flex flex-row">
-          <div className="mr-3 w-18 h-18 bg-gray-100 border border-black border-opacity-10 overflow-hidden rounded-xl relative">
+          <div className="mr-3 w-[64px] h-[64px] bg-gray-100 border border-black border-opacity-10 overflow-hidden rounded-xl relative">
             <img src={image} className="w-full h-full"></img>
           </div>
-          <div className="w-full max-w-[200px] flex flex-col gap-0">
-            <p className="text-base font-semibold line-clamp-1">{title}</p>
-            <p className="text-base font-normal text-[#989898] line-clamp-1">
+          <div className="w-full max-w-[200px] my-auto flex flex-col gap-0">
+            <p className="text-base font-medium line-clamp-1">{title}</p>
+            <p className="text-base font-normal text-gray-500 line-clamp-1">
               {subtext}
             </p>
           </div>
@@ -99,9 +100,9 @@ const ProductListData2 = [
   },
 ];
 
-const ToolBoxHero = () => {
+const ToolBoxHeroWithSignup = ({user}) => {
   return (
-    <div className="w-full h-full bg-white toolboxheroGradient pt-20 pb-20 -mt-[96px]">
+    <div className="w-full h-full bg-white toolboxheroGradient pt-20 pb-8 -mt-[96px] border-b mb-14">
       <div className="w-full h-auto py-20 relative z-2">
         <div className="max-w-7xl mx-auto grid place-items-center h-full">
           <div className="flex flex-col justify-center items-center gap-2">
@@ -112,19 +113,33 @@ const ToolBoxHero = () => {
                 alt="Prototypr Logo"
               />
             </div>
-            <h1 className="text-[40px] md:text-[52px] text-center leading-[52px] md:leading-[63px] font-bold mb-2">
-              Find the tool, <br /> make your thing.
-            </h1>
+            {user?.isLoggedIn?
             <div>
-              <SearchBarToolbox />
+                <h1 className="text-[40px] md:text-[52px] text-center leading-[52px] md:leading-[63px] font-bold mb-2">
+                Find the tool, <br /> make your thing.
+                </h1>
+                <div>
+                <SearchBarToolbox />
+                </div>
             </div>
+            :
+            <div>
+                <h1 className="text-[40px] md:text-[48px] text-center leading-[52px] md:leading-[63px] font-bold mb-2">
+                The best tools <span className="text-blue-800">every week.</span>
+                </h1>
+                <div className="text-center text-gray-600 max-w-[600px] text-lg mt-3 mx-auto">Join 25k+ readers receiving Prototypr Weekly. Improve your workflow with the latest tools, news and design resources.</div>
+                <div className="mt-12 mb-2">
+                <SignupHorizontal showNoSpam={true} className="sm:flex justify-center mx-auto w-[505px] mt-5 mb-6" />
+                </div>
+            </div>
+            }
           </div>
         </div>
       </div>
       <div className="w-full max-w-full relative py-5 flex flex-col gap-2  overflow-hidden">
         <div className=" flex flex-col items-center max-w-7xl mx-auto grid gap-5 top-0 w-full ">
           <MotionSlider
-            duration={50}
+            duration={60}
             slides={ProductListData.map((data, i) => {
               return (
                 <MotionSliderToolCard
@@ -137,7 +152,7 @@ const ToolBoxHero = () => {
             })}
           />
           <MotionSlider
-            duration={35}
+            duration={45}
             slides={ProductListData2.map((data, i) => {
               return (
                 <MotionSliderToolCard
@@ -159,4 +174,4 @@ const ToolBoxHero = () => {
   );
 };
 
-export default ToolBoxHero;
+export default ToolBoxHeroWithSignup;

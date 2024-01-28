@@ -33,7 +33,7 @@ const TopicSection = ({
     <Container maxWidth="max-w-[1320px]">
       {/* <Intro /> */}
       <div className="w-full h-full grid grid-cols-12 flex justify-center">
-        <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 ${showSidebar==false?'':'lg:col-span-9'}`}>
+        <div className={`w-full max-w-full flex flex-col gap-2 z-20 col-span-12 ${showSidebar==false?'':'lg:col-span-9'}`}>
           {/* <HomePageNewNavBar /> */}
           {/* <TabSwitcher selectedTab={currentTab} onTabChange={onTabChange} /> */}
           <LargePostGridC
