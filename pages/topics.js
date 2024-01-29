@@ -106,13 +106,15 @@ export default function Index({
         {/* <TopicSpotlightSection 
       tagline="Open Web"
       headingSize={'text-2xl mb-4'}/> */}
+        <div className="-mt-4">
+          <TagsNavRow currentPage={'topics'} />
+        </div>
 
-        <TagsNavRow currentPage={'topics'} />
-
-        <SectionDivider transparentLine={true} />
+        <SectionDivider py="py-1" transparentLine={true} />
         {/* <Container maxWidth="max-w-[1320px]"> */}
           {TOPICS_PAGE?.map((topic, index) => {
-            // console.log(topic)
+            console.log(topic)
+            console.log(topicRes[topic.slug])
             return (
               <div key={`section_${index}`}>
                 <TopicIndexSection
@@ -121,16 +123,16 @@ export default function Index({
                   heroCardPost={topicRes[topic.slug]?.posts[0]}
                   viewablePosts={topicRes[topic.slug]?.posts?.slice(0, 3)}
                 />
-                <SectionDivider py="py-6" transparentLine={true} />
+                <SectionDivider py="py-4" transparentLine={true} />
               </div>
             );
           })}
 
-          <div className="mt-2 rounded-xl bg-white shadow-sm p-6 md:p-10">
-            <h2 className="text-lg mb-6 font-semibold">Popular topics</h2>
+          {/* <div className="mt-2 rounded-xl bg-white shadow-sm p-6 md:p-10">
+            <h2 className="text-lg mb-6 font-semibold">Popular topics</h2> */}
             {/* <PopularTagsSection popularTags={popularTags}/> */}
             {/* <JumboTagsSection popularTags={popularTags}/> */}
-            <div className="grid grid-cols-12 xs:gap-4 md:gap-6 lg:gap-6">
+            {/* <div className="grid grid-cols-12 xs:gap-4 md:gap-6 lg:gap-6">
               {popularTags.slice(0, 12).map((topic, i) => (
                 <JumboTagC
                   withBackground={true}
@@ -139,17 +141,18 @@ export default function Index({
                   topic={topic}
                 />
               ))}
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         {/* </Container> */}
-        <SectionDivider transparentLine={true} />
+        <SectionDivider py="py-1" transparentLine={true} />
         {/* <Container maxWidth="max-w-[1320px] pb-24 mt-1"> */}
-          <div className="rounded-xl p-6 md:p-10 shadow bg-white">
-            <h2 className="text-lg font-semibold">The A-Z</h2>
+        <Container maxWidth="max-w-[1320px] mb-8">
+          <div className="rounded-xl p-3 md:p-10 shadow bg-white">
+            <h2 className="text-2xl mb-3 font-semibold">All topics</h2>
             <div className="pt-4 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
               {morePopularTags.map((topic, i) => (
                 <CategoriesIconCard
-                  showCount={false}
+                  showCount={true}
                   withBackground={true}
                   key={i}
                   index={i}
@@ -158,6 +161,7 @@ export default function Index({
               ))}
             </div>
           </div>
+        </Container>
         {/* </Container> */}
 
         <Container maxWidth="max-w-[1320px]">

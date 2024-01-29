@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { usePlausible } from "next-plausible";
+import { Tag } from "phosphor-react/dist";
+
 // import Image from "next/image";
 // import gumletLoader from "@/components/new-index/gumletLoader";
 
@@ -20,14 +22,14 @@ const CategoriesIconCard = ({ topic, withBackground, showCount }) => {
           });
         }}
         className="flex"
-      ><div className={`${withBackground?'bg-white border border-black rounded-xl border-opacity-10 p-5':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
+      ><div className={`${withBackground?'bg-white rounded-xl p-3':''} bg-gray-100 w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex flex-row rounded-xl">
           <div
               // style={{ flex: "0 0 3em" }}
-              className="w-12 h-12 bg-gray-100 p-3 my-auto mr-3 relative rounded-xl overflow-hidden"
+              className="w-12 h-12 bg-white/90 p-3 my-auto mr-3 relative rounded-full  overflow-hidden"
             >
               {topic.icon?
-              <img className="w-full h-full" src={topic.icon}/>:''}
+              <img className="w-full h-full" src={topic.icon}/>:<Tag weight="fill" className="my-auto mr-3 opacity-20" size={24}/>}
             </div>
             <div className="flex flex-col pl-1 justify-center">
               <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base">

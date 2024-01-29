@@ -1,10 +1,10 @@
-import BigCard from "../card/BigCard/BigCardC";
+// import BigCard from "../card/BigCard/BigCardC";
 
 // import SmallCard from "../card/SmallCard/SmallCardE";
-import SmallPostsGroup from "./SmallPostGroupB";
-import RSSTitle from "../text/RSSTitle";
+// import SmallPostsGroup from "./SmallPostGroupB";
+// import RSSTitle from "../text/RSSTitle";
 import SmallCard from "../card/SmallCard/SmallCardStacked";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import Button from "@/components/Primitives/Button";
 
 const PostGroupRow = ({ largePost, smallPosts, description,title }) => {
@@ -21,11 +21,11 @@ const PostGroupRow = ({ largePost, smallPosts, description,title }) => {
     return (
     <>
    
-    <div className="grid grid-cols-4 max-w-[1320px]">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-[1320px]">
      
-     <div className="flex flex-col justify-center">
+     <div className="flex flex-col justify-center mb-6 md:mb-0 px-6 md:px-6">
         <div>
-            <h2 className="text-[24px] mb-1 text-[#0F1F40] font-semibold font-inter max-w-md leading-[32px]">
+            <h2 className="text-lg md:text-xl mb-1 text-[#0F1F40] font-semibold font-inter max-w-md leading-[32px]">
              {intl.formatMessage({ id: title })}
             </h2>
             <p>

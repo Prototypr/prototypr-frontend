@@ -35,7 +35,7 @@ const ToolCollection = ({ tools, topic, tagline,slug }) => {
       </div> */}
       {tools?.length?
       <>
-      <ToolCardSimple posts={tools} columns={'xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-2'} type="toolbox" />
+      <ToolCardSimple posts={tools} columns={'grid-cols-1'} type="toolbox" />
       {/* <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-6`}> 
       <div className="flex flex-col justify-center">
         <div className="text-gray-500 uppercase text-xs">

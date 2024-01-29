@@ -205,17 +205,17 @@ export default function Index({
         <Container maxWidth="max-w-[1320px] z-30 relative">
           <div className="p-6 md:p-10 bg-white relative overflow-hidden rounded-xl shadow-sm">
               <ToolLargeCardRow tools={toolsList.slice(0,5)} />
-              <SectionDivider py="py-6" transparentLine={true}  />
+              <SectionDivider py="py-8" transparentLine={true}  />
               <ToolIconCardRow tools={toolsList.slice(5,15)} />       
 
               
-          <div className="flex mt-10">
+          {/* <div className="flex mt-10">
             <Link href="/toolbox">
               <Button className="rounded-full bg-blue-600 px-6 py-4 leading-none text-white" variant="confirmBig">
                 Open toolbox
               </Button>
             </Link>
-          </div>     
+          </div>      */}
           </div>
         </Container>
         
@@ -352,7 +352,7 @@ export async function getStaticProps({ preview = null, locale }) {
       (await getCommonQuery(preview, [tag], "article", 12, 0, sort)) || [];
     
     const topicToolsRes =
-      (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 12, 0, sort)) || [];
+      (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 4, 0, sort)) || [];
 
       //extract authors from the postss while we don't have an endpoint for it
     const authors = makeAuthorList(res)
