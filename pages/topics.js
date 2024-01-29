@@ -119,6 +119,7 @@ export default function Index({
               <div key={`section_${index}`}>
                 <TopicIndexSection
                   title={topic.name}
+                  topicObject={topic}
                   user={user}
                   heroCardPost={topicRes[topic.slug]?.posts[0]}
                   viewablePosts={topicRes[topic.slug]?.posts?.slice(0, 3)}

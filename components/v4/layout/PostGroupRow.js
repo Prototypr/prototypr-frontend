@@ -6,8 +6,8 @@
 import SmallCard from "../card/SmallCard/SmallCardStacked";
 import { useIntl } from "react-intl";
 import Button from "@/components/Primitives/Button";
-
-const PostGroupRow = ({ largePost, smallPosts, description,title }) => {
+import Link from 'next/link'
+const PostGroupRow = ({ largePost, smallPosts, description,title,topicObject }) => {
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;
   const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
   const largeCoverImage = url
@@ -29,10 +29,12 @@ const PostGroupRow = ({ largePost, smallPosts, description,title }) => {
              {intl.formatMessage({ id: title })}
             </h2>
             <p>
-                219 posts
+              {topicObject?.tagline}
             {/* {intl.formatMessage({ id: description })} */}
             </p>
-            <Button className="rounded-full mt-6" variant={"ghostSmallBlue"}>Browse</Button>
+            <Link href={`/posts/${topicObject?.slug}/page/1`}>
+              <Button className="rounded-full mt-6" variant={"ghostSmallBlue"}>Browse</Button>
+            </Link>
         </div>
      </div>
       {/* <div className="w-full lg:w-1/2">
