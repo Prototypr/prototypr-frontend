@@ -519,6 +519,9 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 .toolboxheroGradient {
     background-image:linear-gradient(179.36deg, rgba(255, 255, 255, 0) 55.45%, #F1F3F9 63.72%),url("/static/images/toolbox-grid.svg"),;
 }
+.toolboxheroGradientHome {
+    background-image:url("/static/images/toolbox/toolbox-bg-2.svg"),;
+}
 
 .gridBg {
     background-image: url("/static/images/toolbox/white-grid.svg") ;
@@ -550,4 +553,17 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
     color:#2352BA;
     font-weight: bolder;
   }
+}
+
+.text-underline{
+  background-image:url("/static/images/text-underline.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  margin-left: -0.1em;
+    margin-right: -0.1em;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+    position: relative;
+    padding-bottom: 10px;
 }
