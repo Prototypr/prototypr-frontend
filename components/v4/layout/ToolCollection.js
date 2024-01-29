@@ -7,21 +7,21 @@ import { ArrowRight } from "phosphor-react";
 
 const ToolCollection = ({ tools, topic, tagline,slug }) => {
   return (
-    <div className="border-t border-black border-opacity-5 md:border-t-0 pt-12 mt-12 lg:pt-0 lg:mt-0 w-full lg:pl-6 mb-12">
+    <div className="border-t border-black border-opacity-5 md:border-t-0 pt-12 mt-12 lg:pt-0 lg:mt-0 w-full mb-12">
     
-      <div className="flex relative p-2 mb-1">
+    {/* heading - removed for now */}
+      {/* <div className="flex relative p-2 mb-1">
             <div className="text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
             <Link href={`/toolbox/`}><span className="capitalize">{topic}</span> tools</Link>
             </div>
             <div className="my-auto">
-              {/* @todo: get the right slug in here */}
               <Link href={`/toolbox/`}>
                 <div className="bg-blue-200/90 ml-3 flex justify-center my-auto h-6 w-6 rounded-full">
                     <ArrowRight weight="bold" size={14} color="rgb(0,0,0)" className="my-auto"/>
                 </div>
               </Link>
             </div>
-          </div>
+          </div> */}
 
       {/* <div className="flex justify-between">
         

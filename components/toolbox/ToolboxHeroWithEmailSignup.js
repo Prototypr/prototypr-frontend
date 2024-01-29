@@ -124,8 +124,8 @@ const ToolBoxHeroWithSignup = ({user}) => {
             </div>
             :
             <div>
-                <h1 className="text-[40px] md:text-[48px] text-center leading-[52px] md:leading-[63px] font-bold mb-2">
-                The best tools <span className="text-blue-800">every week.</span>
+                <h1 className="text-[40px] md:text-5xl text-center font-bold mb-2">
+                The best tools <span className="text-underline">every week.</span>
                 </h1>
                 <div className="text-center text-gray-600 max-w-[600px] text-lg mt-3 mx-auto">Join 25k+ readers receiving Prototypr Weekly. Improve your workflow with the latest tools, news and design resources.</div>
                 <div className="mt-12 mb-2">

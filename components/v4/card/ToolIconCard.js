@@ -41,7 +41,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
           <div className="flex flex-row rounded-xl">
             <div
               style={{ flex: `0 0 ${small?'3em':'70px'}` }}
-              className={`${small?'h-12 w-12':'w-[70px] h-[70px]'} mr-2 relative border border-opacity-5 border-black rounded-xl overflow-hidden`}
+              className={`${small?'h-12 w-12':'w-[70px] h-[70px]'} mr-2 relative rounded-xl overflow-hidden`}
             >
               {coverImage ? (
                 <Image

@@ -70,7 +70,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
             //   width="100%"
             //   height="100%"
               alt="Brand logo for external website's link"
-              className="border object-cover rounded-2xl bg-white"
+              className="object-cover rounded-2xl bg-white"
               src={coverImage}
               fill
                 // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
