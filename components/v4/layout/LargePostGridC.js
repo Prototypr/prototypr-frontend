@@ -20,7 +20,7 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
     <>
     <div className="bg-white border border-gray-300/70 p-6 md:p-0 rounded-xl max-w-[1320px] shadow-sm">
     <div className="flex flex-col lg:flex-row justify-between">
-        <div className="w-full lg:w-1/2 md:p-6">
+        <div className="w-full lg:w-1/2 md:p-8">
            {showHeading!==false?<div className="flex w-full justify-between">
             <div className="flex mb-6">
               <Tag className="my-auto mr-3" size={32}/>
@@ -71,7 +71,7 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
             </Link>
           </div>  
         </div>
-      <div className="w-full lg:w-1/2 md:p-6 bg-gray-50 border-l border-gray-100 md:rounded-r-xl">
+      <div className="w-full lg:w-1/2 md:p-8 md:pt-0 lg:pt-10 lg:bg-gray-50 md:border-l border-gray-100 lg:rounded-r-xl">
       {tools?.length>3 ?
         <>
         <ToolCollection tagline={false} slug={slug} topic={heading} tools={tools} />

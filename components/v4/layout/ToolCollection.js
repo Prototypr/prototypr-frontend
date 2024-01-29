@@ -7,7 +7,7 @@ import { ArrowRight } from "phosphor-react";
 
 const ToolCollection = ({ tools, topic, tagline,slug }) => {
   return (
-    <div className="border-t border-black border-opacity-5 md:border-t-0 pt-12 mt-12 lg:pt-0 lg:mt-0 w-full mb-12">
+    <div className="border-t border-black border-opacity-5 md:border-t-0 sm:pt-8 mt-8 md:pt-0 lg:mt-0 w-full mb-12">
     
     {/* heading - removed for now */}
       {/* <div className="flex relative p-2 mb-1">
