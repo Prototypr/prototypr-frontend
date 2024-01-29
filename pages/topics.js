@@ -113,8 +113,6 @@ export default function Index({
         <SectionDivider py="py-1" transparentLine={true} />
         {/* <Container maxWidth="max-w-[1320px]"> */}
           {TOPICS_PAGE?.map((topic, index) => {
-            console.log(topic)
-            console.log(topicRes[topic.slug])
             return (
               <div key={`section_${index}`}>
                 <TopicIndexSection
