@@ -19,7 +19,7 @@ const BigCard = ({ link,title, excerpt, image, tags, date, avatar, author }) => 
         </Link>
       </div>
       <div className="w-full px-0 sm:px-6 lg:px-0 flex flex-col justify-center">
-        <div className="flex text-xs mb-2 mt-3">
+        <div className="flex text-xs mb-3 mt-3">
           {tags?.length
             ? tags.slice(0, 2).map((tag, index) => {
                 return (

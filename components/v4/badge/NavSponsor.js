@@ -3,10 +3,10 @@ import Image from "next/image";
 const NavSponsor = () =>{
 
     return(
-        <div className="p-3 pr-1 my-auto">
+        <div className="p-3 pr-4 my-auto">
         <a href="https://letter.so?ref=prototypr?utm=nav" target="_blank">
         <div
-              className={`relative w-28 h-8 overflow-hidden border-l border-gray-300`}
+              className={`relative w-28 h-8 overflow-hidden border-r border-gray-200`}
             >
               <Image
                 className="object-contain"

@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -32,7 +32,7 @@ export const ToolBoxDisplay = ({ posts, type }) => {
         return (
           <div
             key={slug}
-            className="w-auto flex flex-col md:flex-row justify-between gap-6 p-5 bg-white rounded-2xl border border-black border-opacity-10"
+            className="w-auto flex flex-col md:flex-row justify-between gap-6 p-5 bg-white rounded-2xl border border-black border-opacity-5"
           >
             <div className="flex flex-col sm:flex-row gap-4">
               {coverImage?.logoNew ? (

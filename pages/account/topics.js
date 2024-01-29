@@ -81,7 +81,7 @@ const AccountPage = ({ preview }) => {
                   disabledMessage={<div className="text-center">
                   A new login link has been sent to your email.
                   </div>}
-                  label={'Enter your email address'}
+                  label={'Enter your email'}
                   inputType={'email'}
                   defaultValue={user.email}
                   placeholder={'hola@prototypr.io'}

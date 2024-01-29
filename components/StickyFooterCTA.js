@@ -45,7 +45,7 @@ const StickyFooterCTA = ({title, description, buttonText}) => {
               // x:'50%', 
               transition: { duration: 0.2 } },
           }}
-          className="fixed bottom-0 rounded-none sm:bottom-10 max-w-3xl w-full px-5 py-4 h-auto sm:rounded-lg border border-black border-opacity-10 bg-[#3574F0] z-[100]"
+          className="fixed bottom-0 rounded-none sm:bottom-4 max-w-3xl w-full px-5 py-4 h-auto sm:rounded-lg border border-black border-opacity-10 bg-[#3574F0] z-[100]"
         >
           <div className="w-full flex flex-col gap-4 sm:gap-3 sm:flex-row justify-between">
             <div className="flex flex-row justify-center items-center gap-4 sm:gap-8">

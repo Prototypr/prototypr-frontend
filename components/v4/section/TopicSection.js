@@ -98,7 +98,7 @@ const TopicSection = ({
                 </h3>
                 <Link href='/toolbox'>
                   <div className="flex">
-                    <div className={`"text-sm my-auto text-black opacity-60`}>See all</div>
+                    <div className={`text-sm my-auto text-black opacity-60`}>See all</div>
                     <CaretRight className="opacity-60 my-auto" size={16} />
                   </div>
                 </Link>

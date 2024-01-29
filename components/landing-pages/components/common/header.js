@@ -112,9 +112,9 @@ const Header = ({collapsed, hideLocaleSwitcher, editor, showWriteButton}) => {
                 <MobileActiveLink href={"/"}>Home</MobileActiveLink>
                 <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
                 <MobileActiveLink href={"/jobs"}>Opportunities</MobileActiveLink>
-                <MobileActiveLink href={"/web-monetization"}>
+                {/* <MobileActiveLink href={"/web-monetization"}>
                   Earn Micropayments
-                </MobileActiveLink>
+                </MobileActiveLink> */}
               </div>
             </div>
           </div>

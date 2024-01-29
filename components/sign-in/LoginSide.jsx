@@ -12,7 +12,7 @@ const LoginSide = ({ user, title }) => {
           </div>
         </a>
         <h1 className="text-5xl text-white font-bold font-inter">
-         {title?title: 'Everyone is a Prototype.'}
+         {title?title: 'Everyone is a Prototype. Plugin and power up!'}
         </h1>
       </div>
       <div className="translate-y-[200px] scale-[1.5]">

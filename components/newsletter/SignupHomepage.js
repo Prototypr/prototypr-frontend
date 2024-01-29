@@ -139,8 +139,8 @@ function HookForm(props) {
           />
         </div>
         {/* <div className="flex flex-col ml-2"> */}
-        <Button className="rounded-full" variant={"confirmBig"}>
-          Sign me up!
+        <Button className="rounded-full px-6 py-4 leading-none bg-blue-700" variant={"confirmBig"}>
+          Sign up
         </Button>
         {/* </div> */}
       </form>

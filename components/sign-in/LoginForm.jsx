@@ -163,7 +163,7 @@ const LoginForm = ({ isSignUp, title = "Sign up" }) => {
                 .
               </div>
             }
-            label={"Enter your email address"}
+            label={"Enter your email"}
             inputType={"email"}
             placeholder={"hi@email.com"}
             isLoading={isLoading}

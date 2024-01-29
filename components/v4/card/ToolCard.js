@@ -62,7 +62,7 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
             <Link href={`/toolbox/${slug}`}>
             <div
             key={slug}
-            className="w-auto group flex md:flex-row justify-between gap-6 p-5 bg-white rounded-2xl border border-black border-opacity-10"
+            className="w-auto group flex md:flex-row justify-between gap-6 p-5 bg-white rounded-2xl border border-black border-opacity-5"
           >
             <div className="flex justify-center sm:flex-row">
               {coverImage ? (
@@ -83,7 +83,7 @@ const ToolCard = ({ posts, type, columns, tagNumber }) => {
                     // width="100"
                     // height="100"
                     alt="Brand logo for external website's link"
-                    className="border object-cover rounded-2xl bg-white"
+                    className="object-cover rounded-2xl bg-white"
                     src={coverImage}
                   />
                 </div>

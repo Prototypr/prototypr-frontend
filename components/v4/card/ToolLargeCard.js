@@ -42,7 +42,7 @@ const coverImage = tool.legacyFeaturedImage?.mediaItemUrl || tool.legacyFeatured
         <div className={`${withBackground?'bg-[#EAE9F5] p-2':''} mt-3 md:mt-0 w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex">
             <div className="flex flex-col w-full">
-                <div className={`overflow-hidden rounded-xl border border-black border-opacity-5 ${cardHeight?'mb-3':'mb-2'}`}>
+                <div className={`overflow-hidden rounded-xl border border-black border-opacity-5 ${cardHeight?'mb-3':'mb-2.5'}`}>
                     <div className={`w-full relative ${cardHeight?cardHeight:'h-[180px] md:h-[134px]'} object-cover`}>
                     <Image
                         tabIndex={0}

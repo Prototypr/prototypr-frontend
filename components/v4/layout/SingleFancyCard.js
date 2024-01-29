@@ -2,7 +2,7 @@ const post = {
     image:'/static/images/jobs1.png',
     slug:'/network',
     class:'bg-blue-800',
-    title:'Share your story',
+    title:'Post an article',
     description:'Join the Prototypr Discord community and write with us.'
     }
 const SingleFancyCard = ({title, description}) =>{

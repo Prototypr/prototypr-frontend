@@ -13,7 +13,7 @@ const BigCard = ({ link,title, excerpt, image, tags, date, avatar, author }) => 
             className="object-cover cursor-pointer"
             layout="fill"
             src={image}
-            loader={gumletLoader={}}
+            loader={gumletLoader}
           />
         </Link>
       </div>

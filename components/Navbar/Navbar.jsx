@@ -63,9 +63,9 @@ const Navbar = ({
         <div
           className={`w-[97%] search-wide ${
             maxWidth ? maxWidth : "max-w-[1020px]"
-          } bg-white/75 backdrop-blur-lg border-opacity-10 mx-auto border rounded-[60px] border-black px-6`}
+          } bg-white/90 shadow backdrop-blur-lg mx-auto rounded-[60px] border-black px-3 pl-6`}
         >
-          <div className="relative flex h-16 items-center justify-between">
+          <div className="relative flex h-14 items-center justify-between">
             {/* movil menu button */}
             <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
               <button
@@ -86,7 +86,7 @@ const Navbar = ({
             </div>
             {/* <div className="flex flex-1 items-center justify-center items-stretch justify-between"> */}
             <div className="flex flex-1 items-center">
-              <div className="flex mr-3 flex-shrink-0 items-center">
+              <div className="flex flex-shrink-0 items-center">
                 <Link href="/" as="/">
                   <>
                     <img
@@ -103,7 +103,7 @@ const Navbar = ({
                     />
                   </>
                 </Link>
-                <NavSponsor />
+                {/* <NavSponsor /> */}
                 {/* <div
                   className={`hidden md:block my-auto duration-300 ease-in-out`}
                 >
@@ -140,12 +140,13 @@ const Navbar = ({
                 user?.isLoggedin ? "mr-[52px] sm:mr-16" : "lg:mr-0"
               } mr-[52px] sm:mr-16`}
             >
-              <div className={`hidden mr-2 md:block my-auto`}>
+              {/* <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />
-              </div>
+              </div> */}
               {/* <div className={`hidden mr-2 md:block my-auto`}>
                   <WMButton />
                 </div> */}
+                 <NavSponsor />
               <NavigationMenu>
                 <NavigationMenuList>
                   <LocationMenu
@@ -177,9 +178,9 @@ const Navbar = ({
             <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
             <MobileActiveLink href={"/jobs"}>Opportunities</MobileActiveLink>
             <MobileActiveLink href={"/people"}>People</MobileActiveLink>
-            <MobileActiveLink href={"/web-monetization"}>
+            {/* <MobileActiveLink href={"/web-monetization"}>
               Earn Micropayments
-            </MobileActiveLink>
+            </MobileActiveLink> */}
             {!user?.isLoggedIn?<MobileActiveLink href={"/onboard"}>
               Sign in
             </MobileActiveLink>:''}
