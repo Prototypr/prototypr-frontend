@@ -57,18 +57,18 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
             />
         <SmallPostsGroupC tools={tools} smallPosts={smallPosts?.slice(0,2)}/>
         <div className="flex mt-10">
-            <Link href={`/posts/${slug}/page/1`}>
             {/* <div className="font-inter cursor-pointer flex">
               <div className="text-blue-600 text-md font-base">
                 See more {heading}
               </div>
               <CaretRight className="my-auto text-blue-600" size={14} />
             </div> */}
+            {/* <Link href={`/posts/${slug}/page/1`}>
               
               <Button className="rounded-full  leading-none" variant="ghostBlue">
                 See more {heading}
               </Button>
-            </Link>
+            </Link> */}
           </div>  
         </div>
       <div className="w-full lg:w-1/2 md:p-8 md:pt-0 lg:pt-10 lg:bg-gray-50 md:border-l border-gray-100 lg:rounded-r-xl">

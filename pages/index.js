@@ -251,7 +251,7 @@ export default function Index({
                 <div className="my-auto">
                 <Link href='/topics'>
                   <div className="flex">
-                    <div className="text-sm my-auto text-black opacity-60">See all topics</div>
+                    <div className="text-sm my-auto text-black opacity-60">See all <span className="hidden md:inline-block">topics</span></div>
                     <CaretRight className="opacity-60 my-auto" size={16} />
                   </div>
                 </Link>

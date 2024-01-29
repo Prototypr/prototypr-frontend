@@ -57,20 +57,18 @@ const tags = [
 const TagsNavRow = ({currentPage}) => {
   return (
     <Container maxWidth="max-w-[1320px] mt-7 mb-2">
-      <div className="flex">
         {/* browse all */}
-        <GiantTag classes={`${currentPage=='topics'?'border border-gray-800':''} pl-2`} link={`/topics`}>
+        <div className="flex flex-wrap">
+        <GiantTag classes={`${currentPage=='topics'?'border border-gray-800':''} pl-2 mr-4 md:mr-8`} link={`/topics`}>
           <div className="flex">
           <Compass weight={`${currentPage=='topics'?'fill':'regular'}`} size={24} />
             <div className="ml-2 my-auto">Explore topics</div>
           </div>
         </GiantTag>
-        <div className="ml-4 flex flex-wrap">
           {tags.map((tag, index) => {
             return <GiantTag link={`${tag?.link || "/"}`}>{tag.name}</GiantTag>;
           })}
         </div>
-      </div>
     </Container>
   );
 };
