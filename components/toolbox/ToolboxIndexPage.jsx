@@ -88,14 +88,16 @@ const ToolboxIndexPage = ({
 {/* {title} */}
 
 
-      <Container maxWidth="max-w-[1320px] flex grid grid-cols-12">
-        <Sidebar
+      <Container maxWidth="max-w-[1320px] grid grid-cols-12">
+
+      <Sidebar
+          title={title}
           paginationRoot={paginationRoot}
           urlRoot={urlRoot}
           filterCategories={filterCategories}
           slug={currentSlug}
         />
-        <div className={`w-full px-0 ${title!=='All tools'?'-mt-20':''} md:pr-0 md:pl-8 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10`}>
+        <div className={`w-full px-0 ${title!=='All tools'?'-mt-20':''} pl-0 md:pl-8 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10`}>
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
           ) : (
@@ -141,9 +143,10 @@ const ToolboxIndexPage = ({
 
 export default ToolboxIndexPage;
 
-const Sidebar = ({ filterCategories, paginationRoot, urlRoot, slug }) => {
+const Sidebar = ({ filterCategories, paginationRoot, urlRoot, slug, title }) => {
   return (
-    <div className="hidden md:block relative col-span-2 max-w-[410px] border-r border-opacity-20">
+    // <div className="hidden md:block h-[fit-content] relative col-span-2 bg-white shadow-md rounded-3xl p-6">
+    <div className={`${title!=='All tools'?'mt-6':'' } hidden md:block h-[fit-content] relative col-span-2 rounded-3xl`}>
       <div className="w-full min-h-screen flex flex-col">
         <FilterCategory
           urlRoot={urlRoot}
