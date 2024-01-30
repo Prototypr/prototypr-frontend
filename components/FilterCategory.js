@@ -9,13 +9,16 @@ export default function FilterCategory({
   paginationRoot,
 }) {
   return (
-    <div className="display-none mb-8 p-4 lg:block text-gray-800">
+    <div className="display-none lg:block text-gray-800">
+      <h1 className="font-semibold pb-2 mb-6 text-xl capitalize text-gray-900">
+        Categories
+      </h1>
       {items?.map((item, index) => {
         return (
           <>
           {item?.subItems? <div key={`${key}${index}`} className="text-gray-800 mb-10">
               <div className="">
-                <h1 className="font-bold pb-2 mb-2 border-b border-gray-200 pr-3 text-sm uppercase text-gray-900">
+                <h1 className="font-medium border-b border-gray-200 pb-2 mb-2 pr-3 text-lg capitalize text-gray-900">
                   {item.title}
                 </h1>
               </div>
