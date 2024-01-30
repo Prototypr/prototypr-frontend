@@ -352,7 +352,7 @@ export default function Index({
         </BrowserView> */}
       </Layout>
       {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest stories"
-      description="Earn rewards, get published, and collect tools."
+      description="Join today to make posts and grow with us."
       />}
       <Footer />
     </>

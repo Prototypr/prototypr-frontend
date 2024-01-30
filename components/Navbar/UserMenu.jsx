@@ -59,7 +59,7 @@ const UserMenu = ({ user, userLoading }) => {
             <div className="hidden lg:flex">
               <Link className="my-auto" href="/onboard?signin=true">
                 <div className="flex cursor-pointer text-gray-700 text-sm mr-4">
-                  <div className="my-auto font-medium">Sign in</div>
+                  <div className="my-auto font-medium">Log in</div>
                 </div>
               </Link>
               <Link href="/onboard">
