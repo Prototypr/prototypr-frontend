@@ -6,7 +6,7 @@ import PostGroupRow from "../layout/PostGroupRow";
 const TopicIndexSection = ({user, heroCardPost, viewablePosts, jobsSidebar,title , topicObject}) => {
   return (
     <Container maxWidth="max-w-[1320px]">
-      <div className="w-full shadow-sm h-full grid grid-cols-12 flex justify-center bg-white rounded-xl py-2 md:p-6">
+      <div className="w-full shadow-sm h-full grid grid-cols-12 flex justify-center bg-white rounded-3xl py-2 md:p-6">
         <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 py-3 `}>
           {/* <LargePostGridC title={title} largePost={heroCardPost} smallPosts={viewablePosts} /> */}
           <PostGroupRow topicObject={topicObject} title={title} largePost={heroCardPost} smallPosts={viewablePosts} />

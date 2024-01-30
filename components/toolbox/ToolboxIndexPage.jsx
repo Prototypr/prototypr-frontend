@@ -53,15 +53,17 @@ const ToolboxIndexPage = ({
       {/* <div className="mt-2">
       <ToolsTagsNavRow active={'All'}/>
     </div> */}
-      {/* <Container maxWidth="max-w-[1320px] mt-3 mb-6">
+    
+     {(pagination?.page == 1 && title=='All tools') ?<ToolBoxHeroWithSignup user={user} />:
+     <Container maxWidth="relative mb-6 px-0" padding={false}>
         <div
-          // style={{
-          //   backgroundColor: stc(`${title}`),
-          //   backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
-          // }}
-          className="relative overflow-hidden p-6 border-gray-200 bg-blue-100/80 bg-blur-lg rounded-2xl"
+          style={{
+            // backgroundColor: stc(`${title}`),
+            // backgroundImage: `url(${"/static/images/espi1400.png"})`,
+          }}
+          className="relative bg-[#2f62c7]/90 -mt-[96px] pt-[96px] pb-20 overflow-hidden p-6 shadow-sm rounded-b-[3.4rem]"
         >
-          <div className="w-full backdrop-blur-sm backdrop-opacity-20 w-full h-full">
+          <div className="relative max-w-[1320px] mx-auto w-full h-full px-3 z-10">
             <Breadcrumbs
               urlRoot={urlRoot}
               title={title}
@@ -69,15 +71,23 @@ const ToolboxIndexPage = ({
               links={breadcrumbs.links}
               pageNo={pagination?.page}
             />
-            <div className="inline-flex my-4">
-              <h2 className="text-5xl my-auto font-bold text-gray-800 capitalize">
+            <div className="inline-flex my-8">
+              <h2 className="text-4xl my-auto text-center font-bold text-white capitalize">
                 {title}
               </h2>
             </div>
           </div>
+          {/* <div className="bg-black/10 opacity-50 w-full h-full backdrop-opacity-20 left-0 top-0 absolute"/> */}
+
         </div>
-      </Container> */}
-     {pagination?.page == 1 && <ToolBoxHeroWithSignup user={user} />}
+          {/* <img src='/static/images/espi1400.png' className="absolute w-full h-full object-cover top-0 left-0"/> */}
+        {/* <img src='/static/images/toolbox-grid.svg' className="absolute w-full h-full object-cover top-0 left-0"/> */}
+        <img src='/static/images/toolbox/white-grid.svg' className="absolute w-full h-full object-cover top-0 left-0"/>
+      </Container>
+     }
+{/* {title} */}
+
+
       <Container maxWidth="max-w-[1320px] flex grid grid-cols-12">
         <Sidebar
           paginationRoot={paginationRoot}
@@ -85,34 +95,19 @@ const ToolboxIndexPage = ({
           filterCategories={filterCategories}
           slug={currentSlug}
         />
-        <div className="w-full px-0 md:pr-0 md:pl-6 -mt-6 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10">
+        <div className={`w-full px-0 ${title!=='All tools'?'-mt-20':''} md:pr-0 md:pl-8 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10`}>
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
           ) : (
             <>
               {allPosts.length > 0 && (
                 <>
-                  {pagination?.page == 1 ? (
-                    <>
-                      {/* <TwoColumnCards posts={allPosts.slice(0,2)}/> */}
-                      {/* <ToolsLayout posts={allPosts} columns={'lg:grid-cols-2'} type="toolbox" /> */}
-                      <div className="py-6">
-                        <ToolImageCard
-                          posts={allPosts}
-                          columns={"lg:grid-cols-3"}
-                          type="toolbox"
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    <div className="py-6">
-                      <ToolImageCard
-                        posts={allPosts}
-                        columns={"lg:grid-cols-3"}
-                        type="toolbox"
-                      />
-                    </div>
-                  )}
+                
+                <ToolImageCard
+                  posts={allPosts}
+                  columns={"lg:grid-cols-3"}
+                  type="toolbox"
+                />
 
                   <NewPagination
                     total={pagination?.total}
