@@ -46,7 +46,7 @@ const IntroBanner = ({ tools, sponsor }) => {
         <div className="max-w-[1320px] mx-auto relative grid grid-cols-12">
         {/* <div className="hidden lg:block absolute z-10 opacity-100 w-[800px] h-[500px] -mr-[20%] bg-gradient-to-r to-[#d1e8ff] from-transparent via-[#d1e8ff]/10 z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover"></div> */}
           <img className="absolute opacity-80 w-full h-full  z-10 h-full top-0 right-0 -mt-[20px] -mr-[225px] sm:-mr-[40%] 2md:-mr-[20%] xl:-mr-[60%] 2xl:-mr-[70%] object-cover" 
-          src="/static/images/toolbox/toolbox-bg-2.svg"  style={{ zIndex:1, borderTopLeftRadius:'30%'}}/>
+          src="/static/images/toolbox/toolbox-bg-2.svg"  style={{ zIndex:1}}/>
         <div className="md:col-span-6 pb-10 pt-8 px-7 relative col-span-12 font-inter p-2  relative flex flex-col">
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
@@ -77,12 +77,12 @@ const IntroBanner = ({ tools, sponsor }) => {
       
         <div className="col-span-6"/>
       <div className="col-span-2 relative z-50">
-        <div className="hidden 2md:block boto absolute bottom-0  right-0 -mr-[240px] md:-mr-[20px]">
+        <div className="block boto absolute bottom-0  right-0 -mr-[120px] sm:-mr-[240px] md:-mr-[20px]">
           <div className="relative">
-              <img src="/static/images/robotitosuelto.png" className="w-[165px] collab-cursor z-10"
-                    style={{filter: 'drop-shadow(0 15px 10px rgb(0 0 0 / 0.3))', transform: 'scaleX(-1)', pointerEvents:'all'}}/>
+              <img src="/static/images/robotitosuelto.png" className="w-[125px] -mb-3 md:-mb-0 md:w-[165px] md:-scale-x-100 max-w-[400px] md:max-w-full collab-cursor z-10"
+                    style={{filter: 'drop-shadow(0 15px 10px rgb(0 0 0 / 0.3))', pointerEvents:'all'}}/>
 
-          <div className="eyes-follow-tired absolute z-20 top-0 mt-[48px] md:mt-[42px] 2md:mt-[48px] right-[66px] md:right-[60px] 2md:right-[66px]">
+          <div className="hidden 2md:block eyes-follow-tired absolute z-20 top-0 mt-[48px] md:mt-[42px] 2md:mt-[48px] right-[66px] md:right-[60px] 2md:right-[66px]">
             <div className="container">
               <div className="eyes">
                 <div id="left-eye" className="eye" style={styleLeftEye}>
