@@ -5,10 +5,11 @@ const RSSTitle = ({title}) =>{
   const intl = useIntl();
     return(
         <div className="flex px-1">
-            <h2 className="text-3xl mb-5 text-[#0F1F40] font-semibold font-inter max-w-md">
+            <h2 className="text-2xl mb-2 text-[#0F1F40] font-medium font-inter max-w-md">
              {title?intl.formatMessage({ id: title }):
              <>
-            New & Noteworthy&nbsp;<span className="hidden md:inline text-gray-400">articles</span>
+            New & Noteworthy
+            {/* <span className="hidden md:inline text-gray-400">articles</span> */}
              </>
              } 
             </h2>

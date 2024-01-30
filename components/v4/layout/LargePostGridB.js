@@ -1,4 +1,6 @@
 import BigCard from "../card/BigCard/BigCardC";
+import { ArrowRight } from "phosphor-react";
+import Link from 'next/link'
 
 // import SmallCard from "../card/SmallCard/SmallCardE";
 import SmallPostsGroup from "./SmallPostGroupB";
@@ -14,7 +16,21 @@ const LargePostGrid = ({ largePost, smallPosts, showHeading,title }) => {
     let largePostAvatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
   return (
     <>
-    {showHeading!==false?<RSSTitle title={title}/>:''}
+    <div className="flex justify-between">
+      {showHeading!==false?<RSSTitle title={title}/>:''}
+       <div className="flex relative p-2 mb-1">
+            <div className="text-md inline text-gray-800 font-normal font-inter">
+            <Link href={`/topics/`}>See all</Link>
+            </div>
+            <div className="my-auto">
+              <Link href={`/topics/`}>
+                <div className="bg-blue-100 outline outline-1 outline-blue-300/50 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                    <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
+                </div>
+              </Link>
+            </div>
+          </div>
+    </div>
     <div className="flex flex-col lg:flex-row justify-between max-w-[1320px]">
       <div className="w-full lg:w-1/2">
         <BigCard

@@ -15,9 +15,10 @@ const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
 import { getAllJobs, getPopularTopics } from "@/lib/api";
+import { ArrowRight, Compass, Envelope } from "phosphor-react";
 
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
-import {CaretRight} from 'phosphor-react'
+// import {CaretRight} from 'phosphor-react'
 
 import {
   getCombinedPostsForHome,
@@ -52,6 +53,7 @@ import { MotionSliderToolCard } from "@/components/toolbox/ToolboxHeroWithEmailS
 // import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
 // import TopicSubscription from "@/components/Settings/topicsSubscription";
 import { TAB_ITEMS, ProductListData, ProductListData2 } from "@/lib/constants";
+import GiantTag from "@/components/v4/tag/GiantTag";
 
 export default function Index({
   preview,
@@ -185,7 +187,9 @@ export default function Index({
 
 
               <Link href="/newsletter">
-              <div variant="ghostSmallBlue" className="rounded-full mb-[48px] font-medium mt-6 text-blue-700/80">Get them <span className="">weekly</span></div>
+              <div variant="ghostSmallBlue" className="rounded-full mb-[48px] font-medium mt-6 text-blue-700/80">Get <span className="">'em</span> weekly 
+              <Envelope className="inline -mt-[3px] ml-1" size={22} />
+              </div>
               </Link>
           </div>
         </div>
@@ -203,9 +207,9 @@ export default function Index({
         <SectionDivider py='py-6' transparentLine={true} />
         
         <Container maxWidth="max-w-[1320px] z-30 relative">
-          <div className="p-6 md:p-10 bg-white relative overflow-hidden rounded-xl shadow-sm">
+          <div className="p-6 md:p-6 bg-white relative overflow-hidden rounded-3xl shadow-md">
               <ToolLargeCardRow tools={toolsList.slice(0,5)} />
-              <SectionDivider py="py-8" transparentLine={true}  />
+              <SectionDivider py="py-4" transparentLine={true}  />
               <ToolIconCardRow tools={toolsList.slice(5,15)} />       
 
               
@@ -238,24 +242,36 @@ export default function Index({
           </div>
         </Container>
         {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
-        <Container maxWidth="w-full bg-[#dbeeff]  rounded-b-[3.5rem] relative relative z-10">
+        <Container maxWidth="w-full bg-[#dbeeff]  relative relative z-10">
         {/* <img src="/static/images/bendy9.svg" className="absolute bottom-0 -mb-[12%] mb-12 z-20 left-0 w-full"/> */}
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[200px] left-0 w-full h-[124%] object-cover"/> */}
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[150px] left-0 w-full h-[124%] object-cover"/> */}
 
-          <div className="max-w-[1320px] mx-auto px-6 pb-16 ">
+          <div className="max-w-[1320px] mx-auto px-6 pb-8 ">
           <div className="flex justify-between mb-8">
-              <h3 className="text-[24px] text-[#0F1F40] font-semibold font-inter max-w-md leading-[32px]">
-              Browse by category
+              <h3 className="text-3xl text-[#0F1F40] font-semibold font-inter max-w-md leading-[32px]">
+              Browse by <span className="text-underline">category</span>
               </h3>
-                <div className="my-auto">
+              <div className="flex relative p-2 mb-1">
+            <div className="text-md inline text-blue-800 font-normal font-inter">
+            <Link href={`/topics/`}>See all</Link>
+            </div>
+            <div className="my-auto">
+              <Link href={`/topics/`}>
+                <div className="bg-blue-200/60 outline outline-1 outline-blue-300/80 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                    <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
+                </div>
+              </Link>
+            </div>
+          </div>
+                {/* <div className="my-auto">
                 <Link href='/topics'>
                   <div className="flex">
                     <div className="text-sm my-auto text-black opacity-60">See all <span className="hidden md:inline-block">topics</span></div>
                     <CaretRight className="opacity-60 my-auto" size={16} />
                   </div>
                 </Link>
-                </div>
+                </div> */}
 
             </div>
             {/* <div className="flex justify-start w-full">
@@ -264,10 +280,21 @@ export default function Index({
             </h2>
             </div> */}
             <div className="pt-4 rounded-xl flex flex-wrap">
+            <Link href={"/"}>
+            <div
+              className={`inline-block capitalize text-sm pr-4 pl-2 py-2 cursor-pointer bg-blue-50/50 outline outline-1 outline-blue-300/60 rounded-full mr-5 mb-3 text-blue-900 font-medium`}
+            >
+              <div className="flex">
+          <Compass weight={`regular`} className="my-auto p-0" size={20} />
+            <div className="ml-2 my-auto">Explore all topics</div>
+          </div>
+            </div>
+          </Link>
+         
               {popularTags.map((topic, i) => (
                 <div key={`topic_${i}`}>
                       <Link href={`/posts/${topic?.slug}/page/1/`}>
-                    <div  className={`inline-block capitalize text-sm px-4 py-2 cursor-pointer bg-[#d0e3fe] rounded-full mr-3 mb-3 text-gray-800 font-medium`}>
+                    <div  className={`inline-block capitalize text-sm px-4 py-2 cursor-pointer bg-blue-50/50 outline outline-1 outline-blue-300/60 rounded-full mr-3 mb-3 text-blue-900 font-medium`}>
                       {topic?.name}
                     </div>
                   </Link>
@@ -280,45 +307,49 @@ export default function Index({
         </Container>
          {/* <SectionDivider />
         <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/> */}
-        <SectionDivider py='py-6 pt-12' transparentLine={true} />
-        {/* <SectionDivider /> */}
-        {TAB_ITEMS?.map((topic, index) => {
-          return (
-            <div key={`topicsection_${index}`} className="z-40">
-            <TopicSectionC
-              tagline={topic.tagline}
-              showSidebar={false}
-              slug={topic.slug}
-              icon={topic.icon}
-              title={topic.name}
-              HeroPostRandomSection={topicRes[topic.slug]?.posts[0]}
-              OtherPostsRandomSection={topicRes[topic.slug]?.posts?.slice(1, 5)}
-              heroJob={heroJob}
-              sponsors={sponsors}
-              toolsList={topicRes[topic.slug]?.tools.slice(0, 7)}
-              authorsList={topicRes[topic.slug]?.authors}
-            />
-              {index!==TAB_ITEMS.length-1?
-                <>
-                {/* <SectionDivider /> */}
-                <div className="w-full pb-16"></div>
-                </>
-                :<div className="w-full pb-16"></div>
-                }
-               {index==1?
-               <div className="-mt-8">
-                  <NewsletterSection/>
-                {/* <SectionDivider /> */}
-                <div className="w-full pb-16"></div>
-                </div>:''
-            }
-            </div>
-          );
-        })}
+        <div className="bg-[#dbeeff]">
+          {/* <SectionDivider py='py-6 pt-12' transparentLine={true} /> */}
+          {/* <SectionDivider /> */}
+          {TAB_ITEMS?.map((topic, index) => {
+            return (
+              <div key={`topicsection_${index}`} className="z-40">
+              <TopicSectionC
+                tagline={topic.tagline}
+                showSidebar={false}
+                slug={topic.slug}
+                icon={topic.icon}
+                title={topic.name}
+                HeroPostRandomSection={topicRes[topic.slug]?.posts[0]}
+                OtherPostsRandomSection={topicRes[topic.slug]?.posts?.slice(1, 5)}
+                heroJob={heroJob}
+                sponsors={sponsors}
+                toolsList={topicRes[topic.slug]?.tools.slice(0, 7)}
+                authorsList={topicRes[topic.slug]?.authors}
+              />
+                {index!==TAB_ITEMS.length-1?
+                  <>
+                  {/* <SectionDivider /> */}
+                  <div className="w-full pb-8"></div>
+                  </>
+                  :<div className="w-full pb-8"></div>
+                  }
+                {index==1?
+                <div className="-mt-6">
+                    <NewsletterSection/>
+                  {/* <SectionDivider /> */}
+                  <div className="w-full pb-12"></div>
+                  </div>:''
+              }
+              </div>
+            );
+          })}
+
+        <SectionDivider transparentLine={true}/>
+
+        </div>
           {/* <BrowserView>
           <DesignTool allTools={toolsList} />
         </BrowserView> */}
-
       </Layout>
       {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest stories"
       description="Earn rewards, get published, and collect tools."
@@ -352,7 +383,7 @@ export async function getStaticProps({ preview = null, locale }) {
       (await getCommonQuery(preview, [tag], "article", 12, 0, sort)) || [];
     
     const topicToolsRes =
-      (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 4, 0, sort)) || [];
+      (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 5, 0, sort)) || [];
 
       //extract authors from the postss while we don't have an endpoint for it
     const authors = makeAuthorList(res)

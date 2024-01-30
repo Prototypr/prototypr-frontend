@@ -12,7 +12,7 @@ const SingleFancyCard = ({title, description}) =>{
 
              <a target="_blank" className="col-span-12"
              href={`${post.slug}`}>
-             <div className={`flex h-[220px] ${post.class} relative rounded-2xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>
+             <div className={`flex h-[220px] ${post.class} relative rounded-3xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}>
                <img src={post.image} className="w-1/2 h-auto absolute right-0 -mr-20" style={{transform:'scaleX(-1)'}}/>
                {/* <img className="w-full h-[220px] object-cover rounded-xl" src={coverImage}/> */}
                {/* <h4 className="text-xs text-gray-500 uppercase font-medium mt-3">{section.tagline}</h4> */}

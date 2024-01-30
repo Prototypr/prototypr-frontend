@@ -1,7 +1,8 @@
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import Link from "next/link";
-import {CaretRight} from 'phosphor-react'
-import ToolCard from "../card/ToolCard";
+// import {CaretRight} from 'phosphor-react'
+// import ToolCard from "../card/ToolCard";
+import { ArrowRight } from "phosphor-react";
 
 const ToolIconCardRow = ({ tools, topic, tagline }) => {
   return (
@@ -27,12 +28,25 @@ const ToolIconCardRow = ({ tools, topic, tagline }) => {
         <h3 className="font-medium text-base">
         {topic} <span className="">tools</span>
         </h3>
-        <Link href='/toolbox'>
+        <div className="flex relative">
+            <div className="text-md inline text-gray-800 font-normal font-inter">
+            <Link href={`/toolbox/`}>See all</Link>
+            </div>
+            <div className="my-auto">
+              <Link href={`/toolbox/`}>
+                <div className="bg-blue-100 outline outline-1 outline-blue-300/50 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                    <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
+                </div>
+              </Link>
+            </div>
+          </div>
+        {/* <Link href='/toolbox'>
             <div className="flex mt-2">
               <div className="text-sm my-auto text-black opacity-50">See all</div>
               <CaretRight className="opacity-60 my-auto" size={16} />
             </div>
-          </Link>
+          </Link> */}
+          
       </div>
         {tools?.slice(0,4).map((tool, index) => {
            return (

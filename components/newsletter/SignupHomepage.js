@@ -106,7 +106,7 @@ function HookForm(props) {
               required: true,
               pattern: /^\S+@\S+$/i,
             })}
-            className="w-full max-w-sm p-4 rounded-2xl mb-4 border-blue-600"
+            className="w-full max-w-sm p-3 py-2.5 rounded-2xl mb-4 border border-1 border-blue-600"
           ></input>
           {/* <input
             id="Email"
@@ -139,7 +139,7 @@ function HookForm(props) {
           />
         </div>
         {/* <div className="flex flex-col ml-2"> */}
-        <Button className="rounded-full px-6 py-4 leading-none bg-blue-700" variant={"confirmBig"}>
+        <Button className="rounded-full px-5 font-medium py-3 leading-none bg-blue-600 hover:bg-blue-500" variant={"confirmBig"}>
           Sign up
         </Button>
         {/* </div> */}

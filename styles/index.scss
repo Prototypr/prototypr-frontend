@@ -519,6 +519,12 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 .toolboxheroGradient {
     background-image:linear-gradient(179.36deg, rgba(255, 255, 255, 0) 55.45%, #F1F3F9 63.72%),url("/static/images/toolbox-grid.svg"),;
 }
+.toolboxheroGradient2 {
+    background-image:linear-gradient(179.36deg, rgba(255, 255, 255, 0) 75%, #F1F3F9 88%),url("/static/images/toolbox-grid.svg"),;
+}
+.toolboxheroCheckered{
+    background-image:url("/static/images/toolbox-grid.svg"),;
+}
 .toolboxheroGradientHome {
     background-image:url("/static/images/toolbox/toolbox-bg-2.svg"),;
 }

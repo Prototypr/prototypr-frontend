@@ -6,7 +6,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const ToolCardSimple = ({ posts, type, columns }) => {
   return (
-    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-6 p-1 w-full flex-wrap`}>
+    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-3 w-full flex-wrap`}>
       {posts.map((post, i) => {
         let title, slug, coverImage, tags;
 

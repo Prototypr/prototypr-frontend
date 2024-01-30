@@ -10,8 +10,8 @@ const SignupHorizontal = dynamic(
 export default function Footer() {
   const intl = useIntl();
   return (
-    <footer className="bg-accent-1 border-accent-2">
-      <Container>
+    <footer>
+      <Container maxWidth="max-w-[1320px] z-30 relative">
         <div className="w-full max-w-screen-xl relative mx-auto py-16 px-6">
           <div className="flex flex-wrap">
             <div className="w-full md:w-6/12">
