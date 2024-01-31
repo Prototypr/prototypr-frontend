@@ -129,14 +129,17 @@ const ToolboxIndexPage = ({
           )}
         </div>
       </Container>
-      <div className="grid-cols-12 grid">
+      {/* <div className="grid-cols-12 grid">
         <div className="hidden md:block col-span-2 max-w-[410px]"></div>
           <div className="col-span-12 md:col-span-10">
             {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest tools, weekly"
           description="Collect tools, get published, and earn rewards."
           />}
           </div>
-      </div>
+      </div> */}
+        {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest tools, weekly"
+      description="Join today to make posts and grow with us."
+      />}
     </>
   );
 };
