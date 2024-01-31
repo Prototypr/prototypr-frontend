@@ -2,10 +2,10 @@ import dynamic from "next/dynamic";
 
 import { useRouter } from "next/router";
 import Container from "@/components/container";
-const MoreStories = dynamic(() => import("@/components/more-stories"));
+// const MoreStories = dynamic(() => import("@/components/more-stories"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from "@/components/new-index/layoutForIndex";
-const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+// const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 import { useIntl } from "react-intl";
 import useUser from "@/lib/iron-session/useUser";
 
@@ -66,7 +66,8 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
             viewablePosts={morePosts}
           />
 
-            : allPosts.length > 0 &&   <PostsSectionHero
+            : allPosts.length > 0 &&   
+            <PostsSectionHero
             user={user}
             heroCardPost={heroPost}
             viewablePosts={morePosts}

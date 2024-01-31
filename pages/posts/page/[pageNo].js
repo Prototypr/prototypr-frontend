@@ -2,40 +2,50 @@ import dynamic from "next/dynamic";
 
 import { useRouter } from 'next/router'
 import Container from '@/components/container'
-const MoreStories = dynamic(() => import("@/components/more-stories"));
-const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
+// const MoreStories = dynamic(() => import("@/components/more-stories"));
+// const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
-import Layout from '@/components/layout'
+import Layout from "@/components/new-index/layoutForIndex";
 import { useIntl } from 'react-intl';
-import PostTitle from '@/components/post-title'
+// import PostTitle from '@/components/post-title'
+import TagsNavRow from "@/components/v4/section/TagsNavRow";
+import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
+import useUser from "@/lib/iron-session/useUser";
 
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
+import PostTitle from "@/components/post-title";
 // import Head from 'next/head'
 const PAGE_SIZE = 12;
 export default function PostsPage({allPosts = [], preview, pagination = {}}) {
     let heroPost;
     let morePosts = [];
     let coverImage;
-    if (allPosts.length && pagination.page && pagination.page == 1) {
+    // if (allPosts.length && pagination.page && pagination.page == 1) {
         heroPost = allPosts[0]
         morePosts = allPosts.slice(1)
-        coverImage = 
-        heroPost.attributes.featuredImage?.data?.attributes?.url? heroPost.attributes.featuredImage?.data?.attributes?.url:
-        heroPost.attributes.legacyFeaturedImage ? heroPost.attributes.legacyFeaturedImage:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
-    }
+        coverImage = heroPost?.attributes?.featuredImage?.data?.attributes?.url
+        ? heroPost.attributes.featuredImage?.data?.attributes?.url
+        : heroPost?.attributes?.legacyFeaturedImage
+        ? heroPost?.attributes?.legacyFeaturedImage
+        : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+    // }
     const router = useRouter()
     const intl = useIntl();
-
+  const { user, isLoading } = useUser({
+    redirectIfFound: false,
+  });
     const onPageNumChange = (pageNo) => {
         router.push(`/posts/page/${pageNo}`)
     }
 
     return (
         <>
-          <Layout 
-              maxWidth={'max-w-[1320px] search-wide'}
-
-          seo={{
+          <Layout
+        navOffset={false}
+        padding={false}
+        preview={preview}
+        background={"#EFF4FB"}
+        seo={{
           title: `Prototypr Design articles – free for everyone | Page ${pagination?.page}`,
           description:
             "Design content open and accessible to everyone, no paywall here.",
@@ -43,47 +53,54 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
           canonical:`https://prototypr.io/posts/page/${pagination?.page}`,
           url: `https://prototypr.io/posts/page/${pagination?.page}`,
         }}
-          activeNav={"posts"} preview={preview}>
-            <Container>
-            {router.isFallback ? (
+      >
+      <div className="pt-[74px]">
+
+        <TagsNavRow/>
+        </div>
+        <Container padding={false} maxWidth="max-w-[1320px] mx-auto z-30 relative">
+        {router.isFallback ? (
                  <PostTitle>Loading…</PostTitle>
                 ) :
                 <>  
                 {
             <>
-              {  pagination.page && pagination.page == 1 && (
-                    <>
-                        {/* <Intro /> */}
-                        {heroPost && (
-                           <div className="pt-12">
-                           <EditorPick2 header={intl.formatMessage({ id: "editpicker.title"})} post={heroPost} />
-                          </div>
-                        )}
-                    </>
-                )
-            }
             {
                 pagination.page && pagination.page == 1 ? (
-                    morePosts.length > 0 && <MoreStories posts={morePosts} />
+                    morePosts.length > 0 &&  <PostsSectionHero
+                    user={user}
+                    heroCardPost={heroPost}
+                    viewablePosts={morePosts}
+                    showRecent={true}
+                  />
+        
                 ): (
                     allPosts.length > 0 && 
-                    <div className="pt-8">
-                      <MoreStories posts={allPosts} />
+                    <div className="pt-4">
+                      <PostsSectionHero
+                        user={user}
+                        // heroCardPost={heroPost}
+                        viewablePosts={allPosts}
+                        showRecent={false}
+                      />
+
                     </div>
                 )
               }
             </>}
               </>}
+    
 
-            <NewPagination 
-                total={pagination?.total}
-                pageSize={PAGE_SIZE}
-                currentPage={pagination?.page}
-                onPageNumChange={(pageNum) => {onPageNumChange(pageNum)}}
-            />
-
-            </Container>
-          </Layout>
+          <NewPagination
+            total={pagination?.total}
+            pageSize={PAGE_SIZE}
+            currentPage={pagination?.page}
+            onPageNumChange={(pageNum) => {
+              onPageNumChange(pageNum);
+            }}
+          />
+        </Container>
+      </Layout>
         </>
       )
 }
