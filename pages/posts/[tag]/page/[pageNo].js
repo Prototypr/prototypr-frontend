@@ -91,7 +91,7 @@ export default function PostsPage({
       >
       <div className="mb-8 top-0 w-full">
         <Container padding={false} maxWidth="w-full" >
-          <div className="pt-[100px] pb-[120px] bg-[#bcdeff]/90 rounded-b-[3.4rem] relative overflow-hidden p-0 border-gray-200">
+          <div className="pt-[100px] pb-[120px] bg-gradient-to-br via-[#b3daff] from-[#bcdeff] to-[#77abdd] rounded-b-[3.4rem] relative overflow-hidden p-0 border-gray-200">
             {/* <img src="/static/images/angleshape.svg" className="absolute -mb-[2%] w-full bottom-0 z-40 left-0"/> */}
 
             {/* <div className="z-20 relative"> */}
