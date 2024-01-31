@@ -24,6 +24,7 @@ const PostsGridHero = ({ largePost, smallPosts, showHeading,title }) => {
     <div className="flex flex-col lg:flex-row justify-between max-w-[1320px]">
       <div className="w-full lg:w-1/2 md:pr-6">
         <BigCardPost
+          showHeading={false}
           link={`/post/${largePost?.attributes?.slug}`}
           avatar={largePostAvatar}
           excerpt={largePost?.attributes?.excerpt}
@@ -34,7 +35,7 @@ const PostsGridHero = ({ largePost, smallPosts, showHeading,title }) => {
           tags={largePost?.attributes?.tags?.data}
         />
       </div>
-        <SmallPostsGroup2Cards smallPosts={smallPosts?.slice(0,2)}/>
+        <SmallPostsGroup2Cards smallPosts={smallPosts?.slice(0,2)} />
     </div>
     {/* rows of 3 */}
     </>

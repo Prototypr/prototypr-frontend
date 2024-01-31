@@ -175,8 +175,10 @@ const Navbar = ({
         >
           <div className="space-y-1 px-2 pt-2 pb-3">
             <MobileActiveLink href={"/"}>Home</MobileActiveLink>
+            <MobileActiveLink href={"/posts"}>Articles</MobileActiveLink>
             <MobileActiveLink href={"/toolbox"}>Toolbox</MobileActiveLink>
-            <MobileActiveLink href={"/jobs"}>Opportunities</MobileActiveLink>
+            <MobileActiveLink href={"/jobs"}>Jobs</MobileActiveLink>
+            <MobileActiveLink href={"/topics"}>Topics</MobileActiveLink>
             <MobileActiveLink href={"/people"}>People</MobileActiveLink>
             {/* <MobileActiveLink href={"/web-monetization"}>
               Earn Micropayments

@@ -26,6 +26,7 @@ const PostsGroup3Cards = ({posts}) =>{
                   image={coverImage}
                   date={post?.attributes?.date}
                   title={post?.attributes?.title}
+                  excerpt={post?.attributes?.excerpt}
                   tags={post?.attributes?.tags?.data}
                 />
               </div>
