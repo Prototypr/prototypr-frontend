@@ -91,21 +91,21 @@ export default function PostsPage({
       >
       <div className="mb-8 top-0 w-full">
         <Container padding={false} maxWidth="w-full" >
-          <div className="pt-[100px] pb-[120px] bg-[#2f62c7]/90 rounded-b-[3.4rem] relative overflow-hidden p-6 border-gray-200">
+          <div className="pt-[100px] pb-[120px] bg-[#bcdeff]/90 rounded-b-[3.4rem] relative overflow-hidden p-0 border-gray-200">
             {/* <img src="/static/images/angleshape.svg" className="absolute -mb-[2%] w-full bottom-0 z-40 left-0"/> */}
 
             {/* <div className="z-20 relative"> */}
-            <div className="w-full max-w-[1320px] px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
+            <div className="w-full p-6 z-10 relative max-w-[1320px] px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
               <BreadCrumbs background={false}tagName={tagName}/>
                 <div className="inline-flex my-4">
                   {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
-                    <Tag className="mt-6 text-white mx-auto mr-3 my-auto opacity-80" size={38}/>
+                    <Tag className="mt-6 text-gray-800 mx-auto mr-3 my-auto opacity-80" size={38}/>
                   {/* </div> */}
-                  <h2 className="text-white max-w-md mb-8 mt-3 md:max-w-lg font-semibold text-5xl md:text-[56px] font-inter leading-[50px] md:leading-[60px] capitalize">{tagName}</h2>
+                  <h2 className="text-gray-900 max-w-md mb-8 mt-3 md:max-w-lg font-semibold text-5xl md:text-[56px] font-inter leading-[50px] md:leading-[60px] capitalize">{tagName}</h2>
                 </div>
               </div>
+               <img src='/static/images/toolbox/toolbox-bg-2.svg' className=" pointer-events-none absolute w-full h-full object-cover top-0 left-0 "/>
           </div>
-          <img src='/static/images/toolbox/white-grid.svg' className="pointer-events-none absolute w-full h-full object-cover top-0 left-0"/>
 
         </Container>
       </div>
