@@ -7,15 +7,15 @@ import PostTitle from "@/components/post-title";
 // import Link from "next/link";
 // import gumletLoader from "@/components/new-index/gumletLoader";
 // import ToolsLayout from "@/components/v4/layout/toolbox/ToolsLayout";
-import stc from "string-to-color";
+// import stc from "string-to-color";
 // import { Tag } from "phosphor-react";
 // import TwoColumnCards from "../v4/layout/TwoColumnCards";
 // import ToolsTagsNavRow from "../v4/section/ToolsTagsNavRow";
-import ToolCard from "../v4/card/ToolCard";
+// import ToolCard from "../v4/card/ToolCard";
 import NewsletterSection from "../v4/section/NewsletterSection";
 import useUser from "@/lib/iron-session/useUser";
 import ToolImageCard from "../v4/card/ToolImageCard";
-import ToolBoxHero from "./toolboxHero";
+// import ToolBoxHero from "./toolboxHero";
 import ToolBoxHeroWithSignup from "./ToolboxHeroWithEmailSignup";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
