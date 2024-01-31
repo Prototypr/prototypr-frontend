@@ -4,7 +4,7 @@ import Avatar from "../../avatar/AvatarLine";
 import SmallTag from "../../tag/SmallTag";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const MediumPost = ({link, title, image, tags, date, avatar, author }) => {
+const MediumPost = ({link, title, image, tags, date, avatar, author, excerpt }) => {
   return (
     <div className="flex h-full sm:mt-0 flex-col hover:bg-white transition transition-all duration-300 p-4 bg-white shadow-md rounded-2xl font-inter w-full">
       {image ? (
@@ -30,9 +30,12 @@ const MediumPost = ({link, title, image, tags, date, avatar, author }) => {
               {title}
             </h2>
           </Link>
+          <Link href={link??''}>
+            <p className="my-3 text-gray-600 line-clamp-2">{excerpt}</p>
+          </Link>
           
-        <div className="mt-2">
-          <Avatar src={avatar} author={author} date={date} size="sm" />
+        <div className="mt-3 mb-0.5">
+          <Avatar src={avatar} author={author} date={date} size="lg" />
         </div>
         </div>
         <div className="flex mt-3 text-xs">

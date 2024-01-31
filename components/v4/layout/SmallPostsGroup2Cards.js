@@ -22,6 +22,7 @@ const SmallPostsGroup2Cards = ({smallPosts}) =>{
                 <SmallCardPost
                   link={`/post/${post?.attributes?.slug}`}
                   avatar={avatar}
+                  excerpt={post?.attributes?.excerpt}
                   author={post?.attributes?.author?.data?.attributes}
                   image={coverImage}
                   date={post?.attributes?.date}

@@ -22,9 +22,12 @@ import { transformPostList } from "@/lib/locale/transformLocale";
 // import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 // import TopicSection from "@/components/v4/section/TopicSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
-import { Tag } from "phosphor-react/dist";
+import { ArrowRight } from "phosphor-react/dist";
+import Link from 'next/link'
 import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
-import TagsNavRow from "@/components/v4/section/TagsNavRow";
+// import TagsNavRow from "@/components/v4/section/TagsNavRow";
+import SectionDivider from "@/components/v4/section/SectionDivider";
+import ToolIconCard from "@/components/v4/card/ToolIconCard";
 // import SmallPostsGroup from "@/components/v4/layout/SmallPostsSection";
 // import Image from "next/image";
 // const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
@@ -117,11 +120,13 @@ export default function PostsPage({
                 pagination.page && pagination.page == 1 ? (
                     morePosts.length > 0 &&  <PostsSectionHero
                     user={user}
+                    showHeroTitle={false}
                     showTags={true}
                     title={tagName}
                     heroCardPost={allPosts[0]}
                     viewablePosts={allPosts?.slice(1)}
                     showRecent={true}
+                    toolsList={tools?.slice(0, 4)}
                   />
         
                 ): (
@@ -129,6 +134,7 @@ export default function PostsPage({
                     <div className="pt-4">
                       <PostsSectionHero
                         user={user}
+                        toolsList={tools?.slice(0, 4)}
                         showTags={false}
                         showTitle={false}
                         // heroCardPost={heroPost}
@@ -148,6 +154,51 @@ export default function PostsPage({
               onPageNumChange(pageNum);
             }}
           />
+
+{tools?.length>3 ?
+              <>
+              <SectionDivider py="py-12" transparentLine={false}/>
+      
+                <Container padding={false} maxWidth="mb-3 px-6 max-w-[1320px] mx-auto rounded-2xl w-full relative">
+                  <div className="">
+                    <div className="flex justify-between mb-8">
+                      <h3 className="font-medium capitalize text-2xl ">
+                      Related {tagName} Tools
+                      </h3>
+                      <div className="my-auto">
+                        <div className="flex relative">
+                        <div className="text-md inline text-gray-800 font-normal font-inter">
+                        <Link href={`/toolbox`}>See all</Link>
+                        </div>
+                        <div className="my-auto">
+                          <Link href={`/toolbox`}>
+                            <div className="bg-blue-100 outline outline-1 outline-blue-300/50 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                                <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8">
+                      {tools.map((tool, index) => {
+                        
+                        if(index<4){
+                          return (
+                            <div key={index}>
+                              <ToolIconCard withBackground={true} tool={tool?.attributes} />
+                            </div>
+                          );
+                        }
+                      })}
+                    </div>
+              </div>
+              {/* <img src="/static/images/angleshape.svg" className="absolute -mb-[80px] w-full bottom-0 z-10 left-0"/> */}
+      
+                </Container>
+              <SectionDivider transparentLine={true}/>
+              </>:''
+            }
 
 {/* <TagsNavRow/> */}
 

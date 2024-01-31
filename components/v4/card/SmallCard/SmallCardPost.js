@@ -4,7 +4,7 @@ import Avatar from "../../avatar/AvatarLine";
 import SmallTag from "../../tag/SmallTag";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const SmallCard = ({link, title, image, tags, date, avatar, author }) => {
+const SmallCard = ({link, title, image, tags, date, avatar, author, excerpt }) => {
   return (
     <div className="flex mt-3 sm:mt-0 flex-col sm:flex-row hover:bg-white transition transition-all duration-300 p-1 rounded-2xl font-inter w-full">
       {image ? (
@@ -45,6 +45,10 @@ const SmallCard = ({link, title, image, tags, date, avatar, author }) => {
             <h2 className="text-lg font-semibold leading-snug line-clamp-3">
               {title}
             </h2>
+          </Link>
+
+          <Link href={link??''}>
+            <p className="mt-3 text-gray-600 mb-3 line-clamp-2">{excerpt}</p>
           </Link>
           
         <div className="mt-2">
