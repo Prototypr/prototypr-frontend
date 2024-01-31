@@ -6,7 +6,7 @@ const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototy
 const PostsGroup3Cards = ({posts}) =>{
 
     return(
-        <div className="grid grid-cols-3 gap-6 w-full">
+        <div className="grid grid-cols-3 gap-8 w-full">
 {/* <SingleFancyCard/> */}
             {/* <PrototyprNetworkCTA2 /> */}
         {posts?.length ? (

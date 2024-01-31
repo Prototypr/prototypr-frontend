@@ -13,7 +13,7 @@ import { getPostsByPageForPostsPage } from "@/lib/api";
 import TagsNavRow from "@/components/v4/section/TagsNavRow";
 import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
 // import Head from "next/head";
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 9;
 export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
   let heroPost;
   let morePosts = [];
