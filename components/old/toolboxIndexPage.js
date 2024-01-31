@@ -117,8 +117,8 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
         }}
         activeNav={"toolbox"}
       >
-        {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest tools, weekly"
-      description="Collect tools, get published, and earn rewards."
+        {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest stories"
+      description="Join today to make posts and grow with us."
       />}
         <ToolBoxHero />
 

@@ -221,8 +221,8 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         </div>
       </Container>
 
-      {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest tools, weekly"
-      description="Collect tools, get published, and earn rewards."
+      {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest stories"
+      description="Join today to make posts and grow with us."
       />}
       {/* <NewsletterSection title="Get the best tools every week"/> */}
     </>

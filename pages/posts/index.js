@@ -4,11 +4,14 @@ import { useRouter } from "next/router";
 import Container from "@/components/container";
 const MoreStories = dynamic(() => import("@/components/more-stories"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
-import Layout from "@/components/layout";
+import Layout from "@/components/new-index/layoutForIndex";
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 import { useIntl } from "react-intl";
+import useUser from "@/lib/iron-session/useUser";
 
 import { getPostsByPageForPostsPage } from "@/lib/api";
+import TagsNavRow from "@/components/v4/section/TagsNavRow";
+import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
 // import Head from "next/head";
 const PAGE_SIZE = 12;
 export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
@@ -26,7 +29,9 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
   }
   const router = useRouter();
   const intl = useIntl();
-
+  const { user, isLoading } = useUser({
+    redirectIfFound: false,
+  });
   const onPageNumChange = (pageNo) => {
     router.push(`/posts/page/${pageNo}`);
   };
@@ -34,6 +39,10 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
   return (
     <>
       <Layout
+        navOffset={false}
+        padding={false}
+        preview={preview}
+        background={"#EFF4FB"}
         seo={{
           title: "Prototypr Design articles – free for everyone.",
           description:
@@ -42,34 +51,26 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
           canonical: "https://prototypr.io/posts",
           url: "https://prototypr.io/posts",
         }}
-        activeNav={"posts"}
-        preview={preview}
       >
-        <Container>
-          {pagination.page && pagination.page == 1 && (
-            <>
-              {/* <Intro /> */}
-              {heroPost && (
-                <div className="pt-12">
-                  <EditorPick2
-                    header={intl.formatMessage({ id: "editpicker.title" })}
-                    post={heroPost}
-                  />
-                </div>
-                //    <HeroPost
-                //    title={heroPost.attributes.title}
-                //    coverImage={coverImage}
-                //    date={heroPost.attributes.date}
-                //    author={(heroPost.attributes.author &&heroPost.attributes.author.data) ?heroPost.attributes.author.data.attributes:'https://prototypr.gumlet.io/wp-content/uploads/2021/09/2021-09-17-10-09-02.2021-09-17-10_10_54-f3ijc-1.gif'}
-                //    slug={heroPost.attributes.slug}
-                //    excerpt={heroPost.attributes.excerpt}
-                //  />
-              )}
-            </>
-          )}
+      <div className="pt-[74px]">
+
+        <TagsNavRow/>
+        </div>
+        <Container padding={false} maxWidth="max-w-[1320px] mx-auto z-30 relative">
+      
           {pagination.page && pagination.page == 1
-            ? morePosts.length > 0 && <MoreStories posts={morePosts} />
-            : allPosts.length > 0 && <MoreStories posts={allPosts} />}
+            ? morePosts.length > 0 &&
+            <PostsSectionHero
+            user={user}
+            heroCardPost={heroPost}
+            viewablePosts={morePosts}
+          />
+
+            : allPosts.length > 0 &&   <PostsSectionHero
+            user={user}
+            heroCardPost={heroPost}
+            viewablePosts={morePosts}
+          />}
 
           <NewPagination
             total={pagination?.total}
@@ -95,7 +96,9 @@ export async function getStaticProps({ preview = null, params }) {
   
   const pagination = allPosts.meta.pagination;
   return {
-    props: { allPosts: allPosts.data, preview, pagination },
+    props: { 
+      allPosts: allPosts.data, 
+      preview, pagination },
     revalidate:30
   };
 }

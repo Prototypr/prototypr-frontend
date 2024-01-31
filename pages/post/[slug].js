@@ -207,11 +207,14 @@ export default function Post({ post, preview, relatedPosts }) {
             paddingTop="hidden md:block pt-[76px]"
           />
         </div>
-        <div className="grid grid-cols-12">
+        {/* <div className="grid grid-cols-12">
           <div className="gap-0 col-span-12 lg:col-span-8">
           {!user?.isLoggedIn && <StickyFooterCTA title="The best stories every week"buttonText="Sign up for free" />}
           </div>
-        </div>
+        </div> */}
+       {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest stories"
+      description="Join today to make posts and grow with us."
+      />}
           
       </Container>
       <section className="bg-gray-100">
