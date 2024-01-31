@@ -72,7 +72,7 @@ const ToolboxIndexPage = ({
               pageNo={pagination?.page}
             />
             <div className="inline-flex my-8">
-              <h2 className="text-4xl my-auto text-center font-bold text-white capitalize">
+              <h2 className="max-w-[50rem] text-white text-4xl md:text-5xl font-semibold tracking-tight lg:leading-tight md:leading-tight capitalize drop-shadow-sm ">
                 {title}
               </h2>
             </div>
