@@ -45,7 +45,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
             <Link href={`/toolbox/${slug}`}>
             <div
         className={
-          "flex flex-col- pt-4 pb-1 grid grid-col-1 gap-4 flex-grow h-full rounded-t-xl shadow-md hover:shadow-xl bg-white relative rounded-xl fade-"
+          "flex flex-col- pt-4 pb-1 grid grid-col-1 gap-4 flex-grow h-full rounded-t-2xl shadow-md hover:shadow-xl bg-white relative rounded-2xl fade-"
         }
       >
         <div className="rounded-xl px-4 block cursor-pointer"
@@ -58,6 +58,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
               height: "195px",
             }}
           >
+            <div className="absolute top-0 left-0 z-10 rounded-xl w-full h-full bg-gradient-to-b from-black/5 via-black/10 to-black/40"></div>
             <Image
               loader={gumletLoader}
               priority={false < 2 ? `true` : `false`}
@@ -78,7 +79,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
           </div>
           <div
             style={{ position: "absolute", marginTop: "-6px", left: "28px" }}
-            className="rounded-xl bg-white"
+            className="rounded-xl bg-white z-20"
           >
             <Image
                 loader={gumletLoader}
