@@ -7,6 +7,8 @@ import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 import Footer from "@/components/footer";
 // import LargePostGridB from "@/components/v4/layout/LargePostGridB";
+import useUser from "@/lib/iron-session/useUser";
+// const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 
 // import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
@@ -18,9 +20,11 @@ import { transformPostList } from "@/lib/locale/transformLocale";
 // import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 // import { Waypoint } from "react-waypoint";
 // import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
-import TopicSection from "@/components/v4/section/TopicSection";
+// import TopicSection from "@/components/v4/section/TopicSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 import { Tag } from "phosphor-react/dist";
+import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
+import TagsNavRow from "@/components/v4/section/TagsNavRow";
 // import SmallPostsGroup from "@/components/v4/layout/SmallPostsSection";
 // import Image from "next/image";
 // const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
@@ -28,7 +32,7 @@ import { Tag } from "phosphor-react/dist";
 // const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 // const TopicTopItem = dynamic(() => import("@/components/new-index/TopicTopItem"), { ssr: false });
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 9;
 const ALL_TAGS = [
   "ux",
   "user-research",
@@ -66,6 +70,9 @@ export default function PostsPage({
     tagName = "UI Design";
   }
 
+  const { user, isLoading } = useUser({
+    redirectIfFound: false,
+  });
   return (
     <>
       <Layout
@@ -84,27 +91,68 @@ export default function PostsPage({
       >
       <div className="mb-8 top-0 w-full">
         <Container padding={false} maxWidth="w-full" >
-          <div className="pt-[120px] pb-[120px] bg-[#CCE6FF]/90 relative overflow-hidden p-6 border-gray-200">
-            
-            <img src="/static/images/angleshape.svg" className="absolute -mb-[2%] w-full bottom-0 z-40 left-0"/>
+          <div className="pt-[100px] pb-[120px] bg-[#2f62c7]/90 rounded-b-[3.4rem] relative overflow-hidden p-6 border-gray-200">
+            {/* <img src="/static/images/angleshape.svg" className="absolute -mb-[2%] w-full bottom-0 z-40 left-0"/> */}
 
             {/* <div className="z-20 relative"> */}
             <div className="w-full max-w-[1320px] px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
               <BreadCrumbs background={false}tagName={tagName}/>
                 <div className="inline-flex my-4">
                   {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
-                    <Tag className="mt-6 mx-auto mr-3 my-auto opacity-60" size={38}/>
+                    <Tag className="mt-6 text-white mx-auto mr-3 my-auto opacity-80" size={38}/>
                   {/* </div> */}
-                  <h2 className="text-[#0F1F40] max-w-md mb-8 mt-3 md:max-w-lg font-semibold text-5xl md:text-[56px] font-inter leading-[50px] md:leading-[60px] capitalize">{tagName}</h2>
+                  <h2 className="text-white max-w-md mb-8 mt-3 md:max-w-lg font-semibold text-5xl md:text-[56px] font-inter leading-[50px] md:leading-[60px] capitalize">{tagName}</h2>
                 </div>
               </div>
           </div>
+          <img src='/static/images/toolbox/white-grid.svg' className="pointer-events-none absolute w-full h-full object-cover top-0 left-0"/>
+
         </Container>
       </div>
       {/* <div className="h-[232px]"/> */}
         {allPosts?.length?
-        <div className="pb-10 -mt-32 z-50 relative">
-            <TopicSection
+        <div className="pb-10 -mt-36 z-50 relative">
+
+{
+                pagination.page && pagination.page == 1 ? (
+                    morePosts.length > 0 &&  <PostsSectionHero
+                    user={user}
+                    showTags={true}
+                    title={tagName}
+                    heroCardPost={allPosts[0]}
+                    viewablePosts={allPosts?.slice(1)}
+                    showRecent={true}
+                  />
+        
+                ): (
+                    allPosts.length > 0 && 
+                    <div className="pt-4">
+                      <PostsSectionHero
+                        user={user}
+                        showTags={false}
+                        showTitle={false}
+                        // heroCardPost={heroPost}
+                        viewablePosts={allPosts}
+                        showRecent={false}
+                      />
+
+                    </div>
+                )
+              }
+
+                <NewPagination
+            total={pagination?.total}
+            pageSize={PAGE_SIZE}
+            currentPage={pagination?.page}
+            onPageNumChange={(pageNum) => {
+              onPageNumChange(pageNum);
+            }}
+          />
+
+{/* <TagsNavRow/> */}
+
+
+            {/* <TopicSection
                   showTitle={false}
                   showSidebar={false}
                   showTopicCloud={true}
@@ -128,7 +176,7 @@ export default function PostsPage({
                   // sponsors={sponsors}
                   toolsList={tools?.slice(0, 4)}
                   // authorsList={topicRes[topic.slug]?.authors}
-                />
+                /> */}
         </div>:''}
             {/* todo show loading state above */}
         

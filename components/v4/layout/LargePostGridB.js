@@ -20,10 +20,10 @@ const LargePostGrid = ({ largePost, smallPosts, showHeading,title }) => {
       {showHeading!==false?<RSSTitle title={title}/>:''}
        <div className="flex relative p-2 mb-1">
             <div className="text-md inline text-gray-800 font-normal font-inter">
-            <Link href={`/topics/`}>See all</Link>
+            <Link href={`/posts/`}>See all</Link>
             </div>
             <div className="my-auto">
-              <Link href={`/topics/`}>
+              <Link href={`/posts/`}>
                 <div className="bg-blue-100 outline outline-1 outline-blue-300/50 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
                     <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
                 </div>
