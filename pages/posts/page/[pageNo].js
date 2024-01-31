@@ -15,7 +15,7 @@ import useUser from "@/lib/iron-session/useUser";
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from '@/lib/api'
 import PostTitle from "@/components/post-title";
 // import Head from 'next/head'
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 9;
 export default function PostsPage({allPosts = [], preview, pagination = {}}) {
     let heroPost;
     let morePosts = [];

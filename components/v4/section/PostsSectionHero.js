@@ -19,7 +19,7 @@ const PostsSectionHero = ({user, heroCardPost, viewablePosts, jobsSidebar,title,
       </>
       
       }
-      <div className="w-full shadow-md h-full grid grid-cols-12 flex justify-center bg-white rounded-3xl p-6 lg:p-6">
+      <div className="w-full h-full grid grid-cols-12 flex justify-center">
         <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 `}>
          <div className="flex justify-between">
             <RSSTitle title={'All posts'}/>
