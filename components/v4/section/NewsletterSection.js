@@ -5,7 +5,7 @@ const NewsletterSection = ({title,padding}) =>{
 
     return(
         <Container padding={padding} maxWidth="max-w-[1320px]">
-            <div className=" sm:mt-8 lg:px-0 lg:mt-0">
+            <div className="mt-8 lg:px-0 lg:mt-0">
             <div
             className="w-full shadow-md relative flex h-full bg-gray-100 w-full lg:mt-8 rounded-3xl p-6"
             >

@@ -61,7 +61,7 @@ const ToolboxIndexPage = ({
             // backgroundColor: stc(`${title}`),
             // backgroundImage: `url(${"/static/images/espi1400.png"})`,
           }}
-          className="relative bg-[#2f62c7]/90 -mt-[96px] pt-[96px] pb-20 overflow-hidden p-6 shadow-sm rounded-b-[3.4rem]"
+          className="relative bg-[#2f62c7]/90 -mt-[96px] pt-[86px] md:pt-[96px] pb-20 overflow-hidden px-1 xs:px-3 sm:px-6 shadow-sm rounded-b-[3.4rem]"
         >
           <div className="relative max-w-[1320px] mx-auto w-full h-full px-3 z-10">
             <Breadcrumbs
@@ -88,7 +88,7 @@ const ToolboxIndexPage = ({
 {/* {title} */}
 
 
-      <Container maxWidth="max-w-[1320px] grid grid-cols-12">
+      <Container padding={false} maxWidth="max-w-[1320px] px-6 mx-auto xl:px-3 grid grid-cols-12">
 
       <Sidebar
           title={title}
@@ -97,7 +97,7 @@ const ToolboxIndexPage = ({
           filterCategories={filterCategories}
           slug={currentSlug}
         />
-        <div className={`w-full px-0 ${title!=='All tools'?'-mt-20':''} pl-0 md:pl-8 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10`}>
+        <div className={`w-full px-0 ${(title=='All tools' && pagination?.page==1)?'':'-mt-28 lg:-mt-20'} pl-0 md:pl-8 mx-auto pb-20 gap-2 col-span-12 md:col-span-10 pb-10`}>
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
           ) : (

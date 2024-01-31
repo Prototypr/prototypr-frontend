@@ -129,7 +129,7 @@ const ToolBoxHeroWithSignup = ({user}) => {
                 </h1>
                 <div className="text-center text-gray-600 max-w-[600px] text-lg mt-3 mx-auto">Join 25k+ readers receiving Prototypr Weekly. Improve your workflow with the latest tools, news and design resources.</div>
                 <div className="mt-12 mb-2">
-                <SignupHorizontal showNoSpam={true} className="sm:flex justify-center mx-auto w-[505px] mt-5 mb-6" />
+                <SignupHorizontal showNoSpam={true} className="sm:flex justify-center mx-auto w-full px-6 lg:px-0 lg:w-[505px] mt-5 mb-6" />
                 </div>
             </div>
             }

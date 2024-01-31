@@ -8,7 +8,7 @@ const MediumPost = ({link, title, image, tags, date, avatar, author }) => {
   return (
     <div className="flex h-full sm:mt-0 flex-col hover:bg-white transition transition-all duration-300 p-4 bg-white shadow-md rounded-2xl font-inter w-full">
       {image ? (
-        <div className="w-full shrink-0 h-[180px] max-w-full sm:max-w-[190px] md:h-[240px] md:max-w-full relative rounded-2xl overflow-hidden border border-gray-100">
+        <div className="w-full shrink-0 h-[180px] max-w-full md:h-[240px] md:max-w-full relative rounded-2xl overflow-hidden border border-gray-100">
           <Link href={link??''}>
             <Image
               className="object-cover cursor-pointer"
