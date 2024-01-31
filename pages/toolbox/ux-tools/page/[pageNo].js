@@ -10,7 +10,7 @@ import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_GROUPS from "@/lib/menus/uxTools";
 import Footer from "@/components/footer";
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 15;
 
 const BREADCRUMBS = {
     pageTitle:'UX Tools',

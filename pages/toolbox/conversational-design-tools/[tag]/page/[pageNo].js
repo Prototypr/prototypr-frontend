@@ -4,7 +4,7 @@ import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPa
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 15;
 
 import ALL_SLUGS_CATEGORY from '@/lib/menus/chatTools'
 import Footer from "@/components/footer";

@@ -14,7 +14,7 @@ import {
 import { useEffect } from "react";
 import Footer from "@/components/footer";
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 15;
 
 const BREADCRUMBS = {
   pageTitle: "Toolbox",
