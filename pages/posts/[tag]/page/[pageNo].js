@@ -99,12 +99,12 @@ export default function PostsPage({
               <BreadCrumbs background={false}tagName={tagName}/>
                 <div className="inline-flex my-4">
                   {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
-                    <Tag className="mt-6 text-gray-800 mx-auto mr-3 my-auto opacity-80" size={38}/>
+                    {/* <Tag className="mt-5 text-gray-800 mx-auto mr-3 my-auto opacity-80" size={38}/> */}
                   {/* </div> */}
-                  <h2 className="text-gray-900 max-w-md mb-8 mt-3 md:max-w-lg font-semibold text-5xl md:text-[56px] font-inter leading-[50px] md:leading-[60px] capitalize">{tagName}</h2>
+                  <h2 className="mt-2 mb-2 text-blue-900 text-5xl font-semibold tracking-tight xl:text-[48px] lg:leading-tight md:leading-tight capitalize drop-shadow-sm ">{tagName}</h2>
                 </div>
               </div>
-               <img src='/static/images/toolbox/toolbox-bg-2.svg' className=" pointer-events-none absolute w-full h-full object-cover top-0 left-0 "/>
+               <img src='/static/images/toolbox/toolbox-bg-2.svg' className=" pointer-events-none absolute w-full h-full object-cover opacity-60 top-0 left-0 "/>
           </div>
 
         </Container>

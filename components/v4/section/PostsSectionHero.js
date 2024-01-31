@@ -21,7 +21,7 @@ const PostsSectionHero = ({user, heroCardPost, viewablePosts, showTags,title, sh
       
       }
       {showTags && 
-       <div className="-mt-6 -ml-3 mb-4">
+       <div className="-mt-4 -ml-3 mb-5">
        <TagsNavRow/>
      </div>
       }
