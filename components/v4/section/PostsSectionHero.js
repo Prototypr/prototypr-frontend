@@ -10,7 +10,7 @@ const PostsSectionHero = ({user, heroCardPost, viewablePosts, jobsSidebar,title,
     <Container maxWidth="max-w-[1320px]">
       {showRecent && 
       <>
-        <div className="w-full shadow-md h-full grid grid-cols-12 flex justify-center bg-white rounded-3xl p-6 lg:p-6">
+        <div className="w-full shadow-md h-full grid grid-cols-12 flex justify-center bg-white rounded-3xl p-6 mt-6 lg:p-6">
             <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 `}>
             <PostsGridHero title={title} largePost={heroCardPost} smallPosts={viewablePosts} />
             </div>
