@@ -117,9 +117,9 @@ export default function Index({
             <TagsNavRow/>
           </div>
                 {/* <SectionDivider py='py-9' transparentLine={true} /> */}
-        <div className="z-50 relative pt-[40px]">
+        <div className="z-50 relative pt-[40px] px-3">
           <div className="text-xs font-medium mb-2 text-center text-gray-500/90 uppercase">Prototypr Toolbox</div>
-          <h2 className="text-3xl font-bold mb-[42px] text-center text-gray-800">Tools to shape <span className="text-underline">every idea</span></h2>
+          <h2 className="text-3xl font-bold mb-[42px] text-center text-gray-800">Tools to shape <span className="text-underline inline-block md:inline">every idea</span></h2>
             <div className="pb-3">
               <MotionSlider
                   duration={50}
@@ -253,7 +253,7 @@ export default function Index({
               Browse by <span className="text-underline">category</span>
               </h3>
               <div className="flex relative p-2 mb-1">
-            <div className="text-md inline text-blue-800 font-normal font-inter">
+            <div className="hidden sm:inline text-md text-blue-800 font-normal font-inter">
             <Link href={`/topics/`}>See all</Link>
             </div>
             <div className="my-auto">
