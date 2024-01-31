@@ -5,7 +5,7 @@ import { getAllPostsForToolsSubcategoryPage, getPostsByPageForToolsSubcategoryPa
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 15;
 
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/realityTools'

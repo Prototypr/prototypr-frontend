@@ -7,7 +7,7 @@ import ALL_SLUGS_GROUPS from "@/lib/menus/uxTools";
 import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/getAllTagsFromMenu'
 import Footer from "@/components/footer";
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 15;
 
 const BREADCRUMBS = {
   pageTitle:'UX Tools',
