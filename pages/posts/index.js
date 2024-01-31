@@ -61,6 +61,7 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
           {pagination.page && pagination.page == 1
             ? morePosts.length > 0 &&
             <PostsSectionHero
+            showRecent={true}
             user={user}
             heroCardPost={heroPost}
             viewablePosts={morePosts}
@@ -68,6 +69,7 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
 
             : allPosts.length > 0 &&   
             <PostsSectionHero
+            showRecent={true}
             user={user}
             heroCardPost={heroPost}
             viewablePosts={morePosts}
