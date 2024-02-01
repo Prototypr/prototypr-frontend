@@ -1,16 +1,19 @@
-import ToolLargeCard from "@/components/v4/card/ToolLargeCard";
+// import ToolLargeCard from "@/components/v4/card/ToolLargeCard";
 // import Container from "@/components/container";
 import Link from "next/link";
 // import {CaretRight} from 'phosphor-react'
 import { ArrowRight } from "phosphor-react";
+// import ToolImageCard from "../card/ToolImageCard";
+import ToolImageCardSingle from "../card/ToolImageCardSingle";
 
 const ToolLargeCardRow = ({ tools }) => {
   return (
     <>
     {/* <Container maxWidth="max-w-[1320px] w-full mb-8"> */}
-      <div className="flex justify-between mb-5 ">
-        <h3 className="text-2xl text-gray-800 font-medium font-inter max-w-md">
-          Featured <span className="hidden sm:inline text-gray-400">tools</span>
+      <div className="flex justify-between mb-6">
+        <h3 className="text-3xl text-black/80 font-semibold font-inter max-w-md">
+          {/* Featured <span className="hidden sm:inline text-gray-400">tools</span> */}
+          Featured tools
         </h3>
         <div className="flex relative my-auto">
             <div className="text-md inline text-gray-800 font-normal font-inter">
@@ -32,7 +35,16 @@ const ToolLargeCardRow = ({ tools }) => {
           </Link> */}
 
       </div>
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-8`}>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8`}>
+        {tools.map((tool, index) => {
+          return (
+            <div key={index}>
+              <ToolImageCardSingle post={tool} />
+            </div>
+          );
+        })}
+      </div>
+      {/* <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-8`}>
         {tools.map((tool, index) => {
           return (
             <div key={index}>
@@ -40,7 +52,7 @@ const ToolLargeCardRow = ({ tools }) => {
             </div>
           );
         })}
-      </div>
+      </div> */}
     {/* </Container> */}
     </>
   );

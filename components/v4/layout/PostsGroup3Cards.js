@@ -3,10 +3,10 @@ import MediumPost from "../card/SmallCard/MediumPost";
 const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
 // import SingleFancyCard from "./SingleFancyCard";
 
-const PostsGroup3Cards = ({posts}) =>{
+const PostsGroup3Cards = ({posts,cols}) =>{
 
     return(
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 ${cols==4?'lg:grid-cols-4':'lg:grid-cols-3'} gap-8 w-full`}>
 {/* <SingleFancyCard/> */}
             {/* <PrototyprNetworkCTA2 /> */}
         {posts?.length ? (
@@ -20,6 +20,7 @@ const PostsGroup3Cards = ({posts}) =>{
             return (
               <div key={index} className="w-full">
                 <MediumPost
+                  imageSmall={cols==4?true:''}
                   link={`/post/${post?.attributes?.slug}`}
                   avatar={avatar}
                   author={post?.attributes?.author?.data?.attributes}

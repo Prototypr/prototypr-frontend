@@ -37,11 +37,11 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
           });
         }}
         className="flex"
-      ><div className={`${withBackground?' border border-black bg-white border-opacity-10 hover:bg-white p-4':''} w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
+      ><div className={`${withBackground?' bg-white p-3 shadow-md':''} w-full h-auto rounded-2xl cursor-pointer flex flex-col`}>
           <div className="flex flex-row rounded-xl">
             <div
-              style={{ flex: `0 0 ${small?'3em':'70px'}` }}
-              className={`${small?'h-12 w-12':'w-[70px] h-[70px]'} mr-2 relative rounded-xl overflow-hidden`}
+              style={{ flex: `0 0 ${small?'3em':'56px'}` }}
+              className={`${small?'h-12 w-12':'w-[56px] h-[56px]'} mr-2 relative rounded-xl overflow-hidden`}
             >
               {coverImage ? (
                 <Image
@@ -50,7 +50,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
                   layout="fill"
                   objectFit="cover"
                   src={coverImage}
-                  className="object-cover"
+                  className="object-cover drop-shadow-sm"
                   alt="Author profile picture"
                 />
               ) : (
@@ -58,7 +58,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
               )}
             </div>
             <div className="flex flex-col pl-1 justify-center">
-              <div className=" overflow-hidden line-clamp-1 inline font-medium py-0 mb-0 font-inter text-base">
+              <div className=" overflow-hidden line-clamp-1 inline font-semibold py-0 mb-0 font-inter text-base">
                 {title}
                 {/* <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                   Promoted

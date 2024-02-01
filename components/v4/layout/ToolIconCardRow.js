@@ -4,15 +4,16 @@ import Link from "next/link";
 // import {CaretRight} from 'phosphor-react'
 import { ArrowRight } from "phosphor-react";
 
-const ToolIconCardRow = ({ tools, title, textColor }) => {
+const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }) => {
   return (
-    <>
+    <div className="flex flex-col w-full">
     {/* <Container maxWidth="max-w-[1320px] w-full"> */}
-      <div className="flex justify-between mb-8 mt-4">
-        <h3 className="font-medium text-lg px-1">
+      {showHeader!==false && <div className="flex justify-between mb-3">
+        <h3 className="font-semibold text-lg px-1">
          {title?title:
          <>
-         New <span className="hidden sm:inline text-gray-400">hand picked</span>
+         Latest tools
+         {/* <span className="hidden sm:inline text-gray-400">hand picked</span> */}
          </>}
         </h3>
         <div className="flex relative">
@@ -34,18 +35,18 @@ const ToolIconCardRow = ({ tools, title, textColor }) => {
             </div>
           </Link> */}
 
-      </div>
+      </div>}
       <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-8`}>
         {tools.map((tool, index) => {
           return (
             <div key={index}>
-              <ToolIconCard tool={tool?.attributes} />
+              <ToolIconCard withBackground={withBackground} tool={tool?.attributes} />
             </div>
           );
         })}
       </div>
     {/* </Container> */}
-    </>
+    </div>
   );
 };
 

@@ -37,7 +37,7 @@ const SmallCardB = ({ title, image, tags, date, avatar, author }) => {
         </div>
         <div>
           <Link href="/">
-            <h2 className="text-base text-lg font-semibold leading-snug line-clamp-2">
+            <h2 className="text-base text-lg font-medium leading-snug line-clamp-2">
               {title}
             </h2>
           </Link>

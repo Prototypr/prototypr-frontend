@@ -26,7 +26,7 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
            {showHeading!==false?<div className="flex w-full justify-between mb-6">
             <div className="flex">
               <Tag className="hidden md:inline-block my-auto mr-3" size={32}/>
-              <h2 className="text-xl md:text-3xl capitalize font-semibold text-gray-900">
+              <h2 className="text-xl md:text-3xl capitalize font-semibold text-black/80">
                 {heading}
               </h2>
             </div>

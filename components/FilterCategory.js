@@ -18,7 +18,7 @@ export default function FilterCategory({
           <>
           {item?.subItems? <div key={`${key}${index}`} className="text-gray-800 mb-10">
               <div className="">
-                <h1 className="font-medium border-b border-gray-200 pb-2 mb-2 pr-3 text-lg capitalize text-gray-900">
+                <h1 className="font-medium pb-2 pr-3 text-lg capitalize text-gray-900">
                   {item.title}
                 </h1>
               </div>

@@ -18,8 +18,8 @@ const LargePostGrid = ({ largePost, smallPosts, showHeading,title }) => {
     <>
     <div className="flex justify-between">
       {showHeading!==false?<RSSTitle title={title}/>:''}
-       <div className="flex relative p-2 mb-1">
-            <div className="text-md inline text-gray-800 font-normal font-inter">
+       <div className="flex relative p-2">
+            <div className="text-md inline text-gray-800 my-auto font-normal font-inter">
             <Link href={`/posts/`}>See all</Link>
             </div>
             <div className="my-auto">
