@@ -7,7 +7,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const SmallCardStacked = ({ title, image, tags, date, avatar, author, showAuthor, link }) => {
   return (
-    <div className="flex md:flex-col md:justify-start hover:bg-white px-4 md:px-5 md:-mr-5 my-3.5 md:my-0 md:mb-6 md:mt-0 lg:mb-0 lg:my-0 transition transition-all duration-300 rounded-2xl font-inter w-full max-w-[490px]">
+    <div className="flex shadow-md mx-auto md:flex-col md:justify-start bg-white p-2 md:my-0 md:mt-0 lg:mb-0 lg:my-0 transition transition-all duration-300 rounded-2xl font-inter w-full max-w-[490px]">
       {image ? (
         <div className=" hidden md:inline-block w-full my-auto md:my-0 shrink-0 h-[54px] w-[54px] md:w-full md:h-[164px] relative rounded-lg md:rounded-2xl overflow-hidden border border-gray-100">
          <Link href={link}>
@@ -23,8 +23,8 @@ const SmallCardStacked = ({ title, image, tags, date, avatar, author, showAuthor
       ) : (
         ""
       )}
-      <div className="shrink md:mt-4 flex flex-col-reverse md:flex-col justify-center">
-        {showAuthor!==false?<div className="mt-2 md:mb-1.5 ml-2 md:ml-0">
+      <div className="shrink md:mt-2 mb-1 p-2 md:px-3 flex flex-col-reverse md:flex-col justify-center">
+        {showAuthor!==false?<div className="mt-2 md:mb-1.5 md:ml-0">
           <Avatar src={avatar} author={author} date={date} size="sm" />
         </div>:
         <div className="hidden md:flex text-xs mb-2">
@@ -45,7 +45,7 @@ const SmallCardStacked = ({ title, image, tags, date, avatar, author, showAuthor
         </div>}
         <div>
           <Link href={link}>
-            <h2 className="ml-2 md:ml-0 text-sm md:text-lg font-semibold leading-snug line-clamp-3">
+            <h2 className="md:ml-0 text-sm md:text-lg font-semibold leading-snug line-clamp-3">
               {title}
             </h2>
           </Link>

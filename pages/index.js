@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 // import { useState } from "react";
-import DiscoverSection from "@/components/v4/section/DiscoverSectionB";
+// import DiscoverSection from "@/components/v4/section/DiscoverSectionB";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
 // import Container from "@/components/container";

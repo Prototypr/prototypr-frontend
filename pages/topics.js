@@ -116,11 +116,12 @@ export default function Index({
             return (
               <div key={`section_${index}`}>
                 <TopicIndexSection
+                  index={index}
                   title={topic.name}
                   topicObject={topic}
                   user={user}
-                  heroCardPost={topicRes[topic.slug]?.posts[0]}
-                  viewablePosts={topicRes[topic.slug]?.posts?.slice(0, 3)}
+                  // heroCardPost={topicRes[topic.slug]?.posts[0]}
+                  viewablePosts={topicRes[topic.slug]?.posts?.slice(0, 4)}
                 />
                 <SectionDivider py="py-4" transparentLine={true} />
               </div>

@@ -1,8 +1,8 @@
-import BigCard from "../card/BigCard/BigCardD";
-import ToolCollection from "@/components/v4/layout/ToolCollection";
+// import BigCard from "../card/BigCard/BigCardD";
+// import ToolCollection from "@/components/v4/layout/ToolCollection";
 
 // import SmallCard from "../card/SmallCard/SmallCardE";
-import SmallPostsGroupC from "./SmallPostGroupC";
+// import SmallPostsGroupC from "./SmallPostGroupC";
 // import RSSTitle from "../text/RSSTitle";
 import { ArrowRight, Tag } from "phosphor-react";
 
@@ -55,9 +55,9 @@ const TopicsGridHome = ({ largePost, smallPosts, tools,showHeading, slug, headin
           />
 
 
-          <div className="w-full mt-8 flex">
+          {tools?.length && <div className="w-full mt-8 flex">
             <ToolIconCardRow title={`${heading} tools`} showHeader={true} withBackground={true} tools={tools} />       
-          </div>
+          </div>}
 
         </div>
       
