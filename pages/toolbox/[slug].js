@@ -69,7 +69,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
             // backgroundColor:`${stc(post?.attributes?.title)}`,
             // backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
           }}
-          className="relative w-full max-w-[1200px] mx-auto flex flex-col justify-center"
+          className="relative w-full max-w-[1320px] mx-auto flex flex-col justify-center"
         >
           
             {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
@@ -141,7 +141,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
           </div>
         </Container>
         <Container maxWidth="w-full bg-[#EFF4FB] relative z-10 pt-8">
-          <div className="max-w-[1200px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 px-3 md:px-0 h-full">
+          <div className="max-w-[1320px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 px-3 md:px-0 h-full">
           <div className="col-span-12 lg:col-span-8">
             <div className="bg-white -mt-[214px] p-6 rounded-xl shadow-sm border border-black/5 w-full lg:max-w-[48rem]">
             <h3 class="text-lg font-bold mb-3">Overview</h3>
@@ -204,7 +204,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         </Container>
       </div>
       <Container maxWidth=" w-full pb-16 bg-[#EFF4FB] relative z-10 pt-8">
-          <div className="max-w-[1200px] pt-6 border-t border-black/15 mx-auto px-3 md:px-0 h-full">
+          <div className="max-w-[1320px] pt-6 border-t border-black/15 mx-auto px-3 md:px-0 h-full">
         <div className="mb-8">
           <NewsletterSection padding={false} title="Get the best tools every week"/>
         </div>

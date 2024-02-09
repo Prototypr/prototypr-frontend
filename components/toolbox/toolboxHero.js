@@ -11,7 +11,7 @@ const MotionSliderToolCard = ({ title, subtext, image, slug }) => {
             <img src={image} className="w-full h-full"></img>
           </div>
           <div className="w-full max-w-[200px] flex flex-col gap-0">
-            <p className="text-base font-semibold line-clamp-1">{title}</p>
+            <p className="text-base font-medium line-clamp-1">{title}</p>
             <p className="text-base font-normal text-[#989898] line-clamp-1">
               {subtext}
             </p>

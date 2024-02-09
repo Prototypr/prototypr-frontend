@@ -4,11 +4,11 @@ import Avatar from "../../avatar/AvatarLine";
 import SmallTag from "../../tag/SmallTag";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const MediumPost = ({link, title, image, tags, date, avatar, author, excerpt }) => {
+const MediumPost = ({link, title, image, tags, date, avatar, author, excerpt, imageSmall }) => {
   return (
-    <div className="flex h-full sm:mt-0 flex-col hover:bg-white transition transition-all duration-300 p-4 bg-white shadow-md rounded-2xl font-inter w-full">
+    <div className="flex h-full sm:mt-0 flex-col hover:bg-white transition transition-all duration-300 p-3 bg-white shadow-md rounded-2xl font-inter w-full">
       {image ? (
-        <div className="w-full shrink-0 h-[180px] max-w-full md:h-[240px] md:max-w-full relative rounded-2xl overflow-hidden border border-gray-100">
+        <div className={`w-full shrink-0 h-[180px] shadow-sm max-w-full ${imageSmall?'md:h-[180px]':'md:h-[240px]'} md:max-w-full relative rounded-2xl overflow-hidden border border-gray-100`}>
           <Link href={link??''}>
             <Image
               className="object-cover cursor-pointer"
@@ -22,11 +22,11 @@ const MediumPost = ({link, title, image, tags, date, avatar, author, excerpt }) 
       ) : (
         ""
       )}
-      <div className="mt-3 flex flex-col justify-start">
+      <div className="mt-3 flex flex-col px-[10px] justify-between h-full">
          
-        <div>
+        <div className="flex flex-col justify-start">
           <Link href={link??''}>
-            <h2 className="text-lg font-semibold leading-snug line-clamp-3">
+            <h2 className="text-lg font-medium leading-snug line-clamp-2">
               {title}
             </h2>
           </Link>

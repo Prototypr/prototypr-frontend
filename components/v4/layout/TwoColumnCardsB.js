@@ -11,7 +11,8 @@ description:'Share your story with us and get featured in the newsletter.'
 slug:'/toolbox',
 class:'bg-teal-600',
 title:'Submit a product',
-description:'List your tool in the Prototypr Toolbox and claim your page.'}]
+description:'List your tool in the Prototypr Toolbox and claim your page.'}
+]
 
 const TwoColumnCards = ({posts}) =>{
 
@@ -29,7 +30,7 @@ const TwoColumnCards = ({posts}) =>{
                     {/* <img className="w-full h-[220px] object-cover rounded-xl" src={coverImage}/> */}
                     {/* <h4 className="text-xs text-gray-500 uppercase font-medium mt-3">{section.tagline}</h4> */}
                     <div className="max-w-[200px] sm:max-w-[280px]">
-                      <h3 className="text-2xl text-white font-normal">{post.title}</h3>
+                      <h3 className="text-2xl text-white font-semibold drop-shadow-sm">{post.title}</h3>
                       <p className="text-base text-white/80 mt-1">{post.description}</p>
                     </div>
                   </div>

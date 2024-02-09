@@ -4,44 +4,45 @@ import Image from "next/image";
 import Link from "next/link";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
+const ToolImageCardSingle = ({ post, type, columns, tagNumber }) => {
+
+    let title, slug, coverImage, tags, logo;
+
+
+    title = post?.attributes?.title;
+    slug = post.attributes?.slug;
+    if(tagNumber==1){
+      tags = post?.attributes?.tags?.data.slice(0, 1);
+    }else{
+      tags = post?.attributes?.tags?.data.slice(0, 2);
+    }
+    // let tool = post.attributes
+
+    // let coverImage =   
+    // tool.featuredImage?.data?.attributes?.url
+    //   ? tool.featuredImage.data.attributes.url
+    //   : tool.legacyFeaturedImage
+    //   ? tool.legacyFeaturedImage
+    //   : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+      
+    //   coverImage = (tool?.legacyMedia?.logoNew || coverImage?.logoNew || tool.legacyMedia?.mediaItemUrl)
+      
+
+    coverImage = post.attributes?.featuredImage?.data?.attributes?.url
+      ? post.attributes.featuredImage.data.attributes.url
+      : post.attributes?.legacyFeaturedImage?.mediaItemUrl
+      ? post.attributes?.legacyFeaturedImage?.mediaItemUrl
+      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+
+
+      console.log(post)
+      logo = (post?.attributes?.legacyFeaturedImage?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl ||post.attributes?.legacyFeaturedImage?.mediaItemUrl)
+
+
+
   return (
-    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-8 w-full flex-wrap`}>
-      {posts.map((post, i) => {
-        let title, slug, coverImage, tags, logo;
+    <div >
 
-
-          title = post?.attributes?.title;
-          slug = post.attributes?.slug;
-          if(tagNumber==1){
-            tags = post?.attributes?.tags?.data.slice(0, 1);
-          }else{
-            tags = post?.attributes?.tags?.data.slice(0, 2);
-          }
-          // let tool = post.attributes
-
-          // let coverImage =   
-          // tool.featuredImage?.data?.attributes?.url
-          //   ? tool.featuredImage.data.attributes.url
-          //   : tool.legacyFeaturedImage
-          //   ? tool.legacyFeaturedImage
-          //   : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-            
-          //   coverImage = (tool?.legacyMedia?.logoNew || coverImage?.logoNew || tool.legacyMedia?.mediaItemUrl)
-            
-
-          coverImage = post.attributes?.featuredImage?.data?.attributes?.url
-            ? post.attributes.featuredImage.data.attributes.url
-            : post.attributes?.legacyFeaturedImage?.mediaItemUrl
-            ? post.attributes?.legacyFeaturedImage?.mediaItemUrl
-            : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-
-
-            console.log(post)
-            logo = (post?.attributes?.legacyFeaturedImage?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl ||post.attributes?.legacyFeaturedImage?.mediaItemUrl)
-
-
-        return (
             <Link href={`/toolbox/${slug}`}>
             <div
         className={
@@ -119,10 +120,8 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
         {/* {this._getFooter()} */}
       </div>
             </Link>
-        );
-      })}
     </div>
   );
 };
 
-export default ToolImageCard
+export default ToolImageCardSingle

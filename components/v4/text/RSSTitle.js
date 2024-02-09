@@ -5,7 +5,7 @@ const RSSTitle = ({title}) =>{
   const intl = useIntl();
     return(
         <div className="flex px-1">
-            <h2 className="text-2xl mb-2 text-[#0F1F40] font-medium font-inter max-w-md">
+            <h2 className="text-3xl drop-shadow-sm text-black/80 font-semibold font-inter max-w-md">
              {title?intl.formatMessage({ id: title }):
              <>
             New & Noteworthy
@@ -13,7 +13,7 @@ const RSSTitle = ({title}) =>{
              </>
              } 
             </h2>
-            {!title ?<div className="flex ml-2 mb-4 flex-col justify-center">
+            {!title ?<div className="flex ml-2 flex-col justify-center">
               <a target="_blank" className="inline-flex" href="/feed.xml">
               <RssSimple color="orange" size={22} />
               </a>

@@ -51,7 +51,7 @@ const IntroBanner = ({ tools, sponsor }) => {
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
           className="pointer-events-auto md:pr-0 md:pb-12 md:pt-6 rounded-3xl z-10" style={{width:'fit-content'}}>
-          <h1 className="max-w-[50rem] mt-2 mb-5 text-gray-900 text-5xl font-semibold tracking-tight xl:text-[48px] lg:leading-tight md:leading-tight">
+          <h1 className="max-w-[50rem] mt-2 mb-5 text-black/90 text-5xl font-semibold tracking-tight xl:text-[48px] lg:leading-tight md:leading-tight">
           <span className="drop-shadow-sm ">Everything is a </span> <div className="text-underline inline"><span className="drop-shadow-sm">prototype</span></div>
           </h1>
           <p className="mb-5 text-gray-700 md:leading-[32px] leading-[28px] text-[16px] md:text-[18px] font-inter md:pr-6 max-w-[32rem]">

@@ -21,22 +21,21 @@ const PostGroupRow = ({ largePost, smallPosts, description,title,topicObject }) 
     return (
     <>
    
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-[1320px]">
+    <div className="grid grid-cols-1 gap-3 md:gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-[1320px]">
      
-     <div className="flex flex-col justify-center mb-6 md:mb-0 px-6 md:px-6">
-        <div>
-            <h2 className="text-lg md:text-2xl mb-1 text-[#0F1F40] font-semibold font-inter max-w-md leading-[32px]">
+     {/* <div className="flex flex-col justify-center mb-6 md:mb-0">
+        <div className="bg-blue-200/20 border border-blue-200/70 h-full rounded-2xl p-6">
+            <h2 className="text-lg md:text-3xl mb-1 font-semibold font-inter max-w-md leading-[32px] text-blue-900">
              {intl.formatMessage({ id: title })}
             </h2>
-            <p>
+            <p className="text-blue-900">
               {topicObject?.tagline}
-            {/* {intl.formatMessage({ id: description })} */}
             </p>
             <Link href={`/posts/${topicObject?.slug}/page/1`}>
               <Button className="rounded-full mt-6" variant={"ghostSmallBlue"}>Browse</Button>
             </Link>
         </div>
-     </div>
+     </div> */}
       {/* <div className="w-full lg:w-1/2">
         <BigCard
           link={`/post/${largePost?.attributes?.slug}`}

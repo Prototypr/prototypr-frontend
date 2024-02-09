@@ -61,9 +61,9 @@ const ToolboxIndexPage = ({
             // backgroundColor: stc(`${title}`),
             // backgroundImage: `url(${"/static/images/espi1400.png"})`,
           }}
-          className="relative bg-[#2f62c7]/90 -mt-[96px] pt-[86px] md:pt-[96px] pb-20 overflow-hidden px-1 xs:px-3 sm:px-6 shadow-sm rounded-b-[3.4rem]"
+          className="relative bg-white shadow-sm rounded-b-[3.4rem] -mt-[96px] pt-[86px] md:pt-[96px] pb-20 overflow-hidden px-1 xs:px-3 sm:px-6"
         >
-          <div className="relative max-w-[1320px] mx-auto w-full h-full px-3 z-10">
+          <div className="relative max-w-[1200px] mx-auto w-full h-full px-3 z-10">
             <Breadcrumbs
               urlRoot={urlRoot}
               title={title}
@@ -72,7 +72,7 @@ const ToolboxIndexPage = ({
               pageNo={pagination?.page}
             />
             <div className="inline-flex my-8">
-              <h2 className="max-w-[50rem] text-white text-4xl md:text-5xl font-semibold tracking-tight lg:leading-tight md:leading-tight capitalize drop-shadow-sm ">
+              <h2 className="max-w-[50rem] text-black/90 text-4xl md:text-5xl font-semibold tracking-tight lg:leading-tight md:leading-tight capitalize drop-shadow-sm ">
                 {title}
               </h2>
             </div>
@@ -82,13 +82,15 @@ const ToolboxIndexPage = ({
         </div>
           {/* <img src='/static/images/espi1400.png' className="absolute w-full h-full object-cover top-0 left-0"/> */}
         {/* <img src='/static/images/toolbox-grid.svg' className="absolute w-full h-full object-cover top-0 left-0"/> */}
-        <img src='/static/images/toolbox/white-grid.svg' className="absolute w-full h-full object-cover top-0 left-0"/>
+        {/* <img src='/static/images/toolbox/white-grid.svg' className="absolute w-full h-full object-cover top-0 left-0"/> */}
+        {/* <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-b from-blue-300/10 to-blue-100/10 "/> */}
+        <img src='/static/images/toolbox/squares.svg' className="rounded-b-[3.4rem] opacity absolute w-full h-full object-cover top-0 left-0"/>
       </Container>
      }
 {/* {title} */}
 
 
-      <Container padding={false} maxWidth="max-w-[1320px] px-6 mx-auto xl:px-3 grid grid-cols-12">
+      <Container padding={false} maxWidth="max-w-[1200px] px-6 mx-auto xl:px-3 grid grid-cols-12">
 
       <Sidebar
           title={title}
