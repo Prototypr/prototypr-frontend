@@ -28,7 +28,7 @@ const TopicIndexSection = ({index,user, heroCardPost, viewablePosts, jobsSidebar
           <div className="flex w-full justify-between mb-3 md:mb-6">
             <div className="flex">
               <Tag className="inline-block my-auto mr-3" size={32}/>
-              <h2 className="text-2xl md:text-3xl capitalize font-semibold text-black/80">
+              <h2 className="text-2xl md:text-3xl capitalize font-semibold text-black/90">
               {intl.formatMessage({ id: title })}
               </h2>
             </div>

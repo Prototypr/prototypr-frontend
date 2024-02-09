@@ -10,7 +10,7 @@ const ToolsCarouselSection = () =>{
     return(
         <div className="z-50 relative pt-[40px] px-3">
           <div className="text-xs font-medium mb-2 text-center text-gray-500/90 uppercase">Prototypr Toolbox</div>
-          <h2 className="text-3xl font-bold mb-[42px] text-center text-black/80">Tools to shape <span className="text-underline inline-block md:inline">every idea</span></h2>
+          <h2 className="text-3xl font-bold mb-[42px] text-center text-black/90">Tools to shape <span className="text-underline inline-block md:inline">every idea</span></h2>
             <div className="pb-3">
               <MotionSlider
                   duration={50}

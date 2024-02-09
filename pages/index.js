@@ -51,7 +51,7 @@ import Button from "@/components/Primitives/Button";
 // import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
 // import TopicSubscription from "@/components/Settings/topicsSubscription";
 import { TAB_ITEMS } from "@/lib/constants";
-import GiantTag from "@/components/v4/tag/GiantTag";
+// import GiantTag from "@/components/v4/tag/GiantTag";
 import HeroArticleSection from "@/components/v4/section/HeroArticleSection";
 import TopicSectionHome from "@/components/v4/section/TopicSectionHome";
 import ToolsCarouselSection from "@/components/v4/section/ToolsCarouselSection";
@@ -185,7 +185,7 @@ export default function Index({
 
           <div className="max-w-[1320px] mx-auto px-6 pb-8 ">
           <div className="flex justify-between mb-8">
-              <h3 className="text-3xl text-black/80 font-semibold font-inter max-w-md leading-[32px]">
+              <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md leading-[32px]">
               Browse by <span className="text-underline">category</span>
               </h3>
               <div className="flex relative p-2">
