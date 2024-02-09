@@ -9,7 +9,7 @@ import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/prototyping'
 import Footer from "@/components/footer";
 
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 16;
 
 const BREADCRUMBS = {
     pageTitle:'Prototyping',

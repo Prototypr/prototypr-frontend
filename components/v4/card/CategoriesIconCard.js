@@ -22,15 +22,8 @@ const CategoriesIconCard = ({ topic, withBackground, showCount }) => {
           });
         }}
         className="flex"
-      ><div className={`${withBackground?'bg-white rounded-xl p-3':''} bg-gray-100 w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
-          <div className="flex flex-row rounded-xl">
-          <div
-              // style={{ flex: "0 0 3em" }}
-              className="w-12 h-12 bg-white/90 p-3 my-auto mr-3 relative rounded-full  overflow-hidden"
-            >
-              {topic.icon?
-              <img className="w-full h-full" src={topic.icon}/>:<Tag weight="fill" className="my-auto mr-3 opacity-20" size={24}/>}
-            </div>
+      ><div className={`${withBackground?'bg-white rounded-xl p-4':''} bg-gray-100 w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
+          <div className="flex flex-row justify-between rounded-xl">
             <div className="flex flex-col pl-1 justify-center">
               <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base">
                 {topic?.name}
@@ -51,6 +44,13 @@ const CategoriesIconCard = ({ topic, withBackground, showCount }) => {
               ) : (
                 ""
               )}
+            </div>
+            <div
+              // style={{ flex: "0 0 3em" }}
+              className="w-12 h-12 bg-white/90 p-3 my-auto relative rounded-full  overflow-hidden"
+            >
+              {topic.icon?
+              <img className="w-full h-full" src={topic.icon}/>:<Tag weight="fill" className="my-auto mr-3 opacity-20" size={24}/>}
             </div>
           </div>
         </div>

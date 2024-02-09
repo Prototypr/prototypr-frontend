@@ -6,7 +6,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
   return (
-    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-8 w-full flex-wrap`}>
+    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-6 w-full flex-wrap`}>
       {posts.map((post, i) => {
         let title, slug, coverImage, tags, logo;
 
@@ -55,7 +55,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
             style={{
             //   background: this.state.backgroundShimmer,
               display: "flex",
-              height: "195px",
+              height: "145px",
             }}
           >
             <div className="absolute top-0 left-0 z-10 rounded-2xl w-full h-full bg-gradient-to-b from-black/5 via-black/10 to-black/40"></div>
