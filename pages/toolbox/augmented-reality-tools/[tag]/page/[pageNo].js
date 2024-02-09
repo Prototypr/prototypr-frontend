@@ -8,7 +8,7 @@ import { find_page_slug_from_menu, get_slugs_from_menu } from '@/lib/menus/lib/g
 
 import ALL_SLUGS_CATEGORY from '@/lib/menus/realityTools'
 
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 16;
 
 const BREADCRUMBS = {
     pageTitle:'Miex Reality',

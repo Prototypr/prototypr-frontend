@@ -63,7 +63,7 @@ const ToolboxIndexPage = ({
           }}
           className="relative bg-white shadow-sm rounded-b-[3.4rem] -mt-[96px] pt-[86px] md:pt-[96px] pb-20 overflow-hidden px-1 xs:px-3 sm:px-6"
         >
-          <div className="relative max-w-[1200px] mx-auto w-full h-full px-3 z-10">
+          <div className="relative max-w-[1320px] mx-auto w-full h-full px-3 z-10">
             <Breadcrumbs
               urlRoot={urlRoot}
               title={title}
@@ -90,7 +90,7 @@ const ToolboxIndexPage = ({
 {/* {title} */}
 
 
-      <Container padding={false} maxWidth="max-w-[1200px] px-6 mx-auto xl:px-3 grid grid-cols-12">
+      <Container padding={false} maxWidth="max-w-[1320px] px-6 mx-auto xl:px-3 grid grid-cols-12">
 
       <Sidebar
           title={title}
@@ -109,7 +109,7 @@ const ToolboxIndexPage = ({
                 
                 <ToolImageCard
                   posts={allPosts}
-                  columns={"lg:grid-cols-3"}
+                  columns={"lg:grid-cols-4"}
                   type="toolbox"
                 />
 
