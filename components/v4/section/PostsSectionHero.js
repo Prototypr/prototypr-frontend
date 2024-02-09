@@ -1,22 +1,26 @@
 // import SidebarDiscover from "@/components/v4/layout/SidebarDiscover";
 import Container from "@/components/container";
-import PostsGridHero from "@/components/v4/layout/PostsGridHero";
+// import PostsGridHero from "@/components/v4/layout/PostsGridHero";
 import PostsGroup3Cards from "../layout/PostsGroup3Cards";
 import RSSTitle from "../text/RSSTitle";
 import SectionDivider from "./SectionDivider";
 import TagsNavRow from "./TagsNavRow";
-import {CaretRight} from 'phosphor-react'
-import ToolIconCard from "../card/ToolIconCard";
-import Link from 'next/link'
+import HeroPostGrid from "../layout/HeroPostGrid";
+// import {CaretRight} from 'phosphor-react'
+// import ToolIconCard from "../card/ToolIconCard";
+// import Link from 'next/link'
 // import {RssSimple} from 'phosphor-react'
 const PostsSectionHero = ({user, heroCardPost,toolsList,showHeroTitle, viewablePosts, showTags,title, showRecent,showTitle }) => {
   return (
     <Container maxWidth="max-w-[1320px]">
       {showRecent && 
       <>
-        <div className="w-full shadow-md h-full grid grid-cols-12 flex justify-center bg-white rounded-3xl p-6 mt-6 lg:p-6">
+        {/* <div className="w-full shadow-md h-full grid grid-cols-12 flex justify-center bg-white rounded-3xl p-6 mt-6 lg:p-6"> */}
+        <div className="w-full h-full grid grid-cols-12 flex justify-center">
             <div className={`w-full max-w-full flex flex-col col-span-12 `}>
-            <PostsGridHero title={title} largePost={heroCardPost} showHeading={showHeroTitle!==false} smallPosts={viewablePosts} />
+            {/* <PostsGridHero title={title} largePost={heroCardPost} showHeading={showHeroTitle!==false} smallPosts={viewablePosts} /> */}
+            <PostsGroup3Cards posts={[heroCardPost,...viewablePosts?.slice(0,2)]} />
+            {/* <HeroPostGrid cols={3} showBigPost={2} showHeadingRow={false} largePost={heroCardPost} smallPosts={viewablePosts} /> */}
             </div>
         </div>
         <SectionDivider py="py-4" transparentLine={true}/>

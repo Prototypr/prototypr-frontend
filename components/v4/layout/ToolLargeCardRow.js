@@ -11,7 +11,7 @@ const ToolLargeCardRow = ({ tools }) => {
     <>
     {/* <Container maxWidth="max-w-[1320px] w-full mb-8"> */}
       <div className="flex justify-between mb-6">
-        <h3 className="text-3xl text-black/80 font-semibold font-inter max-w-md">
+        <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md">
           {/* Featured <span className="hidden sm:inline text-gray-400">tools</span> */}
           Featured tools
         </h3>

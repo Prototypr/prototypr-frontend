@@ -8,7 +8,7 @@ import RSSTitle from "../text/RSSTitle";
 import PostsGroup3Cards from "./PostsGroup3Cards";
 import BigBackgroundCard from "../card/BigCard/BigBackgroundCard";
 
-const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,title, cols }) => {
+const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,showHeadingRow,title, cols }) => {
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;
   const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
   const largeCoverImage = url
@@ -19,7 +19,7 @@ const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,title, co
     let largePostAvatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
   return (
     <>
-    <div className="flex justify-between mb-6">
+    {showHeadingRow!==false && <div className="flex justify-between mb-6">
       {showHeading!==false?<RSSTitle title={title}/>:''}
        <div className="flex relative p-2">
             <div className="text-md inline text-gray-800 my-auto font-normal font-inter">
@@ -33,7 +33,7 @@ const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,title, co
               </Link>
             </div>
           </div>
-    </div>
+    </div>}
     <div className="flex flex-col justify-between max-w-[1320px] relative">
     {showBigPost && <div className="w-full mb-8">
       <div className="z-20 relative">
