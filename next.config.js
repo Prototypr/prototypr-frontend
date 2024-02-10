@@ -159,7 +159,7 @@ module.exports =
       scrollRestoration: true,
       legacyBrowsers: false,
       browsersListForSwc: true,
-      optimizePackageImports: ['@phosphor-icons/react']
+      // optimizePackageImports: ['@phosphor-icons/react']
     },
     images: {
       domains: [
