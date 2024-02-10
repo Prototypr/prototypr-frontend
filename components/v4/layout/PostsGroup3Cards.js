@@ -11,11 +11,11 @@ const PostsGroup3Cards = ({posts,cols}) =>{
             {/* <PrototyprNetworkCTA2 /> */}
         {posts?.length ? (
           posts.map((post, index) => {
-            let url = post?.attributes?.featuredImage?.data?.attributes?.url;
+            let url = post?.attributes?.featuredImage?.data?.attributes?.url?post?.attributes?.featuredImage?.data?.attributes?.url:null;
             const coverImage = url
               ? url
-              : post?.attributes?.legacyFeaturedImage?.mediaItemUrl;
-              let authorData = post.attributes?.author?.data?.attributes
+              : post?.attributes?.legacyFeaturedImage?.mediaItemUrl?post?.attributes?.legacyFeaturedImage?.mediaItemUrl:null;
+              let authorData = post.attributes?.author?.data?.attributes?post.attributes?.author?.data?.attributes:null
               let avatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
             return (
               <div key={index} className="w-full">
@@ -23,12 +23,12 @@ const PostsGroup3Cards = ({posts,cols}) =>{
                   imageSmall={cols==4?true:''}
                   link={`/post/${post?.attributes?.slug}`}
                   avatar={avatar}
-                  author={post?.attributes?.author?.data?.attributes}
+                  author={post?.attributes?.author?.data?.attributes?post?.attributes?.author?.data?.attributes:null}
                   image={coverImage}
-                  date={post?.attributes?.date}
-                  title={post?.attributes?.title}
-                  excerpt={post?.attributes?.excerpt}
-                  tags={post?.attributes?.tags?.data}
+                  date={post?.attributes?.date?post?.attributes?.date:null}
+                  title={post?.attributes?.title?post?.attributes?.title:null}
+                  excerpt={post?.attributes?.excerpt?post?.attributes?.excerpt:null}
+                  tags={post?.attributes?.tags?.data?post?.attributes?.tags?.data:null}
                 />
               </div>
             );
