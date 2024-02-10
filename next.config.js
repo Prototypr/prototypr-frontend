@@ -20,11 +20,11 @@ module.exports =
       locales: ["en-US", "es-ES"],
       defaultLocale: "en-US",
     },
-    modularizeImports: {
-      "@phosphor-icons/react": {
-        transform: "@phosphor-icons/react/{{member}}",
-      },
-    },
+    // modularizeImports: {
+    //   "@phosphor-icons/react": {
+    //     transform: "@phosphor-icons/react/{{member}}",
+    //   },
+    // },
     async redirects() {
       return [
         {
@@ -159,6 +159,7 @@ module.exports =
       scrollRestoration: true,
       legacyBrowsers: false,
       browsersListForSwc: true,
+      optimizePackageImports: ['@phosphor-icons/react']
     },
     images: {
       domains: [
