@@ -2,7 +2,7 @@
 // with Sentry.
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
-const { withSentryConfig } = require('@sentry/nextjs');
+// const { withSentryConfig } = require('@sentry/nextjs');
 
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({
 //   enabled: process.env.ANALYZE === 'true'
@@ -19,6 +19,11 @@ module.exports =
     i18n: {
       locales: ["en-US", "es-ES"],
       defaultLocale: "en-US",
+    },
+    modularizeImports: {
+      "@phosphor-icons/react": {
+        transform: "@phosphor-icons/react/{{member}}",
+      },
     },
     async redirects() {
       return [
