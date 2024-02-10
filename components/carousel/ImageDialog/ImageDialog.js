@@ -12,7 +12,7 @@ import {
 
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
-export const ImageDialog = ({open, toggleOpen, image, onPrevButtonClick, onNextButtonClick, prevBtnDisabled, nextBtnDisabled}) =>{
+const ImageDialog = ({open, toggleOpen, image, onPrevButtonClick, onNextButtonClick, prevBtnDisabled, nextBtnDisabled}) =>{
   const router = useRouter();
 
     const [loading, setLoading] = useState(true)
@@ -77,3 +77,4 @@ export const ImageDialog = ({open, toggleOpen, image, onPrevButtonClick, onNextB
       </Dialog>
     )
 }
+export default ImageDialog
