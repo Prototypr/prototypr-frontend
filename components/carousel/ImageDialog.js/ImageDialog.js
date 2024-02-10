@@ -26,22 +26,21 @@ export const ImageDialog = ({open, toggleOpen, image, onPrevButtonClick, onNextB
     },[open])
 
     const navigate = (direction) =>{
-        // setLoading(true)
+        setLoading(true)
         if(direction=='prev'){
             onPrevButtonClick()
         }else{
             onNextButtonClick()
         }
     }
+    console.log(open)
 
     return(
         <Dialog  open={open} onOpenChange={toggleOpen}>
-        <DialogContentImage className="w-[70vw]" variant="">
-          <div>
+        <DialogContentImage className="w-full h-full pointer-events-none" variant="">
           {/* <DialogTitle>Submit for Review</DialogTitle> */}
-          <DialogDescription>
-            <div className="w-full h-full relative">
-                <div className="absolute w-full h-full">
+            <div className="w-full h-full relative flex flex-col justify-center">
+                <div className="absolute top-[50vh] w-full h-full">
                     <div className={`${loading?'h-[100px]':'opacity-0'}  flex justify-center`}>
                         <div className="my-auto">
                             <div className="text-white -mt-[80px] flex flex-col">
@@ -59,23 +58,21 @@ export const ImageDialog = ({open, toggleOpen, image, onPrevButtonClick, onNextB
                 onLoadingComplete={()=>setLoading(false)}
                 height={0}
                 sizes="100vw"
-                className={`w-auto h-auto max-w-full mx-auto`}
+                className={`w-auto lg:rounded-2xl lg:max-w-[80vw] pointer-events-auto h-auto max-w-full mx-auto my-auto`}
                 // width={'100%'}
                 // height={'100%'}
                 src={image}/>
-                <div className="embla__buttons absolute top-0 w-[110%] -ml-[5%] flex justify-between -mt-[2.45rem]">
+                <div className="embla__buttons imagemodal absolute top-[50vh] w-full px-10 flex justify-between -mt-[2.45rem]">
                     <PrevButton onClick={()=>navigate('prev')} disabled={prevBtnDisabled} />
                     <NextButton onClick={()=>navigate('next')} disabled={nextBtnDisabled} />
                 </div>
-            </div>
-          </DialogDescription>
           </div>
 
-         {!loading &&  <DialogClose className="-mr-12" asChild>
+          <DialogClose className="mt-6 mr-10 pointer-events-auto" asChild>
             <IconButton className="bg-gray-200 shadow border border-gray-800 cursor-pointer" aria-label="Close">
               <Cross2Icon />
             </IconButton>
-          </DialogClose>}
+          </DialogClose>
         </DialogContentImage>
       </Dialog>
     )

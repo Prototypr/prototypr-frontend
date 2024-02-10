@@ -67,7 +67,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
       <Container padding={false} maxWidth="w-full relative z-0" >
         <img src='/static/images/toolbox/squares.svg' className="border-b border-gray-200/90 opacity absolute w-full h-full object-cover top-0 left-0"/>
 
-          <div className="pt-[132px] shadow-md -mt-[96px] md:pt-[112px] pb-[182px] relative overflow-hidden p-6 border-gray-200">
+          <div className="pt-[90px] md:pt-[132px] shadow-md -mt-[96px] md:pt-[112px] pb-[182px] relative overflow-hidden p-6 border-gray-200">
           <div
           style={{
             // backgroundColor:`${stc(post?.attributes?.title)}`,
@@ -163,9 +163,9 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
           </div>
         </Container>
         <Container maxWidth="w-full bg-white relative z-10 pt-8">
-          <div className="max-w-[1320px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 px-3 md:px-0 h-full">
+          <div className="max-w-[1320px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 md:px-0 h-full">
           <div className="col-span-12 lg:col-span-12">
-            <div className="-mt-[190px] mt-8 mb-6 rounded-xl">
+            <div className="-mt-[190px] mt-8 mb-6 pl-3 rounded-xl">
               {/* <h3 class="text-lg font-bold">Gallery</h3> */}
               {/* {post?.attributes && (
                   <PopupGallery
@@ -177,7 +177,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                 )} */}
                   <Carousel gallery={gallery}/>
               </div>
-              <div className="max-w-[1100px] mx-auto w-full">
+              <div className="max-w-[1100px] mx-auto px-6 w-full">
                 <div className="max-w-[900px] mx-auto">
                   <h3 class="text-2xl font-semibold mb-8">Overview</h3>
                     <div

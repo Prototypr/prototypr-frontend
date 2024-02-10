@@ -590,6 +590,25 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
   --slide-height: 19rem;
   // padding: 1.6rem;
 }
+@media (max-width: 600px) {
+  .embla {
+    --slide-spacing: 0.6rem;
+    --slide-size: 90%;
+    --slide-height: 20rem;
+    // padding: 1.6rem;
+  }
+  .embla__buttons{
+    display: none!important;
+  }
+  .embla__buttons.imagemodal{
+    top:inherit!important;
+    display:flex!important;
+    bottom:60px!important
+  }
+  .embla-thumbs__slide {
+    display: none;;
+  }
+}
 .embla__viewport {
   overflow: hidden;
 }
@@ -664,11 +683,7 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
   padding-left: var(--thumbs-slide-spacing);
   position: relative;
 }
-@media (min-width: 576px) {
-  .embla-thumbs__slide {
-    // flex: 0 0 18%;
-  }
-}
+
 .embla-thumbs__slide__button {
   -webkit-appearance: none;
   // background-color: transparent;
@@ -744,6 +759,9 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
   transform: translateY(-50%);
   left: 0;
 }
+.embla__buttons.imagemodal{
+  top:50vh;
+}
 .embla__button {
   z-index: 1;
   color: var(--background-site);
@@ -763,4 +781,9 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 .embla__button .embla__button__svg {
   width: 65%;
   height: 65%;
+}
+
+
+.w-full.h-full.pointer-events-none{
+  pointer-events: none!important;
 }
