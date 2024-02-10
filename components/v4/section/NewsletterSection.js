@@ -9,11 +9,12 @@ const NewsletterSection = ({title,padding}) =>{
             <div
             className="w-full shadow-md relative flex h-full bg-gray-100 w-full lg:mt-8 rounded-3xl p-6"
             >
-            <div className="max-w-xl lg:max-w-xl">
+            <div className="max-w-xl lg:max-w-xl z-20">
                 <h3 className="text-xl lg:text-3xl mb-2 font-inter text-black/90 font-semibold">{title?title:'The best design articles, every week'}</h3>
                 <p className="font-inter mb-4 text-base text-gray-900 text-opacity-80">Join 25,000+ creatives who enjoy a regular dose of inspiration and motivation, delivered to your inbox every week.</p>
                 <SignupHomepage/>
             </div>
+            <img src='/static/images/toolbox/squares.svg' className="rounded-3xl opacity absolute w-full h-full object-cover top-0 left-0"/>
             <div>
             <img
                 className="hidden sm:block sm:w-[220px] 2md:w-[344px] lg:w-[350px] top-0 mt-8 md:-mt-6 absolute right-0 xl:mr-32"

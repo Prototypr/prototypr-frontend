@@ -94,7 +94,7 @@ export default function PostsPage({
       >
       <div className="mb-8 top-0 w-full">
         <Container padding={false} maxWidth="w-full" >
-          <div className="pt-[100px] pb-[120px] bg-gradient-to-br via-[#b3daff] from-[#bcdeff] to-[#77abdd] rounded-b-[3.4rem] relative overflow-hidden p-0 border-gray-200">
+          <div className="pt-[100px] pb-[120px] bg-gradient-to-br via-[#b3daff] from-[#bcdeff] to-[#77abdd] relative overflow-hidden p-0 border-gray-200">
             {/* <img src="/static/images/angleshape.svg" className="absolute -mb-[2%] w-full bottom-0 z-40 left-0"/> */}
 
             {/* <div className="z-20 relative"> */}
@@ -107,7 +107,7 @@ export default function PostsPage({
                   <h2 className="mt-2 mb-2 text-black/90 text-5xl font-semibold tracking-tight xl:text-[48px] lg:leading-tight md:leading-tight capitalize drop-shadow-sm ">{tagName}</h2>
                 </div>
               </div>
-               <img src='/static/images/toolbox/toolbox-bg-2.svg' className=" pointer-events-none absolute w-full h-full object-cover opacity-60 top-0 left-0 "/>
+               <img src='/static/images/toolbox/toolbox-bg-2.svg' className=" pointer-events-none absolute w-full h-full object-cover opacity-40 top-0 left-0 "/>
           </div>
 
         </Container>

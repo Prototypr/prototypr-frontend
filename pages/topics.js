@@ -147,20 +147,24 @@ export default function Index({
         <SectionDivider py="py-1" transparentLine={true} />
         {/* <Container maxWidth="max-w-[1320px] pb-24 mt-1"> */}
         <Container maxWidth="max-w-[1320px] mb-8">
-          <div className="rounded-3xl p-3 md:p-10 shadow bg-white">
-            <h2 className="text-2xl mb-3 font-semibold">All topics</h2>
-            <div className="pt-4 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
-              {morePopularTags.map((topic, i) => (
-                <CategoriesIconCard
-                  showCount={true}
-                  withBackground={true}
-                  key={i}
-                  index={i}
-                  topic={topic}
-                />
-              ))}
+          {/* <div className="rounded-3xl p-3 relative md:p-10 shadow bg-white"> */}
+          <div className="relative">
+          {/* <img src='/static/images/toolbox/squares2.svg' className="-scale-x-100 rounded-xl opacity-30  absolute w-full h-full object-cover top-0 left-0"/> */}
+            <div className="z-20 relative">
+              <h2 className="text-2xl mb-3 font-semibold">All topics</h2>
+              <div className="pt-4 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
+                {morePopularTags.map((topic, i) => (
+                  <CategoriesIconCard
+                    showCount={true}
+                    withBackground={true}
+                    key={i}
+                    index={i}
+                    topic={topic}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+            </div>
         </Container>
         {/* </Container> */}
 
