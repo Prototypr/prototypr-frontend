@@ -4,13 +4,15 @@ import { Thumb } from './EmblaCarouselThumbsButton'
 // import imageByIndex from './imageByIndex'
 import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
+import dynamic from "next/dynamic";
 
 import {
   PrevButton,
   NextButton,
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
-import { ImageDialog } from './ImageDialog.js/ImageDialog';
+
+const ImageDialog = dynamic(() => {return import("./ImageDialog/ImageDialog")},{ ssr: false });
 
 const EmblaCarousel = (props) => {
   const { slides, options } = props

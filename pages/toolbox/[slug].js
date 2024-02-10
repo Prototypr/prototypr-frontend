@@ -15,9 +15,6 @@ import useUser from "@/lib/iron-session/useUser";
 import { SealQuestion } from "@phosphor-icons/react";
 
 import Carousel from '@/components/carousel'
-const PopupGallery = dynamic(() => import("@/components/gallery/PopupGallery"), {
-  ssr: true,
-});
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -42,6 +39,7 @@ import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import Link from "next/link";
 import Button from "@/components/Primitives/Button";
+import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 
 const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
   const { user } = useUser();
@@ -415,7 +413,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug("tool", 5000);
+  const allPosts = await getAllPostsWithSlug("tool", TOTAL_STATIC_POSTS);
   // const homePageTools = await getAllToolsForHomeStatic()
   // let mergedSlugs = {
   //   ...allPosts,

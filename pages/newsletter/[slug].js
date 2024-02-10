@@ -6,6 +6,7 @@ import Container from '@/components/container'
 import Layout from "@/components/new-index/layoutForIndex";
 import { getAllPostsWithSlug, getNewsletter } from '@/lib/api'
 import { FormattedMessage } from "react-intl";
+import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 
 const PostPreview = dynamic(() => import("@/components/post-preview"));
 
@@ -133,7 +134,7 @@ export async function getStaticProps({ params, preview = null, postType="newslet
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug('newsletter', 1000)
+  const allPosts = await getAllPostsWithSlug('newsletter', TOTAL_STATIC_POSTS)
   
   return {
     paths: allPosts && allPosts.data?.map((post) =>{ 

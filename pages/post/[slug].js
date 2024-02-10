@@ -34,7 +34,7 @@ import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
-import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
+import { SIDEBAR_STICKY_OFFSET, TOTAL_STATIC_POSTS } from "@/lib/constants";
 import PostHeader from "@/components/post-header";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
@@ -516,7 +516,7 @@ export async function getStaticPaths({ locales }) {
     process.env.NODE_ENV ||
       process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
       ? 20
-      : 5000
+      : TOTAL_STATIC_POSTS
   );
   // const homePosts = await getCombinedPostsForHomeStatic()
 
