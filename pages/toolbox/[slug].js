@@ -65,7 +65,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
       <Container padding={false} maxWidth="w-full relative z-0" >
         <img src='/static/images/toolbox/squares.svg' className="border-b border-gray-200/90 opacity absolute w-full h-full object-cover top-0 left-0"/>
 
-          <div className="pt-[90px] md:pt-[132px] shadow-md -mt-[96px] md:pt-[112px] pb-[182px] relative overflow-hidden p-6 border-gray-200">
+          <div className={`${gallery?.length?'pb-[182px]':'pb-[54px]'} pt-[90px] md:pt-[132px] shadow-md -mt-[96px] md:pt-[112px] relative overflow-hidden p-6 border-gray-200`}>
           <div
           style={{
             // backgroundColor:`${stc(post?.attributes?.title)}`,
@@ -90,7 +90,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                           width="100"
                           height="100"
                           alt="Brand logo for external website's link"
-                          className="rounded-2xl bg-white"
+                          className="rounded-2xl h-full w-full object-cover bg-white"
                           src={coverImage}
                         />
                       </div>
@@ -164,7 +164,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         <Container maxWidth="w-full bg-white relative z-10 pt-8">
           <div className="max-w-[1320px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 md:px-0 h-full">
           <div className="col-span-12 lg:col-span-12">
-            <div className="-mt-[190px] mt-8 mb-6 pl-3 rounded-xl">
+            <div className={`${gallery?.length?'-mt-[190px] mt-8 mb-6 pl-3 rounded-xl':''} `}>
               {/* <h3 class="text-lg font-bold">Gallery</h3> */}
               {/* {post?.attributes && (
                   <PopupGallery
@@ -174,7 +174,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                     arrows={false}
                   />
                 )} */}
-                  <Carousel gallery={gallery}/>
+                 {gallery?.length ? <Carousel gallery={gallery}/>:''}
               </div>
               <div className="max-w-[1100px] mx-auto px-6 w-full">
                 <div className="max-w-[900px] mx-auto">
@@ -186,6 +186,23 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                           __html: post.attributes.content,
                         }}
                       ></div>
+                  <Image
+                  // layout="fill"
+                  // objectFit="cover"
+                  width="800"
+                  height="600"
+                  alt="Product screenshot"
+                  className="rounded-2xsl object-cover"
+                  src={
+                    post.attributes?.featuredImage?.data?.attributes?.url
+                      ? post.attributes.featuredImage.data.attributes.url
+                      : post.attributes?.legacyFeaturedImage
+                      ? post.attributes?.legacyFeaturedImage.mediaItemUrl
+                      : post.attributes?.ogImage
+                      ? post.attributes?.ogImage.opengraphImage
+                      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                  }
+                />
                   </div>
                 </div>
               
@@ -219,7 +236,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         </Container>
       </div>
       <Container maxWidth=" w-full pb-16 bg-white relative z-10 pt-8">
-          <div className="max-w-[1320px] pt-6 border-t border-black/15 mx-auto px-3 md:px-0 h-full">
+          <div className="max-w-[1320px] pt-6 mx-auto px-3 md:px-0 h-full">
         <div className="mb-8">
           <NewsletterSection padding={false} title="Get the best tools every week"/>
         </div>
