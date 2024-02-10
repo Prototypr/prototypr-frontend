@@ -44,13 +44,15 @@ const MediumPost = ({link, title, image, tags, date, avatar, author, excerpt, im
                 //2 long tags make break the layout, so remove word 'design'
                 let name = tag.attributes?.name.replace('-', ' ')
                   return (
-                    <SmallTag
+                    <>
+                    {tag?.attributes?.slug?<SmallTag
                       key={index}
                       index={index}
                       link={`/posts/${tag.attributes?.slug}/page/1/`}
                     >
                       {name}
-                    </SmallTag>
+                    </SmallTag>:null}
+                    </>
                   );
                 })
               : ""}
