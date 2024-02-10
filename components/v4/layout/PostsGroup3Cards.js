@@ -11,17 +11,17 @@ const PostsGroup3Cards = ({posts,cols}) =>{
             {/* <PrototyprNetworkCTA2 /> */}
         {posts?.length ? (
           posts.map((post, index) => {
-            let url = post?.attributes?.featuredImage?.data?.attributes?.url?post?.attributes?.featuredImage?.data?.attributes?.url:null;
+            let url = post?.attributes?.featuredImage?.data?.attributes?.url? post?.attributes?.featuredImage?.data?.attributes?.url:null;
             const coverImage = url
               ? url
-              : post?.attributes?.legacyFeaturedImage?.mediaItemUrl?post?.attributes?.legacyFeaturedImage?.mediaItemUrl:null;
-              let authorData = post.attributes?.author?.data?.attributes?post.attributes?.author?.data?.attributes:null
-              let avatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
+              : post?.attributes?.legacyFeaturedImage?.mediaItemUrl? post?.attributes?.legacyFeaturedImage?.mediaItemUrl:null;
+              let authorData = post.attributes?.author?.data?.attributes? post.attributes?.author?.data?.attributes:null
+              let avatar = authorData?.avatar?.data? authorData?.avatar?.data?.attributes?.url: authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
             return (
               <div key={index} className="w-full">
                 <MediumPost
                   imageSmall={cols==4?true:''}
-                  link={`/post/${post?.attributes?.slug}`}
+                  link={`/post/${post?.attributes?.slug?post?.attributes?.slug:''}`}
                   avatar={avatar}
                   author={post?.attributes?.author?.data?.attributes?post?.attributes?.author?.data?.attributes:null}
                   image={coverImage}
