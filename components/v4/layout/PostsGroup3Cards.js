@@ -15,7 +15,7 @@ const PostsGroup3Cards = ({posts,cols}) =>{
             const coverImage = url
               ? url
               : post?.attributes?.legacyFeaturedImage?.mediaItemUrl? post?.attributes?.legacyFeaturedImage?.mediaItemUrl:null;
-              let authorData = post.attributes?.author?.data?.attributes? post.attributes?.author?.data?.attributes:null
+              let authorData = post?.attributes?.author?.data?.attributes? post?.attributes?.author?.data?.attributes:null
               let avatar = authorData?.avatar?.data? authorData?.avatar?.data?.attributes?.url: authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
             return (
               <div key={index} className="w-full">
