@@ -87,6 +87,7 @@ const EmblaCarousel = (props) => {
                 alt="Your alt text"
               /> */}
                <div className="relative shadow-md w-full rounded-xl h-[240px] sm:h-[264px] w-full lg:max-h-full relative overflow-hidden flex justify-center">
+                {/* <img src={item.original} className='object-cover cursor-pointer pointer-events-auto' alt={`Gallery Image ${index}`}/> */}
                 <Image
                   onClick={()=>{
                     setCurrentImage(item.original)

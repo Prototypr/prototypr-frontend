@@ -52,7 +52,13 @@ const ImageDialog = ({open, toggleOpen, image, onPrevButtonClick, onNextButtonCl
                         </div>
                     </div>
                 </div>
-                <Image 
+                <img 
+                key={image}
+                onLoad={()=>setLoading(false)}
+                src={image} 
+                className='object-cover cursor-pointer pointer-events-auto w-auto lg:rounded-2xl lg:max-w-[80vw] pointer-events-auto h-auto max-w-full mx-auto my-auto'/>
+
+                {/* <Image 
                 key={image}
                 width={0}
                 onLoadingComplete={()=>setLoading(false)}
@@ -61,7 +67,7 @@ const ImageDialog = ({open, toggleOpen, image, onPrevButtonClick, onNextButtonCl
                 className={`w-auto lg:rounded-2xl lg:max-w-[80vw] pointer-events-auto h-auto max-w-full mx-auto my-auto`}
                 // width={'100%'}
                 // height={'100%'}
-                src={image}/>
+                src={image}/> */}
                 <div className="embla__buttons imagemodal absolute top-[50vh] w-full px-10 flex justify-between -mt-[2.45rem]">
                     <PrevButton onClick={()=>navigate('prev')} disabled={prevBtnDisabled} />
                     <NextButton onClick={()=>navigate('next')} disabled={nextBtnDisabled} />
