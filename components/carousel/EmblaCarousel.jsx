@@ -10,6 +10,7 @@ import {
   NextButton,
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
+import { ImageDialog } from './ImageDialog.js/ImageDialog';
 
 const EmblaCarousel = (props) => {
   const { slides, options } = props
@@ -28,6 +29,11 @@ const EmblaCarousel = (props) => {
     [emblaMainApi, emblaThumbsApi]
   )
 
+  const [currentImage, setCurrentImage] = useState(slides[0]?.original)
+  useEffect(()=>{
+    setCurrentImage(slides[selectedIndex]?.original)
+  },[selectedIndex])
+
   const onSelect = useCallback(() => {
     if (!emblaMainApi || !emblaThumbsApi) return
     setSelectedIndex(emblaMainApi.selectedScrollSnap())
@@ -45,12 +51,20 @@ const EmblaCarousel = (props) => {
     prevBtnDisabled,
     nextBtnDisabled,
     onPrevButtonClick,
-    onNextButtonClick
+    onNextButtonClick,
   } = usePrevNextButtons(emblaMainApi)
+
+
+
+  const [dialogOpenImage, setDialogOpenImage] = useState(false)
+
+  const toggleDialogOpen = () =>{
+    setDialogOpenImage(!dialogOpenImage)
+  }
 
   return (
     <div className="embla px-14 py-6 -ml-[1.6rem] -mt-[1.6rem] relative">
-      <div className="embla__buttons absolute top-0 w-full flex justify-between -mt-[2rem]">
+      <div className="embla__buttons absolute top-0 w-full flex justify-between -mt-[2.45rem]">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
@@ -66,8 +80,12 @@ const EmblaCarousel = (props) => {
                 src={item.original}
                 alt="Your alt text"
               /> */}
-               <div className="relative shadow-md w-full rounded-xl h-[200px] sm:h-[300px] w-full lg:max-h-full relative overflow-hidden flex justify-center">
+               <div className="relative shadow-md w-full rounded-xl h-[100px] sm:h-[264px] w-full lg:max-h-full relative overflow-hidden flex justify-center">
                 <Image
+                  onClick={()=>{
+                    setCurrentImage(item.original)
+                    setDialogOpenImage(item.original)
+                  }}
                   loader={gumletLoader}
                   layout="fill"
                   objectFit="cover"
@@ -80,7 +98,7 @@ const EmblaCarousel = (props) => {
                   // data-src={current.original}
                   alt={`Gallery Image ${index}`}
                   sizes={"(max-width: 300px) 100vw, 600px"}
-                  className='embla__slide__img rounded-xl shadow-xl p-[4px] bg-white border border-gray-200'
+                  className='embla__slide__img cursor-pointer rounded-xl shadow-xl p-[4px] bg-white border border-gray-200'
                 />
               </div>
             </div>
@@ -103,6 +121,12 @@ const EmblaCarousel = (props) => {
           </div>
         </div>
       </div>
+      <ImageDialog 
+      onPrevButtonClick={onPrevButtonClick}
+      prevBtnDisabled={prevBtnDisabled}
+      nextBtnDisabled={nextBtnDisabled}
+      onNextButtonClick={onNextButtonClick}
+      image={currentImage} open={dialogOpenImage?true:false} toggleOpen={toggleDialogOpen}/>
     </div>
   )
 }
