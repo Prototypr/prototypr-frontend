@@ -42,13 +42,13 @@ const MediumPost = ({link, title, image, tags, date, avatar, author, excerpt, im
             {tags?.length
               ? tags.slice(0, 2).map((tag, index) => {
                 //2 long tags make break the layout, so remove word 'design'
-                let name = tag.attributes?.name.replace('-', ' ')
+                let name = tag?.attributes?.name?.replace('-', ' ')
                   return (
                     <>
                     {tag?.attributes?.slug?<SmallTag
                       key={index}
                       index={index}
-                      link={`/posts/${tag.attributes?.slug}/page/1/`}
+                      link={`/posts/${tag?.attributes?.slug}/page/1/`}
                     >
                       {name}
                     </SmallTag>:null}
