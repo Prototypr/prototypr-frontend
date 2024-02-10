@@ -59,11 +59,15 @@ const EmblaCarousel = (props) => {
   const [dialogOpenImage, setDialogOpenImage] = useState(false)
 
   const toggleDialogOpen = () =>{
-    setDialogOpenImage(!dialogOpenImage)
+    if(dialogOpenImage){
+      setDialogOpenImage(false)
+    }else{
+      setDialogOpenImage(true)
+    }
   }
 
   return (
-    <div className="embla px-14 py-6 -ml-[1.6rem] -mt-[1.6rem] relative">
+    <div className="embla lg:px-14 py-6 lg:-ml-[1.6rem] -mt-[1.6rem] relative">
       <div className="embla__buttons absolute top-0 w-full flex justify-between -mt-[2.45rem]">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
@@ -80,7 +84,7 @@ const EmblaCarousel = (props) => {
                 src={item.original}
                 alt="Your alt text"
               /> */}
-               <div className="relative shadow-md w-full rounded-xl h-[100px] sm:h-[264px] w-full lg:max-h-full relative overflow-hidden flex justify-center">
+               <div className="relative shadow-md w-full rounded-xl h-[240px] sm:h-[264px] w-full lg:max-h-full relative overflow-hidden flex justify-center">
                 <Image
                   onClick={()=>{
                     setCurrentImage(item.original)

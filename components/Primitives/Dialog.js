@@ -16,6 +16,7 @@ const overlayShow = keyframes({
     backgroundColor: `rgba(0,0,0,0.75)`,
     zIndex: 99,
     position: "fixed",
+    pointerEvents:'all',
     inset: 0,
     "@media (prefers-reduced-motion: no-preference)": {
       animation: `${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
@@ -88,11 +89,9 @@ const overlayShow = keyframes({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "auto",
-    maxWidth: "90vw",
-    minWidth:"300px",
-    minHeight:"200px",
-    height: "auto",
+    width: "100vw",
+    height: "100vh",
+    pointerEvents:'none',
     // minHeight: "60vh",
     // padding: 25,
     "@media (prefers-reduced-motion: no-preference)": {
