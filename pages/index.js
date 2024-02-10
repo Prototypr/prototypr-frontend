@@ -151,6 +151,7 @@ export default function Index({
               <ToolIconCardRow withBackground={true} tools={toolsList.slice(5,15)} />       
 
               
+            
           {/* <div className="flex mt-10">
             <Link href="/toolbox">
               <Button className="rounded-full bg-blue-600 px-6 py-4 leading-none text-white" variant="confirmBig">
@@ -160,7 +161,9 @@ export default function Index({
           </div>      */}
           </div>
         </Container>
-        
+        <div className="mt-20 mb-8">
+          <NewsletterSection/>
+        </div>
         <SectionDivider py='py-6' transparentLine={true}  />
    
         {/* <SectionDivider />
@@ -177,9 +180,11 @@ export default function Index({
             </div>
           </div>
         </Container>
+        
+        <div className="relative">
+
         {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
         <Container maxWidth="w-full bg-[#dbeeff]  relative relative z-10">
-        {/* <img src="/static/images/bendy9.svg" className="absolute bottom-0 -mb-[12%] mb-12 z-20 left-0 w-full"/> */}
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[200px] left-0 w-full h-[124%] object-cover"/> */}
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[150px] left-0 w-full h-[124%] object-cover"/> */}
 
@@ -241,9 +246,11 @@ export default function Index({
             {/* <PopularTagsSection popularTags={popularTags}/> */}
           </div>
         </Container>
+        </div>
          {/* <SectionDivider />
         <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/> */}
-        <div className="bg-gradient-to-b from-[#dbeeff] via-[#EFF4FB] via-10% to-[#EFF4FB]">
+        <div className="relative bg-gradient-to-b from-[#dbeeff] via-[#EFF4FB] via-10% to-[#EFF4FB]">
+
           {/* <SectionDivider py='py-6 pt-12' transparentLine={true} /> */}
           {/* <SectionDivider /> */}
           {TAB_ITEMS?.map((topic, index) => {
@@ -266,14 +273,14 @@ export default function Index({
               
                
             <SectionDivider py="py-12" transparentLine={false}/>
-            {index==0?
+            {index==2?
                 <div className="-mt-8">
                     <NewsletterSection/>
                    <SectionDivider py="py-12" transparentLine={false}/>
                   </div>:''
               }
 
-            {index==3?
+            {index==4?
                 <div className="mt-0">
                   <Container  maxWidth="max-w-[1320px]">
                   <TwoColumnCards/> 
