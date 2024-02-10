@@ -14,7 +14,7 @@ const overlayShow = keyframes({
   
   const StyledOverlay = styled(DialogPrimitive.Overlay, {
     backgroundColor: `rgba(0,0,0,0.75)`,
-    zIndex: 50,
+    zIndex: 99,
     position: "fixed",
     inset: 0,
     "@media (prefers-reduced-motion: no-preference)": {
@@ -75,11 +75,45 @@ const overlayShow = keyframes({
     "&:focus": { outline: "none" },
   });
   
+  const StyledContentImage = styled(DialogPrimitive.Content, {
+    zIndex: 999,
+    // backgroundColor: "white",
+    borderRadius: 6,
+    boxShadow:
+      "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
+    position: "fixed",
+    // display:'flex',
+    // flexDirection:'column',
+    // justifyContent:'space-between',
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "auto",
+    maxWidth: "90vw",
+    minWidth:"300px",
+    minHeight:"200px",
+    height: "auto",
+    // minHeight: "60vh",
+    // padding: 25,
+    "@media (prefers-reduced-motion: no-preference)": {
+      animation: `${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
+    },
+    "&:focus": { outline: "none" },
+  });
+  
   function ContentLarge({ children, ...props }) {
     return (
       <DialogPrimitive.Portal>
         <StyledOverlay />
         <StyledContentLarge {...props}>{children}</StyledContentLarge>
+      </DialogPrimitive.Portal>
+    );
+  }
+  function ContentImage({ children, ...props }) {
+    return (
+      <DialogPrimitive.Portal>
+        <StyledOverlay />
+        <StyledContentImage {...props}>{children}</StyledContentImage>
       </DialogPrimitive.Portal>
     );
   }
@@ -121,6 +155,7 @@ const overlayShow = keyframes({
   export const DialogTrigger = DialogPrimitive.Trigger;
   export const DialogContent = Content;
   export const DialogContentLarge = ContentLarge;
+  export const DialogContentImage = ContentImage;
   export const DialogTitle = StyledTitle;
   export const DialogDescription = StyledDescription;
   export const DialogClose = DialogPrimitive.Close;

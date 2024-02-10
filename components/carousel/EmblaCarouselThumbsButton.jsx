@@ -13,7 +13,7 @@ export const Thumb = (props) => {
     >
       <button
         onClick={onClick}
-        className="embla-thumbs__slide__button"
+        className="embla-thumbs__slide__button rounded-lg"
         type="button"
       >
         <div className="embla-thumbs__slide__number">
