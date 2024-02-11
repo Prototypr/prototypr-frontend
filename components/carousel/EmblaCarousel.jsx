@@ -68,6 +68,24 @@ const EmblaCarousel = (props) => {
     }
   }
 
+  const navigateDialog = (direction) =>{
+    if(direction=='prev'){
+      let prevSlide = slides[selectedIndex-1]
+      if(prevSlide){
+        setSelectedIndex(selectedIndex-1)
+        setCurrentImage(prevSlide.original)
+        // onPrevButtonClick()
+      }
+    }else{
+      let nextSlide = slides[selectedIndex+1]
+      if(nextSlide){
+        setSelectedIndex(selectedIndex+1)
+        setCurrentImage(nextSlide.original)
+        // onNextButtonClick()
+      }
+    }
+  }
+
   return (
     <div className="embla lg:px-14 py-6 lg:-ml-[1.6rem] -mt-[1.6rem] relative">
       <div className="embla__buttons absolute top-0 w-full flex justify-between -mt-[2.45rem]">
@@ -90,6 +108,8 @@ const EmblaCarousel = (props) => {
                 {/* <img src={item.original} className='object-cover cursor-pointer pointer-events-auto' alt={`Gallery Image ${index}`}/> */}
                 <Image
                   onClick={()=>{
+                    setSelectedIndex(index)
+                    // emblaMainApi.scrollTo(index)
                     setCurrentImage(item.original)
                     setDialogOpenImage(item.original)
                   }}
@@ -129,11 +149,12 @@ const EmblaCarousel = (props) => {
         </div>
       </div>
       <ImageDialog 
-      onPrevButtonClick={onPrevButtonClick}
-      prevBtnDisabled={prevBtnDisabled}
-      nextBtnDisabled={nextBtnDisabled}
-      onNextButtonClick={onNextButtonClick}
-      image={currentImage} open={dialogOpenImage?true:false} toggleOpen={toggleDialogOpen}/>
+      navigateDialog={navigateDialog}
+      prevBtnDisabled={false}
+      nextBtnDisabled={false}
+      image={currentImage} 
+      open={dialogOpenImage?true:false} 
+      toggleOpen={toggleDialogOpen}/>
     </div>
   )
 }
