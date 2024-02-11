@@ -171,7 +171,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         <Container maxWidth="w-full bg-[#fefefe] relative z-10 pt-8">
           <div className="max-w-[1320px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 md:px-0 h-full">
           <div className="col-span-12 lg:col-span-12">
-            <div className={`${gallery?.length?'-mt-[125px] mt-8 mb-6 pl-3 rounded-xl':''} `}>
+            <div className={`${gallery?.length?'-mt-[125px] mt-8 mb-6 pl-3 md:pl-0 rounded-xl':''} `}>
               {/* <h3 class="text-lg font-bold">Gallery</h3> */}
               {/* {post?.attributes && (
                   <PopupGallery
@@ -213,9 +213,10 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                   </div>
                 </div>
           </div>
+          <SectionDivider py="py-3" transparentLine={true}/>
           </div>
           <Container maxWidth="max-w-[1320px]">
-          <div className={`pb-0 border-l-[0.19rem] border-b-[0.18rem] border-sky-500 opacity-10 rounded-bl-xl pt-6 opacity-70`}>
+          <div className={`pb-0 border-l-[0.19rem] border-b-[0.18rem] border-sky-500 opacity-10 rounded-bl-xl pt-6`}>
             {/* <div className={` bg-opacity-[0.08] bg-sky-500 h-[3px] w-full pl-3`} /> */}
           </div>
         </Container>
@@ -225,8 +226,8 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
 
       <Container maxWidth=" w-full pb-16 bg-[#fefefe] relative z-10">
       {/* <img src="/static/images/bendy9.svg" className="absolute top-0 -mt-[2.9%] z-10 left-0 w-full gm-added gm-observing gm-observing-cb" loading="lazy"/> */}
-      {relatedPosts?.length && 
-                <div className="z-30 relative max-w-[1320px] mx-auto">
+      {relatedPosts?.length ? 
+                <div className="z-30 relative max-w-[1320px] mx-auto px-6 md:px-3">
                   <img src="/static/images/toolbox/squares2.svg" className="w-full h-[120%] absolute object-cover opacity-20"/>
                   <div classsName="flex flex-col px-3 z-30">
                   <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium font-inter max-w-md">
@@ -237,7 +238,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                   {/* <ToolCard posts={relatedPosts} columns={'grid-cols-1'} type="toolboxContentPage" /> */}
                   </div>
                 </div>
-                }
+               :null }
         </Container>
       <Container maxWidth="w-full pb-16 bg-[#fefefe] relative z-10 pt-0">
           <div className="max-w-[1320px] pt-0 -mt-8 mb-8 mx-auto px-3 h-full">
