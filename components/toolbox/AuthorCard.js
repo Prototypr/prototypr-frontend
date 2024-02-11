@@ -1,6 +1,7 @@
 import Image from 'next/image'
+import Link from 'next/link'
+export default function AuthorCard({ author = {},title, avatar='' }) {
 
-export default function AuthorCard({ author = {}, avatar='' }) {
     let attributes = {};
     if (author.data && author.data.attributes) {
         //displayName firstName lastName avatar
@@ -17,12 +18,12 @@ export default function AuthorCard({ author = {}, avatar='' }) {
       
     return (
         <>
-            <div className="mb-6 md:mb-0 bg-white border-gray-300 p-5 block md:block rounded-lg">
-                <a>
-                    <h1 tabIndex={0} className="text-sm font-semibold mb-3">{attributes.title ? attributes.title : "Posted by"}</h1>
+            <div className="md:mb-0 bg-white border-gray-300 block md:block rounded-lg">
+                <Link href={`/people/${attributes?.slug}`}>
+                    {/* <h1 tabIndex={0} className="text-sm font-medium mb-3">{title?title:attributes.title ? attributes.title : "Posted by"}</h1> */}
                     <div className="py-2 w-full relative flex">
                         <div className="relative mr-3">
-                            <div className="w-12 h-12 rounded-full border border-1 overflow-hidden relative border-gray-100 shadow-sm">
+                            <div className="w-16 h-16 rounded-full border border-1 overflow-hidden relative border-gray-100 shadow-sm">
                                 {
                                     (pic) && <Image 
                                     tabIndex={0}
@@ -40,9 +41,10 @@ export default function AuthorCard({ author = {}, avatar='' }) {
                                 {username}
                             </p>
                             <p tabIndex={0} className="text-sm">Editor</p>
+                           {title? <h1 tabIndex={0} className="text-sm mt-2">{title}</h1>:null}
                         </div>
                     </div>
-                </a>
+                </Link>
             </div>
         </>
     )
