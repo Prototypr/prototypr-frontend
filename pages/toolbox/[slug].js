@@ -224,7 +224,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         </Container>
       </div>
 
-      <Container maxWidth=" w-full pb-16 bg-[#fefefe] relative z-10">
+      <Container maxWidth=" w-full pb-16 bg-gradient-to-tr from-[#fefefe] to-sky-100/20 relative z-10">
       {/* <img src="/static/images/bendy9.svg" className="absolute top-0 -mt-[2.9%] z-10 left-0 w-full gm-added gm-observing gm-observing-cb" loading="lazy"/> */}
       {relatedPosts?.length ? 
                 <div className="z-30 relative max-w-[1320px] mx-auto px-6 md:px-3">
