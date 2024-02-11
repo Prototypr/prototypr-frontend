@@ -39,7 +39,7 @@ export const MotionSlider = ({
               flexShrink: 0,
               flexGrow: 0,
               justifyContent: "flex-start",
-              overflow: "hidden",
+              overflow: "visible",
               width: `${width + gap}px`,
             }}
             className=""
@@ -48,10 +48,10 @@ export const MotionSlider = ({
               style={{
                 width: `${width}px`,
                 height: `${height}px`,
-                overflow: "hidden",
+                overflow: "visible",
                 marginRight: `${gap}px`,
               }}
-              className="flex"
+              className="flex overflow-visible"
             >
               {item.slide}
             </div>

@@ -458,8 +458,11 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
   animation: slide 12s linear infinite;
 }
 
-.collab-cursor{
+.cursor-collab{
   cursor:url("/static/images/arrow.svg"), auto;
+}
+.cursor-collab-blue{
+  cursor:url("/static/images/arrowBlue.svg"), auto;
 }
 
 //

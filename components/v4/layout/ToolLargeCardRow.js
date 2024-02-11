@@ -6,13 +6,11 @@ import { ArrowRight } from "phosphor-react";
 // import ToolImageCard from "../card/ToolImageCard";
 import ToolImageCardSingle from "../card/ToolImageCardSingle";
 
-const ToolLargeCardRow = ({ tools }) => {
+const ToolLargeCardRow = ({ tools , showTitle}) => {
   return (
     <>
-    {/* <Container maxWidth="max-w-[1320px] w-full mb-8"> */}
-      <div className="flex justify-between mb-6">
+      {showTitle!==false?<div className="flex justify-between mb-6">
         <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md">
-          {/* Featured <span className="hidden sm:inline text-gray-400">tools</span> */}
           Featured tools
         </h3>
         <div className="flex relative my-auto">
@@ -27,16 +25,10 @@ const ToolLargeCardRow = ({ tools }) => {
               </Link>
             </div>
           </div>
-          {/* <Link href='/toolbox'>
-            <div className="flex">
-              <div className="text-sm my-auto text-black opacity-60">See all</div>
-              <CaretRight className="opacity-60 my-auto" size={16} />
-            </div>
-          </Link> */}
-
-      </div>
+      </div>:''}
       <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8`}>
         {tools.map((tool, index) => {
+          console.log(tool)
           return (
             <div key={index}>
               <ToolImageCardSingle post={tool} />
@@ -44,16 +36,6 @@ const ToolLargeCardRow = ({ tools }) => {
           );
         })}
       </div>
-      {/* <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-8`}>
-        {tools.map((tool, index) => {
-          return (
-            <div key={index}>
-              <ToolLargeCard tool={tool?.attributes} />
-            </div>
-          );
-        })}
-      </div> */}
-    {/* </Container> */}
     </>
   );
 };

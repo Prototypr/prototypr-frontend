@@ -24,7 +24,7 @@ const overlayShow = keyframes({
   });
   
   const StyledContent = styled(DialogPrimitive.Content, {
-    zIndex: 51,
+    zIndex: 100,
     backgroundColor: "white",
     borderRadius: 6,
     boxShadow:
@@ -53,7 +53,7 @@ const overlayShow = keyframes({
   }
 
   const StyledContentLarge = styled(DialogPrimitive.Content, {
-    zIndex: 51,
+    zIndex: 100,
     backgroundColor: "white",
     borderRadius: 6,
     boxShadow:
