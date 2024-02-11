@@ -41,6 +41,7 @@ import Link from "next/link";
 import Button from "@/components/Primitives/Button";
 import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
+import AuthorCard from "@/components/toolbox/AuthorCard";
 
 const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
   const { user } = useUser();
@@ -210,6 +211,25 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                       : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
                   }
                 />:''}
+                 {post?.attributes?.author && (
+                  <>
+                  <h1 tabIndex={0} className="mt-10 text-sm mb-3 font-semibold">{post?.attributes?.creator?'Contributors':'Posted by'}</h1> 
+                            <div className=" mb-3 flex">
+                              <AuthorCard
+                                title={post?.attributes?.creator?"Curator":null}
+                                author={post.attributes.author}
+                                avatar={post.attributes?.author}
+                              />
+                              {post.attributes?.creator ?<div className="ml-10">
+                                <AuthorCard
+                                title={post?.attributes?.creator?"Creator":null}
+                                author={post.attributes.creator}
+                                  avatar={post.attributes?.creator}
+                                />
+                              </div>:null}
+                            </div>
+                  </>
+                          )}
                   </div>
                 </div>
           </div>
@@ -224,11 +244,11 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         </Container>
       </div>
 
-      <Container maxWidth=" w-full pb-16 bg-gradient-to-tr from-[#fefefe] to-sky-100/20 relative z-10">
+      <Container maxWidth=" w-full pb-24 bg-gradient-to-tr from-[#fefefe] to-sky-100/20 relative z-10">
       {/* <img src="/static/images/bendy9.svg" className="absolute top-0 -mt-[2.9%] z-10 left-0 w-full gm-added gm-observing gm-observing-cb" loading="lazy"/> */}
       {relatedPosts?.length ? 
                 <div className="z-30 relative max-w-[1320px] mx-auto px-6 md:px-3">
-                  <img src="/static/images/toolbox/squares2.svg" className="w-full h-[120%] absolute object-cover opacity-20"/>
+                  <img src="/static/images/toolbox/squares2.svg" className="w-full h-[128%] absolute object-cover opacity-20"/>
                   <div classsName="flex flex-col px-3 z-30">
                   <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium font-inter max-w-md">
                     Related tools
