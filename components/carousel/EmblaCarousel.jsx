@@ -75,19 +75,30 @@ const EmblaCarousel = (props) => {
         setSelectedIndex(selectedIndex-1)
         setCurrentImage(prevSlide.original)
         // onPrevButtonClick()
+      }else{
+        //round to end like pacman
+        let endSlide = slides[slides.length-1]
+        setSelectedIndex(slides.length-1)
+        setCurrentImage(endSlide.original)
       }
     }else{
       let nextSlide = slides[selectedIndex+1]
+      console.log(nextSlide)
       if(nextSlide){
         setSelectedIndex(selectedIndex+1)
         setCurrentImage(nextSlide.original)
         // onNextButtonClick()
+      }else{
+        //back to start like pacman
+        let nextSlide = slides[0]
+        setSelectedIndex(0)
+        setCurrentImage(nextSlide.original)
       }
     }
   }
 
   return (
-    <div className="embla lg:px-14 py-6 lg:-ml-[1.6rem] -mt-[1.6rem] relative">
+    <div className="embla lg:px-14 py-6 -mt-[1.6rem] relative">
       <div className="embla__buttons absolute top-0 w-full flex justify-between -mt-[2.45rem]">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
@@ -104,7 +115,7 @@ const EmblaCarousel = (props) => {
                 src={item.original}
                 alt="Your alt text"
               /> */}
-               <div className="relative shadow-md w-full rounded-xl h-[240px] sm:h-[264px] w-full lg:max-h-full relative overflow-hidden flex justify-center">
+               <div className="relative shimmer shadow-md w-full rounded-xl h-[240px] sm:h-[264px] w-full lg:max-h-full relative overflow-hidden flex justify-center">
                 {/* <img src={item.original} className='object-cover cursor-pointer pointer-events-auto' alt={`Gallery Image ${index}`}/> */}
                 <Image
                   onClick={()=>{
@@ -125,7 +136,7 @@ const EmblaCarousel = (props) => {
                   // data-src={current.original}
                   alt={`Gallery Image ${index}`}
                   sizes={"(max-width: 300px) 100vw, 600px"}
-                  className='embla__slide__img cursor-pointer rounded-xl shadow-xl p-[4px] bg-white border border-gray-200'
+                  className='embla__slide__img  cursor-pointer rounded-xl shadow-xl p-[4px] bg-white border border-gray-200'
                 />
               </div>
             </div>

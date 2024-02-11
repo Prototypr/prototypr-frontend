@@ -40,6 +40,7 @@ import SectionDivider from "@/components/v4/section/SectionDivider";
 import Link from "next/link";
 import Button from "@/components/Primitives/Button";
 import { TOTAL_STATIC_POSTS } from "@/lib/constants";
+import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
 
 const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
   const { user } = useUser();
@@ -65,7 +66,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
       <Container padding={false} maxWidth="w-full relative z-0" >
         <img src='/static/images/toolbox/squares.svg' className="border-b border-gray-200/90 opacity absolute w-full h-full object-cover top-0 left-0"/>
 
-          <div className={`${gallery?.length?'pb-[182px]':'pb-[54px]'} pt-[90px] md:pt-[132px] shadow-md -mt-[96px] md:pt-[112px] relative overflow-hidden p-6 border-gray-200`}>
+          <div className={`${gallery?.length?'pb-[98px]':'pb-[54px]'} pt-[90px] md:pt-[132px] shadow-md -mt-[96px] md:pt-[112px] relative overflow-hidden p-6 border-gray-200`}>
           <div
           style={{
             // backgroundColor:`${stc(post?.attributes?.title)}`,
@@ -152,7 +153,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         className="flex"
       >
 
-                        <div className="inline-block text-base px-4 py-2 cursor-pointer bg-blue-100/60 rounded-full mr-3 mb-3 text-blue-900 text-[15px] font-medium outline outline-1 outline-blue-200/80 undefined">
+                        <div className="inline-block text-base px-3 py-1 cursor-pointer bg-blue-100/60 rounded-full mr-3 mb-3 text-blue-900 text-[15px] font-base outline outline-1 outline-blue-200/80 flex flex-col justify-center">
                           {tag.attributes.name}
                         </div>
       </Link>
@@ -167,10 +168,10 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
     
           </div>
         </Container>
-        <Container maxWidth="w-full bg-white relative z-10 pt-8">
+        <Container maxWidth="w-full bg-[#fefefe] relative z-10 pt-8">
           <div className="max-w-[1320px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 md:px-0 h-full">
           <div className="col-span-12 lg:col-span-12">
-            <div className={`${gallery?.length?'-mt-[190px] mt-8 mb-6 pl-3 rounded-xl':''} `}>
+            <div className={`${gallery?.length?'-mt-[125px] mt-8 mb-6 pl-3 rounded-xl':''} `}>
               {/* <h3 class="text-lg font-bold">Gallery</h3> */}
               {/* {post?.attributes && (
                   <PopupGallery
@@ -184,7 +185,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
               </div>
               <div className="max-w-[1100px] mx-auto px-6 w-full">
                 <div className="max-w-[900px] mx-auto">
-                  <h2 class="text-2xl font-semibold mb-8">Overview</h2>
+                  <h2 class="text-2xl font-medium mb-8">Overview</h2>
                     <div
                         style={{ color: "#222", fontSize: "18px", lineHeight: '33px' }}
                         className="mt-3 popup-modal-content"
@@ -211,47 +212,42 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                 />:''}
                   </div>
                 </div>
-              
           </div>
-          {/* right panel */}
-          {/* <div className="col-span-12 lg:col-span-4">
-              <div className="flex flex-col mt-0 lg:-mt-[214px] gap-6 xl:gap-10">
-                <div className="font-inter bg-white p-6 rounded-xl shadow-sm border border-black/5">
-                    <h3 className="text-lg font-bold mb-3">Tags</h3>
-                    <div className="flex flex-wrap">
-                      {tags.map((tag, index) => {
-                        return (
-                          <Link href={`/toolbox/${tag?.attributes?.slug}/page/1`}>
-                            <div className={`inline-block text-sm px-3 py-1.5 bg-[#eef1f8] bg-opacity-60 border border-gray-200 rounded-full mr-3 mb-3`}>
-                            {tag?.attributes?.name}
-                        </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                <div className="flex mb-6 flex-col">
-                  <h2 className="text-lg mb-3 mt-3 xl:mt-6 font-bold">
-                    Related to {post?.attributes?.title}
-                  </h2>
-                  <ToolCard posts={relatedPosts} columns={'grid-cols-1'} type="toolboxContentPage" />
-                </div>
-              </div>
-          </div> */}
+          </div>
+          <Container maxWidth="max-w-[1320px]">
+          <div className={`pb-0 border-l-[0.19rem] border-b-[0.18rem] border-sky-500 opacity-10 rounded-bl-xl pt-6 opacity-70`}>
+            {/* <div className={` bg-opacity-[0.08] bg-sky-500 h-[3px] w-full pl-3`} /> */}
           </div>
         </Container>
+
+        </Container>
       </div>
-      <Container maxWidth=" w-full pb-16 bg-white relative z-10 pt-8">
-          <div className="max-w-[1320px] pt-6 mx-auto px-3 md:px-0 h-full">
-        <div className="mb-8">
+
+      <Container maxWidth=" w-full pb-16 bg-[#fefefe] relative z-10">
+      {/* <img src="/static/images/bendy9.svg" className="absolute top-0 -mt-[2.9%] z-10 left-0 w-full gm-added gm-observing gm-observing-cb" loading="lazy"/> */}
+      {relatedPosts?.length && 
+                <div className="z-30 relative max-w-[1320px] mx-auto">
+                  <img src="/static/images/toolbox/squares2.svg" className="w-full h-[120%] absolute object-cover opacity-20"/>
+                  <div classsName="flex flex-col px-3 z-30">
+                  <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium font-inter max-w-md">
+                    Related tools
+                  </h3>
+                  {/* <ToolLargeCardRow title={`Related to ${post?.attributes?.title}`} tools={relatedPosts.slice(0,4)} /> */}
+                  <ToolLargeCardRow showTitle={false} tools={relatedPosts.slice(0,4)} />
+                  {/* <ToolCard posts={relatedPosts} columns={'grid-cols-1'} type="toolboxContentPage" /> */}
+                  </div>
+                </div>
+                }
+        </Container>
+      <Container maxWidth="w-full pb-16 bg-[#fefefe] relative z-10 pt-0">
+          <div className="max-w-[1320px] pt-0 -mt-8 mb-8 mx-auto px-3 h-full">
+        <div className="mb-20">
           <NewsletterSection padding={false} title="Get the best tools every week"/>
         </div>
-        <SectionDivider/>
-      
-        {/* <SectionDivider transparentLine={false}/> */}
+        {/* <SectionDivider/>      
         <h2 className="text-lg mb-4 font-semibold">More on Prototypr</h2>
         <TwoColumnCards/>
-        <SectionDivider/>
+        <SectionDivider/> */}
         <div className="mt-2">
           <h2 className="text-lg mb-4 font-semibold">Popular topics</h2>
           <PopularTagsSection popularTags={popularTags}/>
@@ -283,8 +279,8 @@ export default function Post({ post, relatedPosts, gallery, preview, popularTags
   return (
     <Layout
       padding={false}
-      background={"RGBA(204, 230, 255, 0.9)"}
-      // background={"#fff"}
+      // background={"RGBA(204, 230, 255, 0.9)"}
+      background={"#fff"}
       maxWidth={"search-wide"}
       seo={{
         title: `${

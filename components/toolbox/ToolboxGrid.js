@@ -8,7 +8,6 @@ export const ToolBoxDisplay = ({ posts, type }) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 py-6 gap-6 w-full flex-wrap">
       {posts.map((post, i) => {
-        console.log(post);
         let title, slug, coverImage, tags;
 
         if (type === "toolboxContentPage") {

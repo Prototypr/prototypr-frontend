@@ -22,7 +22,7 @@ const CategoriesIconCard = ({ topic, withBackground, showCount }) => {
           });
         }}
         className="flex"
-      ><div className={`${withBackground?'bg-white rounded-xl p-4':''} shadow-sm w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
+      ><div className={`${withBackground?'bg-white rounded-xl p-4':''} shadow-sm border border-gray-200/70 border-1 w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex flex-row justify-between rounded-xl">
             <div className="flex flex-col pl-1 justify-center">
               <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base">

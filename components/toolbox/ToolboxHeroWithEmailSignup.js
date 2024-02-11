@@ -5,9 +5,9 @@ import SignupHorizontal from "../newsletter/SignupHorizontal";
 
 export const MotionSliderToolCard = ({ title, subtext, image, slug }) => {
   return (
-    <div className="w-[400px] h-[90px] cursor-pointer relative rounded-3xl shadow-sm bg-white grid grid-items-center p-3">
+    <div className="w-[400px] h-[90px] cursor-collab-blue relative rounded-3xl shadow-sm border border-1 border-gray-200/70 bg-white grid grid-items-center p-3 hover:scale-105 hover:shadow-xl transition transition-all duration-400">
         <Link href={`/toolbox/${slug}`}>
-        <div className="flex flex-row">
+        <div className="flex flex-row cursor-collab-blue">
           <div className="mr-3 w-[64px] h-[64px] bg-gray-100 overflow-hidden rounded-[12px] relative">
             <img src={image} className="w-full h-full drop-shadow-sm"></img>
           </div>

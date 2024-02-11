@@ -9,12 +9,19 @@ const ToolImageCardSingle = ({ post, type, columns, tagNumber }) => {
     let title, slug, coverImage, tags, logo;
 
 
-    title = post?.attributes?.title;
-    slug = post.attributes?.slug;
+    title = post?.attributes?.title?post?.attributes?.title:post?.title;
+    slug = post.attributes?.slug?post.attributes?.slug:post?.slug;
+
     if(tagNumber==1){
       tags = post?.attributes?.tags?.data.slice(0, 1);
+      if(!tags && post?.tags?.data){
+        tags = post?.tags?.data.slice(0, 1);
+      }
     }else{
       tags = post?.attributes?.tags?.data.slice(0, 2);
+      if(!tags && post?.tags?.data){
+        tags = post?.tags?.data.slice(0, 2);
+      }
     }
     // let tool = post.attributes
 
@@ -28,15 +35,23 @@ const ToolImageCardSingle = ({ post, type, columns, tagNumber }) => {
     //   coverImage = (tool?.legacyMedia?.logoNew || coverImage?.logoNew || tool.legacyMedia?.mediaItemUrl)
       
 
-    coverImage = post.attributes?.featuredImage?.data?.attributes?.url
-      ? post.attributes.featuredImage.data.attributes.url
-      : post.attributes?.legacyFeaturedImage?.mediaItemUrl
-      ? post.attributes?.legacyFeaturedImage?.mediaItemUrl
-      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-
-
-      console.log(post)
-      logo = (post?.attributes?.legacyFeaturedImage?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl ||post.attributes?.legacyFeaturedImage?.mediaItemUrl)
+    if(post?.attributes){
+      coverImage = post.attributes?.featuredImage?.data?.attributes?.url
+        ? post.attributes.featuredImage.data.attributes.url
+        : post.attributes?.legacyFeaturedImage?.mediaItemUrl
+        ? post.attributes?.legacyFeaturedImage?.mediaItemUrl
+        : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+  
+        logo = (post?.attributes?.legacyFeaturedImage?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl ||post.attributes?.legacyFeaturedImage?.mediaItemUrl)
+      }else {
+      coverImage = post.featuredImage?.data?.attributes?.url
+        ? post.featuredImage.data.attributes.url
+        : post.legacyFeaturedImage?.mediaItemUrl
+        ? post.legacyFeaturedImage?.mediaItemUrl
+        : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+  
+        logo = (post?.legacyFeaturedImage?.logoNew || coverImage?.logoNew || post.legacyMedia?.mediaItemUrl ||post.legacyFeaturedImage?.mediaItemUrl)
+    }
 
 
 
@@ -46,7 +61,7 @@ const ToolImageCardSingle = ({ post, type, columns, tagNumber }) => {
             <Link href={`/toolbox/${slug}`}>
             <div
         className={
-          "flex flex-col- pt-3 pb-1 grid grid-col-1 gap-4 flex-grow h-full rounded-t-2xl shadow-md hover:shadow-xl bg-white relative rounded-2xl fade-"
+          "flex flex-col- border border-1 border-gray-200/70 pt-3 pb-1 grid grid-col-1 gap-4 flex-grow h-full rounded-t-2xl shadow-md hover:shadow-xl bg-white relative rounded-2xl fade-"
         }
       >
         <div className="rounded-xl px-3 block cursor-pointer"
