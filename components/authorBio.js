@@ -1,4 +1,12 @@
 import SocialShare from "@/components/SocialShare";
+import Image from 'next/image'
+import dynamic from "next/dynamic";
+
+const KoFiButton = dynamic(
+  () => import("@/components/ko-fi-button/Ko-Fi-Button"),
+  { ssr: false }
+);
+
 export default function AuthorBio({ author, slug, title }) {
   const pic = author?.avatar?.data?.attributes?.url
     ? author?.avatar?.data?.attributes?.url
@@ -8,7 +16,10 @@ export default function AuthorBio({ author, slug, title }) {
 
   const github = getGithubHandle(author?.github);
   const twitter = getTwitterHandle(author?.twitter);
-  const dribbble = getDribbbleHandle(author?.dribbble);
+  const dribbble = getDribbbleHandle(author?.dribbble);  
+  const kofi = getKofiHandle(author?.kofi);
+
+
 
   return (
     <div className="py-4">
@@ -32,22 +43,23 @@ export default function AuthorBio({ author, slug, title }) {
         </div>
       </div>
       <div className=" mx-auto" style={{ maxWidth: "43rem" }}>
-        <div className="w-full border-b border-gray-200 my-12" />
+        <div className="w-full border-b border-gray-200 my-10" />
         <div className="flex flex-col sm:flex-row sm:justify-between">
-          <div className="flex">
-            <div className="w-32 md:w-auto flex justify-end">
+          <div className="flex flex-col w-full">
+            <div className="w-32 md:w-auto flex justify-center">
               <a href={"/people/" + author?.slug}>
-                <img
+                <Image
+                  width={100}
+                  height={100}
                   alt="Author avatar"
-                  className="border-2 border-gray-300 flex-shrink-0 shine mb-2 cursor-pointer mt-2 rounded-lg h-12 w-12 md:h-20 md:w-20 object-cover bg-white rounded-full "
+                  className="flex-shrink-0 shine mb-2 w-[100px] h-[100px] cursor-pointer mt-2 rounded-full object-cover bg-white rounded-full "
                   src={pic}
                 />
               </a>
             </div>
-            <div className="ml-3 md:ml-6">
-              <p className="uppercase text-sm text-gray-600">Written by</p>
-
-              <h1 className="text-xl mt-1 font-semibold leading-normal text-gray-800">
+            <div className="w-full text-center">
+              
+              <h1 className="text-xl mt-1 font-semibold leading-normal text-black/90">
                 {/* {author?.name ? author?.name : ""} */}
                 {`${author?.firstName ? author?.firstName:''}
                   ${author?.lastName ? ' '+author?.lastName:''}
@@ -55,11 +67,11 @@ export default function AuthorBio({ author, slug, title }) {
               </h1>
 
               {author?.jobrole && (
-                <h3 className="text-base font-normal leading-normal mb-1 text-gray-700">
+                <h3 className="text-base font-normal leading-normal mb-1 text-black/80">
                   {author?.jobrole}
                 </h3>
               )}
-              {author?.bio && (
+              {/* {author?.bio && (
                 <div
                   style={{ maxWidth: "40rem" }}
                   className="text-lg text-gray-600 mt-3 pr-3 max-w-lg mx-auto"
@@ -70,8 +82,8 @@ export default function AuthorBio({ author, slug, title }) {
                     }}
                   />
                 </div>
-              )}
-              <div className="flex mt-5 mb-3 z-20">
+              )} */}
+              <div className="flex mt-5 mb-3 z-20 justify-center">
                 {author?.url && (
                   <a href={author?.url}>
                     <div
@@ -90,6 +102,18 @@ export default function AuthorBio({ author, slug, title }) {
                     </div>
                   </a>
                 )}
+
+              {kofi ? (
+                        <div className="mr-4 inline-block">
+                          <KoFiButton
+                            color="#53b1e6"
+                            label={"Buy me a coffee"}
+                            kofiId={kofi}
+                          />
+                        </div>
+                      ) : (
+                        ""
+                      )}
 
                 {twitter && (
                   <a
@@ -190,6 +214,21 @@ function getGithubHandle(string) {
   var result = string.replace(/(^\w+:|^)\/\//, "");
   result = result.replace(/\//g, "");
   result = result.replace("github.com", "");
+  result = result.replace("www.", "");
+  result = result.replace("@", "");
+
+  return result;
+}
+
+function getKofiHandle(string) {
+  if (!string) {
+    return false;
+  }
+  //https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
+  //remove protocols
+  var result = string.replace(/(^\w+:|^)\/\//, "");
+  result = result.replace(/\//g, "");
+  result = result.replace("kofi.com", "");
   result = result.replace("www.", "");
   result = result.replace("@", "");
 
