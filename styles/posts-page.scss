@@ -266,7 +266,7 @@ figure, pre{
         font-style: normal!important;
     }
     color:#7f7f7f;
-    background:#fff;
+    // background:#fff;
     border:0px;
     font-weight: 500;
     line-height: 1.375;
@@ -583,7 +583,7 @@ figure, pre{
     figure, img{
         max-width: 100%!important;
     }
-    p, h1, h2, h3, h4, ol, li, ul, iframe, figure, img, blockquote, figcaption, hr, div{
+    p, h1, h2, h3, h4, ol, li, ul, iframe, figure, img, blockquote, figcaption, hr, div, table{
         margin-left:auto;
         margin-right: auto;
     }

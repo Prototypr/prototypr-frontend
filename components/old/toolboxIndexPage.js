@@ -29,7 +29,7 @@ import Footer from "@/components/footer";
 import ToolCard from "@/components/v4/card/ToolCard";
 // import { MotionSlider } from "@/components/toolbox/ToolboxCarouselAnimation";
 import ToolBoxHero from "@/components/toolbox/toolboxHero";
-import ToolIconCard from "@/components/v4/card/ToolIconCard";
+// import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import useUser from "@/lib/iron-session/useUser";
 import Link from "next/link";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
@@ -117,7 +117,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
         }}
         activeNav={"toolbox"}
       >
-        {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest stories"
+        {!user?.isLoggedIn && <StickyFooterCTA title="Create your account today"
       description="Join today to make posts and grow with us."
       />}
         <ToolBoxHero />
