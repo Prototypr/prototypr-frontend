@@ -323,7 +323,7 @@ const date = post.attributes.date
           {!user?.isLoggedIn && <StickyFooterCTA title="The best stories every week"buttonText="Sign up for free" />}
           </div>
         </div> */}
-       {!user?.isLoggedIn && <StickyFooterCTA title="Create your account today"
+       {!user?.isLoggedIn && <StickyFooterCTA title="Welcome to Prototypr"
       description="Join today to make posts and grow with us."
       />}
           

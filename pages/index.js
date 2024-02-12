@@ -299,7 +299,7 @@ export default function Index({
           <DesignTool allTools={toolsList} />
         </BrowserView> */}
       </Layout>
-      {!user?.isLoggedIn && <StickyFooterCTA title="Create your account today"
+      {!user?.isLoggedIn && <StickyFooterCTA title="Welcome to Prototypr"
       description="Join today to make posts and grow with us."
       />}
       <Footer />

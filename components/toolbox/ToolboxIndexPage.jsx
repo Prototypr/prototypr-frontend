@@ -139,7 +139,7 @@ const ToolboxIndexPage = ({
           />}
           </div>
       </div> */}
-        {!user?.isLoggedIn && <StickyFooterCTA title="Create your account today"
+        {!user?.isLoggedIn && <StickyFooterCTA title="Welcome to Prototypr"
       description="Join today to make posts and grow with us."
       />}
     </>

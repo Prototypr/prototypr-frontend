@@ -117,7 +117,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
         }}
         activeNav={"toolbox"}
       >
-        {!user?.isLoggedIn && <StickyFooterCTA title="Create your account today"
+        {!user?.isLoggedIn && <StickyFooterCTA title="Welcome to Prototypr"
       description="Join today to make posts and grow with us."
       />}
         <ToolBoxHero />
