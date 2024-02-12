@@ -73,7 +73,7 @@ const StickyFooterCTA = ({title, description, buttonText}) => {
                         </Button>
                     </Link>
                   <Link className="w-[fit-content]" href="/onboard">
-                      <Button className="py-1 md:w-auto p-0 py-[0.05rem] bg-blue-600 px-[1rem]" variant={"confirmRounded"}>
+                      <Button className="py-1 md:w-auto p-0 py-[0.1rem] bg-blue-600 px-[1rem]" variant={"confirmRounded"}>
                           {buttonText?buttonText:`Sign up`}
                       </Button>
                   </Link>
