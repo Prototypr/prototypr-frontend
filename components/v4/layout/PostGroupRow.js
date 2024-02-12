@@ -51,26 +51,34 @@ const PostGroupRow = ({ largePost, smallPosts, description,title,topicObject }) 
       </div> */}
       {/* <SmallPostsGroup smallPosts={smallPosts?.slice(0,3)}/> */}
       {smallPosts.map((post,index)=>{
-        if(!post?.attributes){
-          post.attributes = post
+        let p = post?.attributes
+        if(!p){
+          p=post
         }
-          let url = post?.attributes?.featuredImage?.data?.attributes?.url;
+        console.log(p)
+        // if(!post?.attributes && post){
+        //   p.attributes = post
+        // }
+          let url = p?.featuredImage?.data?.attributes?.url;
           const coverImage = url
             ? url
-            : post?.attributes?.legacyFeaturedImage?.mediaItemUrl;
-            let authorData = post.attributes?.author?.data?.attributes
+            : p?.legacyFeaturedImage?.mediaItemUrl;
+            let authorData = p?.author?.data?.attributes
             let avatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
-        return(
-            <SmallCard
-            link={`/post/${post?.attributes?.slug}`}
-            avatar={avatar}
-            author={post?.attributes?.author?.data?.attributes}
-            image={coverImage}
-            date={post?.attributes?.date}
-            title={post?.attributes?.title}
-            tags={post?.attributes?.tags?.data}
-        />
-        )
+        if(p){
+
+          return(
+          <SmallCard
+          link={`/post/${p?.slug}`}
+          avatar={avatar}
+          author={p?.author?.data?.attributes}
+          image={coverImage}
+          date={p?.date}
+          title={p?.title}
+          tags={p?.tags?.data}
+      />
+      )
+        }
       })}
     </div>
     </>

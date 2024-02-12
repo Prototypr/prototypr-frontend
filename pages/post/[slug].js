@@ -338,15 +338,7 @@ const date = post.attributes.date
             Related Articles
           </h1>
           <div className="mt-10">
-            {relatedPosts?.data?.length > 0 ? <PostGroupRow smallPosts={relatedPosts.data} />:null
-              // relatedPosts.data.map((item, index) => {
-              //   return (
-              //     <ProductItem key={`product_item_${index}`} post={item} />
-              //     // <TopicTopItem key={index} topic={item}/>
-              //   );
-              // })
-              
-              }
+            {relatedPosts?.data?.length > 0 ? <PostGroupRow smallPosts={relatedPosts.data} />:null }
           </div>
         </div>
         {/* {post.attributes?.template !== 2 && (
