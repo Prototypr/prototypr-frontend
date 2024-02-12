@@ -46,7 +46,7 @@ export default function AuthorBio({ author, slug, title }) {
         <div className="w-full border-b border-gray-200 my-10" />
         <div className="flex flex-col sm:flex-row sm:justify-between">
           <div className="flex flex-col w-full">
-            <div className="w-32 md:w-auto flex justify-center">
+            <div className="w-32 mx-auto flex justify-center">
               <a href={"/people/" + author?.slug}>
                 <Image
                   width={100}

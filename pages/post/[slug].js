@@ -6,10 +6,6 @@ import Container from "@/components/container";
 import useUser from "@/lib/iron-session/useUser";
 import Date from "@/components/date";
 
-// const TopicTopItem = dynamic(
-//   () => import("@/components/new-index/TopicTopItem"),
-//   { ssr: true }
-// );
 import ProductItem from "@/components/new-index/ProductItem";
 
 
@@ -28,16 +24,12 @@ const NoticeTranslation = dynamic(
 );
 
 import { transformPost, transformPostList } from "@/lib/locale/transformLocale";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
-import { Waypoint } from "react-waypoint";
 import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
-import SignupSidebar from "@/components/newsletter/SignupSidebar";
-import SponsorSidebarCard from "@/components/SponsorSidebarCard";
-import { SIDEBAR_STICKY_OFFSET, TOTAL_STATIC_POSTS } from "@/lib/constants";
+import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import PostHeader from "@/components/post-header";
-// import Avatar from "@/components/avatar";
 import SocialShare from "@/components/SocialShare";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
@@ -149,7 +141,7 @@ const date = post.attributes.date
       preview={preview}
     >
       <Container padding={false} maxWidth="max-w-full mx-auto -mt-[96px] bg-gray-100/20">
-        <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto px-3 md:px-0 mx-auto bg-gray-100/20">
+        <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto mx-auto bg-gray-100/20">
           {user?.isAdmin && (
             <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white mr-16 right-0 p-4 rounded shadow">
               <p className="text-sm">Hi, Admin 👩‍✈️</p>
@@ -160,7 +152,7 @@ const date = post.attributes.date
           )}
 
           {/* <Alert preview={preview} /> */}
-          <main className="pb-20 gap-2 col-span-12 lg:col-span-12 overflow-x-hidden px-3 md:px-8 xl:px-0">
+          <main className="pb-20 gap-2 col-span-12 lg:col-span-12 overflow-x-hidden px-0 md:px-8 xl:px-0">
             {/* {post?.id && process.env.NODE_ENV === "production" && (
               <WMPostTracker postId={post?.id} post={post} />
             )} */}
@@ -216,12 +208,12 @@ const date = post.attributes.date
                       </div>
 
                       </div>
-                      <div className="h-[550px] w-[1020px] bg-blue-50 mx-auto z-30 -mt-[100px] relative rounded-2xl shadow-md outline outline-1 outline-gray-300/20 overflow-hidden">
-                        <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[550px] w-[1020px] bg-gray-100 mx-auto z-30 rounded-2xl"/>
-                        <Image width={1020} height={550} loader={gumletLoader} className="h-full z-20 relative h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto" src={image}/>
+                      <div className="h-[300px] md:h-[550px] px-4 md:px-0 max-w-full w-[1020px] md:bg-blue-50 mx-auto z-30 -mt-[120px] md:-mt-[100px] relative rounded-2xl shadow-md outline outline-1 outline-gray-300/20 overflow-hidden">
+                        <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[300px] md:h-[550px] w-[1020px] md:bg-gray-100 mx-auto z-30 rounded-2xl"/>
+                        <Image width={1020} height={550} loader={gumletLoader} className="h-full z-20 relative h-[300px] md:h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto" src={image}/>
                       </div>
                    
-                   <div className="w-full flex justify-between max-w-[1020px] mx-auto mt-8">
+                   <div className="w-full flex justify-between max-w-[1020px] mx-auto mt-8 px-3 md:px-0">
 
                       {author ?(        <div className="">
           <div className="flex justify-between">
@@ -290,7 +282,7 @@ const date = post.attributes.date
                     <div className="z-0 -mt-4 h-[60%] w-full bg-gradient-to-b from-blue-100/60 to-gray-100/20 absolute top-0 left-0"/>
 
                  </div>
-                <article className="z-10 relative">
+                <article className="z-10 relative px-3 md:px-0">
                   {/* <Head> */}
                   {/* <title>
                   {post.attributes?.title} | Prototypr
