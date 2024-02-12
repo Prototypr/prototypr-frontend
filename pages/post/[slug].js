@@ -81,6 +81,9 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
     : post?.ogImage
     ? post?.ogImage.opengraphImage
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+
+    console.log(image)
+    console.log(post)
   const canonical = post?.attributes?.seo?.canonical
     ? post?.attributes?.seo?.canonical
     : post?.attributes?.slug &&
@@ -156,7 +159,7 @@ const date = post.attributes.date
       preview={preview}
     >
       <Container padding={false} maxWidth="max-w-full mx-auto -mt-[96px] bg-gray-100/20">
-        <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto px-3 mx-auto">
+        <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto px-3 md:px-0 mx-auto">
           {user?.isAdmin && (
             <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white mr-16 right-0 p-4 rounded shadow">
               <p className="text-sm">Hi, Admin 👩‍✈️</p>
@@ -183,7 +186,7 @@ const date = post.attributes.date
 
                     <div 
                     style={{"backgroundImage":"linear-gradient(rgba(32, 52, 144,0.2) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.2) 1px, rgba(247, 247, 247,0.2) 1px)","backgroundSize":"26px 26px"}}
-                    className="relative mx-auto w-[1301px] border-b border-r border-blue-500/10 max-w-full z-10">
+                    className="relative mx-auto w-[1301px] border-b border-b-indigo-500/30 border-r border-indigo-500/10 max-w-full z-10">
                           {!post.currentLocaleAvailable && <NoticeTranslation />}
 
                         <div className="pt-4">
@@ -223,7 +226,10 @@ const date = post.attributes.date
                       </div>
 
                       </div>
-                    <img className="border border-[3px] border-white z-20 relative -mt-[80px] max-h-[550px] w-full object-cover rounded-2xl max-w-[1050px] shadow-md border border-1 border-gray-200/80 mx-auto" src={image}/>
+                      <div className="h-[550px] w-[1020px] bg-blue-50 border border-[3px] border-white mx-auto z-30 -mt-[80px] relative rounded-2xl shadow-md outline outline-1 outline-gray-300/20 overflow-hidden">
+                        <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[544px] w-[1014px] bg-gray-100 mx-auto z-30 rounded-2xl"/>
+                        <Image width={1014} height={544} loader={gumletLoader} className="h-full z-20 relative h-[544px] w-full object-cover rounded-2xl max-w-[1014px] mx-auto" src={image}/>
+                      </div>
                    
                    <div className="w-full flex justify-between max-w-[1020px] mx-auto mt-6">
 

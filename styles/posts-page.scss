@@ -51,7 +51,7 @@ figure, pre{
             font-size:20px;
             font-family:"Inter", serif!important;
     }
-    strong{
+    strong,b{
         font-weight: 600;
     }
      a:not(.headline){
@@ -180,8 +180,13 @@ figure, pre{
    }
    figure img, p>img{
     border-radius:4px;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    border: 1px solid #f8f8f8;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    border: 1px solid #efefef;
+   }
+   img[alt="decorative section divider"]{
+    border-radius:4px;
+    box-shadow:none;
+    border: 0px;
    }
    [data-card]{
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -206,7 +211,7 @@ figure, pre{
   figcaption{
   margin-top:14px!important;
   font-size: 1rem;
-  color: #718096;
+  color: #242424b6;
   margin-top: -0.5rem;
   text-align: center;
   max-width: 40rem!important;

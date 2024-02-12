@@ -16,7 +16,7 @@ export default function AuthorBio({ author, slug, title }) {
         className="flex md:px-0 justify-between mx-auto"
         style={{ maxWidth: "43rem" }}
       >
-        <div className="my-auto mx-auto text-center pt-20">
+        <div className="my-auto mx-auto text-center pt-12">
           {/* <div className="w-full border-b border-gray-300 my-8" /> */}
           <div className="text-xs uppercase mb-4 mx-auto font-medium text-gray-600">
             Share to your friends
