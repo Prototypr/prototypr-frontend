@@ -49,7 +49,7 @@ const StickyFooterCTA = ({title, description, buttonText}) => {
           // className="fixed bottom-0 rounded-none md:bottom-4 max-w-3xl w-full px-5 py-4 h-auto md:rounded-2xl border border-black border-opacity-10 bg-[#2f62c7] z-[100]"
           className="fixed bottom-0 w-full md:bottom-3 bg-gradient-to-t shadow-md overflow- from-blue-50 border border-indigo-900/10 to-white md:w-[80%] md:max-w-[1120px] md:rounded-2xl h-auto z-[100]"
         >
-              <img src={`/static/images/robo2.png`} className="w-[76px] md:w-[100px] drop-shadow-xl z-40 ml-4 md:ml-0 left-0 absolute bottom-0 -mb-[15px] md:-mb-[25px] -scale-x-100"/>
+              <img src={`/static/images/robo2.png`} className="w-[76px] md:w-[104px] drop-shadow-xl z-40 ml-4 md:ml-0 left-0 absolute bottom-0 -mb-[15px] md:-mb-[25px] -scale-x-100"/>
           <Container  maxWidth="max-w-[1320px] z-30 relative overflow-hidden">
               <div  className="absolute top-0 left-0 w-full h-full md:rounded-2xl -ml-0.5 -mt-0.5" style={{"backgroundColor":"#ffffff","opacity":"0.1","backgroundImage":"linear-gradient(#203490 1.5px, transparent 1.5px), linear-gradient(to right, #203490 1.5px, #ffffff 1.5px)","backgroundSize":"30px 30px"}}/>
 
@@ -57,11 +57,11 @@ const StickyFooterCTA = ({title, description, buttonText}) => {
               <div className="hidden md:flex flex-row justify-center items-center gap-4 md:gap-8">
                 <div>
                 </div>
-                <div className="flex flex-col md:ml-[68px]">
-                  <h1 className="text-base font-medium text-black/80">
+                <div className="flex flex-col md:ml-[80px]">
+                  <h1 className="text-xl font-semibold text-black/00">
                     {title?title:`Become a member`}
                   </h1>
-                  <p className="text-sm max-w-md text-black/70">
+                  <p className="text-lg max-w-md text-black/80">
                   {description?description:`Get published, collect tools, and earn rewards.`}
                   </p>
                 </div>

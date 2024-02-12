@@ -20,17 +20,19 @@ export default function PostHeader({
   //   : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
   return <>
-    {template == 2 ? (
-      <div className="w-full relative h-56 md:h-80 rounded-xl mt-2 mb-4 md:mb-0 md:mt-6">
-        <Image
-          loader={gumletLoader}
-          objectFit="cover"
-          className="rounded-xl"
-          layout="fill"
-          src={coverImage}
-        />
-      </div>
-    ):template == 3 && 
+    {
+    // template == 2 ? (
+    //   <div className="w-full relative h-56 md:h-80 rounded-xl mt-2 mb-4 md:mb-0 md:mt-6">
+    //     <Image
+    //       loader={gumletLoader}
+    //       objectFit="cover"
+    //       className="rounded-xl"
+    //       layout="fill"
+    //       src={coverImage}
+    //     />
+    //   </div>
+    // ):
+    template == 3 && 
     <>
 <div className="text-center pt-16 md:pt-16">
 		<p className="text-sm mb-3 md:text-base text-green-500 font-bold">Web Monetization Guide <span className="text-gray-900">/</span> Uphold</p>

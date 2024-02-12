@@ -276,7 +276,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         </div>
       </Container>
 
-      {!user?.isLoggedIn && <StickyFooterCTA title="Create your account today"
+      {!user?.isLoggedIn && <StickyFooterCTA title="Welcome to Prototypr"
       description="Join today to make posts and grow with us."
       />}
       {/* <NewsletterSection title="Get the best tools every week"/> */}

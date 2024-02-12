@@ -249,6 +249,10 @@ figure, pre{
     }
    }
    blockquote.wp-block-quote{
+    em{
+        font-style: normal!important;
+    }
+    font-style: normal!important;
     strong{
         font-weight: 300!important;
     }
