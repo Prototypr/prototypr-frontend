@@ -59,11 +59,11 @@ const Navbar = ({
 
   return (
     <>
-      <nav id="main-nav" className={`font-inter fixed top-2 w-full`} style={{zIndex:99}}>
+      <nav id="main-nav" className={`font-inter fixed top-0 md:top-2 w-full`} style={{zIndex:99}}>
         <div
-          className={`w-[97%] search-wide ${
+          className={`w-full md:w-[97%] search-wide ${
             maxWidth ? maxWidth : "max-w-[1020px]"
-          } bg-white/90 shadow backdrop-blur-lg mx-auto rounded-[60px] border-black px-3 pl-6`}
+          } bg-white/90 shadow backdrop-blur-lg mx-auto md:rounded-[60px] border-black px-3 pl-6`}
         >
           <div className="relative flex h-14 items-center justify-between">
             {/* movil menu button */}
