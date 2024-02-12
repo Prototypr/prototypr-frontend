@@ -37,21 +37,17 @@ import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import { SIDEBAR_STICKY_OFFSET, TOTAL_STATIC_POSTS } from "@/lib/constants";
 import PostHeader from "@/components/post-header";
-import Avatar from "@/components/avatar";
+// import Avatar from "@/components/avatar";
 import SocialShare from "@/components/SocialShare";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
-const WMPostTracker = dynamic(
-  () => import("@/components/WebMonetization/WMPostTracker"),
-  {
-    ssr: false,
-  }
-);
-const KoFiButton = dynamic(
-  () => import("@/components/ko-fi-button/Ko-Fi-Button"),
-  { ssr: false }
-);
+// const WMPostTracker = dynamic(
+//   () => import("@/components/WebMonetization/WMPostTracker"),
+//   {
+//     ssr: false,
+//   }
+// );
 
 export default function Post({ post, preview, relatedPosts, postContent }) {
   const router = useRouter();
@@ -100,10 +96,6 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
 
     const authorName=`${author?.firstName ? author?.firstName:''}${author?.lastName ? ' '+author?.lastName:''} ${(!author?.firstName && !author?.lastName) ? author?.name:''}`
 
-    // const github = getGithubHandle(author?.github);
-    // const twitter = getTwitterHandle(author?.twitter);
-    // const dribbble = getDribbbleHandle(author?.dribbble);
-    // const kofi = getKofiHandle(author?.kofi);
 
 const date = post.attributes.date
   const paymentPointer =
@@ -157,7 +149,7 @@ const date = post.attributes.date
       preview={preview}
     >
       <Container padding={false} maxWidth="max-w-full mx-auto -mt-[96px] bg-gray-100/20">
-        <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto px-3 md:px-0 mx-auto">
+        <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto px-3 md:px-0 mx-auto bg-gray-100/20">
           {user?.isAdmin && (
             <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white mr-16 right-0 p-4 rounded shadow">
               <p className="text-sm">Hi, Admin 👩‍✈️</p>
@@ -183,8 +175,8 @@ const date = post.attributes.date
                  <div className="relative pt-[96px]">
 
                     <div 
-                    style={{"backgroundImage":"linear-gradient(rgba(32, 52, 144,0.2) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.2) 1px, rgba(247, 247, 247,0.2) 1px)","backgroundSize":"26px 26px"}}
-                    className="relative mx-auto w-[1301px] border-b border-b-indigo-500/30 border-r border-indigo-500/10 max-w-full z-10">
+                    style={{"backgroundImage":"linear-gradient(rgba(32, 52, 144,0.16) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.16) 1px, rgba(247, 247, 247,0.16) 1px)","backgroundSize":"26px 26px"}}
+                    className="relative mx-auto w-[1301px] border-b border-b-indigo-500/20 border-r border-indigo-500/10 max-w-full z-10">
                           {!post.currentLocaleAvailable && <NoticeTranslation />}
 
                         <div className="pt-4">
@@ -224,9 +216,9 @@ const date = post.attributes.date
                       </div>
 
                       </div>
-                      <div className="h-[550px] w-[1020px] bg-blue-50 border border-[3px] border-white mx-auto z-30 -mt-[80px] relative rounded-2xl shadow-md outline outline-1 outline-gray-300/20 overflow-hidden">
-                        <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[544px] w-[1014px] bg-gray-100 mx-auto z-30 rounded-2xl"/>
-                        <Image width={1014} height={544} loader={gumletLoader} className="h-full z-20 relative h-[544px] w-full object-cover rounded-2xl max-w-[1014px] mx-auto" src={image}/>
+                      <div className="h-[550px] w-[1020px] bg-blue-50 mx-auto z-30 -mt-[80px] relative rounded-2xl shadow-md outline outline-1 outline-gray-300/20 overflow-hidden">
+                        <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[550px] w-[1020px] bg-gray-100 mx-auto z-30 rounded-2xl"/>
+                        <Image width={1020} height={550} loader={gumletLoader} className="h-full z-20 relative h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto" src={image}/>
                       </div>
                    
                    <div className="w-full flex justify-between max-w-[1020px] mx-auto mt-6">
@@ -238,20 +230,18 @@ const date = post.attributes.date
                 <Link href={`/people/${author.slug}`}>
                   <div className="cursor-pointer block">
                   <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 relative mr-4 my-auto">
                         {avatar && (
                           <Image
                             src={`${
                               avatar.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ""
                             }${avatar}`}
-                            width={0}
-                            height={0}
-                            className="rounded-full w-full h-full object-cover"
+                            width={64}
+                            height={64}
+                            className="rounded-full object-cover w-[64px] h-[64px] mr-3"
                             alt={authorName}
                             loader={gumletLoader}
                           />
                         )}
-                      </div>
                       <div className="flex flex-col justify-center">
                         <div className="text-lg hover:underline font-medium">{authorName}</div>
                         {date && (
@@ -297,7 +287,7 @@ const date = post.attributes.date
                             })}
                       </div> */}
                    </div>
-                    <div className="z-0 -mt-4 h-[80%] w-full bg-gradient-to-b from-blue-100/60 via-blue-100/50 to-gray-100/20 absolute top-0 left-0"/>
+                    <div className="z-0 -mt-4 h-[60%] w-full bg-gradient-to-b from-blue-100/60 to-gray-100/20 absolute top-0 left-0"/>
 
                  </div>
                 <article className="z-10 relative">
@@ -385,226 +375,6 @@ const date = post.attributes.date
     </Layout>
   );
 }
-
-const Sidebar = ({ relatedPosts,tags, paddingTop, author }) => {
-  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
-
-  const _handleWaypointEnter = () => {
-    setStickyPaddingTop("pt-0");
-  };
-  const _handleWaypointLeave = () => {
-    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
-  };
-  
-
-  const avatar = author?.avatar?.data?.attributes?.url
-    ? author?.avatar?.data?.attributes?.url
-    : author?.legacyAvatar
-    ? author?.legacyAvatar
-    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-
-  const github = getGithubHandle(author?.github);
-  const twitter = getTwitterHandle(author?.twitter);
-  const dribbble = getDribbbleHandle(author?.dribbble);
-  const kofi = getKofiHandle(author?.kofi);
-
-  return (
-    <div className={`${paddingTop} relative col-span-4 max-w-[410px]`}>
-      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
-      <div
-        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
-      >
-        <aside className="h-screen px-10 sticky top-0 py-0">
-          <div className="flex flex-col grid gap-10">
-            <div>
-              {author ? (
-                <div className="flex rounded-xl flex-col">
-                  <div className={`${stickyPaddingTop=='pt-0'?'w-[80px] h-[80px] mb-3':'w-[44px] h-[44px] mb-1'} relative border border-gray-100 rounded-full shadow-sm `}>
-                    {avatar ? (
-                      <Link href={`/people/${author.slug}`}>
-                        <Image
-                          src={avatar}
-                          objectFit="cover"
-                          layout="fill"
-                          className="rounded-full"
-                          alt={"user avatar"}
-                          loader={gumletLoader}
-                        />
-                      </Link>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <Link href={`/people/${author.slug}`}>
-                      <h1 className={`${stickyPaddingTop=='pt-0'?'text-xl':'text-base'} mt-1 font-semibold leading-normal text-gray-800`}>
-                        {/* {author?.name ? author?.name : ""} */}
-                        {`${author?.firstName ? author?.firstName : ""}
-                  ${author?.lastName ? " " + author?.lastName : ""}
-                  ${
-                    !author?.firstName && !author?.lastName ? author?.name : ""
-                  }`}
-                      </h1>
-                    </Link>
-                    {author?.jobrole && (
-                      <h3 className="text-gray-500 line-clamp-1 text-sm font-normal leading-normal mb-1 text-gray-700">
-                        {author?.jobrole}
-                      </h3>
-                    )}
-                    {author?.bio && (
-                      <div
-                        style={{ maxWidth: "40rem" }}
-                        className="text-sm  line-clamp-3 overflow-hidden text-gray-500 mt-3 max-w-lg"
-                      >
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: author.bio,
-                          }}
-                        />
-                      </div>
-                    )}
-                    <div className="flex mt-4 z-20">
-                      {author?.url && (
-                        <a href={author?.url}>
-                          <div
-                            style={{
-                              width: "25px",
-                              height: "25px",
-                              marginTop: "2px",
-                            }}
-                            className="text-sm flex justify-center flex-start leading-normal mr-2 text-gray-600 font-normal p-1 bg-gray-200 shadow-sm rounded-full p-1"
-                          >
-                            <img
-                              className=" my-auto "
-                              data-src="/static/images/icons/link.svg"
-                            />
-                            {/* <div className=""><a className="underline text-gray-600" target="_blank" href={this.props.user.url}>{this.props.user.url.replace(/(^\w+:|^)\/\//, '').replace(/\/+$/, "")}</a></div> */}
-                          </div>
-                        </a>
-                      )}
-
-                      {twitter && (
-                        <a
-                          className="link block mr-2"
-                          href={`https://twitter.com/${twitter}`}
-                          target="_blank"
-                        >
-                          <img
-                            style={{ width: "28px" }}
-                            className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                            data-src="/static/images/icons/twitter.svg"
-                          />
-                        </a>
-                      )}
-                      {dribbble && (
-                        <a
-                          className="link block mr-2"
-                          href={`https://dribbble.com/${dribbble}`}
-                          target="_blank"
-                        >
-                          <img
-                            style={{ width: "28px" }}
-                            className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                            data-src="/static/images/icons/dribbble.svg"
-                          />
-                        </a>
-                      )}
-                      {github && (
-                        <a
-                          className="link block mr-2"
-                          href={`https://github.com/${github}`}
-                          target="_blank"
-                        >
-                          <img
-                            style={{ width: "28px" }}
-                            className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                            data-src="/static/images/icons/github.svg"
-                          />
-                        </a>
-                      )}
-                      {kofi ? (
-                        <div className="mb-3 inline-block">
-                          <KoFiButton
-                            color="#53b1e6"
-                            label={"Buy me a coffee"}
-                            kofiId={kofi}
-                          />
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                    {author?.availability == "1" && (
-                      <a
-                        className="cursor-pointer"
-                        target="_blank"
-                        href={`${author?.url ? author?.url : "#"}`}
-                      >
-                        <div className="bg-blue-800 mr-2 mb-2 mt-4 uppercase text-white text-xs px-3 py-2 rounded inline-block">
-                          <span className="hidden sm:block">
-                            🔥 Available for hire
-                          </span>
-                          <span className="sm:hidden">🔥 Hire me</span>
-                        </div>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                ""
-              )}
-              {/* tag cloud */}
-              <div className="font-inter bg-white mt-3 p-6 rounded-xl border border-black/8">
-                    <h3 className="text-base font-semibold mb-3">Tags</h3>
-                    <div className="flex flex-wrap">
-                      {tags.map((tag, index) => {
-                        return (
-                          <Link href={`/posts/${tag?.attributes?.slug}/page/1`}>
-                            <div className={`inline-block text-sm px-3 py-1.5 bg-[#eef1f8] bg-opacity-60 border border-gray-200 rounded-full mr-3 mb-3`}>
-                            {tag?.attributes?.name}
-                        </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-              {/* EMAIL FORM */}
-              <div className="w-full mt-6 rounded-xl p-5 border border-black/8">
-                <h3 className="text-base font-semibold mb-2 text-gray-900">
-                  Dive deeper
-                </h3>
-                <p className="text-base text-gray-500 mb-6">
-                  Get a curated selection of the best articles from Prototypr in
-                  your inbox.
-                </p>
-                <SignupSidebar />
-              </div>
-
-              <div className="mt-8">
-                <SponsorSidebarCard
-                  sponsorLocation="article"
-                  page={"/article/*"}
-                />
-              </div>
-            </div>
-
-            {/* <div className="w-full flex flex-col grid gap-2">
-
-            {relatedPosts?.data?.length > 0 &&
-              relatedPosts.data.map((item, index) => {
-                return (
-                  <ProductItem key={`product_item_${index}`} post={item} />
-                  // <TopicTopItem key={index} topic={item}/>
-                );
-              })}
-            </div> */}
-          </div>
-        </aside>
-      </div>
-    </div>
-  );
-};
-
 export async function getStaticProps({ params, preview = null, locale }) {
   const data = await getPost(params.slug, preview);
   //if no post found, 404
@@ -679,61 +449,4 @@ export async function getStaticPaths({ locales }) {
       [],
     fallback: "blocking",
   };
-}
-
-function getTwitterHandle(string) {
-  if (!string) {
-    return false;
-  }
-  //https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
-  //remove protocols
-  var result = string.replace(/(^\w+:|^)\/\//, "");
-  result = result.replace(/\//g, "");
-  result = result.replace("twitter.com", "");
-  result = result.replace("www.", "");
-  result = result.replace("@", "");
-
-  return "@" + result;
-}
-function getDribbbleHandle(string) {
-  if (!string) {
-    return false;
-  }
-  //https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
-  //remove protocols
-  var result = string.replace(/(^\w+:|^)\/\//, "");
-  result = result.replace(/\//g, "");
-  result = result.replace("dribbble.com", "");
-  result = result.replace("www.", "");
-  result = result.replace("@", "");
-
-  return result;
-}
-function getKofiHandle(string) {
-  if (!string) {
-    return false;
-  }
-  //https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
-  //remove protocols
-  var result = string.replace(/(^\w+:|^)\/\//, "");
-  result = result.replace(/\//g, "");
-  result = result.replace("kofi.com", "");
-  result = result.replace("www.", "");
-  result = result.replace("@", "");
-
-  return result;
-}
-function getGithubHandle(string) {
-  if (!string) {
-    return false;
-  }
-  //https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
-  //remove protocols
-  var result = string.replace(/(^\w+:|^)\/\//, "");
-  result = result.replace(/\//g, "");
-  result = result.replace("github.com", "");
-  result = result.replace("www.", "");
-  result = result.replace("@", "");
-
-  return result;
 }
