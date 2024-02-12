@@ -31,7 +31,8 @@ const MediumPost = ({link, title, image, tags, date, avatar, author, excerpt, im
             </h2>
           </Link>
           <Link href={link??''}>
-            <p className="my-3 text-gray-600 line-clamp-2">{excerpt}</p>
+            <div className="my-3 text-gray-600 line-clamp-2" dangerouslySetInnerHTML={{__html:excerpt}}/>
+            {/* <p className="">{excerpt}</p> */}
           </Link>
           
         <div className="mt-3 mb-0.5">
