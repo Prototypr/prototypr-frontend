@@ -197,7 +197,7 @@ const date = post.attributes.date
                             })}
                       </div>
                         </div>
-                      <div className="pb-[114px]">
+                      <div className="pb-[148px]">
                         <PostHeader
                         slug={post?.attributes?.slug}
                         title={post?.attributes?.title}
@@ -212,16 +212,16 @@ const date = post.attributes.date
                         author={post.attributes?.author?.data?.attributes}
                         template={post.attributes?.template}
                       />
-                      {/* <p className="mx-auto text-center text-md my-3 text-black/70"><Date dateString={post.attributes.date} /></p> */}
+                      <p className="mx-auto text-center text-md my-3 text-black/70">Published <Date dateString={post.attributes.date} /></p>
                       </div>
 
                       </div>
-                      <div className="h-[550px] w-[1020px] bg-blue-50 mx-auto z-30 -mt-[80px] relative rounded-2xl shadow-md outline outline-1 outline-gray-300/20 overflow-hidden">
+                      <div className="h-[550px] w-[1020px] bg-blue-50 mx-auto z-30 -mt-[100px] relative rounded-2xl shadow-md outline outline-1 outline-gray-300/20 overflow-hidden">
                         <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[550px] w-[1020px] bg-gray-100 mx-auto z-30 rounded-2xl"/>
                         <Image width={1020} height={550} loader={gumletLoader} className="h-full z-20 relative h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto" src={image}/>
                       </div>
                    
-                   <div className="w-full flex justify-between max-w-[1020px] mx-auto mt-6">
+                   <div className="w-full flex justify-between max-w-[1020px] mx-auto mt-8">
 
                       {author ?(        <div className="">
           <div className="flex justify-between">
@@ -237,18 +237,18 @@ const date = post.attributes.date
                             }${avatar}`}
                             width={64}
                             height={64}
-                            className="rounded-full object-cover w-[64px] h-[64px] mr-3"
+                            className="rounded-full object-cover w-[64px] h-[64px] mr-4"
                             alt={authorName}
                             loader={gumletLoader}
                           />
                         )}
                       <div className="flex flex-col justify-center">
-                        <div className="text-lg hover:underline font-medium">{authorName}</div>
-                        {date && (
+                        <div className="text-lg mb-0 pb-0 hover:underline font-medium">By {authorName}</div>
+                        {/* {date && (
                           <div className="text-base text-black/80">
                             Published <Date dateString={date} />
                           </div>
-                        )}
+                        )} */}
                       </div>
                     </div>
                     {/* <Avatar
@@ -330,7 +330,7 @@ const date = post.attributes.date
           {!user?.isLoggedIn && <StickyFooterCTA title="The best stories every week"buttonText="Sign up for free" />}
           </div>
         </div> */}
-       {!user?.isLoggedIn && <StickyFooterCTA title="Get the latest stories"
+       {!user?.isLoggedIn && <StickyFooterCTA title="Create your account today"
       description="Join today to make posts and grow with us."
       />}
           
