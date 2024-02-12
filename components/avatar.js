@@ -22,7 +22,7 @@ export default function Avatar({ name, picture, date }) {
         )}
       </div>
       <div className="flex flex-col justify-center">
-        <div className="text-lg hover:underline font-semibold">{name}</div>
+        <div className="text-lg hover:underline font-medium">{name}</div>
         {date && (
           <div className="text-base text-gray-700">
             <Date dateString={date} />

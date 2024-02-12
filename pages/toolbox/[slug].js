@@ -27,14 +27,14 @@ const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
 import {
   getAllPostsWithSlug,
   getTool,
-  getAllToolsForHomeStatic,
+  // getAllToolsForHomeStatic,
   getPopularTopics,
 } from "@/lib/api";
-import ToolCard from "@/components/v4/card/ToolCard";
+// import ToolCard from "@/components/v4/card/ToolCard";
 // import BigTag from "@/components/v4/tag/BigTag";
 import Footer from "@/components/footer";
 import NewsletterSection from "@/components/v4/section/NewsletterSection";
-import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
+// import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
 import PopularTagsSection from "@/components/v4/section/PopularTagsSection";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import Link from "next/link";
@@ -64,7 +64,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
   return (
     <>
       <div className="w-full mx-auto">
-      <Container padding={false} maxWidth="w-full relative z-0" >
+      <Container padding={false} maxWidth="w-full relative z-0 " >
         <img src='/static/images/toolbox/squares.svg' className="border-b border-gray-200/90 opacity absolute w-full h-full object-cover top-0 left-0"/>
 
           <div className={`${gallery?.length?'pb-[98px]':'pb-[54px]'} pt-[90px] md:pt-[132px] shadow-md -mt-[96px] md:pt-[112px] relative overflow-hidden p-6 border-gray-200`}>
@@ -154,7 +154,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         className="flex"
       >
 
-                        <div className="inline-block text-base px-3 py-1 cursor-pointer bg-blue-100/60 rounded-full mr-3 mb-3 text-blue-900 text-[15px] font-base outline outline-1 outline-blue-200/80 flex flex-col justify-center">
+                        <div className="inline-block capitalize text-base px-3 py-1 cursor-pointer bg-blue-100/60 rounded-full mr-3 mb-3 text-blue-900 text-[15px] font-base outline outline-1 outline-blue-200/80 flex flex-col justify-center">
                           {tag.attributes.name}
                         </div>
       </Link>

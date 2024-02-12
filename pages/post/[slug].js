@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "@/components/container";
 import useUser from "@/lib/iron-session/useUser";
+import Date from "@/components/date";
 
 // const TopicTopItem = dynamic(
 //   () => import("@/components/new-index/TopicTopItem"),
@@ -36,6 +37,8 @@ import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import { SIDEBAR_STICKY_OFFSET, TOTAL_STATIC_POSTS } from "@/lib/constants";
 import PostHeader from "@/components/post-header";
+import Avatar from "@/components/avatar";
+import SocialShare from "@/components/SocialShare";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -50,7 +53,7 @@ const KoFiButton = dynamic(
   { ssr: false }
 );
 
-export default function Post({ post, preview, relatedPosts }) {
+export default function Post({ post, preview, relatedPosts, postContent }) {
   const router = useRouter();
 
   const { user, isLoading } = useUser({
@@ -60,6 +63,7 @@ export default function Post({ post, preview, relatedPosts }) {
   if (!router.isFallback && !post?.attributes?.slug) {
     return <ErrorPage statusCode={404} />;
   }
+
 
   const tags = post?.attributes?.tags?.data;
   const title = post?.attributes?.seo?.opengraphTitle
@@ -86,6 +90,21 @@ export default function Post({ post, preview, relatedPosts }) {
     : post?.attributes?.slug &&
       `https://prototypr.io/post/${post?.attributes.slug}`;
 
+      const author = post.attributes?.author?.data?.attributes
+      const avatar = author?.avatar?.data?.attributes?.url
+    ? author?.avatar?.data?.attributes?.url
+    : author?.legacyAvatar
+    ? author?.legacyAvatar
+    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+
+    const authorName=`${author?.firstName ? author?.firstName:''}${author?.lastName ? ' '+author?.lastName:''} ${(!author?.firstName && !author?.lastName) ? author?.name:''}`
+
+    // const github = getGithubHandle(author?.github);
+    // const twitter = getTwitterHandle(author?.twitter);
+    // const dribbble = getDribbbleHandle(author?.dribbble);
+    // const kofi = getKofiHandle(author?.kofi);
+
+const date = post.attributes.date
   const paymentPointer =
     post?.attributes?.author?.data?.attributes?.paymentPointer;
   const intl = useIntl();
@@ -136,7 +155,7 @@ export default function Post({ post, preview, relatedPosts }) {
       activeNav={"posts"}
       preview={preview}
     >
-      <Container padding={false} maxWidth="max-w-[1440px] mx-auto">
+      <Container padding={false} maxWidth="max-w-full mx-auto -mt-[96px] bg-gray-100/20">
         <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto px-3 mx-auto">
           {user?.isAdmin && (
             <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white mr-16 right-0 p-4 rounded shadow">
@@ -148,43 +167,148 @@ export default function Post({ post, preview, relatedPosts }) {
           )}
 
           {/* <Alert preview={preview} /> */}
-          <main className="pb-20 gap-2 col-span-12 lg:col-span-8  px-3 md:px-8 xl:px-0 py-10">
-            {post?.id && process.env.NODE_ENV === "production" && (
+          <main className="pb-20 gap-2 col-span-12 lg:col-span-12 overflow-x-hidden px-3 md:px-8 xl:px-0">
+            {/* {post?.id && process.env.NODE_ENV === "production" && (
               <WMPostTracker postId={post?.id} post={post} />
-            )}
+            )} */}
             {router.isFallback ? (
               <h1 className="text-6xl font-inter-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
                 Loading
               </h1>
             ) : (
               <>
-                <article>
+                  {/* <img src={'/static/images/check.svg'} className="absolute opacity-20 p-6 h-[298px] mt-[60px] top-0 left-0 w-full object-cover"/> */}
+                 
+                 <div className="relative pt-[96px]">
+
+                    <div 
+                    style={{"backgroundImage":"linear-gradient(rgba(32, 52, 144,0.2) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.2) 1px, rgba(247, 247, 247,0.2) 1px)","backgroundSize":"26px 26px"}}
+                    className="relative mx-auto w-[1301px] border-b border-r border-blue-500/10 max-w-full z-10">
+                          {!post.currentLocaleAvailable && <NoticeTranslation />}
+
+                        <div className="pt-4">
+
+                          <div className=" flex mb-3 justify-center flex-wrap">
+                        {tags.map((tag, index) => {
+                              return (
+                                <Link
+                href={`/toolbox/${tag.attributes.slug}/page/1`}
+                className="flex"
+              >
+
+                                <div className={`inline-block capitalize text-base px-3 py-1 cursor-pointer bg-blue-100/60 rounded-full ${index==tags?.length-1?'':'mr-3'} mb-3 text-blue-900 text-[15px] font-base outline outline-1 outline-blue-200 flex flex-col justify-center`}>
+                                  {tag.attributes.name}
+                                </div>
+              </Link>
+                              );
+                            })}
+                      </div>
+                        </div>
+                      <div className="pb-[114px]">
+                        <PostHeader
+                        slug={post?.attributes?.slug}
+                        title={post?.attributes?.title}
+                        coverImage={
+                          post?.attributes?.featuredImage?.data?.attributes?.url
+                            ? post?.attributes?.featuredImage?.data?.attributes?.url
+                            : post?.attributes?.legacyFeaturedImage
+                            ? post?.attributes?.legacyFeaturedImage
+                            : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                        }
+                        date={post.attributes.date}
+                        author={post.attributes?.author?.data?.attributes}
+                        template={post.attributes?.template}
+                      />
+                      {/* <p className="mx-auto text-center text-md my-3 text-black/70"><Date dateString={post.attributes.date} /></p> */}
+                      </div>
+
+                      </div>
+                    <img className="border border-[3px] border-white z-20 relative -mt-[80px] max-h-[550px] w-full object-cover rounded-2xl max-w-[1050px] shadow-md border border-1 border-gray-200/80 mx-auto" src={image}/>
+                   
+                   <div className="w-full flex justify-between max-w-[1020px] mx-auto mt-6">
+
+                      {author ?(        <div className="">
+          <div className="flex justify-between">
+            <div className="max-w-2xl">
+            
+                <Link href={`/people/${author.slug}`}>
+                  <div className="cursor-pointer block">
+                  <div className="flex items-center justify-between">
+                      <div className="w-12 h-12 relative mr-4 my-auto">
+                        {avatar && (
+                          <Image
+                            src={`${
+                              avatar.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ""
+                            }${avatar}`}
+                            width={0}
+                            height={0}
+                            className="rounded-full w-full h-full object-cover"
+                            alt={authorName}
+                            loader={gumletLoader}
+                          />
+                        )}
+                      </div>
+                      <div className="flex flex-col justify-center">
+                        <div className="text-lg hover:underline font-medium">{authorName}</div>
+                        {date && (
+                          <div className="text-base text-black/80">
+                            Published <Date dateString={date} />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    {/* <Avatar
+                      date={post.attributes.date}
+                      name={
+                      `${author?.firstName ? author?.firstName:''}
+                        ${author?.lastName ? ' '+author?.lastName:''}
+                        ${(!author?.firstName && !author?.lastName) ? author?.name:''}`
+                      }
+                      picture={avatar}
+                    /> */}
+                  </div>
+                </Link>
+            </div>
+          </div>
+        </div>
+              ):null}
+          <SocialShare
+            slug={post?.attributes?.slug}
+            title={title}
+            authorTwitter={author?.twitter}
+          />
+               {/* <div className=" flex mb-3 justify-center">
+                        {tags.map((tag, index) => {
+                              return (
+                                <Link
+                href={`/toolbox/${tag.attributes.slug}/page/1`}
+                className="my-auto"
+              >
+
+                                <div className={`inline-block capitalize text-base px-3 py-1 cursor-pointer bg-blue-100/60 rounded-full ${index==tags?.length-1?'':'mr-3'} mb-3 text-blue-900 text-[15px] font-base outline outline-1 outline-blue-200 flex flex-col justify-center`}>
+                                  {tag.attributes.name}
+                                </div>
+              </Link>
+                              );
+                            })}
+                      </div> */}
+                   </div>
+                    <div className="z-0 -mt-4 h-[80%] w-full bg-gradient-to-b from-blue-100/60 via-blue-100/50 to-gray-100/20 absolute top-0 left-0"/>
+
+                 </div>
+                <article className="z-10 relative">
                   {/* <Head> */}
                   {/* <title>
                   {post.attributes?.title} | Prototypr
                 </title> */}
                   {/* <meta property="og:image" content={post.attributes.ogImage} /> */}
                   {/* </Head> */}
-                  {!post.currentLocaleAvailable && <NoticeTranslation />}
-
-                  <PostHeader
-                    slug={post?.attributes?.slug}
-                    title={post?.attributes?.title}
-                    coverImage={
-                      post?.attributes?.featuredImage?.data?.attributes?.url
-                        ? post?.attributes?.featuredImage?.data?.attributes?.url
-                        : post?.attributes?.legacyFeaturedImage
-                        ? post?.attributes?.legacyFeaturedImage
-                        : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-                    }
-                    date={post.attributes.date}
-                    author={post.attributes?.author?.data?.attributes}
-                    template={post.attributes?.template}
-                  />
-                  <div className="max-w-[45rem] mx-auto blog-content">
+               
+                  <div className="max-w-[60rem] mx-auto blog-content">
                     <div
+                      className="max-w-full w-full mt-12"
                       dangerouslySetInnerHTML={{
-                        __html: post.attributes?.content,
+                        __html: postContent,
                       }}
                     />
                   </div>
@@ -200,12 +324,12 @@ export default function Post({ post, preview, relatedPosts }) {
             )}
           </main>
 
-          <Sidebar
+          {/* <Sidebar
             tags={tags}
             author={post.attributes?.author?.data?.attributes}
             relatedPosts={relatedPosts}
             paddingTop="hidden md:block pt-[76px]"
-          />
+          /> */}
         </div>
         {/* <div className="grid grid-cols-12">
           <div className="gap-0 col-span-12 lg:col-span-8">
@@ -497,10 +621,26 @@ export async function getStaticProps({ params, preview = null, locale }) {
     locale
   );
   //   console.log(data?.posts.data[0]?.attributes?.relatedArticles)
+  const removeFirstImageIfMatchModule = await import('@/lib/removeFirstImage');
+  const removeFirstImageIfMatch = removeFirstImageIfMatchModule.default;
+
+  const post = data?.posts?.data[0]
+  const image = post?.attributes?.seo?.opengraphImage
+    ? post?.attributes?.seo?.opengraphImage
+    : post?.attributes?.featuredImage?.data?.attributes?.url
+    ? post?.attributes?.featuredImage?.data?.attributes?.url
+    : post?.legacyFeaturedImage
+    ? post?.legacyFeaturedImage?.mediaItemUrl
+    : post?.ogImage
+    ? post?.ogImage.opengraphImage
+    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+
+  let html = removeFirstImageIfMatch(post?.attributes?.content, image)
 
   return {
     props: {
       preview,
+      postContent:html,
       post: {
         ...postData,
       },

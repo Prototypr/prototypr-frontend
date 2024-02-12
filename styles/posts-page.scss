@@ -6,22 +6,41 @@
         display:inline;
     }
 }
+// .blog-content img:first-of-type{
+//     margin-top:-100px!important;
+// }
+.block-iframe{
+    display: flex;
+    justify-content: center;
+}
+hr + p:empty {
+    display: none;
+  }
+  p:empty + p:empty {
+    display: none;
+  }
+  
+  p:empty + p:not(:empty) {
+    display: none;
+  }
 .blog-content{
+   
     *{
         overflow-wrap: break-word;
     }
     
     .wp-caption-text{margin-top:10px!important;}
 
-figure{
-      margin-bottom: 3.6rem;
+figure, pre{
+      margin-top:2.4rem;
+      margin-bottom: 2.8rem;
 }
 .lazyload-wrapper{
     figure{
         margin-bottom:0rem;
     }
 }
-    color:#2D3748;
+    color:#1c222c;
     font-size:1.14rem;
     font-weight: 400;
     h1,h2,h3,h4,h5{
@@ -32,9 +51,13 @@ figure{
             font-size:20px;
             font-family:"Inter", serif!important;
     }
+    strong{
+        font-weight: 600;
+    }
      a:not(.headline){
-        color:#2384de;
+        color:#242424;
         text-decoration:underline;
+        text-decoration-thickness: 2px;
     }
     p{
         margin-bottom: 1.25rem;
@@ -44,7 +67,7 @@ figure{
     h1{
         font-weight: 600;
         margin-top: 3.2rem;
-        margin-bottom: 2.6rem;
+        margin-bottom: 1.6rem;
         font-size: 2rem;
         font-weight: 500;
     }
@@ -54,51 +77,52 @@ figure{
         font-size: 1.6rem!important;
         padding-bottom: 0!important;
         font-weight: 500;
-        color: #1a202c;
+        color: #242424;
     }
     h3{
         margin-top: 2.6rem;
         margin-bottom: 1.25rem;
         font-size: 1.5rem;
         font-weight: 500;
-        color: #1a202c;
+        color: #242424;
     }
     h4{
         margin-top: 2rem;
         margin-bottom: 1.25rem;
         font-size: 1.22rem;
         font-weight: 500;
-        color: #1a202c;
+        color: #242424;
     }
     blockquote {
-        background: #f2f5f7;
+        // background: #f2f5f7;
         border-top-right-radius:6px;
         border-bottom-right-radius:6px;
-        border-left: 3px solid #1d3d7d;
+        border-left: 3px solid #242424;
         margin: 1.5em 10px;
         margin-top:2.5em!important;
         margin-bottom:2.5em!important;
-        padding: 0.5em 10px;
-        quotes: "\201C" "\201D" "\2018" "\2019";
-        color: #1d3d7d;
+        padding: 0.5em 20px;
+        // quotes: "\201C" "\201D" "\2018" "\2019";
+        color: #242424d1;
         margin-bottom: 1.25rem;
         p {
             display: inline;
-            font-weight: normal;
+            // font-weight: 300;
             font-style: italic;
         }
         strong{
             font-weight: normal;
         }
+        max-width: 46.4rem!important;
     }
-    blockquote:before {
-        color: #1d3d7d;
-        content: open-quote;
-        font-size: 4em;
-        line-height: .1em;
-        margin-right: 0.25em;
-        vertical-align: -0.4em;
-    }
+    // blockquote:before {
+    //     color: #1d3d7d;
+    //     content: open-quote;
+    //     font-size: 4em;
+    //     line-height: .1em;
+    //     margin-right: 0.25em;
+    //     vertical-align: -0.4em;
+    // }
     .wp-block-image.full-size img, .wp-block-cover{
         margin-top: 2.5rem;
         margin-bottom:2.5rem;
@@ -115,7 +139,7 @@ figure{
    ul{
     list-style-type: disc;
     list-style-position: inside;
-    margin: 1.5rem 0 1.5rem 1.5rem;
+    padding: 1.5rem 0 1.5rem 1.5rem;
     margin-bottom: 1.5rem!important;
         li{
             list-style-type: disc;
@@ -124,7 +148,7 @@ figure{
    ol{
     list-style-type: number;
     list-style-position: inside;
-    margin: 1.5rem 0 1.5rem 1.5rem;
+    padding: 1.5rem 0 1.5rem 1.5rem;
     margin-bottom: 1.5rem!important;
         li{
            list-style-type: number;
@@ -155,9 +179,13 @@ figure{
     margin-bottom:2.4rem;
    }
    figure img, p>img{
-    border-radius:16px;
-    // box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    border: 1px solid #edeef9;
+    border-radius:4px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    border: 1px solid #f8f8f8;
+   }
+   [data-card]{
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    border-radius: 4px;
    }
    figure>img.w-full, figure.size-large>img{
        width:44rem;
@@ -167,7 +195,7 @@ figure{
        p{
            max-width: 44rem;
         //    font-style:normal;
-           font-size:1.75rem;
+           font-size:1.8rem;
            line-height:2.5rem;
        }
    }
@@ -176,11 +204,12 @@ figure{
     width: 100%;
   }
   figcaption{
-  margin-top:16px!important;
-  font-size: .875rem;
+  margin-top:14px!important;
+  font-size: 1rem;
   color: #718096;
   margin-top: -0.5rem;
   text-align: center;
+  max-width: 40rem!important;
   }
   .p-3{
     padding:0.75rem;
@@ -213,16 +242,23 @@ figure{
     }
    }
    blockquote.wp-block-quote{
+    strong{
+        font-weight: 300!important;
+    }
+    max-width: 42.5rem!important;
     // margin: 2.5em auto;
     font-size:1.5rem;
     a{
-        color:#1d3d7d;
+        color:#7f7f7f;
+        font-weight: 300!important;
     }
     p{
-        color:#1d3d7d;
+        font-weight: 300!important;
+        color:#7f7f7f;
         display:inline;
+        font-style: normal!important;
     }
-    color:#1d3d7d;
+    color:#7f7f7f;
     background:#fff;
     border:0px;
     font-weight: 500;
@@ -240,7 +276,7 @@ figure{
    }
    blockquote.wp-block-quote:before {
     margin-right: 0.2em;
-    color: #334f9c;
+    color: #cacbcf;
     content: open-quote;
     quotes:"\201C" "\201D" "\2018" "\2019";
     font-size: 4em;
@@ -327,6 +363,7 @@ figure{
   .blog-page .blog-content video {
     width: 100%;
  }
+
 
  .blocks-gallery-item{
      list-style-type: none;
@@ -417,7 +454,7 @@ figure{
         .flex figcaption {
         text-align: center;
         font-size: 0.9rem;
-        color: #2D3748;
+        color: #1c222c;
         // margin-top: rem;
         }
     }
@@ -531,4 +568,23 @@ figure{
             pointer-events: none;
         }
     }
+}
+.blog-content{
+    .max-w-full{
+        max-width: 100%!important;
+    }
+    figure, img{
+        max-width: 100%!important;
+    }
+    p, h1, h2, h3, h4, ol, li, ul, iframe, figure, img, blockquote, figcaption, hr, div{
+        margin-left:auto;
+        margin-right: auto;
+    }
+    .twitter-tweet{
+        margin-top:40px!important;
+        margin-bottom:40px!important;
+    }
+    // figure{
+    //     display:inline
+    // }
 }
