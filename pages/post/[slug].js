@@ -82,9 +82,7 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
     ? post?.ogImage.opengraphImage
     : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
-    console.log(image)
-    console.log(post)
-  const canonical = post?.attributes?.seo?.canonical
+    const canonical = post?.attributes?.seo?.canonical
     ? post?.attributes?.seo?.canonical
     : post?.attributes?.slug &&
       `https://prototypr.io/post/${post?.attributes.slug}`;
