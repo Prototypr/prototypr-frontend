@@ -16,13 +16,15 @@
 hr + p:empty {
     display: none;
   }
-  p:empty + p:empty {
+/* Hide any empty paragraph that is immediately followed by another empty paragraph */
+p:empty + p:empty {
     display: none;
-  }
-  
-  p:empty + p:not(:empty) {
-    display: none;
-  }
+}
+
+/* Override the rule above to ensure that a paragraph with text that follows an empty paragraph is not hidden */
+p:empty + p:not(:empty) {
+    display: block;
+}
 .blog-content{
    
     *{

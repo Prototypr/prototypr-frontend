@@ -24,10 +24,7 @@ export default function SocialShare({ slug, authorTwitter, title = "" }) {
       <div>
         <a
           target="_blank"
-          href={`
-          https://twitter.com/intent/tweet?url=https%3A%2F%2Fprototypr.io%2Fpost%2F${slug}%2F&via=prototypr&text=Recommended%20read:%20%22${titleUrl}%22${
-            authorTwitter ? "%20by%20" + authorTwitter : ""
-          }%20✨%20check%20it%20out!`}
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprototypr.io%2Fpost%2F${slug}`}
         >
                   <LinkedinLogo width={28} height={28}/>
 
