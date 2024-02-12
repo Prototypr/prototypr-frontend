@@ -31,6 +31,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import PostHeader from "@/components/post-header";
 import SocialShare from "@/components/SocialShare";
+import PostGroupRow from "@/components/v4/layout/PostGroupRow";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -333,17 +334,19 @@ const date = post.attributes.date
           style={{ maxWidth: "1200px" }}
           className="px-6 md:px-0 mx-auto pb-20 mt-20"
         >
-          <h1 className="text-4xl font-inter-serif font-semibold -mt-3 mb-12">
+          <h1 className="text-3xl font-inter-serif font-semibold -mt-3 mb-12">
             Related Articles
           </h1>
-          <div className="mt-10 grid lg:grid-cols-2 grid-cols-1 gap-10">
-            {relatedPosts?.data?.length > 0 &&
-              relatedPosts.data.map((item, index) => {
-                return (
-                  <ProductItem key={`product_item_${index}`} post={item} />
-                  // <TopicTopItem key={index} topic={item}/>
-                );
-              })}
+          <div className="mt-10">
+            {relatedPosts?.data?.length > 0 ? <PostGroupRow smallPosts={relatedPosts.data} />:null
+              // relatedPosts.data.map((item, index) => {
+              //   return (
+              //     <ProductItem key={`product_item_${index}`} post={item} />
+              //     // <TopicTopItem key={index} topic={item}/>
+              //   );
+              // })
+              
+              }
           </div>
         </div>
         {/* {post.attributes?.template !== 2 && (

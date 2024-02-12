@@ -161,9 +161,9 @@ export default function Index({
           </div>      */}
           </div>
         </Container>
-        <div className="mt-20 mb-8">
+        {/* <div className="mt-20 mb-8">
           <NewsletterSection/>
-        </div>
+        </div> */}
         <SectionDivider py='py-6' transparentLine={true}  />
    
         {/* <SectionDivider />
@@ -273,7 +273,7 @@ export default function Index({
               
                
             <SectionDivider py="py-12" transparentLine={false}/>
-            {index==2?
+            {index==1?
                 <div className="-mt-8">
                     <NewsletterSection/>
                    <SectionDivider py="py-12" transparentLine={false}/>
