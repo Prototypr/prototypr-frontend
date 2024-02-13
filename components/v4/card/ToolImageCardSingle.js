@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const ToolImageCardSingle = ({ post, type, columns, tagNumber }) => {
+const ToolImageCardSingle = ({ post, imageLarge,type, columns, tagNumber }) => {
 
     let title, slug, coverImage, tags, logo;
 
@@ -87,7 +87,7 @@ const ToolImageCardSingle = ({ post, type, columns, tagNumber }) => {
             style={{
             //   background: this.state.backgroundShimmer,
               display: "flex",
-              height: "195px",
+              height:imageLarge?"240px":"195px",
             }}
           >
             <div className="absolute top-0 left-0 z-10 rounded-2xl w-full h-full bg-gradient-to-b from-black/5 via-black/10 to-black/40"></div>

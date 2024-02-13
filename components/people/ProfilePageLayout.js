@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 
 import Container from "@/components/container";
 import Image from "next/image";
+import { DribbbleLogo,MapPin, TwitterLogo, Globe, LinkedinLogo, GithubLogo } from "phosphor-react";
+
 // import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
 // import ToolLargeCardProfile from "@/components/v4/card/ToolLargeCardProfile";
 import { useRouter } from "next/router";
@@ -52,7 +54,7 @@ const ProfilePageLayout = ({
 
     useEffect(()=>{
         if(previewOnly){
-            let first4 = allPosts?.slice(0,4)
+            let first4 = allPosts?.slice(0,3)
             setPosts(first4)
         }else{
             setPosts(allPosts)
@@ -78,7 +80,7 @@ const ProfilePageLayout = ({
       };
 
     return(
-        <Container maxWidth="max-w-[1320px]" >
+        <Container padding={false} maxWidth="w-full -mt-[96px] px-0" >
         {unapproved?<div className="px-6">
             <div className="mt-3 shadow-sm flex w-full bg-purple-300/70 p-4 px-4 rounded-xl text-purple-900">
             <div className="mr-4 my-auto">
@@ -91,15 +93,28 @@ const ProfilePageLayout = ({
             </p>
             </div>
         </div>:''}
-        <div className="mt-8 flex flex-col px-4 md:px-6">
+        <div className="flex flex-col">
             
           <div className="w-full lg:block">
-            <div className="relative p-6 rounded-xl ">
-                <div className="relative flex justify-start">
-                <div
-                    className="w-[160px] bg-white h-[160px] rounded-full border border-1 overflow-hidden relative border-black/10 shadow-sm mr-4"
-                >
+            <div className="relative pt-[110px] pb-[140px]">
+            <img src='/static/images/toolbox/squares.svg' className=" opacity absolute w-full h-full object-cover top-0 left-0"/>
 
+                {/* <div className="magicpattern absolute top-0 left-0 w-full"/> */}
+                <div className="relative max-w-[1320px] mx-auto flex justify-center">
+
+                <div
+                    className="w-[168px] bg-white h-[168px] -mt-2 rounded-full border border-1 overflow- relative border-black/10 shadow-sm mr-12"
+                >
+  {(kofi || (unapproved && user?.profile?.kofi)) && (
+                        <div className="absolute z-10 bottom-0 mb-3 left-0">
+                          {/* <h2 className="font-medium text-sm mb-2 text-gray-700">Support {author?.firstName?author?.firstName:''}</h2> */}
+                          <KoFiButton
+                            color="#53b1e6"
+                            // label={"Buy me a coffee"}
+                            kofiId={kofi||user?.profile?.kofi}
+                          />
+                        </div>
+                        )}
                     {unapproved?
                     <img src={author?.avatar?.url?author?.avatar?.url:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}/>
                     :(author?.avatar || author?.legacyAvatar) && (
@@ -121,134 +136,118 @@ const ProfilePageLayout = ({
                     // </Link>
                     )}
                 </div>
-                <div className="flex flex-col justify-center">
-                  <h1 className="text-3xl font-semibold leading-normal text-gray-800">
+                <div className="flex flex-col z-20 relative justify-center">
+                  <h1 className="text-2xl font-semibold leading-normal text-black/90">
                       {`${author?.firstName ? author?.firstName:''} ${author?.lastName ? author?.lastName:''}
                       ${(!author?.firstName && !author?.lastName) ? author?.name:''}`}
                       </h1>
                       {author.role && (
-                        <h3 className="text-lg font-normal mb-3 leading-normal text-gray-800">
+                        <h3 className="text-lg mb-3 font-normal leading-normal text-black/80">
                           {author.role}
                         </h3>
                       )} 
+                      {/* TAGS (no point showing them) */}
+                      {/* <div className="flex flex-wrap mb-3">
+                          {(unapproved==true && author?.tags?.length) ?
+              author?.tags?.map((tag, index) => (
+                  <Link href={`/posts/${tag?.slug}/page/1/`}>
+                      <div className={`capitalize inline-block px-2 text-xs py-0.5 bg-[#d8e5f8]/70 rounded-full mr-1.5 mb-1`}>
+                      {tag?.name}
+                      </div>
+                  </Link>
+                ))
+                :(author?.tags?.data?.length) ?
+                author?.tags?.data?.map((tag, index) => (
+                  <Link href={`/posts/${tag.attributes?.slug}/page/1/`}>
+                      <div className={`capitalize inline-block px-2 text-xs py-0.5 bg-[#d8e5f8]/70 rounded-full mr-1.5 mb-1`}>
+                      {tag.attributes?.name}
+                      </div>
+                  </Link>
+                )):''}
+                      </div> */}
+                       {author.bio && (
+                <div className="text-base max-w-[500px] text-black/70 mb-4">
+                  <div dangerouslySetInnerHTML={{ __html: author.bio }} />
+                </div>
+              )}
                       {/* social row */}
+                      {/* LOCATION */}
                       {((twitter||dribbble||github || kofi)||(unapproved && (user?.profile?.twitter||user?.profile?.dribbble||user?.profile?.github||user?.profile?.kofi)))?
-                        <div className="flex">
-                          {author && author.url && (
-                            <div className="text-sm mb-4 mr-8 flex leading-normal mt-1 text-gray-600 font-normal">
-                              {/* <img
-                                style={{ height: "0.94rem" }}
-                                className="h-4 my-auto mr-1"
-                                src="/static/images/icons/link.svg"
-                                data-gumlet="false"
-                              /> */}
-                              <span>
-                                <a
-                                  className="underline"
-                                  target="_blank"
-                                  rel="nofollow"
-                                  href={author.url}
-                                >
-                                  {authorUrl}
-                                </a>
-                              </span>
-                            </div>
-                          )}
-                          {(twitter || (unapproved && user?.profile?.twitter)) && (
-                            <a
-                              className="link block mr-2"
-                              href={`https://twitter.com/${twitter||user?.profile?.twitter}`}
-                              target="_blank"
-                            >
-                              <img
-                                style={{ width: "28px" }}
-                                className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                                src="/static/images/icons/twitter.svg"
-                                data-gumlet="false"
-                              />
-                            </a>
-                          )}
-                          {(dribbble || (unapproved && user?.profile?.dribbble)) && (
-                            <a
-                              className="link block mr-2"
-                              href={`https://dribbble.com/${dribbble||user?.profile?.dribbble}`}
-                              target="_blank"
-                            >
-                              <img
-                                style={{ width: "28px" }}
-                                className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                                src="/static/images/icons/dribbble.svg"
-                                data-gumlet="false"
-                              />
-                            </a>
-                          )}
-                          {(github || (unapproved && user?.profile?.github))&& (
-                            <a
-                              className="link block mr-2"
-                              href={`https://github.com/${github||user?.profile?.github}`}
-                              target="_blank"
-                            >
-                              <img
-                                style={{ width: "28px" }}
-                                className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                                src="/static/images/icons/github.svg"
-                                data-gumlet="false"
-                              />
-                            </a>
-                          )}
-                        {/* {(kofi || (unapproved && user?.profile?.kofi)) && (
-                        <div className="">
-                                        <div className="w-full border-b border-black/5 my-3" />
+                        <div className="flex justify-start">
+                            {(author && location) && (
+                  <div className="text-sm mr-4 flex leading-normal mt-0 text-black/80 font-normal capitalize">
+                        <MapPin className="mr-1" color="rgba(0,0,0,0.8)" width={20} height={20}/>
+                    <span>{location}</span>
+                  </div>
+                )}
+                {/* LINK */}
+                  {author && author.url && (
+                    <div className="text-sm mr-4 flex leading-normal text-black/80 font-normal">
+                        <a href={author.url} target="_blank" rel="nofollow">
+                          <Globe className="mr-1" color="rgba(0,0,0,0.8)" width={20} height={20}/>
+                        </a>
+                      <span>
+                        <a
+                          className="underline"
+                          target="_blank"
+                          rel="nofollow"
+                          href={author.url}
+                        >
+                          {authorUrl}
+                        </a>
+                      </span>
+                    </div>
+                  )}
+                          <div className="flex">
+                    
+                            {(twitter || (unapproved && user?.profile?.twitter)) && (
+                              <a
+                                className="link block mr-2"
+                                href={`https://twitter.com/${twitter||user?.profile?.twitter}`}
+                                target="_blank"
+                              >
+                                <TwitterLogo color="rgba(0,0,0,0.8)" width={20} height={20}/>
+                                {/* <img
+                                  style={{ width: "28px" }}
+                                  className=" bg-white rounded-full shadow-sm hover:shadow-md"
+                                  src="/static/images/icons/twitter.svg"
+                                  data-gumlet="false"
+                                /> */}
+                              </a>
+                            )}
+                            {(dribbble || (unapproved && user?.profile?.dribbble)) && (
+                              <a
+                                className="link block mr-2"
+                                href={`https://dribbble.com/${dribbble||user?.profile?.dribbble}`}
+                                target="_blank"
+                              >
+                                <DribbbleLogo color="rgba(0,0,0,0.8)" width={20} height={20}/>
 
-                          <h2 className="font-medium text-sm mb-2 text-gray-700">Support {author?.firstName?author?.firstName:''}</h2>
-                          <KoFiButton
-                            color="#53b1e6"
-                            label={"Buy me a coffee"}
-                            kofiId={kofi||user?.profile?.kofi}
-                          />
-                        </div>
-                        )} */}
+                                {/* <img
+                                  style={{ width: "28px" }}
+                                  className=" bg-white rounded-full shadow-sm hover:shadow-md"
+                                  src="/static/images/icons/dribbble.svg"
+                                  data-gumlet="false"
+                                /> */}
+                              </a>
+                            )}
+                            {(github || (unapproved && user?.profile?.github))&& (
+                              <a
+                                className="link block mr-2"
+                                href={`https://github.com/${github||user?.profile?.github}`}
+                                target="_blank"
+                              >
+                              <GithubLogo color="rgba(0,0,0,0.8)" width={20} height={20}/>
+
+                              </a>
+                            )}
+                            </div>
+
                            
                         </div>:''}
                 </div>
                 </div>
             <div className="">
-              <div className="mb-3">
-               
-                {(author && location) && (
-                  <div className="text-sm flex leading-normal mt-0 text-gray-600 font-normal capitalize">
-                    <img
-                      style={{ height: "0.94rem" }}
-                      className="my-auto mr-1"
-                      src="/static/images/icons/map-pin.svg"
-                      data-gumlet="false"
-                    />
-                    <span>{location}</span>
-                  </div>
-                )}
-                
-              </div>
-              {author.availability == "1" && (
-                <a
-                  className="hidden md:block cursor-pointer mb-1 inline-block"
-                  rel="nofollow"
-                  target="_blank"
-                  href={`${author.url ? author.url : "#"}`}
-                >
-                  <div className="absolute top-0 right-0 bg-blue-900 mr-8 mt-8 uppercase text-gray-100 text-xs px-3 py-2 rounded inline-block">
-                    <span className="hidden sm:block">
-                      🔥 Available for hire
-                    </span>
-                    <span className="sm:hidden">🔥 Hire me</span>
-                  </div>
-                </a>
-              )}
-
-            {author.bio && (
-                <div className="text-lg text-gray-700 mt-3 mb-3">
-                  <div dangerouslySetInnerHTML={{ __html: author.bio }} />
-                </div>
-              )}
 
               {/* {author.role && (
                 <h3 className="text-lg font-normal leading-normal mb-2 mt-4 text-gray-800">
@@ -256,22 +255,7 @@ const ProfilePageLayout = ({
                 </h3>
               )} */}
 
-            {(unapproved==true && author?.tags?.length) ?
-            author?.tags?.map((tag, index) => (
-                <Link href={`/posts/${tag?.slug}/page/1/`}>
-                    <div className={`capitalize inline-block px-2 text-xs py-0.5 bg-[#d8e5f8]/70 rounded-full mr-1.5 mb-1`}>
-                    {tag?.name}
-                    </div>
-                </Link>
-              ))
-              :(author?.tags?.data?.length) ?
-              author?.tags?.data?.map((tag, index) => (
-                <Link href={`/posts/${tag.attributes?.slug}/page/1/`}>
-                    <div className={`capitalize inline-block px-2 text-xs py-0.5 bg-[#d8e5f8]/70 rounded-full mr-1.5 mb-1`}>
-                    {tag.attributes?.name}
-                    </div>
-                </Link>
-              )):''}
+         
 
               {/* {skills.length > 0 &&
                 skills[0].length > 1 &&
@@ -294,22 +278,46 @@ const ProfilePageLayout = ({
             </div>
             </div>
 
-      
+            {author.availability == "1" && (
+              <div className="fixed z-40 bottom-0 left-0 flex m-3">
+                <a
+                  className="cursor-pointer inline-block"
+                  rel="nofollow"
+                  target="_blank"
+                  href={`${author.url ? author.url : "#"}`}
+                >
+                  <div className="shadow-lg border border-gray-400/30 bg-white capitalize text-gray-100 text-xs px-3 py-2 rounded-full inline-block flex">
+                    <Image 
+                    width={36}
+                    height={36}
+                    className="object-cover w-[36px] h-[36px] rounded-full"
+                    src={author.avatar?.data?.attributes
+                                ? author.avatar.data.attributes.url
+                                : author?.legacyAvatar
+                                ? author.legacyAvatar
+                                : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"}/>
+                    
+                    <div className="my-auto text-indigo-900 text-sm ml-2 pr-2">
+                     Available for projects
+                    </div>
+                  </div>
+                </a>
+              
+              </div>
+              )}
 
            
           </div>
 
-          <div className="flex-1">
-            <div className="mx-auto mb-20 mt-6 lg:mt-0">
+          <div className="flex-1 z-20 -mt-[120px]">
+            <div className="px-3 max-w-[1320px] mx-auto mb-20 mt-6 lg:mt-0">
               
               {allPosts?.length ?
                 <>
-                        {currentPage==1 || !currentPage?<h2 className="font-semibold text-base mb-3">Posts</h2>:<h2 className="font-semibold text-base mb-3">Page {currentPage}</h2>}
-                    <div className="grid grid-cols-12 gap-6">
+                        {currentPage==1 || !currentPage?<h2 className="font-medium rounded-full px-3 py-1 bg-gray-300/40 w-fit text-base mb-3">Posts</h2>:<h2 className="font-semibold text-base mb-3">Page {currentPage}</h2>}
+                    <div className="grid grid-cols-12 gap-8">
                         {posts?.map((post,index)=>{
-                        const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
-                        let authorData = post.attributes?.author?.data?.attributes
-                        let avatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
+                      
                         let url = post?.attributes?.featuredImage?.data?.attributes?.url;
                         const coverImage = url
                             ? url
@@ -317,7 +325,7 @@ const ProfilePageLayout = ({
                         
                         if(post?.attributes?.type=='article'){
                             return(
-                                <div className="h-full col-span-12 2md:col-span-3 lg:col-span-3 xl:col-span-3">
+                                <div className="h-full col-span-12 sm:col-span-6 2md:col-span-4 lg:col-span-4 xl:col-span-4">
                                 {/* <SmallCard
                                 key={index}
                                 showAuthor={false}
@@ -331,10 +339,10 @@ const ProfilePageLayout = ({
                             /> */}
                             <MediumPost
                             showDescription={false}
-                            imageSmall={true}
+                            imageSmall={false}
                             showAuthor={false}
                             link={`/post/${post?.attributes?.slug?post?.attributes?.slug:''}`}
-                            avatar={avatar}
+                            // avatar={avatar}
                             author={post?.attributes?.author?.data?.attributes?post?.attributes?.author?.data?.attributes:null}
                             image={coverImage}
                             date={post?.attributes?.date?post?.attributes?.date:null}
@@ -346,12 +354,12 @@ const ProfilePageLayout = ({
                             )
                         }else{
                             return(
-                                <div className="h-full col-span-12 2md:col-span-3 lg:col-span-3 xl:col-span-3">
+                                <div className="h-full col-span-12 sm:col-span-6 2md:col-span-4 lg:col-span-4 xl:col-span-4">
                             {/* <ToolLargeCardProfile
                             tool={post?.attributes}
                             /> */}
 
-                                <ToolImageCardSingle post={post} />
+                                <ToolImageCardSingle imageLarge={true} post={post} />
                             </div>
                             )
                         }
@@ -369,11 +377,13 @@ const ProfilePageLayout = ({
                       }}
                     />
           </div>:pagination?.total>4?
-          <Link href={`/people/${slug}/page/1`}>
-            <Button variant="ghostBlue" className="mt-6">
-                Show all
-                </Button>
-          </Link>
+          <div className="w-full flex justify-center mt-12">
+            <Link href={`/people/${slug}/page/1`}>
+              <Button variant="ghostBlue" className="">
+                  Show more
+                  </Button>
+            </Link>
+          </div>
             :''}
          {/* {previewOnly? 
          <div className={`${allPosts?.length?'pt-8':''}`}>
