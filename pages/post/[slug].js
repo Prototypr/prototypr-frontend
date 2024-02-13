@@ -6,7 +6,7 @@ import Container from "@/components/container";
 import useUser from "@/lib/iron-session/useUser";
 import Date from "@/components/date";
 
-import ProductItem from "@/components/new-index/ProductItem";
+// import ProductItem from "@/components/new-index/ProductItem";
 
 
 const AuthorBio = dynamic(() => import("@/components/authorBio"), {
@@ -125,6 +125,7 @@ const date = post.attributes.date
 
   },[post.attributes?.content])
 
+
   return (
     <Layout
       maxWidth={"max-w-[1320px] search-wide"}
@@ -211,7 +212,7 @@ const date = post.attributes.date
                       </div>
                       <div className="h-[300px] md:h-[550px] px-4 md:px-0 max-w-full w-[1020px] md:bg-blue-50 mx-auto z-30 -mt-[120px] md:-mt-[100px] relative rounded-2xl shadow-md outline outline-1 outline-gray-300/20 overflow-hidden">
                         <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[300px] md:h-[550px] w-[1020px] md:bg-gray-100 mx-auto z-30 rounded-2xl"/>
-                        <Image width={1020} height={550} loader={gumletLoader} className="h-full z-20 relative h-[300px] md:h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto" src={image}/>
+                        <Image key={image} width={1020} height={550} loader={gumletLoader} className="h-full z-20 relative h-[300px] md:h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto" src={image}/>
                       </div>
                    
                    <div className="w-full flex justify-between max-w-[1020px] mx-auto mt-8 px-3 md:px-0">
@@ -225,6 +226,7 @@ const date = post.attributes.date
                   <div className="flex items-center justify-between">
                         {avatar && (
                           <Image
+                            key={authorName}
                             src={`${
                               avatar.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ""
                             }${avatar}`}
@@ -328,13 +330,14 @@ const date = post.attributes.date
       />}
           
       </Container>
-      <section className="bg-gray-100">
+      <section className="bg-gray-100 relative">
         <hr className="border-accent-2" />
+        <img src="/static/images/toolbox/squares2.svg" class="w-full h-[100%] absolute object-cover opacity-20" loading="lazy"></img>
         <div
           style={{ maxWidth: "1200px" }}
-          className="px-6 md:px-0 mx-auto pb-20 mt-20"
+          className="px-6 md:px-0 mx-auto pb-20 relative z-10 mt-20"
         >
-          <h1 className="text-3xl font-inter-serif font-semibold -mt-3 mb-12">
+          <h1 className="text-2xl font-inter-serif font-medium -mt-3 -mb-3">
             Related Articles
           </h1>
           <div className="mt-10">

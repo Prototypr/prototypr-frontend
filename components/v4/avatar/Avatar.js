@@ -5,14 +5,14 @@ import Link from "next/link";
 const Avatar = ({ size, author, src, date }) => {
   let avatarSize = "h-[44px] w-[44px]";
   let titleClass = "text-md";
-  let dateClass = "text-xs";
+  let dateClass = "text-sm";
   if (size == "lg") {
     avatarSize = "h-[44px] w-[44px] rounded-full";
   }
   if (size == "sm") {
     avatarSize = "h-[32px] w-[32px] rounded-full";
-    titleClass = "text-xs";
-    dateClass = "text-[10px]";
+    titleClass = "text-sm";
+    dateClass = "text-sm";
   }
   return (
     <Link href={`/people/${author?.slug}`}>
