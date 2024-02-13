@@ -8,7 +8,6 @@ import { useIntl } from "react-intl";
 // import Button from "@/components/Primitives/Button";
 // import Link from 'next/link'
 const PostGroupRow = ({ largePost, smallPosts, description,title,topicObject }) => {
-  console.log(smallPosts)
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;
   const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
   const largeCoverImage = url
@@ -55,7 +54,6 @@ const PostGroupRow = ({ largePost, smallPosts, description,title,topicObject }) 
         if(!p){
           p=post
         }
-        console.log(p)
         // if(!post?.attributes && post){
         //   p.attributes = post
         // }

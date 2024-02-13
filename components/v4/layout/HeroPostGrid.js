@@ -3,7 +3,7 @@ import { ArrowRight } from "phosphor-react";
 import Link from 'next/link'
 
 // import SmallCard from "../card/SmallCard/SmallCardE";
-import SmallPostsGroup from "./SmallPostGroupB";
+// import SmallPostsGroup from "./SmallPostGroupB";
 import RSSTitle from "../text/RSSTitle";
 import PostsGroup3Cards from "./PostsGroup3Cards";
 import BigBackgroundCard from "../card/BigCard/BigBackgroundCard";

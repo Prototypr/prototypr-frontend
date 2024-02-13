@@ -8,7 +8,6 @@ const ToolImageCardSingle = ({ post, type, columns, tagNumber }) => {
 
     let title, slug, coverImage, tags, logo;
 
-
     title = post?.attributes?.title?post?.attributes?.title:post?.title;
     slug = post.attributes?.slug?post.attributes?.slug:post?.slug;
 
@@ -40,6 +39,8 @@ const ToolImageCardSingle = ({ post, type, columns, tagNumber }) => {
         ? post.attributes.featuredImage.data.attributes.url
         : post.attributes?.legacyFeaturedImage?.mediaItemUrl
         ? post.attributes?.legacyFeaturedImage?.mediaItemUrl
+        : post.attributes?.legacyFeaturedImage2?.mediaItemUrl?
+        post.attributes?.legacyFeaturedImage2?.mediaItemUrl
         : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
   
         logo = (post?.attributes?.legacyFeaturedImage?.logoNew || coverImage?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl ||post.attributes?.legacyFeaturedImage?.mediaItemUrl)
@@ -48,15 +49,30 @@ const ToolImageCardSingle = ({ post, type, columns, tagNumber }) => {
         ? post.featuredImage.data.attributes.url
         : post.legacyFeaturedImage?.mediaItemUrl
         ? post.legacyFeaturedImage?.mediaItemUrl
+        : post.legacyFeaturedImage2?.mediaItemUrl?
+        post.legacyFeaturedImage2?.mediaItemUrl
         : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
   
         logo = (post?.legacyFeaturedImage?.logoNew || coverImage?.logoNew || post.legacyMedia?.mediaItemUrl ||post.legacyFeaturedImage?.mediaItemUrl)
     }
 
+    if(!logo){
+      logo =   
+  // post.legacyMedia?.logoNew?post.legacyMedia?.logoNew:
+  // post.legacyMedia?.mediaItemUrl?post.legacyMedia?.mediaItemUrl:
+  // post.legacyMedia?.imgUrl?post.legacyMedia?.imgUrl:
+  post.attributes?.featuredImage?.data?.attributes?.url
+    ? post.attributes?.featuredImage.data.attributes.url
+    : post.attributes?.legacyFeaturedImage
+    ? post.attributes?.legacyFeaturedImage
+    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+    
+    logo = (post?.attributes?.legacyMedia?.logoNew || logo?.attributes?.logoNew || post.attributes?.legacyMedia?.mediaItemUrl)
+    }
 
 
   return (
-    <div >
+    <div className="h-full">
 
             <Link href={`/toolbox/${slug}`}>
             <div

@@ -3,8 +3,8 @@ import dynamic from "next/dynamic";
 
 import Container from "@/components/container";
 import Image from "next/image";
-import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
-import ToolLargeCardProfile from "@/components/v4/card/ToolLargeCardProfile";
+// import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
+// import ToolLargeCardProfile from "@/components/v4/card/ToolLargeCardProfile";
 import { useRouter } from "next/router";
 import Button from "../Primitives/Button";
 import Link from "next/link";
@@ -15,6 +15,8 @@ import useUser from "@/lib/iron-session/useUser";
 import { accountLocations } from "@/lib/constants";
 import {CircleWavyCheck } from "phosphor-react";
 
+import MediumPost from "../v4/card/SmallCard/MediumPost";
+import ToolImageCardSingle from "../v4/card/ToolImageCardSingle";
 
 const KoFiButton = dynamic(() => import("@/components/people/KoFiButton"), {
     ssr: true,
@@ -89,19 +91,19 @@ const ProfilePageLayout = ({
             </p>
             </div>
         </div>:''}
-        <div className="mt-8 flex flex-col lg:flex-row px-4 md:px-6">
+        <div className="mt-8 flex flex-col px-4 md:px-6">
             
-          <div className="w-full lg:w-1/4 lg:block">
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-                <div className="relative">
+          <div className="w-full lg:block">
+            <div className="relative p-6 rounded-xl ">
+                <div className="relative flex justify-start">
                 <div
-                    className="w-[144px] bg-white h-[144px] rounded-full border border-1 overflow-hidden relative border-black/10 shadow-sm"
+                    className="w-[160px] bg-white h-[160px] rounded-full border border-1 overflow-hidden relative border-black/10 shadow-sm mr-4"
                 >
 
                     {unapproved?
                     <img src={author?.avatar?.url?author?.avatar?.url:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}/>
                     :(author?.avatar || author?.legacyAvatar) && (
-                    <Link href={`/people/${slug}`}>
+                    // <Link href={`/people/${slug}`}>
                         <Image
                             loader={gumletLoader}
                             layout="fill"
@@ -116,13 +118,99 @@ const ProfilePageLayout = ({
                             className="rounded-full "
                             alt="Author profile picture"
                         />
-                    </Link>
+                    // </Link>
                     )}
                 </div>
-                <h1 className="text-3xl pt-3 font-semibold leading-normal text-gray-800 mb-3">
-                    {`${author?.firstName ? author?.firstName:''} ${author?.lastName ? author?.lastName:''}
-                    ${(!author?.firstName && !author?.lastName) ? author?.name:''}`}
-                    </h1>
+                <div className="flex flex-col justify-center">
+                  <h1 className="text-3xl font-semibold leading-normal text-gray-800">
+                      {`${author?.firstName ? author?.firstName:''} ${author?.lastName ? author?.lastName:''}
+                      ${(!author?.firstName && !author?.lastName) ? author?.name:''}`}
+                      </h1>
+                      {author.role && (
+                        <h3 className="text-lg font-normal mb-3 leading-normal text-gray-800">
+                          {author.role}
+                        </h3>
+                      )} 
+                      {/* social row */}
+                      {((twitter||dribbble||github || kofi)||(unapproved && (user?.profile?.twitter||user?.profile?.dribbble||user?.profile?.github||user?.profile?.kofi)))?
+                        <div className="flex">
+                          {author && author.url && (
+                            <div className="text-sm mb-4 mr-8 flex leading-normal mt-1 text-gray-600 font-normal">
+                              {/* <img
+                                style={{ height: "0.94rem" }}
+                                className="h-4 my-auto mr-1"
+                                src="/static/images/icons/link.svg"
+                                data-gumlet="false"
+                              /> */}
+                              <span>
+                                <a
+                                  className="underline"
+                                  target="_blank"
+                                  rel="nofollow"
+                                  href={author.url}
+                                >
+                                  {authorUrl}
+                                </a>
+                              </span>
+                            </div>
+                          )}
+                          {(twitter || (unapproved && user?.profile?.twitter)) && (
+                            <a
+                              className="link block mr-2"
+                              href={`https://twitter.com/${twitter||user?.profile?.twitter}`}
+                              target="_blank"
+                            >
+                              <img
+                                style={{ width: "28px" }}
+                                className=" bg-white rounded-full shadow-sm hover:shadow-md"
+                                src="/static/images/icons/twitter.svg"
+                                data-gumlet="false"
+                              />
+                            </a>
+                          )}
+                          {(dribbble || (unapproved && user?.profile?.dribbble)) && (
+                            <a
+                              className="link block mr-2"
+                              href={`https://dribbble.com/${dribbble||user?.profile?.dribbble}`}
+                              target="_blank"
+                            >
+                              <img
+                                style={{ width: "28px" }}
+                                className=" bg-white rounded-full shadow-sm hover:shadow-md"
+                                src="/static/images/icons/dribbble.svg"
+                                data-gumlet="false"
+                              />
+                            </a>
+                          )}
+                          {(github || (unapproved && user?.profile?.github))&& (
+                            <a
+                              className="link block mr-2"
+                              href={`https://github.com/${github||user?.profile?.github}`}
+                              target="_blank"
+                            >
+                              <img
+                                style={{ width: "28px" }}
+                                className=" bg-white rounded-full shadow-sm hover:shadow-md"
+                                src="/static/images/icons/github.svg"
+                                data-gumlet="false"
+                              />
+                            </a>
+                          )}
+                        {/* {(kofi || (unapproved && user?.profile?.kofi)) && (
+                        <div className="">
+                                        <div className="w-full border-b border-black/5 my-3" />
+
+                          <h2 className="font-medium text-sm mb-2 text-gray-700">Support {author?.firstName?author?.firstName:''}</h2>
+                          <KoFiButton
+                            color="#53b1e6"
+                            label={"Buy me a coffee"}
+                            kofiId={kofi||user?.profile?.kofi}
+                          />
+                        </div>
+                        )} */}
+                           
+                        </div>:''}
+                </div>
                 </div>
             <div className="">
               <div className="mb-3">
@@ -147,7 +235,7 @@ const ProfilePageLayout = ({
                   target="_blank"
                   href={`${author.url ? author.url : "#"}`}
                 >
-                  <div className=" bg-blue-900 mr-2 mb-2 uppercase text-gray-100 text-xs px-3 py-2 rounded inline-block">
+                  <div className="absolute top-0 right-0 bg-blue-900 mr-8 mt-8 uppercase text-gray-100 text-xs px-3 py-2 rounded inline-block">
                     <span className="hidden sm:block">
                       🔥 Available for hire
                     </span>
@@ -206,98 +294,17 @@ const ProfilePageLayout = ({
             </div>
             </div>
 
-            <div className="mt-3 md:mt-6 top-0 right-0 md:relative">
-              {((twitter||dribbble||github || kofi)||(unapproved && (user?.profile?.twitter||user?.profile?.dribbble||user?.profile?.github||user?.profile?.kofi)))?
-              <div className="bg-white rounded-xl p-4 mb-20 shadow-sm mt-1 md:mt-3 z-20">
-                <h2 className="font-semibold mb-3">Around the web</h2>
-                {author && author.url && (
-                  <div className="text-sm mb-4 flex leading-normal mt-1 text-gray-600 font-normal">
-                    <img
-                      style={{ height: "0.94rem" }}
-                      className="h-4 my-auto mr-1"
-                      src="/static/images/icons/link.svg"
-                      data-gumlet="false"
-                    />
-                    <span>
-                      <a
-                        className="underline"
-                        target="_blank"
-                        rel="nofollow"
-                        href={author.url}
-                      >
-                        {authorUrl}
-                      </a>
-                    </span>
-                  </div>
-                )}
-                <div className="flex">
-                {(twitter || (unapproved && user?.profile?.twitter)) && (
-                  <a
-                    className="link block mr-2"
-                    href={`https://twitter.com/${twitter||user?.profile?.twitter}`}
-                    target="_blank"
-                  >
-                    <img
-                      style={{ width: "28px" }}
-                      className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                      src="/static/images/icons/twitter.svg"
-                      data-gumlet="false"
-                    />
-                  </a>
-                )}
-                {(dribbble || (unapproved && user?.profile?.dribbble)) && (
-                  <a
-                    className="link block mr-2"
-                    href={`https://dribbble.com/${dribbble||user?.profile?.dribbble}`}
-                    target="_blank"
-                  >
-                    <img
-                      style={{ width: "28px" }}
-                      className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                      src="/static/images/icons/dribbble.svg"
-                      data-gumlet="false"
-                    />
-                  </a>
-                )}
-                {(github || (unapproved && user?.profile?.github))&& (
-                  <a
-                    className="link block mr-2"
-                    href={`https://github.com/${github||user?.profile?.github}`}
-                    target="_blank"
-                  >
-                    <img
-                      style={{ width: "28px" }}
-                      className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                      src="/static/images/icons/github.svg"
-                      data-gumlet="false"
-                    />
-                  </a>
-                )}
-              </div>
-              {(kofi || (unapproved && user?.profile?.kofi)) && (
-              <div className="">
-                              <div className="w-full border-b border-black/5 my-3" />
-
-                <h2 className="font-medium text-sm mb-2 text-gray-700">Support {author?.firstName?author?.firstName:''}</h2>
-                <KoFiButton
-                  color="#53b1e6"
-                  label={"Buy me a coffee"}
-                  kofiId={kofi||user?.profile?.kofi}
-                />
-              </div>
-              )}
-              </div>:''}
-            </div>
+      
 
            
           </div>
 
-          <div className="flex-1 lg:pl-8 xl:pl-12">
-            <div className="mx-auto mb-20 xl:max-w-4xl mt-6 lg:mt-0">
+          <div className="flex-1">
+            <div className="mx-auto mb-20 mt-6 lg:mt-0">
               
               {allPosts?.length ?
                 <>
-                        {currentPage==1 || !currentPage?<h2 className="font-semibold text-base mb-3">Recent posts</h2>:<h2 className="font-semibold text-base mb-3">Page {currentPage}</h2>}
+                        {currentPage==1 || !currentPage?<h2 className="font-semibold text-base mb-3">Posts</h2>:<h2 className="font-semibold text-base mb-3">Page {currentPage}</h2>}
                     <div className="grid grid-cols-12 gap-6">
                         {posts?.map((post,index)=>{
                         const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
@@ -310,8 +317,8 @@ const ProfilePageLayout = ({
                         
                         if(post?.attributes?.type=='article'){
                             return(
-                                <div className="col-span-12 2md:col-span-6 lg:col-span-12 xl:col-span-6 p-3 bg-white rounded-xl shadow-sm">
-                                <SmallCard
+                                <div className="h-full col-span-12 2md:col-span-3 lg:col-span-3 xl:col-span-3">
+                                {/* <SmallCard
                                 key={index}
                                 showAuthor={false}
                                 link={`/post/${post?.attributes?.slug}`}
@@ -321,15 +328,30 @@ const ProfilePageLayout = ({
                                 date={post?.attributes?.date}
                                 title={post?.attributes?.title}
                                 tags={post?.attributes?.tags?.data}
+                            /> */}
+                            <MediumPost
+                            showDescription={false}
+                            imageSmall={true}
+                            showAuthor={false}
+                            link={`/post/${post?.attributes?.slug?post?.attributes?.slug:''}`}
+                            avatar={avatar}
+                            author={post?.attributes?.author?.data?.attributes?post?.attributes?.author?.data?.attributes:null}
+                            image={coverImage}
+                            date={post?.attributes?.date?post?.attributes?.date:null}
+                            title={post?.attributes?.title?post?.attributes?.title:null}
+                            excerpt={post?.attributes?.excerpt?post?.attributes?.excerpt:null}
+                            tags={post?.attributes?.tags?.data?post?.attributes?.tags?.data:null}
                             />
                             </div>
                             )
                         }else{
                             return(
-                                <div className="col-span-12 2md:col-span-6 lg:col-span-12 xl:col-span-6 p-3 bg-white rounded-xl shadow-sm">
-                            <ToolLargeCardProfile
+                                <div className="h-full col-span-12 2md:col-span-3 lg:col-span-3 xl:col-span-3">
+                            {/* <ToolLargeCardProfile
                             tool={post?.attributes}
-                            />
+                            /> */}
+
+                                <ToolImageCardSingle post={post} />
                             </div>
                             )
                         }
@@ -353,12 +375,12 @@ const ProfilePageLayout = ({
                 </Button>
           </Link>
             :''}
-         {previewOnly? 
+         {/* {previewOnly? 
          <div className={`${allPosts?.length?'pt-8':''}`}>
              <h2 className="font-semibold text-base mb-3">Recent activity</h2>
              <EmptyState/>
         </div>
-        :''}
+        :''} */}
             </div>
           </div>
 

@@ -24,7 +24,7 @@ const SmallCardStacked = ({ title, image, tags, date, avatar, author, showAuthor
         ""
       )}
       <div className="shrink md:mt-2 mb-1 p-2 md:px-3 flex flex-col-reverse md:flex-col justify-center">
-        {showAuthor!==false?<div className="mt-2 md:mb-1.5 md:ml-0">
+        {showAuthor!==false?<div className="mt-0 md:mb-1.5 md:ml-0">
           <Avatar src={avatar} author={author} date={date} size="sm" />
         </div>:
         <div className="hidden md:flex text-xs mb-2">
