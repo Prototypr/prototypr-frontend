@@ -35,7 +35,7 @@ const MediumPost = ({showAuthor,showDescription,link, title, image, tags, date, 
             {/* <p className="">{excerpt}</p> */}
           </Link>:null}
           
-        {showAuthor!==false?<div className="mb-3 mb-0.5">
+        {showAuthor!==false?<div className="mb-3.5">
           <Avatar src={avatar} author={author} date={date} size="lg" />
         </div>:null}
         </div>
