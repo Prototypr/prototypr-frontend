@@ -584,10 +584,10 @@ figure, pre{
     .max-w-full{
         max-width: 100%!important;
     }
-    figure, img{
+    figure, img, video{
         max-width: 100%!important;
     }
-    p, h1, h2, h3, h4, ol, li, ul, iframe, figure, img, blockquote, figcaption, hr, div, table{
+    p, h1, h2, h3, h4, ol, li, ul, iframe, figure, img, blockquote, figcaption, hr, div, table, video{
         margin-left:auto;
         margin-right: auto;
     }

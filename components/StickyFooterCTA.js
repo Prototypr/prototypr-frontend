@@ -54,7 +54,7 @@ const StickyFooterCTA = ({title, description, buttonText}) => {
               <div  className="absolute top-0 left-0 w-full h-full md:rounded-2xl -ml-0.5 -mt-0.5" style={{"backgroundColor":"#ffffff","opacity":"0.1","backgroundImage":"linear-gradient(#203490 1.5px, transparent 1.5px), linear-gradient(to right, #203490 1.5px, #ffffff 1.5px)","backgroundSize":"30px 30px"}}/>
 
             <div className="w-full z-10 relative px-1 py-3  flex flex-col gap-4 md:gap-3 md:flex-row justify-between">
-              <div className="hidden md:flex flex-row justify-center items-center gap-4 md:gap-8">
+              <div className="hidden md:flex flex-row justify-center items-center gap-4 md:gap-4">
                 <div>
                 </div>
                 <div className="flex flex-col md:ml-[80px]">

@@ -8,7 +8,7 @@ const post = {
 const SingleFancyCard = ({title, description}) =>{
 
     return(
-        <div className="flex flex-col grid gap-8 grid-cols-12">
+        <div className="flex flex-col grid gap-4 grid-cols-12">
 
              <a target="_blank" className="col-span-12"
              href={`${post.slug}`}>

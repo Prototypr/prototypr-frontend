@@ -55,6 +55,7 @@ import { TAB_ITEMS } from "@/lib/constants";
 import HeroArticleSection from "@/components/v4/section/HeroArticleSection";
 import TopicSectionHome from "@/components/v4/section/TopicSectionHome";
 import ToolsCarouselSection from "@/components/v4/section/ToolsCarouselSection";
+import ToolBackgroundCardRow from "@/components/v4/layout/ToolBackgroundCardRow";
 
 export default function Index({
   preview,
@@ -114,15 +115,20 @@ export default function Index({
           <SectionDivider py={'py-1 sm:py-2 md:py-5'} transparentLine={true} />
           </>
           :<div className="pt-[100px]"/>}
-          <div className='relative z-50 -mt-2'>
+           <Container maxWidth="max-w-[1320px] z-30 relative">
+           <div className="text-2xl text-black/90 font-semibold text-left -mt-8 mb-5 px-1 w-fit rounded-full">{`Today's Toolbox`}</div>
+          {/* <h2 className="text-3xl font-bold mb-[42px] text-center text-black/90">Tools to shape <span className="text-underline inline-block md:inline">every idea</span></h2> */}
+            <ToolBackgroundCardRow tools={toolsList.slice(0,4)} />
+          </Container>
+          <div className='relative z-50 pt-3'>
             <TagsNavRow/>
           </div>
                 {/* <SectionDivider py='py-9' transparentLine={true} /> */}
         <ToolsCarouselSection/>
-        <SectionDivider py='py-4' transparentLine={true} />
+        <SectionDivider py='py-3.5' transparentLine={true} />
         {/* <div className="z-50 relative bg-gradient-to-br from-[#EFF4FB] to-[#b8d1f4]/10 pb-12"> */}
         <div className="z-50 relative bg-[#EFF4FB]">
-          <SectionDivider py='py-2' transparentLine={true} />
+          {/* <SectionDivider py='py-2' transparentLine={true} /> */}
             <HeroArticleSection
               user={user}
               cols={3}
@@ -140,8 +146,11 @@ export default function Index({
               jobsSidebar={jobsSidebar}
             /> */}
         </div>
+          <div className="mt-10 mb-8">
+          <NewsletterSection/>
+        </div>
 
-        <SectionDivider py='py-7' transparentLine={true} />
+        <SectionDivider py='py-4' transparentLine={true} />
         
         <Container maxWidth="max-w-[1320px] z-30 relative">
           {/* <div className="p-6 md:p-6 bg-white relative overflow-hidden rounded-3xl shadow-md"> */}
@@ -161,9 +170,7 @@ export default function Index({
           </div>      */}
           </div>
         </Container>
-        {/* <div className="mt-20 mb-8">
-          <NewsletterSection/>
-        </div> */}
+      
         <SectionDivider py='py-6' transparentLine={true}  />
    
         {/* <SectionDivider />
@@ -188,7 +195,7 @@ export default function Index({
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[200px] left-0 w-full h-[124%] object-cover"/> */}
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[150px] left-0 w-full h-[124%] object-cover"/> */}
 
-          <div className="max-w-[1320px] mx-auto px-6 pb-8 ">
+          <div className="max-w-[1320px] mx-auto px-6 pb-16 ">
           <div className="flex justify-between mb-8">
               <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md leading-[32px]">
               Browse by <span className="text-underline">category</span>
@@ -272,7 +279,7 @@ export default function Index({
               
               
                
-            <SectionDivider py="py-12" transparentLine={false}/>
+            <SectionDivider py="py-12 opacity-70" transparentLine={false}/>
             {index==1?
                 <div className="-mt-8">
                     <NewsletterSection/>

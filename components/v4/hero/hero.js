@@ -264,7 +264,7 @@ const HeroGrid = ({
         {/* <div className="w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2  max-w-4xl mx-auto gap-1  sm:gap-10">
           <LargeCardWithImage type={type} data={thirdRowPost} />
         </div> */}
-        {/* <div className="w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2  max-w-4xl mx-auto gap-4 mb-8 sm:mb-0 sm:gap-8">
+        {/* <div className="w-full h-auto flex flex-row flex-wrap  sm:grid sm:grid-cols-2  max-w-4xl mx-auto gap-4 mb-8 sm:mb-0 sm:gap-4">
           <div
             style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}
             className="w-full max-w-[420px] h-[150px] bg-white rounded-[16px] p-4"
@@ -290,7 +290,7 @@ const HeroGrid = ({
             </div>
           )} */}
 
-        <div className="w-full h-auto flex flex-row flex-wrap px-4 lg:px-0 grid grid-cols-2 mx-auto gap-1  sm:gap-8">
+        <div className="w-full h-auto flex flex-row flex-wrap px-4 lg:px-0 grid grid-cols-2 mx-auto gap-1  sm:gap-4">
           {gridPosts.map((post, index) => {
             return  <LargeCardWithImage colSpan='col-span-2 sm:col-span-1 lg:col-span-2 mb-8 sm:mb-0' type={type} data={post} />
             // return  <SmallCardWithImage type={type} data={post} />
@@ -300,7 +300,7 @@ const HeroGrid = ({
           <div
           className="w-full h-full bg-pink-200 w-full lg:mt-8 rounded-[16px] p-6"
         >
-          <h3 className="text-2xl mb-2 font-inter max-w-md text-black font-bold">The best design articles, every week</h3>
+          <h3 className="text-2xl mb-2 font-inter max-w-md text-black font-bold">Tools and resources to shape every idea</h3>
           <p className="font-inter mb-4 text-base leading-[24px] text-black text-opacity-70">Join 25,000+ creatives who enjoy a regular dose of inspiration and motivation, delivered to your inbox every week.</p>
           <SignupHomepage/>
         </div>

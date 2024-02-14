@@ -21,7 +21,7 @@ const PostGroupRow = ({ largePost, smallPosts, description,title,topicObject }) 
     return (
     <>
    
-    <div className="grid grid-cols-1 gap-3 md:gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-[1320px]">
+    <div className="grid grid-cols-1 gap-3 md:gap-4 md:grid-cols-2 lg:grid-cols-4 max-w-[1320px]">
      
      {/* <div className="flex flex-col justify-center mb-6 md:mb-0">
         <div className="bg-blue-200/20 border border-blue-200/70 h-full rounded-2xl p-6">

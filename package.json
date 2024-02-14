@@ -145,6 +145,7 @@
     "react-sweet-wizard": "^1.0.3",
     "react-timeago": "^4.4.0",
     "react-tsparticles": "^2.7.1",
+    "react-use-measure": "^2.1.1",
     "react-waypoint": "^10.3.0",
     "react-web-monetization": "0.0.13",
     "rss": "^1.2.2",

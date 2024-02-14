@@ -2275,7 +2275,7 @@ select {
   gap: 3rem;
 }
 
-.gap-8 {
+.gap-4 {
   gap: 2rem;
 }
 
@@ -5655,7 +5655,7 @@ select {
     gap: 0.75rem;
   }
 
-  .sm\:gap-8 {
+  .sm\:gap-4 {
     gap: 2rem;
   }
 
@@ -6201,7 +6201,7 @@ select {
     gap: 1.5rem;
   }
 
-  .md\:gap-8 {
+  .md\:gap-4 {
     gap: 2rem;
   }
 

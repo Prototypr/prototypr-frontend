@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+
+// const initialDuration=50
+const SLOW_DURATION=350
 
 export const MotionSlider = ({
   slides,
-  gap = 20,
+  gap = 14,
   width = 350,
-  height = 105,
+  height = 94,
   direction = "normal",
-  duration = 8,
+  initialDuration = 8,
 }) => {
+
+  const controls = useAnimation();
+
   const [items] = useState(() =>
     [...slides, ...slides, ...slides, ...slides].map((slide) => ({
       key: Math.random().toString(36),
@@ -16,7 +22,43 @@ export const MotionSlider = ({
     }))
   );
 
-  const isReversed = direction === "reversed";
+
+  const motionDiv = useRef()
+  const [duration, setDuration] = useState(initialDuration)
+
+  const startAnimation = (duration) => {
+    controls.start({
+      x: [0, -(width + gap) * slides.length * 4],
+      transition: { duration, repeat: Infinity, ease: "linear" },
+    });
+  };
+
+    // Effect to restart animation when duration changes
+    useEffect(() => {
+      const transform = motionDiv.current?.style.transform;
+    console.log(transform); // This will log the full transform string
+      // Parsing the translateX value
+    const match = transform?.match(/translateX\((-?\d+\.?\d*)px\)/);
+    if (match && match[1]) {
+      const translateXValue = parseFloat(match[1]);
+      if(translateXValue){
+        // startAnimation(duration);
+        controls.start({
+          x: [translateXValue, -(width + gap) * slides.length * 4],
+          transition: { duration, repeat: Infinity, ease: "linear" },
+        });
+
+      }
+    }
+    }, [duration]); // Dependency on currentDuration
+  
+
+    // Initialize the animation with the fast duration
+    useEffect(() => {
+      startAnimation(initialDuration);
+    }, [controls]); // Re-run the effect if controls changes
+  
+
   return (
     <div>
       <motion.div
@@ -24,14 +66,10 @@ export const MotionSlider = ({
         style={{
           width: "100%",
         }}
+        ref={motionDiv}
         initial={{ x: 0 }}
-        animate={{
-          x: isReversed
-            ? [-(width + gap) * slides.length, 0]
-            : [0, -(width + gap) * slides.length],
-        }}
-        transition={{ duration, repeat: Infinity, ease: "linear" }}
-      >
+        animate={controls}
+       >
         {items.map((item, index) => (
           <div
             key={item.key}
@@ -43,6 +81,8 @@ export const MotionSlider = ({
               width: `${width + gap}px`,
             }}
             className=""
+            onMouseEnter={() => setDuration(SLOW_DURATION)} // Pause animation on hover
+          onMouseLeave={() => setDuration(initialDuration)} // Resume animation when not hovering
           >
             <div
               style={{

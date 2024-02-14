@@ -257,7 +257,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
           </Container>
             <Container maxWidth="pb-16 pt-0">
             <div className="max-w-[1320px] mx-auto">
-              <div className="flex grid gap-8 flex-col md:flex-row grid-cols-12">
+              <div className="flex grid gap-4 flex-col md:flex-row grid-cols-12">
                <div className="col-span-12 md:col-span-6">
                <TwoColumnCards
                   image={TAB_ITEMS[2].image}

@@ -315,7 +315,7 @@ const ProfilePageLayout = ({
               {allPosts?.length ?
                 <>
                         {currentPage==1 || !currentPage?<h2 className="font-medium rounded-full px-3 py-1 bg-gray-300/40 w-fit text-base mb-3">Posts</h2>:<h2 className="font-semibold text-base mb-3">Page {currentPage}</h2>}
-                    <div className="grid grid-cols-12 gap-8">
+                    <div className="grid grid-cols-12 gap-6">
                         {posts?.map((post,index)=>{
                       
                         let url = post?.attributes?.featuredImage?.data?.attributes?.url;

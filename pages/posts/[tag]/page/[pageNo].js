@@ -180,7 +180,7 @@ export default function PostsPage({
                       </div>
                     </div>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                       {tools.map((tool, index) => {
                         
                         if(index<4){
