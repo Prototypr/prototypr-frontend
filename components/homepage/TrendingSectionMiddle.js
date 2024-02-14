@@ -9,7 +9,7 @@ const TrendingSectionMiddle = ({ data }) => {
       <div className="mb-8 px-4 lg:px-0">
         <h1 className="font-semibold mb-3">Topics to browse</h1>
 
-        <div className="flex flex-col grid grid-cols-12 gap-4 justify-end items-end">
+        <div className="flex flex-col grid grid-cols-12 gap-6 justify-end items-end">
 
         {topics.map((topic, i) => (
                   <Link className="col-span-6 sm:col-span-4 md:col-span-3 h-[100px] w-full bg-gray-500 rounded-xl" key={i} href={`/posts/${topic.slug}/page/1`}>

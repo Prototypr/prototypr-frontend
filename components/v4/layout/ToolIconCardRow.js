@@ -8,8 +8,8 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
   return (
     <div className="flex flex-col w-full">
     {/* <Container maxWidth="max-w-[1320px] w-full"> */}
-      {showHeader!==false && <div className="flex justify-between mb-3">
-        <h3 className="font-semibold text-lg px-1">
+      {showHeader!==false && <div className="flex justify-between mb-4">
+        <h3 className="font-semibold text-2xl px-1">
          {title?title:
          <>
          Latest tools
@@ -36,7 +36,7 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
           </Link> */}
 
       </div>}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-8`}>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6`}>
         {tools.map((tool, index) => {
           return (
             <div key={index}>

@@ -19,7 +19,7 @@ const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,showHeadi
     let largePostAvatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
   return (
     <>
-    {showHeadingRow!==false && <div className="flex justify-between mb-6">
+    {showHeadingRow!==false && <div className="flex justify-between mb-4">
       {showHeading!==false?<RSSTitle title={title}/>:''}
        <div className="flex relative p-2">
             <div className="text-md inline text-gray-800 my-auto font-normal font-inter">
@@ -35,7 +35,7 @@ const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,showHeadi
           </div>
     </div>}
     <div className="flex flex-col justify-between max-w-[1320px] relative">
-    {showBigPost && <div className="w-full mb-8">
+    {showBigPost && <div className="w-full mb-6">
       <div className="z-20 relative">
         <BigBackgroundCard
           layout={showBigPost}

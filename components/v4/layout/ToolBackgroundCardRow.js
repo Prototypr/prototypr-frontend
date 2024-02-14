@@ -6,11 +6,16 @@ import { ArrowRight } from "phosphor-react";
 // import ToolImageCard from "../card/ToolImageCard";
 import ToolImageCardSingle from "../card/ToolImageCardSingle";
 
-const ToolLargeCardRow = ({ tools , showTitle}) => {
+
+
+// new one
+// import ToolBackgroundCard from "../card/ToolBackgroundCard";
+
+const ToolBackgroundCardRow = ({ tools , showTitle}) => {
   return (
     <>
-      {showTitle!==false?<div className="flex justify-between mb-6">
-        <h3 className="text-2xl text-black/90 font-semibold font-inter max-w-md">
+      {/* {showTitle!==false?<div className="flex justify-between mb-6">
+        <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md">
           Featured tools
         </h3>
         <div className="flex relative my-auto">
@@ -25,8 +30,8 @@ const ToolLargeCardRow = ({ tools , showTitle}) => {
               </Link>
             </div>
           </div>
-      </div>:''}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6`}>
+      </div>:''} */}
+      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4`}>
         {tools.map((tool, index) => {
           return (
             <div key={index}>
@@ -39,4 +44,4 @@ const ToolLargeCardRow = ({ tools , showTitle}) => {
   );
 };
 
-export default ToolLargeCardRow;
+export default ToolBackgroundCardRow;

@@ -19,20 +19,20 @@ export default function ProfileCard({
   return (
 <Link href={`/people/${slug}`}>
     <div className="flex shadow-sm group flex-col flex-grow h-full border-black/5 border-1 hover:shadow-lg transition-shadow duration-500 bg-white relative rounded-3xl">
-      <div className="p-6 flex">
+      <div className="p-3 flex flex-col">
             {img && (
-      <div className="basis-[96px] mr-5">
+      <div className="basis-[68px] mr-5 w-full flex justify-center">
               <div
-                className="rounded-full flex basis-[96px] my-auto transform group-hover:scale-110 transition duration-700 ease-out"
-                style={{ height: "96px", width: "96px" }}
+                className="rounded-full flex basis-[68px] my-auto transform group-hover:scale-110 transition duration-700 ease-out"
+                style={{ height: "68px", width: "68px" }}
               >
                 
                   <Image
                     loader={gumletLoader}
-                    width="96"
-                    height="96"
+                    width="68"
+                    height="68"
                     alt={`Avatar for ${title}`}
-                    className="border-black border-opacity-[0.05] border border-1 h-[96px] w-[96px] object-cover cursor-pointer flex-shrink-0 shine rounded-full bg-white"
+                    className="border-black border-opacity-[0.05] mx-auto border border-1 h-[68px] w-[68px] object-cover cursor-pointer flex-shrink-0 shine rounded-full bg-white"
                     src={img}
                   />
               </div>
