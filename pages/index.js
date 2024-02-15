@@ -116,9 +116,9 @@ export default function Index({
           </>
           :<div className="pt-[100px]"/>}
            <Container maxWidth="max-w-[1320px] z-30 relative">
-           <div className="text-2xl text-black/90 font-semibold text-left -mt-8 mb-5 px-1 w-fit rounded-full">{`Today's Toolbox`}</div>
+           <div className="text-2xl text-black/90 font-semibold text-left mt-6 md:-mt-8 mb-5 px-1 w-fit rounded-full">{`Today's Toolbox`}</div>
           {/* <h2 className="text-3xl font-bold mb-[42px] text-center text-black/90">Tools to shape <span className="text-underline inline-block md:inline">every idea</span></h2> */}
-            <ToolBackgroundCardRow tools={toolsList.slice(0,4)} />
+            <ToolBackgroundCardRow tools={toolsList.slice(5,9)} />
           </Container>
           <div className='relative z-50 pt-3'>
             <TagsNavRow/>
@@ -138,6 +138,7 @@ export default function Index({
               jobsSidebar={jobsSidebar}
               // showBigPost={false}
               showBigPost={2}
+              showTitle={false}
             />
             {/* <DiscoverSection
               user={user}
@@ -146,7 +147,7 @@ export default function Index({
               jobsSidebar={jobsSidebar}
             /> */}
         </div>
-          <div className="mt-10 mb-8">
+          <div className="mt-14 mb-8">
           <NewsletterSection/>
         </div>
 
@@ -158,7 +159,6 @@ export default function Index({
               <ToolLargeCardRow tools={toolsList.slice(0,4)} />
               <SectionDivider py="py-6" transparentLine={true}  />
               <ToolIconCardRow withBackground={true} tools={toolsList.slice(5,15)} />       
-
               
             
           {/* <div className="flex mt-10">
@@ -201,7 +201,7 @@ export default function Index({
               Browse by <span className="text-underline">category</span>
               </h3>
               <div className="flex relative p-2">
-            <div className="hidden sm:inline text-md text-blue-800 font-normal font-inter">
+            <div className="hidden sm:inline text-md text-black/80 font-normal font-inter">
             <Link href={`/topics/`}>See all</Link>
             </div>
             <div className="my-auto">
@@ -292,7 +292,7 @@ export default function Index({
                   <Container  maxWidth="max-w-[1320px]">
                   <TwoColumnCards/> 
                   </Container>
-                  <SectionDivider py="py-12" transparentLine={false}/>
+                  <SectionDivider py="py-4" transparentLine={true}/>
                   </div>:''
               }
               </div>

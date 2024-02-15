@@ -42,16 +42,22 @@ export default function PeoplePage({
           <PostTitle>Loading…</PostTitle>
         ) :
         <>        
-        {allPosts.length > 0 && (
-          <div className="mt-6 grid grid-rows-1 lg:grid-cols-4 grid-cols-1  gap-10">
-            <div className="col-span-3">
-            <div className={`grid md:grid-cols-2 grid-cols-1 md:gap-y-10 gap-y-10 lg:gap-y-10 gap-x-10 md:gap-x-10 pb-16`}>
+                <h1 className="font-inter font-semibold text-xl">Page {pagination?.page}</h1>
 
+        {allPosts.length > 0 && (
+           <div className="mt-6 grid grid-rows-1 sm:grid-cols-2 lg:grid-cols-4 grid-cols-1  gap-6">
+           <div className="col-span-4">
+           <div className={`grid md:grid-cols-4 grid-cols-1 gap-6 pb-16`}>
             {allPosts.map((post, i) =>
-            <ProfileCard
+            {
+              return(<ProfileCard
                   key={`peoplecard_${
                     post.attributes.slug ? post.attributes.slug : i
                   }`}
+                  twitter={post.attributes?.twitter}
+                  github={post.attributes?.github}
+                  dribbble={post.attributes?.dribbble}
+                  kofi={post.attributes?.kofi}
                   location={post.attributes?.location}
                   bio={post.attributes?.bio}
                   title={post.attributes.username}
@@ -59,7 +65,7 @@ export default function PeoplePage({
                   legacyAvatar={post.attributes.legacyAvatar}
                   avatar={post.attributes.avatar?.data?.attributes?.url}
                   skills={post.attributes.skills}
-                />)}
+                />)})}
                 </div>
               <NewPagination
                 total={pagination?.total}
@@ -70,13 +76,8 @@ export default function PeoplePage({
                 }}
               />
             </div>
-            <div className="grid-cols-1 hidden lg:block">
+            {/* <div className="grid-cols-1 hidden lg:block">
               <div className="w-full min-h-screen  flex flex-col">
-              {/* <PeopleBreadcrumbs 
-                    urlRoot={'/people'}
-                    title={BREADCRUMBS.pageTitle}
-                    links={BREADCRUMBS.links}
-                    /> */}
               <PeopleFilters
                urlRoot={'/people'}
                items={ALL_PEOPLE_GROUPS} 
@@ -84,7 +85,7 @@ export default function PeoplePage({
                slug={'/people'}/>
 
               </div>
-            </div>
+            </div> */}
           </div>
         )}
         </>}

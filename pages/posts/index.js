@@ -13,7 +13,7 @@ import { getPostsByPageForPostsPage } from "@/lib/api";
 import TagsNavRow from "@/components/v4/section/TagsNavRow";
 import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
 // import Head from "next/head";
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 10;
 export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
   let heroPost;
   let morePosts = [];
@@ -62,7 +62,9 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
             ? morePosts.length > 0 &&
             <PostsSectionHero
             showRecent={true}
+            groupSlice={3}
             user={user}
+            showTitle={false}
             heroCardPost={heroPost}
             viewablePosts={morePosts}
           />
@@ -70,6 +72,8 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
             : allPosts.length > 0 &&   
             <PostsSectionHero
             showRecent={true}
+            groupSlice={3}
+            showTitle={false}
             user={user}
             heroCardPost={heroPost}
             viewablePosts={morePosts}

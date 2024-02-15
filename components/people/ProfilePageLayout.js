@@ -100,10 +100,10 @@ const ProfilePageLayout = ({
             <img src='/static/images/toolbox/squares.svg' className=" opacity absolute w-full h-full object-cover top-0 left-0"/>
 
                 {/* <div className="magicpattern absolute top-0 left-0 w-full"/> */}
-                <div className="relative max-w-[1320px] mx-auto flex justify-center">
+                <div className="relative px-6 md:px-0 max-w-[1320px] mx-auto flex flex-col md:flex-row justify-center">
 
                 <div
-                    className="w-[168px] bg-white h-[168px] -mt-2 rounded-full border border-1 overflow- relative border-black/10 shadow-sm mr-12"
+                    className="w-[168px] bg-white h-[168px] -mt-2 rounded-full border border-1 overflow- relative border-black/10 shadow-sm mb-3 md:mb-0 md:mr-12"
                 >
   {(kofi || (unapproved && user?.profile?.kofi)) && (
                         <div className="absolute z-10 bottom-0 mb-3 left-0">
