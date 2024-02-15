@@ -6,7 +6,7 @@ export default function IssueList({ posts = [], marginTop }) {
   const intl = useIntl();
   return (
     <section className={`pt-2 px-3 xl:px-0 ${!marginTop?'':marginTop}`}>
-      <h2 className="font-bold text-3xl text-title-1 mb-10">
+      <h2 className="font-medium font-semibold text-xl text-title-1 mb-6">
         {intl.formatMessage({ id: "newsletter.issue" })}
       </h2>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 mb-20">

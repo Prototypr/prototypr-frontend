@@ -530,17 +530,15 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/people">
-                {/* {submenuTitle5} */}
-                People
+              <NavigationMenuLink href="/newsletter">
+                Newsletter
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            {/* <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/jobs">
-                {/* {submenuTitle5} */}
                 Jobs
               </NavigationMenuLink>
-            </NavigationMenuItem>
+            </NavigationMenuItem> */}
 
             <NavigationMenuItem className="flex flex-col text-sm  xl:mr-2.5 justify-center">
                 <div className="-ml-1">
@@ -551,10 +549,10 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
               <NavigationMenuContent showCaret={false} className="normal-case">
                 <ContentList layout="two">
                   <ContentListItem
-                    title={'Newsletter'}
-                    href="/newsletter"
+                    title={'People'}
+                    href="/people"
                   >
-                    Subscribe to the Prototypr Weekly newsletter and see past issues.
+                    Browse all contributors and members on Prototypr.
                   </ContentListItem>
                   <ContentListItem
                     title={'Publish with us'}
