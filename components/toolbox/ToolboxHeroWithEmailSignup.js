@@ -139,8 +139,8 @@ const ToolBoxHeroWithSignup = ({user}) => {
       <div className="w-full max-w-full relative py-5 flex flex-col gap-2  overflow-hidden">
         <div className=" flex flex-col items-center max-w-7xl mx-auto grid gap-5 top-0 w-full ">
           <MotionSlider
-            initialDuration={60}
-            slides={ProductListData.map((data, i) => {
+                  initialDuration={180}
+                  slides={ProductListData.map((data, i) => {
               return (
                 <MotionSliderToolCard
                   title={data.title}
@@ -152,8 +152,8 @@ const ToolBoxHeroWithSignup = ({user}) => {
             })}
           />
           <MotionSlider
-            initialDuration={45}
-            slides={ProductListData2.map((data, i) => {
+                  initialDuration={150}
+                  slides={ProductListData2.map((data, i) => {
               return (
                 <MotionSliderToolCard
                   slug={data.slug}

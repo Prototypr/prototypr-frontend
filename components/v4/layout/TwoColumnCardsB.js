@@ -3,13 +3,13 @@ import Link from "next/link";
 const dummyData = [{
 image:'/static/images/jobs.svg',
 slug:'/network',
-class:'bg-gray-100',
+class:'bg-gray-50',
 title:'Post an article',
 description:'Share your story with us and get featured in the newsletter.'
 },
 {image:'/static/images/botty.svg',
 slug:'/toolbox',
-class:'bg-gray-100',
+class:'bg-gray-50',
 title:'Get your tool featured',
 description:'List your tool in the Prototypr Toolbox and claim your page.'}
 ]
