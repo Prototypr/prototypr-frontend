@@ -38,7 +38,7 @@ export default function SourcePanel({ desc, title, className, titleSize }) {
             {registered == false ? (
               <>
                 <h3
-                  className={`leading-tight font-semibold text-5xl ${
+                  className={`leading-tight font-medium text-5xl ${
                     titleSize ? titleSize : "lg:text-s6xl"
                   } text-gray-900 mb-3`}
                 >
