@@ -122,7 +122,7 @@ const UserForm = ({ info }) => {
         </div>
         <AvatarEditor/>
       </div>
-      <div className="md:px-4 w-full">
+      {/* <div className="md:px-4 w-full">
       <FormControl inValid={!!errors.paymentPointer}>
           <label htmlFor="paymentPointer" className="text-sm">
             Payment Pointer
@@ -158,7 +158,7 @@ const UserForm = ({ info }) => {
             </div>
         </div>
         </Link>
-      </div>
+      </div> */}
       </div>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col grid gap-2">

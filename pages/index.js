@@ -116,7 +116,7 @@ export default function Index({
           </>
           :<div className="pt-[100px]"/>}
            <Container maxWidth="max-w-[1320px] z-30 relative">
-           <div className="text-2xl text-black/90 font-semibold text-left mt-6 md:-mt-8 mb-5 px-1 w-fit rounded-full">{`Today's Toolbox`}</div>
+           <div className={`${user?.isLoggedIn?'pt-6':''} text-2xl text-black/90 font-semibold text-left mt-6 md:-mt-8 mb-5 px-1 w-fit rounded-full`}>{`Today's Toolbox`}</div>
           {/* <h2 className="text-3xl font-bold mb-[42px] text-center text-black/90">Tools to shape <span className="text-underline inline-block md:inline">every idea</span></h2> */}
             <ToolBackgroundCardRow tools={toolsList.slice(5,9)} />
           </Container>

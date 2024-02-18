@@ -202,7 +202,8 @@ const IconButton = styled("button", {
 //     signOut()
 // }
 
-export const DropdownMenuDemo = ({ icon, user }) => {
+export const ProfileBadgeDropdown = ({ icon, user }) => {
+
   const router = useRouter();
   const { mutateUser } = useUser({
     redirectTo: "/",
@@ -226,7 +227,11 @@ export const DropdownMenuDemo = ({ icon, user }) => {
           >
             <DropdownMenuItem
               onSelect={() => {
-                router.push(`/people/${user?.profile?.slug}`);
+                if(user?.approved){
+                  router.push(`/people/${user?.profile?.slug}`);
+                }else{
+                  router.push(`/account/profile`);
+                }
               }}
             >
               
@@ -257,9 +262,9 @@ export const DropdownMenuDemo = ({ icon, user }) => {
               {/* </Link> */}
               {/* <RightSlot>⌘+T</RightSlot> */}
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator /> */}
 
-            <DropdownMenuItemBanner
+            {/* <DropdownMenuItemBanner
               onSelect={() => {
                 router.push(`/web-monetization`);
               }}
@@ -280,7 +285,7 @@ export const DropdownMenuDemo = ({ icon, user }) => {
                   </p>
                 </div>
               </div>
-            </DropdownMenuItemBanner>
+            </DropdownMenuItemBanner> */}
 
             {/* <DropdownMenuItem
               onSelect={() => {
@@ -362,4 +367,4 @@ export const DropdownMenuDemo = ({ icon, user }) => {
   );
 };
 
-export default DropdownMenuDemo;
+export default ProfileBadgeDropdown;

@@ -20,11 +20,11 @@ export default function Index({allTags}) {
     redirectIfFound: false,
   });
 
-  useEffect(()=>{
-    if((user?.profile?.onboardComplete==true) && !router?.query?.onboard){
-      router.push("/");
-    }
-  },[user])
+  // useEffect(()=>{
+  //   if((user?.profile?.onboardComplete==true) && !router?.query?.onboard){
+  //     router.push("/");
+  //   }
+  // },[user])
 
   useEffect(()=>{
     if(router.query?.signin=='true'){
@@ -52,13 +52,8 @@ export default function Index({allTags}) {
         />
       </Head>
 
-      <div className="h-full w-full grid md:grid-cols-12">
-        <div className="hidden w-full h-full md:block md:col-span-6 lg:col-span-4">
-          <div className="flex items-center justify-center h-full w-full relative bg-[#195DE2] text-white">
-            <LoginSide user={user} />
-          </div>
-        </div>
-        <div className="col-span-12 md:col-span-6 lg:col-span-8">
+      <div className="h-full relative w-full grid md:grid-cols-12">
+        <div className={`col-span-12 ${!user?.isLoggedIn?`md:col-span-6 lg:col-span-6`:''} z-10 relative`}>
           <div className="flex items-center justify-center h-full w-full relative">
             {!user && <Fallback />}
 
@@ -68,8 +63,8 @@ export default function Index({allTags}) {
               </Link>
             </div>:''}
             {user && !user?.isLoggedIn ? (
-              <div className="w-full h-full bg-[#F4F4F4] grid place-items-center">
-                <div className="max-w-[500px] mx-auto">
+              <div className="w-full h-full bg-white grid place-items-center">
+                <div className="max-w-[90%] md:max-w-[340px] -mt-8 w-full mx-auto">
                   <LoginForm isSignUp={isSignUp} />
                 </div>
                 <div className="absolute top-[16px] right-[16px]">
@@ -92,7 +87,15 @@ export default function Index({allTags}) {
               user && user?.isLoggedIn && <WMOnboarding user={user} allTags={allTags} />
             )}
           </div>
+        
         </div>
+        {!user?.isLoggedIn? <div className="hidden z-50 relative w-full h-full md:block md:col-span-6 lg:col-span-6">
+          <div 
+          // style={{background:'radial-gradient(at right center, rgb(103, 118, 192), rgb(40,60, 151))'}}
+          className="flex items-center magicpattern justify-center h-full w-full relative text-white">
+            <LoginSide user={user} />
+          </div>
+        </div>:null}
       </div>
     </>
   );

@@ -12,7 +12,7 @@ const options = [
       slug:'writer'
       },
       {
-      name:'Share your products/projects',
+      name:'Share your projects',
       slug:'maker'
       },
       {
@@ -137,9 +137,9 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
     return(
         <div className={"w-full px-0 md:px-10 lg:px-0"}>
             {next?
-              <div className="w-full p-8 pb-3 md:pb-8 text-center">
+              <div className="w-full p-8 pb-3 md:pb-3 text-center">
                  <div>
-                      <h2 className="text-3xl mb-2 font-inter-serif text-gray-800 font-bold text-center">
+                      <h2 className="text-3xl mb-2 font-inter-serif text-black/90 font-semibold text-center">
                         What are your goals?   
                       </h2>
                     <h3 className="text-lg font-inter-serif text-gray-500 text-center mb-6">
@@ -182,7 +182,7 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
                     <button
                       aria-label="Continue"
                       onClick={() =>{saveInterestsToUser();}}
-                      className={`text-base px-3 py-2 mr-2 focus:outline-none focus:ring focus:ring-blue-400 flex justify-center rounded-md cursor-pointer 
+                      className={`text-base px-3 py-2 mr-2 focus:outline-none focus:ring focus:ring-blue-400 flex justify-center !rounded-full cursor-pointer 
                                     hover:bg-blue-600
                                     bg-blue-500  
                                     duration-200 ease-in-out 

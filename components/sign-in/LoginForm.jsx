@@ -1,5 +1,6 @@
 import { signIn } from "next-auth/react";
-import Button from "../atom/Button/Button";
+// import Button from "../atom/Button/Button";
+import Button from "../Primitives/Button";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
@@ -13,14 +14,21 @@ const LoginForm = ({ isSignUp, title = "Sign up" }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div className="flex flex-col bg-[#fff] rounded-3xl p-8  md:p-18">
-      <h2 className="text-[32px] font-inter text-gray-800 font-bold">
+    <div className="flex flex-col bg-[#fff] rounded-3xl">
+        <div className="w-[140px] bg-white rounded-2xl mb-16 ">
+              <img
+                src={`/static/images/logo.svg`}
+                data-gumlet="false"
+                alt="Prototypr Logo"
+              />
+            </div>
+      <h2 className="text-3xl font-inter text-gray-800 font-semibold">
         {isSignUp ? title : "Welcome back"}
       </h2>
       <div className="flex flex-col gap-4 flex-grow mt-6">
         {/* <Button
           isFullWidth
-          className="text-left w-full text-sm justify-start h-11 p-8 md:px-20 rounded-full font-normal"
+          className="text-left w-full text-sm justify-start h-11 p-8 md:px-20 !rounded-full font-normal"
           color="twitter"
           leftIcon={
             <div className="bg-white p-1 rounded-md">
@@ -41,15 +49,19 @@ const LoginForm = ({ isSignUp, title = "Sign up" }) => {
       
         <Button
           isFullWidth
-          className="text-left w-full text-sm  justify-start h-11 p-8 md:px-20 rounded-full font-normal"
-          color="google"
-          leftIcon={
-            <div className="bg-white p-1 rounded-md">
-              <svg
+          style={{border:'1px solid rgba(0,0,0,0.2)'}}
+          variant={"confirmRounded"}
+          className="text-center w-full !py-2 !px-0 !bg-gray-50 !text-black/90 text-sm !rounded-full font-normal"
+          onClick={() => signIn("google")}
+        >
+          <div className="flex">
+          <svg
+            width={24}
+            height={24}
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 48 48"
-                className="!h-4 !w-4"
+                // className="!h-4 !w-4"
               >
                 <defs>
                   {" "}
@@ -83,33 +95,42 @@ const LoginForm = ({ isSignUp, title = "Sign up" }) => {
                   d="M48 48L17 24l-4-3 35-10z"
                 />{" "}
               </svg>
-            </div>
-          }
-          onClick={() => signIn("google")}
-        >
-          {isSignUp ? "Sign up with Google" : "Sign in with Google"}
+              <div className="ml-2.5 my-auto">
+            {isSignUp ? "Sign up with Google" : "Sign in with Google"}
+              </div>
+          </div>
         </Button>
         <Button
           isFullWidth
-          className="text-left w-full text-sm  justify-start h-11 p-8 md:px-20 rounded-full font-normal"
+          variant={"confirmRounded"}
+          className="text-center !py-2 !px-0 w-full !bg-black/80 text-sm !rounded-full font-normal"
           color="github"
-          leftIcon={
-            <div className="bg-white p-1 rounded-md">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="#1F1F1F"
-                viewBox="0 0 16 16"
-                className="!h-4 !w-4"
-              >
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-              </svg>
-            </div>
-          }
           onClick={() => signIn("github")}
         >
-          {isSignUp ? "Sign up with GitHub" : "Sign in with GitHub"}
+          <div className="flex">
+
+          <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 48 48"
+    >
+      <g data-name="Layer 2">
+        <g fill="none" data-name="invisible box">
+          <path d="M0 0H48V48H0z"></path>
+          <path d="M0 0H48V48H0z"></path>
+        </g>
+        <path
+          fill="#fff"
+          d="M24 1.9a21.6 21.6 0 00-6.8 42.2c1 .2 1.8-.9 1.8-1.8v-2.9c-6 1.3-7.9-2.9-7.9-2.9a6.5 6.5 0 00-2.2-3.2c-2-1.4.1-1.3.1-1.3a4.3 4.3 0 013.3 2c1.7 2.9 5.5 2.6 6.7 2.1a5.4 5.4 0 01.5-2.9C12.7 32 9 28 9 22.6a10.7 10.7 0 012.9-7.6 6.2 6.2 0 01.3-6.4 8.9 8.9 0 016.4 2.9 15.1 15.1 0 015.4-.8 17.1 17.1 0 015.4.7 9 9 0 016.4-2.8 6.5 6.5 0 01.4 6.4 10.7 10.7 0 012.8 7.6c0 5.4-3.7 9.4-10.5 10.6a5.4 5.4 0 01.5 2.9v6.2a1.8 1.8 0 001.9 1.8A21.7 21.7 0 0024 1.9z"
+          data-name="icons Q2"
+        ></path>
+      </g>
+    </svg>
+          <div className="ml-2.5 my-auto">
+            {isSignUp ? "Sign up with GitHub" : "Sign in with GitHub"}
+          </div>
+          </div>
         </Button>
       </div>
       <div className="my-5">
@@ -119,13 +140,14 @@ const LoginForm = ({ isSignUp, title = "Sign up" }) => {
         <Button
           isFullWidth
           type="submit"
-          className="text-left bg-gray-100 justify-start h-11 p-8 md:px-20 rounded-full font-normal"
+          variant={"confirmRounded"}
+          className="text-center !py-2 !px-0 w-full text-sm !rounded-full font-normal"
           onClick={() => {
             setShowLoginForm(!showLoginForm);
             // signIn("email", {email:'graeme@prototypr.io'})
           }}
-          leftIcon={
-            <div className="bg-white p-1 rounded-md">
+        >
+          <div className="flex ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 // className="h-6 w-6"
@@ -133,7 +155,7 @@ const LoginForm = ({ isSignUp, title = "Sign up" }) => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth="2"
-                className="!h-4 !w-4"
+                className="h-5 w-5"
               >
                 <path
                   stroke-linecap="round"
@@ -141,10 +163,10 @@ const LoginForm = ({ isSignUp, title = "Sign up" }) => {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-            </div>
-          }
-        >
+          <div className="ml-2.5 my-auto inline-block ">
           {isSignUp ? "Sign up with Email" : "Sign in with Email"}
+          </div>
+          </div>
         </Button>
       ) : (
         <div className="max-w-xs">
@@ -250,7 +272,7 @@ const showSuccessToast = (loadingToastId) => {
         <div className="relative border border-gray-200 rounded-lg shadow-lg">
           <button
             onClick={() => toast.dismiss(t.id)}
-            className="absolute p-1 bg-gray-100 border border-gray-300 rounded-full -top-1 -right-1"
+            className="absolute p-1 bg-gray-100 border border-gray-300 !rounded-full -top-1 -right-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

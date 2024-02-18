@@ -71,14 +71,14 @@ const AccountPage = ({ preview }) => {
                 <CircleWavyCheck size="44"/>
               </div>
               <p className="w-full max-w-4xl">
-              Your <Link href={`/people/${user?.profile?.slug}`}><span className="underline font-semibold">profile page</span></Link> is <span className="font-semibold inline">pending approval</span>, and is <span className="font-semibold inline">not publicly visible</span> yet. 
-              <br/>Complete your profile to get approved faster. Profiles pages are granted individually for community safety, to improve quality and reduce spam. 💜
+              Your <Link href={`/people/${user?.profile?.slug}`}><span className="">profile page</span></Link> is <span className="font-semibold inline">pending manual approval</span>, and is <span className="font-semibold inline">not publicly visible</span> yet. 
+              <br/>Complete your profile to get approved faster. Profiles pages are granted manually for community safety, to improve quality and reduce spam. 💜
               </p>
               </div>
           </div>:''}
             <div className="pt-6 pb-10 px-0 xl:px-0">
               <div className="bg-white shadow-sm rounded-xl py-6 px-4">
-                <h1 className="font-semibold">General Profile</h1>
+                <h1 className="font-semibold">Public Profile</h1>
                 <span className="text-sm text-gray-500">
                   This information will be displayed on your public profile
                 </span>

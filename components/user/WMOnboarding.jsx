@@ -55,11 +55,11 @@ export default function Onboarding({ allTags, user }) {
               render={({ previous }) => (
                 <div className="md:w-[585px] w-full px-10 lg:px-0">
                   <div>
-                    <h1 className="text-3xl font-inter-serif text-gray-900 font-bold mb-3">
-                      One last thing!
+                    <h1 className="text-3xl font-inter-serif text-gray-900 font-semibold mb-3">
+                      {`You're ready to go!`}
                     </h1>
                   </div>
-                  <p className="text-gray-600 max-w-md mb-3">
+                  {/* <p className="text-gray-600 max-w-md mb-3">
                     When you publish on Prototypr, you'll be eligible to earn
                     tips and streamed payments based on viewing time. Just fill
                     in the payment pointer{" "}
@@ -68,22 +68,22 @@ export default function Onboarding({ allTags, user }) {
                       src="https://webmonetization.org/img/wm-icon-animated.svg"
                     />{" "}
                     field on your profile page.
-                  </p>
+                  </p> */}
                   <p className="text-gray-600 max-w-md mb-3">
-                    You can also update your public profile with your avatar, name, and links to your social profiles.
+                    Update your public profile with your avatar, name, and links to your social profiles to get verified.
                   </p>
                   <div className="flex mx-auto mt-8 items-left justify-start ">
                     <a href="/account">
                       <button
                         aria-label="Set up profile"
-                        className={`text-base px-4 z-10 py-3 mb-2 focus:outline-none focus:ring focus:ring-blue-400 flex justify-center rounded-md cursor-pointer 
+                        className={`text-base px-4 z-10 py-3 mb-2 focus:outline-none focus:ring focus:ring-blue-400 flex justify-center rounded-full cursor-pointer 
                                     hover:bg-blue-600
                                     bg-blue-500  
                                     duration-200 ease-in-out 
                                     transition`}
                       >
                         <div className="flex mx-auto text-white font-semibold my-auto leading-5">
-                          <div>{"Create profile"}</div>
+                          <div>{"Continue"}</div>
                         </div>
                       </button>
                     </a>

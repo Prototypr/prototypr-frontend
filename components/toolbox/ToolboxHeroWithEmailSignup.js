@@ -115,9 +115,9 @@ const ToolBoxHeroWithSignup = ({user}) => {
             </div>
             {user?.isLoggedIn?
             <div>
-                <h1 className="text-[40px] md:text-[52px] text-center leading-[52px] md:leading-[63px] font-bold mb-2">
-                Find the tool, <br /> make your thing.
-                </h1>
+                {/* <h1 className="text-[40px] md:text-5xl text-center font-bold mb-2">
+                Find your <span className="">next tool</span>
+                </h1> */}
                 <div>
                 <SearchBarToolbox />
                 </div>

@@ -81,18 +81,6 @@ const ProfilePageLayout = ({
 
     return(
         <Container padding={false} maxWidth="w-full -mt-[96px] px-0" >
-        {unapproved?<div className="px-6">
-            <div className="mt-3 shadow-sm flex w-full bg-purple-300/70 p-4 px-4 rounded-xl text-purple-900">
-            <div className="mr-4 my-auto">
-            <CircleWavyCheck size="44"/>
-            </div>
-            <p className="max-w-4xl">
-            Your profile is <span className="font-semibold inline">pending approval</span>, and is <span className="font-semibold inline">not publicly visible</span> yet. 
-            <br/><Link href="/account"><span className="underline font-semibold">Complete your profile</span></Link> to get approved faster! Profiles are individually approved for quality and community safety.
-            <br/>Until then, you can still submit articles and tools, and interact with the site as usual! 💜 
-            </p>
-            </div>
-        </div>:''}
         <div className="flex flex-col">
             
           <div className="w-full lg:block">
@@ -116,7 +104,7 @@ const ProfilePageLayout = ({
                         </div>
                         )}
                     {unapproved?
-                    <img src={author?.avatar?.url?author?.avatar?.url:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}/>
+                    <img className="bg-white h-full w-full rounded-full object-cover" src={author?.avatar?.url?author?.avatar?.url:'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}/>
                     :(author?.avatar || author?.legacyAvatar) && (
                     // <Link href={`/people/${slug}`}>
                         <Image
@@ -311,7 +299,21 @@ const ProfilePageLayout = ({
 
           <div className="flex-1 z-20 -mt-[120px]">
             <div className="px-3 max-w-[1320px] mx-auto mb-20 mt-6 lg:mt-0">
-              
+            {unapproved?<div className="px-6 mt-[160px]">
+            <div className="mt-3 flex w-full bg-blue-300/20 p-4 px-4 rounded-xl text-black/90 max-w-3xl mx-auto">
+            <div className="mr-4 my-auto">
+            <CircleWavyCheck size="44"/>
+            </div>
+            <div className="flex flex-col max-w-4xl">
+              <h2 className="mb-1 text-lg font-semibold">Profile pending approval</h2>
+              <p className="mb-3">
+              For community safety and to reduce spam accounts, your profile is not publicly viewable until manually approved by us. 
+              You can still submit posts, but they will only appear once your account is approved. Complete your profile to get approved faster.
+              </p>
+              <p> <Link href="/account"><span className="underline font-semibold">Complete profile</span> →</Link> </p>
+            </div>
+            </div>
+        </div>:''}
               {allPosts?.length ?
                 <>
                         {currentPage==1 || !currentPage?<h2 className="font-medium rounded-full px-3 py-1 bg-gray-300/40 w-fit text-base mb-3">Posts</h2>:<h2 className="font-semibold text-base mb-3">Page {currentPage}</h2>}

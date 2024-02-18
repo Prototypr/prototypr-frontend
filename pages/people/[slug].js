@@ -174,6 +174,10 @@ export async function getStaticProps({ preview = null, params, locale }) {
     let author = null
   if (!allPosts?.data[0]) {
     author = await getUserBySlug(slug)
+    //getUserBySlug 
+    // this is filtered by user approval.
+
+    
     //if no post found, 404
     if(!author){
       return {

@@ -62,7 +62,7 @@ const SearchBoxToolComponent = ({
           boxShadow:
             "0px 100px 80px rgba(0, 0, 0, 0.00696822), 0px 30.1471px 24.1177px rgba(0, 0, 0, 0.01), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.0130318), 0px 4.5288px 3.62304px rgba(0, 0, 0, 0.02)",
         }}
-        className="max-w-[300px] rounded-[12px] h-[72px] px-4 w-[280px] md:w-[400px] border-2 border-[#E6E6E6] bg-white"
+        className="max-w-[340px] rounded-full mt-4 px-4 h-[50px] text-lg placeholder-lg placeholder-gray-500 md:w-[400px] border-1 border border-gray-300 bg-white"
         placeholder="Search 1000s of tools..."
       ></input>
     </form>

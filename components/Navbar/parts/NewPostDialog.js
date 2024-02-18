@@ -57,7 +57,7 @@ const NewPostDialog = ({button}) => {
        <Button variant={"confirmBig"} className="rounded-full">
           Create new
         </Button>
-        :<div className="flex cursor-pointer text-gray-700 text-sm mr-3">
+        :<div className="flex cursor-pointer text-black/80 text-sm mr-3">
                   <NotePencil size={22} className="mr-1.5" />
                  <div className="my-auto font-medium">New</div>
               </div>}
@@ -75,7 +75,7 @@ const NewPostDialog = ({button}) => {
           <DialogDescription>
           <div className="relative  flex flex-col md:flex-row justify-center">
             <Link href="/write">
-                <div className="flex group cursor-pointer flex-col mb-10 md:mb-0 md:mr-10">
+                <div className="flex group cursor-pointer flex-col mb-10 md:mb-0 md:mr-12">
                     <IconButton className="bg-white mx-auto transition transition-all duration-300 group-hover:scale-110 ">
                         <TextAa weight="fill" size="44"/>
                     </IconButton>
@@ -83,7 +83,7 @@ const NewPostDialog = ({button}) => {
                 </div>
             </Link>
             <Link href="/toolbox/post">
-                <div className="flex group cursor-pointer flex-col mb-10 md:mb-0 md:mr-10">
+                <div className="flex group cursor-pointer flex-col mb-10 md:mb-0 md:mr-12">
                     <IconButton className="bg-blue-500 transition transition-all duration-300 group-hover:scale-110 mx-auto">
                         <Package weight="fill" size="44"/>
                     </IconButton>
