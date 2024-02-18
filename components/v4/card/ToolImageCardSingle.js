@@ -138,9 +138,9 @@ const ToolImageCardSingle = ({ post, imageLarge,type, columns, tagNumber }) => {
           <div className="pl-2 overflow-hidden my-auto">
             <div className={'line-clamp-1 font-medium'}> {title}</div>
             {/* {this.props.prototool !== true && */}
-            {tags?.length && (
+            {tags?.length? (
                    <div className='text-xs text-gray-500 mt-0.5 capitalize'>{tags[0].attributes.name}</div>
-                )}
+                ):null}
              
             {/* <div className='w-1/4 relative'> {this._getTag()}</div> */}
           </div>

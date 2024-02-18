@@ -91,18 +91,18 @@ const TopicsSelect = ({
                     {next?
                     <>
                     <div className="flex justify-center mx-auto mb-1">
-                      <h2 className="text-3xl font-inter-serif text-gray-800 font-bold text-center">
-                        Join Prototypr   
+                      <h2 className="text-3xl font-inter-serif text-black/90 font-semibold text-center">
+                        Choose some topics   
                       </h2>
                     </div>
                     <h3 className="text-lg font-inter-serif text-gray-500 text-center mb-6">
-                        Choose your favourite topics
+                        Share your interests
                     </h3>
                     </>
                     :<div className="w-full py-1.5"/>}
                     <div className="md:p-1 max-h-[500px] relative border rounded-xl border-black/10 rounded-xl">
                       <div className="h-full w-full">
-                        <div className="flex p-3 flex-wrap max-h-[390px] overflow-y-auto">
+                        <div className="flex p-3 flex-wrap max-h-[390px] overflow-y-auto justify-center">
                           {allTags.map((topic, i) => {
                             let userAlreadyChosen
                             if(!selectedTopics){
@@ -128,6 +128,7 @@ const TopicsSelect = ({
                     <div className="w-full text-center relative flex justify-center mt-6">
                     <Button 
                       variant="confirm"
+                      className="!rounded-full"
                       onClick={()=>saveTopicsToUser(next)} 
                       disabled={submitting}>
                        {submitting?
@@ -136,7 +137,7 @@ const TopicsSelect = ({
                       </Button>
                     </div>
                     :  <Button 
-                    className="mt-4"
+                    className="mt-4 !rounded-full"
                     variant="confirmRounded"
                     onClick={()=>saveTopicsToUser()} 
                     disabled={submitting}>

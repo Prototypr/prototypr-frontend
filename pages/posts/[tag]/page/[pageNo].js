@@ -122,6 +122,7 @@ export default function PostsPage({
                     user={user}
                     showHeroTitle={false}
                     showTags={true}
+                    groupSlice={3}
                     title={tagName}
                     heroCardPost={allPosts[0]}
                     viewablePosts={allPosts?.slice(1)}
@@ -134,6 +135,7 @@ export default function PostsPage({
                     <div className="pt-4">
                       <PostsSectionHero
                         user={user}
+                        groupSlice={3}
                         toolsList={tools?.slice(0, 4)}
                         showTags={false}
                         showTitle={false}

@@ -158,8 +158,9 @@
     }
   }
   &.btn-google {
-    @apply bg-[#1A73E8] focus:bg-[#125AB7] focus:ring focus:ring-[#64A0EF];
-    @apply text-white;
+    @apply bg-white focus:bg-[#125AB7] focus:ring focus:ring-[#64A0EF];
+    @apply text-black/90;
+    @apply border-gray-300;
 
     &:active:not(:disabled) {
       @apply bg-[#0D4184];

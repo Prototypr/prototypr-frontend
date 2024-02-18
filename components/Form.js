@@ -1,6 +1,5 @@
 // import { FormEvent } from 'react'
-import Button from "@/components/atom/Button/Button";
-
+import Button from "./Primitives/Button";
 export default function Form({
   errorMessage,
   onSubmit,
@@ -17,22 +16,23 @@ export default function Form({
   return (
     <>
       {disabled !== true ? (
-        <form onSubmit={onSubmit}>
+        <form className="flex flex-col" onSubmit={onSubmit}>
           <label>
             <span>{label ? label : "Type your GitHub username"}</span>
+          </label>
             <input
+              className="my-3 rounded-full h-[50px] px-6"
               type={inputType ? inputType : "text"}
               defaultValue={defaultValue ? defaultValue : ""}
               placeholder={placeholder}
               name={inputName ? inputName : "token"}
               required
             />
-          </label>
 
           <Button
             isFullWidth
             type="submit"
-            className="justify-center bg-gray-100 h-11 p-8 px-20 rounded-full font-medium"
+            className="justify-center px-20 !py-2 !rounded-full font-medium"
             color="default"
             isLoading={isLoading}
           >
@@ -41,26 +41,6 @@ export default function Form({
 
           {errorMessage && <p className="error">{errorMessage}</p>}
 
-          <style jsx>{`
-            form,
-            label {
-              display: flex;
-              flex-flow: column;
-            }
-            label > span {
-              font-weight: 500;
-            }
-            input {
-              padding: 30px 32px;
-              margin: 0.3rem 0 1rem;
-              border: 1px solid #ccc;
-              border-radius: 30px;
-            }
-            .error {
-              color: brown;
-              margin: 1rem 0 0;
-            }
-          `}</style>
         </form>
       ) : (
         <>{disabledMessage}</>

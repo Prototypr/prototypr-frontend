@@ -27,17 +27,17 @@ import TagsNavRow from "@/components/v4/section/TagsNavRow";
 
 const featuredSections = [
   {
-    image: "/static/images/localization.webp",
+    image: "/static/images/hola.png",
     slug: "/posts/localization/page/1",
-    class: "bg-[#017169]",
+    class: "bg-gray-50",
     title: "Localization",
     description:
       "Designing and building for different cultures and backgrounds.",
   },
   {
-    image: "/static/images/wmpink.png",
+    image: "/static/images/wm.png",
     slug: "/posts/web-monetization/page/1",
-    class: "bg-[#E281E4]",
+    class: "bg-gray-50",
     title: "Web Monetization",
     description: "A new way to send money on the web with micropayments.",
   },
@@ -176,21 +176,21 @@ export default function Index({
             {featuredSections.map((post, i) => {
               return (
                 <Link
-                  className="col-span-12 lg:col-span-6"
+                  className="col-span-12 border border-gray-300/20 rounded-2xl lg:col-span-6"
                   href={`${post.slug}`}
                 >
                   <div
-                    className={`flex h-[220px] ${post.class} relative shadow-sm rounded-xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}
+                    className={`flex h-[220px] ${post.class} relative shadow-sm rounded-2xl w-full flex-col justify-center overflow-hidden p-5 py-0 md:py-8 md:p-8 text-white`}
                   >
                     <img
                       src={post.image}
-                      className="w-2/3 h-auto absolute right-0 -mr-20"
+                      className="w-2/3 p-16 bg-gray-100/90 rounded-full h-auto absolute right-0 -mr-20"
                     />
                     <div className="max-w-[200px] z-10 sm:max-w-[280px]">
-                      <h3 className="text-2xl text-white font-medium">
+                      <h3 className="text-2xl text-black/90 font-medium">
                         {post.title}
                       </h3>
-                      <p className="text-base text-gray-50 mt-1">
+                      <p className="text-base text-black/80 mt-1">
                         {post.description}
                       </p>
                     </div>
