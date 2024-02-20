@@ -16,10 +16,10 @@ const LoginForm = ({ isSignUp, title = "Sign up", user }) => {
 
   return (
     <div className="flex flex-col bg-[#fff] w-full rounded-3xl">
-      {isSignUp?
+      {isSignUp && !inviteCode?
       <InviteOnlyForm isSignUp={isSignUp} title={title} setInviteCode={setInviteCode}/>
       
-    :  <ProviderForm isSignUp={isSignUp} title={title} inviteCode={inviteCode}/>
+    :  <ProviderForm isSignUp={isSignUp} title={`You're Invited! Sign up`} inviteCode={inviteCode}/>
     }
     </div>
   );
@@ -27,10 +27,15 @@ const LoginForm = ({ isSignUp, title = "Sign up", user }) => {
 
 export default LoginForm;
 
-const InviteOnlyForm = () =>{
+const InviteOnlyForm = ({setInviteCode}) =>{
 
   const [showInputForm, setShowInputForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
+
+  const setInviteCodeValid = (code) =>{
+    setInviteCode(code)
+  }
+
 
 return(
   <div className="max-w-[90%] md:max-w-[480px] -mt-8 w-full mx-auto flex flex-col">
@@ -91,21 +96,21 @@ return(
             isLoading={isLoading}
             onSubmit={(e) => {
               e.preventDefault();
-              setSent(false);
-              setIsLoading(true);
+              // setSent(false);
+              // setIsLoading(true);
               //create username from email
               let code = e.target[0].value;
-              setInviteCode(code)
+              // setInviteCode(code)
            
               var data = JSON.stringify({
-                invite_code:code
+                token:code
               });
 
               //@todo in strapi - add invite code collection
               // change this to 'get' code in strapi
               var config = {
-                method: "post",
-                url: `${process.env.NEXT_PUBLIC_API_URL}/api/passwordless/send-link`,
+                method: "POST",
+                url: `${process.env.NEXT_PUBLIC_API_URL}/api/invite-only/check-token`,
                 headers: {
                   "Content-Type": "application/json",
                 },
@@ -118,22 +123,28 @@ return(
 
               axios(config)
                 .then(function (response) {
-                  console.log(JSON.stringify(response.data));
+                  
+                  if(response?.data?.valid==true){
+                    // toast.success("Invite code is valid", {
+                    //   duration: 10000,
+                    // });
+                    // setSent(true);
+                    setTimeout(() => {
+                      // setSent(true);
+                      setInviteCodeValid(code)
+                      // setIsLoading(false);
+                      showSuccessToast(loadingToastId, 'accessCode');
+                    }, 800);
+                  }else{
+                    toast.dismiss(loadingToastId);
+                    alert("The invite code is invalid.");
+                  }
                   //redirect to verification page
                   // Router.push('/account/verification-sent')
-                  // toast.success("Successfully updated", {
-                  //   duration: 10000,
-                  // });
-                  setSent(true);
-                  setTimeout(() => {
-                    setSent(true);
-                    setIsLoading(false);
-                    showSuccessToast(loadingToastId, 'accessCode');
-                  }, 800);
                 })
                 .catch(function (error) {
-                  setSent(false);
-                  setIsLoading(false);
+                  // setSent(false);
+                  // setIsLoading(false);
                   toast.dismiss(loadingToastId);
                   alert("The invite code is invalid.");
                 });
@@ -154,7 +165,7 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode })=>{
   const [isLoading, setIsLoading] = useState(false);
 
   return(
-    <div className="max-w-[90%] md:max-w-[320px] -mt-8 w-full mx-auto flex flex-col">
+    <div className="max-w-[90%] md:max-w-[340px] -mt-8 w-full mx-auto flex flex-col">
 
       <div className="w-[140px] bg-white rounded-2xl mb-16 ">
         <img
@@ -163,16 +174,17 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode })=>{
           alt="Prototypr Logo"
         />
       </div>
-      <h2 className="text-3xl font-inter text-gray-800 font-semibold">
-        {isSignUp ? title : "Welcome back"}
+      <h2 className="text-3xl font-inter text-black/90 font-semibold">
+        {isSignUp ? `You're invited!` : "Welcome back"}
       </h2>
+      {isSignUp?<p className="text-black/80 mt-3">🎟️ Access granted, you can now sign up via the options below.</p>:null}
       <div className="flex flex-col gap-4 flex-grow mt-6">
         <Button
           isFullWidth
           style={{border:'1px solid rgba(0,0,0,0.2)'}}
           variant={"confirmRounded"}
           className="text-center !max-w-[320px] !w-full !mx-auto w-full !py-2 !px-0 !bg-gray-50 !text-black/90 !text-base !rounded-full font-normal"
-          onClick={() => signIn("google",  {invite_code: 'custominvitetoken'})}
+          onClick={() => signIn("google",  {invite_code: inviteCode})}
         >
           <div className="flex">
             <GoogleIcon/>
@@ -184,7 +196,7 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode })=>{
         <Button
           variant={"confirmRounded"}
           className="text-center !max-w-[320px] !w-full !mx-auto !py-2 !px-0 w-full !bg-black/80 !text-base !rounded-full font-normal"
-          onClick={() => signIn("github")}
+          onClick={() => signIn("github",  {invite_code: inviteCode})}
         >
           <div className="flex">
 
@@ -261,7 +273,7 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode })=>{
               var data = JSON.stringify({
                 email: e.target[0].value,
                 username: username,
-                invite_code:false
+                invite_code:inviteCode
               });
 
               var config = {
