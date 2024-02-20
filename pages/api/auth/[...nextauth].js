@@ -23,7 +23,10 @@ const options = {
     strategy: "jwt"
   },
   callbacks: {
-    jwt: async ({ token, user, account, profile, isNewUser }) => {
+    jwt: async ({ token, user, account, profile, email, credentials }) => {
+
+
+      const invite_code = credentials?.invite_code
 
       const isSignIn = user ? true : false;
       if (isSignIn) {
@@ -46,6 +49,9 @@ const options = {
               url.searchParams.set("access_secret", account.refreshToken) // sending the refreshToken as access_secret
             }
           }
+        }
+        if(invite_code){
+          url.searchParams.set('invite_code',invite_code)
         }
         const response = await fetch(
           url.toString(), 

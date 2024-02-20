@@ -64,9 +64,7 @@ export default function Index({allTags}) {
             </div>:''}
             {user && !user?.isLoggedIn ? (
               <div className="w-full h-full bg-white grid place-items-center">
-                <div className="max-w-[90%] md:max-w-[340px] -mt-8 w-full mx-auto">
-                  <LoginForm isSignUp={isSignUp} />
-                </div>
+                  <LoginForm user={user} isSignUp={isSignUp} />
                 <div className="absolute top-[16px] right-[16px]">
                   <div className="text-sm text-gray-700">
                     <span>

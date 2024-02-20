@@ -55,7 +55,7 @@ const IntroBanner = ({ tools, sponsor }) => {
           <span className="drop-shadow-sm ">Everything is a </span> <div className="text-underline inline cursor-collab"><span className="drop-shadow-sm">prototype</span></div>
           </h1>
           <h2 className="mb-5 text-gray-700 md:leading-[32px] leading-[28px] text-[16px] md:text-[18px] font-inter md:pr-6 max-w-[32rem]">
-            Discover the people, ideas, and wisdom behind designing and building great products.
+          Turn ideas into reality with the tools, resources, and lessons for every step of your product journey.
           </h2>
           <div className="flex mt-4 mb-6 sm:mb-0">
             <Link href="/onboard">
