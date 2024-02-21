@@ -4,12 +4,16 @@ import Button from "../Primitives/Button";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
+import Link from 'next/link'
+import Cookie from 'js-cookie';
+
 const Form = dynamic(() => import("@/components/Form"), { ssr: true });
 // const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
 import toast from "react-hot-toast";
 import { EmailIcon, GitHubIcon, GoogleIcon, TicketIcon } from "../icons";
+import fetchJson from "@/lib/iron-session/fetchJson";
 
-const LoginForm = ({ isSignUp, title = "Sign up", user }) => {
+const LoginForm = ({ isSignUp, title = "Sign up", user,toggleSignIn }) => {
 
 
   const [inviteCode,setInviteCode] = useState(false);
@@ -17,9 +21,9 @@ const LoginForm = ({ isSignUp, title = "Sign up", user }) => {
   return (
     <div className="flex flex-col bg-[#fff] w-full rounded-3xl">
       {isSignUp && !inviteCode?
-      <InviteOnlyForm isSignUp={isSignUp} title={title} setInviteCode={setInviteCode}/>
+      <InviteOnlyForm isSignUp={isSignUp} title={title} toggleSignIn={toggleSignIn} setInviteCode={setInviteCode}/>
       
-    :  <ProviderForm isSignUp={isSignUp} title={`You're Invited! Sign up`} inviteCode={inviteCode}/>
+    :  <ProviderForm isSignUp={isSignUp} title={`You're Invited! Sign up`}toggleSignIn={toggleSignIn} inviteCode={inviteCode}/>
     }
     </div>
   );
@@ -27,7 +31,7 @@ const LoginForm = ({ isSignUp, title = "Sign up", user }) => {
 
 export default LoginForm;
 
-const InviteOnlyForm = ({setInviteCode}) =>{
+const InviteOnlyForm = ({setInviteCode, toggleSignIn, isSignUp}) =>{
 
   const [showInputForm, setShowInputForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
@@ -38,28 +42,33 @@ const InviteOnlyForm = ({setInviteCode}) =>{
 
 
 return(
-  <div className="max-w-[90%] md:max-w-[480px] -mt-8 w-full mx-auto flex flex-col">
+  <div className="max-w-[90%] md:max-w-[340px] -mt-8 w-full mx-auto flex flex-col">
 
   <div className="w-[140px] bg-white rounded-2xl mb-16 ">
-        <img
-              src={`/static/images/logo.svg`}
-              data-gumlet="false"
-              alt="Prototypr Logo"
-            />
+    <Link href="/">
+          <img
+                src={`/static/images/logo.svg`}
+                data-gumlet="false"
+                alt="Prototypr Logo"
+              />
+    </Link>
     </div>
     <h2 className="text-3xl font-inter text-gray-800 font-semibold">
-      Create a new account
+       Create an account
     </h2>
+    <p className="mt-2 mb-4 text-black/60">
+      Start your Prototypr creator journey
+    </p>
     <p className="my-4 mb-8">
 
-    Prototypr membership is invite-only. Reading content is open to everyone, but to create a profile and share tools, stories, and links, you need to be a member. Get an invite from current members or submit an application form to join.
+    Prototypr content is open to all, but only invited members can publish. Get an invite from current members or submit an application form to <span className="text-underline">join as a contributor</span>.
     </p>
     {/* <div className="max-w-[90%] md:max-w-[340px] flex flex-col"> */}
     {showInputForm == false ? (
         <Button
           type="submit"
           variant={"confirmRounded"}
-          className="text-center !max-w-[320px] !w-full !py-2 !px-0 w-full !text-base !rounded-full font-normal"
+          className="text-center !max-w-[340px] !w-full !py-2 !mx-auto !px-0 w-full !text-base !rounded-full font-normal"
           onClick={() => {
             setShowInputForm(!showInputForm);
             // signIn("email", {email:'graeme@prototypr.io'})
@@ -122,13 +131,27 @@ return(
               );
 
               axios(config)
-                .then(function (response) {
+                .then(async function (response) {
                   
                   if(response?.data?.valid==true){
                     // toast.success("Invite code is valid", {
                     //   duration: 10000,
                     // });
                     // setSent(true);
+                    const body = {inviteCode:code};
+                    try{
+                      const result = await fetchJson('/api/auth/setSessionInviteCode', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body),
+                      })
+                      console.log(result)
+                    }catch(e){
+                      console.log(e)
+                    }
+                  
+                    Cookie.set('inviteCode', code, { expires: 1/24, secure: process.env.NODE_ENV === 'production', sameSite: 'Lax' }); // Expires in 1 hour
+
                     setTimeout(() => {
                       // setSent(true);
                       setInviteCodeValid(code)
@@ -153,12 +176,27 @@ return(
         </div>
       )}
     {/* </div> */}
+    <div className="mt-10 text-center">
+                  <div className="text-sm text-gray-700">
+                    <span>
+                      {isSignUp
+                        ? "Already got an account?"
+                        : "Don't have an account?"}
+                    </span>
+                    <a
+                      onClick={toggleSignIn}
+                      className="text-primary-400 cursor-pointer"
+                    >
+                      {isSignUp ? " Sign in." : " Sign up"}
+                    </a>
+                  </div>
+                </div>
   </div>
 )
 
 }
 
-const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode })=>{
+const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode, toggleSignIn })=>{
 
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [sent, setSent] = useState(false);
@@ -167,23 +205,25 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode })=>{
   return(
     <div className="max-w-[90%] md:max-w-[340px] -mt-8 w-full mx-auto flex flex-col">
 
-      <div className="w-[140px] bg-white rounded-2xl mb-16 ">
+      <div className="w-[140px] bg-white rounded-2xl mb-10 ">
         <img
           src={`/static/images/logo.svg`}
           data-gumlet="false"
           alt="Prototypr Logo"
         />
+        {inviteCode}
       </div>
       <h2 className="text-3xl font-inter text-black/90 font-semibold">
         {isSignUp ? `You're invited!` : "Welcome back"}
       </h2>
-      {isSignUp?<p className="text-black/80 mt-3">🎟️ Access granted, you can now sign up via the options below.</p>:null}
+      {isSignUp?<p className="text-black/80 mt-3 mb-3">🎟️ Access granted, you can now sign up via the options below.</p>:
+      <p className="text-black/80 mt-3 mb-3">Hi again, sign in below.</p>}
       <div className="flex flex-col gap-4 flex-grow mt-6">
         <Button
           isFullWidth
           style={{border:'1px solid rgba(0,0,0,0.2)'}}
           variant={"confirmRounded"}
-          className="text-center !max-w-[320px] !w-full !mx-auto w-full !py-2 !px-0 !bg-gray-50 !text-black/90 !text-base !rounded-full font-normal"
+          className="text-center !max-w-[340px] !w-full !mx-auto w-full !py-2 !px-0 !bg-gray-50 !text-black/90 !text-base !rounded-full font-normal"
           onClick={() => signIn("google",  {invite_code: inviteCode})}
         >
           <div className="flex">
@@ -195,7 +235,7 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode })=>{
         </Button>
         <Button
           variant={"confirmRounded"}
-          className="text-center !max-w-[320px] !w-full !mx-auto !py-2 !px-0 w-full !bg-black/80 !text-base !rounded-full font-normal"
+          className="text-center !max-w-[340px] !w-full !mx-auto !py-2 !px-0 w-full !bg-black/80 !text-base !rounded-full font-normal"
           onClick={() => signIn("github",  {invite_code: inviteCode})}
         >
           <div className="flex">
@@ -214,7 +254,7 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode })=>{
         <Button
           type="submit"
           variant={"confirmRounded"}
-          className="text-center !max-w-[320px] !w-full !mx-auto !py-2 !px-0 w-full !text-base !rounded-full font-normal"
+          className="text-center !max-w-[340px] !w-full !mx-auto !py-2 !px-0 w-full !text-base !rounded-full font-normal"
           onClick={() => {
             setShowLoginForm(!showLoginForm);
             // signIn("email", {email:'graeme@prototypr.io'})
@@ -313,7 +353,24 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode })=>{
             }}
           />
         </div>
-      )}</div>
+
+      )}
+      <div className="mt-10 text-center">
+                  <div className="text-sm text-gray-700">
+                    <span>
+                      {isSignUp
+                        ? "Already got an account?"
+                        : "Don't have an account?"}
+                    </span>
+                    <a
+                      onClick={toggleSignIn}
+                      className="text-primary-400 cursor-pointer"
+                    >
+                      {isSignUp ? " Sign in." : " Sign up"}
+                    </a>
+                  </div>
+                </div>
+      </div>
   )
   
 }
@@ -364,7 +421,7 @@ const showSuccessToast = (loadingToastId, type) => {
               </p>
             </div>:
             <div className="ml-3 overflow-hidden">
-            <p className="font-medium text-gray-900">Access Code is valid.</p>
+            <p className="font-medium text-gray-900">Access granted!</p>
             <p className="max-w-xs !text-base text-gray-500 truncate">
               You can create your account.
             </p>

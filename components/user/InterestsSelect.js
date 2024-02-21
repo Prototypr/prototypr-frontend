@@ -88,7 +88,7 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
             }
         }
         const body = {data:{
-          ...data
+          inviteCode
         }};
         try{
           const result = await fetchJson('/api/account/updateProfile', {

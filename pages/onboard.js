@@ -64,22 +64,8 @@ export default function Index({allTags}) {
             </div>:''}
             {user && !user?.isLoggedIn ? (
               <div className="w-full h-full bg-white grid place-items-center">
-                  <LoginForm user={user} isSignUp={isSignUp} />
-                <div className="absolute top-[16px] right-[16px]">
-                  <div className="text-sm text-gray-700">
-                    <span>
-                      {isSignUp
-                        ? "Already got an account?"
-                        : "Not got an account yet?"}
-                    </span>
-                    <a
-                      onClick={toggleSignIn}
-                      className="text-primary-400 cursor-pointer"
-                    >
-                      {isSignUp ? " Sign in." : " Sign up"}
-                    </a>
-                  </div>
-                </div>
+                  <LoginForm user={user} isSignUp={isSignUp} toggleSignIn={toggleSignIn} />
+                
               </div>
             ) : (
               user && user?.isLoggedIn && <WMOnboarding user={user} allTags={allTags} />
