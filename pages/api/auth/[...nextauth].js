@@ -2,6 +2,11 @@ import NextAuth from 'next-auth'
 import TwitterProvider from "next-auth/providers/twitter"
 import GitHubProvider from "next-auth/providers/github"
 import GoogleProvider from 'next-auth/providers/google'
+// import fetchJson from '@/lib/iron-session/fetchJson';
+import { withIronSessionApiRoute } from 'iron-session/next'
+import { sessionOptions } from '@/lib/iron-session/session'
+
+let inviteCode = null
 const options = {
   providers: [
     GitHubProvider({
@@ -23,12 +28,10 @@ const options = {
     strategy: "jwt"
   },
   callbacks: {
-    jwt: async ({ token, user, account, profile, email, credentials }) => {
-
-
-      const invite_code = credentials?.invite_code
-
+    jwt: async ({ token, user, account, profile, isNewUser }) => {
+     
       const isSignIn = user ? true : false;
+      
       if (isSignIn) {
         let url = new URL(
           `${process.env.NEXT_PUBLIC_API_URL}/api/auth/${account.provider}/callback`
@@ -50,9 +53,12 @@ const options = {
             }
           }
         }
-        if(invite_code){
-          url.searchParams.set('invite_code',invite_code)
+
+        if(inviteCode){
+          url.searchParams.set("invite_code",inviteCode)
         }
+
+        console.log('url strapi call', url)
         const response = await fetch(
           url.toString(), 
         );
@@ -85,4 +91,15 @@ const options = {
   },
 };
 
-export default (req,res)=> NextAuth(req, res, options);
+async function handler(req,res){
+
+  inviteCode = req.session.inviteCode
+
+  return NextAuth(req, res, options);
+}
+
+
+// export default (req,res)=> NextAuth(req, res, options);
+
+export default withIronSessionApiRoute(handler, sessionOptions)
+
