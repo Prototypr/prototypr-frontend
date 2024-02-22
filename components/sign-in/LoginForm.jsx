@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import Link from 'next/link'
 import Cookie from 'js-cookie';
+import { CheckCircle } from '@phosphor-icons/react';
 
 const Form = dynamic(() => import("@/components/Form"), { ssr: true });
 // const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
@@ -211,14 +212,13 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode, toggleSignIn })
           data-gumlet="false"
           alt="Prototypr Logo"
         />
-        {inviteCode}
       </div>
       <h2 className="text-3xl font-inter text-black/90 font-semibold">
         {isSignUp ? `You're invited!` : "Welcome back"}
       </h2>
       {isSignUp?<p className="text-black/80 mt-3 mb-3">🎟️ Access granted, you can now sign up via the options below.</p>:
       <p className="text-black/80 mt-3 mb-3">Hi again, sign in below.</p>}
-      <div className="flex flex-col gap-4 flex-grow mt-6">
+     {!sent? <div className="flex flex-col gap-4 flex-grow mt-6">
         <Button
           isFullWidth
           style={{border:'1px solid rgba(0,0,0,0.2)'}}
@@ -246,10 +246,10 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode, toggleSignIn })
           </div>
           </div>
         </Button>
-      </div>
-      <div className="my-5">
+      </div>:null}
+      {!sent?<div className="my-5">
         <p className="text-gray-600 text-center font-medium">OR</p>
-      </div>
+      </div>:null}
       {showLoginForm == false ? (
         <Button
           type="submit"
@@ -268,21 +268,29 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode, toggleSignIn })
           </div>
         </Button>
       ) : (
-        <div className="max-w-xs">
+        <div className="max-w-[340px]">
           <Form
             buttonText={isSignUp ? 'Sign up' : "Sign in"}
             disabled={sent ? true : false}
             disabledMessage={
-              <div className="text-center">
-                A login link has been sent to your email. <br />
-                If you didn't receive it,{" "}
-                <a
-                  className="text-blue-600 cursor-pointer"
-                  onClick={() => setSent(false)}
-                >
-                  retry
-                </a>
-                .
+              <div className="text-left bg-blue-50 p-3 rounded-2xl mt-10 flex">
+                <div className="">
+                <CheckCircle width={24} height={24} color="#2563eb"/>
+                </div>
+                <div className="ml-3 flex flex-col">
+                  <h2 className="font-semibold mb-2">Check your inbox</h2>
+                  <div>
+                    A login link has been sent to your email.
+                    If you didn't receive it,{" "}
+                    <a
+                      className="text-blue-600 cursor-pointer"
+                      onClick={() => setSent(false)}
+                    >
+                      retry
+                    </a>
+                    .
+                  </div>
+                </div>
               </div>
             }
             label={"Enter your email"}
