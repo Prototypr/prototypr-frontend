@@ -206,9 +206,10 @@ const [disabled, setDisabled] = useState(false);
                 className="p-4 bg-blue-700 text-white font-semibold rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                 {isSubmitting?
-                <div className="mx-auto w-6">
-                <Spinner />
-                </div>
+                <>Loading...</>
+                // <div className="mx-auto w-6">
+                // <Spinner />
+                // </div>
                 :
                 `Get Started`}
                 </Button>

@@ -247,6 +247,7 @@ const [disabled, setDisabled] = useState(false);
                 <label htmlFor="image" className="text-md mt-10 font-medium">
                     Gallery
                 </label>
+                <p className="-mt-3 text-black/70">Please add a minimum of 3 images</p>
                 <GalleryUpload gallery={postObject?.gallery} updateField={(files)=>{
                     setGalleryChanged(true)
                     // formik.setFieldValue("logo",files)

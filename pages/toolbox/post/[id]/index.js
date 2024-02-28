@@ -36,8 +36,10 @@ const MenuItems =[
 {title:'Image and media'},
 // {title:'Done'},
 ]
-const Menu = ({}) => {
+const Menu = ({post}) => {
   const { activeStepIndex, steps, goTo } = useWizardContext();
+
+  const lastStepActive = activeStepIndex==3
 
   return (
     <div className="flex flex-col">
@@ -51,6 +53,13 @@ const Menu = ({}) => {
       </div>
     )
    })}
+   {/* only show done step if info is there */}
+   {((post?.logo?.id && post?.gallery?.length))?
+    <div 
+    onClick={()=>{goTo(3)}}
+    className={`p-3 w-full cursor-pointer rounded-lg min-w-[300px] mb-2 ${lastStepActive?'bg-blue-100 font-semibold':''}`}>
+      Done
+    </div>:''}
     </div>
   );
 };
@@ -73,24 +82,25 @@ const PostToolPage = () =>{
       redirectTo: "/",
       redirectIfFound: false,
     });
-    const { loading, postObject, isOwner } =
+    const { loading, postObject, isOwner, refetch:refetchPost } =
     useLoad(user);
   
     return(
       !user && loading?<Fallback/>:
       postObject? 
-      <ToolPostForm isOwner={isOwner} postObject={postObject} user={user} />:null
+      <ToolPostForm refetchPost={refetchPost} isOwner={isOwner} postObject={postObject} user={user} />:null
     )
   
   }
 
-const ToolPostForm = ({user, isOwner, postObject}) =>{
+const ToolPostForm = ({user, isOwner, postObject,refetchPost}) =>{
 
   const [isSignUp, setSignUp] = useState(true);
 
   const toggleSignIn = () => {
     setSignUp(!isSignUp);
   };
+
 
 
   return(
@@ -101,7 +111,7 @@ const ToolPostForm = ({user, isOwner, postObject}) =>{
         <div className="h-full min-h-screen w-full grid md:grid-cols-12">
         <div className="hidden w-full h-full md:block md:col-span-6 lg:col-span-4">
         <div className="flex pt-24 justify-center h-full w-full relative text-black/80">
-            <Menu/>
+            <Menu post={postObject}/>
             {/* <Progress/> */}
             {/* <LoginSide showArrow={false} title="Submit a tool or resource" user={user} /> */}
         </div>
@@ -109,7 +119,7 @@ const ToolPostForm = ({user, isOwner, postObject}) =>{
         <div className="col-span-12 md:col-span-6 lg:col-span-7">
         <div className="justify-center mt-20 w-full">
           {/* <Progress/> */}
-        <ToolSteps postObject={postObject} user={user}/>
+        <ToolSteps refetchPost={refetchPost} postObject={postObject} user={user}/>
           </div>
         </div>
         </div>
@@ -146,7 +156,7 @@ const ToolPostForm = ({user, isOwner, postObject}) =>{
 
 }
 
-const ToolSteps = ({user, postObject}) =>{
+const ToolSteps = ({user, postObject, refetchPost}) =>{
   const { activeStepIndex, onNext, onPrevious, goTo, isFirstStep, isLastStep } =useWizardContext();
   const router = useRouter();
   const { step } = router.query
@@ -165,7 +175,7 @@ const ToolSteps = ({user, postObject}) =>{
 
     <Step key={`page/1`} id={'1'}>
         <div className="flex items-center justify-start h-full w-full relative">
-          <TitleLinkFormEdit onNext={onNext} postObject={postObject} user={user} />
+          <TitleLinkFormEdit refetchPost={refetchPost} onNext={onNext} postObject={postObject} user={user} />
         </div>
     </Step>
     <Step key={`page/2`} id={'2'}>
@@ -184,29 +194,31 @@ const ToolSteps = ({user, postObject}) =>{
               <div className="my-2 mb-6">
               {postObject.status=='draft'?
               <>
-                <h1 className="text-3xl font-bold mx-auto mb-2">Your tool is submitted!</h1>
-                <p className="text-xl mt-4 text-gray-600">Thanks for submitting your tool. Our team will review and then publish your submission if it is relevant to the Prototypr audience.</p>
+                <h1 className="text-3xl font-semibold mx-auto mb-2">Thanks for your submission!</h1>
+                <p className="text-lg mt-4 text-gray-600">Thanks for submitting your tool. Our team will review and then publish your submission if it is relevant to the Prototypr audience.</p>
               </>
               :
               <>
-                <h1 className="text-3xl font-bold mx-auto mb-2">Your tool has been updated!</h1>
+                <h1 className="text-lg font-bold mx-auto mb-2">Your tool has been updated!</h1>
                 {/* <p className="text-xl my-4 text-gray-600">Thanks for submitting your tool. Our team will review and then publish your submission if it is relevant to the Prototypr audience.</p> */}
               </>
               }
-              <p className="text-xl mt-4 mb-6 text-gray-600">If you have a special offer or discount for the Prototypr audience, you can also create an offer for your tool to be featured on our Designer Deals page.</p>
+              <p className="text-lg mt-4 mb-6 text-gray-600">If you have a special offer or discount for the Prototypr audience, you can also create an offer for your tool to be featured on our Designer Deals page.</p>
               <div className="flex">
-              <Link href={`/toolbox/post/${postObject?.id}/deal`}>
+              {/* <Link href={`/toolbox/post/${postObject?.id}/deal`}>
                 <Button variant="confirmMedium">
                   Add a deal
                 </Button>
-              </Link>
-              <div className="ml-3">
+              </Link> */}
+              {/* <div className="ml-3"> */}
                 <Link href="/dashboard">
-                  <Button variant="confirmMediumSecondary">
+                  <Button 
+                                  className="p-4 bg-blue-700 text-white font-semibold rounded-full disabled:bg-gray-300 hover:bg-blue-600 disabled:cursor-not-allowed"
+                  variant="confirmMediumSecondary">
                     Continue to dashboard
                   </Button>
                 </Link>
-              </div>
+              {/* </div> */}
               
               </div>
               </div>

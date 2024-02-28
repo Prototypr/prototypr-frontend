@@ -136,23 +136,8 @@ const [disabled, setDisabled] = useState(false);
         >
             <FormContainer>
             <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
-            <label className="text-md font-medium">
-                  Description
-                </label>
-                <div className="bg-white rounded-xl">
-                    <MiniEditor
-                    placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: Stripe payments, Google Sheets, blogging, and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
-                    title=""
-                    initialContent={content?content:''}
-                    disabled={isSubmitting}
-                    setDescription={(html)=>{
-                        formik.setFieldValue("content",html)
-                        setContent(html)
-                    }}/>
-                </div>
-                {formik.errors.content && <span className="text-red-600 text-xs">{formik.errors.content}</span>}
-
-                <label className="text-md font-medium mt-4">
+            
+               <label className="text-md font-medium ">
                   Tagline
                 </label>
                 <div className="bg-white rounded-xl">
@@ -170,6 +155,23 @@ const [disabled, setDisabled] = useState(false);
                 </div>
                 {formik.errors.excerpt && <span className="text-red-600 text-xs">{formik.errors.excerpt}</span>}
                  
+            <label className="text-md font-medium mt-4">
+                  Description
+                </label>
+                <div className="bg-white rounded-xl">
+                    <MiniEditor
+                    placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: Stripe payments, Google Sheets, blogging, and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
+                    title=""
+                    initialContent={content?content:''}
+                    disabled={isSubmitting}
+                    setDescription={(html)=>{
+                        formik.setFieldValue("content",html)
+                        setContent(html)
+                    }}/>
+                </div>
+                {formik.errors.content && <span className="text-red-600 text-xs">{formik.errors.content}</span>}
+
+             
             </div>
             <div className="flex flex-col mx-auto max-w-2xl mt-12 w-auto"/>
 
