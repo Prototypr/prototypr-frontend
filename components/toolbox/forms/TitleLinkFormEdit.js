@@ -30,7 +30,7 @@ function isEmptyObject(obj) {
   };
   
 
-const TitleLinkFormEdit = ({user, postObject, onNext}) =>{
+const TitleLinkFormEdit = ({user, postObject, onNext, refetchPost}) =>{
     
     const [errores, setErrores] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -72,6 +72,7 @@ const TitleLinkFormEdit = ({user, postObject, onNext}) =>{
           .then(async function (response) {
   
             onNext()
+            refetchPost()
             setIsSubmitting(false)
           })
           .catch(function (error) {
@@ -111,7 +112,7 @@ const [disabled, setDisabled] = useState(false);
       <div className="flex justify-start pt-3 w-full h-full">
       <div className="max-w-2xl pt-3 w-full">
           <div className="my-2 mb-6 ">
-          <h1 className="text-4xl font-semibold mx-auto mb-3">Update tool</h1>
+          <h1 className="text-4xl font-semibold mx-auto mb-3">Update {postObject.title}</h1>
             <p className="text-gray-600">Make changes to the title and link.</p>
             </div>
             <form

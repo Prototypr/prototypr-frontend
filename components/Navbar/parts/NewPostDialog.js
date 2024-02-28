@@ -90,14 +90,14 @@ const NewPostDialog = ({button}) => {
                     <h3 className="text-white text-lg transition transition-all duration-300 group-hover:scale-110 mt-2 font-medium text-center">Tool</h3>
                 </div>
             </Link>
-            <Link href="/jobs/post">
+            {/* <Link href="/jobs/post">
                 <div className="flex group cursor-pointer flex-col">
                     <IconButton className="bg-purple-500 transition transition-all duration-300 group-hover:scale-110 mx-auto">
                     <Briefcase weight="fill" size="44" />
                     </IconButton>
                     <h3 className="text-white text-lg transition transition-all duration-300 group-hover:scale-110 mt-2 font-medium text-center">Opportunity</h3>
                 </div>
-            </Link>
+            </Link> */}
            
           </div>
           </DialogDescription>

@@ -77,7 +77,8 @@ const useLoad = (user) => {
     postStatus,
     articleSlug,
     isOwner,
-    postObject
+    postObject,
+    refetch
   };
 };
 

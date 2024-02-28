@@ -301,6 +301,19 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                     className={styles.input}
                   />
                 </FormInput>
+                
+                <label className="text-md font-medium mt-4">
+                  Tagline
+                </label>
+                <MiniEditor
+                showToolbar={false}
+                title=""
+                placeholder="Unicorn platform is a landing page builder for SaaS products. Build and launch your marketing site in no time!"
+                initialContent={postObject?.excerpt?postObject.excerpt:''} 
+                setDescription={(html)=>{
+                    formik.setFieldValue("excerpt",html)
+                }}/>
+                {formik.errors.excerpt && <span className="text-red-600 text-xs">{formik.errors.excerpt}</span>}
 
 
                 <label className="text-md font-medium mt-4">
@@ -315,20 +328,6 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                     formik.setFieldValue("content",html)
                 }}/>
                 {formik.errors.content && <span className="text-red-600 text-xs">{formik.errors.content}</span>}
-
-                <label className="text-md font-medium mt-4">
-                  Tagline
-                </label>
-                <MiniEditor
-                showToolbar={false}
-                title=""
-                placeholder="Unicorn platform is a landing page builder for SaaS products. Build and launch your marketing site in no time!"
-                initialContent={postObject?.excerpt?postObject.excerpt:''} 
-                setDescription={(html)=>{
-                    formik.setFieldValue("excerpt",html)
-                }}/>
-                {formik.errors.excerpt && <span className="text-red-600 text-xs">{formik.errors.excerpt}</span>}
-
                {/* <FormInput id="title" label="Slug" error={formik.errors}>
                   <input
                     id="slug"
