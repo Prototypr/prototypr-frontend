@@ -61,6 +61,7 @@ const AccountPage = ({ preview }) => {
       <Layout>
 
         <ProfilePageLayout
+        fromAccountPage={true}
           previewOnly={true}
           allPosts={null}  
           preview={false}

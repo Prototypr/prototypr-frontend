@@ -41,6 +41,7 @@ const ProfilePageLayout = ({
   authorUrl = "",
   skills = [],
   previewOnly=false,
+  fromAccountPage=false,
   unapproved=false
 }) =>{
     const router = useRouter();
@@ -91,7 +92,7 @@ const ProfilePageLayout = ({
                 <div className="relative px-6 md:px-0 max-w-[1320px] mx-auto flex flex-col md:flex-row justify-center">
 
                 <div
-                    className="w-[168px] bg-white h-[168px] -mt-2 rounded-full border border-1 overflow- relative border-black/10 shadow-sm mb-3 md:mb-0 md:mr-12"
+                    className="w-[160px] bg-white h-[160px] -mt-2 rounded-full border border-1 overflow- relative border-black/10 shadow-sm mb-3 md:mb-0 md:mr-8"
                 >
   {(kofi || (unapproved && user?.profile?.kofi)) && (
                         <div className="absolute z-10 bottom-0 mb-3 left-0">
@@ -153,9 +154,9 @@ const ProfilePageLayout = ({
                   </Link>
                 )):''}
                       </div> */}
-                       {author.bio && (
+                       {(!fromAccountPage && author.role) && (
                 <div className="text-base max-w-[500px] text-black/70 mb-4">
-                  <div dangerouslySetInnerHTML={{ __html: author.bio }} />
+                  <div dangerouslySetInnerHTML={{ __html: author.role }} />
                 </div>
               )}
                       {/* social row */}
@@ -299,8 +300,8 @@ const ProfilePageLayout = ({
 
           <div className="flex-1 z-20 -mt-[120px]">
             <div className="px-3 max-w-[1320px] mx-auto mb-20 mt-6 lg:mt-0">
-            {unapproved?<div className="px-6 mt-[160px]">
-            <div className="mt-3 flex w-full bg-blue-300/20 p-4 px-4 rounded-xl text-black/90 max-w-3xl mx-auto">
+            {unapproved?<div className="px-6 mt-[60px]">
+            <div className="mt-3 flex w-full bg-white shadow p-4 px-4 rounded-xl text-black/90 max-w-3xl mx-auto">
             <div className="mr-4 my-auto">
             <CircleWavyCheck size="44"/>
             </div>

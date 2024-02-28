@@ -64,8 +64,8 @@ export default function SignupHomepage({ className }) {
             </div>
           </>
         ) : (
-          <div className="p-6 bg-blue-400 rounded-md mb-2 mt-10">
-            <h2 className={`text-base text-gray-800 font-semibold font-inter `}>
+          <div className="p-6 bg-white shadow rounded-md max-w-md xl:max-w-xl mb-2 mt-10">
+            <h2 className={`text-lg mb-2 text-gray-800 font-semibold font-inter `}>
               {intl.formatMessage({ id: "signup.input.check" })} &nbsp;{" "}
               <div className="inline -mt-1">🎉</div>
             </h2>
