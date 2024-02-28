@@ -23,7 +23,7 @@ function isEmptyObject(obj) {
 
   const styles = {
     input:
-      "w-full px-3 max-w-2xl  bg-white text-black font-normal text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
+      "w-full text-base px-3 max-w-2xl  bg-white text-black font-normal rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
     inputFlex:
       "px-3 bg-white text-black font-normal text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
     label: "text-md font-medium uppercase text-gray-700 font-semibold",
@@ -38,7 +38,7 @@ const TitleLinkForm = ({user, edit}) =>{
     const [isSubmitting, setIsSubmitting] = useState(false)
 
   const FormSchema = Yup.object().shape({
-    title: Yup.string().required("Title is required"),
+    title: Yup.string().required("Name is required"),
     link: Yup.string().required("Link is required"),
   });
 
@@ -144,14 +144,15 @@ const [disabled, setDisabled] = useState(false);
 
 
     return(
-        <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
-        <div className="max-w-2xl pt-24 w-full">
+        <div className="flex justify-start pt-3 w-full h-full px-2 px-8 lg:pl-16 2xl:pl-32 lg:px-10">
+        <div className="max-w-2xl pt-28 w-full">
             <div className="my-2 mb-6 ">
-            <h1 className="text-2xl font-bold mx-auto mb-2">Post a Tool</h1>
-            <p className="text-gray-600">Start with the link and title.</p>
+            <h1 className="text-4xl font-semibold mx-auto mb-3">Post a tool</h1>
+            {/* <p className="text-gray-600">As a selected contributor, you're invited to submit tools and resources to the Prototypr Toolbox. Whether a fresh discovery or your own creation, this is the chance to bring more visibility and discoverability to your product across the web and our newsletter.</p> */}
+            <p className="text-gray-600">As a chosen contributor, you can submit tools and resources to the Prototypr Toolbox to enhance your product's visibility across the web and via our newsletter. Whether it's a new find or your own creation, seize this opportunity for greater exposure.</p>
             </div>
             <form
-            className="p-8 shadow-sm bg-white rounded-xl"
+            className="mt-12"
             onSubmit={(e) => {
             e.preventDefault();
             if ((errors && isEmptyObject(errors)) || !errors) {
@@ -166,7 +167,7 @@ const [disabled, setDisabled] = useState(false);
         >
             <FormContainer>
             <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
-            <FormInput id="title" label="Title" error={formik.errors}>
+            <FormInput id="title" label="Name" error={formik.errors}>
                 <input
                 id="title"
                 disabled={isSubmitting}
@@ -195,14 +196,14 @@ const [disabled, setDisabled] = useState(false);
                 />
             </FormInput>
             </div>
-            <div className="flex flex-col mx-auto max-w-2xl mt-12 w-auto"/>
+            <div className="flex flex-col mx-auto max-w-2xl mt-8 w-auto"/>
 
                 
                 <Button
                 variant={"confirmBig"}
                 type="submit"
                 disabled={isSubmitting}
-                className="p-4 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="p-4 bg-blue-700 text-white font-semibold rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                 {isSubmitting?
                 <div className="mx-auto w-6">

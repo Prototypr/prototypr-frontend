@@ -11,6 +11,8 @@ const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 const IssueList = dynamic(() => import("@/components/newsletter/IssueList"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
 import { useIntl } from "react-intl";
+import NewsletterSection from "@/components/v4/section/NewsletterSection";
+import NewsletterPageHero from "@/components/v4/section/NewsletterPageHero";
 const PAGE_SIZE = 8;
 
 export default function NewsLetter({
@@ -26,29 +28,45 @@ export default function NewsLetter({
   };
   return (
     <>
-      <Layout preview={preview}>
+      <Layout preview={preview}
+       padding={false}
+       maxWidth={"max-w-[1400px] search-wide"}
+      >
         <Head>
           <title>
             {intl.formatMessage({ id: "index.header.title" })}
             👾.
           </title>
         </Head>
-        <Container maxWidth={'max-w-[986px] pt-3'}>
+        <Container maxWidth="relative mb-6 px-0" padding={false}>
           {/* <TitleBlock /> */}
-          <div>
-            <SourcePanel
+          <div className="relative bg-white -mt-[96px] pt-[86px] md:pt-[96px] pb-8 mb-20 overflow- px-1 xs:px-3 sm:px-6">
+            {/* <NewsletterSection/> */}
+            {/* <SourcePanel
               title={intl.formatMessage({ id: "navbar.contentitem.title2" })}
               desc={intl.formatMessage({ id: "sourcepanel.desc2" })}
-            />
+            /> */}
+            <NewsletterPageHero/>
+            <div className="absolute  top-0 left-0 w-full h-full" 
+            style={{
+  backgroundColor: "#f6f6f6",
+  opacity: 0.4,
+  backgroundImage: "radial-gradient(#444cf7 0.5px, #ededf9 0.5px)",
+  backgroundSize: "10px 10px"
+}}
+/>
+          {/* <img src='/static/images/toolbox/squares.svg' className="rounded-b-[3.4rem] opacity absolute w-full h-full object-cover top-0 left-0"/> */}
           </div>
-          <IssueList marginTop="mt-12 mb-6" posts={allPosts} />
-          <div className="pb-6">
-            <NewPagination
-              total={pagination?.total}
-              pageSize={PAGE_SIZE}
-              currentPage={pagination?.page}
-              onPageNumChange={(pageNum) => onPageNumChange(pageNum)}
-            />
+          <div className="max-w-[1320px] mx-auto px-6 md:px-3">
+            <IssueList marginTop="mt-8 mb-6" posts={allPosts} />
+            <div className="pb-6">
+              <NewPagination
+                total={pagination?.total}
+                pageSize={PAGE_SIZE}
+                currentPage={pagination?.page}
+                onPageNumChange={(pageNum) => onPageNumChange(pageNum)}
+              />
+            </div>
           </div>
         </Container>
       </Layout>

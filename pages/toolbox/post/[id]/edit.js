@@ -307,8 +307,9 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                 Description
                 </label>
                 <MiniEditor
-                 placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: 🤑 Stripe payments, 📊 Google Sheets, ✍️ Blogging (beta), and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
+                 placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: Stripe payments, Google Sheets, Blogging (beta), and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
                 title=""
+                showToolbar={false}
                 initialContent={postObject?.content?postObject.content:''} 
                 setDescription={(html)=>{
                     formik.setFieldValue("content",html)
@@ -316,9 +317,10 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                 {formik.errors.content && <span className="text-red-600 text-xs">{formik.errors.content}</span>}
 
                 <label className="text-md font-medium mt-4">
-                  Excerpt
+                  Tagline
                 </label>
                 <MiniEditor
+                showToolbar={false}
                 title=""
                 placeholder="Unicorn platform is a landing page builder for SaaS products. Build and launch your marketing site in no time!"
                 initialContent={postObject?.excerpt?postObject.excerpt:''} 

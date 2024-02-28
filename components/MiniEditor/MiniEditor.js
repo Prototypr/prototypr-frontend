@@ -9,7 +9,7 @@ import Link from '@tiptap/extension-link'
 
 import MenuBar from './MenuBar';
 
-export default ({setDescription, initialContent='', height=250, placeholder, disabled}) => {
+export default ({setDescription, initialContent='', height=250, placeholder, disabled, showToolbar}) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -35,8 +35,8 @@ export default ({setDescription, initialContent='', height=250, placeholder, dis
   })
 
   return (
-    <div className="border blog-content border-gray-300 pt-12 rounded-lg py-4 relative -mt-2">
-      <MenuBar editor={editor} />
+    <div className={`${showToolbar!==false?'pt-12 py-4':''} border border-gray-300 rounded-lg relative -mt-2`}>
+     {showToolbar!==false? <MenuBar editor={editor} />:''}
       <div style={{minHeight:height,maxHeight:400}} className="pt-4 px-5 overflow-auto">
         <EditorContent disabled={disabled} editor={editor} />
       </div>

@@ -94,33 +94,38 @@ function HookForm(props) {
   return (
     <div>
       <form className={`${props.className}`} onSubmit={handleSubmit(onSubmit)}>
-        <div className="sm:flex-1 sm:max-w-sm w-full">
-          <label htmlFor="Email" className="sr-only	">
-            <FormattedMessage id="intro.input.placeholder" />
-          </label>
-          <input
-            id="Email"
-            //   type="text"
-            placeholder={intl.formatMessage({ id: "intro.input.placeholder" })}
-            {...register("emailRequired", {
-              required: true,
-              pattern: /^\S+@\S+$/i,
-            })}
-            className="w-full max-w-sm p-3 py-2.5 rounded-2xl mb-4 border border-1 border-blue-600"
-          ></input>
-          {/* <input
-            id="Email"
-            style={{ fontSize: ".875rem" }}
-            type="text"
-            placeholder={intl.formatMessage({ id: "intro.input.placeholder" })}
-            name="email"
-            {...register("emailRequired", {
-              required: true,
-              pattern: /^\S+@\S+$/i,
-            })}
-            // ref={...register({ required: true, pattern: /^\S+@\S+$/i })}
-            className="border-transparent border-solid border-2 border-gradient-br-blue-darkblue-gray-50 hover:border-gradient-tl-blue-darkblue-gray-50 gradient-border-3 w-full h-full p-3 text-gray-800 bg-white rounded-lg"
-          /> */}
+        <div className="flex mb-4">  
+          <div className="mr-3 max-w-sm w-full">
+            <label htmlFor="Email" className="sr-only	">
+              <FormattedMessage id="intro.input.placeholder" />
+            </label>
+            <input
+              id="Email"
+              //   type="text"
+              placeholder={intl.formatMessage({ id: "intro.input.placeholder" })}
+              {...register("emailRequired", {
+                required: true,
+                pattern: /^\S+@\S+$/i,
+              })}
+              className="w-full max-w-sm p-3 py-2.5 rounded-full border border-1 border-blue-600"
+            ></input>
+            {/* <input
+              id="Email"
+              style={{ fontSize: ".875rem" }}
+              type="text"
+              placeholder={intl.formatMessage({ id: "intro.input.placeholder" })}
+              name="email"
+              {...register("emailRequired", {
+                required: true,
+                pattern: /^\S+@\S+$/i,
+              })}
+              // ref={...register({ required: true, pattern: /^\S+@\S+$/i })}
+              className="border-transparent border-solid border-2 border-gradient-br-blue-darkblue-gray-50 hover:border-gradient-tl-blue-darkblue-gray-50 gradient-border-3 w-full h-full p-3 text-gray-800 bg-white rounded-lg"
+            /> */}
+          </div>
+          <Button className="rounded-full flex-none px-5 font-medium py-3 leading-none bg-blue-600 hover:bg-blue-500" variant={"confirmBig"}>
+          Subscribe
+          </Button>
         </div>
         {/* <input type="checkbox" placeholder="Consent" name="consent" ref={register({ required: true })} /> */}
         {errors.consent && errors.consent.type === "required" && (
@@ -139,19 +144,17 @@ function HookForm(props) {
           />
         </div>
         {/* <div className="flex flex-col ml-2"> */}
-        <Button className="rounded-full px-5 font-medium py-3 leading-none bg-blue-600 hover:bg-blue-500" variant={"confirmBig"}>
-          Sign up
-        </Button>
+       
         {/* </div> */}
       </form>
       <div className=" w-10/12 font-inter">
         {errors.emailRequired && errors.emailRequired.type === "required" && (
-          <p className="text-white text-sm mt-2 text-left px-4 py-3 bg-red-400 border rounded-xl">
+          <p className="text-red-700 text-sm mt-2 text-left px-4 w-fit py-3 bg-red-100 rounded-xl">
             <FormattedMessage id="signup.input.validation" />
           </p>
         )}
         {errors.emailRequired && errors.emailRequired.type === "pattern" && (
-          <p className="text-white text-sm mt-2 text-left px-4 py-3 bg-red-400 border rounded-xl">
+          <p className="text-red-700 text-sm mt-2 text-left w-fit px-4 py-3 bg-red-100 rounded-xl">
             <FormattedMessage id="signup.input.error" />
           </p>
         )}

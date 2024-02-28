@@ -17,7 +17,7 @@ const EN = {
   "signup.input.click":
     "Click the activation link in the email we just sent you, and add hello@prototypr.io to your address list so you don't miss the newsletter.",
   "signup.button.submitting": "Submitting",
-  "intro.button.updates": "Sign up",
+  "intro.button.updates": "Subscribe",
   "intro.description": "Open source. Free to all. No paywall.",
   "intro.link": "Learn about Prototypr",
   "navbar.home": "Home",

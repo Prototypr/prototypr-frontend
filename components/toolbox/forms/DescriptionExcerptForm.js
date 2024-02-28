@@ -117,11 +117,11 @@ const [disabled, setDisabled] = useState(false);
     return(
         <div className="max-w-2xl pt-6 pb-20 w-full">
             <div className="my-2 mb-6 ">
-            <h1 className="text-2xl font-bold mx-auto mb-2">Add your description</h1>
+            <h1 className="text-2xl font-semibold mx-auto mb-2">Add your description</h1>
             <p className="text-gray-600">Write a longer description, and a short excerpt.</p>
             </div>
             <form
-            className="p-8 shadow-sm bg-white rounded-xl"
+            className="mt-6"
             onSubmit={(e) => {
             e.preventDefault();
             if ((errors && isEmptyObject(errors)) || !errors) {
@@ -141,7 +141,7 @@ const [disabled, setDisabled] = useState(false);
                 </label>
                 <div className="bg-white rounded-xl">
                     <MiniEditor
-                    placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: 🤑 Stripe payments, 📊 Google Sheets, ✍️ Blogging (beta), and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
+                    placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: Stripe payments, Google Sheets, blogging, and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
                     title=""
                     initialContent={content?content:''}
                     disabled={isSubmitting}
@@ -153,11 +153,12 @@ const [disabled, setDisabled] = useState(false);
                 {formik.errors.content && <span className="text-red-600 text-xs">{formik.errors.content}</span>}
 
                 <label className="text-md font-medium mt-4">
-                  Excerpt
+                  Tagline
                 </label>
                 <div className="bg-white rounded-xl">
                     <MiniEditor
-                    height={100}
+                    height={84}
+                    showToolbar={false}
                     initialContent={excerpt?excerpt:''} 
                     title=""
                     disabled={isSubmitting}
@@ -176,7 +177,7 @@ const [disabled, setDisabled] = useState(false);
                 variant={"confirmMedium"}
                 type="submit"
                 disabled={isSubmitting}
-                className="disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="p-4 bg-blue-700 text-white font-semibold rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                 {isSubmitting?
                 <div className="mx-auto w-[100px] flex justify-center">
