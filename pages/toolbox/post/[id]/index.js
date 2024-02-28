@@ -20,12 +20,37 @@ import MediaForm from "@/components/toolbox/forms/MediaForm";
 import Link from "next/link";
 import Button from "@/components/Primitives/Button";
 
-const Progress = () => {
-  const { activeStepIndex, steps } = useWizardContext();
+// const Progress = () => {
+//   const { activeStepIndex, steps } = useWizardContext();
+
+//   return (
+//     <div>
+//       Step {parseInt(activeStepIndex, 10)+1} of {steps.length}
+//     </div>
+//   );
+// };
+
+const MenuItems =[
+{title:'Title and URL'},
+{title:'General information'},
+{title:'Image and media'},
+// {title:'Done'},
+]
+const Menu = ({}) => {
+  const { activeStepIndex, steps, goTo } = useWizardContext();
 
   return (
-    <div>
-      Step {parseInt(activeStepIndex, 10)+1} of {steps.length}
+    <div className="flex flex-col">
+   {MenuItems.map((menuItem, index)=>{
+    const active = activeStepIndex==index
+    return(
+      <div 
+      onClick={()=>{goTo(index)}}
+      className={`p-3 w-full cursor-pointer rounded-lg min-w-[300px] mb-2 ${active?'bg-blue-100 font-semibold':''}`}>
+        {menuItem.title}
+      </div>
+    )
+   })}
     </div>
   );
 };
@@ -69,19 +94,24 @@ const ToolPostForm = ({user, isOwner, postObject}) =>{
 
 
   return(
-    <Layout showFooter={false} padding={false} seo={seo} showWriteButton={false} background="#EFF2F8">
-      <div className="h-full min-h-screen w-full grid md:grid-cols-12">
-          <div className="hidden w-full h-full md:block md:col-span-6 lg:col-span-4">
-            <div className="flex pt-24 items-center justify-center h-full w-full relative bg-[#195DE2] text-white">
-              <LoginSide title="Submit a tool or resource" user={user} />
-            </div>
-          </div>
-    <div className="col-span-12 md:col-span-6 lg:col-span-8">
+    <Layout showFooter={false} padding={false} seo={seo} showWriteButton={false} background="#fff">
+        
       {!((user && !user?.isLoggedIn) && (isOwner || user?.isAdmin)) ? 
       <WizardProvider>
-        <div className="justify-center mt-20 w-full  px-2 sm:px-6 lg:px-10">
-          <Progress/>
+        <div className="h-full min-h-screen w-full grid md:grid-cols-12">
+        <div className="hidden w-full h-full md:block md:col-span-6 lg:col-span-4">
+        <div className="flex pt-24 justify-center h-full w-full relative text-black/80">
+            <Menu/>
+            {/* <Progress/> */}
+            {/* <LoginSide showArrow={false} title="Submit a tool or resource" user={user} /> */}
+        </div>
+        </div>
+        <div className="col-span-12 md:col-span-6 lg:col-span-7">
+        <div className="justify-center mt-20 w-full">
+          {/* <Progress/> */}
         <ToolSteps postObject={postObject} user={user}/>
+          </div>
+        </div>
         </div>
       </WizardProvider>
       :!(user && !user?.isLoggedIn)?
@@ -111,8 +141,6 @@ const ToolPostForm = ({user, isOwner, postObject}) =>{
     </div>
     </div>
   }
-    </div>
-     </div>
       </Layout>
   )
 
@@ -136,22 +164,22 @@ const ToolSteps = ({user, postObject}) =>{
     <Steps>
 
     <Step key={`page/1`} id={'1'}>
-        <div className="flex items-center justify-center h-full w-full relative">
+        <div className="flex items-center justify-start h-full w-full relative">
           <TitleLinkFormEdit onNext={onNext} postObject={postObject} user={user} />
         </div>
     </Step>
     <Step key={`page/2`} id={'2'}>
-        <div className="flex items-center justify-center h-full w-full relative">
+        <div className="flex items-center justify-start h-full w-full relative">
           <DescriptionExcerptForm postObject={postObject} user={user} />
         </div>
     </Step>
     <Step key={`page/3`} id={'3'}>
-        <div className="flex items-center justify-center h-full w-full relative">
+        <div className="flex items-center justify-start h-full w-full relative">
          <MediaForm postObject={postObject} user={user}/>
         </div>
     </Step>
     <Step key={`page/4`} id={'4'}>
-        <div className="flex items-center justify-center h-full w-full relative">
+        <div className="flex items-center justify-start h-full w-full relative">
           <div className="max-w-2xl pt-6 pb-20 w-full">
               <div className="my-2 mb-6">
               {postObject.status=='draft'?

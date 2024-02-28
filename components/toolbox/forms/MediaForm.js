@@ -208,11 +208,11 @@ const [disabled, setDisabled] = useState(false);
     return(
         <div className="max-w-2xl pt-6 pb-20 w-full">
             <div className="my-2 mb-6">
-            <h1 className="text-2xl font-bold mx-auto mb-2">Add media</h1>
+            <h1 className="text-2xl font-semibold mx-auto mb-2">Add media</h1>
             <p className="text-gray-600">Upload your logo and multiple gallery images.</p>
             </div>
             <form
-            className="p-8 shadow-sm bg-white rounded-xl"
+            className="mt-6"
             onSubmit={(e) => {
             e.preventDefault();
             if ((errors && isEmptyObject(errors)) || !errors) {
@@ -270,14 +270,14 @@ const [disabled, setDisabled] = useState(false);
                 variant={"confirmMedium"}
                 type="submit"
                 disabled={isSubmitting}
-                className="p-4 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="p-4 bg-blue-700 text-white font-semibold rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                 {isSubmitting?
                 <div className="mx-auto w-5">
                 <Spinner size="sm" className="text-black" />
                 </div>
                 :
-                `Save and Continue`}
+                `Save and Submit`}
                 </Button>
                 <div
                 onClick={onPrevious}

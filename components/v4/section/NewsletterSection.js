@@ -19,7 +19,7 @@ const NewsletterSection = ({title,padding}) =>{
             <img src='/static/images/toolbox/squares.svg' className="rounded-3xl opacity absolute w-full h-full object-cover top-0 left-0"/>
             <div>
             <img
-                className="hidden sm:block sm:w-[220px] 2md:w-[344px] lg:w-[350px] top-0 mt-8 md:-mt-6 absolute right-0 xl:mr-32"
+                className="hidden sm:block sm:w-[220px] 2md:w-[300px] lg:w-[300px] top-0 mt-8 md:-mt-6 absolute right-0 xl:mr-32"
                 src={
                     "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/7432cc558c73394df5d2c21a3ee18cd5.png?updated_at=2022-12-14T17:59:46.805Z"
                 }

@@ -126,12 +126,12 @@ const ProfilePageLayout = ({
                 </div>
                 <div className="flex flex-col z-20 relative justify-center">
                   <h1 className="text-2xl font-semibold leading-normal text-black/90">
-                      {`${author?.firstName ? author?.firstName:''} ${author?.lastName ? author?.lastName:''}
-                      ${(!author?.firstName && !author?.lastName) ? author?.name:''}`}
+                      {`${author?.firstName ? author?.firstName:'New'} ${author?.lastName ? author?.lastName:'User'}
+                      ${((!author?.firstName && !author?.lastName) && author?.name) ? author?.name:''}`}
                       </h1>
-                      {author.role && (
+                      {author.bio && (
                         <h3 className="text-lg mb-3 font-normal leading-normal text-black/80">
-                          {author.role}
+                          {author.bio?author.bio:'No description'}
                         </h3>
                       )} 
                       {/* TAGS (no point showing them) */}

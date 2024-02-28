@@ -195,7 +195,12 @@ export const NavigationMenuDemo = ({
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (
             <NavigationMenuButton href="/newsletter">
+              <div className="flex">
+              hi
+              <div>
               {intl.formatMessage({ id: "navbar.menu.title4" })}
+              </div>
+              </div>
             </NavigationMenuButton>
           )}
           <div className="ml-3">

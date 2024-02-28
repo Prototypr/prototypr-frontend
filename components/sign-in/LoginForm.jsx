@@ -62,7 +62,7 @@ return(
     </p>
     <p className="my-4 mb-8">
 
-    Prototypr content is open to all, but only invited members can publish. Get an invite from current members or submit an application form to <span className="text-underline">join as a contributor</span>.
+    Prototypr content is open to all, but only invited members can create posts. Get an invite from current members or submit an application form to <span className="text-underline">join as a creator</span>.
     </p>
     {/* <div className="max-w-[90%] md:max-w-[340px] flex flex-col"> */}
     {showInputForm == false ? (
@@ -78,7 +78,7 @@ return(
           <div className="flex text-white">
              <TicketIcon/>
           <div className="ml-2.5 my-auto text-base inline-block ">
-           Join with Invite Code
+           Join with an invite
           </div>
           </div>
         </Button>

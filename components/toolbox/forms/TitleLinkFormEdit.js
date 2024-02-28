@@ -108,13 +108,14 @@ const [disabled, setDisabled] = useState(false);
 
 
     return(
-        <div className="max-w-2xl pt-6 pb-20 w-full">
-            <div className="my-2 mb-6 ">
-            <h1 className="text-2xl font-bold mx-auto mb-2">Update your tool</h1>
+      <div className="flex justify-start pt-3 w-full h-full">
+      <div className="max-w-2xl pt-3 w-full">
+          <div className="my-2 mb-6 ">
+          <h1 className="text-4xl font-semibold mx-auto mb-3">Update tool</h1>
             <p className="text-gray-600">Make changes to the title and link.</p>
             </div>
             <form
-            className="p-8 shadow-sm bg-white rounded-xl"
+            className="mt-12"
             onSubmit={(e) => {
             e.preventDefault();
             if ((errors && isEmptyObject(errors)) || !errors) {
@@ -149,7 +150,7 @@ const [disabled, setDisabled] = useState(false);
                 <input
                     id="link"
                     name="link"
-                    type="text"
+                    type="url"
                     disabled={isSubmitting}
                     onChange={formik.handleChange}
                     value={formik.values.link}
@@ -165,17 +166,20 @@ const [disabled, setDisabled] = useState(false);
                 variant="confirmMedium"
                 type="submit"
                 disabled={isSubmitting}
+                className="p-4 bg-blue-700 text-white font-semibold rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed"
                 // className="p-4 font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                 {isSubmitting?
-                <div className="mx-auto w-6">
-                <Spinner />
-                </div>
+                <>Saving...</>
+                // <div className="mx-auto w-6">
+                // <Spinner />
+                // </div>
                 :
                 `Continue`}
                 </Button>
             </FormContainer>
         </form>
+        </div>
         </div>
     )
 }
