@@ -44,7 +44,7 @@ const BigBackgroundCard = ({ link,title, excerpt, image, tags, date, avatar, aut
           </h2>
         </Link>
         <Link href={link??''}>
-          <p className="mt-3 text-gray-500 line-clamp-6">{excerpt}</p>
+          <div dangerouslySetInnerHTML={{__html:excerpt}} className="mt-3 text-gray-500 line-clamp-6"/>
         </Link>
         
        </div>
