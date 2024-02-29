@@ -2,8 +2,8 @@ import { TAB_ITEMS, ProductListData, ProductListData2 } from "@/lib/constants";
 import Link from 'next/link'
 import { MotionSlider } from "@/components/toolbox/ToolboxCarouselAnimation";
 import { MotionSliderToolCard } from "@/components/toolbox/ToolboxHeroWithEmailSignup";
-import { ArrowRight, Compass, Envelope } from "phosphor-react";
-import SignupHorizontal from "@/components/newsletter/SignupHorizontal";
+// import { ArrowRight, Compass, Envelope } from "phosphor-react";
+// import SignupHorizontal from "@/components/newsletter/SignupHorizontal";
 import Button from "@/components/Primitives/Button";
 
 const ToolsCarouselSection = () =>{
@@ -45,21 +45,30 @@ const ToolsCarouselSection = () =>{
                 })}
               />
             </div>
-            <div className="w-full flex mt-3 -mb-6 justify-center relative">
+            <div className="w-full  flex mt-3 -mb-6 justify-center relative">
           {/* <div className="w-[400px] mt-2">
               <SignupHorizontal className="sm:flex w-full mt-5 mb-6" />
           </div> */}
-        {/* <Link href="/newsletter">
-        <Button variant="ghostBlue" className="rounded-full mb-[48px] font-medium mt-8 text-blue-700/80">Get&nbsp;<span className="">'em</span>&nbsp;weekly 
-        </Button>
-        </Link> */}
-            
-                <img src="/static/images/squiggle-arrow.svg"  className="w-[100px] h-[70px] absolute top-0 -mt-[36px] -z-10 -ml-[0px]"/>
-              <Link href="/newsletter">
-              <div variant="ghostBlue" className="rounded-full relative mb-[48px] font-base mt-[32px] text-blue-900">{`Don't miss out,`} get&nbsp;<span className="">the</span>&nbsp;digest 
-              <img className="absolute top-0 right-0 -mr-[64px] -mt-[6px] h-[24px]" src="/static/images/mail.svg" />
+            <div className="flex justify-center flex-col">
+
+              <div className="mt-1">
+                  <img src="/static/images/squiggle-arrow.svg"  className="w-[100px] h-[70px] left-1/2 -ml-[50px] absolute top-0  -mt-[36px] -z-10 -ml-[0px]"/>
+                <Link href="/newsletter">
+                <div className="rounded-full flex cursor-collab-blue hover:text-pink-600 text-[#3EA7F3] relative mb-[48px] font-base mt-[32px] text-blue-900">
+                  {/* {`Don't miss out,`} get&nbsp;<span className="">the</span>&nbsp;digest  */}
+                <img className="h-[24px] hover:drop-shadow-xl " src="/static/images/writing.svg" />
+                <img className="-mt-[14px] h-[22px]" src="/static/images/mail.svg" />
+                </div>
+                </Link>
               </div>
-              </Link>
+          {/* <div className="mx-auto -mt-[68px]">
+            <Link href="/newsletter">
+            <Button variant="ghostSmallBlue" className="rounded-full mb-[48px] font-medium mt-8 text-blue-400 outline-blue-400">
+              Subscribe
+            </Button>
+            </Link>
+          </div> */}
+            </div>
           </div>
         </div>
     )
