@@ -24,9 +24,9 @@ const PitchSection = () => {
                   {/* Mindful designers, building towards a calmer, fairer, and more open web.  */}
                   {/* Thoughts into words. Words into designs. Designs into the hands of users. */}
                 </h2>
-                <p className="text-[#C4D7FD] max-w-lg text-[18px] font-inter leading-[32px]">
-                 A platform built to surface purposeful stories from designers, developers, and creators, when they want to be heard – not when an algorithm decides. 
-                 There's no forced engagement here – a reliable network to get the word out.
+                <p className="text-white/80 max-w-lg text-[18px] font-inter leading-[32px]">
+                 Prototypr is a place for genuine stories from real people. Having been unindated with spam profiles and AI-generated posts, we're now invite-only 
+                 to maintain high quality content.
                 </p>
                 <div className="flex flex-row -ml-2 md:-ml-5 flex-wrap max-w-3xl mt-5">
                   {people.map((peep, i) => {

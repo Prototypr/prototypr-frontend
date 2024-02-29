@@ -86,21 +86,21 @@ const Heart = () => {
 const content = [
   {
     icon: <Feedback />,
-    title: "Get draft feedback",
+    title: "Invite only",
     description:
-      "Give and receive feedback on ideas and get guidance from editors.",
+      "Join a safe space, free from spammers, where every member has been invited.",
   },
   {
     icon: <Write />,
-    title: "Write for meaning",
+    title: "Publishing tools",
     description:
-      "Publish to an avid readership, and get discovered for writing meaningful articles.",
+      "Get access to the post editor and submit articles and tools to an avid readership.",
   },
   {
     icon: <Heart />,
-    title: "Contribute to Open Source",
+    title: "Open Web",
     description:
-      "Shape the platform you're writing on through design and code contributions.",
+      "We're an Open Source platform, where content is not limited by paywalls.",
   },
 ];
 
@@ -122,7 +122,7 @@ const FeaturesContent = () => {
                     <h2 className="text-[16px] font-semibold text-gray-900 mb-2 font-inter">
                       {x.title}
                     </h2>
-                    <p className="text-[#AEB6CA]  leading-[28px] text-[16px] font-inter">
+                    <p className="text-black/60  leading-[28px] text-[16px] font-inter">
                       {x.description}
                     </p>
                   </div>
