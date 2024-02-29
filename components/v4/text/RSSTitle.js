@@ -7,10 +7,9 @@ const RSSTitle = ({title}) =>{
         <div className="flex px-1">
             <h2 className="text-2xl drop-shadow-sm text-black/90 font-semibold font-inter max-w-md flex flex-col justify-center">
              {title?intl.formatMessage({ id: title }):
-             <>
-            Trending articles
-            {/* <span className="hidden md:inline text-gray-400">articles</span> */}
-             </>
+             <div className="inline-flex">
+            Trending <span className="hidden md:inline ml-2">articles</span>
+             </div>
              } 
             </h2>
             {!title ?<div className="flex ml-2 flex-col justify-center">

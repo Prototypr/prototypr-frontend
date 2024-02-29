@@ -146,7 +146,7 @@ export default function Index({
         {/* </Container> */}
         <SectionDivider py="py-1" transparentLine={true} />
         {/* <Container maxWidth="max-w-[1320px] pb-24 mt-1"> */}
-        <Container maxWidth="max-w-[1320px] mb-8">
+        <Container padding={false} maxWidth="max-w-[1320px] mb-8 px-3">
           {/* <div className="rounded-3xl p-3 relative md:p-10 shadow bg-white"> */}
           <div className="relative">
           {/* <img src='/static/images/toolbox/squares2.svg' className="-scale-x-100 rounded-xl opacity-30  absolute w-full h-full object-cover top-0 left-0"/> */}
@@ -168,7 +168,7 @@ export default function Index({
         </Container>
         {/* </Container> */}
 
-        <Container maxWidth="max-w-[1320px]">
+        <Container maxWidth="max-w-[1320px] hidden md:block">
           {/* <h2 className={`text-xl mb-6 font-medium`}>
         Featured Topics
       </h2> */}

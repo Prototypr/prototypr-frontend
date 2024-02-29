@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Avatar from "../../avatar/AvatarLine";
 import SmallTag from "../../tag/SmallTag";
-import Moment from "react-moment";
+// import Moment from "react-moment";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
 const SmallCardStacked = ({ title, image, tags, date, avatar, author, showAuthor, link }) => {
@@ -45,7 +45,7 @@ const SmallCardStacked = ({ title, image, tags, date, avatar, author, showAuthor
         </div>}
         <div>
           <Link href={link}>
-            <h2 className="md:ml-0 text-sm md:text-lg font-semibold leading-snug line-clamp-3">
+            <h2 className="md:ml-0 mb-3 md:mb-0 text-sm md:text-lg font-semibold leading-snug line-clamp-3">
               {title}
             </h2>
           </Link>

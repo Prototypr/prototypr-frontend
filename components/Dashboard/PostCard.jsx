@@ -61,7 +61,7 @@ const PostCard = ({ post, refetch, user }) => {
     };
   
     return (
-      <div className="flex flex-row justify-between p-6 h-full rounded-lg border shadow-sm border-black/5 hover:border-opacity-10 cursor-default bg-white hover:transition duration-300 ease-in-out col-span-12">
+      <div className="flex flex-row justify-between p-4 md:p-6 h-full rounded-lg border shadow-sm border-black/5 hover:border-opacity-10 cursor-default bg-white hover:transition duration-300 ease-in-out col-span-12">
         <div className="flex flex-col grid gap-2">
           {(post.status!=='publish' && post.status!=='draft') &&
           <div>
@@ -125,7 +125,7 @@ const PostCard = ({ post, refetch, user }) => {
             </div>
           )}
           {post.type=='tool'? (
-            <div>
+            <div className="hidden md:block">
               <Link href={`/toolbox/post/${post.id}/deal`}>
                 <button className="text-lg bg-white underline text-black  p-3  rounded-full hover:bg-gray-100 ">
                   <Gift size={18}/>

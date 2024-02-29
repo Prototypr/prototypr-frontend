@@ -2,7 +2,7 @@
 import Container from "@/components/container";
 // import LargePostGridC from "@/components/v4/layout/LargePostGridB";
 // import TopicsGridHome from "../layout/TopicsGridHome";
-import PostsGroup3Cards from "../layout/PostsGroup3Cards";
+// import PostsGroup3Cards from "../layout/PostsGroup3Cards";
 import { ArrowRight, Tag } from "phosphor-react";
 import Link from "next/link";
 import { useIntl } from "react-intl";
@@ -13,7 +13,7 @@ const TopicIndexSection = ({index,user, heroCardPost, viewablePosts, jobsSidebar
  
   const intl = useIntl();
   return (
-    <Container maxWidth="max-w-[1320px]">
+    <Container padding={false} maxWidth="px-3 max-w-[1320px]">
       <div className={`w-full h-full grid grid-cols-12 flex justify-center rounded-3xl`}>
         <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 py-3 `}>
           {/* <LargePostGridC title={title} largePost={heroCardPost} smallPosts={viewablePosts} /> */}
@@ -28,7 +28,7 @@ const TopicIndexSection = ({index,user, heroCardPost, viewablePosts, jobsSidebar
           <div className="flex w-full justify-between mb-3 md:mb-6">
             <div className="flex">
               <Tag className="inline-block my-auto mr-3" size={32}/>
-              <h2 className="text-2xl md:text-3xl capitalize font-semibold text-black/90">
+              <h2 className="text-xl my-auto md:text-3xl capitalize font-semibold text-black/90">
               {intl.formatMessage({ id: title })}
               </h2>
             </div>
