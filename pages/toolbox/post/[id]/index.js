@@ -190,7 +190,7 @@ const ToolSteps = ({user, postObject, refetchPost}) =>{
     </Step>
     <Step key={`page/4`} id={'4'}>
         <div className="flex items-center justify-start h-full w-full relative">
-          <div className="max-w-2xl pt-6 pb-20 w-full">
+          <div className="px-6 md:px-0 max-w-2xl pt-6 pb-20 w-full">
               <div className="my-2 mb-6">
               {postObject.status=='draft'?
               <>

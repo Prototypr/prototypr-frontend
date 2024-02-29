@@ -9,7 +9,7 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
     <div className="flex flex-col w-full">
     {/* <Container maxWidth="max-w-[1320px] w-full"> */}
       {showHeader!==false && <div className="flex justify-between mb-4">
-        <h3 className="font-semibold text-2xl px-1">
+        <h3 className="font-semibold text-lg md:text-2xl px-1">
          {title?title:
          <>
          Latest tools

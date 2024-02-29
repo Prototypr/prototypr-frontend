@@ -36,7 +36,7 @@ export default function PeoplePage({
 
   return (
     <Layout activeNav={"people"}>
-      <Container maxWidth="max-w-[1320px] mx-auto pb-16">
+      <Container padding={false} maxWidth="max-w-[1320px] px-3 mx-auto pb-16">
       {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) :

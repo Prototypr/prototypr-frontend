@@ -110,7 +110,7 @@ const [disabled, setDisabled] = useState(false);
 
     return(
       <div className="flex justify-start pt-3 w-full h-full">
-      <div className="max-w-2xl pt-3 w-full">
+      <div className="px-6 md:px-0 max-w-2xl pt-3 w-full">
           <div className="my-2 mb-6 ">
           <h1 className="text-4xl font-semibold mx-auto mb-3">Update {postObject.title}</h1>
             <p className="text-gray-600">Make changes to the title and link.</p>
