@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Button from "./Primitives/Button";
 import Link from "next/link";
 import Container from "./container";
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { set, get } from 'js-cookie';
 
 function getScrollPercent() {
     var h = document.documentElement,
@@ -13,23 +15,49 @@ function getScrollPercent() {
   }
   
 
-const StickyFooterCTA = ({title, description, buttonText}) => {
+  const StickyFooterCTA = ({ title, description, buttonText }) => {
     const [isVisible, setVisible] = useState(false);
+    const [userClosed, setUserClosed] = useState(false);
   
+    // Define the scrollListener inside useEffect or use useCallback
     useEffect(() => {
-      window.addEventListener("scroll", (event) => {
-        const p = getScrollPercent();
+      const scrollListener = () => {
+        const p = getScrollPercent(); // Assuming getScrollPercent is defined elsewhere
   
         if (p > 18 && p < 85) {
-          setVisible(true);
+          if (!userClosed) {
+            setVisible(true);
+          }
         } else {
           setVisible(false);
         }
-      });
-    }, []);
+      };
+  
+      // Check if the user has already closed the sticky footer
+      const closed = get('closed-signup') === 'true';
+      console.log(closed);
+  
+      if (!closed) {
+        window.addEventListener("scroll", scrollListener);
+      } else {
+        setUserClosed(true);
+      }
+  
+      // Clean up function
+      return () => {
+        window.removeEventListener("scroll", scrollListener);
+      };
+    }, [userClosed]); // Re-attach the event listener if userClosed changes
+  
+    const closeStickyFooter = () => {
+      setVisible(false);
+      set('closed-signup', 'true', { expires: 365 }); // Set a cookie to remember the user's choice, assuming a 1-year expiration
+      setUserClosed(true);
+    };
   
     return (
       <div className="w-full flex justify-center relative ">
+       
         <motion.div
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
@@ -50,7 +78,12 @@ const StickyFooterCTA = ({title, description, buttonText}) => {
           className="fixed bottom-0 w-full md:bottom-3 bg-gradient-to-t shadow-md overflow- from-blue-50 border border-indigo-900/10 to-white md:w-[80%] md:max-w-[1120px] md:rounded-2xl h-auto z-[100]"
         >
               <img src={`/static/images/robo2.png`} className="w-[76px] md:w-[104px] drop-shadow-xl z-40 ml-4 md:ml-0 left-0 absolute bottom-0 -mb-[15px] md:-mb-[25px] -scale-x-100"/>
-          <Container  maxWidth="max-w-[1320px] z-30 relative overflow-hidden">
+          <Container  maxWidth="max-w-[1320px] z-30 relative overflow-">
+            <div onClick={closeStickyFooter} className="rounded-full cursor-pointer z-50 w-[22px] flex flex-col justify-center h-[22px] shadow-sm border border-gray-300 absolute top-0 bg-white right-0 -mt-[6px] -mr-[6px]">
+              <div className="mx-auto">
+                <Cross2Icon width={14}/>
+              </div>
+            </div>
               <div  className="absolute top-0 left-0 w-full h-full md:rounded-2xl -ml-0.5 -mt-0.5" style={{"backgroundColor":"#ffffff","opacity":"0.1","backgroundImage":"linear-gradient(#203490 1.5px, transparent 1.5px), linear-gradient(to right, #203490 1.5px, #ffffff 1.5px)","backgroundSize":"30px 30px"}}/>
 
             <div className="w-full z-10 relative px-1 py-3  flex flex-col gap-4 md:gap-3 md:flex-row justify-between">

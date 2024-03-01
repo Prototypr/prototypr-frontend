@@ -125,7 +125,7 @@ const ProfilePageLayout = ({
                     // </Link>
                     )}
                 </div>
-                <div className="flex flex-col z-20 relative justify-center">
+                <div className="flex flex-col z-20 relative justify-center max-w-lg">
                   <h1 className="text-2xl font-semibold leading-normal text-black/90">
                       {`${author?.firstName ? author?.firstName:'New'} ${author?.lastName ? author?.lastName:'User'}
                       ${((!author?.firstName && !author?.lastName) && author?.name) ? author?.name:''}`}
