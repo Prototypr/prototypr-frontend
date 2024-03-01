@@ -62,7 +62,7 @@ return(
     </p>
     <p className="my-4 mb-8">
 
-    Prototypr content is open to all, but only invited members can create posts. Get an invite from current members or submit an application form to <span className="text-underline">join as a creator</span>.
+    Prototypr content is open to all, but only invited members can create posts. Get an invite from current members or submit an <Link href="/apply"><span className="text-blue-600">application</span></Link> form to <span className="text-underline">join as a creator</span>.
     </p>
     {/* <div className="max-w-[90%] md:max-w-[340px] flex flex-col"> */}
     {showInputForm == false ? (
@@ -188,10 +188,15 @@ return(
                       onClick={toggleSignIn}
                       className="text-primary-400 cursor-pointer"
                     >
-                      {isSignUp ? " Sign in." : " Sign up"}
-                    </a>
+                      {isSignUp ? " Sign in" : " Sign up"}
+                    </a>.
                   </div>
                 </div>
+
+                {/* {isSignUp
+                        ? 
+                        <div className="mt-2 text-center text-sm text-gray-700">Need a an invite? <Link href="/apply"><span className="text-blue-500">Apply here</span></Link>.</div>
+                        :null} */}
   </div>
 )
 
@@ -374,8 +379,8 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode, toggleSignIn })
                       onClick={toggleSignIn}
                       className="text-primary-400 cursor-pointer"
                     >
-                      {isSignUp ? " Sign in." : " Sign up"}
-                    </a>
+                      {isSignUp ? " Sign in" : " Sign up"}
+                    </a>.
                   </div>
                 </div>
       </div>
