@@ -14,7 +14,7 @@ const Footer = dynamic(() => import("@/components/footer"));
 const seo = {
   title: "Writers Network for Designers",
   description:"A network for writers to share and receive feedback. We are an Open Source design platform where quality is rewarded, not clicks. Driven by humans, not algorithms. Get draft feedback. Write for meaning. Join us. ",
-  url:"https://prototypr.io/network",
+  url:"https://prototypr.io/apply",
   image:"https://prototypr.io/static/images/writers-card.png"
 }
 

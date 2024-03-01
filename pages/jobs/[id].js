@@ -14,7 +14,7 @@ import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import { useState } from "react";
 import { Waypoint } from "react-waypoint";
-import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
+// import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import SponsorSidebarCard from "@/components/SponsorSidebarCard";
 import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";

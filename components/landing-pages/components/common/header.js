@@ -7,6 +7,7 @@ import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 // import LocationMenu from "@/components/Navbar/parts/LocationMenu";
 import MenuItems from "@/components/Navbar/parts/MenuItems";
 import UserMenu from "@/components/Navbar/UserMenu";
+import Button from "@/components/Primitives/Button";
 const WMButton = dynamic(() => import("@/components/Navbar/parts/WMButton"), 
 {
   ssr: false,
@@ -93,12 +94,17 @@ const Header = ({collapsed, hideLocaleSwitcher, editor, showWriteButton}) => {
                     />
                   </NavigationMenuList>
                 </NavigationMenu> */}
-                 <div className={`hidden mr-2 md:block my-auto`}>
+                 {/* <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />
-              </div>
-                <div className="relative ml-3">
+              </div> */}
+                {/* <div className="relative ml-3">
                   <UserMenu userLoading={isLoading} user={user} />
-                </div>
+                </div> */}
+                 <Link href="/apply/form">
+                  <Button className="text-sm bg-blue-600 hover:bg-blue-500" variant={"confirmRounded"}>
+                  Apply to join
+                </Button>
+                </Link>
               </div>
             </div>
             {/* movil menu */}

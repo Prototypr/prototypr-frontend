@@ -4,7 +4,7 @@ import Button from "@/components/Primitives/Button";
 const PrototyprNetworkCTA = ({ data }) => {
   return (
     <div className="w-full p-5 mt-3 bg-[#EAE9F5] bg-opacity-50 rounded-2xl mb-1">
-<Link href="/network">
+<Link href="/apply">
       <div className="flex flex-col gap-1 justify-end items-end">
         <div className="w-full flex space-between rounded-[12px] h-auto p-5">
           <div className="w-2/3 flex flex-col">

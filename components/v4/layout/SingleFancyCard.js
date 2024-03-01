@@ -1,6 +1,6 @@
 const post = {
     image:'/static/images/jobs1.png',
-    slug:'/network',
+    slug:'/apply',
     class:'bg-blue-800',
     title:'Post an article',
     description:'Join the Prototypr Discord community and write with us.'

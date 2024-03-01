@@ -25,7 +25,7 @@ const PitchSection = () => {
                   {/* Thoughts into words. Words into designs. Designs into the hands of users. */}
                 </h2>
                 <p className="text-white/80 max-w-lg text-[18px] font-inter leading-[32px]">
-                 Prototypr is a place for genuine stories from real people. Having been unindated with spam profiles and AI-generated posts, we're now invite-only 
+                 Prototypr is a place for genuine stories from real people. Having been unindated with spam profiles and AI-generated posts, we're currently invite-only 
                  to maintain high quality content.
                 </p>
                 <div className="flex flex-row -ml-2 md:-ml-5 flex-wrap max-w-3xl mt-5">

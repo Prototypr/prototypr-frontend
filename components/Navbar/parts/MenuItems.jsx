@@ -268,20 +268,20 @@ const ContentList = styled("ul", {
     layout: {
       one: {
         "@media only screen and (min-width: 600px)": {
-          width: 500,
+          width: 400,
           gridTemplateColumns: ".75fr 1fr",
         },
       },
       two: {
         "@media only screen and (min-width: 600px)": {
-          width: 600,
+          width: 400,
           gridAutoFlow: "column",
           gridTemplateRows: "repeat(3, 1fr)",
         },
       },
       three: {
         "@media only screen and (min-width: 600px)": {
-          width: 650,
+          width: 450,
           gridAutoFlow: "column",
           gridTemplateRows: "repeat(3, 1fr)",
         },
@@ -549,23 +549,17 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
               <NavigationMenuContent showCaret={false} className="normal-case">
                 <ContentList layout="two">
                   <ContentListItem
-                    title={'People'}
-                    href="/people"
-                  >
-                    Browse all contributors and members on Prototypr.
-                  </ContentListItem>
-                  <ContentListItem
                     title={'Publish with us'}
-                    href="/post/write-for-us"
+                    href="/apply"
                   >
-                    Find out how to publish on Prototypr and get featured.
+                    Apply for a creator account.
                   </ContentListItem>
-                  <ContentListItem
+                  {/* <ContentListItem
                     title={'Join Network'}
-                    href="/network"
+                    href="/apply"
                   >
                     Get feedback on your writing, and meet like minded creators.
-                  </ContentListItem>
+                  </ContentListItem> */}
                   {/* <ContentListItem
                     title={'Earn micropayments'}
                     href="/web-monetization"
@@ -576,7 +570,13 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                     title={'Open Source'}
                     href="https://open.prototypr.io"
                   >
-                    Learn how we built this platform by looking at the code and design.
+                    See the code for this platform.
+                  </ContentListItem>
+                  <ContentListItem
+                    title={'People'}
+                    href="/people"
+                  >
+                    Browse all Prototypr contributors.
                   </ContentListItem>
                 </ContentList>
               </NavigationMenuContent>

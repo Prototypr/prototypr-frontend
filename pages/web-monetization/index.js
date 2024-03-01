@@ -7,6 +7,7 @@ import WebMonetizationSection from "@/components/landing-pages/components/web-mo
 import WebStandard from "@/components/landing-pages/components/web-mon/webStandardSection";
 import FooterCTA from "@/components/landing-pages/components/web-mon/footerCTA";
 import PayoutSection from "@/components/landing-pages/components/web-mon/payoutSection";
+import SunsetNotice from "@/components/landing-pages/components/web-mon/SunsetNotice";
 
 
 const seo = {
@@ -25,7 +26,8 @@ const Index = () => {
       <WebMonetizationSection />
       <WebStandard />
       <FooterCTA />
-      <PayoutSection />
+      <SunsetNotice/>
+      {/* <PayoutSection /> */}
       <Footer />
     </div>
   );
