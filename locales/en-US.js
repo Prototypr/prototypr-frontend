@@ -84,6 +84,7 @@ const EN = {
   "topicSpotlight.tabs.ai": "AI",
   "topicSpotlight.tabs.code": "Code",
   "topicSpotlight.tabs.psychology": "Psychology",
+  "topicSpotlight.tabs.openSource": "Open Source",
   "notice.translation.copy": "This article is only available in English",
   "notice.translation.button": "Learn more",
   "creatorSpotlight.title": "Creator Spotlight",

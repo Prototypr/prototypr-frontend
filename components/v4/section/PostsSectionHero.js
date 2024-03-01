@@ -13,7 +13,7 @@ import HeroArticleSection from "./HeroArticleSection";
 // import {RssSimple} from 'phosphor-react'
 const PostsSectionHero = ({user, heroCardPost,toolsList,showHeroTitle,groupSlice, viewablePosts, showTags,title, showRecent,showTitle }) => {
   return (
-    <Container maxWidth="max-w-[1320px]">
+    <Container padding={false} maxWidth="max-w-[1320px] mx-auto px-6 md:px-0">
       {showRecent && 
       <>
         {/* <div className="w-full shadow-md h-full grid grid-cols-12 flex justify-center bg-white rounded-3xl p-6 mt-6 lg:p-6"> */}
@@ -39,7 +39,7 @@ const PostsSectionHero = ({user, heroCardPost,toolsList,showHeroTitle,groupSlice
       
       }
       {showTags && 
-       <div className="-mt-4 -ml-3 mb-5">
+       <div className="-mt-4 mb-5">
        <TagsNavRow/>
      </div>
       }
@@ -48,7 +48,7 @@ const PostsSectionHero = ({user, heroCardPost,toolsList,showHeroTitle,groupSlice
          <div className="flex justify-between">
             {showTitle!==false &&
             <div className="my-3">
-              <RSSTitle title={`${title?`All ${title}`:'All posts'}`}/>
+              {/* <RSSTitle title={`${title?`All ${title}`:'All posts'}`}/> */}
               </div>
             }
             </div>

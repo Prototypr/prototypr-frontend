@@ -80,6 +80,7 @@ const ES = {
   "topicSpotlight.tabs.UX": "UX",
   "topicSpotlight.tabs.branding": "Diseño de marca",
   "topicSpotlight.tabs.psychology": "Psicología",
+  "topicSpotlight.tabs.openSource": "Open Source",
   "topicSpotlight.tabs.productDesign": "Diseño de producto",
   "topicSpotlight.tabs.vr": "VR",
   "topicSpotlight.tabs.ai": "AI",
