@@ -227,7 +227,7 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
           >
             <DropdownMenuItem
               onSelect={() => {
-                if(user?.approved){
+                if(user?.profile?.approved){
                   router.push(`/people/${user?.profile?.slug}`);
                 }else{
                   router.push(`/account/profile`);

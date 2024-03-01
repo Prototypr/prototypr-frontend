@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { styled, keyframes } from '@stitches/react';
 import { violet, mauve, blackA, slate } from '@radix-ui/colors';
-import { MixerHorizontalIcon, Cross2Icon } from '@radix-ui/react-icons';
+import { Cross2Icon } from '@radix-ui/react-icons';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import ImageLinkField from './ImageLinkField/ImageLinkField'
 

@@ -8,7 +8,7 @@ async function setSessionInviteCode(req, res) {
   // Assuming the access code is sent in the request body or as a query parameter
   const inviteCode = req.body.inviteCode || req.query.inviteCode;
   // console.log('hello invite code thing')
-  console.log('inviteCode',inviteCode)
+  // console.log('inviteCode',inviteCode)
   // // const cookies = parse(req.headers.cookie || '');
   // // console.log(cookies)
   // // const inviteCode = cookies['inviteCode']; // Retrieve the access code from parsed cookies
@@ -19,8 +19,8 @@ async function setSessionInviteCode(req, res) {
 
   // let inviteCode = cookies.get('inviteCode')
   // // console.log(	req.cookies.get('inviteCode')?.value  )
-console.log('session')
-console.log(req.session)
+// console.log('session')
+// console.log(req.session)
 // const inviteCode = false
   // console.log(inviteCode)
   try {
