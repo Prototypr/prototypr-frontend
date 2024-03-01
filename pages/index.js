@@ -195,7 +195,7 @@ export default function Index({
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[200px] left-0 w-full h-[124%] object-cover"/> */}
         {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[150px] left-0 w-full h-[124%] object-cover"/> */}
 
-          <div className="max-w-[1320px] mx-auto md:px-6 pb-16 ">
+          <div className="max-w-[1320px] mx-auto px-6 md:px-3 pb-16 ">
           <div className="flex justify-between mb-8">
               <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md leading-[32px]">
               Browse by <span className="text-underline">category</span>

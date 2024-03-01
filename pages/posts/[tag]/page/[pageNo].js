@@ -161,7 +161,7 @@ export default function PostsPage({
               <>
               <SectionDivider py="py-12" transparentLine={false}/>
       
-                <Container padding={false} maxWidth="mb-3 px-6 max-w-[1320px] mx-auto rounded-2xl w-full relative">
+                <Container padding={false} maxWidth="mb-3 px-6 md:px-3 max-w-[1320px] mx-auto rounded-2xl w-full relative">
                   <div className="">
                     <div className="flex justify-between mb-8">
                       <h3 className="font-medium capitalize text-2xl ">

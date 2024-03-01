@@ -13,7 +13,7 @@ const TopicIndexSection = ({index,user, heroCardPost, viewablePosts, jobsSidebar
  
   const intl = useIntl();
   return (
-    <Container padding={false} maxWidth="px-3 max-w-[1320px]">
+    <Container padding={false} maxWidth="px-3 max-w-[1320px] mx-auto">
       <div className={`w-full h-full grid grid-cols-12 flex justify-center rounded-3xl`}>
         <div className={`w-full max-w-full flex flex-col gap-2 col-span-12 py-3 `}>
           {/* <LargePostGridC title={title} largePost={heroCardPost} smallPosts={viewablePosts} /> */}
