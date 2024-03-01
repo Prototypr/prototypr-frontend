@@ -268,20 +268,20 @@ const ContentList = styled("ul", {
     layout: {
       one: {
         "@media only screen and (min-width: 600px)": {
-          width: 400,
+          width: 500,
           gridTemplateColumns: ".75fr 1fr",
         },
       },
       two: {
         "@media only screen and (min-width: 600px)": {
-          width: 400,
+          width: 600,
           gridAutoFlow: "column",
           gridTemplateRows: "repeat(3, 1fr)",
         },
       },
       three: {
         "@media only screen and (min-width: 600px)": {
-          width: 450,
+          width: 650,
           gridAutoFlow: "column",
           gridTemplateRows: "repeat(3, 1fr)",
         },
