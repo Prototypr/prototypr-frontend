@@ -98,7 +98,7 @@ export default function PostsPage({
             {/* <img src="/static/images/angleshape.svg" className="absolute -mb-[2%] w-full bottom-0 z-40 left-0"/> */}
 
             {/* <div className="z-20 relative"> */}
-            <div className="w-full p-6 pt-0 z-10 relative max-w-[1320px] px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
+            <div className="w-full p-6 pt-0 z-10 relative max-w-[1320px] px-6 md:px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
               <BreadCrumbs background={false}tagName={tagName}/>
                 <div className="inline-flex my-4">
                   {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}

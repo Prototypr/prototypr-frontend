@@ -172,7 +172,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
         <Container maxWidth="w-full bg-[#fefefe] relative z-10 pt-8">
           <div className="max-w-[1320px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 md:px-0 h-full">
           <div className="col-span-12 lg:col-span-12">
-            <div className={`${gallery?.length?'-mt-[125px] mt-8 mb-6 pl-3 md:pl-0 rounded-xl':''} `}>
+            <div className={`${gallery?.length?'-mt-[125px] mt-8 mb-6 md:pl-0 rounded-xl':''} `}>
               {/* <h3 class="text-lg font-bold">Gallery</h3> */}
               {/* {post?.attributes && (
                   <PopupGallery
@@ -184,7 +184,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                 )} */}
                  {gallery?.length ? <Carousel gallery={gallery}/>:''}
               </div>
-              <div className="max-w-[1100px] mx-auto px-6 w-full">
+              <div className="max-w-[1100px] mx-auto w-full">
                 <div className="max-w-[900px] mx-auto">
                   <h2 class="text-2xl font-medium mb-8">Overview</h2>
                     <div
@@ -247,7 +247,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
       <Container maxWidth=" w-full pb-24 bg-gradient-to-tr from-[#fefefe] to-sky-100/20 relative z-10">
       {/* <img src="/static/images/bendy9.svg" className="absolute top-0 -mt-[2.9%] z-10 left-0 w-full gm-added gm-observing gm-observing-cb" loading="lazy"/> */}
       {relatedPosts?.length ? 
-                <div className="z-30 relative max-w-[1320px] mx-auto px-6 md:px-3">
+                <div className="z-30 relative max-w-[1320px] mx-auto md:px-3">
                   <img src="/static/images/toolbox/squares2.svg" className="w-full h-[128%] absolute object-cover opacity-20"/>
                   <div classsName="flex flex-col px-3 z-30">
                   <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium font-inter max-w-md">
@@ -261,7 +261,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                :null }
         </Container>
       <Container maxWidth="w-full pb-16 bg-[#fefefe] relative z-10 pt-0">
-          <div className="max-w-[1320px] pt-0 -mt-8 mb-8 mx-auto px-3 h-full">
+          <div className="max-w-[1320px] pt-0 -mt-8 mb-8 mx-auto h-full">
         <div className="mb-20">
           <NewsletterSection padding={false} title="Get the best tools every week"/>
         </div>
