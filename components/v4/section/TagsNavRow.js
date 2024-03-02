@@ -56,7 +56,7 @@ const tags = [
 
 const TagsNavRow = ({currentPage}) => {
   return (
-    <Container padding={false} maxWidth={"max-w-[1320px] mx-auto mt-7 mb-2 md:px-3"}>
+    <Container padding={false} maxWidth={"max-w-[1320px] mx-auto mt-7 mb-2 px-6 md:px-3"}>
         {/* browse all */}
         <div className="flex flex-wrap">
         <GiantTag classes={`${currentPage=='topics'?'border border-gray-800':''} pl-2 mr-4 md:mr-8`} link={`/topics`}>

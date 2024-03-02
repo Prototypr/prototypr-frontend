@@ -170,7 +170,7 @@ const date = post.attributes.date
 
                     <div 
                     style={{"backgroundImage":"linear-gradient(rgba(32, 52, 144,0.16) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.16) 1px, rgba(247, 247, 247,0.16) 1px)","backgroundSize":"26px 26px"}}
-                    className="relative mx-auto w-[1301px] border-b border-b-indigo-500/20 border-r border-indigo-500/10 max-w-full z-10">
+                    className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1301px] border-b border-b-indigo-500/20 border-r border-indigo-500/10 max-w-full z-10 px-6 md:px-3">
                           {!post.currentLocaleAvailable && <NoticeTranslation />}
 
                         <div className="pt-4">
@@ -210,7 +210,7 @@ const date = post.attributes.date
                       </div>
 
                       </div>
-                      <div className="h-[300px] md:h-[550px] px-4 md:px-0 max-w-full w-[1020px] md:bg-blue-50 mx-auto z-30 -mt-[120px] md:-mt-[100px] relative rounded-2xl shadow-md outline outline-1 outline-gray-300/20 overflow-hidden">
+                      <div className="h-[300px] md:h-[550px] px-4 md:px-0 max-w-full w-[1020px] md:bg-blue-50 mx-auto z-30 -mt-[120px] md:-mt-[100px] relative md:rounded-2xl md:shadow-md md:outline md:outline-1 outline-gray-300/20 overflow-hidden">
                         <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[300px] md:h-[550px] w-[1020px] md:bg-gray-100 mx-auto z-30 rounded-2xl"/>
                         <Image key={image} width={1020} height={550} loader={gumletLoader} className="h-full z-20 relative h-[300px] md:h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto" src={image}/>
                       </div>
@@ -223,7 +223,7 @@ const date = post.attributes.date
             
                 <Link href={`/people/${author.slug}`}>
                   <div className="cursor-pointer block">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mr-1">
                         {avatar && (
                           <Image
                             key={authorName}
@@ -232,13 +232,13 @@ const date = post.attributes.date
                             }${avatar}`}
                             width={64}
                             height={64}
-                            className="rounded-full object-cover w-[64px] h-[64px] mr-4"
+                            className="rounded-full object-cover w-[44px] h-[44px] md:w-[64px] md:h-[64px] mr-2 md:mr-4"
                             alt={authorName}
                             loader={gumletLoader}
                           />
                         )}
                       <div className="flex flex-col justify-center">
-                        <div className="text-lg mb-0 pb-0 hover:underline font-medium">By {authorName}</div>
+                        <div className="text-base md:text-lg mb-0 pb-0 hover:underline font-medium">By {authorName}</div>
                         {/* {date && (
                           <div className="text-base text-black/80">
                             Published <Date dateString={date} />
@@ -285,7 +285,7 @@ const date = post.attributes.date
                     <div className="z-0 -mt-4 h-[60%] w-full bg-gradient-to-b from-blue-100/60 to-gray-100/20 absolute top-0 left-0"/>
 
                  </div>
-                <article className="z-10 relative px-3 md:px-0">
+                <article className="z-10 relative px-6 md:px-0">
                   {/* <Head> */}
                   {/* <title>
                   {post.attributes?.title} | Prototypr

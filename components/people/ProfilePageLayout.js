@@ -299,7 +299,7 @@ const ProfilePageLayout = ({
           </div>
 
           <div className="flex-1 z-20 -mt-[120px]">
-            <div className="max-w-[1320px] mx-auto mb-20 mt-6 lg:mt-0">
+            <div className="max-w-[1320px] mx-auto px-6 md:px-3 mb-20 mt-6 lg:mt-0">
             {unapproved?<div className="mt-[60px]">
             <div className="mt-3 flex w-full bg-white shadow p-4 px-4 rounded-xl text-black/90 max-w-3xl mx-auto">
             <div className="hidden md:block mr-4 my-auto">
