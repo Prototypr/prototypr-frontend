@@ -158,7 +158,7 @@ export default function Index({
           <div className="">
               <ToolLargeCardRow tools={toolsList.slice(5,9)} />
               <SectionDivider py="py-6" transparentLine={true}  />
-              <ToolIconCardRow withBackground={true} tools={toolsList.slice(5,15)} />       
+              <ToolIconCardRow withBackground={true} tools={[...toolsList.slice(0,5), ...toolsList.slice(10,15)]} />       
               
             
           {/* <div className="flex mt-10">
