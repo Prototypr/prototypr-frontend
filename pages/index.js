@@ -118,7 +118,7 @@ export default function Index({
            <Container maxWidth="max-w-[1320px] z-30 relative">
            <div className={`${user?.isLoggedIn?'pt-6':''} text-2xl text-black/90 font-semibold text-left mt-6 md:-mt-8 mb-5 px-1 w-fit rounded-full`}>{`Today's Toolbox`}</div>
           {/* <h2 className="text-3xl font-bold mb-[42px] text-center text-black/90">Tools to shape <span className="text-underline inline-block md:inline">every idea</span></h2> */}
-            <ToolBackgroundCardRow tools={toolsList.slice(5,9)} />
+            <ToolBackgroundCardRow tools={toolsList.slice(0,4)} />
           </Container>
           <div className='relative z-50 pt-3'>
             <TagsNavRow/>
@@ -156,7 +156,7 @@ export default function Index({
         <Container maxWidth="max-w-[1320px] z-30 relative">
           {/* <div className="p-6 md:p-6 bg-white relative overflow-hidden rounded-3xl shadow-md"> */}
           <div className="">
-              <ToolLargeCardRow tools={toolsList.slice(0,4)} />
+              <ToolLargeCardRow tools={toolsList.slice(5,9)} />
               <SectionDivider py="py-6" transparentLine={true}  />
               <ToolIconCardRow withBackground={true} tools={toolsList.slice(5,15)} />       
               
@@ -360,6 +360,7 @@ export async function getStaticProps({ preview = null, locale }) {
     shuffleArray(allPosts)
   }
   allTools = transformPostListOld(allTools.data, locale);
+
   // shuffleArray(allTools)
   // await generateCombinedRSS({ allPosts, allTools });
   // otherPosts = transformPostListOld(otherPosts.data, locale);
