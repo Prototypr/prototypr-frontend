@@ -124,7 +124,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                   </div>
                 </div>
 
-                <div className="flex mt-6 md:mt-0 md:flex-col md:justify-center">
+                <div className="flex flex-none mt-6 md:mt-0 md:flex-col md:justify-center">
                   <div className="flex justify-end">
                     <a
                       target={"_blank"}
@@ -185,7 +185,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                  {gallery?.length ? <Carousel gallery={gallery}/>:''}
               </div>
               <div className="max-w-[1100px] mx-auto w-full">
-                <div className="max-w-[900px] mx-auto">
+                <div className="max-w-[900px] blog-content toolbox-content mx-auto">
                   <h2 class="text-2xl font-medium mb-8">Overview</h2>
                     <div
                         style={{ color: "#222", fontSize: "18px", lineHeight: '33px' }}
@@ -211,9 +211,10 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                       : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
                   }
                 />:''}
+                  </div>
                  {post?.attributes?.author && (
                   <>
-                  <h1 tabIndex={0} className="mt-10 text-sm mb-3 font-semibold">{post?.attributes?.creator?'Contributors':'Posted by'}</h1> 
+                  <h1 tabIndex={0} className="mt-16 text-sm mb-3 font-semibold">{post?.attributes?.creator?'Contributors':'Posted by'}</h1> 
                             <div className=" mb-3 flex">
                               <AuthorCard
                                 title={post?.attributes?.creator?"Curator":null}
@@ -230,7 +231,6 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                             </div>
                   </>
                           )}
-                  </div>
                 </div>
           </div>
           <SectionDivider py="py-3" transparentLine={true}/>
