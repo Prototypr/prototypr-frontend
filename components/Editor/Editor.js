@@ -19,6 +19,7 @@ import useUser from "@/lib/iron-session/useUser";
 
 // import { saveAs } from "file-saver";
 import { PublishDialogButton } from "./PublishDialogButton";
+import Cite from "./CustomExtensions/Cite"
 
 import Iframe from "./CustomExtensions/Iframe/Iframe";
 import Gapcursor from "@tiptap/extension-gapcursor";
@@ -113,6 +114,7 @@ const Editor = ({
       BulletList,
       OrderedList,
       Dropcursor,
+      Cite,
       // Twitter,
       Video,
       Iframe,
