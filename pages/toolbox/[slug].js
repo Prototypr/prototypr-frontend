@@ -449,7 +449,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       popularTags:popularTags
       // morePosts: data?.morePosts.data,
     },
-    // revalidate: 20
+    revalidate: 40
   };
 }
 
