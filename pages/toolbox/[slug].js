@@ -61,6 +61,36 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
     
     coverImage = (tool?.legacyMedia?.logoNew || coverImage?.logoNew || tool.legacyMedia?.mediaItemUrl ||tool.legacyFeaturedImage?.mediaItemUrl)
 
+    useEffect(() => {
+      const s = document.createElement("script");
+      s.setAttribute("src", "https://platform.twitter.com/widgets.js");
+      s.setAttribute("id", "twitter-widget");
+      s.setAttribute("async", "true");
+  
+      if (!document.getElementById("twitter-widget")) {
+        document.head.appendChild(s);
+      }
+  
+      if (window.$crisp) {
+        // window.$crisp.push(["config", "position:reverse", true])
+        // window.$crisp.push(['do', 'chat:close']);
+        window.$crisp.push(["do", "chat:hide"]);
+      }
+    }, []);
+  
+    useEffect(()=>{
+      var tweets = document.getElementsByClassName('twitter-tweet')
+      
+      for(var x = 0;x<tweets.length;x++){
+        let id = tweets[x]?.getAttribute('tweetId')
+        tweets[x].outerHTML=`<div class="twitter-tweet" tweetId="${id}"></div>`
+        
+        window?.twttr?.widgets?.createTweet(id, tweets[x]);
+  
+      }
+  
+    },[post.attributes?.content])
+
   return (
     <>
       <div className="w-full mx-auto">
