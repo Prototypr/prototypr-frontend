@@ -14,6 +14,8 @@ import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import { useLoad } from "@/components/Sponsor/sponsorHooks";
 import Fallback from "@/components/atom/Fallback/Fallback";
 import Link from "next/link";
+import SelectSponsor from "@/components/Primitives/SelectSponsor";
+import { SponsorPackages } from "@/lib/constants/products";
 
 let axios = require("axios");
 
@@ -112,7 +114,7 @@ const EditForm = ({user, defaultCompany, postObject}) => {
    const formik = useFormik({
     validateOnChange:errores?true:false,
     initialValues: {
-      type: postObject?.type?postObject.type:"",
+      productId: postObject?.productId?postObject.productId:"",
       title:postObject?.title?postObject.title:'',
       description:postObject?.description?postObject.description:'',
       link:postObject?.link?postObject.link:'',
@@ -371,8 +373,13 @@ const EditForm = ({user, defaultCompany, postObject}) => {
             <FormContainer>
               <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
               <h1 className="text-xl font-medium mb-2">Add your sponsorship assets</h1>
-
-              <select
+            {postObject?.productId?  <SelectSponsor
+                items={SponsorPackages}
+                defaultValue={postObject?.productId} 
+                className="w-full text-lg bg-white h-[56px] rounded-xl py-3 border border-gray-300"
+                onChange={(val)=>{console.log(val);formik.setFieldValue('productId',val);}}>
+          </SelectSponsor>:null}
+              {/* <select
                   disabled={true}
                   id="type"
                   name="type"
@@ -386,7 +393,7 @@ const EditForm = ({user, defaultCompany, postObject}) => {
                       {i.Name}
                     </option>
                   ))}
-                </select>
+                </select> */}
                 <p class="text-xs -mt-3 text-gray-400">Start with a new sponsorship for <Link href="/sponsor/"><span className="text-gray-400 underline">other options</span></Link>.</p>
 
 

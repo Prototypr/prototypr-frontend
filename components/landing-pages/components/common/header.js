@@ -69,7 +69,7 @@ const Header = ({collapsed, hideLocaleSwitcher, editor, showWriteButton}) => {
                       {/* movil */}
                       <img
                         className="hidden h-8 w-auto lg:block"
-                        src={`/static/images/logo.svg`}
+                        src={`/static/images/prototypr_logo.svg`}
                         alt="Prototypr Logo"
                       />
                     </>

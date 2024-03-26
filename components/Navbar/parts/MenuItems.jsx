@@ -102,7 +102,10 @@ const CustomTrigger = ({ children, to, ...props }) => {
         color: isActive ? indigo.indigo9 : "",
       }}
     >
-      <StyledTrigger active={isActive.toString()}>{children}</StyledTrigger>
+      <StyledTrigger
+       onPointerMove={(event) => event.preventDefault()}
+       onPointerLeave={(event) => {event.preventDefault()}}
+      active={isActive.toString()}>{children}</StyledTrigger>
     </div>
   );
 };
@@ -441,11 +444,13 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
             </NavigationMenuItem>
             <NavigationMenuItem className="flex text-sm  xl:mr-2.5 flex-col justify-center">
               {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
-              <NavigationMenuTrigger href="articles">
+              <NavigationMenuTrigger 
+              href="articles">
                 {/* {title1} */}
                 Articles
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="normal-case">
+              <NavigationMenuContent  onPointerMove={(event) => event.preventDefault()}
+              onPointerLeave={(event) => {event.preventDefault()}} className="normal-case">
                 <ContentList layout="three">
                   {/* <ContentListItemCallout /> */}
                   <ContentListItem href="/topics" title={submenuTitle1}>
@@ -488,7 +493,10 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
               <NavigationMenuTrigger href="toolbox">
                 {title2}
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="normal-case">
+              <NavigationMenuContent 
+               onPointerMove={(event) => event.preventDefault()}
+               onPointerLeave={(event) => {event.preventDefault()}}
+              className="normal-case">
                 <ContentList layout="two">
                   <ContentListItem
                     title={submenu2Title1}
@@ -546,7 +554,10 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                   <DotsThree weight="bold" size="22" color="rgba(0,0,0,0.5)"/>
               </NavigationMenuTrigger>
                 </div>
-              <NavigationMenuContent showCaret={false} className="normal-case">
+              <NavigationMenuContent 
+               onPointerMove={(event) => event.preventDefault()}
+               onPointerLeave={(event) => {event.preventDefault()}}
+              showCaret={false} className="normal-case">
                 <ContentList layout="two">
                   <ContentListItem
                     title={'Publish with us'}

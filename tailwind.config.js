@@ -1,4 +1,5 @@
-const { blueDark } = require("@radix-ui/colors");
+const { blueDark,mauve, violet } = require("@radix-ui/colors");
+
 const colors = require("tailwindcss/colors");
 module.exports = {
   content: [
@@ -64,6 +65,7 @@ module.exports = {
         },
         colors: {
           // defaults to {}
+          blueDark,
           red: "#f00",
           "blue-darkblue": ["#1e3a8a", "#3b82f6"],
           "red-blue": ["#f00", "#00f"],

@@ -11,9 +11,10 @@ import { FormContainer } from "@/components/Jobs/FormStepper";
 import { FormInput } from "@/components/Jobs/FormInput";
 import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
-import { sponsorTypes} from "@/lib/constants";
 import Link from "next/link";
 
+import { SponsorPackages } from "@/lib/constants/products";
+import SelectSponsor from "@/components/Primitives/SelectSponsor";
 
 const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
 
@@ -107,40 +108,14 @@ const SponsorBookingPage = () =>{
     <>
     {/* only show job post form if user is logged in, so we can prefill it if they have a company */}
     {(defaultCompany!==null && typeof defaultCompany!==undefined) && 
-    <JobPostForm user={user} defaultCompany={defaultCompany}/>
+    <SponsorshipForm user={user} defaultCompany={defaultCompany}/>
     }
     </>
   )
 }
 
-const JobPostForm = ({user, defaultCompany}) => {
+const SponsorshipForm = ({user, defaultCompany}) => {
   const router = useRouter();
-  const [available, setAvailable] = useState(true)
-
-
-    
-  useEffect(()=>{
-      
-      const getProd = async()=>{
-          const response = await axios.get( "http://localhost:1337/strapi-stripe/getProduct/1" )
-
-
-          if(response.data.availability===false){
-            setAvailable(false)
-          }
-      }
-      
-      // used to be in the strapi script, but doing it directly on the front end
-      // const s = document.createElement("script");
-      // // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-      // s.setAttribute("src", "http://localhost:1337/plugins/strapi-stripe/static/stripe.js");
-      // s.setAttribute("async", "true");
-      // document.head.appendChild(s);
-      
-      getProd()
-   
-    },[])
-
 
   const FormSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -176,7 +151,7 @@ const JobPostForm = ({user, defaultCompany}) => {
   const formik = useFormik({
     validateOnChange:errores?true:false,
     initialValues: {
-      type: router?.query?.type=='banner'?"banner":router?.query?.type=='link'?'link':'banner',
+      productId: router?.query?.id,
       title: "",
       description: "",
       link: "",
@@ -191,6 +166,7 @@ const JobPostForm = ({user, defaultCompany}) => {
     },
     validationSchema: FormSchema,
     onSubmit: (values) => {
+
 
       async function submit() {
         let configUpload = {
@@ -314,7 +290,7 @@ const JobPostForm = ({user, defaultCompany}) => {
                * upload featuredImage
                */
                if(values?.featuredImage && uploadNewFeaturedImage ===true){     
-                const featuredImage = toast.loading("Uploading featued image...", {
+                const featuredImage = toast.loading("Uploading featured image...", {
                   duration: 3000,
                 });
                 const file = new File([values.featuredImage], `featuredImage_.png`, {
@@ -409,11 +385,36 @@ const JobPostForm = ({user, defaultCompany}) => {
     }
   }, [errors]);
 
+  const [selectedProduct,setSelectedProduct] = useState(()=>{
+    const id = formik.values.productId
+    let foundObject = SponsorPackages.newsletter.find(obj => obj.productId === id);
+
+    if(!foundObject){
+      foundObject = SponsorPackages.website.find(obj => obj.productId === id);
+    }
+    if(foundObject){
+      return foundObject
+    }else{
+      return null
+    }
+
+  })
+
+  useEffect(()=>{
+    const id = formik.values.productId
+    let foundObject = SponsorPackages.newsletter.find(obj => obj.productId === id);
+    if(!foundObject){
+      foundObject = SponsorPackages.website.find(obj => obj.productId === id);
+    }
+    setSelectedProduct(foundObject?foundObject:null)
+
+  },[formik.values])
+
   return (
     <Layout seo={seo} showWriteButton={false} background="#EFF2F8">
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
-        <div className="max-w-3xl w-full">
-        <div className="pt-5 text-md text-gray-700 pb-8">
+        <div className="max-w-[1320px] w-full">
+        <div className="text-md text-gray-700 pb-8">
               <Link href={`/`}>
                 <span className="hover:underline">Home</span>
               </Link>{" "}
@@ -426,185 +427,248 @@ const JobPostForm = ({user, defaultCompany}) => {
                 <span className="underline">Booking</span>
               </Link>
             </div>
-        <div className="my-2 mb-6">
-          <h1 className="text-2xl font-bold mx-auto mb-2">Book a sponsorship</h1>
-          <p className="text-gray-600">Sponsor our newsletter of ~25k subscribers.</p>
-        </div>
-        <div className="bg-white p-10 pt-12 rounded-xl">
-          <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if ((errors && isEmptyObject(errors)) || !errors) {
-              setDisabled(false);
-              formik.handleSubmit();
-            } else {
-              // setDisabled(true);
-              toast.error("Hmmmm, it seems like some of the fields are empty.");
-            }
-          }}
-        >
-            <FormContainer>
-              <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
-                <h1 className="text-xl font-medium mb-2">Add your sponsorship assets</h1>
-                
-                <select
-                  defaultValue={router?.query?.type}
-                  id="type"
-                  name="type"
-                  className="w-full -mt-2 bg-white border border-gray-300"
-                  onChange={formik.handleChange}
-                  aria-describedby="type_error"
-                  aria-live="assertive"
-                >
-                  {sponsorTypes.map((i, index) => (
-                    <option key={'type_'+index} value={i.value}>
-                      {i.Name}
-                    </option>
-                  ))}
-                </select>
-                
-                <FormInput id="title" label="Headline" error={formik.errors}>
-                  <input
-                    id="title"
-                    name="title"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.title}
-                    placeholder="Unicorn Platform"
-                    className={styles.input}
-                  />
-                  <p class="text-xs mt-1 text-gray-400">Use your product title if it's a tool.</p>
-                </FormInput>             
+        <div className="flex flex- w-full">
+          <div className="w-[720px]">
 
-            <div className="mt-3">
-                <FormInput id="link" label="Link" error={formik.errors}>
-                  <input
-                    id="link"
-                    name="link"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.link}
-                    placeholder="https://prototypr.io/web-monetization"
-                    className={styles.input}
-                  />
-                </FormInput>
-            </div>
-            <label className="text-md font-medium mt-4">
-                  Short Description
-                </label>
-                <p class="text-xs -mt-4 mb-2 text-gray-400">This will be used in the newsletter.</p>
+            <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if ((errors && isEmptyObject(errors)) || !errors) {
+                setDisabled(false);
+                formik.handleSubmit();
+              } else {
+                // setDisabled(true);
+                toast.error("Hmmmm, it seems like some of the fields are empty.");
+              }
+            }}
+          >
+            <div className="bg-white p-10 rounded-xl">
 
-                <MiniEditor 
-                height={110}
-                setDescription={(html)=>{
-                    formik.setFieldValue("description",html)
-                }}/>
-                {formik.errors.description && <span className="text-red-600 text-xs">{formik.errors.description}</span>}
-                <br/>
-                <hr/>
-                <h2 className="mt-3 text-xl mt-4">Image Assets</h2>
-              <label htmlFor="featuredImage" className="text-md font-medium">
-                Featured Image 
-              </label>
-              <ImageUploader 
-              id={1}
-              setFormValue={(blob) =>{
-                setUploadNewFeaturedImage(true)
-                formik.setFieldValue("featuredImage",blob)
-              }}/>
-              {formik.errors.featuredImage && <span className="text-red-600 text-xs">{formik.errors.featuredImage}</span>}
-             
-              <label htmlFor="banner" className="text-md font-medium">
-                Newsletter Banner 
-              </label>
-              <ImageUploader 
-              id={2}
-              w={600} h={300} setFormValue={(blob) =>{
-                setUploadNewBanner(true)
-                formik.setFieldValue("banner",blob)
-              }}/>
-              {formik.errors.banner && <span className="text-red-600 text-xs">{formik.errors.banner}</span>}
-
-
-            </div>
-            </FormContainer>
-            <div className="flex flex-col mx-auto max-w-2xl border-t my-8 border-gray-100 w-auto"/>
-
-            <FormContainer>
-              <div className="flex mx-auto flex-col gap-5 max-w-2xl border border-gray-300 rounded-lg p-5 w-auto mb-8">
-                <h1 className="text-xs text-gray-400 tracking-wide uppercase font-bold">Company Information</h1>
-                <FormInput
-                  id="companyName"
-                  label="What's your Company called?"
-                  error={formik.errors}
-                >
-                  <input
-                    id={3}
-                    name="companyName"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.companyName}
-                    placeholder="Unicorn Platform"
-                    className={styles.input}
-                  />
-                </FormInput>
-                <label htmlFor="companyLogo" className="text-md font-medium">
-                Your logo
-              </label>
-              <ImageUploader 
-              id={3}
-              companyLogoIsDefault={true} 
-              initialImage={defaultCompany?.logo} 
-              setFormValue={(blob) =>{
-                setUploadNewCompanyImage(true)
-                formik.setFieldValue("companyLogo",blob)
-              }}/>
-              {formik.errors.image && <span className="text-red-600 text-xs">{formik.errors.companyLogo}</span>}
-
-                <div className="mt-2">
-                  <FormInput
-                    id="companyWebsite"
-                    label="Company Website"
-                    error={formik.errors}
-                  >
+              <FormContainer>
+                <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
+                  <h1 className="text-2xl font-medium">Create Your Ad</h1>
+                  <p className="text-gray-500 mb-3 -mt-3">Add your product title, description, and media that will be used in the sponsor slots and banners.</p>
+                  
+                  
+                  <FormInput id="title" label="Product Name" error={formik.errors}>
                     <input
-                      id="companyWebsite"
-                      name="companyWebsite"
+                      id="title"
+                      name="title"
                       type="text"
                       onChange={formik.handleChange}
-                      value={formik.values.companyWebsite}
-                      placeholder="https://unicornplatform.com"
+                      value={formik.values.title}
+                      placeholder="Unicorn Platform"
+                      className={styles.input}
+                    />
+                    {/* <p class="text-sm mt-1 text-gray-500">The name of your product or an advert headline</p> */}
+                  </FormInput>             
+
+              <div className="mt-3">
+                  <FormInput id="link" label="Link" error={formik.errors}>
+                    <input
+                      id="link"
+                      name="link"
+                      type="text"
+                      onChange={formik.handleChange}
+                      value={formik.values.link}
+                      placeholder="https://prototypr.io/web-monetization"
                       className={styles.input}
                     />
                   </FormInput>
-                </div>
-                <div className="mt-2">
-                <FormInput
-                  id="contactEmail"
-                  label="Contact Email"
-                  error={formik.errors}
-                >
-                  <input
-                    id="contactEmail"
-                    name="contactEmail"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.contactEmail}
-                    placeholder="hello@unicorns.xyz"
-                    className={styles.input}
-                  />
-                </FormInput>
-                </div>
               </div>
-            </FormContainer>
-            <button
-              type="submit"
-              // disabled={errores}
-              className="w-full p-4 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
-            >
-             Save and Continue
-            </button>
-            </form>
+              <label className="text-md font-medium mt-4">
+                    Short Description
+                  </label>
+                  <p class="text-sm -mt-4 mb-2 text-gray-500">A brief description or tagline of 1-2 sentences to fit in the newsletter.</p>
+
+                  <MiniEditor 
+                  height={110}
+                  setDescription={(html)=>{
+                      formik.setFieldValue("description",html)
+                  }}/>
+                  {formik.errors.description && <span className="text-red-600 text-xs">{formik.errors.description}</span>}
+                  <br/>
+                  <hr/>
+                  <h2 className="mt-3 text-xl mt-4">Image Assets</h2>
+                <label htmlFor="featuredImage" className="text-md font-medium">
+                  Logo 
+                </label>
+                <p className="text-sm -mt-3">This image will be used to identify your product in the newsletter and on the website.</p>
+                <ImageUploader 
+                id={1}
+                setFormValue={(blob) =>{
+                  setUploadNewFeaturedImage(true)
+                  formik.setFieldValue("featuredImage",blob)
+                }}/>
+                {formik.errors.featuredImage && <span className="text-red-600 text-xs">{formik.errors.featuredImage}</span>}
+              
+                <label htmlFor="banner" className="text-md font-medium">
+                  Newsletter Banner 
+                </label>
+                <ImageUploader 
+                placeholderImageUrl={'https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/176d3d79cb9ad1acc057fb0eb3fe72d0.jpeg'}
+                id={2}
+                w={600} h={300} setFormValue={(blob) =>{
+                  setUploadNewBanner(true)
+                  formik.setFieldValue("banner",blob)
+                }}/>
+                {formik.errors.banner && <span className="text-red-600 text-xs">{formik.errors.banner}</span>}
+
+
+              </div>
+              </FormContainer>
+              </div>
+              <div className="bg-white p-10 rounded-xl my-8">
+
+              <FormContainer>
+                <div className="flex mx-auto flex-col gap-5 max-w-2xl mb-8">
+                <h1 className="text-2xl font-medium">Add your company info</h1>
+                  <p className="text-gray-500 mb-3 -mt-3">This will be used in the future for company dashboards where you can view and manage ads. If you're not a company, add your brand, project, or just yourself.</p>
+                  
+                  {/* <h1 className="text-xs text-gray-400 tracking-wide uppercase font-bold">Company Information</h1> */}
+                  <FormInput
+                    id="companyName"
+                    label="What's your company or brand called?"
+                    error={formik.errors}
+                  >
+                    <input
+                      id={3}
+                      name="companyName"
+                      type="text"
+                      onChange={formik.handleChange}
+                      value={formik.values.companyName}
+                      placeholder="Unicorn Platform"
+                      className={styles.input}
+                    />
+                  </FormInput>
+                  <label htmlFor="companyLogo" className="text-md font-medium">
+                  Your logo
+                </label>
+                <ImageUploader 
+                id={3}
+                companyLogoIsDefault={true} 
+                initialImage={defaultCompany?.logo} 
+                setFormValue={(blob) =>{
+                  setUploadNewCompanyImage(true)
+                  formik.setFieldValue("companyLogo",blob)
+                }}/>
+                {formik.errors.image && <span className="text-red-600 text-xs">{formik.errors.companyLogo}</span>}
+
+                  <div className="mt-2">
+                    <FormInput
+                      id="companyWebsite"
+                      label="Company Website"
+                      error={formik.errors}
+                    >
+                      <input
+                        id="companyWebsite"
+                        name="companyWebsite"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.companyWebsite}
+                        placeholder="https://unicornplatform.com"
+                        className={styles.input}
+                      />
+                    </FormInput>
+                  </div>
+                  <div className="mt-2">
+                  <FormInput
+                    id="contactEmail"
+                    label="Contact Email"
+                    error={formik.errors}
+                  >
+                    <input
+                      id="contactEmail"
+                      name="contactEmail"
+                      type="text"
+                      onChange={formik.handleChange}
+                      value={formik.values.contactEmail}
+                      placeholder="hello@unicorns.xyz"
+                      className={styles.input}
+                    />
+                  </FormInput>
+                  </div>
+                </div>
+              </FormContainer>
+              </div>
+              <button
+                type="submit"
+                // disabled={errores}
+                className="w-full p-4 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
+              >
+              Save and Continue
+              </button>
+              </form>
+          </div>
+        <div className="w-2/5 pl-6">
+        <div className="mb-3">
+            <h1 className="text-2xl font-bold mx-auto mb-2">Select Package</h1>
+            {/* <p className="text-gray-600">Sponsor our newsletter of ~25k subscribers.</p> */}
+          </div>
+        <div className="mb-6">
+          <SelectSponsor
+                items={SponsorPackages}
+                defaultValue={router?.query?.id} 
+                className="w-full text-lg bg-white h-[56px] rounded-xl py-3 border border-gray-300"
+                onChange={(val)=>{console.log(val);formik.setFieldValue('productId',val);}}>
+          </SelectSponsor>
+            {/* <select
+                defaultValue={router?.query?.id}
+                id="productId"
+                name="productId"
+                className="w-full text-lg bg-white h-[56px] rounded-xl py-3 border border-gray-300"
+                onChange={(val)=>{console.log(val);
+                  // formik.handleChange
+                }}
+                aria-describedby="type_error"
+                aria-live="assertive"
+              >
+                {SponsorPackages.newsletter.map((i, index) => (
+                  <option key={'type_'+index} value={i.productId}>
+                    {`${i.title} – ${i.price}`} 
+                  </option>
+                ))}
+                {SponsorPackages.website.map((i, index) => (
+                  <option key={'type_'+index+'_website'} value={i.productId}>
+                    {`${i.title} – ${i.price}`}
+                  </option>
+                ))}
+              </select> */}
+          </div>
+          <div className="bg-white h-auto flex flex-col justify-start items-start gap-4 w-full rounded-2xl p-4 border border-opacity-20">
+           {/* <h3 className="text-lg font-semibold">{selectedProduct.titleShort} Details</h3> */}
+           <h3 className="text-lg font-semibold">Package Details</h3>
+           <div>{selectedProduct.desp}</div>
+            <ul>
+
+           <h4 className="font-semibold mb-3">Placements</h4>
+           {selectedProduct?.screenshots?.map((item, index)=>{
+            return(
+                <li className="list-disc ml-4 " key={index}>
+                  <p className="mb-2">{item.description}:</p>
+                  <img className="rounded-xl mb-6" src={item?.image}/>
+                </li>
+            )
+          }) }
+          </ul>
+            <div
+              style={{
+                backgroundImage: `url("${selectedProduct.image}")`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+              }}
+              className="w-full h-[200px] bg-gray-100 rounded-lg relative overflow-hidden"
+            ></div>
+            <div className="flex flex-col gap-2">
+              <h3 className="text-base font-semibold">
+                {selectedProduct.title}
+              </h3>
+              <p className="text-[#7A7A7A] text-base">
+                {selectedProduct.desp}
+              </p>
+            </div>
+          </div>
+        </div>
         </div>
 
         </div>

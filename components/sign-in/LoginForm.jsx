@@ -48,7 +48,7 @@ return(
   <div className="w-[140px] bg-white rounded-2xl mb-16 ">
     <Link href="/">
           <img
-                src={`/static/images/logo.svg`}
+                src={`/static/images/prototypr_logo.svg`}
                 data-gumlet="false"
                 alt="Prototypr Logo"
               />
@@ -213,7 +213,7 @@ const ProviderForm = ({ isSignUp, title = "Sign up", inviteCode, toggleSignIn })
 
       <div className="w-[140px] bg-white rounded-2xl mb-10 ">
         <img
-          src={`/static/images/logo.svg`}
+          src={`/static/images/prototypr_logo.svg`}
           data-gumlet="false"
           alt="Prototypr Logo"
         />
