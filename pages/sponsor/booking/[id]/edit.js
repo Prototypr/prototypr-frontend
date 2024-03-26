@@ -250,7 +250,7 @@ const EditForm = ({user, defaultCompany, postObject}) => {
                * upload featuredImage
                */
                if(values?.featuredImage && uploadNewFeaturedImage ===true){     
-                const featuredImage = toast.loading("Uploading featued image...", {
+                const featuredImage = toast.loading("Uploading featured image...", {
                   duration: 3000,
                 });
                 const file = new File([values.featuredImage], `featuredImage_.png`, {
@@ -305,7 +305,9 @@ const EditForm = ({user, defaultCompany, postObject}) => {
                 duration: 3000,
               });
 
-              router.push(`/sponsor/booking/${response?.data.id}/payment`);
+              if(postObject.paid!==true){
+                router.push(`/sponsor/booking/${response?.data.id}/payment`);
+              }
               // formik.resetForm();
             }else{
               toast.error(response?.data?.message?response?.data?.message:'Something went wrong submitting your post!', {
@@ -375,6 +377,7 @@ const EditForm = ({user, defaultCompany, postObject}) => {
               <h1 className="text-xl font-medium mb-2">Add your sponsorship assets</h1>
             {postObject?.productId?  <SelectSponsor
                 items={SponsorPackages}
+                disabled={postObject?.paid==true}
                 defaultValue={postObject?.productId} 
                 className="w-full text-lg bg-white h-[56px] rounded-xl py-3 border border-gray-300"
                 onChange={(val)=>{console.log(val);formik.setFieldValue('productId',val);}}>

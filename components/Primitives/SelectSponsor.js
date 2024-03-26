@@ -3,13 +3,16 @@ import * as Select from '@radix-ui/react-select';
 import classnames from 'classnames';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 
-const SelectSponsor = ({defaultValue, onChange, items}) => (
+const SelectSponsor = ({defaultValue, onChange, items, disabled}) => {
+  
+  return(
   <Select.Root 
+  disabled={disabled}
   id="productId"
   name="productId"
   className="z-50" defaultValue={defaultValue} onValueChange={onChange}>
     <Select.Trigger
-      className="inline-flex text-lg items-center justify-between rounded-xl px-[15px] w-full leading-none h-[56px] gap-[5px] bg-white text-blue-900 font-medium shadow shadow-black/10 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-blue-9 outline-none"
+      className={`inline-flex text-lg items-center justify-between rounded-xl px-[15px] w-full leading-none h-[56px] gap-[5px] ${disabled?'bg-gray-100 text-gray-500 cursor-not-allowed':'bg-white text-blue-900'}  font-medium shadow shadow-black/10 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-blue-9 outline-none`}
       aria-label="Food"
     >
       <Select.Value placeholder="Select a fruit…" />
@@ -54,7 +57,7 @@ const SelectSponsor = ({defaultValue, onChange, items}) => (
       </Select.Content>
     </Select.Portal>
   </Select.Root>
-);
+);}
 
 const SelectItem = React.forwardRef(({ children, className, ...props }, forwardedRef) => {
   return (
