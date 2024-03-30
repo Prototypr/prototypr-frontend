@@ -77,44 +77,39 @@ export default async function handler(req, res) {
           let inviteeEmail = null
           await axios(configUpdateSponsoredPost)
           .then(async function (response) {
-            console.log('sponsored post update:')
-            console.log(response.data?.data?.attributes?.email)
             inviteeEmail=response.data?.data?.attributes?.email
           }).catch(function (error) {
             console.log('error')
             console.log(error)
           })
 
-          //create invite
-          let configGenerateInvite = {
-            method: "POST",
-            // url: `${process.env.NEXT_PUBLIC_API_URL}/api/users-permissions/users/updateSponsoredPost`,
-            url: `${process.env.NEXT_PUBLIC_API_URL}/api/invite-only/generate-invite-token`,
-            headers: {
-              // Authorization: `Bearer ${user?.jwt}`,
-              Authorization: `Bearer ${process.env.STRAPI_WRITEABLE_TOKEN}`,
-            },
-            data: {
-              quantity:1,
-              userId:2,
-              inviteeEmail:inviteeEmail,
-              sendEmail:true,
-              via:'payment'
-            },
-          };
-          await axios(configGenerateInvite)
-          .then(async function (response) {
-            console.log('configGenerateInvite update:')
-            const inviteToken = response?.data?.inviteToken
-            console.log('inviteToken',inviteToken)
-            console.log('now send email ')
-            
-          }).catch(function (error) {
-            console.log('error')
-            console.log(error)
-          })
-          
-          // await upsertSubscription({supabaseAdmin, body, companyId})
+          if(!companyId){
+            //create invite if the user has no company
+            let configGenerateInvite = {
+              method: "POST",
+              // url: `${process.env.NEXT_PUBLIC_API_URL}/api/users-permissions/users/updateSponsoredPost`,
+              url: `${process.env.NEXT_PUBLIC_API_URL}/api/invite-only/generate-invite-token`,
+              headers: {
+                // Authorization: `Bearer ${user?.jwt}`,
+                Authorization: `Bearer ${process.env.STRAPI_WRITEABLE_TOKEN}`,
+              },
+              data: {
+                quantity:1,
+                userId:2,
+                inviteeEmail:inviteeEmail,
+                sendEmail:true,
+                via:'payment'
+              },
+            };
+            await axios(configGenerateInvite)
+            .then(async function (response) {
+              const inviteToken = response?.data?.inviteToken
+              
+            }).catch(function (error) {
+              console.log('error')
+              console.log(error)
+            })
+          }          
         }
       }
 

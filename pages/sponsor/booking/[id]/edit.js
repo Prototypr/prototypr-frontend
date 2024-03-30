@@ -16,8 +16,6 @@ import SponsorPostForm from "@/components/Sponsor/Forms/SponsorPostForm";
 import AdOutline from "@/components/Sponsor/AdOutline";
 import updateSponserAsUser from "@/lib/axios/updateSponsor/updateSponsor";
 
-let axios = require("axios");
-
 function isEmptyObject(obj) {
   return (
     Object.getPrototypeOf(obj) === Object.prototype &&
