@@ -3,6 +3,7 @@
 import { lemonSqueezyApiInstance } from "@/lib/utils/lemonSqueezyAPI";
 import { userCheck } from '@/lib/account/userCheck'
 import { withIronSessionApiRoute } from 'iron-session/next'
+import axios from  'axios'
 
 async function purchaseProduct(req, res) {
   if (req.method !== "POST") {
@@ -12,19 +13,35 @@ async function purchaseProduct(req, res) {
   }
 
   try {
-    // user check - returns error if no user found
-    const {userId, user} = userCheck({req, res})
+
+    //get currentuser
+    const {userId, user} = userCheck({req, res, requireAuth:false})
 
     const reqData = req.body; // Directly use req.body for JSON payload
 
-    // console.log(user)
-    // console.log(reqData.companyId)
-    // console.log(reqData.productId)
-    // console.log(reqData.bookingDate)
+    console.log(reqData)
 
-    if (!reqData.companyId) {
-      return res.status(400).json({ message: "companyId is required" });
+    // let email = user?.email
+
+    if(userId){
+      if (!reqData.companyId) {
+        return res.status(400).json({ message: "companyId is required" });
+      }
+    }else{
+      //if no user, fetch the linked email as admin
+      //don't need to fetch linked email, just saving sponsoredPostId id will do
+      // let sponsoredPostEndpoint = {
+      //   method: "get",
+      //   url: `${process.env.NEXT_PUBLIC_API_URL}/api/sponsored-post/${reqData?.postObject?.id}`,
+      //   headers: {
+      //     Authorization: `Bearer ${process.env.STRAPI_READABLE_TOKEN}`,
+      //   },
+      // };
+
+      // let sponsoredPost =  await axios(sponsoredPostEndpoint)
+      // console.log(sponsoredPost)
     }
+
 
     if (!reqData.productId) {
       return res.status(400).json({ message: "productId is required" });
@@ -62,7 +79,8 @@ async function purchaseProduct(req, res) {
             custom: {
               company_id: reqData.companyId.toString(),
               sponsoredPostId:reqData.postObject.id.toString(),
-              bookingDate:JSON.stringify(reqData.bookingDate)
+              bookingDate:JSON.stringify(reqData.bookingDate),
+              // email:email
             },
           },
         },

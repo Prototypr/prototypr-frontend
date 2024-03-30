@@ -60,9 +60,8 @@ export default async function handler(req, res) {
             paid:true
           }
 
-          console.log(postData)
           //update product http://localhost:1337/api/restaurants/1
-          let configUpload = {
+          let configUpdateSponsoredPost = {
             method: "PUT",
             // url: `${process.env.NEXT_PUBLIC_API_URL}/api/users-permissions/users/updateSponsoredPost`,
             url: `${process.env.NEXT_PUBLIC_API_URL}/api/sponsored-posts/${sponsoredPostId}`,
@@ -74,17 +73,47 @@ export default async function handler(req, res) {
               data:{...postData},
             },
           };
-
-          await axios(configUpload)
+          
+          let inviteeEmail = null
+          await axios(configUpdateSponsoredPost)
           .then(async function (response) {
-            if(response?.data?.posted==true){
-              console.log('done')
-            }
+            console.log('sponsored post update:')
+            console.log(response.data?.data?.attributes?.email)
+            inviteeEmail=response.data?.data?.attributes?.email
           }).catch(function (error) {
             console.log('error')
             console.log(error)
           })
 
+          //create invite
+          let configGenerateInvite = {
+            method: "POST",
+            // url: `${process.env.NEXT_PUBLIC_API_URL}/api/users-permissions/users/updateSponsoredPost`,
+            url: `${process.env.NEXT_PUBLIC_API_URL}/api/invite-only/generate-invite-token`,
+            headers: {
+              // Authorization: `Bearer ${user?.jwt}`,
+              Authorization: `Bearer ${process.env.STRAPI_WRITEABLE_TOKEN}`,
+            },
+            data: {
+              quantity:1,
+              userId:2,
+              inviteeEmail:inviteeEmail,
+              sendEmail:true,
+              via:'payment'
+            },
+          };
+          await axios(configGenerateInvite)
+          .then(async function (response) {
+            console.log('configGenerateInvite update:')
+            const inviteToken = response?.data?.inviteToken
+            console.log('inviteToken',inviteToken)
+            console.log('now send email ')
+            
+          }).catch(function (error) {
+            console.log('error')
+            console.log(error)
+          })
+          
           // await upsertSubscription({supabaseAdmin, body, companyId})
         }
       }

@@ -13,12 +13,14 @@ export default function Layout({
   padding,
   seo,
   showWriteButton,
+  showSponsorButton,
+  showJobsButton,
   showFooter
 }) {
   return (
     <>
       <Meta seo={seo} />
-      <EditorNav padding={padding} showWriteButton={showWriteButton} activeNav={activeNav}/>
+      <EditorNav padding={padding} showJobsButton={showJobsButton} showSponsorButton={showSponsorButton} showWriteButton={showWriteButton} activeNav={activeNav}/>
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#F3F4F6" }}

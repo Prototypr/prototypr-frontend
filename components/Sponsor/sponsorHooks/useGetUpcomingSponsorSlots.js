@@ -14,7 +14,6 @@ const useGetUpcomingSponsorSlots = ({user, productId}) => {
   }, []);
 
   const refetch = async () => {
-      console.log("getting bookings");
       //load data
       await getBookings();
       setLoading(false);
@@ -25,7 +24,6 @@ const useGetUpcomingSponsorSlots = ({user, productId}) => {
 
     try {
       const allSponsorSlots = await getUpcomingSponsorSlots({productId});     
-      console.log(allSponsorSlots)   
       setSlots(allSponsorSlots)
 
       setLoading(false);

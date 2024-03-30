@@ -44,7 +44,7 @@ const SponsorCard = ({ post, refetch, user }) => {
     };
   
     return (
-      <div className="flex flex-col justify-between p-6 h-full rounded-lg border border-black border-opacity-5 hover:border-opacity-10 cursor-default bg-white hover:transition duration-300 ease-in-out">
+      <div className="flex flex-col justify-between p-6 h-full rounded-lg border border-gray-300 cursor-default bg-white hover:transition duration-300 ease-in-out">
         <div className="flex flex-col grid gap-2">
           {/* {(post.status!=='publish' && post.status!=='draft') &&
           <div>
@@ -64,6 +64,9 @@ const SponsorCard = ({ post, refetch, user }) => {
             <h3 className="text-lg font-medium max-w-md font-inter">
               {post.title}
             </h3>
+            <p className="text-sm text-gray-500">
+            {post.paid?'Paid':'Draft'}
+            </p>
             {/* <p className="text-sm text-gray-500 mb-10">
               {format(new Date(post.date), "LLLL d, yyyy")}
             </p> */}

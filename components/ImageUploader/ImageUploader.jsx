@@ -38,7 +38,6 @@ const ImageUploader = ({w, h,setFormValue, initialImage,companyLogoIsDefault=fal
         defaultImage = "https://req.prototypr.io/" + initialImage;
       }
       if (!defaultImage) {
-        console.log(placeholderImageUrl)
         defaultImage =
         "https://req.prototypr.io/" +(placeholderImageUrl?placeholderImageUrl:"https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png");
       }

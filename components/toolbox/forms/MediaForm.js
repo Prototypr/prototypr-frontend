@@ -242,7 +242,7 @@ const [disabled, setDisabled] = useState(false);
                     setImageBlob(blob)
                     formik.setFieldValue("image",blob)
                 }}/> */}
-                {formik.errors.logo && <span className="text-red-600 text-xs">{formik.errors.logo}</span>}
+                {formik.errors.logo && <span className="text-red-600 text-sm">{formik.errors.logo}</span>}
 
                 <label htmlFor="image" className="text-md mt-10 font-medium">
                     Gallery
@@ -263,7 +263,7 @@ const [disabled, setDisabled] = useState(false);
                     formik.setFieldValue("gallery",'')
                     }
                 }}/>
-                {formik.errors.gallery && <span className="text-red-600 text-xs">{formik.errors.gallery}</span>}
+                {formik.errors.gallery && <span className="text-red-600 text-sm">{formik.errors.gallery}</span>}
             </div>
             <div className="flex flex-col mx-auto mt-5 max-w-2xl w-auto"/>
 

@@ -12,10 +12,10 @@ const SelectSponsor = ({defaultValue, onChange, items, disabled}) => {
   name="productId"
   className="z-50" defaultValue={defaultValue} onValueChange={onChange}>
     <Select.Trigger
-      className={`inline-flex text-lg items-center justify-between rounded-xl px-[15px] w-full leading-none h-[56px] gap-[5px] ${disabled?'bg-gray-100 text-gray-500 cursor-not-allowed':'bg-white text-blue-900'}  font-medium shadow shadow-black/10 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-blue-9 outline-none`}
+      className={`inline-flex text-base items-center justify-between border border-gray-300 rounded-xl px-4 h-[44px] w-full leading-none gap-[5px] ${disabled?'bg-gray-100 text-gray-500 cursor-not-allowed':'bg-white text-gray-800'}  font-base shadow-sm hover:bg-mauve3 focus:shadow-black data-[placeholder]:text-blue-9 outline-none`}
       aria-label="Food"
     >
-      <Select.Value placeholder="Select a fruit…" />
+      <Select.Value placeholder="Select a package..." />
       <Select.Icon className="text-blue-11">
         <ChevronDownIcon />
       </Select.Icon>

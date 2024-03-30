@@ -43,12 +43,12 @@ const ListSponsors = ({postStatus}) => {
             {!loading && !posts?.length && (
               <EmptyState type="sponsor" draft={false} />
             )}
-             <NewPagination
+             {total>1 && <NewPagination
                 total={total}
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageNumChange={changePage}
-              />
+              />}
       </div>
   </>
   );

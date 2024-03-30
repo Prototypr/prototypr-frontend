@@ -8,12 +8,12 @@ const PurchaseButton = ({ selectedSlots,postObject, user,productId,companyId,lsP
 
   const buyProduct = async () => {
     try {
-      if (!user?.isLoggedIn) {
-        router.push("/signup");
-        return false;
-      }
+      //anyone can buy
+      // if (!user?.isLoggedIn) {
+      //   router.push("/signup");
+      //   return false;
+      // }
 
-      console.log(selectedSlots)
       let formattedDates = []
       if(selectedSlots?.length){
         for(var x=0;x<selectedSlots.length;x++){

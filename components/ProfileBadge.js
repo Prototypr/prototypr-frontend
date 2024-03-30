@@ -342,7 +342,7 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
                     router.push(`/dashboard/partner`);
                   }}
                 >
-                  💙 Partners
+                  Business hub
                 </DropdownMenuItem>
               </>
             ):''}

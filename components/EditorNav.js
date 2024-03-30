@@ -12,8 +12,17 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({ editorInstance,showWriteButton,activeNav, editorButtons, isEditor, postStatus, padding }) {
-
+export default function EditorNav({
+  editorInstance,
+  showWriteButton,
+  showSponsorButton,
+  showJobsButton,
+  activeNav,
+  editorButtons,
+  isEditor,
+  postStatus,
+  padding,
+}) {
   const { user, isLoading } = useUser({
     redirectIfFound: false,
   });
@@ -45,48 +54,47 @@ export default function EditorNav({ editorInstance,showWriteButton,activeNav, ed
     }
   }, [user?.email]);
 
-
-  const [statusComponent, setStatusComponent] = useState(null)
-  useEffect(()=>{
-
-    if(postStatus=='draft'){
+  const [statusComponent, setStatusComponent] = useState(null);
+  useEffect(() => {
+    if (postStatus == "draft") {
       setStatusComponent(
         <div className="p-2 py-0.5 text-xs bg-gray-300 bg-opacity-20 text-gray-500 rounded-full border border-gray-300">
           Draft
         </div>
-        )
+      );
     }
-    if(postStatus=='pending'){
+    if (postStatus == "pending") {
       setStatusComponent(
         <div className="p-2 py-0.5 text-xs bg-yellow-300 bg-opacity-20 text-yellow-600 rounded-full border border-yellow-300">
           Pending Review
         </div>
-        )
+      );
     }
-    if(postStatus=='publish'){
+    if (postStatus == "publish") {
       setStatusComponent(
         <div className="p-2 py-0.5 text-xs bg-green-400 bg-opacity-20 text-green-700 rounded-full border border-green-500">
           Published
         </div>
-        )
+      );
     }
-
-  },[postStatus])
+  }, [postStatus]);
 
   return (
     <div
       id="main-nav"
       as="nav"
-      className={`bg-white z-40 fixed w-full top-0 border-b border-1 shadow-sm border-gray-100`}
-      style={{
-        // background: `rgba(255, 255, 255, ${0.9})`,
-        // zIndex:99
-      }}
+      className={`bg-white z-40 fixed w-full top-0 border-b border-1 border-gray-200/70`}
+      style={
+        {
+          // background: `rgba(255, 255, 255, ${0.9})`,
+          // zIndex:99
+        }
+      }
     >
       <>
         <div
           className="mx-auto text-sm px-2 sm:px-6 lg:px-8"
-          style={{ maxWidth: padding===false?'':"1200px" }}
+          style={{ maxWidth: padding === false ? "" : "1200px" }}
         >
           <div
             className={` transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-16`}
@@ -109,7 +117,8 @@ export default function EditorNav({ editorInstance,showWriteButton,activeNav, ed
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <Link href="/" as="/">
                 <div
-                  className={`flex-shrink-0 flex items-center cursor-pointer transition transition-all duration-300 ease-in-out`}>
+                  className={`flex-shrink-0 flex items-center cursor-pointer transition transition-all duration-300 ease-in-out`}
+                >
                   <img
                     className="lg:block h-8 w-auto"
                     data-gumlet="false"
@@ -118,25 +127,27 @@ export default function EditorNav({ editorInstance,showWriteButton,activeNav, ed
                   />
                 </div>
               </Link>
-              <div className="my-auto ml-4">
-              <span className="p-2 py-0.5 text-xs bg-blue-400 bg-opacity-20 text-blue-600 rounded-full border border-blue-200">
+              <div className="my-auto ml-2">
+                <span className="text-lg font-semibold text-gray-700">
+                  Business hub
+                </span>
+                {/* <span className="p-2 py-0.5 text-xs bg-blue-400 bg-opacity-20 text-blue-600 rounded-full border border-blue-200">
                 Beta
-              </span>
+              </span> */}
               </div>
-              <div className="my-auto ml-3">
-              {statusComponent}
-              </div>
+              <div className="my-auto ml-3">{statusComponent}</div>
               {/* Undo/redo */}
-              {isEditor && <UndoRedoButtons editor={editorInstance}/>}
+              {isEditor && <UndoRedoButtons editor={editorInstance} />}
             </div>
             <div
               className={`hidden sm:block sm:ml-6 transition transition-all duration-500 ease-in-out`}
             >
               <div className="flex ">
-
                 {editorButtons}
                 <NavigationMenuDemo
                   showWriteButton={showWriteButton}
+                  showSponsorButton={showSponsorButton}
+                  showJobsButton={showJobsButton}
                   hideLocaleSwitcher={true}
                   user={user}
                   userLoading={isLoading}

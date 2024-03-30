@@ -12,10 +12,12 @@ import Spinner from "@/components/atom/Spinner/Spinner";
 // import { currentWeekNumber } from "@/components/Sponsor/lib/weekNumber";
 // import { cloneDeep } from "lodash";
 import Link from "next/link";
-import BookingCalendar from "@/components/Sponsor/BookingCalendar";
+// import BookingCalendar from "@/components/Sponsor/BookingCalendar";
+import Button from "@/components/Primitives/Button";
 
 export default function SponsorPaymentPage({}) {
-  const [productId, setProductId] = useState(null);
+  // const [productId, setProductId] = useState(null);
+  const [paymentId, setPaymentId] = useState(null);
   const [companyId, setCompanyId] = useState(null);
 
   const { user, mutateUser } = useUser({
@@ -23,11 +25,12 @@ export default function SponsorPaymentPage({}) {
     redirectIfFound: false,
   });
 
+
   const { loading, content, postId, title, isOwner, postObject } =
     useLoad(user);
 
   useEffect(() => {
-    setProductId(postObject?.productId);
+    setPaymentId(postObject?.paymentId);
     setCompanyId(postObject?.company);
   }, [postObject]);
   
@@ -38,43 +41,45 @@ export default function SponsorPaymentPage({}) {
 
     const getLsProduct= async() =>{
 
-      const response = await axios.post("/api/lemonsqueezy/getProduct", {
-        productId: productId,
+      const response = await axios.post("/api/lemonsqueezy/retrieveOrder", {
+        orderId: paymentId,
       });
   
       setLsProduct(response.data);
     }
 
-    if(productId){
+    if(paymentId){
       getLsProduct()
     }
-  },[productId])
+  },[paymentId])
 
+  console.log(lsProduct)
+  console.log(postObject)
   // const [selectedSlots, setSelectedSlots] = useState(null);
   return (
     <Layout
       seo={{
-        title: "Prototypr Toolbox - new design, UX and coding tools.",
+        title: "Payment complete.",
         description:
-          "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
+          "Thanks for supporting Prototypr",
         //   image: "",
         // canonical: "https://prototypr.io/toolbox",
         // url: "https://prototypr.io/toolbox",
       }}
-      activeNav={"toolbox"}
+      activeNav={""}
     >
-      {loading ? (
+      {loading || !lsProduct ? (
         <div className="relative w-full h-full pt-10 flex">
           <div className="my-auto mx-auto">
             <Spinner />
           </div>
         </div>
-      ) : !postObject?.active ? (
+      ) : lsProduct?.status=='paid' ? (
         <>
         {postObject?.featuredImage?
           <div className="fixed top-[88px] z-20 left-0 flex mb-6 border -mt-6 border-gray-300/60 bg-white p-2 w-full">
             <div className="max-w-[1160px] mx-auto md:px-3 w-full flex">
-              <img src={postObject.featuredImage?.data?.attributes?.url?postObject.featuredImage?.data?.attributes?.url:postObject.featuredImage} className="my-auto rounded-xl mr-2 w-[44px] h-[44px] object-cover"/>
+              <img src={postObject.featuredImage?.data?.attributes?.url} className="my-auto rounded-xl mr-2 w-[44px] h-[44px] object-cover"/>
               <div className="flex flex-col justify-center">
                 <h1 className="pr-2 font-semibold">{postObject?.title}</h1>
                 <div className="pr-2 text-gray-500" dangerouslySetInnerHTML={{__html:postObject?.description}}></div>
@@ -85,24 +90,21 @@ export default function SponsorPaymentPage({}) {
         <Container>
           <div className="px-4">
             <div className=" pt-20 mb-6">
-              <h1 className="text-3xl mb-3 font-bold">Book a slot</h1>
+              <h1 className="text-3xl mb-3 font-bold">Thanks for supporting Prototypr</h1>
+              
+              {!postObject?.company?.data?.id?
+              // user has not created an account (no company assigned)
+              <>
               <p>
-                Choose week(s) and upon payment, your sponsored post will
-                be reviewed by our team and scheduled.{" "}
+                Your payment was successful. You can manage your sponsored post with a Prototypr account.  
               </p>
+              <p>
+              Check your inbox for an invitation. Don't see it? Resend it here:
+              </p>
+              <Button className="mt-6 rounded-full">Resend invitation</Button>
+              </>:
+              <p>Log in to manage your ads.</p>}
             </div>
-          
-           {productId? <BookingCalendar lsProduct={lsProduct} productId={productId} companyId={companyId} user={user} postObject={postObject} />:null}
-           {user?.isLoggedIn? <p className="mt-3 max-w-2xl text-gray-500">
-              You can come back and pay later, your sponsored post details are
-              available on your{" "}
-              <Link href="/dashboard/partner">
-                <span className="text-blue-500">partners dashboard</span>
-              </Link>
-              .{" "}
-            </p>: <p className="mt-3 max-w-2xl text-gray-500">
-              You can come back to this url and pay later.
-            </p>}
           </div>
         </Container>
         </>

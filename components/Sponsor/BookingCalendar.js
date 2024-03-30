@@ -23,7 +23,6 @@ const BookingCalendar = ({
   const [selectedRanges, setSelectedRanges] = useState([]);
   const {slots, loading:slotsLoading} = useGetUpcomingSponsorSlots({productId})
 
-  console.log(slots)
    // Convert slots to Date format for easier comparison
    const [unavailableWeeks, setUnavailableWeeks] = useState([]);
 
@@ -53,7 +52,6 @@ const BookingCalendar = ({
     }
   }, [slots]);
 
-   console.log(unavailableWeeks)
    
   // Function to check if a date is in an available week
   const isDateInAvailableWeek = date => {

@@ -229,7 +229,7 @@ const [disabled, setDisabled] = useState(false);
                       setDescription(html)
                   }}/>
               </div>
-              {formik.errors.description && <span className="text-red-600 text-xs">{formik.errors.description}</span>}
+              {formik.errors.description && <span className="text-red-600 text-sm">{formik.errors.description}</span>}
 
               <FormInput id="code" label="Coupon code (optional)" error={formik.errors}>
                   <input
