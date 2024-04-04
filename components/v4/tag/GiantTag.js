@@ -12,9 +12,9 @@ const GiantTag = ({ link, children, index, active, classes }) => {
   return (
     <Link href={`${link ? link : "/"}`}>
       <div
-        className={`inline-block text-base px-4 py-2 cursor-pointer ${
-          active ? "bg-blue-600 text-white" : "bg-blue-100/60"
-        } rounded-full mr-3 mb-3 text-blue-900 text-[15px] font-medium outline outline-1 outline-blue-200/80 ${classes}`}
+        className={`inline-block text-base px-3 py-1 cursor-pointer ${
+          active ? "bg-blue-600 text-white" : "bg-[#d8e9ff]"
+        } rounded-full mr-3 mb-3 text-black/80 text-[15px] font-medium ${classes}`}
       >
         {children}
       </div>

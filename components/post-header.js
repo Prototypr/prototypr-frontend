@@ -41,7 +41,7 @@ export default function PostHeader({
   <div className="container rounded-xl w-full max-w-6xl mx-auto bg-white bg-cover mt-10 h-[280px] md:h-[400px]" style={{backgroundImage:`linear-gradient(to bottom, rgba(255,255,255,0.15),rgba(0,0,0,0.2), rgba(0,0,0,0.34)),url('${coverImage}')`}}></div>
     </>
     }
-    <div className="max-w-[60rem] w-full mx-auto">
+    <div className="w-[1020px] max-w-full mx-auto">
       {template!==3 && <PostTitle>{title}</PostTitle>}
 
       {/* <div className="w-full flex justify-center">

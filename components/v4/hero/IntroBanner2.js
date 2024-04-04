@@ -27,10 +27,10 @@ const IntroBanner = ({ tools, sponsor }) => {
   };
 
   return (
-    <Container padding={false} maxWidth="relative grid z-0">
+    <Container padding={false} maxWidth="relative grid z-0 px-3 md:px-3">
       
       {/* <div className="mt-[70px] max-w-[1320px] relative mx-auto w-full rounded-3xl justify-stretch bg-[#CCE6FF] text-gray-800"> */}
-      <div className="mt-[70px] max-w-[1320px] relative mx-auto w-full rounded-2xl justify-stretch  bg-[#99cdff]/70 border border-gray-300/20 shadow-sm text-gray-800">
+      <div className="mt-[70px] max-w-[1300px] relative mx-auto w-full rounded-2xl justify-stretch  bg-[#99cdff]/70 border border-gray-300/20 shadow-sm text-gray-800">
         <div className="max-w-[1320px] mx-auto w-full rounded-2xl w-full opacity-30 bg-gradient-to-r from-blue-200  via-blue-200 via-blue-300/10 to-indigo-900 absolute top-0 left-0 w-full h-full"/>
          {/* <svg className="bg-gradient-to-br opacity-60 from-blue-200  via-blue-400/20 via-pink-300/20 to-blue-800/50" style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} xmlns='http://www.w3.org/2000/svg'>
           <filter id='noiseFilter'>
@@ -47,7 +47,7 @@ const IntroBanner = ({ tools, sponsor }) => {
         {/* <div className="hidden lg:block absolute z-10 opacity-100 w-[800px] h-[500px] -mr-[20%] bg-gradient-to-r to-[#d1e8ff] from-transparent via-[#d1e8ff]/10 z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover"></div> */}
           <img className="absolute opacity-50 w-full h-full  z-10 h-full top-0 right-0 cursor-collab -mr-[225px] sm:-mr-[40%] 2md:-mr-[20%] xl:-mr-[50%] 2xl:-mr-[60%] object-cover" 
           src="/static/images/toolbox/toolbox-bg-2.svg"  style={{ zIndex:1}}/>
-        <div className="md:col-span-6 relative col-span-12 font-inter relative flex flex-col items-start justify-center gap-8 p-8">
+        <div className="md:col-span-6 relative col-span-12 font-inter relative flex flex-col items-start justify-center gap-8 p-3 md:p-8">
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
           className="pointer-events-auto md:pr-0 rounded-3xl z-10" style={{width:'fit-content'}}>

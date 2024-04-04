@@ -174,23 +174,10 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                   >
                     {!post.currentLocaleAvailable && <NoticeTranslation />}
 
-                    <div className="pt-4 max-w-[60rem] mx-auto w-full">
-                      <div className=" flex mb-3 justify-start flex-wrap">
-                        {tags.map((tag, index) => {
-                          return (
-                            <Link
-                              href={`/toolbox/${tag.attributes.slug}/page/1`}
-                              className="flex"
-                            >
-                              <div
-                                className={`inline-block capitalize text-base px-3 py-1 cursor-pointer bg-blue-100/60 rounded-full ${index == tags?.length - 1 ? "" : "mr-3"} mb-3 text-blue-900 text-[15px] font-base outline outline-1 outline-blue-200 flex flex-col justify-center`}
-                              >
-                                {tag.attributes.name}
-                              </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
+                    <div className="pt-4 w-[1020px] max-w-full mx-auto w-full">
+                      <p className="text-left md:px-1 mt-3 md:mt-0 mb-3 text-base text-black/80">
+                        Published <Date dateString={post.attributes.date} />
+                      </p>
                     </div>
                     <div className="pb-[112px]">
                       <PostHeader
@@ -208,60 +195,43 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                         author={post.attributes?.author?.data?.attributes}
                         template={post.attributes?.template}
                       />
-                      <p className="max-w-[60rem] w-full mx-auto text-left md:px-1 text-lg my-3 font-semibold text-black/70">
-                        Published <Date dateString={post.attributes.date} />
-                      </p>
-                    </div>
-                  </div>
-                  <div className="h-[300px] md:h-[550px] px-4 md:px-0 max-w-full w-[1020px] md:bg-blue-50 mx-auto z-30 -mt-[120px] md:-mt-[100px] relative md:rounded-2xl md:shadow-md md:outline md:outline-1 outline-gray-300/20 overflow-hidden">
-                    <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[300px] md:h-[550px] w-[1020px] md:bg-gray-100 mx-auto z-30 rounded-2xl" />
-                    <Image
-                      key={image}
-                      width={1020}
-                      height={550}
-                      loader={gumletLoader}
-                      className="h-full z-20 relative h-[300px] md:h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto"
-                      src={image}
-                    />
-                  </div>
-
-                  <div className="w-full flex justify-start max-w-[60rem] mx-auto mt-8 px-3 md:px-0">
-                    <div className="flex flex-col">
-                      {author ? (
-                        <div className="">
-                          <div className="flex justify-between">
-                            <div className="max-w-2xl">
-                              <Link href={`/people/${author.slug}`}>
-                                <div className="cursor-pointer block">
-                                  <div className="flex items-center justify-between mr-1">
-                                    {avatar && (
-                                      <Image
-                                        key={authorName}
-                                        src={`${
-                                          avatar.startsWith("/")
-                                            ? process.env
-                                                .NEXT_PUBLIC_STRAPI_API_URL
-                                            : ""
-                                        }${avatar}`}
-                                        width={64}
-                                        height={64}
-                                        className="rounded-full object-cover w-[44px] h-[44px] md:w-[64px] md:h-[64px] mr-2 md:mr-4"
-                                        alt={authorName}
-                                        loader={gumletLoader}
-                                      />
-                                    )}
-                                    <div className="flex flex-col justify-center">
-                                      <div className="text-base md:text-lg mb-0 pb-0 hover:underline font-medium">
-                                        By {authorName}
-                                      </div>
-                                      {/* {date && (
+                      <div className="w-full flex justify-start w-[1020px] max-w-full mx-auto mt-4 mb-6 md:mb-1 px-0">
+                        <div className="flex flex-col md:flex-row justify-between w-full">
+                          {author ? (
+                            <div className="mb-4 md:mb-0">
+                              <div className="flex justify-between">
+                                <div className="max-w-2xl">
+                                  <Link href={`/people/${author.slug}`}>
+                                    <div className="cursor-pointer block">
+                                      <div className="flex items-center justify-between mr-1">
+                                        {avatar && (
+                                          <Image
+                                            key={authorName}
+                                            src={`${
+                                              avatar.startsWith("/")
+                                                ? process.env
+                                                    .NEXT_PUBLIC_STRAPI_API_URL
+                                                : ""
+                                            }${avatar}`}
+                                            width={54}
+                                            height={54}
+                                            className="rounded-full object-cover w-[44px] h-[44px] md:w-[54px] md:h-[54px] mr-2 md:mr-3"
+                                            alt={authorName}
+                                            loader={gumletLoader}
+                                          />
+                                        )}
+                                        <div className="flex flex-col justify-center">
+                                          <div className="text-base md:text-lg mb-0 pb-0 hover:underline font-medium">
+                                            By {authorName}
+                                          </div>
+                                          {/* {date && (
                           <div className="text-base text-black/80">
                             Published <Date dateString={date} />
                           </div>
                         )} */}
-                                    </div>
-                                  </div>
-                                  {/* <Avatar
+                                        </div>
+                                      </div>
+                                      {/* <Avatar
                       date={post.attributes.date}
                       name={
                       `${author?.firstName ? author?.firstName:''}
@@ -270,20 +240,33 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                       }
                       picture={avatar}
                     /> */}
+                                    </div>
+                                  </Link>
                                 </div>
-                              </Link>
+                              </div>
                             </div>
+                          ) : null}
+
+                          <div className="mb-2 md:mb-0 flex my-auto justify-start flex-wrap">
+                            {tags.map((tag, index) => {
+                              if (index < 3) {
+                                return (
+                                  <Link
+                                    href={`/toolbox/${tag.attributes.slug}/page/1`}
+                                    className="flex"
+                                  >
+                                    <div
+                                      className={`inline-block capitalize font-medium text-base px-3 py-1 cursor-pointer bg-[#d0e1f6] rounded-full ${index == tags?.length - 1 ? "" : "mr-3"} text-black/80 text-[15px] font-base flex flex-col justify-center mb-2`}
+                                    >
+                                      {tag.attributes.name}
+                                    </div>
+                                  </Link>
+                                );
+                              }
+                            })}
                           </div>
                         </div>
-                      ) : null}
-
-                      {/* <SocialShare
-                        slug={post?.attributes?.slug}
-                        title={title}
-                        authorTwitter={author?.twitter}
-                      /> */}
-                    </div>
-                    {/* <div className=" flex mb-3 justify-center">
+                        {/* <div className=" flex mb-3 justify-center">
                         {tags.map((tag, index) => {
                               return (
                                 <Link
@@ -298,10 +281,24 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                               );
                             })}
                       </div> */}
+                      </div>
+                    </div>
                   </div>
+                  <div className="h-[300px] md:h-[550px] px-4 md:px-0 max-w-full w-[1020px] md:bg-blue-50 mx-auto z-30 -mt-[120px] md:-mt-[100px] relative md:rounded-2xl md:shadow-md md:outline md:outline-1 outline-gray-300/20 overflow-hidden">
+                    <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[300px] md:h-[550px] w-[1020px] md:bg-gray-100 mx-auto z-30 rounded-2xl" />
+                    <Image
+                      key={image}
+                      width={1020}
+                      height={550}
+                      loader={gumletLoader}
+                      className="h-full z-20 relative h-[300px] md:h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto"
+                      src={image}
+                    />
+                  </div>
+
                   <div className="z-0 -mt-4 h-[60%] w-full bg-gradient-to-b from-blue-100/60 to-gray-100/20 absolute top-0 left-0" />
                 </div>
-                <article className="z-10 relative px-6 md:px-0">
+                <article className="z-10 relative px-6 md:px-0 max-w-full w-[1020px] mx-auto grid grid-cols-12">
                   {/* <Head> */}
                   {/* <title>
                   {post.attributes?.title} | Prototypr
@@ -309,13 +306,23 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                   {/* <meta property="og:image" content={post.attributes.ogImage} /> */}
                   {/* </Head> */}
 
-                  <div className="max-w-[60rem] mx-auto blog-content">
+                  <div className="max-w-[60rem] blog-content col-span-12 md:col-span-9">
                     <div
                       className="max-w-full w-full mt-10"
                       dangerouslySetInnerHTML={{
                         __html: postContent,
                       }}
                     />
+                  </div>
+
+                  <div className="hidden md:block pt-10 col-span-3">
+                    <div className="flex justify-end w-full">
+                      <SocialShare
+                        slug={post?.attributes?.slug}
+                        title={title}
+                        authorTwitter={author?.twitter}
+                      />
+                    </div>
                   </div>
                 </article>
                 <div>

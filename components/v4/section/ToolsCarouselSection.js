@@ -18,7 +18,7 @@ const ToolsCarouselSection = ({toolsList, sponsors}) =>{
           <div className="text-xs font-medium mb-2 text-center text-gray-500/90 uppercase">Prototypr Toolbox</div>
           <h2 className="text-3xl font-bold tracking-tight mb-[42px] text-center text-black/90">Tools to shape <span className="text-underline inline-block md:inline">every idea</span></h2>
 
-            <div className="pb-2">
+            <div className="pb-">
               <MotionSlider
                   initialDuration={250}
                   slides={[...toolsList.slice(0, 3), (sponsors?.length && sponsors[0]?.title) ? sponsors[0] : toolsList[3], ...toolsList.slice(4, 5), toolsList[6]].map((data, i) => {

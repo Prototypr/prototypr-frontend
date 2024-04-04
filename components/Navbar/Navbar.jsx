@@ -63,7 +63,7 @@ const Navbar = ({
     <>
       <nav id="main-nav" className={`font-inter fixed top-0 ${navType=='full'?'':'md:top-2'}  w-full`} style={{zIndex:99}}>
         <div
-          className={`w-full ${navType=='full'?'bg-white border-b border-gray-200 ':' md:w-[97%] md:rounded-2xl bg-white bg-opacity-[95%] border border-solid border-gray-200 p-1 shadow-xl'} search-wide ${
+          className={`w-full ${navType=='full'?'bg-white border-b border-gray-200 ':' md:w-[97%] md:rounded-2xl bg-white bg-opacity-[95%] p-1 shadow-sm'} search-wide ${
             navType=='full'?'max-w-full':
             maxWidth ? maxWidth : "max-w-[1020px]"
           }  backdrop-blur-lg mx-auto p-1 px-1 pl-4`}

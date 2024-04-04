@@ -132,7 +132,7 @@ export default function Index({
          <div className="relative z-50  mt-6 pt-0.5 ">
           <TagsNavRow />
         </div>
-        <Container maxWidth="max-w-[1320px] z-30 relative">
+        <Container padding={false} maxWidth="max-w-[1320px] mx-auto px-6 md:px-3 xl:px-3 z-30 relative">
           <div className="grid gap-3 grid-cols-9 md:grid-cols-9 xl:grid-cols-12">
           <div className="col-span-9 md:col-span-3">
              <NewsColumn sponsor={navSponsor} withBackground={false} posts={allNews} />   

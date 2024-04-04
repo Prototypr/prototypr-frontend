@@ -105,7 +105,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
 
           <div
             // className={`${gallery?.length ? "md:pb-[128px]" : "pb-[54px]"} pt-[90px] md:pt-[102px] shadow-md -mt-[96px] md:pt-[112px] relative bg-gray-800/40 overflow-hidden p-6 border-gray-200`}
-            className={`pb-0 border border-gray-200 h-full shadow-md mt-[72px] w-full mx-auto max-w-[1320px] rounded-2xl pt-[20px] mx-auto relative bg-gray-700 overflow-hidden p-6`}
+            className={`pb-0 border border-gray-200 h-full shadow-sm mt-[72px] w-full mx-auto max-w-[1315px] rounded-2xl pt-[20px] mx-auto relative bg-gray-700 overflow-hidden p-6`}
             // className={`pb-0 h-full rounded-3xl max-w-[1300px] mx-auto relative bg-gray-800/40 overflow-hidden p-6 border-gray-200`}
           >
                <Image

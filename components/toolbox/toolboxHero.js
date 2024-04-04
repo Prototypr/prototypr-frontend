@@ -121,8 +121,8 @@ const ToolBoxHero = () => {
           </div>
         </div>
       </div>
-      <div className="w-full max-w-full relative py-5 flex flex-col gap-2  overflow-hidden">
-        <div className=" flex flex-col items-center max-w-7xl mx-auto grid gap-2 top-0 w-full ">
+      <div className="w-full max-w-full relative py-5 flex flex-col overflow-hidden">
+        <div className=" flex flex-col items-center max-w-7xl mx-auto grid top-0 w-full ">
           <MotionSlider
                   initialDuration={180}
                   slides={ProductListData.map((data, i) => {

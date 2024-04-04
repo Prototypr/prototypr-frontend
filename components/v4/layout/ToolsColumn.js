@@ -22,7 +22,7 @@ const ToolsColumn = ({ tools, title, textColor, withBackground, showHeader }) =>
             </div>
             <div className="my-auto">
               <Link href={`/toolbox/`}>
-                <div className="bg-blue-100 outline outline-1 outline-blue-300/50 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                <div className="bg-blue-100  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
                     <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
                 </div>
               </Link>

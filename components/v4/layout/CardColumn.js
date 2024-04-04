@@ -28,12 +28,12 @@ const CardColumn = ({
             <div className="text-sm text-gray-800">New products, daily.</div>
           </div>
           <div className="flex relative">
-          {/* <div className="text-sm my-auto inline text-gray-800 font-normal font-inter">
+          {/* <div className="text-sm my-auto inline text-black/80 font-normal font-inter">
               <Link href={`/toolbox/`}>See all</Link>
             </div> */}
             <div className="my-auto">
               <Link href={`/toolbox/`}>
-              <div className="bg-blue-100 outline outline-1 outline-blue-300/50 ml-2.5 flex justify-center my-auto h-5 w-5 rounded-full">
+              <div className="bg-blue-100  ml-2.5 flex justify-center my-auto h-5 w-5 rounded-full">
                   <ArrowRight
                     weight="bold"
                     size={12}
