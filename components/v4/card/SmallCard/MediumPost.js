@@ -4,14 +4,14 @@ import Avatar from "../../avatar/AvatarLine";
 import SmallTag from "../../tag/SmallTag";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const MediumPost = ({showAuthor,showDescription,link, title, image, tags, date, avatar, author, excerpt, imageSmall }) => {
+const MediumPost = ({showAuthor,showDescription,link, title, image, tags, date, avatar, author, excerpt, imageSmall, imageVSmall }) => {
   return (
-    <div className="flex h-full sm:mt-0 flex-col hover:bg-white transition transition-all duration-300 p-3 bg-white shadow-md rounded-2xl font-inter w-full">
+    <div className="flex group hover:shadow-lg hover:scale-[1.005] h-full sm:mt-0 flex-col hover:bg-white transition transition-all duration-300 p-3 bg-white shadow-sm border border-gray-300/60 rounded-2xl font-inter w-full">
       {image ? (
-        <div className={`w-full shrink-0 h-[180px] shadow-sm max-w-full ${imageSmall?'md:h-[180px]':'md:h-[240px]'} md:max-w-full relative rounded-2xl overflow-hidden border border-gray-100`}>
+        <div className={`w-full shrink-0 h-[180px] max-w-full ${imageVSmall?'md:h-[144px]':imageSmall?'md:h-[180px]':'md:h-[240px]'} md:max-w-full relative rounded-xl overflow-hidden border border-gray-100`}>
           <Link href={link??''}>
             <Image
-              className="object-cover cursor-pointer"
+              className="object-cover group-hover:scale-[1.03] transition transition-all duration-700 cursor-pointer"
               layout="fill"
               src={image}
               loader={gumletLoader}

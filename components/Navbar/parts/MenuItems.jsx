@@ -73,11 +73,11 @@ const itemStyles = {
   userSelect: "none",
   fontWeight: 400,
   lineHeight: 1,
-  borderRadius: 16,
+  borderRadius: 8,
   // fontSize: 15,
   //   color: indigo.indigo11,
   "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${indigo.indigo8}` },
-  "&:hover": { backgroundColor: indigo.indigo3, color: indigo.indigo11, borderRadius:'16px' },
+  "&:hover": { backgroundColor: indigo.indigo3, color: indigo.indigo11, borderRadius:8 },
 };
 
 const StyledTrigger = styled(NavigationMenuPrimitive.Trigger, {
@@ -94,8 +94,8 @@ const CustomTrigger = ({ children, to, ...props }) => {
 
   return (
     <div
-      className={"rounded-full"+( isActive
-      ? "bg-blue-50 rounded-full font-medium border border-blue-100 border-1 text-blue-default"
+      className={"rounded-lg "+( isActive
+      ? "bg-blue-50 rounded-lg font-medium border border-blue-100 border-1 text-blue-default"
       : "rounded-full")}
       style={{
         background: isActive ? indigo.indigo3 : "",
@@ -237,8 +237,8 @@ const NextLink = ({ children, ...props }) => {
           style={props.css}
           className={
             isActive
-              ? "bg-blue-50 rounded-full font-medium border border-blue-100 border-1 text-blue-default"
-              : "rounded-full"
+              ? "bg-blue-50 rounded-lg font-medium border border-blue-100 border-1 text-blue-default"
+              : " rounded-lg"
           }
           {...props}
         >

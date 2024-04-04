@@ -123,7 +123,7 @@ export default function Index({
                   // heroCardPost={topicRes[topic.slug]?.posts[0]}
                   viewablePosts={topicRes[topic.slug]?.posts?.slice(0, 4)}
                 />
-                <SectionDivider py="py-4" transparentLine={true} />
+                <SectionDivider py="py-2" transparentLine={true} />
               </div>
             );
           })}
@@ -152,7 +152,7 @@ export default function Index({
           {/* <img src='/static/images/toolbox/squares2.svg' className="-scale-x-100 rounded-xl opacity-30  absolute w-full h-full object-cover top-0 left-0"/> */}
             <div className="z-20 relative">
               <h2 className="text-2xl mb-3 font-semibold">All topics</h2>
-              <div className="pt-4 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-8 md:gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="pt-4 rounded-xl grid grid-cols-1 gap-y-6 gap-x-6 md:gap-y-6 md:gap-x-6 sm:grid-cols-2 xl:grid-cols-4">
                 {morePopularTags.map((topic, i) => (
                   <CategoriesIconCard
                     showCount={true}
@@ -172,7 +172,7 @@ export default function Index({
           {/* <h2 className={`text-xl mb-6 font-medium`}>
         Featured Topics
       </h2> */}
-          <div className="flex flex-col grid gap-4 md:gap-4 xl:gap-12 grid-cols-12">
+          <div className="flex flex-col grid gap-4 md:gap-4 xl:gap-6 grid-cols-12">
             {featuredSections.map((post, i) => {
               return (
                 <Link

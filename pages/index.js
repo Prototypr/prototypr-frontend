@@ -2,11 +2,12 @@ import dynamic from "next/dynamic";
 // import { useState } from "react";
 // import DiscoverSection from "@/components/v4/section/DiscoverSectionB";
 import SectionDivider from "@/components/v4/section/SectionDivider";
-import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
+// import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
 // import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 // import TrendingFullWidth from "@/components/homepage/TrendingFullWidth";
 import IntroBanner from "@/components/v4/hero/IntroBanner2";
+
 /**new index components */
 // import { BrowserView } from "react-device-detect";
 const Footer = dynamic(() => import("@/components/footer"));
@@ -14,8 +15,8 @@ const Footer = dynamic(() => import("@/components/footer"));
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
-import { getAllJobs, getPopularTopics } from "@/lib/api";
-import { ArrowRight, Compass } from "phosphor-react";
+// import { getAllJobs, getPopularTopics } from "@/lib/api";
+// import { ArrowRight, Compass } from "phosphor-react";
 
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 // import {CaretRight} from 'phosphor-react'
@@ -23,9 +24,10 @@ import { ArrowRight, Compass } from "phosphor-react";
 import {
   getCombinedPostsForHome,
   getAllToolsForHome,
-  getRandomPostsForHome,
+  // getRandomPostsForHome,
   getCommonQuery,
   getActiveSponsors,
+  getAllNews,
 } from "@/lib/api";
 import { useIntl } from "react-intl";
 import { transformPostListOld } from "@/lib/locale/transformLocale";
@@ -44,8 +46,8 @@ import TagsNavRow from "@/components/v4/section/TagsNavRow";
 import Container from "@/components/container";
 import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
 // import JumboTagsSection from "@/components/v4/section/JumboTagsSection";
-import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
-import Link from "next/link";
+// import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
+// import Link from "next/link";
 // import Button from "@/components/Primitives/Button";
 // import GiantTag from "@/components/v4/tag/GiantTag";
 // import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
@@ -55,18 +57,24 @@ import { TAB_ITEMS } from "@/lib/constants";
 import HeroArticleSection from "@/components/v4/section/HeroArticleSection";
 import TopicSectionHome from "@/components/v4/section/TopicSectionHome";
 import ToolsCarouselSection from "@/components/v4/section/ToolsCarouselSection";
-import ToolBackgroundCardRow from "@/components/v4/layout/ToolBackgroundCardRow";
+// import ToolBackgroundCardRow from "@/components/v4/layout/ToolBackgroundCardRow";
+import { formatAllTools } from "@/lib/utils/formatToolContent";
+// import ToolImageCard from "@/components/v4/card/ToolImageCard";
+// import ToolsColumn from "@/components/v4/layout/ToolsColumn";
+import CardColumn from "@/components/v4/layout/CardColumn";
+import NewsColumn from "@/components/v4/layout/NewsColumn";
 
 export default function Index({
   preview,
   allTools,
   topicRes,
-  jobs,
-  randomPosts,
+  // jobs,
   sponsors,
+  navSponsor,
   heroPost,
   morePosts,
-  popularTags
+  allNews
+  // popularTags,
 }) {
   const intl = useIntl();
 
@@ -84,14 +92,17 @@ export default function Index({
   });
   // const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
   // const OtherPostsRandomSection = randomPosts.filter((item, i) => i !== 0);
-  const heroJob = jobs.filter((item, i) => i === 0);
-  const jobsSidebar = jobs.filter((item, i) => i !== 0);
+  // const heroJob = jobs.filter((item, i) => i === 0);
+  // const jobsSidebar = jobs.filter((item, i) => i !== 0);
+  const toolsList = allTools;
 
-  const toolsList = allTools
+  // console.log(allNews)
+  // console.log(allTools)
 
   return (
     <>
       <Layout
+        sponsor={navSponsor}
         navOffset={false}
         padding={false}
         preview={preview}
@@ -107,208 +118,254 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        
-          {(!user?.isLoggedIn)?
+        {!user?.isLoggedIn ? (
           <>
-          <IntroBanner
-            sponsor={sponsors?.length ? sponsors[0] : null}/>
-          <SectionDivider py={'py-1 sm:py-2 md:py-5'} transparentLine={true} />
-          </>
-          :<div className="pt-[100px]"/>}
-           <Container maxWidth="max-w-[1320px] z-30 relative">
-           <div className={`${user?.isLoggedIn?'pt-6':''} text-2xl text-black/90 font-semibold text-left mt-6 md:-mt-8 mb-5 px-1 w-fit rounded-full`}>{`Today's Toolbox`}</div>
-          {/* <h2 className="text-3xl font-bold mb-[42px] text-center text-black/90">Tools to shape <span className="text-underline inline-block md:inline">every idea</span></h2> */}
-            <ToolBackgroundCardRow tools={toolsList.slice(0,4)} />
-          </Container>
-          <div className='relative z-50 pt-3'>
-            <TagsNavRow/>
-          </div>
-                {/* <SectionDivider py='py-9' transparentLine={true} /> */}
-        <ToolsCarouselSection/>
-        <SectionDivider py='py-3.5' transparentLine={true} />
-        {/* <div className="z-50 relative bg-gradient-to-br from-[#EFF4FB] to-[#b8d1f4]/10 pb-12"> */}
-        <div className="z-50 relative bg-[#EFF4FB]">
-          {/* <SectionDivider py='py-2' transparentLine={true} /> */}
-            <HeroArticleSection
-              user={user}
-              cols={3}
-              // cols={3}
-              heroCardPost={heroPost}
-              viewablePosts={morePosts}
-              jobsSidebar={jobsSidebar}
-              // showBigPost={false}
-              showBigPost={2}
-              showTitle={false}
-            />
-            {/* <DiscoverSection
-              user={user}
-              heroCardPost={heroPost}
-              viewablePosts={morePosts}
-              jobsSidebar={jobsSidebar}
+            <IntroBanner sponsor={sponsors?.length ? sponsors[0] : null} />
+            {/* <SectionDivider
+              py={"py-1 sm:py-2 md:py-5"}
+              transparentLine={true}
             /> */}
+          </>
+        ) : (
+          <div className="pt-[100px]" />
+        )}
+         <div className="relative z-50  mt-6 pt-0.5 ">
+          <TagsNavRow />
         </div>
-          <div className="mt-14 mb-8">
-          <NewsletterSection/>
+        <Container maxWidth="max-w-[1320px] z-30 relative">
+          <div className="grid gap-3 grid-cols-9 md:grid-cols-9 xl:grid-cols-12">
+          <div className="col-span-9 md:col-span-3">
+             <NewsColumn sponsor={navSponsor} withBackground={false} posts={allNews} />   
+              </div>
+       
+            <div className="col-span-9 md:col-span-6 ">
+            <HeroArticleSection
+            user={user}
+            cols={2}
+            // cols={3}
+            heroCardPost={heroPost}
+            viewablePosts={morePosts}
+            showSmallCardDescription={false}
+            // jobsSidebar={jobsSidebar}
+            // showBigPost={false}
+            showBigPost={3}
+            showTitle={false}
+            showHeadingRow={false}
+          />
+              
+              {/* <div
+                className={`${user?.isLoggedIn ? "pt-6" : ""} text-2xl text-black/90 font-semibold text-left mt-6 md:-mt-8 mb-5 px-1 w-fit rounded-full`}
+              >{`Latest products`}</div>
+              <ToolBackgroundCardRow
+                tools={[
+                  ...toolsList.slice(0, 3),
+                  sponsors?.length && navSponsor
+                    ? navSponsor
+                    : toolsList[4],
+                ]}
+              />
+              <ToolImageCard
+                  posts={[
+                    ...toolsList.slice(0, 3),
+                    sponsors?.length && navSponsor
+                      ? navSponsor
+                      : toolsList[4],
+                  ]}
+                  columns={"lg:col-span-4"}
+                  type="toolbox"
+                /> */}
+            </div>
+            <div className="order-first md:order-last col-span-9 md:col-span-9 xl:col-span-3">
+             <CardColumn sponsor={navSponsor} withBackground={false} tools={[...toolsList.slice(0,8)]} />   
+              </div>
+          
+          </div>
+        </Container>
+       
+        {/* <SectionDivider py="py-3.5" transparentLine={true} /> */}
+        {/* <div className="z-50 relative bg-[#EFF4FB]">
+          <HeroArticleSection
+            user={user}
+            cols={3}
+            heroCardPost={heroPost}
+            viewablePosts={morePosts}
+            jobsSidebar={jobsSidebar}
+            showBigPost={2}
+            showTitle={false}
+          />
+        </div> */}
+        <div className="mt-10">
+          <NewsletterSection />
+        </div>
+        <div className="mt-14 py-4 pb-[100px] bg-gray-50">
+        <ToolsCarouselSection toolsList={toolsList} sponsors={sponsors} />
+        {/* <Container maxWidth="max-w-[1320px] -mb-10 mt-12 z-30 relative">
+          <TwoColumnCards />
+        </Container> */}
         </div>
 
-        <SectionDivider py='py-4' transparentLine={true} />
+          <div className="z-50 py-10 relative bg-[#EFF4FB]">
+          <HeroArticleSection
+            user={user}
+            cols={4}
+            heroCardPost={morePosts[4]}
+            viewablePosts={morePosts.slice(5,morePosts.length)}
+            showBigPost={2}
+            showTitle={false}
+          />
+        </div>
+        <SectionDivider py="py-2" transparentLine={false} />
+
+        <Container maxWidth="py-8 pb-18 max-w-[1320px]">
+          <TwoColumnCards />
+        </Container>
+
+        {/* <SectionDivider py='py-4' transparentLine={true} />
         
         <Container maxWidth="max-w-[1320px] z-30 relative">
-          {/* <div className="p-6 md:p-6 bg-white relative overflow-hidden rounded-3xl shadow-md"> */}
           <div className="">
               <ToolLargeCardRow tools={toolsList.slice(5,9)} />
               <SectionDivider py="py-6" transparentLine={true}  />
               <ToolIconCardRow withBackground={true} tools={[...toolsList.slice(0,5), ...toolsList.slice(10,15)]} />       
               
-            
-          {/* <div className="flex mt-10">
-            <Link href="/toolbox">
-              <Button className="rounded-full bg-blue-600 px-6 py-4 leading-none text-white" variant="confirmBig">
-                Open toolbox
-              </Button>
-            </Link>
-          </div>      */}
           </div>
-        </Container>
-      
-        <SectionDivider py='py-6' transparentLine={true}  />
-   
+        </Container> */}
+
+        {/* <SectionDivider py="py-6" transparentLine={true} /> */}
+
         {/* <SectionDivider />
         <div className="hidden md:block">
           <SponsorBannerFull/>
           <SectionDivider />
         </div> */}
-        <SectionDivider py="py-6" transparentLine={true} />
-        
-        <Container padding={false} maxWidth="relative z-0">
-        <div class="relative bottom-0 w-full z-0">
-          <img class="w-full translate-y-[4px] z-0" src="/static/images/tilt-section2.svg"/>
-          <div class="w-full h-[40px] md:h-[50px] translate-y-[2px] bg-[#dbeeff]">
-            </div>
+        {/* <SectionDivider py="py-6" transparentLine={true} /> */}
+
+        {/* <Container padding={false} maxWidth="relative z-0 bg-gray-50">
+          <div class="relative bottom-0 w-full z-0">
+            <img
+              class="w-full translate-y-[4px] z-0"
+              src="/static/images/tilt-section2.svg"
+            />
+            <div class="w-full h-[40px] md:h-[50px] translate-y-[2px] bg-[#dbeeff]"></div>
           </div>
-        </Container>
-        
-        <div className="relative">
+        </Container> */}
 
-        {/* <TopicSelectSection topics={TAB_ITEMS} /> */}
-        <Container maxWidth="w-full bg-[#dbeeff]  relative relative z-10">
-        {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[200px] left-0 w-full h-[124%] object-cover"/> */}
-        {/* <img src='/static/images/toolpattern.svg' style={{opacity:0.37}} className="absolute top-0 -mt-[150px] left-0 w-full h-[124%] object-cover"/> */}
-
-          <div className="max-w-[1320px] mx-auto px-6 md:px-3 pb-16 ">
-          <div className="flex justify-between mb-8">
-              <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md leading-[32px]">
-              Browse by <span className="text-underline">category</span>
-              </h3>
-              <div className="flex relative p-2">
-            <div className="hidden sm:inline text-md text-black/80 font-normal font-inter">
-            <Link href={`/topics/`}>See all</Link>
-            </div>
-            <div className="my-auto">
-              <Link href={`/topics/`}>
-                <div className="bg-blue-200/60 outline outline-1 outline-blue-300/80 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
-                    <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
+        {/* <div className="relative">
+          <Container maxWidth="w-full bg-[#dbeeff]  relative relative z-10">
+            <div className="max-w-[1320px] mx-auto px-6 md:px-3 pb-16 ">
+              <div className="flex justify-between mb-8">
+                <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md leading-[32px]">
+                  Browse by <span className="text-underline">category</span>
+                </h3>
+                <div className="flex relative p-2">
+                  <div className="hidden sm:inline text-md text-black/80 font-normal font-inter">
+                    <Link href={`/topics/`}>See all</Link>
+                  </div>
+                  <div className="my-auto">
+                    <Link href={`/topics/`}>
+                      <div className="bg-blue-200/60 outline outline-1 outline-blue-300/80 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                        <ArrowRight
+                          weight="bold"
+                          size={14}
+                          className="text-blue-900 my-auto"
+                        />
+                      </div>
+                    </Link>
+                  </div>
                 </div>
-              </Link>
-            </div>
-          </div>
-                {/* <div className="my-auto">
-                <Link href='/topics'>
-                  <div className="flex">
-                    <div className="text-sm my-auto text-black opacity-60">See all <span className="hidden md:inline-block">topics</span></div>
-                    <CaretRight className="opacity-60 my-auto" size={16} />
+              </div>
+              <div className="pt-4 rounded-xl flex flex-wrap">
+                <Link href={"/"}>
+                  <div
+                    className={`inline-block capitalize text-sm pr-4 pl-2 py-2 cursor-pointer bg-blue-50/50 outline outline-1 outline-blue-300/60 rounded-full mr-5 mb-3 text-blue-900 font-medium`}
+                  >
+                    <div className="flex">
+                      <Compass
+                        weight={`regular`}
+                        className="my-auto p-0"
+                        size={20}
+                      />
+                      <div className="ml-2 my-auto">Explore all topics</div>
+                    </div>
                   </div>
                 </Link>
-                </div> */}
 
+                {popularTags.map((topic, i) => (
+                  <div key={`topic_${i}`}>
+                    <Link href={`/posts/${topic?.slug}/page/1/`}>
+                      <div
+                        className={`inline-block capitalize text-sm px-4 py-2 cursor-pointer bg-blue-50/50 outline outline-1 outline-blue-300/60 rounded-full mr-3 mb-3 text-blue-900 font-medium`}
+                      >
+                        {topic?.name}
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </div>
-            {/* <div className="flex justify-start w-full">
-              <h2 className="md:text-[28px] text-left mb-10 pt-4 text-[20px] max-w-lg leading-snug md:leading-[40px] md:leading-[48px] font-semibold font-inter text-[#0F1F40] ">
-           Explore Topics 
-            </h2>
-            </div> */}
-            <div className="pt-4 rounded-xl flex flex-wrap">
-            <Link href={"/"}>
-            <div
-              className={`inline-block capitalize text-sm pr-4 pl-2 py-2 cursor-pointer bg-blue-50/50 outline outline-1 outline-blue-300/60 rounded-full mr-5 mb-3 text-blue-900 font-medium`}
-            >
-              <div className="flex">
-          <Compass weight={`regular`} className="my-auto p-0" size={20} />
-            <div className="ml-2 my-auto">Explore all topics</div>
-          </div>
-            </div>
-          </Link>
-         
-              {popularTags.map((topic, i) => (
-                <div key={`topic_${i}`}>
-                      <Link href={`/posts/${topic?.slug}/page/1/`}>
-                    <div  className={`inline-block capitalize text-sm px-4 py-2 cursor-pointer bg-blue-50/50 outline outline-1 outline-blue-300/60 rounded-full mr-3 mb-3 text-blue-900 font-medium`}>
-                      {topic?.name}
-                    </div>
-                  </Link>
-                </div>
-                      ))}
-            </div>
-            {/* <JumboTagsSection popularTags={popularTags}/> */}
-            {/* <PopularTagsSection popularTags={popularTags}/> */}
-          </div>
-        </Container>
-        </div>
-         {/* <SectionDivider />
+          </Container>
+        </div> */}
+        {/* <SectionDivider />
         <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/> */}
-        <div className="relative bg-gradient-to-b from-[#dbeeff] via-[#EFF4FB] via-10% to-[#EFF4FB]">
-
+        <div className="relative pt-16 bg-gray-50">
           {/* <SectionDivider py='py-6 pt-12' transparentLine={true} /> */}
           {/* <SectionDivider /> */}
           {TAB_ITEMS?.map((topic, index) => {
             return (
               <div key={`topicsection_${index}`} className="z-40">
-              <TopicSectionHome
-                tagline={topic.tagline}
-                showSidebar={false}
-                slug={topic.slug}
-                icon={topic.icon}
-                title={topic.name}
-                HeroPostRandomSection={topicRes[topic.slug]?.posts[0]}
-                OtherPostsRandomSection={topicRes[topic.slug]?.posts?.slice(1, 5)}
-                heroJob={heroJob}
-                sponsors={sponsors}
-                toolsList={topicRes[topic.slug]?.tools.slice(0, 7)}
-                authorsList={topicRes[topic.slug]?.authors}
-              />
-              
-              
-               
-            <SectionDivider py="py-12 opacity-70" transparentLine={false}/>
-            {index==1?
-                <div className="-mt-8">
-                    <NewsletterSection/>
-                   <SectionDivider py="py-12" transparentLine={false}/>
-                  </div>:''
-              }
+                <TopicSectionHome
+                  tagline={topic.tagline}
+                  showSidebar={false}
+                  slug={topic.slug}
+                  icon={topic.icon}
+                  title={topic.name}
+                  HeroPostRandomSection={topicRes[topic.slug]?.posts[0]}
+                  OtherPostsRandomSection={topicRes[topic.slug]?.posts?.slice(
+                    1,
+                    5
+                  )}
+                  // heroJob={heroJob}
+                  sponsors={sponsors}
+                  toolsList={topicRes[topic.slug]?.tools.slice(0, 7)}
+                  authorsList={topicRes[topic.slug]?.authors}
+                />
 
-            {index==4?
-                <div className="mt-0">
-                  <Container  maxWidth="max-w-[1320px]">
-                  <TwoColumnCards/> 
-                  </Container>
-                  <SectionDivider py="py-4" transparentLine={true}/>
-                  </div>:''
-              }
+                <SectionDivider py="py-12 opacity-70" transparentLine={false} />
+                {index == 1 ? (
+                  <div className="-mt-8">
+                    <NewsletterSection />
+                    <SectionDivider py="py-12" transparentLine={false} />
+                  </div>
+                ) : (
+                  ""
+                )}
+
+                {index == 4 ? (
+                  <div className="mt-0">
+                    <Container maxWidth="max-w-[1320px]">
+                      <TwoColumnCards />
+                    </Container>
+                    <SectionDivider py="py-4" transparentLine={true} />
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             );
           })}
 
-        <SectionDivider transparentLine={true}/>
-
+          <SectionDivider transparentLine={true} />
         </div>
-          {/* <BrowserView>
+        {/* <BrowserView>
           <DesignTool allTools={toolsList} />
         </BrowserView> */}
       </Layout>
-      {!user?.isLoggedIn && <StickyFooterCTA title="Welcome to Prototypr"
-      description="Join today to make posts and grow with us."
-      />}
+      {!user?.isLoggedIn && (
+        <StickyFooterCTA
+          title="Welcome to Prototypr"
+          description="Join today to make posts and grow with us."
+        />
+      )}
       <Footer />
     </>
   );
@@ -320,63 +377,87 @@ export async function getStaticProps({ preview = null, locale }) {
     sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
   }
 
-  let allPosts = (await getCombinedPostsForHome(preview, 5, 0, sort)) || [];
+  let allPosts = (await getCombinedPostsForHome(preview, 12, 0, sort)) || [];
 
-  let randomPosts = (await getRandomPostsForHome()) || [];
+  // let randomPosts = (await getRandomPostsForHome()) || [];
   let toolCount = 20;
   let allTools =
-    (await getAllToolsForHome(preview, toolCount, 0, ["featured:desc","date:desc"])) || [];
+    (await getAllToolsForHome(preview, toolCount, 0, [
+      "featured:desc",
+      "date:desc",
+    ])) || [];
 
-  let jobs = (await getAllJobs(null, 5, 1)) || [];
+  let allNews = (await getAllNews(preview, 15, 0)) || [];
+
+  // let jobs = (await getAllJobs(null, 5, 1)) || [];
   let sponsors = await getActiveSponsors();
-
   // topic sections
   let topicRes = {};
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].slug;
     const res =
       (await getCommonQuery(preview, [tag], "article", 12, 0, sort)) || [];
-    
-    const topicToolsRes =
-      (await getCommonQuery(preview, [TAB_ITEMS[index].toolSlug], "tool", 5, 0, sort)) || [];
 
-      //extract authors from the postss while we don't have an endpoint for it
-    const authors = makeAuthorList(res)
-   
+    const topicToolsRes =
+      (await getCommonQuery(
+        preview,
+        [TAB_ITEMS[index].toolSlug],
+        "tool",
+        5,
+        0,
+        sort
+      )) || [];
+
+    //extract authors from the postss while we don't have an endpoint for it
+    const authors = makeAuthorList(res);
+
     //shuffle so it's different each time
-    shuffleArray(res.data)
-    shuffleArray(authors)
-    shuffleArray(topicToolsRes.data)
-     
-    const topicData = {authors:authors, posts:res.data, tools:topicToolsRes.data}
-    topicRes[tag] = topicData
+    shuffleArray(res.data);
+    shuffleArray(authors);
+    shuffleArray(topicToolsRes.data);
+
+    const topicData = {
+      authors: authors,
+      posts: res.data,
+      tools: topicToolsRes.data,
+    };
+    topicRes[tag] = topicData;
   }
 
-  const popularTags = (await getPopularTopics({postType:'article', pageSize:34})) || [];
-
+  // const popularTags =
+  //   (await getPopularTopics({ postType: "article", pageSize: 34 })) || [];
 
   allPosts = transformPostListOld(allPosts.data, locale);
-  if(locale!=='es-ES'){
-    shuffleArray(allPosts)
+  if (locale !== "es-ES") {
+    shuffleArray(allPosts);
   }
   allTools = transformPostListOld(allTools.data, locale);
 
   // shuffleArray(allTools)
   // await generateCombinedRSS({ allPosts, allTools });
   // otherPosts = transformPostListOld(otherPosts.data, locale);
+  allTools = formatAllTools({ tools: allTools, tagNumber: 1 });
+  sponsors = formatAllTools({ tools: sponsors.posts, tagNumber: 1 });
+  allNews = formatAllTools({ tools: allNews.data, tagNumber: 0 });
+
+  const navSponsorId = process.env.NEXT_PUBLIC_PRICE_WEBSITE_1;
+  const navSponsor = sponsors?.find(sponsor => sponsor.productId === navSponsorId) || null;
+
   return {
     props: {
       heroPost: allPosts[0],
       morePosts: allPosts.slice(1),
       allTools: allTools,
-      popularTags,
+      allNews:allNews,
+      // popularTags,
       // otherPosts: otherPosts,
       // interviewPosts: interviews.data,
       topicRes,
       preview,
-      jobs,
-      randomPosts: randomPosts.slice(0, 8),
-      sponsors: sponsors?.posts?.length ? sponsors?.posts : [],
+      // jobs,
+      // randomPosts: randomPosts.slice(0, 8),
+      sponsors: sponsors?.length ? sponsors : [],
+      navSponsor
     },
     revalidate: 20,
   };

@@ -74,6 +74,10 @@ p:empty + p:not(:empty) {
 toolbox width
 **/
 .blog-content.toolbox-content{
+    img, div, p, h1, h2, h3, h4, ol, li, ul, iframe, figure, blockquote, figcaption, hr, table, video{
+        margin-left:0!important;
+        margin-right:0!important;
+    }
     iframe{
         width:100%!important;
         margin-top: 1rem;

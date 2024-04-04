@@ -98,8 +98,8 @@ const EmblaCarousel = (props) => {
   }
 
   return (
-    <div className="embla lg:px-14 py-6 -mt-[1.6rem] relative">
-      <div className="embla__buttons absolute top-0 w-full flex justify-between -mt-[2.45rem]">
+    <div className="embla lg:px-5 pt-6 pb-3 relative">
+      <div className="embla__buttons w-[103%] -ml-[1.5%] absolute top-0 w-full flex justify-between -mt-[1rem]">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
@@ -144,7 +144,7 @@ const EmblaCarousel = (props) => {
         </div>
       </div>
 
-      <div className="embla-thumbs w-fit max-w-full mx-auto">
+      {/* <div className="embla-thumbs w-fit max-w-full mx-auto">
         <div className="embla-thumbs__viewport p-1 -mt-2" ref={emblaThumbsRef}>
           <div className="embla-thumbs__container">
             {slides.map((item,index) => (
@@ -158,7 +158,7 @@ const EmblaCarousel = (props) => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
       <ImageDialog 
       navigateDialog={navigateDialog}
       prevBtnDisabled={false}

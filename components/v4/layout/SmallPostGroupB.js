@@ -6,7 +6,9 @@ const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototy
 const SmallPostsGroupB = ({smallPosts}) =>{
 
     return(
-        <div className="flex w-full lg:w-1/2 lg:pl-6 flex-col justify-between">
+      <div className="grid grid-cols-3 gap-3">
+
+        {/* <div className="flex w-full lg:w-1/2 flex-col justify-between"> */}
 {/* <SingleFancyCard/> */}
             {/* <PrototyprNetworkCTA2 /> */}
         {smallPosts?.length ? (
@@ -18,7 +20,7 @@ const SmallPostsGroupB = ({smallPosts}) =>{
               let authorData = post.attributes?.author?.data?.attributes
               let avatar = authorData?.avatar?.data?authorData?.avatar?.data?.attributes?.url:authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
             return (
-              <div key={index} className="w-full">
+              <div key={index} className="w-full col-span-1">
                 <SmallCard
                   link={`/post/${post?.attributes?.slug}`}
                   avatar={avatar}
@@ -27,6 +29,8 @@ const SmallPostsGroupB = ({smallPosts}) =>{
                   date={post?.attributes?.date}
                   title={post?.attributes?.title}
                   tags={post?.attributes?.tags?.data}
+                  content={post?.attributes?.content}
+                  excerpt={post?.attributes?.excerpt}
                 />
               </div>
             );

@@ -6,7 +6,7 @@ const SLOW_DURATION=350
 
 export const MotionSlider = ({
   slides,
-  gap = 14,
+  gap = 12,
   width = 350,
   height = 94,
   direction = "normal",
@@ -36,7 +36,7 @@ export const MotionSlider = ({
     // Effect to restart animation when duration changes
     useEffect(() => {
       const transform = motionDiv.current?.style.transform;
-    console.log(transform); // This will log the full transform string
+    // console.log(transform); // This will log the full transform string
       // Parsing the translateX value
     const match = transform?.match(/translateX\((-?\d+\.?\d*)px\)/);
     if (match && match[1]) {

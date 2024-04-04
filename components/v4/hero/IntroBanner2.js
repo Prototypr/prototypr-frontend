@@ -29,9 +29,9 @@ const IntroBanner = ({ tools, sponsor }) => {
   return (
     <Container padding={false} maxWidth="relative grid z-0">
       
-      <div className="pt-[96px] justify-stretch bg-[#CCE6FF] text-gray-800"
-      >
-        <div className="opacity-30 bg-gradient-to-r from-blue-200  via-blue-200 via-blue-300/10 to-indigo-900 absolute top-0 left-0 w-full h-full"/>
+      {/* <div className="mt-[70px] max-w-[1320px] relative mx-auto w-full rounded-3xl justify-stretch bg-[#CCE6FF] text-gray-800"> */}
+      <div className="mt-[70px] max-w-[1320px] relative mx-auto w-full rounded-3xl justify-stretch  bg-[#99cdff]/70 border border-gray-300/20 shadow-sm text-gray-800">
+        <div className="max-w-[1320px] mx-auto w-full rounded-3xl w-full opacity-30 bg-gradient-to-r from-blue-200  via-blue-200 via-blue-300/10 to-indigo-900 absolute top-0 left-0 w-full h-full"/>
          {/* <svg className="bg-gradient-to-br opacity-60 from-blue-200  via-blue-400/20 via-pink-300/20 to-blue-800/50" style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} xmlns='http://www.w3.org/2000/svg'>
           <filter id='noiseFilter'>
             <feTurbulence 
@@ -42,20 +42,20 @@ const IntroBanner = ({ tools, sponsor }) => {
           </filter>
           <rect width='100%' height='100%' filter='url(#noiseFilter)'/>
         </svg> */}
-        <img src="/static/images/bendy9.svg" className="absolute bottom-0 -mb-[12%] xs:-mb-[15%] md:-mb-[15%] z-40 left-0 w-full"/>
-        <div className="max-w-[1320px] mx-auto relative grid grid-cols-12">
+        {/* <img src="/static/images/bendy9.svg" className="absolute bottom-0 -mb-[12%] xs:-mb-[15%] md:-mb-[15%] z-40 left-0 w-full"/> */}
+        <div className="max-w-[1320px] overflow-hidden mx-auto relative p-6 pt-4 grid grid-cols-12">
         {/* <div className="hidden lg:block absolute z-10 opacity-100 w-[800px] h-[500px] -mr-[20%] bg-gradient-to-r to-[#d1e8ff] from-transparent via-[#d1e8ff]/10 z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover"></div> */}
-          <img className="absolute opacity-80 w-full h-full  z-10 h-full top-0 right-0 -mt-[20px] cursor-collab -mr-[225px] sm:-mr-[40%] 2md:-mr-[20%] xl:-mr-[60%] 2xl:-mr-[70%] object-cover" 
+          <img className="absolute opacity-50 w-full h-full  z-10 h-full top-0 right-0 cursor-collab -mr-[225px] sm:-mr-[40%] 2md:-mr-[20%] xl:-mr-[50%] 2xl:-mr-[60%] object-cover" 
           src="/static/images/toolbox/toolbox-bg-2.svg"  style={{ zIndex:1}}/>
-        <div className="md:col-span-6 pb-10 pt-8 px-7 relative col-span-12 font-inter p-2  relative flex flex-col">
+        <div className="md:col-span-6 relative col-span-12 font-inter relative flex flex-col items-start justify-center gap-8 p-8">
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
-          className="pointer-events-auto md:pr-0 md:pb-12 md:pt-6 rounded-3xl z-10" style={{width:'fit-content'}}>
+          className="pointer-events-auto md:pr-0 rounded-3xl z-10" style={{width:'fit-content'}}>
           <h1 className="max-w-[50rem] mt-2 mb-5 text-black/90 text-5xl font-semibold tracking-tight xl:text-[48px] lg:leading-tight md:leading-tight">
           <span className="drop-shadow-sm ">Everything is a </span> <div className="text-underline inline cursor-collab"><span className="drop-shadow-sm">prototype</span></div>
           </h1>
-          <h2 className="mb-5 text-gray-700 md:leading-[32px] leading-[28px] text-[16px] md:text-[18px] font-inter md:pr-6 max-w-[32rem]">
-          Turn ideas into reality with the tools, resources, and lessons for every step of your product journey.
+          <h2 className="mb-5 text-gray-700 leading-snug text-[18px] font-semibold font-inter md:pr-6 max-w-[32rem]">
+          Start something new. Write a draft, design an app, curate inspiration. Life is a prototype, share your story.
           </h2>
           <div className="flex mt-4 mb-6 sm:mb-0">
             <Link href="/onboard">
@@ -72,14 +72,13 @@ const IntroBanner = ({ tools, sponsor }) => {
         </div>
       </div>
       
-      </div>
       <div className="absolute top-0 left-0 w-full h-full grid grid-cols-12 " style={{pointerEvents:'none'}}>
       
         <div className="col-span-6"/>
       <div className="col-span-2 relative z-50">
-        <div className="block boto absolute bottom-0  right-0 -mr-[120px] sm:-mr-[240px] md:-mr-[20px]">
+        <div className="block boto absolute bottom-0  right-0 -mr-[120px] sm:-mr-[240px] md:mr-[45px]">
           <div className="relative">
-              <img src="/static/images/robotitosuelto.png" className="w-[125px] -mb-3 md:-mb-0 md:w-[165px] md:-scale-x-100 max-w-[400px] md:max-w-full cursor-collab z-10"
+              <img src="/static/images/robotitosuelto.png" className="w-[125px] -mb-3 md:-mb-3 md:w-[165px] md:-scale-x-100 max-w-[400px] md:max-w-full cursor-collab z-10"
                     style={{filter: 'drop-shadow(0 15px 10px rgb(0 0 0 / 0.3))', pointerEvents:'all'}}/>
 
           <div className="hidden 2md:block eyes-follow-tired absolute z-20 top-0 mt-[48px] md:mt-[42px] 2md:mt-[48px] right-[66px] md:right-[60px] 2md:right-[66px]">
@@ -98,10 +97,11 @@ const IntroBanner = ({ tools, sponsor }) => {
         </div>
 
           </div>
-          <div className="hidden md:block col-span-4 mt-[88px] relative z-5" style={{pointerEvents:'all'}}>
+          <div className="hidden md:block col-span-4 relative z-5" style={{pointerEvents:'all'}}>
                             <ParticlesContainer tools={tools} sponsor={sponsor} />                         
           </div>
           </div>
+      </div>
     </Container>
   );
 };

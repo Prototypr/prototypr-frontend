@@ -6,7 +6,7 @@ const {
   default: gumletLoader,
 } = require("@/components/new-index/gumletLoader");
 
-const ToolIconCard = ({ tool, withBackground, small }) => {
+const NewsColumnCard = ({ tool, withBackground, small }) => {
   const { slug, title, tags } = tool;
 
   const plausible = usePlausible();
@@ -27,7 +27,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
   return (
     <div>
       <Link
-        href={`/toolbox/${slug}`}
+        href={`/news/${slug}`}
         onClick={() => {
           plausible("toolIconCard", {
             props: {
@@ -39,7 +39,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
         className="flex"
       ><div className={`${withBackground?' bg-white p-2 shadow-sm border border-gray-200/70 border-1 rounded-2xl':''} w-full h-auto cursor-pointer flex flex-col`}>
           <div className="flex flex-row rounded-xl">
-            <div
+            {/* <div
               style={{ flex: `0 0 ${small?'3em':'56px'}` }}
               className={`${small?'h-12 w-12':'w-[56px] h-[56px]'} mr-2 relative rounded-xl overflow-hidden`}
             >
@@ -56,9 +56,9 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
               ) : (
                 ""
               )}
-            </div>
+            </div> */}
             <div className="flex flex-col pl-1 justify-center">
-              <div className=" overflow-hidden line-clamp-1 inline font-semibold py-0 mb-0 font-inter text-base">
+              <div className=" overflow-hidden line-clamp-2 inline font-base py-0 mb-0 font-inter text-base">
                 {title}
                 {/* <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                   Promoted
@@ -84,4 +84,4 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
     </div>
   );
 };
-export default ToolIconCard;
+export default NewsColumnCard;

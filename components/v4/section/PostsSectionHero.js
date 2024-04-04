@@ -39,7 +39,7 @@ const PostsSectionHero = ({user, heroCardPost,toolsList,showHeroTitle,groupSlice
       
       }
       {showTags && 
-       <div className="-mt-4 mb-5">
+       <div className=" mt-4">
        <TagsNavRow/>
      </div>
       }

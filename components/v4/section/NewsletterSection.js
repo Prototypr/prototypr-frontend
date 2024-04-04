@@ -7,10 +7,10 @@ const NewsletterSection = ({title,padding}) =>{
         <Container padding={padding} maxWidth="max-w-[1320px]">
             <div className="mt-8 lg:px-0 lg:mt-0">
             <div
-            className="w-full shadow-md relative flex h-full bg-gray-100 w-full lg:mt-8 rounded-3xl p-6"
+            className="w-full shadow-sm border border-gray-300/50 relative flex h-full bg-gray-100 w-full lg:mt-8 rounded-3xl p-6"
             >
             <div className="max-w-xl lg:max-w-xl z-20">
-                <h3 className="text-xl lg:text-3xl mb-4 font-inter text-black/90 font-semibold">{title?title:<>
+                <h3 className="text-xl tracking-tight lg:text-3xl mb-4 font-inter text-black/90 font-semibold">{title?title:<>
                     Tips and tools to shape <div className="text-underline inline">every idea</div>
                 </>}</h3>
                 <p className="font-inter mb-4 text-base text-gray-900 text-opacity-80">Join <span className="text-black/80 font-semibold">25,000+ creatives</span> who enjoy a regular dose of inspiration and motivation, delivered to your inbox every week.</p>

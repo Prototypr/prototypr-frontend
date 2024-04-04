@@ -8,7 +8,7 @@ import RSSTitle from "../text/RSSTitle";
 import PostsGroup3Cards from "./PostsGroup3Cards";
 import BigBackgroundCard from "../card/BigCard/BigBackgroundCard";
 
-const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,showHeadingRow,title, cols }) => {
+const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,showHeadingRow,title, cols , showSmallCardDescription}) => {
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;
   const dummyAvatar = 'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'
   const largeCoverImage = url
@@ -35,9 +35,10 @@ const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,showHeadi
           </div>
     </div>}
     <div className="flex flex-col justify-between max-w-[1320px] relative">
-    {showBigPost && <div className="w-full mb-6">
+    {showBigPost && <div className="w-full mb-3">
       <div className="z-20 relative">
         <BigBackgroundCard
+          showDescription={cols==2?false:true}
           layout={showBigPost}
           link={`/post/${largePost?.attributes?.slug}`}
           avatar={largePostAvatar}
@@ -71,7 +72,8 @@ const HeroPostGrid = ({ largePost,showBigPost, smallPosts, showHeading,showHeadi
       </div>}
       <PostsGroup3Cards 
       cols={cols}
-      posts={!showBigPost?[largePost,...smallPosts?.slice(0,(cols==4?3:2))]:smallPosts?.slice(0,(cols==4?4:3))}
+      showDescription={showSmallCardDescription}
+      posts={!showBigPost?[largePost,...smallPosts?.slice(0,(cols==4?3:cols==2?1:2))]:smallPosts?.slice(0,(cols==4?4:cols==2?2:3))}
       />
     </div>
     </>

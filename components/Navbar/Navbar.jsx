@@ -33,8 +33,10 @@ const Navbar = ({
   collapsed,
   hideLocaleSwitcher,
   editor,
+  sponsor,
   showWriteButton,
   maxWidth,
+  navType
 }) => {
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -59,13 +61,14 @@ const Navbar = ({
 
   return (
     <>
-      <nav id="main-nav" className={`font-inter fixed top-0 md:top-2 w-full`} style={{zIndex:99}}>
+      <nav id="main-nav" className={`font-inter fixed top-0 ${navType=='full'?'':'md:top-2'}  w-full`} style={{zIndex:99}}>
         <div
-          className={`w-full md:w-[97%] search-wide ${
+          className={`w-full ${navType=='full'?'bg-white border-b border-gray-200 ':' md:w-[97%] md:rounded-2xl bg-white bg-opacity-[95%] border border-solid border-gray-200 p-1 shadow-xl'} search-wide ${
+            navType=='full'?'max-w-full':
             maxWidth ? maxWidth : "max-w-[1020px]"
-          } bg-white/90 shadow backdrop-blur-lg mx-auto md:rounded-[60px] border-black px-3 pl-6`}
+          }  backdrop-blur-lg mx-auto p-1 px-1 pl-4`}
         >
-          <div className="relative flex h-14 items-center justify-between">
+          <div className={`${maxWidth ? maxWidth : "max-w-[1020px]"} mx-auto relative flex h-9 items-center justify-between`}>
             {/* movil menu button */}
             <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
               <button
@@ -84,20 +87,18 @@ const Navbar = ({
                 )}
               </button>
             </div>
-            {/* <div className="flex flex-1 items-center justify-center items-stretch justify-between"> */}
-            <div className="flex flex-1 items-center">
-              <div className="flex flex-shrink-0 items-center">
+            <div className="flex flex-shrink-0 items-center">
                 <Link href="/" as="/">
                   <>
                     <img
-                      className="xl:hidden h-8 w-auto"
+                      className="xl:hidden h-7 w-auto"
                       src="/static/images/logo-small.svg"
                       // className="block h-10 w-auto mb-2"
                       // src="/static/images/logo-small-xmas.svg"
                       alt="Prototypr Logo"
                     />
                     <img
-                      className="hidden h-8 w-auto xl:block"
+                      className="hidden h-7 w-auto xl:block"
                       src={`/static/images/prototypr_logo.svg`}
                       alt="Prototypr Logo"
                     />
@@ -114,6 +115,9 @@ const Navbar = ({
                   <SearchModal />
                 </div>
               </div>
+            {/* <div className="flex flex-1 items-center justify-center items-stretch justify-between"> */}
+            <div className="flex items-center h-9">
+              
               <div className="hidden sm:ml-6 lg:block">
               <MenuItems />
             </div>
@@ -146,7 +150,7 @@ const Navbar = ({
               {/* <div className={`hidden mr-2 md:block my-auto`}>
                   <WMButton />
                 </div> */}
-                 <NavSponsor />
+                 <NavSponsor sponsor={sponsor} />
               <NavigationMenu>
                 <NavigationMenuList>
                   <LocationMenu

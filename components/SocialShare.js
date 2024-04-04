@@ -5,7 +5,7 @@ export default function SocialShare({ slug, authorTwitter, title = "" }) {
   //   const url = encodeURI(slug);
 
   return (
-    <div className="my-auto px-1 grid grid-cols-3 gap-2.5">
+    <div className="my-auto px-1 grid grid-cols-3 gap-4 w-[fit-content]">
       <div>
         <a
           target="_blank"

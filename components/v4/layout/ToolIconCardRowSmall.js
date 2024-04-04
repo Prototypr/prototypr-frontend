@@ -20,7 +20,7 @@ const ToolIconCardRow = ({ tools, topic, tagline }) => {
       {tools?.length?
       <>
       {/* <ToolCard posts={tools} columns={'lg:grid-cols-2'} type="toolbox" /> */}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6`}> 
+      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2`}> 
       <div className="flex flex-col justify-center">
         <div className="text-gray-500 uppercase text-xs">
           {tagline}

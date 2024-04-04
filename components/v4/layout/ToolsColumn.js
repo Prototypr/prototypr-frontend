@@ -4,12 +4,12 @@ import Link from "next/link";
 // import {CaretRight} from 'phosphor-react'
 import { ArrowRight } from "phosphor-react";
 
-const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }) => {
+const ToolsColumn = ({ tools, title, textColor, withBackground, showHeader }) => {
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full bg-white p-3 h-full rounded-2xl border border-gray-300/50 shadow-sm">
     {/* <Container maxWidth="max-w-[1320px] w-full"> */}
       {showHeader!==false && <div className="flex justify-between mb-4">
-        <h3 className="font-semibold text-lg md:text-2xl px-1">
+        <h3 className="font-semibold text-lg px-1">
          {title?title:
          <>
          Latest tools
@@ -17,7 +17,7 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
          </>}
         </h3>
         <div className="flex relative">
-            <div className="text-md inline my-auto text-gray-800 font-normal font-inter">
+            <div className="text-sm inline my-auto text-gray-800 font-normal font-inter">
             <Link href={`/toolbox/`}>See all</Link>
             </div>
             <div className="my-auto">
@@ -36,7 +36,7 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
           </Link> */}
 
       </div>}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2`}>
+      <div className={`grid grid-cols-1 gap-4`}>
         {tools.map((tool, index) => {
           return (
             <div key={index}>
@@ -50,4 +50,4 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
   );
 };
 
-export default ToolIconCardRow;
+export default ToolsColumn;

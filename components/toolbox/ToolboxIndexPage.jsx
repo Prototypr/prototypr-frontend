@@ -150,7 +150,7 @@ export default ToolboxIndexPage;
 
 const Sidebar = ({ filterCategories, paginationRoot, urlRoot, slug, title }) => {
   return (
-    // <div className="hidden md:block h-[fit-content] relative col-span-2 bg-white shadow-md rounded-3xl p-6">
+    // <div className="hidden md:block h-[fit-content] relative col-span-2 bg-white rounded-2xl shadow-sm border border-gray-300/60 p-6">
     <div className={`${title!=='All tools'?'mt-6':'' } hidden md:block h-[fit-content] relative col-span-2 rounded-3xl`}>
       <div className="w-full min-h-screen flex flex-col">
         <FilterCategory

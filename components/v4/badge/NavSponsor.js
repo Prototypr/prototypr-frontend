@@ -1,17 +1,17 @@
 import Image from "next/image";
 
-const NavSponsor = () =>{
+const NavSponsor = ({sponsor}) =>{
 
     return(
         <div className="p-3 pr-4 my-auto">
-        <a href="https://letter.so?ref=prototypr?utm=nav" target="_blank">
+        <a href={sponsor?.link+'?ref=prototypr'} target="_blank">
         <div
               className={`relative w-28 h-8 overflow-hidden border-r border-gray-200`}
             >
               <Image
                 className="object-contain"
                 layout="fill"
-                src={`/static/images/letter-nav.svg`}
+                src={sponsor?.featuredImage}
               />
             </div>
           {/* <div className="flex bg-gray-100 backdrop-blur-sm bg-opacity-90 rounded-3xl p-0.5">

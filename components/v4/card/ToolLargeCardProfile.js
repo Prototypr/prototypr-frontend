@@ -41,7 +41,7 @@ const coverImage = tool.legacyFeaturedImage?.mediaItemUrl || tool.legacyFeatured
       >
          <div className="flex hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-row font-inter w-full max-w-[470px]">
       {coverImage ? (
-        <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[195px] xs:h-[124px] relative rounded-2xl overflow-hidden border border-gray-100">
+        <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[195px] xs:h-[124px] relative rounded-xl overflow-hidden border border-gray-100">
           <Image
             className="object-cover cursor-pointer"
             layout="fill"

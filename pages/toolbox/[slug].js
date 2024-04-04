@@ -14,7 +14,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 import useUser from "@/lib/iron-session/useUser";
 // import { SealQuestion } from "@phosphor-icons/react";
 
-import Carousel from '@/components/carousel'
+import Carousel from "@/components/carousel";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -47,89 +47,127 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
   const { user } = useUser();
   const tags = post.attributes.tags.data;
 
-  let tool = post.attributes
+  let tool = post.attributes;
 
-  let coverImage =   
-  // tool.legacyMedia?.logoNew?tool.legacyMedia?.logoNew:
-  // tool.legacyMedia?.mediaItemUrl?tool.legacyMedia?.mediaItemUrl:
-  // tool.legacyMedia?.imgUrl?tool.legacyMedia?.imgUrl:
-  tool.featuredImage?.data?.attributes?.url
-    ? tool.featuredImage.data.attributes.url
-    : tool.legacyFeaturedImage
-    ? tool.legacyFeaturedImage
-    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-    
-    coverImage = (tool?.legacyMedia?.logoNew || coverImage?.logoNew || tool.legacyMedia?.mediaItemUrl ||tool.legacyFeaturedImage?.mediaItemUrl)
+  let coverImage =
+    // tool.legacyMedia?.logoNew?tool.legacyMedia?.logoNew:
+    // tool.legacyMedia?.mediaItemUrl?tool.legacyMedia?.mediaItemUrl:
+    // tool.legacyMedia?.imgUrl?tool.legacyMedia?.imgUrl:
+    tool.featuredImage?.data?.attributes?.url
+      ? tool.featuredImage.data.attributes.url
+      : tool.legacyFeaturedImage
+        ? tool.legacyFeaturedImage
+        : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
-    useEffect(() => {
-      const s = document.createElement("script");
-      s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-      s.setAttribute("id", "twitter-widget");
-      s.setAttribute("async", "true");
-  
-      if (!document.getElementById("twitter-widget")) {
-        document.head.appendChild(s);
-      }
-  
-      if (window.$crisp) {
-        // window.$crisp.push(["config", "position:reverse", true])
-        // window.$crisp.push(['do', 'chat:close']);
-        window.$crisp.push(["do", "chat:hide"]);
-      }
-    }, []);
-  
-    useEffect(()=>{
-      var tweets = document.getElementsByClassName('twitter-tweet')
-      
-      for(var x = 0;x<tweets.length;x++){
-        let id = tweets[x]?.getAttribute('tweetId')
-        tweets[x].outerHTML=`<div class="twitter-tweet" tweetId="${id}"></div>`
-        
-        window?.twttr?.widgets?.createTweet(id, tweets[x]);
-  
-      }
-  
-    },[post.attributes?.content])
+  coverImage =
+    tool?.legacyMedia?.logoNew ||
+    coverImage?.logoNew ||
+    tool.legacyMedia?.mediaItemUrl ||
+    tool.legacyFeaturedImage?.mediaItemUrl;
+
+  useEffect(() => {
+    const s = document.createElement("script");
+    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
+    s.setAttribute("id", "twitter-widget");
+    s.setAttribute("async", "true");
+
+    if (!document.getElementById("twitter-widget")) {
+      document.head.appendChild(s);
+    }
+
+    if (window.$crisp) {
+      // window.$crisp.push(["config", "position:reverse", true])
+      // window.$crisp.push(['do', 'chat:close']);
+      window.$crisp.push(["do", "chat:hide"]);
+    }
+  }, []);
+
+  useEffect(() => {
+    var tweets = document.getElementsByClassName("twitter-tweet");
+
+    for (var x = 0; x < tweets.length; x++) {
+      let id = tweets[x]?.getAttribute("tweetId");
+      tweets[x].outerHTML = `<div class="twitter-tweet" tweetId="${id}"></div>`;
+
+      window?.twttr?.widgets?.createTweet(id, tweets[x]);
+    }
+  }, [post.attributes?.content]);
 
   return (
     <>
       <div className="w-full mx-auto">
-      <Container padding={false} maxWidth="w-full relative z-0 " >
-        <img src='/static/images/toolbox/squares.svg' className="border-b border-gray-200/90 opacity absolute w-full h-full object-cover top-0 left-0"/>
+        <Container padding={false} maxWidth="w-full -mt-[96px] relative z-0 h-[344px]">
+       
+          {/* <img
+            src="/static/images/toolbox/squares.svg"
+            className="border-b border-gray-200/90 opacity absolute w-full h-full object-cover top-0 left-0"
+          /> */}
 
-          <div className={`${gallery?.length?'pb-[98px]':'pb-[54px]'} pt-[90px] md:pt-[132px] shadow-md -mt-[96px] md:pt-[112px] relative overflow-hidden p-6 border-gray-200`}>
           <div
-          style={{
-            // backgroundColor:`${stc(post?.attributes?.title)}`,
-            // backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
-          }}
-          className="relative w-full max-w-[900px] mx-auto flex flex-col justify-center"
-        >
-            {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
-          <div className="w-full z-10 mx-auto">
-            <div className="flex flex-col">
-              <div className="flex flex-col md:flex-row justify-between">
-                <div className="flex flex-col">
-                  <div className="flex flex-col md:flex-row">
-
-                      <div className="mr-4 mb-4 md:mb-0 w-[64px] h-[64px] shadow-sm rounded-2xl p-[3px] bg-white border border-gray-300">
-                        <Image
-                          loader={gumletLoader}
-                          priority={false < 2 ? `true` : `false`}
-                          data-priority={false < 2 ? `true` : `false`}
-                          fetchpriority={false < 2 ? "true" : "false"}
-                          data-gmlazy={false < 2 ? `false` : `true`}
-                          width="100"
-                          height="100"
-                          alt="Brand logo for external website's link"
-                          className="rounded-2xl h-full w-full object-cover bg-white"
-                          src={coverImage}
-                        />
-                      </div>
-                        <div className="flex flex-col justify-center">
-                          <h1 className="text-3xl text-black/90 font-semibold drop-shadow-sm">
+            // className={`${gallery?.length ? "md:pb-[128px]" : "pb-[54px]"} pt-[90px] md:pt-[102px] shadow-md -mt-[96px] md:pt-[112px] relative bg-gray-800/40 overflow-hidden p-6 border-gray-200`}
+            className={`pb-0 border border-gray-200 h-full shadow-md mt-[72px] w-full mx-auto max-w-[1320px] rounded-3xl pt-[20px] mx-auto relative bg-gray-700 overflow-hidden p-6`}
+            // className={`pb-0 h-full rounded-3xl max-w-[1300px] mx-auto relative bg-gray-800/40 overflow-hidden p-6 border-gray-200`}
+          >
+               <Image
+            layout='fill'
+            objectFit='cover'
+            src={
+              tool.legacyFeaturedImage?.mediaItemUrl
+                ? tool.legacyFeaturedImage?.mediaItemUrl
+                : gallery?.length
+                  ? gallery[0].original
+                  : coverImage
+            }
+          />
+            {/* <div className="absolute top-0 w-full h-full bg-gradient-to-r from-gray-900/70 via-gray-900/10 to-black/10 left-0 z-0" /> */}
+            <div className="absolute top-0 w-full h-full bg-gradient-to-b from-gray-900/10 to-black/90 left-0 z-0" />
+            <div
+              style={
+                {
+                  // backgroundColor:`${stc(post?.attributes?.title)}`,
+                  // backgroundImage: `url(${"/static/images/proto-bg.svg"})`,
+                }
+              }
+              className="relative w-full max-w-[1320px] px-2 mx-auto h-full flex flex-col justify-end"
+            >
+                <div className="flex absolute text-white top-0 mb-3 flex-row px-3">
+                            {tags.map((tag, i) => {
+                              if(i<4){
+                                return (
+                                  <span className="px-4 py-0.5 text-sm mr-2 capitalize rounded-full border border-opacity-90 border-white bg-black/30 backdrop-blur-md">
+                                    {tag.attributes.name}
+                                  </span>
+                                );
+                              }
+                            })}
+                          </div>
+              {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
+              <div className="w-full z-10 mx-auto flex justify-betweeen p-3 pb-8">
+                <div className="flex w-1/2 flex-col justify-between">
+                  <div className="flex flex-col justify-between">
+                    <div className="flex flex-col">
+                      <div className="flex max-w-[94%] flex-col">
+                        <div className="mr-4 flex-none w-[74px] h-[74px] mb-3 shadow-sm rounded-2xl p-[3px] bg-white border border-gray-300">
+                          <Image
+                            loader={gumletLoader}
+                            priority={false < 2 ? `true` : `false`}
+                            data-priority={false < 2 ? `true` : `false`}
+                            fetchpriority={false < 2 ? "true" : "false"}
+                            data-gmlazy={false < 2 ? `false` : `true`}
+                            width="100"
+                            height="100"
+                            alt="Brand logo for external website's link"
+                            className="rounded-2xl h-full w-full object-cover bg-white"
+                            src={coverImage}
+                          />
+                        </div>
+                        <div className="flex flex-col text-white justify-center">
+                          <h1 className="text-5xl mb-0 tracking-tight font-semibold drop-shadow-lg">
                             {post?.attributes?.title}
                           </h1>
+                         {post?.attributes?.excerpt? <p className="text-base line-clamp-3">
+                            {post?.attributes?.excerpt}
+                          </p>:null}
                           {/* {post?.attributes?.author && (
                             <div className="sm:hidden lg:block">
                               <AuthorCard
@@ -138,73 +176,96 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                               />
                             </div>
                           )} */}
-                          {/* <div className="hidden md:flex mb-3 flex-row">
-                            {tags.map((tag) => {
-                              return (
-                                <span className="px-4 py-0.5 text-sm mr-2 capitalize rounded-full text-gray-600 border border-opacity-10 border-white bg-black bg-opacity-5 backdrop-blur-md">
-                                  {tag.attributes.name}
-                                </span>
-                              );
-                            })}
-                          </div> */}
+                        
                           {/* <div className="text-sm mt-1 top-0 right-0 text-gray-600">
                             Is this your tool? <Link className="underline" href={`/toolbox/post/${post.id}/claim`}>Claim this page</Link>.
                           </div> */}
                         </div>
+                      </div>
+                    </div>
                   </div>
+
+                  {/* <div>
+                    <div className="mt-6 flex flex-wrap">
+                      {tags.map((tag,index) => {
+                        if(index<5){
+                          return (
+                            <Link
+                              href={`/toolbox/${tag.attributes.slug}/page/1`}
+                              className="flex"
+                            >
+                              <div className="inline-block capitalize text-base px-3 py-1 cursor-pointer bg-blue-100 rounded-full mr-3 mb-3 text-blue-900 text-[15px] font-base outline outline-1 outline-blue-200/80 flex flex-col justify-center">
+                                {tag.attributes.name}
+                              </div>
+                            </Link>
+                          );
+                        }
+                      })}
+                    </div>
+                  </div> */}
                 </div>
 
-                <div className="flex flex-none mt-6 md:mt-0 md:flex-col md:justify-center">
-                  <div className="flex justify-end">
-                    <a
-                      target={"_blank"}
-                      href={post?.attributes?.link + "?ref=prototypr.io"}
+                <div className="flex w-1/2 pl-24 flex-col justify-end">
+                <div className="flex text-base text-white">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mr-1.5"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
                     >
-                      <Button className="rounded-full bg-blue-600 font-semibold text-white px-6 py-4 leading-none" variant={"confirmBig"}>
-                        Visit Site
-                      </Button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex text-base top-0 right-0 mt-6 text-black/80">
-                {/* <SealQuestion size={24} className="mr-1.5"/> */}
-                <svg xmlns="http://www.w3.org/2000/svg" className="mr-1.5" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M225.86,102.82c-3.77-3.94-7.67-8-9.14-11.57-1.36-3.27-1.44-8.69-1.52-13.94-.15-9.76-.31-20.82-8-28.51s-18.75-7.85-28.51-8c-5.25-.08-10.67-.16-13.94-1.52-3.56-1.47-7.63-5.37-11.57-9.14C146.28,23.51,138.44,16,128,16s-18.27,7.51-25.18,14.14c-3.94,3.77-8,7.67-11.57,9.14C88,40.64,82.56,40.72,77.31,40.8c-9.76.15-20.82.31-28.51,8S41,67.55,40.8,77.31c-.08,5.25-.16,10.67-1.52,13.94-1.47,3.56-5.37,7.63-9.14,11.57C23.51,109.72,16,117.56,16,128s7.51,18.27,14.14,25.18c3.77,3.94,7.67,8,9.14,11.57,1.36,3.27,1.44,8.69,1.52,13.94.15,9.76.31,20.82,8,28.51s18.75,7.85,28.51,8c5.25.08,10.67.16,13.94,1.52,3.56,1.47,7.63,5.37,11.57,9.14C109.72,232.49,117.56,240,128,240s18.27-7.51,25.18-14.14c3.94-3.77,8-7.67,11.57-9.14,3.27-1.36,8.69-1.44,13.94-1.52,9.76-.15,20.82-.31,28.51-8s7.85-18.75,8-28.51c.08-5.25.16-10.67,1.52-13.94,1.47-3.56,5.37-7.63,9.14-11.57C232.49,146.28,240,138.44,240,128S232.49,109.73,225.86,102.82Zm-11.55,39.29c-4.79,5-9.75,10.17-12.38,16.52-2.52,6.1-2.63,13.07-2.73,19.82-.1,7-.21,14.33-3.32,17.43s-10.39,3.22-17.43,3.32c-6.75.1-13.72.21-19.82,2.73-6.35,2.63-11.52,7.59-16.52,12.38S132,224,128,224s-9.15-4.92-14.11-9.69-10.17-9.75-16.52-12.38c-6.1-2.52-13.07-2.63-19.82-2.73-7-.1-14.33-.21-17.43-3.32s-3.22-10.39-3.32-17.43c-.1-6.75-.21-13.72-2.73-19.82-2.63-6.35-7.59-11.52-12.38-16.52S32,132,32,128s4.92-9.15,9.69-14.11,9.75-10.17,12.38-16.52c2.52-6.1,2.63-13.07,2.73-19.82.1-7,.21-14.33,3.32-17.43S70.51,56.9,77.55,56.8c6.75-.1,13.72-.21,19.82-2.73,6.35-2.63,11.52-7.59,16.52-12.38S124,32,128,32s9.15,4.92,14.11,9.69,10.17,9.75,16.52,12.38c6.1,2.52,13.07,2.63,19.82,2.73,7,.1,14.33.21,17.43,3.32s3.22,10.39,3.32,17.43c.1,6.75.21,13.72,2.73,19.82,2.63,6.35,7.59,11.52,12.38,16.52S224,124,224,128,219.08,137.15,214.31,142.11ZM140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180Zm28-72c0,17.38-13.76,31.93-32,35.28V144a8,8,0,0,1-16,0v-8a8,8,0,0,1,8-8c13.23,0,24-9,24-20s-10.77-20-24-20-24,9-24,20v4a8,8,0,0,1-16,0v-4c0-19.85,17.94-36,40-36S168,88.15,168,108Z"></path></svg>
-                <div className="my-auto">
-                  <div className="inline">Is this your tool? <Link className="underline" href={`/toolbox/post/${post.id}/claim`}>Claim this page</Link>.</div>
-                </div>
-              </div>
-              <div>
-              <div className="mt-6 flex flex-wrap">
-                {tags.map((tag) => {
-                      return (
+                      <path d="M225.86,102.82c-3.77-3.94-7.67-8-9.14-11.57-1.36-3.27-1.44-8.69-1.52-13.94-.15-9.76-.31-20.82-8-28.51s-18.75-7.85-28.51-8c-5.25-.08-10.67-.16-13.94-1.52-3.56-1.47-7.63-5.37-11.57-9.14C146.28,23.51,138.44,16,128,16s-18.27,7.51-25.18,14.14c-3.94,3.77-8,7.67-11.57,9.14C88,40.64,82.56,40.72,77.31,40.8c-9.76.15-20.82.31-28.51,8S41,67.55,40.8,77.31c-.08,5.25-.16,10.67-1.52,13.94-1.47,3.56-5.37,7.63-9.14,11.57C23.51,109.72,16,117.56,16,128s7.51,18.27,14.14,25.18c3.77,3.94,7.67,8,9.14,11.57,1.36,3.27,1.44,8.69,1.52,13.94.15,9.76.31,20.82,8,28.51s18.75,7.85,28.51,8c5.25.08,10.67.16,13.94,1.52,3.56,1.47,7.63,5.37,11.57,9.14C109.72,232.49,117.56,240,128,240s18.27-7.51,25.18-14.14c3.94-3.77,8-7.67,11.57-9.14,3.27-1.36,8.69-1.44,13.94-1.52,9.76-.15,20.82-.31,28.51-8s7.85-18.75,8-28.51c.08-5.25.16-10.67,1.52-13.94,1.47-3.56,5.37-7.63,9.14-11.57C232.49,146.28,240,138.44,240,128S232.49,109.73,225.86,102.82Zm-11.55,39.29c-4.79,5-9.75,10.17-12.38,16.52-2.52,6.1-2.63,13.07-2.73,19.82-.1,7-.21,14.33-3.32,17.43s-10.39,3.22-17.43,3.32c-6.75.1-13.72.21-19.82,2.73-6.35,2.63-11.52,7.59-16.52,12.38S132,224,128,224s-9.15-4.92-14.11-9.69-10.17-9.75-16.52-12.38c-6.1-2.52-13.07-2.63-19.82-2.73-7-.1-14.33-.21-17.43-3.32s-3.22-10.39-3.32-17.43c-.1-6.75-.21-13.72-2.73-19.82-2.63-6.35-7.59-11.52-12.38-16.52S32,132,32,128s4.92-9.15,9.69-14.11,9.75-10.17,12.38-16.52c2.52-6.1,2.63-13.07,2.73-19.82.1-7,.21-14.33,3.32-17.43S70.51,56.9,77.55,56.8c6.75-.1,13.72-.21,19.82-2.73,6.35-2.63,11.52-7.59,16.52-12.38S124,32,128,32s9.15,4.92,14.11,9.69,10.17,9.75,16.52,12.38c6.1,2.52,13.07,2.63,19.82,2.73,7,.1,14.33.21,17.43,3.32s3.22,10.39,3.32,17.43c.1,6.75.21,13.72,2.73,19.82,2.63,6.35,7.59,11.52,12.38,16.52S224,124,224,128,219.08,137.15,214.31,142.11ZM140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180Zm28-72c0,17.38-13.76,31.93-32,35.28V144a8,8,0,0,1-16,0v-8a8,8,0,0,1,8-8c13.23,0,24-9,24-20s-10.77-20-24-20-24,9-24,20v4a8,8,0,0,1-16,0v-4c0-19.85,17.94-36,40-36S168,88.15,168,108Z"></path>
+                    </svg>
+                    <div className="">
+                      <div className="inline">
+                        Is this your tool?{" "}
                         <Link
-        href={`/toolbox/${tag.attributes.slug}/page/1`}
-        className="flex"
-      >
-
-                        <div className="inline-block capitalize text-base px-3 py-1 cursor-pointer bg-blue-100/60 rounded-full mr-3 mb-3 text-blue-900 text-[15px] font-base outline outline-1 outline-blue-200/80 flex flex-col justify-center">
-                          {tag.attributes.name}
-                        </div>
-      </Link>
-                      );
-                    })}
-              </div>
+                          className="underline"
+                          href={`/toolbox/post/${post.id}/claim`}
+                        >
+                          Claim this page
+                        </Link>
+                        .
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-none mt-6 ">
+                      <div className="flex justify-end">
+                        <a
+                          target={"_blank"}
+                          href={post?.attributes?.link + "?ref=prototypr.io"}
+                        >
+                          <Button
+                            className="rounded-full bg-blue-600 font-semibold text-white px-6 py-4 leading-none"
+                            variant={"confirmBig"}
+                          >
+                            Visit Site
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                 
+                </div>
               </div>
             </div>
-          </div>
-        </div>
             {/* <img src="/static/images/surf.svg" className="absolute -mt-1  w-full bottom-0 z-40 left-0"/> */}
-    
           </div>
         </Container>
-        <Container maxWidth="w-full bg-[#fefefe] relative z-10 pt-8">
+        <Container maxWidth="w-full relative z-10">
           <div className="max-w-[1320px] mx-auto grid grid-cols-12 gap-6 xl:gap-0 md:px-0 h-full">
-          <div className="col-span-12 lg:col-span-12">
-            <div className={`${gallery?.length?'-mt-[125px] mt-8 mb-6 md:pl-0 rounded-xl':''} `}>
-              {/* <h3 class="text-lg font-bold">Gallery</h3> */}
-              {/* {post?.attributes && (
+            <div className="col-span-12 lg:col-span-12 flex flex-col flex-col-reverse md:flex-col ">
+              <div
+                // className={`${gallery?.length ? "md:-mt-[114px] mt-8 mb-6 md:pl-0 rounded-xl" : ""} `}
+                className={`${gallery?.length ? "md:pl-0 rounded-xl" : ""} `}
+              >
+                <div className="">
+                  <h2 className="text-xl md:hidden font-medium mb-6">
+                    {post?.attributes?.title} Gallery
+                  </h2>
+                </div>
+                {/* <h3 class="text-lg font-bold">Gallery</h3> */}
+                {/* {post?.attributes && (
                   <PopupGallery
                     item={post.attributes}
                     gallery={gallery}
@@ -212,109 +273,147 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                     arrows={false}
                   />
                 )} */}
-                 {gallery?.length ? <Carousel gallery={gallery}/>:''}
+                {gallery?.length ? <Carousel gallery={gallery} /> : ""}
               </div>
-              <div className="max-w-[1100px] mx-auto w-full">
-                <div className="max-w-[900px] blog-content toolbox-content mx-auto">
+              <div className="max-w-[1100px] w-full">
+                <div className="max-w-[900px] bg-white p-8 rounded-lg border border-gray-300/70 shadow-sm mx-4">
                   <h2 class="text-2xl font-medium mb-8">Overview</h2>
+
+                  <div className="max-w-[900px] blog-content toolbox-content">
                     <div
-                        style={{ color: "#222", fontSize: "18px", lineHeight: '33px' }}
-                        className="mt-3 popup-modal-content"
-                        dangerouslySetInnerHTML={{
-                          __html: post.attributes.content,
-                        }}
-                      ></div>
-                  {!gallery?.length ?<Image
-                  // layout="fill"
-                  // objectFit="cover"
-                  width="800"
-                  height="600"
-                  alt="Product screenshot"
-                  className="rounded-2xl object-cover"
-                  src={
-                    post.attributes?.featuredImage?.data?.attributes?.url
-                      ? post.attributes.featuredImage.data.attributes.url
-                      : post.attributes?.legacyFeaturedImage
-                      ? post.attributes?.legacyFeaturedImage.mediaItemUrl
-                      : post.attributes?.ogImage
-                      ? post.attributes?.ogImage.opengraphImage
-                      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-                  }
-                />:''}
+                      style={{
+                        color: "#222",
+                        fontSize: "18px",
+                        lineHeight: "33px",
+                      }}
+                      className="mt-3 popup-modal-content"
+                      dangerouslySetInnerHTML={{
+                        __html: post.attributes.content,
+                      }}
+                    ></div>
+                    {!gallery?.length ? (
+                      <Image
+                        // layout="fill"
+                        // objectFit="cover"
+                        width="800"
+                        height="600"
+                        alt="Product screenshot"
+                        className="rounded-2xl object-cover"
+                        src={
+                          post.attributes?.featuredImage?.data?.attributes?.url
+                            ? post.attributes.featuredImage.data.attributes.url
+                            : post.attributes?.legacyFeaturedImage
+                              ? post.attributes?.legacyFeaturedImage
+                                  .mediaItemUrl
+                              : post.attributes?.ogImage
+                                ? post.attributes?.ogImage.opengraphImage
+                                : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                        }
+                      />
+                    ) : (
+                      ""
+                    )}
                   </div>
-                 {post?.attributes?.author && (
-                  <>
-                  <h1 tabIndex={0} className="mt-16 text-sm mb-3 font-semibold">{post?.attributes?.creator?'Contributors':'Posted by'}</h1> 
-                            <div className=" mb-3 flex">
-                              <AuthorCard
-                                title={post?.attributes?.creator?"Curator":null}
-                                author={post.attributes.author}
-                                avatar={post.attributes?.author}
-                              />
-                              {post.attributes?.creator ?<div className="ml-10">
-                                <AuthorCard
-                                title={post?.attributes?.creator?"Creator":null}
-                                author={post.attributes.creator}
-                                  avatar={post.attributes?.creator}
-                                />
-                              </div>:null}
-                            </div>
-                  </>
-                          )}
                 </div>
-          </div>
-          <SectionDivider py="py-3" transparentLine={true}/>
+                {post?.attributes?.author && (
+                  <>
+                    <h1
+                      tabIndex={0}
+                      className="mt-16 text-sm mb-3 font-semibold"
+                    >
+                      {post?.attributes?.creator ? "Contributors" : "Posted by"}
+                    </h1>
+                    <div className=" mb-3 flex">
+                      <AuthorCard
+                        title={post?.attributes?.creator ? "Curator" : null}
+                        author={post.attributes.author}
+                        avatar={post.attributes?.author}
+                      />
+                      {post.attributes?.creator ? (
+                        <div className="ml-10">
+                          <AuthorCard
+                            title={post?.attributes?.creator ? "Creator" : null}
+                            author={post.attributes.creator}
+                            avatar={post.attributes?.creator}
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+            <SectionDivider py="py-3" transparentLine={true} />
           </div>
           <Container maxWidth="max-w-[1320px]">
-          <div className={`pb-0 border-l-[0.19rem] border-b-[0.18rem] border-sky-500 opacity-10 rounded-bl-xl pt-6`}>
-            {/* <div className={` bg-opacity-[0.08] bg-sky-500 h-[3px] w-full pl-3`} /> */}
-          </div>
-        </Container>
-
+            <div
+              className={`pb-0 border-l-[0.19rem] border-b-[0.18rem] border-sky-500 opacity-10 rounded-bl-xl pt-6`}
+            >
+              {/* <div className={` bg-opacity-[0.08] bg-sky-500 h-[3px] w-full pl-3`} /> */}
+            </div>
+          </Container>
         </Container>
       </div>
 
       <Container maxWidth=" w-full pb-24 bg-gradient-to-tr from-[#fefefe] to-sky-100/20 relative z-10">
-      {/* <img src="/static/images/bendy9.svg" className="absolute top-0 -mt-[2.9%] z-10 left-0 w-full gm-added gm-observing gm-observing-cb" loading="lazy"/> */}
-      {relatedPosts?.length ? 
-                <div className="z-30 relative max-w-[1320px] mx-auto md:px-3">
-                  <img src="/static/images/toolbox/squares2.svg" className="w-full h-[128%] absolute object-cover opacity-20"/>
-                  <div classsName="flex flex-col px-3 z-30">
-                  <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium font-inter max-w-md">
-                    Related tools
-                  </h3>
-                  {/* <ToolLargeCardRow title={`Related to ${post?.attributes?.title}`} tools={relatedPosts.slice(0,4)} /> */}
-                  <ToolLargeCardRow showTitle={false} tools={relatedPosts.slice(0,4)} />
-                  {/* <ToolCard posts={relatedPosts} columns={'grid-cols-1'} type="toolboxContentPage" /> */}
-                  </div>
-                </div>
-               :null }
-        </Container>
+        {/* <img src="/static/images/bendy9.svg" className="absolute top-0 -mt-[2.9%] z-10 left-0 w-full gm-added gm-observing gm-observing-cb" loading="lazy"/> */}
+        {relatedPosts?.length ? (
+          <div className="z-30 relative max-w-[1320px] mx-auto md:px-3">
+            <img
+              src="/static/images/toolbox/squares2.svg"
+              className="w-full h-[128%] absolute object-cover opacity-20"
+            />
+            <div classsName="flex flex-col px-3 z-30">
+              <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium font-inter max-w-md">
+                Related tools
+              </h3>
+              {/* <ToolLargeCardRow title={`Related to ${post?.attributes?.title}`} tools={relatedPosts.slice(0,4)} /> */}
+              <ToolLargeCardRow
+                showTitle={false}
+                tools={relatedPosts.slice(0, 4)}
+              />
+              {/* <ToolCard posts={relatedPosts} columns={'grid-cols-1'} type="toolboxContentPage" /> */}
+            </div>
+          </div>
+        ) : null}
+      </Container>
       <Container maxWidth="w-full pb-16 bg-[#fefefe] relative z-10 pt-0">
-          <div className="max-w-[1320px] pt-0 -mt-8 mb-8 mx-auto h-full">
-        <div className="mb-20">
-          <NewsletterSection padding={false} title="Get the best tools every week"/>
-        </div>
-        {/* <SectionDivider/>      
+        <div className="max-w-[1320px] pt-0 -mt-8 mb-8 mx-auto h-full">
+          <div className="mb-20">
+            <NewsletterSection
+              padding={false}
+              title="Get the best tools every week"
+            />
+          </div>
+          {/* <SectionDivider/>      
         <h2 className="text-lg mb-4 font-semibold">More on Prototypr</h2>
         <TwoColumnCards/>
         <SectionDivider/> */}
-        <div className="mt-2">
-          <h2 className="text-lg mb-4 font-semibold">Popular topics</h2>
-          <PopularTagsSection popularTags={popularTags}/>
-        </div>
+          <div className="mt-2">
+            <h2 className="text-lg mb-4 font-semibold">Popular topics</h2>
+            <PopularTagsSection popularTags={popularTags} />
+          </div>
         </div>
       </Container>
 
-      {!user?.isLoggedIn && <StickyFooterCTA title="Welcome to Prototypr"
-      description="Join today to make posts and grow with us."
-      />}
+      {!user?.isLoggedIn && (
+        <StickyFooterCTA
+          title="Welcome to Prototypr"
+          description="Join today to make posts and grow with us."
+        />
+      )}
       {/* <NewsletterSection title="Get the best tools every week"/> */}
     </>
   );
 };
 
-export default function Post({ post, relatedPosts, gallery, preview, popularTags }) {
+export default function Post({
+  post,
+  relatedPosts,
+  gallery,
+  preview,
+  popularTags,
+}) {
   const router = useRouter();
 
   if (!router.isFallback && !post?.attributes?.slug) {
@@ -331,7 +430,7 @@ export default function Post({ post, relatedPosts, gallery, preview, popularTags
     <Layout
       padding={false}
       // background={"RGBA(204, 230, 255, 0.9)"}
-      background={"#fff"}
+      background={"#EFF4FB"}
       maxWidth={"search-wide"}
       seo={{
         title: `${
@@ -348,12 +447,12 @@ export default function Post({ post, relatedPosts, gallery, preview, popularTags
           post?.attributes?.seo?.opengraphImage
             ? post?.attributes?.seo?.opengraphImage
             : post?.attributes?.featuredImage?.data?.attributes?.url
-            ? post?.attributes?.featuredImage?.data?.attributes?.url
-            : post?.legacyFeaturedImage
-            ? post?.legacyFeaturedImage?.mediaItemUrl
-            : post?.ogImage
-            ? post?.ogImage.opengraphImage
-            : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+              ? post?.attributes?.featuredImage?.data?.attributes?.url
+              : post?.legacyFeaturedImage
+                ? post?.legacyFeaturedImage?.mediaItemUrl
+                : post?.ogImage
+                  ? post?.ogImage.opengraphImage
+                  : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
         }`,
         canonical: `${
           post?.attributes?.seo?.canonical
@@ -383,10 +482,15 @@ export default function Post({ post, relatedPosts, gallery, preview, popularTags
         </div>
       </Container> */}
       {/* <div className="w-full mt-6 md:mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6"> */}
-        <ToolContent popularTags={popularTags} post={post} gallery={gallery} relatedPosts={relatedPosts} />
+      <ToolContent
+        popularTags={popularTags}
+        post={post}
+        gallery={gallery}
+        relatedPosts={relatedPosts}
+      />
       {/* </div> */}
 
-      <Footer/>
+      <Footer />
     </Layout>
   );
 }
@@ -394,7 +498,9 @@ export default function Post({ post, relatedPosts, gallery, preview, popularTags
 export async function getStaticProps({ params, preview = null, locale }) {
   const data = await getTool(params.slug, preview);
 
-  let relatedPostsData = data?.posts?.data[0]?.attributes?.relatedTools?data?.posts?.data[0]?.attributes?.relatedTools:false;
+  let relatedPostsData = data?.posts?.data[0]?.attributes?.relatedTools
+    ? data?.posts?.data[0]?.attributes?.relatedTools
+    : false;
 
   //build the gallery here
   let PHOTO_SET = [];
@@ -463,11 +569,12 @@ export async function getStaticProps({ params, preview = null, locale }) {
   // no point transforming these, cos they're all english anyway
   // const postData = transformPost(data?.posts.data[0], locale)
   const postData = data?.posts.data[0];
-  const popularTags = (await getPopularTopics({postType:'article', pageSize:8})) || [];
+  const popularTags =
+    (await getPopularTopics({ postType: "article", pageSize: 8 })) || [];
 
   // no point transforming these, cos they're all english anyway
   // relatedPostsData = transformPostList(relatedPostsData, locale)
-  
+
   return {
     props: {
       preview,
@@ -476,10 +583,10 @@ export async function getStaticProps({ params, preview = null, locale }) {
       },
       gallery: PHOTO_SET,
       relatedPosts: relatedPostsData,
-      popularTags:popularTags
+      popularTags: popularTags,
       // morePosts: data?.morePosts.data,
     },
-    revalidate: 40
+    revalidate: 40,
   };
 }
 
@@ -494,7 +601,7 @@ export async function getStaticPaths() {
   return {
     paths:
       (allPosts &&
-        allPosts.data?.map((post) => {
+        allPosts.data?.map(post => {
           return `/toolbox/${post.attributes.slug}`;
         })) ||
       [],

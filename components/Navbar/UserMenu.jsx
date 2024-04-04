@@ -63,7 +63,7 @@ const UserMenu = ({ user, userLoading }) => {
                 </div>
               </Link>
               <Link href="/onboard">
-              <Button className="text-sm bg-blue-600 hover:bg-blue-500" variant={"confirmRounded"}>
+              <Button className="text-sm bg-blue-600 hover:bg-blue-500 rounded-xl" variant={"confirmRounded"}>
               Sign up
             </Button>
             </Link>

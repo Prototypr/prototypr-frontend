@@ -23,6 +23,7 @@ import Navbar, { HomePageNewNavBar } from "@/components/Navbar/Navbar";
 export default function Layout({
   preview,
   children,
+  sponsor,
   activeNav,
   background,
   padding,
@@ -35,7 +36,7 @@ export default function Layout({
       <Meta seo={seo} />
       {/* <Navbar activeNav={activeNav} /> */}
       {/* <div className="fixed w-full z-50"> */}
-      <Navbar maxWidth={"max-w-[1320px]"} />
+      <Navbar navType={navType} sponsor={sponsor} maxWidth={"max-w-[1320px]"} />
       {/* </div> */}
 
       <div
