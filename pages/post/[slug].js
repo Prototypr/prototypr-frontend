@@ -174,7 +174,7 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                   >
                     {!post.currentLocaleAvailable && <NoticeTranslation />}
 
-                    <div className="pt-4 max-w-[44rem] mx-auto w-full">
+                    <div className="pt-4 max-w-[60rem] mx-auto w-full">
                       <div className=" flex mb-3 justify-start flex-wrap">
                         {tags.map((tag, index) => {
                           return (
@@ -208,7 +208,7 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                         author={post.attributes?.author?.data?.attributes}
                         template={post.attributes?.template}
                       />
-                      <p className="max-w-[44rem] w-full mx-auto text-left md:px-1 text-lg my-3 font-semibold text-black/70">
+                      <p className="max-w-[60rem] w-full mx-auto text-left md:px-1 text-lg my-3 font-semibold text-black/70">
                         Published <Date dateString={post.attributes.date} />
                       </p>
                     </div>
@@ -225,7 +225,7 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                     />
                   </div>
 
-                  <div className="w-full flex justify-start max-w-[44rem] mx-auto mt-8 px-3 md:px-0">
+                  <div className="w-full flex justify-start max-w-[60rem] mx-auto mt-8 px-3 md:px-0">
                     <div className="flex flex-col">
                       {author ? (
                         <div className="">

@@ -105,7 +105,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
 
           <div
             // className={`${gallery?.length ? "md:pb-[128px]" : "pb-[54px]"} pt-[90px] md:pt-[102px] shadow-md -mt-[96px] md:pt-[112px] relative bg-gray-800/40 overflow-hidden p-6 border-gray-200`}
-            className={`pb-0 border border-gray-200 h-full shadow-md mt-[72px] w-full mx-auto max-w-[1320px] rounded-3xl pt-[20px] mx-auto relative bg-gray-700 overflow-hidden p-6`}
+            className={`pb-0 border border-gray-200 h-full shadow-md mt-[72px] w-full mx-auto max-w-[1320px] rounded-2xl pt-[20px] mx-auto relative bg-gray-700 overflow-hidden p-6`}
             // className={`pb-0 h-full rounded-3xl max-w-[1300px] mx-auto relative bg-gray-800/40 overflow-hidden p-6 border-gray-200`}
           >
                <Image
@@ -276,7 +276,7 @@ const ToolContent = ({ post, gallery, relatedPosts, popularTags }) => {
                 {gallery?.length ? <Carousel gallery={gallery} /> : ""}
               </div>
               <div className="max-w-[1100px] w-full">
-                <div className="max-w-[900px] bg-white p-8 rounded-lg border border-gray-300/70 shadow-sm mx-4">
+                <div className="max-w-[800px] bg-white p-8 rounded-2xl border border-gray-300/70 shadow-sm mx-1">
                   <h2 class="text-2xl font-medium mb-8">Overview</h2>
 
                   <div className="max-w-[900px] blog-content toolbox-content">

@@ -528,8 +528,8 @@ figure, pre{
        
         *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
             max-width: 100%;
-            margin-right: auto;
-            margin-left: auto;
+            // margin-right: auto;
+            // margin-left: auto;
             .flex{
                 figure{
                     margin-bottom: auto;
@@ -663,13 +663,20 @@ figure, pre{
     .max-w-full{
         max-width: 100%!important;
     }
-    figure, img, video{
+    img, video{
         max-width: 100%!important;
     }
-    p, h1, h2, h3, h4, ol, li, ul, iframe, figure, img, blockquote, figcaption, hr, div, table, video{
-        margin-left:auto;
-        margin-right: auto;
+    figure, figcaption{
+        max-width: 48rem!important;
     }
+//    figcaption{
+//         margin-left:auto;
+//         margin-right: auto;
+//     }
+    // p, h1, h2, h3, h4, ol, li, ul, iframe, figure, img, blockquote, figcaption, hr, div, table, video{
+    //     margin-left:auto;
+    //     margin-right: auto;
+    // }
     .twitter-tweet{
         margin-top:40px!important;
         margin-bottom:40px!important;

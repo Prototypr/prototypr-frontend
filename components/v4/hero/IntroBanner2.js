@@ -30,8 +30,8 @@ const IntroBanner = ({ tools, sponsor }) => {
     <Container padding={false} maxWidth="relative grid z-0">
       
       {/* <div className="mt-[70px] max-w-[1320px] relative mx-auto w-full rounded-3xl justify-stretch bg-[#CCE6FF] text-gray-800"> */}
-      <div className="mt-[70px] max-w-[1320px] relative mx-auto w-full rounded-3xl justify-stretch  bg-[#99cdff]/70 border border-gray-300/20 shadow-sm text-gray-800">
-        <div className="max-w-[1320px] mx-auto w-full rounded-3xl w-full opacity-30 bg-gradient-to-r from-blue-200  via-blue-200 via-blue-300/10 to-indigo-900 absolute top-0 left-0 w-full h-full"/>
+      <div className="mt-[70px] max-w-[1320px] relative mx-auto w-full rounded-2xl justify-stretch  bg-[#99cdff]/70 border border-gray-300/20 shadow-sm text-gray-800">
+        <div className="max-w-[1320px] mx-auto w-full rounded-2xl w-full opacity-30 bg-gradient-to-r from-blue-200  via-blue-200 via-blue-300/10 to-indigo-900 absolute top-0 left-0 w-full h-full"/>
          {/* <svg className="bg-gradient-to-br opacity-60 from-blue-200  via-blue-400/20 via-pink-300/20 to-blue-800/50" style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} xmlns='http://www.w3.org/2000/svg'>
           <filter id='noiseFilter'>
             <feTurbulence 
