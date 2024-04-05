@@ -98,7 +98,7 @@ const EmblaCarousel = (props) => {
   }
 
   return (
-    <div className="embla lg:px-12 pt-6 bg-white my-5 mx-1 rounded-2xl shadow-sm border borader-gray/300/70 pb-3 relative">
+    <div className="embla lg:px-12 pt-4 bg-white my-5 mx-1 rounded-2xl shadow-sm border borader-gray/300/70 pb-0 relative">
       <div className="embla__buttons w-[99%] ml-[0.5%] absolute top-0 w-full flex justify-between -mt-[1rem]">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />

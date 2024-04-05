@@ -59,6 +59,7 @@ import { ToggleSwitch } from "@/components/atom/Switch/switch";
 import PreviewDisplay from "./preview";
 
 import { useRouter } from "next/router";
+import VideoMenu from "./Menus/VideoMenu";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
 const CustomDocument = Document.extend({
@@ -367,6 +368,7 @@ const Editor = ({
             <TextMenu editor={editor} />
             {/* <LinkMenu editor={editor} /> */}
             <ImageMenu editor={editor} />
+            <VideoMenu editor={editor} />
             {((loading || !editorCreated)|| (!content && slug))? (
               <div
                 style={{ maxWidth: "100%" }}

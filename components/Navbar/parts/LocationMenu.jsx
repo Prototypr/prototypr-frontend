@@ -44,7 +44,7 @@ export const LocationMenu = ({
         !editor &&
         showWriteButton !== false && (
           <NavigationMenuItem
-            className={`hidden ml-4 lg:block lg:flex lg:flex-col lg:justify-center`}
+            className={`hiddenlg:block lg:flex lg:flex-col lg:justify-center`}
           >
             <NewPostDialog/>
             {/* <Link href="/write">

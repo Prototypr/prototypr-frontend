@@ -434,8 +434,7 @@ export async function getStaticProps({
     ? data?.posts.data[0]?.attributes?.relatedArticles
     : [];
 
-  let morPosts = groupPostsByDate(data.morePosts?.data);
-  console.log(morPosts);
+  let groupedPosts = groupPostsByDate(data.morePosts?.data);
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
     props: {
@@ -445,7 +444,7 @@ export async function getStaticProps({
       },
       domain,
       link,
-      groupedPosts: morPosts,
+      groupedPosts: groupedPosts,
       postDate: JSON.stringify(postDate),
       morePosts: data.morePosts?.data,
     },

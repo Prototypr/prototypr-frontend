@@ -6,7 +6,7 @@ import Container from "./container";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { set, get } from "js-cookie";
 
-function getScrollPercent() {
+export function getScrollPercent() {
   var h = document.documentElement,
     b = document.body,
     st = "scrollTop",

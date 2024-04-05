@@ -85,7 +85,7 @@ toolbox width
         min-height: 440px;
     }
     *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
-        max-width: 54rem;
+        max-width: 100%;
     }
    figure>img.w-full, figure.size-large>img{
         width:54rem;
@@ -670,12 +670,24 @@ figure, pre{
         max-width: 50rem!important;
         // margin-left: -1rem;
     }
-    figure, figcaption, video, iframe{
-        max-width: 48rem!important;
+    figure{
+        max-width: fit-content;
+        video{
+            width: 100%!important;
+        }
+        img{
+            max-width: 100%!important;
+        }
     }
     img{
         max-width: 100%;
-    
+    }
+    figcaption, iframe{
+        max-width: 44rem!important;
+    }
+    figcaption{
+        margin-left:auto;
+        margin-right: auto;
     }
 //    figcaption{
 //         margin-left:auto;

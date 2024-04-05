@@ -108,6 +108,15 @@ export const Figure = Node.create({
           }
         },
       },
+      width:{
+        default: null,
+        parseHTML: element => {
+          if(element.nodeName=='FIGURE'){
+
+            return element.getAttribute("width")
+          }
+        },
+      },
       link: { parseHTML: (element) => {
         if(element.querySelector('a')){
           return element.querySelector('a')?.getAttribute('href')

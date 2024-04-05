@@ -8,7 +8,7 @@ import {
   NavigationMenu,
   NavigationMenuList,
 } from "@/components/Primitives/Navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
 // import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
@@ -17,10 +17,11 @@ import SearchModal from "../SearchModal";
 // import { Waypoint } from "react-waypoint";
 import MenuItems from "@/components/Navbar/parts/MenuItems";
 import NewPostDialog from "./parts/NewPostDialog";
-const WMButton = dynamic(() => import("./parts/WMButton"), 
-{
-  ssr: false,
-});
+import { getScrollPercent } from "../StickyFooterCTA";
+// const WMButton = dynamic(() => import("./parts/WMButton"),
+// {
+//   ssr: false,
+// });
 
 // const WMCounter = dynamic(
 //   () => import("@/components/WebMonetization/Counter"),
@@ -36,7 +37,7 @@ const Navbar = ({
   sponsor,
   showWriteButton,
   maxWidth,
-  navType
+  navType,
 }) => {
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -47,28 +48,57 @@ const Navbar = ({
     setMobileNavOpen(!mobileNavOpen);
   };
 
-  // const [navScrolledClass, setNavScrolledClass] = useState("border-opacity-0");
-  // const [wrapperClass, setWrapperClass] = useState("top-0");
+  const [isVisible, setVisible] = useState(false);
+  const [blinkyOn, setBlinkyOn] = useState(false);
 
-  // const _handleWaypointEnter = () => {
-  //   setNavScrolledClass("border-opacity-0");
-  //   // setWrapperClass("top-0");
-  // };
-  // const _handleWaypointLeave = () => {
-  //   setNavScrolledClass("border-opacity-5");
-  //   // setWrapperClass("top-2");
-  // };
+  useEffect(() => {
+    setBlinkyOn(true)
+      setTimeout(() => {
+        setBlinkyOn(false)
+      }, 1000);
+  }, [isVisible]);
+
+  // Define the scrollListener inside useEffect or use useCallback
+  useEffect(() => {
+    const scrollListener = () => {
+      const p = getScrollPercent(); // Assuming getScrollPercent is defined elsewhere
+
+      if (p > 1) {
+        setVisible(true);
+  
+      } else {
+        setVisible(false);
+  
+      }
+    };
+
+    window.addEventListener("scroll", scrollListener);
+
+    // Clean up function
+    return () => {
+      window.removeEventListener("scroll", scrollListener);
+    };
+  }, []);
 
   return (
     <>
-      <nav id="main-nav" className={`font-inter fixed top-0 ${navType=='full'?'':'md:top-2'}  w-full`} style={{zIndex:99}}>
+      <nav
+        id="main-nav"
+        className={`font-inter fixed top-0 ${navType == "full" ? "" : "md:top-2"}  w-full`}
+        style={{ zIndex: 99 }}
+      >
         <div
-          className={`w-full ${navType=='full'?'bg-white border-b border-gray-200 ':' md:w-[97%] md:rounded-2xl bg-white bg-opacity-[95%] p-1 shadow-sm'} search-wide ${
-            navType=='full'?'max-w-full':
-            maxWidth ? maxWidth : "max-w-[1020px]"
+          className={`w-full ${navType == "full" ? "bg-white border-b border-gray-200 " : `${isVisible ? "bg-white bg-opacity-[88%] shadow-sm md:w-[62rem]" : "md:w-[97%] "}  md:rounded-2xl p-1`} transition transition-all duration-700 search-wide ${
+            navType == "full"
+              ? "max-w-full"
+              : maxWidth
+                ? maxWidth
+                : "max-w-[1020px]"
           }  backdrop-blur-lg mx-auto p-1 px-1 pl-4`}
         >
-          <div className={`${maxWidth ? maxWidth : "max-w-[1020px]"} mx-auto relative flex h-9 items-center justify-between`}>
+          <div
+            className={`${maxWidth ? maxWidth : "max-w-[1020px]"} mx-auto relative flex h-9 items-center justify-between`}
+          >
             {/* movil menu button */}
             <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
               <button
@@ -88,39 +118,41 @@ const Navbar = ({
               </button>
             </div>
             <div className="flex flex-shrink-0 items-center">
-                <Link href="/" as="/">
-                  <>
-                    <img
-                      className="xl:hidden h-7 w-auto"
-                      src="/static/images/logo-small.svg"
-                      // className="block h-10 w-auto mb-2"
-                      // src="/static/images/logo-small-xmas.svg"
-                      alt="Prototypr Logo"
-                    />
-                    <img
-                      className="hidden h-7 w-auto xl:block"
-                      src={`/static/images/prototypr_logo.svg`}
-                      alt="Prototypr Logo"
-                    />
-                  </>
-                </Link>
-                {/* <NavSponsor /> */}
-                {/* <div
+              <Link href="/" as="/">
+                <>
+                  <img
+                    // className={`${isVisible?'':'xl:block w-[0px] absolute opacity-0'} transition transition-all duration-1000 h-8 w-auto`}
+                    className={`xl:hidden transition transition-all duration-1000 h-8 w-auto`}
+                    src="/static/images/logo-small.svg"
+                    // className="block h-10 w-auto mb-2"
+                    // src="/static/images/logo-small-xmas.svg"
+                    alt="Prototypr Logo"
+                  />
+                  <img
+                    className={`xl:block ${isVisible ? "w-[25px] object-left-top object-cover" : "object-cover object-left-top w-[109px]"} transition transition-all duration-1000 hidden h-7 w-auto `}
+                    src={`/static/images/prototypr_logo.svg`}
+                    alt="Prototypr Logo"
+                  />
+                </>
+              </Link>
+              {/* lil cursor blinker */}
+              <div className={`${blinkyOn?'animate-pulse':'opacity-0'} h-[28px] bg-gray-500/70 w-[2px]`}></div>
+              {/* <NavSponsor /> */}
+              {/* <div
                   className={`hidden md:block my-auto duration-300 ease-in-out`}
                 >
                   <WMCounter />
                 </div> */}
 
-                <div className="xl:mx-3">
-                  <SearchModal />
-                </div>
+              <div className="">
+                <SearchModal />
               </div>
+            </div>
             {/* <div className="flex flex-1 items-center justify-center items-stretch justify-between"> */}
             <div className="flex items-center h-9">
-              
               <div className="hidden sm:ml-6 lg:block">
-              <MenuItems />
-            </div>
+                <MenuItems />
+              </div>
               {/* <div className="justify-end hidden xl:flex mr-6">
                 {[
                   { label: "Home", url: "/" },
@@ -150,7 +182,7 @@ const Navbar = ({
               {/* <div className={`hidden mr-2 md:block my-auto`}>
                   <WMButton />
                 </div> */}
-                 <NavSponsor sponsor={sponsor} />
+              <NavSponsor sponsor={sponsor} />
               <NavigationMenu>
                 <NavigationMenuList>
                   <LocationMenu
@@ -187,14 +219,18 @@ const Navbar = ({
             {/* <MobileActiveLink href={"/web-monetization"}>
               Earn Micropayments
             </MobileActiveLink> */}
-            {!user?.isLoggedIn?<MobileActiveLink href={"/onboard"}>
-              Sign in
-            </MobileActiveLink>:''}
-            {user?.isLoggedIn?
+            {!user?.isLoggedIn ? (
+              <MobileActiveLink href={"/onboard"}>Sign in</MobileActiveLink>
+            ) : (
+              ""
+            )}
+            {user?.isLoggedIn ? (
               <div className="px-2.5 pt-2" onClick={toggleMobileNav}>
-                <NewPostDialog/>
+                <NewPostDialog />
               </div>
-              :''}
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </nav>

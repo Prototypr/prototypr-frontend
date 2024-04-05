@@ -5,13 +5,13 @@ const dummyData = [
 image:'/static/images/jobs.svg',
 slug:'/apply',
 class:'bg-gray-50',
-title:'Become a writer',
+title:'Become a contributor',
 description:'Share your story with us and get featured in the newsletter.'
 },
 {image:'/static/images/botty.svg',
 slug:'/apply',
 class:'bg-gray-50',
-title:'Post a product',
+title:'List a product',
 description:'List your tool in the Prototypr Toolbox and claim your page.'}
 ]
 

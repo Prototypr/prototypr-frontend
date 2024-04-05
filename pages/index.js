@@ -63,6 +63,7 @@ import { formatAllTools } from "@/lib/utils/formatToolContent";
 // import ToolsColumn from "@/components/v4/layout/ToolsColumn";
 import CardColumn from "@/components/v4/layout/CardColumn";
 import NewsColumn from "@/components/v4/layout/NewsColumn";
+import { groupPostsByDate } from "@/lib/utils/groupPostsByDate";
 
 export default function Index({
   preview,
@@ -73,7 +74,8 @@ export default function Index({
   navSponsor,
   heroPost,
   morePosts,
-  allNews
+  allNews,
+  groupedNewsPosts
   // popularTags,
 }) {
   const intl = useIntl();
@@ -127,15 +129,15 @@ export default function Index({
             /> */}
           </>
         ) : (
-          <div className="pt-[100px]" />
+          <div className="pt-[44px]" />
         )}
-         <div className="relative z-50  mt-6 pt-0.5 ">
+         <div className="relative z-50  mt-6">
           <TagsNavRow />
         </div>
         <Container padding={false} maxWidth="max-w-[1320px] mx-auto px-6 md:px-3 xl:px-3 z-30 relative">
           <div className="grid gap-3 grid-cols-9 md:grid-cols-9 xl:grid-cols-12">
           <div className="col-span-9 md:col-span-3">
-             <NewsColumn sponsor={navSponsor} withBackground={false} posts={allNews} />   
+             <NewsColumn groupedNewsPosts={groupedNewsPosts} sponsor={navSponsor} withBackground={false} posts={allNews} />   
               </div>
        
             <div className="col-span-9 md:col-span-6 ">
@@ -443,12 +445,15 @@ export async function getStaticProps({ preview = null, locale }) {
   const navSponsorId = process.env.NEXT_PUBLIC_PRICE_WEBSITE_1;
   const navSponsor = sponsors?.find(sponsor => sponsor.productId === navSponsorId) || null;
 
+  let groupedNewsPosts = groupPostsByDate(allNews);
+
   return {
     props: {
       heroPost: allPosts[0],
       morePosts: allPosts.slice(1),
       allTools: allTools,
       allNews:allNews,
+      groupedNewsPosts:groupedNewsPosts,
       // popularTags,
       // otherPosts: otherPosts,
       // interviewPosts: interviews.data,

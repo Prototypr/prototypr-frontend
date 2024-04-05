@@ -3,7 +3,7 @@ import Image from "next/image";
 const NavSponsor = ({sponsor}) =>{
 
     return(
-        <div className="p-3 pr-4 my-auto">
+        <div className="mr-1 my-auto">
         <a href={sponsor?.link+'?ref=prototypr'} target="_blank">
         <div
               className={`relative w-28 h-8 overflow-hidden border-r border-gray-200`}

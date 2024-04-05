@@ -5,30 +5,15 @@ import { BubbleMenu } from "@tiptap/react";
 import { TextSelection } from "prosemirror-state";
 import { styled } from "@stitches/react";
 import { blackA, slate } from "@radix-ui/colors";
-import ImagePopoverButton from "./MenuButtons/ImagePopoverButton/ImagePopoverButton";
-import { posToDOMRect } from "@tiptap/core";
+import VideoModalButton from "./MenuButtons/VideoPopoverButton/VideoPopoverButton";
+// import ImagePopoverButton from "./MenuButtons/ImagePopoverButton/ImagePopoverButton";
 import { useState } from "react";
+import { posToDOMRect } from "@tiptap/core";
+
 import { roundArrow } from "tippy.js";
 import "tippy.js/dist/svg-arrow.css";
 
 import "tippy.js/animations/scale-subtle.css";
-
-const switchBlockQuote = editor => {
-  // editor.chain().focus().updateAttributes('blockquote',{ class: 'wp-block-quote' }).run();
-
-  if (
-    editor.isActive("blockquote") &&
-    !editor.isActive({ class: "wp-block-quote" })
-  ) {
-    editor
-      .chain()
-      .focus()
-      .updateAttributes("blockquote", { class: "wp-block-quote" })
-      .run();
-  } else {
-    editor.chain().focus().toggleBlockquote().run();
-  }
-};
 
 const IconButton = styled("button", {
   // all: 'unset',
@@ -49,14 +34,14 @@ const IconButton = styled("button", {
   //   '&:active':{background:'white'}
 });
 
-const ImageMenu = ({ editor, isSelecting }) => {
+const VideoMenu = ({ editor, isSelecting }) => {
   if (!editor) {
     return null;
   }
+  const [showing, setShowing] = useState(false);
 
   // const imageActive = editor.isActive('figure', {figureType:'image'});
   // const videoActive = editor.isActive('figure', {figureType:'video'});
-  const [showing, setShowing] = useState(false);
 
   return (
     <>
@@ -65,13 +50,11 @@ const ImageMenu = ({ editor, isSelecting }) => {
         pluginKey={"TextMenu"}
         tippyOptions={{
           arrow: roundArrow,
+          zIndex: "38",
           popperOptions: {
             modifiers: [{ name: "eventListeners", options: { scroll: false } }],
           },
-          duration: 100,
-          zIndex: "38",
-          animation: "scale-subtle",
-     //use the referenceClientRect to position the bubble menu at start of image (because of slider)
+          //use the referenceClientRect to position the bubble menu at start of image (because of slider)
           getReferenceClientRect: () => {
             const { state, view } = editor;
             const { selection } = state;
@@ -99,6 +82,7 @@ const ImageMenu = ({ editor, isSelecting }) => {
                   x: nodeRect.x - nodeRect.width / 2 + 100,
                   y: nodeRect.y,
                 };
+                console.log(newNodeRect);
                 return newNodeRect;
               }
               return node.getBoundingClientRect();
@@ -106,28 +90,30 @@ const ImageMenu = ({ editor, isSelecting }) => {
               return posToDOMRect(view, from, to);
             }
           },
+          duration: 100,
+          animation: "scale-subtle",
         }}
         shouldShow={({ editor, view, state, oldState, from, to }) => {
           const selection = editor.state.selection;
           const isTextSelection = selection instanceof TextSelection;
 
-          if (!editor.isActive("figure", { figureType: "image" })) {
-            return false;
-          }
-
-           if (isTextSelection) {
+          if (!editor.isActive("figure", { figureType: "video" })) {
             setShowing(false);
             return false;
           }
 
-          //update image src
-          const figure_node = selection?.$anchor?.nodeAfter
-          if(figure_node?.type?.name=='figure'){
-          //use image inside figure
-          if(figure_node.firstChild?.type?.name=='image'){
-            let figure_child = figure_node.firstChild
-            setShowing(figure_child?.attrs?.src);
+          if (isTextSelection) {
+            setShowing(false);
+            return false;
           }
+          //update image src
+          const figure_node = selection?.$anchor?.nodeAfter;
+          if (figure_node?.type?.name == "figure") {
+            //use image inside figure
+            if (figure_node.firstChild?.type?.name == "video") {
+              let figure_child = figure_node.firstChild;
+              setShowing(figure_child?.attrs?.src);
+            }
           }
 
           return editor.isActive("figure");
@@ -145,10 +131,10 @@ const ImageMenu = ({ editor, isSelecting }) => {
             {/* <FontFormatButton  editor={editor}/> */}
             {/* <div className={`bg-gray-800 hover:bg-gray-900 mx-1 my-auto`} style={{height:'20px', width:'1px'}}/> */}
 
-            <ImagePopoverButton
-              showing={showing}
+            <VideoModalButton
               onClick={() => uploadRef.current.closePopup()}
               editor={editor}
+              showing={showing}
               // node={props.node}
               // updateAttributes={props.updateAttributes}
             />
@@ -168,4 +154,4 @@ const ImageMenu = ({ editor, isSelecting }) => {
   );
 };
 
-export default ImageMenu;
+export default VideoMenu;

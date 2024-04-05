@@ -5,8 +5,7 @@ import { Node, mergeAttributes } from '@tiptap/core'
 const Video = Node.create({
   name: 'video', // unique name for the Node
   group: 'block', // belongs to the 'block' group of extensions
-  selectable: true, // so we can select the video
-  draggable: true, // so we can drag the video
+  draggable: false, // so we can drag the video
   atom: true, // is a single unit
 
   addAttributes() {
@@ -55,12 +54,16 @@ const Video = Node.create({
 
   addCommands() {
     return {
-      setVideo: ({ src,width,height,classNames, ...attrs }) => ({ chain }) => {
+      setVideo: ({ src,position,width,height,classNames, ...attrs }) => ({ chain }) => {
         return chain()
-          .insertContent({
-            type: this.name,
-            attrs:{src, width, height,class:classNames}
-          })
+        .insertContentAt(position,{
+          type: this.name,
+          attrs:{src, width, height,class:classNames}
+        })
+          // .insertContent({
+          //   type: this.name,
+          //   attrs:{src, width, height,class:classNames}
+          // })
           // set cursor at end of caption field
           .command(({ tr, commands }) => {
             const { doc, selection } = tr

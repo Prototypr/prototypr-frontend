@@ -245,8 +245,12 @@ a.kofi-button:active {
   fill:#111827!important;
 }
 
+.ProseMirror figure video{
+  pointer-events: none;
+}
+
 figure.ProseMirror-selectednode{
-  img{outline:3px solid blue;}
+  img, video{outline:3px solid blue;}
   figcaption::selection {
       background: transparent!important;
   }

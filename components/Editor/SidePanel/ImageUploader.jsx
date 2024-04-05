@@ -294,7 +294,7 @@ const ImageUploader = (props) => {
             </div>
           )}
           {image &&<img
-            className="mx-auto border border-gray-200 rounded mb-3 my-auto"
+            className="mx-auto border border-gray-200 rounded mb-3 my-auto object-cover"
             ref={setEditorRef}
             src={image}
             scale={parseFloat(scale)}
@@ -302,7 +302,7 @@ const ImageUploader = (props) => {
             height={imageDimensions?.h?imageDimensions?.h:props.height?props.height:90}
             position={position}
             image={image}
-            style={{maxWidth:110, maxHeight:90, objectFit:'contain'}}
+            style={{maxWidth:110, maxHeight:90}}
             // className="rounded-lg border"
           />}
         </div>

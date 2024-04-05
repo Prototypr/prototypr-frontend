@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { styled, keyframes } from "@stitches/react";
-import { violet, blackA,slate, mauve, green, red, gray } from "@radix-ui/colors";
+import {
+  violet,
+  blackA,
+  slate,
+  mauve,
+  green,
+  red,
+  gray,
+} from "@radix-ui/colors";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-// import ImageLinkField from './ImageLinkField/ImageLinkField'
-import ImageAltField from './ImageLinkField/ImageAltField'
-import LinkInput from "../LinkDropdown/LinkButtonRadix";
+// import WidthSlider from "../../Common/WidthSlider";
 import WidthRange from "../../Common/WidthRange";
+// import ImageLinkField from './ImageLinkField/ImageLinkField'
+// import ImageAltField from './ImageLinkField/ImageAltField'
+// import LinkInput from "../LinkDropdown/LinkButtonRadix";
 
 const overlayShow = keyframes({
   "0%": { opacity: 0 },
@@ -19,7 +28,7 @@ const contentShow = keyframes({
 });
 
 const StyledOverlay = styled(DialogPrimitive.Overlay, {
-  backgroundColor: 'rgba(255,255,255,0.98)',
+  backgroundColor: "rgba(255,255,255,0.98)",
   zIndex: 99999,
   position: "fixed",
   inset: 0,
@@ -32,10 +41,10 @@ const StyledContent = styled(DialogPrimitive.Content, {
   zIndex: 99999,
   // backgroundColor: "white",
   borderRadius: 6,
-  textAlign:'center',
-  display:'flex',
-  flexDirection:'column',
-  justifyContent:'center',
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
   position: "fixed",
   top: "50%",
   left: "50%",
@@ -146,90 +155,87 @@ const CloseButton = styled("button", {
   "&:focus": { boxShadow: `0 0 0 2px ${violet.violet7}` },
 });
 
-const IconButton = styled('button', {
-  all: 'unset',
-  fontFamily: 'inherit',
-  borderRadius: '6px',
+const IconButton = styled("button", {
+  all: "unset",
+  fontFamily: "inherit",
+  borderRadius: "6px",
   height: 28,
   width: 35,
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
   color: slate.slate6,
-  backgroundColor: 'transparent',
+  backgroundColor: "transparent",
   boxShadow: `0 2px 10px ${blackA.blackA7}`,
-  '&:hover': { backgroundColor: slate.slate11 },
-  '&:focus': { boxShadow: `0 0 0 2px black` },
-//   '&:active':{background:'white'}
+  "&:hover": { backgroundColor: slate.slate11 },
+  "&:focus": { boxShadow: `0 0 0 2px black` },
+  //   '&:active':{background:'white'}
 });
 
+const VideoModalButton = ({ editor, showing }) => {
+  const [modalOpen, setModalOpen] = useState(null);
+  const [modalOption, setModalOption] = useState(null);
+  const setModal = option => {
+    setModalOption(option);
+  };
 
-
-
-const ImageModalButton = ({ editor, showing }) =>{
-
-
-
-  const [modalOpen, setModalOpen] = useState(null)
-  const [modalOption, setModalOption] = useState(null)
-  const setModal = (option) =>{
-    setModalOption(option)
-  }
-  
-  
-const [figureNode, setFigureNode] = useState(null)
-const [imgSrc, setImgSrc] = useState(null)
-const onOpenChange = (open) =>{
-  if(!modalOpen){
-    const selection = editor?.state?.selection
-    const figure_node = selection?.$anchor?.nodeAfter
-    if(figure_node?.type?.name=='figure'){
-     //use image inside figure
-     if(figure_node.firstChild?.type?.name=='image'){
-      let img_node = figure_node.firstChild
-       setFigureNode(img_node)
-       setImgSrc(img_node?.attrs?.src)
-     }
+  const [figureNode, setFigureNode] = useState(null);
+  const [imgSrc, setImgSrc] = useState(null);
+  const onOpenChange = open => {
+    if (!modalOpen) {
+      const selection = editor?.state?.selection;
+      const figure_node = selection?.$anchor?.nodeAfter;
+      if (figure_node?.type?.name == "figure") {
+        //use image inside figure
+        if (figure_node.firstChild?.type?.name == "image") {
+          let img_node = figure_node.firstChild;
+          setFigureNode(img_node);
+          setImgSrc(img_node?.attrs?.src);
+        }
+      }
+      setModalOpen(open);
+    } else {
+      setModalOpen(false);
     }
-    setModalOpen(open)
-  }else{
-    setModalOpen(false)
-  }
-}
+  };
 
-const toggleModal = () =>{
-  setModalOpen(!modalOpen)
-}
-
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
 
   return (
-  <Dialog open={modalOpen} onOpenChange={onOpenChange}>
+    <Dialog open={modalOpen} onOpenChange={onOpenChange}>
       <div className="flex">
-    <DialogTrigger asChild>
-
-      <IconButton onClick={()=>setModal('alt')} className={'text-sm hover:bg-gray-800 hover:text-white'} aria-label="Update link">
-          ALT
-        </IconButton>
-    </DialogTrigger>
-    <LinkInput isFigure={true} marginLeft={-20} showRemove={true} editor={editor} />
-      {/* <IconButton onClick={()=>setModal('link')} className={' hover:bg-gray-800 hover:text-white'} aria-label="Update link">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.364 15.536L16.95 14.12l1.414-1.414a5 5 0 1 0-7.071-7.071L9.879 7.05 8.464 5.636 9.88 4.222a7 7 0 0 1 9.9 9.9l-1.415 1.414zm-2.828 2.828l-1.415 1.414a7 7 0 0 1-9.9-9.9l1.415-1.414L7.05 9.88l-1.414 1.414a5 5 0 1 0 7.071 7.071l1.414-1.414 1.415 1.414zm-.708-10.607l1.415 1.415-7.071 7.07-1.415-1.414 7.071-7.07z" fill="currentColor"/></svg>
-        </IconButton> */}
+        <DialogTrigger asChild>
+          <IconButton
+            onClick={() => setModal("alt")}
+            className={"text-sm hover:bg-gray-800 hover:text-white"}
+            aria-label="Update link"
+          >
+            ALT
+          </IconButton>
+        </DialogTrigger>
+        {/* <LinkInput isFigure={true} marginLeft={-100} showRemove={true} editor={editor} /> */}
+        <WidthRange showing={showing} editor={editor} figureType={'video'} />
       </div>
-      <WidthRange showing={showing} editor={editor} />
-
-    <DialogContent>
-      <DialogTitle>{modalOption=='alt' && 'Alternative Text'}</DialogTitle>
-      <DialogDescription>
-      {modalOption=='alt' && 'Write a brief description of this image for readers with visual impairments'}
-      </DialogDescription>
-      <div>
-        <img style={{maxWidth:300, maxHeight:200, objectFit:'cover'}} className="mx-auto mt-3 mb-10" src={imgSrc}/>
-      </div>
-      <div>
-        <ImageAltField figureNode={figureNode} closePopup={toggleModal} editor={editor}/>
-      </div>
-      {/* <div className="flex flex-row justify-start gap-2">
+      <DialogContent>
+        <DialogTitle>{modalOption == "alt" && "Alternative Text"}</DialogTitle>
+        <DialogDescription>
+          {modalOption == "alt" &&
+            "Write a brief description of this image for readers with visual impairments"}
+        </DialogDescription>
+        <div>
+          <img
+            style={{ maxWidth: 300, maxHeight: 200, objectFit: "cover" }}
+            className="mx-auto mt-3 mb-10"
+            src={imgSrc}
+          />
+        </div>
+        <div>
+          hi
+          {/* <ImageAltField figureNode={figureNode} closePopup={toggleModal} editor={editor}/> */}
+        </div>
+        {/* <div className="flex flex-row justify-start gap-2">
         <DialogClose asChild>
           <Button onClick={onClick} variant="red">
             Delete
@@ -240,11 +246,14 @@ const toggleModal = () =>{
           <Button variant="gray">Cancel</Button>
         </DialogClose>
       </div> */}
-      <DialogClose asChild>
-        <CloseButton aria-label="Close"><Cross2Icon /></CloseButton>
-      </DialogClose>
-    </DialogContent>
-  </Dialog>
-);}
+        <DialogClose asChild>
+          <CloseButton aria-label="Close">
+            <Cross2Icon />
+          </CloseButton>
+        </DialogClose>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
-export default ImageModalButton;
+export default VideoModalButton;
