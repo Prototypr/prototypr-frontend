@@ -37,11 +37,11 @@ export default function AuthorCard({ author = {},title, avatar='' }) {
                         </div>
 
                         <div className="my-auto">
-                            <p tabIndex={0} className="text-sm cursor-pointer leading-5 font-semibold text-gray-800">
+                            <p tabIndex={0} className="text-base cursor-pointer leading-5 font-semibold text-gray-800">
                                 {username}
                             </p>
-                            <p tabIndex={0} className="text-sm">Editor</p>
-                           {title? <h1 tabIndex={0} className="text-sm mt-2">{title}</h1>:null}
+                            <p tabIndex={0} className="text-base">Editor</p>
+                           {title? <h1 tabIndex={0} className="text-base mt-2">{title}</h1>:null}
                         </div>
                     </div>
                 </Link>

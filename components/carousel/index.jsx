@@ -12,7 +12,7 @@ const SLIDE_COUNT = 10
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const Carousel = ({gallery}) => (
-    <section className="sandbox__carousel">
+    <section className="sandbox__carousel h-full">
       <EmblaCarousel slides={gallery} options={OPTIONS} />
     </section>
 )

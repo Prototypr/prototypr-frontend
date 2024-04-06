@@ -100,7 +100,7 @@ export default function DesignTool({ allTools = [] }) {
   let arrayColor = repeatFor(colors, allTools.length);
 
   return (
-    <div className="bg-[#EFF4FB] py-16 h-auto rounded-[50px] px-10">
+    <div className="bg-[#fbfcff] py-16 h-auto rounded-[50px] px-10">
       <div className="flex flex-row flex-wrap w-full justify-between  items-end max-w-7xl mx-auto mb-10">
         <div className=" mb-6 flex flex-col grid gap-7 my-10">
           <div>

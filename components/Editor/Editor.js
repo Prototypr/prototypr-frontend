@@ -4,12 +4,10 @@ import EditorNav from "../EditorNav";
 import dynamic from "next/dynamic";
 
 import Placeholder from "@tiptap/extension-placeholder";
-// import Placeholder from "./CustomExtensions/Figure2/Placeholder";
 import Document from "@tiptap/extension-document";
 import TextMenu from "@/components/Editor/Menus/TextMenu";
 import ImageMenu from "@/components/Editor/Menus/ImageMenu";
 import Button from "@/components/Primitives/Button";
-// import LinkMenu from "./Menus/LinkMenu";
 
 import SidePanelTrigger from "./SidePanel/SidePanelTrigger";
 
@@ -17,9 +15,8 @@ import Link from "@tiptap/extension-link";
 import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 
-// import { saveAs } from "file-saver";
 import { PublishDialogButton } from "./PublishDialogButton";
-import Cite from "./CustomExtensions/Cite"
+import Cite from "./CustomExtensions/Cite";
 
 import Iframe from "./CustomExtensions/Iframe/Iframe";
 import Gapcursor from "@tiptap/extension-gapcursor";
@@ -39,11 +36,7 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import Dropcursor from "@tiptap/extension-dropcursor";
 import History from "@tiptap/extension-history";
 import { Blockquote } from "@/components/Editor/CustomExtensions/CustomBlockquote";
-// import { FigCaption, Figure } from "./CustomExtensions/Figure";
-// import { FigCaption } from "./CustomExtensions/Figure";
-
-// import Image from "@tiptap/extension-image";
-import {Image} from "./CustomExtensions/Figure2/CustomImage";
+import { Image } from "./CustomExtensions/Figure2/CustomImage";
 
 import Figure from "./CustomExtensions/Figure2/Figure";
 import FigCaption from "./CustomExtensions/Figure2/Figcaption";
@@ -67,18 +60,24 @@ const CustomDocument = Document.extend({
   atom: true,
 });
 
-const Editor = ({
-  editorType = "create",
-  hasEditPermission = true,
-}) => {
+const Editor = ({ editorType = "create", hasEditPermission = true }) => {
   const router = useRouter();
 
   const { user } = useUser({
     redirectIfFound: false,
   });
 
-  const { content, loading, slug, title, articleSlug, postId, postStatus, isOwner, postObject } =
-    useLoad(editorType, user);
+  const {
+    content,
+    loading,
+    slug,
+    title,
+    articleSlug,
+    postId,
+    postStatus,
+    isOwner,
+    postObject,
+  } = useLoad(editorType, user);
   const {
     updateExistingPost,
     setSaving,
@@ -91,8 +90,6 @@ const Editor = ({
   const [editorCreated, setEditorCreated] = useState(false);
   const [editorInstance, setEditorInstance] = useState(false);
   const [previewEnabled, togglePreview] = useState(false);
-
-
 
   useConfirmTabClose(hasUnsavedChanges);
 
@@ -116,7 +113,6 @@ const Editor = ({
       OrderedList,
       Dropcursor,
       Cite,
-      // Twitter,
       Video,
       Iframe,
       Youtube,
@@ -125,7 +121,7 @@ const Editor = ({
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          target: '_blank',
+          target: "_blank",
           rel: null,
           class: null,
         },
@@ -142,7 +138,7 @@ const Editor = ({
       //   allowBase64: true,
       // }),
       Placeholder.configure({
-          includeChildren: true,
+        includeChildren: true,
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
             return "What's the title?";
@@ -156,7 +152,7 @@ const Editor = ({
           if (node.type.name === "tweet") {
             return "Paste a tweet link and press enter";
           }
-            return "Tell a story...";
+          return "Tell a story...";
         },
       }),
     ],
@@ -168,8 +164,8 @@ const Editor = ({
       s.setAttribute("src", "https://platform.twitter.com/widgets.js");
       s.setAttribute("id", "twitter-widget");
       s.setAttribute("async", "true");
-  
-      if(!document.getElementById('twitter-widget')){
+
+      if (!document.getElementById("twitter-widget")) {
         document.head.appendChild(s);
       }
       // setTimeout(() => {
@@ -212,7 +208,6 @@ const Editor = ({
     }
   }, [editor, hasEditPermission, user?.isAdmin]);
 
-
   const onSave = async () => {
     // if (editorType === "edit") {
     if (articleSlug) {
@@ -221,7 +216,15 @@ const Editor = ({
         console.log("saving post...");
         // while updating the post, we are using articleSlug instead of slug
         // This is to ensure that the slug never changes from its original slug
-        await updateExistingPost({postId,user,editor,articleSlug,forReview:false,postStatus,postObject});
+        await updateExistingPost({
+          postId,
+          user,
+          editor,
+          articleSlug,
+          forReview: false,
+          postStatus,
+          postObject,
+        });
       } catch (e) {
         setSaving(false);
       }
@@ -249,38 +252,37 @@ const Editor = ({
   //   }
   // };
 
-
-  if((((!loading) && (user?.isLoggedIn && !isOwner)) && editorType!=='create') && !user?.isAdmin)
-    return(
-      <p>You are not owner of this post</p>
-    )
+  if (
+    !loading &&
+    user?.isLoggedIn &&
+    !isOwner &&
+    editorType !== "create" &&
+    !user?.isAdmin
+  )
+    return <p>You are not owner of this post</p>;
 
   return (
     <>
       <div className="fixed z-[48] bottom-10 left-10 border flex flex-col grid gap-2 border-black border-opacity-10 p-4 bg-white rounded-lg">
-        <p className="text-xs">
-          Preview Mode
-        </p>
+        <p className="text-xs">Preview Mode</p>
         <ToggleSwitch
-          onToggle={() =>{
-            togglePreview(!previewEnabled)
-            setTimeout(()=>{
-
+          onToggle={() => {
+            togglePreview(!previewEnabled);
+            setTimeout(() => {
               const s = document.createElement("script");
               s.setAttribute("src", "https://platform.twitter.com/widgets.js");
               s.setAttribute("id", "twitter-widget");
               s.setAttribute("async", "true");
-          
-              if(!document.getElementById('twitter-widget')){
+
+              if (!document.getElementById("twitter-widget")) {
                 document.head.appendChild(s);
               }
-            },500)
+            }, 500);
           }}
           size="small"
           checked={previewEnabled}
         />
       </div>
-
 
       {previewEnabled ? (
         <div>
@@ -292,8 +294,10 @@ const Editor = ({
           {user?.isAdmin && (
             <div className="mt-16">
               {hasEditPermission ? (
-                <div className="z-50 p-3 text-sm fixed top-[64px] w-full bg-green-100 backdrop-blur text-green-900 flex flex-row justify-center items-center">
-                  Hello there Admin, you can edit this post.
+                <div className="fixed bottom-3 z-20 w-full">
+                  <div className="relative bg-gray-100/80 w-[500px] shadow-sm border border-gray-300/20 mx-auto rounded-xl p-3 text-sm backdrop-blur text-gray-800 flex flex-row justify-center items-center">
+                    You're editing as admin.
+                  </div>
                 </div>
               ) : (
                 <div className=" p-3 text-sm bg-yellow-400 flex flex-row justify-center items-center">
@@ -309,67 +313,81 @@ const Editor = ({
             isEditor={true}
             editorButtons={
               <div className="my-auto flex mr-1">
-                {hasUnsavedChanges && (
+                {/* {hasUnsavedChanges && (
                   <div className="inline mr-6 text-pink-500 text-xs my-auto">
                     Unsaved changes
                   </div>
-                )}
+                )} */}
                 <>
                   {!user?.isAdmin && (
-                    <div>
+                    // <div>
                       <Button
                         variant="ghostBlue"
                         onClick={onSave}
-                        className="text-sm"
+                        className="text-[13px] font-normal h-[25px] px-2 my-auto"
                       >
-                        {saving ? "Saving...": postStatus == "publish"? "Update": "Save Draft"}
+                        {saving
+                          ? "Saving..."
+                          : postStatus == "publish"
+                            ? "Update"
+                            : "Save Draft"}
                       </Button>
-                    </div>
+                    // </div>
                   )}
 
-                  {(user?.isAdmin && hasEditPermission )&& (
-                    <div>
+                  {user?.isAdmin && hasEditPermission && (
+                    // <div>
                       <Button
                         variant="ghostBlue"
                         onClick={onSave}
-                        className="text-sm"
+                        className="text-[13px] font-normal h-[25px] px-2 my-auto"
                       >
-                        {saving? "Saving...": postStatus == "publish"? "Update": "Save Draft "}
+                        {saving
+                          ? "Saving..."
+                          : postStatus == "publish"
+                            ? "Update"
+                            : "Save Draft "}
                       </Button>
+                    // </div>
+                  )}
+
+                  {((slug && postStatus != "publish" && !user?.isAdmin) ||
+                    (isOwner && postStatus != "publish")) && (
+                    <PublishDialogButton
+                      slug={slug}
+                      user={user}
+                      postId={postId}
+                      createNewPost={createNewPost}
+                      updateExistingPost={updateExistingPost}
+                      editor={editor}
+                      postStatus={postStatus}
+                      postObject={postObject}
+                    />
+                  )}
+
+                  {user?.isAdmin && (
+                    <div className="flex flex-col grid gap-2 bg-white rounded-lg">
+                      {editorInstance && (
+                        <SidePanelTrigger
+                          user={user}
+                          editor={editorInstance}
+                          postObject={postObject}
+                        />
+                      )}
                     </div>
                   )}
-
-                  {(
-                   ( (slug && postStatus != "publish") && !user?.isAdmin) || (isOwner && postStatus!='publish') )
-                  && (
-                   <PublishDialogButton 
-                    slug={slug}
-                    user={user} 
-                    postId={postId}
-                    createNewPost={createNewPost}
-                    updateExistingPost={updateExistingPost}
-                    editor={editor}
-                    postStatus={postStatus}
-                    postObject={postObject}/>
-                  )}
-
-                {user?.isAdmin &&
-                <div className="flex flex-col grid gap-2 bg-white rounded-lg">
-                  {editorInstance && <SidePanelTrigger user={user} editor={editorInstance} postObject={postObject}/>}
-                </div>
-                }
                 </>
               </div>
             }
           />
           {/* NAVIGATION END */}
-          <div className="my-4 pt-16 max-w-[44rem] mx-auto relative pb-10 blog-content">
+          <div className="my-4 pt-0 mt-[100px] max-w-[44rem] mx-auto relative pb-10 blog-content">
             {editor && <MenuFloating editor={editor} />}
             <TextMenu editor={editor} />
             {/* <LinkMenu editor={editor} /> */}
             <ImageMenu editor={editor} />
             <VideoMenu editor={editor} />
-            {((loading || !editorCreated)|| (!content && slug))? (
+            {loading || !editorCreated || (!content && slug) ? (
               <div
                 style={{ maxWidth: "100%" }}
                 className="mx-2 h-screen absolute top-0 left-0 flex flex-col justify-center w-screen"

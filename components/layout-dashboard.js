@@ -1,7 +1,7 @@
 // import Alert from "./alert";
 import dynamic from "next/dynamic";
 import Meta from "./meta";
-import EditorNav from "./EditorNav";
+import BusinessNav from "./BusinessNav";
 const Footer = dynamic(() => import("./footer"));
 
 
@@ -20,7 +20,7 @@ export default function Layout({
   return (
     <>
       <Meta seo={seo} />
-      <EditorNav padding={padding} showJobsButton={showJobsButton} showSponsorButton={showSponsorButton} showWriteButton={showWriteButton} activeNav={activeNav}/>
+      <BusinessNav padding={padding} showJobsButton={showJobsButton} showSponsorButton={showSponsorButton} showWriteButton={showWriteButton} activeNav={activeNav}/>
       <div
         className={`min-h-screen ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#F3F4F6" }}

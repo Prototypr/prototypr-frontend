@@ -45,7 +45,7 @@ const Index = () => {
       maxWidth={"max-w-[1320px] search-wide"}
       seo={seo}
       showWriteButton={false}
-      background="#eff4fb"
+      background="#fbfcff"
     >
       <Container>
 

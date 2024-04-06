@@ -206,71 +206,77 @@ export default function Post({
           </div>
         </div>
       </div>
-      <Container padding={false} maxWidth="w-full  px-3 xl:px-0 relative z-0">
-        <NewsPageFeatured
-          faviconUrl={faviconUrl}
-          ogImage={ogImage}
-          post={post}
-          domain={domain}
-          content={content}
-        />
-        {/* <BigImageCardWithOverlay post={post} domain={domain} content={content} ogImage={ogImage}/> */}
-        {/* <img src="/static/images/surf.svg" className="absolute -mt-1  w-full bottom-0 z-40 left-0"/> */}
-      </Container>
+
       <Container
         padding={false}
-        maxWidth="w-full px-3 xl:px-0  mt-12 relative z-0 relative w-full h-full  max-w-[1320px] mx-auto"
+        maxWidth="w-full px-3 xl:px-0  mt-3 relative z-0 relative w-full h-full  max-w-[1320px] mx-auto"
       >
-        <h2 className="text-lg font-bold mb-2">Latest</h2>
-        <div className="space-y-20">
-          {["today", "yesterday", "lastWeek", "lastMonth"].map(
-            group =>
-              groupedPosts?.length &&
-              groupedPosts[group].length > 0 && (
-                <section
-                  key={group}
-                  aria-labelledby={group}
-                  className="md:border-l md:border-gray-200 md:pl-6 md:dark:border-gray-700/40"
-                >
-                  <div className="grid bg-white p-4 pr-8 rounded-xl max-w-4xl grid-cols-1 items-baseline gap-y-6 md:grid-cols-4">
-                    <h2
-                      id={group}
-                      className="text-sm font-semibold text-gray-800 dark:text-gray-100"
+        <div className="grid gap-8 grid-cols-3">
+
+          <div className="col-span-2">
+                <NewsPageFeatured
+                faviconUrl={faviconUrl}
+                ogImage={ogImage}
+                post={post}
+                domain={domain}
+                content={content}
+              />
+          </div>
+          <div className="col-span-2">
+            <h2 className="text-lg font-bold mb-2">Latest</h2>
+            <div className="space-y-20">
+              {["today", "yesterday", "lastWeek", "lastMonth"].map(
+                group =>
+                  groupedPosts?.length &&
+                  groupedPosts[group].length > 0 && (
+                    <section
+                      key={group}
+                      aria-labelledby={group}
+                      className="md:border-l md:border-gray-200 md:pl-6 md:dark:border-gray-700/40"
                     >
-                      {group.charAt(0).toUpperCase() + group.slice(1)}
-                    </h2>
-                    <div className="md:col-span-4">
-                      <div className="space-y-16">
-                        {renderPosts(groupedPosts[group])}
+                      <div className="grid bg-white p-4 pr-8 rounded-xl grid-cols-1 items-baseline gap-y-6 md:grid-cols-4">
+                        <h2
+                          id={group}
+                          className="text-sm font-semibold text-gray-800 dark:text-gray-100"
+                        >
+                          {group.charAt(0).toUpperCase() + group.slice(1)}
+                        </h2>
+                        <div className="md:col-span-4">
+                          <div className="space-y-16">
+                            {renderPosts(groupedPosts[group])}
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )
+              )}
+              {groupedPosts?.months &&
+                Object.entries(groupedPosts?.months).map(([month, posts]) => (
+                  <section
+                    key={month}
+                    aria-labelledby={month}
+                    className="md:border-l md:border-gray-400/60 md:pl-6"
+                  >
+                    <div className="grid bg-white border border-gray-300/50 shadow-sm p-4 pr-8 pb-8 rounded-xl max-w-4xl grid-cols-1 items-baseline gap-y-6 md:grid-cols-5">
+                      <h2
+                        id={month}
+                        className="text-base font-semibold text-gray-800 dark:text-gray-100"
+                      >
+                        {month}
+                      </h2>
+                      <div className="md:col-span-4">
+                        <div className="space-y-12">{renderPosts(posts)}</div>
                       </div>
                     </div>
-                  </div>
-                </section>
-              )
-          )}
-          {groupedPosts?.months &&
-            Object.entries(groupedPosts?.months).map(([month, posts]) => (
-              <section
-                key={month}
-                aria-labelledby={month}
-                className="md:border-l md:border-gray-400/60 md:pl-6"
-              >
-                <div className="grid bg-white border border-gray-300/50 shadow-sm p-4 pr-8 pb-8 rounded-xl max-w-4xl grid-cols-1 items-baseline gap-y-6 md:grid-cols-5">
-                  <h2
-                    id={month}
-                    className="text-base font-semibold text-gray-800 dark:text-gray-100"
-                  >
-                    {month}
-                  </h2>
-                  <div className="md:col-span-4">
-                    <div className="space-y-12">{renderPosts(posts)}</div>
-                  </div>
-                </div>
-              </section>
-            ))}
+                  </section>
+                ))}
+            </div>
+          </div>
         </div>
+      
+
       </Container>
-      <Container
+      {/* <Container
         padding={false}
         maxWidth="w-full mt-12 relative z-0 relative w-full h-full  max-w-[1320px] mx-auto"
       >
@@ -287,21 +293,15 @@ export default function Post({
               smallPosts={morePosts.slice(6, 8)}
               type={"news"}
             />
-            {/* <LargePostGridC largePost={morePosts[0]} tools={morePosts} smallPosts={morePosts.splice(1,morePosts.length)}  /> */}
-            {/* <NewsList
-          posts={morePosts}
-          type={"post"}
-          title={"Top Stories"}
-        /> */}
           </>
         )}
-      </Container>
-      <Container
+      </Container> */}
+      {/* <Container
         padding={false}
         maxWidth="w-full relative z-0 relative w-full h-full  max-w-[1320px] mx-auto"
       >
         <TwoColumnCards />
-      </Container>
+      </Container> */}
       {/* <div className="w-full bg-blue-900/90 w-full ">
         <div className="max-w-[1320px] py-4 px-6 mx-auto xl:px-3">
           <div className="flex flex-col md:flex-row justify-between">
@@ -435,6 +435,8 @@ export async function getStaticProps({
     : [];
 
   let groupedPosts = groupPostsByDate(data.morePosts?.data);
+
+
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
     props: {

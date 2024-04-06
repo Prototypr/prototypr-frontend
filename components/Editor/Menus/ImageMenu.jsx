@@ -64,48 +64,53 @@ const ImageMenu = ({ editor, isSelecting }) => {
         style={{ pointerEvents: "none" }}
         pluginKey={"TextMenu"}
         tippyOptions={{
-          arrow: roundArrow,
+          // arrow: roundArrow,
+          flipBehavior:['top-start'],
+          arrow: false,
           popperOptions: {
-            modifiers: [{ name: "eventListeners", options: { scroll: false } }],
+            modifiers: [{ name: "eventListeners", options: { scroll: false } },
+            { name: 'flip', enabled: false }],
           },
+          
           duration: 100,
           zIndex: "38",
           animation: "scale-subtle",
+          placement: "top-start",
      //use the referenceClientRect to position the bubble menu at start of image (because of slider)
-          getReferenceClientRect: () => {
-            const { state, view } = editor;
-            const { selection } = state;
-            let { from, to } = selection;
-            if (selection?.node?.attrs?.src) {
-              let node = view.nodeDOM(from);
+          // getReferenceClientRect: () => {
+          //   const { state, view } = editor;
+          //   const { selection } = state;
+          //   let { from, to } = selection;
+          //   if (selection?.node?.attrs?.src) {
+          //     let node = view.nodeDOM(from);
 
-              const nodeViewWrapper = node.dataset.nodeViewWrapper
-                ? node
-                : node.querySelector("[data-node-view-wrapper]");
+          //     const nodeViewWrapper = node.dataset.nodeViewWrapper
+          //       ? node
+          //       : node.querySelector("[data-node-view-wrapper]");
 
-              if (nodeViewWrapper) {
-                node = nodeViewWrapper.firstChild;
-              }
+          //     if (nodeViewWrapper) {
+          //       node = nodeViewWrapper.firstChild;
+          //     }
 
-              if (node) {
-                let nodeRect = node.getBoundingClientRect();
-                let newNodeRect = {
-                  bottom: nodeRect.bottom,
-                  height: nodeRect.height,
-                  left: nodeRect.left - nodeRect.width / 2 + 100,
-                  right: nodeRect.right,
-                  top: nodeRect.top,
-                  width: nodeRect.width,
-                  x: nodeRect.x - nodeRect.width / 2 + 100,
-                  y: nodeRect.y,
-                };
-                return newNodeRect;
-              }
-              return node.getBoundingClientRect();
-            } else {
-              return posToDOMRect(view, from, to);
-            }
-          },
+          //     if (node) {
+          //       let nodeRect = node.getBoundingClientRect();
+          //       let newNodeRect = {
+          //         bottom: nodeRect.bottom,
+          //         height: nodeRect.height,
+          //         left: nodeRect.left - nodeRect.width / 2 + 100,
+          //         right: nodeRect.right,
+          //         top: nodeRect.top,
+          //         width: nodeRect.width,
+          //         x: nodeRect.x - nodeRect.width / 2 + 100,
+          //         y: nodeRect.y,
+          //       };
+          //       return newNodeRect;
+          //     }
+          //     return node.getBoundingClientRect();
+          //   } else {
+          //     return posToDOMRect(view, from, to);
+          //   }
+          // },
         }}
         shouldShow={({ editor, view, state, oldState, from, to }) => {
           const selection = editor.state.selection;

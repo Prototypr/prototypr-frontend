@@ -6464,6 +6464,11 @@ email-validator@^2.0.4:
   resolved "https://registry.npmjs.org/email-validator/-/email-validator-2.0.4.tgz"
   integrity sha512-gYCwo7kh5S3IDyZPLZf6hSS0MnZT8QmJFqYvbqlDZSbwdZlY6QZWxJ4i/6UhITOJ4XzyI647Bm2MXKCLqnJ4nQ==
 
+embla-carousel-auto-height@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.npmjs.org/embla-carousel-auto-height/-/embla-carousel-auto-height-8.0.1.tgz"
+  integrity sha512-1xTJGP8ag/MCR2xKbBOM4CX+knfcv5C/sO/Yu91YKDe9eoSJxNapb0PB0UyDe3fu/g0Evwe5soo+rRiDKjs31g==
+
 embla-carousel-react@^8.0.0-rc22:
   version "8.0.0-rc22"
   resolved "https://registry.npmjs.org/embla-carousel-react/-/embla-carousel-react-8.0.0-rc22.tgz"

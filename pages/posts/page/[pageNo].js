@@ -44,7 +44,7 @@ export default function PostsPage({allPosts = [], preview, pagination = {}}) {
         navOffset={false}
         padding={false}
         preview={preview}
-        background={"#EFF4FB"}
+        background={"#fbfcff"}
         seo={{
           title: `Prototypr Design articles – free for everyone | Page ${pagination?.page}`,
           description:

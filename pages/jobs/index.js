@@ -31,7 +31,7 @@ const Index = ({ jobs }) => {
       maxWidth={"max-w-[1320px] search-wide"}
       seo={seo}
       showWriteButton={false}
-      background="#eff4fb"
+      background="#fbfcff"
     >
 <Container padding={false} maxWidth="max-w-[1320px] mx-auto pb-16 px-0 xl:px-3">
 <div className="mt-6 grid grid-rows-1 grid-cols-4 grid-cols-1  gap-10">

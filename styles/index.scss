@@ -593,9 +593,11 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 // }
 .embla {
   --slide-spacing: 1rem;
-  --slide-size: 33.33%;
+  --slide-size: 40.33%;
   --slide-height: 19rem;
   // padding: 1.6rem;
+
+  
 }
 @media (max-width: 600px) {
   [data-radix-popper-content-wrapper]{

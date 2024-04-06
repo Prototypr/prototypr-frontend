@@ -108,7 +108,7 @@ export default function Index({
         navOffset={false}
         padding={false}
         preview={preview}
-        background={"#EFF4FB"}
+        background={"#fbfcff"}
         // background={"#f7f9fd"}
         // background={"#F7F7F8"}
         // background={"#ffffff"}
@@ -185,7 +185,7 @@ export default function Index({
         </Container>
        
         {/* <SectionDivider py="py-3.5" transparentLine={true} /> */}
-        {/* <div className="z-50 relative bg-[#EFF4FB]">
+        {/* <div className="z-50 relative bg-[#fbfcff]">
           <HeroArticleSection
             user={user}
             cols={3}
@@ -199,14 +199,14 @@ export default function Index({
         <div className="mt-10">
           <NewsletterSection />
         </div>
-        <div className="mt-14 py-4 pb-[100px] bg-gray-50">
+        <div className="mt-14 py-4 pb-[100px] bg-gray-100">
         <ToolsCarouselSection toolsList={toolsList} sponsors={sponsors} />
         {/* <Container maxWidth="max-w-[1320px] -mb-10 mt-12 z-30 relative">
           <TwoColumnCards />
         </Container> */}
         </div>
 
-          <div className="z-50 py-10 relative bg-[#EFF4FB]">
+          <div className="z-50 py-10 relative bg-[#fbfcff]">
           <HeroArticleSection
             user={user}
             cols={4}

@@ -256,7 +256,7 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                                     className="flex"
                                   >
                                     <div
-                                      className={`inline-block capitalize font-medium text-base px-3 py-1 cursor-pointer bg-[#d0e1f6] rounded-full ${index == tags?.length - 1 ? "" : "mr-3"} text-black/80 text-[15px] font-base flex flex-col justify-center mb-2`}
+                                      className={`inline-block capitalize font-medium text-base px-3 py-1 cursor-pointer bg-[#e0e4ea] rounded-full ${index == tags?.length - 1 ? "" : "mr-3"} text-black/80 text-[15px] font-base flex flex-col justify-center mb-2`}
                                     >
                                       {tag.attributes.name}
                                     </div>

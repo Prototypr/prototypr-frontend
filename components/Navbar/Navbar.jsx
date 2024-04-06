@@ -182,7 +182,7 @@ const Navbar = ({
               {/* <div className={`hidden mr-2 md:block my-auto`}>
                   <WMButton />
                 </div> */}
-              <NavSponsor sponsor={sponsor} />
+              
               <NavigationMenu>
                 <NavigationMenuList>
                   <LocationMenu
@@ -196,6 +196,7 @@ const Navbar = ({
               <div className="relative">
                 <UserMenu userLoading={isLoading} user={user} />
               </div>
+              <NavSponsor sponsor={sponsor} />
             </div>
           </div>
         </div>

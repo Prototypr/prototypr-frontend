@@ -5,7 +5,7 @@ const NewsPageFeatured = ({ post, domain, content, ogImage, faviconUrl }) => {
   return (
     <div className="relative mt-8 w-full max-w-[1320px] mx-auto flex flex-col justify-center">
       {/* <div className="md:border-l md:border-blue-200 md:pl-6"> */}
-      <div className="max-w-5xl">
+      <div className="w-full">
         <div className="relative grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12 bg-white p-6 rounded-2xl border border-gray-300/70 shadow-sm">
           <div className="lg:pl-20 z-10">
             <div className="max-w-xs px-2.5 lg:max-w-none">

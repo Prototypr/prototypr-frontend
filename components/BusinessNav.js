@@ -12,7 +12,7 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({
+export default function BusinessNav({
   editorInstance,
   showWriteButton,
   showSponsorButton,
@@ -83,7 +83,7 @@ export default function EditorNav({
     <div
       id="main-nav"
       as="nav"
-      className={`p-1 z-40 fixed w-full top-0`}
+      className={`bg-white z-40 fixed w-full top-0 border-b border-1 border-gray-200/70`}
       style={
         {
           // background: `rgba(255, 255, 255, ${0.9})`,
@@ -93,11 +93,11 @@ export default function EditorNav({
     >
       <>
         <div
-          className="mx-auto max-w-[1320px] h-10 text-sm px-2  bg-gray-50/80 border border-1 border-gray-200/70 rounded-xl"
-          // style={{ maxWidth: padding === false ? "" : "1200px" }}
+          className="mx-auto text-sm px-2 sm:px-6 lg:px-8"
+          style={{ maxWidth: padding === false ? "" : "1200px" }}
         >
           <div
-            className={` transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-10`}
+            className={` transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-16`}
           >
             <div className="sm:hidden absolute inset-y-0 left-0 flex items-center">
               {/* <!-- Mobile menu button--> */}
@@ -127,11 +127,14 @@ export default function EditorNav({
                   />
                 </div>
               </Link>
-              {/* <div className="my-auto ml-2">
-                <span className="p-2 py-0.5 text-xs bg-blue-400 bg-opacity-20 text-blue-600 rounded-full border border-blue-200">
+              <div className="my-auto ml-2">
+                <span className="text-lg font-semibold text-gray-700">
+                  Business hub
+                </span>
+                {/* <span className="p-2 py-0.5 text-xs bg-blue-400 bg-opacity-20 text-blue-600 rounded-full border border-blue-200">
                 Beta
-              </span>
-              </div> */}
+              </span> */}
+              </div>
               <div className="my-auto ml-3">{statusComponent}</div>
               {/* Undo/redo */}
               {isEditor && <UndoRedoButtons editor={editorInstance} />}
