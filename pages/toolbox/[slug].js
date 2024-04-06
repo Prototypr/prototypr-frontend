@@ -44,7 +44,10 @@ import AuthorCard from "@/components/toolbox/AuthorCard";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import ToolCard from "@/components/v4/card/ToolCard";
 import WeeMan from "@/components/images/weeMan";
-import buildToolboxGallery, { getToolboxFeaturedImage, getToolboxLogo } from "@/lib/utils/buildGallery";
+import buildToolboxGallery, {
+  getToolboxFeaturedImage,
+  getToolboxLogo,
+} from "@/lib/utils/buildGallery";
 import { formatAllTools } from "@/lib/utils/formatToolContent";
 
 const ToolContent = ({
@@ -54,7 +57,7 @@ const ToolContent = ({
   popularTags,
   layout,
   logo,
-  featuredImage
+  featuredImage,
 }) => {
   const { user } = useUser();
   const tags = post.attributes.tags.data;
@@ -92,9 +95,9 @@ const ToolContent = ({
       <div className="w-full mx-auto">
         <Container
           padding={false}
-          maxWidth="w-full mb-6 -mt-[96px] relative z-0"
+          maxWidth="w-full xl:mb-6 -mt-[96px] p-6 md:px-3 xl:p-0 relative z-0"
         >
-          <div className="grid grid-cols-12 gap-3 md:px-0 h-full w-full mx-auto max-w-[1315px] mt-[76px]">
+          <div className="grid grid-cols-12 gap-3 md:px-0 h-full w-full mx-auto max-w-[1315px] mt-[44px] md:mt-[76px]">
             <div
               className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
             >
@@ -107,8 +110,8 @@ const ToolContent = ({
               <div className="absolute bottom-0 w-full h-full bg-gradient-to-b from-gray-900/0 to-black left-0 rounded-2xl z-0" />
               <div className="relative w-full max-w-[1320px] mx-auto h-full flex flex-col-reverse justify-between">
                 {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
-                <div className="w-full z-10 grid grid-cols-3 gap-16 flex p-6 justify-between ">
-                  <div className="flex col-span-2 w-full flex-col justify-between">
+                <div className="w-full z-10 grid grid-cols-3 gap-16 flex pt-0 md:pt-6 p-6 justify-between ">
+                  <div className="flex order-2 md:order-1 col-span-3 md:col-span-2 w-full flex-col justify-between">
                     <div className="flex flex-col justify-between">
                       <div className="flex flex-col">
                         <div className="flex max-w-[94%] flex-col">
@@ -136,13 +139,30 @@ const ToolContent = ({
                               </p>
                             ) : null}
                           </div>
+                          <div className="flex md:hidden mt-4 flex-none">
+                            <div className="flex justify-end">
+                              <a
+                                target={"_blank"}
+                                href={
+                                  post?.attributes?.link + "?ref=prototypr.io"
+                                }
+                              >
+                                <Button
+                                  className="rounded-full text-base bg-blue-600 font-medium text-white px-6 py-2 h-[28px] leading-none"
+                                  variant={"confirmBig"}
+                                >
+                                  Visit site
+                                </Button>
+                              </a>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex col-span-1 flex-col justify-end">
-                     <div className="flex text-base text-white">
+                  <div className="flex order-1 md:order-2 col-span-3 md:col-span-1 flex-col justify-end">
+                    <div className="flex text-base text-white">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="mr-1.5"
@@ -166,7 +186,8 @@ const ToolContent = ({
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-none">
+                    {/* hide on mobile */}
+                    <div className="hidden md:flex flex-none">
                       <div className="flex justify-end">
                         <a
                           target={"_blank"}
@@ -194,7 +215,9 @@ const ToolContent = ({
                     {tags.map((tag, i) => {
                       if (i < 4) {
                         return (
-                          <Link href={`/toolbox/${tag.attributes.slug}/page/1/`}>
+                          <Link
+                            href={`/toolbox/${tag.attributes.slug}/page/1/`}
+                          >
                             <span
                               className={`px-4 py-0.5 text-sm capitalize rounded-full border border-opacity-50 border-white bg-black/30 backdrop-blur-md`}
                             >
@@ -213,20 +236,18 @@ const ToolContent = ({
         {/* Content under header */}
         <Container maxWidth="w-full relative z-10">
           <div className="grid grid-cols-3 grid-flow-row-dense gap-6 max-w-[1320px] mx-auto md:px-0 h-full">
+            
             {gallery.length ? (
               <div
-                className={`order-1 col-span-2 ${gallery?.length ? "md:pl-0 rounded-xl" : ""}`}
+                className={`col-span-3 order-2 md:col-span-2 md:order-1 ${gallery?.length ? "md:pl-0 rounded-xl" : ""}`}
               >
                 <div className="h-full min-h-[230px]">
-                  <h2 className="text-xl md:hidden font-medium mb-6">
-                    {post?.attributes?.title} Gallery
-                  </h2>
                   <Carousel gallery={gallery} />
                 </div>
               </div>
             ) : null}
             <div
-              className={`order-3 col-span-2 bg-white p-8 rounded-2xl border border-gray-300/70 shadow-sm`}
+              className={`order-1 col-span-3 lg:order-3 lg:col-span-2 bg-white p-8 rounded-2xl border border-gray-300/70 shadow-sm`}
             >
               <h2 class="text-2xl font-medium mb-4">Overview</h2>
 
@@ -267,7 +288,7 @@ const ToolContent = ({
             </div>
 
             {post?.attributes?.author && (
-              <div className="order-2 row-span-1 bg-white p-3 rounded-2xl border border-gray-300/70 shadow-sm">
+              <div className="order-3 lg:order-2 col-span-3 lg:col-span-1 bg-white p-3 rounded-2xl border border-gray-300/70 shadow-sm">
                 <h1 tabIndex={0} className="text-base mb-3 font-semibold">
                   {post?.attributes?.creator ? "Contributors" : "Curated by"}
                 </h1>
@@ -290,15 +311,15 @@ const ToolContent = ({
               </div>
             )}
 
-            <div className="order-4 flex flex-col gap-4">
+            <div className="order-4 col-span-3 lg:col-span-1 flex flex-col gap-4">
               <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
                 <div className="z-10 col-span-4 relative">
                   <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
                     Get weekly handpicked tools
                   </h3>
                   <p className="text-base text-gray-600 mb-6">
-                    Join the 1000s who receive curated
-                    products from Graeme @ Prototypr.
+                    Join the 1000s who receive curated products from Graeme @
+                    Prototypr.
                   </p>
                 </div>
                 <div className="z-10 col-span-1 relative">
@@ -316,7 +337,12 @@ const ToolContent = ({
                 </div>
               </div>
               <div className="bg-white relative rounded-2xl border border-gray-300/70 shadow-sm">
-                <h1 tabIndex={0} className="text-base mb-3 font-semibold px-3 pt-3">Related tools</h1>
+                <h1
+                  tabIndex={0}
+                  className="text-base mb-3 font-semibold px-3 pt-3"
+                >
+                  Related tools
+                </h1>
                 <ToolCard
                   border={false}
                   posts={relatedPosts}
@@ -348,7 +374,7 @@ const ToolContent = ({
         </Container>
       </div>
 
-      <Container maxWidth=" w-full pb-24 bg-gradient-to-tr from-[#fefefe] to-sky-100/20 relative z-10">
+      <Container maxWidth="hidden xl:block w-full pb-24 bg-gradient-to-tr from-[#fefefe] to-sky-100/20 relative z-10">
         {/* <img src="/static/images/bendy9.svg" className="absolute top-0 -mt-[2.9%] z-10 left-0 w-full gm-added gm-observing gm-observing-cb" loading="lazy"/> */}
         {relatedPosts?.length ? (
           <div className="z-30 relative max-w-[1320px] mx-auto md:px-3">
@@ -407,7 +433,7 @@ export default function Post({
   popularTags,
   layout,
   logo,
-  featuredImage
+  featuredImage,
 }) {
   const router = useRouter();
 
@@ -500,8 +526,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
     ? data?.posts?.data[0]?.attributes?.relatedTools
     : false;
 
-
-    relatedPostsData = formatAllTools({tools:relatedPostsData, tagNumber:1 });
+  relatedPostsData = formatAllTools({ tools: relatedPostsData, tagNumber: 1 });
   // no point transforming these, cos they're all english anyway
   // const postData = transformPost(data?.posts.data[0], locale)
   const postData = data?.posts.data[0];
@@ -518,13 +543,12 @@ export async function getStaticProps({ params, preview = null, locale }) {
   }
 
   const logo = getToolboxLogo({ post: postData });
-  const featuredImage =  getToolboxFeaturedImage({ post: postData, logo })
-    //build the gallery here
-    let PHOTO_SET = [];
-    const item = data?.posts.data[0];
-  
-    PHOTO_SET = buildToolboxGallery({ item, PHOTO_SET, featuredImage });
+  const featuredImage = getToolboxFeaturedImage({ post: postData, logo });
+  //build the gallery here
+  let PHOTO_SET = [];
+  const item = data?.posts.data[0];
 
+  PHOTO_SET = buildToolboxGallery({ item, PHOTO_SET, featuredImage });
 
   return {
     props: {
@@ -537,7 +561,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       popularTags: popularTags,
       layout,
       logo,
-      featuredImage
+      featuredImage,
       // morePosts: data?.morePosts.data,
     },
     revalidate: 40,

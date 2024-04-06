@@ -55,8 +55,8 @@ const TopicsGridHome = ({ largePost, smallPosts, tools,showHeading, slug, headin
           />
 
 
-          {tools?.length && <div className="w-full mt-8 flex">
-            <ToolIconCardRow title={`${heading} tools`} showHeader={true} withBackground={true} tools={tools} />       
+          {tools?.length && <div className={`w-full mt-3 flex`}>
+            <ToolIconCardRow title={`${heading} tools`} showHeader={false} withBackground={true} tools={tools} />       
           </div>}
 
         </div>

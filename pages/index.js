@@ -75,7 +75,7 @@ export default function Index({
   heroPost,
   morePosts,
   allNews,
-  groupedNewsPosts
+  groupedNewsPosts,
   // popularTags,
 }) {
   const intl = useIntl();
@@ -131,30 +131,38 @@ export default function Index({
         ) : (
           <div className="pt-[44px]" />
         )}
-         <div className="relative z-50  mt-6">
+        <div className="relative z-50  mt-6">
           <TagsNavRow />
         </div>
-        <Container padding={false} maxWidth="max-w-[1320px] mx-auto px-6 md:px-3 xl:px-3 z-30 relative">
+        <Container
+          padding={false}
+          maxWidth="max-w-[1320px] mx-auto px-6 md:px-3 xl:px-3 z-30 relative"
+        >
           <div className="grid gap-3 grid-cols-9 md:grid-cols-9 xl:grid-cols-12">
-          <div className="col-span-9 md:col-span-3">
-             <NewsColumn groupedNewsPosts={groupedNewsPosts} sponsor={navSponsor} withBackground={false} posts={allNews} />   
-              </div>
-       
+            <div className="col-span-9 md:col-span-3">
+              <NewsColumn
+                groupedNewsPosts={groupedNewsPosts}
+                sponsor={navSponsor}
+                withBackground={false}
+                posts={allNews}
+              />
+            </div>
+
             <div className="col-span-9 md:col-span-6 ">
-            <HeroArticleSection
-            user={user}
-            cols={2}
-            // cols={3}
-            heroCardPost={heroPost}
-            viewablePosts={morePosts}
-            showSmallCardDescription={false}
-            // jobsSidebar={jobsSidebar}
-            // showBigPost={false}
-            showBigPost={3}
-            showTitle={false}
-            showHeadingRow={false}
-          />
-              
+              <HeroArticleSection
+                user={user}
+                cols={2}
+                // cols={3}
+                heroCardPost={heroPost}
+                viewablePosts={morePosts}
+                showSmallCardDescription={false}
+                // jobsSidebar={jobsSidebar}
+                // showBigPost={false}
+                showBigPost={3}
+                showTitle={false}
+                showHeadingRow={false}
+              />
+
               {/* <div
                 className={`${user?.isLoggedIn ? "pt-6" : ""} text-2xl text-black/90 font-semibold text-left mt-6 md:-mt-8 mb-5 px-1 w-fit rounded-full`}
               >{`Latest products`}</div>
@@ -178,12 +186,15 @@ export default function Index({
                 /> */}
             </div>
             <div className="order-first md:order-last col-span-9 md:col-span-9 xl:col-span-3">
-             <CardColumn sponsor={navSponsor} withBackground={false} tools={[...toolsList.slice(0,8)]} />   
-              </div>
-          
+              <CardColumn
+                sponsor={navSponsor}
+                withBackground={false}
+                tools={[...toolsList.slice(0, 8)]}
+              />
+            </div>
           </div>
         </Container>
-       
+
         {/* <SectionDivider py="py-3.5" transparentLine={true} /> */}
         {/* <div className="z-50 relative bg-[#fbfcff]">
           <HeroArticleSection
@@ -200,26 +211,28 @@ export default function Index({
           <NewsletterSection />
         </div>
         <div className="mt-14 py-4 pb-[100px] bg-gray-100">
-        <ToolsCarouselSection toolsList={toolsList} sponsors={sponsors} />
-        {/* <Container maxWidth="max-w-[1320px] -mb-10 mt-12 z-30 relative">
+          <ToolsCarouselSection toolsList={toolsList} sponsors={sponsors} />
+          {/* <Container maxWidth="max-w-[1320px] -mb-10 mt-12 z-30 relative">
           <TwoColumnCards />
         </Container> */}
         </div>
 
-          <div className="z-50 py-10 relative bg-[#fbfcff]">
+        <div className="z-50 py-10 relative">
           <HeroArticleSection
             user={user}
             cols={4}
             heroCardPost={morePosts[4]}
-            viewablePosts={morePosts.slice(5,morePosts.length)}
+            viewablePosts={morePosts.slice(5, morePosts.length)}
             showBigPost={2}
             showTitle={false}
           />
         </div>
-        <SectionDivider py="py-2" transparentLine={false} />
+        {/* <SectionDivider py="py-2" transparentLine={false} /> */}
 
-        <Container maxWidth="py-8 pb-18 max-w-[1320px]">
-          <TwoColumnCards />
+        <Container maxWidth="py-16 pt-14  bg-[#ffffff]">
+          <div className="max-w-[1320px] mx-auto">
+            <TwoColumnCards />
+          </div>
         </Container>
 
         {/* <SectionDivider py='py-4' transparentLine={true} />
@@ -309,12 +322,12 @@ export default function Index({
         </div> */}
         {/* <SectionDivider />
         <TopicSpotlightSection title={'Topic spotlight:'} tagline={'Open Web'}/> */}
-        <div className="relative pt-16 bg-gray-50">
+        <div className="relative bg-gray-50">
           {/* <SectionDivider py='py-6 pt-12' transparentLine={true} /> */}
           {/* <SectionDivider /> */}
           {TAB_ITEMS?.map((topic, index) => {
             return (
-              <div key={`topicsection_${index}`} className="z-40">
+              <div key={`topicsection_${index}`} className={`z-40 ${index % 2 === 0?'bg-gray-100/60':''} py-10 `}>
                 <TopicSectionHome
                   tagline={topic.tagline}
                   showSidebar={false}
@@ -328,26 +341,25 @@ export default function Index({
                   )}
                   // heroJob={heroJob}
                   sponsors={sponsors}
-                  toolsList={topicRes[topic.slug]?.tools.slice(0, 7)}
+                  toolsList={topicRes[topic.slug]?.tools.slice(0, 10)}
                   authorsList={topicRes[topic.slug]?.authors}
                 />
 
-                <SectionDivider py="py-12 opacity-70" transparentLine={false} />
+                {/* <SectionDivider py="py-12 opacity-70" transparentLine={true} /> */}
                 {index == 1 ? (
-                  <div className="-mt-8">
+                  <div className="mt-10 py-12 pt-2 -mb-10 bg-white">
                     <NewsletterSection />
-                    <SectionDivider py="py-12" transparentLine={false} />
+                    {/* <SectionDivider py="py-12" transparentLine={true} /> */}
                   </div>
                 ) : (
                   ""
                 )}
 
                 {index == 4 ? (
-                  <div className="mt-0">
+                  <div className="py-10 mt-10 -mb-8 bg-gray-50">
                     <Container maxWidth="max-w-[1320px]">
                       <TwoColumnCards />
                     </Container>
-                    <SectionDivider py="py-4" transparentLine={true} />
                   </div>
                 ) : (
                   ""
@@ -356,7 +368,6 @@ export default function Index({
             );
           })}
 
-          <SectionDivider transparentLine={true} />
         </div>
         {/* <BrowserView>
           <DesignTool allTools={toolsList} />
@@ -389,7 +400,7 @@ export async function getStaticProps({ preview = null, locale }) {
       "date:desc",
     ])) || [];
 
-    // console.log('allTools',allTools)
+  // console.log('allTools',allTools)
 
   let allNews = (await getAllNews(preview, 15, 0)) || [];
 
@@ -407,7 +418,7 @@ export async function getStaticProps({ preview = null, locale }) {
         preview,
         [TAB_ITEMS[index].toolSlug],
         "tool",
-        5,
+        10,
         0,
         sort
       )) || [];
@@ -445,7 +456,8 @@ export async function getStaticProps({ preview = null, locale }) {
   allNews = formatAllTools({ tools: allNews.data, tagNumber: 0 });
 
   const navSponsorId = process.env.NEXT_PUBLIC_PRICE_WEBSITE_1;
-  const navSponsor = sponsors?.find(sponsor => sponsor.productId === navSponsorId) || null;
+  const navSponsor =
+    sponsors?.find(sponsor => sponsor.productId === navSponsorId) || null;
 
   let groupedNewsPosts = groupPostsByDate(allNews);
 
@@ -454,8 +466,8 @@ export async function getStaticProps({ preview = null, locale }) {
       heroPost: allPosts[0],
       morePosts: allPosts.slice(1),
       allTools: allTools,
-      allNews:allNews,
-      groupedNewsPosts:groupedNewsPosts,
+      allNews: allNews,
+      groupedNewsPosts: groupedNewsPosts,
       // popularTags,
       // otherPosts: otherPosts,
       // interviewPosts: interviews.data,
@@ -464,7 +476,7 @@ export async function getStaticProps({ preview = null, locale }) {
       // jobs,
       // randomPosts: randomPosts.slice(0, 8),
       sponsors: sponsors?.length ? sponsors : [],
-      navSponsor
+      navSponsor,
     },
     revalidate: 20,
   };
