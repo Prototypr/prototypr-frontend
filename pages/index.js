@@ -389,6 +389,8 @@ export async function getStaticProps({ preview = null, locale }) {
       "date:desc",
     ])) || [];
 
+    // console.log('allTools',allTools)
+
   let allNews = (await getAllNews(preview, 15, 0)) || [];
 
   // let jobs = (await getAllJobs(null, 5, 1)) || [];

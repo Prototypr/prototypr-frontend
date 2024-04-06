@@ -8,7 +8,6 @@ import ErrorPage from "next/error";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 // import stc from "string-to-color";
-
 // import { ToolBoxDisplay } from "../../components/toolbox/ToolboxGrid";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import useUser from "@/lib/iron-session/useUser";
@@ -46,6 +45,7 @@ import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import ToolCard from "@/components/v4/card/ToolCard";
 import WeeMan from "@/components/images/weeMan";
 import buildToolboxGallery, { getToolboxFeaturedImage, getToolboxLogo } from "@/lib/utils/buildGallery";
+import { formatAllTools } from "@/lib/utils/formatToolContent";
 
 const ToolContent = ({
   post,
@@ -107,8 +107,8 @@ const ToolContent = ({
               <div className="absolute bottom-0 w-full h-full bg-gradient-to-b from-gray-900/0 to-black left-0 rounded-2xl z-0" />
               <div className="relative w-full max-w-[1320px] mx-auto h-full flex flex-col-reverse justify-between">
                 {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
-                <div className="w-[800px] z-10  flex p-6 justify-betweeen ">
-                  <div className="flex w-full flex-col justify-between">
+                <div className="w-full z-10 grid grid-cols-3 gap-16 flex p-6 justify-between ">
+                  <div className="flex col-span-2 w-full flex-col justify-between">
                     <div className="flex flex-col justify-between">
                       <div className="flex flex-col">
                         <div className="flex max-w-[94%] flex-col">
@@ -141,7 +141,31 @@ const ToolContent = ({
                     </div>
                   </div>
 
-                  <div className="flex flex-col justify-center">
+                  <div className="flex col-span-1 flex-col justify-end">
+                     <div className="flex text-base text-white">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="mr-1.5"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        viewBox="0 0 256 256"
+                      >
+                        <path d="M225.86,102.82c-3.77-3.94-7.67-8-9.14-11.57-1.36-3.27-1.44-8.69-1.52-13.94-.15-9.76-.31-20.82-8-28.51s-18.75-7.85-28.51-8c-5.25-.08-10.67-.16-13.94-1.52-3.56-1.47-7.63-5.37-11.57-9.14C146.28,23.51,138.44,16,128,16s-18.27,7.51-25.18,14.14c-3.94,3.77-8,7.67-11.57,9.14C88,40.64,82.56,40.72,77.31,40.8c-9.76.15-20.82.31-28.51,8S41,67.55,40.8,77.31c-.08,5.25-.16,10.67-1.52,13.94-1.47,3.56-5.37,7.63-9.14,11.57C23.51,109.72,16,117.56,16,128s7.51,18.27,14.14,25.18c3.77,3.94,7.67,8,9.14,11.57,1.36,3.27,1.44,8.69,1.52,13.94.15,9.76.31,20.82,8,28.51s18.75,7.85,28.51,8c5.25.08,10.67.16,13.94,1.52,3.56,1.47,7.63,5.37,11.57,9.14C109.72,232.49,117.56,240,128,240s18.27-7.51,25.18-14.14c3.94-3.77,8-7.67,11.57-9.14,3.27-1.36,8.69-1.44,13.94-1.52,9.76-.15,20.82-.31,28.51-8s7.85-18.75,8-28.51c.08-5.25.16-10.67,1.52-13.94,1.47-3.56,5.37-7.63,9.14-11.57C232.49,146.28,240,138.44,240,128S232.49,109.73,225.86,102.82Zm-11.55,39.29c-4.79,5-9.75,10.17-12.38,16.52-2.52,6.1-2.63,13.07-2.73,19.82-.1,7-.21,14.33-3.32,17.43s-10.39,3.22-17.43,3.32c-6.75.1-13.72.21-19.82,2.73-6.35,2.63-11.52,7.59-16.52,12.38S132,224,128,224s-9.15-4.92-14.11-9.69-10.17-9.75-16.52-12.38c-6.1-2.52-13.07-2.63-19.82-2.73-7-.1-14.33-.21-17.43-3.32s-3.22-10.39-3.32-17.43c-.1-6.75-.21-13.72-2.73-19.82-2.63-6.35-7.59-11.52-12.38-16.52S32,132,32,128s4.92-9.15,9.69-14.11,9.75-10.17,12.38-16.52c2.52-6.1,2.63-13.07,2.73-19.82.1-7,.21-14.33,3.32-17.43S70.51,56.9,77.55,56.8c6.75-.1,13.72-.21,19.82-2.73,6.35-2.63,11.52-7.59,16.52-12.38S124,32,128,32s9.15,4.92,14.11,9.69,10.17,9.75,16.52,12.38c6.1,2.52,13.07,2.63,19.82,2.73,7,.1,14.33.21,17.43,3.32s3.22,10.39,3.32,17.43c.1,6.75.21,13.72,2.73,19.82,2.63,6.35,7.59,11.52,12.38,16.52S224,124,224,128,219.08,137.15,214.31,142.11ZM140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180Zm28-72c0,17.38-13.76,31.93-32,35.28V144a8,8,0,0,1-16,0v-8a8,8,0,0,1,8-8c13.23,0,24-9,24-20s-10.77-20-24-20-24,9-24,20v4a8,8,0,0,1-16,0v-4c0-19.85,17.94-36,40-36S168,88.15,168,108Z"></path>
+                      </svg>
+                      <div className="mb-4">
+                        <div className="inline">
+                          Is this your tool?{" "}
+                          <Link
+                            className="underline"
+                            href={`/toolbox/post/${post.id}/claim`}
+                          >
+                            Claim this page
+                          </Link>
+                          .
+                        </div>
+                      </div>
+                    </div>
                     <div className="flex flex-none">
                       <div className="flex justify-end">
                         <a
@@ -149,11 +173,17 @@ const ToolContent = ({
                           href={post?.attributes?.link + "?ref=prototypr.io"}
                         >
                           <Button
+                            className="rounded-full text-base bg-blue-600 font-medium text-white px-6 py-2 h-[28px] leading-none"
+                            variant={"confirmBig"}
+                          >
+                            Visit site
+                          </Button>
+                          {/* <Button
                             className="rounded-full uppercase text-xs bg-blue-600 font-medium text-white px-6 py-0.5 h-[28px] leading-none"
                             variant={"confirmBig"}
                           >
                             Get
-                          </Button>
+                          </Button> */}
                         </a>
                       </div>
                     </div>
@@ -164,9 +194,13 @@ const ToolContent = ({
                     {tags.map((tag, i) => {
                       if (i < 4) {
                         return (
-                          <span className="px-4 py-0.5 text-sm capitalize rounded-full border border-opacity-50 border-white bg-black/30 backdrop-blur-md">
-                            {tag.attributes.name}
-                          </span>
+                          <Link href={`/toolbox/${tag.attributes.slug}/page/1/`}>
+                            <span
+                              className={`px-4 py-0.5 text-sm capitalize rounded-full border border-opacity-50 border-white bg-black/30 backdrop-blur-md`}
+                            >
+                              {tag.attributes.name}
+                            </span>
+                          </Link>
                         );
                       }
                     })}
@@ -264,7 +298,7 @@ const ToolContent = ({
                   </h3>
                   <p className="text-base text-gray-600 mb-6">
                     Join the 1000s who receive curated
-                    products from Prototypr's Graeme.
+                    products from Graeme @ Prototypr.
                   </p>
                 </div>
                 <div className="z-10 col-span-1 relative">
@@ -281,8 +315,8 @@ const ToolContent = ({
                   <SignupSidebar post={post} />
                 </div>
               </div>
-              <div className="bg-white  p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
-                <h1 tabIndex={0} className="text-base mb-3 font-semibold">Related tools</h1>
+              <div className="bg-white relative rounded-2xl border border-gray-300/70 shadow-sm">
+                <h1 tabIndex={0} className="text-base mb-3 font-semibold px-3 pt-3">Related tools</h1>
                 <ToolCard
                   border={false}
                   posts={relatedPosts}
@@ -467,6 +501,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
     : false;
 
 
+    relatedPostsData = formatAllTools({tools:relatedPostsData, tagNumber:1 });
   // no point transforming these, cos they're all english anyway
   // const postData = transformPost(data?.posts.data[0], locale)
   const postData = data?.posts.data[0];
@@ -489,6 +524,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
     const item = data?.posts.data[0];
   
     PHOTO_SET = buildToolboxGallery({ item, PHOTO_SET, featuredImage });
+
 
   return {
     props: {

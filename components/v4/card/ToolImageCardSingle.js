@@ -16,7 +16,7 @@ const ToolImageCardSingle = ({ post, imageLarge,type, columns, tagNumber }) => {
           "flex flex-col- border border-1 border-gray-200/70 pt-3 pb-1 grid grid-col-1 gap-4 flex-grow h-full rounded-t-2xl shadow-sm hover:shadow-xl border border-gray-300/60 transition transition-all duration-400 hover:scale-[1.02] group bg-white relative rounded-2xl fade-"
         }
       >
-        <div className="rounded-xl px-3 block cursor-pointer group-hover:scale-[1.03] transition transition-all duration-700"
+        <div className="rounded-xl px-3 block cursor-pointer group-hover:scale-[1.01] transition transition-all duration-700"
         >
           <div
             className="rounded-xl relative flex"
@@ -26,7 +26,7 @@ const ToolImageCardSingle = ({ post, imageLarge,type, columns, tagNumber }) => {
               height:imageLarge?"240px":"195px",
             }}
           >
-            <div className="absolute top-0 left-0 z-10 rounded-xl w-full h-full bg-gradient-to-b from-black/5 via-black/10 to-black/40 group-hover:scale-[1.03] transition transition-all duration-700"></div>
+            <div className="absolute top-0 left-0 z-10 rounded-xl w-full h-full bg-gradient-to-b from-black/5 via-black/10 to-black/40 group-hover:scale-[1.01] transition transition-all duration-700"></div>
             <Image
               loader={gumletLoader}
               priority={false < 2 ? `true` : `false`}
@@ -39,7 +39,7 @@ const ToolImageCardSingle = ({ post, imageLarge,type, columns, tagNumber }) => {
             //   width="100%"
             //   height="100%"
               alt="Brand logo for external website's link"
-              className="object-cover rounded-xl bg-white group-hover:shadow-sm group-hover:scale-[1.03] transition transition-all duration-700 "
+              className="object-cover rounded-xl bg-white group-hover:shadow-sm group-hover:scale-[1.01] transition transition-all duration-700 "
               src={post?.coverImage}
               fill
                 // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -51,7 +51,7 @@ const ToolImageCardSingle = ({ post, imageLarge,type, columns, tagNumber }) => {
                 width={48}
                 height={48}
               alt="Brand logo for external website's link"
-              className="object-cover flex-shrink-0 shine rounded-xl border-2 border-white bg-white shadow -mt-[22px]"
+              className="object-cover w-[48px] h-[48px] flex-shrink-0 shine rounded-xl border-2 border-white bg-white shadow -mt-[22px]"
             //   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
             //   data-src={coverImage}
               src={post?.logo}

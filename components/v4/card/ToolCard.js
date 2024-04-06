@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 const ToolCard = ({ posts, type, columns, tagNumber, border }) => {
   return (
     <div
-      className={`grid grid-cols-1 ${columns ? columns : "lg:grid-cols-3"} gap-6 w-full flex-wrap`}
+      className={`grid grid-cols-1 px-1 ${columns ? columns : "lg:grid-cols-3"} gap-2 w-full flex-wrap`}
     >
       {posts.map((post, i) => {
         let title, slug, coverImage, tags;
@@ -16,9 +16,9 @@ const ToolCard = ({ posts, type, columns, tagNumber, border }) => {
           title = post.title;
           slug = post.slug;
           if (tagNumber == 1) {
-            tags = post.tags.data.slice(0, 1);
+            tags = post.tags.slice(0, 1);
           } else {
-            tags = post.tags.data.slice(0, 2);
+            tags = post.tags.slice(0, 2);
           }
 
           coverImage = post.featuredImage?.data?.attributes?.url
@@ -67,11 +67,11 @@ const ToolCard = ({ posts, type, columns, tagNumber, border }) => {
           <Link href={`/toolbox/${slug}`}>
             <div
               key={slug}
-              className={`w-auto group flex md:flex-row justify-between gap-4 ${border ? "bg-white rounded-2xl border border-black border-opacity-5 p-3" : ""} `}
+              className={`w-auto group  gap-2 hover:bg-gray-100/90 rounded-2xl transition trasition-all duration-400 p-2 flex md:flex-row justify-between gap-4 ${border ? "bg-white rounded-2xl border border-black border-opacity-5 p-3" : ""} `}
             >
               <div className="flex justify-center sm:flex-row">
                 {coverImage ? (
-                  <div className="mr-4 relative rounded-xl border border-gray-300/40 overflow-hidden h-[64px] w-[64px] bg-gray-50 group-hover:scale-[1.05] flex-none transition transition-all duration-700 ">
+                  <div className="mr-4 relative rounded-xl border border-gray-300/40 overflow-hidden h-[64px] w-[64px] bg-gray-50 group-hover:scale-[1.05] group-hover:shadow-sm flex-none transition transition-all duration-700 ">
                     <Image
                       loader={gumletLoader}
                       priority={false < 2 ? `true` : `false`}
@@ -107,7 +107,7 @@ const ToolCard = ({ posts, type, columns, tagNumber, border }) => {
                     })} */}
                      <Link href={`/toolbox/${tags[0].attributes?.slug}/page/1/`}
                         className={`${i > 0 ? "hidden md:inline-block md:line-clamp-1" : ""} px-2.5 mr-1 py-0.5 leading-wide overflow-hidden hover:shadow-sm hover:font-medium rounded-full bg-[#ecf0f5] text-xs capitalize transition transition-all duration-400`}
-                      >
+                      > 
                         {tags[0].attributes.name}
                       </Link>
                     </div>

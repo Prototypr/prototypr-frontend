@@ -82,7 +82,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
                 width={48}
                 height={48}
               alt="Brand logo for external website's link"
-              className="object-cover flex-shrink-0 shine rounded-xl border-2 border-white bg-white shadow -mt-[22px]"
+              className="object-cover flex-shrink-0 shine rounded-xl  w-[48px] h-[48px] border-2 border-white bg-white shadow -mt-[22px]"
             //   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
             //   data-src={coverImage}
               src={logo}
