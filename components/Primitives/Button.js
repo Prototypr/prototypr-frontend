@@ -223,6 +223,16 @@ const Button = styled("button", {
         '&:hover': { color: pinkDark.pink9, outline: `1px solid ${pinkDark.pink10}` },
         '&:focus': { boxShadow: `0 0 0 2px black` },
       },
+      ghostSlate: {
+        backgroundColor: '',
+        marginRight:'8px',
+        color: slate.slate11,
+        outline:`1px solid ${slate.slate8}`,
+        // boxShadow: `0 2px 10px ${blackA.blackA7}`,
+        // '&:hover': { outline: `1px solid ${slate.slate12}` },
+        '&:hover': { color: slate.slate12, outline: `1px solid ${slate.slate10}` },
+        '&:focus': { boxShadow: `0 0 0 2px black` },
+      },
       ghostBlue: {
         backgroundColor: '',
         borderRadius:20,

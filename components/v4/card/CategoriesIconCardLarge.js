@@ -31,7 +31,7 @@ const CategoriesIconCardLarge = ({ topic, withBackground }) => {
               <img className="w-full h-full opacity-70 bg-white" src={topic.icon}/>:''}
             </div>
             <div className="flex flex-col pl-1 justify-center">
-              <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base">
+              <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base tracking-tight">
                 {topic?.name}
                 {/* <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                   Promoted

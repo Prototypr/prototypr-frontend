@@ -45,7 +45,7 @@ const SmallCardStacked = ({ title, image, tags, date, avatar, author, showAuthor
         </div>}
         <div>
           <Link href={link}>
-            <h2 className="md:ml-0 mb-3 md:mb-0 text-sm md:text-lg font-semibold leading-snug line-clamp-3">
+            <h2 className="md:ml-0 mb-3 md:mb-0 text-sm md:text-lg font-medium leading-snug line-clamp-3 tracking-tight">
               {title}
             </h2>
           </Link>

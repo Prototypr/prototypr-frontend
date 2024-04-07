@@ -5,12 +5,11 @@ import Layout from "@/components/new-index/layoutForIndex";
 import { getAllPostsWithSlug, getNewsAndMoreNews } from "@/lib/api";
 // import markdownToHtml from '@/lib/markdownToHtml'
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import Button from "@/components/Primitives/Button";
-import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
-import NewsList from "@/components/News/news-list";
-import SmallPostsGroupB from "@/components/v4/layout/SmallPostGroupB";
-import SmallPostsGroup2Cards from "@/components/v4/layout/SmallPostsGroup2Cards";
+// import dynamic from "next/dynamic";
+// import Button from "@/components/Primitives/Button";
+// import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
+// import NewsList from "@/components/News/news-list";
+// import SmallPostsGroup2Cards from "@/components/v4/layout/SmallPostsGroup2Cards";
 // import BigImageCardWithOverlay from "@/components/v4/card/BigImageCardWithOverlay";
 import NewsPageFeatured from "@/components/v4/layout/NewsPageFeatured";
 import { groupPostsByDate } from "@/lib/utils/groupPostsByDate";
@@ -69,84 +68,86 @@ export default function Post({
                 : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
       return (
         <article key={index} className="group relative flex">
-          <div className="flex flex-col items-start pr-6">
-            <h3 className="text-lg font-semibold tracking-tight text-gray-800 dark:text-gray-100">
-              <div className="absolute -inset-x-4 -inset-y-2 z-0 scale-95 bg-gray-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-gray-800/50" />
-              <a href={post.url}>
-                <span className="absolute -inset-x-4 -inset-y-0 z-20 sm:-inset-x-6 sm:rounded-2xl" />
-                <span className="relative z-10">{post.attributes?.title}</span>
-              </a>
-            </h3>
-            <div className="z-10 order-first">
-              <div className="relative z-10 flex items-center text-base pl-3.5">
-                <span
-                  className="absolute inset-y-0 left-0 flex items-center"
-                  aria-hidden="true"
-                >
-                  <span className="h-4 w-0.5 rounded-full bg-gray-200 dark:bg-gray-500" />
-                </span>
-                <div className="mb-3 mt-3 text-sm my-auto font-base text-gray-500">
-                  {formatDate(post?.attributes?.date)}
+          <Link target="_blank" className="flex" href={post?.attributes?.legacyAttributes?.link+`?ref=prototypr`}>
+            <div className="flex flex-col items-start pr-6">
+              <h3 className="text-lg font-semibold tracking-tight text-gray-800 dark:text-gray-100">
+                <div className="absolute -inset-x-4 -inset-y-2 z-0 scale-95 bg-gray-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-gray-800/50" />
+                <a href={post.url}>
+                  <span className="absolute -inset-x-4 -inset-y-0 z-20 sm:-inset-x-6 sm:rounded-2xl" />
+                  <span className="relative z-10">{post.attributes?.title}</span>
+                </a>
+              </h3>
+              <div className="z-10 order-first">
+                <div className="relative z-10 flex items-center text-base pl-3.5">
+                  <span
+                    className="absolute inset-y-0 left-0 flex items-center"
+                    aria-hidden="true"
+                  >
+                    <span className="h-4 w-0.5 rounded-full bg-gray-200 dark:bg-gray-500" />
+                  </span>
+                  <div className="mb-3 mt-3 text-sm my-auto font-base text-gray-500">
+                    {formatDate(post?.attributes?.date)}
+                  </div>
+                </div>
+                <div className="z-10 mb-1 mt-1 flex w-[fit-content]">
+                  <div className="my-auto flex rounded-full flex-col justify-center p-[1px] mr-0.5 bg-black/50">
+                    <img
+                      className="w-4 h-4 mx-auto my-auto rounded-full"
+                      src={`https://www.google.com/s2/favicons?domain=${postDomain}`}
+                    />
+                  </div>
+                  <div className="text-[10px] ml-1 text-gray-600 my-auto leading-none font-medium uppercase">
+                    {postDomain}
+                  </div>
                 </div>
               </div>
-              <div className="z-10 mb-1 mt-1 flex w-[fit-content]">
-                <div className="my-auto flex rounded-full flex-col justify-center p-[1px] mr-0.5 bg-black/50">
+              <p className="relative z-10 text-sm text-gray-600 dark:text-gray-400">
+                <div
+                  style={{ color: "#4a5568" }}
+                  className="py-3 max-w-3xl text-base mb-2"
+                  dangerouslySetInnerHTML={{ __html: post.attributes?.excerpt }}
+                ></div>
+              </p>
+              <div className="flex z-10 relative justify-start w-full mt-4">
+                <div
+                  aria-hidden="true"
+                  className="relative flex items-center text-sm font-medium text-blue-500"
+                >
+                  Visit source
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                    className="ml-1 h-4 w-4 stroke-current"
+                  >
+                    <path
+                      d="M6.75 5.75 9.25 8l-2.5 2.25"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div className="relative flex-none group-hover:scale-[1.02] my-auto w-[180px] h-[180px] transition transition-all duration-400">
+              <img
+                className="rounded-xl z-10 h-full w-full object-cover"
+                src={ogImage}
+              />
+              {/* <div className="absolute flex bottom-0 left-0 m-2 w-[fit-content] py-[1px] pl-[1px] pr-2 bg-black/60 rounded-md">
+                <div className="my-auto flex flex-col justify-center p-[1px] rounded-md mr-0.5 bg-black/80 border border-1 border-black/50 rounded">
                   <img
-                    className="w-4 h-4 mx-auto my-auto rounded-full"
+                    className="w-4 h-4 mx-auto my-auto"
                     src={`https://www.google.com/s2/favicons?domain=${postDomain}`}
                   />
                 </div>
-                <div className="text-[10px] ml-1 text-gray-600 my-auto leading-none font-medium uppercase">
+                <div className="text-[10px] ml-1 text-white my-auto leading-none font-medium uppercase">
                   {postDomain}
                 </div>
-              </div>
+              </div> */}
             </div>
-            <p className="relative z-10 text-sm text-gray-600 dark:text-gray-400">
-              <div
-                style={{ color: "#4a5568" }}
-                className="py-3 max-w-3xl text-base mb-2"
-                dangerouslySetInnerHTML={{ __html: post.attributes?.excerpt }}
-              ></div>
-            </p>
-            <div className="flex z-10 relative justify-start w-full mt-4">
-              <div
-                aria-hidden="true"
-                className="relative flex items-center text-sm font-medium text-blue-500"
-              >
-                Visit source
-                <svg
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                  className="ml-1 h-4 w-4 stroke-current"
-                >
-                  <path
-                    d="M6.75 5.75 9.25 8l-2.5 2.25"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="relative flex-none group-hover:scale-[1.02] my-auto w-[180px] h-[180px] transition transition-all duration-400">
-            <img
-              className="rounded-xl z-10 h-full w-full object-cover"
-              src={ogImage}
-            />
-            {/* <div className="absolute flex bottom-0 left-0 m-2 w-[fit-content] py-[1px] pl-[1px] pr-2 bg-black/60 rounded-md">
-              <div className="my-auto flex flex-col justify-center p-[1px] rounded-md mr-0.5 bg-black/80 border border-1 border-black/50 rounded">
-                <img
-                  className="w-4 h-4 mx-auto my-auto"
-                  src={`https://www.google.com/s2/favicons?domain=${postDomain}`}
-                />
-              </div>
-              <div className="text-[10px] ml-1 text-white my-auto leading-none font-medium uppercase">
-                {postDomain}
-              </div>
-            </div> */}
-          </div>
+          </Link>
         </article>
       );
     });

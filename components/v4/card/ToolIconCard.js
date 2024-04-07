@@ -58,7 +58,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
               )}
             </div>
             <div className="flex flex-col pl-1 justify-center">
-              <div className=" overflow-hidden line-clamp-1 inline font-semibold py-0 mb-0 font-inter text-base">
+              <div className=" overflow-hidden tracking-tight line-clamp-1 inline font-semibold py-0 mb-0 font-inter text-base">
                 {title}
                 {/* <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                   Promoted

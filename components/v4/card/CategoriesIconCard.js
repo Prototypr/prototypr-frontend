@@ -25,7 +25,7 @@ const CategoriesIconCard = ({ topic, withBackground, showCount }) => {
       ><div className={`${withBackground?'bg-white rounded-xl p-4':''} shadow-sm border border-gray-200/70 border-1 w-full h-auto rounded-xl cursor-pointer flex flex-col`}>
           <div className="flex flex-row justify-between rounded-xl">
             <div className="flex flex-col pl-1 justify-center">
-              <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base">
+              <div className="capitalize overflow-hidden line-clamp-1 inline font-medium py-0 mb-0.5 font-inter text-base tracking-tight">
                 {topic?.name}
                 {/* <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                   Promoted

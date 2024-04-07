@@ -14,35 +14,48 @@ import HeroArticleSection from "./HeroArticleSection";
 const PostsSectionHero = ({user, heroCardPost,toolsList,showHeroTitle,groupSlice, viewablePosts, showTags,title, showRecent,showTitle }) => {
   return (
     <Container padding={false} maxWidth="max-w-[1320px] mx-auto">
-      {showRecent && 
+      {showRecent ?
       <>
         {/* <div className="w-full shadow-md h-full grid grid-cols-12 flex justify-center bg-white rounded-3xl p-6 mt-6 lg:p-6"> */}
         <div className="w-full h-full grid grid-cols-12 flex justify-center">
             <div className={`w-full max-w-full flex flex-col col-span-12 mt-3 `}>
             {/* <PostsGridHero title={title} largePost={heroCardPost} showHeading={showHeroTitle!==false} smallPosts={viewablePosts} /> */}
             {/* <PostsGroup3Cards posts={[heroCardPost,...viewablePosts?.slice(0,2)]} /> */}
-            <HeroArticleSection
+            <Container padding={false} maxWidth="max-w-[1320px] mx-auto ">
+      {/* <div className="w-full shadow-md h-full grid grid-cols-12 flex justify-center bg-white rounded-3xl p-6 lg:p-6"> */}
+      <div className="w-full h-full grid grid-cols-12 flex justify-center">
+        <div className={`w-full max-w-full flex flex-col col-span-12 `}>
+          <HeroPostGrid 
+          imageDimensions={`md:w-7/12 md:h-[520px]`}
+          textDimensions={`md:w-5/12`}
+          title={title} showSmallCardDescription={true} showHeading={true} showHeadingRow={false} cols={3} showBigPost={2} 
+          show2PostRow={true} largePost={heroCardPost} smallPosts={viewablePosts} maxPosts={viewablePosts?.length} />
+        </div>
+        
+        {/* <SidebarDiscover
+          paddingTop="hidden ml-4 pl-6 lg:block pt-12"
+          content={jobsSidebar}
+        /> */}
+      </div>
+    </Container>
+            {/* <HeroArticleSection
               cols={3}
               title={false}
               showHeading={false}
               showHeadingRow={false}
               // cols={3}
               heroCardPost={heroCardPost}
-              viewablePosts={viewablePosts?.slice(0,3)}
+              viewablePosts={viewablePosts}
+              maxSmallPosts={viewablePosts?.length}
               // showBigPost={false}
-              showBigPost={2}/>
+              showBigPost={2}/> */}
             {/* <HeroPostGrid cols={3} showBigPost={2} showHeadingRow={false} largePost={heroCardPost} smallPosts={viewablePosts} /> */}
             </div>
         </div>
         <SectionDivider py="py-4" transparentLine={true}/>
       </>
+      :
       
-      }
-      {showTags && 
-       <div className=" mt-4">
-       <TagsNavRow/>
-     </div>
-      }
       <div className="w-full h-full grid grid-cols-12 flex justify-center px-6 md:px-3">
         <div className={`${!showRecent?'-mt-4':''} w-full max-w-full flex flex-col gap-2 col-span-12 `}>
          <div className="flex justify-between">
@@ -59,6 +72,14 @@ const PostsSectionHero = ({user, heroCardPost,toolsList,showHeroTitle,groupSlice
           content={jobsSidebar}
         /> */}
       </div>
+      }
+    
+
+        {/* {showTags && 
+       <div className=" mt-4">
+       <TagsNavRow/>
+     </div>
+      } */}
 
     </Container>
   );

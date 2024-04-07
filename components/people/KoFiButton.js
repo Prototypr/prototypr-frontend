@@ -1,10 +1,10 @@
-export default function PostListItem({ label = "", color = "", kofiId = "" }) {
+export default function PostListItem({ label = "", color = "", kofiId = "" , size=""}) {
   return (
     <div className="flex  justify-start">
       <div className="btn-container">
         <a
           title={label}
-          className={`${label?'kofi-button ':'rounded-full w-10 h-10 block flex justify-center'}`}
+          className={`${label?'kofi-button ':`rounded-full ${size?size:'w-10 h-10'} block flex justify-center`}`}
           style={{ backgroundColor: color }}
           href={"https://ko-fi.com/" + kofiId}
           target="_blank"

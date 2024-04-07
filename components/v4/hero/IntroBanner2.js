@@ -51,10 +51,10 @@ const IntroBanner = ({ tools, sponsor }) => {
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
           className="pointer-events-auto md:pr-0 rounded-3xl z-10" style={{width:'fit-content'}}>
-          <h1 className="max-w-[50rem] mt-2 mb-5 text-black/90 text-5xl font-semibold tracking-tight xl:text-[48px] lg:leading-tight md:leading-tight">
+          <h1 className="max-w-[50rem] mt-2 mb-5 text-black/90 text-5xl font-semibold tracking-tighter xl:text-[48px] lg:leading-tight md:leading-tight">
           <span className="drop-shadow-sm ">Everything is a </span> <div className="text-underline inline cursor-collab"><span className="drop-shadow-sm">prototype</span></div>
           </h1>
-          <h2 className="mb-5 text-gray-700 leading-snug text-[18px] font-semibold font-inter md:pr-6 max-w-[32rem]">
+          <h2 className="mb-5 text-gray-700 tracking-tight leading-snug text-[18px] font-semibold font-inter md:pr-6 max-w-[32rem]">
           Start something new. Write a draft, design an app, curate inspiration. Life is a prototype, share your story.
           </h2>
           <div className="flex mt-4 mb-6 sm:mb-0">

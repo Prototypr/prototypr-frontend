@@ -356,7 +356,7 @@ export default function Index({
                 )}
 
                 {index == 4 ? (
-                  <div className="py-10 mt-10 -mb-8 bg-gray-50">
+                  <div className="py-10 mt-8 -mb-10 bg-gray-50">
                     <Container maxWidth="max-w-[1320px]">
                       <TwoColumnCards />
                     </Container>

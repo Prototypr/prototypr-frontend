@@ -8,9 +8,15 @@ import PostTitle from '@/components/post-title'
 
 import { getPeopleByPage } from "@/lib/api";
 import ProfileCard from "@/components/people/ProfileCard";
-import PeopleBreadcrumbs from "@/components/people/PeopleBreadcrumbs";
+import {
+  getTwitterHandle,
+  getKofiName,
+  getDribbbleHandle,
+  getGithubHandle,
+} from "@/lib/profile-page/profile-page.js";
+// import PeopleBreadcrumbs from "@/components/people/PeopleBreadcrumbs";
 
-import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
+// import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
 
 const PAGE_SIZE = 12;
 
@@ -41,7 +47,7 @@ export default function PeoplePage({
           <PostTitle>Loading…</PostTitle>
         ) :
         <>        
-        <h1 className="font-inter font-semibold text-2xl">Contributors</h1>
+        <h1 className="font-inter font-semibold text-3xl tracking-tighter">Contributors</h1>
         {allPosts.length > 0 && (
           <div className="mt-6 grid grid-rows-1 sm:grid-cols-2 lg:grid-cols-4 grid-cols-1  gap-6">
             <div className="col-span-4">
@@ -52,10 +58,10 @@ export default function PeoplePage({
                   key={`peoplecard_${
                     post.attributes.slug ? post.attributes.slug : i
                   }`}
-                  twitter={post.attributes?.twitter}
-                  github={post.attributes?.github}
-                  dribbble={post.attributes?.dribbble}
-                  kofi={post.attributes?.kofi}
+                  twitter={post.attributes?.twitter?getTwitterHandle(post.attributes.twitter):null}
+                  github={post.attributes?.github?getGithubHandle(post.attributes.github):null}
+                  dribbble={post.attributes?.dribbble?getDribbbleHandle(post.attributes.dribbble):null}
+                  kofi={post.attributes?.kofi?getKofiName(post.attributes.kofi):null}
                   location={post.attributes?.location}
                   bio={post.attributes?.bio}
                   title={post.attributes.username}
@@ -66,6 +72,7 @@ export default function PeoplePage({
                 />)})}
             </div>
               <NewPagination
+                align="start"
                 total={pagination?.total}
                 pageSize={PAGE_SIZE}
                 currentPage={pagination?.page}

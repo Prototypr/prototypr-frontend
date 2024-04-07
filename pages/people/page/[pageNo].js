@@ -68,6 +68,7 @@ export default function PeoplePage({
                 />)})}
                 </div>
               <NewPagination
+                align="start"
                 total={pagination?.total}
                 pageSize={PAGE_SIZE}
                 currentPage={pagination?.page}

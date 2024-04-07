@@ -12,6 +12,7 @@ import Layout from "@/components/new-index/layoutForIndex";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import useUser from "@/lib/iron-session/useUser";
 // import { SealQuestion } from "@phosphor-icons/react";
+import { SocialShareVertical } from "@/components/SocialShare";
 
 import Carousel from "@/components/carousel";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
@@ -58,6 +59,9 @@ const ToolContent = ({
   layout,
   logo,
   featuredImage,
+  date,
+  authorAvatar,
+  updatedAtDate,
 }) => {
   const { user } = useUser();
   const tags = post.attributes.tags.data;
@@ -97,7 +101,7 @@ const ToolContent = ({
           padding={false}
           maxWidth="w-full xl:mb-6 -mt-[96px] p-6 md:px-3 xl:p-0 relative z-0"
         >
-          <div className="grid grid-cols-12 gap-3 md:px-0 h-full w-full mx-auto max-w-[1315px] mt-[44px] md:mt-[76px]">
+          <div className="grid grid-cols-12 gap-3 md:px-0 h-full w-full mx-auto max-w-[1315px] mt-[44px] lg:mt-[76px]">
             <div
               className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
             >
@@ -235,122 +239,166 @@ const ToolContent = ({
         </Container>
         {/* Content under header */}
         <Container maxWidth="w-full relative z-10">
-          <div className="grid grid-cols-3 grid-flow-row-dense gap-6 max-w-[1320px] mx-auto md:px-0 h-full">
-            
-            {gallery.length ? (
-              <div
-                className={`col-span-3 order-2 md:col-span-2 md:order-1 ${gallery?.length ? "md:pl-0 rounded-xl" : ""}`}
-              >
-                <div className="h-full min-h-[230px]">
-                  <Carousel gallery={gallery} />
-                </div>
-              </div>
-            ) : null}
-            <div
-              className={`order-1 col-span-3 lg:order-3 lg:col-span-2 bg-white p-8 rounded-2xl border border-gray-300/70 shadow-sm`}
-            >
-              <h2 class="text-2xl font-medium mb-4">Overview</h2>
-
-              <div className="max-w-[900px] blog-content toolbox-content">
+          <div className="grid grid-cols-3 gap-6 max-w-[1320px] mx-auto md:px-0 h-full">
+            <div className="col-span-3 lg:col-span-2 flex flex-col gap-6 ">
+              {gallery.length ? (
                 <div
-                  style={{
-                    color: "#222",
-                    fontSize: "18px",
-                    lineHeight: "33px",
-                  }}
-                  className="mt-3 popup-modal-content"
-                  dangerouslySetInnerHTML={{
-                    __html: post.attributes.content,
-                  }}
-                ></div>
-                {/* {!gallery?.length ? (
-                  <Image
-                    // layout="fill"
-                    // objectFit="cover"
-                    width="800"
-                    height="600"
-                    alt="Product screenshot"
-                    className="rounded-2xl object-cover"
-                    src={
-                      post.attributes?.featuredImage?.data?.attributes?.url
-                        ? post.attributes.featuredImage.data.attributes.url
-                        : post.attributes?.legacyFeaturedImage
-                          ? post.attributes?.legacyFeaturedImage.mediaItemUrl
-                          : post.attributes?.ogImage
-                            ? post.attributes?.ogImage.opengraphImage
-                            : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-                    }
-                  />
-                ) : (
-                  ""
-                )} */}
-              </div>
-            </div>
+                  className={`col-span-3 order-2 lg:order-1 ${gallery?.length ? "md:pl-0 rounded-xl" : ""}`}
+                >
+                  <div className="h-full min-h-[230px]">
+                    <Carousel gallery={gallery} />
+                  </div>
+                </div>
+              ) : null}
+              <div
+                className={`order-1 col-span-3 lg:order-3 bg-white p-6 rounded-2xl border border-gray-300/70 shadow-sm flex justify-between`}
+              >
+                <div className="hidden xl:block">
+                  <div className="flex flex-col">
+                    <div className="text-gray-600 rounded-lg p-1 px-2 bg-gray-100/40">
+                      <h1 className="text-sm tracking-tight font-medium ">
+                        Last edited
+                      </h1>
+                      <div className="text-sm tracking-tight text-gray-500">
+                        {updatedAtDate}
+                      </div>
+                      {/* <div className="w-6 h-6 rounded-full mb-0.5 border border-1 mt-2 overflow-hidden relative border-gray-100 shadow-sm">
+                        {authorAvatar && (
+                          <Image
+                            tabIndex={0}
+                            layout="fill"
+                            objectFit="cover"
+                            src={authorAvatar}
+                            className="rounded-full "
+                            alt="Author profile picture"
+                          />
+                        )}
+                      </div> */}
+                    </div>
 
-            {post?.attributes?.author && (
-              <div className="order-3 lg:order-2 col-span-3 lg:col-span-1 bg-white p-3 rounded-2xl border border-gray-300/70 shadow-sm">
-                <h1 tabIndex={0} className="text-base mb-3 font-semibold">
-                  {post?.attributes?.creator ? "Contributors" : "Curated by"}
-                </h1>
-                <div className=" mb-3 flex">
-                  <AuthorCard
-                    title={post?.attributes?.creator ? "Curator" : null}
-                    author={post.attributes.author}
-                    avatar={post.attributes?.author}
-                  />
-                  {post.attributes?.creator ? (
-                    <div className="ml-10">
-                      <AuthorCard
-                        title={post?.attributes?.creator ? "Creator" : null}
-                        author={post.attributes.creator}
-                        avatar={post.attributes?.creator}
+                    <div className="mt-12">
+                      <SocialShareVertical
+                        title={post.attributes.title}
+                        slug={post.attributes.slug}
                       />
                     </div>
-                  ) : null}
+                  </div>
                 </div>
-              </div>
-            )}
+                <div>
 
-            <div className="order-4 col-span-3 lg:col-span-1 flex flex-col gap-4">
-              <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
-                <div className="z-10 col-span-4 relative">
-                  <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
-                    Get weekly handpicked tools
-                  </h3>
-                  <p className="text-base text-gray-600 mb-6">
-                    Join the 1000s who receive curated products from Graeme @
-                    Prototypr.
-                  </p>
+                  <h2 class="text-3xl font-medium mb-4 tracking-tight">
+                    Overview
+                  </h2>
+                  <div className="max-w-[680px] blog-content toolbox-content">
+                    <div
+                      style={{
+                        color: "#222",
+                        fontSize: "18px",
+                        lineHeight: "33px",
+                      }}
+                      className="mt-3 popup-modal-content"
+                      dangerouslySetInnerHTML={{
+                        __html: post.attributes.content,
+                      }}
+                    ></div>
+                    {/* {!gallery?.length ? (
+                      <Image
+                        // layout="fill"
+                        // objectFit="cover"
+                        width="800"
+                        height="600"
+                        alt="Product screenshot"
+                        className="rounded-2xl object-cover"
+                        src={
+                          post.attributes?.featuredImage?.data?.attributes?.url
+                            ? post.attributes.featuredImage.data.attributes.url
+                            : post.attributes?.legacyFeaturedImage
+                              ? post.attributes?.legacyFeaturedImage.mediaItemUrl
+                              : post.attributes?.ogImage
+                                ? post.attributes?.ogImage.opengraphImage
+                                : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                        }
+                      />
+                    ) : (
+                      ""
+                    )} */}
+                  </div>
                 </div>
-                <div className="z-10 col-span-1 relative">
-                  <WeeMan />
-                </div>
-
-                {/* <img
-                  className="hidden sm:block w-[200px] top-0 mt-8 md:-mt-6 absolute right-0 -mr-20"
-                  src={
-                    "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/7432cc558c73394df5d2c21a3ee18cd5.png?updated_at=2022-12-14T17:59:46.805Z"
-                  }
-                /> */}
-                <div className="col-span-12 relative z-10">
-                  <SignupSidebar post={post} />
-                </div>
-              </div>
-              <div className="bg-white relative rounded-2xl border border-gray-300/70 shadow-sm">
-                <h1
-                  tabIndex={0}
-                  className="text-base mb-3 font-semibold px-3 pt-3"
-                >
-                  Related tools
-                </h1>
-                <ToolCard
-                  border={false}
-                  posts={relatedPosts}
-                  columns={"grid-cols-1"}
-                  type="toolboxContentPage"
-                />
               </div>
             </div>
+            <div className="col-span-3 lg:col-span-1 flex flex-col gap-6">
+              {post?.attributes?.author && (
+                <div className="bg-white p-3 rounded-2xl border border-gray-300/70 shadow-sm">
+                  <h1
+                    tabIndex={0}
+                    className="text-base mb-3 font-semibold tracking-tight"
+                  >
+                    {post?.attributes?.creator ? "Contributors" : "Posted by"}
+                  </h1>
+                  <div className=" mb-3 flex">
+                    <AuthorCard
+                      authorAvatar={authorAvatar}
+                      title={post?.attributes?.creator ? "Curator" : null}
+                      author={post.attributes.author}
+                      avatar={post.attributes?.author}
+                    />
+                    {post.attributes?.creator ? (
+                      <div className="ml-10">
+                        <AuthorCard
+                          title={post?.attributes?.creator ? "Creator" : null}
+                          author={post.attributes.creator}
+                          avatar={post.attributes?.creator}
+                          authorAvatar={authorAvatar}
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              )}
+              <div className="flex flex-col gap-4">
+                <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
+                  <div className="z-10 col-span-5 xl:col-span-4 relative">
+                    <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
+                      Get weekly handpicked tools
+                    </h3>
+                    <p className="text-base text-gray-600 mb-6">
+                      Join the 1000s who receive curated products from Graeme @
+                      Prototypr.
+                    </p>
+                  </div>
+                  <div className="hidden xl:block z-10 col-span-1 relative">
+                    <WeeMan />
+                  </div>
+
+                  {/* <img
+                    className="hidden sm:block w-[200px] top-0 mt-8 md:-mt-6 absolute right-0 -mr-20"
+                    src={
+                      "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/7432cc558c73394df5d2c21a3ee18cd5.png?updated_at=2022-12-14T17:59:46.805Z"
+                    }
+                  /> */}
+                  <div className="col-span-12 relative z-10">
+                    <SignupSidebar post={post} />
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col gap-4">
+                <div className="bg-white relative rounded-2xl border border-gray-300/70 shadow-sm">
+                  <h1
+                    tabIndex={0}
+                    className="text-base mb-3 font-semibold tracking-tight px-3 pt-3 tracking-tight"
+                  >
+                    Related tools
+                  </h1>
+                  <ToolCard
+                    border={false}
+                    posts={relatedPosts}
+                    columns={"grid-cols-1"}
+                    type="toolboxContentPage"
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* <div className="order-5">
               <ToolCard
                 posts={relatedPosts}
@@ -378,12 +426,8 @@ const ToolContent = ({
         {/* <img src="/static/images/bendy9.svg" className="absolute top-0 -mt-[2.9%] z-10 left-0 w-full gm-added gm-observing gm-observing-cb" loading="lazy"/> */}
         {relatedPosts?.length ? (
           <div className="z-30 relative max-w-[1320px] mx-auto md:px-3">
-            <img
-              src="/static/images/toolbox/squares2.svg"
-              className="w-full h-[128%] absolute object-cover opacity-20"
-            />
             <div classsName="flex flex-col px-3 z-30">
-              <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium font-inter max-w-md">
+              <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium font-inter max-w-md tracking-tight">
                 Related tools
               </h3>
               {/* <ToolLargeCardRow title={`Related to ${post?.attributes?.title}`} tools={relatedPosts.slice(0,4)} /> */}
@@ -392,6 +436,10 @@ const ToolContent = ({
                 tools={relatedPosts.slice(0, 4)}
               />
             </div>
+            <img
+              src="/static/images/toolbox/squares2.svg"
+              className="w-full h-[128%] absolute object-cover opacity-20"
+            />
           </div>
         ) : null}
       </Container>
@@ -404,11 +452,13 @@ const ToolContent = ({
             />
           </div>
           {/* <SectionDivider/>      
-        <h2 className="text-lg mb-4 font-semibold">More on Prototypr</h2>
+        <h2 className="text-lg mb-4 font-semibold tracking-tight">More on Prototypr</h2>
         <TwoColumnCards/>
         <SectionDivider/> */}
           <div className="mt-2">
-            <h2 className="text-lg mb-4 font-semibold">Popular topics</h2>
+            <h2 className="text-lg mb-4 font-semibold tracking-tight">
+              Popular topics
+            </h2>
             <PopularTagsSection popularTags={popularTags} />
           </div>
         </div>
@@ -434,6 +484,9 @@ export default function Post({
   layout,
   logo,
   featuredImage,
+  date,
+  updatedAtDate,
+  authorAvatar,
 }) {
   const router = useRouter();
 
@@ -504,6 +557,7 @@ export default function Post({
       </Container> */}
       {/* <div className="w-full mt-6 md:mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6"> */}
       <ToolContent
+        date={date}
         featuredImage={featuredImage}
         logo={logo}
         layout={layout}
@@ -511,6 +565,8 @@ export default function Post({
         post={post}
         gallery={gallery}
         relatedPosts={relatedPosts}
+        authorAvatar={authorAvatar}
+        updatedAtDate={updatedAtDate}
       />
       {/* </div> */}
 
@@ -550,6 +606,16 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
   PHOTO_SET = buildToolboxGallery({ item, PHOTO_SET, featuredImage });
 
+  const date = isoToReadableDate(postData.attributes.date);
+  const updatedAtDate = isoToReadableDate(postData.attributes.updatedAt);
+
+  const authorAttributes = postData.attributes?.author?.data?.attributes;
+  const authorAvatar = authorAttributes?.avatar?.data?.attributes?.url
+    ? authorAttributes.avatar.data.attributes.url
+    : authorAttributes?.legacyAvatar
+      ? authorAttributes.legacyAvatar
+      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+
   return {
     props: {
       preview,
@@ -562,6 +628,9 @@ export async function getStaticProps({ params, preview = null, locale }) {
       layout,
       logo,
       featuredImage,
+      date,
+      updatedAtDate,
+      authorAvatar,
       // morePosts: data?.morePosts.data,
     },
     revalidate: 40,
@@ -585,4 +654,36 @@ export async function getStaticPaths() {
       [],
     fallback: "blocking",
   };
+}
+
+function isoToReadableDate(isoTimestamp) {
+  const date = new Date(isoTimestamp);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based in JavaScript
+  // const year = date.getFullYear().toString().substr(-2);
+  const year = date.getFullYear().toString();
+  return `${day}-${month}-${year}`;
+}
+
+// function isoToReadableDate(isoTimestamp) {
+//   const date = new Date(isoTimestamp);
+//   const day = date.getDate();
+//   const ordinalSuffix = getOrdinalSuffix(day);
+//   const month = date.toLocaleString("default", { month: "long" });
+//   const year = date.getFullYear().toString().substr(-2);
+//   return `${day}${ordinalSuffix} ${month} '${year}`;
+// }
+
+function getOrdinalSuffix(day) {
+  if (day > 3 && day < 21) return "th";
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
 }

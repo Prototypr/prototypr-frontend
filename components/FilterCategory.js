@@ -10,7 +10,7 @@ export default function FilterCategory({
 }) {
   return (
     <div className="display-none lg:block text-gray-800">
-      <h1 className="font-semibold pb-2 mb-6 text-xl capitalize text-gray-900">
+      <h1 className="font-semibold pb-2 mb-6 text-xl capitalize text-gray-900 tracking-tight">
         Categories
       </h1>
       {items?.map((item, index) => {
@@ -18,7 +18,7 @@ export default function FilterCategory({
           <>
           {item?.subItems? <div key={`${key}${index}`} className="text-gray-800 mb-10">
               <div className="">
-                <h1 className="font-medium pb-2 pr-3 text-lg capitalize text-gray-900">
+                <h1 className="font-semibold pb-2 pr-3 text-lg capitalize text-gray-900 tracking-tight">
                   {item.title}
                 </h1>
               </div>
@@ -30,7 +30,7 @@ export default function FilterCategory({
                   >
                     <Link href={`${urlRoot}/${sItem.key}/page/1`}>
                       <div
-                        className={`text-sm hover:text-blue-500 py-1.5 rounded ${
+                        className={`text-base hover:text-blue-500 py-1.5 rounded ${
                           sItem.key == slug
                             ? "text-blue-600 font-semibold"
                             : "text-gray-700 font-base"

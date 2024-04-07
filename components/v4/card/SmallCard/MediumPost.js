@@ -4,11 +4,11 @@ import Avatar from "../../avatar/AvatarLine";
 import SmallTag from "../../tag/SmallTag";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
-const MediumPost = ({showAuthor,showDescription,link, title, image, tags, date, avatar, author, excerpt, imageSmall, imageVSmall }) => {
+const MediumPost = ({showAuthor,showDescription,link, title, image, tags, date, avatar, author, excerpt, imageSmall, imageVSmall, imageHeight}) => {
   return (
     <div className="flex group hover:shadow-lg hover:scale-[1.005] h-full sm:mt-0 flex-col hover:bg-white transition transition-all duration-300 p-3 bg-white shadow-sm border border-gray-300/60 rounded-2xl font-inter w-full">
       {image ? (
-        <div className={`w-full shrink-0 h-[180px] max-w-full ${imageVSmall?'md:h-[144px]':imageSmall?'md:h-[180px]':'md:h-[240px]'} md:max-w-full relative rounded-xl overflow-hidden border border-gray-100`}>
+        <div className={`w-full shrink-0 h-[240px] max-w-full ${imageHeight?imageHeight:imageVSmall?'md:h-[144px]':imageSmall?'md:h-[180px]':'md:h-[240px]'} md:max-w-full relative rounded-xl overflow-hidden border border-gray-100`}>
           <Link href={link??''}>
             <Image
               className="object-cover group-hover:scale-[1.03] transition transition-all duration-700 cursor-pointer"
@@ -26,7 +26,7 @@ const MediumPost = ({showAuthor,showDescription,link, title, image, tags, date, 
          
         <div className="flex flex-col justify-start">
           <Link href={link??''}>
-            <h2 className="text-lg mb-3 font-medium leading-snug line-clamp-2">
+            <h2 className="text-lg tracking-tight mb-3 font-medium leading-snug line-clamp-2">
               {title}
             </h2>
           </Link>

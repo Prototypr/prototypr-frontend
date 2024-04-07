@@ -1,7 +1,6 @@
 // import BigCard from "../card/BigCard/BigCardC";
 
 // import SmallCard from "../card/SmallCard/SmallCardE";
-// import SmallPostsGroup from "./SmallPostGroupB";
 // import RSSTitle from "../text/RSSTitle";
 import SmallCard from "../card/SmallCard/SmallCardStacked";
 import { useIntl } from "react-intl";

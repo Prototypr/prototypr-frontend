@@ -85,11 +85,11 @@ const ProfilePageLayout = ({
         <div className="flex flex-col">
             
           <div className="w-full lg:block">
-            <div className="relative pt-[110px] pb-[140px]">
-            <img src='/static/images/toolbox/squares.svg' className=" opacity absolute w-full h-full object-cover top-0 left-0"/>
+            <div className="relative pt-[110px] pb-12">
+            {/* <img src='/static/images/toolbox/squares.svg' className=" opacity absolute w-full h-full object-cover top-0 left-0"/> */}
 
                 {/* <div className="magicpattern absolute top-0 left-0 w-full"/> */}
-                <div className="relative px-6 md:px-0 max-w-[1320px] mx-auto flex flex-col md:flex-row justify-center">
+                <div className="relative px-6 md:px-0 max-w-[1320px] mx-auto flex flex-col md:flex-row justify-start">
 
                 <div
                     className="w-[160px] bg-white h-[160px] -mt-2 rounded-full border border-1 overflow- relative border-black/10 shadow-sm mb-3 md:mb-0 md:mr-8"
@@ -298,7 +298,7 @@ const ProfilePageLayout = ({
            
           </div>
 
-          <div className="flex-1 z-20 -mt-[120px]">
+          <div className="flex-1 z-20">
             <div className="max-w-[1320px] mx-auto px-6 md:px-3 mb-20 mt-6 lg:mt-0">
             {unapproved?<div className="mt-[60px]">
             <div className="mt-3 flex w-full bg-white shadow p-4 px-4 rounded-xl text-black/90 max-w-3xl mx-auto">

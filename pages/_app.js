@@ -87,7 +87,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
       key={locale || "en-US"}
       defaultLocale="en-US" locale={locale || "en-US"} messages={messages}>
     <>
-    <div className="fixed z-[99] bottom-0 right-0 flex m-3">
+    {/* <div className="fixed z-[99] bottom-0 right-0 flex m-3">
         <a
           className="cursor-pointer inline-block"
           rel="nofollow"
@@ -107,7 +107,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
           </div>
         </a>
       
-      </div>
+      </div> */}
     {/* <PageViewTracker/> */}
     <TopProgressBar/>
     <SWRConfig

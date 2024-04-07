@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-export default function AuthorCard({ author = {},title, avatar='' }) {
+export default function AuthorCard({ author = {},title, avatar='', authorAvatar }) {
+
 
     let attributes = {};
     if (author.data && author.data.attributes) {
@@ -8,13 +9,17 @@ export default function AuthorCard({ author = {},title, avatar='' }) {
         attributes = author.data.attributes
     }
 
+    if(!authorAvatar){
+        authorAvatar = attributes?.avatar?.data?.attributes?.url ? attributes.avatar.data.attributes.url:
+        attributes?.legacyAvatar ? attributes.legacyAvatar
+          :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+    }
+
     var username = attributes.username
     if(!username){
         username = (attributes.firstName ?attributes.firstName:'')+(attributes.lastName ?(' '+attributes.lastName):'')
     }
-    const pic = attributes?.avatar?.data?.attributes?.url ? attributes.avatar.data.attributes.url:
-    attributes?.legacyAvatar ? attributes.legacyAvatar
-      :"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+
       
     return (
         <>
@@ -25,11 +30,11 @@ export default function AuthorCard({ author = {},title, avatar='' }) {
                         <div className="relative mr-3">
                             <div className="w-16 h-16 rounded-full border border-1 overflow-hidden relative border-gray-100 shadow-sm">
                                 {
-                                    (pic) && <Image 
+                                    (authorAvatar) && <Image 
                                     tabIndex={0}
                                     layout="fill"
                                     objectFit="cover"
-                                    src={pic}
+                                    src={authorAvatar}
                                     className="rounded-full " 
                                     alt="Author profile picture"/>
                                 }

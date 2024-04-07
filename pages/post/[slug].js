@@ -252,14 +252,14 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                               if (index < 3) {
                                 return (
                                   <Link
-                                    href={`/toolbox/${tag.attributes.slug}/page/1`}
+                                    href={`/posts/${tag.attributes.slug}/page/1`}
                                     className="flex"
                                   >
-                                    <div
-                                      className={`inline-block capitalize font-medium text-base px-3 py-1 cursor-pointer bg-[#e0e4ea] rounded-full ${index == tags?.length - 1 ? "" : "mr-3"} text-black/80 text-[15px] font-base flex flex-col justify-center mb-2`}
+                                    <button
+                                      className={`inline-block h-8 capitalize font-medium text-base px-3 tracking-tight cursor-pointer bg-[#e0e4ea] hover:bg-gray-300 hover:text-black transition transition-all duration-400 rounded-full ${index == tags?.length - 1 ? "" : "mr-3"} text-black/80 text-[15px] font-base flex flex-col justify-center mb-2`}
                                     >
                                       {tag.attributes.name}
-                                    </div>
+                                    </button>
                                   </Link>
                                 );
                               }
@@ -284,14 +284,14 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                       </div>
                     </div>
                   </div>
-                  <div className="h-[300px] md:h-[550px] px-4 md:px-0 max-w-full w-[1020px] md:bg-blue-50 mx-auto z-30 -mt-[120px] md:-mt-[100px] relative md:rounded-2xl md:shadow-md md:outline md:outline-1 outline-gray-300/20 overflow-hidden">
-                    <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 h-[300px] md:h-[550px] w-[1020px] md:bg-gray-100 mx-auto z-30 rounded-2xl" />
+                  <div className="px-4 md:px-0 max-w-full w-[1020px] md:bg-blue-50 mx-auto z-30 -mt-[120px] md:-mt-[100px] relative md:rounded-2xl md:shadow-md md:outline md:outline-1 outline-gray-300/20 overflow-hidden">
+                    <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 w-[1020px] md:bg-gray-100 mx-auto z-30 rounded-2xl" />
                     <Image
                       key={image}
                       width={1020}
                       height={550}
                       loader={gumletLoader}
-                      className="h-full z-20 relative h-[300px] md:h-[550px] w-full object-cover rounded-2xl max-w-[1020px] mx-auto"
+                      className="h-full z-20 relative w-full object-contain rounded-2xl max-w-[1020px] mx-auto"
                       src={image}
                     />
                   </div>
@@ -306,13 +306,20 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                   {/* <meta property="og:image" content={post.attributes.ogImage} /> */}
                   {/* </Head> */}
 
-                  <div className="max-w-[60rem] blog-content col-span-12 md:col-span-9">
+                  <div className="max-w-[60rem] col-span-12 md:col-span-9">
                     <div
-                      className="max-w-full w-full mt-10"
+                      className="max-w-full blog-content w-full mt-10"
                       dangerouslySetInnerHTML={{
                         __html: postContent,
                       }}
                     />
+                    <div>
+                      <AuthorBio
+                        slug={post?.attributes?.slug}
+                        title={post?.attributes?.title}
+                        author={post?.attributes?.author?.data?.attributes}
+                      />
+                    </div>
                   </div>
 
                   <div className="hidden md:block pt-10 col-span-3">
@@ -325,13 +332,6 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                     </div>
                   </div>
                 </article>
-                <div>
-                  <AuthorBio
-                    slug={post?.attributes?.slug}
-                    title={post?.attributes?.title}
-                    author={post?.attributes?.author?.data?.attributes}
-                  />
-                </div>
               </>
             )}
           </main>

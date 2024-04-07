@@ -187,7 +187,7 @@ export default function Index({
                       className="w-2/3 p-16 bg-gray-100/90 rounded-full h-auto absolute right-0 -mr-20"
                     />
                     <div className="max-w-[200px] z-10 sm:max-w-[280px]">
-                      <h3 className="text-2xl text-black/90 font-medium">
+                      <h3 className="text-2xl tracking-tight text-black/90 font-medium">
                         {post.title}
                       </h3>
                       <p className="text-base text-black/80 mt-1">

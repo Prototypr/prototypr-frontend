@@ -110,10 +110,10 @@ const StickyFooterCTA = ({ title, description, buttonText }) => {
             <div className="hidden md:flex flex-row justify-center items-center gap-4 md:gap-4">
               <div></div>
               <div className="flex flex-col md:ml-[80px]">
-                <h1 className="text-xl font-semibold text-black/00">
+                <h1 className="text-xl tracking-tight font-bold text-black/00">
                   {title ? title : `Become a member`}
                 </h1>
-                <p className="text-lg max-w-md text-black/80">
+                <p className="text-lg font-semibold max-w-md text-black/80">
                   {description
                     ? description
                     : `Get published, collect tools, and earn rewards.`}
