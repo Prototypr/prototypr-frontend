@@ -284,12 +284,12 @@ const ToolContent = ({
                     </div>
                   </div>
                 </div>
-                <div>
+                <div className="max-w-[680px] w-full ">
 
                   <h2 class="text-3xl font-medium mb-4 tracking-tight">
                     Overview
                   </h2>
-                  <div className="max-w-[680px] blog-content toolbox-content">
+                  <div className="blog-content toolbox-content">
                     <div
                       style={{
                         color: "#222",

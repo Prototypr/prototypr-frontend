@@ -26,6 +26,7 @@ import { CircleWavyCheck } from "phosphor-react";
 import MediumPost from "../v4/card/SmallCard/MediumPost";
 import ToolImageCardSingle from "../v4/card/ToolImageCardSingle";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
+import BigBackgroundCard from "../v4/card/BigCard/BigBackgroundCard";
 
 const KoFiButton = dynamic(() => import("@/components/people/KoFiButton"), {
   ssr: true,
@@ -55,7 +56,7 @@ const ProfilePageLayout = ({
   const { user } = useUser();
 
   const [posts, setPosts] = useState();
-  const [currentPage, setCurrentPage] = useState();
+  const [currentPage, setCurrentPage] = useState(pageNo);
 
   const [location, setLocation] = useState();
 
@@ -237,7 +238,9 @@ const ProfilePageLayout = ({
 
                 {author.bio && (
                   <div>
-                    <h3 className="text-gray-500 uppercase font-semibold tracking-wide text-xs my-2">About</h3>
+                    <h3 className="text-gray-500 uppercase font-semibold tracking-wide text-xs my-2">
+                      About
+                    </h3>
                     <p className="text-base font-normal leading-normal text-black/90">
                       {author.bio ? author.bio : "No description"}
                     </p>
@@ -268,61 +271,64 @@ const ProfilePageLayout = ({
 
                 {twitter || dribbble || github ? (
                   <div>
-                     <h3 className="text-gray-500 uppercase font-semibold tracking-wide text-xs my-2">On Social</h3>
-                  <div className="flex">
-                    {(twitter || (unapproved && user?.profile?.twitter)) && (
-                      <a
-                        className="link block mr-2"
-                        href={`https://twitter.com/${twitter || user?.profile?.twitter}`}
-                        target="_blank"
-                      >
-                        <TwitterLogo
-                          color="rgba(0,0,0,0.8)"
-                          width={20}
-                          height={20}
-                        />
-                        {/* <img
+                    <h3 className="text-gray-500 uppercase font-semibold tracking-wide text-xs my-2">
+                      On Social
+                    </h3>
+                    <div className="flex">
+                      {(twitter || (unapproved && user?.profile?.twitter)) && (
+                        <a
+                          className="link block mr-2"
+                          href={`https://twitter.com/${twitter || user?.profile?.twitter}`}
+                          target="_blank"
+                        >
+                          <TwitterLogo
+                            color="rgba(0,0,0,0.8)"
+                            width={20}
+                            height={20}
+                          />
+                          {/* <img
                           style={{ width: "28px" }}
                           className=" bg-white rounded-full shadow-sm hover:shadow-md"
                           src="/static/images/icons/twitter.svg"
                           data-gumlet="false"
                         /> */}
-                      </a>
-                    )}
-                    {(dribbble || (unapproved && user?.profile?.dribbble)) && (
-                      <a
-                        className="link block mr-2"
-                        href={`https://dribbble.com/${dribbble || user?.profile?.dribbble}`}
-                        target="_blank"
-                      >
-                        <DribbbleLogo
-                          color="rgba(0,0,0,0.8)"
-                          width={20}
-                          height={20}
-                        />
+                        </a>
+                      )}
+                      {(dribbble ||
+                        (unapproved && user?.profile?.dribbble)) && (
+                        <a
+                          className="link block mr-2"
+                          href={`https://dribbble.com/${dribbble || user?.profile?.dribbble}`}
+                          target="_blank"
+                        >
+                          <DribbbleLogo
+                            color="rgba(0,0,0,0.8)"
+                            width={20}
+                            height={20}
+                          />
 
-                        {/* <img
+                          {/* <img
                           style={{ width: "28px" }}
                           className=" bg-white rounded-full shadow-sm hover:shadow-md"
                           src="/static/images/icons/dribbble.svg"
                           data-gumlet="false"
                         /> */}
-                      </a>
-                    )}
-                    {(github || (unapproved && user?.profile?.github)) && (
-                      <a
-                        className="link block mr-2"
-                        href={`https://github.com/${github || user?.profile?.github}`}
-                        target="_blank"
-                      >
-                        <GithubLogo
-                          color="rgba(0,0,0,0.8)"
-                          width={20}
-                          height={20}
-                        />
-                      </a>
-                    )}
-                  </div>
+                        </a>
+                      )}
+                      {(github || (unapproved && user?.profile?.github)) && (
+                        <a
+                          className="link block mr-2"
+                          href={`https://github.com/${github || user?.profile?.github}`}
+                          target="_blank"
+                        >
+                          <GithubLogo
+                            color="rgba(0,0,0,0.8)"
+                            width={20}
+                            height={20}
+                          />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 ) : null}
               </div>
@@ -429,7 +435,7 @@ const ProfilePageLayout = ({
                     Page {currentPage}
                   </h2>
                 )}
-                <div className="grid grid-cols-12 gap-3">
+                <div className={`grid grid-cols-12 ${posts?.length>2?'gap-3':'gap-6'}`}>
                   {posts?.map((post, index) => {
                     let url =
                       post?.attributes?.featuredImage?.data?.attributes?.url;
@@ -438,21 +444,35 @@ const ProfilePageLayout = ({
                       : post?.attributes?.legacyFeaturedImage?.mediaItemUrl;
 
                     if (post?.attributes?.type == "article") {
+                      if ((previewOnly && index == 0)|| previewOnly && posts?.length==2) {
+                        return (
+                          <div className="col-span-12">
+                            <BigBackgroundCard
+                              showDescription={true}
+                              layout={2}
+                              flip={index!==0}
+                              link={`/post/${post?.attributes?.slug}`}
+                              avatar={false}
+                              imageDimensions={`lg:w-8/12 lg:h-[460px] h-[260px]`}
+                              textDimensions={`lg:w-4/12`}
+                              excerpt={post?.attributes?.excerpt}
+                              author={
+                                false
+                              }
+                              image={coverImage}
+                              date={post?.attributes?.date}
+                              title={post?.attributes?.title}
+                              tags={post?.attributes?.tags?.data}
+                            />
+                          </div>
+                        );
+                      }
                       return (
-                        <div className="h-full col-span-12 sm:col-span-6 2md:col-span-4 lg:col-span-4 xl:col-span-4">
-                          {/* <SmallCard
-                                key={index}
-                                showAuthor={false}
-                                link={`/post/${post?.attributes?.slug}`}
-                                avatar={avatar}
-                                author={post?.attributes?.author?.data?.attributes}
-                                image={coverImage}
-                                date={post?.attributes?.date}
-                                title={post?.attributes?.title}
-                                tags={post?.attributes?.tags?.data}
-                            /> */}
+                        <div
+                          className={`h-full col-span-12 sm:col-span-6 ${previewOnly && index == 0 ? "md:col-span-12" : previewOnly && index > 0 ? "" : "2md:col-span-4 lg:col-span-4 xl:col-span-4"} `}
+                        >
                           <MediumPost
-                            imageHeight={"h-[240px] md:h-[195px]"}
+                            imageHeight={`${previewOnly && index == 0 ? "h-[240px] md:h-[480px]" : previewOnly && index > 0 ? "h-[240px] md:h-[300px]" : "h-[240px] md:h-[195px]"}`}
                             showDescription={false}
                             imageSmall={false}
                             showAuthor={false}
@@ -489,12 +509,14 @@ const ProfilePageLayout = ({
                       );
                     } else {
                       return (
-                        <div className="h-full col-span-12 sm:col-span-6 2md:col-span-4 lg:col-span-4 xl:col-span-4">
-                          {/* <ToolLargeCardProfile
-                            tool={post?.attributes}
-                            /> */}
-
-                          <ToolImageCardSingle imageLarge={false} post={post} />
+                        <div
+                          className={`h-full col-span-12 sm:col-span-6 ${previewOnly && index == 0 ? "md:col-span-12" : previewOnly && index > 0 ? "" : "2md:col-span-4 lg:col-span-4 xl:col-span-4"} `}
+                        >
+                          <ToolImageCardSingle
+                            imageHeight={`${previewOnly && index == 0 ? "h-[240px] md:h-[480px]" : previewOnly && index > 0 ? "h-[240px] md:h-[300px]" : "h-[240px] md:h-[195px]"}`}
+                            imageLarge={false}
+                            post={post}
+                          />
                         </div>
                       );
                     }
@@ -519,7 +541,7 @@ const ProfilePageLayout = ({
               <div className="w-full flex justify-center mt-12">
                 <Link href={`/people/${slug}/page/1`}>
                   <Button variant="ghostBlue" className="">
-                    Show more
+                    Show all
                   </Button>
                 </Link>
               </div>

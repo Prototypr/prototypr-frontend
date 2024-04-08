@@ -88,14 +88,13 @@ const ToolCard = ({ posts, type, columns, tagNumber, border }) => {
                     />
                   </div>
                 ) : (
-                  <div
-                    className="p-1 rounded-2xl overflow-hidden bg-gray-50"
-                    style={{ height: "75px", width: "75px" }}
-                  ></div>
+                  <div className="p-1 h-[64px] w-[64px] mr-4 rounded-2xl overflow-hidden bg-gray-50"></div>
                 )}
 
                 <div className="flex flex-col justify-center ">
-                  <p className="font-medium tracking-tight line-clamp-2 mb-1">{title}</p>
+                  <p className="font-medium tracking-tight line-clamp-2 mb-1">
+                    {title}
+                  </p>
                   {tags?.length && (
                     <div className="flex flex-wrap">
                       {/* {tags.map((x, i) => { 
@@ -105,9 +104,10 @@ const ToolCard = ({ posts, type, columns, tagNumber, border }) => {
                         </span>
                       );
                     })} */}
-                     <Link href={`/toolbox/${tags[0].attributes?.slug}/page/1/`}
+                      <Link
+                        href={`/toolbox/${tags[0].attributes?.slug}/page/1/`}
                         className={`${i > 0 ? "hidden md:inline-block md:line-clamp-1" : ""} px-2.5 mr-1 py-0.5 leading-wide overflow-hidden hover:shadow-sm hover:font-medium rounded-full bg-[#ecf0f5] text-xs capitalize transition transition-all duration-400`}
-                      > 
+                      >
                         {tags[0].attributes.name}
                       </Link>
                     </div>

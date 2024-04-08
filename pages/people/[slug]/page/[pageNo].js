@@ -6,7 +6,6 @@ import Image from "next/image";
 
 import { getPostsByPageAndAuthor } from "@/lib/api";
 import {
-  gradient,
   getTwitterHandle,
   getKofiName,
   getDribbbleHandle,
@@ -17,9 +16,6 @@ import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
 import ProfilePageLayout from "@/components/people/ProfilePageLayout";
 import { formatToolContent } from "@/lib/utils/formatToolContent";
 
-const KoFiButton = dynamic(() => import("@/components/people/KoFiButton"), {
-  ssr: true,
-});
 const PostTitle = dynamic(() => import("@/components/post-title"), {
   ssr: true,
 });
@@ -47,7 +43,6 @@ export default function PeoplePage({
   slug = "",
   pageNo = 1,
   author = {},
-  gradient = "",
   kofi = null,
   github = null,
   twitter = null,
@@ -102,7 +97,6 @@ export default function PeoplePage({
             slug={slug}
             pageNo={pageNo}
             author={author}
-            gradient={gradient}
             kofi={kofi}
             github={github}
             twitter={twitter}
@@ -110,6 +104,7 @@ export default function PeoplePage({
             authorUrl={authorUrl}
             skills={skills}
           />
+          mamama
         </>
       )}
     </Layout>
@@ -130,14 +125,6 @@ export async function getStaticProps({ preview = null, params }) {
       ? allPosts.data[0].attributes.author
       : {};
   author = author?.data?.attributes;
-  const grad = gradient(
-    author?.name
-      ? author?.name
-      : author?.displayName
-        ? author?.displayName
-        : "",
-    "horizontal"
-  );
 
   const kofi = getKofiName(author.kofi);
   const github = getGithubHandle(author.github);
@@ -183,7 +170,6 @@ export async function getStaticProps({ preview = null, params }) {
       preview,
       pagination,
       allPosts: allPosts,
-      gradient: grad,
     },
     revalidate: 20,
   };

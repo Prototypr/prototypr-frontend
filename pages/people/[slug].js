@@ -44,7 +44,6 @@ export default function PeoplePage({
   slug = "",
   pageNo = 1,
   author = {},
-  gradient = "",
   kofi = null,
   github = null,
   twitter = null,
@@ -89,7 +88,6 @@ export default function PeoplePage({
         slug={slug}
         pageNo={pageNo}
         author = {user?.profile}
-        gradient ={gradient}
         kofi = {kofi}
         github = {github}
         twitter = {twitter}
@@ -138,14 +136,13 @@ export default function PeoplePage({
         unapproved={false}
         pageNo={pageNo}
         author = {author}
-        gradient ={gradient}
         kofi = {kofi}
         github = {github}
         twitter = {twitter}
         dribbble = {dribbble}
         authorUrl = {authorUrl}
         skills = {skills}
-        />
+        /> 
         </>
       )}
     </Layout>
