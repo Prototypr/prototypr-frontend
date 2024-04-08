@@ -51,6 +51,11 @@ const tags = [
       slug:"ui"
     },
     {
+      name: "UX",
+      link: "/posts/ui/page/1",
+      slug:"ux"
+    },
+    {
       name: "User Research",
       link: "/posts/ui/page/1",
       slug:"user-research"
@@ -72,14 +77,13 @@ const TagsNavRow = ({currentPage, activeTag}) => {
 
   useEffect(()=>{
     let reordered = orderTags(tags, activeTag)
-    console.log(reordered)
     setOrderedTags(reordered)
-  },[activeTag])
+  },[activeTag, currentPage])
 
   return (
     <Container padding={false} maxWidth={"max-w-[1320px] mx-auto mb-4 px-6 md:px-3"}>
         {/* browse all */}
-        <div className="flex flex-wrap gap-2">
+        <div key={activeTag} className="flex flex-wrap gap-2">
         <GiantTag classes={`${currentPage=='topics'?'border border-gray-800':''} pl-2 mr-3`} link={`/topics`}>
           <div className="flex">
           <Compass weight={`${currentPage=='topics'?'fill':'regular'}`} size={24} />
@@ -97,10 +101,17 @@ export default TagsNavRow;
 
 //function to order the tags array with the active tag first
 const orderTags = (tags, activeTag) => {
+  let taglies = [...tags]
   if(!activeTag) return tags;
-  let activeTagIndex = tags.findIndex((tag) => tag.slug == activeTag);
-  let activeTagObject = tags[activeTagIndex];
-  tags.splice(activeTagIndex, 1);
-  tags.unshift(activeTagObject);
-  return tags;
+  let activeTagIndex = taglies.findIndex((tag) => tag?.slug == activeTag);
+  let activeTagObject = taglies[activeTagIndex];
+
+  //create tag if it doesn't exist in the tags array
+  if(!activeTagObject){
+    const name = activeTag.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    activeTagObject = {name:name, link:`/posts/${activeTag}/page/1`, slug:activeTag}
+  }
+  taglies.splice(activeTagIndex, 1);
+  taglies.unshift(activeTagObject);
+  return taglies;
 };

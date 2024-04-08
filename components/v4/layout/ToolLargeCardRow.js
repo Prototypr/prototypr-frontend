@@ -19,14 +19,14 @@ const ToolLargeCardRow = ({ tools , showTitle}) => {
             </div>
             <div className="my-auto">
               <Link href={`/toolbox/`}>
-                <div className="bg-blue-100  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
-                    <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
+                <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                    <ArrowRight weight="bold" size={14} className="text-gray-900 my-auto"/>
                 </div>
               </Link>
             </div>
           </div>
       </div>:''}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6`}>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3`}>
         {tools.map((tool, index) => {
           return (
             <div key={index}>

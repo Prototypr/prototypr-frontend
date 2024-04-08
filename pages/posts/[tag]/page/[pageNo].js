@@ -171,20 +171,30 @@ export default function PostsPage({
                           <div className="col-span-3 lg:col-span-1 lg:row-span-2 lg:grid lg:grid-cols-1 lg:grid-rows-2 gap-3">
                             {morePosts?.length > 0 &&
                               morePosts.slice(1, 3).map((post, index) => {
-                                console.log(post)
-                                const coverImage =  post?.attributes?.legacyFeaturedImage
-                                        ?.mediaItemUrl
-                                    ? post?.attributes?.legacyFeaturedImage
-                                        ?.mediaItemUrl
-                                    : post?.attributes?.featuredImage?.data?.attributes?.url?post?.attributes?.featuredImage?.data?.attributes?.url:null;
-                                    let authorData = post?.attributes?.author?.data?.attributes? post?.attributes?.author?.data?.attributes:null
-                                    let avatar = authorData?.avatar?.data? authorData?.avatar?.data?.attributes?.url: authorData?.legacyAvatar?authorData?.legacyAvatar:dummyAvatar
+                                const coverImage = post?.attributes
+                                  ?.legacyFeaturedImage?.mediaItemUrl
+                                  ? post?.attributes?.legacyFeaturedImage
+                                      ?.mediaItemUrl
+                                  : post?.attributes?.featuredImage?.data
+                                        ?.attributes?.url
+                                    ? post?.attributes?.featuredImage?.data
+                                        ?.attributes?.url
+                                    : null;
+                                let authorData = post?.attributes?.author?.data
+                                  ?.attributes
+                                  ? post?.attributes?.author?.data?.attributes
+                                  : null;
+                                let avatar = authorData?.avatar?.data
+                                  ? authorData?.avatar?.data?.attributes?.url
+                                  : authorData?.legacyAvatar
+                                    ? authorData?.legacyAvatar
+                                    : dummyAvatar;
 
                                 return (
                                   <SmallCard
                                     key={index}
                                     title={post?.attributes?.title}
-                                    image={coverImage }
+                                    image={coverImage}
                                     content={post?.attributes?.excerpt}
                                     tags={post?.attributes?.tags?.data}
                                     date={post?.attributes?.date}
@@ -234,7 +244,7 @@ export default function PostsPage({
                 )}
 
             <NewPagination
-              align={'end'}
+              align={"end"}
               total={pagination?.total}
               pageSize={PAGE_SIZE}
               currentPage={pagination?.page}
@@ -263,7 +273,7 @@ export default function PostsPage({
                           </div>
                           <div className="my-auto">
                             <Link href={`/toolbox`}>
-                              <div className="bg-blue-100  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                              <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
                                 <ArrowRight
                                   weight="bold"
                                   size={14}

@@ -210,7 +210,7 @@ export default function Index({
         <div className="mt-10">
           <NewsletterSection />
         </div>
-        <div className="mt-14 py-4 pb-[100px] bg-gray-100">
+        <div className="mt-14 py-4 pb-[100px] bg-[#f2f4fa]">
           <ToolsCarouselSection toolsList={toolsList} sponsors={sponsors} />
           {/* <Container maxWidth="max-w-[1320px] -mb-10 mt-12 z-30 relative">
           <TwoColumnCards />
@@ -327,7 +327,7 @@ export default function Index({
           {/* <SectionDivider /> */}
           {TAB_ITEMS?.map((topic, index) => {
             return (
-              <div key={`topicsection_${index}`} className={`z-40 ${index % 2 === 0?'bg-gray-100/60':''} py-10 `}>
+              <div key={`topicsection_${index}`} className={`z-40 ${index % 2 === 0?'bg-[#f2f4fa]':''} py-10 `}>
                 <TopicSectionHome
                   tagline={topic.tagline}
                   showSidebar={false}

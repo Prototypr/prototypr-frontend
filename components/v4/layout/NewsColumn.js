@@ -40,7 +40,7 @@ const NewsColumn = ({
             </div> */}
             <div className="my-auto">
               <Link href={`/news/`}>
-                <div className="bg-gray-100  ml-2.5 flex justify-center my-auto h-5 w-5 rounded-full">
+                <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-5 w-5 rounded-full">
                   <ArrowRight
                     weight="bold"
                     size={12}

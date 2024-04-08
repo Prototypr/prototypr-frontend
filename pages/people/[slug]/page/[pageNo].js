@@ -15,6 +15,7 @@ import {
 import ToolLargeCardProfile from "@/components/v4/card/ToolLargeCardProfile";
 import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
 import ProfilePageLayout from "@/components/people/ProfilePageLayout";
+import { formatToolContent } from "@/lib/utils/formatToolContent";
 
 const KoFiButton = dynamic(() => import("@/components/people/KoFiButton"), {
   ssr: true,
@@ -57,30 +58,30 @@ export default function PeoplePage({
   const withAuthUser = {};
   const router = useRouter();
 
-  const onPageNumChange = (pageNum) => {
+  const onPageNumChange = pageNum => {
     router.push(`/people/${slug}/page/${pageNum}`);
   };
 
   const avatar = author.avatar?.data?.attributes
     ? author.avatar.data.attributes.url
     : author?.legacyAvatar
-    ? author.legacyAvatar
-    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+      ? author.legacyAvatar
+      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
   return (
     <Layout
       seo={{
-        title: `${author?.firstName ? author?.firstName:''}
-        ${author?.lastName ? ' '+author?.lastName:''}
-        ${(!author?.firstName && !author?.lastName) ? author?.name:''}, member profile at Prototypr`,
-        description: `Say hi to ${author?.firstName ? author?.firstName:''}
-        ${author?.lastName ? ' '+author?.lastName:''}
-        ${(!author?.firstName && !author?.lastName) ? author?.name:''} on Prototypr - check out their profile!`,
+        title: `${author?.firstName ? author?.firstName : ""}
+        ${author?.lastName ? " " + author?.lastName : ""}
+        ${!author?.firstName && !author?.lastName ? author?.name : ""}, member profile at Prototypr`,
+        description: `Say hi to ${author?.firstName ? author?.firstName : ""}
+        ${author?.lastName ? " " + author?.lastName : ""}
+        ${!author?.firstName && !author?.lastName ? author?.name : ""} on Prototypr - check out their profile!`,
         image: author.avatar?.data?.attributes
           ? author.avatar.data.attributes.url
           : author?.legacyAvatar
-          ? author.legacyAvatar
-          : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png",
+            ? author.legacyAvatar
+            : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png",
         canonical: `https://prototypr.io/people/${slug}/page/${pageNo}`,
         url: `https://prototypr.io/people/${slug}/page/${pageNo}`,
       }}
@@ -95,19 +96,19 @@ export default function PeoplePage({
       ) : (
         <>
           <ProfilePageLayout
-        allPosts={allPosts}  
-        preview={preview}
-        pagination={pagination}
-        slug={slug}
-        pageNo={pageNo}
-        author = {author}
-        gradient ={gradient}
-        kofi = {kofi}
-        github = {github}
-        twitter = {twitter}
-        dribbble = {dribbble}
-        authorUrl = {authorUrl}
-        skills = {skills}
+            allPosts={allPosts}
+            preview={preview}
+            pagination={pagination}
+            slug={slug}
+            pageNo={pageNo}
+            author={author}
+            gradient={gradient}
+            kofi={kofi}
+            github={github}
+            twitter={twitter}
+            dribbble={dribbble}
+            authorUrl={authorUrl}
+            skills={skills}
           />
         </>
       )}
@@ -121,6 +122,8 @@ export async function getStaticProps({ preview = null, params }) {
 
   let allPosts =
     (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug])) || [];
+
+
   const pagination = allPosts.meta.pagination;
   let author =
     allPosts.data.length && allPosts.data[0]
@@ -131,15 +134,17 @@ export async function getStaticProps({ preview = null, params }) {
     author?.name
       ? author?.name
       : author?.displayName
-      ? author?.displayName
-      : "",
+        ? author?.displayName
+        : "",
     "horizontal"
   );
 
   const kofi = getKofiName(author.kofi);
   const github = getGithubHandle(author.github);
   const twitter = getTwitterHandle(author.twitter);
-  const authorUrl = author?.url?author?.url?.replace(/(^\w+:|^)\/\//, "")?.replace(/\/+$/, ""):'';
+  const authorUrl = author?.url
+    ? author?.url?.replace(/(^\w+:|^)\/\//, "")?.replace(/\/+$/, "")
+    : "";
   const dribbble = getDribbbleHandle(author.dribbble);
 
   let skills = [];
@@ -148,10 +153,21 @@ export async function getStaticProps({ preview = null, params }) {
   } else {
     //trin string
     var skill = author?.skills?.substring(0, 22);
-    if(skill){
+    if (skill) {
       skills.push(skill);
     }
   }
+
+  allPosts = allPosts.data
+    //loop through all posts and if the post type is a tool, run the tool function
+    allPosts = allPosts?.map((post) => {
+      if (post.attributes.type == "tool") {
+        // use the formatAllTools function to format the tool content
+        post = formatToolContent({post, tagNumber:1});
+      }
+      return post;
+    }
+    );
 
   return {
     props: {
@@ -166,7 +182,7 @@ export async function getStaticProps({ preview = null, params }) {
       pageNo,
       preview,
       pagination,
-      allPosts: allPosts.data,
+      allPosts: allPosts,
       gradient: grad,
     },
     revalidate: 20,

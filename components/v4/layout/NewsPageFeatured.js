@@ -62,9 +62,9 @@ const NewsPageFeatured = ({ post, domain, content, ogImage, faviconUrl }) => {
                 <a
                   target={"_blank"}
                   href={
-                    post?.attributes?.legacyAttributes?.link
+                    (post?.attributes?.legacyAttributes?.link
                       ? post?.attributes?.legacyAttributes?.link
-                      : post?.attributes?.link + "?ref=prototypr.io"
+                      : post?.attributes?.link ) + "?ref=prototypr"
                   }
                 >
                   <Button

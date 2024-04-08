@@ -48,7 +48,7 @@ const HeroPostGrid = ({
             </div>
             <div className="my-auto">
               <Link href={`/posts/`}>
-                <div className="bg-blue-100  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
                   <ArrowRight
                     weight="bold"
                     size={14}

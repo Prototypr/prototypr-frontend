@@ -24,8 +24,8 @@ const ToolBackgroundCardRow = ({ tools , showTitle}) => {
             </div>
             <div className="my-auto">
               <Link href={`/toolbox/`}>
-                <div className="bg-blue-100  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
-                    <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
+                <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                    <ArrowRight weight="bold" size={14} className="text-gray-900 my-auto"/>
                 </div>
               </Link>
             </div>

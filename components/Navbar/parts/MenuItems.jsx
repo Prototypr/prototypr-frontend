@@ -229,9 +229,12 @@ const NextLink = ({ children, ...props }) => {
   if(props.href=='toolbox' && router.asPath.indexOf('toolbox')>-1){
     isActive = true
 }
+//check if link is relative or absolute and add target blank if absolute
+const target = props.href.indexOf('http')>-1?'_blank':'_self'
+
 
   return (
-    <Link href={props.href} passHref>
+    <Link href={props.href} target={target} passHref>
       <StyledLink asChild>
         <span
           style={props.css}

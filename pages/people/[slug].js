@@ -4,6 +4,7 @@ import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 import { transformPostList } from "@/lib/locale/transformLocale";
 import ErrorPage from "next/error";
+import { formatAllTools, formatToolContent } from "@/lib/utils/formatToolContent";
 
 import { getPostsByPageAndAuthor, getUserBySlug } from "@/lib/api";
 import {
@@ -210,6 +211,17 @@ export async function getStaticProps({ preview = null, params, locale }) {
 
   allPosts = transformPostList(allPosts.data, locale);
   
+
+  //loop through all posts and if the post type is a tool, run the tool function
+  allPosts = allPosts?.map((post) => {
+    if (post.attributes.type == "tool") {
+      // use the formatAllTools function to format the tool content
+      post = formatToolContent({post, tagNumber:1});
+    }
+    return post;
+  }
+  );
+
   return {
     props: {
       ...authorResults,

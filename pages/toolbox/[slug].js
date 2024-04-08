@@ -222,11 +222,11 @@ const ToolContent = ({
                           <Link
                             href={`/toolbox/${tag.attributes.slug}/page/1/`}
                           >
-                            <span
-                              className={`px-4 py-0.5 text-sm capitalize rounded-full border border-opacity-50 border-white bg-black/30 backdrop-blur-md`}
+                            <button
+                              className={`px-3 h-6 text-sm capitalize rounded-full border border-opacity-50 border-white bg-black/40 backdrop-blur-md`}
                             >
                               {tag.attributes.name}
-                            </span>
+                            </button>
                           </Link>
                         );
                       }

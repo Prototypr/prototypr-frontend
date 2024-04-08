@@ -7,16 +7,18 @@ const NewsletterSection = ({title,padding}) =>{
         <Container padding={padding} maxWidth="max-w-[1320px]">
             <div className="mt-8 lg:px-0 lg:mt-0">
             <div
-            className="w-full shadow-sm border border-gray-300/50 relative flex h-full bg-gray-100 w-full lg:mt-8 rounded-3xl p-6"
+            className="w-full shadow-sm border border-gray-300/50 relative flex h-full bg-[#eef2ff] w-full lg:mt-8 rounded-3xl p-6"
             >
             <div className="max-w-xl lg:max-w-xl z-20">
                 <h3 className="text-xl tracking-tight lg:text-3xl mb-4 font-inter text-black/90 font-semibold">{title?title:<>
-                    Tips and tools to shape <div className="text-underline inline">every idea</div>
+                    Get hand-picked stories <div className="text-underline inline">every week</div>
                 </>}</h3>
                 <p className="font-inter mb-4 text-base text-gray-900 text-opacity-80">Join <span className="text-black/80 font-semibold">25,000+ creatives</span> who enjoy a regular dose of inspiration and motivation, delivered to your inbox every week.</p>
                 <SignupHomepage/>
             </div>
-            <img src='/static/images/toolbox/squares.svg' className="rounded-3xl opacity absolute w-full h-full object-cover top-0 left-0"/>
+            <div style={{backgroundPosition:'10px 10px'}} className="absolute w-full h-full rounded-3xl bg-[url('/static/images/toolbox/gridsquare.svg')] absolute inset-0 [mask-image:linear-gradient(0deg,#eef2ff,rgba(238,242,255,0.8))]"/>
+            {/* <img src='/static/images/toolbox/white-grid-opacity-1.svg' className="rounded-3xl invert-1 opacity absolute w-full h-full object-cover opacity-50 top-0 left-0"/> */}
+            {/* <img src='/static/images/toolbox/white-grid-opacity-1.svg' className="rounded-3xl invert-1 opacity absolute w-full h-full object-cover opacity-50 top-0 left-0"/> */}
             <div>
             <img
                 className="hidden sm:block sm:w-[220px] 2md:w-[300px] lg:w-[300px] top-0 mt-8 md:-mt-6 absolute right-0 xl:mr-32"

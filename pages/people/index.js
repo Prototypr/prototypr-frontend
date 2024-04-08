@@ -51,7 +51,7 @@ export default function PeoplePage({
         {allPosts.length > 0 && (
           <div className="mt-6 grid grid-rows-1 sm:grid-cols-2 lg:grid-cols-4 grid-cols-1  gap-6">
             <div className="col-span-4">
-            <div className={`grid md:grid-cols-4 grid-cols-1 gap-6 pb-16`}>
+            <div className={`grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-1 gap-6 pb-16`}>
             {allPosts.map((post, i) =>
             {
               return(<ProfileCard

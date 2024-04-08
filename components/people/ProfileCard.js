@@ -41,10 +41,10 @@ export default function ProfileCard({
 
   return (
     <div
-      className="cursor-pointer relative w-full border border-gray-300/50 shadow-sm border-1 rounded-2xl"
+      className="relative w-full border border-gray-300/50 shadow-sm border-1 rounded-xl hover:scale-[1.005] hover:shadow-lg bg-white transition transition-all duration-400"
       // style={{ height: 300 }}
     >
-      <div className="flex flex-col p-3 transition transition-all duration-400 relative hover:scale-[1.005] flex-grow h-full rounded-t-2xl shadow-sm hover:shadow-lg bg-white relative rounded-2xl fade-undefined">
+      <div className="flex flex-col p-3 relative h-full min-h-[252px]">
         <div
           className="rounded-full mb-3 flex-none bg-white relative"
           // style={{ position: "absolute", marginTop: "-12px", left: 12 }}
