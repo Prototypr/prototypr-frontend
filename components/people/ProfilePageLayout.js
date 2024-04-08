@@ -88,9 +88,9 @@ const ProfilePageLayout = ({
   };
 
   return (
-    <Container maxWidth="w-[1320px] mx-auto -mt-[96px]">
+    <Container maxWidth="w-[1320px] max-w-full mx-auto -mt-[96px]">
       <div className="grid grid-cols-8 pt-[110px] gap-6">
-        <div className="w-full col-span-2 lg:block">
+        <div className="w-full col-span-8 lg:col-span-2 lg:block">
           <div className="relative bg-white p-3 shadow-sm rounded-2xl border border-gray-300/70">
             {/* <img src='/static/images/toolbox/squares.svg' className=" opacity absolute w-full h-full object-cover top-0 left-0"/> */}
 
@@ -137,7 +137,7 @@ const ProfilePageLayout = ({
                   )
                 )}
               </div>
-              <div className="flex flex-col z-20 relative justify-center max-w-lg gap-5">
+              <div className="flex flex-col z-20 relative justify-center w-full gap-5">
                 <h1 className="text-2xl text-center tracking-tight font-semibold leading-normal text-black/90">
                   {`${author?.firstName ? author?.firstName : "New"} ${author?.lastName ? author?.lastName : "User"}
                       ${!author?.firstName && !author?.lastName && author?.name ? author?.name : ""}`}
@@ -394,8 +394,8 @@ const ProfilePageLayout = ({
           )} */}
         </div>
 
-        <div className="col-span-6 flex-1 z-20">
-          <div className="max-w-[1320px] mb-20 mt-6 lg:mt-0">
+        <div className="col-span-8 lg:col-span-6 flex-1 z-20">
+          <div className="max-w-[1320px] max-w-full mb-20 lg:mt-0">
             {unapproved ? (
               <div className="mt-[60px]">
                 <div className="mt-3 flex w-full bg-white shadow p-4 px-4 rounded-xl text-black/90 max-w-3xl mx-auto">
@@ -435,7 +435,9 @@ const ProfilePageLayout = ({
                     Page {currentPage}
                   </h2>
                 )}
-                <div className={`grid grid-cols-12 ${posts?.length>2?'gap-3':'gap-6'}`}>
+                <div
+                  className={`grid grid-cols-12 ${posts?.length > 2 ? "gap-3" : "gap-6"}`}
+                >
                   {posts?.map((post, index) => {
                     let url =
                       post?.attributes?.featuredImage?.data?.attributes?.url;
@@ -444,21 +446,22 @@ const ProfilePageLayout = ({
                       : post?.attributes?.legacyFeaturedImage?.mediaItemUrl;
 
                     if (post?.attributes?.type == "article") {
-                      if ((previewOnly && index == 0)|| previewOnly && posts?.length==2) {
+                      if (
+                        (previewOnly && index == 0) ||
+                        (previewOnly && posts?.length == 2)
+                      ) {
                         return (
                           <div className="col-span-12">
                             <BigBackgroundCard
                               showDescription={true}
                               layout={2}
-                              flip={index!==0}
+                              flip={index !== 0}
                               link={`/post/${post?.attributes?.slug}`}
                               avatar={false}
                               imageDimensions={`lg:w-8/12 lg:h-[460px] h-[260px]`}
                               textDimensions={`lg:w-4/12`}
                               excerpt={post?.attributes?.excerpt}
-                              author={
-                                false
-                              }
+                              author={false}
                               image={coverImage}
                               date={post?.attributes?.date}
                               title={post?.attributes?.title}
@@ -524,7 +527,7 @@ const ProfilePageLayout = ({
                 </div>
               </>
             ) : (
-              ""
+              <EmptyState />
             )}
             {!previewOnly ? (
               <div className={`${allPosts?.length ? "pt-6" : ""}`}>
@@ -564,16 +567,15 @@ const ProfilePageLayout = ({
 export default ProfilePageLayout;
 
 const EmptyState = () => (
-  <div className="mt-3 mx-auto rounded-lg border border-gray-300">
-    <div className="pt-8 pb-8 px-6">
+  <div className="mx-auto h-[80vh] rounded-lg border border-gray-300 flex flex-col justify-center">
+    <div className="">
       <img
         width="108"
         className=" mx-auto "
         src="https://letter-so.s3.amazonaws.com/prototypr/6dd2bd90-2c61-4163-bd5d-720567a692e6.png"
-        style={{ opacity: "0.88" }}
       />
       <h1 className="text-lg text-gray-500 pt-0 mt-4 text-center">
-        No activity yet...
+        Nothing here yet...
       </h1>
       {/* {currentTab=='draft' && (
               <div class="flex justify-center w-full my-3">
