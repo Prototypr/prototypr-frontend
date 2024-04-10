@@ -96,52 +96,56 @@ const ProfilePageLayout = ({
 
             {/* <div className="magicpattern absolute top-0 left-0 w-full"/> */}
             <div className="relative max-w-[1320px] mx-auto flex flex-col justify-start">
-              <div className="w-[132px] bg-white h-[132px] mx-auto mt-3 rounded-full border border-1 overflow- relative border-black/10 shadow-sm mb-3">
-                {(kofi || (unapproved && user?.profile?.kofi)) && (
-                  <div className="absolute z-10 bottom-0 mb-1 right-0">
-                    {/* <h2 className="font-medium text-sm mb-2 text-gray-700">Support {author?.firstName?author?.firstName:''}</h2> */}
-                    <KoFiButton
-                      color="#53b1e6"
-                      // label={"Buy me a coffee"}
-                      kofiId={kofi || user?.profile?.kofi}
-                    />
-                  </div>
-                )}
-                {unapproved ? (
-                  <img
-                    className="bg-white h-full w-full rounded-full object-cover"
-                    src={
-                      author?.avatar?.url
-                        ? author?.avatar?.url
-                        : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
-                    }
-                  />
-                ) : (
-                  (author?.avatar || author?.legacyAvatar) && (
-                    // <Link href={`/people/${slug}`}>
-                    <Image
-                      loader={gumletLoader}
-                      layout="fill"
-                      objectFit="cover"
+              <Link href={`/people/${slug}`}>
+                <div className="w-[132px] bg-white h-[132px] mx-auto mt-3 rounded-full border border-1 overflow- relative border-black/10 shadow-sm mb-3">
+                  {(kofi || (unapproved && user?.profile?.kofi)) && (
+                    <div className="absolute z-10 bottom-0 mb-1 right-0">
+                      {/* <h2 className="font-medium text-sm mb-2 text-gray-700">Support {author?.firstName?author?.firstName:''}</h2> */}
+                      <KoFiButton
+                        color="#53b1e6"
+                        // label={"Buy me a coffee"}
+                        kofiId={kofi || user?.profile?.kofi}
+                      />
+                    </div>
+                  )}
+                  {unapproved ? (
+                    <img
+                      className="bg-white h-full w-full rounded-full object-cover"
                       src={
-                        author.avatar?.data?.attributes
-                          ? author.avatar.data.attributes.url
-                          : author?.legacyAvatar
-                            ? author.legacyAvatar
-                            : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                        author?.avatar?.url
+                          ? author?.avatar?.url
+                          : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
                       }
-                      className="rounded-full "
-                      alt="Author profile picture"
                     />
-                    // </Link>
-                  )
-                )}
-              </div>
+                  ) : (
+                    (author?.avatar || author?.legacyAvatar) && (
+                      // <Link href={`/people/${slug}`}>
+                      <Image
+                        loader={gumletLoader}
+                        layout="fill"
+                        objectFit="cover"
+                        src={
+                          author.avatar?.data?.attributes
+                            ? author.avatar.data.attributes.url
+                            : author?.legacyAvatar
+                              ? author.legacyAvatar
+                              : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                        }
+                        className="rounded-full "
+                        alt="Author profile picture"
+                      />
+                      // </Link>
+                    )
+                  )}
+                </div>
+              </Link>
               <div className="flex flex-col z-20 relative justify-center w-full gap-5">
-                <h1 className="text-2xl text-center tracking-tight font-semibold leading-normal text-black/90">
-                  {`${author?.firstName ? author?.firstName : "New"} ${author?.lastName ? author?.lastName : "User"}
+                <Link href={`/people/${slug}`}>
+                  <h1 className="text-2xl text-center tracking-tight font-semibold leading-normal text-black/90">
+                    {`${author?.firstName ? author?.firstName :!author?.name ? "New":''} ${author?.lastName ? author?.lastName : !author?.name?"User":''}
                       ${!author?.firstName && !author?.lastName && author?.name ? author?.name : ""}`}
-                </h1>
+                  </h1>
+                </Link>
 
                 <div
                   className={`${!(!fromAccountPage && author.role && author?.url) ? "hidden" : ""}`}

@@ -101,7 +101,7 @@ const ProductListData2 = [
 
 const ToolBoxHero = () => {
   return (
-    <div className="w-full h-full bg-white toolboxheroGradient pt-20 pb-20 -mt-[96px]">
+    <div className="w-full h-full bg-white  pt-20 pb-20 -mt-[96px]">
       <div className="w-full h-auto py-20 relative z-2">
         <div className="max-w-7xl mx-auto grid place-items-center h-full">
           <div className="flex flex-col justify-center items-center gap-2">

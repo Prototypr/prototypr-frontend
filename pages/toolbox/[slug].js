@@ -43,13 +43,14 @@ import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
 import AuthorCard from "@/components/toolbox/AuthorCard";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
-import ToolCard from "@/components/v4/card/ToolCard";
-import WeeMan from "@/components/images/weeMan";
+// import ToolCard from "@/components/v4/card/ToolCard";
+// import WeeMan from "@/components/images/weeMan";
 import buildToolboxGallery, {
   getToolboxFeaturedImage,
   getToolboxLogo,
 } from "@/lib/utils/buildGallery";
 import { formatAllTools } from "@/lib/utils/formatToolContent";
+import ToolIconCard from "@/components/v4/card/ToolIconCard";
 
 const ToolContent = ({
   post,
@@ -99,7 +100,7 @@ const ToolContent = ({
       <div className="w-full mx-auto">
         <Container
           padding={false}
-          maxWidth="w-full xl:mb-6 -mt-[96px] p-6 md:px-3 xl:p-0 relative z-0"
+          maxWidth="w-full xl:mb-3 -mt-[96px] p-6 md:px-3 xl:p-0 relative z-0"
         >
           <div className="grid grid-cols-12 gap-3 md:px-0 h-full w-full mx-auto max-w-[1315px] mt-[44px] lg:mt-[76px]">
             <div
@@ -239,8 +240,8 @@ const ToolContent = ({
         </Container>
         {/* Content under header */}
         <Container maxWidth="w-full relative z-10">
-          <div className="grid grid-cols-3 gap-6 max-w-[1320px] mx-auto md:px-0 h-full">
-            <div className="col-span-3 lg:col-span-2 flex flex-col gap-6 ">
+          <div className="grid grid-cols-3 lg:grid-cols-12 gap-3 max-w-[1320px] mx-auto md:px-0 h-full">
+            <div className="col-span-3 lg:col-span-9 flex flex-col gap-3 ">
               {gallery.length ? (
                 <div
                   className={`col-span-3 order-2 lg:order-1 ${gallery?.length ? "md:pl-0 rounded-xl" : ""}`}
@@ -255,7 +256,7 @@ const ToolContent = ({
               >
                 <div className="hidden xl:block">
                   <div className="flex flex-col">
-                    <div className="text-gray-600 rounded-lg p-1 px-2 bg-gray-100/40">
+                    <div className="text-gray-600 rounded-lg p-1 px-2">
                       <h1 className="text-sm tracking-tight font-medium ">
                         Last edited
                       </h1>
@@ -284,8 +285,7 @@ const ToolContent = ({
                     </div>
                   </div>
                 </div>
-                <div className="max-w-[680px] w-full ">
-
+                <div className="max-w-[680px] w-full mx-auto">
                   <h2 class="text-3xl font-medium mb-4 tracking-tight">
                     Overview
                   </h2>
@@ -326,7 +326,7 @@ const ToolContent = ({
                 </div>
               </div>
             </div>
-            <div className="col-span-3 lg:col-span-1 flex flex-col gap-6">
+            <div className="col-span-3 lg:col-span-3 flex flex-col gap-3">
               {post?.attributes?.author && (
                 <div className="bg-white p-3 rounded-2xl border border-gray-300/70 shadow-sm">
                   <h1
@@ -357,7 +357,7 @@ const ToolContent = ({
               )}
               <div className="flex flex-col gap-4">
                 <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
-                  <div className="z-10 col-span-5 xl:col-span-4 relative">
+                  <div className="z-10 col-span-5 xl:col-span-5 relative">
                     <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
                       Get weekly handpicked tools
                     </h3>
@@ -366,9 +366,9 @@ const ToolContent = ({
                       Prototypr.
                     </p>
                   </div>
-                  <div className="hidden xl:block z-10 col-span-1 relative">
+                  {/* <div className="hidden xl:block z-10 col-span-1 relative">
                     <WeeMan />
-                  </div>
+                  </div> */}
 
                   {/* <img
                     className="hidden sm:block w-[200px] top-0 mt-8 md:-mt-6 absolute right-0 -mr-20"
@@ -382,19 +382,32 @@ const ToolContent = ({
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <div className="bg-white relative rounded-2xl border border-gray-300/70 shadow-sm">
+                <div className="bg-white relative rounded-2xl border border-gray-300/70 shadow-sm pb-3">
                   <h1
                     tabIndex={0}
                     className="text-base mb-3 font-semibold tracking-tight px-3 pt-3 tracking-tight"
                   >
                     Related tools
                   </h1>
-                  <ToolCard
+                  {/* <ToolCard
                     border={false}
                     posts={relatedPosts}
                     columns={"grid-cols-1"}
                     type="toolboxContentPage"
-                  />
+                  /> */}
+                  {relatedPosts?.map((tool, index) => {
+                    return (
+                      <div key={index} className="flex flex-col px-3">
+                       {index!==0? <div className={`my-3 flex flex-col first:border-t-none border-t border-gray-100`} />:''}
+                        <div className="">
+                          <ToolIconCard
+                            withBackground={false}
+                            tool={tool}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

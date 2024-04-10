@@ -192,6 +192,7 @@ export default function PostsPage({
 
                                 return (
                                   <SmallCard
+                                    link={`/post/${post?.attributes?.slug}`}
                                     key={index}
                                     title={post?.attributes?.title}
                                     image={coverImage}

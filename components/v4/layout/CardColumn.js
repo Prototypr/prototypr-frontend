@@ -12,7 +12,7 @@ const CardColumn = ({
   textColor,
   withBackground,
   showHeader,
-  sponsor
+  sponsor,
 }) => {
   return (
     <div
@@ -28,12 +28,12 @@ const CardColumn = ({
             <div className="text-sm text-gray-800">New products, daily.</div>
           </div>
           <div className="flex relative">
-          {/* <div className="text-sm my-auto inline text-black/80 font-normal font-inter">
+            {/* <div className="text-sm my-auto inline text-black/80 font-normal font-inter">
               <Link href={`/toolbox/`}>See all</Link>
             </div> */}
             <div className="my-auto">
               <Link href={`/toolbox/`}>
-              <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-5 w-5 rounded-full">
+                <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-5 w-5 rounded-full">
                   <ArrowRight
                     weight="bold"
                     size={12}
@@ -52,40 +52,41 @@ const CardColumn = ({
         </div>
       )}
       <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-4`}>
-        {
-        sponsor?
-        [sponsor,...tools.slice(0, 1)].map((tool, index) => {
-          return (
-            <div className="cols-span-1 md:col-span-1" key={index}>
-              <ToolBackgroundCard
-                height={"h-[220px] md:h-[310px] xl:h-[190px]"}
-                withBackground={withBackground}
-                post={tool}
-              />
-            </div>
-          );
-        }):
-        [...tools.slice(0, 2)].map((tool, index) => {
-          return (
-            <div className="cols-span-1 md:col-span-1" key={index}>
-              <ToolBackgroundCard
-                height={"h-[220px] md:h-[310px] xl:h-[190px]"}
-                withBackground={withBackground}
-                post={tool}
-              />
-            </div>
-          );
-        })
-        }
+        {sponsor
+          ? [sponsor, ...tools.slice(0, 1)].map((tool, index) => {
+              return (
+                <div className="cols-span-1 md:col-span-1" key={index}>
+                  <ToolBackgroundCard
+                    height={"h-[220px] md:h-[310px] xl:h-[190px]"}
+                    withBackground={withBackground}
+                    post={tool}
+                  />
+                </div>
+              );
+            })
+          : [...tools.slice(0, 2)].map((tool, index) => {
+              return (
+                <div className="cols-span-1 md:col-span-1" key={index}>
+                  <ToolBackgroundCard
+                    height={"h-[220px] md:h-[310px] xl:h-[190px]"}
+                    withBackground={withBackground}
+                    post={tool}
+                  />
+                </div>
+              );
+            })}
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col pt-6">
         {tools.slice(3, tools.length - 1).map((tool, index) => {
           return (
-            <div  key={index} className="flex flex-col">
-              <div
-                className="my-3 flex flex-col first:border-t-none border-t border-gray-100"
-               
-              />
+            <div key={index} className="flex flex-col">
+              {index !== 0 ? (
+                <div
+                  className={`my-3 flex flex-col first:border-t-none border-t border-gray-100`}
+                />
+              ) : (
+                ""
+              )}
               <div className="">
                 <ToolIconCard withBackground={false} tool={tool?.attributes} />
               </div>

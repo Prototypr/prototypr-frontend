@@ -1,60 +1,29 @@
 import dynamic from "next/dynamic";
 
 import { useRouter } from "next/router";
-import ErrorPage from "next/error";
+// import ErrorPage from "next/error";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
-import { ChevronRightIcon } from "@radix-ui/react-icons";
-
-import { getAllPostsWithSlug, getNewsAndMoreNews } from "@/lib/api";
-// import markdownToHtml from '@/lib/markdownToHtml'
 import Link from "next/link";
-// import dynamic from "next/dynamic";
-// import Button from "@/components/Primitives/Button";
-// import TwoColumnCards from "@/components/v4/layout/TwoColumnCardsB";
-// import NewsList from "@/components/News/news-list";
-// import SmallPostsGroup2Cards from "@/components/v4/layout/SmallPostsGroup2Cards";
-// import BigImageCardWithOverlay from "@/components/v4/card/BigImageCardWithOverlay";
-import NewsPageFeatured from "@/components/v4/layout/NewsPageFeatured";
 import { groupPostsByDate } from "@/lib/utils/groupPostsByDate";
-const Footer = dynamic(() => import("@/components/footer"));
+import { getAllNews } from "@/lib/api";
+import { formatAllTools } from "@/lib/utils/formatToolContent";
+import { ChevronRightIcon } from "@radix-ui/react-icons";
+import SignupSidebar from "@/components/newsletter/SignupSidebar";
 
-// const RelatedPosts = dynamic(() => import("@/components/related-posts"), {
-//   ssr: true,
-// });
-// const PostTitle = dynamic(() => import("@/components/post-title"), {
-//   ssr: true,
-// });
-// const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"), {
-//   ssr: true,
-// });
-// const AuthorNewsCredit = dynamic(
-//   () => import("@/components/AuthorNewsCredit"),
-//   { ssr: true }
-// );
+const Footer = dynamic(() => import("@/components/footer"));
 
 function truncate(str, n) {
   return str.length > n ? str.substr(0, n - 1) + "&hellip;" : str;
 }
 
-export default function Post({
-  post,
-  morePosts,
-  preview,
-  domain,
-  link,
-  postDate,
-  groupedPosts,
-}) {
+export default function Post({ post, preview, domain, groupedPosts }) {
   const router = useRouter();
-  if (!router.isFallback && !post?.attributes.slug) {
-    return <ErrorPage statusCode={404} />;
-  }
+
   let content = "";
   if (post?.attributes.content) {
     content = truncate(post?.attributes.content, 400);
   }
-  // const tags = post.attributes.tags.data;
 
   const renderPosts = posts =>
     posts.map((post, index) => {
@@ -72,7 +41,7 @@ export default function Post({
                 ? post?.attributes?.ogImage.opengraphImage
                 : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
       return (
-        <article key={index} className="group relative flex">
+        <article key={index} className="group relative flex ">
           <Link
             target="_blank"
             className="flex"
@@ -103,16 +72,16 @@ export default function Post({
                 ></div>
               </p>
               <div className="z-10 mt-1 flex w-[fit-content]">
-                  <div className="my-auto flex rounded-full flex-col justify-center p-[1px] mr-0.5 bg-black/50">
-                    <img
-                      className="w-4 h-4 mx-auto my-auto rounded-full"
-                      src={`https://www.google.com/s2/favicons?domain=${postDomain}`}
-                    />
-                  </div>
-                  <div className="text-[10px] ml-1 text-gray-600 my-auto leading-none font-medium uppercase">
-                    {postDomain}
-                  </div>
+                <div className="my-auto flex rounded-full flex-col justify-center p-[1px] mr-0.5 bg-black/50">
+                  <img
+                    className="w-4 h-4 mx-auto my-auto rounded-full"
+                    src={`https://www.google.com/s2/favicons?domain=${postDomain}`}
+                  />
                 </div>
+                <div className="text-[10px] ml-1 text-gray-600 my-auto leading-none font-medium uppercase">
+                  {postDomain}
+                </div>
+              </div>
               {/* <div className="flex z-10 relative justify-start w-full mt-4">
                 <div
                   aria-hidden="true"
@@ -141,7 +110,11 @@ export default function Post({
               </div> */}
             </div>
             <div className="flex flex-col justify-center">
-              <ChevronRightIcon width={20} height={20} className="text-gray-400 group-hover:text-gray-900 fill-current group-hover:translate-x-2 duration-150 ease-in-out"/>
+              <ChevronRightIcon
+                width={20}
+                height={20}
+                className="text-gray-400 group-hover:text-gray-900 fill-current group-hover:translate-x-2 duration-150 ease-in-out"
+              />
               {/* <svg
                 className="fill-current group-hover:translate-x-2 duration-150 ease-in-out"
                 xmlns="http://www.w3.org/2000/svg"
@@ -156,61 +129,30 @@ export default function Post({
       );
     });
 
-  const ogImage = post?.attributes?.seo?.opengraphImage
-    ? post?.attributes?.seo?.opengraphImage
-    : post?.attributes?.featuredImage?.data?.attributes?.url
-      ? post?.attributes?.featuredImage?.data?.attributes?.url
-      : post?.legacyFeaturedImage
-        ? post?.legacyFeaturedImage?.mediaItemUrl
-        : post?.ogImage
-          ? post?.ogImage.opengraphImage
-          : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
-  const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}`;
-
   return (
     <>
       <Layout
         padding={false}
         navOffset={false}
         seo={{
-          title: `${post?.attributes?.seo?.opengraphTitle ? post?.attributes?.seo?.opengraphTitle : post?.attributes?.title && post.attributes.title}`,
-          description: `${post?.attributes?.seo?.opengraphDescription ? post?.attributes?.seo?.opengraphDescription : post?.attributes?.excerpt && post.attributes.excerpt}`,
-          image: `${ogImage}`,
-          canonical: `${post?.attributes?.seo?.canonical ? post?.attributes?.seo?.canonical : post?.attributes?.slug && `https://prototypr.io/news/${post?.attributes.slug}`}`,
-          url: `${post?.attributes?.seo?.canonical ? post?.attributes?.seo?.canonical : post?.attributes?.slug && `https://prototypr.io/news/${post?.attributes.slug}`}`,
+          title: `News Explorer | Prototypr`,
+          description: `Discover the latest news in design and tech. Stay up to date with the latest trends and insights in the industry.`,
+          image: "",
+          canonical: `https://prototypr.io/news/`,
+          url: `https://prototypr.io/news/`,
         }}
-        // activeNav={"posts"}
         // navType={"full"}
         preview={preview}
       >
-        <div className="w-full border-b border-gray-200 shadow-sm pt-[58px] bg-white z-50 w-full ">
-          <div className="max-w-[1320px] py-2.5 px-6 mx-auto xl:px-3">
+        <div className="w-full border-b border-gray-200 shadow-sm pt-[60px] bg-white z-50 w-full ">
+          <div className="max-w-[1320px] py-2.5 px-6 mx-auto xl:px-3 border-t border-gray-300/50">
             <div className="flex flex-col md:flex-row justify-between">
               <div className="flex text-lg text-black/90">
                 <Link href="/news">
-                  <div className="font-black tracking-tight text-xl text-sky-500 drop-shadow-sm my-auto">
+                  <div className="font-bold tracking-tight text-xl text-sky-500 my-auto">
                     News Explorer
                   </div>
                 </Link>
-                <div className="mx-3 text-gray-400/90 my-auto">|</div>
-                <div className="line-clamp-1 font-semibold my-auto tracking-tight">
-                  {post?.attributes?.title}
-                </div>
-                {/* <div className="ml-3 flex font-base text-gray-500/90 my-auto">
-                <img className="w-4 h-4 mr-1 my-auto" src={faviconUrl} />
-                <div>{domain}</div>
-              </div> */}
-                <div className="hidden md:flex ml-4 w-[fit-content]">
-                  <div className="my-auto flex rounded-full flex-col justify-center p-[1px] mr-0.5 bg-black/50">
-                    <img
-                      className="w-4 h-4 mx-auto my-auto rounded-full"
-                      src={faviconUrl}
-                    />
-                  </div>
-                  <div className="text-xs my-auto leading-none text-gray-500 ml-1 font-medium uppercase">
-                    {domain}
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -218,68 +160,100 @@ export default function Post({
 
         <Container
           padding={false}
-          maxWidth="w-full px-3 xl:px-0 pb-20 mt-3 relative z-0 relative w-full h-full  max-w-[1320px] mx-auto"
+          maxWidth="w-full pb-20 px-3 xl:px-0  mt-3 relative z-0 relative w-full h-full  max-w-[1320px] mx-auto"
         >
-          <div className="grid gap-6 grid-cols-12">
-            <div className="col-span-9">
-              <NewsPageFeatured
-                faviconUrl={faviconUrl}
-                ogImage={ogImage}
-                post={post}
-                domain={domain}
-                content={content}
-              />
-            </div>
-            <div className="col-span-9 mt-3">
-              <h2 className="text-lg font-bold mb-2">Latest</h2>
-              <div className="space-y-8">
-                {["today", "yesterday", "lastWeek", "lastMonth"].map(
-                  group =>
-                    groupedPosts?.length &&
-                    groupedPosts[group].length > 0 && (
-                      <section
-                        key={group}
-                        aria-labelledby={group}
-                        className=" md:border-gray-200 md:pl-6 md:dark:border-gray-700/40"
-                      >
-                        <div className="grid bg-white p-4 pr-8 rounded-xl grid-cols-1 gap-y-6 md:grid-cols-4">
-                          <h2
-                            id={group}
-                            className="text-sm font-semibold text-gray-800"
+          <div className="">
+            <div className="grid gap-6 grid-cols-12">
+              {/* <div className="col-span-2"></div> */}
+              <div className="col-span-9">
+                <div className="grid grid-cols-1 gap-y-6">
+
+                  <div className="">
+                    {["today", "yesterday", "lastWeek", "lastMonth"].map(
+                      group =>
+                        groupedPosts?.length &&
+                        groupedPosts[group].length > 0 && (
+                          <section
+                            key={group}
+                            aria-labelledby={group}
+                            className=" md:border-gray-200 md:pl-6 md:dark:border-gray-700/40"
                           >
-                            {group.charAt(0).toUpperCase() + group.slice(1)}
-                          </h2>
-                          <div className="md:col-span-4">
-                            <div className="space-y-16">
-                              {renderPosts(groupedPosts[group])}
+                            <div className="grid bg-white p-4 pr-8 rounded-xl grid-cols-1 items-baseline gap-y-6 md:grid-cols-4">
+                              <h2
+                                id={group}
+                                className="text-sm font-semibold text-gray-800 dark:text-gray-100"
+                              >
+                                {group.charAt(0).toUpperCase() + group.slice(1)}
+                              </h2>
+                              <div className="md:col-span-4">
+                                <div className="space-y-16">
+                                  {renderPosts(groupedPosts[group])}
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      </section>
-                    )
-                )}
-                {groupedPosts?.months &&
-                  Object.entries(groupedPosts?.months).map(([month, posts]) => (
-                    <section
-                      key={month}
-                      aria-labelledby={month}
-                      className="md:border-gray-400/60"
-                    >
-                      <div className="grid md:grid-cols-12 bg-white border border-gray-300/50 shadow-sm p-4 pr-8 pb-8 rounded-xl  grid-cols-1 gap-y-6 ">
-                        <h2
-                          id={month}
-                          className="text-lg col-span-3 font-semibold text-gray-800"
-                        >
-                          {month}
-                        </h2>
-                        <div className="col-span-12 md:col-span-9">
-                          <div className="space-y-12">{renderPosts(posts)}</div>
-                        </div>
-                      </div>
-                    </section>
-                  ))}
+                          </section>
+                        )
+                    )}
+                    {groupedPosts?.months &&
+                      Object.entries(groupedPosts?.months).map(
+                        ([month, posts]) => (
+                          <section
+                            key={month}
+                            aria-labelledby={month}
+                            className="md:border-gray-200 md:pl-"
+                          >
+                              <div className="grid grid-cols-9 col-span-9 bg-white py-6 px-4 shadow-sm rounded-2xl border border-gray-300/50 mb-3">
+                                <div className="col-span-2">
+                                  <h2
+                                    id={month}
+                                    className="mb-1 w-[fit-content] pr-4 pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
+                                  >
+                                    {month}
+                                  </h2>
+                                </div>
+                                <div className="col-span-7 mb-8">
+                                  <div className="space-y-16 max-w-2xl mx-auto">
+                                    {renderPosts(posts)}
+                                  </div>
+                                </div>
+                            </div>
+                          </section>
+                        )
+                      )}
+                  </div>
+                </div>
+              </div>
+              <div className="col-span-3">
+              <div className="flex flex-col gap-4">
+                <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
+                  <div className="z-10 col-span-5 xl:col-span-5 relative">
+                    <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
+                      Get weekly handpicked tools
+                    </h3>
+                    <p className="text-base text-gray-600 mb-6">
+                      Join the 1000s who receive curated products from Graeme @
+                      Prototypr.
+                    </p>
+                  </div>
+                  {/* <div className="hidden xl:block z-10 col-span-1 relative">
+                    <WeeMan />
+                  </div> */}
+
+                  {/* <img
+                    className="hidden sm:block w-[200px] top-0 mt-8 md:-mt-6 absolute right-0 -mr-20"
+                    src={
+                      "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/7432cc558c73394df5d2c21a3ee18cd5.png?updated_at=2022-12-14T17:59:46.805Z"
+                    }
+                  /> */}
+                  <div className="col-span-12 relative z-10">
+                    <SignupSidebar/>
+                  </div>
+                </div>
+              </div>
+
               </div>
             </div>
+            <div className="col-span-6 mx-auto"></div>
           </div>
         </Container>
         {/* <Container
@@ -400,7 +374,6 @@ export default function Post({
         )}
       </Container> */}
       </Layout>
-
       <Footer />
     </>
   );
@@ -411,69 +384,34 @@ export async function getStaticProps({
   preview = null,
   type = "bite",
 }) {
-  const data = await getNewsAndMoreNews(params.slug, preview, type);
+  let allNews = (await getAllNews(preview, 15, 0)) || [];
+  allNews = formatAllTools({ tools: allNews.data, tagNumber: 0 });
 
-  // console.log(data.morePosts.data[0]);
-
-  //if no post found, 404
-  if (!data?.posts?.data[0]) {
-    return {
-      props: {
-        post: null,
-      },
-      revalidate: 30,
-    };
-  }
-
-  let link = data?.posts.data[0].attributes.link;
-  if (!link) {
-    link = data?.posts.data[0].attributes.legacyAttributes?.link
-      ? data?.posts.data[0].attributes.legacyAttributes?.link
-      : "#";
-  }
-  //get url for link
-  let domain = "";
-  if (link) {
-    domain = getDomain(link);
-  }
-
-  let postDate = new Date(data?.posts.data[0]?.attributes?.date);
-
-  const relatedArticles = data?.posts.data[0]?.attributes?.relatedArticles
-    ? data?.posts.data[0]?.attributes?.relatedArticles
-    : [];
-
-  let groupedPosts = groupPostsByDate(data.morePosts?.data);
+  let groupedPosts = groupPostsByDate(allNews);
 
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
     props: {
       preview,
-      post: {
-        ...data?.posts.data[0],
-      },
-      domain,
-      link,
       groupedPosts: groupedPosts,
-      postDate: JSON.stringify(postDate),
-      morePosts: data.morePosts?.data,
     },
+    revalidate: 30,
   };
 }
 
-export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug("bite");
+// export async function getStaticPaths() {
+//   const allPosts = await getAllPostsWithSlug("bite");
 
-  return {
-    paths:
-      (allPosts &&
-        allPosts.data?.map(post => {
-          return `/news/${post.attributes.slug}`;
-        })) ||
-      [],
-    fallback: true,
-  };
-}
+//   return {
+//     paths:
+//       (allPosts &&
+//         allPosts.data?.map(post => {
+//           return `/news/${post.attributes.slug}`;
+//         })) ||
+//       [],
+//     fallback: true,
+//   };
+// }
 
 export const getDomain = link => {
   let domain = link;

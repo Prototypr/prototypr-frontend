@@ -7,8 +7,11 @@ const {
 } = require("@/components/new-index/gumletLoader");
 
 const ToolIconCard = ({ tool, withBackground, small }) => {
-  const { slug, title, tags } = tool;
+  let { slug, title, tags } = tool;
 
+  if(!tags?.data?.length){
+    tags.data = tags
+  }
   const plausible = usePlausible();
 
 
@@ -41,7 +44,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
           <div className="flex flex-row rounded-xl">
             <div
               style={{ flex: `0 0 ${small?'3em':'56px'}` }}
-              className={`${small?'h-12 w-12':'w-[56px] h-[56px]'} mr-2 relative rounded-xl overflow-hidden group-hover:scale-[1.03] group-hover:shadow-sm flex-none transition transition-all duration-700`}
+              className={`${small?'h-12 w-12':'w-[56px] h-[56px]'} border border-gray-300/30 mr-2 relative rounded-xl overflow-hidden group-hover:scale-[1.03] group-hover:shadow-sm flex-none transition transition-all duration-700`}
             >
               {coverImage ? (
                 <Image

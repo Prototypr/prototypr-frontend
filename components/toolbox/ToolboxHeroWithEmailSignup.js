@@ -12,8 +12,13 @@ export const MotionSliderToolCard = ({
   sponsored,
 }) => {
   return (
-    <div className={`w-[400px] h-[fit-content] cursor-collab-blue relative rounded-2xl shadow-sm border border-1 border-gray-200/70 ${sponsored?'bg-white':'bg-white'} grid grid-items-center p-2 hover:scale-105 hover:shadow-xl transition transition-all duration-400`}>
-      <Link target={sponsored?'_blank':"_self"} href={sponsored?link+'?ref=prototypr':`/toolbox/${slug}`}>
+    <div
+      className={`w-[400px] h-[fit-content] cursor-collab-blue relative rounded-2xl shadow-sm border border-1 border-gray-200/70 ${sponsored ? "bg-white" : "bg-white"} grid grid-items-center p-2 hover:scale-105 hover:shadow-xl transition transition-all duration-400`}
+    >
+      <Link
+        target={sponsored ? "_blank" : "_self"}
+        href={sponsored ? link + "?ref=prototypr" : `/toolbox/${slug}`}
+      >
         <div className="flex flex-row cursor-collab-blue">
           <div className="mr-2 w-[64px] h-[64px] bg-gray-100 overflow-hidden rounded-xl relative">
             <img src={image} className="w-full h-full drop-shadow-sm"></img>
@@ -115,7 +120,12 @@ const ProductListData2 = [
 
 const ToolBoxHeroWithSignup = ({ user }) => {
   return (
-    <div className="w-full h-full bg-white toolboxheroGradient pt-20 pb-3 -mt-[96px] mb-10">
+    <div className="w-full h-full bg-[#fbfcff] relative pt-20 pb-3 -mt-[96px] mb-10">
+      <div
+        style={{ backgroundPosition: "10px 10px" }}
+        className="absolute w-full h-full rounded-3xl bg-[url('/static/images/toolbox/gridsquare.svg')] absolute inset-0 [mask-image:linear-gradient(0deg,rgba(251,252,255,0),#eef2ff)]"
+      />
+
       <div className="w-full h-auto pt-4 pb-12 relative z-2">
         <div className="max-w-7xl mx-auto grid place-items-center h-full">
           <div className="flex flex-col justify-center items-center gap-2">

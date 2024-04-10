@@ -197,6 +197,7 @@ const Navbar = ({
                 <UserMenu userLoading={isLoading} user={user} />
               </div>
               <NavSponsor sponsor={sponsor} />
+              <div>&nbsp;</div>
             </div>
           </div>
         </div>

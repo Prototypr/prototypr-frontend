@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 // import { useState } from "react";
 // import DiscoverSection from "@/components/v4/section/DiscoverSectionB";
-import SectionDivider from "@/components/v4/section/SectionDivider";
+// import SectionDivider from "@/components/v4/section/SectionDivider";
 // import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
 // import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
@@ -138,8 +138,8 @@ export default function Index({
           padding={false}
           maxWidth="max-w-[1320px] mx-auto px-6 md:px-3 xl:px-3 z-30 relative"
         >
-          <div className="grid gap-3 grid-cols-9 md:grid-cols-9 xl:grid-cols-12">
-            <div className="col-span-9 md:col-span-3">
+          <div className="grid gap-3 grid-cols-9 md:grid-cols-9 xl:grid-cols-12 auto-rows-min">
+            <div className="order-3 md:order-1 col-span-9 md:col-span-3">
               <NewsColumn
                 groupedNewsPosts={groupedNewsPosts}
                 sponsor={navSponsor}
@@ -148,7 +148,7 @@ export default function Index({
               />
             </div>
 
-            <div className="col-span-9 md:col-span-6 ">
+            <div className="order-2 md:order-2 col-span-9 md:col-span-6 ">
               <HeroArticleSection
                 user={user}
                 cols={2}
@@ -185,7 +185,7 @@ export default function Index({
                   type="toolbox"
                 /> */}
             </div>
-            <div className="order-first md:order-last col-span-9 md:col-span-9 xl:col-span-3">
+            <div className="order-1 md:order-3 col-span-9 md:col-span-9 xl:col-span-3">
               <CardColumn
                 sponsor={navSponsor}
                 withBackground={false}
