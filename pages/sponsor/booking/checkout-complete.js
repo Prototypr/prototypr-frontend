@@ -53,8 +53,8 @@ export default function SponsorPaymentPage({}) {
     }
   },[paymentId])
 
-  console.log(lsProduct)
-  console.log(postObject)
+  // console.log(lsProduct)
+  // console.log(postObject)
   // const [selectedSlots, setSelectedSlots] = useState(null);
   return (
     <Layout

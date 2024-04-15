@@ -41,7 +41,7 @@ const NewsColumn = ({
             // href={post?.attributes?.legacyAttributes?.link + `?ref=prototypr`}
             href={`/news/${post?.attributes?.slug}`}
           >
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start pr-2">
               <h3 className="text-base pl-2.5 mb-0.5 font-medium tracking-tight text-gray-900">
                 {/* <div className="absolute -inset-x-4 -inset-y-2 z-0 scale-95 bg-gray-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-gray-800/50" /> */}
                 <a className="block" href={post.url}>

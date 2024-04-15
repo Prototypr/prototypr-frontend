@@ -2,8 +2,15 @@ import { useRouter } from "next/router";
 import Button from "@/components/Primitives/Button";
 import axios from "axios";
 
-const PurchaseButton = ({ selectedSlots,postObject, user,productId,companyId,lsProduct }) => {
+const PurchaseButton = ({
+  postObject,
+  user,
 
+  selectedProducts,
+
+  companyId,
+  disabled,
+}) => {
   const router = useRouter();
 
   const buyProduct = async () => {
@@ -14,22 +21,36 @@ const PurchaseButton = ({ selectedSlots,postObject, user,productId,companyId,lsP
       //   return false;
       // }
 
-      let formattedDates = []
-      if(selectedSlots?.length){
-        for(var x=0;x<selectedSlots.length;x++){
-            formattedDates.push({start:selectedSlots[x].start.getTime(),end:selectedSlots[x].end.getTime()})
+      //make an array that looks liek this:
+      // const weeks = {
+      //   newsletters: [
+      //     { productId: 1, start: 1630435200000, end: 1631040000000 },
+      //   ],
+      //   websites: [{ productId: 2, start: 1630435200000, end: 1631040000000 }],
+      // };
+
+      const sponsorDates = { newsletter: [], website: [] };
+      selectedProducts.forEach(product => {
+        if (product.dates?.length) {
+          product.dates.forEach(date => {
+            sponsorDates[product.type].push({
+              productId: product.id,
+              start: date.start.getTime(),
+              end: date.end.getTime(),
+            });
+          });
         }
-      }
+      });
 
       // console.log(postObject)
       // return false
       const response = await axios.post("/api/lemonsqueezy/purchaseProduct", {
         // productId: "297442",
-        productId: productId,
+        // productId: productId,\
+        selectedProducts,
+        weeks: sponsorDates,
         companyId: companyId,
-        quantity: selectedSlots.length,
-        bookingDate:formattedDates,
-        postObject:postObject
+        postObject: postObject,
       });
 
       console.log(response.data);
@@ -42,20 +63,30 @@ const PurchaseButton = ({ selectedSlots,postObject, user,productId,companyId,lsP
   };
 
   return (
-    <Button
-    className="w-[fit-content] py-2 rounded-full"
-      onClick={() => {
-        if (!selectedSlots || !selectedSlots?.length) {
-          alert("Please choose the date(s) for your sponsorship.");
-          return false;
-        }
-        buyProduct();
-      }}
-      type="button"
-    >
-      Go to checkout
-    </Button>
+    <>
+      <Button
+        disabled={disabled}
+        className="w-[fit-content] py-2 rounded-full"
+        onClick={() => {
+          if (!selectedProducts?.length) {
+            alert("Please choose the date(s) for your sponsorship.");
+            return false;
+          }
+          buyProduct();
+        }}
+        type="button"
+      >
+        Pay now
+      </Button>
+      {disabled ? (
+        <div className="text-xs text-gray-500 mt-2">
+          Choose all booking date(s) to purchase.
+        </div>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 
-export default PurchaseButton
+export default PurchaseButton;

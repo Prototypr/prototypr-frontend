@@ -458,6 +458,7 @@ export async function getStaticProps({ preview = null, locale }) {
   const navSponsorId = process.env.NEXT_PUBLIC_PRICE_WEBSITE_1;
   const navSponsor =
     sponsors?.find(sponsor => sponsor.productId === navSponsorId) || null;
+    
 
   let groupedNewsPosts = groupPostsByDate(allNews);
 

@@ -44,18 +44,16 @@ export default async function handler(req, res) {
       }
 
       if (eventType === "order_created") {
-        console.log(body.meta.custom_data)
-        console.log('----')
+        // console.log(body.meta.custom_data)
+        // console.log('----')
         const companyId = body.meta.custom_data.company_id;
         const sponsoredPostId = body.meta.custom_data.sponsoredPostId;
-        const bookingDate = JSON.parse(body.meta.custom_data.bookingDate)
+        // const bookingDate = JSON.parse(body.meta.custom_data.bookingDate)
         const isSuccessful = body.data.attributes.status === "paid";
         if (isSuccessful) {
-          console.log(companyId)
-          console.log(bookingDate)
           
          const postData =  {
-            weeks:bookingDate,
+            // weeks:bookingDate,
             paymentId:body.data.id,
             paid:true
           }
@@ -82,8 +80,9 @@ export default async function handler(req, res) {
             console.log('error')
             console.log(error)
           })
-
+          console.log(companyId)
           if(!companyId){
+            console.log('invitee email', inviteeEmail)
             //create invite if the user has no company
             let configGenerateInvite = {
               method: "POST",
@@ -105,6 +104,7 @@ export default async function handler(req, res) {
             .then(async function (response) {
               const inviteToken = response?.data?.inviteToken
               
+              console.log(inviteToken)
             }).catch(function (error) {
               console.log('error')
               console.log(error)

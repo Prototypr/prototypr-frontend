@@ -221,7 +221,7 @@ const EditForm = ({ user, postObject }) => {
                   // disabled={errores}
                   className="w-full p-4 mt-6 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
-                  Update
+                  {postObject?.paid==true?'Update':'Save and Continue'}
                 </button>
               </form>
             </div>

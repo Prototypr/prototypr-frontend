@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/layout-dashboard";
 import Container from "@/components/container";
 import useUser from "@/lib/iron-session/useUser";
-import axios from 'axios'
-import {
-  useLoad,
-} from "@/components/Sponsor/sponsorHooks";
+// import axios from "axios";
+import { useLoad } from "@/components/Sponsor/sponsorHooks";
 // import { useRouter } from "next/router";
 import Spinner from "@/components/atom/Spinner/Spinner";
 // import { currentWeekNumber } from "@/components/Sponsor/lib/weekNumber";
 // import { cloneDeep } from "lodash";
 import Link from "next/link";
 import BookingCalendar from "@/components/Sponsor/BookingCalendar";
+// import PurchaseButton from "@/components/Sponsor/PurchaseButton";
+import CheckoutTotal from "@/components/Sponsor/CheckoutTotal";
 
 export default function SponsorPaymentPage({}) {
-  const [productId, setProductId] = useState(null);
+  // const [productId, setProductId] = useState(null);
   const [companyId, setCompanyId] = useState(null);
 
   const { user, mutateUser } = useUser({
@@ -23,40 +23,55 @@ export default function SponsorPaymentPage({}) {
     redirectIfFound: false,
   });
 
-  const { loading, content, postId, title, isOwner, postObject } =
-    useLoad(user);
+  const { loading, postObject } = useLoad(user);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  const [datesSelected, setDatesSelected] = useState(false);
 
   useEffect(() => {
-    setProductId(postObject?.productId);
-    setCompanyId(postObject?.company);
+    if(postObject?.company?.data==null){
+      setCompanyId(false);
+    }else{
+      setCompanyId(postObject?.company);
+    }
+    setSelectedProducts(postObject?.products);
   }, [postObject]);
-  
-  //lemonsqueezy product
-  const [lsProduct, setLsProduct] = useState(null)
-  //get the product (so latest pricing is available)
-  useEffect(()=>{
 
-    const getLsProduct= async() =>{
-
-      const response = await axios.post("/api/lemonsqueezy/getProduct", {
-        productId: productId,
-      });
-  
-      setLsProduct(response.data);
+  useEffect(() => { 
+    if (selectedProducts?.length) {
+      let datesSelected = true;
+      selectedProducts.forEach(product => {
+        if (!product.dates?.length) {
+          datesSelected = false;
+        }
+      }
+      );
+      setDatesSelected(datesSelected);
     }
+  }, [selectedProducts]);
 
-    if(productId){
-      getLsProduct()
-    }
-  },[productId])
+  const updateDates = newDates => {
+    // find the product and add or update the dates attribute with the new dates
+
+    let newProducts = selectedProducts?.map(product => {
+      if (product.id === newDates.productId) {
+        return {
+          ...product,
+          dates: newDates.dates,
+        };
+      }
+      return product;
+    });
+
+    setSelectedProducts(newProducts);
+  };
 
   // const [selectedSlots, setSelectedSlots] = useState(null);
   return (
     <Layout
       seo={{
-        title: "Prototypr Toolbox - new design, UX and coding tools.",
-        description:
-          "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
+        title: "Confirm booking – choose dates and pay.",
+        description: "Confirm booking dates",
         //   image: "",
         // canonical: "https://prototypr.io/toolbox",
         // url: "https://prototypr.io/toolbox",
@@ -71,40 +86,100 @@ export default function SponsorPaymentPage({}) {
         </div>
       ) : !postObject?.active ? (
         <>
-        {postObject?.featuredImage?
-          <div className="fixed top-[88px] z-20 left-0 flex mb-6 border -mt-6 border-gray-300/60 bg-white p-2 w-full">
-            <div className="max-w-[1160px] mx-auto md:px-3 w-full flex">
-              <img src={postObject.featuredImage?.data?.attributes?.url?postObject.featuredImage?.data?.attributes?.url:postObject.featuredImage} className="my-auto rounded-xl mr-2 w-[44px] h-[44px] object-cover"/>
-              <div className="flex flex-col justify-center">
-                <h1 className="pr-2 font-semibold">{postObject?.title}</h1>
-                <div className="pr-2 text-gray-500" dangerouslySetInnerHTML={{__html:postObject?.description}}></div>
+          {postObject?.featuredImage ? (
+            <div className="fixed top-[88px] z-20 left-0 flex mb-6 border -mt-6 border-gray-300/60 bg-white p-2 w-full">
+              <div className="max-w-[1160px] mx-auto md:px-3 w-full flex">
+                <img
+                  src={
+                    postObject.featuredImage?.data?.attributes?.url
+                      ? postObject.featuredImage?.data?.attributes?.url
+                      : postObject.featuredImage
+                  }
+                  className="my-auto rounded-xl mr-2 w-[44px] h-[44px] object-cover"
+                />
+                <div className="flex flex-col justify-center">
+                  <h1 className="pr-2 font-semibold">{postObject?.title}</h1>
+                  <div
+                    className="pr-2 text-gray-500"
+                    dangerouslySetInnerHTML={{
+                      __html: postObject?.description,
+                    }}
+                  ></div>
+                </div>
               </div>
             </div>
-          </div>
-          :null}
-        <Container>
-          <div className="px-4">
-            <div className=" pt-20 mb-6">
-              <h1 className="text-3xl mb-3 font-bold">Book a slot</h1>
-              <p>
-                Choose week(s) and upon payment, your sponsored post will
-                be reviewed by our team and scheduled.{" "}
-              </p>
+          ) : null}
+          <Container>
+            <div className="grid grid-cols-6 gap-6">
+              <div className="col-span-4">
+                <div className="rounded-xl p-6 border border-opacity-20 bg-white mt-20">
+                  <div className="">
+                  <h1 className="text-xl font-semibold mx-auto mb-2">
+                    Choose Booking Date(s)
+                  </h1>
+                    <p className="text-gray-500 max-w-lg text-sm">
+                      Book your sponsorship from available dates on the calendar. 
+                      When booking multiple weeks, you can space them out for better results. 
+                    </p>
+                  </div>
+
+                  <div>
+                  {postObject?.products?.map(product => {
+                    return (
+                      <div key={`calendar_${product.id}`} className="border-b py-8 border-gray-200 last:border-b-0">
+                        <BookingCalendar
+                          key={product.id}
+                          product={product}
+                          updateDates={updateDates}
+                          lsProduct={product}
+                          companyId={companyId}
+                          user={user}
+                          postObject={postObject}
+                        />
+                      </div>
+                    );
+                  })}
+                  </div>
+
+                  {user?.isLoggedIn ? (
+                    <p className="mt-3 max-w-2xl text-gray-500">
+                      You can come back and pay later, your sponsored post
+                      details are available on your{" "}
+                      <Link href="/dashboard/partner">
+                        <span className="text-blue-500">
+                          partners dashboard
+                        </span>
+                      </Link>
+                      .{" "}
+                    </p>
+                  ) : (
+                    <p className="mt-3 max-w-2xl text-gray-500">
+                      You can come back to this url and pay later.
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="col-span-2 sticky h-fit top-[160px]">
+                <div className="rounded-xl p-6 border border-opacity-20 bg-white">
+                  <h2 className="text-xl font-semibold">Total</h2>
+                  {/* <p className="text-gray-500 text-sm">
+                    Choose a package - you can combine 1 Newsletter and 1
+                    Website package and save 20%.
+                  </p> */}
+                  <CheckoutTotal
+                    paymentDisabled={!datesSelected}
+                    selectedProducts={selectedProducts}
+                    companyId={companyId}
+                    user={user}
+                    postObject={postObject}
+                    // totalPrice={totalPrice}
+                    // discountedPrice={discountedPrice}
+                    // discount={discountAmount}
+                  />
+                </div>
+              </div>
             </div>
-          
-           {productId? <BookingCalendar lsProduct={lsProduct} productId={productId} companyId={companyId} user={user} postObject={postObject} />:null}
-           {user?.isLoggedIn? <p className="mt-3 max-w-2xl text-gray-500">
-              You can come back and pay later, your sponsored post details are
-              available on your{" "}
-              <Link href="/dashboard/partner">
-                <span className="text-blue-500">partners dashboard</span>
-              </Link>
-              .{" "}
-            </p>: <p className="mt-3 max-w-2xl text-gray-500">
-              You can come back to this url and pay later.
-            </p>}
-          </div>
-        </Container>
+          </Container>
         </>
       ) : (
         <Container>
