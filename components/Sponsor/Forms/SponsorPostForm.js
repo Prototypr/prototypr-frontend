@@ -26,7 +26,7 @@ const SponsorPostForm = ({
       <FormContainer>
         <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
           <h1 className="text-xl font-semibold">{header?header:`Create Your Ad`}</h1>
-          <p className="text-gray-500 mb-3 -mt-3">
+          <p className="text-gray-500 text-sm max-w-lg mb-3 -mt-3">
            {subtext?subtext: `Add your product title, description, and media that will be used in
             the sponsor slots and banners.`}
           </p>

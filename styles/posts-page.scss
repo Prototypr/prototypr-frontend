@@ -705,3 +705,17 @@ figure, pre{
     //     display:inline
     // }
 }
+
+.sponsor-table{
+    img{
+        max-width: 180px;
+        margin-top:6px;
+        margin-bottom:12px;
+    }
+    li{
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+        list-style:disc;
+        padding-left: 0.25rem;
+    }
+}

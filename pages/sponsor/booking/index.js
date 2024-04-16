@@ -20,12 +20,11 @@ import CompanyNav from "@/components/Sponsor/CompanyNav";
 // import AdOutline from "@/components/Sponsor/AdOutline";
 // import WebsiteSponsorChoose from "@/components/Sponsor/WebsiteSponsor";
 // import NewsletterSponsorChoose from "@/components/Sponsor/NewsletterSponsor";
-import MultiSelectPackages, {
-  BrowserIcon,
-  EnvelopeIcon,
-} from "@/components/Sponsor/MultiSelectPackages";
+
 import SelectedProductsDisplay from "@/components/Sponsor/SelectedProductsDislay";
-import { set } from "nprogress";
+import useTotalPrices from "@/components/Sponsor/sponsorHooks/useTotalPrices";
+import DiscountBadge from "@/components/Sponsor/DiscountBadge";
+import MultiSelectPackages from "@/components/Sponsor/MultiSelectPackages";
 
 let axios = require("axios");
 
@@ -139,7 +138,7 @@ const SponsorshipForm = ({
             const id = await createSponsorAsUser({
               user,
               values,
-              packages:selectedPackageObjects,
+              packages: selectedPackageObjects,
               uploadNewBanner,
               uploadNewFeaturedImage,
             });
@@ -153,7 +152,7 @@ const SponsorshipForm = ({
               `${process.env.NEXT_PUBLIC_HOME_URL}/api/post/createSponsor`,
               {
                 values,
-                packages:selectedPackageObjects
+                packages: selectedPackageObjects,
               }
             );
 
@@ -249,61 +248,8 @@ const SponsorshipForm = ({
     }
   }, [errors]);
 
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [discountedPrice, setDiscountedPrice] = useState(0);
-  const [discountAmount, setDiscountAmount] = useState(0);
-  const [selectedTypes, setSelectedTypes] = useState([]);
-  // create function to give total price from selected products  - use setState
-  //total should be formik newsletter plus formik website
-  // get the prices from rawPrice of the selected products in SponsorPackages
-
-  useEffect(() => {
-    let price = 0;
-    let applyDiscount = false;
-    let selected_types = [];
-
-    if (router.query.packages) {
-      let packages = router.query.packages.split(",");
-      //get all prices and add them together
-      packages.forEach(packageId => {
-        //add the selected types
-        if (
-          allProducts.find(product => product.uid === packageId)?.type ===
-          "newsletter"
-        ) {
-          selected_types.push("newsletter");
-        }
-        if (
-          allProducts.find(product => product.uid === packageId)?.type ===
-          "website"
-        ) {
-          selected_types.push("website");
-        }
-        //add the price
-        let product = allProducts.find(product => product.uid === packageId);
-        if (product) {
-          price += product.price;
-        }
-      });
-
-      if (
-        selected_types.includes("newsletter") &&
-        selected_types.includes("website")
-      ) {
-        applyDiscount = true;
-      }
-    }
-    setTotalPrice(price);
-    setSelectedTypes(selected_types);
-
-    if (applyDiscount) {
-      setDiscountedPrice(price * 0.8);
-      setDiscountAmount(price * 0.2);
-    } else {
-      setDiscountedPrice(false);
-      setDiscountAmount(0);
-    }
-  }, [router.query.packages]);
+  const { totalPrice, discountedPrice, discountAmount, selectedTypes } =
+    useTotalPrices({ allProducts });
 
   return (
     <Layout seo={seo} showWriteButton={false} background="#EFF2F8">
@@ -311,12 +257,7 @@ const SponsorshipForm = ({
         <div className="max-w-[1320px] w-full">
           {user?.profile?.activeCompany && <CompanyNav user={user} />}
 
-          <div className={`${user?.profile?.activeCompany ? "pt-8" : ""}`}>
-            <FormBreadCrumbs />
-          </div>
-          <div className="flex flex- w-full">
-            <div className="w-[720px]">
-              <form
+          <form
                 onSubmit={e => {
                   e.preventDefault();
                   if ((errors && isEmptyObject(errors)) || !errors) {
@@ -329,14 +270,20 @@ const SponsorshipForm = ({
                     );
                   }
                 }}
-              >
+              > 
+              <div className={`${user?.profile?.activeCompany ? "pt-8" : ""}`}>
+            <FormBreadCrumbs />
+          </div>
+          <div className="grid grid-cols-6 gap-6 flex- w-full">
+            <div className="col-span-6 md:col-span-4">
+             
                 <SponsorPostForm
                   user={user}
                   formik={formik}
                   setUploadNewBanner={setUploadNewBanner}
                   setUploadNewFeaturedImage={setUploadNewFeaturedImage}
                 />
-
+{/* 
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -344,17 +291,16 @@ const SponsorshipForm = ({
                   className={`w-full mt-8 p-4 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed`}
                 >
                   Save and Continue
-                </button>
-              </form>
+                </button> */}
             </div>
-            <div className="w-2/5 pl-6">
-              <div className="p-6 bg-white sticky h-fit top-[120px] rounded-xl border border-opacity-20 border-gray-300/70">
-                <div className="mb-3">
+            <div className="col-span-6 md:col-span-2">
+              <div className="p-6 bg-white sticky h-fit top-[68px] rounded-xl border border-opacity-20 border-gray-300/70">
+                {/* <div className="mb-3">
                   <h1 className="text-xl font-semibold mx-auto mb-2">
                     Choose Package(s)
                   </h1>
+                </div> */}
                   {/* <p className="text-gray-600">Sponsor our newsletter of ~25k subscribers.</p> */}
-                </div>
 
                 {selectedPackages ? (
                   <MultiSelectPackages
@@ -378,42 +324,21 @@ const SponsorshipForm = ({
                 </div>
 
                 <div className="">
-                  {formik.values.websiteProductId &&
-                  !formik.values.newsletterProductId ? (
-                    <p className="text-gray-500 text-sm">
-                      Add a newsletter sponsor and save 20%
-                    </p>
-                  ) : null}
-
-                  {selectedTypes.length &&
-                  !selectedTypes.includes("website") ? (
-                    <div className="text-gray-700 text-sm mt-6 flex bg-blue-50 p-2 rounded-lg px-3">
-                    <BrowserIcon className={"my- w-8 h-8"} />
-                    <div className="flex flex-col ml-3 justify-center">
-                      <h4 className="text-md font-semibold">Get 20% off</h4>
-                    <div className="my-auto text-sm">
-                      Combine with a website sponsorship for a{" "}
-                      <span className="font-">20% discount</span>.
-                    </div>
-                      </div>
-                  </div>
-                  ) : selectedTypes.length &&
-                    !selectedTypes.includes("newsletter") ? (
-                    <div className="text-gray-700 text-sm mt-6 flex bg-blue-50 p-2 rounded-lg px-3">
-                      <EnvelopeIcon className={"my- w-8 h-8"} />
-                      <div className="flex flex-col ml-3 justify-center">
-                        <h4 className="text-md font-semibold">Get 20% off</h4>
-                      <div className="my-auto text-sm">
-                        Combine with a newsletter sponsorship for a{" "}
-                        <span className="font-">20% discount</span>.
-                      </div>
-                        </div>
-                    </div>
-                  ) : null}
+                  <DiscountBadge selectedTypes={selectedTypes} />
                 </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  // disabled={errores}
+                  className="w-full mt-3 h-10 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white"
+                >
+                  Save and Continue
+                </button>
               </div>
             </div>
           </div>
+        </form>
         </div>
       </div>
     </Layout>

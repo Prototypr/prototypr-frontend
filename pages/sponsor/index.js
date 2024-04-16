@@ -2,22 +2,13 @@ import Container from "@/components/container";
 // import Layout from "@/components/layout";
 import Layout from "@/components/layoutForBlogPost";
 
-import { getAllJobs, getAllProducts } from "@/lib/api";
+import { getAllProducts } from "@/lib/api";
 
-// import Link from "next/link";
-// import Button from "@/components/Primitives/Button";
-import SignupSidebar from "@/components/newsletter/SignupSidebar";
-// import Contributors from "@/components/toolbox/Contributors";
-
-import { currentWeekNumber } from "@/components/Sponsor/lib/weekNumber";
 import { useEffect, useState } from "react";
-import { Waypoint } from "react-waypoint";
-import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
-import SponsorSidebarCard from "@/components/SponsorSidebarCard";
-import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
-import { SponsorPackages } from "@/lib/constants/products";
-
-const PAGE_SIZE = 12;
+import SelectedProductsDisplay from "@/components/Sponsor/SelectedProductsDislay";
+import useTotalPrices from "@/components/Sponsor/sponsorHooks/useTotalPrices";
+import DiscountBadge from "@/components/Sponsor/DiscountBadge";
+import SponsorMenu from "@/components/Sponsor/SponsorMenu";
 
 const seo = {
   title: `Sponsor Prototypr`,
@@ -28,16 +19,12 @@ const seo = {
 };
 
 const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
-  const [weekNumber, setWeekNumber] = useState();
   // const [selectedPackage, setSelectedPackage] = useState("Newsletter");
-  const [selectedNewsletterPackage, setNewsletterPackage] = useState(false);
-  const [selectedWebsitePackage, setWebsitePackage] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const { totalPrice, discountedPrice, discountAmount, selectedTypes } =
+    useTotalPrices({ allProducts, selectedPackages: selectedOptions });
 
   useEffect(() => {
-    const week = currentWeekNumber();
-    setWeekNumber(week);
-
     const hashchange = () => {
       if (window.location.hash) {
         window.scrollTo(window.scrollX, window.scrollY - 60);
@@ -67,7 +54,7 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
               style={{ backgroundPosition: "10px 10px" }}
               className="absolute w-full h-[25%] -mt-[96px] rounded-3xl bg-[url('/static/images/toolbox/gridsquare.svg')] absolute inset-0 [mask-image:linear-gradient(0deg,rgba(251,252,255,0),#eef2ff)]"
             />
-            <div className="max-w-[1320px] relative mx-auto  px-6 md:px-3 grid grid-cols-1 gap-1">
+            <div className="max-w-[1320px] relative mx-auto  px-6 md:px-3">
               <div className=" mx-auto pb-20 px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
                 <div
                   // style={{"backgroundImage":"linear-gradient(rgba(32, 52, 144,0.16) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.16) 1px, rgba(247, 247, 247,0.16) 1px)","backgroundSize":"26px 26px"}}
@@ -94,82 +81,23 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
 
                 <div className="mt-20 w-full">
                   <div className="flex w-full">
-                    <div className="w-full rounded-2xl  mx-auto">
+                    <div className="w-full rounded-2xl px-6 mx-auto">
                       <div className="grid grid-cols-6 gap-6">
-                        <div className="col-span-2 sticky h-fit top-0">
-                          <div className="rounded-xl p-6 border border-opacity-20 bg-white">
-                            <h2 className="text-xl font-semibold">Menu</h2>
-                            <p className="text-gray-500 text-sm">
-                              Choose a package - you can combine 1 Newsletter
-                              and 1 Website package and save 20%.
-                            </p>
-                            {selectedOptions.length > 0 ? (
-                              <a
-                                href={`/sponsor/booking?packages=${selectedOptions.join(",")}`}
-                              >
-                                <button className="w-full h-10 px-3 rounded-lg bg-[#0F8CFF] text-white">
-                                  Book now
-                                </button>
-                              </a>
-                            ) : null}
-                            <ul className="space-y-4 text-gray-500 list-disc list-inside dark:text-gray-400">
-                              <li>
-                                <span className="text-semibold">
-                                  Newsletter
-                                </span>
-                                <ol className="pl-5 mt-2 space-y-1 list-decimal list-inside">
-                                  {newsletterProducts?.map((pk, i) => {
-                                    if (pk?.type === "newsletter") {
-                                      return (
-                                        <li>
-                                          <a
-                                            className="hover:underline"
-                                            // href={`#${pk.productId}`}
-                                            href={`#${pk.uid}`}
-                                          >
-                                            {pk?.title}
-                                          </a>
-                                        </li>
-                                      );
-                                    }
-                                  })}
-                                </ol>
-                              </li>
-                              <li>
-                                <span className="text-semibold">Website</span>
-                                <ol className="pl-5 mt-2 space-y-1 list-decimal list-inside">
-                                  {websiteProducts.map((pk, i) => {
-                                    return (
-                                      <li>
-                                        <a
-                                          className="hover:underline"
-                                          href={`#${pk.uid}`}
-                                        >
-                                          {pk?.title}
-                                        </a>
-                                      </li>
-                                    );
-                                  })}
-                                </ol>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="col-span-4">
+                        <div className="col-span-6 lg:col-span-4">
                           <div className="relative overflow-x-auto rounded-xl shadow-sm border border-gray-300/70">
-                            <div className="px-6 py-3">
+                            <div className="px-6 py-3 bg-[#fbfcff]">
                               <h1 className="font-semibold text-gray-700 text-lg">
                                 Newsletter Sponsorship
                               </h1>
                             </div>
-                            <table className="table-fixed w-full text-sm border-t border-gray-200 text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <table className="sponsor-table table-fixed w-full text-sm border-t border-gray-200 text-left rtl:text-right text-gray-500 dark:text-gray-400">
                               <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr className="bg-gray-100">
                                   <th className="px-6 py-3 w-[50px]"></th>
                                   <th
                                     valign="top"
                                     scope="col"
-                                    className="px-6 py-3 w-[180px]"
+                                    className="px-6 py-3 w-[160px]"
                                   >
                                     Product
                                   </th>
@@ -178,13 +106,13 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                                   </th> */}
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 w-[480px]"
+                                    className="px-6 py-3 w-[420px]"
                                   >
                                     Placements
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 w-[180px]"
+                                    className="px-6 py-3 w-[140px]"
                                   ></th>
                                 </tr>
                               </thead>
@@ -202,25 +130,20 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                                               htmlFor={pk.productId}
                                               className="sr-only">{pk.productId}</label> */}
                                           <input
-                                            // disabled={
-                                            //   selectedNewsletterPackage &&
-                                            //   selectedNewsletterPackage !==
-                                            //     // pk.productId
-                                            //     pk.uid
-                                            // }
                                             onChange={e => {
                                               if (e.target.checked) {
                                                 setSelectedOptions(
                                                   prevOptions => [
                                                     ...prevOptions,
-                                                    pk.uid,
+                                                    pk,
                                                   ]
                                                 );
                                               } else {
                                                 setSelectedOptions(
                                                   prevOptions =>
                                                     prevOptions.filter(
-                                                      id => id !== pk.uid
+                                                      option =>
+                                                        option.uid !== pk.uid
                                                     )
                                                 );
                                               }
@@ -228,7 +151,9 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                                             id={pk.uid}
                                             name={pk.uid}
                                             type="checkbox"
-                                            checked={selectedOptions.includes(pk.uid)}
+                                            checked={selectedOptions.some(
+                                              option => option.uid === pk.uid
+                                            )}
                                             className="w-5 h-5 text-blue-600 bg-white disabled:bg-gray-100 border-gray-400 disabled:border-gray-200/80 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                           />
                                         </div>
@@ -242,12 +167,10 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                                           {pk?.title}
                                         </h3>
 
-                                        <p className="text-gray-500 text-sm">
-                                          {pk?.desp}
-                                        </p>
+                                        <p className="text-sm">{pk?.desp}</p>
                                       </td>
                                       {/* <td className="px-6 py-4">{pk?.titleShort}</td> */}
-                                      <td className="px-6 py-4">
+                                      <td className="px-6 py-4 text-gray-800 ">
                                         <div
                                           dangerouslySetInnerHTML={{
                                             __html: pk?.description,
@@ -309,34 +232,34 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                             </table>
                           </div>
                           <div className="relative mt-3 overflow-x-auto rounded-xl shadow-sm border border-gray-300/70">
-                            <div className="px-6 py-3">
+                            <div className="px-6 py-3 bg-[#fbfcff]">
                               <h1 className="font-semibold text-gray-700 text-lg">
                                 Website Sponsorship
                               </h1>
                             </div>
-                            <table className="table-fixed w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <table className="sponsor-table table-fixed w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                               <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr className="bg-gray-100">
                                   <th className="px-6 py-3 w-[50px]"></th>
                                   <th
                                     valign="top"
                                     scope="col"
-                                    className="px-6 py-3 w-[180px]"
+                                    className="px-6 py-3 w-[160px]"
                                   >
-                                    Product name
+                                    Product
                                   </th>
                                   {/* <th scope="col" className="px-6 py-3">
                                     Type
                                   </th> */}
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 w-[500px]"
+                                    className="px-6 py-3 w-[420px]"
                                   >
                                     Placements
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 w-[160px]"
+                                    className="px-6 py-3 w-[140px]"
                                   ></th>
                                 </tr>
                               </thead>
@@ -363,14 +286,15 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                                                 setSelectedOptions(
                                                   prevOptions => [
                                                     ...prevOptions,
-                                                    pk.uid,
+                                                    pk,
                                                   ]
                                                 );
                                               } else {
                                                 setSelectedOptions(
                                                   prevOptions =>
                                                     prevOptions.filter(
-                                                      id => id !== pk.uid
+                                                      option =>
+                                                        option.uid !== pk.uid
                                                     )
                                                 );
                                               }
@@ -378,7 +302,9 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                                             id={pk.uid}
                                             name={pk.uid}
                                             type="checkbox"
-                                            checked={selectedOptions.includes(pk.uid)}
+                                            checked={selectedOptions.some(
+                                              option => option.uid === pk.uid
+                                            )}
                                             className="w-5 h-5 text-blue-600 bg-white disabled:bg-gray-100 border-gray-400 disabled:border-gray-200/80 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                           />
                                         </div>
@@ -397,7 +323,7 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                                         </p>
                                       </td>
                                       {/* <td className="px-6 py-4">{pk?.titleShort}</td> */}
-                                      <td className="px-6 py-4">
+                                      <td className="px-6 py-4 text-gray-800">
                                         <div
                                           dangerouslySetInnerHTML={{
                                             __html: pk?.description,
@@ -457,6 +383,38 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                                 })}
                               </tbody>
                             </table>
+                          </div>
+                        </div>
+                        <div className="col-span-6 lg:col-span-2 sticky h-fit top-[60px]">
+                          <div className="rounded-xl p-6 border border-opacity-20 bg-white">
+                            <div className="mb-3">
+                              <h1 className="text-xl font-semibold mx-auto mb-2">
+                                Choose Package(s)
+                              </h1>
+                              <p className="text-gray-800 text-sm">Sponsor our newsletter of ~25k subscribers. Choose from the following areas:</p>
+                              <SponsorMenu newsletterProducts={newsletterProducts} websiteProducts={websiteProducts} />
+                            </div>
+                            {selectedOptions.length > 0 ? (
+                              <SelectedProductsDisplay
+                                selectedProducts={selectedOptions}
+                                totalPrice={totalPrice}
+                                discountedPrice={discountedPrice}
+                                discount={discountAmount}
+                              />
+                            ) : null}
+                            <DiscountBadge selectedTypes={selectedTypes} />
+
+                            {selectedOptions.length > 0 ? (
+                              <a
+                              href={`/sponsor/booking?packages=${selectedOptions.map(
+                                option => option.uid
+                              )}`}
+                              >
+                                <button className="w-full mt-3 h-10 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">
+                                  Book now
+                                </button>
+                              </a>
+                            ) : null}
                           </div>
                         </div>
                       </div>

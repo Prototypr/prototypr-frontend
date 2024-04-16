@@ -111,22 +111,16 @@ export default function SponsorPaymentPage({}) {
           ) : null}
           <Container>
             <div className="grid grid-cols-6 gap-6">
-              <div className="col-span-4">
+              <div className="col-span-6 md:col-span-4">
                 <div className="rounded-xl p-6 border border-opacity-20 bg-white mt-20">
                   <div className="">
-                  <h1 className="text-xl font-semibold mx-auto mb-2">
-                    Choose Booking Date(s)
-                  </h1>
-                    <p className="text-gray-500 max-w-lg text-sm">
-                      Book your sponsorship from available dates on the calendar. 
-                      When booking multiple weeks, you can space them out for better results. 
-                    </p>
+                 
                   </div>
 
                   <div>
                   {postObject?.products?.map(product => {
                     return (
-                      <div key={`calendar_${product.id}`} className="border-b py-8 border-gray-200 last:border-b-0">
+                      <div key={`calendar_${product.id}`} className="border-b first:pt-0 py-8 border-gray-200 last:border-b-0">
                         <BookingCalendar
                           key={product.id}
                           product={product}
@@ -153,15 +147,20 @@ export default function SponsorPaymentPage({}) {
                       .{" "}
                     </p>
                   ) : (
-                    <p className="mt-3 max-w-2xl text-gray-500">
-                      You can come back to this url and pay later.
-                    </p>
+                   null
                   )}
                 </div>
               </div>
-              <div className="col-span-2 sticky h-fit top-[160px]">
+              <div className="col-span-6 md:col-span-2 sticky h-fit top-[160px]">
                 <div className="rounded-xl p-6 border border-opacity-20 bg-white">
-                  <h2 className="text-xl font-semibold">Total</h2>
+                  {/* <h2 className="text-xl font-semibold">Total</h2> */}
+                  <h1 className="text-xl font-semibold mx-auto mb-2">
+                    Choose Booking Date(s)
+                  </h1>
+                    <p className="text-gray-500 max-w-lg text-sm">
+                      Book your sponsorship from available dates on the calendar. (Bookmark this url to pay later.)
+                      {/* When booking multiple weeks, you can space them out for better results.  */}
+                    </p>
                   {/* <p className="text-gray-500 text-sm">
                     Choose a package - you can combine 1 Newsletter and 1
                     Website package and save 20%.
