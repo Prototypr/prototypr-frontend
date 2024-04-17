@@ -96,7 +96,7 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
   return (
     <div>
       <div className="rounded-lg border border-gray-200 overflow-hidden my-3">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-600 dark:text-gray-400">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-800">
           <tr className="border-b">
             <th className="py-1 px-2 font-semibold">Product</th>
             <th className="py-1 px-2 font-semibold">Quantity</th>

@@ -19,7 +19,11 @@ const useTotalPrices = ({allProducts, selectedPackages}) => {
     if ((router.query.packages && allProducts) || (selectedPackages && allProducts)) {
       let packages = router?.query?.packages?.split(",");
       if(!packages && selectedPackages?.length){
-        let selectedIDs = selectedPackages.map(option => option.uid);
+        let selectedIDs = selectedPackages.map(option =>{        
+        return  option.uid?option.uid:option
+        
+        });
+        console.log(selectedIDs)
         packages = selectedIDs;
       }
       //get all prices and add them together

@@ -13,8 +13,12 @@ import { SponsorPackages } from "@/lib/constants/products";
 import CompanyNav from "@/components/Sponsor/CompanyNav";
 import FormBreadCrumbs from "@/components/Sponsor/Forms/FormBreadcrumbs";
 import SponsorPostForm from "@/components/Sponsor/Forms/SponsorPostForm";
-import AdOutline from "@/components/Sponsor/AdOutline";
+// import AdOutline from "@/components/Sponsor/AdOutline";
 import updateSponserAsUser from "@/lib/axios/updateSponsor/updateSponsor";
+import { getAllProducts } from "@/lib/api";
+import MultiSelectPackages from "@/components/Sponsor/MultiSelectPackages";
+import SelectedProductsDisplay from "@/components/Sponsor/SelectedProductsDislay";
+import useTotalPrices from "@/components/Sponsor/sponsorHooks/useTotalPrices";
 
 function isEmptyObject(obj) {
   return (
@@ -24,15 +28,60 @@ function isEmptyObject(obj) {
   );
 }
 
-const SponsorEditPage = () => {
+const SponsorEditPage = ({ allProducts }) => {
   const { user } = useUser({
     redirectTo: "/",
     redirectIfFound: false,
   });
 
-  const { loading, isOwner, postObject } =
-    useLoad(user);
+  const { loading, isOwner, postObject } = useLoad(user);
 
+  const router = useRouter();
+
+  const [selectedPackages, setSelectedPackages] = useState(null);
+  const [selectedPackageObjects, setSelectedPackageObjects] = useState(null);
+
+  useEffect(() => {
+    if (postObject?.products?.length) {
+      let ids = postObject.products.map(product => product.id);
+
+      setSelectedPackages(ids);
+      setSelectedPackageObjects(postObject.products);
+
+      router.push(
+        {
+          pathname: `/sponsor/booking/${postObject.id}/edit`,
+          query: {
+            packages: ids ? ids.join(",") : "",
+            // ...rest,
+          },
+        },
+        undefined,
+        { shallow: true }
+      );
+    }
+  }, [postObject?.products]);
+
+  useEffect(() => {
+    if (router.query.packages) {
+      //loop through packages and match with allProducts to get the newsletter and website products
+      let packages = router.query.packages.split(",");
+      setSelectedPackages(packages);
+      if (packages) {
+        let selected = [];
+        packages.forEach(packageId => {
+          let product = allProducts.find(product => product.uid === packageId);
+          if (product) {
+            selected.push(product);
+          }
+        });
+        setSelectedPackageObjects(selected);
+      }
+    } else {
+      setSelectedPackages([]);
+      setSelectedPackageObjects([]);
+    }
+  }, [router.query.packages]);
 
   if (loading) {
     return <Fallback />;
@@ -44,19 +93,30 @@ const SponsorEditPage = () => {
       {user && !isOwner && user && !postObject.isMember ? (
         <p>You are not owner of this post</p>
       ) : (
-       
-          <EditForm
-            postObject={postObject}
-            user={user}
-          />
+        <EditForm
+          selectedPackages={selectedPackages}
+          selectedPackageObjects={selectedPackageObjects}
+          allProducts={allProducts}
+          postObject={postObject}
+          user={user}
+        />
       )}
     </>
   );
 };
 
-const EditForm = ({ user, postObject }) => {
+const EditForm = ({
+  user,
+  postObject,
+  allProducts,
+  selectedPackageObjects,
+  selectedPackages,
+}) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { totalPrice, discountedPrice, discountAmount, selectedTypes } =
+    useTotalPrices({ allProducts, selectedPackages });
 
   const FormSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -90,25 +150,27 @@ const EditForm = ({ user, postObject }) => {
 
       async function submit() {
         setIsSubmitting(true);
-        try{
-
+        try {
           const id = await updateSponserAsUser({
             user,
             values,
+            packages:selectedPackageObjects,
             uploadNewBanner,
             uploadNewFeaturedImage,
           });
-         
-          if(id && postObject?.paid !== true){
+
+          if (id && postObject?.paid !== true) {
             router.push(`/sponsor/booking/${id}/payment`);
-          }else{
+          } else {
             setIsSubmitting(false);
           }
-
-        }catch(e){
-          toast.error("Your post failed to update! Please try again or contact support.", {
-            duration: 5000,
-          });
+        } catch (e) {
+          toast.error(
+            "Your post failed to update! Please try again or contact support.",
+            {
+              duration: 5000,
+            }
+          );
           setIsSubmitting(false);
         }
       }
@@ -117,23 +179,23 @@ const EditForm = ({ user, postObject }) => {
     },
   });
 
-  const [selectedProduct, setSelectedProduct] = useState(() => {
-    const id = formik.values.productId
-      ? formik.values.productId
-      : postObject?.productId;
-    let foundObject = SponsorPackages.newsletter.find(
-      obj => obj.productId === id
-    );
+  // const [selectedProduct, setSelectedProduct] = useState(() => {
+  //   const id = formik.values.productId
+  //     ? formik.values.productId
+  //     : postObject?.productId;
+  //   let foundObject = SponsorPackages.newsletter.find(
+  //     obj => obj.productId === id
+  //   );
 
-    if (!foundObject) {
-      foundObject = SponsorPackages.website.find(obj => obj.productId === id);
-    }
-    if (foundObject) {
-      return foundObject;
-    } else {
-      return null;
-    }
-  });
+  //   if (!foundObject) {
+  //     foundObject = SponsorPackages.website.find(obj => obj.productId === id);
+  //   }
+  //   if (foundObject) {
+  //     return foundObject;
+  //   } else {
+  //     return null;
+  //   }
+  // });
 
   useEffect(() => {
     if (postObject?.productId) {
@@ -189,24 +251,24 @@ const EditForm = ({ user, postObject }) => {
           <div className={`${user?.profile?.activeCompany ? "pt-8" : ""}`}>
             <FormBreadCrumbs />
           </div>
-          <div className="flex flex- w-full">
-            <div className="w-[720px]">
-              <form
-                onSubmit={e => {
-                  e.preventDefault();
-                  if ((errors && isEmptyObject(errors)) || !errors) {
-                    setDisabled(false);
-                    formik.handleSubmit();
-                  } else {
-                    // setDisabled(true);
-                    toast.error(
-                      "Hmmmm, it seems like some of the fields are empty."
-                    );
-                  }
-                }}
-              >
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              if ((errors && isEmptyObject(errors)) || !errors) {
+                setDisabled(false);
+                formik.handleSubmit();
+              } else {
+                // setDisabled(true);
+                toast.error(
+                  "Hmmmm, it seems like some of the fields are empty."
+                );
+              }
+            }}
+          >
+            <div className="grid grid-cols-6 gap-6 flex- w-full">
+              <div className="col-span-6 md:col-span-4">
                 <SponsorPostForm
-                  header={'Update yor advert'}
+                  header={"Update Your Ad"}
                   subtext={`Change your product title, description, and media.`}
                   postObject={postObject}
                   user={user}
@@ -215,42 +277,69 @@ const EditForm = ({ user, postObject }) => {
                   setUploadNewFeaturedImage={setUploadNewFeaturedImage}
                 />
 
-                <button
+                {/* <button
                   type="submit"
                   disabled={isSubmitting}
                   // disabled={errores}
                   className="w-full p-4 mt-6 bg-blue-700 text-white font-semibold rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
-                  {postObject?.paid==true?'Update':'Save and Continue'}
-                </button>
-              </form>
-            </div>
-            <div className="w-2/5 pl-6">
-              <div className="p-6 bg-white rounded-xl border mb-6 border-opacity-20 border-gray-300/70">
-                <div className="mb-3">
-                  <h1 className="text-xl font-semibold mx-auto mb-2">
-                    Select Package
-                  </h1>
-                  {/* <p className="text-gray-600">Sponsor our newsletter of ~25k subscribers.</p> */}
-                </div>
-                <div className="">
-                  {postObject?.productId && (
-                    <SelectSponsor
-                      disabled={postObject?.paid == true}
-                      items={SponsorPackages}
-                      defaultValue={postObject?.productId}
-                      className="w-full text-lg bg-white h-[56px] rounded-xl py-3 border border-gray-300"
-                      onChange={val => {
-                        formik.setFieldValue("productId", val);
-                      }}
-                    ></SelectSponsor>
-                  )}
-                </div>
-                {postObject?.paid == true ? <div className="text-sm text-gray-500/90 mt-2">You have already paid for this sponsorship.</div> : null}
+                  {postObject?.paid == true ? "Update" : "Save and Continue"}
+                </button> */}
               </div>
-             <AdOutline selectedProduct={selectedProduct} />
+              <div className="col-span-6 md:col-span-2">
+                <div className="p-6 bg-white rounded-xl border mb-6 border-opacity-20 border-gray-300/70">
+                  <div className="mb-3">
+                    {selectedPackages ? (
+                      <MultiSelectPackages
+                        formik={formik}
+                        packages={allProducts}
+                        selectedPackages={selectedPackages}
+                        productId={postObject?.id} 
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {/* <p className="text-gray-600">Sponsor our newsletter of ~25k subscribers.</p> */}
+                  </div>
+                  <div className="mt-3">
+                    <SelectedProductsDisplay
+                      selectedProducts={selectedPackageObjects}
+                      totalPrice={totalPrice}
+                      discountedPrice={discountedPrice}
+                      discount={discountAmount}
+                    />
+                  </div>
+                  <div className="">
+                    {postObject?.productId && (
+                      <SelectSponsor
+                        disabled={postObject?.paid == true}
+                        items={SponsorPackages}
+                        defaultValue={postObject?.productId}
+                        className="w-full text-lg bg-white h-[56px] rounded-xl py-3 border border-gray-300"
+                        onChange={val => {
+                          formik.setFieldValue("productId", val);
+                        }}
+                      ></SelectSponsor>
+                    )}
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    // disabled={errores}
+                    className="w-full mt-3 h-10 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white"
+                  >
+                    {postObject?.paid == true ? "Update" : "Save and Continue"}
+                  </button>
+                  {postObject?.paid == true ? (
+                    <div className="text-sm text-gray-500/90 mt-2">
+                      You have already paid for this sponsorship.
+                    </div>
+                  ) : null}
+                </div>
+                {/* <AdOutline selectedProduct={selectedProduct} /> */}
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </Layout>
@@ -258,3 +347,32 @@ const EditForm = ({ user, postObject }) => {
 };
 
 export default SponsorEditPage;
+
+export async function getServerSideProps({ preview = null, locale }) {
+  let sort = ["featured:desc", "tier:asc", "date:desc"];
+  if (locale == "es-ES") {
+    sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
+  }
+
+  // console.log('allTools',allTools)
+
+  let allProducts = (await getAllProducts(preview, 15, 0)) || [];
+
+  let products = [];
+  for (var i = 0; i < allProducts.data?.length; i++) {
+    products.push({
+      uid: allProducts.data[i].id,
+      ...allProducts.data[i].attributes,
+    });
+  }
+  let newsletterProducts = products.filter(obj => obj.type === "newsletter");
+  let websiteProducts = products.filter(obj => obj.type === "website");
+  return {
+    props: {
+      allProducts: products,
+      newsletterProducts: newsletterProducts,
+      websiteProducts: websiteProducts,
+    },
+    // revalidate: 100,
+  };
+}

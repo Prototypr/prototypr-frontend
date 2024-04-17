@@ -1,6 +1,5 @@
 import React from "react";
 import * as Popover from "@radix-ui/react-popover";
-import { MixerHorizontalIcon, Cross2Icon } from "@radix-ui/react-icons";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/router";
 export const EnvelopeIcon = ({ className }) => (
@@ -28,9 +27,10 @@ export const BrowserIcon = ({ className }) => (
   </svg>
 );
 
-const MultiSelectPackages = ({ packages, selectedPackages, formik }) => {
+const MultiSelectPackages = ({ packages, selectedPackages, productId }) => {
   const router = useRouter();
 
+  
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -50,20 +50,20 @@ const MultiSelectPackages = ({ packages, selectedPackages, formik }) => {
                         const product = packages.find(
                           product => product.uid === value
                         );
-                        if(product){
-                            return (
-                              <div
-                                key={index}
-                                className="bg-gray-100 flex text-black/80 border border-gray-300/50 rounded-lg px-2 py-1.5 text-sm font-medium"
-                              >
-                                {product.type === "newsletter" ? (
-                                  <EnvelopeIcon className="w-4 h-4 my-auto mr-1" />
-                                ) : (
-                                  <BrowserIcon className="w-4 h-4 my-auto mr-1" />
-                                )}
-                                {product.title}
-                              </div>
-                            );
+                        if (product) {
+                          return (
+                            <div
+                              key={index}
+                              className="bg-gray-100 flex text-black/80 border border-gray-300/50 rounded-lg px-2 py-1.5 text-sm font-medium"
+                            >
+                              {product.type === "newsletter" ? (
+                                <EnvelopeIcon className="w-4 h-4 my-auto mr-1" />
+                              ) : (
+                                <BrowserIcon className="w-4 h-4 my-auto mr-1" />
+                              )}
+                              {product.title}
+                            </div>
+                          );
                         }
                       })}
                     </div>
@@ -90,7 +90,7 @@ const MultiSelectPackages = ({ packages, selectedPackages, formik }) => {
                   if (product.type === "newsletter") {
                     return (
                       <div
-                         onClick={() => {
+                        onClick={() => {
                           let packages = router.query.packages?.split(
                             "," || []
                           );
@@ -100,7 +100,9 @@ const MultiSelectPackages = ({ packages, selectedPackages, formik }) => {
                             );
                             router.push(
                               {
-                                pathname: "/sponsor/booking",
+                                pathname: productId
+                                  ? `/sponsor/booking/${productId}/edit`
+                                  : "/sponsor/booking",
                                 query: {
                                   packages: newPackages
                                     ? newPackages.join(",")
@@ -115,7 +117,9 @@ const MultiSelectPackages = ({ packages, selectedPackages, formik }) => {
                             let newPackages = [...packages, product.uid];
                             router.push(
                               {
-                                pathname: "/sponsor/booking",
+                                pathname: productId
+                                  ? `/sponsor/booking/${productId}/edit`
+                                  : "/sponsor/booking",
                                 query: {
                                   packages: newPackages
                                     ? newPackages.join(",")
@@ -164,7 +168,9 @@ const MultiSelectPackages = ({ packages, selectedPackages, formik }) => {
                             );
                             router.push(
                               {
-                                pathname: "/sponsor/booking",
+                                pathname: productId
+                                  ? `/sponsor/booking/${productId}/edit`
+                                  : "/sponsor/booking",
                                 query: {
                                   packages: newPackages
                                     ? newPackages.join(",")
@@ -179,7 +185,9 @@ const MultiSelectPackages = ({ packages, selectedPackages, formik }) => {
                             let newPackages = [...packages, product.uid];
                             router.push(
                               {
-                                pathname: "/sponsor/booking",
+                                pathname: productId
+                                  ? `/sponsor/booking/${productId}/edit`
+                                  : "/sponsor/booking",
                                 query: {
                                   packages: newPackages
                                     ? newPackages.join(",")
