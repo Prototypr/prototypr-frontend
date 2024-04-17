@@ -43,9 +43,10 @@ export default function Post({ post, preview, domain, groupedPosts }) {
       return (
         <article key={index} className="group relative flex ">
           <Link
-            target="_blank"
+            // target="_blank"
             className="flex"
-            href={post?.attributes?.legacyAttributes?.link + `?ref=prototypr`}
+            href={`/news/${post?.attributes?.slug}`}
+            // href={post?.attributes?.legacyAttributes?.link + `?ref=prototypr`}
           >
             <div className="flex flex-col items-start pl-6 pr-3">
               <h3 className="text-lg font-semibold tracking-tight text-gray-800 dark:text-gray-100">
@@ -149,7 +150,7 @@ export default function Post({ post, preview, domain, groupedPosts }) {
             <div className="flex flex-col md:flex-row justify-between">
               <div className="flex text-lg text-black/90">
                 <Link href="/news">
-                  <div className="font-bold tracking-tight text-xl text-sky-500 my-auto">
+                  <div className="font-black tracking-tight text-xl text-sky-500 my-auto">
                     News Explorer
                   </div>
                 </Link>
@@ -163,30 +164,51 @@ export default function Post({ post, preview, domain, groupedPosts }) {
           maxWidth="w-full pb-20 px-3 xl:px-0  mt-3 relative z-0 relative w-full h-full  max-w-[1320px] mx-auto"
         >
           <div className="">
-            <div className="grid gap-6 grid-cols-12">
+            <div className="grid gap-3 grid-cols-12">
               {/* <div className="col-span-2"></div> */}
-              <div className="col-span-9">
+              <div className="col-span-12 lg:col-span-9">
                 <div className="grid grid-cols-1 gap-y-6">
-
                   <div className="">
                     {["today", "yesterday", "lastWeek", "lastMonth"].map(
                       group =>
-                        groupedPosts?.length &&
+                        groupedPosts[group] &&
                         groupedPosts[group].length > 0 && (
+                          // <section
+                          //   key={group}
+                          //   aria-labelledby={group}
+                          //   className=" md:border-gray-200 md:pl-6 md:dark:border-gray-700/40"
+                          // >
+                          //   <div className="grid bg-white p-4 pr-8 rounded-xl grid-cols-1 items-baseline gap-y-6 md:grid-cols-4">
+                          //     <h2
+                          //       id={group}
+                          //       className="text-sm font-semibold text-gray-800 dark:text-gray-100"
+                          //     >
+                          //       {group.charAt(0).toUpperCase() + group.slice(1)}
+                          //     </h2>
+                          //     <div className="md:col-span-4">
+                          //       <div className="space-y-16">
+                          //         {renderPosts(groupedPosts[group])}
+                          //       </div>
+                          //     </div>
+                          //   </div>
+                          // </section>
                           <section
                             key={group}
                             aria-labelledby={group}
-                            className=" md:border-gray-200 md:pl-6 md:dark:border-gray-700/40"
+                            className="lg:border-gray-200 md:pl-"
                           >
-                            <div className="grid bg-white p-4 pr-8 rounded-xl grid-cols-1 items-baseline gap-y-6 md:grid-cols-4">
-                              <h2
-                                id={group}
-                                className="text-sm font-semibold text-gray-800 dark:text-gray-100"
-                              >
-                                {group.charAt(0).toUpperCase() + group.slice(1)}
-                              </h2>
-                              <div className="md:col-span-4">
-                                <div className="space-y-16">
+                            <div className="grid grid-cols-9 col-span-9 bg-white py-6 px-4 shadow-sm rounded-2xl border border-gray-300/50 mb-3">
+                              <div className="col-span-2">
+                                <h2
+                                  id={group}
+                                  className="mb-6 lg:mb-1 w-[fit-content] lg:pr-4 lg:pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
+                                >
+                                  {group.charAt(0).toUpperCase() +
+                                    group.slice(1)}
+                                </h2>
+                              </div>
+                              <div className="col-span-12 lg:col-span-7 mb-8">
+                                <div className="space-y-16 max-w-2xl mx-auto">
                                   {renderPosts(groupedPosts[group])}
                                 </div>
                               </div>
@@ -200,22 +222,22 @@ export default function Post({ post, preview, domain, groupedPosts }) {
                           <section
                             key={month}
                             aria-labelledby={month}
-                            className="md:border-gray-200 md:pl-"
+                            className="lg:border-gray-200 md:pl-"
                           >
-                              <div className="grid grid-cols-9 col-span-9 bg-white py-6 px-4 shadow-sm rounded-2xl border border-gray-300/50 mb-3">
-                                <div className="col-span-2">
-                                  <h2
-                                    id={month}
-                                    className="mb-1 w-[fit-content] pr-4 pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
-                                  >
-                                    {month}
-                                  </h2>
+                            <div className="grid grid-cols-9 col-span-9 bg-white py-6 px-4 shadow-sm rounded-2xl border border-gray-300/50 mb-3">
+                              <div className="col-span-2">
+                                <h2
+                                  id={month}
+                                  className="mb-6 lg:mb-1 w-[fit-content] lg:pr-4 lg:pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
+                                >
+                                  {month}
+                                </h2>
+                              </div>
+                              <div className="col-span-12 lg:col-span-7 mb-8">
+                                <div className="space-y-16 max-w-2xl mx-auto">
+                                  {renderPosts(posts)}
                                 </div>
-                                <div className="col-span-7 mb-8">
-                                  <div className="space-y-16 max-w-2xl mx-auto">
-                                    {renderPosts(posts)}
-                                  </div>
-                                </div>
+                              </div>
                             </div>
                           </section>
                         )
@@ -223,34 +245,33 @@ export default function Post({ post, preview, domain, groupedPosts }) {
                   </div>
                 </div>
               </div>
-              <div className="col-span-3">
-              <div className="flex flex-col gap-4">
-                <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
-                  <div className="z-10 col-span-5 xl:col-span-5 relative">
-                    <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
-                      Get weekly handpicked tools
-                    </h3>
-                    <p className="text-base text-gray-600 mb-6">
-                      Join the 1000s who receive curated products from Graeme @
-                      Prototypr.
-                    </p>
-                  </div>
-                  {/* <div className="hidden xl:block z-10 col-span-1 relative">
+              <div className="col-span-12 md:col-span-3">
+                <div className="flex flex-col gap-4">
+                  <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
+                    <div className="z-10 col-span-5 xl:col-span-5 relative">
+                      <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
+                        Tomorrow's news, today
+                      </h3>
+                      <p className="text-base text-gray-600 mb-6">
+                        AI-driven updates, curated by humans and hand-edited for
+                        the Prototypr community
+                      </p>
+                    </div>
+                    {/* <div className="hidden xl:block z-10 col-span-1 relative">
                     <WeeMan />
                   </div> */}
 
-                  {/* <img
+                    {/* <img
                     className="hidden sm:block w-[200px] top-0 mt-8 md:-mt-6 absolute right-0 -mr-20"
                     src={
                       "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/7432cc558c73394df5d2c21a3ee18cd5.png?updated_at=2022-12-14T17:59:46.805Z"
                     }
                   /> */}
-                  <div className="col-span-12 relative z-10">
-                    <SignupSidebar/>
+                    <div className="col-span-12 relative z-10">
+                      <SignupSidebar btnText={"Get it daily"} post={post} />
+                    </div>
                   </div>
                 </div>
-              </div>
-
               </div>
             </div>
             <div className="col-span-6 mx-auto"></div>
@@ -385,9 +406,14 @@ export async function getStaticProps({
   type = "bite",
 }) {
   let allNews = (await getAllNews(preview, 15, 0)) || [];
+
+  // console.log(allNews)
   allNews = formatAllTools({ tools: allNews.data, tagNumber: 0 });
+  // console.log(allNews)
 
   let groupedPosts = groupPostsByDate(allNews);
+
+  console.log(groupedPosts);
 
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {

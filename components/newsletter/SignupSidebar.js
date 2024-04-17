@@ -4,12 +4,12 @@ import axios from "axios";
 import { FormattedMessage, useIntl } from "react-intl";
 import Button from "../Primitives/Button";
 
-export default function SignupSidebar({ className }) {
+export default function SignupSidebar({ className, btnText }) {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
   const intl = useIntl();
   const [buttonText, setButtonText] = useState(
-    intl.formatMessage({ id: "intro.button.updates" })
+    btnText?btnText:intl.formatMessage({ id: "intro.button.updates" })
   );
   const onSubmit = async (data) => {
     setButtonText(intl.formatMessage({ id: "signup.button.submitting" }));

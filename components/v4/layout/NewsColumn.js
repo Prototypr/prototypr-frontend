@@ -34,7 +34,10 @@ const NewsColumn = ({
       //           ? post?.attributes?.ogImage.opengraphImage
       //           : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
       return (
-        <article key={index} className="group relative flex hover:bg-gray-50 transition transition-all duration-400">
+        <article
+          key={index}
+          className="group relative flex hover:bg-gray-50 transition transition-all duration-400"
+        >
           <Link
             // target="_blank"
             className="flex"
@@ -52,19 +55,19 @@ const NewsColumn = ({
               </h3>
 
               <div className="pl-2.5">
-                  <div className="z-10 mb-1 mt-1 flex w-[fit-content]">
-                    <div className="my-auto flex rounded-full flex-col justify-center p-[1px] mr-0.5 bg-black/50">
-                      <img
-                        className="w-3 h-3 mx-auto my-auto rounded-full"
-                        src={`https://www.google.com/s2/favicons?domain=${postDomain}`}
-                      />
-                    </div>
-                    <div className="text-[10px] ml-0.5 text-gray-400 tracking-wide my-auto leading-none font-medium uppercase">
-                      {postDomain}
-                    </div>
+                <div className="z-10 mb-1 mt-1 flex w-[fit-content]">
+                  <div className="my-auto flex rounded-full flex-col justify-center p-[1px] mr-0.5 bg-black/50">
+                    <img
+                      className="w-3 h-3 mx-auto my-auto rounded-full"
+                      src={`https://www.google.com/s2/favicons?domain=${postDomain}`}
+                    />
+                  </div>
+                  <div className="text-[10px] ml-0.5 text-gray-400 tracking-wide my-auto leading-none font-medium uppercase">
+                    {postDomain}
                   </div>
                 </div>
-                
+              </div>
+
               <div className="z-10  order-first">
                 <div className="relative z-10 flex items-center text-base pl-2.5">
                   <span
@@ -125,16 +128,22 @@ const NewsColumn = ({
       {/* <Container maxWidth="max-w-[1320px] w-full"> */}
       {showHeader !== false && (
         <div className="flex justify-between p-2.5 pb-4 rounded-t-2xl">
-          <div>
-            <div className="flex">
-              {/* <div className="my-auto">
+          <div className="flex">
+            <div>
+              <div className="flex">
+                {/* <div className="my-auto">
                 <Robot size={'24'} />
               </div> */}
-              <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
-                {title ? title : <>News Explorer</>}
-              </h3>
+                <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
+                  {title ? title : <>News Explorer</>}
+                </h3>
+
+                <span className="bg-blue-500 my-auto font-medium text-white py-0 px-[6px] text-[11px] rounded-full ml-2">
+                  Beta
+                </span>
+              </div>
+              <div className="text-sm text-gray-800">Selected by humans.</div>
             </div>
-            <div className="text-sm text-gray-800">Selected by humans.</div>
           </div>
           <div className="flex relative">
             {/* <div className="text-sm my-auto inline text-black/80 font-normal font-inter">
@@ -162,6 +171,38 @@ const NewsColumn = ({
       )}
       <div className="max-h-[46rem] relative">
         <div className="pl-2 pt-2 pr-2 h-full max-h-[46rem] overflow-y-auto">
+          {["today", "yesterday", "lastWeek", "lastMonth"].map(group => {
+            const formattedGroup = group.replace("last", "last ");
+
+            return (
+              groupedNewsPosts[group] &&
+              groupedNewsPosts[group].length > 0 && (
+                <section
+                  key={group}
+                  aria-labelledby={group}
+                  className="md:border-l md:border-gray-200 md:pl-"
+                >
+                  <div className="grid grid-cols-1 items-baseline gap-y-2 md:grid-cols-5">
+                    <h2
+                      id={group}
+                      className="col-span-5 mb-1 w-[fit-content] pr-4 rounded-r-full pl-2 border- border-gray-300/50 text-base font-semibold text-gray-800"
+                    >
+                      {/* <div className="pl-[1px]"> */}
+                      {formattedGroup.charAt(0).toUpperCase() +
+                        formattedGroup.slice(1)}
+                      {/* </div> */}
+                    </h2>
+                    <div className="col-span-5 mb-8">
+                      <div className="space-y-5">
+                        {" "}
+                        {renderPosts(groupedNewsPosts[group])}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              )
+            );
+          })}
           {groupedNewsPosts?.months &&
             Object.entries(groupedNewsPosts?.months).map(([month, posts]) => (
               <section
@@ -175,7 +216,7 @@ const NewsColumn = ({
                     className="col-span-5 mb-1 w-[fit-content] pr-4 rounded-r-full pl-2 border- border-gray-300/50 text-base font-semibold text-gray-800"
                   >
                     {/* <div className="pl-[1px]"> */}
-                      {month}
+                    {month}
                     {/* </div> */}
                   </h2>
                   <div className="col-span-5 mb-8">
