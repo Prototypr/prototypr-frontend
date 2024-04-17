@@ -9,7 +9,7 @@ const SmallCardB = ({ title, image, tags, date, avatar, author, showAuthor, link
   return (
     <div className="flex hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-row font-inter w-full max-w-[490px]">
       {image ? (
-        <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[195px] xs:h-[124px] relative rounded-2xl overflow-hidden border border-gray-100">
+        <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[195px] xs:h-[124px] relative rounded-xl overflow-hidden border border-gray-100">
          <Link href={link}>
             <Image
               loader={gumletLoader}

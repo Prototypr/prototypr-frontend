@@ -279,7 +279,7 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
 
   return (
     <Layout background="#EFF2F8">
-      <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
+      <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-8">
         <div className="max-w-3xl w-full">
         <div className="my-2 mb-5">
           <h1 className="text-2xl font-bold mx-auto ">Post a Job</h1>
@@ -329,7 +329,7 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
                     </option>
                   ))}
                 </select>
-                {formik.errors.type && <span className="text-red-600 text-xs">{formik.errors.type}</span>}
+                {formik.errors.type && <span className="text-red-600 text-sm">{formik.errors.type}</span>}
              
 
                 <label className="text-md font-medium mt-4">
@@ -338,7 +338,7 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
                 <MiniEditor initialContent={postObject?.description?postObject.description:''} setDescription={(html)=>{
                     formik.setFieldValue("description",html)
                 }}/>
-                {formik.errors.description && <span className="text-red-600 text-xs">{formik.errors.description}</span>}
+                {formik.errors.description && <span className="text-red-600 text-sm">{formik.errors.description}</span>}
                 
             <div className="mt-3">
                 <FormInput id="url" label="Job Link" error={formik.errors}>
@@ -430,7 +430,7 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
               placeholder="Add a location - use 'Worldwide' for anywhere" 
               options={locations}/>}
 
-              {formik.errors.location && <span className="text-red-600 text-xs">{formik.errors.location}</span>}
+              {formik.errors.location && <span className="text-red-600 text-sm">{formik.errors.location}</span>}
                 
             </div>
             </div>
@@ -470,7 +470,7 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
                 setImageBlob(blob)
                 formik.setFieldValue("image",blob)
               }}/> */}
-              {formik.errors.companyLogo && <span className="text-red-600 text-xs">{formik.errors.companyLogo}</span>}
+              {formik.errors.companyLogo && <span className="text-red-600 text-sm">{formik.errors.companyLogo}</span>}
 
                 {/* <div className="flex p-6 -mt-2 border border-gray-300 rounded-lg items-center space-x-6">
                 <div class="shrink-0">

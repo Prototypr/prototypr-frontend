@@ -11,8 +11,12 @@ import useUser from "@/lib/iron-session/useUser";
 // const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 
 // import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
-import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
-import { getAllPostsForPostsPage, getCommonQuery, getPostsByPageForPostsPage } from "@/lib/api";
+// import BreadCrumbs from "@/components/v4/layout/Breadcrumbs";
+import {
+  getAllPostsForPostsPage,
+  getCommonQuery,
+  getPostsByPageForPostsPage,
+} from "@/lib/api";
 // import Head from 'next/head'
 import { transformPostList } from "@/lib/locale/transformLocale";
 // import { useState } from "react";
@@ -23,11 +27,15 @@ import { transformPostList } from "@/lib/locale/transformLocale";
 // import TopicSection from "@/components/v4/section/TopicSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 import { ArrowRight } from "phosphor-react/dist";
-import Link from 'next/link'
+import Link from "next/link";
 import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
 // import TagsNavRow from "@/components/v4/section/TagsNavRow";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
+import TagsNavRow from "@/components/v4/section/TagsNavRow";
+import BigBackgroundCard from "@/components/v4/card/BigCard/BigBackgroundCard";
+import PostsGroup3Cards from "@/components/v4/layout/PostsGroup3Cards";
+import SmallCard from "@/components/v4/card/SmallCard/SmallCardF";
 // import SmallPostsGroup from "@/components/v4/layout/SmallPostsSection";
 // import Image from "next/image";
 // const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
@@ -49,7 +57,7 @@ const ALL_TAGS = [
 ];
 export default function PostsPage({
   allPosts = [],
-  tools=[],
+  tools = [],
   heroPost = null,
   morePosts = [],
   preview,
@@ -58,11 +66,11 @@ export default function PostsPage({
   tag = "",
   pageNo = 1,
   tagName = "",
-  authors=[]
+  authors = [],
 }) {
   const router = useRouter();
 
-  const onPageNumChange = (pageNum) => {
+  const onPageNumChange = pageNum => {
     router.push(`/posts/${tag}/page/${pageNum}`);
   };
   if (tagName == "Interview") {
@@ -76,11 +84,30 @@ export default function PostsPage({
   const { user, isLoading } = useUser({
     redirectIfFound: false,
   });
+
+  const largePost = allPosts[0];
+
+  let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;
+  const dummyAvatar =
+    "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+  const largeCoverImage = url
+    ? url
+    : largePost?.attributes?.legacyFeaturedImage?.mediaItemUrl
+      ? largePost?.attributes?.legacyFeaturedImage?.mediaItemUrl
+      : dummyAvatar;
+
+  let authorData = largePost?.attributes?.author?.data?.attributes;
+  let largePostAvatar = authorData?.avatar?.data
+    ? authorData?.avatar?.data?.attributes?.url
+    : authorData?.legacyAvatar
+      ? authorData?.legacyAvatar
+      : dummyAvatar;
+
   return (
     <>
       <Layout
         navOffset={false}
-          // maxWidth={'max-w-[1320px] search-wide'}
+        // maxWidth={'max-w-[1320px] search-wide'}
         seo={{
           title: `${tagName} | design articles on Prototypr | Page ${pagination?.page}`,
           description: `Articles on ${tagName} - design content open and accessible to everyone, no paywall here.`,
@@ -92,118 +119,197 @@ export default function PostsPage({
         activeNav={"posts"}
         preview={preview}
       >
-      <div className="mb-8 top-0 w-full">
-        <Container padding={false} maxWidth="w-full" >
-          <div className="pt-[100px] pb-[120px] bg-gradient-to-br via-[#b3daff] from-[#bcdeff] to-[#77abdd] relative overflow-hidden p-0 border-gray-200">
-            {/* <img src="/static/images/angleshape.svg" className="absolute -mb-[2%] w-full bottom-0 z-40 left-0"/> */}
+        <Container padding={false} maxWidth="w-full pb-8">
+          <div className="pt-[64px]  relative overflow-hidden p-0 border-gray-200">
+            <div className="mt-3">
+              <TagsNavRow activeTag={tag} />
+            </div>
 
-            {/* <div className="z-20 relative"> */}
-            <div className="w-full p-6 pt-0 z-10 relative max-w-[1320px] px-6 md:px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
-              <BreadCrumbs background={false}tagName={tagName}/>
-                <div className="inline-flex my-4">
-                  {/* <div className="p w-8 h-8 my-auto mr-3 rounded-full border-gray-300 bg-white"> */}
-                    {/* <Tag className="mt-5 text-gray-800 mx-auto mr-3 my-auto opacity-80" size={38}/> */}
-                  {/* </div> */}
-                  <h2 className="mt-2 mb-2 text-black/90 text-5xl font-semibold tracking-tight xl:text-[48px] lg:leading-tight md:leading-tight capitalize drop-shadow-sm ">{tagName}</h2>
-                </div>
+            <div className="w-full p-6 pt-0 pb-0 z-10 relative max-w-[1320px] px-6 md:px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
+              {/* <BreadCrumbs background={false}tagName={tagName}/> */}
+
+              <div className="inline-flex mt-4 mb-4">
+                <h2 className="mt-2 text-black/90 text-5xl font-semibold tracking-tighter xl:text-[48px] lg:leading-tight md:leading-tight capitalize drop-shadow-sm ">
+                  {tagName}
+                </h2>
               </div>
-               <img src='/static/images/toolbox/toolbox-bg-2.svg' className=" pointer-events-none absolute w-full h-full object-cover opacity-40 top-0 left-0 "/>
+              {/* <div className="mb-1 text-gray-500">Page 1</div> */}
+            </div>
+            {/* <img src='/static/images/toolbox/toolbox-bg-2.svg' className=" pointer-events-none absolute w-full h-full object-cover opacity-40 top-0 left-0 "/> */}
           </div>
-
         </Container>
-      </div>
-      {/* <div className="h-[232px]"/> */}
-        {allPosts?.length?
-        <div className="pb-10 -mt-36 z-50 relative">
+        {/* <div className="h-[232px]"/> */}
+        {allPosts?.length ? (
+          <div className="pb-10  z-50 relative">
+            {pagination.page && pagination.page == 1
+              ? morePosts.length > 0 && (
+                  <>
+                    <div className="z-20 relative">
+                      <Container
+                        // padding={false}
+                        maxWidth="max-w-[1320px] mx-auto "
+                      >
+                        <div className="grid grid-cols-3 lg:grid-rows-2 gap-3">
+                          <div className="col-span-3 lg:col-span-2 lg:row-span-2">
+                            <BigBackgroundCard
+                              showDescription={true}
+                              layout={2}
+                              link={`/post/${largePost?.attributes?.slug}`}
+                              avatar={largePostAvatar}
+                              imageDimensions={`lg:w-7/12 lg:h-[400px] h-[260px]`}
+                              textDimensions={`lg:w-5/12`}
+                              excerpt={largePost?.attributes?.excerpt}
+                              author={
+                                largePost?.attributes?.author?.data?.attributes
+                              }
+                              image={largeCoverImage}
+                              date={largePost?.attributes?.date}
+                              title={largePost?.attributes?.title}
+                              tags={largePost?.attributes?.tags?.data}
+                            />
+                          </div>
+                          <div className="col-span-3 lg:col-span-1 lg:row-span-2 lg:grid lg:grid-cols-1 lg:grid-rows-2 gap-3">
+                            {morePosts?.length > 0 &&
+                              morePosts.slice(1, 3).map((post, index) => {
+                                const coverImage = post?.attributes
+                                  ?.legacyFeaturedImage?.mediaItemUrl
+                                  ? post?.attributes?.legacyFeaturedImage
+                                      ?.mediaItemUrl
+                                  : post?.attributes?.featuredImage?.data
+                                        ?.attributes?.url
+                                    ? post?.attributes?.featuredImage?.data
+                                        ?.attributes?.url
+                                    : null;
+                                let authorData = post?.attributes?.author?.data
+                                  ?.attributes
+                                  ? post?.attributes?.author?.data?.attributes
+                                  : null;
+                                let avatar = authorData?.avatar?.data
+                                  ? authorData?.avatar?.data?.attributes?.url
+                                  : authorData?.legacyAvatar
+                                    ? authorData?.legacyAvatar
+                                    : dummyAvatar;
 
-{
-                pagination.page && pagination.page == 1 ? (
-                    morePosts.length > 0 &&  <PostsSectionHero
-                    user={user}
-                    showHeroTitle={false}
-                    showTags={true}
-                    groupSlice={3}
-                    title={tagName}
-                    heroCardPost={allPosts[0]}
-                    viewablePosts={allPosts?.slice(1)}
-                    showRecent={true}
-                    toolsList={tools?.slice(0, 4)}
-                  />
-        
-                ): (
-                    allPosts.length > 0 && 
-                    <div className="pt-4">
-                      <PostsSectionHero
-                        user={user}
-                        groupSlice={3}
-                        toolsList={tools?.slice(0, 4)}
-                        showTags={false}
-                        showTitle={false}
-                        // heroCardPost={heroPost}
-                        viewablePosts={allPosts}
-                        showRecent={false}
-                      />
-
+                                return (
+                                  <SmallCard
+                                    link={`/post/${post?.attributes?.slug}`}
+                                    key={index}
+                                    title={post?.attributes?.title}
+                                    image={coverImage}
+                                    content={post?.attributes?.excerpt}
+                                    tags={post?.attributes?.tags?.data}
+                                    date={post?.attributes?.date}
+                                    avatar={avatar}
+                                    author={
+                                      post?.attributes?.author?.data?.attributes
+                                    }
+                                  />
+                                );
+                              })}
+                          </div>
+                          <div className="col-span-3">
+                            <PostsGroup3Cards
+                              posts={morePosts?.slice(3, morePosts.length)}
+                            />
+                          </div>
+                        </div>
+                      </Container>
                     </div>
+                  </>
                 )
-              }
+              : //   <PostsSectionHero
+                //   user={user}
+                //   showHeroTitle={false}
+                //   showTags={false}
+                //   groupSlice={3}
+                //   title={tagName}
+                //   heroCardPost={allPosts[0]}
+                //   viewablePosts={allPosts?.slice(1)}
+                //   showRecent={true}
+                //   toolsList={tools?.slice(0, 4)}
+                // />
 
-                <NewPagination
-            total={pagination?.total}
-            pageSize={PAGE_SIZE}
-            currentPage={pagination?.page}
-            onPageNumChange={(pageNum) => {
-              onPageNumChange(pageNum);
-            }}
-          />
+                allPosts.length > 0 && (
+                  <div className="pt-4">
+                    <PostsSectionHero
+                      user={user}
+                      groupSlice={3}
+                      toolsList={tools?.slice(0, 4)}
+                      showTags={false}
+                      showTitle={false}
+                      // heroCardPost={heroPost}
+                      viewablePosts={allPosts}
+                      showRecent={false}
+                    />
+                  </div>
+                )}
 
-{tools?.length>3 ?
+            <NewPagination
+              align={"end"}
+              total={pagination?.total}
+              pageSize={PAGE_SIZE}
+              currentPage={pagination?.page}
+              onPageNumChange={pageNum => {
+                onPageNumChange(pageNum);
+              }}
+            />
+
+            {tools?.length > 3 ? (
               <>
-              <SectionDivider py="py-12" transparentLine={false}/>
-      
-                <Container padding={false} maxWidth="mb-3 px-6 md:px-3 max-w-[1320px] mx-auto rounded-2xl w-full relative">
+                <SectionDivider py="py-12" transparentLine={false} />
+
+                <Container
+                  padding={false}
+                  maxWidth="mb-3 px-6 md:px-3 max-w-[1320px] mx-auto rounded-2xl w-full relative"
+                >
                   <div className="">
                     <div className="flex justify-between mb-8">
                       <h3 className="font-medium capitalize text-2xl ">
-                      Related {tagName} Tools
+                        Related {tagName} Tools
                       </h3>
                       <div className="my-auto">
                         <div className="flex relative">
-                        <div className="text-md inline text-gray-800 font-normal font-inter">
-                        <Link href={`/toolbox`}>See all</Link>
-                        </div>
-                        <div className="my-auto">
-                          <Link href={`/toolbox`}>
-                            <div className="bg-blue-100 outline outline-1 outline-blue-300/50 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
-                                <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
-                            </div>
-                          </Link>
+                          <div className="text-md inline text-black/80 font-normal font-inter">
+                            <Link href={`/toolbox`}>See all</Link>
+                          </div>
+                          <div className="my-auto">
+                            <Link href={`/toolbox`}>
+                              <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                                <ArrowRight
+                                  weight="bold"
+                                  size={14}
+                                  className="text-blue-900 my-auto"
+                                />
+                              </div>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                       {tools.map((tool, index) => {
-                        
-                        if(index<4){
+                        if (index < 4) {
                           return (
                             <div key={index}>
-                              <ToolIconCard withBackground={true} tool={tool?.attributes} />
+                              <ToolIconCard
+                                withBackground={true}
+                                tool={tool?.attributes}
+                              />
                             </div>
                           );
                         }
                       })}
                     </div>
-              </div>
-              {/* <img src="/static/images/angleshape.svg" className="absolute -mb-[80px] w-full bottom-0 z-10 left-0"/> */}
-      
+                  </div>
+                  {/* <img src="/static/images/angleshape.svg" className="absolute -mb-[80px] w-full bottom-0 z-10 left-0"/> */}
                 </Container>
-              <SectionDivider transparentLine={true}/>
-              </>:''
-            }
+                <SectionDivider transparentLine={true} />
+              </>
+            ) : (
+              ""
+            )}
 
-{/* <TagsNavRow/> */}
-
+            {/* <TagsNavRow/> */}
 
             {/* <TopicSection
                   showTitle={false}
@@ -230,12 +336,14 @@ export default function PostsPage({
                   toolsList={tools?.slice(0, 4)}
                   // authorsList={topicRes[topic.slug]?.authors}
                 /> */}
-        </div>:''}
-            {/* todo show loading state above */}
-        
+          </div>
+        ) : (
+          ""
+        )}
+        {/* todo show loading state above */}
       </Layout>
 
-        <Footer />
+      <Footer />
     </>
   );
 }
@@ -301,7 +409,7 @@ export async function getStaticProps({ preview = null, params, locale }) {
   if (locale === "es-ES") {
     sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
   }
-  const pageSize = PAGE_SIZE;
+  let pageSize = PAGE_SIZE;
   const { pageNo, tag } = params;
 
   let allPosts =
@@ -313,7 +421,6 @@ export async function getStaticProps({ preview = null, params, locale }) {
       sort
     )) || [];
 
-
   let tags = allPosts[1];
   allPosts = allPosts[0];
   const pagination = allPosts.meta.pagination;
@@ -324,12 +431,11 @@ export async function getStaticProps({ preview = null, params, locale }) {
 
   allPosts = transformPostList(allPosts.data, locale);
 
-  
   const topicToolsRes =
-  (await getCommonQuery(null, [tag], "tool", 12, 0, sort)) || [];
+    (await getCommonQuery(null, [tag], "tool", 12, 0, sort)) || [];
 
-  const authors = makeAuthorList(allPosts)
-  shuffleArray(authors)
+  const authors = makeAuthorList(allPosts);
+  shuffleArray(authors);
 
   // otherwise, just send back the list without splicing
   // firstPost = allPosts.slice(0, 1);
@@ -348,8 +454,8 @@ export async function getStaticProps({ preview = null, params, locale }) {
       pageNo,
       morePosts,
       heroPost,
-      tools:topicToolsRes?.data,
-      authors:authors
+      tools: topicToolsRes?.data,
+      authors: authors,
     },
     revalidate: 20,
   };

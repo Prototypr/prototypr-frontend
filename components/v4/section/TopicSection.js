@@ -90,7 +90,7 @@ const TopicSection = ({
         </Container> */}
 
         <div style={{marginTop:'-6px'}}>
-          <Container padding={false} maxWidth="mb-3 max-w-[1320px] mx-auto bg-[#CCE6FF]/40 p-10 rounded-2xl w-full relative">
+          <Container padding={false} maxWidth="mb-3 max-w-[1320px] mx-auto bg-[#CCE6FF]/40 p-10 rounded-xl w-full relative">
             <div className="">
               <div className="flex justify-between">
                 <h3 className="font-medium text-2xl mb-8">

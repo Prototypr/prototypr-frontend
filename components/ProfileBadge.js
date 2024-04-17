@@ -187,9 +187,9 @@ const IconButton = styled("button", {
   borderRadius: "100%",
   height: 35,
   width: 35,
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
+  // display: "inline-flex",
+  // alignItems: "center",
+  // justifyContent: "center",
   color: blue.blue11,
   backgroundColor: "white",
   border: `1px solid ${gray.gray3}`,
@@ -342,7 +342,7 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
                     router.push(`/dashboard/partner`);
                   }}
                 >
-                  💙 Partners
+                  Business hub
                 </DropdownMenuItem>
               </>
             ):''}

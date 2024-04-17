@@ -101,17 +101,17 @@ const ProductListData2 = [
 
 const ToolBoxHero = () => {
   return (
-    <div className="w-full h-full bg-white toolboxheroGradient pt-20 pb-20 -mt-[96px]">
+    <div className="w-full h-full bg-white  pt-20 pb-20 -mt-[96px]">
       <div className="w-full h-auto py-20 relative z-2">
         <div className="max-w-7xl mx-auto grid place-items-center h-full">
           <div className="flex flex-col justify-center items-center gap-2">
-            <div className="rounded-[16px] overflow-hidden shadow-xl">
+            {/* <div className="rounded-[16px] overflow-hidden shadow-xl">
               <img
                 className=" w-20 h-20 bg-transparent  border-black border-opacity-10"
                 src={"/static/images/toolbox/toolbox-icon.svg"}
                 alt="Prototypr Logo"
               />
-            </div>
+            </div> */}
             <h1 className="text-[40px] md:text-[52px] text-center leading-[52px] md:leading-[63px] font-bold mb-2">
               Find the tool, <br /> make your thing.
             </h1>
@@ -121,8 +121,8 @@ const ToolBoxHero = () => {
           </div>
         </div>
       </div>
-      <div className="w-full max-w-full relative py-5 flex flex-col gap-2  overflow-hidden">
-        <div className=" flex flex-col items-center max-w-7xl mx-auto grid gap-5 top-0 w-full ">
+      <div className="w-full max-w-full relative py-5 flex flex-col overflow-hidden">
+        <div className=" flex flex-col items-center max-w-7xl mx-auto grid top-0 w-full ">
           <MotionSlider
                   initialDuration={180}
                   slides={ProductListData.map((data, i) => {

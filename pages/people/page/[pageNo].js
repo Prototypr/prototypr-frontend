@@ -68,6 +68,7 @@ export default function PeoplePage({
                 />)})}
                 </div>
               <NewPagination
+                align="start"
                 total={pagination?.total}
                 pageSize={PAGE_SIZE}
                 currentPage={pagination?.page}
@@ -100,6 +101,16 @@ export async function getStaticProps({ preview = null, params,locale }) {
   const page = params.pageNo;
   const allPosts =
     (await getPeopleByPage(preview, pageSize, page)) || [];
+
+    //loop through all posts and if the post type is a tool, run the tool function
+    allPosts = allPosts?.map((post) => {
+      if (post.attributes.type == "tool") {
+        // use the formatAllTools function to format the tool content
+        post = formatToolContent({post, tagNumber:1});
+      }
+      return post;
+    }
+    );
     // console.log("allposts*******" + JSON.stringify(allPosts))
   const pagination = allPosts.meta.pagination;
   return {

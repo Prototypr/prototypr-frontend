@@ -22,8 +22,8 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
             </div>
             <div className="my-auto">
               <Link href={`/toolbox/`}>
-                <div className="bg-blue-100 outline outline-1 outline-blue-300/50 ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
-                    <ArrowRight weight="bold" size={14} className="text-blue-900 my-auto"/>
+                <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
+                    <ArrowRight weight="bold" size={14} className="text-gray-900 my-auto"/>
                 </div>
               </Link>
             </div>
@@ -36,7 +36,7 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
           </Link> */}
 
       </div>}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6`}>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2`}>
         {tools.map((tool, index) => {
           return (
             <div key={index}>

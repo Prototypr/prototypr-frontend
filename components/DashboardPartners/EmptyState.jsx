@@ -1,6 +1,6 @@
 const EmptyState = ({type, draft }) => {
     return (
-      <div className="mt-6 mx-auto rounded-lg border border-gray-300">
+      <div className="mx-auto rounded-lg border border-gray-300">
         <div className="pt-20 pb-20 px-6">
           <img
             width="150"

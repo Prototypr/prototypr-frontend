@@ -10,7 +10,7 @@ const NewsletterPageHero = ({title,padding}) =>{
             className="w-full relative flex h-full w-full rounded-3xl p-6 pt-8"
             >
             <div className="z-20 max-w-md xl:max-w-full">
-                <h3 className="text-4xl lg:text-5xl mb-10 leading-snug font-inter text-black/90 font-semibold">{title?title:<>
+                <h3 className="text-4xl tracking-tight lg:text-5xl mb-10 leading-snug font-inter text-black/90 font-semibold">{title?title:<>
                     Weekly tools and stories to <br className="hidden xl:block"/> shape <div className="text-underline inline">every idea</div>
                 </>}</h3>
                 <SignupHomepage/>

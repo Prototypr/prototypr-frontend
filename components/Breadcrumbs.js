@@ -15,10 +15,10 @@ export default function Breadcrumbs({
       {links.map((item, index) => {
         return (
           <>
-           <div key={index} className="inline  border border-1 border-blue-300/20 rounded-full p-1.5 px-3 bg-blue-200/30 text-black/90 font-normal">
+           <div key={index} className="inline  p-1.5 px-3 bg-white rounded-full text-black/90 font-normal border border-1 border-gray-300/50">
               <Link href={`${item.slug}`} key={`breadcrumb_${title}_${index}`}>
                 {!item.svg ? (
-                  <span className="hover:text-white">{item.name}</span>
+                  <span className="hover:text-black">{item.name}</span>
                 ) : (
                   <>{item.svg}</>
                 )}
@@ -32,7 +32,7 @@ export default function Breadcrumbs({
       })}
       {currentSlug == "toolbox" ? (
         <>
-        <div className="inline  border border-1 border-blue-300/20 rounded-full p-1.5 px-3 bg-blue-200/30 text-black/90 font-normal">
+        <div className="inline  p-1.5 px-3 rounded-full bg-white text-black/90 font-normal border border-1 border-gray-300/50">
           <Link
             href={`${urlRoot}`}
             // className={`capitalize ${pageNo?'':'text-bold'}`}>
@@ -44,7 +44,7 @@ export default function Breadcrumbs({
         <div className="inline mx-1 flex flex-col justify-center">
               <ChevronRightIcon className="inline text-black/90" />
             </div>
-        <div className="inline  border border-1 border-blue-300/20 rounded-full p-1.5 px-3 bg-blue-400/60">
+        <div className="inline rounded-full p-1.5 px-3 bg-white">
           <Link
             href={`${urlRoot}/page/1`}
             // className={`capitalize ${pageNo?'':'text-bold'}`}>
@@ -53,17 +53,17 @@ export default function Breadcrumbs({
         </div>
         </>
       ) : currentSlug ? (
-        <div className="inline  border border-1 border-blue-300/20 rounded-full p-1.5 px-3 bg-blue-200/40 font-normal">
+        <div className="inline  bg-white rounded-full p-1.5 px-3 font-normal border border-1 border-gray-300/50">
           <Link
             href={`${urlRoot}/${currentSlug}/page/1`}
             // className={`capitalize ${pageNo?'':'text-bold'}`}>
-            className={`capitalize font-medium text-blue-700/90`}
+            className={`capitalize font-medium text-black/90`}
           >{currentSlug}</Link>
         </div>
       ) : (
-        <div className="inline  border border-1 border-blue-300/20 rounded-full p-1.5 px-3 bg-blue-200/20 font-normal">
+        <div className="inline rounded-full p-1.5 px-3 bg-white font-normal border border-1 border-gray-300/50">
           <Link href={`${urlRoot}/page/1`}>
-            <span className="capitalize font-medium text-blue-700/90">
+            <span className="capitalize font-medium text-black/90">
               {title}
             </span>
           </Link>

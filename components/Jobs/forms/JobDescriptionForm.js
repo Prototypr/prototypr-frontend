@@ -183,7 +183,7 @@ const Form = ({user, defaultCompany, companyData, onPrevious}) => {
 
 
   return (
-    <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10 pb-10">
+    <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-8 pb-10">
         <div className="max-w-2xl pt-24 w-full">
         <div className="my-2 mb-6">
           <h1 className="text-2xl font-bold mx-auto mb-2">Tell us about the opportunity</h1>
@@ -236,7 +236,7 @@ const Form = ({user, defaultCompany, companyData, onPrevious}) => {
                     </option>
                   ))}
                 </select>
-                {formik.errors.type && <span className="text-red-600 text-xs">{formik.errors.type}</span>}
+                {formik.errors.type && <span className="text-red-600 text-sm">{formik.errors.type}</span>}
              
 
                 <label className="text-md font-medium mt-4">
@@ -247,7 +247,7 @@ const Form = ({user, defaultCompany, companyData, onPrevious}) => {
                 setDescription={(html)=>{
                     formik.setFieldValue("description",html)
                 }}/>
-                {formik.errors.description && <span className="text-red-600 text-xs">{formik.errors.description}</span>}
+                {formik.errors.description && <span className="text-red-600 text-sm">{formik.errors.description}</span>}
                 
             <div className="mt-3">
                 <FormInput id="url" label="Link to opportunity" error={formik.errors}>
@@ -337,7 +337,7 @@ const Form = ({user, defaultCompany, companyData, onPrevious}) => {
               placeholder="Add a location - use 'Worldwide' for anywhere" 
               options={locations}/>}
 
-              {formik.errors.location && <span className="text-red-600 text-xs">{formik.errors.location}</span>}
+              {formik.errors.location && <span className="text-red-600 text-sm">{formik.errors.location}</span>}
                 
             </div>
             </div>

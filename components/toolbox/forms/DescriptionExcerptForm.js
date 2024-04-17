@@ -153,7 +153,7 @@ const [disabled, setDisabled] = useState(false);
                         setExcerpt(html)
                     }}/>
                 </div>
-                {formik.errors.excerpt && <span className="text-red-600 text-xs">{formik.errors.excerpt}</span>}
+                {formik.errors.excerpt && <span className="text-red-600 text-sm">{formik.errors.excerpt}</span>}
                  
             <label className="text-md font-medium mt-4">
                   Description
@@ -169,7 +169,7 @@ const [disabled, setDisabled] = useState(false);
                         setContent(html)
                     }}/>
                 </div>
-                {formik.errors.content && <span className="text-red-600 text-xs">{formik.errors.content}</span>}
+                {formik.errors.content && <span className="text-red-600 text-sm">{formik.errors.content}</span>}
 
              
             </div>

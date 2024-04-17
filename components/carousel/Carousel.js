@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import gumletLoader from "@/components/new-index/gumletLoader";
 import Image from "next/image";
+import AutoHeight from 'embla-carousel-auto-height'
 
 const Carousel = ({gallery})=> {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [AutoHeight()])
 
   useEffect(() => {
     if (emblaApi) {
@@ -17,7 +18,7 @@ const Carousel = ({gallery})=> {
       <div className="embla__container ">
       {gallery?.map((current, index) => (
         <div className="embla__slide rounded-xl mb-4 ">
-              <div className="relative w-full rounded-xl h-60 sm:h-96 w-full lg:max-h-full relative overflow-hidden rounded-lg flex justify-center">
+              <div className="relative w-full rounded-xl h-60 sm:h-full w-full lg:max-h-full relative overflow-hidden rounded-lg flex justify-center">
                 <Image
                   loader={gumletLoader}
                   layout="fill"

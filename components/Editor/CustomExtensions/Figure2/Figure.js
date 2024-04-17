@@ -21,7 +21,7 @@ import {
     //   HTMLAttributes: {},
     // },
     group: 'block',
-    content: 'image?figcaption?',
+    content: 'image?video?figcaption?',
     draggable: true,
     inline: false,
     atom:true,
@@ -31,19 +31,52 @@ import {
       return {
         src: {
           default: null,
-          parseHTML: (element) =>
-            element.querySelector('img')?.getAttribute('src'),
+          parseHTML: (element) =>{
+            if(element.querySelector('img')?.getAttribute('src')){
+             return element.querySelector('img')?.getAttribute('src')
+            }else if(element.querySelector('video')?.getAttribute('src')){
+              return element.querySelector('video')?.getAttribute('src')
+            }
+
+            return false
+          },
         },
         alt: {
           default: null,
-          parseHTML: (element) =>
-            element.querySelector('img')?.getAttribute('alt'),
+          parseHTML: (element) =>{
+            if(element.querySelector('img')?.getAttribute('alt')){
+              return element.querySelector('img')?.getAttribute('alt')
+            }else if(element.querySelector('video')?.getAttribute('alt')){
+              return element.querySelector('video')?.getAttribute('alt')
+            }
+            return false
+          }
         },
         title: {
           default: null,
           parseHTML: (element) =>
             element.querySelector('img')?.getAttribute('title'),
         },
+        figureType:{
+          default:'image',
+          parseHTML:(element)=>{
+            if(element.querySelector('img')){
+              return 'image'
+            }else if(element.querySelector('video')){
+              return 'video'
+            }
+          }
+        },
+
+      width:{
+        default: null,
+        parseHTML: element => {
+          if(element.nodeName=='FIGURE'){
+
+            return element.getAttribute("width")
+          }
+        },
+      },
       link: { parseHTML: (element) => {
         if(element.querySelector('a')){
           return element.querySelector('a')?.getAttribute('href')
@@ -146,6 +179,9 @@ import {
                 if(transaction?.curSelection?.node?.type.name=='image'){
                     result = false
                 }
+                if(transaction?.curSelection?.node?.type.name=='video'){
+                    result = false
+                }
                 if(transaction?.curSelection?.$anchor?.parent?.type.name=='figcaption'){
                     if(transaction?.curSelection?.$anchor?.parentOffset==0){
                         if(transaction?.curSelection?.$anchor?.parent.textContent?.length>0){
@@ -237,12 +273,13 @@ import {
   
     
     renderHTML({ HTMLAttributes, node }) {
-      return ['figure', { class: 'figure', ['data-link']:node?.attrs?.link?node?.attrs?.link:'' }, 0];
+      return ['figure', { style:`width:${node?.attrs?.width}`,class: 'figure', ['data-link']:node?.attrs?.link?node?.attrs?.link:'' }, 0];
     },
   
     addCommands() {
       return {
         setFigure: ({ caption, ...attrs }) => ({ chain }) => {
+          if(attrs.figureType=='image'){
             const content= [{ type: 'image', attrs }];
     
             // if (caption) {
@@ -273,6 +310,38 @@ import {
                 })
                 .run()
             );
+          }else if(attrs.figureType=='video'){
+            const content= [{ type: 'video', attrs }];
+    
+            // if (caption) {
+            //   content.push({ type: 'figcaption', text: caption });
+            // }
+            content.push({ type: 'figcaption', text: '' })
+    
+            return (
+              chain()
+                // Delete current empty node.
+                .command(({ commands, state }) => {
+                  return !state.selection.$from.parent.textContent
+                    ? commands.keyboardShortcut('Backspace')
+                    : true;
+                })
+                .insertContent({
+                  type: this.name,
+                  attrs,
+                  content,
+                })
+                 
+                // set cursor at end of caption field
+                .command(({ tr, commands }) => {
+                  const { doc, selection } = tr;
+                  const position = doc.resolve(selection.to - 2).end();
+                  
+                  return commands.setTextSelection(position);
+                })
+                .run()
+            );
+          }
           },
   
         imageToFigure: () => ({ tr, commands }) => {

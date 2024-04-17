@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="w-full max-w-screen-xl relative mx-auto py-16">
           <div className="flex flex-wrap">
             <div className="w-full md:w-6/12">
-              <p className="text-xl font-semibold">
+              <p className="text-xl tracking-tight font-semibold">
                 {intl.formatMessage({ id: "footer.title" })}
               </p>
               <input className="hidden" defaultValue={"hello@prototypr.io"} />
@@ -68,7 +68,7 @@ export default function Footer() {
             <div className="w-full md:w-6/12">
               <div className="flex flex-wrap items-top mb-6">
                 <div className="w-full md:w-6/12 xl:w-4/12 pt-6 md:pt-0 md:px-4 ml-auto">
-                  <span className="block uppercase text-gray-900 text-sm font-semibold mb-2">
+                  <span className="block uppercase text-gray-900 text-sm font-semibold mb-2 tracking-wide">
                     {intl.formatMessage({ id: "footer.rightCat1" })}
                   </span>
                   <ul className="list-unstyled">
@@ -122,7 +122,7 @@ export default function Footer() {
                   </ul>
                 </div>
                 <div className="w-full md:w-6/12 xl:w-4/12 pt-6 md:pt-0 ml-auto">
-                  <span className="block uppercase text-gray-900 text-sm font-semibold mb-2">
+                  <span className="block uppercase text-gray-900 text-sm font-semibold mb-2 tracking-wide">
                     {intl.formatMessage({ id: "footer.otherResource" })}
                   </span>
                   <ul className="list-unstyled">

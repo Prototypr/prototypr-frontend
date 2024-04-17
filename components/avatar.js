@@ -21,7 +21,7 @@ export default function Avatar({ name, picture, date }) {
           />
         )}
       </div>
-      <div className="flex flex-col justify-center">
+      <div className="">
         <div className="text-lg hover:underline font-medium">{name}</div>
         {date && (
           <div className="text-base text-gray-700">

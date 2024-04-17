@@ -4,12 +4,12 @@ import axios from "axios";
 import { FormattedMessage, useIntl } from "react-intl";
 import Button from "../Primitives/Button";
 
-export default function SignupSidebar({ className }) {
+export default function SignupSidebar({ className, btnText }) {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
   const intl = useIntl();
   const [buttonText, setButtonText] = useState(
-    intl.formatMessage({ id: "intro.button.updates" })
+    btnText?btnText:intl.formatMessage({ id: "intro.button.updates" })
   );
   const onSubmit = async (data) => {
     setButtonText(intl.formatMessage({ id: "signup.button.submitting" }));
@@ -155,7 +155,7 @@ function HookForm(props) {
           </Button>
         </div>
       </form>
-      <div className="px-1 w-10/12 mx-auto">
+      <div className="w-10/12">
         {errors.emailRequired && errors.emailRequired.type === "required" && (
           <p className="text-pink-600 mt-2 text-sm text-left">
             <FormattedMessage id="signup.input.validation" />

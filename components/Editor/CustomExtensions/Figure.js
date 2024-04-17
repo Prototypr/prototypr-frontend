@@ -108,6 +108,15 @@ export const Figure = Node.create({
           }
         },
       },
+      width:{
+        default: null,
+        parseHTML: element => {
+          if(element.nodeName=='FIGURE'){
+
+            return element.getAttribute("width")
+          }
+        },
+      },
       link: { parseHTML: (element) => {
         if(element.querySelector('a')){
           return element.querySelector('a')?.getAttribute('href')
@@ -434,7 +443,7 @@ export const Figure = Node.create({
         dom: container,
         contentDOM: figcaptionDiv,
         ignoreMutation(p) {
-          console.log(p)
+          // console.log(p)
           if (p.type === 'attributes' && p.attributeName != null) {
             if (['src', 'title', 'alt', 'figcaption'].includes(p.attributeName)) {
               if (typeof getPos === 'function') {

@@ -267,7 +267,7 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
 
   return (
     <Layout background="#EFF2F8">
-      <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10">
+      <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-8">
         <div className="max-w-3xl w-full">
         <div className="my-2 mb-5">
           <h1 className="text-2xl font-bold mx-auto mb-2">Post a Tool</h1>
@@ -313,7 +313,7 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                 setDescription={(html)=>{
                     formik.setFieldValue("excerpt",html)
                 }}/>
-                {formik.errors.excerpt && <span className="text-red-600 text-xs">{formik.errors.excerpt}</span>}
+                {formik.errors.excerpt && <span className="text-red-600 text-sm">{formik.errors.excerpt}</span>}
 
 
                 <label className="text-md font-medium mt-4">
@@ -327,7 +327,7 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                 setDescription={(html)=>{
                     formik.setFieldValue("content",html)
                 }}/>
-                {formik.errors.content && <span className="text-red-600 text-xs">{formik.errors.content}</span>}
+                {formik.errors.content && <span className="text-red-600 text-sm">{formik.errors.content}</span>}
                {/* <FormInput id="title" label="Slug" error={formik.errors}>
                   <input
                     id="slug"
@@ -355,7 +355,7 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                     className={styles.input}
                   />
                 </FormInput>
-        {formik.errors.link && <span className="text-red-600 text-xs">{formik.errors.link}</span>}
+        {formik.errors.link && <span className="text-red-600 text-sm">{formik.errors.link}</span>}
 
 
               <label htmlFor="image" className="text-md font-medium">
@@ -373,7 +373,7 @@ const ToolPostForm = ({user, isOwner, postObject}) => {
                 setImageBlob(blob)
                 formik.setFieldValue("image",blob)
               }}/> */}
-              {formik.errors.logo && <span className="text-red-600 text-xs">{formik.errors.logo}</span>}
+              {formik.errors.logo && <span className="text-red-600 text-sm">{formik.errors.logo}</span>}
 
               <label htmlFor="image" className="text-md font-medium">
                 Gallery

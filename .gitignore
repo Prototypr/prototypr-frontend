@@ -57,3 +57,6 @@ next.config.original.js
 
 # Sentry
 next.config.wizardcopy.js
+
+# Prototypr Plus
+/.prototypr

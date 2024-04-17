@@ -6,7 +6,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
   return (
-    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-6 w-full flex-wrap`}>
+    <div className={`grid grid-cols-1 ${columns?columns:'lg:grid-cols-3'} gap-4 w-full flex-wrap`}>
       {posts.map((post, i) => {
         let title, slug, coverImage, tags, logo;
 
@@ -44,7 +44,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
             <Link href={`/toolbox/${slug}`}>
             <div
         className={
-          "flex flex-col- pt-3 pb-1 grid grid-col-1 gap-4 flex-grow h-full rounded-t-2xl shadow-md hover:shadow-xl bg-white relative rounded-2xl fade-"
+          "flex flex-col- pt-3 pb-1 grid grid-col-1 gap-4 flex-grow h-full rounded-t-2xl shadow-sm hover:shadow-xl border border-gray-300/60 transition transition-all duration-400 hover:scale-[1.02] group bg-white relative rounded-2xl fade-"
         }
       >
         <div className="rounded-xl px-3 block cursor-pointer"
@@ -57,7 +57,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
               height: "145px",
             }}
           >
-            <div className="absolute top-0 left-0 z-10 rounded-2xl w-full h-full bg-gradient-to-b from-black/5 via-black/10 to-black/40"></div>
+            <div className="absolute top-0 left-0 z-10 rounded-xl w-full h-full bg-gradient-to-b from-black/5 via-black/10 to-black/40 group-hover:scale-[1.03] transition transition-all duration-700"></div>
             <Image
               loader={gumletLoader}
               priority={false < 2 ? `true` : `false`}
@@ -70,7 +70,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
             //   width="100%"
             //   height="100%"
               alt="Brand logo for external website's link"
-              className="object-cover rounded-2xl bg-white shadow-sm"
+              className="object-cover rounded-xl bg-white group-hover:shadow-sm group-hover:scale-[1.03] transition transition-all duration-700 "
               src={coverImage}
               fill
                 // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -82,7 +82,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
                 width={48}
                 height={48}
               alt="Brand logo for external website's link"
-              className="object-cover flex-shrink-0 shine rounded-xl border-2 border-white bg-white shadow -mt-[22px]"
+              className="object-cover flex-shrink-0 shine rounded-xl  w-[48px] h-[48px] border-2 border-white bg-white shadow -mt-[22px]"
             //   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
             //   data-src={coverImage}
               src={logo}
@@ -103,7 +103,7 @@ const ToolImageCard = ({ posts, type, columns, tagNumber }) => {
             /> */}
           {/* <div className="pl-3 overflow-hidden mt-1"> */}
           <div className="pl-2 overflow-hidden my-auto">
-            <div className={'line-clamp-1 font-medium'}> {title}</div>
+            <div className={'line-clamp-1 tracking-tight font-medium'}> {title}</div>
             {/* {this.props.prototool !== true && */}
             {tags?.length ? (
                    <div className='text-xs text-gray-500 mt-0.5 capitalize'>{tags[0].attributes.name}</div>

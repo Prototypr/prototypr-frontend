@@ -11,7 +11,7 @@ export default function IssueItem({ post = {} }) {
     featuredImage = {},
   } = post;
   return (
-    <div className="group cursor-pointer grid-cols-1 flex items-center py-5 px-6 bg-white rounded-lg">
+    <div className="group cursor-pointer grid-cols-1 flex items-center py-5 px-6 bg-white rounded-xl shadow-sm border border-gray-300/50">
         <div className="w-20 h-20 rounded-lg bg-gray-4 pt-3 pl-3">
           <div className="font-medium text-xs capitalize text-gray-3">
             {intl.formatMessage({ id: "issue" })}

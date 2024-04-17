@@ -106,7 +106,7 @@ export default function ToolboxPage({ allPosts = [], topicPosts = [], featuredPo
         navOffset={false}
         topPadding={false}
         maxWidth={"max-w-[1400px] search-wide"}
-        background={"#EFF4FB"}
+        background={"#fbfcff"}
         // background={"#F1F3F9"}
         seo={{
           title: `Prototypr Toolbox - new design, UX and coding tools`,

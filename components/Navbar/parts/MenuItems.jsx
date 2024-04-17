@@ -73,11 +73,15 @@ const itemStyles = {
   userSelect: "none",
   fontWeight: 400,
   lineHeight: 1,
-  borderRadius: 16,
+  borderRadius: 8,
   // fontSize: 15,
   //   color: indigo.indigo11,
   "&:focus": { position: "relative", boxShadow: `0 0 0 2px ${indigo.indigo8}` },
-  "&:hover": { backgroundColor: indigo.indigo3, color: indigo.indigo11, borderRadius:'16px' },
+  "&:hover": {
+    backgroundColor: indigo.indigo3,
+    color: indigo.indigo11,
+    borderRadius: 8,
+  },
 };
 
 const StyledTrigger = styled(NavigationMenuPrimitive.Trigger, {
@@ -94,15 +98,26 @@ const CustomTrigger = ({ children, to, ...props }) => {
 
   return (
     <div
-      className={"rounded-full"+( isActive
-      ? "bg-blue-50 rounded-full font-medium border border-blue-100 border-1 text-blue-default"
-      : "rounded-full")}
+      className={
+        "rounded-lg " +
+        (isActive
+          ? "bg-blue-50 rounded-lg font-medium border border-blue-100 border-1 text-blue-default"
+          : "rounded-full")
+      }
       style={{
         background: isActive ? indigo.indigo3 : "",
         color: isActive ? indigo.indigo9 : "",
       }}
     >
-      <StyledTrigger active={isActive.toString()}>{children}</StyledTrigger>
+      <StyledTrigger
+        onPointerMove={event => event.preventDefault()}
+        onPointerLeave={event => {
+          event.preventDefault();
+        }}
+        active={isActive.toString()}
+      >
+        {children}
+      </StyledTrigger>
     </div>
   );
 };
@@ -118,24 +133,31 @@ const StyledCaret = styled(CaretDownIcon, {
 });
 
 const StyledTriggerWithCaret = React.forwardRef(
-  ({ children, ...props }, forwardedRef) => 
-  
-  {
+  ({ children, ...props }, forwardedRef) => {
     const router = useRouter();
-    let isActive = Boolean(router.asPath==(props.href));
+    let isActive = Boolean(router.asPath == props.href);
 
-    if(props.href=='toolbox' && (router.asPath.indexOf('/toolbox')>-1 || router.asPath.indexOf('/prototyping')>-1)){
-        isActive = true
+    if (
+      props.href == "toolbox" &&
+      (router.asPath.indexOf("/toolbox") > -1 ||
+        router.asPath.indexOf("/prototyping") > -1)
+    ) {
+      isActive = true;
     }
-    if(props.href=='articles' && (router.asPath.indexOf('/posts')>-1 || router.asPath.indexOf('/topics')>-1)){
-        isActive = true
+    if (
+      props.href == "articles" &&
+      (router.asPath.indexOf("/posts") > -1 ||
+        router.asPath.indexOf("/topics") > -1)
+    ) {
+      isActive = true;
     }
-    return(
-    <CustomTrigger active={isActive} {...props} ref={forwardedRef}>
-      {children}
-      {props.showCaret!==false?<StyledCaret aria-hidden />:''}
-    </CustomTrigger>
-  )}
+    return (
+      <CustomTrigger active={isActive} {...props} ref={forwardedRef}>
+        {children}
+        {props.showCaret !== false ? <StyledCaret aria-hidden /> : ""}
+      </CustomTrigger>
+    );
+  }
 );
 
 const StyledLink = styled(NavigationMenuPrimitive.Link, {
@@ -218,24 +240,26 @@ const StyledViewport = styled(NavigationMenuPrimitive.Viewport, {
 
 const NextLink = ({ children, ...props }) => {
   const router = useRouter();
-  let isActive = Boolean(router.asPath==(props.href));
+  let isActive = Boolean(router.asPath == props.href);
 
-  if(props.href==('/toolbox') && router.asPath=='/toolbox'){
-    isActive = true
+  if (props.href == "/toolbox" && router.asPath == "/toolbox") {
+    isActive = true;
   }
-  if(props.href=='toolbox' && router.asPath.indexOf('toolbox')>-1){
-    isActive = true
-}
+  if (props.href == "toolbox" && router.asPath.indexOf("toolbox") > -1) {
+    isActive = true;
+  }
+  //check if link is relative or absolute and add target blank if absolute
+  const target = props.href.indexOf("http") > -1 ? "_blank" : "_self";
 
   return (
-    <Link href={props.href} passHref>
+    <Link href={props.href} target={target} passHref>
       <StyledLink asChild>
         <span
           style={props.css}
           className={
             isActive
-              ? "bg-blue-50 rounded-full font-medium border border-blue-100 border-1 text-blue-default"
-              : "rounded-full"
+              ? "bg-blue-50 rounded-lg font-medium border border-blue-100 border-1 text-blue-default"
+              : " rounded-lg"
           }
           {...props}
         >
@@ -432,158 +456,163 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
       className={`hidden md:flex justify-between space-x-4 w-full relative py-2 text-sm`}
     >
       <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem className="hidden -ml-4 text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/">
-                {/* {submenuTitle4} */}
-                {homeMenuText}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="flex text-sm  xl:mr-2.5 flex-col justify-center">
-              {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
-              <NavigationMenuTrigger href="articles">
-                {/* {title1} */}
-                Articles
-              </NavigationMenuTrigger>
-              <NavigationMenuContent className="normal-case">
-                <ContentList layout="three">
-                  {/* <ContentListItemCallout /> */}
-                  <ContentListItem href="/topics" title={submenuTitle1}>
-                    {submenuDesc1}
-                  </ContentListItem>
-                  <ContentListItem
-                    href="/posts/ux/page/1"
-                    title={submenuTitle2}
-                  >
-                    {submenuDesc2}
-                  </ContentListItem>
-                  <ContentListItem
-                    href="/posts/interview/page/1"
-                    title={submenuTitle3}
-                  >
-                    {submenuDesc3}
-                  </ContentListItem>
-                  <ContentListItem
-                    href="/posts/accessibility/page/1"
-                    title={submenuTitle4}
-                  >
-                    {submenuDesc4}
-                  </ContentListItem>
-                  <ContentListItem
-                    href="/posts/ui/page/1"
-                    title={submenuTitle5}
-                  >
-                    {submenuDesc5}
-                  </ContentListItem>
-                  <ContentListItem
-                    href="/posts/code/page/1"
-                    title={submenuTitle6}
-                  >
-                    {submenuDesc6}
-                  </ContentListItem>
-                </ContentList>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="flex flex-col text-sm  xl:mr-2.5 justify-center">
-              <NavigationMenuTrigger href="toolbox">
-                {title2}
-              </NavigationMenuTrigger>
-              <NavigationMenuContent className="normal-case">
-                <ContentList layout="two">
-                  <ContentListItem
-                    title={submenu2Title1}
-                    href="/toolbox"
-                  >
-                    {submenu2Desc1}
-                  </ContentListItem>
-                  <ContentListItem
-                    title={submenu2Title2}
-                    href="/toolbox/ux-tools/page/1"
-                  >
-                    {submenu2Desc2}
-                  </ContentListItem>
-                  <ContentListItem
-                    title={submenu2Title3}
-                    href="/toolbox/augmented-reality-tools/page/1"
-                  >
-                    {submenu2Desc3}
-                  </ContentListItem>
-                  <ContentListItem
-                    title={submenu2Title4}
-                    href="/prototyping/page/1"
-                  >
-                    {submenu2Desc4}
-                  </ContentListItem>
-                  <ContentListItem
-                    title={submenu2Title5}
-                    href="/toolbox/accessibility/page/1"
-                  >
-                    {submenu2Desc5}
-                  </ContentListItem>
-                  <ContentListItem
-                    title={submenu2Title6}
-                    href="/toolbox/conversational-design-tools/page/1"
-                  >
-                    {submenu2Desc6}
-                  </ContentListItem>
-                </ContentList>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/newsletter">
-                Newsletter
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            {/* <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+        <NavigationMenuList>
+          <NavigationMenuItem className="hidden -ml-4 text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuLink href="/">
+              {/* {submenuTitle4} */}
+              {homeMenuText}
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem className="flex text-sm  xl:mr-2.5 flex-col justify-center">
+            {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
+            <NavigationMenuTrigger href="articles">
+              {/* {title1} */}
+              Articles
+            </NavigationMenuTrigger>
+            <NavigationMenuContent
+              onPointerMove={event => event.preventDefault()}
+              onPointerLeave={event => {
+                event.preventDefault();
+              }}
+              className="normal-case"
+            >
+              <ContentList layout="three">
+                {/* <ContentListItemCallout /> */}
+                <ContentListItem href="/topics" title={submenuTitle1}>
+                  {submenuDesc1}
+                </ContentListItem>
+                <ContentListItem href="/posts/ux/page/1" title={submenuTitle2}>
+                  {submenuDesc2}
+                </ContentListItem>
+                <ContentListItem
+                  href="/posts/interview/page/1"
+                  title={submenuTitle3}
+                >
+                  {submenuDesc3}
+                </ContentListItem>
+                <ContentListItem
+                  href="/posts/accessibility/page/1"
+                  title={submenuTitle4}
+                >
+                  {submenuDesc4}
+                </ContentListItem>
+                <ContentListItem href="/posts/ui/page/1" title={submenuTitle5}>
+                  {submenuDesc5}
+                </ContentListItem>
+                <ContentListItem
+                  href="/posts/code/page/1"
+                  title={submenuTitle6}
+                >
+                  {submenuDesc6}
+                </ContentListItem>
+              </ContentList>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem className="flex flex-col text-sm  xl:mr-2.5 justify-center">
+            <NavigationMenuTrigger href="toolbox">
+              {title2}
+            </NavigationMenuTrigger>
+            <NavigationMenuContent
+              onPointerMove={event => event.preventDefault()}
+              onPointerLeave={event => {
+                event.preventDefault();
+              }}
+              className="normal-case"
+            >
+              <ContentList layout="two">
+                <ContentListItem title={submenu2Title1} href="/toolbox">
+                  {submenu2Desc1}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenu2Title2}
+                  href="/toolbox/ux-tools/page/1"
+                >
+                  {submenu2Desc2}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenu2Title3}
+                  href="/toolbox/augmented-reality-tools/page/1"
+                >
+                  {submenu2Desc3}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenu2Title4}
+                  href="/prototyping/page/1"
+                >
+                  {submenu2Desc4}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenu2Title5}
+                  href="/toolbox/accessibility/page/1"
+                >
+                  {submenu2Desc5}
+                </ContentListItem>
+                <ContentListItem
+                  title={submenu2Title6}
+                  href="/toolbox/conversational-design-tools/page/1"
+                >
+                  {submenu2Desc6}
+                </ContentListItem>
+              </ContentList>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
+            <NavigationMenuLink href="/newsletter">
+              Newsletter
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          {/* <NavigationMenuItem className="hidden text-sm  xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
               <NavigationMenuLink href="/jobs">
                 Jobs
               </NavigationMenuLink>
             </NavigationMenuItem> */}
 
-            <NavigationMenuItem className="flex flex-col text-sm  xl:mr-2.5 justify-center">
-                <div className="-ml-1">
+          <NavigationMenuItem className="flex flex-col text-sm  xl:mr-2.5 justify-center">
+            <div className="-ml-1">
               <NavigationMenuTrigger showCaret={false}>
-                  <DotsThree weight="bold" size="22" color="rgba(0,0,0,0.5)"/>
+                <DotsThree weight="bold" size="22" color="rgba(0,0,0,0.5)" />
               </NavigationMenuTrigger>
-                </div>
-              <NavigationMenuContent showCaret={false} className="normal-case">
-                <ContentList layout="two">
-                  <ContentListItem
-                    title={'Publish with us'}
-                    href="/apply"
-                  >
-                    Apply for a creator account.
-                  </ContentListItem>
-                  {/* <ContentListItem
+            </div>
+            <NavigationMenuContent
+              onPointerMove={event => event.preventDefault()}
+              onPointerLeave={event => {
+                event.preventDefault();
+              }}
+              showCaret={false}
+              className="normal-case"
+            >
+              <ContentList layout="two">
+                <ContentListItem title={"Publish with us"} href="/apply">
+                  Apply for a creator account.
+                </ContentListItem>
+                {/* <ContentListItem
                     title={'Join Network'}
                     href="/apply"
                   >
                     Get feedback on your writing, and meet like minded creators.
                   </ContentListItem> */}
-                  {/* <ContentListItem
+                {/* <ContentListItem
                     title={'Earn micropayments'}
                     href="/web-monetization"
                   >
                     Earn money based on the amount of time readers spend on your work.
                   </ContentListItem> */}
-                  <ContentListItem
-                    title={'Open Source'}
-                    href="https://open.prototypr.io"
-                  >
-                    See the code for this platform.
-                  </ContentListItem>
-                  <ContentListItem
-                    title={'People'}
-                    href="/people"
-                  >
-                    Browse all Prototypr contributors.
-                  </ContentListItem>
-                </ContentList>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-
-         
-          </NavigationMenuList>
+                <ContentListItem
+                  title={"Open Source"}
+                  href="https://open.prototypr.io"
+                >
+                  See the code for this platform.
+                </ContentListItem>
+                <ContentListItem title={"People"} href="/people">
+                  Browse all Prototypr contributors.
+                </ContentListItem>
+                <ContentListItem title={"Sponsor"} href="/sponsor">
+                  Promote your product.
+                </ContentListItem>
+              </ContentList>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
         <NavigationMenuIndicator />
         <ViewportPosition className="ml-0 ml-36">
           <NavigationMenuViewport />

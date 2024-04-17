@@ -36,13 +36,13 @@ const UserMenu = ({ user, userLoading }) => {
       {clientMounted ? (
         <NavigationMenuItem className="flex flex-col justify-center" style={{zIndex:999}}>
           {user && user?.isLoggedIn ? (
-            <div className="ml-2 w-8 mt-[4px]">
+            <div className="ml-2 w-8 mt-[4px] mr-1.5">
               {user && (
                 <ProfileBadge
                   user={user}
                   icon={
                     <img
-                      className="hover:shadow border border-1 rounded-full my-auto w-8 h-8 cursor-pointer object-cover"
+                      className="hover:shadow border border-1 rounded-full my-auto w-full h-fullcursor-pointer object-cover"
                       src={
                         user?.profile?.avatar?.url
                           ? user.profile?.avatar.url
@@ -63,7 +63,7 @@ const UserMenu = ({ user, userLoading }) => {
                 </div>
               </Link>
               <Link href="/onboard">
-              <Button className="text-sm bg-blue-600 hover:bg-blue-500" variant={"confirmRounded"}>
+              <Button className="text-sm bg-blue-600 hover:bg-blue-500 rounded-xl" variant={"confirmRounded"}>
               Sign up
             </Button>
             </Link>

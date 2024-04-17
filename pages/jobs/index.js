@@ -31,7 +31,7 @@ const Index = ({ jobs }) => {
       maxWidth={"max-w-[1320px] search-wide"}
       seo={seo}
       showWriteButton={false}
-      background="#eff4fb"
+      background="#fbfcff"
     >
 <Container padding={false} maxWidth="max-w-[1320px] mx-auto pb-16 px-0 xl:px-3">
 <div className="mt-6 grid grid-rows-1 grid-cols-4 grid-cols-1  gap-10">
@@ -98,7 +98,7 @@ const Sidebar = ({ relatedPosts, paddingTop, author }) => {
             <PrototyprNetworkCTA />
             <div>
               {/* EMAIL FORM */}
-              <div className="w-full bg-blue-100 rounded-2xl p-5 border border-black/5 shadow-sm">
+              <div className="w-full bg-blue-100 rounded-2xl p-5 border border-gray-300/60 shadow-sm">
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">
                   Get the roundup
                 </h3>

@@ -2,21 +2,13 @@ import Container from "@/components/container";
 // import Layout from "@/components/layout";
 import Layout from "@/components/layoutForBlogPost";
 
-import { getAllJobs } from "@/lib/api";
+import { getAllProducts } from "@/lib/api";
 
-import Link from "next/link";
-import Button from "@/components/Primitives/Button";
-import SignupSidebar from "@/components/newsletter/SignupSidebar";
-// import Contributors from "@/components/toolbox/Contributors";
-
-import { currentWeekNumber } from "@/components/Sponsor/lib/weekNumber";
 import { useEffect, useState } from "react";
-import { Waypoint } from "react-waypoint";
-import PrototyprNetworkCTA from "@/components/Sidebar/NetworkCTA";
-import SponsorSidebarCard from "@/components/SponsorSidebarCard";
-import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
-
-const PAGE_SIZE = 12;
+import SelectedProductsDisplay from "@/components/Sponsor/SelectedProductsDislay";
+import useTotalPrices from "@/components/Sponsor/sponsorHooks/useTotalPrices";
+import DiscountBadge from "@/components/Sponsor/DiscountBadge";
+import SponsorMenu from "@/components/Sponsor/SponsorMenu";
 
 const seo = {
   title: `Sponsor Prototypr`,
@@ -26,354 +18,449 @@ const seo = {
   url: `https://prototypr.io/sponsor`,
 };
 
-const SponsorPackages = {
-  newsletter: [
-    {
-      image: "/static/images/sponsor-nl-main-cover.png",
-      title: "Featured Sponsor (One Week)",
-      desp: "A large banner featured in it's own section of the newsletter, plus your logo on the site-wide navbar.",
-      ctaText: "Book for $600",
-      link: "/sponsor/booking?type=banner",
-    },
-    {
-      image: "/static/images/sponsor-nl-link-cover.png",
-      title: "Sponsored Link (One Week)",
-      desp: "A sponsored article or tool in a section of the newsletter as a link with your logo.",
-      ctaText: "Book for $300",
-      link: "/sponsor/booking?type=link",
-    },
-  ],
-  website: [
-    {
-      image: "/static/images/sponsor-web-main.png",
-      title: "Main Sponsor  (One Week)",
-      desp: "A sponsor card on the homepage and article pages",
-      ctaText: "Book for $900",
-      link: "",
-    },
-    {
-      image: "/static/images/sponsor-web-topic.png",
-      title: "Topic Sponsor (One Week)",
-      desp: "A sponsor card on a topic page and related articles.",
-      ctaText: "Book for $500",
-      link: "",
-    },
-    {
-      image: "/static/images/sponsor-web-tool.png",
-      title: "Sponsored Tool (One Week)",
-      desp: "A sponsored tool in the toolbox. Showed on every toolbox page.",
-      ctaText: "Book for $100",
-      link: "",
-    },
-  ],
-};
-
-const Index = () => {
-  const [weekNumber, setWeekNumber] = useState();
-  const [selectedPackage, setSelectedPackage] = useState("Newsletter");
+const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
+  // const [selectedPackage, setSelectedPackage] = useState("Newsletter");
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const { totalPrice, discountedPrice, discountAmount, selectedTypes } =
+    useTotalPrices({ allProducts, selectedPackages: selectedOptions });
 
   useEffect(() => {
-    const week = currentWeekNumber();
-    setWeekNumber(week);
+    const hashchange = () => {
+      if (window.location.hash) {
+        window.scrollTo(window.scrollX, window.scrollY - 60);
+      }
+    };
+    window.addEventListener("hashchange", hashchange);
+
+    return () => {
+      window.removeEventListener("hashchange", hashchange);
+    };
   }, []);
 
   return (
-    <Layout
-      maxWidth={"max-w-[1320px] search-wide"}
-      seo={seo}
-      showWriteButton={false}
-      background="#eff4fb"
-    >
-      <Container>
-        <div className="w-full h-full grid grid-cols-1 gap-1  ">
-          <div className="max-w-[46rem] mx-auto pb-20 px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
-            {/* <div className="pt-5 text-md text-gray-700 pb-8">
-              <Link href={`/`}>
-                <span className="hover:underline">Home</span>
-              </Link>{" "}
-              →{" "}
-              <Link href={`/sponsor`}>
-                <span className="underline">Sponsor</span>
-              </Link>
-            </div> */}
-            <div className=" w-full">
-              <div className="flex w-full">
-                <div className="w-full bg-white p-5 md:p-10 rounded-2xl">
-                  <div className=" w-full flex flex-col gap-5 mb-5">
-                    <h1 className="text-2xl md:text-4xl max-w-3xl font-bold tracking-tighter leading-tight">
-                      Promote your product <br /> to Prototypr readers 
-                    </h1>
-                    <p className=" text-base text-[#807F7F] max-w-lg">
-                      Got an article or product you'd like to share with the
-                      Prototypr audience? We run 2 sponsor packages - a featured
-                      placement, or a sponsored link.
-                    </p>
-                    <p className="w-full bg-[#F8A4FF] text-opacity-80 text-white border rounded-xl border-[#E19DDF] px-5 py-3">
-                      This is an automated booking system. To book a slot,
-                      please sign up. After you sign up, you can pick a slot
-                      based on the availability. For any queries, {' '}
-                      <div className="inline underline cursor-pointer text-white font-medium"
-                      onClick={()=>{
-                        if(window.$crisp){
-                          window.$crisp.push(['do', 'chat:open']);
-                        }
-                      }}
-                      >click here to chat</div>, or email
-                      <span className="text-white">
-                        {" "}
-                        graeme@prototypr.io{" "}
-                      </span>{" "}.
-                    </p>
-                  </div>
-                  {/* <hr /> */}
-                  {/* <div className="flex flex-col gap-4 py-10">
-                    <h2 className="text-2xl max-w-xs font-bold">
-                      Where would you like to reach your audience?
-                    </h2>
-                    <div className="w-full flex flex-row gap-2">
-                      <button
-                        onClick={() => setSelectedPackage("Newsletter")}
-                        className={`w-full h-20  ${
-                          selectedPackage === "Newsletter"
-                            ? "border-[#5380D6] border bg-[#DCEEFF] text-[#5380D6]"
-                            : "border-[#D1D1D1] border bg-gray-50 text-[#B8B4B4]"
-                        } rounded-lg`}
-                      >
-                        Newsletter
-                      </button>
-                      <button
-                        onClick={() => setSelectedPackage("Website")}
-                        className={`w-full h-20  ${
-                          selectedPackage === "Website"
-                            ? "border-[#5380D6] border bg-[#DCEEFF] text-[#5380D6]"
-                            : "border-[#D1D1D1] border bg-gray-50 text-[#B8B4B4]"
-                        } rounded-lg`}
-                      >
-                        Website
-                      </button>
-                    </div>
-                  </div> */}
-                  <hr />
-                  <div className="w-full py-5">
-                    {selectedPackage === "Newsletter" ? (
-                      <div>
-                        <div className="flex flex-col gap-4">
-                          {/* <h2 className="text-3xl font-bold">Newsletter</h2> */}
-                          <h2 className="text-3xl font-bold">Placement Options</h2>
-                          <p className=" text-base text-[#807F7F] max-w-lg">
-                            Reach an audience of 25k+ subscribers consisting of
-                            developers, designers and marketers who are looking
-                            for the latest tools and articles that can help them
-                            grow.
-                          </p>
-                          <div className="grid grid-col-1 md:grid-cols-2 gap-4 ">
-                            {SponsorPackages.newsletter.map((pk, i) => {
-                              return (
-                                <div className="bg-white h-auto flex flex-col justify-center items-center gap-4 w-full rounded-2xl p-4 border border-opacity-20">
-                                  <div
-                                    style={{
-                                      backgroundImage: `url("${pk.image}")`,
-                                      backgroundSize: "cover",
-                                      backgroundPosition: "center center",
-                                    }}
-                                    className="w-full h-[200px] bg-gray-100 rounded-lg relative overflow-hidden"
-                                  ></div>
-                                  <div className="flex flex-col gap-2">
-                                    <h3 className="text-base font-semibold">
-                                      {pk.title}
-                                    </h3>
-                                    <p className="text-[#7A7A7A] text-base">
-                                      {pk.desp}
-                                    </p>
-                                    <a href={pk.link}>
-                                      <button className="w-full py-4 rounded-lg bg-[#0F8CFF] text-white">
-                                        {pk.ctaText}
-                                      </button>
-                                    </a>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <div className="flex flex-col gap-4">
-                          <h2 className="text-3xl font-bold">Website</h2>
-                          <p className=" text-base text-[#807F7F] max-w-lg">
-                            Reach an audience of 50k+ monthly viewers consisting
-                            of developers, designers and marketers who are
-                            looking for the latest tools and articles that can
-                            help them grow. Place highly targeted ads for topics
-                            like AI, Product Design etc.
-                          </p>
-                          <div className="grid grid-col-1 md:grid-cols-2 gap-4 ">
-                            {SponsorPackages.website.map((pk, i) => {
-                              return (
-                                <div className="bg-white h-auto flex flex-col justify-center items-center gap-4 w-full rounded-2xl p-4 border border-opacity-20">
-                                  <div
-                                    style={{
-                                      backgroundImage: `url("${pk.image}")`,
-                                      backgroundSize: "cover",
-                                      backgroundPosition: "center center",
-                                    }}
-                                    className="w-full h-[200px] bg-gray-100 rounded-lg relative overflow-hidden"
-                                  ></div>
-                                  <div className="flex flex-col gap-2">
-                                    <h3 className="text-base font-semibold">
-                                      {pk.title}
-                                    </h3>
-                                    <p className="text-[#7A7A7A] text-base">
-                                      {pk.desp}
-                                    </p>
-                                    <a href={pk.link}>
-                                      <button className="w-full py-4 rounded-lg bg-[#0F8CFF] text-white">
-                                        {pk.ctaText}
-                                      </button>
-                                    </a>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  {/* <div className="mb-8">
-                    <div className="mb-6 rounded-lg p-4">
-                      <h1 className="text-lg mb-1 md:text-xl font-medium">
-                        Featured package
-                      </h1>
-                      <p className="mb-6">
-                        The large banner in the newsletter, and featured on the
-                        website:
-                      </p>
-                      <div className="flex flex-col xl:flex-row">
-                        <img
-                          style={{ maxWidth: 300 }}
-                          className="mb-6 xl:mb-0 md:mr-3 object-cover rounded border border-gray-200 shadow"
-                          src="https://ucarecdn.com/2963e430-e355-473d-bada-a5b9f2499d01/screenshot-2020-09-22-at-20.56.18.png"
-                        />
-                        <img
-                          className="xl:max-h-[180px] height-auto rounded border border-gray-200 shadow"
-                          src="https://ucarecdn.com/c855f91d-3882-4611-98c0-e62e0f2f4504/single-pages.png"
-                        />
-                      </div>
-                      <div className="w-full mt-7 mb-1">
-                        <Link href="/sponsor/booking?type=banner">
-                          <Button variant="confirm">Buy for $600</Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="mb-6 rounded-lg bg-white shadow border border-gray-200 p-4">
-                      <h1 className="text-lg mb-1 md:text-xl font-medium">
-                        Promoted link
-                      </h1>
-                      <p className="mb-6">
-                        A promoted article or tool only in the newsletter:
-                      </p>
-                      <img
-                        style={{ maxWidth: 300 }}
-                        className="rounded border border-gray-200 shadow"
-                        src="https://ucarecdn.com/27e76335-6f67-4d5b-a037-310a25b07711/featured-article-sponsor.png"
-                      />
+    <>
+      {/* <div className="w-full h-full pt-20 pb-8 w-full mb-14 absolute top-0 h-[100vh] z-10"></div> */}
 
-                      <div className="w-full mt-7 mb-1">
-                        <Link href="/sponsor/booking?type=link">
-                          <Button variant="confirm">Buy for $400</Button>
-                        </Link>
+      <Layout
+        maxWidth={"max-w-[1320px] search-wide"}
+        seo={seo}
+        showWriteButton={false}
+        background="#fbfcff"
+        padding={false}
+      >
+        <Container padding={false} maxWidth="px-0">
+          <div className=" z-30 relative mx-auto w-full h-full ">
+            <div
+              style={{ backgroundPosition: "10px 10px" }}
+              className="absolute w-full h-[25%] -mt-[96px] rounded-3xl bg-[url('/static/images/toolbox/gridsquare.svg')] absolute inset-0 [mask-image:linear-gradient(0deg,rgba(251,252,255,0),#eef2ff)]"
+            />
+            <div className="max-w-[1320px] relative mx-auto  px-6 md:px-3">
+              <div className=" mx-auto pb-20 px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
+                <div
+                  // style={{"backgroundImage":"linear-gradient(rgba(32, 52, 144,0.16) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.16) 1px, rgba(247, 247, 247,0.16) 1px)","backgroundSize":"26px 26px"}}
+                  className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1301px] max-w-full z-10 px-6 md:px-3"
+                >
+                  <div className="pt-4">
+                    <div className=" flex mb-3 justify-center flex-wrap">
+                      <div
+                        className={`inline-block capitalize text-base px-3 py-1 cursor-pointer bg-blue-100/60 rounded-full mb-3 text-blue-900 text-[15px] font-base outline outline-1 outline-blue-200 flex flex-col justify-center`}
+                      >
+                        Sponsor
                       </div>
                     </div>
-                  </div> */}
+                  </div>
+                  <div className="pb-[20px]">
+                    <h1 className="text-5xl md:text-6.5xl w-full leading-tight mx-auto text-black/80 font-inter font-bold text-center drop-shadow-sm">
+                      Promote your product <br /> on Prototypr
+                    </h1>
+                    <p className="mx-auto text-center text-md my-3 text-black/70">
+                      Reach 25k+ readers and support the platform.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-20 w-full">
+                  <div className="flex w-full">
+                    <div className="w-full rounded-2xl px-6 mx-auto">
+                      <div className="grid grid-cols-6 gap-6">
+                        <div className="col-span-6 lg:col-span-4">
+                          <div className="relative overflow-x-auto rounded-xl shadow-sm border border-gray-300/70">
+                            <div className="px-6 py-3 bg-[#fbfcff]">
+                              <h1 className="font-semibold text-gray-700 text-lg">
+                                Newsletter Sponsorship
+                              </h1>
+                            </div>
+                            <table className="sponsor-table table-fixed w-full text-sm border-t border-gray-200 text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                              <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr className="bg-gray-100">
+                                  <th className="px-6 py-3 w-[50px]"></th>
+                                  <th
+                                    valign="top"
+                                    scope="col"
+                                    className="px-6 py-3 w-[160px]"
+                                  >
+                                    Product
+                                  </th>
+                                  {/* <th scope="col" className="px-6 py-3">
+                                    Type
+                                  </th> */}
+                                  <th
+                                    scope="col"
+                                    className="px-6 py-3 w-[420px]"
+                                  >
+                                    Placements
+                                  </th>
+                                  <th
+                                    scope="col"
+                                    className="px-6 py-3 w-[140px]"
+                                  ></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {newsletterProducts?.map((pk, i) => {
+                                  return (
+                                    <tr
+                                      // id={pk.productId}
+                                      id={pk.uid}
+                                      className=" border-b odd:bg-white even:bg-gray-50"
+                                    >
+                                      <td valign="top" className="px-6 py-4">
+                                        <div className="flex items-center pt-1">
+                                          {/* <label
+                                              htmlFor={pk.productId}
+                                              className="sr-only">{pk.productId}</label> */}
+                                          <input
+                                            onChange={e => {
+                                              if (e.target.checked) {
+                                                setSelectedOptions(
+                                                  prevOptions => [
+                                                    ...prevOptions,
+                                                    pk,
+                                                  ]
+                                                );
+                                              } else {
+                                                setSelectedOptions(
+                                                  prevOptions =>
+                                                    prevOptions.filter(
+                                                      option =>
+                                                        option.uid !== pk.uid
+                                                    )
+                                                );
+                                              }
+                                            }}
+                                            id={pk.uid}
+                                            name={pk.uid}
+                                            type="checkbox"
+                                            checked={selectedOptions.some(
+                                              option => option.uid === pk.uid
+                                            )}
+                                            className="w-5 h-5 text-blue-600 bg-white disabled:bg-gray-100 border-gray-400 disabled:border-gray-200/80 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                          />
+                                        </div>
+                                      </td>
+                                      <td
+                                        valign="top"
+                                        scope="row"
+                                        className="px-6 py-4"
+                                      >
+                                        <h3 className="font-medium text-base text-gray-900 mb-2">
+                                          {pk?.title}
+                                        </h3>
+
+                                        <p className="text-sm">{pk?.desp}</p>
+                                      </td>
+                                      {/* <td className="px-6 py-4">{pk?.titleShort}</td> */}
+                                      <td className="px-6 py-4 text-gray-800 ">
+                                        <div
+                                          dangerouslySetInnerHTML={{
+                                            __html: pk?.description,
+                                          }}
+                                        ></div>
+                                        {/* <ul>
+                                            {pk?.placements?.map(
+                                              (item, index) => {
+                                                return (
+                                                  <li
+                                                    className="list-disc ml-4 text-gray-800"
+                                                    key={index}
+                                                  >
+                                                    <p className="mb-2">
+                                                      {item.description}:
+                                                    </p>
+                                                    <a
+                                                      href={item.image}
+                                                      target="_blank"
+                                                      className=""
+                                                    >
+                                                      <img
+                                                        key={item.image}
+                                                        className="rounded-xl mb-6 w-[140px] hover:shadow-md hover:scale-[1.02] transition transition-all duration-400 object-cover"
+                                                        src={item?.image}
+                                                      />
+                                                    </a>
+                                                  </li>
+                                                );
+                                              }
+                                            )}
+                                          </ul> */}
+                                      </td>
+                                      <td valign="top" className="px-6 py-4">
+                                        <p className="mb-1">
+                                          <span className="font-medium text-gray-900">
+                                            Duration:
+                                          </span>{" "}
+                                          {pk.duration}
+                                        </p>
+                                        <p className="mb-3">
+                                          <span className="font-medium text-gray-900">
+                                            Price:
+                                          </span>{" "}
+                                          {pk.price}
+                                        </p>
+                                        {/* <a
+                                            href={`/sponsor/booking?id=${pk.productId}`}
+                                          >
+                                            <button className="w-full h-10 px-3 rounded-lg bg-[#0F8CFF] text-white">
+                                              {pk.ctaText}
+                                            </button>
+                                          </a> */}
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                          <div className="relative mt-3 overflow-x-auto rounded-xl shadow-sm border border-gray-300/70">
+                            <div className="px-6 py-3 bg-[#fbfcff]">
+                              <h1 className="font-semibold text-gray-700 text-lg">
+                                Website Sponsorship
+                              </h1>
+                            </div>
+                            <table className="sponsor-table table-fixed w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                              <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr className="bg-gray-100">
+                                  <th className="px-6 py-3 w-[50px]"></th>
+                                  <th
+                                    valign="top"
+                                    scope="col"
+                                    className="px-6 py-3 w-[160px]"
+                                  >
+                                    Product
+                                  </th>
+                                  {/* <th scope="col" className="px-6 py-3">
+                                    Type
+                                  </th> */}
+                                  <th
+                                    scope="col"
+                                    className="px-6 py-3 w-[420px]"
+                                  >
+                                    Placements
+                                  </th>
+                                  <th
+                                    scope="col"
+                                    className="px-6 py-3 w-[140px]"
+                                  ></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {websiteProducts.map((pk, i) => {
+                                  return (
+                                    <tr
+                                      id={pk.uid}
+                                      className=" border-b odd:bg-white even:bg-gray-50"
+                                    >
+                                      <td valign="top" className="px-6 py-4">
+                                        <div className="flex items-center pt-1">
+                                          {/* <label
+                                            htmlFor={pk.productId}
+                                            className="sr-only">{pk.productId}</label> */}
+                                          <input
+                                            // disabled={
+                                            //   selectedWebsitePackage &&
+                                            //   selectedWebsitePackage !==
+                                            //     pk.uid
+                                            // }
+                                            onChange={e => {
+                                              if (e.target.checked) {
+                                                setSelectedOptions(
+                                                  prevOptions => [
+                                                    ...prevOptions,
+                                                    pk,
+                                                  ]
+                                                );
+                                              } else {
+                                                setSelectedOptions(
+                                                  prevOptions =>
+                                                    prevOptions.filter(
+                                                      option =>
+                                                        option.uid !== pk.uid
+                                                    )
+                                                );
+                                              }
+                                            }}
+                                            id={pk.uid}
+                                            name={pk.uid}
+                                            type="checkbox"
+                                            checked={selectedOptions.some(
+                                              option => option.uid === pk.uid
+                                            )}
+                                            className="w-5 h-5 text-blue-600 bg-white disabled:bg-gray-100 border-gray-400 disabled:border-gray-200/80 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                          />
+                                        </div>
+                                      </td>
+                                      <td
+                                        valign="top"
+                                        scope="row"
+                                        className="px-6 py-4"
+                                      >
+                                        <h3 className="font-medium text-gray-900">
+                                          {pk?.title}
+                                        </h3>
+
+                                        <p className="text-gray-500 text-sm">
+                                          {pk?.desp}
+                                        </p>
+                                      </td>
+                                      {/* <td className="px-6 py-4">{pk?.titleShort}</td> */}
+                                      <td className="px-6 py-4 text-gray-800">
+                                        <div
+                                          dangerouslySetInnerHTML={{
+                                            __html: pk?.description,
+                                          }}
+                                        ></div>
+                                        {/* <ul>
+                                          {pk?.placements?.map(
+                                            (item, index) => {
+                                              return (
+                                                <li
+                                                  className="list-disc ml-4 text-gray-800"
+                                                  key={index}
+                                                >
+                                                  <p className="mb-2">
+                                                    {item.description}:
+                                                  </p>
+                                                  <a
+                                                    href={item.image}
+                                                    target="_blank"
+                                                    className=""
+                                                  >
+                                                    <img
+                                                      key={item.image}
+                                                      className="rounded-xl mb-6 w-[140px] hover:shadow-md hover:scale-[1.02] transition transition-all duration-400 object-cover"
+                                                      src={item?.image}
+                                                    />
+                                                  </a>
+                                                </li>
+                                              );
+                                            }
+                                          )}
+                                        </ul> */}
+                                      </td>
+                                      <td valign="top" className="px-6 py-4">
+                                        <p className="mb-1">
+                                          <span className="font-medium text-gray-900">
+                                            Duration:
+                                          </span>{" "}
+                                          {pk.duration}
+                                        </p>
+                                        <p className="mb-3">
+                                          <span className="font-medium text-gray-900">
+                                            Price:
+                                          </span>{" "}
+                                          {pk.price}
+                                        </p>
+                                        {/* <a
+                                            href={`/sponsor/booking?id=${pk.productId}`}
+                                          >
+                                            <button className="w-full h-10 px-3 rounded-lg bg-[#0F8CFF] text-white">
+                                              {pk.ctaText}
+                                            </button>
+                                          </a> */}
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div className="col-span-6 lg:col-span-2 sticky h-fit top-[60px]">
+                          <div className="rounded-xl p-6 border border-opacity-20 bg-white">
+                            <div className="mb-3">
+                              <h1 className="text-xl font-semibold mx-auto mb-2">
+                                Choose Package(s)
+                              </h1>
+                              <p className="text-gray-800 text-sm">Sponsor our newsletter of ~25k subscribers. Choose from the following areas:</p>
+                              <SponsorMenu newsletterProducts={newsletterProducts} websiteProducts={websiteProducts} />
+                            </div>
+                            {selectedOptions.length > 0 ? (
+                              <SelectedProductsDisplay
+                                selectedProducts={selectedOptions}
+                                totalPrice={totalPrice}
+                                discountedPrice={discountedPrice}
+                                discount={discountAmount}
+                              />
+                            ) : null}
+                            <DiscountBadge selectedTypes={selectedTypes} />
+
+                            {selectedOptions.length > 0 ? (
+                              <a
+                              href={`/sponsor/booking?packages=${selectedOptions.map(
+                                option => option.uid
+                              )}`}
+                              >
+                                <button className="w-full mt-3 h-10 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">
+                                  Book now
+                                </button>
+                              </a>
+                            ) : null}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* <Sidebar
+            {/* <Sidebar
       paddingTop="hidden md:block pt-12"
       /> */}
-        </div>
-      </Container>
-    </Layout>
+          </div>
+        </Container>
+      </Layout>
+    </>
   );
 };
 
 export default Index;
 
-export async function getStaticProps({ preview = null, params }) {
-  const pageSize = PAGE_SIZE;
-  const page = 0;
-  let allPosts = (await getAllJobs(preview, pageSize, page)) || [];
+export async function getStaticProps({ preview = null, locale }) {
+  let sort = ["featured:desc", "tier:asc", "date:desc"];
+  if (locale == "es-ES") {
+    sort = ["esES:desc", "featured:desc", "tier:asc", "date:desc"];
+  }
 
-  const pagination = allPosts?.meta?.pagination;
+  // console.log('allTools',allTools)
+
+  let allProducts = (await getAllProducts(preview, 15, 0)) || [];
+
+  let products = [];
+  for (var i = 0; i < allProducts.data?.length; i++) {
+    products.push({
+      uid: allProducts.data[i].id,
+      ...allProducts.data[i].attributes,
+    });
+  }
+  let newsletterProducts = products.filter(obj => obj.type === "newsletter");
+  let websiteProducts = products.filter(obj => obj.type === "website");
   return {
     props: {
-      // jobs: allPosts?.data?allPosts.data:null,
-      jobs: allPosts,
-      preview,
-      pagination: pagination ? pagination : null,
+      allProducts: products,
+      newsletterProducts: newsletterProducts,
+      websiteProducts: websiteProducts,
     },
-    revalidate: 40,
+    revalidate: 100,
   };
 }
-
-const Sidebar = ({ relatedPosts, paddingTop, author }) => {
-  const [stickyPaddingTop, setStickyPaddingTop] = useState("pt-0");
-
-  const _handleWaypointEnter = () => {
-    setStickyPaddingTop("pt-0");
-  };
-  const _handleWaypointLeave = () => {
-    setStickyPaddingTop(SIDEBAR_STICKY_OFFSET);
-  };
-
-  return (
-    <div
-      className={`${paddingTop} relative col-span-4 max-w-[410px] border-l border-opacity-20`}
-    >
-      <Waypoint onEnter={_handleWaypointEnter} onLeave={_handleWaypointLeave} />
-      <div
-        className={`${stickyPaddingTop} absolute transition transition-all duration-300 sticky top-0 min-h-screen hidden lg:block`}
-      >
-        <aside className="h-screen px-10 sticky top-0 py-0">
-          <div className="flex flex-col grid gap-6">
-            <PrototyprNetworkCTA />
-            <div>
-              {/* EMAIL FORM */}
-              <div className="w-full bg-blue-100 rounded-xl p-5 border border-gray-200">
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                  Get the roundup
-                </h3>
-                <p className="text-base text-gray-500 mb-6">
-                  Get a curated selection of the best articles and topics from
-                  Prototypr in your inbox.
-                </p>
-                <SignupSidebar />
-              </div>
-
-              <div className="mt-6">
-                <SponsorSidebarCard />
-              </div>
-            </div>
-
-            {/* <div className="w-full flex flex-col grid gap-2">
-
-            {relatedPosts?.data?.length > 0 &&
-              relatedPosts.data.map((item, index) => {
-                return (
-                  <ProductItem key={`product_item_${index}`} post={item} />
-                  // <TopicTopItem key={index} topic={item}/>
-                );
-              })}
-            </div> */}
-          </div>
-        </aside>
-      </div>
-    </div>
-  );
-};

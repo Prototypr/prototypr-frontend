@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getUpcomingSponsorSlots } from "@/lib/api";
 
-const useGetUpcomingSponsorSlots = ({user, type}) => {
+const useGetUpcomingSponsorSlots = ({user, productId, sponsorType}) => {
+
   const [slots, setSlots] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -14,7 +15,6 @@ const useGetUpcomingSponsorSlots = ({user, type}) => {
   }, []);
 
   const refetch = async () => {
-      console.log("getting bookings");
       //load data
       await getBookings();
       setLoading(false);
@@ -24,8 +24,7 @@ const useGetUpcomingSponsorSlots = ({user, type}) => {
     setLoading(true);
 
     try {
-      const allSponsorSlots = await getUpcomingSponsorSlots({type});     
-      console.log(allSponsorSlots)   
+      const allSponsorSlots = await getUpcomingSponsorSlots({productId, sponsorType});  
       setSlots(allSponsorSlots)
 
       setLoading(false);

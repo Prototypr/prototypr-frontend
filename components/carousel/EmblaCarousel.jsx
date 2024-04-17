@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Thumb } from './EmblaCarouselThumbsButton'
+import AutoHeight from 'embla-carousel-auto-height'
+
 // import imageByIndex from './imageByIndex'
 import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
@@ -11,6 +13,9 @@ import {
   NextButton,
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
+
+
+const TWEEN_FACTOR_BASE = 0.52
 
 const ImageDialog = dynamic(() => {return import("./ImageDialog/ImageDialog")},{ ssr: false });
 
@@ -98,15 +103,21 @@ const EmblaCarousel = (props) => {
   }
 
   return (
-    <div className="embla lg:px-14 py-6 -mt-[1.6rem] relative">
-      <div className="embla__buttons absolute top-0 w-full flex justify-between -mt-[2.45rem]">
+    // <div className="embla p-3 bg-white rounded-2xl shadow-sm border border-gray-300/70 relative h-full">
+    <div className="embla relative h-full">
+
+      {/* <div className="absolute top-0 w-[40px] h-full bg-gradient-to-r mr-3 from-white/0 via-white/40 to-white right-0 z-40 rounded-r-2xl pointer-events-none" /> */}
+      {/* <div className="absolute bottom-0 w-[40px] h-full bg-gradient-to-l ml-3 from-white/0 to-white left-0 z-40 rounded-l-2xl pointer-events-none" /> */}
+      
+      
+      <div className="embla__buttons w-[95%] pointer-events-none ml-[2.5%] absolute top-0 w-full flex justify-between z-50 -mt-[0.2rem]">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
-      <div className="embla__viewport" ref={emblaMainRef}>
-        <div className="embla__container">
+      <div className="embla__viewport h-full" ref={emblaMainRef}>
+        <div className="embla__container h-full">
           {slides.map((item,index) => (
-            <div className="embla__slide pb-4" key={index}>
+            <div className="embla__slide h-full" key={index}>
               <div className="embla__slide__number">
                 <span>{index + 1}</span>
               </div>
@@ -115,7 +126,7 @@ const EmblaCarousel = (props) => {
                 src={item.original}
                 alt="Your alt text"
               /> */}
-               <div className="relative shimmer shadow-md w-full rounded-xl h-[240px] sm:h-[264px] w-full lg:max-h-full relative overflow-hidden flex justify-center">
+               <div className="relative shimmer shadow-sm w-full rounded-xl h-full w-full relative overflow-hidden flex justify-center">
                 {/* <img src={item.original} className='object-cover cursor-pointer pointer-events-auto' alt={`Gallery Image ${index}`}/> */}
                 <Image
                   onClick={()=>{
@@ -136,7 +147,7 @@ const EmblaCarousel = (props) => {
                   // data-src={current.original}
                   alt={`Gallery Image ${index}`}
                   sizes={"(max-width: 300px) 100vw, 600px"}
-                  className='embla__slide__img  cursor-pointer rounded-xl shadow-xl p-[4px] bg-white border border-gray-200'
+                  className='embla__slide__img  cursor-pointer rounded-xl bg-white border border-gray-300/70'
                 />
               </div>
             </div>
@@ -144,7 +155,7 @@ const EmblaCarousel = (props) => {
         </div>
       </div>
 
-      <div className="embla-thumbs w-fit max-w-full mx-auto">
+      {/* <div className="embla-thumbs w-fit max-w-full mx-auto">
         <div className="embla-thumbs__viewport p-1 -mt-2" ref={emblaThumbsRef}>
           <div className="embla-thumbs__container">
             {slides.map((item,index) => (
@@ -158,7 +169,7 @@ const EmblaCarousel = (props) => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
       <ImageDialog 
       navigateDialog={navigateDialog}
       prevBtnDisabled={false}

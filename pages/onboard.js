@@ -15,6 +15,8 @@ const WMOnboarding = dynamic(() => import("@/components/user/WMOnboarding"));
 export default function Index({allTags}) {
   const router = useRouter();
 
+  const [inviteeEmail,setInviteeEmail] = useState(false)
+
   const { user } = useUser({
     // redirectTo: '/account',
     redirectIfFound: false,
@@ -29,6 +31,9 @@ export default function Index({allTags}) {
   useEffect(()=>{
     if(router.query?.signin=='true'){
       toggleSignIn()
+    }
+    if(router.query?.inviteeemail){
+      setInviteeEmail(router.query?.inviteeemail)
     }
   },[router.query])
 
@@ -64,7 +69,7 @@ export default function Index({allTags}) {
             </div>:''}
             {user && !user?.isLoggedIn ? (
               <div className="w-full h-full bg-white grid place-items-center">
-                  <LoginForm user={user} isSignUp={isSignUp} toggleSignIn={toggleSignIn} />
+                  <LoginForm inviteeEmail={inviteeEmail} user={user} isSignUp={isSignUp} toggleSignIn={toggleSignIn} />
                 
               </div>
             ) : (

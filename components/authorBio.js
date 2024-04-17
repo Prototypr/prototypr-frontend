@@ -25,7 +25,7 @@ export default function AuthorBio({ author, slug, title }) {
     <div className="py-4">
       <div
         className="flex md:px-0 justify-between mx-auto"
-        style={{ maxWidth: "43rem" }}
+        style={{ maxWidth: "60rem" }}
       >
         <div className="my-auto mx-auto text-center pt-12">
           {/* <div className="w-full border-b border-gray-300 my-8" /> */}
@@ -42,7 +42,7 @@ export default function AuthorBio({ author, slug, title }) {
           </div>
         </div>
       </div>
-      <div className=" mx-auto" style={{ maxWidth: "43rem" }}>
+      <div className=" mx-auto" style={{ maxWidth: "60rem" }}>
         <div className="w-full border-b border-gray-200 my-10" />
         <div className="flex flex-col sm:flex-row sm:justify-between">
           <div className="flex flex-col w-full">

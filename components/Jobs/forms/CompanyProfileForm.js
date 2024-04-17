@@ -191,7 +191,7 @@ console.log(values)
 
 
   return (
-    <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-10 pb-10">
+    <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-8 pb-10">
         <div className="max-w-2xl pt-24 w-full">
         <div className="my-2 mb-6">
           <h1 className="text-2xl font-bold mx-auto mb-2">Post an opportunity</h1>
@@ -246,7 +246,7 @@ console.log(values)
                 setImageBlob(blob)
                 formik.setFieldValue("image",blob)
               }}/> */}
-              {formik.errors.companyLogo && <span className="text-red-600 text-xs">{formik.errors.companyLogo}</span>}
+              {formik.errors.companyLogo && <span className="text-red-600 text-sm">{formik.errors.companyLogo}</span>}
 
                 {/* <div className="flex p-6 -mt-2 border border-gray-300 rounded-lg items-center space-x-6">
                 <div class="shrink-0">

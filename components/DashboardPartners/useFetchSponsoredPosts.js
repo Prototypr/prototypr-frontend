@@ -22,7 +22,6 @@ const useFetchSponsoredPosts = (user, postStatus) => {
         }
     
         const data = await getPartnerPosts({user, pageSize:PAGE_SIZE, offset:pageOffset});
-        console.log(data)
         const partnerPosts = data.partnerPosts?.posts
         setPosts(partnerPosts)
         setTotal(data.partnerPosts?.count)

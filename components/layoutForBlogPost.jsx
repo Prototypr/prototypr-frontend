@@ -24,7 +24,7 @@ export default function Layout({
 
       <div
         className={`min-h-screen ${NAV_OFFSET} ${padding == false ? "" : "px-3 md:px-8"}`}
-        style={{ background: background ? background : "#eff4fb" }}
+        style={{ background: background ? background : "#fbfcff" }}
       >
         <main
           className="mx-auto "

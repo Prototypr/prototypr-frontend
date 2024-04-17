@@ -39,7 +39,7 @@ export default function PeopleFilters({
                   >
                     {/* <Link href={`${urlRoot}/${sItem.key}/page/1`}> */}
                       <div
-                        className={`text-sm hover:text-blue-500 py-1.5 rounded ${
+                        className={`text-base hover:text-blue-500 py-1.5 rounded ${
                           sItem.key == slug
                             ? "text-blue-600 font-semibold"
                             : "text-gray-700 font-base"

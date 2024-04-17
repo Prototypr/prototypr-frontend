@@ -45,7 +45,7 @@ export const PublishDialogButton = ({createNewPost,updateExistingPost,postId, us
         <DialogTrigger asChild>
         <Button
             variant="confirmRounded"
-            className="text-sm"
+            className="text-[13px] font-normal h-[25px] px-2 outline outline-blue-600 outline-1 py-0 mr-1 my-auto"
             >
           Submit
         </Button>

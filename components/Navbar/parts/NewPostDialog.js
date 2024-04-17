@@ -57,7 +57,7 @@ const NewPostDialog = ({button}) => {
        <Button variant={"confirmBig"} className="rounded-full">
           Create new
         </Button>
-        :<div className="flex cursor-pointer text-black/80 text-sm mr-3">
+        :<div className="flex cursor-pointer text-black/80 text-sm mr-1">
                   <NotePencil size={22} className="mr-1.5" />
                  <div className="my-auto font-medium">New</div>
               </div>}
