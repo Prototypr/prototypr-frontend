@@ -1,53 +1,29 @@
 const slugify = require("slugify");
-// const qs = require("qs");
+import { getTitle, getExcerpt } from "./helpers/editorDataFormatter";
+import { generateImageTypes, getImageExtention } from "./helpers/imageHelpers";
 
 export const uid = function () {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
 
-export function generateImageTypes(url) {
-  const breakpoints = [
-    { w: 300, h: 131 },
-    { w: 768, h: 336 },
-    { w: 1024, h: 448 },
-    { w: 1400, h: 600 },
-  ];
-  const splitString = url?.split(".");
-  const extention = splitString[splitString.length - 1];
-  const mediaURL = splitString.slice(0, -1).join(".");
-
-  const urls = breakpoints.map(
-    (breakpoint) =>
-      `${mediaURL}-${breakpoint?.w}x${breakpoint?.h}.${extention} ${breakpoint.w}w`
-  );
-  return urls.join(",");
-}
-
-export function getImageExtention(url) {
-  const splitString = url.split(".");
-  const extention = splitString[splitString.length - 1];
-
-  return extention;
-}
-
-export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCreate, postObject}) => {
+export const getPostDetails = ({
+  user,
+  editor,
+  slug,
+  forReview,
+  postStatus,
+  isCreate,
+  postObject,
+}) => {
   const html = editor.getHTML();
   const json = editor.getJSON()?.content;
 
-  let docNode = editor?.view?.state?.doc;
-  let title = "";
-  docNode.descendants((node, pos) => {
-    if (title) {
-      return false;
-    }
-    if (node.type.name == "heading" && node.attrs.level == 1) {
-      title = node.textContent;
-      return false;
-    }
-  });
-  if (!title) {
-    title = "Untitled post";
-  }
+  const title = getTitle({ editor });
+
+  const excerpt = getExcerpt({ json });
+
+  const coverImage = json.find(p => p?.type === "figure")?.attrs?.src;
+
 
   //remove title from content body
   let div = document.createElement("div");
@@ -61,11 +37,6 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
     }
   }
 
-  const firstParagraph = json
-    .find((p) => p?.type === "paragraph")
-    ?.content?.find((x) => x.type === "text")?.text;
-
-  const coverImage = json.find((p) => p?.type === "figure")?.attrs?.src;
   // append an id at the end of the slug
   let postSlug;
 
@@ -73,12 +44,16 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
   // We are adding a uid to the end of the slug to avoid slug collisions
 
   if (!slug) {
-    postSlug = slugify(title.toLocaleLowerCase(), {remove: /[^\w\s]/gi}) + `---${uid()}`;
+    postSlug =
+      slugify(title.toLocaleLowerCase(), { remove: /[^\w\s]/gi }) +
+      `---${uid()}`;
   } else {
     // in edit draft mode, use existing slug passed down from the parent component
     const slugSplit = slug.split("---");
     const prevUid = slugSplit[slugSplit.length - 1];
-    postSlug = slugify(title.toLocaleLowerCase(), {remove:/[^\w\s]/gi}) + `---${prevUid || uid()}`; //slug;
+    postSlug =
+      slugify(title.toLocaleLowerCase(), { remove: /[^\w\s]/gi }) +
+      `---${prevUid || uid()}`; //slug;
   }
 
   let contentToInsert = html;
@@ -86,11 +61,15 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
     contentToInsert = div?.innerHTML;
   }
 
-  let seo = postObject?.seo?postObject.seo:{}
-  seo.opengraphTitle = title
-  seo.opengraphImage = postObject?.featuredImage?postObject.featuredImage:coverImage
-  seo.twitterImage = postObject?.twitterImage?postObject.twitterImage:coverImage
-  seo.twitterTitle = title
+  let seo = postObject?.seo ? postObject.seo : {};
+  seo.opengraphTitle = title;
+  seo.opengraphImage = postObject?.featuredImage
+    ? postObject.featuredImage
+    : coverImage;
+  seo.twitterImage = postObject?.twitterImage
+    ? postObject.twitterImage
+    : coverImage;
+  seo.twitterTitle = title;
 
   let entry = {
     type: "article",
@@ -99,7 +78,7 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
     title: title,
     content: contentToInsert,
     // remove user or the post user gets changed on update (when admin edits)
-    // user: user?.id, 
+    // user: user?.id,
     //   featuredImage: coverImage,
     legacyFeaturedImage: {
       mediaItemUrl: coverImage || "",
@@ -108,34 +87,37 @@ export const getPostDetails = ({user, editor, slug, forReview, postStatus, isCre
       medium: `${coverImage}-768x336.${getImageExtention(coverImage || "")}`,
     },
     seo: seo,
-    esES: false
+    esES: false,
   };
 
   //if creating, need to send the user id
-  if(isCreate){
-    console.log(user?.profile)
-    entry.user = user?.profile?.id
+  if (isCreate) {
+    console.log(user?.profile);
+    entry.user = user?.profile?.id;
   }
 
   //change the date on save only if it's a draft or pending publish
-  if((postStatus=='draft' || postStatus=='pending') || (!postStatus || isCreate)){
-    if(!postObject || postObject?.status!=='publish'){
-
-      entry.date=new Date();
-      entry.slug= postSlug
-      entry.featured = false
-      entry.excerpt= firstParagraph,
-  
-      //SEO
-      entry.seo.opengraphPublishedTime = new Date()
-      entry.seo.metaDesc = firstParagraph
-      entry.seo.opengraphDescription = firstParagraph
-      entry.seo.twitterDescription = firstParagraph
+  if (
+    postStatus == "draft" ||
+    postStatus == "pending" ||
+    !postStatus ||
+    isCreate
+  ) {
+    if (!postObject || postObject?.status !== "publish") {
+      entry.date = new Date();
+      entry.slug = postSlug;
+      entry.featured = false;
+      (entry.excerpt = firstParagraph),
+        //SEO
+        (entry.seo.opengraphPublishedTime = new Date());
+      entry.seo.metaDesc = firstParagraph;
+      entry.seo.opengraphDescription = firstParagraph;
+      entry.seo.twitterDescription = firstParagraph;
     }
-
   }
 
   return {
     entry,
   };
 };
+

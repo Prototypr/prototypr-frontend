@@ -14,7 +14,7 @@ const AdsDashbaord = () => {
   return (
     <>
       {user?.isLoggedIn && (
-        <Layout navType={"simple"} showSponsorButton={true} showWriteButton={false} background="#EFF2F8">
+        <Layout navType={"simple"} showSponsorButton={true} showWriteButton={false} >
           <div
             className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 "
             style={{ maxWidth: 1200 }}

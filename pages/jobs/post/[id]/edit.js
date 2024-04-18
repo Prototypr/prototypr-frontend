@@ -278,7 +278,7 @@ const JobPostForm = ({user, defaultCompany, postObject}) => {
 
 
   return (
-    <Layout background="#EFF2F8">
+    <Layout >
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-8">
         <div className="max-w-3xl w-full">
         <div className="my-2 mb-5">

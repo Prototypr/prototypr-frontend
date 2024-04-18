@@ -202,68 +202,65 @@ export default function Post({
                 excerpt={post?.attributes?.excerpt}
                 authorAvatar={authorAvatar}
               />
-            </div>
-
-            <div className="col-span-12 lg:col-span-3 ">
-              {/* <div className="bg-white p-3 rounded-2xl border border-gray-300/70 shadow-sm"> */}
-              {/* <h1
-                  tabIndex={0}
-                  className="text-base mb-3 font-semibold tracking-tight"
-                >
-                  References
-                </h1> */}
-
-              {/* {post?.attributes?.outgoingLinks?.length ? (
-                  <>
-                    <h1
-                      tabIndex={0}
-                      className="text-base mb-0.5 mt-4 font-semibold tracking-tight"
-                    >
-                      Referenced Links
-                    </h1>
-                    <p className="text-xs text-gray-500 mb-3">
-                      Articles and links referenced in this post
-                    </p>
-                    <div className=" mb-3 flex flex-col gap-1 pr-1">
-                      {post.attributes.outgoingLinks.map((link, index) => (
-                        <a
-                          href={`${link.url}?ref=prototypr`}
-                          target="_blank"
-                          className="text-sm"
+              <div className="mt-3">
+                <h2 className="text-lg font-bold mb-2">Latest News</h2>
+                <div className="space-y-8">
+                  {["today", "yesterday", "lastWeek", "lastMonth"].map(
+                    group =>
+                      groupedPosts[group] &&
+                      groupedPosts[group].length > 0 && (
+                        <section
+                          key={group}
+                          aria-labelledby={group}
+                          className="lg:border-gray-200 md:pl-"
                         >
-                          <div key={index} className="flex items-center mb-2">
-                            {link.imageUrl ? (
-                              <img
-                                src={link.imageUrl}
-                                className="w-10 h-10 my-auto rounded-lg border border-gray-50 mr-2"
-                              />
-                            ) : (
-                              <div className="h-10 w-10 my-auto bg-gray-100/80 border border-gray-100 rounded-lg mr-2 flex flex-col justify-center">
-                                <LinkIcon className={'mx-auto text-gray-500/80 w-5 h-5'} />
-                              </div>
-                            )}
-                            <div className="flex flex-col">
-                              <div className="text-gray-700 text-xs font-semibold">
-                                {link.title
-                                  ? link.title
-                                  : link.text
-                                    ? link.text
-                                    : link.url}
-                              </div>
-                              <div className="text-gray-400 text-xs max-w-[200px] truncate">
-                                {link.rootDomain?link.rootDomain:link.url}
+                          <div className="grid grid-cols-9 col-span-9 bg-white py-6 px-4 shadow-sm rounded-2xl border border-gray-300/50 mb-3">
+                            <div className="col-span-9 lg:col-span-2">
+                              <h2
+                                id={group}
+                                className="mb-6 lg:mb-1 w-[fit-content] lg:pr-4 lg:pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
+                              >
+                                {group.charAt(0).toUpperCase() + group.slice(1)}
+                              </h2>
+                            </div>
+                            <div className="col-span-9 lg:col-span-7 mb-8">
+                              <div className="space-y-16 max-w-2xl mx-auto">
+                                {renderPosts(groupedPosts[group])}
                               </div>
                             </div>
                           </div>
-                        </a>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )} */}
-              {/* </div> */}
-              {/* <button>View</button> */}
+                        </section>
+                      )
+                  )}
+                  {groupedPosts?.months &&
+                    Object.entries(groupedPosts?.months).map(
+                      ([month, posts]) => (
+                        <section
+                          key={month}
+                          aria-labelledby={month}
+                          className="lg:border-gray-400/60"
+                        >
+                          <div className="grid lg:grid-cols-12 bg-white border border-gray-300/50 shadow-sm p-4 pr-8 pb-8 rounded-xl  grid-cols-1 gap-y-6 ">
+                            <h2
+                              id={month}
+                              className="text-lg col-span-3 font-semibold text-gray-800"
+                            >
+                              {month}
+                            </h2>
+                            <div className="col-span-12 lg:col-span-9">
+                              <div className="space-y-12">
+                                {renderPosts(posts)}
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                      )
+                    )}
+                </div>
+              </div>
+            </div>
+
+            <div className="col-span-12 lg:col-span-3 ">
               <div className="bg-white p-3 rounded-2xl border border-gray-300/70 shadow-sm">
                 <h1
                   tabIndex={0}
@@ -389,10 +386,11 @@ export default function Post({
                 <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
                   <div className="z-10 col-span-5 xl:col-span-5 relative">
                     <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
-                    Tomorrow's news, today
+                      Tomorrow's news, today
                     </h3>
                     <p className="text-base text-gray-600 mb-6">
-                     AI-driven updates, curated by humans and hand-edited for the Prototypr community
+                      AI-driven updates, curated by humans and hand-edited for
+                      the Prototypr community
                     </p>
                   </div>
                   {/* <div className="hidden xl:block z-10 col-span-1 relative">
@@ -406,62 +404,9 @@ export default function Post({
                     }
                   /> */}
                   <div className="col-span-12 relative z-10">
-                    <SignupSidebar btnText={'Get it daily'} post={post} />
+                    <SignupSidebar btnText={"Get it daily"} post={post} />
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div className="col-span-12 lg:col-span-9 mt-3">
-              <h2 className="text-lg font-bold mb-2">Latest</h2>
-              <div className="space-y-8">
-                {["today", "yesterday", "lastWeek", "lastMonth"].map(
-                  group =>
-                    groupedPosts[group] &&
-                    groupedPosts[group].length > 0 && (
-                      <section
-                        key={group}
-                        aria-labelledby={group}
-                        className="lg:border-gray-200 md:pl-"
-                      >
-                        <div className="grid grid-cols-9 col-span-9 bg-white py-6 px-4 shadow-sm rounded-2xl border border-gray-300/50 mb-3">
-                          <div className="col-span-9 lg:col-span-2">
-                            <h2
-                              id={group}
-                              className="mb-6 lg:mb-1 w-[fit-content] lg:pr-4 lg:pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
-                            >
-                              {group.charAt(0).toUpperCase() + group.slice(1)}
-                            </h2>
-                          </div>
-                          <div className="col-span-9 lg:col-span-7 mb-8">
-                            <div className="space-y-16 max-w-2xl mx-auto">
-                              {renderPosts(groupedPosts[group])}
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-                    )
-                )}
-                {groupedPosts?.months &&
-                  Object.entries(groupedPosts?.months).map(([month, posts]) => (
-                    <section
-                      key={month}
-                      aria-labelledby={month}
-                      className="lg:border-gray-400/60"
-                    >
-                      <div className="grid lg:grid-cols-12 bg-white border border-gray-300/50 shadow-sm p-4 pr-8 pb-8 rounded-xl  grid-cols-1 gap-y-6 ">
-                        <h2
-                          id={month}
-                          className="text-lg col-span-3 font-semibold text-gray-800"
-                        >
-                          {month}
-                        </h2>
-                        <div className="col-span-12 lg:col-span-9">
-                          <div className="space-y-12">{renderPosts(posts)}</div>
-                        </div>
-                      </div>
-                    </section>
-                  ))}
               </div>
             </div>
           </div>

@@ -47,7 +47,9 @@ import LinkEmbed from "./CustomExtensions/LinkEmbed/LinkEmbed";
 import Video from "./CustomExtensions/Video/Video";
 
 import { useConfirmTabClose } from "./useConfirmTabClose";
-import { useCreate, useLoad, useUpdate } from "./editorHooks/index";
+import { useLoad, useUpdate } from "./editorHooks/index";
+import useCreate from "@/components/Editor/editorHooks/newPost/useCreate";
+
 import { ToggleSwitch } from "@/components/atom/Switch/switch";
 import PreviewDisplay from "./preview";
 

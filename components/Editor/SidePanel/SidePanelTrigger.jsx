@@ -23,7 +23,7 @@ import SidePanel from './SidePanel';
         variants: {
           variant: {
             preview: {
-                backgroundColor: blackA.blackA2,
+                // backgroundColor: blackA.blackA2,
                 color: blackA.blackA12,
                 // boxShadow: `0 2px 10px ${blackA.blackA7}`,
                 // '&:hover': { backgroundColor: blackA.blackA3, color:blackA.blackA12 },

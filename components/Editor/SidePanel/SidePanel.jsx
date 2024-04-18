@@ -73,7 +73,7 @@ const ContentImportSidebarInner = ({isOpen, close, rootElement,editor, isAdmin, 
     setTier(postObject?.tier)
     setSlug(postObject?.slug)
     
-    if(postObject.published_at){
+    if(postObject?.published_at){
       let dateObj = new Date(postObject.published_at)
       if(dateObj){
         setTimestamp(dateObj)

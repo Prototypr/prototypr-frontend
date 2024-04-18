@@ -101,7 +101,7 @@ const NewsPageFeatured = ({
               </div>
             </div> */}
           </div>
-          <div className="col-span-2 border-t w-full border-gray-100 flex flex-col lg:flex-row lg:justify-between">
+          {content!==excerpt?<div className="col-span-2 border-t w-full border-gray-100 flex flex-col lg:flex-row lg:justify-between">
             {post?.attributes?.outgoingLinks?.length ? (
               <div className="flex flex-col justify-start pr-[40px] relative flex-none w-full lg:w-[300px]">
                   <h1
@@ -180,7 +180,7 @@ const NewsPageFeatured = ({
               className="text-lg order-first lg:order-last max-w-[48rem] mx-auto text-gray-800 blog-content news-content"
               dangerouslySetInnerHTML={{ __html: content }}
             ></div>
-          </div>
+          </div>:null}
         </div>
       </div>
     </div>

@@ -99,8 +99,9 @@ const Navbar = ({
           <div
             className={`${maxWidth ? maxWidth : "max-w-[1020px]"} mx-auto relative flex h-9 items-center justify-between`}
           >
-            {/* movil menu button */}
-            <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
+            <div className="flex flex-shrink-0 items-center">
+                {/* movil menu button */}
+            <div className=" inset-y-0 mr-2 flex items-center xl:hidden">
               <button
                 type="button"
                 onClick={toggleMobileNav}
@@ -117,7 +118,6 @@ const Navbar = ({
                 )}
               </button>
             </div>
-            <div className="flex flex-shrink-0 items-center">
               <Link href="/" as="/">
                 <>
                   <img

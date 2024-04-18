@@ -70,7 +70,7 @@ export default function Index() {
             navType={"simple"}
             showWriteButton={false}
             showSponsorButton={true}
-            background="#EFF2F8"
+            // 
           >
             <div
               className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 "

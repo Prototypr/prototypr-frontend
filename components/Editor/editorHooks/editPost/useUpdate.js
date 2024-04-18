@@ -1,30 +1,52 @@
 import toast from "react-hot-toast";
-import { getPostDetails } from "./libs/helpers";
 import { useState } from "react";
 import { checkSessionExpired } from "@/lib/account/checkSessionExpired";
-var axios = require("axios");
+import { getEditPostData } from "../libs/getEditPostData";
+const axios = require("axios");
 
+/**
+ * updates a post based on its postId
+ *
+ * used in the editor to save existing post drafts, submit for review, or publish
+ *
+ * @param {*} postId
+ * @param {*} user
+ * @param {*} editor
+ * @param {*} slug
+ * @param {*} forReview
+ * @param {*} postStatus
+ * @param {*} postObject
+ *
+ * @returns
+ */
 const useUpdate = () => {
   const [saving, setSaving] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(undefined);
 
-  const updateExistingPost = async (
-    {postId,
+  const updatePost = async ({
+    postId,
     user,
     editor,
     slug,
     forReview,
     postStatus,
-    postObject}
-  ) => {
-    const { entry } = getPostDetails({user, editor, slug, forReview, postStatus, postObject});
+    postObject,
+  }) => {
+    const { entry } = getEditPostData({
+      user,
+      editor,
+      slug,
+      forReview,
+      postStatus,
+      postObject,
+    });
 
     //check if session expired
     //check if jwt is expired
-    const sessionExpired = checkSessionExpired(user?.jwt)
-    if(sessionExpired){
-      alert('Your sessions has expired. Please log in again.')
-      return false
+    const sessionExpired = checkSessionExpired(user?.jwt);
+    if (sessionExpired) {
+      alert("Your sessions has expired. Please log in again.");
+      return false;
     }
 
     let publishPostEndpointConfig = {
@@ -75,7 +97,7 @@ const useUpdate = () => {
   };
 
   return {
-    updateExistingPost,
+    updatePostById: updatePost,
     saving,
     hasUnsavedChanges,
     setHasUnsavedChanges,

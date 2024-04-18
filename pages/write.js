@@ -1,95 +1,128 @@
-import Head from "next/head";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import Layout from "@/components/layout-editor";
 
 import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
-// import axios from "axios";
 import { useEffect } from "react";
-// import Meta from "@/components/meta";
-// import { Cross1Icon } from "@radix-ui/react-icons";
-import { useState } from "react";
 
-import Editor from "@/components/Editor/Editor";
-// const axios = dynamic(() => import("axios"));
-const Spinner = dynamic(() => import('@/components/atom/Spinner/Spinner'))
-// const LoginForm = dynamic(() => import("@/components/sign-in/LoginForm"));
-// const LoginSide = dynamic(() => import("@/components/sign-in/LoginSide"));
-// const WMOnboarding = dynamic(() => import("@/components/user/WMOnboarding"));
+import Editor from "@/components/Editor/EditorB";
+const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
-export default function Index() {
+import useLoad from "@/components/Editor/editorHooks/newPost/useLoad";
+import useCreate from "@/components/Editor/editorHooks/newPost/useCreate";
+
+import { useRouter } from "next/router";
+import EditorNav from "@/components/EditorNavB";
+
+/**
+ * Write
+ * used to create new post
+ *
+ * uses the 'new post' version of useLoad
+ * /components/Editor/editorHooks/newPost/useLoad
+ * this hook loads the editor with any content stored in local storage
+ *
+ * @returns
+ */
+export default function Write() {
+  const router = useRouter();
+
   const { user } = useUser({
     // redirectTo: '/account',
-    redirectTo:'/onboard',
+    redirectTo: "/onboard",
     redirectIfFound: false,
   });
 
-  // const [isSignUp, setSignUp] = useState(true);
-
-  // const toggleSignIn = () => {
-  //   setSignUp(!isSignUp);
-  // };
-
-  // const [editorInstance, setEditorInstance] = useState(null)
-
-  useEffect(()=>{
+  /**
+   * embed twitter widget if not already loaded
+   * hide crisp chat if loaded
+   */
+  useEffect(() => {
     const s = document.createElement("script");
     s.setAttribute("src", "https://platform.twitter.com/widgets.js");
     s.setAttribute("id", "twitter-widget");
     s.setAttribute("async", "true");
 
-    if(!document.getElementById('twitter-widget')){
+    if (!document.getElementById("twitter-widget")) {
       document.head.appendChild(s);
     }
-    if(window.$crisp){
-      window.$crisp.push(['do', 'chat:hide']);
+    if (window.$crisp) {
+      window.$crisp.push(["do", "chat:hide"]);
     }
+  }, []);
 
-  },[])
+  //useLoad hook
+  //initialContent is null until loaded - so is 'false' when it's a new post
+  const { canEdit, loading, initialContent, postStatus } = useLoad(user);
+
+  //create new post hook
+  const { createPost } = useCreate();
+
+  /**
+   * updatePost
+   * when editor onUpdate is triggered,
+   * save the content to local storage
+   * @param {*} param0
+   */
+  const updatePost = ({ editor, json }) => {
+    // send the content to an API here (if new post only)
+    localStorage.setItem("wipContent", JSON.stringify(json));
+  };
+
+  /**
+   * savePost
+   * when save button is clicked
+   * save the post to the backend
+   * 
+   * for new post, create a new post and redirect to the new post
+   * @param {*} param0 
+   * @returns 
+   */
+  const savePost = async ({ editor, forReview }) => {
+    try {
+      const postInfo = await createPost({ user, editor, forReview });
+      //set the new slug
+      localStorage.removeItem("wipContent");
+
+      router.push(`p/${postInfo?.id}`);
+    } catch (e) {
+      return false;
+    }
+  };
 
   return (
     <>
+      <EditorNav postStatus={postStatus} />
+
       <div className="h-full w-full" id="editor-container">
         <div className="w-full h-full mx-auto  relative">
           {!user && <Fallback />}
 
-            {user && !user?.isLoggedIn ? (
-              <Layout>
-                 <div className="my-auto">
-                  <Spinner />
+          {/* only load editor if initialContent is not null */}
+          {(user && !user?.isLoggedIn) || initialContent == null ? (
+            // <Layout>
+            <div className="my-auto">
+              <Spinner />
+            </div>
+          ) : (
+            // </Layout>
+            user?.isLoggedIn && (
+              <>
+                <div className="my-4">
+                  <Editor
+                    canEdit={canEdit}
+                    initialContent={initialContent}
+                    postStatus={postStatus}
+                    //functions
+                    createPost={createPost}
+                    savePost={savePost}
+                    updatePost={updatePost}
+                  />
                 </div>
-                
-                {/* <div className="w-full" style={{maxWidth:600}}>
-                <LoginForm isSignUp={isSignUp} />
-                </div>
-                <div className="absolute top-[2%] right-[2%]">
-                  <div className="text-sm text-gray-700">
-                    <span>
-                      {isSignUp
-                        ? "Already got an account?"
-                        : "Not got an account yet?"}
-                    </span>
-                    <a
-                      onClick={toggleSignIn}
-                      className="text-primary-400 cursor-pointer"
-                    >
-                      {isSignUp ? " Sign in." : " Sign up"}
-                    </a>
-                  </div>
-                </div> */}
-              </Layout>
-            ) : (
-              user &&
-              user?.isLoggedIn && (
-                
-                  <div className="my-4">
-                    {/* <Editor setEditorInstance={setEditorInstance} /> */}
-                    <Editor />
-                  </div>
-              )
-            )}
-          </div>
+              </>
+            )
+          )}
+        </div>
       </div>
     </>
   );
