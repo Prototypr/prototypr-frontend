@@ -2,15 +2,17 @@
 // import { processPost } from "@prototypr/prototypr-postie";
 let processPost;
 
-try {
-  const postie = await import("@prototypr/prototypr-postie");
-  processPost = postie.processPost;
-} catch (error) {
-  processPost = () => {
-    // Provide a fallback implementation or handle the error appropriately
-    console.log("The @prototypr/prototypr-postie module is not public so was not instaled.");
-  };
-}
+(async () => {
+  try {
+    const postie = await import("@prototypr/prototypr-postie");
+    processPost = postie.processPost;
+  } catch (error) {
+    processPost = () => {
+      // Provide a fallback implementation or handle the error appropriately
+      console.log("The @prototypr/prototypr-postie module is not installed.");
+    };
+  }
+})();
 
 export const maxDuration = 120; // This function can run for a maximum of 120 seconds
 
