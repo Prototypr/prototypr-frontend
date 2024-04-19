@@ -86,8 +86,12 @@ export const getContent = ({ html, title }) => {
 export const getCoverImage = ({ postObject, json }) => {
   if (postObject?.featuredImage) {
     return postObject.featuredImage;
+  } else if (postObject?.legacyFeaturedImage) {
+    return postObject.legacyFeaturedImage;
   } else {
-    json.find(p => p?.type === "figure")?.attrs?.src;
+    let img = json.find(p => p?.type === "figure")?.attrs?.src;
+
+    return img;
   }
 };
 
@@ -145,15 +149,14 @@ export const getLegacyFeaturedImage = ({ coverImage }) => {
   return legacyFeaturedImage;
 };
 
-export const getPostDate = ({postObject}) =>{
+export const getPostDate = ({ postObject }) => {
   //if post is not publish status,
-  if(postObject?.status!=="publish"){
+  if (postObject?.status !== "publish") {
     return new Date();
-  }else{
-    return postObject?.date
+  } else {
+    return postObject?.date;
   }
-
-}
+};
 
 export const uid = function () {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);

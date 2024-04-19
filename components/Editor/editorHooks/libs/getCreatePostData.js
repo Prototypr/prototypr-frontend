@@ -9,7 +9,6 @@ import {
 export const getCreatePostData = ({
   editor,
   forReview,
-  postStatus,
   postObject,
   user
 }) => {
@@ -24,17 +23,15 @@ export const getCreatePostData = ({
   const legacyFeaturedImage = getLegacyFeaturedImage({ coverImage });
 
   //create post slug - just use a unique id and the date
-  const slug = uuidv4();
-  `${uuidv4()}---${uid()}`;
+  const slug = `${uid()}--${user?.profile?.id}`;
 
   let entry = {
     type: "article",
-    legacyFeaturedImage: {},
-    status: forReview ? "pending" : postStatus ? postStatus : "draft",
+    status: forReview ? "pending" : "draft",
     title: title,
     content: content,
-    legacyFeaturedImage: legacyFeaturedImage,
-    seo: seo,
+    // legacyFeaturedImage: legacyFeaturedImage,
+    // seo: seo,
     esES: false,
     slug: slug, //slug is always the same when editing a draft
     date: new Date(),

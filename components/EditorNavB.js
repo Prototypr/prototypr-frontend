@@ -72,7 +72,7 @@ export default function EditorNav({ activeNav, postStatus }) {
   return (
     <div id="main-nav" as="nav" className={`p-1 z-40 fixed w-full top-0`}>
       <>
-        <div className="mx-auto max-w-[1320px] h-10 text-sm px-2  bg-gray-50/80 border border-1 border-gray-200/70 rounded-xl">
+        <div className="mx-auto max-w-[1320px] text-sm px-2  bg-gray-50/80 border border-1 border-gray-200/70 rounded-xl">
           <div
             className={` transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-10`}
           >
@@ -114,7 +114,7 @@ export default function EditorNav({ activeNav, postStatus }) {
               <div className="flex ">
                 {/* {editorButtons} */}
                 <div
-                  className="my-auto flex mr-1"
+                  className="my-auto flex mr-3"
                   id="editor-nav-buttons"
                 ></div>
 

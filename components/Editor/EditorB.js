@@ -10,7 +10,7 @@ import TextMenu from "@/components/Editor/Menus/TextMenu";
 import ImageMenu from "@/components/Editor/Menus/ImageMenu";
 
 import Link from "@tiptap/extension-link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 
 import Cite from "./CustomExtensions/Cite";
@@ -43,58 +43,30 @@ import Tweet from "./CustomExtensions/Tweet/Tweet";
 import LinkEmbed from "./CustomExtensions/LinkEmbed/LinkEmbed";
 import Video from "./CustomExtensions/Video/Video";
 
-import { ToggleSwitch } from "@/components/atom/Switch/switch";
-import PreviewDisplay from "./preview";
-
-import { useRouter } from "next/router";
 import VideoMenu from "./Menus/VideoMenu";
 import { addTwitterScript } from "./editorHooks/libs/addTwitterScript";
 import UndoRedoButtons from "./UndoRedoButtons";
-// const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
-
-import Button from "@/components/Primitives/Button";
-import { PublishDialogButton } from "./PublishDialogButton";
-import SidePanelTrigger from "./SidePanel/SidePanelTrigger";
+import EditorNavButtons from "./EditorNavButtons";
 
 const CustomDocument = Document.extend({
   content: "heading block*",
   atom: true,
 });
 
-/**
- * Editor
- * @returns {JSX.Element}
- * @example
- *
- * @param {*} param0
- * @returns
- */
 const Editor = ({
   canEdit = false,
   initialContent = null,
   postStatus = "draft",
   postObject = null,
-  slug = null,
-  postId = null,
   //functions
-  createPost = false,
+  refetchPost=false,
   savePost = false,
   updatePost = false,
+  updatePostSettings = false,
 }) => {
-  const router = useRouter();
-
   const { user } = useUser({
     redirectIfFound: false,
   });
-
-  /**
-   * useLoad is a custom hook that loads the editor content
-   * Load the editor content
-   * @returns {object}
-   */
-
-  const [editorInstance, setEditorInstance] = useState(false);
-  const [previewEnabled, togglePreview] = useState(false);
 
   const [isSaving, setIsSaving] = useState(false);
 
@@ -162,7 +134,6 @@ const Editor = ({
       }),
     ],
     onCreate: ({ editor }) => {
-      setEditorInstance(editor);
       /**
        * when the editor is created
        * set the content to the initial content
@@ -223,81 +194,51 @@ const Editor = ({
 
   return (
     <>
-      <div className="fixed z-[48] bottom-10 left-10 border flex flex-col grid gap-2 border-black border-opacity-10 p-4 bg-white rounded-lg">
-        <p className="text-xs">Preview Mode</p>
-        <ToggleSwitch
-          onToggle={() => {
-            togglePreview(!previewEnabled);
-            setTimeout(() => {
-              const s = document.createElement("script");
-              s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-              s.setAttribute("id", "twitter-widget");
-              s.setAttribute("async", "true");
-
-              if (!document.getElementById("twitter-widget")) {
-                document.head.appendChild(s);
-              }
-            }, 500);
-          }}
-          size="small"
-          checked={previewEnabled}
-        />
-      </div>
-
-      {previewEnabled ? (
-        <div>
-          <PreviewDisplay editor={editorInstance} content={content} />
-        </div>
-      ) : (
-        <div className="w-full relative my-4">
-          {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
-          {user?.isAdmin && (
-            <div className="mt-16">
-              <div className="fixed bottom-3 z-20 w-full">
-                <div className="relative bg-gray-100/80 w-[500px] shadow-sm border border-gray-300/20 mx-auto rounded-xl p-3 text-sm backdrop-blur text-gray-800 flex flex-row justify-center items-center">
-                  You're editing as admin.
-                </div>
+      <div className="w-full relative my-4">
+        {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
+        {user?.isAdmin && (
+          <div className="mt-16">
+            <div className="fixed bottom-3 z-20 w-full">
+              <div className="relative bg-gray-100/80 w-[500px] shadow-sm border border-gray-300/20 mx-auto rounded-xl p-3 text-sm backdrop-blur text-gray-800 flex flex-row justify-center items-center">
+                You're editing as admin.
               </div>
             </div>
-          )}
-
-          {/* undoredo buttons render in a portal on the navbar */}
-          <UndoRedoNavPortal>
-            <UndoRedoButtons editor={editor} />
-          </UndoRedoNavPortal>
-
-          <EditorButtonsNavPortal>
-            <EditorButtons
-              //general stuff
-              user={user}
-              onSave={onSave}
-              isSaving={isSaving}
-              postStatus={postStatus}
-              canEdit={canEdit}
-              editor={editor}
-              //functions
-              createPost={createPost}
-              updatePost={updatePost}
-              //for updating existing post
-              slug={slug}
-              postId={postId}
-              postObject={postObject}
-            />
-          </EditorButtonsNavPortal>
-
-          {/* NAVIGATION END */}
-          <div className="my-4 pt-0 mt-[100px] max-w-[44rem] mx-auto relative pb-10 blog-content">
-            {editor && <MenuFloating editor={editor} />}
-            <TextMenu editor={editor} />
-            {/* <LinkMenu editor={editor} /> */}
-            <ImageMenu editor={editor} />
-            <VideoMenu editor={editor} />
-
-            <EditorContent editor={editor} />
-            <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
           </div>
+        )}
+
+        {/* undoredo buttons render in a portal on the navbar */}
+        <UndoRedoNavPortal>
+          <UndoRedoButtons editor={editor} />
+        </UndoRedoNavPortal>
+
+        <EditorButtonsNavPortal>
+          <EditorNavButtons
+            user={user}
+            onSave={onSave}
+            isSaving={isSaving}
+            postStatus={postStatus}
+            canEdit={canEdit}
+            editor={editor}
+            //for settings panel
+            postObject={postObject}
+            updatePostSettings={updatePostSettings}
+            refetchPost={refetchPost}
+          />
+        </EditorButtonsNavPortal>
+
+        {/* NAVIGATION END */}
+        <div className="my-4 pt-0 mt-[100px] max-w-[44rem] mx-auto relative pb-10 blog-content">
+          {editor && <MenuFloating editor={editor} />}
+          <TextMenu editor={editor} />
+          {/* <LinkMenu editor={editor} /> */}
+          <ImageMenu editor={editor} />
+          <VideoMenu editor={editor} />
+
+          <EditorContent editor={editor} />
+          <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
         </div>
-      )}
+      </div>
+      {/* )} */}
     </>
   );
 };
@@ -315,66 +256,4 @@ const EditorButtonsNavPortal = ({ children }) => {
 const UndoRedoNavPortal = ({ children }) => {
   const container = document.getElementById("undoredo-container");
   return ReactDOM.createPortal(children, container);
-};
-
-/**
- * EditorButtons
- * render buttons for saving and publishing
- * in the editor, these are wrapped in a portal so they can be rendered on the navbar
- * @param {*} param0
- * @returns
- */
-const EditorButtons = ({
-  //general stuff
-  user,
-  canEdit,
-  onSave,
-  isSaving,
-  postStatus,
-  editor,
-  //for updating existing post
-  slug,
-  postId,
-  postObject,
-}) => {
-  return (
-    <>
-      {user?.isLoggedIn && (
-        <Button
-          variant="ghostBlue"
-          onClick={onSave}
-          className="text-[13px] font-normal h-[25px] px-2 my-auto"
-        >
-          {isSaving
-            ? "Saving..."
-            : postStatus == "publish"
-              ? "Update"
-              : "Save Draft "}
-        </Button>
-      )}
-
-      {/* show publish button if post not published */}
-      {/* publish button does same as save draft button, but uses dialog and adds 'forReview' flag */}
-      {canEdit && postStatus !== "publish" && (
-        <PublishDialogButton
-          //save post creates a post or updates an existing one
-          //for /write (new post), it creates a new post
-          //for /p/[slug] (existing post), it updates the existing post
-          onSave={onSave}
-        />
-      )}
-
-      {user?.isAdmin && (
-          <div className="flex flex-col grid gap-2 rounded-lg">
-            {editor && (
-              <SidePanelTrigger
-                user={user}
-                editor={editor}
-                postObject={postObject}
-              />
-            )}
-          </div>
-        )}
-    </>
-  );
 };

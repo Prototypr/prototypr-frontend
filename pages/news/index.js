@@ -169,29 +169,19 @@ export default function Post({ post, preview, domain, groupedPosts }) {
               <div className="col-span-12 lg:col-span-9">
                 <div className="grid grid-cols-1 gap-y-6">
                   <div className="">
-                    {["today", "yesterday", "lastWeek", "lastMonth"].map(
-                      group =>
+                    {[
+                      "today",
+                      "yesterday",
+                      "thisWeek",
+                      "lastWeek",
+                      "lastMonth",
+                    ].map(group => {
+                      let formattedGroup = group.replace("last", "last ");
+                      formattedGroup = formattedGroup.replace("this", "this ");
+
+                      return (
                         groupedPosts[group] &&
                         groupedPosts[group].length > 0 && (
-                          // <section
-                          //   key={group}
-                          //   aria-labelledby={group}
-                          //   className=" md:border-gray-200 md:pl-6 md:dark:border-gray-700/40"
-                          // >
-                          //   <div className="grid bg-white p-4 pr-8 rounded-xl grid-cols-1 items-baseline gap-y-6 md:grid-cols-4">
-                          //     <h2
-                          //       id={group}
-                          //       className="text-sm font-semibold text-gray-800 dark:text-gray-100"
-                          //     >
-                          //       {group.charAt(0).toUpperCase() + group.slice(1)}
-                          //     </h2>
-                          //     <div className="md:col-span-4">
-                          //       <div className="space-y-16">
-                          //         {renderPosts(groupedPosts[group])}
-                          //       </div>
-                          //     </div>
-                          //   </div>
-                          // </section>
                           <section
                             key={group}
                             aria-labelledby={group}
@@ -203,8 +193,8 @@ export default function Post({ post, preview, domain, groupedPosts }) {
                                   id={group}
                                   className="mb-6 lg:mb-1 w-[fit-content] lg:pr-4 lg:pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
                                 >
-                                  {group.charAt(0).toUpperCase() +
-                                    group.slice(1)}
+                                  {formattedGroup.charAt(0).toUpperCase() +
+                                    formattedGroup.slice(1)}
                                 </h2>
                               </div>
                               <div className="col-span-12 lg:col-span-7 mb-8">
@@ -215,7 +205,8 @@ export default function Post({ post, preview, domain, groupedPosts }) {
                             </div>
                           </section>
                         )
-                    )}
+                      );
+                    })}
                     {groupedPosts?.months &&
                       Object.entries(groupedPosts?.months).map(
                         ([month, posts]) => (
@@ -413,8 +404,7 @@ export async function getStaticProps({
 
   let groupedPosts = groupPostsByDate(allNews);
 
-  console.log(groupedPosts);
-
+  
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
     props: {

@@ -205,8 +205,16 @@ export default function Post({
               <div className="mt-3">
                 <h2 className="text-lg font-bold mb-2">Latest News</h2>
                 <div className="space-y-8">
-                  {["today", "yesterday", "lastWeek", "lastMonth"].map(
-                    group =>
+                  {[
+                    "today",
+                    "yesterday",
+                    "thisWeek",
+                    "lastWeek",
+                    "lastMonth",
+                  ].map(group => {
+                    let formattedGroup = group.replace("last", "last ");
+                    formattedGroup = formattedGroup.replace("this", "this ");
+                    return (
                       groupedPosts[group] &&
                       groupedPosts[group].length > 0 && (
                         <section
@@ -220,7 +228,8 @@ export default function Post({
                                 id={group}
                                 className="mb-6 lg:mb-1 w-[fit-content] lg:pr-4 lg:pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
                               >
-                                {group.charAt(0).toUpperCase() + group.slice(1)}
+                                {formattedGroup.charAt(0).toUpperCase() +
+                                  formattedGroup.slice(1)}
                               </h2>
                             </div>
                             <div className="col-span-9 lg:col-span-7 mb-8">
@@ -231,7 +240,8 @@ export default function Post({
                           </div>
                         </section>
                       )
-                  )}
+                    );
+                  })}
                   {groupedPosts?.months &&
                     Object.entries(groupedPosts?.months).map(
                       ([month, posts]) => (

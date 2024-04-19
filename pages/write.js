@@ -1,9 +1,10 @@
 import dynamic from "next/dynamic";
-import Layout from "@/components/layout-editor";
+// import Layout from "@/components/layout-editor";
 
 import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
 import { useEffect } from "react";
+import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 
 import Editor from "@/components/Editor/EditorB";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
@@ -38,14 +39,7 @@ export default function Write() {
    * hide crisp chat if loaded
    */
   useEffect(() => {
-    const s = document.createElement("script");
-    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-    s.setAttribute("id", "twitter-widget");
-    s.setAttribute("async", "true");
-
-    if (!document.getElementById("twitter-widget")) {
-      document.head.appendChild(s);
-    }
+    addTwitterScript();
     if (window.$crisp) {
       window.$crisp.push(["do", "chat:hide"]);
     }
@@ -73,10 +67,10 @@ export default function Write() {
    * savePost
    * when save button is clicked
    * save the post to the backend
-   * 
+   *
    * for new post, create a new post and redirect to the new post
-   * @param {*} param0 
-   * @returns 
+   * @param {*} param0
+   * @returns
    */
   const savePost = async ({ editor, forReview }) => {
     try {

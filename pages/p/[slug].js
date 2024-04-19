@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 
 import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
-import Layout from "@/components/layout-editor";
+// import Layout from "@/components/layout-editor";
 
 import Editor from "@/components/Editor/EditorB";
 import { useEffect } from "react";
@@ -11,6 +11,7 @@ import useUpdate from "@/components/Editor/editorHooks/editPost/useUpdate";
 
 import { useConfirmTabClose } from "@/components/Editor/useConfirmTabClose";
 import EditorNav from "@/components/EditorNavB";
+import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
@@ -32,14 +33,7 @@ export default function EditPostPage(props) {
   });
 
   useEffect(() => {
-    const s = document.createElement("script");
-    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-    s.setAttribute("id", "twitter-widget");
-    s.setAttribute("async", "true");
-
-    if (!document.getElementById("twitter-widget")) {
-      document.head.appendChild(s);
-    }
+    addTwitterScript();
     if (window.$crisp) {
       window.$crisp.push(["do", "chat:hide"]);
     }
@@ -48,43 +42,76 @@ export default function EditPostPage(props) {
   //useLoad hook
   const {
     canEdit,
-    loading,
     initialContent,
     postStatus,
     postObject,
     slug,
     postId,
+    refetch,
+    setPostObject,
   } = useLoad(user);
 
+  //useUpdate hook
   const {
+    //update post content
     updatePostById,
-    setSaving,
+    //update post settings
+    updateSettings,
     setHasUnsavedChanges,
     hasUnsavedChanges,
-    saving,
   } = useUpdate();
 
   useConfirmTabClose(hasUnsavedChanges);
 
   /**
    * savePost
-   * when save button is clicked
+   * when save or submit for publishing button is clicked
    * save the post to the backend
    * @param {*} param0
    */
   const savePost = async ({ editor, forReview }) => {
     try {
-      await updatePostById({
+      const updatedPostObject = await updatePostById({
         editor: editor,
         postId: postId,
         user: user,
-        slug: slug,
         forReview: forReview,
         postStatus: postStatus,
         postObject: postObject,
       });
+
+      //update the postObject from useLoad hook
+      if(updatedPostObject) {
+        setPostObject(updatedPostObject);
+        //confirm no unsaved changes
+        setHasUnsavedChanges(false);
+      }
       return true;
     } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+
+  /**
+   * updateSettings
+   */
+  const updatePostSettings = async ({ settings }) => {
+    try {
+      const updatedPostObject = await updateSettings({
+        postId: postId,
+        user: user,
+        settings: settings,
+        postObject: postObject,
+      });
+
+      if(updatedPostObject) {
+        setPostObject(updatedPostObject);
+      }
+
+      return true;
+    } catch (e) {
+      console.log(e);
       return false;
     }
   };
@@ -98,8 +125,8 @@ export default function EditPostPage(props) {
    * - using save post button to save for now
    * @param {*} param0
    */
-  const updatePost = ({ editor, json, forReview=false }) => {
-    console.log("updatePost");
+  const updatePost = ({ editor, json, forReview = false }) => {
+    // console.log("updatePost");
     setHasUnsavedChanges(true);
   };
 
@@ -133,9 +160,13 @@ export default function EditPostPage(props) {
                   slug={slug}
                   postId={postId}
                   postObject={postObject}
-                  //functions
+                  //save and update content
                   savePost={savePost}
                   updatePost={updatePost}
+                  //refetch post needed when the featured image is updated in post settings
+                  refetchPost={refetch}
+                  //update post settings
+                  updatePostSettings={updatePostSettings}
                 />
               </div>
             )

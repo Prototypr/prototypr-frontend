@@ -9,7 +9,6 @@ import {
 
 export const getEditPostData = ({
   editor,
-  slug,
   forReview,
   postStatus,
   postObject,
@@ -26,13 +25,11 @@ export const getEditPostData = ({
 
   let entry = {
     type: "article",
-    legacyFeaturedImage: {},
     status: forReview ? "pending" : postStatus ? postStatus : "draft",
     title: title,
     content: content,
-    legacyFeaturedImage: legacyFeaturedImage,
     esES: false,
-    slug: slug, //slug is always the same when editing a draft
+    // slug: slug, //slug is always the same when editing a draft - so we don't need to update it
   };
 
   //change the date on save only if postStatus==draft or postStatus==pending publish
@@ -40,13 +37,14 @@ export const getEditPostData = ({
     entry.date = new Date();
   }
 
-  if(forReview){
+  if(forReview || postStatus=="publish"){
     //only save seo and excerpt if it's for review - then it'll be the latest data
     entry.seo = seo;
     entry.excerpt = excerpt;
+    entry.legacyFeaturedImage=legacyFeaturedImage;
   }
 
   return {
-    entry,
+    entry
   };
 };

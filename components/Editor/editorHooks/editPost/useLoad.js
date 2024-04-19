@@ -36,6 +36,10 @@ const useLoad = user => {
     setPostId(router.query.slug);
     if (user?.isLoggedIn && router.query.slug) {
       setLoading(true);
+
+      //clear local storage
+      localStorage.removeItem("wipContent");
+      //fetch the post
       refetch();
       //   Sentry.captureMessage(`#33 l29 userId: ${user?.id}`, { extra: user });
     }
@@ -43,9 +47,6 @@ const useLoad = user => {
 
   const refetch = async () => {
     if (postId) {
-      //clear local storage
-      localStorage.removeItem("wipContent");
-      console.log("loading from backend");
       //load data
       await getCurrentPost();
       setLoading(false);
@@ -72,20 +73,7 @@ const useLoad = user => {
 
       //only set post data if user has permission
       if (userHasPermission) {
-        let content = post?.content;
-        //if title isn't part of body, add it in
-        if (post?.title && content.indexOf(post?.title) == -1) {
-          content = `<h1>${post?.title}</h1>${content}`;
-        }
-        setPostObject(post);
-        setPostId(post?.id);
-        if(content){
-            setInitialContent(content);
-        }else{
-            setInitialContent(false)
-        }
-        setTitle(post?.title);
-        setStatus(post?.status);
+        setPostObject(post);        
       }
 
       setLoading(false);
@@ -95,6 +83,38 @@ const useLoad = user => {
     }
   };
 
+  /**
+   * when postObject is available, set the initial content
+   * and other data
+   */
+  useEffect(() => {
+    if (postObject) {
+      setPostId(postObject?.id);
+
+      //et content
+      let content = postObject?.content;
+      //if title isn't part of body, add it in
+      if (postObject?.title && content.indexOf(postObject?.title) == -1) {
+        content = `<h1>${postObject?.title}</h1>${content}`;
+      }
+      if (content) {
+        setInitialContent(content);
+      } else {
+        setInitialContent(false);
+      }
+
+      //set title
+      setTitle(postObject?.title);
+      //set status
+      setStatus(postObject?.status);
+    }
+  }, [postObject]);
+
+  /**
+   * check if user has permission to edit the post
+   * @param {*} post 
+   * @returns 
+   */
   const checkPermissions = post => {
     let hasPermission = false;
 
@@ -140,6 +160,9 @@ const useLoad = user => {
     isOwner,
     postObject,
     canEdit,
+    refetch,
+    //when save through useUpdate, update the postObject
+    setPostObject
   };
 };
 
