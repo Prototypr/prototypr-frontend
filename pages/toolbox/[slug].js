@@ -655,22 +655,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths() {
-  let allPosts = null;
-
-  try {
-    allPosts = await Promise.race([
-      getAllPostsWithSlug(
-        "tool",
-        process.env.NODE_ENV ||
-          process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
-          ? 20
-          : TOTAL_STATIC_POSTS
-      ),
-      staticPathTimeout(26000), // Set your desired timeout in milliseconds
-    ]);
-  } catch (error) {
-    console.error(error);
-  }
+  const allPosts = await getAllPostsWithSlug("tool", TOTAL_STATIC_POSTS);
 
   return {
     paths:
