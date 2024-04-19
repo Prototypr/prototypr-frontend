@@ -447,9 +447,10 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths({ locales }) {
-
-
-  const allPosts=await getPostsWithRetry({maxRetries: 3, postType:"article"})
+  const allPosts = await getPostsWithRetry({
+    maxRetries: 4,
+    postType: "article",
+  });
 
   return {
     paths:

@@ -51,7 +51,7 @@ import buildToolboxGallery, {
 } from "@/lib/utils/buildGallery";
 import { formatAllTools } from "@/lib/utils/formatToolContent";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
-import { staticPathTimeout } from "@/lib/staticPathTimeout";
+import { getPostsWithRetry, staticPathTimeout } from "@/lib/staticPathTimeout";
 
 const ToolContent = ({
   post,
@@ -655,7 +655,11 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug("tool", TOTAL_STATIC_POSTS);
+  // const allPosts = await getAllPostsWithSlug("tool", TOTAL_STATIC_POSTS);
+  const allPosts = await getPostsWithRetry({
+    maxRetries: 4,
+    postType: "tool",
+  });
 
   return {
     paths:
