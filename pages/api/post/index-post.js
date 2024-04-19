@@ -1,4 +1,5 @@
-import { processPost } from ".prototypr/prototypr-postie/index.js";
+// import { processPost } from ".prototypr/prototypr-postie/index.js";
+import { processPost } from "@prototypr/prototypr-postie";
 export const maxDuration = 120; // This function can run for a maximum of 120 seconds
 
 const axios = require("axios");

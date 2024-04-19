@@ -180,6 +180,7 @@ export default function Post({ post, preview, domain, groupedPosts }) {
                       formattedGroup = formattedGroup.replace("this", "this ");
 
                       return (
+                        groupedPosts &&
                         groupedPosts[group] &&
                         groupedPosts[group].length > 0 && (
                           <section
@@ -404,7 +405,6 @@ export async function getStaticProps({
 
   let groupedPosts = groupPostsByDate(allNews);
 
-  
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
     props: {

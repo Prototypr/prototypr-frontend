@@ -12,6 +12,7 @@ import NewsPageFeatured from "@/components/v4/layout/NewsPageFeatured";
 import { groupPostsByDate } from "@/lib/utils/groupPostsByDate";
 import AuthorCard from "@/components/toolbox/AuthorCard";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
+import Spinner from "@/components/atom/Spinner/Spinner";
 const Footer = dynamic(() => import("@/components/footer"));
 
 // const RelatedPosts = dynamic(() => import("@/components/related-posts"), {
@@ -53,6 +54,20 @@ export default function Post({
     content = post?.attributes.content;
   }
   // const tags = post.attributes.tags.data;
+
+  if (!post) {
+    return (
+      <>
+        {/* <Layout> */}
+        <div className="relative w-full h-full flex">
+          <div className="my-auto mx-auto">
+            <Spinner />
+          </div>
+        </div>
+        {/* </Layout> */}
+      </>
+    );
+  }
 
   const renderPosts = posts =>
     posts.map((post, index) => {
@@ -212,9 +227,10 @@ export default function Post({
                     "lastWeek",
                     "lastMonth",
                   ].map(group => {
-                    let formattedGroup = group.replace("last", "last ");
-                    formattedGroup = formattedGroup.replace("this", "this ");
+                    let formattedGroup = group?.replace("last", "last ");
+                    formattedGroup = formattedGroup?.replace("this", "this ");
                     return (
+                      groupedPosts &&
                       groupedPosts[group] &&
                       groupedPosts[group].length > 0 && (
                         <section
@@ -228,8 +244,8 @@ export default function Post({
                                 id={group}
                                 className="mb-6 lg:mb-1 w-[fit-content] lg:pr-4 lg:pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
                               >
-                                {formattedGroup.charAt(0).toUpperCase() +
-                                  formattedGroup.slice(1)}
+                                {formattedGroup?.charAt(0).toUpperCase() +
+                                  formattedGroup?.slice(1)}
                               </h2>
                             </div>
                             <div className="col-span-9 lg:col-span-7 mb-8">
@@ -282,15 +298,15 @@ export default function Post({
                   <AuthorCard
                     authorAvatar={authorAvatar}
                     title={post?.attributes?.creator ? "Curator" : null}
-                    author={post.attributes.author}
-                    avatar={post.attributes?.author}
+                    author={post?.attributes?.author}
+                    avatar={post?.attributes?.author}
                   />
                   {post.attributes?.creator ? (
                     <div className="ml-10">
                       <AuthorCard
                         title={post?.attributes?.creator ? "Creator" : null}
-                        author={post.attributes.creator}
-                        avatar={post.attributes?.creator}
+                        author={post?.attributes?.creator}
+                        avatar={post?.attributes?.creator}
                         authorAvatar={authorAvatar}
                       />
                     </div>

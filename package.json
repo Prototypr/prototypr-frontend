@@ -22,6 +22,7 @@
     "@meilisearch/instant-meilisearch": "^0.8.1",
     "@next/bundle-analyzer": "^12.1.5",
     "@phosphor-icons/react": "^2.0.15",
+    "@prototypr/prototypr-postie": "^1.0.2",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-checkbox": "^1.0.1",
     "@radix-ui/react-collapsible": "^1.0.1",
