@@ -51,6 +51,7 @@ import buildToolboxGallery, {
 } from "@/lib/utils/buildGallery";
 import { formatAllTools } from "@/lib/utils/formatToolContent";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
+import { staticPathTimeout } from "@/lib/staticPathTimeout";
 
 const ToolContent = ({
   post,
@@ -398,12 +399,15 @@ const ToolContent = ({
                   {relatedPosts?.map((tool, index) => {
                     return (
                       <div key={index} className="flex flex-col px-3">
-                       {index!==0? <div className={`my-3 flex flex-col first:border-t-none border-t border-gray-100`} />:''}
-                        <div className="">
-                          <ToolIconCard
-                            withBackground={false}
-                            tool={tool}
+                        {index !== 0 ? (
+                          <div
+                            className={`my-3 flex flex-col first:border-t-none border-t border-gray-100`}
                           />
+                        ) : (
+                          ""
+                        )}
+                        <div className="">
+                          <ToolIconCard withBackground={false} tool={tool} />
                         </div>
                       </div>
                     );
@@ -651,12 +655,22 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug("tool", TOTAL_STATIC_POSTS);
-  // const homePageTools = await getAllToolsForHomeStatic()
-  // let mergedSlugs = {
-  //   ...allPosts,
-  //   ...homePageTools
-  // };
+  let allPosts = null;
+
+  try {
+    allPosts = await Promise.race([
+      getAllPostsWithSlug(
+        "tool",
+        process.env.NODE_ENV ||
+          process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
+          ? 20
+          : TOTAL_STATIC_POSTS
+      ),
+      staticPathTimeout(26000), // Set your desired timeout in milliseconds
+    ]);
+  } catch (error) {
+    console.error(error);
+  }
 
   return {
     paths:
@@ -676,27 +690,4 @@ function isoToReadableDate(isoTimestamp) {
   // const year = date.getFullYear().toString().substr(-2);
   const year = date.getFullYear().toString();
   return `${day}-${month}-${year}`;
-}
-
-// function isoToReadableDate(isoTimestamp) {
-//   const date = new Date(isoTimestamp);
-//   const day = date.getDate();
-//   const ordinalSuffix = getOrdinalSuffix(day);
-//   const month = date.toLocaleString("default", { month: "long" });
-//   const year = date.getFullYear().toString().substr(-2);
-//   return `${day}${ordinalSuffix} ${month} '${year}`;
-// }
-
-function getOrdinalSuffix(day) {
-  if (day > 3 && day < 21) return "th";
-  switch (day % 10) {
-    case 1:
-      return "st";
-    case 2:
-      return "nd";
-    case 3:
-      return "rd";
-    default:
-      return "th";
-  }
 }

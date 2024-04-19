@@ -31,6 +31,7 @@ import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import PostHeader from "@/components/post-header";
 import SocialShare from "@/components/SocialShare";
 import PostGroupRow from "@/components/v4/layout/PostGroupRow";
+import { staticPathTimeout } from "@/lib/staticPathTimeout";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -447,9 +448,6 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
 export async function getStaticPaths({ locales }) {
 
-  const timeout = (ms) => new Promise((resolve, reject) => 
-    setTimeout(() => reject(new Error('Request timed out')), ms)
-  );
 
   let allPosts=null
   try {
@@ -461,20 +459,11 @@ export async function getStaticPaths({ locales }) {
           ? 20
           : TOTAL_STATIC_POSTS
       ),
-      timeout(26000) // Set your desired timeout in milliseconds
+      staticPathTimeout(26000) // Set your desired timeout in milliseconds
     ]);
   } catch (error) {
     console.error(error);
-    // Handle the timeout error appropriately
   }
-
-  // const allPosts = await getAllPostsWithSlug(
-  //   "article",
-  //   process.env.NODE_ENV ||
-  //     process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
-  //     ? 20
-  //     : TOTAL_STATIC_POSTS
-  // );
 
   return {
     paths:
