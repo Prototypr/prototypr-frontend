@@ -171,8 +171,9 @@ const NewsColumn = ({
       )}
       <div className="max-h-[46rem] relative">
         <div className="pl-2 pt-2 pr-2 h-full max-h-[46rem] overflow-y-auto">
-          {["today", "yesterday", "lastWeek", "lastMonth"].map(group => {
-            const formattedGroup = group.replace("last", "last ");
+          {["today", "yesterday","thisWeek", "lastWeek", "lastMonth"].map(group => {
+            let formattedGroup = group.replace("last", "last ");
+            formattedGroup = formattedGroup.replace("this", "this ");
 
             return (
               groupedNewsPosts[group] &&

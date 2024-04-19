@@ -252,7 +252,7 @@ const SponsorshipForm = ({
     useTotalPrices({ allProducts });
 
   return (
-    <Layout seo={seo} showWriteButton={false} background="#EFF2F8">
+    <Layout seo={seo} showWriteButton={false} >
       <div className="flex justify-center pt-3 w-full h-full px-2 sm:px-6 lg:px-8">
         <div className="max-w-[1320px] w-full">
           {user?.profile?.activeCompany && <CompanyNav user={user} />}

@@ -128,7 +128,7 @@ const EditCompanyForm = ({ user, defaultCompany, router }) => {
   }, [errors]);
 
   return (
-    <Layout seo={seo} showSponsorButton={true} showWriteButton={false} background="#EFF2F8">
+    <Layout seo={seo} showSponsorButton={true} showWriteButton={false} >
       <div
         className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 "
         style={{ maxWidth: 1200 }}
@@ -166,7 +166,7 @@ const EditCompanyForm = ({ user, defaultCompany, router }) => {
                     type="submit"
                     disabled={isSubmitting}
                     // disabled={errores}
-                    className={`w-full mt-8 px-4 py-2 bg-blue-700 text-white font-semibold w-[fit-content] rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed`}
+                    className={`w-full mt-8 px-4 h-[40px] bg-blue-600 hover:bg-blue-500 text-white font-semibold w-[fit-content] rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed`}
                   >
                     Save changes
                   </button>

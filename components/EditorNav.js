@@ -4,7 +4,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import useUser from "@/lib/iron-session/useUser";
 import { useState, useEffect } from "react";
 import jsCookie from "js-cookie";
-import UndoRedoButtons from "./Editor/UndoRedoButtons";
+
 const NavigationMenuDemo = dynamic(() => import("./navbar-menu"), {
   ssr: true,
 });
@@ -12,17 +12,7 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({
-  editorInstance,
-  showWriteButton,
-  showSponsorButton,
-  showJobsButton,
-  activeNav,
-  editorButtons,
-  isEditor,
-  postStatus,
-  padding,
-}) {
+export default function EditorNav({ activeNav, postStatus }) {
   const { user, isLoading } = useUser({
     redirectIfFound: false,
   });
@@ -80,22 +70,9 @@ export default function EditorNav({
   }, [postStatus]);
 
   return (
-    <div
-      id="main-nav"
-      as="nav"
-      className={`p-1 z-40 fixed w-full top-0`}
-      style={
-        {
-          // background: `rgba(255, 255, 255, ${0.9})`,
-          // zIndex:99
-        }
-      }
-    >
+    <div id="main-nav" as="nav" className={`p-1 z-40 fixed w-full top-0`}>
       <>
-        <div
-          className="mx-auto max-w-[1320px] h-10 text-sm px-2  bg-gray-50/80 border border-1 border-gray-200/70 rounded-xl"
-          // style={{ maxWidth: padding === false ? "" : "1200px" }}
-        >
+        <div className="mx-auto max-w-[1320px] text-sm px-2  bg-gray-50/80 border border-1 border-gray-200/70 rounded-xl">
           <div
             className={` transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-10`}
           >
@@ -127,30 +104,30 @@ export default function EditorNav({
                   />
                 </div>
               </Link>
-              {/* <div className="my-auto ml-2">
-                <span className="p-2 py-0.5 text-xs bg-blue-400 bg-opacity-20 text-blue-600 rounded-full border border-blue-200">
-                Beta
-              </span>
-              </div> */}
               <div className="my-auto ml-3">{statusComponent}</div>
               {/* Undo/redo */}
-              {isEditor && <UndoRedoButtons editor={editorInstance} />}
+              <div id="undoredo-container"></div>
             </div>
             <div
               className={`hidden sm:block sm:ml-6 transition transition-all duration-500 ease-in-out`}
             >
               <div className="flex ">
-                {editorButtons}
+                {/* {editorButtons} */}
+                <div
+                  className="my-auto flex mr-3"
+                  id="editor-nav-buttons"
+                ></div>
+
                 <NavigationMenuDemo
-                  showWriteButton={showWriteButton}
-                  showSponsorButton={showSponsorButton}
-                  showJobsButton={showJobsButton}
+                  showWriteButton={false}
+                  showSponsorButton={false}
+                  showJobsButton={false}
                   hideLocaleSwitcher={true}
                   user={user}
                   userLoading={isLoading}
                   userLoggedInCookie={userLoggedInCookie}
                   activeNav={activeNav}
-                  editor={isEditor}
+                  editor={true}
                 />
               </div>
             </div>

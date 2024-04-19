@@ -175,15 +175,15 @@ const NewslettersSelect = ({user,next, previous, selectedOptions, setSelectedOpt
                       </div>
                     </button>
                   </div>:
-                   <Button 
-                   className="mt-4"
+                   <button 
+                   className={`w-full mt-4 px-4 h-[40px] bg-blue-600 hover:bg-blue-500 text-white font-semibold w-[fit-content] rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed`}
                    variant="confirmRounded"
                    onClick={()=>saveInterestsToUser()} 
                    disabled={submitting}>
                     {submitting?
                      <Spinner size="sm" className="mx-auto p-1 cursor-loading "/>:
                     'Save preferences'}
-                   </Button>}
+                   </button>}
                 </div>
     )
 }

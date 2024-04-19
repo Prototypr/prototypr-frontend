@@ -301,17 +301,16 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
                 router.push("/account");
               }}
             >
-              Settings
+              Edit profile
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
+            {/* <DropdownMenuSeparator /> */}
+            {/* <DropdownMenuItem
               onSelect={() => {
                 window.open(`https://help.prototypr.io`);
               }}
             >
               Help
-              {/* <RightSlot>⌘+T</RightSlot> */}
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
 
             {user?.isAdmin? (
               <>

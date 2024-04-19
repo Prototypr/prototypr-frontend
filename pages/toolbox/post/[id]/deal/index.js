@@ -57,7 +57,7 @@ const CreateDealForm = () =>{
 
 
   return(
-    <Layout showFooter={false} padding={false} seo={seo} showWriteButton={false} background="#EFF2F8">
+    <Layout showFooter={false} padding={false} seo={seo} showWriteButton={false} >
       <div className="h-full min-h-screen w-full grid md:grid-cols-12">
       <div className="hidden w-full h-full md:block md:col-span-6 lg:col-span-4">
             <div className="flex pt-24 items-center justify-center h-full w-full relative bg-[#195DE2] text-white">

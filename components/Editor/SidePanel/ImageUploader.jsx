@@ -147,6 +147,7 @@ const ImageUploader = (props) => {
         .then(async function (response) {
             setSaving(false);
             setSavingOnInsert(false)
+            props.refetchPost()
           toast.success("Image Uploaded!", {
             duration: 5000,
           });

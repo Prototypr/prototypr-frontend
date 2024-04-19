@@ -126,25 +126,23 @@ const TopicsSelect = ({
                     
                     {next?
                     <div className="w-full text-center relative flex justify-center mt-6">
-                    <Button 
-                      variant="confirm"
-                      className="!rounded-full"
+                    <button 
+                      className={`w-full px-4 h-[40px] bg-blue-600 hover:bg-blue-500 text-white font-semibold w-[fit-content] rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed`}
                       onClick={()=>saveTopicsToUser(next)} 
                       disabled={submitting}>
                        {submitting?
                         <Spinner size="sm" className="mx-auto p-1 cursor-loading "/>:
                        'Continue'}
-                      </Button>
+                      </button>
                     </div>
-                    :  <Button 
-                    className="mt-4 !rounded-full"
-                    variant="confirmRounded"
+                    :  <button 
+                    className={`w-full mt-4 px-4 h-[40px] bg-blue-600 hover:bg-blue-500 text-white font-semibold w-[fit-content] rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed`}
                     onClick={()=>saveTopicsToUser()} 
                     disabled={submitting}>
                      {submitting?
                       <Spinner size="sm" className="mx-auto p-1 cursor-loading "/>:
                      'Save topics'}
-                    </Button>
+                    </button>
                     }
                   </div>
                 </>
