@@ -171,39 +171,42 @@ const NewsColumn = ({
       )}
       <div className="max-h-[46rem] relative">
         <div className="pl-2 pt-2 pr-2 h-full max-h-[46rem] overflow-y-auto">
-          {["today", "yesterday","thisWeek", "lastWeek", "lastMonth"].map(group => {
-            let formattedGroup = group.replace("last", "last ");
-            formattedGroup = formattedGroup.replace("this", "this ");
+          {["today", "yesterday", "thisWeek", "lastWeek", "lastMonth"].map(
+            group => {
+              let formattedGroup = group.replace("last", "last ");
+              formattedGroup = formattedGroup.replace("this", "this ");
 
-            return (
-              groupedNewsPosts[group] &&
-              groupedNewsPosts[group].length > 0 && (
-                <section
-                  key={group}
-                  aria-labelledby={group}
-                  className="md:border-l md:border-gray-200 md:pl-"
-                >
-                  <div className="grid grid-cols-1 items-baseline gap-y-2 md:grid-cols-5">
-                    <h2
-                      id={group}
-                      className="col-span-5 mb-1 w-[fit-content] pr-4 rounded-r-full pl-2 border- border-gray-300/50 text-base font-semibold text-gray-800"
-                    >
-                      {/* <div className="pl-[1px]"> */}
-                      {formattedGroup.charAt(0).toUpperCase() +
-                        formattedGroup.slice(1)}
-                      {/* </div> */}
-                    </h2>
-                    <div className="col-span-5 mb-8">
-                      <div className="space-y-5">
-                        {" "}
-                        {renderPosts(groupedNewsPosts[group])}
+              return (
+                groupedNewsPosts &&
+                groupedNewsPosts[group] &&
+                groupedNewsPosts[group].length > 0 && (
+                  <section
+                    key={group}
+                    aria-labelledby={group}
+                    className="md:border-l md:border-gray-200 md:pl-"
+                  >
+                    <div className="grid grid-cols-1 items-baseline gap-y-2 md:grid-cols-5">
+                      <h2
+                        id={group}
+                        className="col-span-5 mb-1 w-[fit-content] pr-4 rounded-r-full pl-2 border- border-gray-300/50 text-base font-semibold text-gray-800"
+                      >
+                        {/* <div className="pl-[1px]"> */}
+                        {formattedGroup.charAt(0).toUpperCase() +
+                          formattedGroup.slice(1)}
+                        {/* </div> */}
+                      </h2>
+                      <div className="col-span-5 mb-8">
+                        <div className="space-y-5">
+                          {" "}
+                          {renderPosts(groupedNewsPosts[group])}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </section>
-              )
-            );
-          })}
+                  </section>
+                )
+              );
+            }
+          )}
           {groupedNewsPosts?.months &&
             Object.entries(groupedNewsPosts?.months).map(([month, posts]) => (
               <section

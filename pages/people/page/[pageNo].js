@@ -6,12 +6,12 @@ import Container from "@/components/container";
 import PostTitle from '@/components/post-title'
 import { getPeopleByPage } from "@/lib/api";
 
-import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
+// import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
 import ProfileCard from "@/components/people/ProfileCard";
 
 const NewPagination = dynamic(() => import("@/components/pagination"));
-const PeopleFilters = dynamic(() => import("@/components/people/PeopleFilters"));
-const PeopleBreadcrumbs = dynamic(() => import("@/components/people/PeopleBreadcrumbs"));
+// const PeopleFilters = dynamic(() => import("@/components/people/PeopleFilters"));
+// const PeopleBreadcrumbs = dynamic(() => import("@/components/people/PeopleBreadcrumbs"));
 
 const PAGE_SIZE = 12;
 
@@ -103,7 +103,7 @@ export async function getStaticProps({ preview = null, params,locale }) {
     (await getPeopleByPage(preview, pageSize, page)) || [];
 
     //loop through all posts and if the post type is a tool, run the tool function
-    allPosts = allPosts?.map((post) => {
+    let formattedPosts = allPosts?.data?.map((post) => {
       if (post.attributes.type == "tool") {
         // use the formatAllTools function to format the tool content
         post = formatToolContent({post, tagNumber:1});
@@ -112,10 +112,10 @@ export async function getStaticProps({ preview = null, params,locale }) {
     }
     );
     // console.log("allposts*******" + JSON.stringify(allPosts))
-  const pagination = allPosts.meta.pagination;
+  const pagination = allPosts?.meta?.pagination;
   return {
     props: {
-      allPosts: allPosts.data,
+      allPosts: formattedPosts,
       preview,
       pagination,
     },
@@ -125,8 +125,8 @@ export async function getStaticProps({ preview = null, params,locale }) {
 
 export async function getStaticPaths() {
   const allPosts = (await getPeopleByPage(null, PAGE_SIZE, 0)) || [];
-  const pagination = allPosts.meta.pagination;
-  const pageCount = pagination.pageCount;
+  const pagination = allPosts?.meta?.pagination;
+  const pageCount = pagination?.pageCount;
   const pageCountArr = new Array(pageCount).fill(" ");
   return {
     paths:

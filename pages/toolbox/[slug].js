@@ -646,7 +646,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       authorAvatar,
       // morePosts: data?.morePosts.data,
     },
-    revalidate: 40,
+    // revalidate: 40,
   };
 }
 

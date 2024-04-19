@@ -171,6 +171,9 @@
     "uuidv4": "^6.2.13",
     "yup": "^0.32.11"
   },
+  "optionalDependencies": {
+    "@prototypr/prototypr-postie": "^1.0.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.20.7",
     "@storybook/addon-actions": "^8.0.0-alpha.15",

@@ -446,19 +446,35 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const allPosts = await getAllPostsWithSlug(
-    "article",
-    process.env.NODE_ENV ||
-      process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
-      ? 20
-      : TOTAL_STATIC_POSTS
-  );
-  // const homePosts = await getCombinedPostsForHomeStatic()
 
-  // let mergedSlugs = {
-  //   ...allPosts,
-  //   ...homePosts
-  // };
+  const timeout = (ms) => new Promise((resolve, reject) => 
+    setTimeout(() => reject(new Error('Request timed out')), ms)
+  );
+
+  let allPosts=null
+  try {
+    allPosts = await Promise.race([
+      getAllPostsWithSlug(
+        "article",
+        process.env.NODE_ENV ||
+          process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
+          ? 20
+          : TOTAL_STATIC_POSTS
+      ),
+      timeout(26000) // Set your desired timeout in milliseconds
+    ]);
+  } catch (error) {
+    console.error(error);
+    // Handle the timeout error appropriately
+  }
+
+  // const allPosts = await getAllPostsWithSlug(
+  //   "article",
+  //   process.env.NODE_ENV ||
+  //     process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
+  //     ? 20
+  //     : TOTAL_STATIC_POSTS
+  // );
 
   return {
     paths:
