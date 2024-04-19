@@ -21,10 +21,12 @@ If you do want to run the backend locally though, [here is a guide](https://prot
 ## How to run
 
 1. Clone this repo to your machine
-2. Run `npm install` from the project folder (we are using node v14.17.4)
+2. Run `npm install --no-optional` from the project folder (we are using node v14.17.4)
 3. Set up the environmental variables (see nect section)
 4. `npm run dev` 
 
+
+`npm install --no-optional` - some @prototypr packages are not public, --no-optional is required to skip installing them.   
 
 ## Set up .env variables
 

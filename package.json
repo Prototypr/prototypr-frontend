@@ -22,7 +22,6 @@
     "@meilisearch/instant-meilisearch": "^0.8.1",
     "@next/bundle-analyzer": "^12.1.5",
     "@phosphor-icons/react": "^2.0.15",
-    "@prototypr/prototypr-postie": "^1.0.2",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-checkbox": "^1.0.1",
     "@radix-ui/react-collapsible": "^1.0.1",
@@ -171,6 +170,9 @@
     "tsparticles": "^2.7.1",
     "uuidv4": "^6.2.13",
     "yup": "^0.32.11"
+  },
+  "optionalDependencies": {
+    "@prototypr/prototypr-postie": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
