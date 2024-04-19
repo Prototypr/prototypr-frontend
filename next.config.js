@@ -186,7 +186,7 @@ module.exports =
       ],
     },
       // generation before timing out
-  staticPageGenerationTimeout: 100000,
+  staticPageGenerationTimeout: 300000,
   });
 
 // module.exports = withSentryConfig(
