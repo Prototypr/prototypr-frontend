@@ -131,7 +131,7 @@ export default function Index({
         ) : (
           <div className="pt-[44px]" />
         )}
-        <div className="relative z-50  mt-6">
+        <div className="relative z-50 pt-6">
           <TagsNavRow />
         </div>
         <Container

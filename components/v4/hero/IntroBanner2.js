@@ -78,8 +78,7 @@ const IntroBanner = ({ tools, sponsor }) => {
       <div className="col-span-2 relative z-50">
         <div className="block boto absolute bottom-0  right-0 -mr-[120px] sm:-mr-[240px] md:mr-[45px]">
           <div className="relative">
-              <img src="/static/images/robotitosuelto.png" className="w-[125px] -mb-3 md:-mb-3 md:w-[165px] md:-scale-x-100 max-w-[400px] md:max-w-full cursor-collab z-10"
-                    style={{filter: 'drop-shadow(0 15px 10px rgb(0 0 0 / 0.3))', pointerEvents:'all'}}/>
+              <img src="/static/images/robotitosuelto.png" className="w-[125px] -mb-3 drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] md:-mb-3 md:w-[165px] md:-scale-x-100 max-w-[400px] md:max-w-full cursor-collab z-40 pointer-all"/>
 
           <div className="hidden 2md:block eyes-follow-tired absolute z-20 top-0 mt-[48px] md:mt-[42px] 2md:mt-[48px] right-[66px] md:right-[60px] 2md:right-[66px]">
             <div className="container">
