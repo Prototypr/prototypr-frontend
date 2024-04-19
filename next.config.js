@@ -185,6 +185,8 @@ module.exports =
         "sfo2.digitaloceanspaces.com",
       ],
     },
+      // generation before timing out
+  staticPageGenerationTimeout: 1000,
   });
 
 // module.exports = withSentryConfig(
