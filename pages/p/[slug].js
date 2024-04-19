@@ -4,13 +4,13 @@ import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
 // import Layout from "@/components/layout-editor";
 
-import Editor from "@/components/Editor/EditorB";
+import Editor from "@/components/Editor/Editor";
 import { useEffect } from "react";
 import useLoad from "@/components/Editor/editorHooks/editPost/useLoad";
 import useUpdate from "@/components/Editor/editorHooks/editPost/useUpdate";
 
 import { useConfirmTabClose } from "@/components/Editor/useConfirmTabClose";
-import EditorNav from "@/components/EditorNavB";
+import EditorNav from "@/components/EditorNav";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));

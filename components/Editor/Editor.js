@@ -1,21 +1,18 @@
+import React from "react";
+import ReactDOM from "react-dom";
+
 import { useEditor, EditorContent } from "@tiptap/react";
 import MenuFloating from "./Menus/FloatingMenu";
-import EditorNav from "../EditorNav";
-import dynamic from "next/dynamic";
 
 import Placeholder from "@tiptap/extension-placeholder";
 import Document from "@tiptap/extension-document";
 import TextMenu from "@/components/Editor/Menus/TextMenu";
 import ImageMenu from "@/components/Editor/Menus/ImageMenu";
-import Button from "@/components/Primitives/Button";
-
-import SidePanelTrigger from "./SidePanel/SidePanelTrigger";
 
 import Link from "@tiptap/extension-link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 
-import { PublishDialogButton } from "./PublishDialogButton";
 import Cite from "./CustomExtensions/Cite";
 
 import Iframe from "./CustomExtensions/Iframe/Iframe";
@@ -46,54 +43,32 @@ import Tweet from "./CustomExtensions/Tweet/Tweet";
 import LinkEmbed from "./CustomExtensions/LinkEmbed/LinkEmbed";
 import Video from "./CustomExtensions/Video/Video";
 
-import { useConfirmTabClose } from "./useConfirmTabClose";
-import { useLoad, useUpdate } from "./editorHooks/index";
-import useCreate from "@/components/Editor/editorHooks/newPost/useCreate";
-
-import { ToggleSwitch } from "@/components/atom/Switch/switch";
-import PreviewDisplay from "./preview";
-
-import { useRouter } from "next/router";
 import VideoMenu from "./Menus/VideoMenu";
-const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
+import { addTwitterScript } from "./editorHooks/libs/addTwitterScript";
+import UndoRedoButtons from "./UndoRedoButtons";
+import EditorNavButtons from "./EditorNavButtons";
 
 const CustomDocument = Document.extend({
   content: "heading block*",
   atom: true,
 });
 
-const Editor = ({ editorType = "create", hasEditPermission = true }) => {
-  const router = useRouter();
-
+const Editor = ({
+  canEdit = false,
+  initialContent = null,
+  postStatus = "draft",
+  postObject = null,
+  //functions
+  refetchPost=false,
+  savePost = false,
+  updatePost = false,
+  updatePostSettings = false,
+}) => {
   const { user } = useUser({
     redirectIfFound: false,
   });
 
-  const {
-    content,
-    loading,
-    slug,
-    title,
-    articleSlug,
-    postId,
-    postStatus,
-    isOwner,
-    postObject,
-  } = useLoad(editorType, user);
-  const {
-    updateExistingPost,
-    setSaving,
-    setHasUnsavedChanges,
-    hasUnsavedChanges,
-    saving,
-  } = useUpdate();
-  const { createNewPost } = useCreate();
-
-  const [editorCreated, setEditorCreated] = useState(false);
-  const [editorInstance, setEditorInstance] = useState(false);
-  const [previewEnabled, togglePreview] = useState(false);
-
-  useConfirmTabClose(hasUnsavedChanges);
+  const [isSaving, setIsSaving] = useState(false);
 
   const editor = useEditor({
     extensions: [
@@ -159,255 +134,126 @@ const Editor = ({ editorType = "create", hasEditPermission = true }) => {
       }),
     ],
     onCreate: ({ editor }) => {
-      setEditorInstance(editor);
-      setEditorCreated(true);
+      /**
+       * when the editor is created
+       * set the content to the initial content
+       */
+      editor
+        ?.chain()
+        .setContent(initialContent)
+        .setMeta("addToHistory", false)
+        .run();
 
-      const s = document.createElement("script");
-      s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-      s.setAttribute("id", "twitter-widget");
-      s.setAttribute("async", "true");
-
-      if (!document.getElementById("twitter-widget")) {
-        document.head.appendChild(s);
-      }
-      // setTimeout(() => {
-      // }, 1200);
+      //add the twitter widget script
+      addTwitterScript();
     },
     onUpdate: ({ editor }) => {
-      const json = editor.getJSON();
-      setHasUnsavedChanges(true);
-      // send the content to an API here (if new post only)
-      if (!articleSlug) {
-        localStorage.setItem("wipContent", JSON.stringify(json));
+      try {
+        const json = editor.getJSON();
+        // autosave would happen in the parent here;
+        updatePost({ editor, json });
+      } catch (e) {
+        if (typeof updatePost !== "function") {
+          console.log(e);
+          console.log("updatePost is not a function");
+        } else [console.log(e)];
       }
     },
   });
 
-  // load from local storage if anything exists
-  useEffect(() => {
-    if (editor && !editor.isDestroyed) {
-      if (editor?.commands) {
-        editor
-          ?.chain()
-          .setContent(content)
-          .setMeta("addToHistory", false)
-          .run();
-      }
-    }
-  }, [content]);
+  /**
+   * onSave
+   * when save button is clicked on the navbar!
+   *
+   * forReview is a flag for when publish button is clicked - it submits the post for review
+   *
+   * - not using autosave yet
+   * - remove onSave when switching to autosaving
+   */
+  const onSave = async ({ forReview }) => {
+    setIsSaving(true);
 
-  useEffect(() => {
-    if (editor) {
-      if (user?.isAdmin) {
-        if (!hasEditPermission) {
-          console.log("cant edit");
-          editor.setEditable(false);
-        } else {
-          console.log("can edit");
-          editor.setEditable(true);
-        }
+    try {
+      const saved = await savePost({
+        editor,
+        forReview: forReview ? true : false,
+      });
+      if (saved) {
+        setIsSaving(false);
+      } else {
+        console.log("Error saving");
+        setIsSaving(false);
       }
-    }
-  }, [editor, hasEditPermission, user?.isAdmin]);
-
-  const onSave = async () => {
-    // if (editorType === "edit") {
-    if (articleSlug) {
-      setSaving(true);
-      try {
-        console.log("saving post...");
-        // while updating the post, we are using articleSlug instead of slug
-        // This is to ensure that the slug never changes from its original slug
-        await updateExistingPost({
-          postId,
-          user,
-          editor,
-          articleSlug,
-          forReview: false,
-          postStatus,
-          postObject,
-        });
-      } catch (e) {
-        setSaving(false);
-      }
-    } else {
-      if (editorType === "create") {
-        const postInfo = await createNewPost(user, editor);
-        //set the new slug
-        localStorage.removeItem("wipContent");
-
-        router.push(`p/${postInfo?.id}`);
-      }
+    } catch (e) {
+      console.log("Error saving");
+      setIsSaving(false);
     }
   };
 
-  // not using right now
-  // const onExport = async () => {
-  //   const json = editor.getJSON();
-  //   const content = json.content;
-  //   if (content) {
-  //     let blob = new Blob([JSON.stringify({ content: content })], {
-  //       type: "application/json",
-  //     });
-  //     const filename = slug ? `${slug}.json` : `${Date.now()}.json`;
-  //     saveAs(blob, filename);
-  //   }
-  // };
-
-  if (
-    !loading &&
-    user?.isLoggedIn &&
-    !isOwner &&
-    editorType !== "create" &&
-    !user?.isAdmin
-  )
-    return <p>You are not owner of this post</p>;
+  if (!canEdit) return <p>You are not owner of this post</p>;
 
   return (
     <>
-      <div className="fixed z-[48] bottom-10 left-10 border flex flex-col grid gap-2 border-black border-opacity-10 p-4 bg-white rounded-lg">
-        <p className="text-xs">Preview Mode</p>
-        <ToggleSwitch
-          onToggle={() => {
-            togglePreview(!previewEnabled);
-            setTimeout(() => {
-              const s = document.createElement("script");
-              s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-              s.setAttribute("id", "twitter-widget");
-              s.setAttribute("async", "true");
-
-              if (!document.getElementById("twitter-widget")) {
-                document.head.appendChild(s);
-              }
-            }, 500);
-          }}
-          size="small"
-          checked={previewEnabled}
-        />
-      </div>
-
-      {previewEnabled ? (
-        <div>
-          <PreviewDisplay editor={editorInstance} content={content} />
-        </div>
-      ) : (
-        <div className="w-full relative my-4">
-          {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
-          {user?.isAdmin && (
-            <div className="mt-16">
-              {hasEditPermission ? (
-                <div className="fixed bottom-3 z-20 w-full">
-                  <div className="relative bg-gray-100/80 w-[500px] shadow-sm border border-gray-300/20 mx-auto rounded-xl p-3 text-sm backdrop-blur text-gray-800 flex flex-row justify-center items-center">
-                    You're editing as admin.
-                  </div>
-                </div>
-              ) : (
-                <div className=" p-3 text-sm bg-yellow-400 flex flex-row justify-center items-center">
-                  You don't have permission to edit this.
-                </div>
-              )}
+      <div className="w-full relative my-4">
+        {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
+        {user?.isAdmin && (
+          <div className="mt-16">
+            <div className="fixed bottom-3 z-20 w-full">
+              <div className="relative bg-gray-100/80 w-[500px] shadow-sm border border-gray-300/20 mx-auto rounded-xl p-3 text-sm backdrop-blur text-gray-800 flex flex-row justify-center items-center">
+                You're editing as admin.
+              </div>
             </div>
-          )}
-
-          <EditorNav
-            editorInstance={editorInstance}
-            postStatus={postStatus}
-            isEditor={true}
-            editorButtons={
-              <div className="my-auto flex mr-1">
-                {/* {hasUnsavedChanges && (
-                  <div className="inline mr-6 text-pink-500 text-xs my-auto">
-                    Unsaved changes
-                  </div>
-                )} */}
-                <>
-                  {!user?.isAdmin && (
-                    // <div>
-                      <Button
-                        variant="ghostBlue"
-                        onClick={onSave}
-                        className="text-[13px] font-normal h-[25px] px-2 my-auto"
-                      >
-                        {saving
-                          ? "Saving..."
-                          : postStatus == "publish"
-                            ? "Update"
-                            : "Save Draft"}
-                      </Button>
-                    // </div>
-                  )}
-
-                  {user?.isAdmin && hasEditPermission && (
-                    // <div>
-                      <Button
-                        variant="ghostBlue"
-                        onClick={onSave}
-                        className="text-[13px] font-normal h-[25px] px-2 my-auto"
-                      >
-                        {saving
-                          ? "Saving..."
-                          : postStatus == "publish"
-                            ? "Update"
-                            : "Save Draft "}
-                      </Button>
-                    // </div>
-                  )}
-
-                  {((slug && postStatus != "publish" && !user?.isAdmin) ||
-                    (isOwner && postStatus != "publish")) && (
-                    <PublishDialogButton
-                      slug={slug}
-                      user={user}
-                      postId={postId}
-                      createNewPost={createNewPost}
-                      updateExistingPost={updateExistingPost}
-                      editor={editor}
-                      postStatus={postStatus}
-                      postObject={postObject}
-                    />
-                  )}
-
-                  {user?.isAdmin && (
-                    <div className="flex flex-col grid gap-2 bg-white rounded-lg">
-                      {editorInstance && (
-                        <SidePanelTrigger
-                          user={user}
-                          editor={editorInstance}
-                          postObject={postObject}
-                        />
-                      )}
-                    </div>
-                  )}
-                </>
-              </div>
-            }
-          />
-          {/* NAVIGATION END */}
-          <div className="my-4 pt-0 mt-[100px] max-w-[44rem] mx-auto relative pb-10 blog-content">
-            {editor && <MenuFloating editor={editor} />}
-            <TextMenu editor={editor} />
-            {/* <LinkMenu editor={editor} /> */}
-            <ImageMenu editor={editor} />
-            <VideoMenu editor={editor} />
-            {loading || !editorCreated || (!content && slug) ? (
-              <div
-                style={{ maxWidth: "100%" }}
-                className="mx-2 h-screen absolute top-0 left-0 flex flex-col justify-center w-screen"
-              >
-                <div className="-mt-32 mx-auto text-blue-800 opacity-80">
-                  <Spinner />
-                </div>
-              </div>
-            ) : (
-              <EditorContent editor={editor} />
-            )}
-
-            <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
           </div>
+        )}
+
+        {/* undoredo buttons render in a portal on the navbar */}
+        <UndoRedoNavPortal>
+          <UndoRedoButtons editor={editor} />
+        </UndoRedoNavPortal>
+
+        <EditorButtonsNavPortal>
+          <EditorNavButtons
+            user={user}
+            onSave={onSave}
+            isSaving={isSaving}
+            postStatus={postStatus}
+            canEdit={canEdit}
+            editor={editor}
+            //for settings panel
+            postObject={postObject}
+            updatePostSettings={updatePostSettings}
+            refetchPost={refetchPost}
+          />
+        </EditorButtonsNavPortal>
+
+        {/* NAVIGATION END */}
+        <div className="my-4 pt-0 mt-[100px] max-w-[44rem] mx-auto relative pb-10 blog-content">
+          {editor && <MenuFloating editor={editor} />}
+          <TextMenu editor={editor} />
+          {/* <LinkMenu editor={editor} /> */}
+          <ImageMenu editor={editor} />
+          <VideoMenu editor={editor} />
+
+          <EditorContent editor={editor} />
+          <div className="popup-modal mb-6 relative bg-white p-6 pt-3 rounded-lg w-full"></div>
         </div>
-      )}
+      </div>
+      {/* )} */}
     </>
   );
 };
 
 export default Editor;
+
+/**
+ * Use portal components so that the buttons can be rendered on the navbar
+ */
+const EditorButtonsNavPortal = ({ children }) => {
+  const container = document.getElementById("editor-nav-buttons");
+  return ReactDOM.createPortal(children, container);
+};
+
+const UndoRedoNavPortal = ({ children }) => {
+  const container = document.getElementById("undoredo-container");
+  return ReactDOM.createPortal(children, container);
+};

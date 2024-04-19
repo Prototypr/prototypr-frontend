@@ -6,14 +6,14 @@ import useUser from "@/lib/iron-session/useUser";
 import { useEffect } from "react";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 
-import Editor from "@/components/Editor/EditorB";
+import Editor from "@/components/Editor/Editor";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
 import useLoad from "@/components/Editor/editorHooks/newPost/useLoad";
 import useCreate from "@/components/Editor/editorHooks/newPost/useCreate";
 
 import { useRouter } from "next/router";
-import EditorNav from "@/components/EditorNavB";
+import EditorNav from "@/components/EditorNav";
 
 /**
  * Write
