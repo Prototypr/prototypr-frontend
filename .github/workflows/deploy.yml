@@ -63,6 +63,10 @@ jobs:
         mkdir -p ~/.ssh/
         echo "${{ secrets.SERVER_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+
+      # Add the server's host key to known_hosts
+        echo "${{ secrets.SERVER_HOST_KEY }}" >> ~/.ssh/known_hosts
+
         scp -r ${{ env.STAGING_DIR_PATH }} ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
