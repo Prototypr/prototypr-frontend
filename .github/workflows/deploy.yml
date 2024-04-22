@@ -65,7 +65,7 @@ jobs:
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging directory of .next folder...' && if [ -d ${{ env.STAGING_DIR_PATH }}/.next ]; then rm -rf ${{ env.STAGING_DIR_PATH }}/.next; fi"
-        scp -r ${{ env.STAGING_DIR_PATH }}/* ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
+        scp -r ${{ env.STAGING_DIR_PATH }}/.next ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
           trap 'echo \"An error occurred. Reverting to backup...\"; mv ${{ env.LIVE_DIR_PATH }}.backup ${{ env.LIVE_DIR_PATH }}' ERR
