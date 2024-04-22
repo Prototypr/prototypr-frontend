@@ -65,7 +65,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
         # Add the server's host key to known_hosts
-       ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+        ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
         scp -r ${{ env.STAGING_DIR_PATH }} ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
