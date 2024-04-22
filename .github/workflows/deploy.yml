@@ -61,6 +61,7 @@ jobs:
         SERVER_USER: ${{ secrets.SERVER_USER }}
       run: |
         mkdir -p ~/.ssh/
+        echo "${{ secrets.SERVER_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         scp -r ${{ env.STAGING_DIR_PATH }} ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
