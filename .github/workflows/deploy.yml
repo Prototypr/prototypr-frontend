@@ -64,9 +64,11 @@ jobs:
         # Add the server's host key to known_hosts
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-        scp -v -r ${{ env.STAGING_DIR_PATH }} ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
-        ssh -v ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
+        scp -r ${{ env.STAGING_DIR_PATH }}/ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
+        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
+          echo "Cleaning staging directory..." | tee -a /var/log/prototypr/deploy.log
+          rm -rf ${{ env.STAGING_DIR_PATH }}/*
           echo "Checking if live directory exists..." | tee -a /var/log/prototypr/deploy.log
           if [ -d ${{ env.LIVE_DIR_PATH }} ]; then
             echo "Moving live directory to backup..." | tee -a /var/log/prototypr/deploy.log
