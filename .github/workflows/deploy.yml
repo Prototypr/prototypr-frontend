@@ -80,18 +80,18 @@ jobs:
           echo "Waiting for .next directory to be copied..."
             sleep 5
           done
-          echo "Checking if ${env.LIVE_DIR_PATH} exists..."
-          if [ -d "${env.LIVE_DIR_PATH}" ]; then
-            echo "${env.LIVE_DIR_PATH} exists."
+          echo "Checking if ${{env.LIVE_DIR_PATH}} exists..."
+          if [ -d "${{env.LIVE_DIR_PATH}}" ]; then
+            echo "${{env.LIVE_DIR_PATH}} exists."
           else
-            echo "${env.LIVE_DIR_PATH} does not exist."
+            echo "${{env.LIVE_DIR_PATH}} does not exist."
           fi
 
-          echo "Checking if ${env.LIVE_DIR_PATH}/.next exists..."
-          if [ -d "${env.LIVE_DIR_PATH}/.next" ]; then
-            echo "${env.LIVE_DIR_PATH}/.next exists."
+          echo "Checking if ${{env.LIVE_DIR_PATH}}/.next exists..."
+          if [ -d "${{env.LIVE_DIR_PATH}}/.next" ]; then
+            echo "${{env.LIVE_DIR_PATH}}/.next exists."
           else
-            echo "${env.LIVE_DIR_PATH}/.next does not exist."
+            echo "${{env.LIVE_DIR_PATH}}/.next does not exist."
           fi
           mv ${{ env.STAGING_DIR_PATH }}/.next ${{ env.LIVE_DIR_PATH }}/.next
           echo "Restarting application..." | tee -a /var/log/prototypr/deploy.log
