@@ -1,0 +1,56 @@
+name: Deploy Next.js App
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  # STAGING_DIR: /tmp/my-app-staging
+  # LIVE_DIR: /var/www/my-app
+  STAGING_DIR_PATH: ${{ vars.STAGING_DIR_PATH }}
+  LIVE_DIR_PATH: ${{ vars.LIVE_DIR_PATH }}
+
+jobs:
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: Production
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20.x
+
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+
+    - name: Build Next.js app
+      run: |
+        mkdir -p ${{ env.STAGING_DIR_PATH }}
+        npm run build
+        cp -r .next ${{ env.STAGING_DIR_PATH }}
+
+    - name: Deploy to server
+      env:
+        SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+      run: |
+        mkdir -p ~/.ssh/
+        chmod 600 ~/.ssh/id_rsa
+        scp -r ${{ env.STAGING_DIR_PATH }} ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
+        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
+          set -e
+          echo "Checking if live directory exists..." | tee -a /var/log/prototypr/deploy.log
+          if [ -d ${{ env.LIVE_DIR_PATH }} ]; then
+            echo "Moving live directory to backup..." | tee -a /var/log/prototypr/deploy.log
+            mv ${{ env.LIVE_DIR_PATH }} ${{ env.LIVE_DIR_PATH }}.backup
+          fi
+          echo "Moving .next to live directory..." | tee -a /var/log/prototypr/deploy.log
+          mv ${{ env.STAGING_DIR_PATH }}/.next ${{ env.LIVE_DIR_PATH }}
+          echo "Restarting application..." | tee -a /var/log/prototypr/deploy.log
+          pm2 restart prototypr-5
+        "

@@ -14,8 +14,8 @@ const MakerPopover = () => {
 
   const [userClosed, setUserClosed] = useState(false);
   const [visible, setVisible] = useState(false);
-const [justClosed, setJustClosed] = useState(false);
-const [closed, setClosed] = useState(false);
+  const [justClosed, setJustClosed] = useState(false);
+  const [closed, setClosed] = useState(false);
   // Define the scrollListener inside useEffect or use useCallback
   useEffect(() => {
     // Check if the user has already closed the sticky footer
@@ -36,20 +36,22 @@ const [closed, setClosed] = useState(false);
   }, [userClosed]); // Re-attach the event listener if userClosed changes
 
   const hide = () => {
-    if (confirm("Are you you want to get rid of my little face from the site?")) {
-        setJustClosed(true);
+    if (
+      confirm("Are you you want to get rid of my little face from the site?")
+    ) {
+      setJustClosed(true);
 
-        setTimeout(()=>{
-            setClosed(true)
-        },1000)
-        
-        setTimeout(()=>{
-          setOpen(false);
-          setVisible(false);
-          set("closed-face", "true", { expires: 365 }); // Set a cookie to remember the user's choice, assuming a 1-year expiration
-          setUserClosed(true);
-          setJustClosed(false)
-      },2000)
+      setTimeout(() => {
+        setClosed(true);
+      }, 1000);
+
+      setTimeout(() => {
+        setOpen(false);
+        setVisible(false);
+        set("closed-face", "true", { expires: 365 }); // Set a cookie to remember the user's choice, assuming a 1-year expiration
+        setUserClosed(true);
+        setJustClosed(false);
+      }, 2000);
     }
   };
 
@@ -63,7 +65,7 @@ const [closed, setClosed] = useState(false);
         >
           <div
             id="supportavatar"
-            className={`transition transition-all duration-1000 ${(justClosed && !closed)?'right-[190px] bottom-[140px]':closed?'-right-[350px]':'right-0'} fixed z-[99] bottom-0 flex m-3`}
+            className={`transition transition-all duration-1000 ${justClosed && !closed ? "right-[190px] bottom-[140px]" : closed ? "-right-[25vw]" : "right-0"} fixed z-[99] bottom-0 flex m-3`}
           >
             <a
               className="cursor-pointer inline-block"
@@ -72,18 +74,20 @@ const [closed, setClosed] = useState(false);
               // href={`${author.url ? author.url : "#"}`}
             >
               <div
-                className={`shadow-sm group ${open ? "scale-[1.5] " : ""} transition transition-all duration-700 w-[44px] h-[44px] relative border border-gray-400/30 bg-white capitalize text-gray-100 text-xs p-0.5 rounded-full inline-block flex`}
+                className={`shadow-sm group ${open ? "scale-[1.5] " : ""} transition transition-all duration-700 w-[44px] h-[44px] md:w-[54px] md:h-[54px] relative border border-gray-400/30 bg-white capitalize text-gray-100 text-xs p-[2px] rounded-full inline-block flex`}
               >
-                <div className={`${justClosed?'scale-[10] ':''} transition transition-all duration-1000 w-full h-full rounded-full  overflow-hidden`}>
+                <div
+                  className={`${justClosed ? "scale-[10] " : ""} transition transition-all duration-1000 w-full h-full rounded-full  overflow-hidden`}
+                >
                   <img
                     width={36}
                     height={36}
-                    className={`${justClosed?'animate-spin':'group-hover:scale-125'} ${((open && !justClosed)) ? "scale-[1.5]" : ""} object-cover w-full h-full transition transition-all duration-700 rounded-full`}
+                    className={`${justClosed ? "animate-spin" : "group-hover:scale-125"} ${open && !justClosed ? "scale-[1.5]" : ""} object-cover w-full h-full transition transition-all duration-700 rounded-full`}
                     src={"/static/avatars/ah.png"}
                   />
                 </div>
                 <div
-                  className={`absolute transition transition-all duration-700 ${open ? "" : ""} right-0 bottom-[2px] text-[16px] drop-shadow-md"`}
+                  className={`absolute transition transition-all duration-700 ${(open || closed || justClosed) ? "scale-0" : ""} -right-[1px] bottom-[1px] text-[15px] drop-shadow-md"`}
                 >
                   👋
                 </div>
@@ -108,7 +112,7 @@ const [closed, setClosed] = useState(false);
               }
             }}
             onFocusOutside={() => setOpen(false)}
-            className={`${justClosed?'hidden':''} z-[99] rounded p-5 w-[460px] max-w-[90%] ml-[2.5%] bg-white shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.violet7)] will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade`}
+            className={`${justClosed ? "hidden" : ""} z-[99] rounded p-5 w-[400px] max-w-[90vw] mr-3 md:mr-10 bg-white shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.violet7)] will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade`}
             sideOffset={5}
           >
             <div className="flex flex-col gap-2.5">
