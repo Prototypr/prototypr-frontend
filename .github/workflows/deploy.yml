@@ -26,7 +26,8 @@ jobs:
         node-version: 20.x
 
     - name: Install dependencies
-      run: npm install --legacy-peer-deps
+      #GITHUB_PERSONAL_ACCESS_TOKEN for private npm packages
+      run: GITHUB_PERSONAL_ACCESS_TOKEN=${{secrets.GH_PERSONAL_ACCESS_TOKEN}} npm install --legacy-peer-deps
 
     - name: Build Next.js app
       run: |
