@@ -64,7 +64,7 @@ jobs:
         # Add the server's host key to known_hosts
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Cleaning staging directory...' && rm -rf ${{ env.STAGING_DIR_PATH }}/*"
+        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging directory...' && if [ -d ${{ env.STAGING_DIR_PATH }} ]; then cd ${{ env.STAGING_DIR_PATH }} && rm -rf *; fi"
         scp -r ${{ env.STAGING_DIR_PATH }}/* ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
