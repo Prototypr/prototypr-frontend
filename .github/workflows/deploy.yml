@@ -76,7 +76,7 @@ jobs:
           fi
           echo "Moving .next to live directory..." | tee -a /var/log/prototypr/deploy.log
           trap 'echo \"An error occurred. Reverting to backup...\"; rsync -a ${{ env.LIVE_DIR_PATH }}.backup/ ${{ env.LIVE_DIR_PATH }}/' ERR
-          mv ${{ env.STAGING_DIR_PATH }}/.next ${{ env.LIVE_DIR_PATH }}/.next
+          mv ${{ env.STAGING_DIR_PATH }}/.next ${{ env.LIVE_DIR_PATH }}/
           echo "Restarting application..." | tee -a /var/log/prototypr/deploy.log
           pm2 restart prototypr-5
         "
