@@ -64,15 +64,18 @@ jobs:
         # Add the server's host key to known_hosts
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
+        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Cleaning staging directory...' && rm -rf ${{ env.STAGING_DIR_PATH }}/*"
         scp -r ${{ env.STAGING_DIR_PATH }}/ ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
+          trap 'echo \"An error occurred. Reverting to backup...\"; mv ${{ env.LIVE_DIR_PATH }}.backup ${{ env.LIVE_DIR_PATH }}' ERR
           echo "Checking if live directory exists..." | tee -a /var/log/prototypr/deploy.log
           if [ -d ${{ env.LIVE_DIR_PATH }} ]; then
             echo "Moving live directory to backup..." | tee -a /var/log/prototypr/deploy.log
             mv ${{ env.LIVE_DIR_PATH }} ${{ env.LIVE_DIR_PATH }}.backup
           fi
           echo "Moving .next to live directory..." | tee -a /var/log/prototypr/deploy.log
+          trap 'echo \"An error occurred. Reverting to backup...\"; rsync -a ${{ env.LIVE_DIR_PATH }}.backup/ ${{ env.LIVE_DIR_PATH }}/' ERR
           mv ${{ env.STAGING_DIR_PATH }}/.next ${{ env.LIVE_DIR_PATH }}
           echo "Restarting application..." | tee -a /var/log/prototypr/deploy.log
           pm2 restart prototypr-5
