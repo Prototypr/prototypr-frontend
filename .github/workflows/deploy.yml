@@ -22,9 +22,6 @@ env:
   SECRET_COOKIE_PASSWORD: ${{ secrets.SECRET_COOKIE_PASSWORD }}
   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
   SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-  SERVER_HOST: ${{ secrets.SERVER_HOST }}
-  SERVER_SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
-  SERVER_USER: ${{ secrets.SERVER_USER }}
   STRAPI_DATABASE_URL: ${{ secrets.STRAPI_DATABASE_URL }}
   STRAPI_PREVIEW_SECRET: ${{ secrets.STRAPI_PREVIEW_SECRET }}
   STRAPI_READONLY_TOKEN: ${{ secrets.STRAPI_READONLY_TOKEN }}
@@ -67,8 +64,8 @@ jobs:
         # Add the server's host key to known_hosts
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-        scp -r ${{ env.STAGING_DIR_PATH }} ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
-        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
+        scp -v -r ${{ env.STAGING_DIR_PATH }} ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
+        ssh -v ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
           echo "Checking if live directory exists..." | tee -a /var/log/prototypr/deploy.log
           if [ -d ${{ env.LIVE_DIR_PATH }} ]; then
