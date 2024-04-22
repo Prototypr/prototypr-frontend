@@ -31,7 +31,6 @@ import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import PostHeader from "@/components/post-header";
 import SocialShare from "@/components/SocialShare";
 import PostGroupRow from "@/components/v4/layout/PostGroupRow";
-import { getPostsWithRetry, staticPathTimeout } from "@/lib/staticPathTimeout";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -447,10 +446,13 @@ export async function getStaticProps({ params, preview = null, locale }) {
 }
 
 export async function getStaticPaths({ locales }) {
-  const allPosts = await getPostsWithRetry({
-    maxRetries: 4,
-    postType: "article",
-  });
+  const allPosts = await getAllPostsWithSlug(
+    'article',
+    process.env.NODE_ENV ||
+      process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
+      ? TOTAL_STATIC_POSTS
+      : 20
+  );
 
   return {
     paths:

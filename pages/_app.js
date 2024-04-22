@@ -22,6 +22,7 @@ const AppToaster = dynamic(() => {return import("@/components/AppToaster")},{ ss
 import '../styles/index.scss'
 import '../styles/toolStyles.css'
 import PageViewTracker from "@/components/PageViewTracker";
+import MakerPopover from "@/components/maker/maker";
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
 
@@ -87,27 +88,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
       key={locale || "en-US"}
       defaultLocale="en-US" locale={locale || "en-US"} messages={messages}>
     <>
-    {/* <div className="fixed z-[99] bottom-0 right-0 flex m-3">
-        <a
-          className="cursor-pointer inline-block"
-          rel="nofollow"
-          target="_blank"
-          // href={`${author.url ? author.url : "#"}`}
-        >
-          <div className="shadow-lg border border-gray-400/30 bg-white capitalize text-gray-100 text-xs px-3 py-2 rounded-full inline-block flex">
-            <img 
-            width={36}
-            height={36}
-            className="object-cover w-[36px] h-[36px] rounded-full"
-            src={'https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png'}/>
-            
-            <div className="my-auto text-indigo-900 text-sm ml-2 pr-2">
-             By Graeme
-            </div>
-          </div>
-        </a>
-      
-      </div> */}
+    <MakerPopover/>
     {/* <PageViewTracker/> */}
     <TopProgressBar/>
     <SWRConfig

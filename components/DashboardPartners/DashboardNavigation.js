@@ -62,11 +62,11 @@ const DashboardNavigation = ({ activeTab }) => {
       <Link href="/dashboard/partner" className="mb-2">
         <div className={"text-gray-700 "}>
           <div
-            className={`${activeTab == 0 ? "bg-blue-100 font-semibold text-blue-900" : "hover:bg-blue-100/80"} flex justify-start p-2.5 px-4 rounded-xl text-sm cursor-pointer w-full`}
+            className={`${activeTab == 0 ? "bg-blue-100 font-semibold text-black/90" : "hover:bg-blue-100/80"} flex justify-start p-3 rounded-xl text-base cursor-pointer w-full`}
           >
             <div className="flex justify-start">
-              <Building size={18} className="mr-3" />
-              <div className="my-auto text-center mx-auto text-sm">
+              <Building size={22} className="mr-2" />
+              <div className="my-auto text-center mx-auto text-base">
                 Overview
               </div>
             </div>
@@ -76,11 +76,11 @@ const DashboardNavigation = ({ activeTab }) => {
       <Link href="/dashboard/partner/edit-company" className="mb-2">
         <div className={"text-gray-700"}>
           <div
-            className={`${activeTab == 1 ? "bg-blue-100 font-semibold text-blue-900" : "hover:bg-blue-100/80"} flex justify-start p-2.5 px-4 rounded-xl text-sm cursor-pointer w-full`}
+            className={`${activeTab == 1 ? "bg-blue-100 font-semibold text-black/90" : "hover:bg-blue-100/80"} flex justify-start p-3 rounded-xl text-base cursor-pointer w-full`}
           >
             <div className="flex justify-start">
-              <UserSquare size={18} className="mr-3" />
-              <div className="my-auto text-center text-sm">Company</div>
+              <UserSquare size={22} className="mr-2" />
+              <div className="my-auto text-center text-base">Company</div>
             </div>
           </div>
         </div>
@@ -88,11 +88,11 @@ const DashboardNavigation = ({ activeTab }) => {
       <Link href="/dashboard/partner/ads" className="mb-2">
         <div className={"text-gray-700 "}>
           <div
-            className={`${activeTab == 2 ? "bg-blue-100 font-semibold text-blue-900" : "hover:bg-blue-100/80"} flex justify-start p-2.5 px-4 rounded-xl text-sm cursor-pointer w-full`}
+            className={`${activeTab == 2 ? "bg-blue-100 font-semibold text-black/90" : "hover:bg-blue-100/80"} flex justify-start p-3 rounded-xl text-base cursor-pointer w-full`}
           >
             <div className="flex justify-start">
-              <ShootingStar size={18} className="mr-3" />
-              <div className="my-auto text-center mx-auto text-sm">Ads</div>
+              <ShootingStar size={22} className="mr-2" />
+              <div className="my-auto text-center mx-auto text-base">Ads</div>
             </div>
           </div>
         </div>
@@ -100,11 +100,11 @@ const DashboardNavigation = ({ activeTab }) => {
       <Link href="/dashboard/partner/jobs" className="mb-2">
         <div className={"text-gray-700"}>
           <div
-            className={`${activeTab == 3 ? "bg-blue-100 font-semibold text-blue-900" : "hover:bg-blue-100/80"} flex justify-start p-2.5 px-4 rounded-xl text-sm cursor-pointer w-full`}
+            className={`${activeTab == 3 ? "bg-blue-100 font-semibold text-black/90" : "hover:bg-blue-100/80"} flex justify-start p-3 rounded-xl text-base cursor-pointer w-full`}
           >
             <div className="flex justify-start">
-              <SignPost size={18} className="mr-3" />
-              <div className="my-auto text-center text-sm">Jobs</div>
+              <SignPost size={22} className="mr-2" />
+              <div className="my-auto text-center text-base">Jobs</div>
             </div>
           </div>
         </div>

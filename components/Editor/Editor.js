@@ -48,18 +48,21 @@ import { addTwitterScript } from "./editorHooks/libs/addTwitterScript";
 import UndoRedoButtons from "./UndoRedoButtons";
 import EditorNavButtons from "./EditorNavButtons";
 
-const CustomDocument = Document.extend({
-  content: "heading block*",
-  atom: true,
-});
+// const CustomDocument = Document.extend({
+//   content: "heading block*",
+//   atom: true,
+// });
 
 const Editor = ({
+  wrapperClass=false,
+  postType = "article",
   canEdit = false,
   initialContent = null,
   postStatus = "draft",
   postObject = null,
+  showNavButtons = true,
   //functions
-  refetchPost=false,
+  refetchPost = false,
   savePost = false,
   updatePost = false,
   updatePostSettings = false,
@@ -72,7 +75,12 @@ const Editor = ({
 
   const editor = useEditor({
     extensions: [
-      CustomDocument,
+      // CustomDocument,
+      //if postType is article, then the document should start with a heading
+      Document.extend({
+        content: postType == "article" ? "heading block*" : "block*",
+        atom: true,
+      }),
       Text,
       History,
       Paragraph,
@@ -194,9 +202,9 @@ const Editor = ({
 
   return (
     <>
-      <div className="w-full relative my-4">
+      <div className={`w-full relative ${postType=='article'?'my-4':''}`}>
         {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
-        {user?.isAdmin && (
+        {(user?.isAdmin && postType=='article')?
           <div className="mt-16">
             <div className="fixed bottom-3 z-20 w-full">
               <div className="relative bg-gray-100/80 w-[500px] shadow-sm border border-gray-300/20 mx-auto rounded-xl p-3 text-sm backdrop-blur text-gray-800 flex flex-row justify-center items-center">
@@ -204,30 +212,34 @@ const Editor = ({
               </div>
             </div>
           </div>
-        )}
+        :null}
 
         {/* undoredo buttons render in a portal on the navbar */}
-        <UndoRedoNavPortal>
-          <UndoRedoButtons editor={editor} />
-        </UndoRedoNavPortal>
+        {showNavButtons !== false ? (
+          <UndoRedoNavPortal>
+            <UndoRedoButtons editor={editor} />
+          </UndoRedoNavPortal>
+        ) : null}
 
-        <EditorButtonsNavPortal>
-          <EditorNavButtons
-            user={user}
-            onSave={onSave}
-            isSaving={isSaving}
-            postStatus={postStatus}
-            canEdit={canEdit}
-            editor={editor}
-            //for settings panel
-            postObject={postObject}
-            updatePostSettings={updatePostSettings}
-            refetchPost={refetchPost}
-          />
-        </EditorButtonsNavPortal>
+        {showNavButtons !== false ? (
+          <EditorButtonsNavPortal>
+            <EditorNavButtons
+              user={user}
+              onSave={onSave}
+              isSaving={isSaving}
+              postStatus={postStatus}
+              canEdit={canEdit}
+              editor={editor}
+              //for settings panel
+              postObject={postObject}
+              updatePostSettings={updatePostSettings}
+              refetchPost={refetchPost}
+            />
+          </EditorButtonsNavPortal>
+        ) : null}
 
         {/* NAVIGATION END */}
-        <div className="my-4 pt-0 mt-[100px] max-w-[44rem] mx-auto relative pb-10 blog-content">
+        <div className={wrapperClass?wrapperClass:postType=="article"?"my-4 pt-0 mt-[100px] max-w-[44rem] mx-auto relative pb-10 blog-content":''}>
           {editor && <MenuFloating editor={editor} />}
           <TextMenu editor={editor} />
           {/* <LinkMenu editor={editor} /> */}

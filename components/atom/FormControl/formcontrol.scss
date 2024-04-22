@@ -10,8 +10,12 @@
     }
   }
 
+  input {
+    @apply bg-white border border-2 border-gray-300 rounded-xl text-base h-11 px-4 transition-shadow;
+  }
+
   & label {
-    @apply text-sm text-gray-700 flex items-center justify-between py-2 pr-1 select-none font-semibold;
+    @apply flex items-center justify-between py-2 pr-1 select-none font-medium;
   }
 
   & .error {
@@ -39,9 +43,9 @@
 textarea,
 select {
   // base style
-  @apply rounded-lg border-0 bg-gray-100 flex-shrink-0;
+  @apply rounded-xl flex-shrink-0;
   // base size
-  @apply h-10 text-sm px-4;
+  @apply h-11 px-4;
   @apply transition-shadow;
 
   &:focus:not(:disabled) {

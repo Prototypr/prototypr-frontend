@@ -139,7 +139,7 @@ const EditCompanyForm = ({ user, defaultCompany, router }) => {
         >
           <DashboardNavigation activeTab={1} />
           <div className="w-full mx-auto px-2 sm:pr-0 sm:pl-6 lg:pl-8">
-            <div className="pt-6 pb-10 px-0 xl:px-0">
+            <div className="pb-10 px-0 xl:px-0">
               <div className="bg-white rounded-xl p-6 border border border-gray-300/70">
                 <form
                   onSubmit={e => {

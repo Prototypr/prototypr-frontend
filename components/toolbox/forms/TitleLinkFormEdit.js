@@ -22,7 +22,7 @@ function isEmptyObject(obj) {
 
   const styles = {
     input:
-      "w-full px-3 max-w-2xl  bg-white text-black font-normal text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
+      "w-full px-3 max-w-xl  bg-white text-black font-normal text-base rounded-xl border border-gray-300 border-2 focus:outline-none focus:ring-1  focus:ring-blue-200",
     inputFlex:
       "px-3 bg-white text-black font-normal text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
     label: "text-md font-medium uppercase text-gray-700 font-semibold",
@@ -109,11 +109,11 @@ const [disabled, setDisabled] = useState(false);
 
 
     return(
-      <div className="flex justify-start pt-3 w-full h-full">
-      <div className="px-6 md:px-0 max-w-2xl pt-3 w-full">
-          <div className="my-2 mb-6 ">
-          <h1 className="text-4xl font-semibold mx-auto mb-3">Update {postObject.title}</h1>
-            <p className="text-gray-600">Make changes to the title and link.</p>
+      <div className="flex justify-start w-full h-full">
+      <div className="px-6 md:px-0 max-w-lg w-full">
+          <div className="mb-6 ">
+          <h1 className="text-2xl font-semibold mx-auto mb-3">Update {postObject.title}</h1>
+            <p className="text-gray-600">Change to the title and url.</p>
             </div>
             <form
             className="mt-12"

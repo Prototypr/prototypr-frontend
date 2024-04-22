@@ -1,12 +1,11 @@
 import Fallback from "@/components/atom/Fallback/Fallback";
-import Layout from "@/components/new-index/layoutForIndex";
+import Layout from "@/components/new-index/layoutForAccount";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import axios from "axios";
 // import toast from "react-hot-toast";
 import useUser from "@/lib/iron-session/useUser";
 import { useEffect, useState } from "react";
-import AccountNavigation from "@/components/user/AccountNavigation";
 import NewslettersSelect from "@/components/user/NewslettersSelect";
 
 const toast = dynamic(() => import("react-hot-toast"), { ssr: true });
@@ -28,96 +27,92 @@ const AccountPage = ({ preview }) => {
 
   if (user?.isLoggedIn) {
     return (
-      <Layout preview={preview}>
+      <Layout activeTab={4}  preview={preview}>
         <Head>
           <title>Account Settings</title>
         </Head>
-        <div
-          className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 "
-          style={{ maxWidth: 1200 }}
-        >
-        {user && user.confirmed ? (
-          <div className="flex w-full max-w-6xl mx-auto flex-col md:flex-row">
-            <AccountNavigation activeTab={4} />
-            <div className="w-full mx-auto px-2 sm:pr-0 sm:pl-6 lg:pl-8">
-              <div className="pt-6 pb-10 px-0 xl:px-0">
+        <div>
+          {user && user.confirmed ? (
+            <div>
+              <div>
+                <div className="pb-10 px-0 xl:px-0">
+                  <div className="bg-white border border-gray-300/70 shadow-sm rounded-xl p-6">
+                    <h1 className="font-semibold text-xl">Newsletter preferences</h1>
+                    <span className="text-sm text-gray-500">
+                      Choose which emails you receive
+                    </span>
+                    <NewslettersSelect
+                      user={user}
+                      next={false}
+                      previous={false}
+                      selectedOptions={selectedNewsletters}
+                      setSelectedOptions={setSelectedNewsletters}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8">
+              <div className="pt-6 pb-10 md:pt-10 px-3 xl:px-0">
                 <div className="bg-white border border-gray-300/70 shadow-sm rounded-xl p-6">
-                  <h1 className="font-semibold">Newsletter preferences</h1>
-                  <span className="text-sm text-gray-500">
-                    Choose which emails you receive
-                  </span>
-                  <NewslettersSelect
-                    user={user}
-                    next={false}
-                    previous={false}
-                    selectedOptions={selectedNewsletters}
-                    setSelectedOptions={setSelectedNewsletters}
+                  <h1 className="font-semibold text-lg">Confirm your email</h1>
+                  <p className="text-normal mt-3 mb-3 text-gray-800">
+                    Hi {user.name}, please check your email ({user.email}) to
+                    confirm your account. If you didn't receive it, try again
+                    with the following form:
+                  </p>
+                  <Form
+                    buttonText={"Resend email verification"}
+                    disabled={sent ? true : false}
+                    disabledMessage={
+                      <div className="text-center">
+                        A new login link has been sent to your email.
+                      </div>
+                    }
+                    label={"Enter your email"}
+                    inputType={"email"}
+                    defaultValue={user.email}
+                    placeholder={"hola@prototypr.io"}
+                    isLoading={isLoading}
+                    onSubmit={e => {
+                      e.preventDefault();
+                      setSent(false);
+                      setIsLoading(true);
+                      var data = JSON.stringify({
+                        email: e.target[0].value,
+                      });
+                      var config = {
+                        method: "post",
+                        url: `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/users-permissions/users/resendConfirmationEmail`,
+                        headers: {
+                          Authorization: user.jwt,
+                          "Content-Type": "application/json",
+                        },
+                        data: data,
+                      };
+                      const loadingToastId = toast.loading(
+                        "Sending verification email"
+                      );
+
+                      axios(config)
+                        .then(function (response) {
+                          setSent(true);
+                          setTimeout(() => {
+                            setSent(true);
+                            setIsLoading(false);
+                            showSuccessToast(loadingToastId);
+                          }, 800);
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                        });
+                    }}
                   />
                 </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <div className="w-full mx-auto px-2 sm:pr-0 sm:pl-6 lg:pl-8">
-            <div className="pt-6 pb-10 md:pt-10 px-3 xl:px-0">
-              <div className="bg-white border border-gray-300/70 shadow-sm rounded-xl p-6">
-                <h1 className="font-semibold text-lg">Confirm your email</h1>
-                <p className="text-normal mt-3 mb-3 text-gray-800">
-                  Hi {user.name}, please check your email ({user.email}) to
-                  confirm your account. If you didn't receive it, try again with
-                  the following form:
-                </p>
-                <Form
-                  buttonText={"Resend email verification"}
-                  disabled={sent ? true : false}
-                  disabledMessage={
-                    <div className="text-center">
-                      A new login link has been sent to your email.
-                    </div>
-                  }
-                  label={"Enter your email"}
-                  inputType={"email"}
-                  defaultValue={user.email}
-                  placeholder={"hola@prototypr.io"}
-                  isLoading={isLoading}
-                  onSubmit={e => {
-                    e.preventDefault();
-                    setSent(false);
-                    setIsLoading(true);
-                    var data = JSON.stringify({
-                      email: e.target[0].value,
-                    });
-                    var config = {
-                      method: "post",
-                      url: `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/users-permissions/users/resendConfirmationEmail`,
-                      headers: {
-                        Authorization: user.jwt,
-                        "Content-Type": "application/json",
-                      },
-                      data: data,
-                    };
-                    const loadingToastId = toast.loading(
-                      "Sending verification email"
-                    );
-
-                    axios(config)
-                      .then(function (response) {
-                        setSent(true);
-                        setTimeout(() => {
-                          setSent(true);
-                          setIsLoading(false);
-                          showSuccessToast(loadingToastId);
-                        }, 800);
-                      })
-                      .catch(function (error) {
-                        console.log(error);
-                      });
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
+          )}
         </div>
       </Layout>
     );

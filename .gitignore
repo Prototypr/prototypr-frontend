@@ -27,6 +27,7 @@ yarn-error.log*
 
 # local env files
 .env.local
+.env.local.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -60,3 +61,6 @@ next.config.wizardcopy.js
 
 # Prototypr Plus
 /.prototypr
+.env*.local
+.env*.production
+.env*.development

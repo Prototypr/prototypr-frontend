@@ -10,14 +10,10 @@ import axios from "axios";
 import useUser from "@/lib/iron-session/useUser";
 import { getPostsByPageAndAuthor } from "@/lib/api";
 import { useEffect, useState } from "react";
-import AccountNavigation from "@/components/user/AccountNavigation";
 import ProfilePageLayout from "@/components/people/ProfilePageLayout";
 
 
 const toast = dynamic(() => import('react-hot-toast'), { ssr: true })
-const Form = dynamic(() => import('@/components/Form'), { ssr: true })
-const UserForm = dynamic(() => import('@/components/user/UserForm'), { ssr: true })
-
 
 const AccountPage = ({ preview }) => {
 

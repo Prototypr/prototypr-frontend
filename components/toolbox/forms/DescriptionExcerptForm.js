@@ -11,6 +11,7 @@ import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import useLoad from "../hooks/useLoad";import {
     useWizardContext,
   } from 'react-sweet-wizard';
+import Editor from "@/components/Editor/Editor";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 const axios = require("axios");
 
@@ -115,10 +116,10 @@ const [disabled, setDisabled] = useState(false);
     },[postObject])
 
     return(
-        <div className="px-6 md:px-0 max-w-2xl pt-6 pb-20 w-full">
-            <div className="my-2 mb-6 ">
-            <h1 className="text-2xl font-semibold mx-auto mb-2">Add your description</h1>
-            <p className="text-gray-600">Write a longer description, and a short excerpt.</p>
+        <div className="px-6 md:px-0 max-w-2xl w-full">
+            <div className="mb-6 ">
+            <h1 className="text-xl font-semibold mx-auto mb-2">Add your description</h1>
+            <p className="text-gray-600">Write a longer description, and a short excerpt. The description can be like a blog post, highlighting benefits of the product.</p>
             </div>
             <form
             className="mt-6"
@@ -155,11 +156,25 @@ const [disabled, setDisabled] = useState(false);
                 </div>
                 {formik.errors.excerpt && <span className="text-red-600 text-sm">{formik.errors.excerpt}</span>}
                  
-            <label className="text-md font-medium mt-4">
+            <label className="text-base font-medium mt-6">
                   Description
                 </label>
-                <div className="bg-white rounded-xl">
-                    <MiniEditor
+                <div className="bg-white rounded-xl -mt-1">
+                  <Editor
+                  wrapperClass="border border-gray-300 rounded-xl border-2 p-6 max-w-[44rem] mx-auto relative blog-content toolbox-content"
+                  postType="tool"
+                  showNavButtons={false}
+                  initialContent={content?content:''}
+                  updatePost={({editor})=>{
+                    const html = editor.getHTML()
+                    formik.setFieldValue("content",html)
+                  }}
+                  canEdit={true}
+                  savePost={()=>{
+
+                  }}
+                  />
+                    {/* <MiniEditor
                     placeholder="Example: Need a new landing page? Look no further – ‘Unicorn Platform 3’ is here! One of the best landing page builders around just got better. Version 3 has loads of new features: Stripe payments, Google Sheets, blogging, and tonnes more. Everything you need for your SaaS, mobile app page, or tech startup. It’s also an Indie-made product, built by Alexander Isora and co."
                     title=""
                     initialContent={content?content:''}
@@ -167,7 +182,8 @@ const [disabled, setDisabled] = useState(false);
                     setDescription={(html)=>{
                         formik.setFieldValue("content",html)
                         setContent(html)
-                    }}/>
+                    }}/> */}
+                    
                 </div>
                 {formik.errors.content && <span className="text-red-600 text-sm">{formik.errors.content}</span>}
 

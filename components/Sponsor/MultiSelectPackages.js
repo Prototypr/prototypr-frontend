@@ -35,7 +35,7 @@ const MultiSelectPackages = ({ packages, selectedPackages, productId }) => {
     <Popover.Root>
       <Popover.Trigger asChild>
         <button
-          className="flex w-full rounded-xl border border-gray-400 min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
+          className="flex w-full rounded-xl border border-gray-300 border-2 min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
           aria-label="Update dimensions"
         >
           <div className="flex justify-between items-center w-full">

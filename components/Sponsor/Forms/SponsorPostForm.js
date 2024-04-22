@@ -5,7 +5,7 @@ import ImageUploader from "@/components/ImageUploader/ImageUploader";
 
 const styles = {
   input:
-    "w-full px-3 max-w-2xl shadow-sm bg-white text-black font-normal text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
+    "w-full px-3 max-w-xl bg-white text-black font-normal text-base rounded-xl border border-2 border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
   inputFlex:
     "px-3 bg-white text-black font-normal text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
   label: "text-md font-medium text-gray-800  uppercase text-gray-800 font-semibold",

@@ -119,14 +119,14 @@ const UserForm = ({ info }) => {
     <div>
       <div className="flex flex-col md:flex-row mt-2">
         <div className="md:mr-4">
-          <div className="text-sm mt-3 font-semibold text-gray-700">
+          <div className="text-base mt-3 font-medium">
             Profile picture
           </div>
           <AvatarEditor />
         </div>
         {/* <div className="md:px-4 w-full">
       <FormControl inValid={!!errors.paymentPointer}>
-          <label htmlFor="paymentPointer" className="text-sm">
+          <label htmlFor="paymentPointer" className="text-base">
             Payment Pointer
           </label>
           <input
@@ -155,8 +155,8 @@ const UserForm = ({ info }) => {
         <div className="cursor-pointer p-4 my-3 mb-4 bg-green-50 rounded-lg text-gray-700 flex">
           <img className="w-10 mr-4" src="https://webmonetization.org/img/wm-icon-animated.svg"/>
             <div>
-            <h2 className="text-md font-primary font-medium text-gray-800">Learn about Web Monetization</h2>
-            <p className="text-gray-800 text-sm">Receive tips and streamed payments with a <a className="underline text-green-900 font-medium" href="#">Payment Pointer</a> and wallet. Learn how to <a className="underline text-green-900 font-medium" href="#">set it up here</a>. →</p>
+            <h2 className="text-base font-primary font-medium text-gray-800">Learn about Web Monetization</h2>
+            <p className="text-gray-800 text-base">Receive tips and streamed payments with a <a className="underline text-green-900 font-medium" href="#">Payment Pointer</a> and wallet. Learn how to <a className="underline text-green-900 font-medium" href="#">set it up here</a>. →</p>
             </div>
         </div>
         </Link>
@@ -164,9 +164,9 @@ const UserForm = ({ info }) => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col grid gap-2">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
             <FormControl inValid={!!errors.firstName}>
-              <label htmlFor="firstName" className="text-sm">
+              <label htmlFor="firstName" className="text-base">
                 First name
               </label>
               <input
@@ -192,7 +192,7 @@ const UserForm = ({ info }) => {
               )}
             </FormControl>
             <FormControl inValid={!!errors.secondName}>
-              <label htmlFor="secondName" className="text-sm">
+              <label htmlFor="secondName" className="text-base">
                 Last name
               </label>
               <input
@@ -218,12 +218,12 @@ const UserForm = ({ info }) => {
               )}
             </FormControl>
             <FormControl inValid={!!errors.location}>
-              <label htmlFor="location" className="text-sm">
+              <label htmlFor="location" className="text-base">
                 Location
               </label>
               <select
                 id="location"
-                className="w-full"
+                className="w-full bg-white border border-gray-300 border-2 text-base"
                 disabled={isSubmitting}
                 aria-describedby="location_error"
                 aria-live="assertive"
@@ -242,7 +242,7 @@ const UserForm = ({ info }) => {
               )}
             </FormControl>
             <FormControl inValid={!!errors.website}>
-              <label htmlFor="website" className="text-sm">
+              <label htmlFor="website" className="text-base">
                 Personal Website
               </label>
               <input
@@ -274,14 +274,14 @@ const UserForm = ({ info }) => {
           </div>
 
           <FormControl inValid={!!errors.bio}>
-            <label htmlFor="bio" className="text-sm">
+            <label htmlFor="bio" className="text-base">
               Bio
             </label>
             <textarea
               id="bio"
               type="text"
               autoComplete="off"
-              className="w-full resize-y h-auto"
+              className="w-full border-gray-300 border-2 resize-y h-auto"
               rows={4}
               disabled={isSubmitting}
               aria-describedby="bio_error"
@@ -306,7 +306,7 @@ const UserForm = ({ info }) => {
           </FormControl>
 
           {/* <FormControl inValid={!!errors.email}>
-          <label htmlFor="email" className="text-sm">
+          <label htmlFor="email" className="text-base">
             Email
           </label>
           <input
@@ -334,7 +334,7 @@ const UserForm = ({ info }) => {
         </FormControl> */}
 
           <FormControl inValid={!!errors.username}>
-            <label htmlFor="username" className="text-sm">
+            <label htmlFor="username" className="text-base">
               Username
             </label>
             <input
@@ -366,12 +366,12 @@ const UserForm = ({ info }) => {
           <h2>Social Links</h2>
 
           <FormControl inValid={!!errors.twitter}>
-            <label htmlFor="twitter" className="text-sm">
+            <label htmlFor="twitter" className="text-base">
               Twitter
             </label>
             <div className="relative w-4/5">
-              <div class="pointer-events-none bg-gray-200 border border-gray-200 rounded-l-lg absolute inset-y-0 left-0 flex items-center pl-3 pr-1">
-                <span class="text-gray-500 sm:text-sm">
+              <div class="pointer-events-none bg-gray-200 border border-gray-200 rounded-l-xl absolute inset-y-0 left-0 flex items-center pl-3 pr-1">
+                <span class="text-gray-500 sm:text-base">
                   https://twitter.com/
                 </span>
               </div>
@@ -379,7 +379,7 @@ const UserForm = ({ info }) => {
                 id="twitter"
                 type="text"
                 autoComplete="off"
-                className="pl-[150px] w-full h-auto"
+                className="!pl-[170px] w-full h-auto"
                 placeholder="@prototypr"
                 disabled={isSubmitting}
                 aria-describedby="twitter_error"
@@ -399,12 +399,12 @@ const UserForm = ({ info }) => {
             )}
           </FormControl>
           <FormControl inValid={!!errors.dribbble}>
-            <label htmlFor="dribbble" className="text-sm">
+            <label htmlFor="dribbble" className="text-base">
               Dribbble
             </label>
             <div className="relative w-4/5">
-              <div class="pointer-events-none bg-gray-200 border border-gray-200  rounded-l-lg absolute inset-y-0 left-0 flex items-center pl-3 pr-1">
-                <span class="text-gray-500 sm:text-sm">
+              <div class="pointer-events-none bg-gray-200 border border-gray-200  rounded-l-xl absolute inset-y-0 left-0 flex items-center pl-3 pr-1">
+                <span class="text-gray-500 sm:text-base">
                   https://dribbble.com/
                 </span>
               </div>
@@ -412,7 +412,7 @@ const UserForm = ({ info }) => {
                 id="dribbble"
                 type="text"
                 autoComplete="off"
-                className="pl-[165px] h-auto w-full"
+                className="!pl-[185px] h-auto w-full"
                 placeholder="Prototypr"
                 disabled={isSubmitting}
                 aria-describedby="dribbble_error"
@@ -432,12 +432,12 @@ const UserForm = ({ info }) => {
             )}
           </FormControl>
           <FormControl inValid={!!errors.github}>
-            <label htmlFor="github" className="text-sm">
+            <label htmlFor="github" className="text-base">
               Github
             </label>
             <div className="relative w-4/5">
-              <div class="pointer-events-none bg-gray-200 border border-gray-200  rounded-l-lg absolute inset-y-0 left-0 flex items-center pl-3 pr-1">
-                <span class="text-gray-500 sm:text-sm">
+              <div class="pointer-events-none bg-gray-200 border border-gray-200  rounded-l-xl absolute inset-y-0 left-0 flex items-center pl-3 pr-1">
+                <span class="text-gray-500 sm:text-base">
                   https://github.com/
                 </span>
               </div>
@@ -445,7 +445,7 @@ const UserForm = ({ info }) => {
                 id="github"
                 type="text"
                 autoComplete="off"
-                className="pl-[150px] w-full h-auto"
+                className="!pl-[170px] w-full h-auto"
                 placeholder="GraemeFulton"
                 disabled={isSubmitting}
                 aria-describedby="github_error"
@@ -466,18 +466,18 @@ const UserForm = ({ info }) => {
           </FormControl>
 
           <FormControl inValid={!!errors.kofi}>
-            <label htmlFor="kofi" className="text-sm">
+            <label htmlFor="kofi" className="text-base">
               Kofi
             </label>
             <div className="relative w-4/5">
-              <div class="pointer-events-none bg-gray-200 border border-gray-200  rounded-l-lg absolute inset-y-0 left-0 flex items-center pl-3 pr-1">
-                <span class="text-gray-500 sm:text-sm">https://kofi.com/</span>
+              <div class="pointer-events-none bg-gray-200 border border-gray-200  rounded-l-xl absolute inset-y-0 left-0 flex items-center pl-3 pr-1">
+                <span class="text-gray-500 sm:text-base">https://kofi.com/</span>
               </div>
               <input
                 id="kofi"
                 type="text"
                 autoComplete="off"
-                className="pl-[134px] h-auto w-full"
+                className="!pl-[150px] h-auto w-full"
                 placeholder="prototyprio"
                 disabled={isSubmitting}
                 aria-describedby="kofi_error"
@@ -508,7 +508,7 @@ const UserForm = ({ info }) => {
               Save all
             </button>
             {isSubmitSuccessful && (
-              <div role="alert" className="text-green-600 text-sm font-medium">
+              <div role="alert" className="text-green-600 text-base font-medium">
                 Profile information successfully updated.
               </div>
             )}

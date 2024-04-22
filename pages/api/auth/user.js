@@ -48,7 +48,7 @@ async function userRoute(req, res) {
     //if so, just log them out
     if(sessionExpired){
       req.session.destroy();
-      return res.json({
+      return res.status(200).json({
         isLoggedIn: false,
         login: '',
         avatarUrl: '',
@@ -88,7 +88,7 @@ async function userRoute(req, res) {
     /**
      * return the user
      */
-    return res.json({
+    return res.status(200).json({
       ...sessionUser.login.user,
       jwt:sessionUser.login.jwt,
       isLoggedIn: true,
@@ -98,7 +98,7 @@ async function userRoute(req, res) {
   }
   else{
     //nobody logged in
-    return res.json({
+    return res.status(200).json({
       isLoggedIn: false,
       login: '',
       avatarUrl: '',

@@ -97,7 +97,7 @@ const ImageUploader = ({w, h,setFormValue, initialImage,companyLogoIsDefault=fal
           onPositionChange={handlePositionChange}
           // borderRadius={100}
           image={image}
-          className="rounded-lg"
+          className="rounded-xl"
         />
         <div
           className="absolute z-10 bottom-0 right-0 w-8 h-7 bg-blue-500 rounded-tl-lg rounded-br-lg border border-1 border-blue-500 shadow-xs cursor-pointer"

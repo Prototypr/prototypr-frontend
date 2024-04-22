@@ -1,5 +1,5 @@
 import Fallback from "@/components/atom/Fallback/Fallback";
-import Layout from "@/components/new-index/layoutForIndex";
+import Layout from "@/components/new-index/layoutForAccount";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { CircleWavyCheck } from "phosphor-react";
@@ -57,77 +57,70 @@ const AccountPage = ({ preview }) => {
 
   if (user?.isLoggedIn) {
     return (
-      <Layout preview={preview}>
+      <Layout activeTab={1} preview={preview}>
         <Head>
           <title>Account Settings</title>
         </Head>
-        <div
-          className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 "
-          style={{ maxWidth: 1200 }}
-        >
+        <div>
           {user && user.confirmed ? (
-            <div className="flex w-full max-w-6xl mx-auto flex-col md:flex-row">
-              <AccountNavigation activeTab={1} />
-
-              <div className="w-full mx-auto px-2 sm:pr-0 sm:pl-6 lg:pl-8">
-                {!user?.profile?.approved && hasPosts === false ? (
-                  <div className="-mb-3">
-                    <div className="mt-3 shadow-sm flex w-full bg-purple-300/70 p-4 px-4 rounded-xl text-purple-900">
-                      <div className="mr-4 my-auto">
-                        <CircleWavyCheck size="44" />
-                      </div>
-                      <p className="w-full max-w-4xl">
-                        Your{" "}
-                        <Link href={`/people/${user?.profile?.slug}`}>
-                          <span className="">profile page</span>
-                        </Link>{" "}
-                        is{" "}
-                        <span className="font-semibold inline">
-                          pending manual approval
-                        </span>
-                        , and is{" "}
-                        <span className="font-semibold inline">
-                          not publicly visible
-                        </span>{" "}
-                        yet.
-                        <br />
-                        Complete your profile to get approved faster. Profiles
-                        pages are granted manually for community safety, to
-                        improve quality and reduce spam. 💜
-                      </p>
+            <div>
+              {!user?.profile?.approved && hasPosts === false ? (
+                <div className="-mb-3">
+                  <div className="mt-3 shadow-sm flex w-full bg-purple-300/70 p-4 px-4 rounded-xl text-purple-900">
+                    <div className="mr-4 my-auto">
+                      <CircleWavyCheck size="44" />
                     </div>
+                    <p className="w-full max-w-4xl">
+                      Your{" "}
+                      <Link href={`/people/${user?.profile?.slug}`}>
+                        <span className="">profile page</span>
+                      </Link>{" "}
+                      is{" "}
+                      <span className="font-semibold inline">
+                        pending manual approval
+                      </span>
+                      , and is{" "}
+                      <span className="font-semibold inline">
+                        not publicly visible
+                      </span>{" "}
+                      yet.
+                      <br />
+                      Complete your profile to get approved faster. Profiles
+                      pages are granted manually for community safety, to
+                      improve quality and reduce spam. 💜
+                    </p>
                   </div>
-                ) : (
-                  ""
-                )}
-                <div className="pt-6 pb-10 px-0 xl:px-0">
-                  <div className="bg-white border border-gray-300/70 shadow-sm rounded-xl p-6">
-                    <h1 className="font-semibold">Public Profile</h1>
-                    <span className="text-sm text-gray-500">
-                      This information will be displayed on your public profile
-                    </span>
-                    <div className="max-w-3xl">
-                      <UserForm
-                        info={{
-                          firstName: user?.profile.firstName,
-                          secondName: user?.profile.secondName,
-                          location: user?.profile.location,
-                          website: user?.profile.website,
-                          bio: user?.profile.bio,
-                          paymentPointer: user?.profile.paymentPointer,
-                          twitter: user?.profile.twitter,
-                          dribbble: user?.profile.dribbble,
-                          github: user?.profile.github,
-                          kofi: user?.profile.kofi,
+                </div>
+              ) : (
+                ""
+              )}
+              <div className="pb-10 px-0 xl:px-0">
+                <div className="bg-white border border-gray-300/70 shadow-sm rounded-xl p-6">
+                  <h1 className="font-semibold text-xl">Public Profile</h1>
+                  <span className="text-sm text-gray-500">
+                    This information will be displayed on your public profile
+                  </span>
+                  <div className="max-w-3xl">
+                    <UserForm
+                      info={{
+                        firstName: user?.profile.firstName,
+                        secondName: user?.profile.secondName,
+                        location: user?.profile.location,
+                        website: user?.profile.website,
+                        bio: user?.profile.bio,
+                        paymentPointer: user?.profile.paymentPointer,
+                        twitter: user?.profile.twitter,
+                        dribbble: user?.profile.dribbble,
+                        github: user?.profile.github,
+                        kofi: user?.profile.kofi,
 
-                          // ask about these later
-                          email: user?.email, //this is always updated in the iron session when the user submits the form
-                          username: user?.profile?.username
-                            ? user?.profile?.username
-                            : user?.profile.name,
-                        }}
-                      />
-                    </div>
+                        // ask about these later
+                        email: user?.email, //this is always updated in the iron session when the user submits the form
+                        username: user?.profile?.username
+                          ? user?.profile?.username
+                          : user?.profile.name,
+                      }}
+                    />
                   </div>
                 </div>
               </div>

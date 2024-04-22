@@ -51,7 +51,7 @@ const MenuBar = ({ editor }) => {
     }, [editor])
   
     return (
-      <div className='absolute flex justify-start tippy-content top-0 left-0 w-full bg-gray-50 rounded-t-lg p-1'>
+      <div className='absolute flex justify-start tippy-content top-0 left-0 w-full bg-gray-50 rounded-t-xl p-1'>
             <IconButton
           className={`hover:bg-blue-100  mr-1 bg-gray-50 text-gray-800`} 
           onClick={(e) =>{

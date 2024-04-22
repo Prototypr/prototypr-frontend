@@ -12,7 +12,8 @@ import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import Link from "next/link";
 
 const originalSearchClient = instantMeiliSearch(
-  process.env.NEXT_PUBLIC_MEILISEARCH_URL,
+  // process.env.NEXT_PUBLIC_MEILISEARCH_URL,
+  'https://search.prototypr.io/',
   process.env.NEXT_PUBLIC_MEILISEARCH_KEY
   //   {
   //     filters: "(type:article OR type:tool)",

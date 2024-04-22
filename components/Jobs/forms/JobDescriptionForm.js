@@ -384,9 +384,9 @@ export default JobDescriptionForm
 
 const styles = {
   input:
-    "w-full px-3 max-w-2xl  bg-white text-black font-normal text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
+    "w-full px-3 max-w-xl  bg-white text-black font-normal text-sm rounded-xl border border-gray-300 border-2 focus:outline-none focus:ring-1  focus:ring-blue-200",
   inputFlex:
-    "px-3 bg-white text-black font-normal text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
+    "px-3 bg-white text-black font-normal text-sm rounded-xl border border-gray-300 border-2 focus:outline-none focus:ring-1  focus:ring-blue-200",
   label: "text-md font-medium uppercase text-gray-700 font-semibold",
   inputError: "text-xs font-medium uppercase text-red-400",
 };

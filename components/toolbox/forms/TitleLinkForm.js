@@ -23,7 +23,7 @@ function isEmptyObject(obj) {
 
   const styles = {
     input:
-      "w-full text-base px-3 max-w-2xl  bg-white text-black font-normal rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
+      "w-full text-base px-3 max-w-2xl  bg-white text-black font-normal rounded-xl border border-gray-300 border-2 focus:outline-none focus:ring-1  focus:ring-blue-200",
     inputFlex:
       "px-3 bg-white text-black font-normal text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-1  focus:ring-blue-200",
     label: "text-md font-medium uppercase text-gray-700 font-semibold",
@@ -144,15 +144,14 @@ const [disabled, setDisabled] = useState(false);
 
 
     return(
-        <div className="flex justify-start pt-3 w-full h-full px-2 px-8 lg:pl-16 2xl:pl-32 lg:px-10">
-        <div className="max-w-2xl pt-28 w-full">
+        <div className="flex justify-center w-full h-full">
+        <div className="max-w-lg w-full">
             <div className="my-2 mb-6 ">
-            <h1 className="text-4xl font-semibold mx-auto mb-3">Post a tool</h1>
-            {/* <p className="text-gray-600">As a selected contributor, you're invited to submit tools and resources to the Prototypr Toolbox. Whether a fresh discovery or your own creation, this is the chance to bring more visibility and discoverability to your product across the web and our newsletter.</p> */}
-            <p className="text-gray-600">As a chosen contributor, you can submit tools and resources to the Prototypr Toolbox to enhance your product's visibility across the web and via our newsletter. Whether it's a new find or your own creation, seize this opportunity for greater exposure.</p>
+            <h1 className="text-2xl font-semibold mx-auto mb-4 tracking-tight">Post a tool</h1>
+            <p className="text-gray-600">As a Prototypr member, you can submit resources to the Prototypr Toolbox to enhance product visibility across the web.</p>
             </div>
             <form
-            className="mt-12"
+            className="mt-8"
             onSubmit={(e) => {
             e.preventDefault();
             if ((errors && isEmptyObject(errors)) || !errors) {

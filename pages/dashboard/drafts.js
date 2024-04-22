@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 // import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
 // import Navbar from "@/components/small-nav";
-import Layout from "@/components/layout-dashboard";
+import Layout from "@/components/new-index/layoutForIndex";
 
 import useUser from "@/lib/iron-session/useUser";
 import { useState } from "react";
@@ -33,7 +33,19 @@ export default function Index() {
       {!user && <Fallback />}
 
       {user && !user?.isLoggedIn ? (
-        <Layout>
+        <Layout
+        // sponsor={navSponsor}
+        navOffset={false}
+        padding={false}
+        background={"#fbfcff"}
+        seo={{
+          title: 'Dashboard | Prototypr',
+          description: 'Edit your posts, drafts, and tools on Prototypr',
+          image: "",
+          canonical: "https://prototypr.io",
+          url: "https://prototypr.io",
+        }}
+      >
           <div className="w-full relative max-w-4xl p-4 mx-auto ">
             <div
               className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto mt-8"

@@ -29,14 +29,15 @@ export default function Layout({
   padding,
   seo,
   navType,
-  navOffset
+  navOffset,
+  navBackground
 }) {
   return (
     <>
       <Meta seo={seo} />
       {/* <Navbar activeNav={activeNav} /> */}
       {/* <div className="fixed w-full z-50"> */}
-      <Navbar navType={navType} sponsor={sponsor} maxWidth={"max-w-[1320px]"} />
+      <Navbar background={navBackground} navType={navType} sponsor={sponsor} maxWidth={"max-w-[1320px]"} />
       {/* </div> */}
 
       <div

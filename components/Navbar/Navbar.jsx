@@ -38,6 +38,7 @@ const Navbar = ({
   showWriteButton,
   maxWidth,
   navType,
+  navBackground
 }) => {
   const { user, isLoading } = useUser({
     redirectIfFound: false,

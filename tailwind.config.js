@@ -1,4 +1,4 @@
-const { blueDark,mauve, violet } = require("@radix-ui/colors");
+const { blueDark, mauve, violet } = require("@radix-ui/colors");
 
 const colors = require("tailwindcss/colors");
 module.exports = {
@@ -24,28 +24,28 @@ module.exports = {
       // "noto-serif": "'Noto Serif', serif;",
     },
     screens: {
-      'xs': '475px',
+      xs: "475px",
       // => @media (min-width: 640px) { ... }
-      'sm': '640px',
+      sm: "640px",
       // => @media (min-width: 640px) { ... }
 
-      'md': '768px',
+      md: "768px",
       // => @media (min-width: 768px) { ... }
-      '2md':'850px',
-      
-      'lg': '1024px',
-      // => @media (min-width: 1024px) { ... }
-      '2lg':'1140px',
+      "2md": "850px",
 
-      'xl': '1280px',
+      lg: "1024px",
+      // => @media (min-width: 1024px) { ... }
+      "2lg": "1140px",
+
+      xl: "1280px",
       // => @media (min-width: 1280px) { ... }
 
-      '2xl': '1536px',
+      "2xl": "1536px",
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
       scale: {
-        '114': '1.14',
+        114: "1.14",
       },
       contrast: {
         110: "1.10",
@@ -212,11 +212,34 @@ module.exports = {
       },
       animation: {
         spinner: "spinner 1.5s linear infinite",
+        slideUpAndFade: "slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+        slideRightAndFade:
+          "slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+        slideDownAndFade:
+          "slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+        slideLeftAndFade:
+          "slideLeftAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
       },
       keyframes: {
         spinner: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
+        },
+        slideUpAndFade: {
+          from: { opacity: "0", transform: "translateY(2px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        slideRightAndFade: {
+          from: { opacity: "0", transform: "translateX(-2px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+        slideDownAndFade: {
+          from: { opacity: "0", transform: "translateY(-2px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        slideLeftAndFade: {
+          from: { opacity: "0", transform: "translateX(2px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
         },
       },
     },

@@ -138,6 +138,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone-uploader": "^2.11.0",
     "react-filepond": "^7.1.2",
+    "react-github-btn": "^1.4.0",
     "react-gravatar": "^2.6.3",
     "react-hook-form": "^7.29.0",
     "react-hook-mighty-mouse": "^1.4.31",

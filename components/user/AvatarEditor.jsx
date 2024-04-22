@@ -162,7 +162,7 @@ const AvatarEditor = () => {
           onPositionChange={handlePositionChange}
           borderRadius={100}
           image={image}
-          className="rounded-lg"
+          className="rounded-xl"
         />
         <div
           className="absolute z-10 bottom-0 right-0 w-8 h-7 bg-white rounded-tl-lg rounded-br-lg border border-1 border-gray-100 shadow-xs cursor-pointer"

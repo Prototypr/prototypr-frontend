@@ -6,7 +6,7 @@ const NavSponsor = ({sponsor}) =>{
         <div className="ml-2 my-auto">
         <a href={sponsor?.link+'?ref=prototypr'} target="_blank">
         <div
-              className={`relative w-28 h-8 overflow-hidden rounded-xl`}
+              className={`relative w-28 h-8 ml-1 overflow-hidden rounded-xl`}
             >
               <Image
                 className="object-contain"
