@@ -46,11 +46,11 @@ jobs:
       #GITHUB_PERSONAL_ACCESS_TOKEN for private npm packages
       run: GITHUB_PERSONAL_ACCESS_TOKEN=${{secrets.GH_PERSONAL_ACCESS_TOKEN}} npm install --legacy-peer-deps
 
-    - name: Build Next.js app
-      run: |
-        mkdir -p ${{ env.STAGING_DIR_PATH }}
-        npm run build
-        cp -r .next ${{ env.STAGING_DIR_PATH }}
+    # - name: Build Next.js app
+    #   run: |
+    #     mkdir -p ${{ env.STAGING_DIR_PATH }}
+    #     npm run build
+    #     cp -r .next ${{ env.STAGING_DIR_PATH }}
 
     - name: Deploy to server
       env:
@@ -65,14 +65,18 @@ jobs:
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging directory of .next folder...' && if [ -d ${{ env.STAGING_DIR_PATH }}/.next ]; then rm -rf ${{ env.STAGING_DIR_PATH }}/.next; fi"
-        scp -r ${{ env.STAGING_DIR_PATH }}/.next ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
+        # scp -r ${{ env.STAGING_DIR_PATH }}/.next ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
           trap 'echo \"An error occurred. Reverting to backup...\"; mv ${{ env.LIVE_DIR_PATH }}.backup ${{ env.LIVE_DIR_PATH }}' ERR
           echo "Checking if live directory exists..." | tee -a /var/log/prototypr/deploy.log
           if [ -d ${{ env.LIVE_DIR_PATH }} ]; then
             echo "Moving live directory to backup..." | tee -a /var/log/prototypr/deploy.log
-            mv ${{ env.LIVE_DIR_PATH }} ${{ env.LIVE_DIR_PATH }}.backup
+             #if backup exists, remove it
+             if [ -d ${{ env.LIVE_DIR_PATH }}.backup ]; then
+                rm -rf ${{ env.LIVE_DIR_PATH }}.backup
+              fi
+              mv ${{ env.LIVE_DIR_PATH }} ${{ env.LIVE_DIR_PATH }}.backup
           fi
           echo "Moving .next to live directory..." | tee -a /var/log/prototypr/deploy.log
           trap 'echo \"An error occurred. Reverting to backup...\"; rsync -a ${{ env.LIVE_DIR_PATH }}.backup/ ${{ env.LIVE_DIR_PATH }}/' ERR
@@ -80,19 +84,21 @@ jobs:
           echo "Waiting for .next directory to be copied..."
             sleep 5
           done
-          echo "Checking if ${{env.LIVE_DIR_PATH}} exists..."
-          if [ -d "${{env.LIVE_DIR_PATH}}" ]; then
-            echo "${{env.LIVE_DIR_PATH}} exists."
+          
+          echo "Checking if ${{ env.LIVE_DIR_PATH }} exists..."
+          if [ -d "${{ env.LIVE_DIR_PATH }}" ]; then
+            echo "${{ env.LIVE_DIR_PATH }} exists."
           else
-            echo "${{env.LIVE_DIR_PATH}} does not exist."
+            echo "${{ env.LIVE_DIR_PATH }} does not exist."
           fi
 
-          echo "Checking if ${{env.LIVE_DIR_PATH}}/.next exists..."
-          if [ -d "${{env.LIVE_DIR_PATH}}/.next" ]; then
-            echo "${{env.LIVE_DIR_PATH}}/.next exists."
+          echo "Checking if ${{ env.LIVE_DIR_PATH }}/.next exists..."
+          if [ -d "${{ env.LIVE_DIR_PATH }}/.next" ]; then
+            echo "${{ env.LIVE_DIR_PATH }}/.next exists."
           else
-            echo "${{env.LIVE_DIR_PATH}}/.next does not exist."
+            echo "${{ env.LIVE_DIR_PATH }}/.next does not exist."
           fi
+          
           mv ${{ env.STAGING_DIR_PATH }}/.next ${{ env.LIVE_DIR_PATH }}/.next
           echo "Restarting application..." | tee -a /var/log/prototypr/deploy.log
           pm2 restart prototypr-5
