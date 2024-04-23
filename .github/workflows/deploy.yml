@@ -66,16 +66,16 @@ jobs:
         # scp -r ${{ env.STAGING_DIR_PATH }}/.next ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
-          trap 'echo \"An error occurred. Reverting to backup...\"; mv ${{ env.LIVE_DIR_PATH }}.backup ${{ env.LIVE_DIR_PATH }} 2>/dev/null || true' ERR
+          trap 'echo \"An error occurred. Reverting to backup...\"; rm -rf ${{ env.LIVE_DIR_PATH }}.backup 2>/dev/null || true' ERR
 
           echo \"Checking if live application directory exists...\" | tee -a /var/log/prototypr/deploy.log
           if [ -d \"${{ env.LIVE_DIR_PATH }}\" ]; then
-            echo \"Moving live application directory to backup...\" | tee -a /var/log/prototypr/deploy.log
+            echo \"Creating backup of live application directory...\" | tee -a /var/log/prototypr/deploy.log
             # Remove any existing backup directory
             if [ -d \"${{ env.LIVE_DIR_PATH }}.backup\" ]; then
               rm -rf \"${{ env.LIVE_DIR_PATH }}.backup\"
             fi
-            mv \"${{ env.LIVE_DIR_PATH }}\" \"${{ env.LIVE_DIR_PATH }}.backup\"
+            cp -r \"${{ env.LIVE_DIR_PATH }}\" \"${{ env.LIVE_DIR_PATH }}.backup\"
           fi
 
           NEW_DEPLOYMENT_DIR=\"${{ env.LIVE_DIR_PATH }}.new\"
@@ -83,7 +83,7 @@ jobs:
           mkdir -p \"\$NEW_DEPLOYMENT_DIR\"
 
           echo \"Copying live application directory to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
-          trap 'echo \"An error occurred. Reverting to backup...\"; rsync -a \"${{ env.LIVE_DIR_PATH }}.backup/\" \"${{ env.LIVE_DIR_PATH }}/\"' ERR
+          trap 'echo \"An error occurred. Reverting to backup...\"; rm -rf \"${{ env.LIVE_DIR_PATH }}\"; cp -r \"${{ env.LIVE_DIR_PATH }}.backup/\" \"${{ env.LIVE_DIR_PATH }}/\"' ERR
 
           if [ -d \"${{ env.LIVE_DIR_PATH }}.backup\" ]; then
             cp -r \"${{ env.LIVE_DIR_PATH }}.backup/\" \"\$NEW_DEPLOYMENT_DIR/\"
