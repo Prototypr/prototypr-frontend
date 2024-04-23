@@ -50,58 +50,84 @@ jobs:
       run: |
         mkdir -p ${{ env.STAGING_DIR_PATH }}
         npm run build
-        cp -r .next ${{ env.STAGING_DIR_PATH }}
+        cp -r . ${{ env.STAGING_DIR_PATH }}
 
     - name: Deploy to server
       env:
         SERVER_HOST: ${{ secrets.SERVER_HOST }}
         SERVER_USER: ${{ secrets.SERVER_USER }}
       run: |
+
+        # add blue/green deployment
+        BLUE_DIR=${{ env.LIVE_DIR_PATH }}-blue
+        GREEN_DIR=${{ env.LIVE_DIR_PATH }}-green
+
+        CURRENT_LIVE_NAME=false
+        CURRENT_LIVE_DIR=false
+        
+        DEPLOYING_TO_NAME=false
+        DEPLOYING_TO_DIR=false
+
         mkdir -p ~/.ssh/
         echo "${{ secrets.SERVER_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+
         # Add the server's host key to known_hosts
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
-        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging directory of .next folder...' && if [ -d ${{ env.STAGING_DIR_PATH }}/.next ]; then rm -rf ${{ env.STAGING_DIR_PATH }}/.next; fi"
-        # scp -r ${{ env.STAGING_DIR_PATH }}/.next ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
+
+        # delete folder in temp staging directory if it exists
+        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging folder...' && if [ -d ${{ env.STAGING_DIR_PATH }}/* ]; then rm -rf ${{ env.STAGING_DIR_PATH }}/*; fi"
+        # copy .next folder to temp staging directory
+        scp -r ${{ env.STAGING_DIR_PATH }}/. ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
-          trap 'echo \"An error occurred. Reverting to backup...\"; rm -rf ${{ env.LIVE_DIR_PATH }}.backup 2>/dev/null || true' ERR
 
-          echo \"Checking if live application directory exists...\" | tee -a /var/log/prototypr/deploy.log
-          if [ -d \"${{ env.LIVE_DIR_PATH }}\" ]; then
-            echo \"Creating backup of live application directory...\" | tee -a /var/log/prototypr/deploy.log
-            # Remove any existing backup directory
-            if [ -d \"${{ env.LIVE_DIR_PATH }}.backup\" ]; then
-              rm -rf \"${{ env.LIVE_DIR_PATH }}.backup\"
-            fi
-            cp -r \"${{ env.LIVE_DIR_PATH }}\" \"${{ env.LIVE_DIR_PATH }}.backup\"
-          fi
+          #check if blue or green deployment is running
+          PM2_STATUS=$(pm2 jlist | jq -r '.[] | select(.name == "blue" or .name == "green") | .name, .pm2_env.status')
 
-          NEW_DEPLOYMENT_DIR=\"${{ env.LIVE_DIR_PATH }}.new\"
-          rm -rf \"\$NEW_DEPLOYMENT_DIR\" 2>/dev/null || true
-          mkdir -p \"\$NEW_DEPLOYMENT_DIR\"
-
-          echo \"Copying live application directory to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
-          trap 'echo \"An error occurred. Reverting to backup...\"; rm -rf \"${{ env.LIVE_DIR_PATH }}\"; cp -r \"${{ env.LIVE_DIR_PATH }}.backup/\" \"${{ env.LIVE_DIR_PATH }}/\"' ERR
-
-          if [ -d \"${{ env.LIVE_DIR_PATH }}.backup\" ]; then
-            cp -r \"${{ env.LIVE_DIR_PATH }}.backup/\" \"\$NEW_DEPLOYMENT_DIR/\"
+          if [[ $PM2_STATUS == *"blue online"* ]]; then
+            echo "Blue is running"
+            CURRENT_LIVE_NAME="blue"
+            CURRENT_LIVE_DIR=$BLUE_DIR
+            
+            DEPLOYING_TO_NAME="green"
+            DEPLOYING_TO_DIR=$GREEN_DIR
+          elif [[ $PM2_STATUS == *"green online"* ]]; then
+            echo "Green is running"
+            CURRENT_LIVE_NAME="green"
+            CURRENT_LIVE_DIR=$GREEN_DIR
+            
+            DEPLOYING_TO_NAME="blue"
+            DEPLOYING_TO_DIR=$BLUE_DIR
           else
-            echo \"Live application directory backup does not exist.\"
+            echo "Neither blue nor green is running"
+            #DEPLOYING_TO_DIR=$BLUE_DIR
           fi
 
-          echo \"Copying .next to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
-          if [ -d \"${{ env.STAGING_DIR_PATH }}/.next\" ]; then
-            cp -r \"${{ env.STAGING_DIR_PATH }}/.next\" \"\$NEW_DEPLOYMENT_DIR/.next\"
-          else
-            echo \"Staging directory does not contain .next directory.\"
+          echo "Deploying to $DEPLOYING_TO_DIR"
+
+          # if no $DEPLOY_DIR, exit with error
+          if [ ! -d $DEPLOYING_TO_DIR ]; then
+            echo "Error: $DEPLOYING_TO_DIR does not exist"
+            exit 1
           fi
+          
+          # wait for directory to be copied from github to temp via scp
+          while [ ! -d "${{ env.STAGING_DIR_PATH }}/.next" ]; do
+          echo "Waiting for directory to be copied from github to temp via scp..."
+            sleep 5
+          done
+          
+          # copy from temp to new build directory
+          echo "Copy new temp build to new build directory..." | tee -a /var/log/prototypr/deploy.log
+          # remove old .next folder
+          rm -rf $DEPLOYING_TO_DIR
+          # copy new folder
+          cp -r ${{ env.STAGING_DIR_PATH }} $DEPLOYING_TO_DIR
 
-          echo \"Switching to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
-          rm -rf \"${{ env.LIVE_DIR_PATH }}\" 2>/dev/null || true
-          mv \"\$NEW_DEPLOYMENT_DIR\" \"${{ env.LIVE_DIR_PATH }}\"
-
-          echo \"Restarting application...\" | tee -a /var/log/prototypr/deploy.log
-          pm2 restart prototypr-5
+          ##now all the new files are in the new deployment folder, pm2 can be restarted to point to the new folder
+          echo "Stop $CURRENT_LIVE_NAME and start $DEPLOYING_TO_NAME" | tee -a /var/log/prototypr/deploy.log
+          pm2 restart $DEPLOYING_TO_NAME
+          pm2 stop $CURRENT_LIVE_NAME
+          # pm2 start $DEPLOYING_TO_DIR/.next/server/index.js --name $DEPLOYING_TO_NAME
         "
