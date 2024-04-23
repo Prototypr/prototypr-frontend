@@ -52,54 +52,57 @@ jobs:
     #     npm run build
     #     cp -r .next ${{ env.STAGING_DIR_PATH }}
 
-    - name: Deploy to server
-      env:
-        SERVER_HOST: ${{ secrets.SERVER_HOST }}
-        SERVER_USER: ${{ secrets.SERVER_USER }}
-      run: |
-        mkdir -p ~/.ssh/
-        echo "${{ secrets.SERVER_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+- name: Deploy to server
+  env:
+    SERVER_HOST: ${{ secrets.SERVER_HOST }}
+    SERVER_USER: ${{ secrets.SERVER_USER }}
+  run: |
+    mkdir -p ~/.ssh/
+    echo "${{ secrets.SERVER_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+    # Add the server's host key to known_hosts
+    ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+    ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging directory of .next folder...' && if [ -d ${{ env.STAGING_DIR_PATH }}/.next ]; then rm -rf ${{ env.STAGING_DIR_PATH }}/.next; fi"
+    # scp -r ${{ env.STAGING_DIR_PATH }}/.next ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
+    ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
+      set -e
+      trap 'echo \"An error occurred. Reverting to backup...\"; mv ${{ env.LIVE_DIR_PATH }}.backup ${{ env.LIVE_DIR_PATH }} 2>/dev/null || true' ERR
 
-        # Add the server's host key to known_hosts
-        ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+      echo \"Checking if live directory exists...\" | tee -a /var/log/prototypr/deploy.log
+      if [ -d \"${{ env.LIVE_DIR_PATH }}\" ]; then
+        echo \"Moving live directory to backup...\" | tee -a /var/log/prototypr/deploy.log
+        # If backup exists, remove it
+        if [ -d \"${{ env.LIVE_DIR_PATH }}.backup\" ]; then
+          rm -rf \"${{ env.LIVE_DIR_PATH }}.backup\"
+        fi
+        mv \"${{ env.LIVE_DIR_PATH }}\" \"${{ env.LIVE_DIR_PATH }}.backup\"
+      fi
 
-        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging directory of .next folder...' && if [ -d ${{ env.STAGING_DIR_PATH }}/.next ]; then rm -rf ${{ env.STAGING_DIR_PATH }}/.next; fi"
-        # scp -r ${{ env.STAGING_DIR_PATH }}/.next ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
-        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
-          set -e
-          trap 'echo \"An error occurred. Reverting to backup...\"; mv ${{ env.LIVE_DIR_PATH }}.backup ${{ env.LIVE_DIR_PATH }}' ERR
-          echo "Checking if live directory exists..." | tee -a /var/log/prototypr/deploy.log
-          if [ -d ${{ env.LIVE_DIR_PATH }} ]; then
-            echo "Moving live directory to backup..." | tee -a /var/log/prototypr/deploy.log
-             #if backup exists, remove it
-             if [ -d ${{ env.LIVE_DIR_PATH }}.backup ]; then
-                rm -rf ${{ env.LIVE_DIR_PATH }}.backup
-              fi
-              mv ${{ env.LIVE_DIR_PATH }} ${{ env.LIVE_DIR_PATH }}.backup
-          fi
-          echo "Moving .next to live directory..." | tee -a /var/log/prototypr/deploy.log
-          trap 'echo \"An error occurred. Reverting to backup...\"; rsync -a ${{ env.LIVE_DIR_PATH }}.backup/ ${{ env.LIVE_DIR_PATH }}/' ERR
-          while [ ! -d "${{ env.STAGING_DIR_PATH }}/.next" ]; do
-          echo "Waiting for .next directory to be copied..."
-            sleep 5
-          done
-          
-          echo "Checking if ${{ env.LIVE_DIR_PATH }} exists..."
-          if [ -d "${{ env.LIVE_DIR_PATH }}" ]; then
-            echo "${{ env.LIVE_DIR_PATH }} exists."
-          else
-            echo "${{ env.LIVE_DIR_PATH }} does not exist."
-          fi
+      echo \"Creating new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
+      NEW_DEPLOYMENT_DIR=\"${{ env.LIVE_DIR_PATH }}.new\"
+      rm -rf \"\$NEW_DEPLOYMENT_DIR\" 2>/dev/null || true
+      mkdir -p \"\$NEW_DEPLOYMENT_DIR\"
 
-          echo "Checking if ${{ env.LIVE_DIR_PATH }}/.next exists..."
-          if [ -d "${{ env.LIVE_DIR_PATH }}/.next" ]; then
-            echo "${{ env.LIVE_DIR_PATH }}/.next exists."
-          else
-            echo "${{ env.LIVE_DIR_PATH }}/.next does not exist."
-          fi
-          
-          mv ${{ env.STAGING_DIR_PATH }}/.next ${{ env.LIVE_DIR_PATH }}/.next
-          echo "Restarting application..." | tee -a /var/log/prototypr/deploy.log
-          pm2 restart prototypr-5
-        "
+      echo \"Copying live directory to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
+      trap 'echo \"An error occurred. Reverting to backup...\"; rsync -a \"${{ env.LIVE_DIR_PATH }}.backup/\" \"${{ env.LIVE_DIR_PATH }}/\"' ERR
+
+      if [ -d \"${{ env.LIVE_DIR_PATH }}.backup\" ]; then
+        cp -r \"${{ env.LIVE_DIR_PATH }}.backup/\" \"\$NEW_DEPLOYMENT_DIR/\"
+      else
+        echo \"Live directory backup does not exist.\"
+      fi
+
+      echo \"Copying .next to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
+      if [ -d \"${{ env.STAGING_DIR_PATH }}/.next\" ]; then
+        cp -r \"${{ env.STAGING_DIR_PATH }}/.next\" \"\$NEW_DEPLOYMENT_DIR/.next\"
+      else
+        echo \"Staging directory does not contain .next directory.\"
+      fi
+
+      echo \"Switching to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
+      rm -rf \"${{ env.LIVE_DIR_PATH }}\" 2>/dev/null || true
+      mv \"\$NEW_DEPLOYMENT_DIR\" \"${{ env.LIVE_DIR_PATH }}\"
+
+      echo \"Restarting application...\" | tee -a /var/log/prototypr/deploy.log
+      pm2 restart prototypr-5
+    "
