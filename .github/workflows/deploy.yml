@@ -4,30 +4,7 @@ on:
   push:
     branches:
       - main
-
-env:
-  # STAGING_DIR: /tmp/my-app-staging
-  # LIVE_DIR: /var/www/my-app
-  STAGING_DIR_PATH: ${{ vars.STAGING_DIR_PATH }}
-  LIVE_DIR_PATH: ${{ vars.LIVE_DIR_PATH }}
-  NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
-  NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-  NEXT_PUBLIC_HOME_URL: ${{ secrets.NEXT_PUBLIC_HOME_URL }}
-  NEXT_PUBLIC_MEILISEARCH_KEY: ${{ secrets.NEXT_PUBLIC_MEILISEARCH_KEY }}
-  NEXT_PUBLIC_MEILISEARCH_URL: ${{ secrets.NEXT_PUBLIC_MEILISEARCH_URL }}
-  NEXT_PUBLIC_NODE_ENV: ${{ secrets.NEXT_PUBLIC_NODE_ENV }}
-  NEXT_PUBLIC_PLAUSIBLE: ${{ secrets.NEXT_PUBLIC_PLAUSIBLE }}
-  NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
-  NEXT_PUBLIC_STRAPI_API_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_API_URL }}
-  SECRET_COOKIE_PASSWORD: ${{ secrets.SECRET_COOKIE_PASSWORD }}
-  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-  SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-  STRAPI_DATABASE_URL: ${{ secrets.STRAPI_DATABASE_URL }}
-  STRAPI_PREVIEW_SECRET: ${{ secrets.STRAPI_PREVIEW_SECRET }}
-  STRAPI_READONLY_TOKEN: ${{ secrets.STRAPI_READONLY_TOKEN }}
-  NEXT_PUBLIC_SUPABASE_ANON: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON }}
-  NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-
+      
 jobs:
 
   build-and-deploy:
@@ -37,36 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 20.x
-
-    - name: Install dependencies
-      #GITHUB_PERSONAL_ACCESS_TOKEN for private npm packages
-      run: GITHUB_PERSONAL_ACCESS_TOKEN=${{secrets.GH_PERSONAL_ACCESS_TOKEN}} npm install --legacy-peer-deps
-
-    - name: Build Next.js app
-      run: |
-        mkdir -p ${{ env.STAGING_DIR_PATH }}
-        npm run build
-        cp -r . ${{ env.STAGING_DIR_PATH }}
-
-    - name: Deploy to server
+    - name: Trigger deploy script
       env:
         SERVER_HOST: ${{ secrets.SERVER_HOST }}
         SERVER_USER: ${{ secrets.SERVER_USER }}
       run: |
-
-        # add blue/green deployment
-        BLUE_DIR=${{ env.LIVE_DIR_PATH }}-blue
-        GREEN_DIR=${{ env.LIVE_DIR_PATH }}-green
-
-        CURRENT_LIVE_NAME=false
-        CURRENT_LIVE_DIR=false
-        
-        DEPLOYING_TO_NAME=false
-        DEPLOYING_TO_DIR=false
 
         mkdir -p ~/.ssh/
         echo "${{ secrets.SERVER_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
@@ -76,59 +28,11 @@ jobs:
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
         # delete folder in temp staging directory if it exists
-        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging folder...' && rm -rf ${{ env.STAGING_DIR_PATH }};"
-        # copy folder to temp staging directory
-        scp -r "${{ env.STAGING_DIR_PATH }}" "${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}"
-        #scp -r ${{ env.STAGING_DIR_PATH }}/. ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
-        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
-          set -e
+        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }};"
 
-          #check if blue or green deployment is running
-          PM2_STATUS=$(pm2 jlist | jq -r '.[] | select(.name == "blue" or .name == "green") | .name, .pm2_env.status')
+        # navigate to deploy script
+        cd ~;
 
-          if [[ $PM2_STATUS == *"blue online"* ]]; then
-            echo "Blue is running"
-            CURRENT_LIVE_NAME="blue"
-            CURRENT_LIVE_DIR=$BLUE_DIR
-            
-            DEPLOYING_TO_NAME="green"
-            DEPLOYING_TO_DIR=$GREEN_DIR
-          elif [[ $PM2_STATUS == *"green online"* ]]; then
-            echo "Green is running"
-            CURRENT_LIVE_NAME="green"
-            CURRENT_LIVE_DIR=$GREEN_DIR
-            
-            DEPLOYING_TO_NAME="blue"
-            DEPLOYING_TO_DIR=$BLUE_DIR
-          else
-            echo "Neither blue nor green is running"
-            #DEPLOYING_TO_DIR=$BLUE_DIR
-          fi
-
-          echo "Deploying to $DEPLOYING_TO_DIR"
-
-          # if no $DEPLOY_DIR, exit with error
-          if [ ! -d $DEPLOYING_TO_DIR ]; then
-            echo "Error: $DEPLOYING_TO_DIR does not exist"
-            exit 1
-          fi
-          
-          # wait for directory to be copied from github to temp via scp
-          while [ ! -d "${{ env.STAGING_DIR_PATH }}/.next" ]; do
-          echo "Waiting for directory to be copied from github to temp via scp..."
-            sleep 5
-          done
-          
-          # copy from temp to new build directory
-          echo "Copy new temp build to new build directory..." | tee -a /var/log/prototypr/deploy.log
-          # remove old .next folder
-          rm -rf $DEPLOYING_TO_DIR
-          # copy new folder
-          cp -r ${{ env.STAGING_DIR_PATH }} $DEPLOYING_TO_DIR
-
-          ##now all the new files are in the new deployment folder, pm2 can be restarted to point to the new folder
-          echo "Stop $CURRENT_LIVE_NAME and start $DEPLOYING_TO_NAME" | tee -a /var/log/prototypr/deploy.log
-          pm2 restart $DEPLOYING_TO_NAME
-          pm2 stop $CURRENT_LIVE_NAME
-          # pm2 start $DEPLOYING_TO_DIR/.next/server/index.js --name $DEPLOYING_TO_NAME
+        # run script
+        ./deploy.sh
         "
