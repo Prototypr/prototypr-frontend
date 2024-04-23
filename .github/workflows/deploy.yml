@@ -76,9 +76,10 @@ jobs:
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
         # delete folder in temp staging directory if it exists
-        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging folder...' && if [ -d ${{ env.STAGING_DIR_PATH }}/* ]; then rm -rf ${{ env.STAGING_DIR_PATH }}/*; fi"
-        # copy .next folder to temp staging directory
-        scp -r ${{ env.STAGING_DIR_PATH }}/. ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
+        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Checking and cleaning staging folder...' && rm -rf ${{ env.STAGING_DIR_PATH }};"
+        # copy folder to temp staging directory
+        scp -r "${{ env.STAGING_DIR_PATH }}" "${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}"
+        #scp -r ${{ env.STAGING_DIR_PATH }}/. ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.STAGING_DIR_PATH }}
         ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
           set -e
 
