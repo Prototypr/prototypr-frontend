@@ -68,9 +68,9 @@ jobs:
           set -e
           trap 'echo \"An error occurred. Reverting to backup...\"; mv ${{ env.LIVE_DIR_PATH }}.backup ${{ env.LIVE_DIR_PATH }} 2>/dev/null || true' ERR
 
-          echo \"Checking if live directory exists...\" | tee -a /var/log/prototypr/deploy.log
+          echo \"Checking if live application directory exists...\" | tee -a /var/log/prototypr/deploy.log
           if [ -d \"${{ env.LIVE_DIR_PATH }}\" ]; then
-            echo \"Moving live directory to backup...\" | tee -a /var/log/prototypr/deploy.log
+            echo \"Moving live application directory to backup...\" | tee -a /var/log/prototypr/deploy.log
             # Remove any existing backup directory
             if [ -d \"${{ env.LIVE_DIR_PATH }}.backup\" ]; then
               rm -rf \"${{ env.LIVE_DIR_PATH }}.backup\"
@@ -82,13 +82,13 @@ jobs:
           rm -rf \"\$NEW_DEPLOYMENT_DIR\" 2>/dev/null || true
           mkdir -p \"\$NEW_DEPLOYMENT_DIR\"
 
-          echo \"Copying live directory to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
+          echo \"Copying live application directory to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
           trap 'echo \"An error occurred. Reverting to backup...\"; rsync -a \"${{ env.LIVE_DIR_PATH }}.backup/\" \"${{ env.LIVE_DIR_PATH }}/\"' ERR
 
           if [ -d \"${{ env.LIVE_DIR_PATH }}.backup\" ]; then
             cp -r \"${{ env.LIVE_DIR_PATH }}.backup/\" \"\$NEW_DEPLOYMENT_DIR/\"
           else
-            echo \"Live directory backup does not exist.\"
+            echo \"Live application directory backup does not exist.\"
           fi
 
           echo \"Copying .next to new deployment directory...\" | tee -a /var/log/prototypr/deploy.log
