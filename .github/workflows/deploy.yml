@@ -28,11 +28,6 @@ jobs:
         ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
         # delete folder in temp staging directory if it exists
-        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }};"
-
-        # navigate to deploy script
-        cd ~;
-
-        # run script
-        ./deploy.sh
-        "
+        ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "\
+          cd ~; \
+          ./deploy.sh"
