@@ -127,7 +127,7 @@ const NewsColumn = ({
     >
       {/* <Container maxWidth="max-w-[1320px] w-full"> */}
       {showHeader !== false && (
-        <div className="flex justify-between p-2.5 pb-4 rounded-t-2xl">
+        <div className="flex justify-between p-3 pb-4 rounded-t-2xl">
           <div className="flex">
             <div>
               <div className="flex">
@@ -170,7 +170,7 @@ const NewsColumn = ({
         </div>
       )}
       <div className="max-h-[46rem] relative">
-        <div className="pl-2 pt-2 pr-2 h-full max-h-[46rem] overflow-y-auto">
+        <div className="p-3 h-full max-h-[46rem] overflow-y-auto">
           {["today", "yesterday", "thisWeek", "lastWeek", "lastMonth"].map(
             group => {
               let formattedGroup = group.replace("last", "last ");

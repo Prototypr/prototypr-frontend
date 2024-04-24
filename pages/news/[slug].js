@@ -463,6 +463,14 @@ export async function getStaticProps({
 
   const postData = data?.posts.data[0];
 
+  //filter the content for posts before 2022
+  if (new Date(postData.attributes.date) < new Date("2024-01-01")) {
+    // postData.attributes.content = postData.attributes.content.replace(
+    //truncate the content to 400 characters
+    postData.attributes.content =
+      postData.attributes?.content?.substring(0, 400) + "...";
+  }
+
   let link = data?.posts.data[0].attributes.link;
   if (!link) {
     link = data?.posts.data[0].attributes.legacyAttributes?.link
@@ -498,7 +506,7 @@ export async function getStaticProps({
     props: {
       preview,
       post: {
-        ...data?.posts.data[0],
+        ...postData,
       },
       domain,
       link,
