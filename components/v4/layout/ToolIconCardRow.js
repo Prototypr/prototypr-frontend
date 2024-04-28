@@ -36,7 +36,7 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
           </Link> */}
 
       </div>}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2`}>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2`}>
         {tools.map((tool, index) => {
           return (
             <div key={index}>

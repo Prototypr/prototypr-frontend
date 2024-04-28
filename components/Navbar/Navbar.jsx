@@ -130,7 +130,7 @@ const Navbar = ({
                     alt="Prototypr Logo"
                   />
                   <img
-                    className={`xl:block ${isVisible ? "w-[25px] object-left-top object-cover" : "object-cover object-left-top w-[109px]"} transition transition-all duration-1000 hidden h-7 w-auto `}
+                    className={`xl:block ${isVisible ? "w-[25px] object-left-top object-cover drop-shadow-md" : "object-cover object-left-top w-[109px]"} transition transition-all duration-1000 hidden h-7 w-auto `}
                     src={`/static/images/prototypr_logo.svg`}
                     alt="Prototypr Logo"
                   />

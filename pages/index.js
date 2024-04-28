@@ -418,7 +418,7 @@ export async function getStaticProps({ preview = null, locale }) {
         preview,
         [TAB_ITEMS[index].toolSlug],
         "tool",
-        10,
+        8,
         0,
         sort
       )) || [];
