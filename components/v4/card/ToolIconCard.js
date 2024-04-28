@@ -81,7 +81,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col z-10 justify-center">
               <span className="text-xs font-semibold uppercase bg-gray-100 font-medium py-0.5 px-3 text-blue-600 border border-black border-opacity-5 rounded-full">
                 Get
               </span>
