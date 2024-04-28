@@ -77,13 +77,13 @@ const CardColumn = ({
               );
             })}
       </div>
-      <div className="flex flex-col pt-6">
+      <div className="flex flex-col pt-6 grid grid-cols-6 gap-4">
         {tools.slice(3, tools.length - 1).map((tool, index) => {
           return (
-            <div key={index} className="flex flex-col">
+            <div key={index} className="flex col-span-6 sm:col-span-3 lg:col-span-3 xl:col-span-6 flex-col">
               {index !== 0 ? (
                 <div
-                  className={`my-3 flex flex-col first:border-t-none border-t border-gray-100`}
+                  className={`flex flex-col first:border-t-none`}
                 />
               ) : (
                 ""
