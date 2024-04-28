@@ -28,7 +28,7 @@ export default function AuthorCard({ author = {},title, avatar='', authorAvatar 
                     {/* <h1 tabIndex={0} className="text-sm font-medium mb-3">{title?title:attributes.title ? attributes.title : "Posted by"}</h1> */}
                     <div className="py-2 w-full relative flex">
                         <div className="relative mr-3">
-                            <div className="w-16 h-16 rounded-full border border-1 overflow-hidden relative border-gray-100 shadow-sm">
+                            <div className="w-16 h-16 rounded-full border border-1 border-gray-300/50 overflow-hidden relative">
                                 {
                                     (authorAvatar) && <Image 
                                     tabIndex={0}

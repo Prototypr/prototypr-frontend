@@ -44,7 +44,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
                         width="100"
                         height="100"
                         alt="Brand logo for external website's link"
-                        className="rounded-2xl h-full w-full object-cover bg-white"
+                        className="rounded-xl h-full w-full object-cover bg-white"
                         src={logo}
                       />
                     </div>

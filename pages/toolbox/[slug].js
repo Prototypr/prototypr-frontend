@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Button from "@/components/Primitives/Button";
 import Link from "next/link";
 import ErrorPage from "next/error";
+import Image from "next/image";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 // import stc from "string-to-color";
@@ -138,7 +139,7 @@ const ToolContent = ({
                       <div className="text-sm tracking-tight text-gray-500">
                         {updatedAtDate}
                       </div>
-                      {/* <div className="w-6 h-6 rounded-full mb-0.5 border border-1 mt-2 overflow-hidden relative border-gray-100 shadow-sm">
+                      <div className="w-6 h-6 rounded-full mb-0.5 border border-1 mt-2 overflow-hidden relative border-gray-100">
                         {authorAvatar && (
                           <Image
                             tabIndex={0}
@@ -149,7 +150,7 @@ const ToolContent = ({
                             alt="Author profile picture"
                           />
                         )}
-                      </div> */}
+                      </div>
                     </div>
 
                     <div className="mt-12">
