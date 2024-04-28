@@ -102,7 +102,7 @@ const ToolContent = ({
           padding={false}
           maxWidth="w-full xl:mb-3 -mt-[96px] p-6 md:px-3 xl:p-0 relative z-0"
         >
-          <div className="grid grid-cols-12 gap-3 md:px-0 h-full w-full mx-auto max-w-[1315px] mt-[44px] lg:mt-[76px]">
+          <div className="grid grid-cols-12 gap-3 md:px-0 h-full w-full mx-auto max-w-[1320px] mt-[44px] lg:mt-[76px]">
             <div
               className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
             >
