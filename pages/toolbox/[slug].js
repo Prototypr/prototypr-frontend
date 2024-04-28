@@ -218,33 +218,33 @@ const ToolContent = ({
                 </div>
               </div> */}
               <div className="bg-white p-1 pt-0.5 rounded-2xl h-fit border border-gray-300/50">
-              {post?.attributes?.author && (
-                <div className="p-3 rounded-2xl">
-                  <h1
-                    tabIndex={0}
-                    className="text-sm mb-3 font-medium tracking-tight"
-                  >
-                    {post?.attributes?.creator ? "Contributors" : "Posted by"}
-                  </h1>
-                  <div className=" mb-3 flex">
-                    <AuthorCard
-                      authorAvatar={authorAvatar}
-                      title={post?.attributes?.creator ? "Curator" : null}
-                      author={post.attributes.author}
-                      avatar={post.attributes?.author}
-                    />
-                    {post.attributes?.creator ? (
-                      <div className="ml-10">
-                        <AuthorCard
-                          title={post?.attributes?.creator ? "Creator" : null}
-                          author={post.attributes.creator}
-                          avatar={post.attributes?.creator}
-                          authorAvatar={authorAvatar}
-                        />
-                      </div>
-                    ) : null}
-                  </div>
-                  {/* <Link
+                {post?.attributes?.author && (
+                  <div className="p-3 rounded-2xl">
+                    <h1
+                      tabIndex={0}
+                      className="text-sm mb-3 font-medium tracking-tight"
+                    >
+                      {post?.attributes?.creator ? "Contributors" : "Posted by"}
+                    </h1>
+                    <div className=" mb-3 flex">
+                      <AuthorCard
+                        authorAvatar={authorAvatar}
+                        title={post?.attributes?.creator ? "Curator" : null}
+                        author={post.attributes.author}
+                        avatar={post.attributes?.author}
+                      />
+                      {post.attributes?.creator ? (
+                        <div className="ml-10">
+                          <AuthorCard
+                            title={post?.attributes?.creator ? "Creator" : null}
+                            author={post.attributes.creator}
+                            avatar={post.attributes?.creator}
+                            authorAvatar={authorAvatar}
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                    {/* <Link
                     target="_blank"
                     href={post?.attributes?.link + "?ref=prototypr"}
                   >
@@ -252,43 +252,41 @@ const ToolContent = ({
                       Visit source
                     </button>
                   </Link> */}
+                  </div>
+                )}
+                <div className="h-[1px] pb-2 -mt-3 px-3">
+                  <div className="bg-gray-100 h-[1px]"></div>
                 </div>
-              )}
-              <div className="h-[1px] pb-2 -mt-3 px-3">
-                <div className="bg-gray-100 h-[1px]"></div>
-                </div>
-              <div className="flex flex-col gap-4 ">
-                <div className="relative rounded-2xl pb-3">
-                  <h1
-                    tabIndex={0}
-                    className="text-sm mb-3 font-medium tracking-tight px-3 pt-3 tracking-tight"
-                  >
-                    Related tools
-                  </h1>
-                  {/* <ToolCard
+                <div className="flex flex-col gap-4 ">
+                  <div className="relative rounded-2xl pb-3">
+                    <h1
+                      tabIndex={0}
+                      className="text-sm mb-3 font-medium tracking-tight px-3 pt-3 tracking-tight"
+                    >
+                      Related tools
+                    </h1>
+                    {/* <ToolCard
                     border={false}
                     posts={relatedPosts}
                     columns={"grid-cols-1"}
                     type="toolboxContentPage"
                   /> */}
-                  {relatedPosts?.map((tool, index) => {
-                    return (
-                      <div key={index} className="flex flex-col px-3">
-                        {index !== 0 ? (
-                          <div
-                            className={`my-3 flex flex-col first:border-t-none border-t border-gray-100`}
-                          />
-                        ) : (
-                          ""
-                        )}
-                        <div className="">
-                          <ToolIconCard withBackground={false} tool={tool} />
-                        </div>
-                      </div>
-                    );
-                  })}
+                    <div className="flex flex-col pt-1 grid grid-cols-6 gap-6">
+                      {relatedPosts?.map((tool, index) => {
+                        return (
+                          <div key={index} className="flex flex-col px-3 col-span-6 sm:col-span-3 lg:col-span-3 xl:col-span-6">
+                            <div className="">
+                              <ToolIconCard
+                                withBackground={false}
+                                tool={tool}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
-              </div>
               </div>
 
               <div className="flex flex-col gap-4">
