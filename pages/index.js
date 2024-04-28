@@ -136,10 +136,10 @@ export default function Index({
         </div>
         <Container
           padding={false}
-          maxWidth="max-w-[1320px] mx-auto px-6 md:px-3 xl:px-3 z-30 relative"
+          maxWidth="max-w-[1320px] mx-auto px-3 md:px-3 xl:px-3 z-30 relative"
         >
           <div className="grid gap-3 grid-cols-9 md:grid-cols-9 xl:grid-cols-12 auto-rows-min">
-            <div className="order-3 md:order-1 col-span-9 md:col-span-3">
+            <div className="order-3 md:order-1 mt-6 md:mt-0 col-span-9 md:col-span-3">
               <NewsColumn
                 groupedNewsPosts={groupedNewsPosts}
                 sponsor={navSponsor}
@@ -149,6 +149,9 @@ export default function Index({
             </div>
 
             <div className="order-2 md:order-2 col-span-9 md:col-span-6 ">
+            <h3 className="md:hidden mt-6 mb-3 font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
+                  New Posts
+              </h3>
               <HeroArticleSection
                 user={user}
                 cols={2}
@@ -185,7 +188,7 @@ export default function Index({
                   type="toolbox"
                 /> */}
             </div>
-            <div className="order-1 md:order-3 col-span-9 md:col-span-9 xl:col-span-3">
+            <div className="order-1 mt-3 md:mt-0 md:order-3 col-span-9 md:col-span-9 xl:col-span-3">
               <CardColumn
                 sponsor={navSponsor}
                 withBackground={false}
@@ -217,7 +220,7 @@ export default function Index({
         </Container> */}
         </div>
 
-        <div className="z-50 py-10 relative">
+        <div className="z-50 py-10 relative px-3">
           <HeroArticleSection
             user={user}
             cols={4}
@@ -267,7 +270,7 @@ export default function Index({
 
         {/* <div className="relative">
           <Container maxWidth="w-full bg-[#dbeeff]  relative relative z-10">
-            <div className="max-w-[1320px] mx-auto px-6 md:px-3 pb-16 ">
+            <div className="max-w-[1320px] mx-auto px-3 md:px-3 pb-16 ">
               <div className="flex justify-between mb-8">
                 <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md leading-[32px]">
                   Browse by <span className="text-underline">category</span>

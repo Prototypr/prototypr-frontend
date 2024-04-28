@@ -23,7 +23,7 @@ export default function AuthorCard({ author = {},title, avatar='', authorAvatar 
       
     return (
         <>
-            <div className="md:mb-0 bg-white border-gray-300 block md:block rounded-lg">
+            <div className="md:mb-0 block md:block rounded-lg">
                 <Link href={`/people/${attributes?.slug}`}>
                     {/* <h1 tabIndex={0} className="text-sm font-medium mb-3">{title?title:attributes.title ? attributes.title : "Posted by"}</h1> */}
                     <div className="py-2 w-full relative flex">

@@ -462,7 +462,7 @@ const ProfilePageLayout = ({
                               flip={index !== 0}
                               link={`/post/${post?.attributes?.slug}`}
                               avatar={false}
-                              imageDimensions={`lg:w-8/12 lg:h-[460px] h-[260px]`}
+                              imageDimensions={`lg:w-8/12 border-r border-gray-200 lg:h-[460px] h-[260px]`}
                               textDimensions={`lg:w-4/12`}
                               excerpt={post?.attributes?.excerpt}
                               author={false}

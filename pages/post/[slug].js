@@ -170,7 +170,7 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                         "linear-gradient(rgba(32, 52, 144,0.10) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.10) 1px, rgba(247, 247, 247,0.10) 1px)",
                       backgroundSize: "26px 26px",
                     }}
-                    className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1301px] border-b border-b-indigo-500/20 border-r border-indigo-500/10 max-w-full z-10 px-6 md:px-3"
+                    className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1301px] border-b border-b-indigo-500/20 border-r border-indigo-500/10 max-w-full z-10 px-3 md:px-3"
                   >
                     {!post.currentLocaleAvailable && <NoticeTranslation />}
 

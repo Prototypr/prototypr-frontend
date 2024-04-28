@@ -54,11 +54,11 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
               style={{ backgroundPosition: "10px 10px" }}
               className="absolute w-full h-[25%] -mt-[96px] rounded-3xl bg-[url('/static/images/toolbox/gridsquare.svg')] absolute inset-0 [mask-image:linear-gradient(0deg,rgba(251,252,255,0),#eef2ff)]"
             />
-            <div className="max-w-[1320px] relative mx-auto  px-6 md:px-3">
+            <div className="max-w-[1320px] relative mx-auto  px-3 md:px-3">
               <div className=" mx-auto pb-20 px-3 md:px-8 xl:px-0 gap-2 col-span-12 lg:col-span-8">
                 <div
                   // style={{"backgroundImage":"linear-gradient(rgba(32, 52, 144,0.16) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.16) 1px, rgba(247, 247, 247,0.16) 1px)","backgroundSize":"26px 26px"}}
-                  className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1301px] max-w-full z-10 px-6 md:px-3"
+                  className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1301px] max-w-full z-10 px-3 md:px-3"
                 >
                   <div className="pt-4">
                     <div className=" flex mb-3 justify-center flex-wrap">

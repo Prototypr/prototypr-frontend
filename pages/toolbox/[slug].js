@@ -120,7 +120,7 @@ const ToolContent = ({
                 <div
                   className={`relative lg:bg-gradient-to-b from-black to-white -mt-3 z-20 py-6 pt-0 lg:pt-5 col-span-3 order-2 pl-6 lg:order-1 ${gallery?.length ? "" : ""}`}
                 >
-                  <div className="hidden lg:block h-full w-full -mt-5 bg-gradient-to-b from-gray-700/40 to-white absolute left-0" />
+                  <div className="hidden lg:block h-full w-full -mt-5 bg-gradient-to-b from-gray-700/10 to-white absolute left-0" />
                   <div className="h-full min-h-[230px]">
                     <Carousel gallery={gallery} />
                   </div>
@@ -201,7 +201,7 @@ const ToolContent = ({
                 </div>
               </div>
             </div>
-            <div className="col-span-3 lg:col-span-3 flex flex-col gap-3">
+            <div className="col-span-3 h-fit lg:col-span-3 flex flex-col gap-3">
               {/* <div className="flex flex-none">
                 <div className="flex justify-end">
                   <a
@@ -217,11 +217,12 @@ const ToolContent = ({
                   </a>
                 </div>
               </div> */}
+              <div className="bg-white p-1 pt-0.5 rounded-2xl h-fit border border-gray-300/50">
               {post?.attributes?.author && (
-                <div className="bg-white p-3 rounded-2xl border border-gray-300/50">
+                <div className="p-3 rounded-2xl">
                   <h1
                     tabIndex={0}
-                    className="text-base mb-3 font-semibold tracking-tight"
+                    className="text-sm mb-3 font-medium tracking-tight"
                   >
                     {post?.attributes?.creator ? "Contributors" : "Posted by"}
                   </h1>
@@ -253,11 +254,14 @@ const ToolContent = ({
                   </Link> */}
                 </div>
               )}
-              <div className="flex flex-col gap-4">
-                <div className="bg-white relative rounded-2xl border border-gray-300/50 pb-3">
+              <div className="h-[1px] pb-2 -mt-3 px-3">
+                <div className="bg-gray-100 h-[1px]"></div>
+                </div>
+              <div className="flex flex-col gap-4 ">
+                <div className="relative rounded-2xl pb-3">
                   <h1
                     tabIndex={0}
-                    className="text-base mb-3 font-semibold tracking-tight px-3 pt-3 tracking-tight"
+                    className="text-sm mb-3 font-medium tracking-tight px-3 pt-3 tracking-tight"
                   >
                     Related tools
                   </h1>
@@ -285,9 +289,10 @@ const ToolContent = ({
                   })}
                 </div>
               </div>
+              </div>
 
               <div className="flex flex-col gap-4">
-                <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/50">
+                <div className="grid grid-cols-5 p-3 relative rounded-2xl">
                   <div className="z-10 col-span-5 xl:col-span-5 relative">
                     <h3 className="font-bold drop-shadow-sm text-lg tracking-[-0.018em] text-gray-800">
                       Get weekly handpicked tools

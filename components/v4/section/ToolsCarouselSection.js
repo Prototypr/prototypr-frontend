@@ -11,7 +11,7 @@ const ToolsCarouselSection = ({toolsList, sponsors}) =>{
 
     return(
         <div className="z-50 relative pt-[40px] px-3">
-          {/* <div className="max-w-[1320px] mx-auto mt-5 px-6 md:px-3">
+          {/* <div className="max-w-[1320px] mx-auto mt-5 px-3 md:px-3">
           <div className="text-xs font-medium text-left text-gray-800/90 uppercase mb-6">Latest in Prototypr Toolbox</div>
           <div className="text-3xl text-black/90 font-semibold text-center mx-auto -mt-8 mb-8 w-fit rounded-full">Hot this week</div>
           </div> */}

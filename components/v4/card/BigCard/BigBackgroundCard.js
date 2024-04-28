@@ -25,10 +25,10 @@ const BigBackgroundCard = ({
   return (
     // <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col sm:flex-row lg:flex-col font-inter w-full max-w-[985px]">
     <div
-      className={`bg-white h-full p-3 border border-gray-300/50 shadow-sm group hover:shadow-lg hover:scale-[1.005] transition transition-all duration-300 rounded-2xl flex flex-col ${layout == 3 ? "" : `sm:flex-row ${flip?'sm:flex-row-reverse':''}`} font-inter w-full `}
+      className={`bg-white h-full p-0 border border-gray-300/50 shadow-sm overflow-hidden group hover:shadow-lg hover:scale-[1.005] transition transition-all duration-300 rounded-2xl flex flex-col ${layout == 3 ? "" : `sm:flex-row ${flip?'sm:flex-row-reverse':''}`} font-inter w-full `}
     >
       <div
-        className={`${imageDimensions ? imageDimensions : layout == 2 ? "md:w-[45%] md:h-[320px]" : layout == 3 ? "w-full md:h-[364px]" : "md:w-3/5 md:h-[440px]"} w-full relative ${!imageDimensions ? "h-[240px] sm:h-[224px]" : ""} rounded-xl overflow-hidden border border-gray-300/60`}
+        className={`${imageDimensions ? imageDimensions : layout == 2 ? "md:w-[45%] border-r md:h-[320px]" : layout == 3 ? "w-full md:h-[364px] border-b" : "md:w-3/5 border-r md:h-[440px]"} w-full relative ${!imageDimensions ? "h-[240px] sm:h-[224px]" : ""} overflow-hidden border-gray-200`}
       >
         <Link href={link ?? ""}>
           <Image
@@ -41,11 +41,11 @@ const BigBackgroundCard = ({
         </Link>
       </div>
       <div
-        className={`${textDimensions ? textDimensions : layout == 2 ? "md:w-[65%]" : layout == 3 ? "w-full" : "md:w-2/5"} ${layout == 3 ? "p-3" : "px-5 py-0"} w-full  flex flex-col justify-between`}
+        className={`${textDimensions ? textDimensions : layout == 2 ? "md:w-[65%]" : layout == 3 ? "w-full" : "md:w-2/5"} ${layout == 3 ? "p-4" : "px-5 py-4"} w-full  flex flex-col justify-between`}
       >
         <div className="flex flex-col">
           {tags?.length ? (
-            <div className={`flex text-xs mb-3 mt-3`}>
+            <div className={`flex text-xs mb-3`}>
               {tags.slice(0, 2).map((tag, index) => {
                 return (
                   <MediumTag

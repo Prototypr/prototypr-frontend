@@ -123,11 +123,11 @@ const NewsColumn = ({
 
   return (
     <div
-      className={`h-full w-full ${true ? "bg-white rounded-2xl border border-gray-300/50 shadow-sm" : ""}`}
+      className={`h-full w-full rounded-2xl`}
     >
       {/* <Container maxWidth="max-w-[1320px] w-full"> */}
       {showHeader !== false && (
-        <div className="flex justify-between p-3 pb-4 rounded-t-2xl">
+        <div className="flex justify-between p-3 pt-0 pb-4 rounded-t-2xl">
           <div className="flex">
             <div>
               <div className="flex">

@@ -16,7 +16,8 @@ const CardColumn = ({
 }) => {
   return (
     <div
-      className={`flex flex-col h-full w-full ${true ? "bg-white p-3 rounded-2xl border border-gray-300/50 shadow-sm" : ""}`}
+      // className={`flex flex-col h-full w-full ${true ? "bg-white p-3 rounded-2xl border border-gray-300/50 shadow-sm" : ""}`}
+      className={`flex flex-col h-full w-full md:p-3 pt-0`}
     >
       {/* <Container maxWidth="max-w-[1320px] w-full"> */}
       {showHeader !== false && (

@@ -81,7 +81,7 @@ const TagsNavRow = ({currentPage, activeTag}) => {
   },[activeTag, currentPage])
 
   return (
-    <Container padding={false} maxWidth={"max-w-[1320px] mx-auto mb-4 px-6 md:px-3"}>
+    <Container padding={false} maxWidth={"max-w-[1320px] mx-auto mb-4 px-3 md:px-3"}>
         {/* browse all */}
         <div key={activeTag} className="flex flex-wrap gap-2">
         <GiantTag classes={`${currentPage=='topics'?'border border-gray-800':''} pl-2 mr-3`} link={`/topics`}>

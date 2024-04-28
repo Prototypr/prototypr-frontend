@@ -56,7 +56,7 @@ const PostsSectionHero = ({user, heroCardPost,toolsList,showHeroTitle,groupSlice
       </>
       :
       
-      <div className="w-full h-full grid grid-cols-12 flex justify-center px-6 md:px-3">
+      <div className="w-full h-full grid grid-cols-12 flex justify-center px-3 md:px-3">
         <div className={`${!showRecent?'-mt-4':''} w-full max-w-full flex flex-col gap-2 col-span-12 `}>
          <div className="flex justify-between">
             {showTitle!==false &&

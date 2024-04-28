@@ -49,7 +49,7 @@ export default function NewsletterPage({ allPosts = [], preview, pagination = {}
                     backgroundSize: "10px 10px"
                     }}/>
                     </div>
-                    <div className="max-w-[1320px] mx-auto px-6 md:px-3">
+                    <div className="max-w-[1320px] mx-auto px-3 md:px-3">
                         {router.isFallback ? (
                             <PostTitle>Loading…</PostTitle>
                         ) :

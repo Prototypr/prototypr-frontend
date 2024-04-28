@@ -45,7 +45,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
         className="flex"
       >
         <div
-          className={`${withBackground ? "hover:shadow-md hover:scale-[1.005] transition transition-all duration-400 bg-white p-2 shadow-sm border border-gray-200/70 border-1 rounded-2xl" : ""} w-full h-auto cursor-pointer flex flex-col group`}
+          className={`${withBackground ? "hover:shadow-md hover:scale-[1.005] transition transition-all duration-400 bg-white p-3 shadow-sm border border-gray-200/70 border-1 rounded-2xl" : ""} w-full h-auto cursor-pointer flex flex-col group`}
         >
           <div className="flex flex-row rounded-xl justify-between gap-3">
             <div className="flex justify-start w-full">

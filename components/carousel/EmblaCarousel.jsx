@@ -103,7 +103,7 @@ const EmblaCarousel = (props) => {
   }
 
   return (
-    // <div className="embla p-3 bg-white rounded-2xl shadow-sm border border-gray-300/70 relative h-full">
+    // <div className="embla p-2 bg-white rounded-2xl shadow-sm border border-gray-300/70 relative h-full">
     <div className="embla relative h-full">
 
       {/* <div className="absolute top-0 w-[40px] h-full bg-gradient-to-r mr-3 from-white/0 via-white/40 to-white right-0 z-40 rounded-r-2xl pointer-events-none" /> */}

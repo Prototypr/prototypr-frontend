@@ -125,7 +125,7 @@ export default function PostsPage({
               <TagsNavRow activeTag={tag} />
             </div>
 
-            <div className="w-full p-6 pt-0 pb-0 z-10 relative max-w-[1320px] px-6 md:px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
+            <div className="w-full p-6 pt-0 pb-0 z-10 relative max-w-[1320px] px-3 md:px-3 mx-auto backdrop-blur-sm backdrop-opacity-20 w-full h-full">
               {/* <BreadCrumbs background={false}tagName={tagName}/> */}
 
               <div className="inline-flex mt-4 mb-4">
@@ -156,7 +156,7 @@ export default function PostsPage({
                               layout={2}
                               link={`/post/${largePost?.attributes?.slug}`}
                               avatar={largePostAvatar}
-                              imageDimensions={`lg:w-7/12 lg:h-[400px] h-[260px]`}
+                              imageDimensions={`lg:w-7/12 lg:h-[400px] h-[260px] border-r`}
                               textDimensions={`lg:w-5/12`}
                               excerpt={largePost?.attributes?.excerpt}
                               author={
@@ -260,7 +260,7 @@ export default function PostsPage({
 
                 <Container
                   padding={false}
-                  maxWidth="mb-3 px-6 md:px-3 max-w-[1320px] mx-auto rounded-2xl w-full relative"
+                  maxWidth="mb-3 px-3 md:px-3 max-w-[1320px] mx-auto rounded-2xl w-full relative"
                 >
                   <div className="">
                     <div className="flex justify-between mb-8">

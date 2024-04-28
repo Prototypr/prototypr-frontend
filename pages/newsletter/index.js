@@ -57,7 +57,7 @@ export default function NewsLetter({
 />
           {/* <img src='/static/images/toolbox/squares.svg' className="rounded-b-[3.4rem] opacity absolute w-full h-full object-cover top-0 left-0"/> */}
           </div>
-          <div className="max-w-[1320px] mx-auto px-6 md:px-3">
+          <div className="max-w-[1320px] mx-auto px-3 md:px-3">
             <IssueList marginTop="mt-8 mb-6" posts={allPosts} />
             <div className="pb-6">
               <NewPagination
