@@ -137,6 +137,7 @@ const EmblaCarousel = (props) => {
                   }}
                   loader={gumletLoader}
                   layout="fill"
+                  key={item.original}
                   objectFit="cover"
                   priority={index == 0 ? true : false}
                   fetchpriority={index == 0 ? "true" : "false"}
@@ -147,7 +148,7 @@ const EmblaCarousel = (props) => {
                   // data-src={current.original}
                   alt={`Gallery Image ${index}`}
                   sizes={"(max-width: 300px) 100vw, 600px"}
-                  className='embla__slide__img  cursor-pointer rounded-xl bg-white border border-gray-300/70'
+                  className='embla__slide__img  cursor-pointer rounded-xl border border-gray-300/50'
                 />
               </div>
             </div>
