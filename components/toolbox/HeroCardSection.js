@@ -28,7 +28,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
         <div className="absolute bottom-0 w-full h-full bg-gradient-to-b from-gray-900/0 to-black left-0 rounded-t-2xl z-0" />
         <div className="relative w-full max-w-[1320px] mx-auto h-full flex flex-col-reverse justify-between">
           {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
-          <div className="w-full z-10 grid grid-cols-12 gap-16 flex pt-0 md:pt-6 p-6 justify-between ">
+          <div className="w-full z-10 grid grid-cols-12 lg:gap-8 flex pt-0 md:pt-6 p-6 justify-between ">
             <div className="flex order-2 md:order-1 col-span-12 lg:col-span-9 w-full flex-col justify-between">
               <div className="flex flex-col justify-between">
                 <div className="flex flex-col">
