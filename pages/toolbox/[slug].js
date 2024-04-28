@@ -275,7 +275,7 @@ const ToolContent = ({
                     <div className="flex flex-col pt-1 grid grid-cols-6 gap-6">
                       {relatedPosts?.map((tool, index) => {
                         return (
-                          <div key={index} className="flex flex-col px-3 col-span-6 sm:col-span-3 lg:col-span-3 xl:col-span-6">
+                          <div key={index} className="flex flex-col px-3 col-span-6 sm:col-span-3 lg:col-span-6 xl:col-span-6">
                             <div className="">
                               <ToolIconCard
                                 withBackground={false}
