@@ -119,10 +119,11 @@ const ToolContent = ({
               </div>
               {gallery.length ? (
                 <div
-                  className={`relative lg:bg-gradient-to-b from-black to-white -mt-3 z-20 py-6 pt-0 lg:pt-5 col-span-3 order-2 pl-6 lg:order-1 ${gallery?.length ? "" : ""}`}
+                  // className={`relative lg:bg-gradient-to-b backdrop-blur-sm from-black via-white to-white -mt-3 z-20 py-6 pt-0 lg:pt-5 col-span-3 order-2 pl-6 lg:order-1 ${gallery?.length ? "" : ""}`}
+                  className={`relative -mt-8 mb-3 z-20 pt-0 col-span-3 order-2 mx-6 lg:order-1 ${gallery?.length ? "" : ""}`}
                 >
-                  <div className="hidden lg:block h-full w-full -mt-5 bg-gradient-to-b from-gray-700/10 to-white absolute left-0" />
-                  <div className="h-full min-h-[230px]">
+                  {/* <div className="hidden lg:block h-full w-full -mt-5 bg-gradient-to-b from-white/[0.01] to-white/[0.3] absolute left-0" /> */}
+                  <div className="h-full min-h-[240px]">
                     <Carousel gallery={gallery} />
                   </div>
                 </div>

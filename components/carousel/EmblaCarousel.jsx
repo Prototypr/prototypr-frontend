@@ -114,8 +114,8 @@ const EmblaCarousel = (props) => {
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
-      <div className="embla__viewport h-full" ref={emblaMainRef}>
-        <div className="embla__container h-full">
+      <div className="embla__viewport h-full bg-white px-3 rounded-3xl" ref={emblaMainRef}>
+        <div className="embla__container h-full py-3">
           {slides.map((item,index) => (
             <div className="embla__slide h-full" key={index}>
               <div className="embla__slide__number">
@@ -126,7 +126,7 @@ const EmblaCarousel = (props) => {
                 src={item.original}
                 alt="Your alt text"
               /> */}
-               <div className="relative shimmer shadow-sm w-full rounded-xl h-full w-full relative overflow-hidden flex justify-center">
+               <div className="relative shimmer border border-gray-300/70 shadow-md w-full rounded-2xl h-full w-full relative overflow-hidden flex justify-center">
                 {/* <img src={item.original} className='object-cover cursor-pointer pointer-events-auto' alt={`Gallery Image ${index}`}/> */}
                 <Image
                   onClick={()=>{
@@ -148,7 +148,7 @@ const EmblaCarousel = (props) => {
                   // data-src={current.original}
                   alt={`Gallery Image ${index}`}
                   sizes={"(max-width: 300px) 100vw, 600px"}
-                  className='embla__slide__img  cursor-pointer rounded-xl border border-gray-300/50'
+                  className='embla__slide__img  cursor-pointer bg-white'
                 />
               </div>
             </div>
