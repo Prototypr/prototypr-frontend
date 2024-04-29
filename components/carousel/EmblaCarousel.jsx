@@ -114,7 +114,7 @@ const EmblaCarousel = (props) => {
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
-      <div className="embla__viewport h-full bg-white px-3 rounded-3xl" ref={emblaMainRef}>
+      <div className="embla__viewport h-full bg-white px-3 rounded-t-3xl" ref={emblaMainRef}>
         <div className="embla__container h-full py-3">
           {slides.map((item,index) => (
             <div className="embla__slide h-full" key={index}>
