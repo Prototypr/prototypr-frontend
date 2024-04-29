@@ -16,10 +16,10 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
     return(
         <div
         // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
-        className={`col-span-12 h-full rounded-t-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
+        className={`col-span-12 h-full mx-auto relative overflow-hidden p-2 leading-tight w-full`}
       >
         <Image
-          className="bg-gray-700 rounded-t-2xl object-cover"
+          className="bg-gray-700 object-cover"
           layout="fill"
           objectFit="cover"
           key={featuredImage}
