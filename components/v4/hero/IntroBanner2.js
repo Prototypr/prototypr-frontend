@@ -80,7 +80,7 @@ const IntroBanner = ({ tools, sponsor }) => {
           <div className="relative">
               <img src="/static/images/robotitosuelto.png" className="w-[125px] -mb-3 drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] md:-mb-3 md:w-[165px] md:-scale-x-100 max-w-[400px] md:max-w-full cursor-collab z-40 pointer-all"/>
 
-          <div className="hidden 2md:block eyes-follow-tired absolute z-20 top-0 mt-[48px] md:mt-[42px] 2md:mt-[48px] right-[66px] md:right-[60px] 2md:right-[66px]">
+          <div className="hidden xl:block eyes-follow-tired absolute z-20 top-0 mt-[48px] md:mt-[42px] 2md:mt-[48px] right-[66px] md:right-[60px] 2md:right-[66px]">
             <div className="container">
               <div className="eyes">
                 <div id="left-eye" className="eye" style={styleLeftEye}>

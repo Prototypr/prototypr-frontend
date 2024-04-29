@@ -55,13 +55,14 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
                 <Image
                   tabIndex={0}
                   loader={gumletLoader}
-                  layout="fill"
+                  width="100"
+                  height="100"
                   objectFit="cover"
                   src={
                     coverImage ||
                     "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/176d3d79cb9ad1acc057fb0eb3fe72d0.jpeg"
                   }
-                  className="object-cover drop-shadow-sm"
+                  className="object-cover w-full h-full"
                   alt="Author profile picture"
                 />
               </div>

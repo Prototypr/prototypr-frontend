@@ -243,7 +243,7 @@ const NewsColumn = ({
             </div>
           );
         })} */}
-        <div className="z-10 absolute z-10 hidden md:block pointer-events-none bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white" />
+        <div className="z-10 absolute z-10 hidden md:block pointer-events-none bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#fbfcff]" />
       </div>
     </div>
   );
