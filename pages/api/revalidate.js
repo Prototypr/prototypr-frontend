@@ -9,6 +9,7 @@ export default async function handler(req, res) {
 
   try {
     const { entry } = req.body;
+    console.log(req.body)
     // revalidate posts
     if (entry.type=='article' && (entry.status === "publish" || entry.publishedAt)) {
       console.log("revalidating published post :", entry.slug);
@@ -17,7 +18,7 @@ export default async function handler(req, res) {
       return res.json({ revalidated: true });
     } 
     //revalidate jobs
-    else if(entry.publishedAt){
+    else if(entry.type=='job' && entry.publishedAt){
       console.log("revalidating job post :", entry.slug);
       const url = `/jobs/${entry.id}`;
       await res.revalidate(url);
