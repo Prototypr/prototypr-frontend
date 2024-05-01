@@ -153,9 +153,13 @@ news width
         font-weight: 500;
         color: #242424;
     }
-    pre, figure{
-        text-wrap: balance;
+    pre{
+        white-space:break-spaces;
         font-size:14px;
+        margin-top:12px;
+        margin-bottom:12px;
+    }
+    figure{
         margin-top:12px;
         margin-bottom:12px;
     }

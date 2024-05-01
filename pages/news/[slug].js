@@ -287,10 +287,10 @@ export default function Post({
             </div>
 
             <div className="col-span-12 lg:col-span-3 ">
-              <div className="bg-white p-3 rounded-2xl border border-gray-300/70 shadow-sm">
+              <div className="p-3">
                 <h1
                   tabIndex={0}
-                  className="text-base mb-3 font-semibold tracking-tight"
+                  className="text-sm text-gray-600 mb-3 tracking-tight"
                 >
                   {post?.attributes?.creator ? "Contributors" : "Posted by"}
                 </h1>
@@ -321,16 +321,16 @@ export default function Post({
                       : ""
                   }
                 >
-                  <button className="w-full rounded-xl  bg-blue-500 text-white font-medium h-[44px]">
+                  <button className="w-full rounded-xl  bg-blue-500 text-white h-[44px]">
                     Visit source
                   </button>
                 </Link>
               </div>
               {relatedNews && relatedNews.length > 0 ? (
-                <div className="bg-white p-3 mt-3 rounded-2xl border border-gray-300/70 shadow-sm">
+                <div className="p-3 mt-3">
                   <h1
                     tabIndex={0}
-                    className="text-base mb-3 font-semibold tracking-tight"
+                    className="text-sm mb-3 text-gray-600"
                   >
                     Related
                   </h1>
@@ -409,7 +409,7 @@ export default function Post({
                 </div>
               ) : null}
               <div className="flex flex-col mt-3 gap-4">
-                <div className="bg-white grid grid-cols-5 p-3 relative rounded-2xl border border-gray-300/70 shadow-sm">
+                <div className="grid grid-cols-5 p-3 relative">
                   <div className="z-10 col-span-5 xl:col-span-5 relative">
                     <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
                       Tomorrow's news, today
