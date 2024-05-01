@@ -1832,10 +1832,10 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.5.tgz"
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
-"@prototypr/prototypr-postie@^1.0.3":
-  version "1.0.3"
-  resolved "https://npm.pkg.github.com/download/@prototypr/prototypr-postie/1.0.3/330c608157b0fc54492a9623f1405e8f79257d24"
-  integrity sha512-mokJv/33vaDDCf6vNnkvkunz0r4oAet+LR9/9ySvV83hno7Oi7EHF0HUwbc5TdgAg1gB/fU9DAVOXruFFLm1AQ==
+"@prototypr/prototypr-postie@^1.0.8":
+  version "1.0.8"
+  resolved "https://npm.pkg.github.com/download/@prototypr/prototypr-postie/1.0.8/916c6c5ce64523e9d62dc0f177512007c4787308"
+  integrity sha512-R/xLOgeRVr5MBUMy16w2k04JR71EbvB623Nt6wr2FIrLSYWoVJFgWaUyQau3vCzya8lbWDdQl8peDHpGoa9UIQ==
   dependencies:
     axios "^1.6.8"
     cheerio "^1.0.0-rc.12"

@@ -173,7 +173,7 @@
     "yup": "^0.32.11"
   },
   "optionalDependencies": {
-    "@prototypr/prototypr-postie": "^1.0.3"
+    "@prototypr/prototypr-postie": "^1.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",

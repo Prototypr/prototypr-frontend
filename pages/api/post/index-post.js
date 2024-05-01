@@ -6,8 +6,8 @@ let processPost;
   try {
     if(process.env.NODE_ENV === 'development'){
       console.log('is dev')
-      // const postie = await import("@prototypr/prototypr-postie");
-      // processPost = postie.processPost;
+      // const {processPost:postieProcessPost} = await import("@prototypr/prototypr-postie");
+      // processPost = postieProcessPost;
       const postie = await import(".prototypr/prototypr-postie/index.js");
       processPost = postie.processPost;
     }else{
@@ -16,6 +16,7 @@ let processPost;
       processPost = postie.processPost;
     }
   } catch (error) {
+    console.log(error)
     processPost = () => {
       // Provide a fallback implementation or handle the error appropriately
       console.log("The @prototypr/prototypr-postie module is not installed.");
