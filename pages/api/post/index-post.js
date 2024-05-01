@@ -4,8 +4,14 @@ let processPost;
 
 (async () => {
   try {
-    const postie = await import("@prototypr/prototypr-postie");
-    processPost = postie.processPost;
+    if(process.env.NODE_ENV === 'development'){
+      console.log('is dev')
+      const postie = await import(".prototypr/prototypr-postie/index.js");
+      processPost = postie.processPost;
+    }else{
+      const postie = await import("@prototypr/prototypr-postie");
+      processPost = postie.processPost;
+    }
   } catch (error) {
     processPost = () => {
       // Provide a fallback implementation or handle the error appropriately

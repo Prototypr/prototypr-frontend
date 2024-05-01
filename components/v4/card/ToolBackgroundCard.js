@@ -18,7 +18,7 @@ const ToolBackgroundCard = ({
       <Link href={`/toolbox/${slug}`}>
         <div
           className={
-            "flex pt-0 grid grid-col-1 gap-2 flex-grow h-full rounded-t-2xl shadow hover:shadow-xl border border-gray-300/60 transition transition-all duration-400 hover:scale-[1.02] group bg-white relative rounded-2xl fade-"
+            "flex pt-0 grid grid-col-1 gap-2 flex-grow h-full rounded-t-2xl shadow hover:shadow-xl border border-gray-300/60 transition transition-all duration-400 hover:scale-[1.02] group bg-white relative rounded-2xl fade- overflow-hidden"
           }
         >
           <div className="rounded-xl px-0 block cursor-pointer">
