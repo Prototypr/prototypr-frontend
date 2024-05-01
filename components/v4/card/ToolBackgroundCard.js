@@ -44,7 +44,7 @@ const ToolBackgroundCard = ({
             >
               <div className="flex w-full justify-between p-2 bg-black/40 backdrop-blur-sm rounded-2xl border border-gray-300/20">
                 <div className="flex">
-                  <div className="absolute top-0 left-0 z-10 rounded-xl w-full h-full bg-gradient-to-b from-black/5 to-black/60 shadow"></div>
+                  {/* <div className="absolute top-0 left-0 z-10 rounded-xl w-full h-full bg-gradient-to-b from-black/5 to-black/60 shadow"></div> */}
                   <div
                     className={`rounded-xl z-20 flex`}
                   >
