@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     //revalidate news
     else if(entry.type=='bite' && entry.publishedAt){
       console.log("revalidating news post :", entry.slug);
-      const url = `/news/${entry.id}`;
+      const url = `/news/${entry.slug}`;
       await res.revalidate(url);
       return res.json({ revalidated: true });
     }
