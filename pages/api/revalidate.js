@@ -24,6 +24,13 @@ export default async function handler(req, res) {
       await res.revalidate(url);
       return res.json({ revalidated: true });
     }
+    //revalidate news
+    else if(entry.type=='bite' && entry.publishedAt){
+      console.log("revalidating news post :", entry.slug);
+      const url = `/news/${entry.id}`;
+      await res.revalidate(url);
+      return res.json({ revalidated: true });
+    }
     // revalidate tools
     else if(entry.type=='tool' && entry.publishedAt){
       console.log("revalidating tool post :", entry.slug);

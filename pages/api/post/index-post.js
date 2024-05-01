@@ -6,9 +6,12 @@ let processPost;
   try {
     if(process.env.NODE_ENV === 'development'){
       console.log('is dev')
+      // const postie = await import("@prototypr/prototypr-postie");
+      // processPost = postie.processPost;
       const postie = await import(".prototypr/prototypr-postie/index.js");
       processPost = postie.processPost;
     }else{
+      console.log('is prod')
       const postie = await import("@prototypr/prototypr-postie");
       processPost = postie.processPost;
     }
@@ -27,7 +30,6 @@ const axios = require("axios");
 export default async function handler(req, res) {
   //get query string param called secret
   const secret = req.query.secret;
-
   if (secret !== process.env.PROTOTYPR_WEBHOOK_SECRET) {
     return res.status(401).send("Unauthorized");
   }
