@@ -107,7 +107,7 @@ const ToolContent = ({
         </Container> */}
         {/* Content under header */}
         <Container maxWidth="w-full relative z-10">
-          <div className="grid grid-cols-3 lg:grid-cols-12 gap-7 max-w-[1320px] mx-auto md:px-0 h-full">
+          <div className="grid grid-cols-3 lg:grid-cols-12 gap-3 xl:gap-7 max-w-[1320px] mx-auto md:px-0 h-full">
             <div className="col-span-3 border border-gray-300/50 rounded-2xl overflow-hidden shadow-sm lg:col-span-9 flex flex-col gap-3 bg-white">
               <div className="grid gap-3 md:px-0 -mb-4">
                 <HeroCardSection

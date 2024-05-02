@@ -78,11 +78,20 @@ toolbox width
         margin-left:0!important;
         margin-right:0!important;
     }
+    ul{
+        padding:0rem 0 0.75rem 1.5rem;
+    }
     iframe{
         width:100%!important;
         margin-top: 1rem;
         margin-bottom: 2rem;
-        min-height: 440px;
+        min-height: 400px;
+    }
+    @media only screen and (max-width: 660px) {
+        iframe{
+            max-height: 280px;
+            min-height: 280px;
+        }
     }
     *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
         // max-width: 100%;
@@ -111,6 +120,11 @@ toolbox width
     }
     figcaption{
         max-width: 50rem!important;
+        margin-top: 8px !important;
+    }
+    figure, pre {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
     }
     blockquote.wp-block-quote.main-menu{
         max-width: 50rem;
