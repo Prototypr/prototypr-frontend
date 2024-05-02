@@ -21,6 +21,7 @@ const HeroCardSection = ({ logo, post, tags, featuredImage, faviconUrl, domain, 
       <Image
         className="bg-gray-700 object-cover"
         layout="fill"
+        loader={gumletLoader}
         objectFit="cover"
         key={featuredImage}
         src={featuredImage}
@@ -55,11 +56,11 @@ const HeroCardSection = ({ logo, post, tags, featuredImage, faviconUrl, domain, 
                 
                   {/* </div> */}
                 </div>
-                <h1 className="text-5xl line-clamp-2 mb-0 tracking-tight font-semibold drop-shadow-lg text-white">
+                <h1 className="text-5xl mb-0 tracking-tight font-semibold drop-shadow-lg text-white">
                   {post?.attributes?.title}
                 </h1>
                 {post?.attributes?.excerpt ? (
-                  <p className="text-base line-clamp-3 text-white mt-2">
+                  <p className="text-base line-clamp-4 text-white mt-2">
                     {post?.attributes?.excerpt}
                   </p>
                 ) : null}

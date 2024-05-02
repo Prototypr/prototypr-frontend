@@ -22,6 +22,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
           className="bg-gray-700 object-cover"
           layout="fill"
           objectFit="cover"
+          loader={gumletLoader}
           key={featuredImage}
           src={featuredImage}
         />
@@ -33,7 +34,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
               <div className="flex flex-col justify-between">
                 <div className="flex flex-col">
                   <div className="flex flex-col">
-                    {logo?<div className="mr-4 mb-3 flex-none w-[74px] h-[74px] md:w-[88px] md:h-[88px] my-auto shadow-sm rounded-2xl p-[3px] bg-white border border-gray-300">
+                    <div className="mr-4 mb-3 flex-none w-[74px] h-[74px] md:w-[88px] md:h-[88px] my-auto shadow-sm rounded-2xl p-[3px] bg-white border border-gray-300">
                       <Image
                         key={logo}
                         loader={gumletLoader}
@@ -47,7 +48,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
                         className="rounded-xl h-full w-full object-cover bg-white"
                         src={logo}
                       />
-                    </div>:null}
+                    </div>
                     <div className="flex flex-col text-white justify-center">
                       <h1 className="text-5xl line-clamp-2 mb-0 tracking-tight font-semibold drop-shadow-lg text-white">
                         {post?.attributes?.title}
@@ -124,7 +125,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
           
           <div className="p-6 pt-3 text-white flex flex-col-reverse">
             <div className="flex flex-row flex-wrap gap-2">
-              {tags?.length ? tags.map((tag, i) => {
+              {tags.map((tag, i) => {
                 if (i < 4) {
                   return (
                     <Link
@@ -138,7 +139,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
                     </Link>
                   );
                 }
-              }):null}
+              })}
             </div>
           </div>
         </div>
