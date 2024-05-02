@@ -173,7 +173,7 @@ export default function Post({
             <div className="flex flex-col md:flex-row justify-between">
               <div className="flex text-lg text-black/90">
                 <Link href="/news">
-                  <div className="font-black tracking-tight text-xl text-sky-500 my-auto">
+                  <div className="font-black tracking-tight text-xl text-gray-600 my-auto">
                     News{" "}
                     <span className="hidden lg:inline-block">Explorer</span>
                   </div>
@@ -206,7 +206,7 @@ export default function Post({
           padding={false}
           maxWidth="w-full px-3 xl:px-0 pb-20 mt-3 relative z-0 relative w-full h-full  max-w-[1320px] mx-auto"
         >
-          <div className="grid gap-3 grid-cols-12 mt-8">
+          <div className="grid gap-8 grid-cols-12 mt-8">
             <div className="col-span-12 lg:col-span-9 ">
               <NewsPageFeatured
                 faviconUrl={faviconUrl}
@@ -294,7 +294,7 @@ export default function Post({
                 >
                   {post?.attributes?.creator ? "Contributors" : "Posted by"}
                 </h1>
-                <div className=" mb-3 flex">
+                <div className=" flex">
                   <AuthorCard
                     authorAvatar={authorAvatar}
                     title={post?.attributes?.creator ? "Curator" : null}
@@ -312,7 +312,7 @@ export default function Post({
                     </div>
                   ) : null}
                 </div>
-                <Link
+                {/* <Link
                   target="_blank"
                   href={
                     post?.attributes?.legacyAttributes?.link
@@ -324,10 +324,10 @@ export default function Post({
                   <button className="w-full rounded-xl  bg-blue-500 text-white h-[44px]">
                     Visit source
                   </button>
-                </Link>
+                </Link> */}
               </div>
               {relatedNews && relatedNews.length > 0 ? (
-                <div className="p-3 mt-3">
+                <div className="p-3">
                   <h1
                     tabIndex={0}
                     className="text-sm mb-3 text-gray-600"

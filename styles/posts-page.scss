@@ -131,9 +131,12 @@ news width
     *:not(.tippy-content *, .tippy-box, [data-tippy-root]), ul, ol{
         max-width: 44rem;
     }
+    h2:first-of-type, h1:first-of-type, h3:first-of-type{
+        margin-top:0px!important;
+    }
     ul{
-        padding: 1rem 0 1rem 1.5rem;
-        margin-bottom: 1.5rem !important;
+        padding: 0rem 0 1rem 1.5rem;
+        margin-bottom: 1rem !important;
     }
     li{
         margin-top:1.14rem;

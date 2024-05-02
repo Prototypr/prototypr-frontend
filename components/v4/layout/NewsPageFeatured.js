@@ -2,6 +2,8 @@ import Button from "@/components/Primitives/Button";
 import Link from "next/link";
 import Image from "next/image";
 import { LinkIcon } from "@/components/icons";
+import HeroCardSection from "@/components/toolbox/HeroCardSectionNews";
+
 const NewsPageFeatured = ({
   post,
   domain,
@@ -14,99 +16,27 @@ const NewsPageFeatured = ({
     <div className="relative w-full max-w-[1320px] mx-auto flex flex-col justify-center">
       {/* <div className="md:border-l md:border-blue-200 md:pl-6"> */}
       <div className="w-full">
-        <div className="relative grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12 bg-white p-6 rounded-2xl border border-gray-300/70 shadow-sm">
-          <div className="lg:pl-20 z-10">
-            <div className="max-w-xs px-2.5 lg:max-w-none">
-              {post?.attributes?.featuredImage?.data?.attributes?.url ? (
-                <Image
-                  alt=""
-                  loading="lazy"
-                  layout="responsive"
-                  width={800}
-                  height={800}
-                  decoding="async"
-                  data-nimg={1}
-                  className="aspect-square shadow-sm w-full rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
-                  sizes="(min-width: 1024px) 32rem, 20rem"
-                  src={post.attributes.featuredImage.data.attributes.url}
-                  style={{ color: "transparent" }}
-                />
-              ) : (
-                <img
-                  alt=""
-                  loading="lazy"
-                  layout="responsive"
-                  width={800}
-                  height={800}
-                  decoding="async"
-                  data-nimg={1}
-                  className="aspect-square shadow-sm w-full rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
-                  sizes="(min-width: 1024px) 32rem, 20rem"
-                  src={ogImage}
-                  style={{ color: "transparent" }}
-                />
-              )}
-            </div>
-          </div>
-          <div className="lg:order-first flex flex-col justify-between">
-            <div>
-              {/* <div className="flex mb-3 mt-3">
-                <div className="w-6 h-6 my-auto flex flex-col justify-center p-0.5 mr-1 bg-gray-50 border border-gray-100 rounded">
-                  <img className="w-4 h-4 mx-auto my-auto" src={faviconUrl} />
-                </div>
-                <div className="text-xs my-auto leading-none font-medium uppercase">
-                  {domain}
-                </div>
-              </div> */}
-              <div className="z-10 mb-3 flex w-[fit-content]">
-                <div className="my-auto flex rounded-full flex-col justify-center p-[1px] mr-0.5 bg-black/50">
-                  <img
-                    className="w-4 h-4 mx-auto my-auto rounded-full"
-                    src={faviconUrl}
-                  />
-                </div>
-                <div className="text-xs my-auto leading-none text-gray-500 ml-1 font-medium uppercase">
-                  {domain}
-                </div>
-              </div>
-              {/* <div className="flex flex-col justify-between "> */}
-              <h1 className="text-4xl leading-tight font-bold tracking-tight text-zinc-800 sm:text-6xl dark:text-zinc-100">
-                {post?.attributes?.title}
-              </h1>
-              <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-                <div
-                  className="text-base text-gray-500"
-                  dangerouslySetInnerHTML={{ __html: excerpt }}
-                ></div>
-              </div>
-              {/* </div> */}
-            </div>
-            {/* <div className="flex flex-col justify-center flex-none border-t border-gray-200 bg-gray-50/50 rounded-b-xl w-full absolute py-4 left-0 bottom-0 w-[calc(100%-2px)] ml-[1px]">
-              <div className="flex flex-col justify-center relative">
-                <a
-                  target={"_blank"}
-                  href={
-                    (post?.attributes?.legacyAttributes?.link
-                      ? post?.attributes?.legacyAttributes?.link
-                      : post?.attributes?.link) + "?ref=prototypr"
-                  }
-                >
-                  <Button
-                    className="rounded-full ml-4 bg-blue-600 font-semibold text-white px-6 py-4 leading-none"
-                    variant={"confirmBig"}
-                  >
-                    Read article
-                  </Button>
-                </a>
-              </div>
-            </div> */}
-          </div>
-          {content!==excerpt?<div className="col-span-2 border-t w-full border-gray-100 flex flex-col lg:flex-row lg:justify-between">
+    
+        <div className="relative bg-white overflow-hidden rounded-2xl border border-gray-300/70 shadow-sm">
+
+        <HeroCardSection 
+        faviconUrl={faviconUrl}
+        domain={domain}
+        logo={null}
+        post={post}
+        excerpt={excerpt}
+        tags={post.attributes.tags.data}
+        featuredImage={post?.attributes?.featuredImage?.data?.attributes?.url?post?.attributes?.featuredImage?.data?.attributes?.url:ogImage}
+        />
+
+  
+        
+          {content!==excerpt?<div className="col-span-2 p-6 border-t w-full border-gray-100 flex flex-col lg:flex-row lg:justify-between">
             {post?.attributes?.outgoingLinks?.length ? (
-              <div className="flex flex-col justify-start pr-[40px] relative flex-none w-full lg:w-[300px]">
+              <div className="flex flex-col justify-start lg:pr-[40px] relative flex-none w-full lg:w-[300px]">
                   <h1
                     tabIndex={0}
-                    className="text-base mb-0.5 mt-6 font-semibold tracking-tight"
+                    className="text-base mb-0.5 font-semibold tracking-tight"
                   >
                     References
                   </h1>
@@ -114,14 +44,14 @@ const NewsPageFeatured = ({
                     Articles and links referenced in this post
                   </p>
                   {post.attributes.outgoingLinks?.length ? (
-                    <div className=" mb-3 flex flex-col gap-4 pr-1">
+                    <div className="flex flex-col gap-3 lg:pr-1">
                       {post.attributes.outgoingLinks.map((link, index) => {
                         const hostname = new URL(link.url).hostname;
                         return (
                           <a
                             href={`${link.url}?ref=prototypr`}
                             target="_blank"
-                            className="text-sm"
+                            className="text-sm bg-gray-100/50 hover:bg-gray-100 transition transition-all duration-700 p-4 lg:p-2 rounded-2xl"
                           >
                             <div className="z-10 mb-1.5 flex w-[fit-content]">
                               <div className="my-auto flex rounded-full flex-col justify-center p-[1px] mr-0.5 bg-black/50">
@@ -135,9 +65,9 @@ const NewsPageFeatured = ({
                               </div>
                             </div>
 
-                            <div key={index} className="flex  mb-2">
+                            <div key={index} className="flex ">
                               <div className="flex flex-col gap-0.5">
-                                <div className="text-gray-700 text-sm font-medium">
+                                <div className="text-gray-700 text-base lg:text-sm font-medium">
                                   {link.title
                                     ? link.title
                                     : link.text
