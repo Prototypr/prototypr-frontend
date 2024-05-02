@@ -7,11 +7,13 @@ import ErrorPage from "next/error";
 import Image from "next/image";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
+import isoToReadableDate from "@/lib/utils/isoToReadableDate";
 // import stc from "string-to-color";
 // import { ToolBoxDisplay } from "../../components/toolbox/ToolboxGrid";
 import useUser from "@/lib/iron-session/useUser";
 // import { SealQuestion } from "@phosphor-icons/react";
-import { SocialShareVertical } from "@/components/SocialShare";
+// import { SocialShareVertical, SocialShare } from "@/components/SocialShare";
+import SocialShare from "@/components/SocialShare";
 
 import Carousel from "@/components/carousel";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
@@ -108,7 +110,7 @@ const ToolContent = ({
         {/* Content under header */}
         <Container maxWidth="w-full relative z-10">
           <div className="grid grid-cols-3 lg:grid-cols-12 gap-3 xl:gap-7 max-w-[1320px] mx-auto md:px-0 h-full">
-            <div className="col-span-3 border border-gray-300/50 rounded-2xl overflow-hidden shadow-sm lg:col-span-9 flex flex-col gap-3 bg-white">
+            <div className="col-span-3 border border-gray-300/60 rounded-2xl overflow-hidden lg:col-span-9 flex flex-col gap-3 bg-white">
               <div className="grid gap-3 md:px-0 -mb-4">
                 <HeroCardSection
                   logo={logo}
@@ -131,7 +133,7 @@ const ToolContent = ({
               <div
                 className={`order-1 col-span-3 lg:order-3 bg-white p-6 lg:pt-0 lg:pb-12 rounded-2xl flex justify-between`}
               >
-                <div className="hidden xl:block">
+                {/* <div className="hidden xl:block">
                   <div className="flex flex-col">
                     <div className="text-gray-600 rounded-lg p-1 px-2">
                       <h1 className="text-sm tracking-tight font-medium ">
@@ -161,7 +163,7 @@ const ToolContent = ({
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="max-w-[680px] w-full mx-auto">
                   <h2 class="text-2xl font-medium mb-4 tracking-tight">
                     Overview
@@ -219,16 +221,16 @@ const ToolContent = ({
                   </a>
                 </div>
               </div> */}
-              <div className="bg-white p-1 pt-0.5 rounded-2xl h-fit border border-gray-300/50">
+              <div className="p-1 pt-0.5 rounded-2xl h-fit border-gray-300/60">
                 {post?.attributes?.author && (
-                  <div className="p-3 rounded-2xl">
-                    <h1
+                  <div className="p-4 rounded-2xl bg-[#f4f4f4]/60">
+                    {/* <h1
                       tabIndex={0}
                       className="text-sm mb-3 font-medium tracking-tight"
                     >
                       {post?.attributes?.creator ? "Contributors" : "Posted by"}
-                    </h1>
-                    <div className=" mb-3 flex">
+                    </h1> */}
+                    <div className="flex">
                       <AuthorCard
                         authorAvatar={authorAvatar}
                         title={post?.attributes?.creator ? "Curator" : null}
@@ -256,14 +258,47 @@ const ToolContent = ({
                   </Link> */}
                   </div>
                 )}
-                <div className="h-[1px] pb-2 -mt-3 px-3">
+
+                {/* <div className="h-[1px] pb-2 -mt-3 px-3">
                   <div className="bg-gray-100 h-[1px]"></div>
+                </div> */}
+                <div className="flex flex-col gap-4 mt-4 p-4 rounded-2xl bg-[#f4f4f4]/60">
+                  <div className="text-gray-500">
+                    <h3 className="text-sm tracking-tight  ">Published</h3>
+                    <div className="text-base tracking-tight font-medium text-gray-500">
+                      {date}
+                    </div>
+                  </div>
+                  <div className="text-gray-500 mt-1">
+                    <h3 className="text-sm tracking-tight ">Tags</h3>
+                    {tags?.map((tag, index) => {
+                      return (
+                        <Link
+                        href={`/toolbox/${tag.attributes.slug}/page/1/`}
+                      >
+                        <div
+                          key={index}
+                          className="text-gray-800 tracking-tight font-medium"
+                        >
+                          {tag.attributes.name}
+                        </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-2">
+                    <SocialShare
+                      size={22}
+                      title={post.attributes.title}
+                      slug={post.attributes.slug}
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-col gap-4 ">
+                <div className="flex flex-col gap-4 mt-4 rounded-2xl bg-[#f4f4f4]/60">
                   <div className="relative rounded-2xl pb-3">
                     <h1
                       tabIndex={0}
-                      className="text-sm mb-3 font-medium tracking-tight px-3 pt-3 tracking-tight"
+                      className="text-sm mb-3 text-gray-500 tracking-tight px-3 pt-3"
                     >
                       Related tools
                     </h1>
@@ -276,7 +311,10 @@ const ToolContent = ({
                     <div className="flex flex-col pt-1 grid grid-cols-6 gap-6">
                       {relatedPosts?.map((tool, index) => {
                         return (
-                          <div key={index} className="flex flex-col px-3 col-span-6 sm:col-span-3 lg:col-span-6 xl:col-span-6">
+                          <div
+                            key={index}
+                            className="flex flex-col px-3 col-span-6 sm:col-span-3 lg:col-span-6 xl:col-span-6"
+                          >
                             <div className="">
                               <ToolIconCard
                                 withBackground={false}
@@ -577,13 +615,4 @@ export async function getStaticPaths() {
       [],
     fallback: "blocking",
   };
-}
-
-function isoToReadableDate(isoTimestamp) {
-  const date = new Date(isoTimestamp);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based in JavaScript
-  // const year = date.getFullYear().toString().substr(-2);
-  const year = date.getFullYear().toString();
-  return `${day}-${month}-${year}`;
 }

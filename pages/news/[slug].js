@@ -13,6 +13,9 @@ import { groupPostsByDate } from "@/lib/utils/groupPostsByDate";
 import AuthorCard from "@/components/toolbox/AuthorCard";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import Spinner from "@/components/atom/Spinner/Spinner";
+import isoToReadableDate from "@/lib/utils/isoToReadableDate";
+import SocialShare from "@/components/SocialShare";
+
 const Footer = dynamic(() => import("@/components/footer"));
 
 // const RelatedPosts = dynamic(() => import("@/components/related-posts"), {
@@ -40,6 +43,7 @@ export default function Post({
   domain,
   link,
   postDate,
+  date,
   groupedPosts,
   authorAvatar,
   relatedNews,
@@ -49,11 +53,12 @@ export default function Post({
     return <ErrorPage statusCode={404} />;
   }
   let content = "";
+  let tags = "";
   if (post?.attributes.content) {
     // content = truncate(post?.attributes.content, 400);
     content = post?.attributes.content;
+    tags = post.attributes.tags.data;
   }
-  // const tags = post.attributes.tags.data;
 
   if (!post) {
     return (
@@ -168,8 +173,8 @@ export default function Post({
         // navType={"full"}
         preview={preview}
       >
-        <div className="w-full border-b border-gray-200 shadow-sm pt-[58px] bg-white z-50 w-full ">
-          <div className="max-w-[1320px] py-2.5 px-6 mx-auto xl:px-3">
+        <div className="w-full border-b border-gray-200 max-w-[1320px] bg-white mx-auto rounded-b-3xl overflow-hidden shadow-sm pt-[58px] bg-white z-50 w-full ">
+          <div className="max-w-[1320px] bg-white z-50 py-2.5 px-6 mx-auto xl:px-4">
             <div className="flex flex-col md:flex-row justify-between">
               <div className="flex text-lg text-black/90">
                 <Link href="/news">
@@ -287,13 +292,13 @@ export default function Post({
             </div>
 
             <div className="col-span-12 lg:col-span-3 ">
-              <div className="p-3">
-                <h1
+              <div className="p-4 bg-[#f4f4f4]/60 rounded-xl mb-4">
+                {/* <h1
                   tabIndex={0}
                   className="text-sm text-gray-600 mb-3 tracking-tight"
                 >
                   {post?.attributes?.creator ? "Contributors" : "Posted by"}
-                </h1>
+                </h1> */}
                 <div className=" flex">
                   <AuthorCard
                     authorAvatar={authorAvatar}
@@ -326,15 +331,50 @@ export default function Post({
                   </button>
                 </Link> */}
               </div>
+              <div className="flex mb-4 flex-col gap-4 mt-4 p-4 rounded-2xl bg-[#f4f4f4]/60">
+                <div className="text-gray-500">
+                  <h3 className="text-sm tracking-tight  ">Curated</h3>
+                  <div className="text-base tracking-tight font-medium text-gray-500">
+                    {date}
+                  </div>
+                </div>
+                <div className="text-gray-500 mt-1">
+                  <h3 className="text-sm tracking-tight  ">Source</h3>
+                  <a href={post?.attributes?.link + "?ref=prototypr.io"} target="_blank">
+                    <div className="text-base tracking-tight font-medium text-gray-800">
+                      {domain}
+                    </div>
+                  </a>
+                </div>
+                <div className="text-gray-500 mt-1">
+                  <h3 className="text-sm tracking-tight ">Tags</h3>
+                  {tags?.map((tag, index) => {
+                    return (
+                      // <Link href={`/toolbox/${tag.attributes.slug}/page/1/`}>
+                      <div
+                        key={index}
+                        className="text-gray-800 capitalize tracking-tight font-medium"
+                      >
+                        {tag.attributes.name}
+                      </div>
+                      // </Link>
+                    );
+                  })}
+                </div>
+                <div className="mt-2">
+                  <SocialShare
+                    size={22}
+                    title={post.attributes.title}
+                    slug={post.attributes.slug}
+                  />
+                </div>
+              </div>
               {relatedNews && relatedNews.length > 0 ? (
-                <div className="p-3">
-                  <h1
-                    tabIndex={0}
-                    className="text-sm mb-3 text-gray-600"
-                  >
+                <div className="p-3 bg-[#f4f4f4]/60 rounded-xl">
+                  <h1 tabIndex={0} className="text-sm mb-3 text-gray-500">
                     Related
                   </h1>
-                  <div className="flex flex-col gap-4 mt-4">
+                  <div className="flex flex-col gap-4">
                     {relatedNews?.map((post, index) => {
                       const _ogImage = post?.featuredImage?.data?.attributes
                         ?.url
@@ -491,7 +531,7 @@ export async function getStaticProps({
       : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
   let postDate = new Date(data?.posts.data[0]?.attributes?.date);
-
+  const date = isoToReadableDate(postDate);
   // const relatedArticles = data?.posts.data[0]?.attributes?.relatedArticles
   //   ? data?.posts.data[0]?.attributes?.relatedArticles
   //   : [];
@@ -511,6 +551,7 @@ export async function getStaticProps({
       domain,
       link,
       groupedPosts: groupedPosts,
+      date: date,
       postDate: JSON.stringify(postDate),
       morePosts: data.morePosts?.data,
       authorAvatar,
