@@ -16,11 +16,13 @@ const HeroCardSection = ({ logo, post, tags, featuredImage, faviconUrl, domain, 
   return (
     <div
       // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
-      className={`col-span-12 h-full mx-auto relative overflow-hidden p-2 leading-tight w-full `}
+      className={`col-span-12 h-full relative mx-auto relative overflow-hidden p-2 leading-tight w-full `}
     >
       <Image
-        className="bg-gray-700 object-cover"
-        layout="fill"
+        className="bg-gray-700 object-cover absolute top-0 left-0 w-full h-full z-0"
+        // layout="fill"
+        width={400}
+        height={400}
         loader={gumletLoader}
         priority={true}
         objectFit="cover"
