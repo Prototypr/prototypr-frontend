@@ -126,7 +126,7 @@ const EmblaCarousel = (props) => {
                 src={item.original}
                 alt="Your alt text"
               /> */}
-               <div className="relative shimmer border border-gray-300/70 shadow-md w-full rounded-2xl h-full w-full relative overflow-hidden flex justify-center">
+               <div className="relative shimmer border border-gray-300/70 h-[240px] shadow-md w-full rounded-2xl h-full w-full relative overflow-hidden flex justify-center">
                 {/* <img src={item.original} className='object-cover cursor-pointer pointer-events-auto' alt={`Gallery Image ${index}`}/> */}
                 <Image
                   onClick={()=>{
@@ -136,18 +136,21 @@ const EmblaCarousel = (props) => {
                     setDialogOpenImage(item.original)
                   }}
                   loader={gumletLoader}
-                  layout="fill"
+                  // layout="fill"
+                  width={300}
+                  height={240}
                   key={item.original}
-                  objectFit="cover"
-                  priority={index == 0 ? true : false}
-                  fetchpriority={index == 0 ? "true" : "false"}
-                  data-priority={index == 0 ? `true` : `false`}
-                  data-gmlazy={index == 0 ? `false` : `true`}
+                  // objectFit="cover"
+                  // priority={index == 0 ? true : false}
+                  // fetchpriority={index == 0 ? "true" : "false"}
+                  // data-priority={index == 0 ? `true` : `false`}
+                  // data-gmlazy={index == 0 ? `false` : `true`}
+                  data-gmlazy={true}
                   // className="rounded-lg  object-contain h-60 sm:h-96"
                   src={item.original}
                   // data-src={current.original}
                   alt={`Gallery Image ${index}`}
-                  sizes={"(max-width: 300px) 100vw, 600px"}
+                  // sizes={"(max-width: 300px) 100vw, 600px"}
                   className='embla__slide__img  cursor-pointer bg-white'
                 />
               </div>
