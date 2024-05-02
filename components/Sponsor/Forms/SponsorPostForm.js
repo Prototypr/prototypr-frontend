@@ -16,6 +16,7 @@ const SponsorPostForm = ({
   user,
   formik,
   setUploadNewBanner,
+  setUploadLogoWide,
   setUploadNewFeaturedImage,
   postObject,
   header,
@@ -97,7 +98,7 @@ const SponsorPostForm = ({
           <hr /> */}
           {/* <h2 className="mt-3 text-xl mt-4">Image Assets</h2> */}
           <label htmlFor="featuredImage" className="text-md mt-3 font-medium text-gray-800 ">
-            Logo
+            Logo Square
           </label>
           {/* <p className="text-sm -mt-3">
             This image will be used to identify your product in the newsletter
@@ -114,6 +115,28 @@ const SponsorPostForm = ({
           {formik.errors.featuredImage && (
             <span className="text-red-600 text-sm">
               {formik.errors.featuredImage}
+            </span>
+          )}
+
+          <label htmlFor="featuredImage" className="text-md mt-3 font-medium text-gray-800 ">
+            Logo Wide (Optional)
+          </label>
+          <p className="text-sm -mt-3">
+           If you're sponsoring the navbar, upload a wide version of your logo (e.g. logo + logotext).
+          </p>
+          <ImageUploader
+           initialImage={postObject?.logoWide}
+            id={3}
+            w={336}
+            h={110}
+            setFormValue={blob => {
+              setUploadLogoWide(true);
+              formik.setFieldValue("logoWide", blob);
+            }}
+          />
+          {formik.errors.logoWide && (
+            <span className="text-red-600 text-sm">
+              {formik.errors.logoWide}
             </span>
           )}
 

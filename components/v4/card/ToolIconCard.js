@@ -54,6 +54,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
               >
                 <Image
                   tabIndex={0}
+                  lazy={true}
                   loader={gumletLoader}
                   width="100"
                   height="100"

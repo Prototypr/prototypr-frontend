@@ -33,6 +33,7 @@ export default function AuthorCard({ author = {},title, avatar='', authorAvatar 
                                     (authorAvatar) && <Image 
                                     tabIndex={0}
                                     layout="fill"
+                                    // priority={true}
                                     objectFit="cover"
                                     src={authorAvatar}
                                     className="rounded-full " 

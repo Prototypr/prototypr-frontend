@@ -22,6 +22,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
           className="bg-gray-700 object-cover"
           layout="fill"
           objectFit="cover"
+          priority={true}
           loader={gumletLoader}
           key={featuredImage}
           src={featuredImage}
@@ -38,10 +39,10 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
                       <Image
                         key={logo}
                         loader={gumletLoader}
-                        priority={false < 2 ? `true` : `false`}
-                        data-priority={false < 2 ? `true` : `false`}
-                        fetchpriority={false < 2 ? "true" : "false"}
-                        data-gmlazy={false < 2 ? `false` : `true`}
+                        // priority={true}
+                        // data-priority={true}
+                        // fetchpriority={true}
+                        data-gmlazy={false}
                         width="100"
                         height="100"
                         alt="Brand logo for external website's link"

@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
-import Button from "@/components/Primitives/Button";
+// import Button from "@/components/Primitives/Button";
 import Link from "next/link";
 import ErrorPage from "next/error";
-import Image from "next/image";
+// import Image from "next/image";
 import Container from "@/components/container";
 import Layout from "@/components/new-index/layoutForIndex";
 import isoToReadableDate from "@/lib/utils/isoToReadableDate";

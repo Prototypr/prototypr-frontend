@@ -103,12 +103,14 @@ const SponsorshipForm = ({
       .required("Sponsored link is required"),
     banner: Yup.mixed().required("Please add your newsletter banner"),
     featuredImage: Yup.mixed().required("Please add a featured image"),
+    logoWide:Yup.mixed().optional(),
   });
 
   const [errores, setErrores] = useState(false);
 
   const [uploadNewFeaturedImage, setUploadNewFeaturedImage] = useState(true);
   const [uploadNewBanner, setUploadNewBanner] = useState(true);
+  const [uploadLogoWide, setUploadLogoWide] = useState(true);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -141,6 +143,7 @@ const SponsorshipForm = ({
               packages: selectedPackageObjects,
               uploadNewBanner,
               uploadNewFeaturedImage,
+              uploadLogoWide
             });
 
             if (id) {
@@ -280,6 +283,7 @@ const SponsorshipForm = ({
                 <SponsorPostForm
                   user={user}
                   formik={formik}
+                  setUploadLogoWide={setUploadLogoWide}
                   setUploadNewBanner={setUploadNewBanner}
                   setUploadNewFeaturedImage={setUploadNewFeaturedImage}
                 />

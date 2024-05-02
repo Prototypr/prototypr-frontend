@@ -22,6 +22,7 @@ const HeroCardSection = ({ logo, post, tags, featuredImage, faviconUrl, domain, 
         className="bg-gray-700 object-cover"
         layout="fill"
         loader={gumletLoader}
+        priority={true}
         objectFit="cover"
         key={featuredImage}
         src={featuredImage}
