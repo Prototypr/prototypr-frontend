@@ -3,6 +3,8 @@ import * as Popover from "@radix-ui/react-popover";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import GitHubButton from "react-github-btn";
 import { set, get } from "js-cookie";
+import Image from "next/image";
+import gumletLoader from "@/lib/imageloader";
 
 const MakerPopover = () => {
   const [open, setOpen] = useState(false);
@@ -79,7 +81,9 @@ const MakerPopover = () => {
                 <div
                   className={`${justClosed ? "scale-[10] " : ""} transition transition-all duration-1000 w-full h-full rounded-full  overflow-hidden`}
                 >
-                  <img
+                  <Image
+                    // priority={true}
+                    loader={gumletLoader}
                     width={36}
                     height={36}
                     className={`${justClosed ? "animate-spin" : "group-hover:scale-125"} ${open && !justClosed ? "scale-[1.5]" : ""} object-cover w-full h-full transition transition-all duration-700 rounded-full`}
