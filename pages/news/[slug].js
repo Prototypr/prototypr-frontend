@@ -15,6 +15,8 @@ import SignupSidebar from "@/components/newsletter/SignupSidebar";
 import Spinner from "@/components/atom/Spinner/Spinner";
 import isoToReadableDate from "@/lib/utils/isoToReadableDate";
 import SocialShare from "@/components/SocialShare";
+import Image from "next/image";
+import gumletLoader from "@/lib/imageloader";
 
 const Footer = dynamic(() => import("@/components/footer"));
 
@@ -429,7 +431,10 @@ export default function Post({
                                 </div>:null} */}
                             </div>
                             <div className="relative flex-none group-hover:scale-[1.02] w-[64px] h-[64px] order-first transition transition-all duration-400">
-                              <img
+                              <Image
+                                loader={gumletLoader}
+                                width={100}
+                                height={100}
                                 className="rounded-lg z-10 h-full w-full object-cover"
                                 src={_ogImage}
                               />
@@ -505,6 +510,15 @@ export async function getStaticProps({
 
   //filter the content for posts before 2022
   if (new Date(postData.attributes.date) < new Date("2024-01-01")) {
+    if (postData.attributes.content?.length) {
+      const gumletPostContentLoaderModule = await import("@/lib/gumletPostContentLoader");
+      const gumletPostContentLoader = gumletPostContentLoaderModule.default;
+    
+      let html = gumletPostContentLoader(postData.attributes.content);
+      if (html) {
+        postData.attributes.content = html;
+      }
+    }
     // postData.attributes.content = postData.attributes.content.replace(
     //truncate the content to 400 characters
     postData.attributes.content =

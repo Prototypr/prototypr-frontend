@@ -419,6 +419,9 @@ export async function getStaticProps({ params, preview = null, locale }) {
   const removeFirstImageIfMatchModule = await import("@/lib/removeFirstImage");
   const removeFirstImageIfMatch = removeFirstImageIfMatchModule.default;
 
+  const gumletPostContentLoaderModule = await import("@/lib/gumletPostContentLoader");
+  const gumletPostContentLoader = gumletPostContentLoaderModule.default;
+
   const post = data?.posts?.data[0];
   const image = post?.attributes?.seo?.opengraphImage
     ? post?.attributes?.seo?.opengraphImage
@@ -431,6 +434,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
           : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
   let html = removeFirstImageIfMatch(post?.attributes?.content, image);
+  html = gumletPostContentLoader(html);
 
   return {
     props: {

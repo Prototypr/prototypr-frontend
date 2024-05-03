@@ -559,6 +559,19 @@ export async function getStaticProps({ params, preview = null, locale }) {
     layout = 2;
   }
 
+  /**
+   * replace images with gumlet loader
+   */
+  if (postData.attributes.content?.length) {
+    const gumletPostContentLoaderModule = await import("@/lib/gumletPostContentLoader");
+    const gumletPostContentLoader = gumletPostContentLoaderModule.default;
+  
+    let html = gumletPostContentLoader(postData.attributes.content);
+    if (html) {
+      postData.attributes.content = html;
+    }
+  }
+
   const logo = getToolboxLogo({ post: postData });
   const { featuredImage, base64 } = await getToolboxFeaturedImage({
     post: postData,

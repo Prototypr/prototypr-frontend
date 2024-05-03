@@ -1,7 +1,4 @@
-import Button from "@/components/Primitives/Button";
-import Link from "next/link";
-import Image from "next/image";
-import { LinkIcon } from "@/components/icons";
+
 import HeroCardSection from "@/components/toolbox/HeroCardSectionNews";
 
 const NewsPageFeatured = ({
