@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { Thumb } from "./EmblaCarouselThumbsButton";
-import AutoHeight from "embla-carousel-auto-height";
+// import { Thumb } from "./EmblaCarouselThumbsButton";
+// import AutoHeight from "embla-carousel-auto-height";
 
 // import imageByIndex from './imageByIndex'
 import Image from "next/image";
@@ -14,7 +14,7 @@ import {
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
 
-const TWEEN_FACTOR_BASE = 0.52;
+// const TWEEN_FACTOR_BASE = 0.52;
 
 const ImageDialog = dynamic(
   () => {
@@ -139,6 +139,8 @@ const EmblaCarousel = props => {
                     setCurrentImage(item.original);
                     setDialogOpenImage(item.original);
                   }}
+                  placeholder={item.base64?"blur":"empty"}
+                  blurDataURL={item.base64?item.base64:""}
                   loader={gumletLoader}
                   // layout="fill"
                   width={300}

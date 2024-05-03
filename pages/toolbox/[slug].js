@@ -572,10 +572,12 @@ export async function getStaticProps({ params, preview = null, locale }) {
     logo,
   });
   //build the gallery here
-  let PHOTO_SET = [];
+  // let PHOTO_SET = [];
   const item = data?.posts.data[0];
 
-  PHOTO_SET = buildToolboxGallery({ item, PHOTO_SET, featuredImage });
+  const PHOTO_SET = await buildToolboxGallery({ item, featuredImage });
+
+  console.log(PHOTO_SET.length, "PHOTO_SET.length");
 
   const date = isoToReadableDate(postData.attributes.date);
   const updatedAtDate = isoToReadableDate(postData.attributes.updatedAt);
