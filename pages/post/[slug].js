@@ -31,6 +31,7 @@ import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import PostHeader from "@/components/post-header";
 import SocialShare from "@/components/SocialShare";
 import PostGroupRow from "@/components/v4/layout/PostGroupRow";
+import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -93,14 +94,8 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
   const intl = useIntl();
 
   useEffect(() => {
-    const s = document.createElement("script");
-    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-    s.setAttribute("id", "twitter-widget");
-    s.setAttribute("async", "true");
-
-    if (!document.getElementById("twitter-widget")) {
-      document.head.appendChild(s);
-    }
+    
+    addTwitterScript();
 
     if (window.$crisp) {
       // window.$crisp.push(["config", "position:reverse", true])

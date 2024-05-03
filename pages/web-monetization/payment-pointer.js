@@ -38,23 +38,6 @@ export default function Post({ post, preview, relatedPosts }) {
 
   const intl = useIntl();
 
-  useEffect(() => {
-    const s = document.createElement("script");
-    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-    s.setAttribute("id", "twitter-widget");
-    s.setAttribute("async", "true");
-
-    if (!document.getElementById("twitter-widget")) {
-      document.head.appendChild(s);
-    }
-
-    if(window.$crisp){
-      // window.$crisp.push(["config", "position:reverse", true])
-      // window.$crisp.push(['do', 'chat:close']);
-      window.$crisp.push(['do', 'chat:hide']);
-    }
-
-  }, []);
 
   return (
     <Layout

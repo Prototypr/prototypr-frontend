@@ -52,6 +52,7 @@ import buildToolboxGallery, {
 import { formatAllTools } from "@/lib/utils/formatToolContent";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import HeroCardSection from "@/components/toolbox/HeroCardSection";
+import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 
 const ToolContent = ({
   post,
@@ -70,15 +71,8 @@ const ToolContent = ({
   const tags = post.attributes.tags.data;
 
   useEffect(() => {
-    const s = document.createElement("script");
-    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-    s.setAttribute("id", "twitter-widget");
-    s.setAttribute("async", "true");
-
-    if (!document.getElementById("twitter-widget")) {
-      document.head.appendChild(s);
-    }
-
+   
+    addTwitterScript();
     if (window.$crisp) {
       // window.$crisp.push(["config", "position:reverse", true])
       // window.$crisp.push(['do', 'chat:close']);
