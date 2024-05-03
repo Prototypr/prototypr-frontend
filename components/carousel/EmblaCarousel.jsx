@@ -139,8 +139,8 @@ const EmblaCarousel = props => {
                     setCurrentImage(item.original);
                     setDialogOpenImage(item.original);
                   }}
-                  placeholder={item.base64?"blur":"empty"}
-                  blurDataURL={item.base64?item.base64:""}
+                  placeholder={(item.base64 && index<3)?"blur":"empty"}
+                  blurDataURL={(item.base64 && index<3)?item.base64:""}
                   loader={gumletLoader}
                   // layout="fill"
                   width={300}

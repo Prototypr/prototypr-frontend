@@ -577,8 +577,6 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
   const PHOTO_SET = await buildToolboxGallery({ item, featuredImage });
 
-  console.log(PHOTO_SET.length, "PHOTO_SET.length");
-
   const date = isoToReadableDate(postData.attributes.date);
   const updatedAtDate = isoToReadableDate(postData.attributes.updatedAt);
 
