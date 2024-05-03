@@ -3,6 +3,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 import Link from "next/link";
 import Button from "@/components/Primitives/Button"
 
+
 /**
  * HeroCardSection
  * this one is rounded at the top only
@@ -12,7 +13,7 @@ import Button from "@/components/Primitives/Button"
  * @param {*} param0 
  * @returns 
  */
-const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
+const HeroCardSection = ({logo, post, tags, featuredImage, base64}) =>{
     return(
         <div
         // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
@@ -25,6 +26,9 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
           height={400}
           objectFit="cover"
           loading="eager"
+          placeholder="blur"
+          blurDataURL={base64}
+
           priority={true}
           loader={gumletLoader}
           key={featuredImage}
@@ -42,6 +46,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage}) =>{
                       <Image
                         key={logo}
                         loader={gumletLoader}
+                        // placeholder="blur"
                         // priority={true}
                         // data-priority={true}
                         // fetchpriority={true}

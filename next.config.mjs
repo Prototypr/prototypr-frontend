@@ -7,9 +7,13 @@
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({
 //   enabled: process.env.ANALYZE === 'true'
 // })
-const { withPlausibleProxy } = require("next-plausible");
+// const { withPlausibleProxy } = require("next-plausible");
 
-module.exports =
+import withPlaiceholder from "@plaiceholder/next";
+import { withPlausibleProxy } from "next-plausible";
+
+const nextConfig =
+// module.exports =
   //  withBundleAnalyzer(
   withPlausibleProxy({
     customDomain: "https://analytics.prototypr.io",
@@ -190,7 +194,9 @@ module.exports =
   });
 
 // module.exports = withSentryConfig(
-  module.exports,
-  { silent: true },
-  { hideSourcemaps: true }
+  // module.exports,
+  // { silent: true },
+  // { hideSourcemaps: true }
 // );
+
+export default withPlaiceholder(nextConfig)

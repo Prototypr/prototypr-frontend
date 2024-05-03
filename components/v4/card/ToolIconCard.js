@@ -57,6 +57,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
                   lazy={true}
                   loader={gumletLoader}
                   width="100"
+                  // placeholder="blur"
                   height="100"
                   objectFit="cover"
                   src={

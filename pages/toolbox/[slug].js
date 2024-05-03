@@ -61,6 +61,7 @@ const ToolContent = ({
   layout,
   logo,
   featuredImage,
+  base64,
   date,
   authorAvatar,
   updatedAtDate,
@@ -114,6 +115,7 @@ const ToolContent = ({
               <div className="grid gap-3 md:px-0 -mb-4">
                 <HeroCardSection
                   logo={logo}
+                  base64={base64}
                   post={post}
                   tags={tags}
                   featuredImage={featuredImage}
@@ -442,6 +444,7 @@ export default function Post({
   layout,
   logo,
   featuredImage,
+  base64,
   date,
   updatedAtDate,
   authorAvatar,
@@ -517,6 +520,7 @@ export default function Post({
       <ToolContent
         date={date}
         featuredImage={featuredImage}
+        base64={base64}
         logo={logo}
         layout={layout}
         popularTags={popularTags}
@@ -557,7 +561,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
   }
 
   const logo = getToolboxLogo({ post: postData });
-  const featuredImage = getToolboxFeaturedImage({ post: postData, logo });
+  const {featuredImage, base64} = await getToolboxFeaturedImage({ post: postData, logo });
   //build the gallery here
   let PHOTO_SET = [];
   const item = data?.posts.data[0];
@@ -586,6 +590,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       layout,
       logo,
       featuredImage,
+      base64,
       date,
       updatedAtDate,
       authorAvatar,

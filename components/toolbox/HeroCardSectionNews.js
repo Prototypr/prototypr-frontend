@@ -24,6 +24,7 @@ const HeroCardSection = ({ logo, post, tags, featuredImage, faviconUrl, domain, 
         width={400}
         height={400}
         loader={gumletLoader}
+        placeholder="blur"
         priority={true}
         objectFit="cover"
         key={featuredImage}
