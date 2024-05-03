@@ -6,7 +6,7 @@ import { useIntl } from "react-intl";
 // import SectionDivider from "@/components/v4/section/SectionDivider";
 // import ToolIconCardRow from "@/components/v4/layout/ToolIconCardRow";
 // import Divider from "../layout/Divider";
-import { CaretRight, Tag } from "phosphor-react/dist";
+import { CaretRight, Tag } from "@/components/icons";
 // import SmallPostsGroup from "../layout/SmallPostsSection";
 import Link from "next/link";
 import LargePostGridD from "@/components/v4/layout/LargePostGridD";

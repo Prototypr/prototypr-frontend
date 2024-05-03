@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "@/components/Primitives/Button";
 import { Dialog, DialogTrigger, DialogContentLarge, DialogTitle, DialogDescription, DialogClose } from "@/components/Primitives/Dialog";
-import { useRouter } from "next/router";
 import Link from "next/link";
 // import { Cross2Icon } from "@radix-ui/react-icons";
-import { Sparkle, NotePencil, Package, TextAa, Briefcase } from "phosphor-react";
-import { violet, mauve, blackA } from '@radix-ui/colors';
-import { styled, keyframes } from '@stitches/react';
-
-
-
-const button_options = [
-  { name: "Wrte an article", link: "/write" },
-  { name: "Submit a tool", filter: "/toolbox/post" },
-];
+import { NotePencil, Package, TextAa } from "@/components/icons";
+import { blackA } from '@radix-ui/colors';
+import { styled } from '@stitches/react';
 
 const IconButton = styled('button', {
     all: 'unset',

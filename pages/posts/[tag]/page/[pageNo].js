@@ -26,7 +26,7 @@ import { transformPostList } from "@/lib/locale/transformLocale";
 // import { SIDEBAR_STICKY_OFFSET } from "@/lib/constants";
 // import TopicSection from "@/components/v4/section/TopicSection";
 import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
-import { ArrowRight } from "phosphor-react/dist";
+import { ArrowRight } from "@/components/icons";
 import Link from "next/link";
 import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
 // import TagsNavRow from "@/components/v4/section/TagsNavRow";

@@ -1,8 +1,7 @@
 // import ToolLargeCard from "@/components/v4/card/ToolLargeCard";
 // import Container from "@/components/container";
 import Link from "next/link";
-// import {CaretRight} from 'phosphor-react'
-import { ArrowRight } from "phosphor-react";
+import { ArrowRight } from "@/components/icons";
 // import ToolImageCard from "../card/ToolImageCard";
 import ToolImageCardSingle from "../card/ToolImageCardSingle";
 

@@ -1,8 +1,3 @@
-// import BigCardPost from "../card/BigCard/BigCardPost";
-// import { ArrowRight } from "phosphor-react";
-// import Link from 'next/link'
-
-// import SmallCard from "../card/SmallCard/SmallCardE";
 import PostsGroup3Cards from "./PostsGroup3Cards";
 import RSSTitle from "../text/RSSTitle";
 

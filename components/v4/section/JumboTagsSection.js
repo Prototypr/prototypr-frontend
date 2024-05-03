@@ -1,6 +1,6 @@
 // import Container from "@/components/container"
 // import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
-import { ArrowRight } from "phosphor-react";
+import { ArrowRight } from "@/components/icons";
 import JumboTag from "../card/JumboTag";
 import Link from "next/link";
 

@@ -1,7 +1,6 @@
 // import SidebarDiscover from "@/components/v4/layout/SidebarDiscover";
 import Container from "@/components/container";
 import HeroPostGrid from "../layout/HeroPostGrid";
-// import {RssSimple} from 'phosphor-react'
 const HeroArticleSection = ({user, heroCardPost,showBigPost, viewablePosts, cols,title, showHeading,showHeadingRow, showSmallCardDescription }) => {
   return (
     <Container padding={false} maxWidth="max-w-[1320px] mx-auto ">

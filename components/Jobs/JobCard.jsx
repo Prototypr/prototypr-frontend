@@ -1,10 +1,8 @@
 import dynamic from "next/dynamic";
-import { ClockIcon, LocationIcon, MoneyIcon } from "@/components/icons";
 import Link from "next/link";
-import Button from "@/components/Primitives/Button";
 import gumletLoader from "../new-index/gumletLoader";
 import Image from "next/image";
-import { Briefcase, ClockAfternoon, MapPin } from "phosphor-react";
+import { Briefcase,  MapPin } from "@/components/icons";
 
 const TimeAgo = dynamic(() => import("react-timeago"), { ssr: false });
 

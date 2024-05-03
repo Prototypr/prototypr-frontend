@@ -1,5 +1,4 @@
-import BigCard from "../card/BigCard/BigCardC";
-import { ArrowRight } from "phosphor-react";
+import { ArrowRight } from "@/components/icons";
 import Link from "next/link";
 
 import RSSTitle from "../text/RSSTitle";

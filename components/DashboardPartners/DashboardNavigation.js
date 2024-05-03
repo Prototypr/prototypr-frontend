@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Envelope, FolderPlus, ListChecks, User } from "phosphor-react";
 const ShootingStar = ({ size, className }) => {
   return (
     <svg

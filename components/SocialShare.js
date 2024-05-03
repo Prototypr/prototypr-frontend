@@ -1,4 +1,4 @@
-import { FacebookLogo, TwitterLogo, LinkedinLogo } from "phosphor-react";
+import { FacebookLogo, TwitterLogo, LinkedinLogo } from "@/components/icons";
 
 export default function SocialShare({ slug, authorTwitter, title = "" , size=28}) {
   const titleUrl = encodeURI(title);

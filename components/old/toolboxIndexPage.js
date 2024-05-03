@@ -18,7 +18,6 @@ import TwoColumnCards from "@/components/v4/layout/TwoColumnCards";
 // import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import Container from "@/components/container";
 // import Link from "next/link";
-// import { CaretRight } from "phosphor-react";
 // import TopicSection from "@/components/v4/section/TopicSection";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import NewsletterSection from "@/components/v4/section/NewsletterSection";

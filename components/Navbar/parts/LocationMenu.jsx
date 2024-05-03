@@ -8,7 +8,6 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
 } from "@/components/Primitives/Navigation";
-import { NotePencil } from "phosphor-react";
 
 const LocaleSwitcher = dynamic(() => import("../../Locale/LocaleSwitcher"), {
   ssr: true,

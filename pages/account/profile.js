@@ -2,10 +2,6 @@ import Fallback from "@/components/atom/Fallback/Fallback";
 import Layout from "@/components/new-index/layoutForIndex";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import {CircleWavyCheck } from "phosphor-react";
-import Link from "next/link";
-import axios from "axios";
-// import toast from "react-hot-toast";
 
 import useUser from "@/lib/iron-session/useUser";
 import { getPostsByPageAndAuthor } from "@/lib/api";

@@ -1,11 +1,6 @@
 // import { TAB_ITEMS, ProductListData, ProductListData2 } from "@/lib/constants";
-import Link from 'next/link'
 import { MotionSlider } from "@/components/toolbox/ToolboxCarouselAnimation";
 import { MotionSliderToolCard } from "@/components/toolbox/ToolboxHeroWithEmailSignup";
-// import {formatToolContent} from "@/lib/utils/formatToolContent";
-// import { ArrowRight, Compass, Envelope } from "phosphor-react";
-// import SignupHorizontal from "@/components/newsletter/SignupHorizontal";
-// import Button from "@/components/Primitives/Button";
 
 const ToolsCarouselSection = ({toolsList, sponsors}) =>{
 

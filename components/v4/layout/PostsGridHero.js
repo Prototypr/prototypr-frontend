@@ -1,11 +1,6 @@
 import BigCardPost from "../card/BigCard/BigCardPost";
-// import { ArrowRight } from "phosphor-react";
-// import Link from 'next/link'
-
-// import SmallCard from "../card/SmallCard/SmallCardE";
 import SmallPostsGroup2Cards from "./SmallPostsGroup2Cards";
 import RSSTitle from "../text/RSSTitle";
-// import PostsGroup3Cards from "./PostsGroup3Cards";
 
 const PostsGridHero = ({ largePost, smallPosts, showHeading,title }) => {
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;

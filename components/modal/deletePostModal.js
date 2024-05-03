@@ -2,7 +2,7 @@ import React from "react";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogClose, IconButton } from "../Primitives/Dialog";
 import Button from "../Primitives/Button";
-import { Trash } from "phosphor-react";
+import { Trash } from "@/components/icons";
 
 
 const DeletePostButton = ({ onClick }) => (

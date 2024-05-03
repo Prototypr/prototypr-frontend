@@ -1,8 +1,6 @@
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import Link from "next/link";
-// import {CaretRight} from 'phosphor-react'
-// import ToolCard from "../card/ToolCard";
-import { ArrowRight } from "phosphor-react";
+import { ArrowRight } from "@/components/icons";
 
 const ToolIconCardRow = ({ tools, topic, tagline }) => {
   return (

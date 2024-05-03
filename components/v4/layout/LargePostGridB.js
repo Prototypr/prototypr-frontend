@@ -1,8 +1,7 @@
 import BigCard from "../card/BigCard/BigCardC";
-import { ArrowRight } from "phosphor-react";
+import { ArrowRight } from "@/components/icons";
 import Link from 'next/link'
 
-// import SmallCard from "../card/SmallCard/SmallCardE";
 import SmallPostsGroup from "./SmallPostGroupB";
 import RSSTitle from "../text/RSSTitle";
 const LargePostGrid = ({ largePost, smallPosts, showHeading,title }) => {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CaretRight } from "phosphor-react";
+import { CaretRight } from "@/components/icons";
 
 const HeadingSeeAllRow = ({
   link = "/",

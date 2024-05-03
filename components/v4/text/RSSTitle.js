@@ -1,4 +1,4 @@
-import { RssSimple } from "phosphor-react"
+import { RssSimple } from "@/components/icons"
 import { FormattedMessage, useIntl } from "react-intl";
 
 const RSSTitle = ({title}) =>{

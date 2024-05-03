@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { FormattedMessage, useIntl } from "react-intl";
-import { DotsThree } from "phosphor-react";
+import { DotsThree } from "@/components/icons";
 const enterFromRight = keyframes({
   from: { transform: "translateX(200px)", opacity: 0 },
   to: { transform: "translateX(0)", opacity: 1 },

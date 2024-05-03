@@ -3,17 +3,9 @@ import { useRouter } from "next/router";
 import Container from "@/components/container";
 import PostTitle from "@/components/post-title";
 
-import Image from "next/image";
-import Link from "next/link";
-import gumletLoader from "@/components/new-index/gumletLoader";
 import ToolsLayout from "@/components/v4/layout/toolbox/ToolsLayout";
-import stc from "string-to-color";
-import { Tag } from "phosphor-react";
-import TwoColumnCards from "../v4/layout/TwoColumnCards";
-import ToolsTagsNavRow from "../v4/section/ToolsTagsNavRow";
 import Footer from "../footer";
 
-const MoreStories = dynamic(() => import("@/components/more-stories"));
 const NewPagination = dynamic(() => import("@/components/pagination"));
 const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 const FilterCategory = dynamic(() => import("@/components/FilterCategory"));

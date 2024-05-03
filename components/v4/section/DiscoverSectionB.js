@@ -1,7 +1,6 @@
 // import SidebarDiscover from "@/components/v4/layout/SidebarDiscover";
 import Container from "@/components/container";
 import LargePostGridB from "@/components/v4/layout/LargePostGridB";
-// import {RssSimple} from 'phosphor-react'
 const DiscoverSection = ({user, heroCardPost, viewablePosts, jobsSidebar,title }) => {
   return (
     <Container maxWidth="max-w-[1320px]">

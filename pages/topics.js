@@ -6,7 +6,6 @@ import Layout from "@/components/new-index/layoutForIndex";
 // import { useIntl } from "react-intl";
 import CategoriesIconCard from "@/components/v4/card/CategoriesIconCard";
 import { getPopularTopics } from "@/lib/api";
-// import { Tag } from "phosphor-react";
 import SectionDivider from "@/components/v4/section/SectionDivider";
 import Footer from "@/components/footer";
 // import TopicSpotlightSection from "@/components/v4/section/TopicSpotlightSection";

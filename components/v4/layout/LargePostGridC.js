@@ -1,12 +1,7 @@
 import BigCard from "../card/BigCard/BigCardD";
 import ToolCollection from "@/components/v4/layout/ToolCollection";
-
-// import SmallCard from "../card/SmallCard/SmallCardE";
 import SmallPostsGroupC from "./SmallPostGroupC";
-// import RSSTitle from "../text/RSSTitle";
-import { ArrowRight, Tag } from "phosphor-react";
-
-// import { CaretRight, Tag } from "phosphor-react";
+import { ArrowRight, Tag } from "@/components/icons";
 import Link from "next/link";
 // import Button from "@/components/Primitives/Button";
 const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, heading }) => {

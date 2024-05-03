@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import gumletLoader from "../new-index/gumletLoader";
-import { DribbbleLogo, TwitterLogo, GithubLogo, MapPin } from "phosphor-react";
+import { DribbbleLogo, TwitterLogo, GithubLogo, MapPin } from "@/components/icons";
 import { accountLocations } from "@/lib/constants";
 import { useState } from "react";
 import Button from "../Primitives/Button";

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Envelope, FolderPlus, ListChecks, User } from "phosphor-react";
+import { Envelope, FolderPlus, ListChecks, User } from "@/components/icons";
 const AccountNavigation = ({ activeTab }) => {
   return (
     <div className="flex w-full flex-row flex-wrap md:flex-col text-gray-900 md:mb-6 ">

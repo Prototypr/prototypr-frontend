@@ -2,7 +2,6 @@ import Fallback from "@/components/atom/Fallback/Fallback";
 import Layout from "@/components/new-index/layoutForAccount";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import { CircleWavyCheck } from "phosphor-react";
 import Link from "next/link";
 import axios from "axios";
 // import toast from "react-hot-toast";
@@ -10,7 +9,7 @@ import axios from "axios";
 import useUser from "@/lib/iron-session/useUser";
 import { getPostsByPageAndAuthor } from "@/lib/api";
 import { useEffect, useState } from "react";
-import AccountNavigation from "@/components/user/AccountNavigation";
+import {CircleWavyCheck} from '@/components/icons'
 
 const toast = dynamic(() => import("react-hot-toast"), { ssr: true });
 const Form = dynamic(() => import("@/components/Form"), { ssr: true });

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { usePlausible } from "next-plausible";
-import { ArrowRight } from "phosphor-react";
+import { ArrowRight } from "@/components/icons";
 // import Image from "next/image";
 // import gumletLoader from "@/components/new-index/gumletLoader";
 

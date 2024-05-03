@@ -8,14 +8,13 @@ import {
   Stats,
   Highlight,
   Configure,
-  connectSearchBox,
 } from "react-instantsearch-dom";
 import { Dialog, DialogTrigger, DialogContentLarge, DialogTitle, DialogDescription, DialogClose, IconButton } from "@/components/Primitives/Dialog";
 import { useRouter } from "next/router";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import Link from "next/link";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import { MagnifyingGlass } from "phosphor-react";
+import { MagnifyingGlass } from "@/components/icons";
 
 const originalSearchClient = instantMeiliSearch(
   process.env.NEXT_PUBLIC_MEILISEARCH_URL,

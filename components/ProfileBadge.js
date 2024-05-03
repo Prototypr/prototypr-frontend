@@ -14,7 +14,7 @@ import fetchJson from "@/lib/iron-session/fetchJson";
 
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { useRouter } from "next/router";
-import { Article, CircleWavyCheck, UserCircle } from "phosphor-react";
+import { UserCircle, Article, CircleWavyCheck } from "@/components/icons";
 
 const slideUpAndFade = keyframes({
   "0%": { opacity: 0, transform: "translateY(2px)" },

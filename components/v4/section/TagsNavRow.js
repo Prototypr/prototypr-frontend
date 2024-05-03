@@ -1,7 +1,6 @@
 import Container from "@/components/container";
-import BigTag from "@/components/v4/tag/BigTag";
 import GiantTag from "../tag/GiantTag";
-import {Compass} from 'phosphor-react'
+import {Compass} from '@/components/icons'
 import { useEffect, useState } from "react";
 
 const tags = [

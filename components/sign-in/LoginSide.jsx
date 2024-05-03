@@ -1,4 +1,4 @@
-import {Sparkle} from 'phosphor-react'
+import {Sparkle} from '@/components/icons'
 const LoginSide = ({ user, title, showArrow }) => {
   return (
     <div className="flex flex-col w-full h-full relative">

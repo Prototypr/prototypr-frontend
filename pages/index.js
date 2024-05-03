@@ -16,10 +16,8 @@ const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
 // import { getAllJobs, getPopularTopics } from "@/lib/api";
-// import { ArrowRight, Compass } from "phosphor-react";
 
 // import { HomePageNewNavBar } from "@/components/Navbar/Navbar";
-// import {CaretRight} from 'phosphor-react'
 
 import {
   getCombinedPostsForHome,

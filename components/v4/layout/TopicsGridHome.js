@@ -1,16 +1,8 @@
-// import BigCard from "../card/BigCard/BigCardD";
-// import ToolCollection from "@/components/v4/layout/ToolCollection";
+import { ArrowRight, Tag } from "@/components/icons";
 
-// import SmallCard from "../card/SmallCard/SmallCardE";
-// import SmallPostsGroupC from "./SmallPostGroupC";
-// import RSSTitle from "../text/RSSTitle";
-import { ArrowRight, Tag } from "phosphor-react";
-
-// import { CaretRight, Tag } from "phosphor-react";
 import Link from "next/link";
 import PostsGroup3Cards from "./PostsGroup3Cards";
 import ToolIconCardRow from "./ToolIconCardRow";
-// import Button from "@/components/Primitives/Button";
 
 const TopicsGridHome = ({ largePost, smallPosts, tools,showHeading, slug, heading }) => {
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;

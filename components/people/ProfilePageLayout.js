@@ -7,9 +7,9 @@ import {
   MapPin,
   TwitterLogo,
   Globe,
-  LinkedinLogo,
   GithubLogo,
-} from "phosphor-react";
+  CircleWavyCheck
+} from "@/components/icons";
 
 // import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
 // import ToolLargeCardProfile from "@/components/v4/card/ToolLargeCardProfile";
@@ -21,7 +21,6 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 import useUser from "@/lib/iron-session/useUser";
 
 import { accountLocations } from "@/lib/constants";
-import { CircleWavyCheck } from "phosphor-react";
 
 import MediumPost from "../v4/card/SmallCard/MediumPost";
 import ToolImageCardSingle from "../v4/card/ToolImageCardSingle";

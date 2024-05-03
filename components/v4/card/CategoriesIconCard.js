@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { usePlausible } from "next-plausible";
-import { Tag } from "phosphor-react/dist";
+import { Tag } from "@/components/icons";
 
 // import Image from "next/image";
 // import gumletLoader from "@/components/new-index/gumletLoader";

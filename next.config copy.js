@@ -4,18 +4,13 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 // const { withSentryConfig } = require('@sentry/nextjs');
 
-
-import withPlaiceholder from "@plaiceholder/next";
-import { withPlausibleProxy } from "next-plausible";
-
-// import withBundleAnalyzer from '@next/bundle-analyzer';
-// const bundleAnalyzer = withBundleAnalyzer({
-// 	enabled: process.env.ANALYZE === 'true',
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true'
 // })
+const { withPlausibleProxy } = require("next-plausible");
 
-
-const nextConfig =
-  // module.exports =
+module.exports =
+  //  withBundleAnalyzer(
   withPlausibleProxy({
     customDomain: "https://analytics.prototypr.io",
     domain: "4.prototypr.io",
@@ -63,16 +58,13 @@ const nextConfig =
           permanent: true,
         },
         {
-          source:
-            "/post/the-ai-companion-who-doesnt-care---lf6ra6yx0c2fgy2pbws",
+          source: "/post/the-ai-companion-who-doesnt-care---lf6ra6yx0c2fgy2pbws",
           destination: "/post/conversational-ai-companion",
           permanent: true,
         },
         {
-          source:
-            "/toolbox/gradient-hunt%E2%80%8A-%E2%80%8Abeautiful-color-gradients",
-          destination:
-            "/toolbox/gradient-hunte2808a-e2808abeautiful-color-gradients",
+          source: "/toolbox/gradient-hunt%E2%80%8A-%E2%80%8Abeautiful-color-gradients",
+          destination: "/toolbox/gradient-hunte2808a-e2808abeautiful-color-gradients",
           permanent: true,
         },
         {
@@ -86,17 +78,13 @@ const nextConfig =
           permanent: true,
         },
         {
-          source:
-            "/toolbox/coolhue-2-0%E2%80%8A-%E2%80%8Acoolest-gradient-hues-and-swatches",
-          destination:
-            "/toolbox/coolhue-2-0e2808a-e2808acoolest-gradient-hues-and-swatches",
+          source: "/toolbox/coolhue-2-0%E2%80%8A-%E2%80%8Acoolest-gradient-hues-and-swatches",
+          destination: "/toolbox/coolhue-2-0e2808a-e2808acoolest-gradient-hues-and-swatches",
           permanent: true,
         },
         {
-          source:
-            "/toolbox/gradient-hunt%E2%80%8A-%E2%80%8Abeautiful-color-gradients",
-          destination:
-            "/toolbox/gradient-hunte2808a-e2808abeautiful-color-gradients",
+          source: "/toolbox/gradient-hunt%E2%80%8A-%E2%80%8Abeautiful-color-gradients",
+          destination: "/toolbox/gradient-hunte2808a-e2808abeautiful-color-gradients",
           permanent: true,
         },
         {
@@ -125,31 +113,28 @@ const nextConfig =
           permanent: true,
         },
         {
-          source:
-            "/post/:slug(announcing-prototypr-grant-for-the-web-flagship-project-%F0%9F%8E%89)",
+          source: '/post/:slug(\announcing-prototypr-grant-for-the-web-flagship-project-%F0%9F%8E%89\)',
           destination:
             "/post/announcing-prototypr-grant-for-the-web-flagship-project-f09f8e89",
           permanent: true,
         },
+        { source:'/post/microsoft-designer-ai-prompt-design-principles---lbzz9kvwx9e13fo5rj',
+          destination:'/post/microsoft-designer-ai-prompt-design-principles',
+          permanent:true
+        },
         {
-          source:
-            "/post/microsoft-designer-ai-prompt-design-principles---lbzz9kvwx9e13fo5rj",
-          destination: "/post/microsoft-designer-ai-prompt-design-principles",
+          source: '/prototyping-tool/:slug*',
+          destination: '/toolbox/:slug*', // Matched parameters can be used in the destination
           permanent: true,
         },
         {
-          source: "/prototyping-tool/:slug*",
-          destination: "/toolbox/:slug*", // Matched parameters can be used in the destination
+          source: '/p',
+          destination: '/dashboard/drafts',
           permanent: true,
         },
         {
-          source: "/p",
-          destination: "/dashboard/drafts",
-          permanent: true,
-        },
-        {
-          source: "/dashboard",
-          destination: "/dashboard/drafts",
+          source: '/dashboard',
+          destination: '/dashboard/drafts',
           permanent: true,
         },
       ];
@@ -157,10 +142,10 @@ const nextConfig =
     webpack: (config, options) => {
       if (!options.isServer) {
         //letter addition - graeme graylien change
-        config.resolve.fallback.fs = false;
-        config.resolve.fallback.net = false;
-        config.resolve.fallback.tls = false;
-        config.resolve.fallback.dns = false;
+        config.resolve.fallback.fs=false
+        config.resolve.fallback.net=false
+        config.resolve.fallback.tls=false
+        config.resolve.fallback.dns=false
       }
 
       if (typeof config.webpack === "function") {
@@ -177,8 +162,6 @@ const nextConfig =
       // optimizePackageImports: ['@phosphor-icons/react']
     },
     images: {
-      loader: "custom",
-      loaderFile: "./lib/imageloader.js",
       domains: [
         "localhost",
         "www.iconshock.com",
@@ -202,15 +185,12 @@ const nextConfig =
         "sfo2.digitaloceanspaces.com",
       ],
     },
-    // generation before timing out
-    staticPageGenerationTimeout: 300000,
+      // generation before timing out
+  staticPageGenerationTimeout: 300000,
   });
 
 // module.exports = withSentryConfig(
-// module.exports,
-// { silent: true },
-// { hideSourcemaps: true }
+  module.exports,
+  { silent: true },
+  { hideSourcemaps: true }
 // );
-
-// export default bundleAnalyzer(withPlaiceholder(nextConfig));
-export default withPlaiceholder(nextConfig);

@@ -1,5 +1,3 @@
-// import Link from "next/link";
-// import {CaretRight} from 'phosphor-react'
 import AuthorListItem from "../listItem/AuthorListItem";
 
 const SidePanelAuthors = ({ list, topic }) => {

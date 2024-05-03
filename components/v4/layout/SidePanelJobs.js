@@ -1,6 +1,6 @@
 import Link from "next/link";
 import JobListItem from "@/components/v4/listItem/JobListItem";
-import {CaretRight} from 'phosphor-react'
+import {CaretRight} from '@/components/icons'
 
 const SidePanelJobs = ({ list }) => {
   return (

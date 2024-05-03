@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Container from "@/components/container";
-import { House, CaretRight } from "phosphor-react/dist";
+import { House, CaretRight } from "@/components/icons";
 
 const Breadcrumbs = ({tagName, background}) =>{
 

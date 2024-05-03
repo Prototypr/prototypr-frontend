@@ -1,6 +1,5 @@
 import { useIntl } from "react-intl";
 import Link from "next/link";
-import {Robot} from 'phosphor-react'
 const TopicIconCard = ({ title, topic, icon }) => {
   const intl = useIntl();
 

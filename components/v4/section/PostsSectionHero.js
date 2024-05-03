@@ -2,15 +2,9 @@
 import Container from "@/components/container";
 // import PostsGridHero from "@/components/v4/layout/PostsGridHero";
 import PostsGroup3Cards from "../layout/PostsGroup3Cards";
-import RSSTitle from "../text/RSSTitle";
 import SectionDivider from "./SectionDivider";
-import TagsNavRow from "./TagsNavRow";
 import HeroPostGrid from "../layout/HeroPostGrid";
-import HeroArticleSection from "./HeroArticleSection";
-// import {CaretRight} from 'phosphor-react'
-// import ToolIconCard from "../card/ToolIconCard";
-// import Link from 'next/link'
-// import {RssSimple} from 'phosphor-react'
+
 const PostsSectionHero = ({user, heroCardPost,toolsList,showHeroTitle,groupSlice, viewablePosts, showTags,title, showRecent,showTitle }) => {
   return (
     <Container padding={false} maxWidth="max-w-[1320px] mx-auto">

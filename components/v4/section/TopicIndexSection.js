@@ -3,12 +3,11 @@ import Container from "@/components/container";
 // import LargePostGridC from "@/components/v4/layout/LargePostGridB";
 // import TopicsGridHome from "../layout/TopicsGridHome";
 // import PostsGroup3Cards from "../layout/PostsGroup3Cards";
-import { ArrowRight, Tag } from "phosphor-react";
+import { ArrowRight } from "@/components/icons";
 import Link from "next/link";
 import { useIntl } from "react-intl";
 
 import PostGroupRow from "../layout/PostGroupRow";
-// import {RssSimple} from 'phosphor-react'
 const TopicIndexSection = ({index,user, heroCardPost, viewablePosts, jobsSidebar,title , topicObject}) => {
  
   const intl = useIntl();

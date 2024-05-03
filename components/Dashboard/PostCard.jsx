@@ -19,11 +19,9 @@ import format from "date-fns/format";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import DeletePostButton from "@/components/modal/deletePostModal";
-import { ArrowSquareOut, ChartBar, Gift, NotePencil } from "phosphor-react";
-const qs = require("qs");
+import { ArrowSquareOut, ChartBar, Gift, NotePencil } from "@/components/icons";
 
 var axios = require("axios");
-var slugify = require("slugify");
 
 
 const PostCard = ({ post, refetch, user }) => {
