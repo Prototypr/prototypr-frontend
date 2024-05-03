@@ -11,6 +11,7 @@ const ToolImageCardSingle = ({
   columns,
   tagNumber,
   imageHeight,
+  preload
 }) => {
   return (
     <div className="h-full">
@@ -34,10 +35,10 @@ const ToolImageCardSingle = ({
               <div className="absolute top-0 left-0 z-10 rounded-xl w-full h-full bg-gradient-to-b from-black/5 via-black/10 to-black/40 group-hover:scale-[1.01] transition transition-all duration-700"></div>
               <Image
                 loader={gumletLoader}
-                priority={false < 2 ? `true` : `false`}
-                data-priority={false < 2 ? `true` : `false`}
-                fetchpriority={false < 2 ? "true" : "false"}
-                data-gmlazy={false < 2 ? `false` : `true`}
+                priority={preload?preload:false}
+                data-priority={preload?preload:false}
+                fetchpriority={preload?preload:false}
+                data-gmlazy={preload?!preload:true}
                 //   fill={true}
                 //   layout="fill"
                 //   style={{width:'100%'}}

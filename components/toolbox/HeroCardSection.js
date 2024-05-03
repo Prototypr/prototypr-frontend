@@ -30,7 +30,7 @@ const HeroCardSection = ({logo, post, tags, featuredImage, base64}) =>{
           blurDataURL={base64}
 
           priority={true}
-          loader={gumletLoader}
+          // loader={gumletLoader}
           key={featuredImage}
           src={featuredImage}
         />

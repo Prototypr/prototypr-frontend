@@ -275,15 +275,13 @@ const ToolContent = ({
                     <h3 className="text-sm tracking-tight ">Tags</h3>
                     {tags?.map((tag, index) => {
                       return (
-                        <Link
-                        href={`/toolbox/${tag.attributes.slug}/page/1/`}
-                      >
-                        <div
-                          key={index}
-                          className="text-gray-800 tracking-tight font-medium"
-                        >
-                          {tag.attributes.name}
-                        </div>
+                        <Link href={`/toolbox/${tag.attributes.slug}/page/1/`}>
+                          <div
+                            key={index}
+                            className="text-gray-800 tracking-tight font-medium"
+                          >
+                            {tag.attributes.name}
+                          </div>
                         </Link>
                       );
                     })}
@@ -392,6 +390,7 @@ const ToolContent = ({
               </h3>
               {/* <ToolLargeCardRow title={`Related to ${post?.attributes?.title}`} tools={relatedPosts.slice(0,4)} /> */}
               <ToolLargeCardRow
+                preload={false}
                 showTitle={false}
                 tools={relatedPosts.slice(0, 4)}
               />
@@ -561,7 +560,10 @@ export async function getStaticProps({ params, preview = null, locale }) {
   }
 
   const logo = getToolboxLogo({ post: postData });
-  const {featuredImage, base64} = await getToolboxFeaturedImage({ post: postData, logo });
+  const { featuredImage, base64 } = await getToolboxFeaturedImage({
+    post: postData,
+    logo,
+  });
   //build the gallery here
   let PHOTO_SET = [];
   const item = data?.posts.data[0];

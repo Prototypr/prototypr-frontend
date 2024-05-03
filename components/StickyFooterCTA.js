@@ -34,8 +34,7 @@ const StickyFooterCTA = ({ title, description, buttonText }) => {
 
     // Check if the user has already closed the sticky footer
     const closed = get("closed-signup") === "true";
-    console.log(closed);
-
+    
     if (!closed) {
       window.addEventListener("scroll", scrollListener);
     } else {

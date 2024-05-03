@@ -30,7 +30,7 @@ export default function Layout({
   seo,
   navType,
   navOffset,
-  navBackground
+  navBackground,
 }) {
   return (
     <>

@@ -6,7 +6,7 @@ import { ArrowRight } from "phosphor-react";
 // import ToolImageCard from "../card/ToolImageCard";
 import ToolImageCardSingle from "../card/ToolImageCardSingle";
 
-const ToolLargeCardRow = ({ tools , showTitle}) => {
+const ToolLargeCardRow = ({ tools , showTitle, preload}) => {
   return (
     <>
       {showTitle!==false?<div className="flex justify-between mb-6">
@@ -30,7 +30,7 @@ const ToolLargeCardRow = ({ tools , showTitle}) => {
         {tools.map((tool, index) => {
           return (
             <div key={index}>
-              <ToolImageCardSingle post={tool} />
+              <ToolImageCardSingle preload={preload} post={tool} />
             </div>
           );
         })}
