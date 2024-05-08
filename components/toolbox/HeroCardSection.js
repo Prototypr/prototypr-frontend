@@ -13,7 +13,7 @@ import Button from "@/components/Primitives/Button"
  * @param {*} param0 
  * @returns 
  */
-const HeroCardSection = ({logo, post, tags, featuredImage, base64}) =>{
+const HeroCardSection = ({logo,logoBase64, post, tags, featuredImage, base64}) =>{
     return(
         <div
         // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
@@ -46,7 +46,8 @@ const HeroCardSection = ({logo, post, tags, featuredImage, base64}) =>{
                       <Image
                         key={logo}
                         loader={gumletLoader}
-                        // placeholder="blur"
+                        placeholder="blur"
+                        blurDataURL={logoBase64}
                         // priority={true}
                         // data-priority={true}
                         // fetchpriority={true}
