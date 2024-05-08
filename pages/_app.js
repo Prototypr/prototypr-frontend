@@ -21,8 +21,8 @@ const AppToaster = dynamic(() => {return import("@/components/AppToaster")},{ ss
 
 import '../styles/index.scss'
 import '../styles/toolStyles.css'
-import PageViewTracker from "@/components/PageViewTracker";
-import MakerPopover from "@/components/maker/maker";
+// import PageViewTracker from "@/components/PageViewTracker";
+// import MakerPopover from "@/components/maker/maker";
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
 
@@ -88,7 +88,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
       key={locale || "en-US"}
       defaultLocale="en-US" locale={locale || "en-US"} messages={messages}>
     <>
-    <MakerPopover/>
+    {/* <MakerPopover/> */}
     {/* <PageViewTracker/> */}
     <TopProgressBar/>
     <SWRConfig

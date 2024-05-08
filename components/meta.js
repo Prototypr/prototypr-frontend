@@ -141,6 +141,7 @@ export default function Meta({ seo, articleJsonLd, productJsonLd }) {
       
       {/* CODEPEN AND TWITTER EMBED */}
       {typeof window &&<script defer async="async" src="https://static.codepen.io/assets/embed/ei.js"></script>}
+      {typeof window &&<script defer async="async" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>}
       
     </>
   );
