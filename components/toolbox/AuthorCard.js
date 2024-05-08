@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import gumletLoader from "../new-index/gumletLoader";
 export default function AuthorCard({
   author = {},
   title,
@@ -39,6 +40,7 @@ export default function AuthorCard({
                   <Image
                     tabIndex={0}
                     layout="fill"
+                    loader={gumletLoader}
                     // priority={true}
                     // placeholder="blur"
                     objectFit="cover"

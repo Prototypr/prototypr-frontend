@@ -29,7 +29,7 @@ const NewsletterPageHero = ({title,padding}) =>{
             <img
                 className="z-30 hidden 2md:block sm:w-[200px] drop-shadow-lg 2md:w-[304px] lg:w-[400px] top-0 absolute right-0 xl:mr-32"
                 src={
-                    "https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/c8452fffe5ddee55705e7e9de63b47e7.png"
+                    "https://prototyprio.gumlet.io/strapi/c8452fffe5ddee55705e7e9de63b47e7.png?w=400&q=75&format=avif&compress=true&dpr=1"
                 }
                 />
             </div>
