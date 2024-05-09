@@ -98,7 +98,6 @@ export default function Index({
   const toolsList = allTools;
 
   
-  console.log(toolsList)
   return (
     <>
       <Layout
