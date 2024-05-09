@@ -2,6 +2,8 @@ import Link from "next/link";
 import { usePlausible } from "next-plausible";
 
 import Image from "next/image";
+const defaultBase64 = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAABLCAQAAAA1k5H2AAAAi0lEQVR42u3SMQEAAAgDoC251a3gL2SgmfBYBRAA`;
+
 const {
   default: gumletLoader,
 } = require("@/components/new-index/gumletLoader");
@@ -12,24 +14,25 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
   if (!tags?.data?.length) {
     tags.data = tags;
   }
+
   const plausible = usePlausible();
 
   let coverImage =
     // tool.legacyMedia?.logoNew?tool.legacyMedia?.logoNew:
     // tool.legacyMedia?.mediaItemUrl?tool.legacyMedia?.mediaItemUrl:
     // tool.legacyMedia?.imgUrl?tool.legacyMedia?.imgUrl:
+    typeof tool.logo=="string"?tool.logo:
+    tool.logo?.data?.attributes?.url
+      ? tool.logo.data.attributes.url:
+      tool?.legacyMedia?.logoNew?tool?.legacyMedia?.logoNew:
     tool.featuredImage?.data?.attributes?.url
       ? tool.featuredImage.data.attributes.url
-      : tool.legacyFeaturedImage
-        ? tool.legacyFeaturedImage
+      : tool.legacyFeaturedImage?.mediaItemUrl
+        ? tool.legacyFeaturedImage?.mediaItemUrl
         : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
-  coverImage =
-    tool?.legacyMedia?.logoNew ||
-    coverImage?.logoNew ||
-    tool.legacyMedia?.mediaItemUrl ||
-    tool.legacyFeaturedImage?.mediaItemUrl;
-
+   const logoBase64 =tool.logo?.data?.attributes?.base64?tool.logo?.data?.attributes?.base64:tool.logoBase64?tool.logoBase64:defaultBase64
+        
   return (
     <div>
       <Link
@@ -57,7 +60,8 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
                   lazy={true}
                   loader={gumletLoader}
                   width="100"
-                  // placeholder="blur"
+                  placeholder="blur"
+                  blurDataURL={logoBase64}
                   height="100"
                   objectFit="cover"
                   src={

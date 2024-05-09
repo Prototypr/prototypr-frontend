@@ -62,6 +62,7 @@ import { formatAllTools } from "@/lib/utils/formatToolContent";
 import CardColumn from "@/components/v4/layout/CardColumn";
 import NewsColumn from "@/components/v4/layout/NewsColumn";
 import { groupPostsByDate } from "@/lib/utils/groupPostsByDate";
+import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 
 export default function Index({
   preview,
@@ -96,9 +97,8 @@ export default function Index({
   // const jobsSidebar = jobs.filter((item, i) => i !== 0);
   const toolsList = allTools;
 
-  // console.log(allNews)
-  // console.log(allTools)
-
+  
+  console.log(toolsList)
   return (
     <>
       <Layout
@@ -401,7 +401,12 @@ export async function getStaticProps({ preview = null, locale }) {
       "date:desc",
     ])) || [];
 
-  // console.log('allTools',allTools)
+
+  for (var x=0;x<allTools.data.length;x++){
+    //generate blurhash here
+    allTools.data[x].attributes.logoBase64 = createB64WithFallback(allTools.data[x]?.attributes?.logo?.data?.attributes?.blurhash);
+    allTools.data[x].attributes.base64 = createB64WithFallback(allTools.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash);
+  }
 
   let allNews = (await getAllNews(preview, 15, 0)) || [];
 
@@ -432,6 +437,12 @@ export async function getStaticProps({ preview = null, locale }) {
     shuffleArray(authors);
     shuffleArray(topicToolsRes.data);
 
+    //add blurhash to the images
+    for(var x = 0;x<topicToolsRes.data.length;x++){
+      topicToolsRes.data[x].attributes.logoBase64 = createB64WithFallback(topicToolsRes.data[x]?.attributes?.logo?.data?.attributes?.blurhash);
+      topicToolsRes.data[x].attributes.base64 = createB64WithFallback(topicToolsRes.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash);
+    }
+
     const topicData = {
       authors: authors,
       posts: res.data,
@@ -439,6 +450,7 @@ export async function getStaticProps({ preview = null, locale }) {
     };
     topicRes[tag] = topicData;
   }
+
 
   // const popularTags =
   //   (await getPopularTopics({ postType: "article", pageSize: 34 })) || [];
@@ -461,7 +473,14 @@ export async function getStaticProps({ preview = null, locale }) {
     sponsors?.find(sponsor => sponsor.productId === navSponsorId) || null;
     
 
+  // for(var x = 0; x<allNews.tools.length;x++){
+  //   allNews.tools[x].attributes.base64 = createB64WithFallback(allNews.tools[x]?.attributes?.featuredImage?.data?.blurhash);
+  //   allTools.data[x].attributes.logoBase64 = createB64WithFallback(allTools.data[x]?.attributes?.logo?.data?.blurhash);
+  // }
+
   let groupedNewsPosts = groupPostsByDate(allNews);
+
+  
 
   return {
     props: {
