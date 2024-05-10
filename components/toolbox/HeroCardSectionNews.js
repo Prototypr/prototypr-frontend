@@ -12,7 +12,7 @@ import Button from "@/components/Primitives/Button";
  * @param {*} param0
  * @returns
  */
-const HeroCardSection = ({ logo, post, tags, featuredImage, faviconUrl, domain, excerpt }) => {
+const HeroCardSection = ({ post, tags, featuredImage, faviconUrl, domain }) => {
   return (
     <div
       // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}

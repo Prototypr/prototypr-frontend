@@ -12,6 +12,7 @@ const PostsGroup3Cards = ({posts,cols, showDescription}) =>{
         {posts?.length ? (
           posts.map((post, index) => {
             let url = post?.attributes?.featuredImage?.data?.attributes?.url? post?.attributes?.featuredImage?.data?.attributes?.url:null;
+            
             const coverImage = url
               ? url
               : post?.attributes?.legacyFeaturedImage?.mediaItemUrl? post?.attributes?.legacyFeaturedImage?.mediaItemUrl:null;
@@ -20,6 +21,7 @@ const PostsGroup3Cards = ({posts,cols, showDescription}) =>{
             return (
               <div key={index} className="w-full">
                 <MediumPost
+                  post={post}
                   showDescription={showDescription}
                   imageSmall={cols==4?true:''}
                   imageVSmall={cols==2?true:''}

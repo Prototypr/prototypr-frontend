@@ -12,6 +12,7 @@ import useUser from "@/lib/iron-session/useUser";
 import { getPostsByPageForPostsPage } from "@/lib/api";
 import TagsNavRow from "@/components/v4/section/TagsNavRow";
 import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
+import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 // import Head from "next/head";
 const PAGE_SIZE = 10;
 export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
@@ -24,15 +25,15 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
     coverImage = heroPost.attributes.featuredImage?.data?.attributes?.url
       ? heroPost.attributes.featuredImage?.data?.attributes?.url
       : heroPost.attributes.legacyFeaturedImage
-      ? heroPost.attributes.legacyFeaturedImage
-      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+        ? heroPost.attributes.legacyFeaturedImage
+        : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
   }
   const router = useRouter();
   const intl = useIntl();
   const { user, isLoading } = useUser({
     redirectIfFound: false,
   });
-  const onPageNumChange = (pageNo) => {
+  const onPageNumChange = pageNo => {
     router.push(`/posts/page/${pageNo}`);
   };
 
@@ -52,38 +53,40 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
           url: "https://prototypr.io/posts",
         }}
       >
-      <div className="pt-[74px]">
-
-        <TagsNavRow/>
+        <div className="pt-[74px]">
+          <TagsNavRow />
         </div>
-        <Container padding={false} maxWidth="max-w-[1320px] mx-auto z-30 relative">
-      
+        <Container
+          padding={false}
+          maxWidth="max-w-[1320px] mx-auto z-30 relative"
+        >
           {pagination.page && pagination.page == 1
-            ? morePosts.length > 0 &&
-            <PostsSectionHero
-            showRecent={true}
-            groupSlice={3}
-            user={user}
-            showTitle={false}
-            heroCardPost={heroPost}
-            viewablePosts={morePosts}
-          />
-
-            : allPosts.length > 0 &&   
-            <PostsSectionHero
-            showRecent={true}
-            groupSlice={3}
-            showTitle={false}
-            user={user}
-            heroCardPost={heroPost}
-            viewablePosts={morePosts}
-          />}
+            ? morePosts.length > 0 && (
+                <PostsSectionHero
+                  showRecent={true}
+                  groupSlice={3}
+                  user={user}
+                  showTitle={false}
+                  heroCardPost={heroPost}
+                  viewablePosts={morePosts}
+                />
+              )
+            : allPosts.length > 0 && (
+                <PostsSectionHero
+                  showRecent={true}
+                  groupSlice={3}
+                  showTitle={false}
+                  user={user}
+                  heroCardPost={heroPost}
+                  viewablePosts={morePosts}
+                />
+              )}
 
           <NewPagination
             total={pagination?.total}
             pageSize={PAGE_SIZE}
             currentPage={pagination?.page}
-            onPageNumChange={(pageNum) => {
+            onPageNumChange={pageNum => {
               onPageNumChange(pageNum);
             }}
           />
@@ -100,12 +103,20 @@ export async function getStaticProps({ preview = null, params }) {
     (await getPostsByPageForPostsPage(preview, pageSize, page)) || [];
   allPosts = allPosts[0];
 
-  
+  //add blurhash to allPosts images
+  for (var x = 0; x < allPosts.data?.length; x++) {
+    allPosts.data[x].attributes.base64 = createB64WithFallback(
+      allPosts?.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash
+    );
+  }
+
   const pagination = allPosts.meta.pagination;
   return {
-    props: { 
-      allPosts: allPosts.data, 
-      preview, pagination },
-    revalidate:30
+    props: {
+      allPosts: allPosts.data,
+      preview,
+      pagination,
+    },
+    revalidate: 30,
   };
 }

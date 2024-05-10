@@ -36,6 +36,7 @@ import TagsNavRow from "@/components/v4/section/TagsNavRow";
 import BigBackgroundCard from "@/components/v4/card/BigCard/BigBackgroundCard";
 import PostsGroup3Cards from "@/components/v4/layout/PostsGroup3Cards";
 import SmallCard from "@/components/v4/card/SmallCard/SmallCardF";
+import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 // import SmallPostsGroup from "@/components/v4/layout/SmallPostsSection";
 // import Image from "next/image";
 // const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
@@ -162,6 +163,7 @@ export default function PostsPage({
                               author={
                                 largePost?.attributes?.author?.data?.attributes
                               }
+                              post={largePost}
                               image={largeCoverImage}
                               date={largePost?.attributes?.date}
                               title={largePost?.attributes?.title}
@@ -440,6 +442,12 @@ export async function getStaticProps({ preview = null, params, locale }) {
   // otherwise, just send back the list without splicing
   // firstPost = allPosts.slice(0, 1);
   // morePosts = allPosts.slice(1);
+
+    //add blurhash to allPosts images
+    for(var x = 0;x<allPosts.length;x++){
+      allPosts[x].attributes.base64 = createB64WithFallback(allPosts[x]?.attributes?.featuredImage?.data?.attributes?.blurhash);
+    }
+
   morePosts = allPosts;
 
   nextPosts = allPosts;

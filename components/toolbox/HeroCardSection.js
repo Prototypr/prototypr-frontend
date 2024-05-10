@@ -13,7 +13,7 @@ import Button from "@/components/Primitives/Button"
  * @param {*} param0 
  * @returns 
  */
-const HeroCardSection = ({logo,logoBase64, post, tags, featuredImage, base64}) =>{
+const HeroCardSection = ({post, tags, featuredImage}) =>{
     return(
         <div
         // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
@@ -27,7 +27,7 @@ const HeroCardSection = ({logo,logoBase64, post, tags, featuredImage, base64}) =
           objectFit="cover"
           loading="eager"
           placeholder="blur"
-          blurDataURL={base64}
+          blurDataURL={post?.attributes?.base64}
 
           priority={true}
           // loader={gumletLoader}
@@ -44,10 +44,10 @@ const HeroCardSection = ({logo,logoBase64, post, tags, featuredImage, base64}) =
                   <div className="flex flex-col">
                     <div className="mr-4 mb-3 flex-none w-[74px] h-[74px] md:w-[88px] md:h-[88px] my-auto shadow-sm rounded-2xl p-[3px] bg-white border border-gray-300">
                       <Image
-                        key={logo}
+                        key={post?.attributes?.logo}
                         loader={gumletLoader}
                         placeholder="blur"
-                        blurDataURL={logoBase64}
+                        blurDataURL={post?.attributes?.logoBase64}
                         // priority={true}
                         // data-priority={true}
                         // fetchpriority={true}
@@ -56,7 +56,7 @@ const HeroCardSection = ({logo,logoBase64, post, tags, featuredImage, base64}) =
                         height="100"
                         alt="Brand logo for external website's link"
                         className="rounded-xl h-full w-full object-cover bg-white"
-                        src={logo}
+                        src={post?.attributes?.logo}
                       />
                     </div>
                     <div className="flex flex-col text-white justify-center">

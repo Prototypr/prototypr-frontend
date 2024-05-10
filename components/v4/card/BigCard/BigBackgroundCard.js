@@ -8,6 +8,7 @@ import Moment from "react-moment";
 // layouts: 1 is big image
 // 2 is small image
 const BigBackgroundCard = ({
+  post,
   link,
   title,
   flip,
@@ -22,6 +23,7 @@ const BigBackgroundCard = ({
   imageDimensions,
   textDimensions,
 }) => {
+
   return (
     // <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col sm:flex-row lg:flex-col font-inter w-full max-w-[985px]">
     <div
@@ -32,6 +34,8 @@ const BigBackgroundCard = ({
       >
         <Link href={link ?? ""}>
           <Image
+            placeholder="blur"
+            blurDataURL={post?.attributes?.base64}
             loader={gumletLoader}
             className="object-cover cursor-pointer group-hover:scale-[1.03] transition transition-all duration-700"
             layout="fill"

@@ -53,6 +53,7 @@ import { formatAllTools } from "@/lib/utils/formatToolContent";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import HeroCardSection from "@/components/toolbox/HeroCardSection";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
+import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 
 const ToolContent = ({
   post,
@@ -109,9 +110,6 @@ const ToolContent = ({
             <div className="col-span-3 border border-gray-300/60 rounded-2xl overflow-hidden lg:col-span-9 flex flex-col gap-3 bg-white">
               <div className="grid gap-3 md:px-0 -mb-4">
                 <HeroCardSection
-                  logo={logo}
-                  logoBase64={logoBase64}
-                  base64={base64}
                   post={post}
                   tags={tags}
                   featuredImage={featuredImage}
@@ -544,7 +542,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
   relatedPostsData = formatAllTools({ tools: relatedPostsData, tagNumber: 1 });
   // no point transforming these, cos they're all english anyway
   // const postData = transformPost(data?.posts.data[0], locale)
-  const postData = data?.posts.data[0];
+  let postData = data?.posts.data[0];
   const popularTags =
     (await getPopularTopics({ postType: "article", pageSize: 8 })) || [];
 
@@ -571,11 +569,17 @@ export async function getStaticProps({ params, preview = null, locale }) {
   }
 
   const {logo, base64:logoBase64} = getToolboxLogo({ post: postData });
+  
+  postData.attributes.logoBase64 = logoBase64
+  postData.attributes.logo = logo
+
+
   const { featuredImage, base64 } = await getToolboxFeaturedImage({
     post: postData,
-    logo,
-    logoBase64
   });
+
+  postData.attributes.base64 = base64
+
   //build the gallery here
   // let PHOTO_SET = [];
   const item = data?.posts.data[0];
@@ -629,6 +633,15 @@ export async function getStaticPaths() {
     paths:
       (allPosts &&
         allPosts.data?.map(post => {
+
+          // add blurhash to allPosts images
+          post.attributes.base64 = createB64WithFallback(
+            post?.attributes?.featuredImage?.data?.attributes?.blurhash
+          );
+          post.attributes.logoBase64 = createB64WithFallback(
+            post?.attributes?.logo?.data?.attributes?.blurhash
+          );
+
           //this is the part that fails
           return `/toolbox/${post.attributes.slug}`;
         })) ||

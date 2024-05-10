@@ -415,8 +415,14 @@ export async function getStaticProps({ preview = null, locale }) {
   let topicRes = {};
   for (let index = 0; index < TAB_ITEMS.length; index++) {
     const tag = TAB_ITEMS[index].slug;
-    const res =
+    let res =
       (await getCommonQuery(preview, [tag], "article", 12, 0, sort)) || [];
+
+    //add blurhash to the images
+    for(var x = 0;x<res.data.length;x++){
+      res.data[x].attributes.base64 = createB64WithFallback(res.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash);
+    }
+    
 
     const topicToolsRes =
       (await getCommonQuery(
@@ -460,6 +466,11 @@ export async function getStaticProps({ preview = null, locale }) {
   }
   allTools = transformPostListOld(allTools.data, locale);
 
+  //add blurhash to allPosts images
+  for(var x = 0;x<allPosts.length;x++){
+    allPosts[x].attributes.base64 = createB64WithFallback(allPosts[x]?.attributes?.featuredImage?.data?.attributes?.blurhash);
+  }
+
   // shuffleArray(allTools)
   // await generateCombinedRSS({ allPosts, allTools });
   // otherPosts = transformPostListOld(otherPosts.data, locale);
@@ -478,7 +489,6 @@ export async function getStaticProps({ preview = null, locale }) {
   // }
 
   let groupedNewsPosts = groupPostsByDate(allNews);
-
   
 
   return {

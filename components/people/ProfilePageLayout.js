@@ -456,6 +456,7 @@ const ProfilePageLayout = ({
                         return (
                           <div className="col-span-12">
                             <BigBackgroundCard
+                              post={post}
                               showDescription={true}
                               layout={2}
                               flip={index !== 0}
@@ -478,6 +479,7 @@ const ProfilePageLayout = ({
                           className={`h-full col-span-12 sm:col-span-6 ${previewOnly && index == 0 ? "md:col-span-12" : previewOnly && index > 0 ? "" : "2md:col-span-4 lg:col-span-4 xl:col-span-4"} `}
                         >
                           <MediumPost
+                            post={post}
                             imageHeight={`${previewOnly && index == 0 ? "h-[240px] md:h-[480px]" : previewOnly && index > 0 ? "h-[240px] md:h-[300px]" : "h-[240px] md:h-[195px]"}`}
                             showDescription={false}
                             imageSmall={false}

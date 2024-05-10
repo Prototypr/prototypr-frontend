@@ -73,6 +73,7 @@ const HeroPostGrid = ({
                 excerpt={largePost?.attributes?.excerpt}
                 author={largePost?.attributes?.author?.data?.attributes}
                 image={largeCoverImage}
+                post={largePost}
                 date={largePost?.attributes?.date}
                 title={largePost?.attributes?.title}
                 tags={largePost?.attributes?.tags?.data}
@@ -132,6 +133,7 @@ const HeroPostGrid = ({
                       return (
                         <div key={index} className="w-full">
                           <MediumPost
+                            post={post}
                             showDescription={true}
                             imageHeight={`h-[320px]`}
                             link={`/post/${post?.attributes?.slug ? post?.attributes?.slug : ""}`}

@@ -15,6 +15,7 @@ import ToolLargeCardProfile from "@/components/v4/card/ToolLargeCardProfile";
 import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
 import ProfilePageLayout from "@/components/people/ProfilePageLayout";
 import { formatToolContent } from "@/lib/utils/formatToolContent";
+import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 
 const PostTitle = dynamic(() => import("@/components/post-title"), {
   ssr: true,
@@ -118,6 +119,12 @@ export async function getStaticProps({ preview = null, params }) {
   let allPosts =
     (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug])) || [];
 
+  //add blurhash to allPosts images
+  for (var x = 0; x < allPosts.data?.length; x++) {
+    allPosts.data[x].attributes.base64 = createB64WithFallback(
+      allPosts?.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash
+    );
+  }
 
   const pagination = allPosts.meta.pagination;
   let author =
@@ -145,16 +152,15 @@ export async function getStaticProps({ preview = null, params }) {
     }
   }
 
-  allPosts = allPosts.data
-    //loop through all posts and if the post type is a tool, run the tool function
-    allPosts = allPosts?.map((post) => {
-      if (post.attributes.type == "tool") {
-        // use the formatAllTools function to format the tool content
-        post = formatToolContent({post, tagNumber:1});
-      }
-      return post;
+  allPosts = allPosts.data;
+  //loop through all posts and if the post type is a tool, run the tool function
+  allPosts = allPosts?.map(post => {
+    if (post.attributes.type == "tool") {
+      // use the formatAllTools function to format the tool content
+      post = formatToolContent({ post, tagNumber: 1 });
     }
-    );
+    return post;
+  });
 
   return {
     props: {
@@ -179,9 +185,17 @@ export async function getStaticPaths() {
   let pageCountArr = [];
 
   for (let index = 0; index < ALL_SLUGS.length; index++) {
-    const allPosts =
+    let allPosts =
       (await getPostsByPageAndAuthor(null, PAGE_SIZE, 0, [ALL_SLUGS[index]])) ||
       [];
+
+    //add blurhash to allPosts images
+    for (var x = 0; x < allPosts.data?.length; x++) {
+      allPosts.data[x].attributes.base64 = createB64WithFallback(
+        allPosts?.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash
+      );
+    }
+
     const pagination = allPosts.meta.pagination;
     const pageCount = pagination.pageCount;
     let arr = new Array(pageCount).fill("");
