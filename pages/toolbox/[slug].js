@@ -572,20 +572,38 @@ export async function getStaticProps({ params, preview = null, locale }) {
   
   postData.attributes.logoBase64 = logoBase64
   postData.attributes.logo = logo
-
-
+  
+  //build the gallery here
+  // let PHOTO_SET = [];
+  const item = data?.posts.data[0];
+  
+  let PHOTO_SET = await buildToolboxGallery({ item })||[];
   const { featuredImage, base64 } = await getToolboxFeaturedImage({
     post: postData,
+    gallery: PHOTO_SET,
   });
 
   postData.attributes.base64 = base64
 
-  //build the gallery here
-  // let PHOTO_SET = [];
-  const item = data?.posts.data[0];
 
-  const PHOTO_SET = await buildToolboxGallery({ item, featuredImage });
-
+    //if there is no gallery, add a default image
+    if (!PHOTO_SET.length) {
+      let base64 = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAABLCAQAAAA1k5H2AAAAi0lEQVR42u3SMQEAAAgDoC251a3gL2SgmfBYBRAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARCAgwWEOSWBnYbKggAAAABJRU5ErkJggg==`;
+  
+      PHOTO_SET.push({
+        base64: base64,
+        thumbnail: featuredImage
+          ? featuredImage
+          : "https://prototypr.gumlet.com/https://prototypr-media.sfo2.digitaloceanspaces.com/uploads/2021/04/Screen-Shot-2021-04-30-at-4.37.37-PM.png",
+        original: featuredImage
+          ? featuredImage
+          : "https://prototypr.gumlet.com/https://prototypr-media.sfo2.digitaloceanspaces.com/uploads/2021/04/Screen-Shot-2021-04-30-at-4.37.37-PM.png",
+        originalAlt: "Screenshot of product",
+        thumbnailAlt: "Smaller procut screenshot thumbnail",
+        type: "image",
+      });
+    }
+  
   const date = isoToReadableDate(postData.attributes.date);
   const updatedAtDate = isoToReadableDate(postData.attributes.updatedAt);
 
@@ -608,7 +626,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       layout,
       logo,
       logoBase64,
-      featuredImage,
+      featuredImage:featuredImage?featuredImage:null,
       base64,
       date,
       updatedAtDate,

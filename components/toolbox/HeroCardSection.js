@@ -19,7 +19,7 @@ const HeroCardSection = ({post, tags, featuredImage}) =>{
         // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
         className={`relative col-span-12 h-full mx-auto relative overflow-hidden p-2 leading-tight w-full`}
       >
-        <Image
+       {featuredImage? <Image
           className="bg-gray-700 object-cover absolute top-0 left-0 w-full h-full z-0"
           // layout="fill"
           width={400}
@@ -33,7 +33,7 @@ const HeroCardSection = ({post, tags, featuredImage}) =>{
           // loader={gumletLoader}
           key={featuredImage}
           src={featuredImage}
-        />
+        />:null}
         <div className="absolute bottom-0 w-full h-full bg-gradient-to-b from-gray-900/0 via-black/60 to-black left-0 rounded-t-2xl z-0" />
         <div className="relative w-full max-w-[1320px] mx-auto h-full flex flex-col-reverse justify-between">
           {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
