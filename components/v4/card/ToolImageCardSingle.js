@@ -13,6 +13,9 @@ const ToolImageCardSingle = ({
   imageHeight,
   preload
 }) => {
+
+
+  const logo = post?.logo?post?.logo:post?.legacyMedia?.logoNew?post?.legacyMedia?.logoNew:''
   return (
     <div className="h-full">
       <Link
@@ -60,7 +63,7 @@ const ToolImageCardSingle = ({
                 className="object-cover w-[48px] h-[48px] flex-shrink-0 shine rounded-xl border-2 border-white bg-white shadow -mt-[22px]"
                 //   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                 //   data-src={coverImage}
-                src={post?.logo}
+                src={logo}
               />
             </div>
           </div>

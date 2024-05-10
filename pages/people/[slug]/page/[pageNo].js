@@ -11,8 +11,8 @@ import {
   getDribbbleHandle,
   getGithubHandle,
 } from "@/lib/profile-page/profile-page.js";
-import ToolLargeCardProfile from "@/components/v4/card/ToolLargeCardProfile";
-import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
+// import ToolLargeCardProfile from "@/components/v4/card/ToolLargeCardProfile";
+// import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
 import ProfilePageLayout from "@/components/people/ProfilePageLayout";
 import { formatToolContent } from "@/lib/utils/formatToolContent";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
@@ -105,7 +105,6 @@ export default function PeoplePage({
             authorUrl={authorUrl}
             skills={skills}
           />
-          mamama
         </>
       )}
     </Layout>

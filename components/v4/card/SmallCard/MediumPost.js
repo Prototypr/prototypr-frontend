@@ -5,7 +5,6 @@ import SmallTag from "../../tag/SmallTag";
 import gumletLoader from "@/components/new-index/gumletLoader";
 
 const MediumPost = ({post,showAuthor,showDescription,link, title, image, tags, date, avatar, author, excerpt, imageSmall, imageVSmall, imageHeight}) => {
-
   return (
     <div className="flex group hover:shadow-lg hover:scale-[1.005] h-full sm:mt-0 flex-col hover:bg-white transition transition-all duration-300 p-0 bg-white shadow-sm border border-gray-300/60 rounded-2xl overflow-hidden font-inter w-full">
       {image && post?.attributes?.base64 ? (
