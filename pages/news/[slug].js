@@ -92,11 +92,14 @@ export default function Post({
                 ? post?.attributes?.ogImage.opengraphImage
                 : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
       return (
-        <article key={index} className="group relative flex">
+        <article
+          key={index}
+          className="group relative flex bg-white p-4 shadow-sm border border-gray-300/50 rounded-2xl"
+        >
           <Link className="flex" href={`/news/${post?.attributes?.slug}`}>
             <div className="flex flex-col items-start pl-6 pr-3">
               <h3 className="text-lg font-semibold tracking-tight text-gray-800 dark:text-gray-100">
-                <div className="absolute -inset-x-4 -inset-y-2 z-0 scale-95 bg-gray-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-gray-800/50" />
+                {/* <div className="absolute -inset-x-4 -inset-y-2 z-0 scale-95 bg-gray-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-gray-800/50" /> */}
                 <a href={post.url}>
                   <span className="absolute -inset-x-4 -inset-y-0 z-20 sm:-inset-x-6 sm:rounded-2xl" />
                   <span className="relative z-10">
@@ -180,14 +183,19 @@ export default function Post({
             <div className="flex flex-col md:flex-row justify-between">
               <div className="flex text-lg text-black/90">
                 <Link href="/news">
-                  <div className="font-black tracking-tight text-xl text-gray-600 my-auto">
+                  <div className="font-black tracking-tight text-xl text-gray-700 my-auto">
                     News{" "}
                     <span className="hidden lg:inline-block">Explorer</span>
                   </div>
                 </Link>
                 <div className="mx-3 text-gray-400/90 my-auto">|</div>
                 <div className="line-clamp-1 font-semibold my-auto tracking-tight">
-                  {post?.attributes?.title}
+                  <a
+                    target={"_blank"}
+                    href={post?.attributes?.link + "?ref=prototypr.io"}
+                  >
+                    {post?.attributes?.title}
+                  </a>
                 </div>
                 {/* <div className="ml-3 flex font-base text-gray-500/90 my-auto">
                 <img className="w-4 h-4 mr-1 my-auto" src={faviconUrl} />
@@ -201,7 +209,12 @@ export default function Post({
                     />
                   </div>
                   <div className="text-xs my-auto leading-none text-gray-500 ml-1 font-medium uppercase">
-                    {domain}
+                    <a
+                      target={"_blank"}
+                      href={post?.attributes?.link + "?ref=prototypr.io"}
+                    >
+                      {domain}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -223,74 +236,79 @@ export default function Post({
                 content={content}
                 excerpt={post?.attributes?.excerpt}
                 authorAvatar={authorAvatar}
-              />
-              <div className="mt-3">
-                <h2 className="text-lg font-bold mb-2">Latest News</h2>
-                <div className="space-y-8">
-                  {[
-                    "today",
-                    "yesterday",
-                    "thisWeek",
-                    "lastWeek",
-                    "lastMonth",
-                  ].map(group => {
-                    let formattedGroup = group?.replace("last", "last ");
-                    formattedGroup = formattedGroup?.replace("this", "this ");
-                    return (
-                      groupedPosts &&
-                      groupedPosts[group] &&
-                      groupedPosts[group].length > 0 && (
-                        <section
-                          key={group}
-                          aria-labelledby={group}
-                          className="lg:border-gray-200 md:pl-"
-                        >
-                          <div className="grid grid-cols-9 col-span-9 bg-white py-6 px-4 shadow-sm rounded-2xl border border-gray-300/50 mb-3">
-                            <div className="col-span-9 lg:col-span-2">
-                              <h2
-                                id={group}
-                                className="mb-6 lg:mb-1 w-[fit-content] lg:pr-4 lg:pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
-                              >
-                                {formattedGroup?.charAt(0).toUpperCase() +
-                                  formattedGroup?.slice(1)}
-                              </h2>
-                            </div>
-                            <div className="col-span-9 lg:col-span-7 mb-8">
-                              <div className="space-y-16 max-w-2xl mx-auto">
-                                {renderPosts(groupedPosts[group])}
-                              </div>
-                            </div>
-                          </div>
-                        </section>
-                      )
-                    );
-                  })}
-                  {groupedPosts?.months &&
-                    Object.entries(groupedPosts?.months).map(
-                      ([month, posts]) => (
-                        <section
-                          key={month}
-                          aria-labelledby={month}
-                          className="lg:border-gray-400/60"
-                        >
-                          <div className="grid lg:grid-cols-12 bg-white border border-gray-300/50 shadow-sm p-4 pr-8 pb-8 rounded-xl  grid-cols-1 gap-y-6 ">
-                            <h2
-                              id={month}
-                              className="text-lg col-span-3 font-semibold text-gray-800"
+                morePosts={
+                  <div className="mt-8 hidden lg:block">
+                    <h2 className="text-lg font-bold mb-6">Latest News</h2>
+                    <div className="space-y-8">
+                      {[
+                        "today",
+                        "yesterday",
+                        "thisWeek",
+                        "lastWeek",
+                        "lastMonth",
+                      ].map(group => {
+                        let formattedGroup = group?.replace("last", "last ");
+                        formattedGroup = formattedGroup?.replace(
+                          "this",
+                          "this "
+                        );
+                        return (
+                          groupedPosts &&
+                          groupedPosts[group] &&
+                          groupedPosts[group].length > 0 && (
+                            <section
+                              key={group}
+                              aria-labelledby={group}
+                              className="lg:border-gray-200 md:pl-"
                             >
-                              {month}
-                            </h2>
-                            <div className="col-span-12 lg:col-span-9">
-                              <div className="space-y-12">
-                                {renderPosts(posts)}
+                              <div className="grid grid-cols-9 col-span-9 mb-3">
+                                {/* <div className="col-span-9">
+                                  <h2
+                                    id={group}
+                                    className="mb-6 lg:mb-1 w-[fit-content] lg:pr-4 lg:pl-2 border- border-gray-300/50 text-xl pt-0 leading-tight font-semibold text-black/90"
+                                  >
+                                    {formattedGroup?.charAt(0).toUpperCase() +
+                                      formattedGroup?.slice(1)}
+                                  </h2>
+                                </div> */}
+                                <div className="col-span-9 mb-8">
+                                  <div className="space-y-4">
+                                    {renderPosts(groupedPosts[group])}
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </section>
-                      )
-                    )}
-                </div>
-              </div>
+                            </section>
+                          )
+                        );
+                      })}
+                      {groupedPosts?.months &&
+                        Object.entries(groupedPosts?.months).map(
+                          ([month, posts]) => (
+                            <section
+                              key={month}
+                              aria-labelledby={month}
+                              className="lg:border-gray-400/60"
+                            >
+                              <div className="grid lg:grid-cols-12 bg-white border border-gray-300/50 shadow-sm p-4 pr-8 pb-8 rounded-xl  grid-cols-1 gap-y-6 ">
+                                <h2
+                                  id={month}
+                                  className="text-lg col-span-12 font-semibold text-gray-800"
+                                >
+                                  {month}
+                                </h2>
+                                <div className="col-span-12">
+                                  <div className="space-y-12">
+                                    {renderPosts(posts)}
+                                  </div>
+                                </div>
+                              </div>
+                            </section>
+                          )
+                        )}
+                    </div>
+                  </div>
+                }
+              />
             </div>
 
             <div className="col-span-12 lg:col-span-3 ">
@@ -342,7 +360,10 @@ export default function Post({
                 </div>
                 <div className="text-gray-500 mt-1">
                   <h3 className="text-sm tracking-tight  ">Source</h3>
-                  <a href={post?.attributes?.link + "?ref=prototypr.io"} target="_blank">
+                  <a
+                    href={post?.attributes?.link + "?ref=prototypr.io"}
+                    target="_blank"
+                  >
                     <div className="text-base tracking-tight font-medium text-gray-800">
                       {domain}
                     </div>
@@ -511,9 +532,11 @@ export async function getStaticProps({
   //filter the content for posts before 2022
   if (new Date(postData.attributes.date) < new Date("2024-01-01")) {
     if (postData.attributes.content?.length) {
-      const gumletPostContentLoaderModule = await import("@/lib/gumletPostContentLoader");
+      const gumletPostContentLoaderModule = await import(
+        "@/lib/gumletPostContentLoader"
+      );
       const gumletPostContentLoader = gumletPostContentLoaderModule.default;
-    
+
       let html = gumletPostContentLoader(postData.attributes.content);
       if (html) {
         postData.attributes.content = html;

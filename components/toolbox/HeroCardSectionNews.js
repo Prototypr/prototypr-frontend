@@ -12,20 +12,24 @@ import Button from "@/components/Primitives/Button";
  * @param {*} param0
  * @returns
  */
-const HeroCardSection = ({ post, tags, featuredImage, faviconUrl, domain }) => {
+const HeroCardSection = ({
+  logo,
+  post,
+  tags,
+  featuredImage,
+  faviconUrl,
+  domain,
+  excerpt,
+}) => {
   return (
     <div
       // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
-      className={`col-span-12 h-full relative mx-auto relative overflow-hidden p-2 leading-tight w-full `}
+      className={`col-span-12 h-full mx-auto relative overflow-hidden p-2 leading-tight w-full `}
     >
       <Image
-        className="bg-gray-700 object-cover absolute top-0 left-0 w-full h-full z-0"
-        // layout="fill"
-        width={400}
-        height={400}
+        className="bg-gray-700 object-cover"
+        layout="fill"
         loader={gumletLoader}
-        // placeholder="blur"
-        priority={true}
         objectFit="cover"
         key={featuredImage}
         src={featuredImage}
@@ -34,7 +38,7 @@ const HeroCardSection = ({ post, tags, featuredImage, faviconUrl, domain }) => {
       <div className="relative w-full max-w-[1320px] min-h-[340px] mx-auto h-full flex flex-col-reverse justify-between">
         {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
         <div className="w-full z-10 grid grid-cols-12 lg:gap-8 flex pt-0 md:pt-6 p-6 lg:pb-6 justify-between ">
-          <div className="flex order-2 md:order-1 col-span-12 lg:col-span-9 w-full flex-col justify-between">
+          <div className="flex order-2 md:order-1 col-span-12 w-full flex-col justify-between">
             <div className="flex flex-col">
               <div className="flex flex-col text-white justify-center">
                 <div>
@@ -57,29 +61,34 @@ const HeroCardSection = ({ post, tags, featuredImage, faviconUrl, domain }) => {
                       {domain}
                     </div>
                   </div>
-                
+
                   {/* </div> */}
                 </div>
-                <h1 className="text-5xl mb-0 tracking-tight font-semibold drop-shadow-lg text-white">
-                  {post?.attributes?.title}
-                </h1>
-                {post?.attributes?.excerpt ? (
+                <a
+                  target={"_blank"}
+                  href={post?.attributes?.link + "?ref=prototypr.io"}
+                >
+                  <h1 className="text-5xl mb-0 tracking-tight font-semibold drop-shadow-lg text-white">
+                    {post?.attributes?.title}
+                  </h1>
+                </a>
+                {/* {post?.attributes?.excerpt ? (
                   <p className="text-base line-clamp-4 text-white mt-2">
                     {post?.attributes?.excerpt}
                   </p>
-                ) : null}
+                ) : null} */}
               </div>
-              <div className="flex lg:hidden mt-4 flex-none">
+              <div className="flex mt-4 flex-none">
                 <div className="flex justify-end">
                   <a
                     target={"_blank"}
                     href={post?.attributes?.link + "?ref=prototypr.io"}
                   >
                     <Button
-                      className="rounded-full text-sm bg-blue-600 font-medium uppercase text-white px-6 py-1 h-[28px] leading-none"
+                      className="rounded-full text-sm lg:text-xs bg-blue-600 font-medium uppercase text-white px-6 h-[28px] py-1 lg:h-[24px] lg:px-4 leading-none"
                       variant={"confirmBig"}
                     >
-                      Read full story
+                      Read story
                     </Button>
                   </a>
                 </div>
@@ -87,9 +96,8 @@ const HeroCardSection = ({ post, tags, featuredImage, faviconUrl, domain }) => {
             </div>
           </div>
 
-          <div className="order-1 hidden lg:flex md:order-2 col-span-3 flex-col justify-end">
-            {/* hide on mobile */}
-            <div className="hidden md:flex flex-none">
+          {/* <div className="order-1 hidden lg:flex md:order-2 col-span-3 flex-col justify-end">
+            <div className="hidden md:flex justify-end flex-none">
               <div className="flex justify-end">
                 <a
                   target={"_blank"}
@@ -99,12 +107,12 @@ const HeroCardSection = ({ post, tags, featuredImage, faviconUrl, domain }) => {
                     className="rounded-full text-xs uppercase bg-blue-600 font-medium text-white px-5 py-0.5 h-[28px] leading-none"
                     variant={"confirmBig"}
                   >
-                    Read full story
+                    Read story
                   </Button>
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="p-6 pt-3 text-white flex flex-col-reverse">
@@ -113,13 +121,13 @@ const HeroCardSection = ({ post, tags, featuredImage, faviconUrl, domain }) => {
               ? tags.map((tag, i) => {
                   if (i < 4) {
                     return (
-                    //   <Link href={`/news/${tag.attributes.slug}/page/1/`}>
-                        <button
-                          className={`px-3 h-6 cursor-default text-sm capitalize rounded-full border border-opacity-50 border-white bg-black/40 backdrop-blur-md`}
-                        >
-                          {tag.attributes.name}
-                        </button>
-                    //   </Link>
+                      //   <Link href={`/news/${tag.attributes.slug}/page/1/`}>
+                      <button
+                        className={`px-3 h-6 cursor-default text-sm capitalize rounded-full border border-opacity-50 border-white bg-black/40 backdrop-blur-md`}
+                      >
+                        {tag.attributes.name}
+                      </button>
+                      //   </Link>
                     );
                   }
                 })

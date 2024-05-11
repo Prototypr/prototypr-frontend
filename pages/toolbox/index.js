@@ -4,6 +4,7 @@ import { getAllPostsForToolsPage, getPostsByPageForToolsPage } from "@/lib/api";
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 import Footer from "@/components/footer";
+import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 
 const PAGE_SIZE = 16;
 
@@ -82,8 +83,14 @@ export async function getStaticProps({ preview = null, params, locale }) {
   }
   const pageSize = PAGE_SIZE;
   const page = 1;
-  const allPosts =
+  let allPosts =
     (await getPostsByPageForToolsPage(preview, pageSize, page, sort)) || [];
+
+  // add blurhash to allPosts images
+  for(let post of allPosts.data){
+      post.attributes.base64 = createB64WithFallback(post.attributes?.featuredImage?.data?.attributes?.blurhash);
+      post.attributes.logoBase64 = createB64WithFallback(post.attributes?.logo?.data?.attributes?.blurhash);
+  }
 
 
   const pagination = allPosts.meta.pagination;

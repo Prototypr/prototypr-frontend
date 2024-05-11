@@ -436,9 +436,7 @@ export default function Post({
   popularTags,
   layout,
   logo,
-  logoBase64,
   featuredImage,
-  base64,
   date,
   updatedAtDate,
   authorAvatar,
@@ -514,9 +512,7 @@ export default function Post({
       <ToolContent
         date={date}
         featuredImage={featuredImage}
-        base64={base64}
         logo={logo}
-        logoBase64={logoBase64}
         layout={layout}
         popularTags={popularTags}
         post={post}

@@ -32,6 +32,7 @@ import PostHeader from "@/components/post-header";
 import SocialShare from "@/components/SocialShare";
 import PostGroupRow from "@/components/v4/layout/PostGroupRow";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
+import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -94,7 +95,6 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
   const intl = useIntl();
 
   useEffect(() => {
-    
     addTwitterScript();
 
     if (window.$crisp) {
@@ -284,6 +284,8 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
                     <Image
                       key={image}
                       width={1020}
+                      placeholder="blur"
+                      blurDataURL={post?.attributes?.base64}
                       height={550}
                       loader={gumletLoader}
                       className="h-full z-20 relative w-full object-contain rounded-2xl max-w-[1020px] mx-auto"
@@ -410,18 +412,32 @@ export async function getStaticProps({ params, preview = null, locale }) {
     data?.posts.data[0].attributes.relatedArticles,
     locale
   );
+
+  for(let i = 0; i < relatedPosts.data.length; i++){
+    relatedPosts.data[i].base64 = createB64WithFallback(
+      relatedPosts?.data[i]?.featuredImage?.data?.attributes?.blurhash
+    );
+  }
+
   //   console.log(data?.posts.data[0]?.attributes?.relatedArticles)
   const removeFirstImageIfMatchModule = await import("@/lib/removeFirstImage");
   const removeFirstImageIfMatch = removeFirstImageIfMatchModule.default;
 
-  const gumletPostContentLoaderModule = await import("@/lib/gumletPostContentLoader");
+  const gumletPostContentLoaderModule = await import(
+    "@/lib/gumletPostContentLoader"
+  );
   const gumletPostContentLoader = gumletPostContentLoaderModule.default;
 
   const post = data?.posts?.data[0];
-  const image = post?.attributes?.seo?.opengraphImage
-    ? post?.attributes?.seo?.opengraphImage
-    : post?.attributes?.featuredImage?.data?.attributes?.url
-      ? post?.attributes?.featuredImage?.data?.attributes?.url
+
+  post.attributes.base64 = createB64WithFallback(
+    post?.attributes?.featuredImage?.data?.attributes?.blurhash
+  );
+
+  const image = post?.attributes?.featuredImage?.data?.attributes?.url
+    ? post?.attributes?.featuredImage?.data?.attributes?.url
+    : post?.attributes?.seo?.opengraphImage
+      ? post?.attributes?.seo?.opengraphImage
       : post?.legacyFeaturedImage
         ? post?.legacyFeaturedImage?.mediaItemUrl
         : post?.ogImage
@@ -446,7 +462,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
 export async function getStaticPaths({ locales }) {
   const allPosts = await getAllPostsWithSlug(
-    'article',
+    "article",
     process.env.NODE_ENV ||
       process.env.NEXT_PUBLIC_HOME_URL.indexOf("localhost") > -1
       ? TOTAL_STATIC_POSTS

@@ -175,7 +175,7 @@
     "yup": "^0.32.11"
   },
   "optionalDependencies": {
-    "@prototypr/prototypr-postie": "^1.0.8"
+    "@prototypr/prototypr-postie": "^1.0.9"
   },
   "resolutions": {
     "sharp": "0.33.2"
