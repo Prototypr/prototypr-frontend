@@ -219,6 +219,26 @@ const productResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/
 
   });
 
+  if(reqData.customDiscount){
+    try{
+
+      const response = await lemonSqueezyApiInstance.get(`/discounts?filter[store_id]=${process.env.LEMON_SQUEEZY_STORE_ID}`);
+      //check if discount code exists
+      const discountItem = response.data.data.find(d => d.attributes.code === reqData.customDiscount);
+      const discountPercentage = discountItem.attributes.amount;
+
+      console.log(discountPercentage)
+      totalPrice = totalPrice - (totalPrice * discountPercentage / 100);
+      if(totalPrice==0){
+        totalPrice=1
+      }
+
+
+    }catch(e){
+      console.log('Error fetching discount')
+    }
+  }
+
   // console.log(totalPrice);
 
   return totalPrice

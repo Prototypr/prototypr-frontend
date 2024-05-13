@@ -5,7 +5,7 @@ import axios from "axios";
 const PurchaseButton = ({
   postObject,
   user,
-
+  customDiscount,
   selectedProducts,
 
   companyId,
@@ -51,6 +51,7 @@ const PurchaseButton = ({
         weeks: sponsorDates,
         companyId: companyId,
         postObject: postObject,
+        customDiscount: customDiscount,
       });
 
       console.log(response.data);

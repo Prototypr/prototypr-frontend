@@ -151,7 +151,7 @@ export default function SponsorPaymentPage({}) {
                   )}
                 </div>
               </div>
-              <div className="col-span-6 md:col-span-2 sticky h-fit top-[160px]">
+              <div className="col-span-6 md:col-span-2 sticky h-fit top-[160px] mt-[80px]">
                 <div className="rounded-xl p-6 border border-opacity-20 bg-white">
                   {/* <h2 className="text-xl font-semibold">Total</h2> */}
                   <h1 className="text-xl font-semibold mx-auto mb-2">

@@ -445,6 +445,7 @@ export async function getStaticProps({ preview = null, locale }) {
   // console.log('allTools',allTools)
 
   let allProducts = (await getAllProducts(preview, 15, 0)) || [];
+  console.log(allProducts)
 
   let products = [];
   for (var i = 0; i < allProducts.data?.length; i++) {

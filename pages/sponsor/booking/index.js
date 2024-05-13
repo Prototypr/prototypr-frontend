@@ -335,9 +335,9 @@ const SponsorshipForm = ({
                   type="submit"
                   disabled={isSubmitting}
                   // disabled={errores}
-                  className="w-full mt-3 h-10 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white"
+                  className={`${isSubmitting?'cursor-wait	opacity-50':''} w-full mt-3 h-10 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white`}
                 >
-                  Save and Continue
+                  {isSubmitting?'Saving...':'Save and Continue'}
                 </button>
               </div>
             </div>

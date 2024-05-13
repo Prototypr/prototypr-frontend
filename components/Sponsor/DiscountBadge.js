@@ -12,7 +12,7 @@ const DiscountBadge = ({ selectedTypes }) => {
           <div className="flex flex-col ml-3 justify-center">
             <h4 className="text-md font-semibold">Get 5% off</h4>
             <div className="my-auto text-sm">
-              Combine with a website sponsorship for a{" "}
+              Combine 1 newsletter with 1 website sponsorship for a{" "}
               <span className="font-">5% discount</span>.
             </div>
           </div>
@@ -23,7 +23,7 @@ const DiscountBadge = ({ selectedTypes }) => {
           <div className="flex flex-col ml-3 justify-center">
             <h4 className="text-md font-semibold">Get 5% off</h4>
             <div className="my-auto text-sm">
-              Combine with a newsletter sponsorship for a{" "}
+              Combine 1 newsletter with 1 website sponsorship for a{" "}
               <span className="font-">5% discount</span>.
             </div>
           </div>

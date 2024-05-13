@@ -1,17 +1,42 @@
 import { useEffect, useState } from "react";
 import PurchaseButton from "./PurchaseButton";
+import axios from "axios";
 
 export const HandHeartIcon = ({ className }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M230.33,141.06a24.34,24.34,0,0,0-18.61-4.77C230.5,117.33,240,98.48,240,80c0-26.47-21.29-48-47.46-48A47.58,47.58,0,0,0,156,48.75,47.58,47.58,0,0,0,119.46,32C93.29,32,72,53.53,72,80c0,11,3.24,21.69,10.06,33a31.87,31.87,0,0,0-14.75,8.4L44.69,144H16A16,16,0,0,0,0,160v40a16,16,0,0,0,16,16H120a7.93,7.93,0,0,0,1.94-.24l64-16a6.94,6.94,0,0,0,1.19-.4L226,182.82l.44-.2a24.6,24.6,0,0,0,3.93-41.56ZM119.46,48A31.15,31.15,0,0,1,148.6,67a8,8,0,0,0,14.8,0,31.15,31.15,0,0,1,29.14-19C209.59,48,224,62.65,224,80c0,19.51-15.79,41.58-45.66,63.9l-11.09,2.55A28,28,0,0,0,140,112H100.68C92.05,100.36,88,90.12,88,80,88,62.65,102.41,48,119.46,48ZM16,160H40v40H16Zm203.43,8.21-38,16.18L119,200H56V155.31l22.63-22.62A15.86,15.86,0,0,1,89.94,128H140a12,12,0,0,1,0,24H112a8,8,0,0,0,0,16h32a8.32,8.32,0,0,0,1.79-.2l67-15.41.31-.08a8.6,8.6,0,0,1,6.3,15.9Z"></path></svg>
-)
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    fill="currentColor"
+    viewBox="0 0 256 256"
+  >
+    <path d="M230.33,141.06a24.34,24.34,0,0,0-18.61-4.77C230.5,117.33,240,98.48,240,80c0-26.47-21.29-48-47.46-48A47.58,47.58,0,0,0,156,48.75,47.58,47.58,0,0,0,119.46,32C93.29,32,72,53.53,72,80c0,11,3.24,21.69,10.06,33a31.87,31.87,0,0,0-14.75,8.4L44.69,144H16A16,16,0,0,0,0,160v40a16,16,0,0,0,16,16H120a7.93,7.93,0,0,0,1.94-.24l64-16a6.94,6.94,0,0,0,1.19-.4L226,182.82l.44-.2a24.6,24.6,0,0,0,3.93-41.56ZM119.46,48A31.15,31.15,0,0,1,148.6,67a8,8,0,0,0,14.8,0,31.15,31.15,0,0,1,29.14-19C209.59,48,224,62.65,224,80c0,19.51-15.79,41.58-45.66,63.9l-11.09,2.55A28,28,0,0,0,140,112H100.68C92.05,100.36,88,90.12,88,80,88,62.65,102.41,48,119.46,48ZM16,160H40v40H16Zm203.43,8.21-38,16.18L119,200H56V155.31l22.63-22.62A15.86,15.86,0,0,1,89.94,128H140a12,12,0,0,1,0,24H112a8,8,0,0,0,0,16h32a8.32,8.32,0,0,0,1.79-.2l67-15.41.31-.08a8.6,8.6,0,0,1,6.3,15.9Z"></path>
+  </svg>
+);
 export const CoinsIcon = ({ className }) => (
-<svg className={className} xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M184,89.57V84c0-25.08-37.83-44-88-44S8,58.92,8,84v40c0,20.89,26.25,37.49,64,42.46V172c0,25.08,37.83,44,88,44s88-18.92,88-44V132C248,111.3,222.58,94.68,184,89.57ZM232,132c0,13.22-30.79,28-72,28-3.73,0-7.43-.13-11.08-.37C170.49,151.77,184,139,184,124V105.74C213.87,110.19,232,122.27,232,132ZM72,150.25V126.46A183.74,183.74,0,0,0,96,128a183.74,183.74,0,0,0,24-1.54v23.79A163,163,0,0,1,96,152,163,163,0,0,1,72,150.25Zm96-40.32V124c0,8.39-12.41,17.4-32,22.87V123.5C148.91,120.37,159.84,115.71,168,109.93ZM96,56c41.21,0,72,14.78,72,28s-30.79,28-72,28S24,97.22,24,84,54.79,56,96,56ZM24,124V109.93c8.16,5.78,19.09,10.44,32,13.57v23.37C36.41,141.4,24,132.39,24,124Zm64,48v-4.17c2.63.1,5.29.17,8,.17,3.88,0,7.67-.13,11.39-.35A121.92,121.92,0,0,0,120,171.41v23.46C100.41,189.4,88,180.39,88,172Zm48,26.25V174.4a179.48,179.48,0,0,0,24,1.6,183.74,183.74,0,0,0,24-1.54v23.79a165.45,165.45,0,0,1-48,0Zm64-3.38V171.5c12.91-3.13,23.84-7.79,32-13.57V172C232,180.39,219.59,189.4,200,194.87Z"></path></svg>
-)
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    fill="currentColor"
+    viewBox="0 0 256 256"
+  >
+    <path d="M184,89.57V84c0-25.08-37.83-44-88-44S8,58.92,8,84v40c0,20.89,26.25,37.49,64,42.46V172c0,25.08,37.83,44,88,44s88-18.92,88-44V132C248,111.3,222.58,94.68,184,89.57ZM232,132c0,13.22-30.79,28-72,28-3.73,0-7.43-.13-11.08-.37C170.49,151.77,184,139,184,124V105.74C213.87,110.19,232,122.27,232,132ZM72,150.25V126.46A183.74,183.74,0,0,0,96,128a183.74,183.74,0,0,0,24-1.54v23.79A163,163,0,0,1,96,152,163,163,0,0,1,72,150.25Zm96-40.32V124c0,8.39-12.41,17.4-32,22.87V123.5C148.91,120.37,159.84,115.71,168,109.93ZM96,56c41.21,0,72,14.78,72,28s-30.79,28-72,28S24,97.22,24,84,54.79,56,96,56ZM24,124V109.93c8.16,5.78,19.09,10.44,32,13.57v23.37C36.41,141.4,24,132.39,24,124Zm64,48v-4.17c2.63.1,5.29.17,8,.17,3.88,0,7.67-.13,11.39-.35A121.92,121.92,0,0,0,120,171.41v23.46C100.41,189.4,88,180.39,88,172Zm48,26.25V174.4a179.48,179.48,0,0,0,24,1.6,183.74,183.74,0,0,0,24-1.54v23.79a165.45,165.45,0,0,1-48,0Zm64-3.38V171.5c12.91-3.13,23.84-7.79,32-13.57V172C232,180.39,219.59,189.4,200,194.87Z"></path>
+  </svg>
+);
 
-export const BULK_DISCOUNT=0.1
-export const MULTI_DISCOUNT=0.05
+export const BULK_DISCOUNT = 0.1;
+export const MULTI_DISCOUNT = 0.05;
 
-const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, postObject }) => {
+const CheckoutTotal = ({
+  selectedProducts,
+  paymentDisabled,
+  companyId,
+  user,
+  postObject,
+}) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [multiDiscountAmount, setMultiDiscountAmount] = useState(0);
@@ -20,6 +45,30 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
 
   const [totalPriceWithDiscount, setTotalPriceWithDiscount] = useState(0);
 
+  const [customDiscount, setCustomDiscount] = useState("");
+  const [verifiedDiscountAmount, setVerifiedDiscount] = useState(0);
+  const [loadingDiscount, setLoadingDiscount] = useState(false);
+
+  const checkDiscount = async () => {
+    setLoadingDiscount(true);
+    try {
+      const response = await axios.post("/api/lemonsqueezy/retrieveDiscount", {
+        customDiscount,
+      });
+
+      if (response?.data?.discount) {
+        setVerifiedDiscount(response?.data?.discount);
+        alert("Discount applied");
+      } else {
+        alert("Discount code invalid");
+      }
+    } catch (e) {
+      alert("Discount code invalid");
+    }
+    setLoadingDiscount(false);
+  };
+
+  console.log(verifiedDiscountAmount)
   // create function to give total price from selected products  - use setState
   //total should be formik newsletter plus formik website
   // get the prices from rawPrice of the selected products in SponsorPackages
@@ -35,8 +84,9 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
     let totalPurchases = 0;
 
     //get all prices and add them together
-    selectedProducts?.forEach(p => {
-      // console.log(p);
+    for (let i = 0; i < selectedProducts?.length; i++) {
+     let p = selectedProducts[i];
+     // console.log(p);
       //add the selected types
       if (p?.type === "newsletter") {
         selected_types.push("newsletter");
@@ -49,7 +99,7 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
       totalPurchases += p.dates?.length ? p.dates.length : 1;
       //add the price
       price += p.price * (p.dates?.length ? p.dates.length : 1);
-    });
+    }
 
     if (
       selected_types.includes("newsletter") &&
@@ -63,7 +113,7 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
     }
 
     setTotalPrice(price.toFixed(2));
-    
+
     if (multipackDiscount) {
       combodiscountamount = price * MULTI_DISCOUNT;
       setMultiDiscountAmount(combodiscountamount.toFixed(2));
@@ -80,6 +130,15 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
       setBulkDiscountAmount(0);
     }
 
+    //calculate total price with discount code
+    //check disocunt code
+    //if valid, apply discount
+    console.log('verifiedDiscountAmount', verifiedDiscountAmount)
+    if (verifiedDiscountAmount) {
+      // reduce the price by the discount percentage
+      price = price - price * (verifiedDiscountAmount / 100);
+    }
+
     let totalPriceWithD = price - combodiscountamount - bulkdiscountamount;
     //format with 2 decimal places
     setTotalPriceWithDiscount(totalPriceWithD.toFixed(2));
@@ -87,11 +146,12 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
 
   useEffect(() => {
     calculatePrice();
-  }, [selectedProducts]);
+  }, [selectedProducts, verifiedDiscountAmount]);
 
   useEffect(() => {
     calculatePrice();
   }, []);
+
 
   return (
     <div>
@@ -154,7 +214,7 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
             <tr className="bg-blue-50 border-t ">
               <td className="py-1 px-2 font-medium">Combo discount</td>
               <td className="py-1 px-2 font-medium text-black/90">
-                💫 {MULTI_DISCOUNT*100}% off
+                💫 {MULTI_DISCOUNT * 100}% off
               </td>
               <td className="py-1 px-2 font-semibold">
                 –${multiDiscountAmount}
@@ -166,7 +226,9 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
           {bulkDiscountAmount ? (
             <tr className="bg-blue-50 border-t ">
               <td className="py-1 px-2 font-medium">Bulk discount</td>
-              <td className="py-1 px-2 font-medium text-black/90">💫 {BULK_DISCOUNT * 100}% off</td>
+              <td className="py-1 px-2 font-medium text-black/90">
+                💫 {BULK_DISCOUNT * 100}% off
+              </td>
               <td className="py-1 px-2 font-semibold">
                 –${bulkDiscountAmount}
               </td>
@@ -174,6 +236,20 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
           ) : (
             ""
           )}
+          {verifiedDiscountAmount ? (
+            <tr className="bg-green-50 border-t">
+              <td className="py-1 px-2 font-medium">Discount code</td>
+              <td className="py-1 px-2 font-medium text-black/90">
+                💫 {verifiedDiscountAmount}% off
+              </td>
+              <td className="py-1 px-2 font-semibold">
+                –${(totalPrice * (verifiedDiscountAmount / 100)).toFixed(2)}
+              </td>
+            </tr>
+          ) : (
+            ""
+          )  
+          }
           {totalPriceWithDiscount ? (
             <tr className="border-t bg-gray-50/90">
               <td className="py-1 px-2 font-semibold">Grand Total</td>
@@ -192,11 +268,12 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
           <CoinsIcon className={"my- w-8 h-8"} />
           <div className="flex flex-col ml-3 justify-center">
             <h4 className="text-md font-semibold">
-              Get {multiDiscountAmount ? "an extra" : ""} {BULK_DISCOUNT*100}% off
+              Get {multiDiscountAmount ? "an extra" : ""} {BULK_DISCOUNT * 100}%
+              off
             </h4>
             <div className="my-auto text-sm">
               Book 4+ weeks for {multiDiscountAmount ? "a further " : "a "}
-              <span className="font-">{BULK_DISCOUNT*100}% discount</span>.
+              <span className="font-">{BULK_DISCOUNT * 100}% discount</span>.
             </div>
           </div>
         </div>
@@ -204,15 +281,49 @@ const CheckoutTotal = ({ selectedProducts,paymentDisabled, companyId, user, post
         ""
       )}
 
-      <PurchaseButton
-        disabled={paymentDisabled}
-        selectedProducts={selectedProducts}
-        // newsletterDates={newsletterDates}
-        // websiteDates={websiteDates}
-        companyId={companyId}
-        user={user}
-        postObject={postObject}
-      />
+      <div className="flex flex-col">
+        <label className="text-sm text-gray-700 mb-1">Discount code</label>
+        <div className="flex">
+          <input
+            className="h-[34px] mb-6"
+            type="text"
+            value={customDiscount}
+            onChange={e => {
+              setCustomDiscount(e.target.value);
+            }}
+          />
+          <button
+            onClick={checkDiscount}
+            className={`${loadingDiscount ? "cursor-wait opacity-50" : ""} bg-gray-100 h-[34px] text-gray-700 text-sm font-medium px-4 py-1 rounded-lg ml-2`}
+          >
+            {loadingDiscount ? "Applying..." : "Apply"}
+          </button>
+        </div>
+        {verifiedDiscountAmount ? (
+          <div className="text-gray-700 -mt-4 text-sm my-4 flex bg-gray-50 p-2 rounded-lg px-3">
+            <HandHeartIcon className={"my- w-8 h-8"} />
+            <div className="flex flex-col ml-3 justify-center">
+              <h4 className="text-md font-semibold">Discount code applied</h4>
+              <div className="my-auto text-sm">
+                You saved {verifiedDiscountAmount}% on your total price.
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+
+        <PurchaseButton
+          disabled={paymentDisabled}
+          selectedProducts={selectedProducts}
+          customDiscount={customDiscount}
+          // newsletterDates={newsletterDates}
+          // websiteDates={websiteDates}
+          companyId={companyId}
+          user={user}
+          postObject={postObject}
+        />
+      </div>
     </div>
   );
 };
