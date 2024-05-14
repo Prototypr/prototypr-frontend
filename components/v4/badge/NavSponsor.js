@@ -1,3 +1,4 @@
+import gumletLoader from "@/lib/imageloader";
 import Image from "next/image";
 
 const NavSponsor = ({sponsor}) =>{
@@ -10,6 +11,7 @@ const NavSponsor = ({sponsor}) =>{
             >
              {sponsor? <Image
                 className="object-contain"
+                loader={gumletLoader}
                 layout="fill"
                 src={sponsor?.logoWide?sponsor?.logoWide:sponsor?.featuredImage?sponsor?.featuredImage:null}
               />:null}
