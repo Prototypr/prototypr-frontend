@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 import Spinner from "@/components/atom/Spinner/Spinner";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const PostTitle = dynamic(() => import("@/components/post-title"), {
   ssr: true,
@@ -54,6 +55,8 @@ export default function PeoplePage({
   dribbble = null,
   authorUrl = "",
   skills = [],
+  navSponsor,
+  sponsors
 }) {
   const router = useRouter();
   const { user } = useUser();
@@ -79,7 +82,7 @@ export default function PeoplePage({
   // owner is yet to be approved, let them see preview of profile
   if (isOwner == true && !author) {
     return (
-      <Layout>
+      <Layout sponsor={navSponsor}>
         <ProfilePageLayout
           previewOnly={true}
           allPosts={null}
@@ -103,6 +106,7 @@ export default function PeoplePage({
   // avatar?.data?.attributes?.avatar?.data?.attributes
   return (
     <Layout
+      sponsor={navSponsor}
       seo={{
         title: `
         ${author?.firstName ? author?.firstName : ""}
@@ -170,6 +174,8 @@ export async function getStaticProps({ preview = null, params, locale }) {
     (await getPostsByPageAndAuthor(preview, pageSize, pageNo, [slug], sort)) ||
     [];
 
+  const { navSponsor, sponsors } = await getSponsors();
+
   let author = null;
   if (!allPosts?.data[0]) {
     author = await getUserBySlug(slug);
@@ -182,6 +188,8 @@ export async function getStaticProps({ preview = null, params, locale }) {
         props: {
           author: null,
           slug,
+          navSponsor,
+          sponsors
         },
         revalidate: 30,
       };
@@ -191,6 +199,8 @@ export async function getStaticProps({ preview = null, params, locale }) {
         props: {
           ...authorResults,
           slug,
+          navSponsor,
+          sponsors
         },
         revalidate: 30,
       };
@@ -231,6 +241,8 @@ export async function getStaticProps({ preview = null, params, locale }) {
       pagination,
       allPosts: allPosts,
       slug,
+      navSponsor,
+      sponsors
     },
     revalidate: 20,
   };

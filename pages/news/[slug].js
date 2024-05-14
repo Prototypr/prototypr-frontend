@@ -17,6 +17,7 @@ import isoToReadableDate from "@/lib/utils/isoToReadableDate";
 import SocialShare from "@/components/SocialShare";
 import Image from "next/image";
 import gumletLoader from "@/lib/imageloader";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const Footer = dynamic(() => import("@/components/footer"));
 
@@ -49,6 +50,8 @@ export default function Post({
   groupedPosts,
   authorAvatar,
   relatedNews,
+  sponsors,
+  navSponsor
 }) {
   const router = useRouter();
   if (!router.isFallback && !post?.attributes.slug) {
@@ -167,6 +170,7 @@ export default function Post({
       <Layout
         padding={false}
         navOffset={false}
+        sponsor={navSponsor}
         seo={{
           title: `${post?.attributes?.seo?.opengraphTitle ? post?.attributes?.seo?.opengraphTitle : post?.attributes?.title && post.attributes.title}`,
           description: `${post?.attributes?.seo?.opengraphDescription ? post?.attributes?.seo?.opengraphDescription : post?.attributes?.excerpt && post.attributes.excerpt}`,
@@ -577,6 +581,7 @@ export async function getStaticProps({
     : [];
 
   let groupedPosts = groupPostsByDate(data.morePosts?.data);
+  const { navSponsor, sponsors } = await getSponsors();
 
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
@@ -586,6 +591,8 @@ export async function getStaticProps({
         ...postData,
       },
       domain,
+      navSponsor,
+      sponsors,
       link,
       groupedPosts: groupedPosts,
       date: date,

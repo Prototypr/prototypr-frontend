@@ -16,6 +16,7 @@ import {
 import ProfilePageLayout from "@/components/people/ProfilePageLayout";
 import { formatToolContent } from "@/lib/utils/formatToolContent";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const PostTitle = dynamic(() => import("@/components/post-title"), {
   ssr: true,
@@ -50,6 +51,8 @@ export default function PeoplePage({
   dribbble = null,
   authorUrl = "",
   skills = [],
+  navSponsor,
+  sponsors,
 }) {
   const withAuthUser = {};
   const router = useRouter();
@@ -66,6 +69,7 @@ export default function PeoplePage({
 
   return (
     <Layout
+      sponsor={navSponsor}
       seo={{
         title: `${author?.firstName ? author?.firstName : ""}
         ${author?.lastName ? " " + author?.lastName : ""}
@@ -161,6 +165,9 @@ export async function getStaticProps({ preview = null, params }) {
     return post;
   });
 
+  const { navSponsor, sponsors } = await getSponsors();
+
+
   return {
     props: {
       author: author,
@@ -175,6 +182,8 @@ export async function getStaticProps({ preview = null, params }) {
       preview,
       pagination,
       allPosts: allPosts,
+      navSponsor,
+      sponsors,
     },
     revalidate: 20,
   };

@@ -5,6 +5,7 @@ import Container from "@/components/container";
 const NewPagination = dynamic(() => import("@/components/pagination"));
 import Layout from "@/components/layout";
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from "@/lib/api";
+import getSponsors from "@/lib/utils/getSponsors";
 const EditorPick2 = dynamic(() => import("@/components/new-index/EditorPick2"));
 const ProductList = dynamic(() => import("@/components/new-index/ProductList"));
 const TopicTopItem = dynamic(
@@ -33,6 +34,8 @@ export default function PostsPage({
   tag = "",
   pageNo = 1,
   tagName = "",
+  sponsors,
+  navSponsor,
 }) {
   const router = useRouter();
 
@@ -56,6 +59,7 @@ export default function PostsPage({
   return (
     <>
       <Layout
+        sponsor={navSponsor}
         maxWidth={"max-w-[1320px] search-wide"}
         seo={{
           title: "Prototypr Design articles – free for everyone.",
@@ -124,6 +128,9 @@ export async function getStaticProps({ preview = null, params, locale }) {
 
   const pagination = allPosts.meta.pagination;
 
+  const { navSponsor, sponsors } = await getSponsors();
+
+
   let firstPost = [],
     nextPosts = [],
     morePosts = [],
@@ -146,6 +153,8 @@ export async function getStaticProps({ preview = null, params, locale }) {
       pageNo,
       morePosts,
       heroPost,
+      sponsors: sponsors?.length ? sponsors : [],
+      navSponsor,
     },
     revalidate: 20,
   };

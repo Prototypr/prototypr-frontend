@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 const NewPagination = dynamic(() => import("@/components/pagination"));
-const PeopleFilters = dynamic(() => import("@/components/people/PeopleFilters"));
+// const PeopleFilters = dynamic(() => import("@/components/people/PeopleFilters"));
 import PostTitle from '@/components/post-title'
 
 import { getPeopleByPage } from "@/lib/api";
@@ -14,6 +14,7 @@ import {
   getDribbbleHandle,
   getGithubHandle,
 } from "@/lib/profile-page/profile-page.js";
+import getSponsors from "@/lib/utils/getSponsors";
 // import PeopleBreadcrumbs from "@/components/people/PeopleBreadcrumbs";
 
 // import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
@@ -21,17 +22,12 @@ import {
 const PAGE_SIZE = 12;
 
 
-const BREADCRUMBS = {
-  pageTitle:'People',
-  links:[
-      {name:'Home', slug:'/', svg:<svg className="w-4 h-4 inline -mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM6 19h12V9.157l-6-5.454-6 5.454V19zm2-4h8v2H8v-2z" fill="currentColor"/></svg>},
-  ]
-}
-
 export default function PeoplePage({
   allPosts = [],
   preview,
   pagination = {},
+  navSponsor,
+  sponsors
 }) {
   //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
   const router = useRouter();
@@ -41,7 +37,7 @@ export default function PeoplePage({
   };
 
   return (
-    <Layout activeNav={"people"}>
+    <Layout sponsor={navSponsor} activeNav={"people"}>
       <Container padding={false} maxWidth="max-w-[1320px] px-3 mx-auto pb-16">
       {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
@@ -107,11 +103,17 @@ export async function getStaticProps({ preview = null}) {
     (await getPeopleByPage(preview, pageSize, page)) || [];
     // console.log("allposts*******" + JSON.stringify(allPosts))
   const pagination = allPosts.meta.pagination;
+
+  const { navSponsor, sponsors } = await getSponsors();
+
+
   return {
     props: {
       allPosts: allPosts.data,
       preview,
       pagination,
+      navSponsor,
+      sponsors
     },
     revalidate:20
   };

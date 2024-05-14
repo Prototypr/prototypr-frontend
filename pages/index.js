@@ -63,6 +63,7 @@ import CardColumn from "@/components/v4/layout/CardColumn";
 import NewsColumn from "@/components/v4/layout/NewsColumn";
 import { groupPostsByDate } from "@/lib/utils/groupPostsByDate";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 
 export default function Index({
   preview,
@@ -410,7 +411,6 @@ export async function getStaticProps({ preview = null, locale }) {
   let allNews = (await getAllNews(preview, 15, 0)) || [];
 
   // let jobs = (await getAllJobs(null, 5, 1)) || [];
-  let sponsors = await getActiveSponsors();
   // topic sections
   let topicRes = {};
   for (let index = 0; index < TAB_ITEMS.length; index++) {
@@ -475,13 +475,10 @@ export async function getStaticProps({ preview = null, locale }) {
   // await generateCombinedRSS({ allPosts, allTools });
   // otherPosts = transformPostListOld(otherPosts.data, locale);
   allTools = formatAllTools({ tools: allTools, tagNumber: 1 });
-  sponsors = formatAllTools({ tools: sponsors.posts, tagNumber: 1 });
   allNews = formatAllTools({ tools: allNews.data, tagNumber: 0 });
 
-  const navSponsorId = process.env.NEXT_PUBLIC_PRICE_WEBSITE_1;
-  const navSponsor =
-    sponsors?.find(sponsor => sponsor.productId === navSponsorId) || null;
-    
+
+  const {navSponsor, sponsors} = await getSponsors();
 
   // for(var x = 0; x<allNews.tools.length;x++){
   //   allNews.tools[x].attributes.base64 = createB64WithFallback(allNews.tools[x]?.attributes?.featuredImage?.data?.blurhash);

@@ -33,6 +33,7 @@ import SocialShare from "@/components/SocialShare";
 import PostGroupRow from "@/components/v4/layout/PostGroupRow";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -43,7 +44,7 @@ const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
 //   }
 // );
 
-export default function Post({ post, preview, relatedPosts, postContent }) {
+export default function Post({ post, preview, relatedPosts, postContent, sponsors, navSponsor}) {
   const router = useRouter();
 
   const { user, isLoading } = useUser({
@@ -119,6 +120,7 @@ export default function Post({ post, preview, relatedPosts, postContent }) {
     <Layout
       maxWidth={"max-w-[1320px] search-wide"}
       padding={false}
+      sponsor={navSponsor}
       seo={{
         title: `${title}`,
         description: `${description}`,
@@ -446,6 +448,8 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
   let html = removeFirstImageIfMatch(post?.attributes?.content, image);
   html = gumletPostContentLoader(html);
+  
+  const { navSponsor, sponsors } = await getSponsors();
 
   return {
     props: {
@@ -454,6 +458,8 @@ export async function getStaticProps({ params, preview = null, locale }) {
       post: {
         ...postData,
       },
+      sponsors,
+      navSponsor,
       relatedPosts: relatedPosts,
     },
     // revalidate: 20,

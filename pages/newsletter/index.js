@@ -5,7 +5,7 @@ import Layout from "@/components/new-index/layoutForIndex";
 
 import Head from "next/head";
 import { getAllPostsForToolsPage } from "@/lib/api";
-const Footer = dynamic(() => import('@/components/footer')) 
+const Footer = dynamic(() => import("@/components/footer"));
 const SourcePanel = dynamic(() => import("@/components/new-index/SourcePanel"));
 // const TitleBlock = dynamic(() => import("@/components/newsletter/TitleBlock"));
 const IssueList = dynamic(() => import("@/components/newsletter/IssueList"));
@@ -13,24 +13,29 @@ const NewPagination = dynamic(() => import("@/components/pagination"));
 import { useIntl } from "react-intl";
 import NewsletterSection from "@/components/v4/section/NewsletterSection";
 import NewsletterPageHero from "@/components/v4/section/NewsletterPageHero";
+import getSponsors from "@/lib/utils/getSponsors";
 const PAGE_SIZE = 8;
 
 export default function NewsLetter({
   preview,
   allPosts = [],
   pagination = {},
+  navSponsor,
+  sponsors,
 }) {
   const intl = useIntl();
   const router = useRouter();
 
-  const onPageNumChange = (pageNo) => {
+  const onPageNumChange = pageNo => {
     router.push(`/newsletter/page/${pageNo}`);
   };
   return (
     <>
-      <Layout preview={preview}
-       padding={false}
-       maxWidth={"max-w-[1400px] search-wide"}
+      <Layout
+        sponsor={navSponsor}
+        preview={preview}
+        padding={false}
+        maxWidth={"max-w-[1400px] search-wide"}
       >
         <Head>
           <title>
@@ -46,16 +51,18 @@ export default function NewsLetter({
               title={intl.formatMessage({ id: "navbar.contentitem.title2" })}
               desc={intl.formatMessage({ id: "sourcepanel.desc2" })}
             /> */}
-            <NewsletterPageHero/>
-            <div className="absolute  top-0 left-0 w-full h-full" 
-            style={{
-  backgroundColor: "#f6f6f6",
-  opacity: 0.4,
-  backgroundImage: "radial-gradient(#444cf7 0.5px, #ededf9 0.5px)",
-  backgroundSize: "10px 10px"
-}}
-/>
-          {/* <img src='/static/images/toolbox/squares.svg' className="rounded-b-[3.4rem] opacity absolute w-full h-full object-cover top-0 left-0"/> */}
+            <NewsletterPageHero />
+            <div
+              className="absolute  top-0 left-0 w-full h-full"
+              style={{
+                backgroundColor: "#f6f6f6",
+                opacity: 0.4,
+                backgroundImage:
+                  "radial-gradient(#444cf7 0.5px, #ededf9 0.5px)",
+                backgroundSize: "10px 10px",
+              }}
+            />
+            {/* <img src='/static/images/toolbox/squares.svg' className="rounded-b-[3.4rem] opacity absolute w-full h-full object-cover top-0 left-0"/> */}
           </div>
           <div className="max-w-[1320px] mx-auto px-3 md:px-3">
             <IssueList marginTop="mt-8 mb-6" posts={allPosts} />
@@ -64,7 +71,7 @@ export default function NewsLetter({
                 total={pagination?.total}
                 pageSize={PAGE_SIZE}
                 currentPage={pagination?.page}
-                onPageNumChange={(pageNum) => onPageNumChange(pageNum)}
+                onPageNumChange={pageNum => onPageNumChange(pageNum)}
               />
             </div>
           </div>
@@ -79,12 +86,16 @@ export async function getStaticProps({ preview = null }) {
   const allPosts =
     (await getAllPostsForToolsPage(null, PAGE_SIZE, 0, "newsletter")) || [];
   const pagination = allPosts.meta.pagination;
+  const { navSponsor, sponsors } = await getSponsors();
+
   return {
     props: {
       preview,
       allPosts: allPosts?.data,
       pagination,
+      navSponsor,
+      sponsors,
     },
-    revalidate:20
+    revalidate: 20,
   };
 }

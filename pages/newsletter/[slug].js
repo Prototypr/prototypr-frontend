@@ -7,6 +7,7 @@ import Layout from "@/components/new-index/layoutForIndex";
 import { getAllPostsWithSlug, getNewsletter } from '@/lib/api'
 import { FormattedMessage } from "react-intl";
 import { TOTAL_STATIC_NEWSLETTERS } from "@/lib/constants";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const PostPreview = dynamic(() => import("@/components/post-preview"));
 
@@ -15,7 +16,7 @@ const PostTitle = dynamic(() => import('@/components/post-title'), { ssr: true }
 const PostBody = dynamic(() => import('@/components/post-body'), { ssr: true })
 
 
-export default function Post({ post, morePosts, preview }) {
+export default function Post({ post, morePosts, preview, navSponsor, sponsors }) {
 
   const router = useRouter()
   if (!router.isFallback && !post?.attributes?.slug) {
@@ -29,6 +30,7 @@ export default function Post({ post, morePosts, preview }) {
 
   return (
     <Layout 
+    sponsor={navSponsor}
      seo={{
       title:`${title}`,
       description:`${description}`,
@@ -120,11 +122,16 @@ export async function getStaticProps({ params, preview = null, postType="newslet
   const relatedNewsletters =  data?.posts.data[0]?.attributes?.relatedNewsletters?
   data?.posts.data[0]?.attributes?.relatedNewsletters:[]
   
+  const { navSponsor, sponsors } = await getSponsors();
+
+
   return {
     props: {
       preview,
       post: {
         ...data?.posts.data[0],
+        navSponsor,
+        sponsors
         // content,
       },
       morePosts: relatedNewsletters,

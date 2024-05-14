@@ -12,42 +12,48 @@ const ToolBackgroundCard = ({
   tagNumber,
   height,
 }) => {
-  let { title, slug, coverImage, tags, logo } = post;
+  let { title, slug, coverImage, tags, logo, sponsorLink } = post;
+
   return (
     <div className="h-full">
-      <Link href={`/toolbox/${slug}`}>
+      <Link
+        target={sponsorLink ? "_blank" : ""}
+        href={slug ? `/toolbox/${slug}` : sponsorLink}
+      >
         <div
           className={
             "flex pt-0 grid grid-col-1 gap-2 flex-grow h-full rounded-t-2xl shadow hover:shadow-xl border border-gray-300/60 transition transition-all duration-400 hover:scale-[1.02] group bg-white relative rounded-2xl fade- overflow-hidden"
           }
         >
           <div className="rounded-xl px-0 block cursor-pointer">
-          <Image
-                    loader={gumletLoader}
-                    priority={false < 2 ? `true` : `false`}
-                    data-priority={false < 2 ? `true` : `false`}
-                    fetchpriority={false < 2 ? "true" : "false"}
-                    data-gmlazy={false < 2 ? `false` : `true`}
-                    //   fill={true}
-                    //   layout="fill"
-                    //   style={{width:'100%'}}
-                    //   width="100%"
-                    //   height="100%"
-                    alt="Brand logo for external website's link"
-                    className="object-cover rounded-xl bg-white group-hover:shadow-sm transition-transform duration-300"
-                    src={coverImage}
-                    fill
-                    // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+            <Image
+              loader={gumletLoader}
+              priority={false < 2 ? `true` : `false`}
+              data-priority={false < 2 ? `true` : `false`}
+              fetchpriority={false < 2 ? "true" : "false"}
+              data-gmlazy={false < 2 ? `false` : `true`}
+              //   fill={true}
+              //   layout="fill"
+              //   style={{width:'100%'}}
+              //   width="100%"
+              //   height="100%"
+              alt="Brand logo for external website's link"
+              className="object-cover rounded-xl bg-white group-hover:shadow-sm transition-transform duration-300"
+              src={
+                post.postType == "ad" && post.cardImage
+                  ? post.cardImage
+                  : coverImage
+              }
+              fill
+              // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
             <div
               className={`${height ? height : imageLarge ? "h-[240px]" : "h-[290px]"} rounded-xl m-2 relative flex flex-col justify-end`}
             >
               <div className="flex w-full justify-between p-2 bg-black/40 backdrop-blur-sm rounded-2xl border border-gray-300/20">
                 <div className="flex">
                   {/* <div className="absolute top-0 left-0 z-10 rounded-xl w-full h-full bg-gradient-to-b from-black/5 to-black/60 shadow"></div> */}
-                  <div
-                    className={`rounded-xl z-20 flex`}
-                  >
+                  <div className={`rounded-xl z-20 flex`}>
                     <Image
                       loader={gumletLoader}
                       width={48}
@@ -61,15 +67,18 @@ const ToolBackgroundCard = ({
                     <div className="overflow-hidden my-auto ml-3 text-white">
                       <div className={"line-clamp-1 font-medium"}> {title}</div>
                       {/* {this.props.prototool !== true && */}
-                      {tags?.length && (
-                        <div className="text-xs mt-0.5 capitalize">
-                          {tags[0].attributes.name}
-                        </div>
+                      {post.postType == "ad" ? (
+                        <div className="text-xs mt-0.5 font-medium capitalize">Ad</div>
+                      ) : (
+                        tags?.length && (
+                          <div className="text-xs mt-0.5 capitalize">
+                            {tags[0].attributes.name}
+                          </div>
+                        )
                       )}
 
                       {/* <div className='w-1/4 relative'> {this._getTag()}</div> */}
                     </div>
-              
                   </div>
                 </div>
                 <div className="flex flex-col z-20 justify-center">

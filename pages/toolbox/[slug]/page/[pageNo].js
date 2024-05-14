@@ -13,6 +13,8 @@ import {
 } from "@/lib/menus/lib/getAllTagsFromMenu";
 import { useEffect } from "react";
 import Footer from "@/components/footer";
+import getSponsors from "@/lib/utils/getSponsors";
+import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 
 const PAGE_SIZE = 16;
 
@@ -48,6 +50,8 @@ export default function ToolboxPage({
   preview,
   pagination,
   tag,
+  sponsors,
+  navSponsor,
 }) {
   useEffect(() => {
     if (window.$crisp) {
@@ -57,36 +61,37 @@ export default function ToolboxPage({
 
   return (
     <>
-    <Layout
-    padding={false}
-      maxWidth={"search-wide max-w-[1380px]"}
-      seo={{
-        title: `${tag} – design tools | Prototypr Toolbox | Page ${pagination?.page}`,
-        description:
-          "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
-        //   image: "",
-        canonical: `https://prototypr.io/toolbox/${tag}/page/${pagination?.page}`,
-        url: `https://prototypr.io/toolbox/${tag}/page/${pagination?.page}`,
-      }}
-      activeNav={"toolbox"}
-      preview={preview}
-    >
-      <ToolboxIndexPage
-        paginationRoot={`/toolbox/${tag}`}
-        filterCategories={ALL_SLUGS_GROUPS}
-        urlRoot={`/toolbox`}
-        title={title}
-        currentSlug={tag}
-        description="All your design tools in one place, updated weekly"
-        pagination={pagination}
-        pageSize={PAGE_SIZE}
-        allPosts={allPosts}
-        breadcrumbs={BREADCRUMBS}
-      />
-    </Layout>
+      <Layout
+        sponsor={navSponsor}
+        padding={false}
+        maxWidth={"search-wide max-w-[1380px]"}
+        seo={{
+          title: `${tag} – design tools | Prototypr Toolbox | Page ${pagination?.page}`,
+          description:
+            "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
+          //   image: "",
+          canonical: `https://prototypr.io/toolbox/${tag}/page/${pagination?.page}`,
+          url: `https://prototypr.io/toolbox/${tag}/page/${pagination?.page}`,
+        }}
+        activeNav={"toolbox"}
+        preview={preview}
+      >
+        <ToolboxIndexPage
+          paginationRoot={`/toolbox/${tag}`}
+          filterCategories={ALL_SLUGS_GROUPS}
+          urlRoot={`/toolbox`}
+          title={title}
+          currentSlug={tag}
+          description="All your design tools in one place, updated weekly"
+          pagination={pagination}
+          pageSize={PAGE_SIZE}
+          allPosts={allPosts}
+          breadcrumbs={BREADCRUMBS}
+        />
+      </Layout>
 
-<Footer/>
-</>
+      <Footer />
+    </>
   );
 }
 
@@ -97,29 +102,26 @@ export async function getStaticProps({ preview = null, params }) {
   //     return slug === SLUG.key
   // })
   //assign slug to tag
-  let allPosts = []
+  let allPosts = [];
   const foundSlug = find_page_slug_from_menu(ALL_SLUGS_GROUPS, slug);
-  let tagName = ''
-  if(!foundSlug){
-    allPosts = (await getPostsByPageForToolsSubcategoryPage(
-      preview,
-      pageSize,
-      pageNo,
-      [slug]
-    )) || [];
-    if(allPosts?.data?.length){
-      
-      const tags = allPosts.data[0]?.attributes?.tags?.data
-      if(tags?.length){
-        for (var x = 0 ;x<tags.length;x++){
-          if(tags[x]?.attributes?.slug==slug){
-            tagName=tags[x]?.attributes?.name
+  let tagName = "";
+  if (!foundSlug) {
+    allPosts =
+      (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, [
+        slug,
+      ])) || [];
+    if (allPosts?.data?.length) {
+      const tags = allPosts.data[0]?.attributes?.tags?.data;
+      if (tags?.length) {
+        for (var x = 0; x < tags.length; x++) {
+          if (tags[x]?.attributes?.slug == slug) {
+            tagName = tags[x]?.attributes?.name;
           }
         }
       }
     }
-  }else{
-     allPosts =
+  } else {
+    allPosts =
       (await getPostsByPageForToolsSubcategoryPage(
         preview,
         pageSize,
@@ -127,6 +129,22 @@ export async function getStaticProps({ preview = null, params }) {
         foundSlug.tags
       )) || [];
   }
+  allPosts?.length &&
+    allPosts.data?.map(post => {
+      // add blurhash to allPosts images
+      post.attributes.base64 = createB64WithFallback(
+        post?.attributes?.featuredImage?.data?.attributes?.blurhash
+      );
+      post.attributes.logoBase64 = createB64WithFallback(
+        post?.attributes?.logo?.data?.attributes?.blurhash
+      );
+
+      //this is the part that fails
+      return `/toolbox/${post.attributes.slug}`;
+    });
+
+  const { navSponsor, sponsors } = await getSponsors();
+
   // const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, pageNo, ["whiteboard"] )) || []
   const pagination = allPosts.meta.pagination;
   return {
@@ -134,8 +152,14 @@ export async function getStaticProps({ preview = null, params }) {
       allPosts: allPosts.data,
       preview,
       pagination,
-      tag:slug,
-      title: foundSlug?.title ? foundSlug.title :tagName?tagName: "Design Tools",
+      tag: slug,
+      title: foundSlug?.title
+        ? foundSlug.title
+        : tagName
+          ? tagName
+          : "Design Tools",
+      sponsors: sponsors?.length ? sponsors : [],
+      navSponsor,
     },
     revalidate: 20,
   };

@@ -15,9 +15,10 @@ import useUser from "@/lib/iron-session/useUser";
 import { getAllPostsForPostsPage, getPostsByPageForPostsPage } from "@/lib/api";
 import PostTitle from "@/components/post-title";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 // import Head from 'next/head'
 const PAGE_SIZE = 9;
-export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
+export default function PostsPage({ allPosts = [], preview, pagination = {}, navSponsor, sponsors}) {
   let heroPost;
   let morePosts = [];
   let coverImage;
@@ -43,6 +44,7 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
     <>
       <Layout
         navOffset={false}
+        sponsor={navSponsor}
         padding={false}
         preview={preview}
         background={"#fbfcff"}
@@ -120,9 +122,12 @@ export async function getStaticProps({ preview = null, params }) {
     );
   }
 
+  const { navSponsor, sponsors } = await getSponsors();
+
+
   const pagination = allPosts.meta.pagination;
   return {
-    props: { allPosts: allPosts.data, preview, pagination },
+    props: { allPosts: allPosts.data, preview, pagination, sponsors: sponsors?.length ? sponsors : [], navSponsor},
     revalidate: 20,
   };
 }

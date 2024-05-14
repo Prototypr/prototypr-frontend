@@ -10,6 +10,7 @@ import { getAllNews } from "@/lib/api";
 import { formatAllTools } from "@/lib/utils/formatToolContent";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const Footer = dynamic(() => import("@/components/footer"));
 
@@ -17,7 +18,7 @@ function truncate(str, n) {
   return str.length > n ? str.substr(0, n - 1) + "&hellip;" : str;
 }
 
-export default function Post({ post, preview, domain, groupedPosts }) {
+export default function Post({ post, preview, domain, groupedPosts, sponsors, navSponsor }) {
   const router = useRouter();
 
   let content = "";
@@ -133,6 +134,7 @@ export default function Post({ post, preview, domain, groupedPosts }) {
   return (
     <>
       <Layout
+        sponsor={navSponsor}
         padding={false}
         navOffset={false}
         seo={{
@@ -405,11 +407,15 @@ export async function getStaticProps({
 
   let groupedPosts = groupPostsByDate(allNews);
 
+  const { navSponsor, sponsors } = await getSponsors();
+
   // const content = await markdownToHtml(data?.posts[0]?.content || '')
   return {
     props: {
       preview,
       groupedPosts: groupedPosts,
+      navSponsor,
+      sponsors,
     },
     revalidate: 30,
   };

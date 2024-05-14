@@ -23,6 +23,7 @@ import { makeAuthorList, shuffleArray } from "@/lib/utils/postUtils";
 
 import { getCommonQuery } from "@/lib/api";
 import TagsNavRow from "@/components/v4/section/TagsNavRow";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const featuredSections = [
   {
@@ -68,6 +69,8 @@ export default function Index({
   popularToolTags,
   morePopularTags,
   topicRes,
+  navSponsor,
+  sponsors,
 }) {
   // const intl = useIntl();
   const { user, isLoading } = useUser({
@@ -78,6 +81,7 @@ export default function Index({
     <>
       <Layout
         maxWidth={""}
+        sponsor={navSponsor}
         seo={{
           title: "Prototypr Topics - Design, UX, UI, accessibility...",
           description:
@@ -276,6 +280,7 @@ export async function getStaticProps({ preview = null }) {
   /**
    * topic sections end
    */
+  const {navSponsor, sponsors} = await getSponsors();
 
   return {
     props: {
@@ -283,6 +288,8 @@ export async function getStaticProps({ preview = null }) {
       // popularToolTags,
       topicRes,
       morePopularTags: morePopularTags,
+      sponsors: sponsors?.length ? sponsors : [],
+      navSponsor,
     },
     revalidate: 8640, //24 hrs
   };

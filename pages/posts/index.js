@@ -13,9 +13,10 @@ import { getPostsByPageForPostsPage } from "@/lib/api";
 import TagsNavRow from "@/components/v4/section/TagsNavRow";
 import PostsSectionHero from "@/components/v4/section/PostsSectionHero";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 // import Head from "next/head";
 const PAGE_SIZE = 10;
-export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
+export default function PostsPage({ allPosts = [], preview, pagination = {}, navSponsor, sponsors}) {
   let heroPost;
   let morePosts = [];
   let coverImage;
@@ -41,6 +42,7 @@ export default function PostsPage({ allPosts = [], preview, pagination = {} }) {
     <>
       <Layout
         navOffset={false}
+        sponsor={navSponsor}
         padding={false}
         preview={preview}
         background={"#fbfcff"}
@@ -110,12 +112,17 @@ export async function getStaticProps({ preview = null, params }) {
     );
   }
 
+  const { navSponsor, sponsors } = await getSponsors();
+
+
   const pagination = allPosts.meta.pagination;
   return {
     props: {
       allPosts: allPosts.data,
       preview,
       pagination,
+      navSponsor,
+      sponsors,
     },
     revalidate: 30,
   };

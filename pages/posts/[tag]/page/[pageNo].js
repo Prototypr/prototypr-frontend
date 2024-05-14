@@ -37,6 +37,7 @@ import BigBackgroundCard from "@/components/v4/card/BigCard/BigBackgroundCard";
 import PostsGroup3Cards from "@/components/v4/layout/PostsGroup3Cards";
 import SmallCard from "@/components/v4/card/SmallCard/SmallCardF";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 // import SmallPostsGroup from "@/components/v4/layout/SmallPostsSection";
 // import Image from "next/image";
 // const Aspiring = dynamic(() => import("@/components/new-index/Aspiring"));
@@ -68,6 +69,8 @@ export default function PostsPage({
   pageNo = 1,
   tagName = "",
   authors = [],
+  navSponsor,
+  sponsors,
 }) {
   const router = useRouter();
 
@@ -108,6 +111,7 @@ export default function PostsPage({
     <>
       <Layout
         navOffset={false}
+        sponsor={navSponsor}
         // maxWidth={'max-w-[1320px] search-wide'}
         seo={{
           title: `${tagName} | design articles on Prototypr | Page ${pagination?.page}`,
@@ -452,9 +456,14 @@ export async function getStaticProps({ preview = null, params, locale }) {
 
   nextPosts = allPosts;
 
+  
+  const { navSponsor, sponsors } = await getSponsors();
+
   return {
     props: {
       allPosts: nextPosts,
+      navSponsor,
+      sponsors: sponsors?.length ? sponsors : [],
       preview,
       pagination,
       tag,

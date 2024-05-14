@@ -10,6 +10,7 @@ export default function Layout({
   activeNav,
   background,
   padding,
+  sponsor,
   seo,
   showWriteButton,
   maxWidth,
@@ -18,6 +19,7 @@ export default function Layout({
     <>
       <Meta seo={seo} />
       <Navbar
+        sponsor={sponsor}
         maxWidth={maxWidth}
         showWriteButton={showWriteButton}
         activeNav={activeNav}

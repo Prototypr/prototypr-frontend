@@ -54,6 +54,7 @@ import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import HeroCardSection from "@/components/toolbox/HeroCardSection";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const ToolContent = ({
   post,
@@ -68,12 +69,13 @@ const ToolContent = ({
   date,
   authorAvatar,
   updatedAtDate,
+  navSponsor,
+  sponsors,
 }) => {
   const { user } = useUser();
   const tags = post.attributes.tags.data;
 
   useEffect(() => {
-   
     addTwitterScript();
     if (window.$crisp) {
       // window.$crisp.push(["config", "position:reverse", true])
@@ -440,6 +442,8 @@ export default function Post({
   date,
   updatedAtDate,
   authorAvatar,
+  navSponsor,
+  sponsors,
 }) {
   const router = useRouter();
 
@@ -455,6 +459,7 @@ export default function Post({
 
   return (
     <Layout
+      sponsor={navSponsor}
       padding={false}
       // background={"RGBA(204, 230, 255, 0.9)"}
       background={"#fbfcff"}
@@ -555,51 +560,52 @@ export async function getStaticProps({ params, preview = null, locale }) {
    * replace images with gumlet loader
    */
   if (postData.attributes.content?.length) {
-    const gumletPostContentLoaderModule = await import("@/lib/gumletPostContentLoader");
+    const gumletPostContentLoaderModule = await import(
+      "@/lib/gumletPostContentLoader"
+    );
     const gumletPostContentLoader = gumletPostContentLoaderModule.default;
-  
+
     let html = gumletPostContentLoader(postData.attributes.content);
     if (html) {
       postData.attributes.content = html;
     }
   }
 
-  const {logo, base64:logoBase64} = getToolboxLogo({ post: postData });
-  
-  postData.attributes.logoBase64 = logoBase64
-  postData.attributes.logo = logo
-  
+  const { logo, base64: logoBase64 } = getToolboxLogo({ post: postData });
+
+  postData.attributes.logoBase64 = logoBase64;
+  postData.attributes.logo = logo;
+
   //build the gallery here
   // let PHOTO_SET = [];
   const item = data?.posts.data[0];
-  
-  let PHOTO_SET = await buildToolboxGallery({ item })||[];
+
+  let PHOTO_SET = (await buildToolboxGallery({ item })) || [];
   const { featuredImage, base64 } = await getToolboxFeaturedImage({
     post: postData,
     gallery: PHOTO_SET,
   });
 
-  postData.attributes.base64 = base64
+  postData.attributes.base64 = base64;
 
+  //if there is no gallery, add a default image
+  if (!PHOTO_SET.length) {
+    let base64 = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAABLCAQAAAA1k5H2AAAAi0lEQVR42u3SMQEAAAgDoC251a3gL2SgmfBYBRAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARCAgwWEOSWBnYbKggAAAABJRU5ErkJggg==`;
 
-    //if there is no gallery, add a default image
-    if (!PHOTO_SET.length) {
-      let base64 = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAABLCAQAAAA1k5H2AAAAi0lEQVR42u3SMQEAAAgDoC251a3gL2SgmfBYBRAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARCAgwWEOSWBnYbKggAAAABJRU5ErkJggg==`;
-  
-      PHOTO_SET.push({
-        base64: base64,
-        thumbnail: featuredImage
-          ? featuredImage
-          : "https://prototypr.gumlet.com/https://prototypr-media.sfo2.digitaloceanspaces.com/uploads/2021/04/Screen-Shot-2021-04-30-at-4.37.37-PM.png",
-        original: featuredImage
-          ? featuredImage
-          : "https://prototypr.gumlet.com/https://prototypr-media.sfo2.digitaloceanspaces.com/uploads/2021/04/Screen-Shot-2021-04-30-at-4.37.37-PM.png",
-        originalAlt: "Screenshot of product",
-        thumbnailAlt: "Smaller procut screenshot thumbnail",
-        type: "image",
-      });
-    }
-  
+    PHOTO_SET.push({
+      base64: base64,
+      thumbnail: featuredImage
+        ? featuredImage
+        : "https://prototypr.gumlet.com/https://prototypr-media.sfo2.digitaloceanspaces.com/uploads/2021/04/Screen-Shot-2021-04-30-at-4.37.37-PM.png",
+      original: featuredImage
+        ? featuredImage
+        : "https://prototypr.gumlet.com/https://prototypr-media.sfo2.digitaloceanspaces.com/uploads/2021/04/Screen-Shot-2021-04-30-at-4.37.37-PM.png",
+      originalAlt: "Screenshot of product",
+      thumbnailAlt: "Smaller procut screenshot thumbnail",
+      type: "image",
+    });
+  }
+
   const date = isoToReadableDate(postData.attributes.date);
   const updatedAtDate = isoToReadableDate(postData.attributes.updatedAt);
 
@@ -609,6 +615,8 @@ export async function getStaticProps({ params, preview = null, locale }) {
     : authorAttributes?.legacyAvatar
       ? authorAttributes.legacyAvatar
       : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+
+  const { navSponsor, sponsors } = await getSponsors();
 
   return {
     props: {
@@ -622,11 +630,13 @@ export async function getStaticProps({ params, preview = null, locale }) {
       layout,
       logo,
       logoBase64,
-      featuredImage:featuredImage?featuredImage:null,
+      featuredImage: featuredImage ? featuredImage : null,
       base64,
       date,
       updatedAtDate,
       authorAvatar,
+      sponsors: sponsors?.length ? sponsors : [],
+      navSponsor,
       // morePosts: data?.morePosts.data,
     },
     // revalidate: 40,
@@ -647,7 +657,6 @@ export async function getStaticPaths() {
     paths:
       (allPosts &&
         allPosts.data?.map(post => {
-
           // add blurhash to allPosts images
           post.attributes.base64 = createB64WithFallback(
             post?.attributes?.featuredImage?.data?.attributes?.blurhash

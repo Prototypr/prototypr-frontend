@@ -5,6 +5,7 @@ import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 import Footer from "@/components/footer";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const PAGE_SIZE = 16;
 
@@ -37,12 +38,15 @@ export default function ToolboxPage({
   allPosts = [],
   preview,
   pagination = {},
+  navSponsor,
+  sponsors
 }) {
   //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
 
   return (
     <>
       <Layout
+        sponsor={navSponsor}
         padding={false}
         maxWidth={"max-w-[1400px] search-wide"}
         seo={{
@@ -94,12 +98,16 @@ export async function getStaticProps({ preview = null, params, locale }) {
     );
   }
 
+  const { navSponsor, sponsors } = await getSponsors();
+
   const pagination = allPosts.meta.pagination;
   return {
     props: {
       allPosts: allPosts.data,
       preview,
       pagination,
+      sponsors,
+      navSponsor
     },
     revalidate: 60,
   };

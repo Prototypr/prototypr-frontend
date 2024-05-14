@@ -4,15 +4,15 @@ const NavSponsor = ({sponsor}) =>{
 
     return(
         <div className="ml-2 my-auto">
-        <a href={sponsor?.link+'?ref=prototypr'} target="_blank">
+        <a href={sponsor?.link} target="_blank">
         <div
               className={`relative w-28 h-8 ml-1 overflow-hidden rounded-xl`}
             >
-              <Image
+             {sponsor? <Image
                 className="object-contain"
                 layout="fill"
-                src={sponsor?.featuredImage}
-              />
+                src={sponsor?.logoWide?sponsor?.logoWide:sponsor?.featuredImage?sponsor?.featuredImage:null}
+              />:null}
             </div>
           {/* <div className="flex bg-gray-100 backdrop-blur-sm bg-opacity-90 rounded-3xl p-0.5">
             <div

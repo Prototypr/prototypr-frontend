@@ -12,14 +12,15 @@ export default function Layout({
   padding,
   seo,
   navType,
-  maxWidth
+  maxWidth,
+  sponsor
 }) {
   return (
     <>
       <Meta seo={seo} />
       {/* <Navbar activeNav={activeNav} /> */}
       <div className="fixed w-full z-50">
-        <Navbar maxWidth={maxWidth} />
+        <Navbar maxWidth={maxWidth} sponsor={sponsor}/>
       </div>
 
       <div

@@ -9,6 +9,8 @@ import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 import get_all_tags from '@/lib/menus/lib/getAllTagsFromMenu'
 import ALL_SLUGS_CATEGORY from '@/lib/menus/chatTools'
 import Footer from "@/components/footer";
+import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const PAGE_SIZE = 16;
 
@@ -21,12 +23,13 @@ const BREADCRUMBS = {
     ]
   }
 
-export default function ToolboxPage({allPosts = [], preview, pagination}) {
+export default function ToolboxPage({allPosts = [], preview, pagination, navSponsor, sponsors}) {
     //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
 
     return (
         <>
         <Layout 
+        sponsor={navSponsor}
     padding={false}
        maxWidth={"search-wide max-w-[1320px]"}
         seo={{
@@ -59,12 +62,28 @@ export async function getStaticProps({ preview = null, params}) {
     const page = params.pageNo
     var all_tags = get_all_tags(ALL_SLUGS_CATEGORY)
 
-    const allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, page, all_tags )) || []
+    let allPosts = (await getPostsByPageForToolsSubcategoryPage(preview, pageSize, page, all_tags )) || []
+    allPosts.data?.map(post => {
+        // add blurhash to allPosts images
+        post.attributes.base64 = createB64WithFallback(
+          post?.attributes?.featuredImage?.data?.attributes?.blurhash
+        );
+        post.attributes.logoBase64 = createB64WithFallback(
+          post?.attributes?.logo?.data?.attributes?.blurhash
+        );
     
+        //this is the part that fails
+        return `/toolbox/${post.attributes.slug}`;
+      })
+
     const pagination = allPosts.meta.pagination
+
+    const { navSponsor, sponsors } = await getSponsors();
+
     return {
         props: {
-            allPosts: allPosts.data, preview, pagination
+            allPosts: allPosts.data, preview, pagination,
+            navSponsor, sponsors
         },revalidate: 20,
     }
   }

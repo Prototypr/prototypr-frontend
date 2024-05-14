@@ -8,6 +8,7 @@ import { getPeopleByPage } from "@/lib/api";
 
 // import ALL_PEOPLE_GROUPS from '@/lib/menus/allPeopleCat'
 import ProfileCard from "@/components/people/ProfileCard";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const NewPagination = dynamic(() => import("@/components/pagination"));
 // const PeopleFilters = dynamic(() => import("@/components/people/PeopleFilters"));
@@ -15,18 +16,12 @@ const NewPagination = dynamic(() => import("@/components/pagination"));
 
 const PAGE_SIZE = 12;
 
-
-const BREADCRUMBS = {
-  pageTitle:'People',
-  links:[
-      {name:'Home', slug:'/'},
-  ]
-}
-
 export default function PeoplePage({
   allPosts = [],
   preview,
   pagination = {},
+  navSponsor,
+  sponsors,
 }) {
   //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
   const router = useRouter();
@@ -36,7 +31,7 @@ export default function PeoplePage({
   };
 
   return (
-    <Layout activeNav={"people"} preview={preview}>
+    <Layout sponsor={navSponsor} activeNav={"people"} preview={preview}>
       <Container padding={false} maxWidth="px-3 max-w-[1320px] mx-auto pb-16">
       {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
@@ -111,6 +106,8 @@ export async function getStaticProps({ preview = null, params,locale }) {
       return post;
     }
     );
+    const { navSponsor, sponsors } = await getSponsors();
+
     // console.log("allposts*******" + JSON.stringify(allPosts))
   const pagination = allPosts?.meta?.pagination;
   return {
@@ -118,6 +115,8 @@ export async function getStaticProps({ preview = null, params,locale }) {
       allPosts: formattedPosts,
       preview,
       pagination,
+      navSponsor,
+      sponsors,
     },
     revalidate: 30,
   };

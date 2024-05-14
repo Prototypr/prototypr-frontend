@@ -5,10 +5,9 @@ import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 import ALL_SLUGS_GROUPS from "@/lib/menus/allTools";
 import Footer from "@/components/footer";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
+import getSponsors from "@/lib/utils/getSponsors";
 
 const PAGE_SIZE = 16;
-
-
 
 const BREADCRUMBS = {
   pageTitle: "Toolbox",
@@ -39,39 +38,42 @@ export default function ToolboxPage({
   allPosts = [],
   preview,
   pagination = {},
+  sponsors,
+  navSponsor,
 }) {
   //pagination is like {"total":1421,"pageSize":12,"page":2,"pageCount":119}
 
   return (
     <>
-    <Layout
-    padding={false}
-      maxWidth={"max-w-[1400px] search-wide"}
-      seo={{
-        title: `Prototypr Toolbox - new design, UX and coding tools | Page ${pagination?.page}`,
-        description:
-          "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
-        //   image: "",
-        canonical: `https://prototypr.io/toolbox/${pagination?.page}`,
-        url: `https://prototypr.io/toolbox/${pagination?.page}`,
-      }}
-      activeNav={"toolbox"}
-    >
-      <ToolboxIndexPage
-        filterCategories={ALL_SLUGS_GROUPS}
-        urlRoot={`/toolbox`}
-        paginationRoot={`/toolbox`}
-        title="All tools"
-        description="All your design tools in one place, updated weekly"
-        pagination={pagination}
-        pageSize={PAGE_SIZE}
-        currentSlug={"toolbox"}
-        allPosts={allPosts}
-        breadcrumbs={BREADCRUMBS}
-        color={"#3574F0"}
-      />
-    </Layout>
-    <Footer/>
+      <Layout
+        padding={false}
+        maxWidth={"max-w-[1400px] search-wide"}
+        sponsor={navSponsor}
+        seo={{
+          title: `Prototypr Toolbox - new design, UX and coding tools | Page ${pagination?.page}`,
+          description:
+            "Today's Latest Design Tools. Find illustrations, icons, UI Kits and more.",
+          //   image: "",
+          canonical: `https://prototypr.io/toolbox/${pagination?.page}`,
+          url: `https://prototypr.io/toolbox/${pagination?.page}`,
+        }}
+        activeNav={"toolbox"}
+      >
+        <ToolboxIndexPage
+          filterCategories={ALL_SLUGS_GROUPS}
+          urlRoot={`/toolbox`}
+          paginationRoot={`/toolbox`}
+          title="All tools"
+          description="All your design tools in one place, updated weekly"
+          pagination={pagination}
+          pageSize={PAGE_SIZE}
+          currentSlug={"toolbox"}
+          allPosts={allPosts}
+          breadcrumbs={BREADCRUMBS}
+          color={"#3574F0"}
+        />
+      </Layout>
+      <Footer />
     </>
   );
 }
@@ -87,11 +89,16 @@ export async function getStaticProps({ preview = null, params, locale }) {
     (await getPostsByPageForToolsPage(preview, pageSize, page, sort)) || [];
 
   // add blurhash to allPosts images
-  for(let post of allPosts.data){
-      post.attributes.base64 = createB64WithFallback(post.attributes?.featuredImage?.data?.attributes?.blurhash);
-      post.attributes.logoBase64 = createB64WithFallback(post.attributes?.logo?.data?.attributes?.blurhash);
+  for (let post of allPosts.data) {
+    post.attributes.base64 = createB64WithFallback(
+      post.attributes?.featuredImage?.data?.attributes?.blurhash
+    );
+    post.attributes.logoBase64 = createB64WithFallback(
+      post.attributes?.logo?.data?.attributes?.blurhash
+    );
   }
 
+  const { navSponsor, sponsors } = await getSponsors();
 
   const pagination = allPosts.meta.pagination;
   return {
@@ -99,6 +106,8 @@ export async function getStaticProps({ preview = null, params, locale }) {
       allPosts: allPosts.data,
       preview,
       pagination,
+      sponsors: sponsors?.length ? sponsors : [],
+      navSponsor,
     },
     revalidate: 60,
   };
