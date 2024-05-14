@@ -24,7 +24,6 @@ import {
   getAllToolsForHome,
   // getRandomPostsForHome,
   getCommonQuery,
-  getActiveSponsors,
   getAllNews,
 } from "@/lib/api";
 import { useIntl } from "react-intl";
