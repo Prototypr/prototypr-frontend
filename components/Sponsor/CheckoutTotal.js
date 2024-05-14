@@ -68,7 +68,6 @@ const CheckoutTotal = ({
     setLoadingDiscount(false);
   };
 
-  console.log(verifiedDiscountAmount)
   // create function to give total price from selected products  - use setState
   //total should be formik newsletter plus formik website
   // get the prices from rawPrice of the selected products in SponsorPackages
@@ -133,7 +132,6 @@ const CheckoutTotal = ({
     //calculate total price with discount code
     //check disocunt code
     //if valid, apply discount
-    console.log('verifiedDiscountAmount', verifiedDiscountAmount)
     if (verifiedDiscountAmount) {
       // reduce the price by the discount percentage
       price = price - price * (verifiedDiscountAmount / 100);

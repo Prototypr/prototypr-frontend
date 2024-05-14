@@ -17,7 +17,7 @@ export const MotionSliderToolCard = ({
     >
       <Link
         target={sponsored ? "_blank" : "_self"}
-        href={sponsored ? link + "?ref=prototypr" : `/toolbox/${slug}`}
+        href={sponsored ? link : `/toolbox/${slug}`}
       >
         <div className="flex flex-row cursor-collab-blue">
           <div className="mr-2 w-[64px] h-[64px] bg-gray-100 overflow-hidden rounded-xl relative">

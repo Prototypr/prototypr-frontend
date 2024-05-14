@@ -191,6 +191,36 @@ const SponsorshipForm = ({
                   toast.dismiss(loadingBanner);
                 }
               }
+              if (uploadLogoWide) {
+                const loadingLogoWide = toast.loading(
+                  "Uploading logo (wide version)...",
+                  {
+                    duration: 3000,
+                  }
+                );
+                const file = new File([values.logoWide], `logowide_.png`, {
+                  type: "image/png",
+                });
+
+                const formData = new FormData();
+                formData.append("files", file, "logoWide");
+                formData.append("refId", response?.data?.id);
+                formData.append("field", "logoWide");
+                formData.append("ref", "api::sponsored-post.sponsored-post");
+                const response3 = await axios.post(
+                  `${process.env.NEXT_PUBLIC_HOME_URL}/api/post/attachImage`,
+                  formData,
+                  {
+                    headers: {
+                      // Axios and modern browsers will automatically set the Content-Type
+                      // to multipart/form-data with the correct boundary.
+                    },
+                  }
+                );
+                if (loadingLogoWide) {
+                  toast.dismiss(loadingLogoWide);
+                }
+              }
               if (uploadNewFeaturedImage) {
                 const file = new File(
                   [values.featuredImage],

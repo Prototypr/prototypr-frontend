@@ -227,7 +227,6 @@ const productResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/
       const discountItem = response.data.data.find(d => d.attributes.code === reqData.customDiscount);
       const discountPercentage = discountItem.attributes.amount;
 
-      console.log(discountPercentage)
       totalPrice = totalPrice - (totalPrice * discountPercentage / 100);
       if(totalPrice==0){
         totalPrice=1

@@ -458,7 +458,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       post: {
         ...postData,
       },
-      sponsors,
+      sponsors: sponsors?.length ? sponsors : [],
       navSponsor,
       relatedPosts: relatedPosts,
     },
