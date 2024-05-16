@@ -17,7 +17,7 @@ const ToolCard = ({ posts, type, columns, tagNumber, border }) => {
           slug = post.slug;
           if (tagNumber == 1) {
             tags = post.tags.slice(0, 1);
-          } else {
+          } else if(tagNumber > 2){
             tags = post.tags.slice(0, 2);
           }
 

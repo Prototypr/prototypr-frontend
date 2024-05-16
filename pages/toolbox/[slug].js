@@ -43,7 +43,7 @@ import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
 import AuthorCard from "@/components/toolbox/AuthorCard";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
-// import ToolCard from "@/components/v4/card/ToolCard";
+import ToolCard from "@/components/v4/card/ToolCard";
 // import WeeMan from "@/components/images/weeMan";
 import buildToolboxGallery, {
   getToolboxFeaturedImage,
@@ -55,6 +55,7 @@ import HeroCardSection from "@/components/toolbox/HeroCardSection";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
+import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
 
 const ToolContent = ({
   post,
@@ -74,6 +75,9 @@ const ToolContent = ({
 }) => {
   const { user } = useUser();
   const tags = post.attributes.tags.data;
+
+  console.log(sponsors);
+  console.log(navSponsor);
 
   useEffect(() => {
     addTwitterScript();
@@ -290,6 +294,16 @@ const ToolContent = ({
                     />
                   </div>
                 </div>
+
+                <div className="mt-4">
+                  <ToolBackgroundCard
+                    showAdTag={true}
+                    height={"h-[220px] md:h-[310px] xl:h-[190px]"}
+                    withBackground={true}
+                    post={navSponsor}
+                  />
+                </div>
+
                 <div className="flex flex-col gap-4 mt-4 rounded-2xl bg-[#f4f4f4]/60">
                   <div className="relative rounded-2xl pb-3">
                     <h1
@@ -298,12 +312,7 @@ const ToolContent = ({
                     >
                       Related tools
                     </h1>
-                    {/* <ToolCard
-                    border={false}
-                    posts={relatedPosts}
-                    columns={"grid-cols-1"}
-                    type="toolboxContentPage"
-                  /> */}
+
                     <div className="flex flex-col pt-1 grid grid-cols-6 gap-6">
                       {relatedPosts?.map((tool, index) => {
                         return (
@@ -320,6 +329,13 @@ const ToolContent = ({
                           </div>
                         );
                       })}
+                      {/* <ToolCard
+                    border={false}
+                    posts={sponsors}
+                    withBackground={false}
+                    columns={"grid-cols-1"}
+                    type="toolboxContentPage"
+                  /> */}
                     </div>
                   </div>
                 </div>
@@ -525,6 +541,8 @@ export default function Post({
         relatedPosts={relatedPosts}
         authorAvatar={authorAvatar}
         updatedAtDate={updatedAtDate}
+        sponsors={sponsors}
+        navSponsor={navSponsor}
       />
       {/* </div> */}
 

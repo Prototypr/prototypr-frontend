@@ -11,6 +11,7 @@ const ToolBackgroundCard = ({
   columns,
   tagNumber,
   height,
+  showAdTag=false
 }) => {
   let { title, slug, coverImage, tags, logo, sponsorLink } = post;
 
@@ -47,6 +48,14 @@ const ToolBackgroundCard = ({
               fill
               // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
+            {(post.postType == "ad" && showAdTag) && (
+              <div className="absolute top-0 left-0 z-20">
+                <div className="px-3 h-[18px] rounded-full shadow-xs text-[11px] font-medium m-3 border border-gray-200 bg-gray-100">
+                Ad
+                  </div>
+                </div>
+            )}
+
             <div
               className={`${height ? height : imageLarge ? "h-[240px]" : "h-[290px]"} rounded-xl m-2 relative flex flex-col justify-end`}
             >
@@ -68,7 +77,9 @@ const ToolBackgroundCard = ({
                       <div className={"line-clamp-1 font-medium"}> {title}</div>
                       {/* {this.props.prototool !== true && */}
                       {post.postType == "ad" ? (
-                        <div className="text-xs mt-0.5 font-medium capitalize">Ad</div>
+                        <div className="text-xs mt-0.5 font-medium capitalize line-clamp-1">
+                          {showAdTag?post.description:'Ad'}
+                        </div>
                       ) : (
                         tags?.length && (
                           <div className="text-xs mt-0.5 capitalize">
