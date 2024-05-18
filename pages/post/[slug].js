@@ -34,6 +34,10 @@ import PostGroupRow from "@/components/v4/layout/PostGroupRow";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
+
+import AdCard from "@/components/v4/card/AdCard";
+
+import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -44,7 +48,14 @@ const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
 //   }
 // );
 
-export default function Post({ post, preview, relatedPosts, postContent, sponsors, navSponsor}) {
+export default function Post({
+  post,
+  preview,
+  relatedPosts,
+  postContent,
+  sponsors,
+  navSponsor,
+}) {
   const router = useRouter();
 
   const { user, isLoading } = useUser({
@@ -329,6 +340,14 @@ export default function Post({ post, preview, relatedPosts, postContent, sponsor
                         authorTwitter={author?.twitter}
                       />
                     </div>
+                    <div className="h-[220px] md:h-[310px] xl:h-[220px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
+                    <AdCard
+                      showAdTag={true}
+                      height={"h-[220px] md:h-[310px] xl:h-[220px] hover:h-[290px]"}
+                      withBackground={true}
+                      post={navSponsor}
+                    />
+                    </div>
                   </div>
                 </article>
               </>
@@ -415,7 +434,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
     locale
   );
 
-  for(let i = 0; i < relatedPosts.data.length; i++){
+  for (let i = 0; i < relatedPosts.data.length; i++) {
     relatedPosts.data[i].base64 = createB64WithFallback(
       relatedPosts?.data[i]?.featuredImage?.data?.attributes?.blurhash
     );
@@ -448,8 +467,13 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
   let html = removeFirstImageIfMatch(post?.attributes?.content, image);
   html = gumletPostContentLoader(html);
-  
+
   const { navSponsor, sponsors } = await getSponsors();
+
+  const insertBannerAdsModule = await import("@/lib/insertBannerAds");
+  const insertBannerAds = insertBannerAdsModule.default;
+
+  html=insertBannerAds(html, navSponsor, sponsors);
 
   return {
     props: {
