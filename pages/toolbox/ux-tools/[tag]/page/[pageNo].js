@@ -15,7 +15,7 @@ import Footer from "@/components/footer";
 import getSponsors from "@/lib/utils/getSponsors";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 15;
 
 const BREADCRUMBS = {
   pageTitle: "UX Tools",
@@ -71,6 +71,8 @@ export default function ToolboxPage({
         preview={preview}
       >
         <ToolboxIndexPage
+         sponsors={sponsors}
+         navSponsor={navSponsor}
           paginationRoot={`/toolbox/ux-tools/${tag}`}
           filterCategories={ALL_SLUGS_GROUPS}
           urlRoot={`/toolbox/ux-tools`}

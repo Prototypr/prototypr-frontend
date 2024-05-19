@@ -6,7 +6,7 @@ import {
 } from "@/lib/api";
 import ToolboxIndexPage from "@/components/toolbox/ToolboxIndexPage";
 
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 15;
 
 import get_all_tags from "@/lib/menus/lib/getAllTagsFromMenu";
 import ALL_SLUGS_CATEGORY from "@/lib/menus/realityTools";
@@ -62,6 +62,8 @@ export default function ToolboxPage({ allPosts = [], preview, pagination, navSpo
         preview={preview}
       >
         <ToolboxIndexPage
+         sponsors={sponsors}
+         navSponsor={navSponsor}
           paginationRoot={`/toolbox/augmented-reality-tools`}
           filterCategories={ALL_SLUGS_CATEGORY}
           urlRoot={`/toolbox/augmented-reality-tools`}

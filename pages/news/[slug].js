@@ -18,6 +18,7 @@ import SocialShare from "@/components/SocialShare";
 import Image from "next/image";
 import gumletLoader from "@/lib/imageloader";
 import getSponsors from "@/lib/utils/getSponsors";
+import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
 
 const Footer = dynamic(() => import("@/components/footer"));
 
@@ -51,7 +52,7 @@ export default function Post({
   authorAvatar,
   relatedNews,
   sponsors,
-  navSponsor
+  navSponsor,
 }) {
   const router = useRouter();
   if (!router.isFallback && !post?.attributes.slug) {
@@ -396,6 +397,7 @@ export default function Post({
                   />
                 </div>
               </div>
+
               {relatedNews && relatedNews.length > 0 ? (
                 <div className="p-3 bg-[#f4f4f4]/60 rounded-xl">
                   <h1 tabIndex={0} className="text-sm mb-3 text-gray-500">
@@ -478,6 +480,14 @@ export default function Post({
                   </div>
                 </div>
               ) : null}
+              <div className="mt-4">
+                <ToolBackgroundCard
+                  showAdTag={true}
+                  height={"h-[220px] md:h-[310px] xl:h-[190px]"}
+                  withBackground={true}
+                  post={navSponsor}
+                />
+              </div>
               <div className="flex flex-col mt-3 gap-4">
                 <div className="grid grid-cols-5 p-3 relative">
                   <div className="z-10 col-span-5 xl:col-span-5 relative">

@@ -15,7 +15,7 @@ import ALL_SLUGS_CATEGORY from "@/lib/menus/realityTools";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
 
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 15;
 
 const BREADCRUMBS = {
   pageTitle: "Miex Reality",
@@ -71,6 +71,8 @@ export default function ToolboxPage({
         preview={preview}
       >
         <ToolboxIndexPage
+         sponsors={sponsors}
+         navSponsor={navSponsor}
           paginationRoot={`/toolbox/augmented-reality-tools/${tag}`}
           filterCategories={ALL_SLUGS_CATEGORY}
           urlRoot={`/toolbox/augmented-reality-tools`}

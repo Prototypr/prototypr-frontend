@@ -10,7 +10,7 @@ import {
   find_page_slug_from_menu,
   get_slugs_from_menu,
 } from "@/lib/menus/lib/getAllTagsFromMenu";
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 15;
 
 import ALL_SLUGS_CATEGORY from "@/lib/menus/chatTools";
 import Footer from "@/components/footer";
@@ -76,6 +76,8 @@ export default function ToolboxPage({
         preview={preview}
       >
         <ToolboxIndexPage
+         sponsors={sponsors}
+         navSponsor={navSponsor}
           paginationRoot={`/toolbox/conversational-design-tools/${tag}`}
           filterCategories={ALL_SLUGS_CATEGORY}
           urlRoot={`/toolbox/conversational-design-tools`}

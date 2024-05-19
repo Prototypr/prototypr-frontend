@@ -7,7 +7,7 @@ import Footer from "@/components/footer";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
 
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 15;
 
 const BREADCRUMBS = {
   pageTitle: "Toolbox",
@@ -60,6 +60,8 @@ export default function ToolboxPage({
         activeNav={"toolbox"}
       >
         <ToolboxIndexPage
+          sponsors={sponsors}
+          navSponsor={navSponsor}
           filterCategories={ALL_SLUGS_GROUPS}
           urlRoot={`/toolbox`}
           paginationRoot={`/toolbox`}

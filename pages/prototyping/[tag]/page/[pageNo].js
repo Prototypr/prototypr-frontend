@@ -12,7 +12,7 @@ import {
   get_slugs_from_menu,
 } from "@/lib/menus/lib/getAllTagsFromMenu";
 
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 15;
 import ALL_SLUGS_CATEGORY from "@/lib/menus/prototyping";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
@@ -50,7 +50,7 @@ export default function ToolboxPage({
   pagination,
   tag,
   title,
-  sponsor,
+  sponsors,
   navSponsor,
 }) {
   //pagination is like {"total":48,"pageSize":13,"page":1,"pageCount":4}
@@ -73,6 +73,7 @@ export default function ToolboxPage({
         preview={preview}
       >
         <ToolboxIndexPage
+          navSponsor={navSponsor}
           paginationRoot={`/prototyping/${tag}`}
           filterCategories={ALL_SLUGS_CATEGORY}
           urlRoot={`/prototyping`}
@@ -83,6 +84,7 @@ export default function ToolboxPage({
           allPosts={allPosts}
           breadcrumbs={BREADCRUMBS}
           currentSlug={tag}
+          sponsors={sponsors}
         />
       </Layout>
       <Footer />

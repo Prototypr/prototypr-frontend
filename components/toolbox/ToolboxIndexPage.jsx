@@ -28,6 +28,8 @@ const ToolboxIndexPage = ({
   filterCategories,
   currentSlug,
   paginationRoot,
+  navSponsor,
+  sponsor,
   color,
 }) => {
   const router = useRouter();
@@ -99,6 +101,8 @@ const ToolboxIndexPage = ({
                 <>
                 
                 <ToolImageCard
+                  navSponsor={navSponsor}
+                  sponsor={sponsor}
                   posts={allPosts}
                   columns={"lg:grid-cols-4"}
                   type="toolbox"
