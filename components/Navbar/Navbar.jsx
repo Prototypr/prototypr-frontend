@@ -89,7 +89,7 @@ const Navbar = ({
         style={{ zIndex: 99 }}
       >
         <div
-          className={`w-full ${navType == "full" ? "bg-white border-b border-gray-200 " : `${isVisible ? "bg-white bg-opacity-[88%] shadow-sm md:w-[62rem]" : "md:w-[97%] "}  md:rounded-2xl p-1`} transition transition-all duration-700 search-wide ${
+          className={`w-full ${navType == "full" ? "bg-white border-b border-gray-200 " : `${isVisible ? "bg-white bg-opacity-[88%] shadow-sm md:w-[50rem] lg:w-[62rem]" : "md:w-[97%] "}  md:rounded-2xl p-1`} transition transition-all duration-700 search-wide ${
             navType == "full"
               ? "max-w-full"
               : maxWidth
@@ -175,7 +175,7 @@ const Navbar = ({
             <div
               className={`items-center sm:static sm:inset-auto flex ${
                 user?.isLoggedin ? "mr-[52px] sm:mr-16" : "lg:mr-0"
-              } mr-[52px] sm:mr-16`}
+              }`}
             >
               {/* <div className={`hidden mr-2 md:block my-auto`}>
                 <WMButton />

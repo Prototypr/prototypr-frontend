@@ -37,7 +37,7 @@ import getSponsors from "@/lib/utils/getSponsors";
 
 import AdCard from "@/components/v4/card/AdCard";
 
-import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
+// import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
@@ -340,13 +340,37 @@ export default function Post({
                         authorTwitter={author?.twitter}
                       />
                     </div>
-                    <div className="h-[220px] md:h-[310px] xl:h-[220px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
-                    <AdCard
-                      showAdTag={true}
-                      height={"h-[220px] md:h-[310px] xl:h-[220px] hover:h-[290px]"}
-                      withBackground={true}
-                      post={navSponsor}
-                    />
+                    {/* <div className="h-[220px] md:h-[310px] xl:h-[220px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
+                        <AdCard
+                          showAdTag={true}
+                          height={
+                            "h-[220px] md:h-[310px] xl:h-[220px] hover:h-[290px]"
+                          }
+                          withBackground={true}
+                          post={navSponsor}
+                        />
+                      </div> */}
+                    <div className="flex flex-col justify-evenly h-full">
+                      <div className="h-[220px] md:h-[310px] xl:h-[220px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
+                        <AdCard
+                          showAdTag={true}
+                          height={
+                            "h-[220px] md:h-[310px] xl:h-[220px] hover:h-[290px]"
+                          }
+                          withBackground={true}
+                          post={navSponsor}
+                        />
+                      </div>
+                      <div className="h-[220px] md:h-[310px] xl:h-[220px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
+                        <AdCard
+                          showAdTag={true}
+                          height={
+                            "h-[220px] md:h-[310px] xl:h-[220px] hover:h-[290px]"
+                          }
+                          withBackground={true}
+                          post={navSponsor}
+                        />
+                      </div>
                     </div>
                   </div>
                 </article>
@@ -473,7 +497,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
   const insertBannerAdsModule = await import("@/lib/insertBannerAds");
   const insertBannerAds = insertBannerAdsModule.default;
 
-  html=insertBannerAds(html, navSponsor, sponsors);
+  html = insertBannerAds(html, navSponsor, sponsors);
 
   return {
     props: {
