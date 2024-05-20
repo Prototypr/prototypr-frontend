@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 // import Link from "next/link";
 import Fallback from "@/components/atom/Fallback/Fallback";
 // import Navbar from "@/components/small-nav";
-import Layout from "@/components/layout-dashboard";
+import Layout from "@/components/new-index/layoutForIndex";
 
 import useUser from "@/lib/iron-session/useUser";
 import { useState } from "react";
