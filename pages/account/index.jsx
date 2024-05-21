@@ -64,8 +64,8 @@ const AccountPage = ({ preview }) => {
           {user && user.confirmed ? (
             <div>
               {!user?.profile?.approved && hasPosts === false ? (
-                <div className="-mb-3">
-                  <div className="mt-3 shadow-sm flex w-full bg-purple-300/70 p-4 px-4 rounded-xl text-purple-900">
+                <div className="mb-3">
+                  <div className="shadow-sm flex w-full bg-white p-4 px-4 rounded-xl text-gray-900 border border-gray-300/70">
                     <div className="mr-4 my-auto">
                       <CircleWavyCheck size="44" />
                     </div>

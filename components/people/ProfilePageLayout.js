@@ -400,19 +400,18 @@ const ProfilePageLayout = ({
         <div className="col-span-8 lg:col-span-6 flex-1 z-20">
           <div className="max-w-[1320px] max-w-full mb-20 lg:mt-0">
             {unapproved ? (
-              <div className="mt-[60px]">
-                <div className="mt-3 flex w-full bg-white shadow p-4 px-4 rounded-xl text-black/90 max-w-3xl mx-auto">
+              <div className="">
+                <div className="mb-3 flex w-full bg-white shadow-sm p-4 px-4 rounded-xl text-black/90 border border-gray-300/70 mx-auto">
                   <div className="hidden md:block mr-4 my-auto">
                     <CircleWavyCheck size="44" />
                   </div>
-                  <div className="flex flex-col max-w-4xl">
+                  <div className="flex flex-col max-w-4xl pr-4">
                     <h2 className="mb-1 text-lg font-semibold">
                       Profile pending approval
                     </h2>
                     <p className="mb-3">
-                      For community safety and to reduce spam accounts, your
-                      profile is not publicly viewable until manually approved
-                      by us. You can still submit posts, but they will only
+                      For community safety, your
+                      profile is not publicly viewable until manually approved. You can submit posts, but they will only
                       appear once your account is approved. Complete your
                       profile to get approved faster.
                     </p>
