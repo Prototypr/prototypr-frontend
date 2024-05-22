@@ -53,11 +53,6 @@ export default function ToolboxPage({
   sponsors,
   navSponsor,
 }) {
-  useEffect(() => {
-    if (window.$crisp) {
-      window.$crisp.push(["do", "chat:show"]);
-    }
-  }, []);
 
   return (
     <>

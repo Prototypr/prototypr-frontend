@@ -841,3 +841,24 @@ box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
       height:22px!important;
     }
 }
+
+button.woot-widget-bubble.woot-elements--right {
+  width: 50px!important;
+  height: 50px!important;
+}
+.woot-widget-bubble svg {
+  all: revert;
+  height: 20px!important;
+  margin: 15px!important;
+  width: 20px!important;
+}
+.woot--close::before, .woot--close::after {
+  height: 20px!important;
+  left: 25px!important;
+  top: 16px!important;
+}
+@media only screen and (min-width: 667px) {
+  .woot-widget-holder {
+      bottom: 84px!important;
+  }
+}

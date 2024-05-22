@@ -55,18 +55,24 @@ export default function ClaimToolPage({data}) {
        <div className="text-gray-800">
         {!user?.isLoggedIn?<p className="mb-2">Please sign in to claim this page.</p>:''}
         <p className="mb-2">Once approved as owner, you'll be able to edit the description, images, and see the page stats for this tool.</p>
-        {user?.isLoggedIn?<p className="mb-2">To claim the page, send a claim message using the button below – the button will create a message to our support team with the necessary details - the tool name and your user name.</p>:''}
+        {user?.isLoggedIn?<p className="mb-2">To claim the page, send a message with the tool name and URL, along with your user name.</p>:''}
         </div>
        </div>
       {(user?.isLoggedIn===true)?
       <Button 
       className="mt-6"
        onClick={()=>{
-        if (window.$crisp) {
-            window.$crisp.push(["do", "chat:open"]);
-            window.$crisp.push(["set", "message:text", [`Hi! I would like to claim tool: "${post?.attributes?.title}". My username is ${user?.profile?.name}, and my user ID is ${user?.id}. Thanks!`]]);
-          }
-       }} type="button">Send claim message</Button>:''}
+        console.log(user)
+        // pop up chat
+        // window.$chatwoot?.setUser(user?.id, {
+        //   claimId: post?.id,
+        //   claimName: post?.attributes?.title,
+        // });
+        window.$chatwoot?.toggle()
+        // window.$chatwoot.popoutChatWindow();
+
+        // woot-widget-bubble
+       }} type="button">Ask support</Button>:''}
         </div>
 
         {!(user?.isLoggedIn===true)?

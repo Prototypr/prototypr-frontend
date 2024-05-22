@@ -50,6 +50,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   //   //     setLocaleOfNavigator(navigator.language)
   //   //   }
   //   // }
+    
 
   //   if(typeof window !='undefined' && !window.$crisp){
   //     window.$crisp = [];

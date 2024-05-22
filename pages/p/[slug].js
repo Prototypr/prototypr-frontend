@@ -34,9 +34,6 @@ export default function EditPostPage(props) {
 
   useEffect(() => {
     addTwitterScript();
-    if (window.$crisp) {
-      window.$crisp.push(["do", "chat:hide"]);
-    }
   }, []);
 
   //useLoad hook

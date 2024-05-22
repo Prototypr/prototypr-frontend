@@ -28,7 +28,7 @@ import {
 } from "@/lib/api";
 import { useIntl } from "react-intl";
 import { transformPostListOld } from "@/lib/locale/transformLocale";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 // import TopicSectionC from "@/components/v4/section/TopicSectionC";
 // import TopicSelectSection from "@/components/v4/section/TopicSelectSection";
@@ -82,11 +82,6 @@ export default function Index({
   const titleText = intl.formatMessage({ id: "index.header.title" });
   const descriptionText = intl.formatMessage({ id: "intro.description" });
 
-  useEffect(() => {
-    if (window.$crisp) {
-      window.$crisp.push(["do", "chat:show"]);
-    }
-  }, []);
 
   const { user, isLoading } = useUser({
     redirectIfFound: false,

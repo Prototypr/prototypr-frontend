@@ -36,13 +36,9 @@ export default function Write() {
 
   /**
    * embed twitter widget if not already loaded
-   * hide crisp chat if loaded
    */
   useEffect(() => {
     addTwitterScript();
-    if (window.$crisp) {
-      window.$crisp.push(["do", "chat:hide"]);
-    }
   }, []);
 
   //useLoad hook

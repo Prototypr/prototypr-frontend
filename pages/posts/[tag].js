@@ -50,12 +50,6 @@ export default function PostsPage({
     tagName = "UI Design";
   }
 
-  useEffect(() => {
-    if (window.$crisp) {
-      window.$crisp.push(["do", "chat:show"]);
-    }
-  }, []);
-
   return (
     <>
       <Layout

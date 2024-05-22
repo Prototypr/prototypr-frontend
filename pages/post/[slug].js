@@ -108,12 +108,6 @@ export default function Post({
 
   useEffect(() => {
     addTwitterScript();
-
-    if (window.$crisp) {
-      // window.$crisp.push(["config", "position:reverse", true])
-      // window.$crisp.push(['do', 'chat:close']);
-      window.$crisp.push(["do", "chat:hide"]);
-    }
   }, []);
 
   useEffect(() => {

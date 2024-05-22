@@ -81,11 +81,6 @@ const ToolContent = ({
 
   useEffect(() => {
     addTwitterScript();
-    if (window.$crisp) {
-      // window.$crisp.push(["config", "position:reverse", true])
-      // window.$crisp.push(['do', 'chat:close']);
-      window.$crisp.push(["do", "chat:hide"]);
-    }
   }, []);
 
   useEffect(() => {
@@ -467,11 +462,6 @@ export default function Post({
     return <ErrorPage statusCode={404} />;
   }
 
-  useEffect(() => {
-    if (window.$crisp) {
-      window.$crisp.push(["do", "chat:show"]);
-    }
-  }, []);
 
   return (
     <Layout

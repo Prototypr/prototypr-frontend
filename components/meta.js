@@ -142,6 +142,23 @@ export default function Meta({ seo, articleJsonLd, productJsonLd }) {
       {/* CODEPEN AND TWITTER EMBED */}
       {typeof window &&<script defer async="async" src="https://static.codepen.io/assets/embed/ei.js"></script>}
       {typeof window &&<script defer async="async" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>}
+
+      {typeof window && <script dangerouslySetInnerHTML={{__html:`
+          (function(d,t) {
+            var BASE_URL="https://chatwoot-3n2v4-u6349.vm.elestio.app";
+            var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=BASE_URL+"/packs/js/sdk.js";
+            g.defer = true;
+            g.async = true;
+            s.parentNode.insertBefore(g,s);
+            g.onload=function(){
+              window.chatwootSDK.run({
+                websiteToken: 'oh8AKRPnciiHjLwsjNZ1hTW7',
+                baseUrl: BASE_URL
+              })
+            }
+          })(document,"script");
+      `}}></script>}
       
     </>
   );
