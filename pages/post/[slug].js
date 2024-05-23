@@ -153,7 +153,7 @@ export default function Post({
           )}
 
           {/* <Alert preview={preview} /> */}
-          <main className="pb-20 gap-2 col-span-12 lg:col-span-12 overflow-x-hidden px-0 md:px-8 xl:px-0">
+          <main className="pb-20 gap-2 col-span-12 lg:col-span-12 overflow-x-hidden px-0 ">
             {/* {post?.id && process.env.NODE_ENV === "production" && (
               <WMPostTracker postId={post?.id} post={post} />
             )} */}
@@ -177,8 +177,8 @@ export default function Post({
                     {!post.currentLocaleAvailable && <NoticeTranslation />}
 
                     <div className="pt-4 w-[1020px] max-w-full mx-auto w-full">
-                      <p className="text-left md:px-1 mt-3 md:mt-0 mb-3 text-base text-black/80">
-                        Published <Date dateString={post.attributes.date} />
+                      <p className="text-left md:px-1 mt-3 md:mt-0 mb-3 text-base tracking-tight text-black/80">
+                        <Date dateString={post.attributes.date} />
                       </p>
                     </div>
                     <div className="pb-[112px]">
@@ -198,7 +198,7 @@ export default function Post({
                         template={post.attributes?.template}
                       />
                       <div className="w-full flex justify-start w-[1020px] max-w-full mx-auto mt-4 mb-6 md:mb-1 px-0">
-                        <div className="flex flex-col md:flex-row justify-between w-full">
+                        <div className="flex flex-col md:flex-row max-w-[46rem] justify-between w-full md:mb-4">
                           {author ? (
                             <div className="mb-4 md:mb-0">
                               <div className="flex justify-between">
@@ -223,8 +223,8 @@ export default function Post({
                                           />
                                         )}
                                         <div className="flex flex-col justify-center">
-                                          <div className="text-base md:text-lg mb-0 pb-0 hover:underline font-medium">
-                                            By {authorName}
+                                          <div className="text-lg tracking-tight md:text-2xl mb-0 pb-0 hover:underline font-medium">
+                                            {authorName}
                                           </div>
                                           {/* {date && (
                           <div className="text-base text-black/80">
@@ -286,18 +286,20 @@ export default function Post({
                       </div>
                     </div>
                   </div>
-                  <div className="px-4 md:px-0 max-w-full w-[1020px] md:bg-blue-50 mx-auto z-30 -mt-[120px] md:-mt-[100px] relative md:rounded-2xl md:shadow-md md:outline md:outline-1 outline-gray-300/20 overflow-hidden">
-                    <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 w-[1020px] md:bg-gray-100 mx-auto z-30 rounded-2xl" />
-                    <Image
-                      key={image}
-                      width={1020}
-                      placeholder="blur"
-                      blurDataURL={post?.attributes?.base64}
-                      height={550}
-                      loader={gumletLoader}
-                      className="h-full z-20 relative w-full object-contain rounded-2xl max-w-[1020px] mx-auto"
-                      src={image}
-                    />
+                  <div className="px-4 xl:px-0 max-w-full w-[1020px] mx-auto z-30 -mt-[132px] md:-mt-[86px] relative md:rounded-3xl">
+                    <div className="relative lg:-ml-8 xl:-ml-16 rounded-3xl shadow-sm w-[800px] max-w-full">
+                      <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 w-[800px] max-w-full md:bg-gray-100 mx-auto z-30 rounded-3xl" />
+                      <Image
+                        key={image}
+                        width={1020}
+                        placeholder="blur"
+                        blurDataURL={post?.attributes?.base64}
+                        height={550}
+                        loader={gumletLoader}
+                        className="h-full z-20 relative w-full object-contain rounded-3xl max-w-[800px] max-w-full"
+                        src={image}
+                      />
+                    </div>
                   </div>
 
                   <div className="z-0 -mt-4 h-[60%] w-full bg-gradient-to-b from-blue-100/60 to-gray-100/20 absolute top-0 left-0" />
