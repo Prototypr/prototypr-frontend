@@ -1,5 +1,6 @@
 // only published posts should be revalidated
 //
+import { purgeCloudFlareCache } from "@/lib/utils/cloudflare";
 
 export default async function handler(req, res) {
   // Check for secret to confirm this is a valid request
@@ -15,6 +16,9 @@ export default async function handler(req, res) {
       console.log("revalidating published post :", entry.slug);
       const url = `/post/${entry.slug}`;
       await res.revalidate(url);
+      if(process.env.NODE_ENV=='production'){
+        await purgeCloudFlareCache(url);
+      }
       return res.json({ revalidated: true });
     } 
     //revalidate jobs
@@ -22,6 +26,10 @@ export default async function handler(req, res) {
       console.log("revalidating job post :", entry.slug);
       const url = `/jobs/${entry.id}`;
       await res.revalidate(url);
+      //if production
+      if(process.env.NODE_ENV=='production'){
+        await purgeCloudFlareCache(url);
+      }
       return res.json({ revalidated: true });
     }
     //revalidate news
@@ -29,6 +37,9 @@ export default async function handler(req, res) {
       console.log("revalidating news post :", entry.slug);
       const url = `/news/${entry.slug}`;
       await res.revalidate(url);
+      if(process.env.NODE_ENV=='production'){
+        await purgeCloudFlareCache(url);
+      }
       return res.json({ revalidated: true });
     }
     // revalidate tools
@@ -36,6 +47,9 @@ export default async function handler(req, res) {
       console.log("revalidating tool post :", entry.slug);
       const url = `/toolbox/${entry.slug}`;
       await res.revalidate(url);
+      if(process.env.NODE_ENV=='production'){
+        await purgeCloudFlareCache(url);
+      }
       return res.json({ revalidated: true });
     }
     else {
