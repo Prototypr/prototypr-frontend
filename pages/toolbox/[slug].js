@@ -219,7 +219,7 @@ const ToolContent = ({
                 {post.attributes?.creators?.data?.length > 0 ? (
                   <div className="order-1 p-4 mb-4 rounded-2xl bg-[#f4f4f4]/60">
                     <h3 className="text-sm tracking-tight text-gray-500 ">
-                      Creators
+                     {post.attributes?.creators?.data?.length > 1? `Creators`:'Creator' }
                     </h3>
                     {post.attributes?.creators?.data?.map((creator, index) => {
                       return (
@@ -264,7 +264,7 @@ const ToolContent = ({
                     </div>
                   </div>
                   {post?.attributes?.author &&
-                  post?.attributes?.creators?.data?.length ? (
+                  post?.attributes?.creators?.data?.length && (post?.attributes?.author?.id !=  post?.attributes?.creators?.data[0]?.id) ? (
                     <AuthorCard
                       size={"small"}
                       authorAvatar={authorAvatar}
