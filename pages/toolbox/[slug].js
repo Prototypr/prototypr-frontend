@@ -76,9 +76,6 @@ const ToolContent = ({
   const { user } = useUser();
   const tags = post.attributes.tags.data;
 
-  console.log(sponsors);
-  console.log(navSponsor);
-
   useEffect(() => {
     addTwitterScript();
   }, []);
@@ -219,43 +216,43 @@ const ToolContent = ({
                 </div>
               </div> */}
               <div className="p-1 pt-0.5 rounded-2xl h-fit border-gray-300/60">
-                {post?.attributes?.author && (
-                  <div className="p-4 rounded-2xl bg-[#f4f4f4]/60">
-                    {/* <h1
-                      tabIndex={0}
-                      className="text-sm mb-3 font-medium tracking-tight"
-                    >
-                      {post?.attributes?.creator ? "Contributors" : "Posted by"}
-                    </h1> */}
-                    <div className="flex">
+                {post.attributes?.creators?.data?.length > 0 ? (
+                  <div className="order-1 p-4 mb-4 rounded-2xl bg-[#f4f4f4]/60">
+                    <h3 className="text-sm tracking-tight text-gray-500 ">
+                      Creators
+                    </h3>
+                    {post.attributes?.creators?.data?.map((creator, index) => {
+                      return (
+                        <AuthorCard
+                          creator={true}
+                          key={index}
+                          title={post?.attributes?.creator ? "Curator" : null}
+                          author={creator}
+                          avatar={creator}
+                          authorAvatar={
+                            creator?.attributes?.avatar?.data?.attributes?.url
+                              ? creator?.attributes.avatar.data.attributes.url
+                              : creator?.attributes?.legacyAvatar
+                                ? creator?.attributes.legacyAvatar
+                                : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png"
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                ) : null}
+
+                {post?.attributes?.author &&
+                  !post?.attributes?.creators?.data?.length && (
+                    <div className="p-4 rounded-2xl bg-[#f4f4f4]/60">
                       <AuthorCard
                         authorAvatar={authorAvatar}
                         title={post?.attributes?.creator ? "Curator" : null}
                         author={post.attributes.author}
                         avatar={post.attributes?.author}
                       />
-                      {post.attributes?.creator ? (
-                        <div className="ml-10">
-                          <AuthorCard
-                            title={post?.attributes?.creator ? "Creator" : null}
-                            author={post.attributes.creator}
-                            avatar={post.attributes?.creator}
-                            authorAvatar={authorAvatar}
-                          />
-                        </div>
-                      ) : null}
                     </div>
-                    {/* <Link
-                    target="_blank"
-                    href={post?.attributes?.link + "?ref=prototypr"}
-                  >
-                    <button className="w-full rounded-xl  bg-blue-500 text-white font-medium h-[44px]">
-                      Visit source
-                    </button>
-                  </Link> */}
-                  </div>
-                )}
-
+                  )}
                 {/* <div className="h-[1px] pb-2 -mt-3 px-3">
                   <div className="bg-gray-100 h-[1px]"></div>
                 </div> */}
@@ -266,6 +263,17 @@ const ToolContent = ({
                       {date}
                     </div>
                   </div>
+                  {post?.attributes?.author &&
+                  post?.attributes?.creators?.data?.length ? (
+                    <AuthorCard
+                      size={"small"}
+                      authorAvatar={authorAvatar}
+                      title={post?.attributes?.creator ? "Curator" : null}
+                      author={post.attributes.author}
+                      avatar={post.attributes?.author}
+                    />
+                  ) : null}
+
                   <div className="text-gray-500 mt-1">
                     <h3 className="text-sm tracking-tight ">Tags</h3>
                     {tags?.map((tag, index) => {
@@ -461,7 +469,6 @@ export default function Post({
   if (!router.isFallback && !post?.attributes?.slug) {
     return <ErrorPage statusCode={404} />;
   }
-
 
   return (
     <Layout

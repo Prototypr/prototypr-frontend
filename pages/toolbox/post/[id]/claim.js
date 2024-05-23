@@ -62,7 +62,7 @@ export default function ClaimToolPage({data}) {
       <Button 
       className="mt-6"
        onClick={()=>{
-        console.log(user)
+        // console.log(user)
         // pop up chat
         // window.$chatwoot?.setUser(user?.id, {
         //   claimId: post?.id,
@@ -78,26 +78,11 @@ export default function ClaimToolPage({data}) {
         {!(user?.isLoggedIn===true)?
             <div className="w-full relative max-w-4xl mx-auto ">
             <div
-              className="w-full bg-white shadow-sm p-8 rounded-lg flex justify-center mx-auto"
+              className="w-full bg-white mt-6 border border-gray-300/70 mb-20 pt-20 shadow-sm pb-20 rounded-xl flex justify-center mx-auto"
               style={{ maxWidth: 650 }}
             >
-              <LoginForm isSignUp={isSignUp} />
+              <LoginForm isSignUp={isSignUp} user={user} toggleSignIn={toggleSignIn} />
             </div>
-          <div className="mt-4 mb-20 flex justify-center">
-            <div className="text-sm text-gray-700">
-              <span>
-                {isSignUp
-                  ? "Already got an account?"
-                  : "Not got an account yet?"}
-              </span>
-              <a
-                onClick={toggleSignIn}
-                className="text-primary-400 cursor-pointer"
-              >
-                {isSignUp ? " Sign in." : " Sign up"}
-              </a>
-            </div>
-          </div>
         </div>:''}       
       </Container>
     </Layout>
