@@ -28,7 +28,25 @@ const MediaForm = ({ user, isEditMode }) => {
     <Fallback />
   ) : postObject ? (
     <Form postObject={postObject} user={user} isEditMode={isEditMode} />
-  ) : null;
+  ) : (
+    <div>
+      <div className="px-6 md:px-0 max-w-2xl w-full">
+        <div className="mb-6 ">
+          <h1 className="text-xl text-left font-semibold mx-auto mb-2">
+            Add media
+          </h1>
+          <p className="text-gray-600">
+            Upload your logo and multiple gallery images.
+          </p>
+        </div>
+      </div>
+      <div className="text-center flex flex-col h-full w-full justify-center">
+        <div className="mx-auto text-gray-600">
+          <Spinner />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const Form = ({ user, postObject, isEditMode }) => {
@@ -110,54 +128,53 @@ const Form = ({ user, postObject, isEditMode }) => {
         /**
          * upload new gallery
          */
-        if (values.gallery && galleryChanged && (values.gallery !== "exist" || postObject?.gallery?.length !== galleryFiles?.length)) {
-
-          console.log('galleryFiles',galleryFiles)
-          console.log(values.gallery)
-          console.log(postObject?.gallery)
-         
+        if (
+          values.gallery &&
+          galleryChanged &&
+          (values.gallery !== "exist" ||
+            postObject?.gallery?.length !== galleryFiles?.length)
+        ) {
           //compare galleryFiles with postObject.gallery for images that have been removed by checking the id
-          const removedImages = postObject?.gallery?.filter((image) => {
-            return !galleryFiles?.some((file) => {
+          const removedImages = postObject?.gallery?.filter(image => {
+            return !galleryFiles?.some(file => {
               return file.id === image.id;
             });
           });
 
-          if(removedImages){
+          if (removedImages) {
             //create array of ids to delete
-            const ids = removedImages.map((image)=>image.id)
+            const ids = removedImages.map(image => image.id);
             //remove images with ids from postObject.gallery leaving remaining array
-            const remainingImages = postObject.gallery.filter((image)=>!ids.includes(image.id))
+            const remainingImages = postObject.gallery.filter(
+              image => !ids.includes(image.id)
+            );
             //post to the api to set the image ids refs to the remaining images
             const data = {
-              gallery: remainingImages.map((image)=>image.id)
-            }
+              gallery: remainingImages.map(image => image.id),
+            };
             let publishPostEndpointConfig = {
               method: "put",
               url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postObject.id}`,
               headers: {
                 Authorization: `Bearer ${user?.jwt}`,
               },
-        
+
               data: {
                 data: {
                   ...data,
                 },
               },
             };
-            
+
             await axios(publishPostEndpointConfig)
-              .then(async function (response) {
-              })
+              .then(async function (response) {})
               .catch(function (error) {
-                console.log(error)
+                console.log(error);
                 toast.error("There was an error removing old images!", {
                   duration: 5000,
                 });
               });
           }
-          
-
 
           const galleryData = {};
           const galleryFormData = new FormData();
@@ -194,7 +211,7 @@ const Form = ({ user, postObject, isEditMode }) => {
                   });
                   if (!isEditMode) {
                     goTo("3");
-                  }else{
+                  } else {
                     setIsSubmitting(false);
                   }
                 })
@@ -205,7 +222,6 @@ const Form = ({ user, postObject, isEditMode }) => {
                   });
                 });
             }
-           
           }
         } else {
           setIsSubmitting(false);
@@ -241,9 +257,8 @@ const Form = ({ user, postObject, isEditMode }) => {
   // },[postObject])
 
   useEffect(() => {
-    if(postObject?.gallery?.length!==galleryFiles?.length){
-
-      setGalleryChanged(true)
+    if (postObject?.gallery?.length !== galleryFiles?.length) {
+      setGalleryChanged(true);
     }
   }, [galleryFiles]);
 
@@ -329,30 +344,33 @@ const Form = ({ user, postObject, isEditMode }) => {
           </div>
           <div className="flex flex-col mx-auto mt-5 max-w-2xl w-auto" />
 
-         
-            <>
-              <Button
-                variant={"confirmMedium"}
-                type="submit"
-                disabled={isSubmitting}
-                className="p-4 bg-blue-700 text-white font-semibold rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <div className="mx-auto w-5">
-                    <Spinner size="sm" className="text-black" />
-                  </div>
-                ) :isEditMode?'Save Changes': (
-                  `Save and Submit`
-                )}
-              </Button>
-              {!isEditMode ?  <div
+          <>
+            <Button
+              variant={"confirmMedium"}
+              type="submit"
+              disabled={isSubmitting}
+              className="p-4 bg-blue-700 text-white font-semibold rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? (
+                <div className="mx-auto w-5">
+                  <Spinner size="sm" className="text-black" />
+                </div>
+              ) : isEditMode ? (
+                "Save Changes"
+              ) : (
+                `Save and Submit`
+              )}
+            </Button>
+            {!isEditMode ? (
+              <div
                 onClick={onPrevious}
                 disabled={isSubmitting}
                 className="px-3 py-2 inline-block hover:text-black text-gray-600 ml-4 cursor-pointer font-medium rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
                 Back
-              </div>:null}
-            </>
+              </div>
+            ) : null}
+          </>
         </FormContainer>
       </form>
     </div>

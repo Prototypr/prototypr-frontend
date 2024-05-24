@@ -142,8 +142,8 @@ const ToolPostForm = ({ user, isOwner, postObject, refetchPost }) => {
                 {/* <LoginSide showArrow={false} title="Submit a tool or resource" user={user} /> */}
               </div>
             </div>
-            <div className="col-span-12 md:col-span-6 lg:col-span-6">
-              <div className="bg-white border border-gray-300/70 shadow-sm rounded-xl p-6">
+            <div className="col-span-12 md:col-span-6 lg:col-span-6 mb-12">
+              <div className="bg-white border h-full border-gray-300/70 shadow-sm rounded-xl p-6 step-wizard">
                 {/* <Progress/> */}
                 <ToolSteps
                   refetchPost={refetchPost}
@@ -213,7 +213,7 @@ const ToolSteps = ({ user, postObject, refetchPost }) => {
         </div>
       </Step>
       <Step key={`page/2`} id={"2"}>
-        <div className="flex items-center justify-start h-full w-full relative">
+        <div className="flex flex-col justify-start h-full w-full relative">
           <DescriptionExcerptForm
             isEditMode={postObject?.published_at}
             postObject={postObject}
@@ -221,8 +221,8 @@ const ToolSteps = ({ user, postObject, refetchPost }) => {
           />
         </div>
       </Step>
-      <Step key={`page/3`} id={"3"}>
-        <div className="flex items-center justify-start h-full w-full relative">
+      <Step key={`page/3`} id={"3"} >
+        <div className="flex flex-col justify-start h-full w-full relative">
           <MediaForm
             postObject={postObject}
             user={user}
@@ -230,7 +230,7 @@ const ToolSteps = ({ user, postObject, refetchPost }) => {
           />
         </div>
       </Step>
-      <Step key={`page/4`} id={"4"}>
+      <Step key={`page/4`} id={"4"} >
         <div className="flex items-center justify-start h-full w-full relative">
           <div className="px-6 md:px-0 max-w-2xl pt-6 pb-20 w-full">
             <div className="my-2 mb-6">
