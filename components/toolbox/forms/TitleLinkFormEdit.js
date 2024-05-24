@@ -30,7 +30,7 @@ function isEmptyObject(obj) {
   };
   
 
-const TitleLinkFormEdit = ({user, postObject, onNext, refetchPost}) =>{
+const TitleLinkFormEdit = ({user, postObject, onNext, refetchPost, isEditMode}) =>{
     
     const [errores, setErrores] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -51,7 +51,9 @@ const TitleLinkFormEdit = ({user, postObject, onNext, refetchPost}) =>{
 
 
   onSubmit: (values) => {
-      
+
+    delete values?.slug
+   
       async function submit() {
         setIsSubmitting(true)
         let publishPostEndpointConfig = {
@@ -71,13 +73,19 @@ const TitleLinkFormEdit = ({user, postObject, onNext, refetchPost}) =>{
         await axios(publishPostEndpointConfig)
           .then(async function (response) {
   
-            onNext()
+            if(!isEditMode){
+              onNext()
+            }else{
+              toast.success("Title and Link updated!", {
+                duration: 5000,
+              });
+            }
             refetchPost()
             setIsSubmitting(false)
           })
           .catch(function (error) {
             console.log(error)
-            toast.error("Your Job Post has been saved!", {
+            toast.error("Your Post has been saved!", {
               duration: 5000,
             });
           });
@@ -176,7 +184,7 @@ const [disabled, setDisabled] = useState(false);
                 // <Spinner />
                 // </div>
                 :
-                `Continue`}
+                `Save Changes`}
                 </Button>
             </FormContainer>
         </form>

@@ -24,7 +24,7 @@ function isEmptyObject(obj) {
   }
   
 
-  const DescriptionExcerptForm = ({user}) =>{
+  const DescriptionExcerptForm = ({user, isEditMode}) =>{
 
     const { loading, postObject, isOwner } =
     useLoad(user);
@@ -32,12 +32,12 @@ function isEmptyObject(obj) {
     return(
       !user && loading?<Fallback/>:
       postObject? 
-      <Form postObject={postObject} user={user} />:null
+      <Form postObject={postObject} user={user} isEditMode={isEditMode} />:null
     )
   
   }
 
-const Form = ({user, postObject}) =>{
+const Form = ({user, postObject, isEditMode}) =>{
 
     const { activeStepIndex, onNext, onPrevious, goTo, isFirstStep, isLastStep } =useWizardContext();
 
@@ -61,6 +61,16 @@ const Form = ({user, postObject}) =>{
 
   onSubmit: async(values) => {
 
+     //strip html tags and get plain text
+     var el = document.createElement('div')
+     el.innerHTML = values?.excerpt
+
+     var exc = el.textContent || el.innerText || ''
+
+     if(exc){
+        values.excerpt = exc
+     }
+
     async function submit() {
         setIsSubmitting(true)
         let publishPostEndpointConfig = {
@@ -79,7 +89,14 @@ const Form = ({user, postObject}) =>{
         
         await axios(publishPostEndpointConfig)
           .then(async function (response) {
-            goTo(2)
+            if(!isEditMode){
+              goTo(2)
+              // onNext()
+            }else{
+              toast.success("Tagline and description updated!", {
+                duration: 5000,
+              });
+            }
             setIsSubmitting(false)
           })
           .catch(function (error) {
@@ -202,15 +219,15 @@ const [disabled, setDisabled] = useState(false);
                 <Spinner size="sm" className="text-black" />
                 </div>
                 :
-                `Save and Continue`}
+                isEditMode?'Save Changes':`Save and Continue`}
                 </Button>
-                <div
+                {!isEditMode?<div
                 onClick={onPrevious}
                 disabled={isSubmitting}
                 className="px-3 py-2 inline-block hover:text-black text-gray-600 ml-4 cursor-pointer font-medium rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                 Back
-                </div>
+                </div>:null}
             </FormContainer>
         </form>
         </div>

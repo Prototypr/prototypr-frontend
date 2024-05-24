@@ -67,7 +67,6 @@ function GalleryUpload({updateField, gallery}) {
             setFiles(files)
             let fileys = files.map((fileItem) => fileItem.file)
             updateField(fileys)
-            console.log(fileys)
         }}
         allowMultiple={true}
         maxFiles={5}

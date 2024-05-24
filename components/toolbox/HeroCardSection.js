@@ -12,7 +12,9 @@ import Button from "@/components/Primitives/Button";
  * @param {*} param0
  * @returns
  */
-const HeroCardSection = ({ post, tags, featuredImage }) => {
+const HeroCardSection = ({ post, tags, featuredImage, user }) => {
+  console.log(post)
+  console.log(user)
   return (
     <div
       // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
@@ -137,20 +139,30 @@ const HeroCardSection = ({ post, tags, featuredImage }) => {
               </div>
             )}
             {/* hide on mobile */}
-            <div className="hidden md:flex flex-none">
+            <div className="hidden md:flex gap-4 flex-none">
               <div className="flex justify-end">
                 <a
                   target={"_blank"}
                   href={post?.attributes?.link + "?ref=prototypr.io"}
                 >
                   <Button
-                    className="rounded-full text-xs uppercase bg-blue-600 font-medium text-white px-5 py-0.5 h-[28px] leading-none"
+                    className="rounded-full text-xs uppercase outline outline-blue-600 bg-blue-600 font-medium text-white px-5 py-0.5 h-[28px] leading-none"
                     variant={"confirmBig"}
                   >
                     Get
                   </Button>
                 </a>
               </div>
+              {user?.id && user?.id==post?.attributes?.author?.data?.id?<div className="flex justify-end">
+                <Link href={`/toolbox/post/${post?.id}`}>
+                  <Button
+                    className="rounded-full text-xs uppercase bg-transparent hover:bg-white/10 outline outline-white/80 font-medium text-white px-5 py-0.5 h-[28px] leading-none"
+                    variant={"confirmBig"}
+                  >
+                    Edit
+                  </Button>
+                </Link>
+              </div>:null}
             </div>
           </div>
         </div>

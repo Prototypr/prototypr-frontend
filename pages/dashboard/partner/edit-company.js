@@ -7,9 +7,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import useUser from "@/lib/iron-session/useUser";
 import toast from "react-hot-toast";
-import Link from "next/link";
+// import Link from "next/link";
 
-import { createSponsorAsUser } from "@/lib/axios/createSponsor/createSponsorAsUser";
+// import { createSponsorAsUser } from "@/lib/axios/createSponsor/createSponsorAsUser";
 import { updateCompany } from "@/lib/axios/updateCompany/updateCompany";
 import CompanyForm from "@/components/Sponsor/Forms/CompanyForm";
 // import FormBreadCrumbs from "@/components/Sponsor/Forms/FormBreadcrumbs";

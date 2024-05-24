@@ -111,6 +111,7 @@ const ToolContent = ({
                   post={post}
                   tags={tags}
                   featuredImage={featuredImage}
+                  user={user}
                 />
               </div>
               {gallery.length ? (

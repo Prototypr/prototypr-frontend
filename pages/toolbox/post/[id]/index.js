@@ -57,7 +57,7 @@ const Menu = ({ post }) => {
         );
       })}
       {/* only show done step if info is there */}
-      {post?.logo?.id && post?.gallery?.length ? (
+      {!post.published_at && post?.logo?.id && post?.gallery?.length ? (
         <div
           onClick={() => {
             goTo(3);
@@ -119,9 +119,22 @@ const ToolPostForm = ({ user, isOwner, postObject, refetchPost }) => {
       showWriteButton={false}
       // background="#fff"
     >
+      <div className="h-14 bg-white shadow-sm z-10 w-full fixed top-[44px]">
+        <div className="flex gap-3 max-w-[1320px] cursor-default mx-auto h-full">
+          <img
+            src={
+              postObject?.logo?.formats?.thumbnail?.url
+                ? postObject?.logo?.formats?.thumbnail?.url
+                : ""
+            }
+            className="w-10 bg-gray-50 shadow-sm h-10 my-auto rounded-lg"
+          />
+          <div className="my-auto text-lg tracking-tight font-medium">{postObject?.title}</div>
+        </div>
+      </div>
       {!(user && !user?.isLoggedIn && (isOwner || user?.isAdmin)) ? (
         <WizardProvider>
-          <div className="h-full min-h-screen max-w-[1320px] mx-auto w-full grid md:grid-cols-12 pt-20">
+          <div className="h-full min-h-screen max-w-[1320px] mx-auto w-full grid md:grid-cols-12 pt-[128px]">
             <div className="hidden w-full h-full md:block md:col-span-6 lg:col-span-3">
               <div className="max-w-[280px] h-full w-full relative text-black/80">
                 <Menu post={postObject} />
@@ -181,7 +194,6 @@ const ToolSteps = ({ user, postObject, refetchPost }) => {
 
   useEffect(() => {
     if (step == 2) {
-      console.log(activeStepIndex);
       if (activeStepIndex == 0) {
         goTo("1");
       }
@@ -196,17 +208,26 @@ const ToolSteps = ({ user, postObject, refetchPost }) => {
             onNext={onNext}
             postObject={postObject}
             user={user}
+            isEditMode={postObject?.published_at}
           />
         </div>
       </Step>
       <Step key={`page/2`} id={"2"}>
         <div className="flex items-center justify-start h-full w-full relative">
-          <DescriptionExcerptForm postObject={postObject} user={user} />
+          <DescriptionExcerptForm
+            isEditMode={postObject?.published_at}
+            postObject={postObject}
+            user={user}
+          />
         </div>
       </Step>
       <Step key={`page/3`} id={"3"}>
         <div className="flex items-center justify-start h-full w-full relative">
-          <MediaForm postObject={postObject} user={user} />
+          <MediaForm
+            postObject={postObject}
+            user={user}
+            isEditMode={postObject?.published_at}
+          />
         </div>
       </Step>
       <Step key={`page/4`} id={"4"}>
