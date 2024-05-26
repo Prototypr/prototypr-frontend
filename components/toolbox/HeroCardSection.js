@@ -13,8 +13,7 @@ import Button from "@/components/Primitives/Button";
  * @returns
  */
 const HeroCardSection = ({ post, tags, featuredImage, user }) => {
-  console.log(post)
-  console.log(user)
+
   return (
     <div
       // className={`col-span-12 border border-1 border-[#dadee5] shadow-sm h-full rounded-2xl mx-auto relative overflow-hidden p-2 leading-tight w-full`}
