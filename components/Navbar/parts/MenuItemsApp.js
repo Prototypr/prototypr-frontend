@@ -6,7 +6,8 @@ import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { indigo, mauve, green, teal } from "@radix-ui/colors";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 import { FormattedMessage, useIntl } from "react-intl";
 import { DotsThree } from "@/components/icons";
@@ -133,22 +134,24 @@ const StyledCaret = styled(CaretDownIcon, {
   },
 });
 
+
 const StyledTriggerWithCaret = React.forwardRef(
   ({ children, ...props }, forwardedRef) => {
-    const router = useRouter();
-    let isActive = Boolean(router.asPath == props.href);
+    const pathname =usePathname();
+
+    let isActive = Boolean(pathname == props.href);
 
     if (
       props.href == "toolbox" &&
-      (router.asPath.indexOf("/toolbox") > -1 ||
-        router.asPath.indexOf("/prototyping") > -1)
+      (pathname.indexOf("/toolbox") > -1 ||
+      pathname.indexOf("/prototyping") > -1)
     ) {
       isActive = true;
     }
     if (
       props.href == "articles" &&
-      (router.asPath.indexOf("/posts") > -1 ||
-        router.asPath.indexOf("/topics") > -1)
+      (pathname.indexOf("/posts") > -1 ||
+        pathname.indexOf("/topics") > -1)
     ) {
       isActive = true;
     }
@@ -240,13 +243,13 @@ const StyledViewport = styled(NavigationMenuPrimitive.Viewport, {
 });
 
 const NextLink = ({ children, ...props }) => {
-  const router = useRouter();
-  let isActive = Boolean(router.asPath == props.href);
+  const pathname = usePathname();
+  let isActive = Boolean(pathname == props.href);
 
-  if (props.href == "/toolbox" && router.asPath == "/toolbox") {
+  if (props.href == "/toolbox" && pathname == "/toolbox") {
     isActive = true;
   }
-  if (props.href == "toolbox" && router.asPath.indexOf("toolbox") > -1) {
+  if (props.href == "toolbox" && pathname.indexOf("toolbox") > -1) {
     isActive = true;
   }
   //check if link is relative or absolute and add target blank if absolute

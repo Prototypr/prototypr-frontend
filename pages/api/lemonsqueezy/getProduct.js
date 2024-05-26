@@ -1,8 +1,9 @@
 // Assuming this is located at pages/api/yourEndpointName.js
 // import { fetchUser } from "@/app/actions";
 import { lemonSqueezyApiInstance } from "@/lib/utils/lemonSqueezyAPI";
-import { userCheck } from '@/lib/account/userCheck'
-import { withIronSessionApiRoute } from 'iron-session/next'
+import { userCheck } from "@/lib/account/userCheck";
+import { getIronSession } from "iron-session";
+import { sessionOptions } from "@/lib/iron-session/session";
 
 async function getProduct(req, res) {
   if (req.method !== "POST") {
@@ -24,7 +25,9 @@ async function getProduct(req, res) {
     }
 
     // return res.status(500).json({ message: "An error occurred" });
-    const response = await lemonSqueezyApiInstance.get("/variants/"+reqData.productId);
+    const response = await lemonSqueezyApiInstance.get(
+      "/variants/" + reqData.productId
+    );
     // const response = await lemonSqueezyApiInstance.get("/products");
 
     const product = response.data.data;
@@ -38,12 +41,8 @@ async function getProduct(req, res) {
 /**
  * hook up to iron session
  */
-export default withIronSessionApiRoute(getProduct,  {
-    password: process.env.SECRET_COOKIE_PASSWORD,
-    cookieName: 'prototypr/iron-session',
-    // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
-    cookieOptions: {
-      secure: process.env.NODE_ENV === 'production',
-    },
-  })
-  
+export default async function mainHandler(req, res) {
+  const session = await getIronSession(req, res, sessionOptions);
+  req.session = session;
+  return getProduct(req, res);
+}

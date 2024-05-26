@@ -3,8 +3,9 @@ import TwitterProvider from "next-auth/providers/twitter"
 import GitHubProvider from "next-auth/providers/github"
 import GoogleProvider from 'next-auth/providers/google'
 // import fetchJson from '@/lib/iron-session/fetchJson';
-import { withIronSessionApiRoute } from 'iron-session/next'
+import { getIronSession } from 'iron-session'
 import { sessionOptions } from '@/lib/iron-session/session'
+import { cookies } from "next/headers";
 
 let inviteCode = null
 const options = {
@@ -58,7 +59,6 @@ const options = {
           url.searchParams.set("invite_code",inviteCode)
         }
 
-        console.log('url strapi call', url)
         const response = await fetch(
           url.toString(), 
         );
@@ -100,6 +100,11 @@ async function handler(req,res){
 
 
 // export default (req,res)=> NextAuth(req, res, options);
-
-export default withIronSessionApiRoute(handler, sessionOptions)
-
+export default async function mainHandler (
+  req,
+  res,
+) {
+  const session = await getIronSession(req, res,  sessionOptions)
+  req.session = session
+  return handler(req, res)
+}

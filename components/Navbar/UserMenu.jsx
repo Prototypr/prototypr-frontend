@@ -12,37 +12,33 @@ const ProfileBadge = dynamic(() => import("../ProfileBadge"));
 // Exports
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
-const UserMenu = ({ user, userLoading }) => {
-  const [clientMounted, setClientMounted] = useState(false);
-  useEffect(() => {
-    setClientMounted(true);
-  }, []);
+const UserMenu = ({ user, userLoading, sessionUser }) => {
 
   /**
    * use the logged in true/false cookie
    * so there is minimal flicker between subscribe and log in button
    */
-  const [userLoggedInCookie] = useState(() => {
-    let loggedInCookie = jsCookie.get("prototypr-loggedIn");
-    if (loggedInCookie == "true") {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  // const [userLoggedInCookie] = useState(() => {
+  //   let loggedInCookie = jsCookie.get("prototypr-loggedIn");
+  //   if (loggedInCookie == "true") {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // });
 
   return (
     <>
-      {clientMounted ? (
+      {true ? (
         <NavigationMenuItem className="flex flex-col justify-center" style={{zIndex:999}}>
-          {user && user?.isLoggedIn ? (
+          {((user && user?.isLoggedIn )||sessionUser)? (
             <div className="w-8 mt-[4px] mr-1.5">
-              {user && (
+              {(user || sessionUser) && (
                 <ProfileBadge
                   user={user}
                   icon={
                     <img
-                      className="hover:shadow border border-1 rounded-full my-auto w-full h-fullcursor-pointer object-cover"
+                      className="hover:shadow border border-1 !rounded-full my-auto w-full h-full cursor-pointer object-cover"
                       src={
                         user?.profile?.avatar?.url
                           ? user.profile?.avatar.url
@@ -53,7 +49,7 @@ const UserMenu = ({ user, userLoading }) => {
                 />
               )}
             </div>
-          ) : userLoading && userLoggedInCookie ? (
+          ) : (userLoading && !sessionUser) ? (
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (
             <div className="hidden lg:flex">
@@ -71,17 +67,10 @@ const UserMenu = ({ user, userLoading }) => {
             // <NewsletterNav collapsed={false} />
           )}
         </NavigationMenuItem>
-      ) : userLoggedInCookie ? (
+      ) : (
         
         <NewPostDialog/>
-      ) : (
-        <></>
-      //   <Link href="/onboard">
-      //   <Button variant={"confirmRounded"}>
-      //     New post
-      //   </Button>
-      // </Link>
-      )}
+      ) }
     </>
   );
 };

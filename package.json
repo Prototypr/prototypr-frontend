@@ -96,7 +96,7 @@
     "fs": "0.0.1-security",
     "image-validator": "^1.2.1",
     "instantsearch.css": "^7.4.5",
-    "iron-session": "^6.1.2",
+    "iron-session": "8.0.1",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.1.2",
     "metascraper": "^5.33.8",

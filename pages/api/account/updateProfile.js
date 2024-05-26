@@ -4,10 +4,11 @@
  * @param res.body
  */
  import qs from "query-string";
- import { withIronSessionApiRoute } from 'iron-session/next'
+ import { getIronSession } from 'iron-session';
  import axios from "axios";
 import { updateSessionUser } from "@/lib/account/updateSessionUser";
- 
+ import { sessionOptions } from '@/lib/iron-session/session'
+
  async function updateProfile(
   req,
   res
@@ -78,11 +79,11 @@ import { updateSessionUser } from "@/lib/account/updateSessionUser";
 /**
  * hook up to iron session
  */
-export default withIronSessionApiRoute(updateProfile,  {
-  password: process.env.SECRET_COOKIE_PASSWORD,
-  cookieName: 'prototypr/iron-session',
-  // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
-  cookieOptions: {
-    secure: process.env.NODE_ENV === 'production',
-  },
-})
+export default async function mainHandler (
+  req,
+  res,
+) {
+  const session = await getIronSession(req, res,  sessionOptions)
+  req.session = session
+  return updateProfile(req, res)
+}

@@ -1,11 +1,15 @@
 // import { User } from "./user";
-import { withIronSessionApiRoute } from "iron-session/next";
+import { getIronSession } from "iron-session";
 import { sessionOptions } from "@/lib/iron-session/session";
 // import { NextApiRequest, NextApiResponse } from "next";
 
 var axios = require("axios");
 
-export default withIronSessionApiRoute(loginRoute, sessionOptions);
+export default async function mainHandler(req, res) {
+  const session = await getIronSession(req, res, sessionOptions);
+  req.session = session;
+  return loginRoute(req, res);
+}
 
 async function loginRoute(req, res) {
   const { token } = await req.body;

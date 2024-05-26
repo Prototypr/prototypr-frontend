@@ -22,6 +22,7 @@ export const LocationMenu = ({
   hideLocaleSwitcher,
   editor,
   showWriteButton,
+  sessionUser
 }) => {
   const intl = useIntl();
   const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
@@ -30,7 +31,7 @@ export const LocationMenu = ({
     <>
       {/* {!hideLocaleSwitcher && <LocaleSwitcher showWriteButton={showWriteButton} collapsed={collapsed} />} */}
 
-      {!user || !user?.isLoggedIn ? (
+      {((!user || !user?.isLoggedIn ) && !sessionUser)? (
         <NavigationMenuItem
           className={`hidden md:block md:flex md:flex-col md:justify-center`}
         >
@@ -39,7 +40,7 @@ export const LocationMenu = ({
           </NavigationMenuLink>} */}
         </NavigationMenuItem>
       ) : (
-        user &&
+        (user || sessionUser) &&
         !editor &&
         showWriteButton !== false && (
           <NavigationMenuItem

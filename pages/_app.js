@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import PlausibleProvider from 'next-plausible'
 
-import { useEffect } from "react";
 import { useMemo } from "react";
 // import "@/styles/index.scss";
 import { SessionProvider } from "next-auth/react";

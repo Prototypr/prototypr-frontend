@@ -1,3 +1,4 @@
+'use client'
 import { NAV_OFFSET } from "@/lib/constants";
 import Meta from "../meta";
 import Navbar, { HomePageNewNavBar } from "@/components/Navbar/Navbar";

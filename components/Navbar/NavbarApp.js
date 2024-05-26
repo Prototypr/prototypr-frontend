@@ -10,12 +10,12 @@ import {
 } from "@/components/Primitives/Navigation";
 import { useEffect, useRef, useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLink";
+import MobileActiveLink from "@/components/Navbar/parts/MobileActiveLinkApp";
 // import ActiveLinkNewMenu from "./parts/ActiveLinkNewMenu";
 import NavSponsor from "../v4/badge/NavSponsor";
 import SearchModal from "../SearchModal";
 // import { Waypoint } from "react-waypoint";
-import MenuItems from "@/components/Navbar/parts/MenuItems";
+import MenuItems from "@/components/Navbar/parts/MenuItemsApp";
 import NewPostDialog from "./parts/NewPostDialog";
 import { getScrollPercent } from "../StickyFooterCTA";
 // const WMButton = dynamic(() => import("./parts/WMButton"),
@@ -38,7 +38,8 @@ const Navbar = ({
   showWriteButton,
   maxWidth,
   navType,
-  navBackground
+  navBackground,
+  sessionUser
 }) => {
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -85,7 +86,7 @@ const Navbar = ({
     <>
       <nav
         id="main-nav"
-        className={`font-inter fixed top-0 ${navType == "full" ? "" : "md:top-2"}  w-full`}
+        className={`fixed top-0 ${navType == "full" ? "" : "md:top-2"}  w-full`}
         style={{ zIndex: 99 }}
       >
         <div
@@ -152,7 +153,7 @@ const Navbar = ({
             {/* <div className="flex flex-1 items-center justify-center items-stretch justify-between"> */}
             <div className="flex items-center h-9">
               <div className="hidden sm:ml-6 lg:block">
-                <MenuItems />
+                <MenuItems locale={false} />
               </div>
               {/* <div className="justify-end hidden xl:flex mr-6">
                 {[
@@ -174,7 +175,7 @@ const Navbar = ({
             </div>
             <div
               className={`items-center sm:static sm:inset-auto flex ${
-                user?.isLoggedin ? "mr-[52px] sm:mr-16" : "lg:mr-0"
+                (user?.isLoggedin || sessionUser) ? "mr-[52px] sm:mr-16" : "lg:mr-0"
               }`}
             >
               {/* <div className={`hidden mr-2 md:block my-auto`}>
@@ -188,6 +189,7 @@ const Navbar = ({
                 <NavigationMenuList>
                   <LocationMenu
                     user={user}
+                    sessionUser={sessionUser}
                     hideLocaleSwitcher={hideLocaleSwitcher}
                     collapsed={collapsed}
                     showWriteButton={showWriteButton}
@@ -195,7 +197,7 @@ const Navbar = ({
                 </NavigationMenuList>
               </NavigationMenu>
               <div className="relative">
-                <UserMenu userLoading={isLoading} user={user} />
+                <UserMenu userLoading={isLoading} user={user}  sessionUser={sessionUser}/>
               </div>
               <NavSponsor sponsor={sponsor} />
               <div>&nbsp;</div>
@@ -227,7 +229,7 @@ const Navbar = ({
             ) : (
               ""
             )}
-            {user?.isLoggedIn ? (
+            {(user?.isLoggedIn || sessionUser) ? (
               <div className="px-2.5 pt-2" onClick={toggleMobileNav}>
                 <NewPostDialog />
               </div>

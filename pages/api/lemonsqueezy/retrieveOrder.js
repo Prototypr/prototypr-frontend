@@ -2,7 +2,8 @@
 // import { fetchUser } from "@/app/actions";
 import { lemonSqueezyApiInstance } from "@/lib/utils/lemonSqueezyAPI";
 // import { userCheck } from '@/lib/account/userCheck'
-import { withIronSessionApiRoute } from 'iron-session/next'
+import { getIronSession } from 'iron-session';
+import { sessionOptions } from '@/lib/iron-session/session'
 
 // https://docs.lemonsqueezy.com/api/orders#retrieve-an-order
 async function retrieveOrder(req, res) {
@@ -40,12 +41,12 @@ async function retrieveOrder(req, res) {
 /**
  * hook up to iron session
  */
-export default withIronSessionApiRoute(retrieveOrder,  {
-    password: process.env.SECRET_COOKIE_PASSWORD,
-    cookieName: 'prototypr/iron-session',
-    // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
-    cookieOptions: {
-      secure: process.env.NODE_ENV === 'production',
-    },
-  })
+  export default async function mainHandler (
+    req,
+    res,
+  ) {
+    const session = await getIronSession(req, res,  sessionOptions)
+    req.session = session
+    return retrieveOrder(req, res)
+  }
   

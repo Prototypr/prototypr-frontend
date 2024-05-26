@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { keyframes } from "@stitches/react";
 import { styled } from "../stitches.config";
@@ -13,7 +14,8 @@ import useUser from "@/lib/iron-session/useUser";
 import fetchJson from "@/lib/iron-session/fetchJson";
 
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { UserCircle, Article, CircleWavyCheck } from "@/components/icons";
 
 const slideUpAndFade = keyframes({
@@ -213,10 +215,10 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
     <Box>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <IconButton aria-label="Customise options">{icon}</IconButton>
+          <IconButton aria-label="Customise options" className="!rounded-full">{icon}</IconButton>
         </DropdownMenuTrigger>
 
-        <DropdownMenuPrimitive.DropdownMenuPortal container={document.getElementById('main-nav')}>
+        <DropdownMenuPrimitive.DropdownMenuPortal container={typeof document !=='undefined' && document?.getElementById('main-nav')}>
 
           <DropdownMenuContent
             side={"bottom"}

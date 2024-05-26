@@ -1,16 +1,24 @@
-
+"use server"
    
-import { withIronSessionApiRoute } from 'iron-session/next'
 import { sessionOptions } from '@/lib/iron-session/session'
 import axios from "axios";
 import { getNextAuthSession } from '@/lib/account/getNextAuthSession'
 import { updateSessionUser } from '@/lib/account/updateSessionUser';
 import {checkSessionExpired} from  '@/lib/account/checkSessionExpired';
+import { getIronSession } from 'iron-session';
 /**
  * combines nextauth authentication
  * with strapi passwordless auth
  */
-export default withIronSessionApiRoute(userRoute, sessionOptions)
+export default async function mainHandler (
+  req,
+  res,
+) {
+  const session = await getIronSession(req, res,  sessionOptions)
+  req.session = session
+  return userRoute(req, res)
+}
+
 
 async function userRoute(req, res) {
 

@@ -1,5 +1,7 @@
 // Import necessary modules
-import { withIronSessionApiRoute } from 'iron-session/next';
+import { getIronSession } from "iron-session";
+import { sessionOptions } from "@/lib/iron-session/session";
+
 // import axios from "axios";
 // import { parse } from 'cookie';
 // import Cookies from 'cookies'
@@ -19,9 +21,9 @@ async function setSessionInviteCode(req, res) {
 
   // let inviteCode = cookies.get('inviteCode')
   // // console.log(	req.cookies.get('inviteCode')?.value  )
-// console.log('session')
-// console.log(req.session)
-// const inviteCode = false
+  // console.log('session')
+  // console.log(req.session)
+  // const inviteCode = false
   // console.log(inviteCode)
   try {
     // if (!req.session.user) {
@@ -34,28 +36,26 @@ async function setSessionInviteCode(req, res) {
       req.session.inviteCode = inviteCode;
       // req.session.user.inviteCode = inviteCode;
       await req.session.save(); // Save the session with the access code
-      console.log('saved req.session')
-      console.log(req.session)
-      return res.status(200).json({ message: "Access code saved in session", inviteCode });
-    }else{
-      console.log('no access code cookie found')
-      return res.status(500).json({error:'No access code'})
+      console.log("saved req.session");
+      console.log(req.session);
+      return res
+        .status(200)
+        .json({ message: "Access code saved in session", inviteCode });
+    } else {
+      console.log("no access code cookie found");
+      return res.status(500).json({ error: "No access code" });
     }
 
     // Any other logic can follow here, if needed
     // For example, if you're still updating the profile or performing another action
-
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: error.message });
   }
 }
 
-export default withIronSessionApiRoute(setSessionInviteCode, {
-  password: process.env.SECRET_COOKIE_PASSWORD,
-  cookieName: 'prototypr/iron-session',
-  // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
-  cookieOptions: {
-    secure: process.env.NODE_ENV === 'production',
-  },
-});
+export default async function mainHandler(req, res) {
+  const session = await getIronSession(req, res, sessionOptions);
+  req.session = session;
+  return setSessionInviteCode(req, res);
+}

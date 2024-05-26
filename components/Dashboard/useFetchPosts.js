@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react";
 import { getUserArticles } from "@/lib/api";
 
@@ -21,6 +22,9 @@ const useFetchPosts = (user, postStatus, postType) => {
           pageOffset = 0
         }
     
+        if(!user){
+          return false
+        }
         const data = await getUserArticles({user, postStatus:postStatus, pageSize:PAGE_SIZE, offset:pageOffset, type:postType});
         const postsFromUser = data.userPosts?.posts
         setPosts(postsFromUser)

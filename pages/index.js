@@ -63,6 +63,7 @@ import NewsColumn from "@/components/v4/layout/NewsColumn";
 import { groupPostsByDate } from "@/lib/utils/groupPostsByDate";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
+// import { fetchUser } from "app/actions";
 
 export default function Index({
   preview,
@@ -81,7 +82,6 @@ export default function Index({
 
   const titleText = intl.formatMessage({ id: "index.header.title" });
   const descriptionText = intl.formatMessage({ id: "intro.description" });
-
 
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -112,7 +112,7 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        {!user?.isLoggedIn ? (
+        {!user?.isLoggedIn  ? (
           <>
             <IntroBanner sponsor={sponsors?.length ? sponsors[0] : null} />
             {/* <SectionDivider

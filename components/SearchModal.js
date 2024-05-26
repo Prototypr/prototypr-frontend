@@ -1,6 +1,8 @@
+"use client"
 import "instantsearch.css/themes/algolia-min.css";
 import React, { useEffect, useState } from "react";
 import Button from "@/components/Primitives/Button";
+import { usePathname } from "next/navigation";
 import {
   InstantSearch,
   InfiniteHits,
@@ -10,7 +12,7 @@ import {
   Configure,
 } from "react-instantsearch-dom";
 import { Dialog, DialogTrigger, DialogContentLarge, DialogTitle, DialogDescription, DialogClose, IconButton } from "@/components/Primitives/Dialog";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import Link from "next/link";
 import { Cross2Icon } from "@radix-ui/react-icons";
@@ -41,7 +43,8 @@ const SearchModal = (props) => {
     setSubmitOpen(!submitOpen)
   }
 
-  const router = useRouter();
+  const pathname = usePathname();
+  // const router = useRouter();
 
 
   useEffect(() => {
@@ -50,13 +53,13 @@ const SearchModal = (props) => {
       toggleSubmitOpen()
     }    
 
-  }, [router.asPath]);
+  }, [pathname]);
 
 
   return (
     <Dialog onOpenChange={toggleSubmitOpen} open={submitOpen}>
         <DialogTrigger asChild>
-        <Button className="rounded-full w-6 h-6 hover:bg-blue-50 cursor-pointer ml-2 bg-gray-50/20 p-2 text-sm">
+        <Button className="!rounded-full !w-6 !h-6 !hover:bg-blue-50 cursor-pointer !ml-2 !bg-gray-50/20 !p-2 !text-sm">
           <MagnifyingGlass size={20} color="#444" weight="bold"/>
             </Button>
         </DialogTrigger>

@@ -61,14 +61,14 @@ const NewPostDialog = ({button}) => {
             </Button>
         </div> */}
         </DialogTrigger>
-        <DialogContentLarge className="bg-transparent shadow-none" variant="big">
+        <DialogContentLarge className="!bg-transparent !shadow-none" variant="big">
           <div>
           {/* <DialogTitle>Search</DialogTitle> */}
           <DialogDescription>
           <div className="relative  flex flex-col md:flex-row justify-center">
             <Link href="/write">
                 <div className="flex group cursor-pointer flex-col mb-10 md:mb-0 md:mr-12">
-                    <IconButton className="bg-white mx-auto transition transition-all duration-300 group-hover:scale-110 ">
+                    <IconButton className="!bg-white mx-auto !transition !transition-all !duration-300 !group-hover:scale-110 ">
                         <TextAa weight="fill" size="44"/>
                     </IconButton>
                     <h3 className="text-white text-lg mt-2 font-medium text-center transition transition-all duration-300 group-hover:scale-110 ">Article</h3>
@@ -76,7 +76,7 @@ const NewPostDialog = ({button}) => {
             </Link>
             <Link href="/toolbox/post">
                 <div className="flex group cursor-pointer flex-col mb-10 md:mb-0 md:mr-12">
-                    <IconButton className="bg-blue-500 transition transition-all duration-300 group-hover:scale-110 mx-auto">
+                    <IconButton className="!bg-blue-500 !transition !transition-all !duration-300 !group-hover:scale-110 mx-auto">
                         <Package weight="fill" size="44"/>
                     </IconButton>
                     <h3 className="text-white text-lg transition transition-all duration-300 group-hover:scale-110 mt-2 font-medium text-center">Tool</h3>
