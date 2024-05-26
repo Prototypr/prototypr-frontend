@@ -175,7 +175,7 @@ const Navbar = ({
             </div>
             <div
               className={`items-center sm:static sm:inset-auto flex ${
-                (user?.isLoggedin || sessionUser) ? "mr-[52px] sm:mr-16" : "lg:mr-0"
+                (user?.isLoggedin || sessionUser) ? "" : "lg:mr-0"
               }`}
             >
               {/* <div className={`hidden mr-2 md:block my-auto`}>
@@ -199,7 +199,7 @@ const Navbar = ({
               <div className="relative">
                 <UserMenu userLoading={isLoading} user={user}  sessionUser={sessionUser}/>
               </div>
-              <NavSponsor sponsor={sponsor} />
+              {sponsor?<NavSponsor sponsor={sponsor} />:null}
               <div>&nbsp;</div>
             </div>
           </div>

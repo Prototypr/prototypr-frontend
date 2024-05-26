@@ -3,6 +3,7 @@
 
 import { fetchUser } from "../../actions";
 import Layout from "@/components/new-index/layoutForApp";
+// import Layout from "../../layout";
 // import { redirect } from 'next/navigation'
 // import AccountPageWrapper from './pageWrapper'
 import { HOME_OG_IMAGE_URL } from "@/lib/constants";
@@ -28,6 +29,15 @@ export const metadata = {
     site: "@prototypr",
     cardType: "summary_large_image",
   },
+  favicon:{
+    appleTouchIcon: "favicon/apple-touch-icon.png",
+    favicon32: "favicon/favicon-32x32.png",
+    favicon16: "favicon/favicon-16x16.png",
+    siteManifest: "favicon/site.webmanifest",
+    msTileColor: "#da532c",
+    themeColor: "#ffffff",
+  
+  }
 };
 
 export default async function AccountPage() {

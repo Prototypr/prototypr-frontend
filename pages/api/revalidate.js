@@ -1,6 +1,7 @@
 // only published posts should be revalidated
 //
 import { purgeCloudFlareCache } from "@/lib/utils/cloudflare";
+import axios from "axios";
 
 export default async function handler(req, res) {
   // Check for secret to confirm this is a valid request
@@ -10,14 +11,15 @@ export default async function handler(req, res) {
 
   try {
     const { entry } = req.body;
-    console.log(req.body)
+
     // revalidate posts
     if (entry.type=='article' && (entry.status === "publish" || entry.publishedAt)) {
-      console.log("revalidating published post :", entry.slug);
       const url = `/post/${entry.slug}`;
+      
       await res.revalidate(url);
       if(process.env.NODE_ENV=='production'){
         await purgeCloudFlareCache(url);
+        await clearAuthCache(entry.id);
       }
       return res.json({ revalidated: true });
     } 
@@ -29,6 +31,7 @@ export default async function handler(req, res) {
       //if production
       if(process.env.NODE_ENV=='production'){
         await purgeCloudFlareCache(url);
+        await clearAuthCache(entry.id);
       }
       return res.json({ revalidated: true });
     }
@@ -39,6 +42,7 @@ export default async function handler(req, res) {
       await res.revalidate(url);
       if(process.env.NODE_ENV=='production'){
         await purgeCloudFlareCache(url);
+        await clearAuthCache(entry.id);
       }
       return res.json({ revalidated: true });
     }
@@ -49,6 +53,7 @@ export default async function handler(req, res) {
       await res.revalidate(url);
       if(process.env.NODE_ENV=='production'){
         await purgeCloudFlareCache(url);
+        await clearAuthCache(entry.id);
       }
       return res.json({ revalidated: true });
     }
@@ -61,3 +66,44 @@ export default async function handler(req, res) {
     return res.status(500).send("Error revalidating");
   }
 }
+
+
+const clearAuthCache = async (postId) => {
+
+  //fetch the user of the post by the postId from strapi using the admin secret key
+    
+
+  var config = {
+    method: 'get',
+    url: process.env.NEXT_PUBLIC_STRAPI_API_URL+`/api/posts/${postId}?populate=user`,
+    headers: { 
+      'authorization': `Bearer ${process.env.STRAPI_READONLY_TOKEN}`, 
+      'Content-Type': 'application/json'
+    }
+  };
+
+  axios(config)
+        .then(async function (response) {
+            try{
+              let userSlug = (response?.data?.data?.attributes?.user?.data?.attributes?.slug)
+              if(userSlug){
+                let url = `/people/${userSlug}`
+                await purgeCloudFlareCache(url);
+              }
+                // return res.status(200).json({ views: response.data?.results?.visitors?.value})
+            }catch(e){
+              console.log(e)
+            }
+        })
+        .catch(function (error) {
+        console.log(error.message);
+        return res.status(500).send("Error checking analytics");
+        });
+
+  const url = "/api/auth/user";
+  await res.revalidate(url);
+  if(process.env.NODE_ENV=='production'){
+    await purgeCloudFlareCache(url);
+  }
+  return res.json({ revalidated: true });
+};

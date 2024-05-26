@@ -197,7 +197,7 @@ const Navbar = ({
               <div className="relative">
                 <UserMenu userLoading={isLoading} user={user} />
               </div>
-              <NavSponsor sponsor={sponsor} />
+              {sponsor?<NavSponsor sponsor={sponsor} />:null}
               <div>&nbsp;</div>
             </div>
           </div>
