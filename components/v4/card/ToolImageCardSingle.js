@@ -15,7 +15,8 @@ const ToolImageCardSingle = ({
 }) => {
 
 
-  const logo = post?.logo?post?.logo:post?.legacyMedia?.logoNew?post?.legacyMedia?.logoNew:''
+  const logo = post?.attributes?.logo?.data?.attributes?.url?post?.attributes?.logo?.data?.attributes?.url:post?.legacyMedia?.logoNew?post?.legacyMedia?.logoNew:post?.logo?post?.logo:''
+
   return (
     <div className="h-full">
       <Link
