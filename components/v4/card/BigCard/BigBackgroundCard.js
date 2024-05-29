@@ -4,6 +4,7 @@ import Avatar from "../../avatar/Avatar";
 import MediumTag from "../../tag/MediumTag";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import Moment from "react-moment";
+const defaultBase64 = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAABLCAQAAAA1k5H2AAAAi0lEQVR42u3SMQEAAAgDoC251a3gL2SgmfBYBRAA`;
 
 // layouts: 1 is big image
 // 2 is small image
@@ -35,7 +36,7 @@ const BigBackgroundCard = ({
         <Link href={link ?? ""}>
           <Image
             placeholder="blur"
-            blurDataURL={post?.attributes?.base64}
+            blurDataURL={post?.attributes?.base64?post?.attributes?.base64:defaultBase64}
             loader={gumletLoader}
             className="object-cover cursor-pointer group-hover:scale-[1.03] transition transition-all duration-700"
             layout="fill"

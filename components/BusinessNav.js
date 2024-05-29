@@ -150,7 +150,7 @@ export default function BusinessNav({
                   showJobsButton={showJobsButton}
                   hideLocaleSwitcher={true}
                   user={user}
-                  userLoading={isLoading}
+                  userLoading={false}
                   userLoggedInCookie={userLoggedInCookie}
                   activeNav={activeNav}
                   editor={isEditor}
@@ -170,7 +170,7 @@ export default function BusinessNav({
             <NavigationMenuMobile
               user={user}
               userLoggedInCookie={userLoggedInCookie}
-              userLoading={isLoading}
+              userLoading={false}
               activeNav={activeNav}
             />
           </div>

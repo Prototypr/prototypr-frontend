@@ -124,7 +124,7 @@ export default function EditorNav({ activeNav, postStatus }) {
                   showJobsButton={false}
                   hideLocaleSwitcher={true}
                   user={user}
-                  userLoading={isLoading}
+                  userLoading={false}
                   userLoggedInCookie={userLoggedInCookie}
                   activeNav={activeNav}
                   editor={true}
@@ -144,7 +144,7 @@ export default function EditorNav({ activeNav, postStatus }) {
             <NavigationMenuMobile
               user={user}
               userLoggedInCookie={userLoggedInCookie}
-              userLoading={isLoading}
+              userLoading={false}
               activeNav={activeNav}
             />
           </div>

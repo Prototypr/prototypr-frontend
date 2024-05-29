@@ -92,7 +92,6 @@ export default function Index({
   // const jobsSidebar = jobs.filter((item, i) => i !== 0);
   const toolsList = allTools;
 
-  
   return (
     <>
       <Layout
@@ -112,7 +111,7 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        {!user?.isLoggedIn  ? (
+        {!user?.isLoggedIn ? (
           <>
             <IntroBanner sponsor={sponsors?.length ? sponsors[0] : null} />
             {/* <SectionDivider
@@ -141,8 +140,8 @@ export default function Index({
             </div>
 
             <div className="order-2 md:order-2 col-span-9 md:col-span-6 ">
-            <h3 className="md:hidden mt-6 mb-3 font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
-                  New Posts
+              <h3 className="md:hidden mt-6 mb-3 font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
+                New Posts
               </h3>
               <HeroArticleSection
                 user={user}
@@ -184,7 +183,7 @@ export default function Index({
               <CardColumn
                 sponsor={navSponsor}
                 withBackground={false}
-                tools={[...toolsList.slice(0, 8)]}
+                tools={toolsList ? [...toolsList.slice(0, 8)] : []}
               />
             </div>
           </div>
@@ -206,7 +205,9 @@ export default function Index({
           <NewsletterSection />
         </div>
         <div className="mt-14 py-4 pb-[100px] bg-[#f2f4fa]">
-          <ToolsCarouselSection toolsList={toolsList} sponsors={sponsors} />
+          {toolsList?.length > 0 ? (
+            <ToolsCarouselSection toolsList={toolsList} sponsors={sponsors} />
+          ) : null}
           {/* <Container maxWidth="max-w-[1320px] -mb-10 mt-12 z-30 relative">
           <TwoColumnCards />
         </Container> */}
@@ -216,8 +217,12 @@ export default function Index({
           <HeroArticleSection
             user={user}
             cols={4}
-            heroCardPost={morePosts[4]}
-            viewablePosts={morePosts.slice(5, morePosts.length)}
+            heroCardPost={morePosts?.length > 3 ? morePosts[4] : null}
+            viewablePosts={
+              morePosts?.length > 5
+                ? morePosts.slice(5, morePosts.length)
+                : null
+            }
             showBigPost={2}
             showTitle={false}
           />
@@ -322,7 +327,10 @@ export default function Index({
           {/* <SectionDivider /> */}
           {TAB_ITEMS?.map((topic, index) => {
             return (
-              <div key={`topicsection_${index}`} className={`z-40 ${index % 2 === 0?'bg-[#f2f4fa]':''} py-10 `}>
+              <div
+                key={`topicsection_${index}`}
+                className={`z-40 ${index % 2 === 0 ? "bg-[#f2f4fa]" : ""} py-10 `}
+              >
                 <TopicSectionHome
                   tagline={topic.tagline}
                   showSidebar={false}
@@ -336,8 +344,13 @@ export default function Index({
                   )}
                   // heroJob={heroJob}
                   sponsors={sponsors}
-                  toolsList={topicRes[topic.slug]?.tools.slice(0, 10)}
-                  authorsList={topicRes[topic.slug]?.authors}
+                  toolsList={(
+                    (topicRes && topicRes[topic.slug]?.tools) ||
+                    []
+                  ).slice(0, 10)}
+                  authorsList={
+                    (topicRes && topicRes[topic.slug]?.authors) || {}
+                  }
                 />
 
                 {/* <SectionDivider py="py-12 opacity-70" transparentLine={true} /> */}
@@ -362,7 +375,6 @@ export default function Index({
               </div>
             );
           })}
-
         </div>
         {/* <BrowserView>
           <DesignTool allTools={toolsList} />
@@ -395,11 +407,14 @@ export async function getStaticProps({ preview = null, locale }) {
       "date:desc",
     ])) || [];
 
-
-  for (var x=0;x<allTools.data.length;x++){
+  for (var x = 0; x < allTools?.data?.length; x++) {
     //generate blurhash here
-    allTools.data[x].attributes.logoBase64 = createB64WithFallback(allTools.data[x]?.attributes?.logo?.data?.attributes?.blurhash);
-    allTools.data[x].attributes.base64 = createB64WithFallback(allTools.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash);
+    allTools.data[x].attributes.logoBase64 = createB64WithFallback(
+      allTools.data[x]?.attributes?.logo?.data?.attributes?.blurhash
+    );
+    allTools.data[x].attributes.base64 = createB64WithFallback(
+      allTools.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash
+    );
   }
 
   let allNews = (await getAllNews(preview, 15, 0)) || [];
@@ -413,10 +428,11 @@ export async function getStaticProps({ preview = null, locale }) {
       (await getCommonQuery(preview, [tag], "article", 12, 0, sort)) || [];
 
     //add blurhash to the images
-    for(var x = 0;x<res.data.length;x++){
-      res.data[x].attributes.base64 = createB64WithFallback(res.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash);
+    for (var x = 0; x < res?.data?.length; x++) {
+      res.data[x].attributes.base64 = createB64WithFallback(
+        res.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash
+      );
     }
-    
 
     const topicToolsRes =
       (await getCommonQuery(
@@ -437,9 +453,14 @@ export async function getStaticProps({ preview = null, locale }) {
     shuffleArray(topicToolsRes.data);
 
     //add blurhash to the images
-    for(var x = 0;x<topicToolsRes.data.length;x++){
-      topicToolsRes.data[x].attributes.logoBase64 = createB64WithFallback(topicToolsRes.data[x]?.attributes?.logo?.data?.attributes?.blurhash);
-      topicToolsRes.data[x].attributes.base64 = createB64WithFallback(topicToolsRes.data[x]?.attributes?.featuredImage?.data?.attributes?.blurhash);
+    for (var x = 0; x < topicToolsRes?.data?.length; x++) {
+      topicToolsRes.data[x].attributes.logoBase64 = createB64WithFallback(
+        topicToolsRes.data[x]?.attributes?.logo?.data?.attributes?.blurhash
+      );
+      topicToolsRes.data[x].attributes.base64 = createB64WithFallback(
+        topicToolsRes.data[x]?.attributes?.featuredImage?.data?.attributes
+          ?.blurhash
+      );
     }
 
     const topicData = {
@@ -449,7 +470,6 @@ export async function getStaticProps({ preview = null, locale }) {
     };
     topicRes[tag] = topicData;
   }
-
 
   // const popularTags =
   //   (await getPopularTopics({ postType: "article", pageSize: 34 })) || [];
@@ -461,8 +481,10 @@ export async function getStaticProps({ preview = null, locale }) {
   allTools = transformPostListOld(allTools.data, locale);
 
   //add blurhash to allPosts images
-  for(var x = 0;x<allPosts.length;x++){
-    allPosts[x].attributes.base64 = createB64WithFallback(allPosts[x]?.attributes?.featuredImage?.data?.attributes?.blurhash);
+  for (var x = 0; x < allPosts?.length; x++) {
+    allPosts[x].attributes.base64 = createB64WithFallback(
+      allPosts[x]?.attributes?.featuredImage?.data?.attributes?.blurhash
+    );
   }
 
   // shuffleArray(allTools)
@@ -471,8 +493,7 @@ export async function getStaticProps({ preview = null, locale }) {
   allTools = formatAllTools({ tools: allTools, tagNumber: 1 });
   allNews = formatAllTools({ tools: allNews.data, tagNumber: 0 });
 
-
-  const {navSponsor, sponsors} = await getSponsors();
+  const { navSponsor, sponsors } = await getSponsors();
 
   // for(var x = 0; x<allNews.tools.length;x++){
   //   allNews.tools[x].attributes.base64 = createB64WithFallback(allNews.tools[x]?.attributes?.featuredImage?.data?.blurhash);
@@ -480,19 +501,18 @@ export async function getStaticProps({ preview = null, locale }) {
   // }
 
   let groupedNewsPosts = groupPostsByDate(allNews);
-  
 
   return {
     props: {
-      heroPost: allPosts[0],
-      morePosts: allPosts.slice(1),
-      allTools: allTools,
-      allNews: allNews,
-      groupedNewsPosts: groupedNewsPosts,
+      heroPost: allPosts?.length ? allPosts[0] : null,
+      morePosts: allPosts?.length > 1 ? allPosts.slice(1) : null,
+      allTools: allTools?.length ? allTools : null,
+      allNews: allNews?.length ? allNews : null,
+      groupedNewsPosts: groupedNewsPosts ? groupedNewsPosts : null,
       // popularTags,
       // otherPosts: otherPosts,
       // interviewPosts: interviews.data,
-      topicRes,
+      topicRes: topicRes ? topicRes : null,
       preview,
       // jobs,
       // randomPosts: randomPosts.slice(0, 8),

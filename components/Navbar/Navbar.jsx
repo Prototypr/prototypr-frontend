@@ -195,7 +195,7 @@ const Navbar = ({
                 </NavigationMenuList>
               </NavigationMenu>
               <div className="relative">
-                <UserMenu userLoading={isLoading} user={user} />
+                <UserMenu userLoading={false} user={user} />
               </div>
               {sponsor?<NavSponsor sponsor={sponsor} />:null}
               <div>&nbsp;</div>

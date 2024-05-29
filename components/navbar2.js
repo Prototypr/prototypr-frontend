@@ -156,7 +156,7 @@ export default function Navbar({ activeNav }) {
                 <NavigationMenuDemo
                   collapsed={showNav}
                   user={user}
-                  userLoading={isLoading}
+                  userLoading={false}
                   userLoggedInCookie={userLoggedInCookie}
                   activeNav={activeNav}
                 />
@@ -165,7 +165,7 @@ export default function Navbar({ activeNav }) {
           </div>
           <SubNav
             collapse={showNav}
-            userLoading={isLoading}
+            userLoading={false}
             activeNav={activeNav}
           />
         </div>
@@ -180,7 +180,7 @@ export default function Navbar({ activeNav }) {
             <NavigationMenuMobile
               user={user}
               userLoggedInCookie={userLoggedInCookie}
-              userLoading={isLoading}
+              userLoading={false}
               activeNav={activeNav}
             />
           </div>

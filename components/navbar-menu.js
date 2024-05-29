@@ -225,7 +225,7 @@ export const NavigationMenuDemo = ({
             {user && user?.isLoggedIn ? (
               <div className="ml-2 w-8 relative">
                 {/* <Link href="/account"> */}
-                {user ? <UserMenu userLoading={userLoading} user={user} /> : ""}
+                {user ? <UserMenu userLoading={false} user={user} /> : ""}
                 {/* {user && 
                   <ProfileBadge
                   user={user}

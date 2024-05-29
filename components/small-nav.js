@@ -140,7 +140,7 @@ export default function Navbar({ activeNav }) {
                 <NavigationMenuDemo
                   collapsed={showNav}
                   user={user}
-                  userLoading={isLoading}
+                  userLoading={false}
                   userLoggedInCookie={userLoggedInCookie}
                   activeNav={activeNav}
                 />
