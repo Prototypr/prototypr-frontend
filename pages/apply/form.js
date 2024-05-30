@@ -51,7 +51,7 @@ export default function Apply() {
         />
       </Head>
 
-      <div className="h-full relative w-full grid md:grid-cols-12">
+      <div className="h-full relative w-full grid md:grid-cols-12 min-h-screen">
     
         {!user?.isLoggedIn? <div className="hidden z-50 relative w-full h-full md:block md:col-span-5 lg:col-span-5">
           <div 

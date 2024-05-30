@@ -57,7 +57,7 @@ export default function Index({allTags}) {
         />
       </Head>
 
-      <div className="h-full relative w-full grid md:grid-cols-12">
+      <div className="h-full relative w-full grid md:grid-cols-12 min-h-screen">
         <div className={`col-span-12 ${!user?.isLoggedIn?`md:col-span-6 lg:col-span-6`:''} z-10 relative`}>
           <div className="flex items-center justify-center h-full w-full relative">
             {!user && <Fallback />}
