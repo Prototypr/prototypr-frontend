@@ -11,6 +11,7 @@ import Skeleton from "./Skeleton";
 const Dashboard = ({ postStatus, postType, currentTab }) => {
   const { user } = useUser({
     redirectIfFound: false,
+    redirectTo: "/",
   });
 
   const { posts, loading, refetch, total, pageSize } = useFetchPosts(

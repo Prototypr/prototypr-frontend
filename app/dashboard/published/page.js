@@ -43,7 +43,7 @@ export default async function AccountPage() {
           style={{ maxWidth: 1200 }}
         >
           <div className="flex flex-row justify-between items-baseline mt-3">
-            <h1 className="my-3 text-3xl font-semibold">My posts</h1>
+            <h1 className="my-3 text-3xl font-semibold">Your posts</h1>
           </div>
           <Navigation activeTab={2} />
           {/* set post type to empty so it gets tools too */}

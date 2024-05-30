@@ -43,7 +43,7 @@ export default function Apply() {
         <Meta
           seo={{
             title: "Apply for Prototypr Account",
-            description: "Applicaiton to create an account",
+            description: "Application to create an account",
             //   image: "",
             canonical: "https://prototypr.io/early-acess",
             url: "https://prototypr.io/early-acess",

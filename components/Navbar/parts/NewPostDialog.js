@@ -46,7 +46,7 @@ const NewPostDialog = ({button}) => {
     <Dialog onOpenChange={toggleSubmitOpen} open={submitOpen}>
         <DialogTrigger asChild>
         {button==true?
-       <Button variant={"confirmBig"} className="rounded-full">
+       <Button variant={"confirmBig"} className="!rounded-xl !h-[44px] !px-4 !font-medium !py-0">
           Create new
         </Button>
         :<div className="flex cursor-pointer text-black/80 text-sm mr-1">

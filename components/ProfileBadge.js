@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { keyframes } from "@stitches/react";
 import { styled } from "../stitches.config";
@@ -156,7 +156,6 @@ const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
   fill: "white",
 });
 
-
 // Exports
 export const DropdownMenu = DropdownMenuPrimitive.Root;
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
@@ -205,7 +204,6 @@ const IconButton = styled("button", {
 // }
 
 export const ProfileBadgeDropdown = ({ icon, user }) => {
-
   const router = useRouter();
   const { mutateUser } = useUser({
     redirectTo: "/",
@@ -215,11 +213,17 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
     <Box>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <IconButton aria-label="Customise options" className="!rounded-full">{icon}</IconButton>
+          <IconButton aria-label="Customise options" className="!rounded-full">
+            {icon}
+          </IconButton>
         </DropdownMenuTrigger>
 
-        <DropdownMenuPrimitive.DropdownMenuPortal container={typeof document !=='undefined' && document?.getElementById('main-nav')}>
-
+        <DropdownMenuPrimitive.DropdownMenuPortal
+          container={
+            typeof document !== "undefined" &&
+            document?.getElementById("main-nav")
+          }
+        >
           <DropdownMenuContent
             side={"bottom"}
             align={"center"}
@@ -229,16 +233,15 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
           >
             <DropdownMenuItem
               onSelect={() => {
-                if(user?.profile?.approved){
+                if (user?.profile?.approved) {
                   router.push(`/people/${user?.profile?.slug}`);
-                }else{
+                } else {
                   router.push(`/account/profile`);
                 }
               }}
             >
-              
-                  <UserCircle size={26} className="opacity-80 mr-3"/>
-                  Profile
+              <UserCircle size={26} className="opacity-80 mr-3" />
+              Profile
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />
@@ -248,22 +251,23 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
                 router.push("/dashboard/drafts");
               }}
             >
-              <Article size={26} className="opacity-80 mr-3"/>
-              Dashboard
+              <Article size={26} className="opacity-80 mr-3" />
+              Posts
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
 
-            <DropdownMenuItem
-              onSelect={() => {
-                router.push(`/onboard?onboard=true`);
-              }}
-            >
-              <CircleWavyCheck size={26}  className="opacity-80 mr-3" />
-              {/* <Link href="/account"> */}
-              Setup
-              {/* </Link> */}
-              {/* <RightSlot>⌘+T</RightSlot> */}
-            </DropdownMenuItem>
+            {user?.profile?.onboardComplete !== true ? (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onSelect={() => {
+                    router.push(`/onboard?onboard=true`);
+                  }}
+                >
+                  <CircleWavyCheck size={26} className="opacity-80 mr-3" />
+                  Setup
+                </DropdownMenuItem>
+              </>
+            ) : null}
             {/* <DropdownMenuSeparator /> */}
 
             {/* <DropdownMenuItemBanner
@@ -298,7 +302,7 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
             </DropdownMenuItem>
             <DropdownMenuSeparator /> */}
             <DropdownMenuSeparator />
-          <DropdownMenuItem
+            <DropdownMenuItem
               onSelect={() => {
                 router.push("/account");
               }}
@@ -314,7 +318,7 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
               Help
             </DropdownMenuItem> */}
 
-            {user?.isAdmin? (
+            {user?.isAdmin ? (
               <>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
@@ -334,7 +338,9 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
                   👾 Strapi
                 </DropdownMenuItem>
               </>
-            ):''}
+            ) : (
+              ""
+            )}
             {user?.profile?.companies?.length ? (
               <>
                 <DropdownMenuSeparator />
@@ -346,7 +352,9 @@ export const ProfileBadgeDropdown = ({ icon, user }) => {
                   Business hub
                 </DropdownMenuItem>
               </>
-            ):''}
+            ) : (
+              ""
+            )}
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onSelect={async () => {

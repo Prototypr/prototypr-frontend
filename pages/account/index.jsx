@@ -9,7 +9,7 @@ import axios from "axios";
 import useUser from "@/lib/iron-session/useUser";
 import { getPostsByPageAndAuthor } from "@/lib/api";
 import { useEffect, useState } from "react";
-import {CircleWavyCheck} from '@/components/icons'
+import {CircleWavyCheck, CircleWavyQuestion} from '@/components/icons'
 
 const toast = dynamic(() => import("react-hot-toast"), { ssr: true });
 const Form = dynamic(() => import("@/components/Form"), { ssr: true });
@@ -67,7 +67,8 @@ const AccountPage = ({ preview }) => {
                 <div className="mb-3">
                   <div className="shadow-sm flex w-full bg-white p-4 px-4 rounded-xl text-gray-900 border border-gray-300/70">
                     <div className="mr-4 my-auto">
-                      <CircleWavyCheck size="44" />
+                      <CircleWavyQuestion size="44"/>
+                      {/* <CircleWavyCheck size="44" /> */}
                     </div>
                     <p className="w-full max-w-4xl">
                       Your{" "}
