@@ -9,7 +9,7 @@ const PrototyprNetworkCTA = ({ data }) => {
         <div className="w-full flex space-between rounded-[12px] h-auto p-5">
           <div className="w-2/3 flex flex-col">
             <div>
-                <h2 className="text-gray-800 font-semibold text-lg font-inter">
+                <h2 className="text-gray-800 font-semibold text-lg ">
                 By creators, for creators
                 </h2>
                 <p className='text-sm text-gray-500 max-w-[250px]'>

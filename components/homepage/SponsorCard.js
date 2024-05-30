@@ -9,7 +9,7 @@ const SponsorCard = ({ data }) => {
               <img src={data.src} />
             </div>
             <div className="w-full col-span-2 flex flex-col grid gap-1">
-              <p className="w-auto max-w-[150px] text-[#6B6B6B] font-medium tracking-[-0.1px] text-[13px] font-inter ">
+              <p className="w-auto max-w-[150px] text-[#6B6B6B] font-medium tracking-[-0.1px] text-[13px]  ">
                 {data.heading}
               </p>
               <div>

@@ -139,7 +139,7 @@ const NewsColumn = ({
             </div>
           </div>
           <div className="flex relative">
-            {/* <div className="text-sm my-auto inline text-black/80 font-normal font-inter">
+            {/* <div className="text-sm my-auto inline text-black/80 font-normal ">
               <Link href={`/news/`}>See all</Link>
             </div> */}
             <div className="my-auto">

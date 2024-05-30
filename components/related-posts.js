@@ -8,7 +8,7 @@ export default function RelatedPosts({
 }) {
   return (
     <div className="hidden md:block bg-white rounded-lg mt-6 p-6 lg:mb-16">
-      <h1 className="text-sm font-semibold font-inter-serif mb-3">{title}</h1>
+      <h1 className="text-sm font-semibold  mb-3">{title}</h1>
       {relatedPosts.map((post, index) => {
         post = post.attributes;
         const img = post?.legacyFeaturedImage?.logoNew

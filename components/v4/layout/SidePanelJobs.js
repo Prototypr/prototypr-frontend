@@ -6,7 +6,7 @@ const SidePanelJobs = ({ list }) => {
   return (
     <div className="flex rounded-lg flex-col gap-0 px-2 mt-8">
       <div className="flex flex-row justify-between items-baseline">
-        <h3 className="font-inter my-0.5 font-bold text-gray-800 text-sm">
+        <h3 className=" my-0.5 font-bold text-gray-800 text-sm">
           Opportunities
         </h3>
       </div>
@@ -28,7 +28,7 @@ const SidePanelJobs = ({ list }) => {
         })}
 
         <Link href={"/jobs"}>
-          <div className="font-inter mt-1 text-gray-600 cursor-pointer text-xs flex">
+          <div className=" mt-1 text-gray-600 cursor-pointer text-xs flex">
             <div className="my-auto">See All</div>
           <CaretRight className="my-auto" size={12} />
           </div>

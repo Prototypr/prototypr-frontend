@@ -23,6 +23,15 @@ import '../styles/toolStyles.css'
 // import PageViewTracker from "@/components/PageViewTracker";
 // import MakerPopover from "@/components/maker/maker";
 
+
+import { Inter } from "next/font/google";
+const font = Inter({
+  // weight: '400',
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
 function App({ Component, pageProps: { session, ...pageProps } }) {
 
   // addLocaleData([...en, ...de])
@@ -100,7 +109,10 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
       }}
     >
       <SessionProvider session={session} refetchInterval={5 * 60}>
+        <div className={font.className}>
+
         <Component {...pageProps} />
+        </div>
       </SessionProvider>
       </SWRConfig>
       <AppToaster/>

@@ -422,7 +422,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
         </Link>
         <Link href="/">
           <p
-            className={`cursor-pointer font-inter-serif hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
+            className={`cursor-pointer  hidden xl:block leading-4 text-base my-auto h-8 font-semibold normal-case ${
               collapse ? "w-0 opacity-0" : "w-auto opacity-1 ml-3"
             } transition transition-all duration-150 ease-in-out`}
           >
@@ -561,7 +561,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
 
       {/* tagline */}
       <p
-        className={`my-auto font-inter-serif hidden xl:block normal-case font-medium ${
+        className={`my-auto  hidden xl:block normal-case font-medium ${
           !collapse
             ? "opacity-0 -z-10 absolute right-0 pt-3.5 text-gray-50 -mr-12 text-xs"
             : "text-base"

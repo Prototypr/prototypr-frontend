@@ -38,11 +38,11 @@ const AuthorCard = ({ data }) => {
         </div>
 
         {data?.attributes?.firstName ? (
-          <p className="text-sm font-inter text-gray-800 font-medium">
+          <p className="text-sm  text-gray-800 font-medium">
             {data?.attributes?.firstName} {data?.attributes?.lastName}
           </p>
         ) : (
-          <p className="text-base font-inter">Unknown</p>
+          <p className="text-base ">Unknown</p>
         )}
       </div>
     </>
@@ -54,7 +54,7 @@ const MetaInfo = ({ tags = [] }) => {
   return (
     <div className="flex flex-row justify-between">
       {tagContent[0]?.attributes?.name && (
-        <span className="text-xs capitalize bg-gray-100  font-inter px-2 py-0.5 border border-black border-opacity-5  text-gray-500 rounded-full">
+        <span className="text-xs capitalize bg-gray-100   px-2 py-0.5 border border-black border-opacity-5  text-gray-500 rounded-full">
           {tagContent[0]?.attributes?.name}
         </span>
       )}
@@ -121,10 +121,10 @@ const LargeCardWithImage = ({ data, type = "regular", colSpan }) => {
           )}{" "}
         </div>
           <div className="flex flex-col grid gap-2">
-            <h1 className="text-2xl leading-2 text-[#222] tracking-tight font-bold font-inter line-clamp-2">
+            <h1 className="text-2xl leading-2 text-[#222] tracking-tight font-bold  line-clamp-2">
               {type === "regular" ? data?.attributes?.title : data?.title}
             </h1>
-            <p className="text-base leading-[24px] font-inter  overflow-clip text-[#626A6E] tracking-[-2%] line-clamp-3">
+            <p className="text-base leading-[24px]   overflow-clip text-[#626A6E] tracking-[-2%] line-clamp-3">
               {type === "regular" ? data?.attributes?.excerpt : data?.excerpt}
             </p>
             <div className="flex mt-2">
@@ -185,10 +185,10 @@ const SmallCardWithImage = ({ src, data, type }) => {
           )}{" "}
         </div>
           <div className="flex flex-col grid gap-2">
-            <h1 className="text-base leading-[24px] text-[#222] font-semibold font-inter m-0 p-0 line-clamp-2">
+            <h1 className="text-base leading-[24px] text-[#222] font-semibold  m-0 p-0 line-clamp-2">
               {type === "regular" ? data?.attributes?.title : data?.title}
             </h1>
-            <p className="md:hidden text-base leading-[24px] font-inter  overflow-clip text-[#626A6E] tracking-[-2%] line-clamp-3">
+            <p className="md:hidden text-base leading-[24px]   overflow-clip text-[#626A6E] tracking-[-2%] line-clamp-3">
               {type === "regular" ? data?.attributes?.excerpt : data?.excerpt}
             </p>
             <div className="flex mt-2">
@@ -218,7 +218,7 @@ const JobFeatureCard = ({ item }) => {
         <div className="flex flex-row justify-between  rounded-lg">
           <div className="flex flex-co grid gap-2 justify-center">
             <div className="flex flex-col ">
-              <p className="text-base line-clamp-2 font-medium  text-[#333] overflow-hidden line-clamp-3 font-inter">
+              <p className="text-base line-clamp-2 font-medium  text-[#333] overflow-hidden line-clamp-3 ">
                 <span className="">{companyName}</span>, is looking for a{" "}
                 {title} in {locations[0]?.name}.
               </p>
@@ -300,8 +300,8 @@ const HeroGrid = ({
           <div
           className="w-full h-full bg-pink-200 w-full lg:mt-8 rounded-[16px] p-6"
         >
-          <h3 className="text-2xl mb-2 font-inter max-w-md text-black font-bold">Tools and resources to shape every idea</h3>
-          <p className="font-inter mb-4 text-base leading-[24px] text-black text-opacity-70">Join 25,000+ creatives who enjoy a regular dose of inspiration and motivation, delivered to your inbox every week.</p>
+          <h3 className="text-2xl mb-2  max-w-md text-black font-bold">Tools and resources to shape every idea</h3>
+          <p className=" mb-4 text-base leading-[24px] text-black text-opacity-70">Join 25,000+ creatives who enjoy a regular dose of inspiration and motivation, delivered to your inbox every week.</p>
           <SignupHomepage/>
         </div>
         </div>

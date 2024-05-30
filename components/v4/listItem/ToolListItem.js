@@ -24,7 +24,7 @@ const ToolListItem = ({title, legacyFeaturedImage, slug, showLogo}) =>{
             ""
         )}
         <div className="flex flex-col ml-1 grid gap-1 justify-center">
-            <p className="overflow-hidden line-clamp-2 inline font-inter text-sm">
+            <p className="overflow-hidden line-clamp-2 inline  text-sm">
             {title}
             </p>
         </div>

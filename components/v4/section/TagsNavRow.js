@@ -51,12 +51,12 @@ const tags = [
     },
     {
       name: "UX",
-      link: "/posts/ui/page/1",
+      link: "/posts/ux/page/1",
       slug:"ux"
     },
     {
       name: "User Research",
-      link: "/posts/ui/page/1",
+      link: "/posts/user-research/page/1",
       slug:"user-research"
     },
     // {

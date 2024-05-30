@@ -6,7 +6,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const SmallCard = ({link, title, image, tags, date, avatar, author, excerpt }) => {
   return (
-    <div className="flex mt-3 hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-col sm:flex-row font-inter w-full pr-">
+    <div className="flex mt-3 hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-col sm:flex-row  w-full pr-">
       {image ? (
         <div className="w-full shrink-0 my-auto h-[160px] sm:h-[90px] sm:w-[124px] sm:basis-[124px] relative rounded-xl overflow-hidden border border-gray-100">
           <Link href={link??''}>

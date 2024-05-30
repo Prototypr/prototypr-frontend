@@ -7,16 +7,16 @@ const SidePanelTools = ({list}) =>{
 
         <div className="flex rounded-lg flex-col gap-0 px-2 mt-8">
         <div className="flex flex-row justify-between items-baseline">
-          <h3 className="font-inter my-0.5 font-bold text-gray-800 text-sm">
+          <h3 className=" my-0.5 font-bold text-gray-800 text-sm">
             Latest Tools
           </h3>
             {/* <div className="flex flex-row justify-between items-baseline">
-                    <h3 className="font-inter my-0.5 font-bold text-gray-500 text-sm">
+                    <h3 className=" my-0.5 font-bold text-gray-500 text-sm">
                       Latest Tools
                     </h3>
                     <Link
                       href={"/toolbox"}
-                      className="font-inter text-xs font-semibold text-gray-800 cursor-pointer"
+                      className=" text-xs font-semibold text-gray-800 cursor-pointer"
                     >
                       See all
                     </Link>
@@ -38,7 +38,7 @@ const SidePanelTools = ({list}) =>{
           })}
 
           <Link href={"/toolbox"}>
-            <div className="font-inter font-medium mt-3 text-gray-600 cursor-pointer text-xs">{`See All ->`}</div>
+            <div className=" font-medium mt-3 text-gray-600 cursor-pointer text-xs">{`See All ->`}</div>
           </Link>
         </div>
       </div>

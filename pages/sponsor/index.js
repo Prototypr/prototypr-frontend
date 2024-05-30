@@ -70,7 +70,7 @@ const Index = ({ allProducts, newsletterProducts, websiteProducts }) => {
                     </div>
                   </div>
                   <div className="pb-[20px]">
-                    <h1 className="text-5xl md:text-6.5xl w-full leading-tight mx-auto text-black/80 font-inter font-bold text-center drop-shadow-sm">
+                    <h1 className="text-5xl md:text-6.5xl w-full leading-tight mx-auto text-black/80  font-bold text-center drop-shadow-sm">
                       Promote your product <br /> on Prototypr
                     </h1>
                     <p className="mx-auto text-center text-md my-3 text-black/70">

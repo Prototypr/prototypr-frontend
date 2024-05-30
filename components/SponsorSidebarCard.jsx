@@ -50,14 +50,14 @@ const SponsorSidebarCard = ({
                 )}
               </div>
               <div className="flex flex-col grid gap-1 justify-center">
-                <p className=" overflow-hidden line-clamp-2 inline my-auto font-inter text-sm">
+                <p className=" overflow-hidden line-clamp-2 inline my-auto  text-sm">
                   {title}
-                  <span className="text-xs ml-2 capitalize bg-gray-100 font-inter px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
+                  <span className="text-xs ml-2 capitalize bg-gray-100  px-2 text-blue-800 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                     Promoted
                   </span>
                 </p>
                 {/* <div className="flex flex-row gap-1 text-sm text-gray-500">
-                  <span className="text-xs mt-1 capitalize bg-gray-100 font-inter px-3.5 py-0.5 border border-black border-opacity-5 text-black rounded-full">
+                  <span className="text-xs mt-1 capitalize bg-gray-100  px-3.5 py-0.5 border border-black border-opacity-5 text-black rounded-full">
                     Sponsored
                   </span>
                 </div> */}
@@ -101,11 +101,11 @@ export const SponsorHomeCard = ({
                 )}
               </div>
               <div className="flex flex-col grid gap-1 justify-center">
-                <p className=" h-[18px] overflow-hidden line-clamp-1 inline font-inter text-sm">
+                <p className=" h-[18px] overflow-hidden line-clamp-1 inline  text-sm">
                   {title}
                 </p>
                 <div className="flex flex-row gap-1 text-sm text-gray-500">
-                  <span className="text-xs capitalize flex flex-row justify-center items-center bg-gray-100 font-inter px-4 border border-black border-opacity-5 text-black rounded-full">
+                  <span className="text-xs capitalize flex flex-row justify-center items-center bg-gray-100  px-4 border border-black border-opacity-5 text-black rounded-full">
                     Sponsored
                   </span>
                 </div>

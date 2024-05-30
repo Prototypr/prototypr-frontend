@@ -49,7 +49,7 @@ const TopicSection = ({
             </div>
             <div className="my-auto">
             <Link href={`/posts/${slug}/page/1`}>
-            <div className="font-inter mt-1 text-sm my-auto text-black opacity-60 cursor-pointer text-sm flex">
+            <div className=" mt-1 text-sm my-auto text-black opacity-60 cursor-pointer text-sm flex">
               {/* <div className="my-auto">More <span className="capitalize">{heading}</span></div> */}
               <div className="my-auto">See all</div>
             <CaretRight className="my-auto" size={14} />

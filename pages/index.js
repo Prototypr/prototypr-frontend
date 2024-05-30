@@ -269,11 +269,11 @@ export default function Index({
           <Container maxWidth="w-full bg-[#dbeeff]  relative relative z-10">
             <div className="max-w-[1320px] mx-auto px-3 md:px-3 pb-16 ">
               <div className="flex justify-between mb-8">
-                <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md leading-[32px]">
+                <h3 className="text-3xl text-black/90 font-semibold  max-w-md leading-[32px]">
                   Browse by <span className="text-underline">category</span>
                 </h3>
                 <div className="flex relative p-2">
-                  <div className="hidden sm:inline text-md text-black/80 font-normal font-inter">
+                  <div className="hidden sm:inline text-md text-black/80 font-normal ">
                     <Link href={`/topics/`}>See all</Link>
                   </div>
                   <div className="my-auto">

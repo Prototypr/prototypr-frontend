@@ -27,7 +27,7 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
             </div>
             <div className="my-auto">
               <div className="flex relative">
-              <div className="text-md inline text-black/80 font-normal font-inter">
+              <div className="text-md inline text-black/80 font-normal ">
               <Link href={`/posts/${slug}/page/1`}>See all</Link>
               </div>
               <div className="my-auto">
@@ -39,7 +39,7 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
               </div>
             </div>
             {/* <Link href={`/posts/${slug}/page/1`}>
-            <div className="font-inter mt-1 text-sm my-auto text-black opacity-60 cursor-pointer text-sm flex">
+            <div className=" mt-1 text-sm my-auto text-black opacity-60 cursor-pointer text-sm flex">
               <div className="my-auto">See all</div>
             <CaretRight className="my-auto" size={14} />
             </div>
@@ -47,7 +47,7 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
             </div>
           </div>:''}
         {/* <div className="hidden md:block flex relative p-2 mb-1">
-            <h3 className="text-lg overflow-hidden line-clamp-1 font-medium font-inter">
+            <h3 className="text-lg overflow-hidden line-clamp-1 font-medium ">
               Top reads
             </h3>
             <div className="bg-blue-200/90 ml-3 flex justify-center my-auto h-6 w-6 rounded-full">
@@ -66,7 +66,7 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
             />
         <SmallPostsGroupC tools={tools} smallPosts={smallPosts?.slice(0,2)}/>
         {/* <div className="flex mt-10"> */}
-            {/* <div className="font-inter cursor-pointer flex">
+            {/* <div className=" cursor-pointer flex">
               <div className="text-blue-600 text-md font-base">
                 See more {heading}
               </div>

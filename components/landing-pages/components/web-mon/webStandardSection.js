@@ -72,13 +72,13 @@ const WebStandard = () => {
             <div className="flex flex-col grid gap-2">
               <GlobeIcon />
               <div className="flex flex-col grid gap-10 md:py-10">
-                <h3 className="text-[28px] sm:text-[32px] md:text-[40px] leading-[42px] md:leading-[60px] text-white font-inter font-medium">
+                <h3 className="text-[28px] sm:text-[32px] md:text-[40px] leading-[42px] md:leading-[60px] text-white  font-medium">
                   A New Standard <br /> for the Web that <br />{" "}
                   <span className="italic text-[#309BFE]">
                     Rewards Creators
                   </span>
                 </h3>
-                <div className="max-w-3xl flex flex-col grid gap-5 font-inter leading-[34px] text-[18px] text-[#9FBDDF]">
+                <div className="max-w-3xl flex flex-col grid gap-5  leading-[34px] text-[18px] text-[#9FBDDF]">
                   <p>
                     Web Monetization is a proposed W3C standard that encourages fairer revenue models for the web.
                   </p>
@@ -94,7 +94,7 @@ const WebStandard = () => {
                 </div>
                 <a
                   href="https://help.coil.com/docs/general-info/intro-to-coil"
-                  className="text-white font-inter"
+                  className="text-white "
                   target={"_blank"}
                 >
                   Learn about Coil →
@@ -120,7 +120,7 @@ const WebStandard = () => {
                     }}
                     className="w-full overflow-hidden  bg-white bg-opacity-10 rounded-lg cursor-pointer h-[200px] md:h-[250px]"
                   ></div>
-                  <p className="text-[16px] mt-3 font-medium text-gray-300 font-inter">{x.title}</p>
+                  <p className="text-[16px] mt-3 font-medium text-gray-300 ">{x.title}</p>
                 </a>
                 </div>
               );

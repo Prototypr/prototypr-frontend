@@ -39,7 +39,7 @@ const coverImage = tool.legacyFeaturedImage?.mediaItemUrl || tool.legacyFeatured
         }}
         className="flex"
       >
-         <div className="flex hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-row font-inter w-full max-w-[470px]">
+         <div className="flex hover:bg-white transition transition-all duration-300 p-1 rounded-2xl flex-row  w-full max-w-[470px]">
       {coverImage ? (
         <div className="w-full shrink-0 h-[90px] max-w-[100px] xs:max-w-[195px] xs:h-[124px] relative rounded-xl overflow-hidden border border-gray-100">
           <Image
@@ -74,13 +74,13 @@ const coverImage = tool.legacyFeaturedImage?.mediaItemUrl || tool.legacyFeatured
                     </div>
                     <div className="flex flex-col pl-1 justify-center">
                         
-                    <div className=" overflow-hidden line-clamp-1 inline font-medium py-0 mb-0 font-inter text-base">
+                    <div className=" overflow-hidden line-clamp-1 inline font-medium py-0 mb-0  text-base">
                         {title}
                     </div>
                     {tags?.data?.length ? (
                         // <Link href={`/toolbox/${tags?.data[0]?.attributes?.slug}`}>
                         <div className="flex flex-row text-sm text-gray-500">
-                            {/* <span className="text-xs mt-1 capitalize bg-gray-100 font-inter px-2 py-0.5 border border-black border-opacity-5 text-black rounded-full"> */}
+                            {/* <span className="text-xs mt-1 capitalize bg-gray-100  px-2 py-0.5 border border-black border-opacity-5 text-black rounded-full"> */}
                             <span className="text-xs capitalize text-gray-500">
                             {tags?.data[0]?.attributes?.name}
                             </span>
@@ -94,7 +94,7 @@ const coverImage = tool.legacyFeaturedImage?.mediaItemUrl || tool.legacyFeatured
                 </div>
 
         <Link href="/toolbox">
-            <span className="text-xs inline-block mt-3 capitalize bg-pink-50 font-inter px-2 text-pink-600 py-0.5 border border-black border-opacity-5 rounded-full" style={{maxWidth:'fit-content'}}>
+            <span className="text-xs inline-block mt-3 capitalize bg-pink-50  px-2 text-pink-600 py-0.5 border border-black border-opacity-5 rounded-full" style={{maxWidth:'fit-content'}}>
                 Toolbox
             </span>
         </Link>

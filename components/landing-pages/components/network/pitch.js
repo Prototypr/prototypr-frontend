@@ -17,14 +17,14 @@ const PitchSection = () => {
           <div className="w-full max-w-7xl mx-auto px-0 md:px-5 z-10">
             <div className="w-full bg-[#195DE2] h-auto rounded-[32px] px-5 py-10 md:py-32 md:px-10">
               <div className="max-w-6xl mx-auto grid flex flex-col grid gap-5">
-                <h2 className="md:text-[50px] text-[30px] max-w-2xl leading-[40px] md:leading-[60px] font-semibold font-inter text-white">
+                <h2 className="md:text-[50px] text-[30px] max-w-2xl leading-[40px] md:leading-[60px] font-semibold  text-white">
                   {/* A place to meet like minded writers, share ideas and spread
                   knowledge */}
                    Be the signal<br/> through the noise
                   {/* Mindful designers, building towards a calmer, fairer, and more open web.  */}
                   {/* Thoughts into words. Words into designs. Designs into the hands of users. */}
                 </h2>
-                <p className="text-white/80 max-w-lg text-[18px] font-inter leading-[32px]">
+                <p className="text-white/80 max-w-lg text-[18px]  leading-[32px]">
                  Prototypr is a place for genuine stories from real people. Having been unindated with spam profiles and AI-generated posts, we're currently invite-only 
                  to maintain high quality content.
                 </p>

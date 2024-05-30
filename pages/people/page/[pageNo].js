@@ -37,7 +37,7 @@ export default function PeoplePage({
           <PostTitle>Loading…</PostTitle>
         ) :
         <>        
-                <h1 className="font-inter font-semibold text-xl">Page {pagination?.page}</h1>
+                <h1 className=" font-semibold text-xl">Page {pagination?.page}</h1>
 
         {allPosts.length > 0 && (
            <div className="mt-6 grid grid-rows-1 sm:grid-cols-2 lg:grid-cols-4 grid-cols-1  gap-6">

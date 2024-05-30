@@ -24,12 +24,12 @@ const MissionSection = () => {
     <div className="w-full pb-40 bg-[#F8B700] px-5 ">
       <div className="w-full max-w-6xl mx-auto  ">
         <div className="max-w-3xl pt-20 md:pt-32">
-          <h3 className="text-black/70 text-[40px] leading-[50px] md:text-[56px] md:leading-[70px] font-semibold font-inter">
+          <h3 className="text-black/70 text-[40px] leading-[50px] md:text-[56px] md:leading-[70px] font-semibold ">
             {/* Our mission is to make Design Open for all, just like Open Source
             Code. */}
             We're creating a more mindful, open, and fair publishing platform.
           </h3>
-          <h3 className="text-black/60 text-[24px] leading-[70px] font-semibold font-inter my-3 md:my-5">
+          <h3 className="text-black/60 text-[24px] leading-[70px] font-semibold  my-3 md:my-5">
             Built in the open for design, code, and tech
           </h3>
         </div>
@@ -37,10 +37,10 @@ const MissionSection = () => {
           {Benefits.map((item, i) => {
             return (
               <div key={i} className="max-w-lg grid flex flex-col grid gap-3">
-                <h3 className="font-bold font-inter text-[18px] text-black/70">
+                <h3 className="font-bold  text-[18px] text-black/70">
                   {item.title}
                 </h3>
-                <p className="leading-[34px] font-inter font-medium text-[18px] text-black/60">
+                <p className="leading-[34px]  font-medium text-[18px] text-black/60">
                   <div dangerouslySetInnerHTML={{__html:item.description}}/>
                 </p>
               </div>

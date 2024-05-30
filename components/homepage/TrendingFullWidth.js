@@ -99,7 +99,7 @@ const TrendingFullWidth = ({ tools, sponsor }) => {
               <div className="z-20 flex flex-col justify-end h-full w-full absolute p-3">
                 <div className="flex">
                   <div className="absolute top-0 right-0 mt-3 mr-3">
-                    <span className="capitalize bg-gray-100 font-inter px-2 py-0.5 border border-black border-opacity-5 text-black text-xs rounded-full">
+                    <span className="capitalize bg-gray-100  px-2 py-0.5 border border-black border-opacity-5 text-black text-xs rounded-full">
                       Promoted
                     </span>
                   </div>

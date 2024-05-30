@@ -9,11 +9,11 @@ const ToolBackgroundCardRow = ({ tools , showTitle}) => {
   return (
     <>
       {/* {showTitle!==false?<div className="flex justify-between mb-6">
-        <h3 className="text-3xl text-black/90 font-semibold font-inter max-w-md">
+        <h3 className="text-3xl text-black/90 font-semibold  max-w-md">
           Featured tools
         </h3>
         <div className="flex relative my-auto">
-            <div className="text-md inline text-black/80 font-normal font-inter">
+            <div className="text-md inline text-black/80 font-normal ">
             <Link href={`/toolbox/`}>See all</Link>
             </div>
             <div className="my-auto">

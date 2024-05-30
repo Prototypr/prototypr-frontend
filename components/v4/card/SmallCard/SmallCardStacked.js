@@ -7,7 +7,7 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const SmallCardStacked = ({ title, image, tags, date, avatar, author, showAuthor, link }) => {
   return (
-    <div className="flex shadow-sm hover:scale-[1.01] hover:shadow-lg group border border-gray-300/70 mx-auto md:flex-col md:justify-start bg-white p-0 md:my-0 md:mt-0 lg:mb-0 lg:my-0 overflow-hidden transition transition-all duration-300 rounded-2xl font-inter w-full max-w-[490px]">
+    <div className="flex shadow-sm hover:scale-[1.01] hover:shadow-lg group border border-gray-300/70 mx-auto md:flex-col md:justify-start bg-white p-0 md:my-0 md:mt-0 lg:mb-0 lg:my-0 overflow-hidden transition transition-all duration-300 rounded-2xl  w-full max-w-[490px]">
       {image ? (
         <div className="group-hover:scale-[1.01] transition transition-all duration-700 hidden md:inline-block w-full my-auto md:my-0 shrink-0 h-[54px] w-[54px] md:w-full md:h-[164px] relative border-b border-gray-200 overflow-hidden">
          <Link href={link}>

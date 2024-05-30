@@ -65,12 +65,12 @@ export default function SignupHomepage({ className }) {
           </>
         ) : (
           <div className="p-6 bg-white shadow rounded-md max-w-md xl:max-w-xl mb-2 mt-10">
-            <h2 className={`text-lg mb-2 text-gray-800 font-semibold font-inter `}>
+            <h2 className={`text-lg mb-2 text-gray-800 font-semibold  `}>
               {intl.formatMessage({ id: "signup.input.check" })} &nbsp;{" "}
               <div className="inline -mt-1">🎉</div>
             </h2>
             <div
-              className={`block text-base  leading-6 font-base text-gray-800 font-inter`}
+              className={`block text-base  leading-6 font-base text-gray-800 `}
             >
               {intl.formatMessage({ id: "signup.input.click" })}
             </div>
@@ -147,7 +147,7 @@ function HookForm(props) {
        
         {/* </div> */}
       </form>
-      <div className=" w-10/12 font-inter">
+      <div className=" w-10/12 ">
         {errors.emailRequired && errors.emailRequired.type === "required" && (
           <p className="text-red-700 text-sm mt-2 text-left px-4 w-fit py-3 bg-red-100 rounded-xl">
             <FormattedMessage id="signup.input.validation" />

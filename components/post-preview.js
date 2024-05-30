@@ -57,7 +57,7 @@ export default function PostPreview({
               {title}
             </Link>
           </div>
-          <div className="text-xs inline-block capitalize bg-gray-100 font-inter mt-1.5 px-2.5 py-0.5 border border-black border-opacity-5 text-black rounded-full">
+          <div className="text-xs inline-block capitalize bg-gray-100  mt-1.5 px-2.5 py-0.5 border border-black border-opacity-5 text-black rounded-full">
             {tag?`${tag.attributes?.name}`:''}
           </div>
         </div>

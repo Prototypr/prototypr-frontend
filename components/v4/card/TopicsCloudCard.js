@@ -26,7 +26,7 @@ const tags = [
   },
   {
     name: "User Research",
-    link: "/posts/ui/page/1",
+    link: "/posts/user-research/page/1",
   },
   {
     name: "Notion",
@@ -40,7 +40,7 @@ const tags = [
 
 const TopicsCloudCard = ({title="Hot topics"}) => {
   return (
-    <div className="font-inter">
+    <div className="">
       <h3 className="font-semibold text-sm mb-5">{title}</h3>
       <div className="flex flex-wrap">
         {tags.map((tag, index) => {

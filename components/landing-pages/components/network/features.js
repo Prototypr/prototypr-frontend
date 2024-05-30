@@ -119,10 +119,10 @@ const FeaturesContent = () => {
                   {/* <img className=" w-14 h-14 object-contain mb-3" src={x.icon} /> */}
                   <div>
                     <div>{x.icon}</div>
-                    <h2 className="text-[16px] font-semibold text-gray-900 mb-2 font-inter">
+                    <h2 className="text-[16px] font-semibold text-gray-900 mb-2 ">
                       {x.title}
                     </h2>
-                    <p className="text-black/60  leading-[28px] text-[16px] font-inter">
+                    <p className="text-black/60  leading-[28px] text-[16px] ">
                       {x.description}
                     </p>
                   </div>

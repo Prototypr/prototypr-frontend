@@ -17,7 +17,7 @@ const IntroBanner = ({ tools, sponsor }) => {
         // style={{background: 'linear-gradient(179.7deg, #040444, rgb(3 3 63))'}}
         className="flex bg-[#EAE9F5] text-gray-800 overflow-hidden overflow-x-scroll bg-opacity-60 border border-gray-100 md:overflow-x-hidden rounded rounded-3xl"
       >
-        <div className="w-full z-10 font-inter p-2 2md:w-full relative flex flex-col">
+        <div className="w-full z-10  p-2 2md:w-full relative flex flex-col">
           {/* <SponsorBubble/> */}
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}

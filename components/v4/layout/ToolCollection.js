@@ -6,7 +6,7 @@ const ToolCollection = ({ tools, topic, tagline,slug }) => {
     
     {/* heading - removed for now */}
       {/* <div className="flex relative p-2 mb-1">
-            <div className="text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+            <div className="text-lg overflow-hidden line-clamp-1 inline font-medium ">
             <Link href={`/toolbox/`}><span className="capitalize">{topic}</span> tools</Link>
             </div>
             <div className="my-auto">

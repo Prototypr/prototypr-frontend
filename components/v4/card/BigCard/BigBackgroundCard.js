@@ -26,9 +26,9 @@ const BigBackgroundCard = ({
 }) => {
 
   return (
-    // <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col sm:flex-row lg:flex-col font-inter w-full max-w-[985px]">
+    // <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col sm:flex-row lg:flex-col  w-full max-w-[985px]">
     <div
-      className={`bg-white h-full p-0 border border-gray-300/50 shadow-sm overflow-hidden group hover:shadow-lg hover:scale-[1.005] transition transition-all duration-300 rounded-2xl flex flex-col ${layout == 3 ? "" : `sm:flex-row ${flip?'sm:flex-row-reverse':''}`} font-inter w-full `}
+      className={`bg-white h-full p-0 border border-gray-300/50 shadow-sm overflow-hidden group hover:shadow-lg hover:scale-[1.005] transition transition-all duration-300 rounded-2xl flex flex-col ${layout == 3 ? "" : `sm:flex-row ${flip?'sm:flex-row-reverse':''}`}  w-full `}
     >
       <div
         className={`${imageDimensions ? imageDimensions : layout == 2 ? "md:w-[45%] border-r md:h-[320px]" : layout == 3 ? "w-full md:h-[364px] border-b" : "md:w-3/5 border-r md:h-[440px]"} w-full relative ${!imageDimensions ? "h-[240px] sm:h-[224px]" : ""} overflow-hidden border-gray-200`}

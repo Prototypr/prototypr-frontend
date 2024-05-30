@@ -42,7 +42,7 @@ const HeroPostGrid = ({
         <div className="flex justify-between mb-4">
           {showHeading !== false ? <RSSTitle title={title} /> : ""}
           <div className="flex relative p-2">
-            <div className="text-md inline text-gray-800 my-auto font-normal font-inter">
+            <div className="text-md inline text-gray-800 my-auto font-normal ">
               <Link href={`/posts/`}>See all</Link>
             </div>
             <div className="my-auto">

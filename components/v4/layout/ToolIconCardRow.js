@@ -16,7 +16,7 @@ const ToolIconCardRow = ({ tools, title, textColor, withBackground, showHeader }
          </>}
         </h3>
         <div className="flex relative">
-            <div className="text-md inline my-auto text-gray-800 font-normal font-inter">
+            <div className="text-md inline my-auto text-gray-800 font-normal ">
             <Link href={`/toolbox/`}>See all</Link>
             </div>
             <div className="my-auto">

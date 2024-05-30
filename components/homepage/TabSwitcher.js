@@ -30,7 +30,7 @@ const TabSwitcher = ({ selectedTab, onTabChange }) => {
               return (
                 <span
                   onClick={() => onTabChange(tab)}
-                  className={`px-4 py-2 mb-2 block font-inter tracking-tight font-medium cursor-pointer cursor text-sm  mr-2 rounded-full ${
+                  className={`px-4 py-2 mb-2 block  tracking-tight font-medium cursor-pointer cursor text-sm  mr-2 rounded-full ${
                     selectedTab === tab.id
                       ? "bg-blue-600 font-semibold text-white"
                       : "bg-transparent text-gray-600"

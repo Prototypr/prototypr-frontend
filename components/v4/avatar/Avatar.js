@@ -16,7 +16,7 @@ const Avatar = ({ size, author, src, date }) => {
   }
   return (
     <Link href={`/people/${author?.slug}`}>
-      <div className="flex font-inter w-full max-w-[300px]">
+      <div className="flex  w-full max-w-[300px]">
         <div
           className={`relative ${avatarSize} overflow-hidden border border-gray-100`}
         >

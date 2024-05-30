@@ -35,7 +35,7 @@ const AuthorListItem = ({
             ""
           )}
             <div
-              className={`overflow-hidden flex flex-col justify-center line-clamp-1 my-auto font-medium font-inter text-sm ml-0.5`}
+              className={`overflow-hidden flex flex-col justify-center line-clamp-1 my-auto font-medium  text-sm ml-0.5`}
             >
                 {author?.firstName ? (
                 <>
@@ -56,10 +56,10 @@ const AuthorListItem = ({
                 showLogo ? "-mt-2 bg-[#F7F7F8]" : ""
               } flex flex-row gap-1 text-xs z-10 text-gray-500"`}
             >
-              <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline font-inter">
+              <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline ">
                 {name},
               </p>
-              <p className=" h-[18px] max-w-[150px] overflow-hidden line-clamp-1 inline font-inter">
+              <p className=" h-[18px] max-w-[150px] overflow-hidden line-clamp-1 inline ">
                 {locations[0]?.name}
               </p>
             </div> */}

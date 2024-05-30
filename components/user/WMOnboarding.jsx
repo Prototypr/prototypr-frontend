@@ -55,7 +55,7 @@ export default function Onboarding({ allTags, user }) {
               render={({ previous }) => (
                 <div className="md:w-[585px] w-full px-10 lg:px-0">
                   <div>
-                    <h1 className="text-3xl font-inter-serif text-gray-900 font-semibold mb-3">
+                    <h1 className="text-3xl  text-gray-900 font-semibold mb-3">
                       {`You're ready to go!`}
                     </h1>
                   </div>

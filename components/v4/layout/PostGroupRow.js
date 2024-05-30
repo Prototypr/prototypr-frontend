@@ -24,7 +24,7 @@ const PostGroupRow = ({ largePost, smallPosts, description,title,topicObject }) 
      
      {/* <div className="flex flex-col justify-center mb-6 md:mb-0">
         <div className="bg-blue-200/20 border border-blue-200/70 h-full rounded-2xl p-6">
-            <h2 className="text-lg md:text-3xl mb-1 font-semibold font-inter max-w-md leading-[32px] text-blue-900">
+            <h2 className="text-lg md:text-3xl mb-1 font-semibold  max-w-md leading-[32px] text-blue-900">
              {intl.formatMessage({ id: title })}
             </h2>
             <p className="text-blue-900">

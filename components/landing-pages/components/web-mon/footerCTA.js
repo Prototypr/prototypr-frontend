@@ -3,7 +3,7 @@ const FooterCTA = () => {
     <div className="w-full bg-[#00028C] pt-10 md:pt-20 relative overflow-hidden">
       <div className="w-full max-w-6xl mx-auto flex flex-col justify-content items-center pt-10 z-[1]">
         <div className="flex grid flex-col gap-5 justify-center items-center">
-          <h3 className="mx-auto text-white text-[32px] sm:text-[40px] md:text-[60px] font-semibold leading-[42px] md:leading-[70px] font-inter">
+          <h3 className="mx-auto text-white text-[32px] sm:text-[40px] md:text-[60px] font-semibold leading-[42px] md:leading-[70px] ">
             Prototypr + Coil
           </h3>
           <p className="mx-auto text-gray-200 mb-2 text-center max-w-lg">

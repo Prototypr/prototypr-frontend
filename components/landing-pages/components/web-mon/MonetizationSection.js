@@ -18,7 +18,7 @@ const WebMonetizationSection = () => (
     <div className="bg-[#FFFFFF] max-w-7xl mx-auto p-10  pt-30 md:pt-32 md:p-20 md:pb-32 rounded-t-[30px] flex flex-col grid gap-5 md:gap-10">
       <div className="flex grid flex-col gap-6">
         {/* <Curly /> */}
-        <h2 className="text-[#000] leading-[44px] md:leading-[60px] text-[26px] sm:text-[32px] md:text-[40px] font-inter font-medium">
+        <h2 className="text-[#000] leading-[44px] md:leading-[60px] text-[26px] sm:text-[32px] md:text-[40px]  font-medium">
           {/* We are experimenting <br /> with{" "}
         <span className="italic">Web Monetization </span> */}
           {/* Better business <br /> models for the web */}
@@ -26,11 +26,11 @@ const WebMonetizationSection = () => (
           with Web-Monetization
         </h2>
         <div className="flex flex-col max-w-lg md:flex-col grid gap-4 md:gap-4 text-[#707070]">
-          <p className="leading-[34px] text-[18px] font-inter font-normal">
+          <p className="leading-[34px] text-[18px]  font-normal">
             Introducing an alternative business model, that keeps the Web open.
             Earn tips and micropayments based on the time readers spend on your work.
           </p>
-          <p className="leading-[34px] text-[18px] font-inter font-normal">
+          <p className="leading-[34px] text-[18px]  font-normal">
             <span className="font-semibold text-gray-700">Web Monetization</span> is a new system making it possible to reward creators, without gating work behind a paywall. 
             Powered by payment providers like Coil, the goal is to facilite a 
             fairer, ad-free, open web. 
@@ -47,10 +47,10 @@ const WebMonetizationSection = () => (
                   <img className="w-full" src={x.src}></img>
                 </div>
                 <div className="flex flex-col grid gap-4">
-                  <h3 className="text-[28px] m-0 font-inter text-[#000] font-semibold">
+                  <h3 className="text-[28px] m-0  text-[#000] font-semibold">
                     {x.heading}
                   </h3>
-                  <p className="leading-[34px] text-[18px] font-inter text-[#707070]">
+                  <p className="leading-[34px] text-[18px]  text-[#707070]">
                     {x.desp}
                   </p>
                 </div>

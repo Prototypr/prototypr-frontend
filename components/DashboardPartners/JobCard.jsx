@@ -61,7 +61,7 @@ const SponsorCard = ({ post, refetch, user }) => {
             </span>
           </div>} */}
           <div className="mb-3">
-            <h3 className="text-lg font-medium max-w-md font-inter">
+            <h3 className="text-lg font-medium max-w-md ">
               {post.title}
             </h3>
             {/* <p className="text-sm text-gray-500 mb-10">

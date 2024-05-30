@@ -120,17 +120,23 @@ const ToolPostForm = ({ user, isOwner, postObject, refetchPost }) => {
       // background="#fff"
     >
       <div className="h-14 bg-white shadow-sm z-10 w-full fixed top-[44px]">
-        <div className="flex gap-3 max-w-[1320px] cursor-default mx-auto h-full">
-          <img
-            src={
-              postObject?.logo?.formats?.thumbnail?.url
-                ? postObject?.logo?.formats?.thumbnail?.url
-                : ""
-            }
-            className="w-10 bg-gray-50 shadow-sm h-10 my-auto rounded-lg"
-          />
-          <div className="my-auto text-lg tracking-tight font-medium">{postObject?.title}</div>
-        </div>
+        <a href={`/toolbox/${postObject?.slug}`} target="_blank" className="cursor-pointer">
+          <div className="flex gap-3 max-w-[1320px] mx-auto h-full">
+            <img
+              src={
+                postObject?.logo?.url
+                  ? postObject?.logo?.url
+                  : postObject?.legacyLogo
+                    ? postObject.legacyLogo
+                    : ""
+              }
+              className="w-10 bg-gray-50 shadow-sm h-10 my-auto rounded-lg"
+            />
+            <div className="my-auto text-lg tracking-tight font-medium">
+              {postObject?.title}
+            </div>
+          </div>
+        </a>
       </div>
       {!(user && !user?.isLoggedIn && (isOwner || user?.isAdmin)) ? (
         <WizardProvider>
@@ -221,7 +227,7 @@ const ToolSteps = ({ user, postObject, refetchPost }) => {
           />
         </div>
       </Step>
-      <Step key={`page/3`} id={"3"} >
+      <Step key={`page/3`} id={"3"}>
         <div className="flex flex-col justify-start h-full w-full relative">
           <MediaForm
             postObject={postObject}
@@ -230,7 +236,7 @@ const ToolSteps = ({ user, postObject, refetchPost }) => {
           />
         </div>
       </Step>
-      <Step key={`page/4`} id={"4"} >
+      <Step key={`page/4`} id={"4"}>
         <div className="flex items-center justify-start h-full w-full relative">
           <div className="px-6 md:px-0 max-w-2xl pt-6 pb-20 w-full">
             <div className="my-2 mb-6">

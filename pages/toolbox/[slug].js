@@ -401,7 +401,7 @@ const ToolContent = ({
         {relatedPosts?.length ? (
           <div className="z-30 relative max-w-[1320px] mx-auto md:px-3">
             <div classsName="flex flex-col px-3 z-30">
-              <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium font-inter max-w-md tracking-tight">
+              <h3 className="text-2xl pt-12 mb-6 text-black/90 font-medium  max-w-md tracking-tight">
                 Related tools
               </h3>
               {/* <ToolLargeCardRow title={`Related to ${post?.attributes?.title}`} tools={relatedPosts.slice(0,4)} /> */}
@@ -519,7 +519,7 @@ export default function Post({
       {/* <Container>
         <div className="w-full mt-6 md:mt-6 grid grid-rows-1 grid-cols-24 lg:gap-6">
           {router.isFallback ? (
-            <h1 className="text-6xl font-inter-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
+            <h1 className="text-6xl  font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
               Loading...
             </h1>
           ) : (

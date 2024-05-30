@@ -47,14 +47,14 @@ const IntroBanner = ({ tools, sponsor }) => {
         {/* <div className="hidden lg:block absolute z-10 opacity-100 w-[800px] h-[500px] -mr-[20%] bg-gradient-to-r to-[#d1e8ff] from-transparent via-[#d1e8ff]/10 z-10 h-full top-0 right-0 -mt-[2%] -mr-[20%] object-cover"></div> */}
           <img className="absolute opacity-50 w-full h-full  z-10 h-full top-0 right-0 cursor-collab -mr-[225px] sm:-mr-[40%] 2md:-mr-[20%] xl:-mr-[50%] 2xl:-mr-[60%] object-cover" 
           src="/static/images/toolbox/toolbox-bg-2.svg"  style={{ zIndex:1}}/>
-        <div className="md:col-span-6 relative col-span-12 font-inter relative flex flex-col items-start justify-center gap-8 p-3 md:p-8">
+        <div className="md:col-span-6 relative col-span-12  relative flex flex-col items-start justify-center gap-8 p-3 md:p-8">
           <div 
           onClick={(e)=>{e.preventDefault();e.stopProgagation}}
           className="pointer-events-auto md:pr-0 rounded-3xl z-10" style={{width:'fit-content'}}>
           <h1 className="max-w-[50rem] mt-2 mb-5 text-black/90 text-5xl font-semibold tracking-tighter xl:text-[48px] lg:leading-tight md:leading-tight">
           <span className="drop-shadow-sm ">Everything is a </span> <div className="text-underline inline cursor-collab"><span className="drop-shadow-sm">prototype</span></div>
           </h1>
-          <h2 className="mb-5 text-gray-700 tracking-tight leading-snug text-[18px] font-semibold font-inter md:pr-6 max-w-[32rem]">
+          <h2 className="mb-5 text-gray-700 tracking-tight leading-snug text-[18px] font-semibold  md:pr-6 max-w-[32rem]">
           Start something new. Write a draft, design an app, curate inspiration. Life is a prototype, share your story.
           </h2>
           <div className="flex mt-4 mb-6 sm:mb-0">

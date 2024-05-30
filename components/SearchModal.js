@@ -134,7 +134,7 @@ const Hit = ({ hit }) => {
             hit={hit}
           />
           <div className="mt-1.5">
-            <span className="capitalize text-xs capitalize bg-gray-100 font-inter px-3 py-0.5 border border-black border-opacity-5 text-gray-500 rounded-full">
+            <span className="capitalize text-xs capitalize bg-gray-100  px-3 py-0.5 border border-black border-opacity-5 text-gray-500 rounded-full">
               {hit.type}
             </span>
           </div>

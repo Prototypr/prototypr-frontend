@@ -32,7 +32,7 @@ const JumboTag = ({ topic, withBackground, showCount }) => {
           </div>
         </div>
         <div className="flex w-full relative justify-between p-2">
-            <div className="capitalize z-10 text-base text-gray-800 overflow-hidden line-clamp-1 inline font-medium font-inter">
+            <div className="capitalize z-10 text-base text-gray-800 overflow-hidden line-clamp-1 inline font-medium ">
               {topic?.name}
             </div>
             <div className="bg-gray-500/20 z-10 flex justify-center my-auto h-6 w-6 rounded-full">

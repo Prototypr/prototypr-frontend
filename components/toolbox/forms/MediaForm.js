@@ -116,12 +116,14 @@ const Form = ({ user, postObject, isEditMode }) => {
               toast.success("Upload complete!", {
                 duration: 3000,
               });
+              setIsSubmitting(false);
             })
             .catch(function (error) {
               console.log(error);
               toast.console.warn("The logo failed to save.", {
                 duration: 3000,
               });
+              setIsSubmitting(false);
             });
         }
 
@@ -214,12 +216,14 @@ const Form = ({ user, postObject, isEditMode }) => {
                   } else {
                     setIsSubmitting(false);
                   }
+                  setIsSubmitting(false);
                 })
                 .catch(function (error) {
                   console.log(error);
                   toast.console.warn("The gallery failed to update.", {
                     duration: 3000,
                   });
+                  setIsSubmitting(false);
                 });
             }
           }

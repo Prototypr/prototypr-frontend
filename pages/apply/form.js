@@ -63,7 +63,7 @@ export default function Apply() {
             <div className="relative">
                 <p><Link href="/apply">← Back</Link></p>
                     {/* <Sparkle size={44}/> */}
-                <h1 className="text-4xl leading-snug text-white font-medium font-inter mt-4">
+                <h1 className="text-4xl leading-snug text-white font-medium  mt-4">
                 Application Form
                 </h1>
             <p className="my-4 max-w-[450px]">Prototypr accounts are invite only, and applications are manually approved to prevent spam signups. Members can create posts, submit links, get a profile and more. You can ask current members for an invite or submit this application.</p>

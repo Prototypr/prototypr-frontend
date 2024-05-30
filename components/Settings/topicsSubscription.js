@@ -36,7 +36,7 @@ const tags = [
   },
   {
     name: "User Research",
-    link: "/posts/ui/page/1",
+    link: "/posts/user-research/page/1",
   },
   {
     name: "Notion",

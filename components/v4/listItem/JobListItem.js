@@ -37,7 +37,7 @@ const JobListItem = ({
             <p
               className={`overflow-hidden ${
                 showLogo ? "line-clamp-1 mt-1" : "line-clamp-2"
-              } inline font-medium font-inter text-sm`}
+              } inline font-medium  text-sm`}
             >
               {title}
             </p>
@@ -46,10 +46,10 @@ const JobListItem = ({
                 showLogo ? "-mt-2 bg-[#F7F7F8]" : ""
               } flex flex-row gap-1 text-xs z-10 text-gray-500"`}
             >
-              <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline font-inter">
+              <p className=" h-[18px] max-w-[100px] overflow-hidden line-clamp-1 inline ">
                 {companyName},
               </p>
-              <p className=" h-[18px] max-w-[150px] overflow-hidden line-clamp-1 inline font-inter">
+              <p className=" h-[18px] max-w-[150px] overflow-hidden line-clamp-1 inline ">
                 {locations[0]?.name}
               </p>
             </div>

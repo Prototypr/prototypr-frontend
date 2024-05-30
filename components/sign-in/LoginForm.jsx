@@ -70,7 +70,7 @@ const InviteOnlyForm = ({
           />
         </Link>
       </div>
-      <h2 className="text-3xl font-inter text-gray-800 font-semibold">
+      <h2 className="text-3xl  text-gray-800 font-semibold">
         Create an account
       </h2>
       <p className="mt-2 mb-4 text-black/60">
@@ -241,7 +241,7 @@ const ProviderForm = ({
           alt="Prototypr Logo"
         />
       </div>
-      <h2 className="text-3xl font-inter text-black/90 font-semibold">
+      <h2 className="text-3xl  text-black/90 font-semibold">
         {(isSignUp || inviteeEmail) ? `You're invited!` : "Welcome back"}
       </h2>
       {(isSignUp || inviteeEmail) ? (

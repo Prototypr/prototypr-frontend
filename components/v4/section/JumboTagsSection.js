@@ -38,7 +38,7 @@ const JumboTagsSection = ({popularTags}) =>{
                                     </div>
                                 </div>
                                 <div className="flex justify-between p-2">
-                                <div className="capitalize text-lg overflow-hidden line-clamp-1 inline font-medium font-inter">
+                                <div className="capitalize text-lg overflow-hidden line-clamp-1 inline font-medium ">
                                     All topics
                                 </div>
                                 <div className="bg-blue-500 relative flex justify-center my-auto h-6 w-6 rounded-full">

@@ -33,7 +33,7 @@ const TopicIndexSection = ({index,user, heroCardPost, viewablePosts, jobsSidebar
             </div>
             <div className="my-auto">
               <div className="flex relative">
-              <div className="text-md inline text-black/80 font-normal font-inter">
+              <div className="text-md inline text-black/80 font-normal ">
               <Link href={`/posts/${topicObject.slug}/page/1`}>See all</Link>
               </div>
               <div className="my-auto">

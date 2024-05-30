@@ -91,11 +91,11 @@ const TopicsSelect = ({
                     {next?
                     <>
                     <div className="flex justify-center mx-auto mb-1">
-                      <h2 className="text-3xl font-inter-serif text-black/90 font-semibold text-center">
+                      <h2 className="text-3xl  text-black/90 font-semibold text-center">
                         Choose some topics   
                       </h2>
                     </div>
-                    <h3 className="text-lg font-inter-serif text-gray-500 text-center mb-6">
+                    <h3 className="text-lg  text-gray-500 text-center mb-6">
                         Share your interests
                     </h3>
                     </>

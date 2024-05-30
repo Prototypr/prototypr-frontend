@@ -8,7 +8,7 @@ export default function NewsList({
 }) {
   return (
     <div className="hidden md:block bg-white rounded-lg mt-6 p-6 lg:mb-16">
-      <h1 className="text-sm font-semibold font-inter-serif mb-3">{title}</h1>
+      <h1 className="text-sm font-semibold  mb-3">{title}</h1>
 
       {posts.map((post, index) => {
         post = post.attributes;

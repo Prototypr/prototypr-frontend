@@ -28,7 +28,7 @@ const CardColumn = ({
             <div className="text-sm text-gray-800">New products, daily.</div>
           </div>
           <div className="flex relative">
-            {/* <div className="text-sm my-auto inline text-black/80 font-normal font-inter">
+            {/* <div className="text-sm my-auto inline text-black/80 font-normal ">
               <Link href={`/toolbox/`}>See all</Link>
             </div> */}
             <div className="my-auto">

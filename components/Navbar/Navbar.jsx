@@ -85,7 +85,7 @@ const Navbar = ({
     <>
       <nav
         id="main-nav"
-        className={`font-inter fixed top-0 ${navType == "full" ? "" : "md:top-2"}  w-full`}
+        className={` fixed top-0 ${navType == "full" ? "" : "md:top-2"}  w-full`}
         style={{ zIndex: 99 }}
       >
         <div

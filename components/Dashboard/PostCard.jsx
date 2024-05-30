@@ -77,7 +77,7 @@ const PostCard = ({ post, refetch, user }) => {
           </div>}
           <div className="">
             <Link href={post.type=='article'?`/p/${post.id}`:`/toolbox/post/${post.id}`}>
-              <h3 className="text-xl mb-2 font-semibold max-w-2xl font-inter">
+              <h3 className="text-xl mb-2 font-semibold max-w-2xl ">
                 {post.title}
               </h3>
             </Link>

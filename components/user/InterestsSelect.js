@@ -139,10 +139,10 @@ const InterestsSelect = ({user,next, previous, selectedOptions, setSelectedOptio
             {next?
               <div className="w-full p-8 pb-3 md:pb-3 text-center">
                  <div>
-                      <h2 className="text-3xl mb-2 font-inter-serif text-black/90 font-semibold text-center">
+                      <h2 className="text-3xl mb-2  text-black/90 font-semibold text-center">
                         What are your goals?   
                       </h2>
-                    <h3 className="text-lg font-inter-serif text-gray-500 text-center mb-6">
+                    <h3 className="text-lg  text-gray-500 text-center mb-6">
                         Let us know what you're looking for
                     </h3>
                     </div>

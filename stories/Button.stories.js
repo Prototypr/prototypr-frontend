@@ -14,7 +14,7 @@ export default {
 };
 
 const Template = (args) => (
-  <div className="font-inter">
+  <div className="">
     <Button variant="" {...args}>
       {args.children}
     </Button>

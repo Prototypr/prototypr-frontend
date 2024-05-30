@@ -6,8 +6,8 @@ import gumletLoader from "@/components/new-index/gumletLoader";
 
 const BigCardC = ({ link,title, excerpt, image, tags, date, avatar, author }) => {
   return (
-    // <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col sm:flex-row lg:flex-col font-inter w-full max-w-[985px]">
-    <div className="bg-white p-3 shadow-md transition transition-all duration-300 rounded-2xl flex flex-col sm:flex-row lg:flex-col font-inter w-full max-w-[985px]">
+    // <div className="hover:bg-white transition transition-all duration-300 rounded-2xl p-1 flex flex-col sm:flex-row lg:flex-col  w-full max-w-[985px]">
+    <div className="bg-white p-3 shadow-md transition transition-all duration-300 rounded-2xl flex flex-col sm:flex-row lg:flex-col  w-full max-w-[985px]">
       <div className="w-full w-full relative h-[180px] sm:h-[224px] md:h-[305px] rounded-xl overflow-hidden border border-gray-200">
         <Link href={link??''}>
           <Image

@@ -625,7 +625,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
 
       {/* tagline */}
       <p
-        className={`my-auto font-inter-serif hidden xl:block normal-case font-semibold ${
+        className={`my-auto  hidden xl:block normal-case font-semibold ${
           !collapse
             ? "opacity-0 -z-10 absolute right-0 pt-3.5 text-gray-50 -mr-12 text-xs"
             : "text-base"

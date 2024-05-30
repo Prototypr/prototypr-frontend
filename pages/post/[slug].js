@@ -158,7 +158,7 @@ export default function Post({
               <WMPostTracker postId={post?.id} post={post} />
             )} */}
             {router.isFallback ? (
-              <h1 className="text-6xl font-inter-serif font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
+              <h1 className="text-6xl  font-semibold tracking-tighter leading-tight md:leading-tighter mb-5 text-center md:text-left">
                 Loading
               </h1>
             ) : (
@@ -404,7 +404,7 @@ export default function Post({
           style={{ maxWidth: "1200px" }}
           className="px-6 md:px-0 mx-auto pb-20 relative z-10 mt-20"
         >
-          <h1 className="text-2xl font-inter-serif font-medium -mt-3 -mb-3">
+          <h1 className="text-2xl  font-medium -mt-3 -mb-3">
             Related Articles
           </h1>
           <div className="mt-10">
@@ -422,7 +422,7 @@ export default function Post({
         <SourcePanel
           titleSize={"lg:text-5xl"}
           className={
-            "w-full font-inter-serif mb-4 mt-12 border rounded-lg pb-0 pt-8 border-gray-100"
+            "w-full  mb-4 mt-12 border rounded-lg pb-0 pt-8 border-gray-100"
           }
           title={intl.formatMessage({ id: "newsletterPanel.title3" })}
           desc={intl.formatMessage({ id: "newsletterPanel.desc3" })}

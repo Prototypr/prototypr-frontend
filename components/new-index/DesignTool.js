@@ -104,7 +104,7 @@ export default function DesignTool({ allTools = [] }) {
       <div className="flex flex-row flex-wrap w-full justify-between  items-end max-w-7xl mx-auto mb-10">
         <div className=" mb-6 flex flex-col grid gap-7 my-10">
           <div>
-            <h2 className="text-[40px] leading-[50px] md:text-[60px] max-w-xl md:leading-[68px] text-black font-bold font-inter">
+            <h2 className="text-[40px] leading-[50px] md:text-[60px] max-w-xl md:leading-[68px] text-black font-bold ">
               {/* The best tools for your design workflow. */}
               {/* The best design tools, handpicked every week. */}
               The best Design Tools, handpicked every week.
@@ -113,12 +113,12 @@ export default function DesignTool({ allTools = [] }) {
           </div>
           <div className="flex flex-row flex-wrap gap-2">
             <Link href="/toolbox">
-              <button className="px-8 mr-3 py-5 font-medium bg-[#345FF8] rounded-2xl text-sm text-white font-inter">
+              <button className="px-8 mr-3 py-5 font-medium bg-[#345FF8] rounded-2xl text-sm text-white ">
                 Submit Tool
               </button>
             </Link>
             <Link href="/toolbox">
-              <button className="px-8 py-5 bg-[#67CBFC] font-medium rounded-2xl text-sm text-white font-inter">
+              <button className="px-8 py-5 bg-[#67CBFC] font-medium rounded-2xl text-sm text-white ">
                 Open Toolbox
               </button>
             </Link>
@@ -133,7 +133,7 @@ export default function DesignTool({ allTools = [] }) {
 
       <div>
         <div className="max-w-7xl mx-auto my-4">
-          <p className="text-[20px] max-w-lg text-medium font-semibold font-inter">
+          <p className="text-[20px] max-w-lg text-medium font-semibold ">
             Recent Tools {"->"}
           </p>
         </div>
@@ -191,7 +191,7 @@ export default function DesignTool({ allTools = [] }) {
                                   {showItem.tags?.data.map((tab) => {
                                     return (
                                       <span
-                                        className={`mr-2 px-5 py-[6px] block text-[12px] backdrop-blur-md border border-white border-opacity-10 bg-white bg-opacity-20 capitalize text-white font-inter tracking-tight font-normal cursor-pointer min-w-max cursor w-full  rounded-full`}
+                                        className={`mr-2 px-5 py-[6px] block text-[12px] backdrop-blur-md border border-white border-opacity-10 bg-white bg-opacity-20 capitalize text-white  tracking-tight font-normal cursor-pointer min-w-max cursor w-full  rounded-full`}
                                       >
                                         {tab.attributes.name}
                                       </span>
@@ -203,16 +203,16 @@ export default function DesignTool({ allTools = [] }) {
                           </div>
 
                           <div className="mb-3">
-                            <h3 className="font-inter text-[20px] font-bold text-white line-clamp-1 flex flex-row gap-3">
+                            <h3 className=" text-[20px] font-bold text-white line-clamp-1 flex flex-row gap-3">
                               {" "}
                               {showItem.title}
                             </h3>
-                            <p className="line-clamp-3 font-normal text-white text-opacity-70 text-[14px] leading-[22px] font-inter">
+                            <p className="line-clamp-3 font-normal text-white text-opacity-70 text-[14px] leading-[22px] ">
                               {" "}
                               {showItem.excerpt}
                             </p>
                           </div>
-                          <button className="w-full bg-white text-sm text-black rounded-2xl font-inter py-3 px-5">
+                          <button className="w-full bg-white text-sm text-black rounded-2xl  py-3 px-5">
                             Show Tool
                           </button>
                         </div>

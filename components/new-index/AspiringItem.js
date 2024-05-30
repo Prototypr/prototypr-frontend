@@ -45,7 +45,7 @@ export default function AspiringItem({ post = {} }) {
         </div> */}
         <h4 className="text-black-1 font-semibold text-lg leading-6 mt-4">
           <Link href={`/post/${slug}`}>
-            <span className="cursor-pointer font-inter-serif">{title}</span>
+            <span className="cursor-pointer ">{title}</span>
           </Link>
         </h4>
         <div className="font-base font-normal hover:underline hover:text-gray-800 text-base text-neutral-700 leading-5 mt-2">
