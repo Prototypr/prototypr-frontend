@@ -41,10 +41,6 @@ const Dashboard = ({ postStatus, postType, currentTab }) => {
               <PostCard refetch={refetch} user={user} post={post} />
             ))}
 
-          {!loading &&
-            posts?.map(post => (
-              <PostCard refetch={refetch} user={user} post={post} />
-            ))}
         </div>
         {!loading && !posts?.length && (
           <EmptyState currentTab={currentTab} draft={false} />

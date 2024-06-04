@@ -37,7 +37,7 @@ export default ({setDescription, initialContent='', height=250, placeholder, dis
   return (
     <div className={`${showToolbar!==false?'pt-12 py-4':''} border border-gray-300 rounded-xl border-2 relative -mt-2`}>
      {showToolbar!==false? <MenuBar editor={editor} />:''}
-      <div style={{minHeight:height,maxHeight:400}} className="pt-4 px-5 overflow-auto">
+      <div style={{minHeight:height,maxHeight:400}} className="py-4 text-lg px-5 overflow-auto">
         <EditorContent disabled={disabled} editor={editor} />
       </div>
     </div>

@@ -77,7 +77,7 @@ const CardColumn = ({
             })}
       </div>
       <div className="flex flex-col pt-6 grid grid-cols-6 gap-5">
-        {tools.slice(2, tools.length - 1).map((tool, index) => {
+        {tools.slice(1, tools.length - 2).map((tool, index) => {
           return (
             <div key={index} className="flex col-span-6 sm:col-span-3 lg:col-span-3 xl:col-span-6 flex-col">
               {index !== 0 ? (

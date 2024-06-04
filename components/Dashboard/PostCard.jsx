@@ -124,7 +124,7 @@ const PostCard = ({ post, refetch, user }) => {
           )}
           {post.type=='tool'? (
             <div className="hidden md:block">
-              <Link href={`/toolbox/post/${post.id}/deal`}>
+              <Link href={`/toolbox/post/${post.id}?step=3`}>
                 <button className="text-lg bg-white underline text-black  p-3  rounded-full hover:bg-gray-100 ">
                   <Gift size={18}/>
                 </button>

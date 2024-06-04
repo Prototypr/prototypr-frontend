@@ -21,8 +21,8 @@ function isEmptyObject(obj) {
   );
 }
 
-const MediaForm = ({ user, isEditMode }) => {
-  const { loading, postObject, isOwner } = useLoad(user);
+const MediaForm = ({ user, isEditMode, loading, postObject }) => {
+  // const { loading, postObject, isOwner } = useLoad(user);
 
   return !user && loading ? (
     <Fallback />
@@ -116,14 +116,12 @@ const Form = ({ user, postObject, isEditMode }) => {
               toast.success("Upload complete!", {
                 duration: 3000,
               });
-              setIsSubmitting(false);
             })
             .catch(function (error) {
               console.log(error);
               toast.console.warn("The logo failed to save.", {
                 duration: 3000,
               });
-              setIsSubmitting(false);
             });
         }
 
@@ -136,6 +134,10 @@ const Form = ({ user, postObject, isEditMode }) => {
           (values.gallery !== "exist" ||
             postObject?.gallery?.length !== galleryFiles?.length)
         ) {
+
+          toast.loading("Uploading gallery images...", {
+            duration: 3000,
+          });
           //compare galleryFiles with postObject.gallery for images that have been removed by checking the id
           const removedImages = postObject?.gallery?.filter(image => {
             return !galleryFiles?.some(file => {
@@ -362,7 +364,7 @@ const Form = ({ user, postObject, isEditMode }) => {
               ) : isEditMode ? (
                 "Save Changes"
               ) : (
-                `Save and Submit`
+                `Save and Continue`
               )}
             </Button>
             {!isEditMode ? (

@@ -8,10 +8,10 @@ const {
   default: gumletLoader,
 } = require("@/components/new-index/gumletLoader");
 
-const ToolIconCard = ({ tool, withBackground, small }) => {
+const ToolIconCard = ({ tool, withBackground, small, logo }) => {
   let { slug, title, tags } = tool;
 
-  if (!tags?.data?.length) {
+  if (!tags?.data?.length && tags?.length) {
     tags.data = tags;
   }
 
@@ -29,7 +29,7 @@ const ToolIconCard = ({ tool, withBackground, small }) => {
       ? tool.featuredImage.data.attributes.url
       : tool.legacyFeaturedImage?.mediaItemUrl
         ? tool.legacyFeaturedImage?.mediaItemUrl
-        : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+        : logo?logo:"https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
    const logoBase64 =tool.logo?.data?.attributes?.base64?tool.logo?.data?.attributes?.base64:tool.logoBase64?tool.logoBase64:defaultBase64
         

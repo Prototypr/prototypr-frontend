@@ -22,8 +22,8 @@ function isEmptyObject(obj) {
   );
 }
 
-const DescriptionExcerptForm = ({ user, isEditMode }) => {
-  const { loading, postObject, isOwner } = useLoad(user);
+const DescriptionExcerptForm = ({ user, isEditMode,postObject, loading }) => {
+  // const { loading, postObject, isOwner } = useLoad(user);
 
 
   return !user && loading ? (

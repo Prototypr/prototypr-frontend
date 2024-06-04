@@ -30,7 +30,7 @@ function isEmptyObject(obj) {
   };
   
 
-const TitleLinkFormEdit = ({user, postObject, onNext, refetchPost, isEditMode}) =>{
+const TitleLinkFormEdit = ({user, postObject,loading, onNext, refetchPost, isEditMode}) =>{
     
     const [errores, setErrores] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -118,13 +118,13 @@ const [disabled, setDisabled] = useState(false);
 
     return(
       <div className="flex justify-start w-full h-full">
-      <div className="px-6 md:px-0 max-w-lg w-full">
+      <div className="px-6 md:px-0 max-w-lg w-full flex flex-col">
           <div className="mb-6 ">
-          <h1 className="text-2xl font-semibold mx-auto mb-3">Update {postObject.title}</h1>
+          <h1 className="text-xl font-semibold mx-auto mb-3">Update {postObject.title}</h1>
             <p className="text-gray-600">Change to the title and url.</p>
             </div>
             <form
-            className="mt-12"
+            className="mt-3 h-full"
             onSubmit={(e) => {
             e.preventDefault();
             if ((errors && isEmptyObject(errors)) || !errors) {
@@ -137,8 +137,8 @@ const [disabled, setDisabled] = useState(false);
             }
             }}
         >
-            <FormContainer>
-            <div className="flex flex-col mx-auto gap-5 max-w-2xl  w-auto">
+            <div className="flex flex-col justify-between h-full">
+            <div className="flex flex-col w-full gap-5 max-w-xl">
             <FormInput id="title" label="Title" error={formik.errors}>
                 <input
                 id="title"
@@ -175,7 +175,7 @@ const [disabled, setDisabled] = useState(false);
                 variant="confirmMedium"
                 type="submit"
                 disabled={isSubmitting}
-                className="p-4 bg-blue-700 text-white font-semibold rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="p-4 bg-blue-700 !w-fit !px-4 text-white font-semibold rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed"
                 // className="p-4 font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                 {isSubmitting?
@@ -186,7 +186,7 @@ const [disabled, setDisabled] = useState(false);
                 :
                 `Save Changes`}
                 </Button>
-            </FormContainer>
+            </div>
         </form>
         </div>
         </div>
