@@ -34,7 +34,7 @@ const NewsPageFeatured = ({
               }
             />
 
-            <div className="p-6 lg:p-8">
+            <div className="p-6 lg:p-8 pb-3 lg:pb-3">
               <div className="w-[48rem] max-w-full mb-8 text-gray-800 text-lg">{excerpt}</div>
               {post.attributes?.outgoingLinks?.length?<div className="col-span-8 lg:col-span-2 max-h-[1200px] relative">
                 <h1
@@ -113,14 +113,20 @@ const NewsPageFeatured = ({
             </div>
 
             {content !== excerpt ? (
-              <div className="col-span-2 border-t border-gray-100/80 p-6 lg:p-8 mt-6 w-full flex flex-col">
+              <div className="col-span-2 w-[48rem] max-w-full mx-auto border-t border-gray-100/80 p-6 lg:p-8 mt-6 w-full flex flex-col">
+                <h1
+                  tabIndex={0}
+                  className="text-xl mb-3 font-semibold tracking-tight"
+                >
+                  Summary
+                </h1>
                 <div
-                  className="text-lg w-[48rem] max-w-full mx-auto text-gray-800 blog-content news-content"
+                  className="text-lg text-gray-800 blog-content"
                   dangerouslySetInnerHTML={{ __html: content }}
                 ></div>
-                <div className="mt-6 w-[48rem] max-w-full mx-auto ">
+                <div className="mt-6 mb-6 ">
                   <a
-                    className="underline text-lg font-medium text-gray-700"
+                    className="underline text-lg font-semibold text-gray-700"
                     target={"_blank"}
                     href={post?.attributes?.link + "?ref=prototypr.io"}
                   >
