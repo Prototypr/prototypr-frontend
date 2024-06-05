@@ -83,22 +83,23 @@ const Form = ({ user, postObject, isEditMode }) => {
         values.excerpt = exc;
       }
 
+      //turn postObject.creators array into an array of ids (from each element.id)
+      let creatorIds = [];
+      if (postObject?.creators?.length) {
+        creatorIds = postObject?.creators?.map(creator => creator.id);
+      }
       if (values.isCreator) {
-        //turn postObject.creators array into an array of ids (from each element.id)
-
-        let creatorIds = [];
-        if (postObject?.creators?.length) {
-          creatorIds = postObject?.creators?.map(creator => creator.id);
-        }
-
         //add user id to the array of creator ids if it's not already there
         if (!creatorIds.includes(user.id)) {
           creatorIds.push(user.id);
         }
-        if(creatorIds.length>0){
-          values.creators = creatorIds
+      } else {
+        // remove user id from the array of creator ids if it's there
+        if (creatorIds.includes(user.id)) {
+          creatorIds = creatorIds.filter(id => id !== user.id);
         }
       }
+      values.creators = creatorIds;
       delete values.isCreator;
 
       async function submit() {
