@@ -137,7 +137,7 @@ const RightSlot = styled("div", {
   "[data-disabled] &": { color: mauve.mauve8 },
 });
 
-const IconButton = styled("button", {
+export const IconButton = styled("button", {
   all: "unset",
   fontFamily: "inherit",
   borderRadius: "100%",

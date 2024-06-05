@@ -33,7 +33,7 @@ const Dashboard = ({ postStatus, postType, currentTab }) => {
   return (
     <>
       <div>
-        <div className="grid grid-cols-12 gap-4 md:gap-6">
+        <div className="grid grid-cols-12 gap-4">
           {loading ? [1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} />) : null}
 
           {!loading &&

@@ -123,7 +123,7 @@ export const DropdownMenuArrow = StyledArrow;
 // Your app...
 const Box = styled('div', {});
 
-const IconButton = styled('button', {
+export const IconButton = styled('button', {
   all: 'unset',
   fontFamily: 'inherit',
   borderRadius: '6px',

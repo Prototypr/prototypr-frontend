@@ -8,9 +8,11 @@ import { Trash } from "@/components/icons";
 const DeletePostButton = ({ onClick }) => (
   <Dialog>
     <DialogTrigger asChild>
-      <button className="text-sm bg-white underline text-black p-3  rounded-full hover:bg-gray-100">
-        <Trash size={18}/>
-      </button>
+      <div className="text-sm w-full text-left group-hover:text-white">
+      {/* <button className="text-sm bg-white text-black p-3  rounded-full hover:bg-gray-100"> */}
+        {/* <Trash size={18}/> */}
+        Delete
+      </div>
     </DialogTrigger>
     <DialogContent>
       <DialogTitle>Delete Post</DialogTitle>

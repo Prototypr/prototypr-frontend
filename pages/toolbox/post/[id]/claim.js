@@ -4,9 +4,9 @@ import Layout from "@/components/new-index/layoutForIndex";
 import Container from "@/components/container";
 import axios from "axios";
 import useUser from "@/lib/iron-session/useUser";
-import { useLoad } from "@/components/Jobs/jobHooks";
+// import { useLoad } from "@/components/Jobs/jobHooks";
 import Button from "@/components/Primitives/Button";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import Spinner from "@/components/atom/Spinner/Spinner";
 import { getToolById } from "@/lib/api";
 import LoginForm from "@/components/sign-in/LoginForm";
@@ -130,16 +130,23 @@ export default function ClaimToolPage({ data }) {
                 <Button
                   className="mt-6 rounded-full"
                   onClick={() => {
-                    // console.log(user)
-                    // pop up chat
-                    // window.$chatwoot?.setUser(user?.id, {
-                    //   claimId: post?.id,
-                    //   claimName: post?.attributes?.title,
-                    // });
-                    window.$chatwoot?.toggle();
-                    // window.$chatwoot.popoutChatWindow();
+                     // console.log(user)
+                      // pop up chat
+                      // window.$chatwoot?.setUser(user?.id, {
+                      //   claimId: post?.id,
+                      //   claimName: post?.attributes?.title,
+                      // });
+                      if (!window?.$chatwoot) {
+                        addSupportScript();
+                        setTimeout(() => {
+                          window?.$chatwoot?.toggle();
+                        }, 1000);
+                      } else {
+                        window?.$chatwoot?.toggle();
+                      }
+                      // window.$chatwoot.popoutChatWindow();
 
-                    // woot-widget-bubble
+                      // woot-widget-bubble
                   }}
                   type="button"
                 >

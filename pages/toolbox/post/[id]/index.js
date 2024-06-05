@@ -25,6 +25,8 @@ import DealForm from "@/components/toolbox/forms/DealForm";
 // import { PublishDialogButton } from "@/components/Editor/PublishDialogButton";
 import { PublishToolDialog } from "@/components/toolbox/forms/PublishToolDialog";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
+import Button from "@/components/Primitives/Button";
+import { addSupportScript } from "@/lib/addSupportScript";
 
 // const Progress = () => {
 //   const { activeStepIndex, steps } = useWizardContext();
@@ -425,7 +427,38 @@ const ToolSteps = ({ user, postObject, refetchPost, loading }) => {
                     onSave={onSubmitForPublishing}
                   />
                 </div>
-              ) : null}
+              ) : (
+                <>
+                  <p className="text-gray-800 mt-6">
+                    Any questions? Please contact support.
+                  </p>
+                  <Button
+                    className="mt-6 rounded-full"
+                    onClick={() => {
+                      // console.log(user)
+                      // pop up chat
+                      // window.$chatwoot?.setUser(user?.id, {
+                      //   claimId: post?.id,
+                      //   claimName: post?.attributes?.title,
+                      // });
+                      if (!window?.$chatwoot) {
+                        addSupportScript();
+                        setTimeout(() => {
+                          window?.$chatwoot?.toggle();
+                        }, 3000);
+                      } else {
+                        window?.$chatwoot?.toggle();
+                      }
+                      // window.$chatwoot.popoutChatWindow();
+
+                      // woot-widget-bubble
+                    }}
+                    type="button"
+                  >
+                    Ask support
+                  </Button>
+                </>
+              )}
               {/* </div> */}
             </div>
           </div>
