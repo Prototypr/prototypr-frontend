@@ -39,11 +39,11 @@ const NewsPageFeatured = ({
               {post.attributes?.outgoingLinks?.length?<div className="col-span-8 lg:col-span-2 max-h-[1200px] relative">
                 <h1
                   tabIndex={0}
-                  className="text-base mb-2 font-semibold tracking-tight"
+                  className="text-base mb-2.5 font-semibold tracking-tight"
                 >
                   References
                 </h1>
-                <div className=" bg-[#f4f4f4]/10 rounded-2xl lg:overflow-x-auto flex gap-4">
+                <div className=" lg:overflow-x-auto flex gap-4">
                   <div className="z-10 absolute p-4 z-10 -mr-8 hidden md:block pointer-events-none bottom-0 right-0 h-full w-32 bg-gradient-to-l from-[#fbfcff]" />
 
                   {post.attributes.outgoingLinks.map((link, index) => {
@@ -64,7 +64,7 @@ const NewsPageFeatured = ({
                                   backgroundPosition: "center",
                                   backgroundRepeat: "no-repeat",
                                 }}
-                                className="flex flex-col relative bg-gray-50 border-r border-gray-100/80 h-full w-[150px]"
+                                className="flex flex-col relative bg-gray-50 border-r border-gray-100/80 h-full w-[166px]"
                               >
                               </div>
                             ) : null}
@@ -84,7 +84,7 @@ const NewsPageFeatured = ({
 
                               <div className="flex flex-col h-full justify-between">
                                 <div>
-                                  <div className="text-gray-700 max-w-[220px] text-base lg:text-md mb-2 leading-snug font-medium">
+                                  <div className="text-gray-700 max-w-[220px] line-clamp-2 text-base lg:text-md mb-2 leading-snug font-medium">
                                     {link.title
                                       ? link.title
                                       : link.text
@@ -93,7 +93,7 @@ const NewsPageFeatured = ({
                                   </div>
                                   {link?.description !==
                                   (link.title || link.text) ? (
-                                    <div className="text-gray-600 line-clamp-2 text-xs max-w-[240px]">
+                                    <div className="text-gray-600 mb-2 line-clamp-2 text-xs max-w-[240px]">
                                       {link.description}
                                     </div>
                                   ) : null}
