@@ -34,7 +34,7 @@ export default function Index(props) {
           {user && !user?.isLoggedIn ? (
             <>
               <Layout>
-                <div className="relative w-full h-full flex">
+                <div className="relative w-full h-screen flex">
                   <div className="my-auto mx-auto">
                     <Spinner />
                   </div>

@@ -139,7 +139,7 @@ export default function EditPostPage(props) {
           {(user && !user?.isLoggedIn) || initialContent == null ? (
             <>
               {/* <Layout> */}
-              <div className="relative w-full h-full flex">
+              <div className="relative w-full h-screen flex">
                 <div className="my-auto mx-auto">
                   <Spinner />
                 </div>

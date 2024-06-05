@@ -319,7 +319,7 @@ const LoadingPage = () => {
     <div className="h-full w-full">
       <div id="editor-container" className="w-full h-full mx-auto  relative">
         <Layout>
-          <div className="relative w-full h-full flex">
+          <div className="relative w-full h-screen flex">
             <div className="my-auto mx-auto">
               <Spinner />
             </div>

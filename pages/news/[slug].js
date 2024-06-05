@@ -70,7 +70,7 @@ export default function Post({
     return (
       <>
         {/* <Layout> */}
-        <div className="relative w-full h-full flex">
+        <div className="relative w-full h-screen flex">
           <div className="my-auto mx-auto">
             <Spinner />
           </div>
