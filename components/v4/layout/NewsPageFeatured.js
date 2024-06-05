@@ -116,12 +116,12 @@ const NewsPageFeatured = ({
               <div className="col-span-2 w-[48rem] max-w-full mx-auto border-t border-gray-100/80 p-6 lg:p-8 mt-6 w-full flex flex-col">
                 <h1
                   tabIndex={0}
-                  className="text-xl mb-3 font-semibold tracking-tight"
+                  className="text-2xl mb-4 font-medium tracking-tight"
                 >
                   Summary
                 </h1>
                 <div
-                  className="text-lg text-gray-800 blog-content"
+                  className="text-lg text-gray-800 blog-content news-content"
                   dangerouslySetInnerHTML={{ __html: content }}
                 ></div>
                 <div className="mt-6 mb-6 ">
