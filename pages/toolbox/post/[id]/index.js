@@ -358,7 +358,7 @@ const ToolSteps = ({ user, postObject, refetchPost, loading }) => {
                     : postObject.status == "pending"
                       ? "Pending review"
                       : postObject.status == "publish"
-                        ? "Your post is live!"
+                        ? "Your post is live 🎉"
                         : "Thanks for your submission!"}
                 </h1>
                 <p className="text-lg mt-4 text-gray-600">
@@ -368,14 +368,7 @@ const ToolSteps = ({ user, postObject, refetchPost, loading }) => {
                     "Thanks for your submission, your post is awaiting review. We will notify you when it is live. You can still make changes."
                   ) : postObject.status == "publish" ? (
                     <>
-                      Your tool has been published.{" "}
-                      <a
-                        href={`/toolbox/${postObject.slug}`}
-                        target="_blank"
-                        className="text-primary-500 underline"
-                      >
-                        View it here
-                      </a>
+                      Your tool has been published. Thank you for contributing!
                     </>
                   ) : (
                     "Your tool is saved as a draft. You can edit it anytime."
@@ -429,11 +422,11 @@ const ToolSteps = ({ user, postObject, refetchPost, loading }) => {
                 </div>
               ) : (
                 <>
-                  <p className="text-gray-800 mt-6">
+                  <p className="text-gray-700 mt-8">
                     Any questions? Please contact support.
                   </p>
                   <Button
-                    className="mt-6 rounded-full"
+                    className="mt-3 rounded-full"
                     onClick={() => {
                       // console.log(user)
                       // pop up chat
@@ -441,11 +434,12 @@ const ToolSteps = ({ user, postObject, refetchPost, loading }) => {
                       //   claimId: post?.id,
                       //   claimName: post?.attributes?.title,
                       // });
+                      console.log(window.$chat)
                       if (!window?.$chatwoot) {
                         addSupportScript();
                         setTimeout(() => {
                           window?.$chatwoot?.toggle();
-                        }, 3000);
+                        }, 1000);
                       } else {
                         window?.$chatwoot?.toggle();
                       }

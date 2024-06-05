@@ -11,6 +11,7 @@ import MiniEditor from "@/components/MiniEditor/MiniEditor";
 import useLoad from "../hooks/useLoad";
 import { useWizardContext } from "react-sweet-wizard";
 import Editor from "@/components/Editor/Editor";
+import { ToggleSwitch } from "@/components/atom/Switch/switch";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 const axios = require("axios");
 
@@ -22,9 +23,8 @@ function isEmptyObject(obj) {
   );
 }
 
-const DescriptionExcerptForm = ({ user, isEditMode,postObject, loading }) => {
+const DescriptionExcerptForm = ({ user, isEditMode, postObject, loading }) => {
   // const { loading, postObject, isOwner } = useLoad(user);
-
 
   return !user && loading ? (
     <Spinner />
@@ -32,23 +32,23 @@ const DescriptionExcerptForm = ({ user, isEditMode,postObject, loading }) => {
     <Form postObject={postObject} user={user} isEditMode={isEditMode} />
   ) : (
     <div>
-    <div className="px-6 md:px-0 max-w-2xl w-full">
-    <div className="mb-6 ">
-      <h1 className="text-xl font-semibold mx-auto mb-2">
-        Add your description
-      </h1>
-      <p className="text-gray-600">
-        Write a longer description, and a short excerpt. The description can
-        be like a blog post, highlighting benefits of the product.
-      </p>
-    </div>
-    </div>
-    <div className="text-center flex flex-col h-full w-full justify-center">
-      <div className="mx-auto text-gray-600">
-        <Spinner  />
+      <div className="px-6 md:px-0 max-w-2xl w-full">
+        <div className="mb-6 ">
+          <h1 className="text-xl font-semibold mx-auto mb-2">
+            Tell us about your product
+          </h1>
+          <p className="text-gray-600">
+            Write a longer description, and a short excerpt. The description can
+            be like a blog post, highlighting benefits of the product.
+          </p>
+        </div>
+      </div>
+      <div className="text-center flex flex-col h-full w-full justify-center">
+        <div className="mx-auto text-gray-600">
+          <Spinner />
+        </div>
       </div>
     </div>
-  </div>
   );
 };
 
@@ -82,6 +82,24 @@ const Form = ({ user, postObject, isEditMode }) => {
       if (exc) {
         values.excerpt = exc;
       }
+
+      if (values.isCreator) {
+        //turn postObject.creators array into an array of ids (from each element.id)
+
+        let creatorIds = [];
+        if (postObject?.creators?.length) {
+          creatorIds = postObject?.creators?.map(creator => creator.id);
+        }
+
+        //add user id to the array of creator ids if it's not already there
+        if (!creatorIds.includes(user.id)) {
+          creatorIds.push(user.id);
+        }
+        if(creatorIds.length>0){
+          values.creators = creatorIds
+        }
+      }
+      delete values.isCreator;
 
       async function submit() {
         setIsSubmitting(true);
@@ -135,22 +153,54 @@ const Form = ({ user, postObject, isEditMode }) => {
 
   const [content, setContent] = useState(postObject?.content);
   const [excerpt, setExcerpt] = useState(postObject?.excerpt);
+  const [isCreator, setIsCreator] = useState(
+    postObject?.creators?.length &&
+      postObject.creators.find(creator => creator.id === user.id) !== undefined
+  );
+
   useEffect(() => {
-    setContent(postObject?.content);
-    setExcerpt(postObject?.excerpt);
-  }, [postObject]);
+    if (!content) {
+      setContent(postObject?.content);
+    }
+    if (!excerpt) {
+      setExcerpt(postObject?.excerpt);
+    }
+    setIsCreator(
+      postObject?.creators?.length &&
+        postObject.creators.find(creator => creator.id === user.id) !==
+          undefined
+    );
+  }, [postObject, user]);
 
   return (
     <div className="px-6 md:px-0 max-w-2xl w-full">
       <div className="mb-6 ">
         <h1 className="text-xl font-semibold mx-auto mb-2">
-          Add your description
+          Tell us about your product
         </h1>
         <p className="text-gray-600">
-          Write a longer description, and a short excerpt. The description can
-          be like a blog post, highlighting benefits of the product.
+          Share a tagline, and an in-depth product description. For best
+          results, highlight benefits and key features in your description.
         </p>
       </div>
+
+      <div className="mb-2">
+        <label className="text-md font-medium ">Did you make it?</label>
+        <p className="text-sm text-gray-500">
+          Add yourself as the creator of this tool.
+        </p>
+        <div className="mt-2">
+          <ToggleSwitch
+            size="small"
+            checked={isCreator}
+            onToggle={() => {
+              setIsCreator(!isCreator);
+              formik.setFieldValue("isCreator", !isCreator);
+            }}
+          />
+        </div>
+      </div>
+
       <form
         className="mt-6"
         onSubmit={e => {

@@ -36,6 +36,7 @@ import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
 
 import AdCard from "@/components/v4/card/AdCard";
+import { PenLineSimple } from "@/components/icons";
 
 // import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
@@ -144,13 +145,29 @@ export default function Post({
       >
         <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto mx-auto bg-gray-100/20">
           {user?.isAdmin && (
-            <div className="fixed bottom-0 mb-16 z-50 border border-gray-100 bg-white mr-16 right-0 p-4 rounded shadow">
-              <p className="text-sm">Hi, Admin 👩‍✈️</p>
-              <button className="p-1 mt-3 px-3 text-sm text-white bg-purple-600 shadow rounded">
-                <Link href={`/p/${post?.id}`}>Edit</Link>
-              </button>
-            </div>
+            <div className="fixed bottom-0 mb-6 z-50 border border-gray-200 bg-white mr-20 right-0 p-2 px-3 rounded-full shadow-sm">
+            {/* <button className="p-1 px-3 text-sm text-white bg-purple-600 shadow rounded"> */}
+            <Link href={`/p/${post?.id}`}>
+              <div className="flex text-gray-700">
+                <PenLineSimple className="w-4 h-4 my-auto mr-2" />
+                <div className="my-auto text-sm">Edit</div>
+              </div>
+            </Link>
+            {/* </button> */}
+          </div>
           )}
+          {!user?.isAdmin && (user?.id == post?.attributes?.author?.data?.id) ? (
+            <div className="fixed bottom-0 mb-6 z-50 border border-gray-200 bg-white mr-20 right-0 p-2 px-3 rounded-full shadow-sm">
+              {/* <button className="p-1 px-3 text-sm text-white bg-purple-600 shadow rounded"> */}
+              <Link href={`/p/${post?.id}`}>
+                <div className="flex text-gray-700">
+                  <PenLineSimple className="w-4 h-4 my-auto mr-2" />
+                  <div className="my-auto text-sm">Edit</div>
+                </div>
+              </Link>
+              {/* </button> */}
+            </div>
+          ) : null}
 
           {/* <Alert preview={preview} /> */}
           <main className="pb-20 gap-2 col-span-12 lg:col-span-12 overflow-x-hidden px-0 ">

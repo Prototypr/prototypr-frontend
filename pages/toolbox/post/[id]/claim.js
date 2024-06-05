@@ -121,37 +121,31 @@ export default function ClaimToolPage({ data }) {
           ) : claimedByUser ? (
             <>
               <p className="text-gray-800 mt-6">
-              ✅ You have claimed this page. You will be notified once the claim
-                is approved.
+                ✅ You have claimed this page. You will be notified once the
+                claim is approved.
               </p>
               <p className="text-gray-800 mt-1">
-              💬 Please contact support if you need any more help.
+                💬 Please contact support if you need any more help.
               </p>
-                <Button
-                  className="mt-6 rounded-full"
-                  onClick={() => {
-                     // console.log(user)
-                      // pop up chat
-                      // window.$chatwoot?.setUser(user?.id, {
-                      //   claimId: post?.id,
-                      //   claimName: post?.attributes?.title,
-                      // });
-                      if (!window?.$chatwoot) {
-                        addSupportScript();
-                        setTimeout(() => {
-                          window?.$chatwoot?.toggle();
-                        }, 1000);
-                      } else {
-                        window?.$chatwoot?.toggle();
-                      }
-                      // window.$chatwoot.popoutChatWindow();
+              <Button
+                className="mt-6 rounded-full"
+                onClick={() => {
+                  // console.log(user)
+                  // pop up chat
+                  // window.$chatwoot?.setUser(user?.id, {
+                  //   claimId: post?.id,
+                  //   claimName: post?.attributes?.title,
+                  // });
 
-                      // woot-widget-bubble
-                  }}
-                  type="button"
-                >
-                  Ask support
-                </Button>
+                  window.$chatwoot?.toggle();
+                  // window.$chatwoot.popoutChatWindow();
+
+                  // woot-widget-bubble
+                }}
+                type="button"
+              >
+                Ask support
+              </Button>
             </>
           ) : (
             ""
