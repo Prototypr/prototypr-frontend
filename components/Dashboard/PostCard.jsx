@@ -34,7 +34,7 @@ import { DotsThree } from "@/components/icons";
 
 var axios = require("axios");
 
-const PostCard = ({ post, refetch, user }) => {
+const PostCard = ({ post, refetch, user, edit }) => {
   const deletePost = async id => {
     if (id) {
       let currentPostData = {
@@ -73,6 +73,8 @@ const PostCard = ({ post, refetch, user }) => {
         <div className="">
           <Link
             href={
+              (edit===false && post.type=='article')? `/post/${post.slug}`:
+              (edit===false && post.type=='tool')? `/toolbox/${post.slug}`:
               post.type == "article"
                 ? `/p/${post.id}`
                 : `/toolbox/post/${post.id}`
@@ -152,7 +154,7 @@ const PostCard = ({ post, refetch, user }) => {
             </Link>
           </div>
         )}
-        {post.type == "tool" ? (
+        {(post.type == "tool" && edit!==false) ? (
           <div className="hidden md:block">
             <Link href={`/toolbox/post/${post.id}?step=3`}>
               <button className="text-lg bg-white underline text-black  p-3  rounded-full hover:bg-gray-100 ">
@@ -164,7 +166,7 @@ const PostCard = ({ post, refetch, user }) => {
           ""
         )}
 
-        <div>
+       {edit!==false? <div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <IconButton
@@ -193,7 +195,7 @@ const PostCard = ({ post, refetch, user }) => {
               <DropdownMenuArrow offset={12} />
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
+        </div>:null}
       </div>
     </div>
   );

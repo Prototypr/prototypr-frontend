@@ -8,7 +8,7 @@ import PostCard from "./PostCard";
 import NewPagination from "../pagination";
 import Skeleton from "./Skeleton";
 
-const Dashboard = ({ postStatus, postType, currentTab }) => {
+const Dashboard = ({ postStatus, postType, currentTab, creatorArticles, edit }) => {
   const { user } = useUser({
     redirectIfFound: false,
     redirectTo: "/",
@@ -17,7 +17,8 @@ const Dashboard = ({ postStatus, postType, currentTab }) => {
   const { posts, loading, refetch, total, pageSize } = useFetchPosts(
     user,
     postStatus,
-    postType
+    postType,
+    creatorArticles
   );
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,12 +39,12 @@ const Dashboard = ({ postStatus, postType, currentTab }) => {
 
           {!loading &&
             posts?.map(post => (
-              <PostCard refetch={refetch} user={user} post={post} />
+              <PostCard refetch={refetch} user={user} post={post} edit={edit} />
             ))}
 
         </div>
         {!loading && !posts?.length && (
-          <EmptyState currentTab={currentTab} draft={false} />
+          <EmptyState edit={edit} currentTab={currentTab} draft={false} />
         )}
         <NewPagination
           total={total}

@@ -17,11 +17,21 @@ const Navigation = ({activeTab}) =>{
         </div>
         </Link>
         <Link href="/dashboard/published">
-        <div className={"text-gray-700 mr-2"}>
+        <div className={"text-gray-700 mr-4"}>
           <div className={`${activeTab==2?"bg-gray-800 font-semibold text-white border-gray-800":'hover:bg-gray-100 border border-gray-400'} border border-1 flex p-3 rounded-full text-sm cursor-pointer w-full`}>
             <div className="flex">
             {/* <svg className="w-4 h-4 mr-2 my-auto"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1zm-1-2V4H5v16h14zM8 9h8v2H8V9zm0 4h8v2H8v-2z" fill="currentColor"/></svg> */}
               <div className="my-auto text-sm">Published</div>
+            </div>
+          </div>
+        </div>
+        </Link>
+        <Link href="/dashboard/tagged">
+        <div className={"text-gray-700 mr-2"}>
+          <div className={`${activeTab==3?"bg-gray-800 font-semibold text-white border-gray-800":'hover:bg-gray-100 border border-gray-400'} border border-1 flex p-3 rounded-full text-sm cursor-pointer w-full`}>
+            <div className="flex">
+            {/* <svg className="w-4 h-4 mr-2 my-auto"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1zm-1-2V4H5v16h14zM8 9h8v2H8V9zm0 4h8v2H8v-2z" fill="currentColor"/></svg> */}
+              <div className="my-auto text-sm">Tagged</div>
             </div>
           </div>
         </div>

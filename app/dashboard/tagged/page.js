@@ -45,12 +45,14 @@ export default async function AccountPage() {
           <div className="flex flex-row justify-between items-baseline mt-3">
             <h1 className="my-3 text-3xl font-semibold">Your posts</h1>
           </div>
-          <Navigation activeTab={2} />
+          <Navigation activeTab={3} />
           {/* set post type to empty so it gets tools too */}
           <Dashboard
-            currentTab="publish"
+            currentTab="tagged"
             postStatus={["publish"]}
             postType=""
+            creatorArticles={true}
+            edit={false}
           />
         </div>
         {/* <AccountPageWrapper userData={userData}/> */}

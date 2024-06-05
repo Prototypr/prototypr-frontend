@@ -1,7 +1,7 @@
 import NewPostDialog from "../Navbar/parts/NewPostDialog";
-import Button from "../Primitives/Button";
+// import Button from "../Primitives/Button";
 
-const EmptyState = ({currentTab }) => {
+const EmptyState = ({currentTab, edit }) => {
     return (
       <div className="mt-6 mx-auto rounded-lg border border-gray-300">
         <div className="pt-20 pb-20 px-6">
@@ -12,13 +12,14 @@ const EmptyState = ({currentTab }) => {
             style={{ opacity: "0.92" }}
           />
           <h1 className="text-lg text-gray-700 pt-0 mt-4 mb-8 text-center">
-            {currentTab=='draft'
+            {edit===false? `You've not been mentioned on any posts yet.`:
+            currentTab=='draft'
               ? `No drafts in progress.`
               : `You've not published anything.`}
           </h1>
-            <div class="flex justify-center w-full my-3">
+           {edit!==false? <div class="flex justify-center w-full my-3">
               <NewPostDialog button={true}/>
-            </div>
+            </div>:null}
         </div>
       </div>
     );
