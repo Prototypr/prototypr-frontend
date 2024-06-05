@@ -133,7 +133,7 @@ export default function EditPostPage(props) {
 
       <div className="h-full w-full">
         <div id="editor-container" className="w-full h-full mx-auto  relative">
-          {!user && <Fallback />}
+          {/* {!user && <Fallback />} */}
 
           {/* only load editor if initialContent has loaded */}
           {(user && !user?.isLoggedIn) || initialContent == null ? (
