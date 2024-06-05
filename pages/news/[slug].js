@@ -294,7 +294,7 @@ export default function Post({
                               aria-labelledby={month}
                               className="lg:border-gray-400/60"
                             >
-                              <div className="grid lg:grid-cols-12 bg-white border border-gray-300/50 shadow-sm p-4 pr-8 pb-8 rounded-xl  grid-cols-1 gap-y-6 ">
+                              <div className="grid lg:grid-cols-12 pr-8 pb-8 rounded-xl  grid-cols-1 gap-y-6 ">
                                 <h2
                                   id={month}
                                   className="text-lg col-span-12 font-semibold text-gray-800"
@@ -302,7 +302,7 @@ export default function Post({
                                   {month}
                                 </h2>
                                 <div className="col-span-12">
-                                  <div className="space-y-12">
+                                  <div className="space-y-4">
                                     {renderPosts(posts)}
                                   </div>
                                 </div>
