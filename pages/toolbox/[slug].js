@@ -19,6 +19,9 @@ import Carousel from "@/components/carousel";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
+const StickyFooterInterview = dynamic(() => import("@/components/StickyFooterInterview"), {
+  ssr: false,
+});
 // const AuthorCard = dynamic(() => import("@/components/toolbox/AuthorCard"));
 // const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"));
 // const RelatedPosts = dynamic(() => import("@/components/related-posts"));
@@ -43,7 +46,7 @@ import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import ToolLargeCardRow from "@/components/v4/layout/ToolLargeCardRow";
 import AuthorCard from "@/components/toolbox/AuthorCard";
 import SignupSidebar from "@/components/newsletter/SignupSidebar";
-import ToolCard from "@/components/v4/card/ToolCard";
+// import ToolCard from "@/components/v4/card/ToolCard";
 // import WeeMan from "@/components/images/weeMan";
 import buildToolboxGallery, {
   getToolboxFeaturedImage,
@@ -90,6 +93,7 @@ const ToolContent = ({
       window?.twttr?.widgets?.createTweet(id, tweets[x]);
     }
   }, [post.attributes?.content]);
+
 
   return (
     <>
@@ -444,6 +448,12 @@ const ToolContent = ({
           title="Welcome to Prototypr"
           description="Join today to make posts and grow with us."
         />
+      )}
+
+      {(user?.isLoggedIn && post?.attributes?.creators?.data?.some(item => item.id == user.id) && !post.attributes?.interviews?.data?.length) && (
+        <>
+        <StickyFooterInterview title="Tell your creator story" description={"Get featured in the newsletter by answering a creator interview"} />
+        </>
       )}
       {/* <NewsletterSection title="Get the best tools every week"/> */}
     </>

@@ -8,7 +8,6 @@ import Layout from "@/components/new-index/layoutForApp";
 import { HOME_OG_IMAGE_URL } from "@/lib/constants";
 import Dashboard from "@/components/Dashboard/Dashboard";
 import Navigation from "@/components/Dashboard/navigation";
-
 export const metadata = {
   title: "Dashboard | Prototypr",
   description: "Edit your posts, drafts, and tools on Prototypr",

@@ -39,11 +39,12 @@ const NewsPageFeatured = ({
               {post.attributes?.outgoingLinks?.length?<div className="col-span-8 lg:col-span-2 max-h-[1200px] relative">
                 <h1
                   tabIndex={0}
-                  className="text-base mb-2.5 font-semibold tracking-tight"
+                  className="text-xl mb-3 font-semibold tracking-tight"
                 >
-                  References
+                  Explore links in this article
                 </h1>
-                <div className=" lg:overflow-x-auto flex gap-4">
+                {/* <p className="mb-2.5 text-sm text-gray-600">Referenced in this article</p> */}
+                <div className="overflow-x-auto flex gap-4">
                   <div className="z-10 absolute p-4 z-10 -mr-8 hidden md:block pointer-events-none bottom-0 right-0 h-full w-32 bg-gradient-to-l from-[#fbfcff]" />
 
                   {post.attributes.outgoingLinks.map((link, index) => {
@@ -114,12 +115,16 @@ const NewsPageFeatured = ({
 
             {content !== excerpt ? (
               <div className="col-span-2 w-[48rem] max-w-full mx-auto border-t border-gray-100/80 p-6 lg:p-8 mt-6 w-full flex flex-col">
+                <div className="flex gap-1 mb-4">
+                <svg className="h-6 w-6 my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polygon points="160 16 144 96 208 120 96 240 112 160 48 136 160 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
                 <h1
                   tabIndex={0}
-                  className="text-2xl mb-4 font-medium tracking-tight"
+                  className="text-2xl my-auto font-medium tracking-tight"
                 >
-                  Summary
+                  Breakdown 
                 </h1>
+
+                  </div>
                 <div
                   className="text-lg text-gray-800 blog-content news-content"
                   dangerouslySetInnerHTML={{ __html: content }}
