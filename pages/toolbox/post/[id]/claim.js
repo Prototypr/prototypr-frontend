@@ -77,9 +77,9 @@ export default function ClaimToolPage({ data }) {
       activeNav={"toolbox"}
     >
       <Container maxWidth="max-w-[1320px]">
-        <div className="max-w-[650px] mt-6 mx-auto pt-3 mb-3 p-5 border border-black/10 rounded-xl bg-white">
+        <div className="max-w-[650px] mt-6 mx-auto mb-3 p-4 border border-black/10 rounded-xl bg-white">
           <img
-            className="rounded rounded-lg shadow-sm border border-gray-100"
+            className="rounded-xl shadow-sm border border-gray-100"
             src={post?.attributes?.legacyFeaturedImage?.logoNew}
             width={60}
             height={60}
@@ -95,18 +95,10 @@ export default function ClaimToolPage({ data }) {
                 ) : (
                   ""
                 )}
-                <p className="mb-2">
+                <p className="">
                   Once approved as owner, you'll be able to edit the
                   description, images, and see the page stats for this tool.
                 </p>
-                {user?.isLoggedIn ? (
-                  <p className="mb-2">
-                    To claim the page, send a message with the tool name and
-                    URL, along with your user name.
-                  </p>
-                ) : (
-                  ""
-                )}
               </div>
             ) : null}
           </div>

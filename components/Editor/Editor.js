@@ -54,7 +54,7 @@ import EditorNavButtons from "./EditorNavButtons";
 // });
 
 const Editor = ({
-  wrapperClass=false,
+  wrapperClass = false,
   postType = "article",
   canEdit = false,
   initialContent = null,
@@ -123,21 +123,22 @@ const Editor = ({
       //   allowBase64: true,
       // }),
       Placeholder.configure({
+        showOnlyCurrent: false,
         includeChildren: true,
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
-            return "What's the title?";
+            return "Title";
           }
           if (node.type.name === "figcaption") {
-            return "What's the title?";
+            return "Enter a caption";
           }
           if (node.type.name === "figure") {
-            return "What's the title?";
+            return "Enter a caption";
           }
           if (node.type.name === "tweet") {
             return "Paste a tweet link and press enter";
           }
-          return "Tell a story...";
+          return "Tell your story...";
         },
       }),
     ],
@@ -151,6 +152,14 @@ const Editor = ({
         .setContent(initialContent)
         .setMeta("addToHistory", false)
         .run();
+
+      //check if editor.state.doc.textContent is white space or empty
+      if (editor.state.doc.textContent.trim() === "") {
+        editor.commands.clearContent()
+        setTimeout(()=>{
+          editor.chain().focus().setTextSelection(0).enter().run()
+        },100)
+      }
 
       //add the twitter widget script
       addTwitterScript();
@@ -202,9 +211,9 @@ const Editor = ({
 
   return (
     <>
-      <div className={`w-full relative ${postType=='article'?'my-4':''}`}>
+      <div className={`w-full relative ${postType == "article" ? "my-4" : ""}`}>
         {/* NAVIGATION, WITH BUTTONS EMBEDDED AS A PROP */}
-        {(user?.isAdmin && postType=='article')?
+        {user?.isAdmin && postType == "article" ? (
           <div className="mt-16">
             <div className="fixed bottom-3 z-20 w-full">
               <div className="relative bg-gray-100/80 w-[500px] shadow-sm border border-gray-300/20 mx-auto rounded-xl p-3 text-sm backdrop-blur text-gray-800 flex flex-row justify-center items-center">
@@ -212,7 +221,7 @@ const Editor = ({
               </div>
             </div>
           </div>
-        :null}
+        ) : null}
 
         {/* undoredo buttons render in a portal on the navbar */}
         {showNavButtons !== false ? (
@@ -239,7 +248,15 @@ const Editor = ({
         ) : null}
 
         {/* NAVIGATION END */}
-        <div className={wrapperClass?wrapperClass:postType=="article"?"my-4 pt-0 mt-[100px] max-w-[44rem] mx-auto relative pb-10 blog-content":''}>
+        <div
+          className={
+            wrapperClass
+              ? wrapperClass
+              : postType == "article"
+                ? "my-4 pt-0 mt-[100px] max-w-[44rem] mx-auto relative pb-10 blog-content"
+                : ""
+          }
+        >
           {editor && <MenuFloating editor={editor} />}
           <TextMenu editor={editor} />
           {/* <LinkMenu editor={editor} /> */}

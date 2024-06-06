@@ -234,9 +234,17 @@ a.kofi-button:active {
 .ProseMirror .is-empty:first-child::before {
     content: attr(data-placeholder);
     float: left;
-    color: #ced4da;
+    color: #aeb4bb;
     pointer-events: none;
     height: 0;
+}
+
+.ProseMirror .is-empty:first-of-type::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #aeb4bb;
+  pointer-events: none;
+  height: 0;
 }
 
 .tippy-svg-arrow{

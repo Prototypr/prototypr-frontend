@@ -86,13 +86,15 @@ export default function Write() {
 
       <div className="h-full w-full" id="editor-container">
         <div className="w-full h-full mx-auto  relative">
-          {!user && <Fallback />}
+          {/* {!user && <Fallback />} */}
 
           {/* only load editor if initialContent is not null */}
           {(user && !user?.isLoggedIn) || initialContent == null ? (
             // <Layout>
-            <div className="my-auto">
-              <Spinner />
+            <div className="my-auto h-screen flex flex-col justify-center text-center">
+              <div className="mx-auto opacity-50">
+                <Spinner />
+              </div>
             </div>
           ) : (
             // </Layout>

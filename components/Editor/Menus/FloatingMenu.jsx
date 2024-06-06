@@ -332,15 +332,16 @@ const MenuFloating = ({ editor, isSelecting }) => {
   return (
     <FloatingMenu
       shouldShow={({ editor, view, state, oldState }) => {
-        // if(state?.selection?.$anchor?.parent?.type?.name=='paragraph' && state?.selection?.$anchor?.parent?.textContent==''
-        // // ||state?.selection?.$anchor?.nodeBefore?.type?.name=='horizontalRule'
-        // ){
         if (
           state?.selection?.$anchor?.parent?.type?.name == "paragraph" &&
           state?.selection?.$anchor?.parent?.textContent == "" &&
           !editor.isActive("bulletList") &&
           !editor.isActive("orderedList")
         ) {
+          return true;
+        }
+
+        if(editor.state.doc.textContent.trim() === "" && state?.selection?.$anchor?.pos==2){
           return true;
         }
       }}
