@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import Button from "@/components/Primitives/Button";
 import Link from "next/link";
 import ErrorPage from "next/error";
@@ -33,6 +33,8 @@ import {
   getTool,
   // getAllToolsForHomeStatic,
   getPopularTopics,
+  getSlugFromArticleId,
+  getUserRelatedPostsFromId,
 } from "@/lib/api";
 // import ToolCard from "@/components/v4/card/ToolCard";
 // import BigTag from "@/components/v4/tag/BigTag";
@@ -93,6 +95,25 @@ const ToolContent = ({
       window?.twttr?.widgets?.createTweet(id, tweets[x]);
     }
   }, [post.attributes?.content]);
+
+  const [hasInterview, setHasInterview] = useState('loading');
+  useEffect(()=>{
+    if(user?.isLoggedIn && post?.attributes?.creators?.data?.some(item => item.id == user.id)){
+      //query the user endpoint where drafts are returned
+      const fetchPostWithDrafts = async (user, postId) => {
+        const { userPostId } = await getUserRelatedPostsFromId(user, postId);
+        //this is named weirdly - it's actually the post object
+        if(userPostId?.interviews?.length){
+          setHasInterview(true);
+        }else{
+          setHasInterview(false);
+        }
+      }
+        
+      fetchPostWithDrafts(user, post.id)
+    }
+
+  },[post?.attributes?.creators, user])
 
 
   return (
@@ -450,9 +471,9 @@ const ToolContent = ({
         />
       )}
 
-      {(user?.isLoggedIn && post?.attributes?.creators?.data?.some(item => item.id == user.id) && !post.attributes?.interviews?.data?.length) && (
+      {(user?.isLoggedIn && post?.attributes?.creators?.data?.some(item => item.id == user.id) && (hasInterview!=='loading' && hasInterview==false)) && (
         <>
-        <StickyFooterInterview title="Tell your creator story" description={"Get featured in the newsletter by answering a creator interview"} />
+        <StickyFooterInterview post={post} title="Tell your creator story" description={"Get featured in the newsletter by answering a creator interview"} />
         </>
       )}
       {/* <NewsletterSection title="Get the best tools every week"/> */}

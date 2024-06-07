@@ -9,7 +9,9 @@ import { useEffect, useState } from "react";
  * @param {*} usr
  * @returns
  */
-const useLoad = user => {
+import { getInterViewTemplate } from "../libs/templates/interviewTemplate";
+
+const useLoad = ({user, interview, productName}) => {
   const [loading, setLoading] = useState(true);
 
   const [postStatus] = useState("draft");
@@ -27,12 +29,19 @@ const useLoad = user => {
 
   const refetch = async () => {
     let retrievedObject = localStorage.getItem("wipContent");
+    if(interview){
+      retrievedObject = localStorage.getItem("wipInterview");
+    }
     if (retrievedObject) {
       setInitialContent(JSON.parse(retrievedObject));
       setLoading(false);
-    } else {
+    } 
+    else {
       //it's a new post
       setInitialContent(false)
+      if(interview){
+        setInitialContent(getInterViewTemplate({productName:'Prototypr Publisher'}));
+      }
       setLoading(false);
     }
   };

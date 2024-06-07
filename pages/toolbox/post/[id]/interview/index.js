@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 // import Layout from "@/components/layout-editor";
 
-// import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
 import { useEffect } from "react";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
@@ -25,7 +24,7 @@ import EditorNav from "@/components/EditorNav";
  *
  * @returns
  */
-export default function Write() {
+export default function InterviewEditor() {
   const router = useRouter();
 
   const { user } = useUser({
@@ -43,7 +42,7 @@ export default function Write() {
 
   //useLoad hook
   //initialContent is null until loaded - so is 'false' when it's a new post
-  const { canEdit, loading, initialContent, postStatus } = useLoad({user});
+  const { canEdit, loading, initialContent, postStatus } = useLoad({user, interview:true});
 
   //create new post hook
   const { createPost } = useCreate();
@@ -56,7 +55,7 @@ export default function Write() {
    */
   const updatePost = ({ editor, json }) => {
     // send the content to an API here (if new post only)
-    localStorage.setItem("wipContent", JSON.stringify(json));
+    localStorage.setItem("wipInterview", JSON.stringify(json));
   };
 
   /**
@@ -70,11 +69,14 @@ export default function Write() {
    */
   const savePost = async ({ editor, forReview }) => {
     try {
-      const postInfo = await createPost({ user, editor, forReview });
-      //set the new slug
-      localStorage.removeItem("wipContent");
+      const { id } = router.query;
 
-      router.push(`p/${postInfo?.id}`);
+      const postInfo = await createPost({ user, editor, forReview, relatedPost:id });
+      //set the new slug
+      localStorage.removeItem("wipInterview");
+      
+
+      router.push(`/toolbox/post/${id}/interview/${postInfo?.id}`);
     } catch (e) {
       return false;
     }

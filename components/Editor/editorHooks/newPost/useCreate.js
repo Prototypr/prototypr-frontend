@@ -3,9 +3,9 @@ import { getCreatePostData } from "../libs/getCreatePostData";
 var axios = require("axios");
 
 const useCreate = () => {
-  const createPost = async ({ user, editor, forReview }) => {
+  const createPost = async ({ user, editor, forReview, relatedPost }) => {
 
-    const { entry } = getCreatePostData({ user, editor, forReview });
+    const { entry } = getCreatePostData({ user, editor, forReview, relatedPost });
 
     let publishPostEndpointConfig = {
       method: "post",

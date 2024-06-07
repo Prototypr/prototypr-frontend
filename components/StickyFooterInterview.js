@@ -14,7 +14,7 @@ export function getScrollPercent() {
   return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
 }
 
-const StickyFooterInterview = ({ title, description, buttonText }) => {
+const StickyFooterInterview = ({ title, description, buttonText, post }) => {
   const [isVisible, setVisible] = useState(true);
 //   const [userClosed, setUserClosed] = useState(false);
 
@@ -113,7 +113,7 @@ const StickyFooterInterview = ({ title, description, buttonText }) => {
               </div>
             </div>
             <div className="my-auto ml-4 md:ml-0 flex-none w-full md:w-[fit-content] md:block flex justify-start md:justify-end">
-              <Link className="w-[fit-content]" href="/onboard">
+              <Link className="w-[fit-content]" href={`/toolbox/post/${post.id}/interview`}>
                 <Button
                   className="py-1 md:w-auto p-0 py-[0.1rem] bg-yellow-300/90 hover:bg-yellow-300 text-yellow-900 px-[1rem]"
                   variant={"confirmRounded"}

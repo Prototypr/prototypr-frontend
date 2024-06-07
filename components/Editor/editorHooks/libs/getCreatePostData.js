@@ -4,13 +4,15 @@ import {
   getContent,
   getLegacyFeaturedImage,
   uid,
+  getPostRelation
 } from "./helpers/editorDataFormatter";
 
 export const getCreatePostData = ({
   editor,
   forReview,
   postObject,
-  user
+  user,
+  relatedPost
 }) => {
   const html = editor.getHTML();
   const json = editor.getJSON()?.content;
@@ -25,6 +27,9 @@ export const getCreatePostData = ({
   //create post slug - just use a unique id and the date
   const slug = `${uid()}--${user?.profile?.id}`;
 
+  const postRelation = getPostRelation({ relatedPost, postObject });
+  
+
   let entry = {
     type: "article",
     status: forReview ? "pending" : "draft",
@@ -37,6 +42,10 @@ export const getCreatePostData = ({
     date: new Date(),
     user: user?.profile?.id,
   };
+
+  if(postRelation) {
+    entry.tools = [postRelation];
+  }
 
   //change the date on save only if postStatus==draft or postStatus==pending publish
   if (postObject?.status !== "publish") {
