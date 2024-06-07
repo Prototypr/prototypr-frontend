@@ -40,7 +40,7 @@ const useLoad = ({user, interview, productName}) => {
       //it's a new post
       setInitialContent(false)
       if(interview){
-        setInitialContent(getInterViewTemplate({productName:'Prototypr Publisher'}));
+        setInitialContent(getInterViewTemplate({productName:productName}));
       }
       setLoading(false);
     }

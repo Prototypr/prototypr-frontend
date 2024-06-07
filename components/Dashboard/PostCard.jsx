@@ -67,17 +67,22 @@ const PostCard = ({ post, refetch, user, edit }) => {
     }
   };
 
+
   return (
     <div className="flex flex-row justify-between p-4 h-full rounded-lg border shadow-sm border-black/5 hover:border-opacity-10 cursor-default bg-white hover:transition duration-300 ease-in-out col-span-12">
       <div className="flex flex-col grid gap-2 w-full flex-shrink">
         <div className="">
           <Link
             href={
-              (edit===false && post.type=='article')? `/post/${post.slug}`:
-              (edit===false && post.type=='tool')? `/toolbox/${post.slug}`:
-              post.type == "article"
-                ? `/p/${post.id}`
-                : `/toolbox/post/${post.id}`
+              edit === false && post.type == "article"
+                ? `/post/${post.slug}`
+                : edit === false && post.type == "tool"
+                  ? `/toolbox/${post.slug}`
+                  : post.type == "article" && post.tools?.length
+                    ? `/toolbox/post/${post.tools[0].id}/interview/${post.id}`
+                    : post.type == "article"
+                      ? `/p/${post.id}`
+                      : `/toolbox/post/${post.id}`
             }
           >
             <h3 className="text-xl font-semibold max-w-2xl ">{post.title}</h3>
@@ -89,10 +94,30 @@ const PostCard = ({ post, refetch, user, edit }) => {
                 {format(new Date(post.date), "LLLL d, yyyy")}
               </p>
               <div className="my-auto text-sm text-gray-500">{` · `}</div>
-              {post.type ? (
+              {post.type == "article" && post.tools?.length ? (
+                <div className="text-[11px] font-semibold my-auto bg-yellow-100 px-3 py-1 uppercase  rounded-full text-yellow-900">
+                  Interview
+                </div>
+              ) : post.type ? (
                 <div className="text-[11px] font-semibold my-auto bg-gray-100 px-3 py-1 uppercase  rounded-full text-gray-600">
                   {post.type}
                 </div>
+              ) : (
+                ""
+              )}
+
+              {post.type == "article" && post.tools?.length ? (
+                <>
+                <div className="my-auto text-sm text-gray-500">{` · `}</div>
+                <div className="flex-none my-auto">
+                  <Link target="_blank" href={`/toolbox/${post.tools[0].slug}`}>
+                    <img
+                      className="flex-none w-6 h-6 rounded-2xl my-auto"
+                      src={post.tools[0].logo?.url}
+                    />
+                  </Link>
+                </div>
+                </>
               ) : (
                 ""
               )}
@@ -154,7 +179,7 @@ const PostCard = ({ post, refetch, user, edit }) => {
             </Link>
           </div>
         )}
-        {(post.type == "tool" && edit!==false) ? (
+        {post.type == "tool" && edit !== false ? (
           <div className="hidden md:block">
             <Link href={`/toolbox/post/${post.id}?step=3`}>
               <button className="text-lg bg-white underline text-black  p-3  rounded-full hover:bg-gray-100 ">
@@ -165,37 +190,38 @@ const PostCard = ({ post, refetch, user, edit }) => {
         ) : (
           ""
         )}
+        {edit !== false ? (
+          <div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <IconButton
+                  className="!text-gray-700"
+                  aria-label="Customise options"
+                >
+                  <DotsThree />
+                </IconButton>
+              </DropdownMenuTrigger>
 
-       {edit!==false? <div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <IconButton
-                className="!text-gray-700"
-                aria-label="Customise options"
-              >
-                <DotsThree />
-              </IconButton>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent sideOffset={5}>
-              {/* <DropdownMenuSeparator /> */}
-              <DropdownMenuItem
-              className="group"
-                onSelect={(e) => {
-                 e.preventDefault()
-                }}
-              >
-                <DeletePostButton
-                  onClick={() => {
-                    deletePost(post.id);
+              <DropdownMenuContent sideOffset={5}>
+                {/* <DropdownMenuSeparator /> */}
+                <DropdownMenuItem
+                  className="group"
+                  onSelect={e => {
+                    e.preventDefault();
                   }}
-                />
-              </DropdownMenuItem>
+                >
+                  <DeletePostButton
+                    onClick={() => {
+                      deletePost(post.id);
+                    }}
+                  />
+                </DropdownMenuItem>
 
-              <DropdownMenuArrow offset={12} />
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>:null}
+                <DropdownMenuArrow offset={12} />
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        ) : null}
       </div>
     </div>
   );

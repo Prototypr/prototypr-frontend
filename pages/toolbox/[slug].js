@@ -33,7 +33,6 @@ import {
   getTool,
   // getAllToolsForHomeStatic,
   getPopularTopics,
-  getSlugFromArticleId,
   getUserRelatedPostsFromId,
 } from "@/lib/api";
 // import ToolCard from "@/components/v4/card/ToolCard";

@@ -58,7 +58,7 @@ export default function AuthorCard({
             </div>
 
             <div className={`my-auto ${size=='small'?"mr-1":"w-3/5"}`}>
-              {size=='small'&& <h3 className="text-sm tracking-tight text-gray-500 ">Curated by</h3>}
+              {size=='small'&& <h3 className="text-sm tracking-tight text-gray-500 ">Posted by</h3>}
               <p
                 tabIndex={0}
                 className="text-base cursor-pointer leading-5 font-semibold text-gray-800"

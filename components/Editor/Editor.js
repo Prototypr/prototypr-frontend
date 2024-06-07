@@ -124,7 +124,7 @@ const Editor = ({
       // }),
       Placeholder.configure({
         showOnlyCurrent: false,
-        includeChildren: true,
+        includeChildren: false,
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
             return "Title";

@@ -13,6 +13,7 @@ import useCreate from "@/components/Editor/editorHooks/newPost/useCreate";
 
 import { useRouter } from "next/router";
 import EditorNav from "@/components/EditorNav";
+import { getToolById } from "@/lib/api";
 
 /**
  * Write
@@ -24,9 +25,8 @@ import EditorNav from "@/components/EditorNav";
  *
  * @returns
  */
-export default function InterviewEditor() {
+export default function InterviewEditor({tool}) {
   const router = useRouter();
-
   const { user } = useUser({
     // redirectTo: '/account',
     redirectTo: "/onboard",
@@ -42,7 +42,11 @@ export default function InterviewEditor() {
 
   //useLoad hook
   //initialContent is null until loaded - so is 'false' when it's a new post
-  const { canEdit, loading, initialContent, postStatus } = useLoad({user, interview:true});
+  const { canEdit, loading, initialContent, postStatus } = useLoad({
+    user,
+    interview: true,
+    productName:tool?.attributes?.title
+  });
 
   //create new post hook
   const { createPost } = useCreate();
@@ -71,16 +75,31 @@ export default function InterviewEditor() {
     try {
       const { id } = router.query;
 
-      const postInfo = await createPost({ user, editor, forReview, relatedPost:id });
+      const postInfo = await createPost({
+        user,
+        editor,
+        forReview,
+        relatedPost: id,
+      });
       //set the new slug
       localStorage.removeItem("wipInterview");
-      
 
       router.push(`/toolbox/post/${id}/interview/${postInfo?.id}`);
     } catch (e) {
       return false;
     }
   };
+
+
+  if(router.isFallback){
+    return (
+      <div className="my-auto h-screen flex flex-col justify-center text-center">
+        <div className="mx-auto opacity-50">
+          <Spinner />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -120,4 +139,30 @@ export default function InterviewEditor() {
       </div>
     </>
   );
+}
+
+export async function getStaticProps({ params, preview = null, locale }) {
+  let data;
+  try {
+    data = await getToolById(params.id, preview);
+  } catch (error) {
+    console.error('Failed to get tool:', error);
+    return {
+      notFound: true,
+    };
+  }
+
+  let tool = data?.posts?.data[0] || null;
+  return {
+    props: {
+      tool: tool || null,
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  };
 }

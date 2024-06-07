@@ -273,7 +273,7 @@ export const getInterViewTemplate = ({ productName }) => {
         content: [
           {
             type: "text",
-            text: "Q. Who is it for, and how are you discovering your first users?",
+            text: `Q. Who is ${productName} for, and how are you discovering your first users?`,
           },
         ],
       },
