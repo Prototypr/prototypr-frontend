@@ -24,7 +24,7 @@ export const getInterViewTemplate = ({ productName }) => {
                 type: "italic",
               },
             ],
-            text: "Welcome to your creator story! This is an interview template that will help share your story and show the human behind the product. The purpose is to showcase work you're excited about, whilst also helping and inspiring readers with their own projects. ",
+            text: "Welcome to your creator story! This is an interview template that will help share your story and show the human behind the product. The purpose is to showcase work you're excited about, whilst also helping and inspiring readers with their own projects. On completion, your story will be featured on Prototypr and shared with our 25k+ newsletter subscribers and 100k+ Medium followers. ",
           },
         ],
       },

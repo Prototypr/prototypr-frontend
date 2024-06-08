@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 // import Layout from "@/components/layout-editor";
 
 import useUser from "@/lib/iron-session/useUser";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 
 import Editor from "@/components/Editor/Editor";
@@ -14,6 +14,7 @@ import useCreate from "@/components/Editor/editorHooks/newPost/useCreate";
 import { useRouter } from "next/router";
 import EditorNav from "@/components/EditorNav";
 import { getToolById } from "@/lib/api";
+import InterviewDialog from "@/components/InterviewDialog";
 
 /**
  * Write
@@ -25,7 +26,7 @@ import { getToolById } from "@/lib/api";
  *
  * @returns
  */
-export default function InterviewEditor({tool}) {
+export default function InterviewEditor({ tool }) {
   const router = useRouter();
   const { user } = useUser({
     // redirectTo: '/account',
@@ -45,7 +46,7 @@ export default function InterviewEditor({tool}) {
   const { canEdit, loading, initialContent, postStatus } = useLoad({
     user,
     interview: true,
-    productName:tool?.attributes?.title
+    productName: tool?.attributes?.title,
   });
 
   //create new post hook
@@ -60,6 +61,17 @@ export default function InterviewEditor({tool}) {
   const updatePost = ({ editor, json }) => {
     // send the content to an API here (if new post only)
     localStorage.setItem("wipInterview", JSON.stringify(json));
+  };
+
+  const [dialogOpen, setDialogOpen] = useState(true);
+  const [initialEditor, setInitialEditor] = useState(null);
+
+  const toggleDialog = () => {
+    setDialogOpen(!dialogOpen);
+  };
+
+  const setInitialEditorContent = editor => {
+    setInitialEditor(editor);
   };
 
   /**
@@ -90,15 +102,14 @@ export default function InterviewEditor({tool}) {
     }
   };
 
-
-  if(router.isFallback){
+  if (router.isFallback) {
     return (
       <div className="my-auto h-screen flex flex-col justify-center text-center">
         <div className="mx-auto opacity-50">
           <Spinner />
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -125,6 +136,7 @@ export default function InterviewEditor({tool}) {
                   <Editor
                     canEdit={canEdit}
                     initialContent={initialContent}
+                    setInitialEditorContent={setInitialEditorContent}
                     postStatus={postStatus}
                     //functions
                     createPost={createPost}
@@ -137,6 +149,15 @@ export default function InterviewEditor({tool}) {
           )}
         </div>
       </div>
+      <InterviewDialog
+        tool={tool}
+        initialEditor={initialEditor}
+        createPost={createPost}
+        toggleOpen={toggleDialog}
+        open={dialogOpen}
+        user={user}
+        relatedPostId={router.query.id}
+      />
     </>
   );
 }
@@ -146,7 +167,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
   try {
     data = await getToolById(params.id, preview);
   } catch (error) {
-    console.error('Failed to get tool:', error);
+    console.error("Failed to get tool:", error);
     return {
       notFound: true,
     };
@@ -163,6 +184,6 @@ export async function getStaticProps({ params, preview = null, locale }) {
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: 'blocking',
+    fallback: "blocking",
   };
 }

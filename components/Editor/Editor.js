@@ -66,6 +66,7 @@ const Editor = ({
   savePost = false,
   updatePost = false,
   updatePostSettings = false,
+  setInitialEditorContent = false,
 }) => {
   const { user } = useUser({
     redirectIfFound: false,
@@ -155,11 +156,13 @@ const Editor = ({
 
       //check if editor.state.doc.textContent is white space or empty
       if (editor.state.doc.textContent.trim() === "") {
-        editor.commands.clearContent()
-        setTimeout(()=>{
-          editor.chain().focus().setTextSelection(0).enter().run()
-        },100)
+        editor.commands.clearContent();
+        setTimeout(() => {
+          editor.chain().focus().setTextSelection(0).enter().run();
+        }, 100);
       }
+
+      if (setInitialEditorContent) setInitialEditorContent(editor);
 
       //add the twitter widget script
       addTwitterScript();
