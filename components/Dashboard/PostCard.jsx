@@ -95,7 +95,7 @@ const PostCard = ({ post, refetch, user, edit }) => {
               </p>
               <div className="my-auto text-sm text-gray-500">{` · `}</div>
               {post.type == "article" && post.tools?.length ? (
-                <div className="text-[11px] font-semibold my-auto bg-yellow-100 px-3 py-1 uppercase  rounded-full text-yellow-900">
+                <div className="text-[11px] font-semibold my-auto bg-pink-100 px-3 py-1 uppercase  rounded-full text-pink-900">
                   Interview
                 </div>
               ) : post.type ? (

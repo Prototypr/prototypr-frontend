@@ -12,7 +12,7 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({ activeNav, postStatus }) {
+export default function EditorNav({ activeNav, postStatus, tool, post }) {
   const { user, isLoading } = useUser({
     redirectIfFound: false,
   });
@@ -94,7 +94,7 @@ export default function EditorNav({ activeNav, postStatus }) {
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <Link href="/" as="/">
                 <div
-                  className={`flex-shrink-0 flex items-center cursor-pointer transition transition-all duration-300 ease-in-out`}
+                  className={`flex-shrink-0  flex items-center cursor-pointer transition transition-all duration-300 ease-in-out`}
                 >
                   <img
                     className="lg:block h-8 w-auto"
@@ -104,6 +104,13 @@ export default function EditorNav({ activeNav, postStatus }) {
                   />
                 </div>
               </Link>
+              {tool ? (
+                <div className="my-auto ml-3">
+                  <div className="p-2 py-0.5 text-xs bg-pink-100 text-pink-900 rounded-full border border-pink-200">
+                    Interview
+                  </div>
+                </div>
+              ) : null}
               <div className="my-auto ml-3">{statusComponent}</div>
               {/* Undo/redo */}
               <div id="undoredo-container"></div>
@@ -150,6 +157,7 @@ export default function EditorNav({ activeNav, postStatus }) {
           </div>
         </div>
       </>
+   
     </div>
   );
 }

@@ -114,7 +114,7 @@ export default function InterviewEditor({ tool }) {
 
   return (
     <>
-      <EditorNav postStatus={postStatus} />
+      <EditorNav tool={tool} postStatus={postStatus} />
 
       <div className="h-full w-full" id="editor-container">
         <div className="w-full h-full mx-auto  relative">

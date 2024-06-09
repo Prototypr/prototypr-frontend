@@ -12,6 +12,7 @@ import useUpdate from "@/components/Editor/editorHooks/editPost/useUpdate";
 import { useConfirmTabClose } from "@/components/Editor/useConfirmTabClose";
 import EditorNav from "@/components/EditorNav";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
+import { getToolById } from "@/lib/api";
 
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
@@ -26,7 +27,7 @@ const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
  * @param {*} props
  * @returns
  */
-export default function EditPostPage(props) {
+export default function EditPostPage({ tool }) {
   const { user } = useUser({
     redirectTo: "/onboard",
     redirectIfFound: false,
@@ -78,7 +79,7 @@ export default function EditPostPage(props) {
       });
 
       //update the postObject from useLoad hook
-      if(updatedPostObject) {
+      if (updatedPostObject) {
         setPostObject(updatedPostObject);
         //confirm no unsaved changes
         setHasUnsavedChanges(false);
@@ -102,7 +103,7 @@ export default function EditPostPage(props) {
         postObject: postObject,
       });
 
-      if(updatedPostObject) {
+      if (updatedPostObject) {
         setPostObject(updatedPostObject);
       }
 
@@ -129,9 +130,26 @@ export default function EditPostPage(props) {
 
   return (
     <>
-      <EditorNav postStatus={postStatus} />
+      <EditorNav tool={tool} post={postObject} postStatus={postStatus} />
 
       <div className="h-full w-full">
+        {tool?.attributes?.logo?.data?.attributes?.url ? (
+          <div className="mx-auto mt-[72px] -mb-16 max-w-[44rem] mx-auto text-sm px-2 py-2  bg-white border border-1 border-gray-200/70 rounded-xl">
+            <div className="flex ">
+              <img
+                className="lg:block h-8 w-auto shadow rounded-lg border border-gray-50"
+                data-gumlet="false"
+                src={tool?.attributes?.logo?.data?.attributes?.url}
+                alt="Prototypr Logo"
+              />
+              <div className="my-auto ml-3">
+                <div className="text-base font-medium tracking-tight text-gray-800">
+                  {tool?.attributes?.title}: Creator Story
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
         <div id="editor-container" className="w-full h-full mx-auto  relative">
           {/* {!user && <Fallback />} */}
 
@@ -172,4 +190,30 @@ export default function EditPostPage(props) {
       </div>
     </>
   );
+}
+
+export async function getStaticProps({ params, preview = null, locale }) {
+  let data;
+  try {
+    data = await getToolById(params.id, preview);
+  } catch (error) {
+    console.error("Failed to get tool:", error);
+    return {
+      notFound: true,
+    };
+  }
+
+  let tool = data?.posts?.data[0] || null;
+  return {
+    props: {
+      tool: tool || null,
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
 }
