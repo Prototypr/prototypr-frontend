@@ -277,17 +277,16 @@ const ProfilePageLayout = ({
                     <h3 className="text-gray-500 uppercase font-semibold tracking-wide text-xs my-2">
                       On Social
                     </h3>
-                    <div className="flex">
+                    <div className="flex gap-2.5">
                       {(twitter || (unapproved && user?.profile?.twitter)) && (
                         <a
-                          className="link block mr-2"
+                          className="link block"
                           href={`https://twitter.com/${twitter || user?.profile?.twitter}`}
                           target="_blank"
                         >
                           <TwitterLogo
                             color="rgba(0,0,0,0.8)"
-                            width={20}
-                            height={20}
+                            size={24}
                           />
                           {/* <img
                           style={{ width: "28px" }}
@@ -300,14 +299,13 @@ const ProfilePageLayout = ({
                       {(dribbble ||
                         (unapproved && user?.profile?.dribbble)) && (
                         <a
-                          className="link block mr-2"
+                          className="link block"
                           href={`https://dribbble.com/${dribbble || user?.profile?.dribbble}`}
                           target="_blank"
                         >
                           <DribbbleLogo
                             color="rgba(0,0,0,0.8)"
-                            width={20}
-                            height={20}
+                            size={24}
                           />
 
                           {/* <img
@@ -320,14 +318,13 @@ const ProfilePageLayout = ({
                       )}
                       {(github || (unapproved && user?.profile?.github)) && (
                         <a
-                          className="link block mr-2"
+                          className="link block"
                           href={`https://github.com/${github || user?.profile?.github}`}
                           target="_blank"
                         >
                           <GithubLogo
                             color="rgba(0,0,0,0.8)"
-                            width={20}
-                            height={20}
+                            size={24}
                           />
                         </a>
                       )}
