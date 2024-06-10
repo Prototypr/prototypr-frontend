@@ -94,8 +94,7 @@ export default function ProfileCard({
                 <MapPin
                   className="mr-1 my-auto"
                   color="rgba(0,0,0,0.8)"
-                  width={16}
-                  height={16}
+                  size={16}
                 />
                 <div className="inline-block my-auto">{locationNiceName}</div>
               </div>
@@ -127,7 +126,7 @@ export default function ProfileCard({
                 href={`https://twitter.com/${twitter}`}
                 target="_blank"
               >
-                <TwitterLogo color="rgba(0,0,0,0.8)" width={20} height={20} />
+                <TwitterLogo color="rgba(0,0,0,0.8)" size={20} />
               </a>
             ) : null}
             {dribbble ? (
@@ -136,7 +135,7 @@ export default function ProfileCard({
                 href={`https://dribbble.com/${dribbble}`}
                 target="_blank"
               >
-                <DribbbleLogo color="rgba(0,0,0,0.8)" width={20} height={20} />
+                <DribbbleLogo color="rgba(0,0,0,0.8)" size={20} />
               </a>
             ) : null}
             {github ? (
@@ -145,7 +144,7 @@ export default function ProfileCard({
                 href={`https://github.com/${github}`}
                 target="_blank"
               >
-                <GithubLogo color="rgba(0,0,0,0.8)" width={20} height={20} />
+                <GithubLogo color="rgba(0,0,0,0.8)" size={20} />
               </a>
             ) : null}
           </div>

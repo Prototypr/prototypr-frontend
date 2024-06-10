@@ -391,7 +391,7 @@ export default function Post({
                 </div>
                 <div className="mt-2">
                   <SocialShare
-                    size={22}
+                    size={28}
                     title={post.attributes.title}
                     slug={post.attributes.slug}
                   />

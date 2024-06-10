@@ -11,14 +11,14 @@ export default function SocialShare({ slug, authorTwitter, title = "" , size=28}
           target="_blank"
           href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fprototypr.io%2Fpost%2F${slug}%2F&via=prototypr&text=Recommended%20read:%20%22${titleUrl}%22${authorTwitter ? "%20by%20" + authorTwitter : ""}%20✨%20check%20it%20out!`}
         >
-          <TwitterLogo width={size} height={size}/>
+          <TwitterLogo size={size}/>
         </a>
       </div>
       <div>
         <a
           target="_blank"
           href={`http://www.facebook.com/share.php?u=https%3A%2F%2Fprototypr.io%2Fpost%2F${slug}`}>
-        <FacebookLogo width={size} height={size}/>
+        <FacebookLogo size={size}/>
         </a>
       </div>
       <div>
@@ -26,7 +26,7 @@ export default function SocialShare({ slug, authorTwitter, title = "" , size=28}
           target="_blank"
           href={`https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprototypr.io%2Fpost%2F${slug}`}
         >
-                  <LinkedinLogo width={size} height={size}/>
+                  <LinkedinLogo size={size}/>
 
         </a>
       </div>
