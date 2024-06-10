@@ -19,9 +19,12 @@ import Carousel from "@/components/carousel";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
   ssr: false,
 });
-const StickyFooterInterview = dynamic(() => import("@/components/StickyFooterInterview"), {
-  ssr: false,
-});
+const StickyFooterInterview = dynamic(
+  () => import("@/components/StickyFooterInterview"),
+  {
+    ssr: false,
+  }
+);
 // const AuthorCard = dynamic(() => import("@/components/toolbox/AuthorCard"));
 // const SponsorCard = dynamic(() => import("@/components/toolbox/SponsorCard"));
 // const RelatedPosts = dynamic(() => import("@/components/related-posts"));
@@ -60,6 +63,7 @@ import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitte
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
 import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
+import LikeButton from "@/components/LikeButton";
 
 const ToolContent = ({
   post,
@@ -95,25 +99,26 @@ const ToolContent = ({
     }
   }, [post.attributes?.content]);
 
-  const [hasInterview, setHasInterview] = useState('loading');
-  useEffect(()=>{
-    if(user?.isLoggedIn && post?.attributes?.creators?.data?.some(item => item.id == user.id)){
+  const [hasInterview, setHasInterview] = useState("loading");
+  useEffect(() => {
+    if (
+      user?.isLoggedIn &&
+      post?.attributes?.creators?.data?.some(item => item.id == user.id)
+    ) {
       //query the user endpoint where drafts are returned
       const fetchPostWithDrafts = async (user, postId) => {
         const { userPostId } = await getUserRelatedPostsFromId(user, postId);
         //this is named weirdly - it's actually the post object
-        if(userPostId?.interviews?.length){
+        if (userPostId?.interviews?.length) {
           setHasInterview(true);
-        }else{
+        } else {
           setHasInterview(false);
         }
-      }
-        
-      fetchPostWithDrafts(user, post.id)
+      };
+
+      fetchPostWithDrafts(user, post.id);
     }
-
-  },[post?.attributes?.creators, user])
-
+  }, [post?.attributes?.creators, user]);
 
   return (
     <>
@@ -127,9 +132,12 @@ const ToolContent = ({
           </div>
         </Container> */}
         {/* Content under header */}
-        <Container maxWidth="w-full relative z-10">
+        <Container maxWidth="w-full z-10">
           <div className="grid grid-cols-3 lg:grid-cols-12 gap-3 xl:gap-7 max-w-[1320px] mx-auto md:px-0 h-full">
-            <div className="col-span-3 border border-gray-300/60 rounded-2xl overflow-hidden lg:col-span-9 flex flex-col gap-3 bg-white">
+            <div className="hidden sticky top-0 h-fit lg:col-span-1 lg:block">
+                <LikeButton post={post}/>
+            </div>
+            <div className="col-span-3 border border-gray-300/60 rounded-2xl overflow-hidden lg:col-span-8 flex flex-col gap-3 bg-white">
               <div className="grid gap-3 md:px-0 -mb-4">
                 <HeroCardSection
                   post={post}
@@ -244,7 +252,9 @@ const ToolContent = ({
                 {post.attributes?.creators?.data?.length > 0 ? (
                   <div className="order-1 p-4 mb-4 rounded-2xl bg-[#f4f4f4]/60">
                     <h3 className="text-sm tracking-tight text-gray-500 ">
-                     {post.attributes?.creators?.data?.length > 1? `Creators`:'Creator' }
+                      {post.attributes?.creators?.data?.length > 1
+                        ? `Creators`
+                        : "Creator"}
                     </h3>
                     {post.attributes?.creators?.data?.map((creator, index) => {
                       return (
@@ -289,7 +299,9 @@ const ToolContent = ({
                     </div>
                   </div>
                   {post?.attributes?.author &&
-                  post?.attributes?.creators?.data?.length && (post?.attributes?.author?.id !=  post?.attributes?.creators?.data[0]?.id) ? (
+                  post?.attributes?.creators?.data?.length &&
+                  post?.attributes?.author?.id !=
+                    post?.attributes?.creators?.data[0]?.id ? (
                     <AuthorCard
                       size={"small"}
                       authorAvatar={authorAvatar}
@@ -470,11 +482,20 @@ const ToolContent = ({
         />
       )}
 
-      {(user?.isLoggedIn && post?.attributes?.creators?.data?.some(item => item.id == user.id) && (hasInterview!=='loading' && hasInterview==false)) && (
-        <>
-        <StickyFooterInterview post={post} title="Tell your creator story" description={"Get featured in the newsletter by answering a creator interview"} />
-        </>
-      )}
+      {user?.isLoggedIn &&
+        post?.attributes?.creators?.data?.some(item => item.id == user.id) &&
+        hasInterview !== "loading" &&
+        hasInterview == false && (
+          <>
+            <StickyFooterInterview
+              post={post}
+              title="Tell your creator story"
+              description={
+                "Get featured in the newsletter by answering a creator interview"
+              }
+            />
+          </>
+        )}
       {/* <NewsletterSection title="Get the best tools every week"/> */}
     </>
   );

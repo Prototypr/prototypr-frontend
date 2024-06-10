@@ -42,7 +42,7 @@ export default function Layout({
       {/* </div> */}
 
       <div
-        className={`min-h-screen overflow-hidden ${navOffset==false?'':NAV_OFFSET} ${
+        className={`min-h-screen overflow ${navOffset==false?'':NAV_OFFSET} ${
           padding == false ? "" : "px-3 md:px-8"
         }`}
         style={{ background: background ? background : "#fbfcff" }}
