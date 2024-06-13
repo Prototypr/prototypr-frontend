@@ -134,8 +134,8 @@ const ToolContent = ({
         {/* Content under header */}
         <Container maxWidth="w-full z-10">
           <div className="grid grid-cols-3 lg:grid-cols-12 gap-3 xl:gap-7 max-w-[1320px] mx-auto md:px-0 h-full">
-            <div className="hidden sticky top-0 h-fit lg:col-span-1 lg:block">
-                <LikeButton post={post}/>
+            <div className="hidden sticky top-6 h-fit lg:col-span-1 lg:block">
+                <LikeButton post={post} user={user}/>
             </div>
             <div className="col-span-3 border border-gray-300/60 rounded-2xl overflow-hidden lg:col-span-8 flex flex-col gap-3 bg-white">
               <div className="grid gap-3 md:px-0 -mb-4">

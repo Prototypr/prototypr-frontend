@@ -100,6 +100,7 @@
     "iron-session": "8.0.1",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.21",
     "metascraper": "^5.33.8",
     "metascraper-amazon": "^5.33.7",
     "metascraper-author": "^5.33.7",
