@@ -158,7 +158,8 @@ const LikeButton = ({ post, user }) => {
   );
 
   const handleReaction = async reaction => {
-    if (!user) {
+    
+    if (!user?.isLoggedIn) {
       toast("Sign in to react to posts.", {
         duration: 5000,
         icon: "💔",
