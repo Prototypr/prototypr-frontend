@@ -17,7 +17,7 @@ const LikeButton = ({ post, user }) => {
     }
     if (lc?.post?.data?.attributes?.likes?.data) {
       const likeObject = lc?.post?.data?.attributes?.likes?.data?.find(
-        like => like?.attributes?.user?.data?.id == user.id
+        like => like?.attributes?.user?.data?.id == user?.id
       );
       if (likeObject) {
         setUserLikeObject(likeObject);
@@ -51,11 +51,11 @@ const LikeButton = ({ post, user }) => {
   const [creatingLike, setCreatingLike] = useState(false);
 
   useEffect(() => {
-    setLikeCount(post.attributes.likeCount);
+    const updateLikes = async () => {
+      await refetchLikeCount(post, user);
 
-    if (user?.id) {
       const likeObject = post.attributes?.likes?.data?.find(
-        like => like?.attributes?.user?.data?.id == user.id
+        like => like?.attributes?.user?.data?.id == user?.id
       );
       if (likeObject) {
         setUserLikeObject(likeObject);
@@ -75,12 +75,13 @@ const LikeButton = ({ post, user }) => {
           unicorn: false,
         });
       }
-    }
+    };
+    updateLikes();
   }, [user, post]);
 
   const debounceSave = useCallback(
     debounce(async (post, newReactions, total, userLikeObject, user, type) => {
-      if (!user) {
+      if (!user?.isLoggedIn) {
         return false;
       }
       if (type == "update") {
@@ -158,8 +159,40 @@ const LikeButton = ({ post, user }) => {
   );
 
   const handleReaction = async reaction => {
-    
+    /**
+     * logged out user toggle animation and show toast
+     */
     if (!user?.isLoggedIn) {
+      if(creatingLike){
+        return false
+      }
+      setCreatingLike(true)
+      let addLike = reactions[reaction] ? false : true;
+      let newReactions = { ...reactions, [reaction]: addLike };
+
+      let newLikeCountObj = { ...likeCount };
+      newLikeCountObj[reaction] = newLikeCountObj[reaction] + 1;
+      newLikeCountObj.total = likeCount.total+1;
+
+      setLikeCount(newLikeCountObj);
+
+      if (reactions) {
+        setReactions({ ...newReactions });
+      }
+
+      setTimeout(() => {
+        addLike = reactions[reaction] ? true : false;
+        newReactions = { ...reactions, [reaction]: addLike };
+        if (reactions) {
+          setReactions({ ...newReactions });
+        }
+
+        let newLikeCountObj = { ...likeCount };
+        newLikeCountObj[reaction] = newLikeCountObj[reaction];
+        newLikeCountObj.total = likeCount.total;
+        setLikeCount(newLikeCountObj);
+        setCreatingLike(false)
+      }, 800);
       toast("Sign in to react to posts.", {
         duration: 5000,
         icon: "💔",
