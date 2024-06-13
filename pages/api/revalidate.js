@@ -138,7 +138,7 @@ const clearPostCacheByLike = async (likeId, res) => {
         response?.data?.data?.attributes?.post?.data?.attributes?.slug;
 
         if (postSlug) {
-          let url = `/post/${postSlug}`;
+          let url = `/toolbox/${postSlug}`;
           await res.revalidate(url);
           if (process.env.NODE_ENV == "production") {
             await purgeCloudFlareCache(url);
