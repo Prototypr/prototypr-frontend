@@ -134,7 +134,7 @@ const LikeButton = ({ post, user }) => {
         setUserLikeObject(publishData.data.data);
         setCreatingLike(false);
         console.log("created");
-        refetchLikeCount();
+        refetchLikeCount(post,user);
       }
     }, 2000),
     [getLikeCount]
