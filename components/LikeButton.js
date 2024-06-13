@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const LikeButton = ({ post, user }) => {
   const [userLikeObject, setUserLikeObject] = useState(null);
 
-  const [likeCount, setLikeCount] = useState(null);
+  const [likeCount, setLikeCount] = useState(post?.attributes?.likeCount);
 
   const refetchLikeCount = async (post, user) => {
     const lc = await getLikeCount(post?.id);
@@ -104,9 +104,17 @@ const LikeButton = ({ post, user }) => {
           },
         };
 
-        const updateData = await axios(updatePostEndpointConfig);
-        console.log("saved");
-        refetchLikeCount(post, user);
+        try {
+          const updateData = await axios(updatePostEndpointConfig);
+          console.log("saved");
+          refetchLikeCount(post, user);
+        } catch (e) {
+          refetchLikeCount(post, user);
+          toast("Error liking post", {
+            duration: 5000,
+            icon: "💔",
+          });
+        }
       } else if (type == "create") {
         setCreatingLike(true);
         //create a new like object
@@ -117,9 +125,9 @@ const LikeButton = ({ post, user }) => {
           post: post?.id,
         };
 
-        let updatePostEndpointConfig = {
+        let createPostEndpointConfig = {
           method: "post",
-          url: `${process.env.NEXT_PUBLIC_API_URL}/api/likes`,
+          url: `${process.env.NEXT_PUBLIC_API_URL}/api/likes?post=${post?.id}`,
           headers: {
             Authorization: `Bearer ${user?.jwt}`,
           },
@@ -130,25 +138,33 @@ const LikeButton = ({ post, user }) => {
           },
         };
 
-        const publishData = await axios(updatePostEndpointConfig);
-        setUserLikeObject(publishData.data.data);
-        setCreatingLike(false);
-        console.log("created");
-        refetchLikeCount(post,user);
+        try {
+          const publishData = await axios(createPostEndpointConfig);
+          setUserLikeObject(publishData.data.data);
+          setCreatingLike(false);
+          console.log("created");
+          refetchLikeCount(post, user);
+        } catch (e) {
+          setCreatingLike(false);
+          refetchLikeCount(post, user);
+          toast("Error liking post", {
+            duration: 5000,
+            icon: "💔",
+          });
+        }
       }
     }, 2000),
     [getLikeCount]
   );
 
   const handleReaction = async reaction => {
+    if (!user) {
+      toast("Sign in to react to posts.", {
+        duration: 5000,
+        icon: "💔",
+      });
 
-    if(!user){
-        toast("Sign in to react to posts.", {
-            duration: 5000,
-            icon: '💔',
-          });
-
-          return false
+      return false;
     }
 
     const addLike = reactions[reaction] ? false : true;
@@ -197,7 +213,11 @@ const LikeButton = ({ post, user }) => {
 
   return (
     <div className="flex flex-col gap-2 mt-4">
-      <p className={`${likeCount?.total>0?'h-6':'opacity-0 h-0'} text-gray-600  tracking-tight font-semibold text-center transition transition-all duration-400 cursor-default`}><span className="mr-[2px]">❤️</span> {likeCount?.total}</p>
+      <p
+        className={`${likeCount?.total > 0 ? "h-6" : "opacity-0 h-0"} text-gray-600  tracking-tight font-semibold text-center transition transition-all duration-400 cursor-default`}
+      >
+        <span className="mr-[2px]">❤️</span> {likeCount?.total}
+      </p>
       <div className="rounded-full h-fit w-fit p-2.5 flex flex-col gap-2 bg-gray-100/90">
         <button
           disabled={creatingLike}
@@ -207,7 +227,14 @@ const LikeButton = ({ post, user }) => {
           <div
             className={`${reactions.like ? "opacity-100 text-[26px] drop-shadow-lg" : "text-[22px] opacity-80 group-hover:opacity-100"} transition transition-all duration-400 mx-auto flex gap-2`}
           >
-            😍 {likeCount?.like>0?<div className={`${reactions.like?'text-gray-700':'text-gray-500'} text-sm my-auto`}>{likeCount?.like}</div>:null}
+            😍{" "}
+            {likeCount?.like > 0 ? (
+              <div
+                className={`${reactions.like ? "text-gray-700" : "text-gray-500"} text-sm my-auto`}
+              >
+                {likeCount?.like}
+              </div>
+            ) : null}
           </div>
         </button>
         <button
@@ -218,7 +245,14 @@ const LikeButton = ({ post, user }) => {
           <div
             className={`${reactions.unicorn ? "opacity-100 text-[26px] drop-shadow-lg" : "text-[22px] opacity-80 group-hover:opacity-100"} transition transition-all duration-400 mx-auto flex gap-2`}
           >
-            🦄  {likeCount?.unicorn>0?<div className={`${reactions.unicorn?'text-gray-700':'text-gray-500'} text-sm my-auto`}>{likeCount?.unicorn}</div>:null}
+            🦄{" "}
+            {likeCount?.unicorn > 0 ? (
+              <div
+                className={`${reactions.unicorn ? "text-gray-700" : "text-gray-500"} text-sm my-auto`}
+              >
+                {likeCount?.unicorn}
+              </div>
+            ) : null}
           </div>
         </button>
         <button
@@ -229,7 +263,14 @@ const LikeButton = ({ post, user }) => {
           <div
             className={`${reactions.fire ? "opacity-100 text-[26px] drop-shadow-lg" : "text-[22px] opacity-80 group-hover:opacity-100"} transition transition-all duration-400 mx-auto flex gap-2`}
           >
-            🔥 {likeCount?.fire>0?<div className={`${reactions.fire?'text-gray-700':'text-gray-500'} text-sm my-auto`}>{likeCount?.fire}</div>:null}
+            🔥{" "}
+            {likeCount?.fire > 0 ? (
+              <div
+                className={`${reactions.fire ? "text-gray-700" : "text-gray-500"} text-sm my-auto`}
+              >
+                {likeCount?.fire}
+              </div>
+            ) : null}
           </div>
         </button>
       </div>
