@@ -53,28 +53,6 @@ const LikeButton = ({ post, user }) => {
   useEffect(() => {
     const updateLikes = async () => {
       await refetchLikeCount(post, user);
-
-      const likeObject = post.attributes?.likes?.data?.find(
-        like => like?.attributes?.user?.data?.id == user?.id
-      );
-      if (likeObject) {
-        setUserLikeObject(likeObject);
-        const { like, love, fire, unicorn } = likeObject.attributes;
-        setReactions({
-          like,
-          love,
-          fire,
-          unicorn,
-        });
-      } else {
-        setUserLikeObject(null);
-        setReactions({
-          like: false,
-          love: false,
-          fire: false,
-          unicorn: false,
-        });
-      }
     };
     updateLikes();
   }, [user, post]);
