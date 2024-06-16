@@ -8,8 +8,11 @@ import {
   TwitterLogo,
   Globe,
   GithubLogo,
-  CircleWavyCheck
+  CircleWavyCheck,
+  Medal,
 } from "@/components/icons";
+
+import CreatorBadge from "../icons/creatorBadge";
 
 // import SmallCard from "@/components/v4/card/SmallCard/SmallCardB";
 // import ToolLargeCardProfile from "@/components/v4/card/ToolLargeCardProfile";
@@ -97,14 +100,22 @@ const ProfilePageLayout = ({
             <div className="relative max-w-[1320px] mx-auto flex flex-col justify-start">
               <Link href={`/people/${slug}`}>
                 <div className="w-[132px] bg-white h-[132px] mx-auto mt-3 rounded-full border border-1 overflow- relative border-black/10 shadow-sm mb-3">
-                  {(kofi || (unapproved && user?.profile?.kofi)) && (
+                  {/* {(kofi || (unapproved && user?.profile?.kofi)) && (
                     <div className="absolute z-10 bottom-0 mb-1 right-0">
-                      {/* <h2 className="font-medium text-sm mb-2 text-gray-700">Support {author?.firstName?author?.firstName:''}</h2> */}
+                      <h2 className="font-medium text-sm mb-2 text-gray-700">Support {author?.firstName?author?.firstName:''}</h2>
                       <KoFiButton
                         color="#53b1e6"
                         // label={"Buy me a coffee"}
                         kofiId={kofi || user?.profile?.kofi}
                       />
+                    </div>
+                  )} */}
+                  {(author.creatorBadge ||
+                    (unapproved && user?.profile?.creatorBadge)) && (
+                    <div className="absolute z-10 bottom-0 -mb-1 right-0.5  text-white">
+                      {/* <div className="rounded-xl bg-blue-600 flex flex-col justify-center w-8 h-8 border border-1 border-gray-200 shadow-sm"> */}
+                      <CreatorBadge />
+                      {/* </div> */}
                     </div>
                   )}
                   {unapproved ? (
@@ -141,7 +152,7 @@ const ProfilePageLayout = ({
               <div className="flex flex-col z-20 relative justify-center w-full gap-5">
                 <Link href={`/people/${slug}`}>
                   <h1 className="text-2xl text-center tracking-tight font-semibold leading-normal text-black/90">
-                    {`${author?.firstName ? author?.firstName :!author?.name ? "New":''} ${author?.lastName ? author?.lastName : !author?.name?"User":''}
+                    {`${author?.firstName ? author?.firstName : !author?.name ? "New" : ""} ${author?.lastName ? author?.lastName : !author?.name ? "User" : ""}
                       ${!author?.firstName && !author?.lastName && author?.name ? author?.name : ""}`}
                   </h1>
                 </Link>
@@ -284,10 +295,7 @@ const ProfilePageLayout = ({
                           href={`https://twitter.com/${twitter || user?.profile?.twitter}`}
                           target="_blank"
                         >
-                          <TwitterLogo
-                            color="rgba(0,0,0,0.8)"
-                            size={24}
-                          />
+                          <TwitterLogo color="rgba(0,0,0,0.8)" size={24} />
                           {/* <img
                           style={{ width: "28px" }}
                           className=" bg-white rounded-full shadow-sm hover:shadow-md"
@@ -303,10 +311,7 @@ const ProfilePageLayout = ({
                           href={`https://dribbble.com/${dribbble || user?.profile?.dribbble}`}
                           target="_blank"
                         >
-                          <DribbbleLogo
-                            color="rgba(0,0,0,0.8)"
-                            size={24}
-                          />
+                          <DribbbleLogo color="rgba(0,0,0,0.8)" size={24} />
 
                           {/* <img
                           style={{ width: "28px" }}
@@ -322,11 +327,26 @@ const ProfilePageLayout = ({
                           href={`https://github.com/${github || user?.profile?.github}`}
                           target="_blank"
                         >
-                          <GithubLogo
-                            color="rgba(0,0,0,0.8)"
-                            size={24}
-                          />
+                          <GithubLogo color="rgba(0,0,0,0.8)" size={24} />
                         </a>
+                      )}
+                    </div>
+                  </div>
+                ) : null}
+                {kofi ? (
+                  <div>
+                    <h3 className="text-gray-500 uppercase font-semibold tracking-wide text-xs my-2">
+                      Support
+                    </h3>
+                    <div className="flex gap-2.5">
+                      {(kofi || (unapproved && user?.profile?.kofi)) && (
+                        <div className="">
+                          <KoFiButton
+                            color="#53b1e6"
+                            label={"Buy me a coffee"}
+                            kofiId={kofi || user?.profile?.kofi}
+                          />
+                        </div>
                       )}
                     </div>
                   </div>
@@ -407,10 +427,10 @@ const ProfilePageLayout = ({
                       Profile pending approval
                     </h2>
                     <p className="mb-3">
-                      For community safety, your
-                      profile is not publicly viewable until manually approved. You can submit posts, but they will only
-                      appear once your account is approved. Complete your
-                      profile to get approved faster.
+                      For community safety, your profile is not publicly
+                      viewable until manually approved. You can submit posts,
+                      but they will only appear once your account is approved.
+                      Complete your profile to get approved faster.
                     </p>
                     <p>
                       {" "}
