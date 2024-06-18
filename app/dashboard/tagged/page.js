@@ -39,7 +39,7 @@ export default async function AccountPage() {
         {/* {userData?.user?.id} */}
         <div
           className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 w-full"
-          style={{ maxWidth: 1200 }}
+          style={{ maxWidth: 840 }}
         >
           <div className="flex flex-row justify-between items-baseline mt-3">
             <h1 className="my-3 text-3xl font-semibold">Your posts</h1>

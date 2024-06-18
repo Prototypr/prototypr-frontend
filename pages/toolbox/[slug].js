@@ -135,7 +135,7 @@ const ToolContent = ({
         <Container maxWidth="w-full z-10">
           <div className="grid grid-cols-3 lg:grid-cols-12 gap-3 xl:gap-7 max-w-[1320px] mx-auto md:px-0 h-full">
             <div className="hidden sticky top-6 h-fit lg:col-span-1 lg:block">
-                <LikeButton post={post} user={user} />
+              <LikeButton post={post} user={user} />
             </div>
             <div className="col-span-3 border border-gray-300/60 rounded-2xl overflow-hidden lg:col-span-8 flex flex-col gap-3 bg-white">
               <div className="grid gap-3 md:px-0 -mb-4">
@@ -619,14 +619,14 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
   let layout = 1;
   //if post content is less than 1000 words, use layout 2
-  if (postData.attributes.content?.length < 1000) {
+  if (postData?.attributes?.content?.length < 1000) {
     layout = 2;
   }
 
   /**
    * replace images with gumlet loader
    */
-  if (postData.attributes.content?.length) {
+  if (postData?.attributes?.content?.length) {
     const gumletPostContentLoaderModule = await import(
       "@/lib/gumletPostContentLoader"
     );
@@ -640,8 +640,10 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
   const { logo, base64: logoBase64 } = getToolboxLogo({ post: postData });
 
-  postData.attributes.logoBase64 = logoBase64;
-  postData.attributes.logo = logo;
+  if (postData?.attributes) {
+    postData.attributes.logoBase64 = logoBase64;
+    postData.attributes.logo = logo;
+  }
 
   //build the gallery here
   // let PHOTO_SET = [];
@@ -653,7 +655,9 @@ export async function getStaticProps({ params, preview = null, locale }) {
     gallery: PHOTO_SET,
   });
 
-  postData.attributes.base64 = base64;
+  if (postData?.attributes) {
+    postData.attributes.base64 = base64;
+  }
 
   //if there is no gallery, add a default image
   if (!PHOTO_SET.length) {
@@ -673,8 +677,8 @@ export async function getStaticProps({ params, preview = null, locale }) {
     });
   }
 
-  const date = isoToReadableDate(postData.attributes.date);
-  const updatedAtDate = isoToReadableDate(postData.attributes.updatedAt);
+  const date = isoToReadableDate(postData?.attributes?.date);
+  const updatedAtDate = isoToReadableDate(postData?.attributes?.updatedAt);
 
   const authorAttributes = postData.attributes?.author?.data?.attributes;
   const authorAvatar = authorAttributes?.avatar?.data?.attributes?.url

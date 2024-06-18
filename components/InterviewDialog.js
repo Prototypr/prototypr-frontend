@@ -43,7 +43,7 @@ const InterviewDialog = ({
                     src={tool?.attributes?.logo?.data?.attributes?.url}
                     className="w-20 h-20 mx-auto rounded-2xl shadow-lg "
                   />
-                  <h2 className="text-white font-medium mt-1 text-xl tracking-tight drop-shadow-md">
+                  <h2 className="text-white text-center font-medium mt-1 text-xl tracking-tight drop-shadow-md">
                     {tool.attributes?.title}
                   </h2>
                 </div>

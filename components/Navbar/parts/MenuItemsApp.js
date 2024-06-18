@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { keyframes } from "@stitches/react";
 import { styled } from "../../../stitches.config";
@@ -6,8 +6,8 @@ import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { indigo, mauve, green, teal } from "@radix-ui/colors";
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
-import { usePathname } from 'next/navigation'
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { FormattedMessage, useIntl } from "react-intl";
 import { DotsThree } from "@/components/icons";
@@ -112,6 +112,7 @@ const CustomTrigger = ({ children, to, ...props }) => {
       }}
     >
       <StyledTrigger
+        className="unset bg-transparent flex justify-between align-center py-[8px] px-[12px] outline-none user-select-none line-[1]"
         onPointerMove={event => event.preventDefault()}
         onPointerLeave={event => {
           event.preventDefault();
@@ -134,31 +135,36 @@ const StyledCaret = styled(CaretDownIcon, {
   },
 });
 
-
 const StyledTriggerWithCaret = React.forwardRef(
   ({ children, ...props }, forwardedRef) => {
-    const pathname =usePathname();
+    const pathname = usePathname();
 
     let isActive = Boolean(pathname == props.href);
 
     if (
       props.href == "toolbox" &&
       (pathname.indexOf("/toolbox") > -1 ||
-      pathname.indexOf("/prototyping") > -1)
+        pathname.indexOf("/prototyping") > -1)
     ) {
       isActive = true;
     }
     if (
       props.href == "articles" &&
-      (pathname.indexOf("/posts") > -1 ||
-        pathname.indexOf("/topics") > -1)
+      (pathname.indexOf("/posts") > -1 || pathname.indexOf("/topics") > -1)
     ) {
       isActive = true;
     }
     return (
       <CustomTrigger active={isActive} {...props} ref={forwardedRef}>
         {children}
-        {props.showCaret !== false ? <StyledCaret aria-hidden /> : ""}
+        {props.showCaret !== false ? (
+          <StyledCaret
+            className="relative top-[1] text-blue-500 my-auto"
+            aria-hidden
+          />
+        ) : (
+          ""
+        )}
       </CustomTrigger>
     );
   }
@@ -257,7 +263,7 @@ const NextLink = ({ children, ...props }) => {
 
   return (
     <Link href={props.href} target={target} passHref>
-      <StyledLink asChild>
+      <StyledLink className="px-[12px] py-[8px]" asChild>
         <span
           style={props.css}
           className={
@@ -459,8 +465,8 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
     <div
       className={`hidden md:flex justify-between space-x-4 w-full relative py-2 text-sm`}
     >
-      <NavigationMenu>
-        <NavigationMenuList>
+      <NavigationMenu className="relative flex justify-center w-auto z-10">
+        <NavigationMenuList className="flex justify-center p-[4px] ronded-[6px] list-none">
           <NavigationMenuItem className="hidden -ml-4 text-sm xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
             <NavigationMenuLink href="/">
               {/* {submenuTitle4} */}
@@ -618,7 +624,7 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
           </NavigationMenuItem>
         </NavigationMenuList>
         <NavigationMenuIndicator />
-        <ViewportPosition className="ml-0 ml-36">
+        <ViewportPosition className="ml-0 ml-36 absolute flex justify-center w-full top-100 left-0">
           <NavigationMenuViewport />
         </ViewportPosition>
       </NavigationMenu>

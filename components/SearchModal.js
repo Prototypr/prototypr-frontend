@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import "instantsearch.css/themes/algolia-min.css";
 import React, { useEffect, useState } from "react";
 import Button from "@/components/Primitives/Button";
@@ -11,7 +11,15 @@ import {
   Highlight,
   Configure,
 } from "react-instantsearch-dom";
-import { Dialog, DialogTrigger, DialogContentLarge, DialogTitle, DialogDescription, DialogClose, IconButton } from "@/components/Primitives/Dialog";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContentLarge,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+  IconButton,
+} from "@/components/Primitives/Dialog";
 // import { useRouter } from "next/router";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import Link from "next/link";
@@ -35,86 +43,83 @@ const filter_options = [
   { name: "Tool", filter: "type=tool" },
 ];
 
-const SearchModal = (props) => {
+const SearchModal = props => {
   const [activeFilter, setActiveFilter] = useState(filter_options[0]?.filter);
-  const [submitOpen, setSubmitOpen] = useState(null)
+  const [submitOpen, setSubmitOpen] = useState(null);
 
-  const toggleSubmitOpen = () =>{
-    setSubmitOpen(!submitOpen)
-  }
+  const toggleSubmitOpen = () => {
+    setSubmitOpen(!submitOpen);
+  };
 
   const pathname = usePathname();
   // const router = useRouter();
 
-
   useEffect(() => {
-    if(submitOpen){
-
-      toggleSubmitOpen()
-    }    
-
+    if (submitOpen) {
+      toggleSubmitOpen();
+    }
   }, [pathname]);
-
 
   return (
     <Dialog onOpenChange={toggleSubmitOpen} open={submitOpen}>
-        <DialogTrigger asChild>
-        <Button className="!rounded-full !w-6 !h-6 !hover:bg-blue-50 cursor-pointer !ml-2 !bg-gray-50/20 !p-2 !text-sm">
-          <MagnifyingGlass size={20} color="#444" weight="bold"/>
-            </Button>
-        </DialogTrigger>
-        <DialogContentLarge variant="big">
-          <div>
+      <DialogTrigger asChild>
+        <div className="flex my-auto cursor-text hover:bg-blue-50 cursor-pointer ml-3 bg-gray-200/60 p-2 lg:p-0 lg:px-4 lg:pl-2 w-fit lg:w-[120px] h-[32px] rounded-full text-gray-600 text-sm">
+            <MagnifyingGlass className={'my-auto'} size={18}  weight="bold" />
+          <div className="hidden lg:block ml-2 my-auto font-base">Search</div>
+        </div>
+      </DialogTrigger>
+      <DialogContentLarge variant="big">
+        <div>
           <DialogTitle>Search</DialogTitle>
           <DialogDescription>
-          <div className="relative">
-            <InstantSearch indexName="post" searchClient={searchClient}>
-              <Configure
-                // analytics={false}
-                filters={`${activeFilter}`}
-                hitsPerPage={8}
-              />
-              <SearchBox placeholder="Search for design tools and articles" />
-              <div
-                id="meilisearch-results"
-                className="h-[50vh] overflow-auto w-full mt-6 pt-1 px-2"
-              >
-                <div className="flex justify-between">
-                  <div className="flex flex-col justify-center">
-                    <Stats />
+            <div className="relative">
+              <InstantSearch indexName="post" searchClient={searchClient}>
+                <Configure
+                  // analytics={false}
+                  filters={`${activeFilter}`}
+                  hitsPerPage={8}
+                />
+                <SearchBox placeholder="Search for design tools and articles" />
+                <div
+                  id="meilisearch-results"
+                  className="h-[50vh] overflow-auto w-full mt-6 pt-1 px-2"
+                >
+                  <div className="flex justify-between">
+                    <div className="flex flex-col justify-center">
+                      <Stats />
+                    </div>
+                    <select
+                      id="location"
+                      className="w-[100px]"
+                      onChange={e => {
+                        setActiveFilter(
+                          filter_options[parseInt(e.target.value, 10)]?.filter
+                        );
+                      }}
+                    >
+                      {filter_options.map((i, index) => (
+                        <option key={"filter_" + index} value={index}>
+                          {i.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  <select
-                    id="location"
-                    className="w-[100px]"
-                    onChange={(e) => {
-                      setActiveFilter(
-                        filter_options[parseInt(e.target.value, 10)]?.filter
-                      );
-                    }}
-                  >
-                    {filter_options.map((i, index) => (
-                      <option key={"filter_" + index} value={index}>
-                        {i.name}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="mt-3">
+                    <InfiniteHits hitComponent={Hit} />
+                  </div>
                 </div>
-                <div className="mt-3" >
-                  <InfiniteHits  hitComponent={Hit} />
-                </div>
-              </div>
-            </InstantSearch>
-          </div>
+              </InstantSearch>
+            </div>
           </DialogDescription>
-          </div>
+        </div>
 
-          <DialogClose asChild>
-            <IconButton aria-label="Close">
-              <Cross2Icon />
-            </IconButton>
-          </DialogClose>
-        </DialogContentLarge>
-      </Dialog>
+        <DialogClose asChild>
+          <IconButton aria-label="Close">
+            <Cross2Icon />
+          </IconButton>
+        </DialogClose>
+      </DialogContentLarge>
+    </Dialog>
   );
 };
 
@@ -162,7 +167,7 @@ const SearchResultImage = ({ image, hit }) => {
   );
 };
 
-const getImage = (hit) => {
+const getImage = hit => {
   if (hit) {
     if (hit.legacyMedia?.logoNew) {
       return hit.legacyMedia?.logoNew;
@@ -180,7 +185,7 @@ const getImage = (hit) => {
   }
 };
 
-const getLink = (hit) => {
+const getLink = hit => {
   if (hit.type == "article") {
     return `${process.env.NEXT_PUBLIC_HOME_URL}/post/${hit.slug}`;
   }

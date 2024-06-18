@@ -53,14 +53,14 @@ const UserMenu = ({ user, userLoading, sessionUser }) => {
             <div className="bg-gray-200 hover:shadow border border-1 ml-2 rounded-full my-auto w-8 h-8 cursor-pointer"></div>
           ) : (
             <div className="hidden lg:flex">
-              <Link className="my-auto" href="/onboard?signin=true">
+              {/* <Link className="my-auto" href="/onboard?signin=true">
                 <div className="flex cursor-pointer text-gray-700 text-sm mr-4">
                   <div className="my-auto font-medium">Log in</div>
                 </div>
-              </Link>
+              </Link> */}
               <Link href="/onboard">
               <Button className="text-sm bg-blue-600 hover:bg-blue-500 rounded-xl" variant={"confirmRounded"}>
-              Sign up
+              Sign in
             </Button>
             </Link>
             </div>

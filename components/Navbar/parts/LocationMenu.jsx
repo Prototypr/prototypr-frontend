@@ -1,12 +1,8 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import Button from "../../Primitives/Button";
-
-import Link from "next/link";
 
 import {
   NavigationMenuItem,
-  NavigationMenuLink,
 } from "@/components/Primitives/Navigation";
 
 const LocaleSwitcher = dynamic(() => import("../../Locale/LocaleSwitcher"), {
@@ -15,6 +11,8 @@ const LocaleSwitcher = dynamic(() => import("../../Locale/LocaleSwitcher"), {
 
 import { useIntl } from "react-intl";
 import NewPostDialog from "./NewPostDialog";
+import { BellIcon } from "@/components/icons";
+import ActiveIconButtonLink from "./ActiveIconButtonLink";
 
 export const LocationMenu = ({
   collapsed,
@@ -22,7 +20,7 @@ export const LocationMenu = ({
   hideLocaleSwitcher,
   editor,
   showWriteButton,
-  sessionUser
+  sessionUser,
 }) => {
   const intl = useIntl();
   const title3 = intl.formatMessage({ id: "navbar.menu.title3" });
@@ -31,7 +29,7 @@ export const LocationMenu = ({
     <>
       {/* {!hideLocaleSwitcher && <LocaleSwitcher showWriteButton={showWriteButton} collapsed={collapsed} />} */}
 
-      {((!user || !user?.isLoggedIn ) && !sessionUser)? (
+      {(!user || !user?.isLoggedIn) && !sessionUser ? (
         <NavigationMenuItem
           className={`hidden md:block md:flex md:flex-col md:justify-center`}
         >
@@ -46,7 +44,7 @@ export const LocationMenu = ({
           <NavigationMenuItem
             className={`hiddenlg:block lg:flex lg:flex-col lg:justify-center mr-2`}
           >
-            <NewPostDialog/>
+            <NewPostDialog />
             {/* <Link href="/write">
               <div className="flex text-gray-700 text-sm mr-3">
                   <NotePencil size={22} className="mr-1.5" />
@@ -56,6 +54,11 @@ export const LocationMenu = ({
           </NavigationMenuItem>
         )
       )}
+      <div className="mr-3">
+        <ActiveIconButtonLink href="/notifications">
+          <BellIcon className={'mx-auto'} size={22} />
+        </ActiveIconButtonLink>
+      </div>
     </>
   );
 };

@@ -185,9 +185,9 @@ const Navbar = ({
                   <WMButton />
                 </div> */}
               
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <LocationMenu
+              <NavigationMenu className="relative flex justify-center w-auto z-10">
+              <NavigationMenuList className="flex justify-center p-[4px] ronded-[6px] list-none">
+              <LocationMenu
                     user={user}
                     sessionUser={sessionUser}
                     hideLocaleSwitcher={hideLocaleSwitcher}

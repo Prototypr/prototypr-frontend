@@ -49,7 +49,7 @@ export default function Layout({
   navType,
   navOffset,
   navBackground,
-  sessionUser,
+  sessionUser
 }) {
   // const { locale } = useRouter();
   const [shortLocale] = ["en"];
@@ -65,6 +65,7 @@ export default function Layout({
     }
   }, [shortLocale]);
 
+  // console.log(getCssText())
   return (
     <div className={`${font.className}`}>
       {/* <Head> */}
@@ -72,7 +73,7 @@ export default function Layout({
       <Head>
         <style
           id="stitches"
-          dangerouslySetInnerHTML={{ __html: getCssText() }}
+          dangerouslySetInnerHTML={{ __html:getCssText() }}
         />
       </Head>
       <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
