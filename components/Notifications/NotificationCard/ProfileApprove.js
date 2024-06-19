@@ -4,7 +4,7 @@ import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 
 const ProfileApprove = ({ notification }) => {
-  return (
+    return (
     <div className="flex items-start justify-between">
       <div className="flex gap-6">
         <div className="flex flex-col h-full justify-center">
@@ -24,7 +24,7 @@ const ProfileApprove = ({ notification }) => {
             {notification.action_type == "approve" ? (
               <>
                 <Link
-                  href={`/people/${notification?.notifiers[0].slug}`}
+                  href={`/account`}
                   className="font-bold hover:underline"
                 >
                   Your profile
@@ -36,7 +36,7 @@ const ProfileApprove = ({ notification }) => {
                 <>
                 
                 <Link
-                  href={`/people/${notification?.notifiers[0].slug}`}
+                  href={`/account`}
                   className="font-bold hover:underline"
                 >
                  Complete your profile
@@ -65,7 +65,7 @@ const ProfileApprove = ({ notification }) => {
       {notification.read == false || notification.read == "false" ? (
         <Link
           className="my-auto"
-          href={`/people/${notification?.notifiers[0].slug}`}
+          href={`/account`}
         >
           <div className="rounded-full flex-none bg-blue-500 h-[9px] w-[9px] my-auto mr-2"></div>
         </Link>

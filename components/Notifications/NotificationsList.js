@@ -10,6 +10,9 @@ import InterviewInviteBadge from "./NotificationCard/InterviewInviteBadge";
 import ClaimNotification from "./NotificationCard/ClaimNotification";
 import LikeNotification from "./NotificationCard/LikeNotification";
 import ProfileApprove from "./NotificationCard/ProfileApprove";
+import NotificationEmptyState from "./EmptyState";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const NotificationsList = () => {
   const { user } = useUser({
@@ -17,10 +20,10 @@ const NotificationsList = () => {
     redirectTo: "/",
   });
 
+  const router = useRouter();
+
   const { notifications, loading, refetch, total, pageSize } =
     useFetchNotifications(user);
-
-  console.log(notifications);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -33,6 +36,48 @@ const NotificationsList = () => {
     refetch(offset);
   };
 
+  const [showMarkAllAsRead, setShowMarkAllAsRead] = useState(false);
+  useEffect(() => {
+    for(let i = 0; i < notifications?.length; i++) {
+      if (notifications[i].read == 'false') {
+        setShowMarkAllAsRead(true);
+        break;
+      }
+    }
+  
+  }, [notifications]);
+
+
+  const clearNotifications = async id => {
+    var data = JSON.stringify({
+      id: id ? id : "*",
+    });
+    var config = {
+      method: "post",
+      url: `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/notificationsClear`,
+      headers: {
+        Authorization: `Bearer ${user.jwt}`,
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+    // const loadingToastId = toast.loading("Sending verification email");
+
+    axios(config)
+      .then(function (response) {
+        setTimeout(() => {
+          // setIsLoading(false);
+          // showSuccessToast(loadingToastId);
+        }, 800);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    
+      location.reload() 
+  };
+
+
   return (
     <div className="flex flex-col">
       {/* <header className="bg-gray-900 text-white py-4 px-6">
@@ -40,19 +85,27 @@ const NotificationsList = () => {
       </header> */}
       <main className="flex-1 my-6">
         <div className="grid gap-4">
-          {loading
-            ? [1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} />)
-            : notifications?.map(notification => (
-                <NotificationItem
-                  key={notification.id}
-                  notification={notification}
-                />
-              ))}
+          {loading ? (
+            [1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} />)
+          ) : notifications?.length ? (
+            notifications.map(notification => (
+              <NotificationItem
+                key={notification.id}
+                notification={notification}
+              />
+            ))
+          ) : (
+            <NotificationEmptyState />
+          )}
         </div>
       </main>
-      <footer className="py-4 flex justify-end">
-        <Button>Mark All as Read</Button>
-      </footer>
+      {showMarkAllAsRead ? (
+        <footer className="py-4 flex justify-end">
+          <Button onClick={() => clearNotifications("*")}>
+            Mark All as Read
+          </Button>
+        </footer>
+      ) : null}
 
       <NewPagination
         total={total}
@@ -93,11 +146,9 @@ const NotificationItem = ({ notification }) => {
         <ClaimNotification notification={notification} />
       ) : notification?.entity_type == "like" ? (
         <LikeNotification notification={notification} />
-      ):notification?.entity_type == "profile" ? (
+      ) : notification?.entity_type == "profile" ? (
         <ProfileApprove notification={notification} />
-      ) :
-      
-      (
+      ) : (
         <div>
           <h3 className="text-lg font-medium">{notification.title}</h3>
           <p className="text-gray-500">{notification.body}</p>

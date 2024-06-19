@@ -11,8 +11,7 @@ const LocaleSwitcher = dynamic(() => import("../../Locale/LocaleSwitcher"), {
 
 import { useIntl } from "react-intl";
 import NewPostDialog from "./NewPostDialog";
-import { BellIcon } from "@/components/icons";
-import ActiveIconButtonLink from "./ActiveIconButtonLink";
+import NotificationButton from "./NotificationButton";
 
 export const LocationMenu = ({
   collapsed,
@@ -54,11 +53,7 @@ export const LocationMenu = ({
           </NavigationMenuItem>
         )
       )}
-      <div className="mr-3">
-        <ActiveIconButtonLink href="/notifications">
-          <BellIcon className={'mx-auto'} size={22} />
-        </ActiveIconButtonLink>
-      </div>
+     <NotificationButton user={user}/>
     </>
   );
 };
