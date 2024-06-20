@@ -16,6 +16,7 @@ export default function Index({allTags}) {
   const router = useRouter();
 
   const [inviteeEmail,setInviteeEmail] = useState(false)
+  const [inviteCode,setInviteCode] = useState(false)
 
   const { user } = useUser({
     // redirectTo: '/account',
@@ -34,6 +35,10 @@ export default function Index({allTags}) {
     }
     if(router.query?.inviteeemail){
       setInviteeEmail(router.query?.inviteeemail)
+    }
+    if(router.query?.invite_code){
+      // console.log(router.query?.code)
+      setInviteCode(router.query?.invite_code)
     }
   },[router.query])
 
@@ -69,7 +74,7 @@ export default function Index({allTags}) {
             </div>:''}
             {user && !user?.isLoggedIn ? (
               <div className="w-full h-full bg-white grid place-items-center">
-                  <LoginForm inviteeEmail={inviteeEmail} user={user} isSignUp={isSignUp} toggleSignIn={toggleSignIn} />
+                  <LoginForm initialInviteCode={inviteCode} inviteeEmail={inviteeEmail} user={user} isSignUp={isSignUp} toggleSignIn={toggleSignIn} />
                 
               </div>
             ) : (

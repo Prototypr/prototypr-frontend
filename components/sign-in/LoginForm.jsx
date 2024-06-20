@@ -1,7 +1,7 @@
 import { signIn } from "next-auth/react";
 // import Button from "../atom/Button/Button";
 import Button from "../Primitives/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
 import Link from "next/link";
@@ -20,8 +20,13 @@ const LoginForm = ({
   user,
   toggleSignIn,
   inviteeEmail,
+  initialInviteCode
 }) => {
-  const [inviteCode, setInviteCode] = useState(false);
+  const [inviteCode, setInviteCode] = useState(null);
+
+  useEffect(()=>{
+    setInviteCode(initialInviteCode)
+  },[initialInviteCode])
 
   return (
     <div className="flex flex-col bg-[#fff] w-full rounded-3xl">
@@ -31,6 +36,7 @@ const LoginForm = ({
           title={title}
           toggleSignIn={toggleSignIn}
           setInviteCode={setInviteCode}
+          initialInviteCode={initialInviteCode}
         />
       ) : (
         <ProviderForm
