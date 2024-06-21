@@ -319,6 +319,15 @@ const MenuFloating = ({ editor, isSelecting }) => {
     setIsOpen(!open);
   };
 
+  useEffect(()=>{
+    let editor = document.querySelector('.tiptap.ProseMirror')
+    if(open){
+      editor.classList.add('menu-open')
+    }else{
+      editor.classList.remove('menu-open')
+    }
+  },[open])
+
   useEffect(() => {
     function handleKeyUp(event) {
       setIsOpen(false);

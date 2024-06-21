@@ -247,6 +247,15 @@ a.kofi-button:active {
   height: 0;
 }
 
+// .menu-open.ProseMirror .is-empty:first-child::before {
+//     opacity: 0!important;
+//     color:#fff!important;
+// }
+.menu-open.ProseMirror p.is-empty:first-of-type::before {
+    opacity: 0!important;
+    color:#fff!important;
+}
+
 .tippy-svg-arrow{
   fill:#111827!important;
 }
