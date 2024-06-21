@@ -123,7 +123,7 @@ export default function ProfileCard({
             {twitter ? (
               <a
                 className="link block mx-1"
-                href={`https://twitter.com/${twitter}`}
+                href={`https://x.com/${twitter}`}
                 target="_blank"
               >
                 <TwitterLogo color="rgba(0,0,0,0.8)" size={20} />

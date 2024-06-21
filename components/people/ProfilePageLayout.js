@@ -292,7 +292,7 @@ const ProfilePageLayout = ({
                       {(twitter || (unapproved && user?.profile?.twitter)) && (
                         <a
                           className="link block"
-                          href={`https://twitter.com/${twitter || user?.profile?.twitter}`}
+                          href={`https://x.com/${twitter || user?.profile?.twitter}`}
                           target="_blank"
                         >
                           <TwitterLogo color="rgba(0,0,0,0.8)" size={24} />

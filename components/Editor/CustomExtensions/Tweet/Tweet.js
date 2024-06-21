@@ -3,7 +3,7 @@ import axios from 'axios'
 import {NodeSelection} from 'prosemirror-state'
 
 export const TWITTER_REG_G =
-  /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(.+)?$/g;
+  /^https?:\/\/(?:twitter|x)\.com\/(?:#!\/)?(\w+)\/status(es)?\/(.+)?$/g;
 
 const Twitter = Node.create({
   name: 'twitter',

@@ -43,7 +43,7 @@ const StyledContent = styled(PopoverPrimitive.Content, {
   flexDirection: "row",
   padding: 5,
   paddingLeft: 20,
-  background: "#fff",
+  background: "transparent",
   width: 1000,
   outline: "none",
   "@media (prefers-reduced-motion: no-preference)": {
@@ -190,7 +190,7 @@ const uploadMedia = (event, editor, user, setLoading) => {
     }
   }
   //if video
-  else if(files && files[0] && isVideo(files[0])){
+  else if (files && files[0] && isVideo(files[0])) {
     if (files && files[0]) {
       var reader = new FileReader();
 
@@ -245,7 +245,6 @@ const uploadMedia = (event, editor, user, setLoading) => {
       };
       reader.readAsDataURL(files[0]);
     }
-  
   }
 };
 
@@ -332,6 +331,11 @@ const MenuFloating = ({ editor, isSelecting }) => {
   return (
     <FloatingMenu
       shouldShow={({ editor, view, state, oldState }) => {
+        if (state?.selection?.$anchor?.parent?.type?.name == "doc") {
+          setIsOpen(false)
+          return false;
+        }
+
         if (
           state?.selection?.$anchor?.parent?.type?.name == "paragraph" &&
           state?.selection?.$anchor?.parent?.textContent == "" &&
@@ -341,7 +345,10 @@ const MenuFloating = ({ editor, isSelecting }) => {
           return true;
         }
 
-        if(editor.state.doc.textContent.trim() === "" && state?.selection?.$anchor?.pos==2){
+        if (
+          editor.state.doc.textContent.trim() === "" &&
+          state?.selection?.$anchor?.pos == 2
+        ) {
           return true;
         }
       }}
@@ -370,6 +377,9 @@ const MenuFloating = ({ editor, isSelecting }) => {
             </IconButton>
           </PopoverTrigger>
           <PopoverContent
+            onCloseAutoFocus={e => {
+              e.preventDefault();
+            }}
             sticky="always"
             onPointerDownOutside={e => {
               if (
@@ -423,13 +433,30 @@ const MenuFloating = ({ editor, isSelecting }) => {
               <DropdownMenuItem>
                 <IconButton
                   onClick={() => {
+                    setIsOpen(false);
+
+                    let editorDiv = document.querySelector(
+                      ".tiptap.ProseMirror"
+                    );
+
                     const url = prompt("Enter YouTube URL");
                     if (url) {
-                      editor.commands.setYoutubeVideo({
-                        src: url,
-                        width: 600,
-                        height: 400,
-                      });
+                      //get current position
+                      let pos = editor.state.selection.from;
+
+                      editor
+                        .chain()
+                        .setYoutubeVideo({
+                          src: url,
+                          width: 600,
+                          height: 400,
+                        })
+                        .setNodeSelection(pos - 1)
+                        .insertContentAt(pos, "<p></p>")
+                        .setTextSelection(pos+1)
+                        .focus()
+                        .enter()
+                        .run();
                     }
                   }}
                   className="hover:cursor-pointer menu-item"

@@ -118,7 +118,7 @@ export default function AuthorBio({ author, slug, title }) {
                 {twitter && (
                   <a
                     className="link block mr-2"
-                    href={`https://twitter.com/${twitter}`}
+                    href={`https://x.com/${twitter}`}
                     target="_blank"
                   >
                     <img
@@ -186,6 +186,7 @@ function getTwitterHandle(string) {
   var result = string.replace(/(^\w+:|^)\/\//, "");
   result = result.replace(/\//g, "");
   result = result.replace("twitter.com", "");
+  result = result.replace("x.com", "");
   result = result.replace("www.", "");
   result = result.replace("@", "");
 

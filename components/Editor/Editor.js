@@ -126,7 +126,7 @@ const Editor = ({
       Placeholder.configure({
         showOnlyCurrent: false,
         includeChildren: false,
-        placeholder: ({ node }) => {
+        placeholder: ({ editor, node }) => {
           if (node.type.name === "heading") {
             return "Title";
           }
@@ -139,7 +139,15 @@ const Editor = ({
           if (node.type.name === "tweet") {
             return "Paste a tweet link and press enter";
           }
-          return "Tell your story...";
+          if (node.type.name == "paragraph") {
+            //check if editor has 3 or more nodes
+            if (
+              editor.state.doc.textContent.trim() === "" &&
+              editor.state.doc.childCount <= 2
+            ) {
+              return "Tell your story...";
+            }
+          }
         },
       }),
     ],
