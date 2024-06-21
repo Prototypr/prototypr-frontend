@@ -20,8 +20,8 @@ const InterviewInviteBadge = ({ notification }) => {
               <>
                 You're invited to answer an interview article about {" "}
                 <Link
-                  href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
-                  className="font-bold hover:underline"
+              href={{ pathname:`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`, query: { clearNotification: notification.id } }}
+              className="font-bold hover:underline"
                 >
                   {notification.post.title}
                 </Link>
@@ -34,7 +34,8 @@ const InterviewInviteBadge = ({ notification }) => {
           <p className="text-sm text-gray-500 max-w-[42rem] line-clamp-2 mr-4">
             <Link
               className="hover:underline"
-              href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
+              href={{ pathname:`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`, query: { clearNotification: notification.id } }}
+              // as={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
             >
               Get featured in the newsletter for telling your story about
               <span className="font-medium text-gray-700">
@@ -50,7 +51,7 @@ const InterviewInviteBadge = ({ notification }) => {
           </div>
           <div className="mt-4">
             <Link
-              href={`${process.env.NEXT_PUBLIC_HOME_URL}/toolbox/post/${notification?.post?.id}/interview`}
+              href={`${process.env.NEXT_PUBLIC_HOME_URL}/toolbox/post/${notification?.post?.id}/interview?clearNotification=${notification.id}`}
               className="font-bold hover:underline"
             >
               <button className="bg-gray-100 border font-normal border-gray-300/70 text-gray-600 px-3 py-1 text-sm rounded-lg">
@@ -63,8 +64,8 @@ const InterviewInviteBadge = ({ notification }) => {
       {notification.read == false || notification.read == "false" ? (
         <Link
           className="my-auto"
-          href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
-        >
+          href={`${process.env.NEXT_PUBLIC_HOME_URL}/toolbox/post/${notification?.post?.id}/interview?clearNotification=${notification.id}`}
+          >
           <div className="rounded-full flex-none bg-blue-500 h-[9px] w-[9px] my-auto mr-2"></div>
         </Link>
       ) : null}

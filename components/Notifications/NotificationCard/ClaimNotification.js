@@ -20,7 +20,7 @@ const ClaimNotification = ({ notification }) => {
               <>
                 You've been added as a creator of {" "}
                 <Link
-                  href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
+                  href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}?clearNotification=${notification.id}`}
                   className="font-bold hover:underline"
                 >
                   {notification.post.title}
@@ -34,7 +34,7 @@ const ClaimNotification = ({ notification }) => {
           <p className="text-sm text-gray-500 max-w-[42rem] line-clamp-2 mr-4">
             <Link
               className="hover:underline"
-              href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
+              href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}?clearNotification=${notification.id}`}
             >
               <span className="font-medium text-gray-700">
                 {notification.post.title}:
@@ -52,7 +52,7 @@ const ClaimNotification = ({ notification }) => {
       {notification.read == false || notification.read == "false" ? (
         <Link
           className="my-auto"
-          href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
+          href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}?clearNotification=${notification.id}`}
         >
           <div className="rounded-full flex-none bg-blue-500 h-[9px] w-[9px] my-auto mr-2"></div>
         </Link>

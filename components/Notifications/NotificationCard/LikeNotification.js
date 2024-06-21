@@ -22,7 +22,7 @@ const LikeNotification = ({ notification }) => {
                   {notification?.notifiers?.map(notifier => {
                     return (
                       <Link
-                        href={`/people/${notifier.slug}`}
+                        href={`/people/${notifier.slug}?clearNotification=${notification.id}`}
                         className="hover:underline"
                       >
                         {notifier.firstName?notifier.firstName:notifier.username}
@@ -32,7 +32,7 @@ const LikeNotification = ({ notification }) => {
                 </span>{" "}
                 reacted to your post, {""}
                 <Link
-                  href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
+                  href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}?clearNotification=${notification.id}`}
                   className="font-bold hover:underline"
                 >
                   {notification.post.title}
@@ -46,7 +46,7 @@ const LikeNotification = ({ notification }) => {
           <p className="text-sm text-gray-500 max-w-[42rem] line-clamp-2 mr-4">
             <Link
               className="hover:underline"
-              href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
+              href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}?clearNotification=${notification.id}`}
             >
               <span className="font-medium text-gray-700">
                 {notification.post.title}:
@@ -64,7 +64,7 @@ const LikeNotification = ({ notification }) => {
       {notification.read == false || notification.read == "false" ? (
         <Link
           className="my-auto"
-          href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
+          href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}?clearNotification=${notification.id}`}
         >
           <div className="rounded-full flex-none bg-blue-500 h-[9px] w-[9px] my-auto mr-2"></div>
         </Link>

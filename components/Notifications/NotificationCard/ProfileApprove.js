@@ -24,7 +24,7 @@ const ProfileApprove = ({ notification }) => {
             {notification.action_type == "approve" ? (
               <>
                 <Link
-                  href={`/account`}
+                  href={`/account?clearNotification=${notification.id}`}
                   className="font-bold hover:underline"
                 >
                   Your profile
@@ -36,7 +36,7 @@ const ProfileApprove = ({ notification }) => {
                 <>
                 
                 <Link
-                  href={`/account`}
+                  href={`/account?clearNotification=${notification.id}`}
                   className="font-bold hover:underline"
                 >
                  Complete your profile
@@ -65,7 +65,7 @@ const ProfileApprove = ({ notification }) => {
       {notification.read == false || notification.read == "false" ? (
         <Link
           className="my-auto"
-          href={`/account`}
+          href={`/account?clearNotification=${notification.id}`}
         >
           <div className="rounded-full flex-none bg-blue-500 h-[9px] w-[9px] my-auto mr-2"></div>
         </Link>
