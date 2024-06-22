@@ -1,20 +1,5 @@
-import dynamic from "next/dynamic";
-
-import Fallback from "@/components/atom/Fallback/Fallback";
-import useUser from "@/lib/iron-session/useUser";
-// import Layout from "@/components/layout-editor";
-
-import Editor from "@/components/Editor/Editor";
-import { useEffect } from "react";
-import useLoad from "@/components/Editor/editorHooks/editPost/useLoad";
-import useUpdate from "@/components/Editor/editorHooks/editPost/useUpdate";
-
-import { useConfirmTabClose } from "@/components/Editor/useConfirmTabClose";
-import EditorNav from "@/components/EditorNav";
-import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 import { getToolById } from "@/lib/api";
-
-const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
+import EditorWrapper from "@/components/Editor/EditorWrapper";
 
 /**
  * Edit post page
@@ -28,116 +13,14 @@ const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
  * @returns
  */
 export default function EditPostPage({ tool }) {
-  const { user } = useUser({
-    redirectTo: "/onboard",
-    redirectIfFound: false,
-  });
-
-  useEffect(() => {
-    addTwitterScript();
-  }, []);
-
-  //useLoad hook
-  const {
-    canEdit,
-    initialContent,
-    postStatus,
-    postObject,
-    slug,
-    postId,
-    refetch,
-    setPostObject,
-  } = useLoad(user);
-
-  //useUpdate hook
-  const {
-    //update post content
-    updatePostById,
-    //update post settings
-    updateSettings,
-    setHasUnsavedChanges,
-    hasUnsavedChanges,
-  } = useUpdate();
-
-  useConfirmTabClose(hasUnsavedChanges);
-
-  /**
-   * savePost
-   * when save or submit for publishing button is clicked
-   * save the post to the backend
-   * @param {*} param0
-   */
-  const savePost = async ({ editor, forReview }) => {
-    try {
-      const updatedPostObject = await updatePostById({
-        editor: editor,
-        postId: postId,
-        user: user,
-        forReview: forReview,
-        postStatus: postStatus,
-        postObject: postObject,
-      });
-
-      //update the postObject from useLoad hook
-      if (updatedPostObject) {
-        setPostObject(updatedPostObject);
-        //confirm no unsaved changes
-        setHasUnsavedChanges(false);
-      }
-      return true;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
-  };
-
-  /**
-   * updateSettings
-   */
-  const updatePostSettings = async ({ settings }) => {
-    try {
-      const updatedPostObject = await updateSettings({
-        postId: postId,
-        user: user,
-        settings: settings,
-        postObject: postObject,
-      });
-
-      if (updatedPostObject) {
-        setPostObject(updatedPostObject);
-      }
-
-      return true;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
-  };
-
-  /**
-   * updatePost
-   * when editor onUpdate is triggered,
-   * do whatever - in this case, set hasUnsavedChanges to true
-   *
-   * - not autosaving yet until saving doesn't have issues (like overwriting fields wrongly)
-   * - using save post button to save for now
-   * @param {*} param0
-   */
-  const updatePost = ({ editor, json, forReview = false }) => {
-    // console.log("updatePost");
-    setHasUnsavedChanges(true);
-  };
-
   return (
     <>
-      <EditorNav tool={tool} post={postObject} postStatus={postStatus} />
-
       <div className="h-full w-full">
         {tool?.attributes?.logo?.data?.attributes?.url ? (
           <div className="mx-auto mt-[72px] -mb-16 max-w-[44rem] mx-auto text-sm px-2 py-2  bg-white border border-1 border-gray-200/70 rounded-xl">
             <div className="flex ">
               <img
-                className="lg:block h-8 w-auto shadow rounded-lg border border-gray-50"
+                className="lg:block h-10 w-10 object-cover shadow rounded-lg border border-gray-50"
                 data-gumlet="false"
                 src={tool?.attributes?.logo?.data?.attributes?.url}
                 alt="Prototypr Logo"
@@ -150,43 +33,7 @@ export default function EditPostPage({ tool }) {
             </div>
           </div>
         ) : null}
-        <div id="editor-container" className="w-full h-full mx-auto  relative">
-          {/* {!user && <Fallback />} */}
-
-          {/* only load editor if initialContent has loaded */}
-          {(user && !user?.isLoggedIn) || initialContent == null ? (
-            <>
-              {/* <Layout> */}
-              <div className="relative w-full h-screen flex">
-                <div className="my-auto mx-auto">
-                  <Spinner />
-                </div>
-              </div>
-              {/* </Layout> */}
-            </>
-          ) : (
-            user?.isLoggedIn && (
-              <div>
-                <Editor
-                  canEdit={canEdit}
-                  initialContent={initialContent}
-                  postStatus={postStatus}
-                  //used for updating existing post
-                  slug={slug}
-                  postId={postId}
-                  postObject={postObject}
-                  //save and update content
-                  savePost={savePost}
-                  updatePost={updatePost}
-                  //refetch post needed when the featured image is updated in post settings
-                  refetchPost={refetch}
-                  //update post settings
-                  updatePostSettings={updatePostSettings}
-                />
-              </div>
-            )
-          )}
-        </div>
+        <EditorWrapper isInterview={true} tool={tool} />
       </div>
     </>
   );

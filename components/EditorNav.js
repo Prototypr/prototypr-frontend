@@ -70,7 +70,7 @@ export default function EditorNav({ activeNav, postStatus, tool, post }) {
   }, [postStatus]);
 
   return (
-    <div id="main-nav" as="nav" className={`z-40 fixed w-full bg-white/80 backdrop-blur-xs py-3 top-0`}>
+    <div id="main-nav" as="nav" className={`z-40 fixed w-full bg-white/90 backdrop-blur-xs py-3 top-0`}>
       <>
         <div className="mx-auto max-w-[1000px] text-sm px-2 rounded-xl">
           <div

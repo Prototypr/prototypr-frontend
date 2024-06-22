@@ -44,12 +44,12 @@ const useLoad = ({ user, interview, productName } = {}) => {
 
         refetch();
     }
-  }, [postId]);
+  }, [postId, user?.isLoggedIn]);
 
   // Refetch content
   const refetch = async () => {
     if (postId) {
-      await getCurrentPost();
+        await getCurrentPost();
       setLoading(false);
     } else {
       setIsOwner(true);
@@ -81,7 +81,7 @@ const useLoad = ({ user, interview, productName } = {}) => {
     try {
       const data = await getUserArticle(user, postId);
       const post = data.userPostId;
-
+      
       const userHasPermission = checkPermissions(post);
       Sentry.captureMessage(`#33 80 getUserArticle: ${post?.id}`, {
         extra: data,
