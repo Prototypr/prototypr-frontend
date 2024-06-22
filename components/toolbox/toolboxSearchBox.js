@@ -10,10 +10,11 @@ import {
 } from "react-instantsearch-dom";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import Link from "next/link";
+import { MagnifyingGlass } from "../icons";
 
 const originalSearchClient = instantMeiliSearch(
   // process.env.NEXT_PUBLIC_MEILISEARCH_URL,
-  'https://search.prototypr.io/',
+  "https://search.prototypr.io/",
   process.env.NEXT_PUBLIC_MEILISEARCH_KEY
   //   {
   //     filters: "(type:article OR type:tool)",
@@ -58,21 +59,24 @@ const SearchBoxToolComponent = ({
       <input
         type="search"
         value={currentRefinement}
-        onChange={(event) => refine(event.currentTarget.value)}
+        onChange={event => refine(event.currentTarget.value)}
         style={{
           boxShadow:
             "0px 100px 80px rgba(0, 0, 0, 0.00696822), 0px 30.1471px 24.1177px rgba(0, 0, 0, 0.01), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.0130318), 0px 4.5288px 3.62304px rgba(0, 0, 0, 0.02)",
         }}
-        className="max-w-[340px] rounded-full mt-4 px-4 h-[50px] text-lg placeholder-lg placeholder-gray-500 md:w-[400px] border-1 border border-gray-300 bg-white"
+        className="max-w-[340px] rounded-full px-4 h-[50px] text-lg placeholder-lg placeholder-gray-500 md:w-[400px] border-1 border border-gray-400/70 bg-white"
         placeholder="Search 1000s of tools..."
-      ></input>
+      />
+      <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+        <MagnifyingGlass className={"my-auto"} size={22} weight="bold" />
+      </span>
     </form>
   );
 };
 
 const CustomSearchBox = connectSearchBox(SearchBoxToolComponent);
 
-export const SearchBarToolbox = (props) => {
+export const SearchBarToolbox = props => {
   const [activeFilter, setActiveFilter] = useState(filter_options[0]?.filter);
 
   return (
@@ -96,7 +100,7 @@ export const SearchBarToolbox = (props) => {
             <select
               id="location"
               className="w-[100px]"
-              onChange={(e) => {
+              onChange={e => {
                 setActiveFilter(
                   filter_options[parseInt(e.target.value, 10)]?.filter
                 );
@@ -160,7 +164,7 @@ const SearchResultImage = ({ image, hit }) => {
   );
 };
 
-const getImage = (hit) => {
+const getImage = hit => {
   if (hit) {
     if (hit.legacyMedia?.logoNew) {
       return hit.legacyMedia?.logoNew;
@@ -178,7 +182,7 @@ const getImage = (hit) => {
   }
 };
 
-const getLink = (hit) => {
+const getLink = hit => {
   if (hit.type == "article") {
     return `${process.env.NEXT_PUBLIC_HOME_URL}/post/${hit.slug}`;
   }

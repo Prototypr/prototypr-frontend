@@ -10,6 +10,9 @@ import TextMenu from "@/components/Editor/Menus/TextMenu";
 import ImageMenu from "@/components/Editor/Menus/ImageMenu";
 
 import Link from "@tiptap/extension-link";
+
+import NextLink from "next/link";
+
 import { useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 
@@ -218,7 +221,27 @@ const Editor = ({
     }
   };
 
-  if (!canEdit) return <p>You are not owner of this post</p>;
+  if (!canEdit) {
+    return (
+      <div className="h-full w-full mx-auto  relative">
+        <div className="my-auto h-screen flex -mt-8 flex-col justify-center text-center text-center">
+          <img
+            className="w-[160px] mx-auto"
+            src="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/ecacc329595d009d506f6ec3e6e47d0f.png"
+          />
+          <p className="text-gray-700">You are not owner of this post</p>
+
+          <div className="mx-auto mt-4">
+            <NextLink href="/dashboard">
+              <button className="px-3 h-[35px] bg-blue-500 text-white font-semibold text-sm rounded-md w-fit hover:bg-blue-600">
+                Go to dashboard
+              </button>
+            </NextLink>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

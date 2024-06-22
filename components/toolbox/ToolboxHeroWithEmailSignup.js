@@ -136,16 +136,19 @@ const ToolBoxHeroWithSignup = ({ user }) => {
                 alt="Prototypr Logo"
               />
             </div> */}
-            {user?.isLoggedIn ? (
+            {/* {user?.isLoggedIn ? ( */}
               <div>
                 {/* <h1 className="text-[40px] md:text-5xl text-center font-bold mb-2">
                 Find your <span className="">next tool</span>
                 </h1> */}
-                <div>
+                <h1 className="text-[40px] md:text-5xl text-center tracking-tight font-bold mb-2">
+                  Find the tool, <br/> make <span className="text-underline">your thing</span>.
+                </h1>
+                <div className="w-full my-8 flex justify-center">
                   <SearchBarToolbox />
                 </div>
               </div>
-            ) : (
+            {/* ) : (
               <div>
                 <h1 className="text-[40px] md:text-5xl text-center font-bold mb-2">
                   The best tools{" "}
@@ -162,7 +165,7 @@ const ToolBoxHeroWithSignup = ({ user }) => {
                   />
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
