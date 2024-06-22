@@ -64,9 +64,12 @@ const Editor = ({
   postStatus = "draft",
   postObject = null,
   showNavButtons = true,
+  //save status
+  isSaving = false,
+  hasUnsavedChanges = false,
   //functions
   refetchPost = false,
-  savePost = false,
+  // savePost = false,
   updatePost = false,
   updatePostSettings = false,
   setInitialEditorContent = false,
@@ -75,7 +78,9 @@ const Editor = ({
     redirectIfFound: false,
   });
 
-  const [isSaving, setIsSaving] = useState(false);
+  // const [isSaving, setIsSaving] = useState(false);
+
+  const [forReview, setForReview] = useState(false);
 
   const editor = useEditor({
     extensions: [
@@ -182,7 +187,7 @@ const Editor = ({
       try {
         const json = editor.getJSON();
         // autosave would happen in the parent here;
-        updatePost({ editor, json });
+        updatePost({ editor, json, forReview });
       } catch (e) {
         if (typeof updatePost !== "function") {
           console.log(e);
@@ -201,25 +206,25 @@ const Editor = ({
    * - not using autosave yet
    * - remove onSave when switching to autosaving
    */
-  const onSave = async ({ forReview }) => {
-    setIsSaving(true);
+  // const onSave = async ({ forReview }) => {
+  //   setIsSaving(true);
 
-    try {
-      const saved = await savePost({
-        editor,
-        forReview: forReview ? true : false,
-      });
-      if (saved) {
-        setIsSaving(false);
-      } else {
-        console.log("Error saving");
-        setIsSaving(false);
-      }
-    } catch (e) {
-      console.log("Error saving");
-      setIsSaving(false);
-    }
-  };
+  //   try {
+  //     const saved = await savePost({
+  //       editor,
+  //       forReview: forReview ? true : false,
+  //     });
+  //     if (saved) {
+  //       setIsSaving(false);
+  //     } else {
+  //       console.log("Error saving");
+  //       setIsSaving(false);
+  //     }
+  //   } catch (e) {
+  //     console.log("Error saving");
+  //     setIsSaving(false);
+  //   }
+  // };
 
   if (!canEdit) {
     return (
@@ -260,7 +265,12 @@ const Editor = ({
         {/* undoredo buttons render in a portal on the navbar */}
         {showNavButtons !== false ? (
           <UndoRedoNavPortal>
-            <UndoRedoButtons editor={editor} />
+            <div className="flex">
+              <UndoRedoButtons editor={editor} />
+              <div className={`ml-3 my-auto text-gray-500`}>
+                {isSaving ? "Saving..." : hasUnsavedChanges ? "" : "Saved"}
+              </div>
+            </div>
           </UndoRedoNavPortal>
         ) : null}
 
@@ -268,7 +278,9 @@ const Editor = ({
           <EditorButtonsNavPortal>
             <EditorNavButtons
               user={user}
-              onSave={onSave}
+              onSave={({ forReview }) => {
+                setForReview(forReview);
+              }}
               isSaving={isSaving}
               postStatus={postStatus}
               canEdit={canEdit}

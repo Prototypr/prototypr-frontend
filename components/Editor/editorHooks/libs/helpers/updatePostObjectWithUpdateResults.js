@@ -6,7 +6,6 @@
  * @param {*} param0 
  */
 export const updatePostObject = ({updatedObject, existingObject}) => {
-    console.log('existingObject', existingObject)
 
     const newFields={
         content: updatedObject.content,

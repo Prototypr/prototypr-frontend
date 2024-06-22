@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 // import Fallback from "@/components/atom/Fallback/Fallback";
 import useUser from "@/lib/iron-session/useUser";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
 
 import Editor from "@/components/Editor/Editor";
@@ -17,6 +17,8 @@ import useUpdate from "@/components/Editor/editorHooks/editPost/useUpdate";
 import { useRouter } from "next/router";
 import EditorNav from "@/components/EditorNav";
 import { useConfirmTabClose } from "./useConfirmTabClose";
+import { debounce } from "lodash";
+const saveDebounceDelay = 3000;
 
 /**
  * Write
@@ -28,7 +30,7 @@ import { useConfirmTabClose } from "./useConfirmTabClose";
  *
  * @returns
  */
-export default function EditorWrapper({isInterview=false,tool=false}) {
+export default function EditorWrapper({ isInterview = false, tool = false }) {
   const router = useRouter();
 
   const { user } = useUser({
@@ -43,7 +45,6 @@ export default function EditorWrapper({isInterview=false,tool=false}) {
     addTwitterScript();
   }, []);
 
-
   //useLoad hook
   //initialContent is null until loaded - so is 'false' when it's a new post
   //useLoad hook
@@ -56,7 +57,11 @@ export default function EditorWrapper({isInterview=false,tool=false}) {
     postId,
     refetch,
     setPostObject,
-  } = useLoad({ user, interview:isInterview, productName: tool?.name?tool.name:false});
+  } = useLoad({
+    user,
+    interview: isInterview,
+    productName: tool?.name ? tool.name : false,
+  });
   //create new post hook
   const { createPost } = useCreate();
 
@@ -66,6 +71,8 @@ export default function EditorWrapper({isInterview=false,tool=false}) {
     //update post settings
     updateSettings,
     setHasUnsavedChanges,
+    saving,
+    setSaving,
     hasUnsavedChanges,
   } = useUpdate();
 
@@ -77,15 +84,30 @@ export default function EditorWrapper({isInterview=false,tool=false}) {
    * save the content to local storage
    * @param {*} param0
    */
-  const updatePost = ({ editor, json }) => {
+  const updatePost = ({ editor, json, forReview }) => {
     // send the content to an API here (if new post only)
-    if(postId){
-        setHasUnsavedChanges(true);
-    }else{
-        localStorage.setItem("wipContent", JSON.stringify(json));
+    if (postId) {
+      setHasUnsavedChanges(true);
+      setTimeout(()=>{
+        setSaving(!saving)
+      },2700)
+      debounceSave({ editor, forReview });
+    } else {
+      localStorage.setItem("wipContent", JSON.stringify(json));
+      debounceSave({ editor, forReview });
     }
   };
-  
+
+  /**
+   * for autosave
+   */
+  const debounceSave = useCallback(
+    debounce(async ({ editor, forReview }) => {
+        setSaving(false)
+      savePost({ editor, forReview });
+    }, saveDebounceDelay),
+    [user, postId, postObject, postStatus]
+  );
 
   /**
    * savePost
@@ -98,8 +120,11 @@ export default function EditorWrapper({isInterview=false,tool=false}) {
    */
   const savePost = async ({ editor, forReview }) => {
     try {
-      if (postId) {
+        if (postId) {
         // Updating an existing post
+
+        //debounce the save
+
         const updatedPostObject = await updatePostById({
           editor: editor,
           postId: postId,
@@ -118,11 +143,11 @@ export default function EditorWrapper({isInterview=false,tool=false}) {
         return true;
       } else {
         // Creating a new post
-        if(!router.query.slug){
+        if (!router.query.slug) {
           const postInfo = await createPost({ user, editor, forReview });
           // Set the new slug
           localStorage.removeItem("wipContent");
-  
+
           router.replace(
             {
               pathname: router.pathname,
@@ -133,15 +158,11 @@ export default function EditorWrapper({isInterview=false,tool=false}) {
             { shallow: true }
           );
 
-          
-
-
           refetch();
           return true;
-        }else{
-          return false
+        } else {
+          return false;
         }
-
       }
     } catch (e) {
       console.log(e);
@@ -193,26 +214,20 @@ export default function EditorWrapper({isInterview=false,tool=false}) {
             user?.isLoggedIn && (
               <>
                 <div className="my-4">
-                  {/* <Editor
-                    canEdit={canEdit}
-                    initialContent={initialContent}
-                    postStatus={postStatus}
-                    //functions
-                    createPost={createPost}
-                    savePost={savePost}
-                    updatePost={updatePost}
-                  /> */}
-
                   <Editor
                     canEdit={canEdit}
                     initialContent={initialContent}
                     postStatus={postStatus}
+
+                    //saving status
+                    hasUnsavedChanges={hasUnsavedChanges}
+                    isSaving={saving}
                     //used for updating existing post
                     slug={slug}
                     postId={postId}
                     postObject={postObject}
                     //save and update content
-                    savePost={savePost}
+                    // savePost={debounceSave}
                     updatePost={updatePost}
                     //refetch post needed when the featured image is updated in post settings
                     refetchPost={refetch}

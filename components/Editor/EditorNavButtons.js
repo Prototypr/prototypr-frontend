@@ -23,7 +23,7 @@ const EditorNavButtons = ({
 }) => {
   return (
     <>
-      {user?.isLoggedIn ? 
+      {/* {user?.isLoggedIn ? 
         <Button
           variant="ghostBlue"
           onClick={onSave}
@@ -35,7 +35,7 @@ const EditorNavButtons = ({
               ? "Update"
               : "Save Draft "}
         </Button>
-      :null}
+      :null} */}
 
       {/* show publish button if post not published */}
       {/* publish button does same as save draft button, but uses dialog and adds 'forReview' flag */}

@@ -70,23 +70,25 @@ const useUpdate = () => {
 
     const updateData = await axios(publishPostEndpointConfig)
       .then(async function (response) {
-        setSaving(false);
-        setHasUnsavedChanges(false);
+        setTimeout(() => {
+          setSaving(false);
+          setHasUnsavedChanges(false);
+        }, 1000);
         if (forReview) {
           toast.success("Submitted for review!", {
             duration: 5000,
           });
           localStorage.removeItem("wipContent");
         } else if (postStatus == "publish") {
-          toast.success("Your post has been updated!", {
-            duration: 5000,
-          });
+          // toast.success("Your post has been updated!", {
+          //   duration: 5000,
+          // });
 
           localStorage.removeItem("wipContent");
         } else {
-          toast.success("Your draft has been updated!", {
-            duration: 5000,
-          });
+          // toast.success("Your draft has been updated!", {
+          //   duration: 5000,
+          // });
 
           localStorage.removeItem("wipContent");
         }
