@@ -213,11 +213,12 @@ const LikeButton = ({ post, user }) => {
     newLikeCountObj[reaction] = addLike
       ? newLikeCountObj[reaction] + 1
       : newLikeCountObj[reaction] - 1;
-    const totalLikes = Object.values(newReactions).reduce(
-      (total, reaction) => total + (reaction ? 1 : 0),
-      0
-    );
-    newLikeCountObj.total = totalLikes;
+    // const totalLikes = Object.values(newReactions).reduce(
+    //   (total, reaction) => total + (reaction ? 1 : 0),
+    //   0
+    // );
+    // newLikeCountObj.total = totalLikes;
+    newLikeCountObj.total = addLike? likeCount.total + 1: likeCount.total - 1;
     setLikeCount(newLikeCountObj);
 
     try {
