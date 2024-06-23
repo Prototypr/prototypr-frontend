@@ -1,11 +1,23 @@
 import toast from "react-hot-toast";
 import { getCreatePostData } from "../libs/getCreatePostData";
+import { useState } from "react";
 var axios = require("axios");
 
 const useCreate = () => {
-  const createPost = async ({ user, editor, forReview, relatedPost }) => {
+  const [creatingPost, setCreating] = useState(false);
+  const [created, setCreated] = useState(false);
 
-    const { entry } = getCreatePostData({ user, editor, forReview, relatedPost });
+  const createPost = async ({ user, editor, forReview, relatedPost }) => {
+    setCreating(true);
+    if (created) {
+      throw new Error("Post already created");
+    }
+    const { entry } = getCreatePostData({
+      user,
+      editor,
+      forReview,
+      relatedPost,
+    });
 
     let publishPostEndpointConfig = {
       method: "post",
@@ -25,12 +37,17 @@ const useCreate = () => {
     try {
       let postResult = await axios(publishPostEndpointConfig)
         .then(async function (response) {
-          toast.success("Your draft has been saved!", {
-            duration: 5000,
-          });
+          // toast.success("Your draft has been saved!", {
+          //   duration: 5000,
+          // });
+          setCreated(true);
+          setTimeout(() => {
+            setCreating(false);
+          }, 1000);
           return response?.data?.data;
         })
         .catch(function (error) {
+          setCreating(false);
           console.log(error);
         });
 
@@ -43,7 +60,7 @@ const useCreate = () => {
     }
   };
 
-  return { createPost };
+  return { createPost, creatingPost, created };
 };
 
 export default useCreate;

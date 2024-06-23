@@ -63,7 +63,7 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
     productName: tool?.name ? tool.name : false,
   });
   //create new post hook
-  const { createPost } = useCreate();
+  const { createPost, creatingPost, created } = useCreate();
 
   const {
     //update post content
@@ -71,6 +71,7 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
     //update post settings
     updateSettings,
     setHasUnsavedChanges,
+    saved,
     saving,
     setSaving,
     hasUnsavedChanges,
@@ -88,9 +89,9 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
     // send the content to an API here (if new post only)
     if (postId) {
       setHasUnsavedChanges(true);
-      setTimeout(()=>{
-        setSaving(!saving)
-      },2700)
+      setTimeout(() => {
+        setSaving(!saving);
+      }, 2700);
       debounceSave({ editor, forReview });
     } else {
       localStorage.setItem("wipContent", JSON.stringify(json));
@@ -99,11 +100,20 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
   };
 
   /**
+   * bypass debounce and save immediately
+   * @param {*} param0 
+   */
+  const forceSave = ({ editor, json, forReview }) => {
+    setSaving(false);
+    savePost({ editor, forReview });
+  }
+
+  /**
    * for autosave
    */
   const debounceSave = useCallback(
     debounce(async ({ editor, forReview }) => {
-        setSaving(false)
+      setSaving(false);
       savePost({ editor, forReview });
     }, saveDebounceDelay),
     [user, postId, postObject, postStatus]
@@ -119,12 +129,18 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
    * @returns
    */
   const savePost = async ({ editor, forReview }) => {
+    //check if editor has any content
+    // Updating an existing post
+    if (
+      editor.state.doc.textContent.trim() === "" &&
+      editor.state.doc.childCount <= 2
+    ) {
+      return false;
+    }
+
     try {
-        if (postId) {
+      if (postId) {
         // Updating an existing post
-
-        //debounce the save
-
         const updatedPostObject = await updatePostById({
           editor: editor,
           postId: postId,
@@ -218,10 +234,10 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
                     canEdit={canEdit}
                     initialContent={initialContent}
                     postStatus={postStatus}
-
                     //saving status
                     hasUnsavedChanges={hasUnsavedChanges}
-                    isSaving={saving}
+                    isSaving={saving || creatingPost}
+                    saved={saved || created}
                     //used for updating existing post
                     slug={slug}
                     postId={postId}
@@ -229,6 +245,7 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
                     //save and update content
                     // savePost={debounceSave}
                     updatePost={updatePost}
+                    forceSave={forceSave}
                     //refetch post needed when the featured image is updated in post settings
                     refetchPost={refetch}
                     //update post settings

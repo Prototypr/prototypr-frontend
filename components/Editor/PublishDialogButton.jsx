@@ -14,7 +14,8 @@ import Button from "@/components/Primitives/Button";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
 export const PublishDialogButton = ({
-  onSave
+  onSave,
+  canPublish
 }) => {
 
   const [submitting, setSubmitting] = useState(null);
@@ -41,6 +42,7 @@ export const PublishDialogButton = ({
     <Dialog onOpenChange={toggleSubmitOpen} open={submitOpen}>
       <DialogTrigger asChild>
         <Button
+          disabled={!canPublish}
           variant="confirmRounded"
           className="text-[13px] font-normal h-[25px] px-2 outline outline-blue-600 outline-1 py-0 mr-1 my-auto"
         >

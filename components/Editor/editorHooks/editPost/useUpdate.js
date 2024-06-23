@@ -22,6 +22,7 @@ const axios = require("axios");
  */
 const useUpdate = () => {
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(undefined);
 
   /**
@@ -67,12 +68,13 @@ const useUpdate = () => {
     };
 
     setSaving(true);
-
+    setSaved(false)
     const updateData = await axios(publishPostEndpointConfig)
       .then(async function (response) {
         setTimeout(() => {
           setSaving(false);
           setHasUnsavedChanges(false);
+          setSaved(true);
         }, 1000);
         if (forReview) {
           toast.success("Submitted for review!", {
@@ -179,6 +181,7 @@ const useUpdate = () => {
     hasUnsavedChanges,
     setHasUnsavedChanges,
     setSaving,
+    saved
   };
 };
 

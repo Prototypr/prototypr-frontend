@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import { useEditor, EditorContent } from "@tiptap/react";
@@ -67,10 +67,11 @@ const Editor = ({
   //save status
   isSaving = false,
   hasUnsavedChanges = false,
+  saved = false,
   //functions
   refetchPost = false,
-  // savePost = false,
   updatePost = false,
+  forceSave= false,
   updatePostSettings = false,
   setInitialEditorContent = false,
 }) => {
@@ -78,9 +79,15 @@ const Editor = ({
     redirectIfFound: false,
   });
 
-  // const [isSaving, setIsSaving] = useState(false);
 
-  const [forReview, setForReview] = useState(false);
+  const [saveForReview, setForReview] = useState(false);
+
+  useEffect(() => {
+    if(forceSave && saveForReview){
+      forceSave({editor, json:editor.getJSON(), forReview:saveForReview})
+      setForReview(false)
+    }
+  },[saveForReview])
 
   const editor = useEditor({
     extensions: [
@@ -187,7 +194,7 @@ const Editor = ({
       try {
         const json = editor.getJSON();
         // autosave would happen in the parent here;
-        updatePost({ editor, json, forReview });
+        updatePost({ editor, json, forReview:saveForReview });
       } catch (e) {
         if (typeof updatePost !== "function") {
           console.log(e);
@@ -268,7 +275,7 @@ const Editor = ({
             <div className="flex">
               <UndoRedoButtons editor={editor} />
               <div className={`ml-3 my-auto text-gray-500`}>
-                {isSaving ? "Saving..." : hasUnsavedChanges ? "" : "Saved"}
+                {isSaving ? "Saving..." : hasUnsavedChanges ? "" : saved?"Saved":''}
               </div>
             </div>
           </UndoRedoNavPortal>
@@ -283,6 +290,7 @@ const Editor = ({
               }}
               isSaving={isSaving}
               postStatus={postStatus}
+              saved={saved}
               canEdit={canEdit}
               editor={editor}
               //for settings panel
