@@ -204,55 +204,46 @@ const VideoModalButton = ({ editor, showing }) => {
   };
 
   return (
-    <Dialog open={modalOpen} onOpenChange={onOpenChange}>
-      <div className="flex">
-        <DialogTrigger asChild>
-          <IconButton
-            onClick={() => setModal("alt")}
-            className={"text-sm hover:bg-gray-800 hover:text-white"}
-            aria-label="Update link"
-          >
-            ALT
-          </IconButton>
-        </DialogTrigger>
-        {/* <LinkInput isFigure={true} marginLeft={-100} showRemove={true} editor={editor} /> */}
-        <WidthRange showing={showing} editor={editor} figureType={'video'} />
-      </div>
-      <DialogContent>
-        <DialogTitle>{modalOption == "alt" && "Alternative Text"}</DialogTitle>
-        <DialogDescription>
-          {modalOption == "alt" &&
-            "Write a brief description of this image for readers with visual impairments"}
-        </DialogDescription>
-        <div>
-          <img
-            style={{ maxWidth: 300, maxHeight: 200, objectFit: "cover" }}
-            className="mx-auto mt-3 mb-10"
-            src={imgSrc}
-          />
-        </div>
-        <div>
-          hi
-          {/* <ImageAltField figureNode={figureNode} closePopup={toggleModal} editor={editor}/> */}
-        </div>
-        {/* <div className="flex flex-row justify-start gap-2">
-        <DialogClose asChild>
-          <Button onClick={onClick} variant="red">
-            Delete
-          </Button>
-        </DialogClose>
+    <div className="h-[26px] flex flex-col justify-center">
+      <WidthRange showing={showing} editor={editor} figureType={"video"} />
+    </div>
 
-        <DialogClose asChild>
-          <Button variant="gray">Cancel</Button>
-        </DialogClose>
-      </div> */}
-        <DialogClose asChild>
-          <CloseButton aria-label="Close">
-            <Cross2Icon />
-          </CloseButton>
-        </DialogClose>
-      </DialogContent>
-    </Dialog>
+    // <Dialog open={modalOpen} onOpenChange={onOpenChange}>
+    //   <div className="flex">
+    //     <DialogTrigger asChild>
+    //       <IconButton
+    //         onClick={() => setModal("alt")}
+    //         className={"text-sm hover:bg-gray-800 hover:text-white"}
+    //         aria-label="Update link"
+    //       >
+    //         ALT
+    //       </IconButton>
+    //     </DialogTrigger>
+    //     <WidthRange showing={showing} editor={editor} figureType={'video'} />
+    //   </div>
+    //   <DialogContent>
+    //     <DialogTitle>{modalOption == "alt" && "Alternative Text"}</DialogTitle>
+    //     <DialogDescription>
+    //       {modalOption == "alt" &&
+    //         "Write a brief description of this image for readers with visual impairments"}
+    //     </DialogDescription>
+    //     <div>
+    //       <img
+    //         style={{ maxWidth: 300, maxHeight: 200, objectFit: "cover" }}
+    //         className="mx-auto mt-3 mb-10"
+    //         src={imgSrc}
+    //       />
+    //     </div>
+    //     <div>
+    //       hi
+    //     </div>
+    //     <DialogClose asChild>
+    //       <CloseButton aria-label="Close">
+    //         <Cross2Icon />
+    //       </CloseButton>
+    //     </DialogClose>
+    //   </DialogContent>
+    // </Dialog>
   );
 };
 

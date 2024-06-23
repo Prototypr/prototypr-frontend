@@ -73,14 +73,14 @@ const ImageMenu = ({ editor, isSelecting }) => {
           const selection = editor.state.selection;
           const isTextSelection = selection instanceof TextSelection;
 
-          // if (!editor.isActive("figure", { figureType: "image" })) {
-          //   return false;
-          // }
+          if (!editor.isActive("figure", { figureType: "image" })) {
+            return false;
+          }
 
-          //  if (isTextSelection) {
-          //   setShowing(false);
-          //   return false;
-          // }
+           if (isTextSelection) {
+            setShowing(false);
+            return false;
+          }
 
           //update image src
           const figure_node = selection?.$anchor?.nodeAfter
