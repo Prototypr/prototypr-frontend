@@ -127,7 +127,7 @@ const isVideo = file => {
   return file && file["type"].split("/")[0] === "video";
 };
 
-const uploadMedia = (event, editor, user, setLoading) => {
+const uploadMedia = (event, editor, user, setLoading, setIsOpen) => {
   const files = event.target.files;
 
   //if image
@@ -141,7 +141,7 @@ const uploadMedia = (event, editor, user, setLoading) => {
 
         const resp = await fetch(url);
         const blob = await resp.blob();
-
+        setIsOpen(false)
         let placeholderPos = addPlaceholder(blob, editor);
 
         const file = new File([blob], `${files[0].name || "image.png"}`, {
@@ -163,6 +163,7 @@ const uploadMedia = (event, editor, user, setLoading) => {
         await axios(configUpload)
           .then(async function (response) {
             setLoading(false);
+            setIsOpen(false)
             toast.success("Image Uploaded!", {
               duration: 5000,
             });
@@ -181,6 +182,7 @@ const uploadMedia = (event, editor, user, setLoading) => {
           })
           .catch(function (error) {
             console.log(error);
+            setIsOpen(false)
             alert("There was an issue with that image. Please try again.");
             setTimeout(() => {}, 300);
             removePlaceholder(editor);
@@ -417,9 +419,10 @@ const MenuFloating = ({ editor, isSelecting }) => {
                       id="img-upload"
                       accept="image/*,video/*"
                       className="hidden"
-                      onChange={event =>
-                        uploadMedia(event, editor, user, setLoading)
-                      }
+                      onChange={event =>{
+                        setIsOpen(false)
+                        uploadMedia(event, editor, user, setLoading, setIsOpen)
+                      }}
                     />
                   </>
                 </IconButton>
