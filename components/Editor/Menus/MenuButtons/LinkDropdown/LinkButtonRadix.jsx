@@ -152,7 +152,9 @@ const togglePopup =()=>{
 
 return(
   <Collapsible open={open}>
-    <CollapsibleTrigger  onClick={togglePopup} asChild>
+    <CollapsibleTrigger  
+    // onClick={togglePopup}
+     asChild>
       {/* <IconButton className={open?'bg-gray-800':' hover:bg-gray-800 hover:text-white'} aria-label="Update link"> */}
       <IconButton id="link-btn" className={`
        ${editor.isActive("link")?'bg-gray-800':'bg-gray-900'}
@@ -162,7 +164,7 @@ return(
       </IconButton>
     </CollapsibleTrigger>
     <CollapsibleContent 
-    css={{pointerEvents:'all',marginLeft:marginLeft?marginLeft:'', marginTop:-1, height:47}}
+    css={{pointerEvents:'all',marginLeft:marginLeft?marginLeft:'', marginTop:-58, height:47}}
     id="link-form-content"
     onPointerDownOutside={()=>setIsOpen(false)} onEscapeKeyDown={()=>setIsOpen(false)} sideOffset={5} >
       <Flex css={{ justifyContent:'space-between', gap: 10, marginTop:2, }}>

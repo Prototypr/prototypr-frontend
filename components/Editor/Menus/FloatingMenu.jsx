@@ -170,14 +170,14 @@ const uploadMedia = (event, editor, user, setLoading, setIsOpen) => {
             const url = response?.data?.url;
             // editor.chain().focus().setFigure({src: url, caption:'enter caption'}).run()
             // editor.chain().focus().setImage({ src: url }).run();
-            editor.commands.setFigure({
+            editor.chain().setNodeSelection(placeholderPos).setFigure({
               figureType: "image",
               position: placeholderPos,
               src: url,
               alt: "",
               figcaption: "",
               class: "",
-            });
+            }).run();
             removePlaceholder(editor);
           })
           .catch(function (error) {
