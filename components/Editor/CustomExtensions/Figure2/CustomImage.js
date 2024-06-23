@@ -1,3 +1,5 @@
+import React from 'react';
+import { ReactNodeViewRenderer } from "@tiptap/react";
 import {
     mergeAttributes,
     Node,
@@ -5,6 +7,7 @@ import {
   } from '@tiptap/core'
   import { PluginKey , Plugin} from "prosemirror-state";
 import {Decoration, DecorationSet} from "prosemirror-view"
+import ImageNodeView from './ImageNodeView/ImageNodeView';
 
 export const ImageDecorationKey = new PluginKey('image-decoration');
 
@@ -31,13 +34,20 @@ export const ImageDecorationKey = new PluginKey('image-decoration');
       return this.options.inline ? 'inline' : 'block'
     },
   
-    draggable: false,
+    draggable: true,
   
     addAttributes() {
       return {
         src: {
           default: null,
         },
+        // blob:{
+        //   default:null,
+        //   parseHTML: async (element) => {
+        //    const blob = await imgToBlob()
+        //    return blob
+        //   }
+        // },
         alt: {
           default: null,
         },
@@ -144,6 +154,13 @@ export const ImageDecorationKey = new PluginKey('image-decoration');
             props: {
               decorations(state) { return this.getState(state) },
             },
+            // filterTransaction: (transaction, state) => {
+            //   let result = true; // true for keep, false for stop transaction
+            //   if (transaction?.curSelection?.node?.type.name == "image") {
+            //     result = false;
+            //   }
+            //   return result;
+            // },
            
           })
         ];
@@ -189,11 +206,20 @@ export const ImageDecorationKey = new PluginKey('image-decoration');
           find: inputRegex,
           type: this.type,
           getAttributes: match => {
-            const [,, alt, src, title] = match
+            const [alt, src, title] = match
   
             return { src, alt, title }
           },
         }),
       ]
     },
+    // addNodeView() {
+    //   return ReactNodeViewRenderer(React.memo(ImageNodeView));
+    // }
   })
+
+  const imgToBlob = async () => {
+    const response = await fetch(`https://req.prototypr.io/${props.node.attrs.src}`);
+    const blob = await response.blob();
+    return (URL.createObjectURL(blob));
+  };
