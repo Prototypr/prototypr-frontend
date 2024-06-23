@@ -227,7 +227,13 @@ const uploadMedia = (event, editor, user, setLoading, setIsOpen) => {
             toast.success("Video Uploaded!", {
               duration: 5000,
             });
-            const url = response?.data?.url;
+            let url = response?.data?.url;
+            
+            //ensure url has https:// prefix
+            if (!url.startsWith("https://")) {
+              url = "https://" + url;
+            }
+
             // editor.chain().focus().setFigure({src: url, caption:'enter caption'}).run()
             // editor.chain().focus().setImage({ src: url }).run();
             editor.commands.setFigure({
