@@ -166,11 +166,12 @@ const Form = ({ user, postObject, isEditMode }) => {
     if (!excerpt) {
       setExcerpt(postObject?.excerpt);
     }
-    setIsCreator(
-      postObject?.creators?.length &&
-        postObject.creators.find(creator => creator.id === user.id) !==
-          undefined
-    );
+    let iscreatr = postObject?.creators?.length &&
+    postObject.creators.find(creator => creator.id === user.id) !==
+      undefined
+
+    setIsCreator(iscreatr);
+    formik.setFieldValue("isCreator", iscreatr);
   }, [postObject, user]);
 
   return (
