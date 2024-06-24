@@ -194,8 +194,6 @@ const ToolPostForm = ({ user, isOwner, postObject, refetchPost, loading }) => {
                 {/* <LoginSide showArrow={false} title="Submit a tool or resource" user={user} /> */}
               </div>
             </div>
-            <div className="col-span-12 md:col-span-6 lg:col-span-6 mb-12">
-              <div className="bg-white border border-gray-300/70 shadow-sm rounded-xl p-6 step-wizard">
                 {/* <Progress/> */}
                 <ToolSteps
                   loading={loading}
@@ -203,8 +201,6 @@ const ToolPostForm = ({ user, isOwner, postObject, refetchPost, loading }) => {
                   postObject={postObject}
                   user={user}
                 />
-              </div>
-            </div>
           </div>
         </WizardProvider>
       ) : !(user && !user?.isLoggedIn) ? (
@@ -300,7 +296,12 @@ const ToolSteps = ({ user, postObject, refetchPost, loading }) => {
       });
   };
 
+
   return (
+    <div className={`col-span-12 md:col-span-6 ${activeStepIndex==2?'lg:col-span-8':'lg:col-span-6'} mb-12`}>
+
+    <div className="bg-white border border-gray-300/70 shadow-sm rounded-xl p-6 step-wizard">
+
     <Steps>
       <Step key={`page/1`} id={"1"}>
         <div className="flex items-center justify-start h-full w-full relative">
@@ -327,6 +328,7 @@ const ToolSteps = ({ user, postObject, refetchPost, loading }) => {
       <Step key={`page/3`} id={"3"}>
         <div className="flex flex-col justify-start h-full w-full relative">
           <MediaForm
+            refetchPost={refetchPost}
             postObject={postObject}
             loading={loading}
             user={user}
@@ -459,6 +461,8 @@ const ToolSteps = ({ user, postObject, refetchPost, loading }) => {
         </div>
       </Step>
     </Steps>
+    </div>
+    </div>
   );
 };
 

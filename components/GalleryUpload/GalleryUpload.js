@@ -1,72 +1,78 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 // https://github.com/pqina/react-filepond
 // Import React FilePond
-import { FilePond, registerPlugin } from 'react-filepond'
+import { FilePond, registerPlugin } from "react-filepond";
 
 // Import FilePond styles
 
 // Import the Image EXIF Orientation and Image Preview plugins
 // Note: These need to be installed separately
 // `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
-import 'filepond/dist/filepond.min.css';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css'
-
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginFilePoster from "filepond-plugin-file-poster";
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import "filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css";
 
 // Register the plugins
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFilePoster)
+registerPlugin(
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginFilePoster
+);
 
 // Our app
-function GalleryUpload({updateField, gallery}) {
-  const [files, setFiles] = useState(null)
+function GalleryUpload({ updateField, gallery, reorder }) {
+  const [files, setFiles] = useState(null);
 
-  useEffect(()=>{
-
+  useEffect(() => {
     // set default images when in edit mode
-    let files = []
-    for(var x = 0;x<gallery?.length;x++){
+    let files = [];
+    for (var x = 0; x < gallery?.length; x++) {
       // https://pqina.nl/filepond/docs/api/plugins/file-poster/
-      files.push(
-        {
-          // the server file reference
-          source: gallery[x].id,
-          // set type to local to indicate an already uploaded file
-          options: {
-              filePosterHeight:0,
-              type: 'local',
-              // optional stub file information
-              file: {
-                  name: gallery[x].name,
-                  size: gallery[x].size,
-                  type: gallery[x].size.mime,
-                  id:gallery[x].id
-              },
-
-              // pass poster property
-              metadata: {
-                poster: gallery[x].url,
-            },
+      files.push({
+        // the server file reference
+        source: gallery[x].id,
+        // set type to local to indicate an already uploaded file
+        options: {
+          filePosterHeight: 0,
+          type: "local",
+          // optional stub file information
+          file: {
+            name: gallery[x].name,
+            size: gallery[x].size,
+            type: gallery[x].size.mime,
+            id: gallery[x].id,
           },
-      },
-      )
+
+          // pass poster property
+          metadata: {
+            poster: gallery[x].url,
+          },
+        },
+      });
     }
-    setFiles(files)
-
-  },[gallery])
-
+    setFiles(files);
+  }, [gallery]);
 
   return (
     <div className="App">
       <FilePond
-        
-        files={files?files:[]}
-        onupdatefiles={(files)=>{
-            setFiles(files)
-            let fileys = files.map((fileItem) => fileItem.file)
-            updateField(fileys)
+        allowReorder={true}
+        files={files ? files : []}
+        onupdatefiles={files => {
+          setFiles(files);
+          let fileys = files.map(fileItem => fileItem.file);
+          updateField(fileys);
+        }}
+        onreorderfiles={files => {
+          setFiles(files);
+          let fileys = files.map(fileItem => fileItem.file);
+          if (fileys?.length) {
+            updateField(fileys);
+          }
+          reorder(files);
         }}
         allowMultiple={true}
         maxFiles={5}
@@ -75,6 +81,6 @@ function GalleryUpload({updateField, gallery}) {
         labelIdle='Drag & Drop your images or <span class="filepond--label-action">Browse</span>'
       />
     </div>
-  )
+  );
 }
-export default GalleryUpload
+export default GalleryUpload;

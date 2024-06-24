@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FloatingMenu } from "@tiptap/react";
 import useUser from "@/lib/iron-session/useUser";
 import toast from "react-hot-toast";
-
+import { uploadToGumlet } from "@/lib/uploadToGumlet";
 import { styled, keyframes } from "@stitches/react";
 import { violet, mauve, blackA } from "@radix-ui/colors";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
@@ -141,7 +141,7 @@ const uploadMedia = (event, editor, user, setLoading, setIsOpen) => {
 
         const resp = await fetch(url);
         const blob = await resp.blob();
-        setIsOpen(false)
+        setIsOpen(false);
         let placeholderPos = addPlaceholder(blob, editor);
 
         const file = new File([blob], `${files[0].name || "image.png"}`, {
@@ -163,26 +163,30 @@ const uploadMedia = (event, editor, user, setLoading, setIsOpen) => {
         await axios(configUpload)
           .then(async function (response) {
             setLoading(false);
-            setIsOpen(false)
+            setIsOpen(false);
             toast.success("Image Uploaded!", {
               duration: 5000,
             });
             const url = response?.data?.url;
             // editor.chain().focus().setFigure({src: url, caption:'enter caption'}).run()
             // editor.chain().focus().setImage({ src: url }).run();
-            editor.chain().setNodeSelection(placeholderPos).setFigure({
-              figureType: "image",
-              position: placeholderPos,
-              src: url,
-              alt: "",
-              figcaption: "",
-              class: "",
-            }).run();
+            editor
+              .chain()
+              .setNodeSelection(placeholderPos)
+              .setFigure({
+                figureType: "image",
+                position: placeholderPos,
+                src: url,
+                alt: "",
+                figcaption: "",
+                class: "",
+              })
+              .run();
             removePlaceholder(editor);
           })
           .catch(function (error) {
             console.log(error);
-            setIsOpen(false)
+            setIsOpen(false);
             alert("There was an issue with that image. Please try again.");
             setTimeout(() => {}, 300);
             removePlaceholder(editor);
@@ -228,7 +232,19 @@ const uploadMedia = (event, editor, user, setLoading, setIsOpen) => {
               duration: 5000,
             });
             let url = response?.data?.url;
-            
+
+            // const gumletData = await uploadToGumlet({
+            //   videoUrl: url,
+            //   mediaId: null,
+            // });
+
+            // const gumletAttr = {
+            //   gumletId: gumletData.asset_id,
+            //   source_id: gumletData.source_id,
+            //   collection_id: gumletData.collection_id,
+            //   output: gumletData?.output,
+            // };
+
             //ensure url has https:// prefix
             if (!url.startsWith("https://")) {
               url = "https://" + url;
@@ -239,7 +255,9 @@ const uploadMedia = (event, editor, user, setLoading, setIsOpen) => {
             editor.commands.setFigure({
               figureType: "video",
               position: placeholderPos,
+              // gumlet: JSON.stringify(gumletAttr),
               src: url,
+              original: url,
               class: "",
             });
             removePlaceholder(editor);
@@ -327,14 +345,14 @@ const MenuFloating = ({ editor, isSelecting }) => {
     setIsOpen(!open);
   };
 
-  useEffect(()=>{
-    let editor = document.querySelector('.tiptap.ProseMirror')
-    if(open){
-      editor?.classList?.add('menu-open')
-    }else{
-      editor?.classList?.remove('menu-open')
+  useEffect(() => {
+    let editor = document.querySelector(".tiptap.ProseMirror");
+    if (open) {
+      editor?.classList?.add("menu-open");
+    } else {
+      editor?.classList?.remove("menu-open");
     }
-  },[open])
+  }, [open]);
 
   useEffect(() => {
     function handleKeyUp(event) {
@@ -349,7 +367,7 @@ const MenuFloating = ({ editor, isSelecting }) => {
     <FloatingMenu
       shouldShow={({ editor, view, state, oldState }) => {
         if (state?.selection?.$anchor?.parent?.type?.name == "doc") {
-          setIsOpen(false)
+          setIsOpen(false);
           return false;
         }
 
@@ -425,9 +443,9 @@ const MenuFloating = ({ editor, isSelecting }) => {
                       id="img-upload"
                       accept="image/*,video/*"
                       className="hidden"
-                      onChange={event =>{
-                        setIsOpen(false)
-                        uploadMedia(event, editor, user, setLoading, setIsOpen)
+                      onChange={event => {
+                        setIsOpen(false);
+                        uploadMedia(event, editor, user, setLoading, setIsOpen);
                       }}
                     />
                   </>
@@ -471,7 +489,7 @@ const MenuFloating = ({ editor, isSelecting }) => {
                         })
                         .setNodeSelection(pos - 1)
                         .insertContentAt(pos, "<p></p>")
-                        .setTextSelection(pos+1)
+                        .setTextSelection(pos + 1)
                         .focus()
                         .enter()
                         .run();

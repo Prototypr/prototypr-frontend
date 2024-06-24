@@ -10,6 +10,7 @@ import useLoad from "../hooks/useLoad";
 import { useWizardContext } from "react-sweet-wizard";
 import GalleryUpload from "@/components/GalleryUpload/GalleryUpload";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
+import { cloneDeep, set } from "lodash";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 const axios = require("axios");
 
@@ -21,13 +22,18 @@ function isEmptyObject(obj) {
   );
 }
 
-const MediaForm = ({ user, isEditMode, loading, postObject }) => {
+const MediaForm = ({ user, isEditMode, loading, postObject, refetchPost }) => {
   // const { loading, postObject, isOwner } = useLoad(user);
 
   return !user && loading ? (
     <Fallback />
   ) : postObject ? (
-    <Form postObject={postObject} user={user} isEditMode={isEditMode} />
+    <Form
+      postObject={postObject}
+      user={user}
+      refetchPost={refetchPost}
+      isEditMode={isEditMode}
+    />
   ) : (
     <div>
       <div className="px-6 md:px-0 max-w-2xl w-full">
@@ -49,7 +55,7 @@ const MediaForm = ({ user, isEditMode, loading, postObject }) => {
   );
 };
 
-const Form = ({ user, postObject, isEditMode }) => {
+const Form = ({ user, postObject, isEditMode, refetchPost }) => {
   const { activeStepIndex, onNext, onPrevious, goTo, isFirstStep, isLastStep } =
     useWizardContext();
 
@@ -116,10 +122,55 @@ const Form = ({ user, postObject, isEditMode }) => {
               toast.success("Upload complete!", {
                 duration: 3000,
               });
+              setUploadNewLogo(false);
             })
             .catch(function (error) {
               console.log(error);
               toast.console.warn("The logo failed to save.", {
+                duration: 3000,
+              });
+            });
+        }
+        if (
+          values.banner &&
+          uploadNewBanner == true &&
+          values.banner !== "exist"
+        ) {
+          toast.loading("Uploading new banner...", {
+            duration: 3000,
+          });
+          const file = new File([values.banner], `banner_.png`, {
+            type: "image/png",
+          });
+
+          const data = {};
+          const formData = new FormData();
+          formData.append("files", file, "featuredImage");
+          formData.append("data", JSON.stringify(data));
+          formData.append("refId", postObject.id);
+          formData.append("field", "featuredImage");
+          formData.append("ref", "api::post.post");
+
+          var imageConfig = {
+            method: "post",
+            url: `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
+            headers: {
+              Authorization: `Bearer ${user?.jwt}`,
+            },
+            data: formData,
+          };
+
+          await axios(imageConfig)
+            .then(async function (response) {
+              //set field value to id of image, which is used to attach to post
+              toast.success("Upload complete!", {
+                duration: 3000,
+              });
+              setUploadNewBanner(false);
+            })
+            .catch(function (error) {
+              console.log(error);
+              toast.console.warn("The banner failed to save.", {
                 duration: 3000,
               });
             });
@@ -131,10 +182,9 @@ const Form = ({ user, postObject, isEditMode }) => {
         if (
           values.gallery &&
           galleryChanged &&
-          (values.gallery !== "exist" ||
+          ((values.gallery !== "exist" && values.gallery !== "reorder") ||
             postObject?.gallery?.length !== galleryFiles?.length)
         ) {
-
           toast.loading("Uploading gallery images...", {
             duration: 3000,
           });
@@ -171,7 +221,9 @@ const Form = ({ user, postObject, isEditMode }) => {
             };
 
             await axios(publishPostEndpointConfig)
-              .then(async function (response) {})
+              .then(async function (response) {
+                await reorderImages({ showSuccess: true });
+              })
               .catch(function (error) {
                 console.log(error);
                 toast.error("There was an error removing old images!", {
@@ -209,6 +261,27 @@ const Form = ({ user, postObject, isEditMode }) => {
               };
               await axios(galleryConfig)
                 .then(async function (response) {
+                  //update galleryFiles with the new image objects
+                  let newGalleryFiles = cloneDeep(galleryFiles);
+                  for (var x = 0; x < newGalleryFiles.length; x++) {
+                    if (newGalleryFiles[x] instanceof File) {
+                      for (var y = 0; y < response.data.length; y++) {
+                        if (newGalleryFiles[x].name === response.data[y].name) {
+                          newGalleryFiles[x] = {
+                            name: response.data[y].name,
+                            id: response.data[y].id,
+                          };
+                        }
+                      }
+                    }
+                  }
+                  setGalleryFiles(newGalleryFiles);
+
+                  await refetchPost();
+                  await reorderImages({
+                    showSuccess: false,
+                    galleryObject: newGalleryFiles,
+                  });
                   //set field value to id of image, which is used to attach to post
                   toast.success("Gallery uploads complete!", {
                     duration: 3000,
@@ -229,6 +302,9 @@ const Form = ({ user, postObject, isEditMode }) => {
                 });
             }
           }
+        } else if (values.gallery == "reorder") {
+          await reorderImages({ showSuccess: true });
+          setIsSubmitting(false);
         } else {
           setIsSubmitting(false);
           if (!isEditMode) {
@@ -252,6 +328,7 @@ const Form = ({ user, postObject, isEditMode }) => {
     }
   }, [errors]);
 
+  const [uploadNewBanner, setUploadNewBanner] = useState(false);
   const [uploadNewLogo, setUploadNewLogo] = useState(false);
   const [galleryChanged, setGalleryChanged] = useState(false);
   const [galleryFiles, setGalleryFiles] = useState(false);
@@ -267,6 +344,53 @@ const Form = ({ user, postObject, isEditMode }) => {
       setGalleryChanged(true);
     }
   }, [galleryFiles]);
+
+  const reorderImages = async ({
+    showSuccess = false,
+    galleryObject = galleryFiles,
+  }) => {
+    let newOrder = galleryObject.map((file, index) => {
+      return file.id;
+    });
+    if (!newOrder.length) {
+      return;
+    }
+    //if one of the new images is a file object or undefined, skip the reordering
+    if (
+      newOrder.some(file => file instanceof File || typeof file === "undefined")
+    ) {
+      return;
+    }
+
+    let updatePostEndpointConfig = {
+      method: "put",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postObject.id}`,
+      headers: {
+        Authorization: `Bearer ${user?.jwt}`,
+      },
+
+      data: {
+        data: {
+          gallery: newOrder,
+        },
+      },
+    };
+
+    await axios(updatePostEndpointConfig)
+      .then(async function (response) {
+        if (showSuccess) {
+          toast.success("Gallery images reordered!", {
+            duration: 3000,
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("There was an error!", {
+          duration: 5000,
+        });
+      });
+  };
 
   return (
     <div className="px-6 md:px-0 max-w-2xl w-full">
@@ -310,6 +434,21 @@ const Form = ({ user, postObject, isEditMode }) => {
                 formik.setFieldValue("logo", blob);
               }}
             />
+
+            <label htmlFor="image" className="text-md mt-10 font-medium">
+              Banner
+            </label>
+            <ImageUploader
+              id={4}
+              w={770}
+              h={377}
+              companyLogoIsDefault={false}
+              initialImage={postObject?.featuredImage}
+              setFormValue={blob => {
+                setUploadNewBanner(true);
+                formik.setFieldValue("banner", blob);
+              }}
+            />
             {/* <ImageUploader initialImage={defaultCompany?.logo} setFormValue={(blob) =>{
                     setImageBlob(blob)
                     formik.setFieldValue("image",blob)
@@ -326,6 +465,10 @@ const Form = ({ user, postObject, isEditMode }) => {
             </p>
             <GalleryUpload
               gallery={postObject?.gallery}
+              reorder={() => {
+                setGalleryChanged(true);
+                formik.setFieldValue("gallery", "reorder");
+              }}
               updateField={files => {
                 setGalleryChanged(true);
                 // formik.setFieldValue("logo",files)

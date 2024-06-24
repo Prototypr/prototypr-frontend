@@ -1,80 +1,98 @@
-
-import { Node, mergeAttributes } from '@tiptap/core'
+import { Node, mergeAttributes } from "@tiptap/core";
 // https://www.codemzy.com/blog/tiptap-video-embed-extension
 
 const Video = Node.create({
-  name: 'video', // unique name for the Node
-  group: 'block', // belongs to the 'block' group of extensions
+  name: "video", // unique name for the Node
+  group: "block", // belongs to the 'block' group of extensions
   draggable: false, // so we can drag the video
   atom: true, // is a single unit
 
   addAttributes() {
     return {
-      "src": {
-        default: null
+      src: {
+        default: null,
       },
-      width:{
+      original:{
         default:null
       },
-      height:{
-        default:null
+      gumlet: {
+        default: null,
       },
-      class:{
-        default:''
+      width: {
+        default: null,
       },
-      autoplay:{
-        default:'autoplay'
+      height: {
+        default: null,
       },
-      loop:{
-        default:'loop'
+      class: {
+        default: "",
       },
-      muted:{
-        default:''
+      autoplay: {
+        default: "autoplay",
       },
-      defaultMuted:{
-        default:''
+      loop: {
+        default: "loop",
       },
-      playsinline:{
-        default:''
-      }
-    }
+      muted: {
+        default: "",
+      },
+      defaultMuted: {
+        default: "",
+      },
+      playsinline: {
+        default: "",
+      },
+    };
   },
 
   parseHTML() {
     return [
       {
-        tag: 'video',
+        tag: "video",
       },
-    ]
+    ];
   },
 
   renderHTML({ HTMLAttributes }) {
-      return ['video', mergeAttributes(HTMLAttributes)];
+    console.log(HTMLAttributes)
+    if (HTMLAttributes.gumlet) {
+      let gumletJSON = JSON.parse(HTMLAttributes.gumlet);
+     console.log(gumletJSON)
+      // if (gumletJSON.output?.playback_url) {
+      //   HTMLAttributes.src = gumletJSON.output?.playback_url;
+      // }
+    }
+
+    return ["video", mergeAttributes(HTMLAttributes)];
   },
 
   addCommands() {
     return {
-      setVideo: ({ src,position,width,height,classNames, ...attrs }) => ({ chain }) => {
-        return chain()
-        .insertContentAt(position,{
-          type: this.name,
-          attrs:{src, width, height,class:classNames}
-        })
-          // .insertContent({
-          //   type: this.name,
-          //   attrs:{src, width, height,class:classNames}
-          // })
-          // set cursor at end of caption field
-          .command(({ tr, commands }) => {
-            const { doc, selection } = tr
-            const position = doc.resolve(selection.to - 2).end()
+      setVideo:
+        ({ src, position, width, height, classNames, ...attrs }) =>
+        ({ chain }) => {
+          return (
+            chain()
+              .insertContentAt(position, {
+                type: this.name,
+                attrs: { src, width, height, class: classNames },
+              })
+              // .insertContent({
+              //   type: this.name,
+              //   attrs:{src, width, height,class:classNames}
+              // })
+              // set cursor at end of caption field
+              .command(({ tr, commands }) => {
+                const { doc, selection } = tr;
+                const position = doc.resolve(selection.to - 2).end();
 
-            return commands.setTextSelection(position)
-          })
-          .run()
-      },
-    }
-  }
+                return commands.setTextSelection(position);
+              })
+              .run()
+          );
+        },
+    };
+  },
 
   // addNodeView() {
   //   return ({ editor, node }) => {
@@ -97,4 +115,4 @@ const Video = Node.create({
   // },
 });
 
-export default Video
+export default Video;
