@@ -54,14 +54,13 @@ const Video = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
-    console.log(HTMLAttributes)
-    if (HTMLAttributes.gumlet) {
-      let gumletJSON = JSON.parse(HTMLAttributes.gumlet);
-     console.log(gumletJSON)
-      // if (gumletJSON.output?.playback_url) {
-      //   HTMLAttributes.src = gumletJSON.output?.playback_url;
-      // }
-    }
+
+    // if (HTMLAttributes.gumlet) {
+    //   let gumletJSON = JSON.parse(HTMLAttributes.gumlet);
+    //   if (gumletJSON.output?.playback_url) {
+    //     HTMLAttributes.src = gumletJSON.output?.playback_url;
+    //   }
+    // }
 
     return ["video", mergeAttributes(HTMLAttributes)];
   },

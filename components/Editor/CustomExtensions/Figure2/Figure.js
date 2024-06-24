@@ -341,7 +341,6 @@ const Figure = Node.create({
                 .run()
             );
           } else if (attrs.figureType == "video") {
-            console.log(attrs)
             const content = [{ type: "video", attrs }];
 
             // if (caption) {

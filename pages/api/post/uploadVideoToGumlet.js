@@ -31,12 +31,12 @@ async function handler(req, res) {
       headers: {
         accept: "application/json",
         "content-type": "application/json",
-        Authorization: "Bearer [bearer otken here]",
+        Authorization: `Bearer ${process.env.GUMLET_API_KEY}`,
       },
       body: JSON.stringify({
-        format: "ABR",
+        format: "MP4",
         input: videoUrl,
-        collection_id: "[collection id here]",
+        collection_id: process.env.GUMLET_COLLECTION_ID,
       }),
     };
 
