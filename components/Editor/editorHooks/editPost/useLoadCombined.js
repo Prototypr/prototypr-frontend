@@ -84,7 +84,6 @@ const useLoad = ({ user, interview, productName } = {}) => {
       const post = data.userPostId;
       
       const userHasPermission = checkPermissions(post);
-      console.log(userHasPermission)
       Sentry.captureMessage(`#33 80 getUserArticle: ${post?.id}`, {
         extra: data,
       });
