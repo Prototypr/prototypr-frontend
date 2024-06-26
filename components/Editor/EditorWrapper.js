@@ -62,6 +62,7 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
     interview: isInterview,
     productName: tool?.name ? tool.name : false,
   });
+  console.log("postObject", postObject);
   //create new post hook
   const { createPost, creatingPost, created } = useCreate();
 

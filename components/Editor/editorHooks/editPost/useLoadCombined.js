@@ -27,6 +27,7 @@ const useLoad = ({ user, interview, productName } = {}) => {
   const [title, setTitle] = useState(null);
   const [postStatus, setStatus] = useState("draft");
 
+
   // Load content when user or postId changes
   useEffect(() => {
     if (user && router.isReady) {
@@ -83,6 +84,7 @@ const useLoad = ({ user, interview, productName } = {}) => {
       const post = data.userPostId;
       
       const userHasPermission = checkPermissions(post);
+      console.log(userHasPermission)
       Sentry.captureMessage(`#33 80 getUserArticle: ${post?.id}`, {
         extra: data,
       });
@@ -99,7 +101,7 @@ const useLoad = ({ user, interview, productName } = {}) => {
   const checkPermissions = post => {
     let hasPermission = false;
 
-    if (user && post?.owner === user?.id && post?.type === "article") {
+    if (user && post?.owner == user?.id && post?.type === "article") {
       setIsOwner(true);
       setCanEdit(true);
       hasPermission = true;
