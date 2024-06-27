@@ -7,42 +7,54 @@ import Button from "../Primitives/Button";
 export default function SignupHomepage({ className }) {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
+  const [letterUrl, setLetterUrl] = useState("");
+  const [tryEmail, setTryEmail] = useState(false);
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const intl = useIntl();
   const [buttonText, setButtonText] = useState(
     intl.formatMessage({ id: "intro.button.updates" })
   );
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
     setButtonText(intl.formatMessage({ id: "signup.button.submitting" }));
 
-    axios
-      .post(
-        "https://req.prototypr.io/https://emailoctopus.com/lists/c70b3a0c-1390-11eb-a3d0-06b4694bee2a/members/embedded/1.3/add",
-        {
-          field_0: data.emailRequired,
-        }
-      )
-      .then(function (response) {
-        console.log("success");
-        // var cookieDomain = process.env.customKey && { domain: ".prototypr.io" };
-        // jsCookie.set("prototypr_signupbar", "hide", cookieDomain);
+    const response = await fetch(`/api/subscribe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.emailRequired,
+        listId: "et15895b31367",
+      }),
+    });
+    setTryEmail(false);
+    setAlreadySubscribed(false);
+    setRegistered(false);
+    setError(false);
 
-        if (response.data.success) {
-          setRegistered(true);
-          setError(false);
-          setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
-        }
-      })
-      .catch(function (error) {
-        setRegistered(false);
-        setError(true);
-        setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
-      });
+    console.log(response)
+    if (response.status == 200) {
+      setRegistered(true);
+      setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
+    } else if (response.status == 204) {
+      setAlreadySubscribed(true);
+      setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
+    }else if(response.status==202){
+      setTryEmail(true);
+      setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
+    }
+    else {
+      setRegistered(false);
+      setError(true);
+      setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
+    }
   };
+
 
   return (
     <>
       <div className={`rounded-md lg:mb-0`}>
-        {registered == false ? (
+        {registered == false && tryEmail == false && alreadySubscribed == false ? (
           <>
             <HookForm
               className={className}
@@ -63,8 +75,32 @@ export default function SignupHomepage({ className }) {
               {intl.formatMessage({ id: "signup.res.error" })}
             </div>
           </>
+        ) :
+        tryEmail?(
+          <div className="p-6 bg-white shadow rounded-xl max-w-md xl:max-w-xl mb-2 mt-2">
+          <h2 className={`text-lg mb-2 text-gray-800 font-semibold  `}>
+          Please check your email &nbsp;
+          </h2>
+          <div
+            className={`block text-base  leading-6 font-base text-gray-800 `}
+          >
+           You've tried to sign up before. There should be a confirmation email in your inbox from the first time you tried to signed up - if you can't find it, check your spam folder.
+          </div>
+        </div>
+        ):
+        alreadySubscribed ? (
+          <div className="p-6 bg-white shadow rounded-xl max-w-md xl:max-w-xl mb-2 mt-2">
+            <h2 className={`text-lg mb-2 text-gray-800 font-semibold  `}>
+              You've already subscribed to the newsletter
+            </h2>
+            <div
+              className={`block text-base  leading-6 font-base text-gray-800 `}
+            >
+            Thanks for being a part of the community! 🎉
+            </div>
+          </div>
         ) : (
-          <div className="p-6 bg-white shadow rounded-md max-w-md xl:max-w-xl mb-2 mt-10">
+          <div className="p-6 bg-white shadow rounded-xl max-w-md xl:max-w-xl mb-2 mt-2">
             <h2 className={`text-lg mb-2 text-gray-800 font-semibold  `}>
               {intl.formatMessage({ id: "signup.input.check" })} &nbsp;{" "}
               <div className="inline -mt-1">🎉</div>
@@ -88,13 +124,13 @@ function HookForm(props) {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => props.onSubmit(data);
+  const onSubmit = data => props.onSubmit(data);
   const intl = useIntl();
 
   return (
     <div>
       <form className={`${props.className}`} onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex mb-4">  
+        <div className="flex mb-4">
           <div className="mr-3 max-w-sm w-full">
             <label htmlFor="Email" className="sr-only	">
               <FormattedMessage id="intro.input.placeholder" />
@@ -102,7 +138,9 @@ function HookForm(props) {
             <input
               id="Email"
               //   type="text"
-              placeholder={intl.formatMessage({ id: "intro.input.placeholder" })}
+              placeholder={intl.formatMessage({
+                id: "intro.input.placeholder",
+              })}
               {...register("emailRequired", {
                 required: true,
                 pattern: /^\S+@\S+$/i,
@@ -123,8 +161,17 @@ function HookForm(props) {
               className="border-transparent border-solid border-2 border-gradient-br-blue-darkblue-gray-50 hover:border-gradient-tl-blue-darkblue-gray-50 gradient-border-3 w-full h-full p-3 text-gray-800 bg-white rounded-lg"
             /> */}
           </div>
-          <Button className="rounded-full flex-none px-5 font-medium py-3 leading-none bg-blue-600 hover:bg-blue-500" variant={"confirmBig"}>
-          Subscribe
+          <Button
+            disabled={
+              props.buttonText !==
+              intl.formatMessage({ id: "intro.button.updates" })
+                ? true
+                : false
+            }
+            className="rounded-full flex-none px-5 font-medium py-3 leading-none bg-blue-600 hover:bg-blue-500"
+            variant={"confirmBig"}
+          >
+            {props.buttonText}
           </Button>
         </div>
         {/* <input type="checkbox" placeholder="Consent" name="consent" ref={register({ required: true })} /> */}
@@ -144,7 +191,7 @@ function HookForm(props) {
           />
         </div>
         {/* <div className="flex flex-col ml-2"> */}
-       
+
         {/* </div> */}
       </form>
       <div className=" w-10/12 ">
