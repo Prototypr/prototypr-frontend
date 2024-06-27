@@ -7,42 +7,52 @@ import Button from "../Primitives/Button";
 export default function SignupSidebar({ className, btnText }) {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(false);
+  const [tryEmail, setTryEmail] = useState(false);
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const intl = useIntl();
   const [buttonText, setButtonText] = useState(
-    btnText?btnText:intl.formatMessage({ id: "intro.button.updates" })
+    intl.formatMessage({ id: "intro.button.updates" })
   );
+
   const onSubmit = async (data) => {
     setButtonText(intl.formatMessage({ id: "signup.button.submitting" }));
 
-    axios
-      .post(
-        "https://req.prototypr.io/https://emailoctopus.com/lists/c70b3a0c-1390-11eb-a3d0-06b4694bee2a/members/embedded/1.3/add",
-        {
-          field_0: data.emailRequired,
-        }
-      )
-      .then(function (response) {
-        console.log("success");
-        // var cookieDomain = process.env.customKey && { domain: ".prototypr.io" };
-        // jsCookie.set("prototypr_signupbar", "hide", cookieDomain);
+    const response = await fetch(`/api/subscribe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.emailRequired,
+        listId: "et15895b31367",
+      }),
+    });
+    setTryEmail(false);
+    setAlreadySubscribed(false);
+    setRegistered(false);
+    setError(false);
 
-        if (response.data.success) {
-          setRegistered(true);
-          setError(false);
-          setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
-        }
-      })
-      .catch(function (error) {
-        setRegistered(false);
-        setError(true);
-        setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
-      });
+    if (response.status == 200) {
+      setRegistered(true);
+      setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
+    } else if (response.status == 204) {
+      setAlreadySubscribed(true);
+      setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
+    }else if(response.status==202){
+      setTryEmail(true);
+      setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
+    }
+    else {
+      setRegistered(false);
+      setError(true);
+      setButtonText(intl.formatMessage({ id: "intro.button.updates" }));
+    }
   };
 
   return (
     <>
       <div className={`rounded-md mb-12 lg:mb-0`}>
-        {registered == false ? (
+        {registered == false && tryEmail == false && alreadySubscribed == false ? (
           <>
             <HookForm
               className={className}
@@ -53,9 +63,7 @@ export default function SignupSidebar({ className, btnText }) {
           </>
         ) : error ? (
           <>
-            <h2
-              className={`text-base text-gray-800 text-white font-semibold mb-2`}
-            >
+            <h2 className={`text-base text-gray-800  font-semibold mb-2`}>
               {intl.formatMessage({ id: "signup.tip.again" })} &nbsp;{" "}
               <div className="inline -mt-1">🤖</div>
             </h2>
@@ -65,18 +73,40 @@ export default function SignupSidebar({ className, btnText }) {
               {intl.formatMessage({ id: "signup.res.error" })}
             </div>
           </>
+        ) : tryEmail ? (
+          <div className="p-6 bg-white shadow rounded-xl max-w-md xl:max-w-xl mb-2 mt-2">
+            <h2 className={`text-lg mb-2 text-gray-800 font-semibold  `}>
+              Please check your email &nbsp;
+            </h2>
+            <div
+              className={`block text-base  leading-6 font-base text-gray-800 `}
+            >
+              You've tried to sign up before. There should be a confirmation email in your inbox from the first time you tried to signed up - if you can't find it, check your spam folder.
+            </div>
+          </div>
+        ) : alreadySubscribed ? (
+          <div className="p-6 bg-white shadow rounded-xl max-w-md xl:max-w-xl mb-2 mt-2">
+            <h2 className={`text-lg mb-2 text-gray-800 font-semibold  `}>
+              You've already subscribed to the newsletter
+            </h2>
+            <div
+              className={`block text-base  leading-6 font-base text-gray-800 `}
+            >
+              Thanks for being a part of the community! 🎉
+            </div>
+          </div>
         ) : (
-          <>
-            <h2 className={`text-2xl text-gray-800 font-semibold mb-2 mt-10`}>
+          <div className="p-6 bg-white shadow rounded-xl max-w-md xl:max-w-xl mb-2 mt-2">
+            <h2 className={`text-lg mb-2 text-gray-800 font-semibold  `}>
               {intl.formatMessage({ id: "signup.input.check" })} &nbsp;{" "}
               <div className="inline -mt-1">🎉</div>
             </h2>
             <div
-              className={`block text-lg mb-10 leading-6 font-base text-gray-800 text-white`}
+              className={`block text-base  leading-6 font-base text-gray-800 `}
             >
               {intl.formatMessage({ id: "signup.input.click" })}
             </div>
-          </>
+          </div>
         )}
       </div>
     </>
