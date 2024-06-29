@@ -1,6 +1,7 @@
 import SocialShare from "@/components/SocialShare";
-import Image from 'next/image'
+import Image from "next/image";
 import dynamic from "next/dynamic";
+import { DribbbleLogo, GithubLogo, TwitterLogo } from "./icons";
 
 const KoFiButton = dynamic(
   () => import("@/components/ko-fi-button/Ko-Fi-Button"),
@@ -11,15 +12,13 @@ export default function AuthorBio({ author, slug, title }) {
   const pic = author?.avatar?.data?.attributes?.url
     ? author?.avatar?.data?.attributes?.url
     : author?.legacyAvatar
-    ? author?.legacyAvatar
-    : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
+      ? author?.legacyAvatar
+      : "https://s3-us-west-1.amazonaws.com/tinify-bucket/%2Fprototypr%2Ftemp%2F1595435549331-1595435549330.png";
 
   const github = getGithubHandle(author?.github);
   const twitter = getTwitterHandle(author?.twitter);
-  const dribbble = getDribbbleHandle(author?.dribbble);  
+  const dribbble = getDribbbleHandle(author?.dribbble);
   const kofi = getKofiHandle(author?.kofi);
-
-
 
   return (
     <div className="py-4">
@@ -58,12 +57,11 @@ export default function AuthorBio({ author, slug, title }) {
               </a>
             </div>
             <div className="w-full text-center">
-              
               <h1 className="text-xl mt-1 font-semibold leading-normal text-black/90">
                 {/* {author?.name ? author?.name : ""} */}
-                {`${author?.firstName ? author?.firstName:''}
-                  ${author?.lastName ? ' '+author?.lastName:''}
-                  ${(!author?.firstName && !author?.lastName) ? author?.name:''}`}
+                {`${author?.firstName ? author?.firstName : ""}
+                  ${author?.lastName ? " " + author?.lastName : ""}
+                  ${!author?.firstName && !author?.lastName ? author?.name : ""}`}
               </h1>
 
               {author?.jobrole && (
@@ -103,17 +101,17 @@ export default function AuthorBio({ author, slug, title }) {
                   </a>
                 )}
 
-              {kofi ? (
-                        <div className="mr-4 inline-block">
-                          <KoFiButton
-                            color="#53b1e6"
-                            label={"Buy me a coffee"}
-                            kofiId={kofi}
-                          />
-                        </div>
-                      ) : (
-                        ""
-                      )}
+                {kofi ? (
+                  <div className="mr-4 inline-block">
+                    <KoFiButton
+                      color="#53b1e6"
+                      label={"Buy me a coffee"}
+                      kofiId={kofi}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
 
                 {twitter && (
                   <a
@@ -121,11 +119,7 @@ export default function AuthorBio({ author, slug, title }) {
                     href={`https://x.com/${twitter}`}
                     target="_blank"
                   >
-                    <img
-                      style={{ width: "28px" }}
-                      className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                      data-src="/static/images/icons/twitter.svg"
-                    />
+                    <TwitterLogo color="rgba(0,0,0,0.8)" size={24} />
                   </a>
                 )}
                 {dribbble && (
@@ -134,11 +128,7 @@ export default function AuthorBio({ author, slug, title }) {
                     href={`https://dribbble.com/${dribbble}`}
                     target="_blank"
                   >
-                    <img
-                      style={{ width: "28px" }}
-                      className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                      data-src="/static/images/icons/dribbble.svg"
-                    />
+                    <DribbbleLogo color="rgba(0,0,0,0.8)" size={24} />
                   </a>
                 )}
                 {github && (
@@ -147,11 +137,7 @@ export default function AuthorBio({ author, slug, title }) {
                     href={`https://github.com/${github}`}
                     target="_blank"
                   >
-                    <img
-                      style={{ width: "28px" }}
-                      className=" bg-white rounded-full shadow-sm hover:shadow-md"
-                      data-src="/static/images/icons/github.svg"
-                    />
+                    <GithubLogo color="rgba(0,0,0,0.8)" size={24} />
                   </a>
                 )}
               </div>

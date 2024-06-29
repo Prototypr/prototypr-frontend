@@ -173,7 +173,7 @@ export default function Post({
           ) : null}
 
           {/* <Alert preview={preview} /> */}
-          <main className="pb-20 gap-2 col-span-12 lg:col-span-12 overflow-hidden px-0 ">
+          <main className="pb-20 gap-2 col-span-12 lg:col-span-12 px-0 ">
             {/* {post?.id && process.env.NODE_ENV === "production" && (
               <WMPostTracker postId={post?.id} post={post} />
             )} */}
