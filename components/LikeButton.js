@@ -250,12 +250,12 @@ const LikeButton = ({ post, user }) => {
 
   return (
     <div className="flex flex-col gap-2 mt-4">
-      <p
-        className={`${likeCount?.total > 0 ? "h-6" : "opacity-0 h-0"} text-gray-600  tracking-tight font-semibold text-center transition transition-all duration-400 cursor-default`}
+      <div className="rounded-full h-fit w-fit p-2.5 flex flex-col gap-2 bg-gray-100/90">
+      <div
+        className={`${likeCount?.total > 0 ? "h-6 my-2" : "opacity-0 h-0"} text-gray-600  tracking-tight font-semibold text-center transition transition-all duration-400 cursor-default`}
       >
         <span className="mr-[2px]">❤️</span> {likeCount?.total}
-      </p>
-      <div className="rounded-full h-fit w-fit p-2.5 flex flex-col gap-2 bg-gray-100/90">
+      </div>
         <button
           disabled={creatingLike}
           onClick={() => handleReaction("like")}

@@ -37,6 +37,9 @@ import getSponsors from "@/lib/utils/getSponsors";
 
 import AdCard from "@/components/v4/card/AdCard";
 import { PenLineSimple } from "@/components/icons";
+import AuthorSidebar from "@/components/AuthorSidebar";
+import LikeButton from "@/components/LikeButton";
+import isoToReadableDate from "@/lib/utils/isoToReadableDate";
 
 // import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
@@ -56,6 +59,7 @@ export default function Post({
   postContent,
   sponsors,
   navSponsor,
+  date
 }) {
   const router = useRouter();
 
@@ -102,7 +106,6 @@ export default function Post({
 
   const authorName = `${author?.firstName ? author?.firstName : ""}${author?.lastName ? " " + author?.lastName : ""} ${!author?.firstName && !author?.lastName ? author?.name : ""}`;
 
-  const date = post.attributes.date;
   const paymentPointer =
     post?.attributes?.author?.data?.attributes?.paymentPointer;
   const intl = useIntl();
@@ -124,7 +127,7 @@ export default function Post({
 
   return (
     <Layout
-      maxWidth={"max-w-[1320px] search-wide"}
+      maxWidth={"max-w-[1300px] search-wide"}
       padding={false}
       sponsor={navSponsor}
       seo={{
@@ -146,17 +149,17 @@ export default function Post({
         <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto mx-auto bg-gray-100/20">
           {user?.isAdmin && (
             <div className="fixed bottom-0 mb-6 z-50 border border-gray-200 bg-white mr-20 right-0 p-2 px-3 rounded-full shadow-sm">
-            {/* <button className="p-1 px-3 text-sm text-white bg-purple-600 shadow rounded"> */}
-            <Link href={`/p/${post?.id}`}>
-              <div className="flex text-gray-700">
-                <PenLineSimple className="w-4 h-4 my-auto mr-2" />
-                <div className="my-auto text-sm">Edit</div>
-              </div>
-            </Link>
-            {/* </button> */}
-          </div>
+              {/* <button className="p-1 px-3 text-sm text-white bg-purple-600 shadow rounded"> */}
+              <Link href={`/p/${post?.id}`}>
+                <div className="flex text-gray-700">
+                  <PenLineSimple className="w-4 h-4 my-auto mr-2" />
+                  <div className="my-auto text-sm">Edit</div>
+                </div>
+              </Link>
+              {/* </button> */}
+            </div>
           )}
-          {!user?.isAdmin && (user?.id == post?.attributes?.author?.data?.id) ? (
+          {!user?.isAdmin && user?.id == post?.attributes?.author?.data?.id ? (
             <div className="fixed bottom-0 mb-6 z-50 border border-gray-200 bg-white mr-20 right-0 p-2 px-3 rounded-full shadow-sm">
               {/* <button className="p-1 px-3 text-sm text-white bg-purple-600 shadow rounded"> */}
               <Link href={`/p/${post?.id}`}>
@@ -170,7 +173,7 @@ export default function Post({
           ) : null}
 
           {/* <Alert preview={preview} /> */}
-          <main className="pb-20 gap-2 col-span-12 lg:col-span-12 overflow-x-hidden px-0 ">
+          <main className="pb-20 gap-2 col-span-12 lg:col-span-12 overflow-hidden px-0 ">
             {/* {post?.id && process.env.NODE_ENV === "production" && (
               <WMPostTracker postId={post?.id} post={post} />
             )} */}
@@ -182,19 +185,19 @@ export default function Post({
               <>
                 {/* <img src={'/static/images/check.svg'} className="absolute opacity-20 p-6 h-[298px] mt-[60px] top-0 left-0 w-full object-cover"/> */}
 
-                <div className="relative pt-[68px]">
+                <div className="relative pt-[128px]">
                   <div
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(rgba(32, 52, 144,0.10) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.10) 1px, rgba(247, 247, 247,0.10) 1px)",
-                      backgroundSize: "26px 26px",
-                    }}
-                    className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1301px] border-b border-b-indigo-500/20 border-r border-indigo-500/10 max-w-full z-10 px-3 md:px-3"
+                    // style={{
+                    //   backgroundImage:
+                    //     "linear-gradient(rgba(32, 52, 144,0.10) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.10) 1px, rgba(247, 247, 247,0.10) 1px)",
+                    //   backgroundSize: "26px 26px",
+                    // }}
+                    className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1301px] max-w-full z-10 px-3 md:px-3"
                   >
                     {!post.currentLocaleAvailable && <NoticeTranslation />}
 
-                    <div className="pt-4 w-[1020px] max-w-full mx-auto w-full">
-                      <p className="text-left md:px-1 mt-3 md:mt-0 mb-3 text-base tracking-tight text-black/80">
+                    <div className="pt-4 w-[1300px] max-w-full mx-auto w-full">
+                      <p className="text-left md:px-1 mt-3 md:mt-0 mb-10 text-base tracking-tight text-black/80">
                         <Date dateString={post.attributes.date} />
                       </p>
                     </div>
@@ -214,8 +217,8 @@ export default function Post({
                         author={post.attributes?.author?.data?.attributes}
                         template={post.attributes?.template}
                       />
-                      <div className="w-full flex justify-start w-[1020px] max-w-full mx-auto mt-4 mb-6 md:mb-1 px-0">
-                        <div className="flex flex-col md:flex-row max-w-[46rem] justify-between w-full md:mb-4">
+                      <div className="w-full flex justify-start w-[1300px] max-w-full mx-auto mt-4 mb-6 md:mb-1 px-0">
+                        <div className="flex flex-col md:flex-row justify-between w-full">
                           {author ? (
                             <div className="mb-4 md:mb-0">
                               <div className="flex justify-between">
@@ -240,7 +243,7 @@ export default function Post({
                                           />
                                         )}
                                         <div className="flex flex-col justify-center">
-                                          <div className="text-lg tracking-tight md:text-2xl mb-0 pb-0 hover:underline font-medium">
+                                          <div className="text-lg tracking-tight md:text-xl mb-0 pb-0 hover:underline font-medium">
                                             {authorName}
                                           </div>
                                           {/* {date && (
@@ -303,9 +306,9 @@ export default function Post({
                       </div>
                     </div>
                   </div>
-                  <div className="px-4 xl:px-0 max-w-full w-[1020px] mx-auto z-30 -mt-[132px] md:-mt-[86px] relative md:rounded-3xl">
-                    <div className="relative lg:-ml-8 xl:-ml-16 rounded-3xl shadow-sm w-[800px] max-w-full">
-                      <div className="animate-pulse z-10 absolute top-0 left-0 duration-50 w-[800px] max-w-full md:bg-gray-100 mx-auto z-30 rounded-3xl" />
+                  <div className="px-4 xl:px-0 max-w-full w-[1300px] mx-auto z-30 -mt-[132px] md:-mt-[86px] relative md:rounded-3xl">
+                    <div className="relative rounded-3xl shadow-sm max-w-full">
+                      <div className="animate-pulse z-10 absolute top-0 left-0 duration-50  max-w-full md:bg-gray-100 mx-auto z-30 rounded-2xl" />
                       <Image
                         key={image}
                         width={1020}
@@ -313,31 +316,34 @@ export default function Post({
                         blurDataURL={post?.attributes?.base64}
                         height={550}
                         loader={gumletLoader}
-                        className="h-full z-20 relative w-full object-contain rounded-3xl max-w-[800px] max-w-full"
+                        className="h-full z-20 relative w-full object-contain rounded-3xl max-w-full"
                         src={image}
                       />
                     </div>
                   </div>
 
-                  <div className="z-0 -mt-4 h-[60%] w-full bg-gradient-to-b from-blue-100/60 to-gray-100/20 absolute top-0 left-0" />
+                  <div className="z-0 -mt-4 h-[60%] w-full bg-gradient-to-b from-blue-100/50 to-gray-100/20 absolute top-0 left-0" />
                 </div>
-                <article className="z-10 relative px-6 md:px-0 max-w-full w-[1020px] mx-auto grid grid-cols-12">
+                <article className="z-10 relative px-6 max-w-full w-[1300px] mx-auto grid grid-cols-12">
                   {/* <Head> */}
                   {/* <title>
                   {post.attributes?.title} | Prototypr
                 </title> */}
                   {/* <meta property="og:image" content={post.attributes.ogImage} /> */}
                   {/* </Head> */}
-
-                  <div className="max-w-[60rem] col-span-12 md:col-span-9">
+                  <div className="hidden sticky top-6 mt-8 h-fit lg:col-span-1 lg:block">
+                    <LikeButton post={post} user={user} />
+                  </div>
+                  <div className="max-w-full col-span-12 md:col-span-9 lg:col-span-8 lg:pl-[10%] md:pr-4 lg:pr-0">
                     <div
-                      className="max-w-full blog-content w-full mt-10"
+                      className="max-w-full blog-content w-[44rem] mt-10 mx-auto"
                       dangerouslySetInnerHTML={{
                         __html: postContent,
                       }}
                     />
                     <div>
                       <AuthorBio
+                        authorAvatar={avatar}
                         slug={post?.attributes?.slug}
                         title={post?.attributes?.title}
                         author={post?.attributes?.author?.data?.attributes}
@@ -347,10 +353,16 @@ export default function Post({
 
                   <div className="hidden md:block pt-10 col-span-3">
                     <div className="flex justify-end w-full">
-                      <SocialShare
+                      {/* <SocialShare
                         slug={post?.attributes?.slug}
                         title={title}
                         authorTwitter={author?.twitter}
+                      /> */}
+                      <AuthorSidebar
+                        post={post}
+                        date={date}
+                        navSponsor={navSponsor}
+                        tags={tags}
                       />
                     </div>
                     {/* <div className="h-[220px] md:h-[310px] xl:h-[220px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
@@ -364,25 +376,29 @@ export default function Post({
                         />
                       </div> */}
                     <div className="flex flex-col justify-evenly h-full">
-                      <div className="h-[220px] md:h-[310px] xl:h-[220px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
-                        <AdCard
-                          showAdTag={true}
-                          height={
-                            "h-[220px] md:h-[310px] xl:h-[220px] hover:h-[290px]"
-                          }
-                          withBackground={true}
-                          post={navSponsor}
-                        />
+                      <div className="flex w-full justify-end">
+                        <div className="h-[220px] md:h-[310px] xl:h-[220px] w-full max-w-[274px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
+                          <AdCard
+                            showAdTag={true}
+                            height={
+                              "h-[220px] md:h-[310px] xl:h-[220px] hover:h-[290px] "
+                            }
+                            withBackground={true}
+                            post={navSponsor}
+                          />
+                        </div>
                       </div>
-                      <div className="h-[220px] md:h-[310px] xl:h-[220px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
-                        <AdCard
-                          showAdTag={true}
-                          height={
-                            "h-[220px] md:h-[310px] xl:h-[220px] hover:h-[290px]"
-                          }
-                          withBackground={true}
-                          post={navSponsor}
-                        />
+                      <div className="flex w-full justify-end">
+                        <div className="h-[220px] md:h-[310px] w-full xl:h-[220px] max-w-[274px] transition transition-all duration-400 hover:h-[290px] mt-8 sticky">
+                          <AdCard
+                            showAdTag={true}
+                            height={
+                              "h-[220px] md:h-[310px] xl:h-[220px] hover:h-[290px]"
+                            }
+                            withBackground={true}
+                            post={navSponsor}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -512,6 +528,9 @@ export async function getStaticProps({ params, preview = null, locale }) {
 
   html = insertBannerAds(html, navSponsor, sponsors);
 
+  
+  const date = isoToReadableDate(post.attributes.date);
+
   return {
     props: {
       preview,
@@ -521,6 +540,7 @@ export async function getStaticProps({ params, preview = null, locale }) {
       },
       sponsors: sponsors?.length ? sponsors : [],
       navSponsor,
+      date,
       relatedPosts: relatedPosts,
     },
     // revalidate: 20,

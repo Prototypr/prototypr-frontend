@@ -66,7 +66,7 @@ export default function AuthorCard({
                 {username}
               </p>
               {size!=='small'?<p tabIndex={0} className="text-base text-gray-500">
-                {attributes?.jobrole?attributes.jobrole:creator?'Creator':'Editor'}
+                {attributes?.jobrole?attributes.jobrole:creator?'Creator':'Author'}
               </p>:null}
               {title ? (
                 <h1 tabIndex={0} className="text-base mt-2">
