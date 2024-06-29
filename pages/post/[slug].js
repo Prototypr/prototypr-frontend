@@ -127,7 +127,7 @@ export default function Post({
 
   return (
     <Layout
-      maxWidth={"max-w-[1300px] search-wide"}
+      maxWidth={"max-w-[1350px] search-wide"}
       padding={false}
       sponsor={navSponsor}
       seo={{
@@ -192,11 +192,11 @@ export default function Post({
                     //     "linear-gradient(rgba(32, 52, 144,0.10) 1px, transparent 1px), linear-gradient(to right, rgba(32, 52, 144,0.10) 1px, rgba(247, 247, 247,0.10) 1px)",
                     //   backgroundSize: "26px 26px",
                     // }}
-                    className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1301px] max-w-full z-10 px-3 md:px-3"
+                    className="relative -mt-[96px] md:-mt-0 pt-[64px] md:pt-0 mx-auto w-[1351px] max-w-full z-10 px-3 md:px-3"
                   >
                     {!post.currentLocaleAvailable && <NoticeTranslation />}
 
-                    <div className="pt-4 w-[1300px] max-w-full mx-auto w-full">
+                    <div className="pt-4 w-[1350px] max-w-full mx-auto w-full">
                       <p className="text-left md:px-1 mt-3 md:mt-0 mb-10 text-base tracking-tight text-black/80">
                         <Date dateString={post.attributes.date} />
                       </p>
@@ -217,7 +217,7 @@ export default function Post({
                         author={post.attributes?.author?.data?.attributes}
                         template={post.attributes?.template}
                       />
-                      <div className="w-full flex justify-start w-[1300px] max-w-full mx-auto mt-4 mb-6 md:mb-1 px-0">
+                      <div className="w-full flex justify-start w-[1350px] max-w-full mx-auto mt-4 mb-6 md:mb-1 px-0">
                         <div className="flex flex-col md:flex-row justify-between w-full">
                           {author ? (
                             <div className="mb-4 md:mb-0">
@@ -306,7 +306,7 @@ export default function Post({
                       </div>
                     </div>
                   </div>
-                  <div className="px-4 xl:px-0 max-w-full w-[1300px] mx-auto z-30 -mt-[132px] md:-mt-[86px] relative md:rounded-3xl">
+                  <div className="px-4 xl:px-0 max-w-full w-[1350px] mx-auto z-30 -mt-[132px] md:-mt-[86px] relative md:rounded-3xl">
                     <div className="relative rounded-2xl shadow-md max-w-full border border-gray-100/80">
                       <div className="animate-pulse z-10 absolute top-0 left-0 duration-50  max-w-full md:bg-gray-100 mx-auto z-30 rounded-2xl" />
                       <Image
@@ -324,7 +324,7 @@ export default function Post({
 
                   <div className="z-0 -mt-4 h-[60%] w-full bg-gradient-to-b from-blue-100/50 to-gray-100/20 absolute top-0 left-0" />
                 </div>
-                <article className="z-10 relative px-6 lg:px-0 max-w-full w-[1320px] mx-auto grid grid-cols-12">
+                <article className="z-10 relative px-6 lg:px-0 max-w-full w-[1350px] mx-auto grid grid-cols-12">
                   {/* <Head> */}
                   {/* <title>
                   {post.attributes?.title} | Prototypr
@@ -334,7 +334,7 @@ export default function Post({
                   <div className="hidden sticky top-6 mt-8 h-fit lg:col-span-1 lg:block">
                     <LikeButton post={post} user={user} />
                   </div>
-                  <div className="max-w-full col-span-12 md:col-span-9 lg:col-span-8 lg:pl-[18%] md:pr-4 lg:pr-0">
+                  <div className="max-w-full col-span-12 md:col-span-9 lg:col-span-8 lg:pl-[14%] md:pr-4 lg:pr-0">
                     <div
                       className="max-w-full blog-content w-[44rem] mt-10 mx-auto"
                       dangerouslySetInnerHTML={{
