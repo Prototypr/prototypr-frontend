@@ -19,16 +19,14 @@ const LikeNotification = ({ notification }) => {
             {notification.action_type == "create" ? (
               <>
                 <span className="font-bold">
-                  {notification?.notifiers?.map(notifier => {
-                    return (
-                      <Link
-                        href={`/people/${notifier.slug}?clearNotification=${notification.id}`}
-                        className="hover:underline"
-                      >
-                        {notifier.firstName?notifier.firstName:notifier.username}
-                      </Link>
-                    );
-                  })}
+                  <Link
+                    href={`/people/${notification.actor.slug}?clearNotification=${notification.id}`}
+                    className="hover:underline"
+                  >
+                    {notification.actor.firstName
+                      ? notification.actor.firstName
+                      : notification.actor.username}
+                  </Link>
                 </span>{" "}
                 reacted to your post, {""}
                 <Link
