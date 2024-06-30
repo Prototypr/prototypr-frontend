@@ -60,7 +60,7 @@ const HeroCardSection = ({ post, tags, featuredImage, user }) => {
                     />
                   </div>
                   <div className="flex flex-col text-white justify-center">
-                    <h1 className="text-5xl line-clamp-2 mb-0 tracking-tight font-semibold drop-shadow-lg text-white">
+                    <h1 className="text-6xl line-clamp-2 my-2.5 tracking-tight font-semibold drop-shadow-lg text-white">
                       {post?.attributes?.title}
                     </h1>
                     {post?.attributes?.excerpt ? (

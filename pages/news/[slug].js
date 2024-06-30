@@ -19,6 +19,8 @@ import Image from "next/image";
 import gumletLoader from "@/lib/imageloader";
 import getSponsors from "@/lib/utils/getSponsors";
 import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
+import LikeButton from "@/components/LikeButton";
+import useUser from "@/lib/iron-session/useUser";
 
 const Footer = dynamic(() => import("@/components/footer"));
 
@@ -54,6 +56,8 @@ export default function Post({
   sponsors,
   navSponsor,
 }) {
+  const { user } = useUser();
+
   const router = useRouter();
   if (!router.isFallback && !post?.attributes.slug) {
     return <ErrorPage statusCode={404} />;
@@ -232,7 +236,10 @@ export default function Post({
           maxWidth="w-full px-3 xl:px-0 pb-20 mt-3 relative z-0 relative w-full h-full  max-w-[1320px] mx-auto"
         >
           <div className="grid gap-8 grid-cols-12 mt-8">
-            <div className="col-span-12 lg:col-span-9 ">
+            <div className="hidden sticky top-3 -mt-3 h-fit lg:col-span-1 lg:block">
+              <LikeButton post={post} user={user} />
+            </div>
+            <div className="col-span-12 lg:col-span-8 ">
               <NewsPageFeatured
                 faviconUrl={faviconUrl}
                 ogImage={ogImage}
