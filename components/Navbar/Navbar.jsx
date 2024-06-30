@@ -38,7 +38,7 @@ const Navbar = ({
   showWriteButton,
   maxWidth,
   navType,
-  navBackground
+  navBackground,
 }) => {
   const { user, isLoading } = useUser({
     redirectIfFound: false,
@@ -51,12 +51,16 @@ const Navbar = ({
 
   const [isVisible, setVisible] = useState(false);
   const [blinkyOn, setBlinkyOn] = useState(false);
+  const [hideOffTop, setHideOffTop] = useState(false);
+  const prevScrollPos = useRef(
+    typeof window !== "undefined" && window?.pageYOffset
+  );
 
   useEffect(() => {
-    setBlinkyOn(true)
-      setTimeout(() => {
-        setBlinkyOn(false)
-      }, 1000);
+    setBlinkyOn(true);
+    setTimeout(() => {
+      setBlinkyOn(false);
+    }, 1000);
   }, [isVisible]);
 
   // Define the scrollListener inside useEffect or use useCallback
@@ -64,12 +68,27 @@ const Navbar = ({
     const scrollListener = () => {
       const p = getScrollPercent(); // Assuming getScrollPercent is defined elsewhere
 
-      if (p > 1) {
+      if (p > 1 && isVisible !== true) {
         setVisible(true);
-  
       } else {
         setVisible(false);
-  
+      }
+
+      //check if page is an article page (has url with /post/)
+      if (window.location.pathname.includes("/post/")) {
+        const currentScrollPos = window?.pageYOffset;
+
+        if (p > 10 && !hideOffTop) {
+          setHideOffTop(true);
+        } else {
+          setHideOffTop(false);
+        }
+
+        //check if user is scrolling upward direction
+        if (prevScrollPos.current > currentScrollPos) {
+          setHideOffTop(false);
+        }
+        prevScrollPos.current = currentScrollPos;
       }
     };
 
@@ -85,7 +104,7 @@ const Navbar = ({
     <>
       <nav
         id="main-nav"
-        className={` fixed top-0 ${navType == "full" ? "" : "md:top-2"}  w-full`}
+        className={` fixed ${hideOffTop ? "-mt-20" : ""} top-0 ${navType == "full" ? "" : "md:top-2"}  w-full transition transition-all duration-1000`}
         style={{ zIndex: 99 }}
       >
         <div
@@ -101,24 +120,24 @@ const Navbar = ({
             className={`${maxWidth ? maxWidth : "max-w-[1020px]"} mx-auto relative flex h-9 items-center justify-between`}
           >
             <div className="flex flex-shrink-0 items-center">
-                {/* movil menu button */}
-            <div className=" inset-y-0 mr-2 flex items-center xl:hidden">
-              <button
-                type="button"
-                onClick={toggleMobileNav}
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-500 bg-gray-50 hover:bg-gray-100 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
+              {/* movil menu button */}
+              <div className=" inset-y-0 mr-2 flex items-center xl:hidden">
+                <button
+                  type="button"
+                  onClick={toggleMobileNav}
+                  className="inline-flex items-center justify-center rounded-md p-2 text-gray-500 bg-gray-50 hover:bg-gray-100 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  aria-controls="mobile-menu"
+                  aria-expanded="false"
+                >
+                  <span className="sr-only">Open main menu</span>
 
-                {mobileNavOpen ? (
-                  <XIcon className="block h-6 w-6" aria-hidden="true" />
-                ) : (
-                  <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                )}
-              </button>
-            </div>
+                  {mobileNavOpen ? (
+                    <XIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </button>
+              </div>
               <Link href="/" as="/">
                 <>
                   <img
@@ -137,7 +156,9 @@ const Navbar = ({
                 </>
               </Link>
               {/* lil cursor blinker */}
-              <div className={`${blinkyOn?'animate-pulse':'opacity-0'} h-[28px] bg-gray-500/70 w-[2px]`}></div>
+              <div
+                className={`${blinkyOn ? "animate-pulse" : "opacity-0"} h-[28px] bg-gray-500/70 w-[2px]`}
+              ></div>
               {/* <NavSponsor /> */}
               {/* <div
                   className={`hidden md:block my-auto duration-300 ease-in-out`}
@@ -183,7 +204,7 @@ const Navbar = ({
               {/* <div className={`hidden mr-2 md:block my-auto`}>
                   <WMButton />
                 </div> */}
-              
+
               <NavigationMenu>
                 <NavigationMenuList>
                   <LocationMenu
@@ -197,7 +218,7 @@ const Navbar = ({
               <div className="relative">
                 <UserMenu userLoading={false} user={user} />
               </div>
-              {sponsor?<NavSponsor sponsor={sponsor} />:null}
+              {sponsor ? <NavSponsor sponsor={sponsor} /> : null}
               <div>&nbsp;</div>
             </div>
           </div>
