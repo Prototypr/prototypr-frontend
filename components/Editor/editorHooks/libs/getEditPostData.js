@@ -23,14 +23,26 @@ export const getEditPostData = ({
   const seo = getSeoData({ postObject, title, excerpt, coverImage });
   const legacyFeaturedImage = getLegacyFeaturedImage({ coverImage });
 
+
   let entry = {
     type: "article",
-    status: forReview ? "pending" : postStatus ? postStatus : "draft",
-    title: title,
-    content: content,
+    status: forReview && (!postObject?.status || postObject?.status=='draft') ? "pending" : postStatus ? postStatus : "draft",
+    // removed content for issue #54
+    // content: content,  
+    // #54 save content to draft_content instead:
+    draft_title: title,
+    draft_content:content,
     esES: false,
     // slug: slug, //slug is always the same when editing a draft - so we don't need to update it
   };
+
+  if(forReview && content){
+    //clear the draft version
+    entry.draft_content=''
+    entry.content = content
+    entry.draft_title=''
+    entry.title = title
+  }
 
   //change the date on save only if postStatus==draft or postStatus==pending publish
   if (postObject?.status !== "publish") {

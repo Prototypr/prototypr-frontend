@@ -9,6 +9,9 @@ export const updatePostObject = ({updatedObject, existingObject}) => {
 
     const newFields={
         content: updatedObject.content,
+        draft_content: updatedObject.draft_content,
+        draft_title: updatedObject.draft_title,
+
         date: updatedObject.date,
         title: updatedObject.title,
         type: updatedObject.type,

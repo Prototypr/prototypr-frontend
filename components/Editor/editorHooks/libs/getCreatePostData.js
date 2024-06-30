@@ -33,8 +33,10 @@ export const getCreatePostData = ({
   let entry = {
     type: "article",
     status: forReview ? "pending" : "draft",
-    title: title,
-    content: content,
+    title:'',
+    content: '',
+    draft_title: title,
+    draft_content: content,
     // legacyFeaturedImage: legacyFeaturedImage,
     // seo: seo,
     esES: false,

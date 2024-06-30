@@ -62,7 +62,6 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
     interview: isInterview,
     productName: tool?.name ? tool.name : false,
   });
-  console.log("postObject", postObject);
   //create new post hook
   const { createPost, creatingPost, created } = useCreate();
 
@@ -250,7 +249,7 @@ export default function EditorWrapper({ isInterview = false, tool = false }) {
                     //refetch post needed when the featured image is updated in post settings
                     refetchPost={refetch}
                     //update post settings
-                    updatePostSettings={updatePostSettings}
+                    updatePostSettings={user?.isAdmin?updatePostSettings:false}
                   />
                 </div>
               </>

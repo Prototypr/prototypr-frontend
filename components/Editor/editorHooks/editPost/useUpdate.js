@@ -76,15 +76,15 @@ const useUpdate = () => {
           setHasUnsavedChanges(false);
           setSaved(true);
         }, 1000);
-        if (forReview) {
+        if (forReview && postStatus !== "publish") {
           toast.success("Submitted for review!", {
             duration: 5000,
           });
           localStorage.removeItem("wipContent");
-        } else if (postStatus == "publish") {
-          // toast.success("Your post has been updated!", {
-          //   duration: 5000,
-          // });
+        } else if (forReview && postStatus == "publish") {
+          toast.success("Your post has been updated!", {
+            duration: 5000,
+          });
 
           localStorage.removeItem("wipContent");
         } else {

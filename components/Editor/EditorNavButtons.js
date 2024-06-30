@@ -41,7 +41,8 @@ const EditorNavButtons = ({
       {/* publish button does same as save draft button, but uses dialog and adds 'forReview' flag */}
       
         <PublishDialogButton
-        canPublish = {canEdit && postStatus !== "publish" && postObject?.id ? (true) : (false)}
+        postObject={postObject}
+        canPublish = {canEdit && postObject?.id ? (true) : (false)}
           //save post creates a post or updates an existing one
           //for /write (new post), it creates a new post
           //for /p/[slug] (existing post), it updates the existing post

@@ -27,7 +27,6 @@ const useLoad = ({ user, interview, productName } = {}) => {
   const [title, setTitle] = useState(null);
   const [postStatus, setStatus] = useState("draft");
 
-
   // Load content when user or postId changes
   useEffect(() => {
     if (user && router.isReady) {
@@ -41,16 +40,15 @@ const useLoad = ({ user, interview, productName } = {}) => {
   }, [user, router.query.slug && router.isReady]);
 
   useEffect(() => {
-    if(postId && user?.isLoggedIn){
-
-        refetch();
+    if (postId && user?.isLoggedIn) {
+      refetch();
     }
   }, [postId, user?.isLoggedIn]);
 
   // Refetch content
   const refetch = async () => {
     if (postId) {
-        await getCurrentPost();
+      await getCurrentPost();
       setLoading(false);
     } else {
       setIsOwner(true);
@@ -82,7 +80,7 @@ const useLoad = ({ user, interview, productName } = {}) => {
     try {
       const data = await getUserArticle(user, postId);
       const post = data.userPostId;
-      
+
       const userHasPermission = checkPermissions(post);
       Sentry.captureMessage(`#33 80 getUserArticle: ${post?.id}`, {
         extra: data,
@@ -111,9 +109,9 @@ const useLoad = ({ user, interview, productName } = {}) => {
       hasPermission = true;
     }
 
-    if(!post?.id){
-        hasPermission = false;
-        setInitialContent(false);
+    if (!post?.id) {
+      hasPermission = false;
+      setInitialContent(false);
     }
 
     return hasPermission;
@@ -127,20 +125,40 @@ const useLoad = ({ user, interview, productName } = {}) => {
     if (postObject) {
       setPostId(postObject?.id);
 
-      //et content
-      let content = postObject?.content;
-      //if title isn't part of body, add it in
-      if (postObject?.title && content.indexOf(postObject?.title) == -1) {
-        content = `<h1>${postObject?.title}</h1>${content}`;
+      //set content
+      // update for #54
+      // load from draft_content if available (draft_content is cleared when post is published/submitted for review)
+      let content = "";
+
+      if (postObject?.draft_content?.length) {
+        content = postObject?.draft_content;
+      } else if (postObject?.content?.length) {
+        // legacy support - if there is no draft_content, load content
+        content = postObject?.content;
       }
+      if (postObject?.draft_title?.length) {
+        //set title
+        setTitle(postObject?.draft_title);
+        if (
+          postObject?.draft_title &&
+          content.indexOf(postObject?.draft_title) == -1
+        ) {
+          content = `<h1>${postObject?.draft_title}</h1>${content}`;
+        }
+      } else if (postObject?.title?.length) {
+        //set title
+        setTitle(postObject?.title);
+        // legacy support - if there is no draft_title, load content
+        if (postObject?.title && content.indexOf(postObject?.title) == -1) {
+          content = `<h1>${postObject?.title}</h1>${content}`;
+        }
+      }
+      //if title isn't part of body, add it in
       if (content) {
         setInitialContent(content);
       } else {
         setInitialContent(false);
       }
-
-      //set title
-      setTitle(postObject?.title);
       //set status
       setStatus(postObject?.status);
     }
