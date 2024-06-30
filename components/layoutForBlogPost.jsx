@@ -24,7 +24,7 @@ export default function Layout({
       </div>
 
       <div
-        className={`min-h-screen ${NAV_OFFSET} ${padding == false ? "" : "px-3 md:px-8"}`}
+        className={`min-h-screen overflow-x-hidden md:overflow-x-visible ${NAV_OFFSET} ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#fbfcff" }}
       >
         <main
