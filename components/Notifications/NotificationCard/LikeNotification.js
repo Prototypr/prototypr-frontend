@@ -19,14 +19,14 @@ const LikeNotification = ({ notification }) => {
             {notification.action_type == "create" ? (
               <>
                 <span className="font-bold">
-                  <Link
-                    href={`/people/${notification.actor.slug}?clearNotification=${notification.id}`}
+                  {notification?.actor?.slug?<Link
+                    href={`/people/${notification.actor?.slug}?clearNotification=${notification.id}`}
                     className="hover:underline"
                   >
-                    {notification.actor.firstName
-                      ? notification.actor.firstName
-                      : notification.actor.username}
-                  </Link>
+                    {notification.actor?.firstName
+                      ? notification.actor?.firstName
+                      : notification.actor?.username}
+                  </Link>:`Someone`}
                 </span>{" "}
                 reacted to your post, {""}
                 <Link
@@ -41,7 +41,7 @@ const LikeNotification = ({ notification }) => {
               "Notification received"
             )}
           </h3>
-          <p className="text-sm text-gray-500 max-w-[42rem] line-clamp-2 mr-4">
+          {notification.post.excerpt?<p className="text-sm text-gray-500 max-w-[42rem] line-clamp-2 mr-4">
             <Link
               className="hover:underline"
               href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}?clearNotification=${notification.id}`}
@@ -51,7 +51,7 @@ const LikeNotification = ({ notification }) => {
               </span>{" "}
               {notification.post.excerpt}
             </Link>
-          </p>
+          </p>:null}
           <div className="text-blue-400 text-sm">
             {formatDistanceToNow(new Date(notification.createdAt), {
               addSuffix: true,

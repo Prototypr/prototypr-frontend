@@ -31,7 +31,7 @@ const CreatorBadgeNotification = ({ notification }) => {
               "Notification received"
             )}
           </h3>
-          <p className="text-sm text-gray-500 max-w-[42rem] line-clamp-2 mr-4">
+          {notification.post.excerpt?<p className="text-sm text-gray-500 max-w-[42rem] line-clamp-2 mr-4">
             <Link
               className="hover:underline"
               href={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}?clearNotification=${notification.id}`}
@@ -41,7 +41,7 @@ const CreatorBadgeNotification = ({ notification }) => {
               </span>{" "}
               {notification.post.excerpt}
             </Link>
-          </p>
+          </p>:null}
           <div className="text-blue-400 text-sm">
             {formatDistanceToNow(new Date(notification.createdAt), {
               addSuffix: true,

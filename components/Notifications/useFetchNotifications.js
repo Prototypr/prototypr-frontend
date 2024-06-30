@@ -31,8 +31,8 @@ const useFetchNotifications = user => {
       offset: pageOffset,
     });
 
-
     const notificationsForUser = data.userNotifications?.notifications;
+
     setNotifications(notificationsForUser);
     setTotal(data.userNotifications?.count);
 

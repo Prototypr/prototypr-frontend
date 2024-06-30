@@ -13,6 +13,7 @@ import ProfileApprove from "./NotificationCard/ProfileApprove";
 import NotificationEmptyState from "./EmptyState";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import GroupedLikeNotification from "./NotificationCard/GroupedLikeNotification";
 
 const NotificationsList = () => {
   const { user } = useUser({
@@ -134,6 +135,12 @@ const Skeleton = () => {
 };
 
 const NotificationItem = ({ notification }) => {
+  const isGrouped = notification.groupInfo && notification.groupInfo.count > 1;
+
+  if (isGrouped && notification.entity_type === "like") {
+    return <GroupedLikeNotification notification={notification} />;
+  }
+
   return (
     <div className="bg-white rounded-lg shadow p-4">
       {notification?.entity_type == "post" ? (
