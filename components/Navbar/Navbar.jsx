@@ -78,7 +78,7 @@ const Navbar = ({
       if (window.location.pathname.includes("/post/")) {
         const currentScrollPos = window?.pageYOffset;
 
-        if (p > 10 && !hideOffTop) {
+        if (currentScrollPos > 750 && !hideOffTop) {
           setHideOffTop(true);
         } else {
           setHideOffTop(false);
