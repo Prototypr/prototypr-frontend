@@ -137,7 +137,7 @@ const ToolContent = ({
             <div className="hidden sticky top-6 h-fit lg:col-span-1 lg:block">
               <LikeButton post={post} user={user} />
             </div>
-            <div className="col-span-3 border border-gray-300/60 rounded-2xl overflow-hidden lg:col-span-8 flex flex-col gap-3 bg-white h-fit">
+            <div className="col-span-3 border border-gray-300/60 rounded-2xl overflow-hidden lg:col-span-8 flex flex-col gap-3 bg-white lg:h-fit">
               <div className="grid gap-3 md:px-0 -mb-4">
                 <HeroCardSection
                   post={post}
