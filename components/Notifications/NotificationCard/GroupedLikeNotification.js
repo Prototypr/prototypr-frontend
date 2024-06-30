@@ -82,11 +82,13 @@ const GroupedLikeNotification = ({ notification }) => {
           })}
         </p>
       </div>
-      {(notification.read === false || notification.read === "false") && (
+      {(notification.read === false || notification.read === "false") ? (
         <div className="flex-shrink-0 my-auto">
           <div className="rounded-full flex-none bg-blue-500 h-[9px] w-[9px] my-auto mr-2"></div>
         </div>
-      )}
+      ): <div className="flex-shrink-0 my-auto">
+      <div className="rounded-full flex-none bg-white h-[9px] w-[9px] my-auto mr-2"></div>
+    </div>}
     </div>
   );
 };

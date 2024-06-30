@@ -14,6 +14,7 @@ import NotificationEmptyState from "./EmptyState";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import GroupedLikeNotification from "./NotificationCard/GroupedLikeNotification";
+import LoadMoreButton from "../LoadMoreButton";
 
 const NotificationsList = () => {
   const { user } = useUser({
@@ -23,7 +24,7 @@ const NotificationsList = () => {
 
   const router = useRouter();
 
-  const { notifications, loading, refetch, total, pageSize } =
+  const { notifications, loading, refetch, total, pageSize, fetchMore,hasMoreNotifications   } =
     useFetchNotifications(user);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,22 +33,25 @@ const NotificationsList = () => {
     refetch(1);
   }, [user]);
 
-  const changePage = offset => {
-    setCurrentPage(offset);
-    refetch(offset);
+  // const changePage = offset => {
+  //   setCurrentPage(offset);
+  //   refetch(offset);
+  // };
+  const loadMore = () => {
+    const nextPage = currentPage + 1;
+    setCurrentPage(nextPage);
+    fetchMore(nextPage);
   };
 
   const [showMarkAllAsRead, setShowMarkAllAsRead] = useState(false);
   useEffect(() => {
-    for(let i = 0; i < notifications?.length; i++) {
-      if (notifications[i].read == 'false') {
+    for (let i = 0; i < notifications?.length; i++) {
+      if (notifications[i].read == "false") {
         setShowMarkAllAsRead(true);
         break;
       }
     }
-  
   }, [notifications]);
-
 
   const clearNotifications = async id => {
     var data = JSON.stringify({
@@ -74,46 +78,54 @@ const NotificationsList = () => {
       .catch(function (error) {
         console.log(error);
       });
-    
-      location.reload() 
+
+    location.reload();
   };
 
-
   return (
-    <div className="flex flex-col">
-      {/* <header className="bg-gray-900 text-white py-4 px-6">
-        <h1 className="text-2xl font-bold">Notifications</h1>
-      </header> */}
-      <main className="flex-1 my-6">
-        <div className="grid gap-4">
-          {loading ? (
-            [1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} />)
-          ) : notifications?.length ? (
-            notifications.map(notification => (
-              <NotificationItem
-                key={notification.id}
-                notification={notification}
-              />
-            ))
-          ) : (
-            <NotificationEmptyState />
-          )}
-        </div>
-      </main>
+    <div>
       {showMarkAllAsRead ? (
-        <footer className="py-4 flex justify-end">
-          <Button onClick={() => clearNotifications("*")}>
-            Mark All as Read
+        <footer className="py-4 flex justify-end -mt-[64px]">
+          <Button variant={'ghostSmallBlue'} className="!rounded-full" onClick={() => clearNotifications("*")}>
+            Mark all as read
           </Button>
         </footer>
       ) : null}
+      <div className="flex flex-col">
+        {/* <header className="bg-gray-900 text-white py-4 px-6">
+        <h1 className="text-2xl font-bold">Notifications</h1>
+      </header> */}
+        <main className="flex-1 my-6">
+          <div className="grid gap-4">
+            {loading ? (
+              [1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} />)
+            ) : notifications?.length ? (
+              notifications.map(notification => (
+                <NotificationItem
+                  key={notification.id}
+                  notification={notification}
+                />
+              ))
+            ) : (
+              <NotificationEmptyState />
+            )}
+          </div>
+        </main>
 
-      <NewPagination
+        {/* <NewPagination
         total={total}
         pageSize={pageSize}
         currentPage={currentPage}
         onPageNumChange={changePage}
-      />
+      /> */}
+        {hasMoreNotifications?<LoadMoreButton
+          total={total}
+          pageSize={pageSize}
+          currentCount={notifications?.length}
+          onLoadMore={loadMore}
+          loading={loading}
+        />:null}
+      </div>
     </div>
   );
 };
