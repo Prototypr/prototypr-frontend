@@ -24,11 +24,11 @@ export default function Layout({
       </div>
 
       <div
-        className={`min-h-screen overflow-x-hidden md:overflow-x-visible ${NAV_OFFSET} ${padding == false ? "" : "px-3 md:px-8"}`}
+        className={`min-h-screen overflow-x-hidden md:overflow-x-visible  ${padding == false ? "" : "px-3 md:px-8"}`}
         style={{ background: background ? background : "#fbfcff" }}
       >
         <main
-          className="mx-auto "
+          className={`mx-auto ${NAV_OFFSET} overflow-hidden `}
           //   style={{ maxWidth: padding == false ? "" : "1200px" }}
         >
           {children}

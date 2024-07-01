@@ -520,23 +520,6 @@ figure, pre{
   }
  }
 
-@media only screen and (max-width: 600px) {
-    figure{
-        max-width:100%!important;
-        img{
-            max-width:100%!important;
-        }
-    }
-    iframe{
-        max-width: 100%!important;
-    }
-    .max-w-full{
-        max-width: 100%!important;
-        // max-width: 50rem!important;
-        margin-left: 0rem!important;
-    }
-  }
-
   .blog-page .blog-content video {
     width: 100%;
  }
@@ -801,3 +784,24 @@ figure, pre{
         padding-left: 0.25rem;
     }
 }
+
+@media only screen and (max-width: 600px) {
+    figure{
+        max-width:100%!important;
+        img{
+            max-width:100%!important;
+        }
+    }
+
+    iframe{
+        max-width: 100%!important;
+    }
+    .blog-content figcaption, .blog-content iframe{
+        max-width: 100%!important;
+    }
+    .max-w-full{
+        max-width: 100%!important;
+        // max-width: 50rem!important;
+        margin-left: 0rem!important;
+    }
+  }
