@@ -1,4 +1,4 @@
-import Button from "@/components/Primitives/Button";
+// import Button from "@/components/Primitives/Button";
 import { PublishDialogButton } from "./PublishDialogButton";
 import SidePanelTrigger from "./SidePanel/SidePanelTrigger";
 /**
@@ -40,14 +40,14 @@ const EditorNavButtons = ({
       {/* show publish button if post not published */}
       {/* publish button does same as save draft button, but uses dialog and adds 'forReview' flag */}
       
-        <PublishDialogButton
+       {postObject? <PublishDialogButton
         postObject={postObject}
         canPublish = {canEdit && postObject?.id ? (true) : (false)}
           //save post creates a post or updates an existing one
           //for /write (new post), it creates a new post
           //for /p/[slug] (existing post), it updates the existing post
           onSave={onSave}
-        />
+        />:null}
 
       {/* show side panel trigger if updatePostSettings is defined (in /p/[slug]) */}
       {editor && updatePostSettings !== false ? (

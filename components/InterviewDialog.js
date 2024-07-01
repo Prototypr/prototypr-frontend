@@ -79,7 +79,7 @@ const InterviewDialog = ({
             </ol>
             <p>
               Once done, we'll publish it and send it out in the newsletter to{" "}
-              <span className="text-underline">25k+ subscribers</span>. and{" "}
+              <span className="text-underline">25k+ subscribers</span> and{" "}
               <span className="text-underline">100k+ followers</span> on the
               Prototypr Medium publication.
             </p>
