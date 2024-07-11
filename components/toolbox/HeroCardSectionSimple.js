@@ -37,7 +37,7 @@ const HeroCardSection = ({ post, tags, featuredImage, user }) => {
         ) : null}
         {/* <div className="absolute bottom-0 h-[250px] w-full bg-gradient-to-b from-gray-900/0 via-black/30 to-black/50 left-0 rounded-t-2xl z-0" /> */}
       </div>
-      <div className="relative w-full max-w-[1320px] mx-auto">
+      <div className="relative p-3 w-full max-w-[1320px] mx-auto">
         {/* <div style={{pointerEvents:'none'}} className="bg-black pointer-none opacity-[20%] w-full h-full absolute left-0 top-0"/> */}
         <div className="w-full z-10 grid grid-cols-12 lg:gap-8 flex pt-0 md:pt-4 p-4  justify-between ">
           <div className="flex order-2 md:order-1 col-span-12 w-full flex-col justify-between">
@@ -63,7 +63,7 @@ const HeroCardSection = ({ post, tags, featuredImage, user }) => {
                       />
                     </div>
 
-                    <div className="absolute top-0 right-0 p-4">
+                    <div className="absolute top-0 right-0 p-4 pr-6">
                       <div className="order-1 flex md:order-2 col-span-3 flex-col flex-none justify-end">
                         {/* hide on mobile */}
                         <div className="flex gap-4 flex-none">
