@@ -45,7 +45,7 @@ const HeroCardSection = ({ post, tags, featuredImage, user }) => {
               <div className="flex flex-col">
                 <div className="flex flex-col">
                   <div className="flex justify-between w-full">
-                    <div className="mb-0 -mt-[40px] md:-mt-[80px] flex-none w-[100px] h-[100px] md:w-[124px] md:h-[124px] my-auto shadow-sm rounded-2xl p-[3px] bg-white border border-gray-300">
+                    <div className="mb-0 -mt-[66px] md:-mt-[92px] flex-none w-[104px] h-[104px] md:w-[124px] md:h-[124px] my-auto shadow-sm rounded-2xl p-[3px] bg-white border border-gray-300">
                       <Image
                         key={post?.attributes?.logo}
                         loader={gumletLoader}
@@ -109,7 +109,7 @@ const HeroCardSection = ({ post, tags, featuredImage, user }) => {
                           <div className="flex text-xs text-gray-600 mb-4">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="mr-1"
+                              className="mr-1 my-auto"
                               width="22"
                               height="22"
                               fill="currentColor"
@@ -136,7 +136,7 @@ const HeroCardSection = ({ post, tags, featuredImage, user }) => {
                                         href={`/toolbox/${tag.attributes.slug}/page/1/`}
                                       >
                                         <button
-                                          className={`inline-block h-5 capitalize font-medium text-base px-1.5 tracking-tight cursor-pointer bg-[#e0e4ea] hover:bg-gray-300 hover:text-black transition transition-all duration-400 rounded-full  text-black/50 text-[12px] font-base flex flex-col justify-center`}
+                                          className={` h-5 ${i<2?'flex':'hidden md:flex'} flex-col justify-center capitalize font-medium text-base px-1.5 tracking-tight cursor-pointer bg-[#e0e4ea] hover:bg-gray-300 hover:text-black transition transition-all duration-400 rounded-full  text-black/50 text-[12px] font-base`}
                                         >
                                           {tag.attributes.name}
                                         </button>
