@@ -18,6 +18,7 @@ const HeroPostGrid = ({
   maxPosts,
   show2PostRow,
   imageDimensions,
+  tools,
   textDimensions,
 }) => {
   let url = largePost?.attributes?.featuredImage?.data?.attributes?.url;

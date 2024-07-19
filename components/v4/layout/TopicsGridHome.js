@@ -28,7 +28,7 @@ const TopicsGridHome = ({ largePost, smallPosts, tools,showHeading, slug, headin
             <div className="my-auto">
               <div className="flex relative">
               <div className="text-md inline text-black/80 font-normal ">
-              <Link href={`/posts/${slug}/page/1`}>See all</Link>
+              <Link href={`/topic/${slug}/page/1`}>See all</Link>
               </div>
               <div className="my-auto">
                 <Link href={`/posts/${slug}/page/1`}>

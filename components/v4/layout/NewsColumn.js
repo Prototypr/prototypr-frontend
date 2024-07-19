@@ -10,6 +10,8 @@ const NewsColumn = ({
   groupedNewsPosts,
   showHeader,
   sponsor,
+  headline,
+  showBeta,
 }) => {
   const renderPosts = posts =>
     posts.map((post, index) => {
@@ -32,10 +34,10 @@ const NewsColumn = ({
           className="group relative flex hover:bg-gray-50 transition transition-all duration-400"
         >
           <Link
-            // target="_blank"
+            target={!showBeta?'_blank':""}
             className="flex"
             // href={post?.attributes?.legacyAttributes?.link + `?ref=prototypr`}
-            href={`/news/${post?.attributes?.slug}`}
+            href={!showBeta?`${post?.attributes?.legacyAttributes?.link}`:`/news/${post?.attributes?.slug}`}
           >
             <div className="flex flex-col items-start pr-2">
               <h3 className="text-base pl-2.5 mb-0.5 font-medium tracking-tight text-gray-900">
@@ -115,9 +117,7 @@ const NewsColumn = ({
     });
 
   return (
-    <div
-      className={`h-full w-full rounded-2xl`}
-    >
+    <div className={`h-full w-full rounded-2xl`}>
       {/* <Container maxWidth="max-w-[1320px] w-full"> */}
       {showHeader !== false && (
         <div className="flex justify-between p-3 pt-0 pb-4 rounded-t-2xl">
@@ -127,15 +127,25 @@ const NewsColumn = ({
                 {/* <div className="my-auto">
                 <Robot size={'24'} />
               </div> */}
-                <h3 className="font-bold drop-shadow-sm text-xl tracking-[-0.018em] text-gray-800">
-                  {title ? title : <>News Explorer</>}
+                <h3
+                  className={`${showBeta === false ? "text-xl" : "text-xl font-bold"} capitalize drop-shadow-sm tracking-[-0.018em] text-gray-800`}
+                >
+                  {headline ? headline : title ? title : <>News Explorer</>}
                 </h3>
 
-                <span className="bg-blue-500 my-auto font-medium text-white py-0 px-[6px] text-[11px] rounded-full ml-2">
-                  Beta
-                </span>
+                {showBeta !== false ? (
+                  <span className="bg-blue-500 my-auto font-medium text-white py-0 px-[6px] text-[11px] rounded-full ml-2">
+                    Beta
+                  </span>
+                ) : null}
               </div>
-              <div className="text-sm text-gray-800">Selected by humans.</div>
+              {showBeta !== false ? (
+                <div className="text-sm text-gray-600">
+                  Prototypr News Explorer
+                </div>
+              ) : null
+              // <div className="text-sm text-gray-800">Selected by humans.</div>
+              }
             </div>
           </div>
           <div className="flex relative">
@@ -162,8 +172,12 @@ const NewsColumn = ({
           </Link> */}
         </div>
       )}
-      <div className="max-h-[46rem] relative">
-        <div className="p-3 h-full max-h-[46rem] overflow-y-auto">
+      <div
+        className={`${showBeta === false ? "max-h-[404px]" : "max-h-[46rem]"} relative`}
+      >
+        <div
+          className={`p-3 h-full ${showBeta === false ? "max-h-[404px]" : "max-h-[46rem]"} overflow-y-auto`}
+        >
           {["today", "yesterday", "thisWeek", "lastWeek", "lastMonth"].map(
             group => {
               let formattedGroup = group.replace("last", "last ");
@@ -236,7 +250,9 @@ const NewsColumn = ({
             </div>
           );
         })} */}
-        <div className="z-10 absolute z-10 hidden md:block pointer-events-none bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#fbfcff]" />
+        {showBeta !== false ? (
+          <div className="z-10 rounded-b-2xl absolute z-10 hidden md:block pointer-events-none bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#fbfcff]" />
+        ) : null}
       </div>
     </div>
   );

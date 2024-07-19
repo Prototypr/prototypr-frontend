@@ -13,7 +13,7 @@ const GiantTag = ({ link, children, index, active, classes }) => {
     <Link href={`${link ? link : "/"}`}>
       <button
         className={`inline-block text-base px-3 cursor-pointer ${
-          active ? "bg-gray-300/80 text-black font-medium border border-gray-800" : "bg-[#ecf0f5] hover:bg-gray-200 text-zinc-600 font-medium hover:text-zinc-900"
+          active ? "bg-blue-100/60 text-blue-600 font-semibold border border-blue-600" : "bg-[#ecf0f5] hover:bg-gray-200 text-zinc-600 font-medium hover:text-zinc-900"
         } rounded-full tracking-tight h-10 transition transition-all duration-400 ${classes}`}
       >
         {children}

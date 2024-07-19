@@ -12,7 +12,7 @@ const CategoriesIconCard = ({ topic, withBackground, showCount }) => {
   return (
     <div>
       <Link
-        href={`/posts/${topic.slug}/page/1`}
+        href={`/topic/${topic.slug}/page/1`}
         onClick={() => {
           plausible("toolIconCard", {
             props: {

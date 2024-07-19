@@ -476,7 +476,8 @@ export async function getStaticProps({ preview = null, locale }) {
 
   allPosts = transformPostListOld(allPosts.data, locale);
   if (locale !== "es-ES") {
-    shuffleArray(allPosts);
+    // dont shuffle for now
+    // shuffleArray(allPosts);
   }
   allTools = transformPostListOld(allTools.data, locale);
 

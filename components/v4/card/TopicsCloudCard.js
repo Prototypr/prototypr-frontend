@@ -2,39 +2,39 @@ import BigTag from "@/components/v4/tag/BigTag";
 const tags = [
   {
     name: "Accessibility",
-    link: "/posts/accessibility/page/1",
+    link: "/topic/accessibility/page/1",
   },
   {
     name: "AI",
-    link: "/posts/ai/page/1",
+    link: "/topic/ai/page/1",
   },
   {
     name: "Open Source",
-    link: "/posts/open-source/page/1",
+    link: "/topic/open-source/page/1",
   },
   {
     name: "Branding",
-    link: "/posts/branding/page/1",
+    link: "/topic/branding/page/1",
   },
   {
     name: "UI",
-    link: "/posts/ui/page/1",
+    link: "/topic/ui/page/1",
   },
   {
     name: "Figma",
-    link: "/posts/figma/page/1",
+    link: "/topic/figma/page/1",
   },
   {
     name: "User Research",
-    link: "/posts/user-research/page/1",
+    link: "/topic/user-research/page/1",
   },
   {
     name: "Notion",
-    link: "/posts/notion/page/1",
+    link: "/topic/notion/page/1",
   },
   {
     name: "Web Monetization",
-    link: "/posts/web-monetization/page/1",
+    link: "/topic/web-monetization/page/1",
   },
 ];
 

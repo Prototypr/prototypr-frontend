@@ -28,10 +28,10 @@ const LargePostGridC = ({ largePost, smallPosts, tools,showHeading, slug, headin
             <div className="my-auto">
               <div className="flex relative">
               <div className="text-md inline text-black/80 font-normal ">
-              <Link href={`/posts/${slug}/page/1`}>See all</Link>
+              <Link href={`/topic/${slug}/page/1`}>See all</Link>
               </div>
               <div className="my-auto">
-                <Link href={`/posts/${slug}/page/1`}>
+                <Link href={`/topic/${slug}/page/1`}>
                   <div className="bg-gray-200/60  ml-2.5 flex justify-center my-auto h-6 w-6 rounded-full">
                       <ArrowRight weight="bold" size={14} className="text-gray-900 my-auto"/>
                   </div>

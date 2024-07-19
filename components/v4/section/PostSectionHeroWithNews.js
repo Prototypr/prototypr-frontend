@@ -1,11 +1,14 @@
 // import SidebarDiscover from "@/components/v4/layout/SidebarDiscover";
 import Container from "@/components/container";
 // import PostsGridHero from "@/components/v4/layout/PostsGridHero";
-import PostsGroup3Cards from "../layout/PostsGroup3Cards";
 import SectionDivider from "./SectionDivider";
 import HeroPostGrid from "../layout/HeroPostGrid";
+// import NewsColumn from "../layout/NewsColumn";
+import PostsNewsGroup3 from "../layout/PostNewsGroup3";
 
-const PostsSectionHero = ({
+import { FireIcon } from "@/components/icons";
+
+const PostsSectionHeroWithNews = ({
   user,
   heroCardPost,
   toolsList,
@@ -16,6 +19,13 @@ const PostsSectionHero = ({
   title,
   showRecent,
   showTitle,
+  news,
+  headline,
+  groupedNewsPosts,
+  tagName,
+  tools,
+  pageNo,
+  tag,
 }) => {
   return (
     <Container padding={false} maxWidth="max-w-[1320px] mx-auto">
@@ -42,6 +52,7 @@ const PostsSectionHero = ({
                       showHeading={true}
                       showHeadingRow={false}
                       cols={3}
+                      tools={tools}
                       showBigPost={2}
                       show2PostRow={true}
                       largePost={heroCardPost}
@@ -84,7 +95,9 @@ const PostsSectionHero = ({
                 </div>
               )}
             </div>
-            <PostsGroup3Cards
+            <PostsNewsGroup3
+              // tools={tools}
+              pageNo={pageNo}
               posts={
                 !showRecent
                   ? viewablePosts
@@ -93,6 +106,17 @@ const PostsSectionHero = ({
                       viewablePosts?.length
                     )
               }
+              headline={
+                <div className="flex">
+                  <FireIcon size={24} className={"my-auto mr-1"} />
+                  {tagName} News
+                </div>
+              }
+              news={news}
+              tag={tag}
+              tagName={tagName}
+              groupedNewsPosts={groupedNewsPosts}
+              tools={tools}
             />
           </div>
           {/* <SidebarDiscover
@@ -111,4 +135,4 @@ const PostsSectionHero = ({
   );
 };
 
-export default PostsSectionHero;
+export default PostsSectionHeroWithNews;

@@ -442,22 +442,22 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
         >
           <NavigationMenuList>
             <NavigationMenuItem className="hidden -ml-4 text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/posts/accessibility">
+              <NavigationMenuLink href="/topic/accessibility">
                 {submenuTitle4}
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="hidden text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/posts/interview">
+              <NavigationMenuLink href="/topic/interview">
                 {submenuTitle3}
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="hidden text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/posts/ux">
+              <NavigationMenuLink href="/topic/ux">
                 {submenuTitle2}
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="hidden text-sm md:text-base xl:mr-2.5 md:block md:flex md:flex-col md:justify-center">
-              <NavigationMenuLink href="/posts/ui">
+              <NavigationMenuLink href="/topic/ui">
                 {submenuTitle5}
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -473,31 +473,31 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                     {submenuDesc1}
                   </ContentListItem>
                   <ContentListItem
-                    href="/posts/ux/page/1"
+                    href="/topic/ux/page/1"
                     title={submenuTitle2}
                   >
                     {submenuDesc2}
                   </ContentListItem>
                   <ContentListItem
-                    href="/posts/interview/page/1"
+                    href="/topic/interview/page/1"
                     title={submenuTitle3}
                   >
                     {submenuDesc3}
                   </ContentListItem>
                   <ContentListItem
-                    href="/posts/accessibility/page/1"
+                    href="/topic/accessibility/page/1"
                     title={submenuTitle4}
                   >
                     {submenuDesc4}
                   </ContentListItem>
                   <ContentListItem
-                    href="/posts/ui/page/1"
+                    href="/topic/ui/page/1"
                     title={submenuTitle5}
                   >
                     {submenuDesc5}
                   </ContentListItem>
                   <ContentListItem
-                    href="/posts/code/page/1"
+                    href="/topic/code/page/1"
                     title={submenuTitle6}
                   >
                     {submenuDesc6}

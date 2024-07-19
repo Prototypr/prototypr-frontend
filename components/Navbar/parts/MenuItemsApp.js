@@ -475,9 +475,9 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
           </NavigationMenuItem>
           <NavigationMenuItem className="flex text-sm  xl:mr-2.5 flex-col justify-center">
             {/* <NavigationMenuTrigger active={activeNav === "posts"}> */}
-            <NavigationMenuTrigger href="articles">
+            <NavigationMenuTrigger href="topics">
               {/* {title1} */}
-              Articles
+              Topics
             </NavigationMenuTrigger>
             <NavigationMenuContent
               onPointerMove={event => event.preventDefault()}
@@ -491,26 +491,26 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 <ContentListItem href="/topics" title={submenuTitle1}>
                   {submenuDesc1}
                 </ContentListItem>
-                <ContentListItem href="/posts/ux/page/1" title={submenuTitle2}>
+                <ContentListItem href="/topic/ux/page/1" title={submenuTitle2}>
                   {submenuDesc2}
                 </ContentListItem>
                 <ContentListItem
-                  href="/posts/interview/page/1"
+                  href="/topic/interview/page/1"
                   title={submenuTitle3}
                 >
                   {submenuDesc3}
                 </ContentListItem>
                 <ContentListItem
-                  href="/posts/accessibility/page/1"
+                  href="/topic/accessibility/page/1"
                   title={submenuTitle4}
                 >
                   {submenuDesc4}
                 </ContentListItem>
-                <ContentListItem href="/posts/ui/page/1" title={submenuTitle5}>
+                <ContentListItem href="/topic/ui/page/1" title={submenuTitle5}>
                   {submenuDesc5}
                 </ContentListItem>
                 <ContentListItem
-                  href="/posts/code/page/1"
+                  href="/topic/code/page/1"
                   title={submenuTitle6}
                 >
                   {submenuDesc6}

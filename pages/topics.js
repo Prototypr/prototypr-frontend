@@ -28,7 +28,7 @@ import getSponsors from "@/lib/utils/getSponsors";
 const featuredSections = [
   {
     image: "/static/images/hola.png",
-    slug: "/posts/localization/page/1",
+    slug: "/topic/localization/page/1",
     class: "bg-gray-50",
     title: "Localization",
     description:
@@ -36,7 +36,7 @@ const featuredSections = [
   },
   {
     image: "/static/images/wm.png",
-    slug: "/posts/web-monetization/page/1",
+    slug: "/topic/web-monetization/page/1",
     class: "bg-gray-50",
     title: "Web Monetization",
     description: "A new way to send money on the web with micropayments.",

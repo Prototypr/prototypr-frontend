@@ -3,79 +3,79 @@ import GiantTag from "../tag/GiantTag";
 import {Compass} from '@/components/icons'
 import { useEffect, useState } from "react";
 
-const tags = [
+const tags = (path)=>[
     {
       name: "Accessibility",
-      link: "/posts/accessibility/page/1",
+      link: `/${path?path:'topic'}/accessibility/page/1`,
       slug:"accessibility"
     },
     {
       name: "AI",
-      link: "/posts/ai/page/1",
+      link: `/${path?path:'topic'}/ai/page/1`,
       slug:"ai"
     },
     {
       name: "Branding",
-      link: "/posts/branding/page/1",
+      link: `/${path?path:'topic'}/branding/page/1`,
       slug:"branding"
     },
     {
       name: "Figma",
-      link: "/posts/figma/page/1",
+      link: `/${path?path:'topic'}/figma/page/1`,
       slug:"figma"
     },
     {
       name: "Notion",
-      link: "/posts/notion/page/1",
+      link: `/${path?path:'topic'}/notion/page/1`,
       slug:"notion"
     },
     {
       name: "Interview",
-      link: "/posts/interview/page/1",
+      link: `/${path?path:'topic'}/interview/page/1`,
       slug:"interview"
     },
     {
       name: "Open Source",
-      link: "/posts/open-source/page/1",
+      link: `/${path?path:'topic'}/open-source/page/1`,
       slug:"open-source"
     },
     {
       name: "Psychology",
-      link: "/posts/design-psychology/page/1",
+      link: `/${path?path:'topic'}/design-psychology/page/1`,
       slug:"psychology"
     },
     {
       name: "UI",
-      link: "/posts/ui/page/1",
+      link: `/${path?path:'topic'}/ui/page/1`,
       slug:"ui"
     },
     {
       name: "UX",
-      link: "/posts/ux/page/1",
+      link: `/${path?path:'topic'}/ux/page/1`,
       slug:"ux"
     },
     {
       name: "User Research",
-      link: "/posts/user-research/page/1",
+      link: `/${path?path:'topic'}/user-research/page/1`,
       slug:"user-research"
     },
     // {
     //   name: "Web Monetization",
-    //   link: "/posts/web-monetization/page/1",
+    //   link: `/${path?path:'topic'}/web-monetization/page/1`,
     // },
     {
       name: "Career",
-      link: "/posts/career/page/1",
+      link: `/${path?path:'topic'}/career/page/1`,
       slug:"career"
     },
   ];
 
-const TagsNavRow = ({currentPage, activeTag}) => {
+const TagsNavRow = ({currentPage, activeTag, path}) => {
 
-  const [orderedTags, setOrderedTags] = useState(tags)
+  const [orderedTags, setOrderedTags] = useState(()=>tags(path))
 
   useEffect(()=>{
-    let reordered = orderTags(tags, activeTag)
+    let reordered = orderTags(tags(path), activeTag, path)
     setOrderedTags(reordered)
   },[activeTag, currentPage])
 
@@ -99,7 +99,7 @@ const TagsNavRow = ({currentPage, activeTag}) => {
 export default TagsNavRow;
 
 //function to order the tags array with the active tag first
-const orderTags = (tags, activeTag) => {
+const orderTags = (tags, activeTag, path) => {
   let taglies = [...tags]
   if(!activeTag) return tags;
   let activeTagIndex = taglies.findIndex((tag) => tag?.slug == activeTag);
@@ -108,7 +108,7 @@ const orderTags = (tags, activeTag) => {
   //create tag if it doesn't exist in the tags array
   if(!activeTagObject){
     const name = activeTag.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-    activeTagObject = {name:name, link:`/posts/${activeTag}/page/1`, slug:activeTag}
+    activeTagObject = {name:name, link:`/${path?path:'topic'}/${activeTag}/page/1`, slug:activeTag}
   }
   taglies.splice(activeTagIndex, 1);
   taglies.unshift(activeTagObject);

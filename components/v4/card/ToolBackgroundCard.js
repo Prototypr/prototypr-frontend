@@ -59,7 +59,7 @@ const ToolBackgroundCard = ({
             <div
               className={`${height ? height : imageLarge ? "h-[240px]" : "h-[290px]"} rounded-xl m-2 relative flex flex-col justify-end`}
             >
-              <div className="flex w-full justify-between p-2 bg-black/40 backdrop-blur-sm rounded-2xl border border-gray-300/20">
+              <div className="flex w-full justify-between p-2 bg-white backdrop-blur-sm rounded-2xl border border-gray-300/40">
                 <div className="flex">
                   {/* <div className="absolute top-0 left-0 z-10 rounded-xl w-full h-full bg-gradient-to-b from-black/5 to-black/60 shadow"></div> */}
                   <div className={`rounded-xl z-20 flex`}>
@@ -73,7 +73,7 @@ const ToolBackgroundCard = ({
                       //   data-src={coverImage}
                       src={logo}
                     />
-                    <div className="overflow-hidden my-auto ml-3 text-white">
+                    <div className="overflow-hidden my-auto ml-3 text-gray-900">
                       <div className={"line-clamp-1 font-medium"}> {title}</div>
                       {/* {this.props.prototool !== true && */}
                       {post.postType == "ad" ? (

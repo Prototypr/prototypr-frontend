@@ -7,7 +7,7 @@ export const dummyData =
     },
     {   
         src:'/static/particles/topics/box.png',
-        slug:'/posts/ui/page/1',
+        slug:'/topic/ui/page/1',
         position:{x:50, y:26},
         topic:true
     },
@@ -33,7 +33,7 @@ export const dummyData =
     },
     {   
         src:'/static/particles/topics/accessibility.png',
-        slug:'/posts/accessibility/page/1',
+        slug:'/topic/accessibility/page/1',
         position:{x:70, y:25},
         topic:true
     },
@@ -50,7 +50,7 @@ export const dummyData =
 
     {   
         src:'/static/particles/topics/swatches.png',
-        slug:'/posts/branding/page/1',
+        slug:'/topic/branding/page/1',
         position:{x:76, y:89},
         topic:true
     },
@@ -76,7 +76,7 @@ export const dummyData =
     },
     {   
         src:'/static/particles/topics/arrow.png',
-        slug:'/posts/product-design/page/1',
+        slug:'/topic/product-design/page/1',
         position:{x:59, y:42},
         topic:true
     },
@@ -92,7 +92,7 @@ export const dummyData =
     },
     {   
         src:'/static/particles/topics/ai.png',
-        slug:'/posts/ai/page/1',
+        slug:'/topic/ai/page/1',
         position:{x:88, y:6},
         topic:true
     },
@@ -104,7 +104,7 @@ export const dummyData =
     },
     {   
         src:'/static/particles/topics/github.png',
-        slug:'/posts/open-source/page/1',
+        slug:'/topic/open-source/page/1',
         position:{x:98, y:60},
         topic:true
     },
@@ -116,7 +116,7 @@ export const dummyData =
     },
     {   
         src:'/static/particles/topics/localization.png',
-        slug:'/posts/localization/page/1',
+        slug:'/topic/localization/page/1',
         position:{x:55, y:69},
         topic:true
     },
@@ -128,7 +128,7 @@ export const dummyData =
     },
     {   
         src:'/static/particles/topics/twitter.png',
-        slug:'/posts/social-media/page/1',
+        slug:'/topic/social-media/page/1',
         position:{x:78, y:48},
         topic:true
     },
@@ -144,7 +144,7 @@ export const dummyData =
     },
     {   
         src:'/static/particles/topics/brain.png',
-        slug:'/posts/behavioural-design/page/1',
+        slug:'/topic/behavioural-design/page/1',
         position:{x:45, y:56},
         topic:true
     },
