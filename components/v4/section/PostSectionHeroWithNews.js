@@ -107,7 +107,7 @@ const PostsSectionHeroWithNews = ({
                     )
               }
               headline={
-                <div className="flex">
+                <div className="flex font-bold text-lg">
                   <FireIcon size={24} className={"my-auto mr-1"} />
                   {tagName} News
                 </div>

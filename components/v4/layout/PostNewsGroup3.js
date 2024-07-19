@@ -13,13 +13,13 @@ const dummyAvatar =
 const PostsNewsGroup3 = ({ tagName,tag,posts, cols, showDescription, news,groupedNewsPosts, headline, tools, pageNo }) => {
   return (
     <div
-      className={`grid grid-cols-1 sm:grid-cols-2 ${cols == 4 ? "lg:grid-cols-4" : cols == 2 ? "lg:grid-cols-2" : "lg:grid-cols-3"} gap-3 w-full`}
+      className={`flex flex-col sm:grid sm:grid-cols-2 ${cols == 4 ? "lg:grid-cols-4" : cols == 2 ? "lg:grid-cols-2" : "lg:grid-cols-3"} gap-3 w-full`}
     >
       {/* <SingleFancyCard/> */}
       {news?.length ? (
-        <div className="overflow-hidden pt-3 bg-white shadow-sm rounded-2xl relative border border-gray-300/50">
+        <div className="order-2 md:order-first overflow-hidden pt-3 bg-white shadow-sm rounded-2xl relative border border-gray-300/50">
          <div className="z-50 rounded-b-2xl absolute block pointer-events-none bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#fbfcff]" />
-          <div className="order-3 md:order-1 mt-6 md:mt-0 col-span-9 md:col-span-3">
+          <div className="order-3 md:order-1 md:mt-0 col-span-9 md:col-span-3">
               <NewsColumn
                 showBeta={false}
                 headline={headline}
@@ -94,7 +94,7 @@ const PostsNewsGroup3 = ({ tagName,tag,posts, cols, showDescription, news,groupe
           })
         : ""}
          {(pageNo>1 && tools?.length) ? (
-                  <div className="col-span-3 border border-gray-300/50 bg-white p-3 shadow-sm rounded-2xl  lg:col-span-1">
+                  <div className="col-span-2 border border-gray-300/50 bg-white p-3 shadow-sm rounded-2xl  lg:col-span-1">
                     <div className="flex w-full justify-between">
                       <div>
                         <div className="flex">

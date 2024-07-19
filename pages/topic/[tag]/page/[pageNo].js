@@ -167,7 +167,7 @@ export default function PostsPage({
                             layout={2}
                             link={`/post/${largePost?.attributes?.slug}`}
                             avatar={largePostAvatar}
-                            imageDimensions={`lg:w-7/12 lg:h-[400px] h-[260px] border-r`}
+                            imageDimensions={`lg:w-7/12 lg:h-[400px] h-full border-r`}
                             textDimensions={`lg:w-5/12`}
                             excerpt={largePost?.attributes?.excerpt}
                             author={
