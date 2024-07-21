@@ -85,9 +85,9 @@ const PostCard = ({ post, refetch, user, edit }) => {
                       : `/toolbox/post/${post.id}`
             }
           >
-            <h3 className="text-xl font-semibold max-w-2xl ">{post.title}</h3>
+            <h3 className="text-xl font-semibold max-w-2xl ">{post.draft_title?post.draft_title:post.title}</h3>
             <p className="text-base text-gray-600 mb-3 max-w-[38rem] line-clamp-2 overflow-ellipses">
-              {post.excerpt}
+              {post.draft_excerpt?post.draft_excerpt:post.excerpt}
             </p>
             <div className="flex gap-1.5">
               <p className="text-sm my-auto text-gray-500">
