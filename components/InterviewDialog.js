@@ -23,6 +23,7 @@ const InterviewDialog = ({
   user,
   initialEditor,
   relatedPostId,
+  enabled,
 }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -85,7 +86,7 @@ const InterviewDialog = ({
             </p>
             <div className="w-full flex justify-start">
               <Button
-                disabled={loading}
+                disabled={loading || !enabled}
                 className="mt-6 cursor-pointe rounded-full"
                 onClick={async () => {
                   setLoading(true);

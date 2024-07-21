@@ -13,7 +13,7 @@ import useCreate from "@/components/Editor/editorHooks/newPost/useCreate";
 
 import { useRouter } from "next/router";
 import EditorNav from "@/components/EditorNav";
-import { getToolById } from "@/lib/api";
+import { getPostWithTool, getToolById, getUserArticle } from "@/lib/api";
 import InterviewDialog from "@/components/InterviewDialog";
 
 /**
@@ -27,6 +27,7 @@ import InterviewDialog from "@/components/InterviewDialog";
  * @returns
  */
 export default function InterviewEditor({ tool }) {
+
   const router = useRouter();
   const { user } = useUser({
     // redirectTo: '/account',
@@ -34,11 +35,45 @@ export default function InterviewEditor({ tool }) {
     redirectIfFound: false,
   });
 
+
+  const [postData, setPostData] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  
+  useEffect(() => {
+    if (postData && postData.interviews && postData.interviews.length > 0) {
+      setIsDisabled(true);
+      //redirect to the interview
+      router.push(`/toolbox/post/${router.query.id}/interview/${postData?.interviews[0].id}`);
+    } else {
+      setIsDisabled(false);
+    }
+  }, [postData]);
+  
+
+  useEffect(() => {
+    const fetchPostData = async () => {
+      if (user && router.query.id) {
+        try {
+          const data = await getUserArticle(user, router.query.id);
+          setPostData(data.userPostId);
+        } catch (error) {
+          console.error("Error fetching post data:", error);
+        }
+      }
+    };
+
+    fetchPostData();
+  }, [user, router.query.id]);
+  
+
   /**
    * embed twitter widget if not already loaded
    */
   useEffect(() => {
     addTwitterScript();
+
+
   }, []);
 
   //useLoad hook
@@ -157,6 +192,7 @@ export default function InterviewEditor({ tool }) {
         open={dialogOpen}
         user={user}
         relatedPostId={router.query.id}
+        enabled={!!postData && !isDisabled} // Enable dialog only when postData is available
       />
     </>
   );
@@ -166,6 +202,9 @@ export async function getStaticProps({ params, preview = null, locale }) {
   let data;
   try {
     data = await getToolById(params.id, preview);
+
+
+
   } catch (error) {
     console.error("Failed to get tool:", error);
     return {
