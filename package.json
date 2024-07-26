@@ -188,7 +188,7 @@
     "yup": "^0.32.11"
   },
   "optionalDependencies": {
-    "@prototypr/paper-interview": "^0.0.1",
+    "@prototypr/paper-interview": "^0.0.21",
     "@prototypr/prototypr-postie": "^1.0.9"
   },
   "resolutions": {

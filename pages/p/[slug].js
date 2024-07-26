@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import useUser from "@/lib/iron-session/useUser";
 import { getUserArticle, getSlugFromArticleId } from "@/lib/api";
 
-const EditorWrapper = dynamic(() => import("tiptypr/dist/EditorWrapper"), {
+const EditorWrapper = dynamic(() => import("tiptypr/src/EditorWrapper"), {
   ssr: false
 });
 
