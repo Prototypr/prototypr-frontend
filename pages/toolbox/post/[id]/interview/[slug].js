@@ -2,9 +2,8 @@ import { getToolById } from "@/lib/api";
 import { getUserArticle, getSlugFromArticleId } from "@/lib/api";
 import useUser from "@/lib/iron-session/useUser";
 import dynamic from 'next/dynamic';
-// import '@prototypr/typr/dist/styles.css';
 
-const EditorWrapper = dynamic(() => import("@prototypr/typr/dist/EditorWrapper"), {
+const EditorWrapper = dynamic(() => import("tiptypr/dist/EditorWrapper"), {
   ssr: false
 });
 

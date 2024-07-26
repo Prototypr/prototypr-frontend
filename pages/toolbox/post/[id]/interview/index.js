@@ -5,11 +5,11 @@ import useUser from "@/lib/iron-session/useUser";
 import { useEffect, useState } from "react";
 import { addTwitterScript } from "@/lib/addTwitterScript";
 
-import Editor from "@prototypr/typr/dist/Editor";
+import Editor from "tiptypr/dist/Editor";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 
-import useLoad from "@prototypr/typr/dist/editorHooks/useLoad";
-import useCreate from "@prototypr/typr/dist/editorHooks/useCreate";
+import useLoad from "tiptypr/dist/editorHooks/useLoad";
+import useCreate from "tiptypr/dist/editorHooks/useCreate";
 
 import { useRouter } from "next/router";
 import EditorNav from "@/components/EditorNav";

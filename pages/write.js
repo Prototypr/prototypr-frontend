@@ -1,12 +1,9 @@
-// import EditorWrapper from "../prototypr-packages/public/Editor/EditorWrapper";
-// import EditorWrapper from "@prototypr/typr/dist/EditorWrapper";
 import useUser from "@/lib/iron-session/useUser";
 import { getUserArticle, getSlugFromArticleId } from "@/lib/api";
 import dynamic from "next/dynamic";
-const EditorWrapper = dynamic(() => import("@prototypr/typr/dist/EditorWrapper"), {
+const EditorWrapper = dynamic(() => import("tiptypr/dist/EditorWrapper"), {
   ssr: false
 });
-// import '@prototypr/typr/dist/styles.css';
 
 /**
  * Write
