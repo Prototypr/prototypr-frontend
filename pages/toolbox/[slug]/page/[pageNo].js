@@ -11,7 +11,6 @@ import {
   find_page_slug_from_menu,
   get_slugs_from_menu,
 } from "@/lib/menus/lib/getAllTagsFromMenu";
-import { useEffect } from "react";
 import Footer from "@/components/footer";
 import getSponsors from "@/lib/utils/getSponsors";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";

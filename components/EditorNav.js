@@ -12,7 +12,7 @@ const NavigationMenuMobile = dynamic(() => import("./navbar-menu-mobile"), {
   ssr: false,
 });
 
-export default function EditorNav({ activeNav, postStatus, tool, post }) {
+export default function EditorNav({ activeNav, postStatus, tool, post, isInterview }) {
   const { user, isLoading } = useUser({
     redirectIfFound: false,
   });
@@ -70,9 +70,9 @@ export default function EditorNav({ activeNav, postStatus, tool, post }) {
   }, [postStatus]);
 
   return (
-    <div id="main-nav" as="nav" className={`z-40 fixed w-full bg-white/90 backdrop-blur-xs py-3 top-0`}>
+    <div id="main-nav" as="nav" className={`z-40  ${isInterview ? "fixed w-[calc(100vw-450px)]" : "fixed"} w-full bg-white/90 backdrop-blur-xs py-3 top-0`}>
       <>
-        <div className="mx-auto max-w-[1000px] text-sm px-2 rounded-xl">
+        <div className={`mx-auto text-sm px-2 rounded-xl ${isInterview ? "max-w-full" : "max-w-[1000px]"}`}>
           <div
             className={` transition transition-all duration-700 ease-in-out relative flex items-center justify-between h-10`}
           >

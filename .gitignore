@@ -64,3 +64,6 @@ next.config.wizardcopy.js
 .env*.local
 .env*.production
 .env*.development
+
+prototypr-packages/
+

@@ -883,3 +883,26 @@ button.woot-widget-bubble.woot-elements--right {
 .step-wizard>div{
   height:100%;
 }
+
+.ai-response{
+  h3{
+
+    font-size: 15px!important;
+    margin: 20px 0 8px;
+    font-weight: 600!important;
+  }
+  p{
+    color:#444;
+    margin-bottom:10px;
+  }
+.flex.items-start:first-of-type{
+    background:rgb(247, 249, 253);
+    margin-top:-10px!important;
+    p{
+      color:rgb(56, 51, 100);
+    }
+    button {
+      display: none;
+    }
+  }
+}

@@ -3,7 +3,7 @@
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 // const { withSentryConfig } = require('@sentry/nextjs');
-
+import path from 'path';
 import withPlaiceholder from "@plaiceholder/next";
 import { withPlausibleProxy } from "next-plausible";
 
@@ -162,11 +162,23 @@ const nextConfig =
         config.resolve.fallback.dns = false;
       }
 
+      // fix for npm-link module
+      // remove this when we have a better way to handle this
+      // as it breaks on the app router (e.g. for page /notifications)
+      // if(!isProd){
+      //   config.resolve.alias = {
+      //     ...config.resolve.alias,
+      //     react: path.resolve('./node_modules/react'),
+      //     'react-dom': path.resolve('./node_modules/react-dom'),
+      //   };
+      // }
+
       if (typeof config.webpack === "function") {
         return config.webpack(config, options);
       }
       return config;
     },
+    // transpilePackages: ['react', 'react-dom'],
     // https://twitter.com/dan_abramov/status/1529677207869825024
     experimental: {
       plugins: true,

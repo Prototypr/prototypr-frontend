@@ -7,10 +7,10 @@ import Layout from "@/components/new-index/layoutForApp";
 // import { redirect } from 'next/navigation'
 // import AccountPageWrapper from './pageWrapper'
 import { HOME_OG_IMAGE_URL } from "@/lib/constants";
-import Dashboard from "@/components/Dashboard/Dashboard";
-import Navigation from "@/components/Dashboard/navigation";
+// import Dashboard from "@/components/Dashboard/Dashboard";
+// import Navigation from "@/components/Dashboard/navigation";
 import NotificationsList from "@/components/Notifications/NotificationsList";
-import { getCssText } from "stitches.config";
+// import { getCssText } from "stitches.config";
 
 export const metadata = {
   title: "Notifications | Prototypr",

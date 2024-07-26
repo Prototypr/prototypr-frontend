@@ -1,6 +1,14 @@
-import EditorWrapper from "@/components/Editor/EditorWrapper";
+import dynamic from 'next/dynamic';
+import useUser from "@/lib/iron-session/useUser";
+import { getUserArticle, getSlugFromArticleId } from "@/lib/api";
+// import '@prototypr/typr/dist/styles.css';
+
+const EditorWrapper = dynamic(() => import("@prototypr/typr/dist/EditorWrapper"), {
+  ssr: false
+});
 
 /**
+ * 
  * Write
  * used to create new post
  *
@@ -11,9 +19,21 @@ import EditorWrapper from "@/components/Editor/EditorWrapper";
  * @returns
  */
 export default function EditPostPage() {
+  const { user, isLoading, mutateUser } = useUser({
+    // redirectTo: '/account',
+    redirectTo: "/onboard",
+    redirectIfFound: false,
+  });
+
   return (
     <>
-      <EditorWrapper />
+      <EditorWrapper
+        user={user}
+        userLoading={isLoading}
+        mutateUser={mutateUser}
+        getUserArticle={getUserArticle}
+        getSlugFromArticleId={getSlugFromArticleId}
+      />
     </>
   );
 }

@@ -1,5 +1,20 @@
 import { getToolById } from "@/lib/api";
-import EditorWrapper from "@/components/Editor/EditorWrapper";
+// /import EditorWrapper from "@/components/Editor/EditorWrapper";
+import { getUserArticle, getSlugFromArticleId } from "@/lib/api";
+import useUser from "@/lib/iron-session/useUser";
+import dynamic from 'next/dynamic';
+// import '@prototypr/typr/dist/styles.css';
+
+const EditorWrapper = dynamic(() => import("@prototypr/typr/dist/EditorWrapper"), {
+  ssr: false
+});
+
+// const InterviewEditor = dynamic(() => import("prototypr-packages/private/InterviewEditor/components/InterviewEditor"), {
+//   ssr: false
+// });
+const InterviewEditor = dynamic(() => import("@prototypr/paper-interview/dist/components/InterviewEditor"), {
+  ssr: false
+});
 
 /**
  * Edit post page
@@ -13,27 +28,41 @@ import EditorWrapper from "@/components/Editor/EditorWrapper";
  * @returns
  */
 export default function EditPostPage({ tool }) {
+  const { user, isLoading, mutateUser } = useUser({
+    // redirectTo: '/account',
+    redirectTo: "/onboard",
+    redirectIfFound: false,
+  });
   return (
     <>
-      <div className="h-full w-full">
-        {tool?.attributes?.logo?.data?.attributes?.url ? (
-          <div className="mx-auto mt-[72px] -mb-16 max-w-[44rem] mx-auto text-sm px-2 py-2  bg-white border border-1 border-gray-200/70 rounded-xl">
-            <div className="flex ">
-              <img
-                className="lg:block h-10 w-10 object-cover shadow rounded-lg border border-gray-50"
-                data-gumlet="false"
-                src={tool?.attributes?.logo?.data?.attributes?.url}
-                alt="Prototypr Logo"
-              />
-              <div className="my-auto ml-3">
-                <div className="text-base font-medium tracking-tight text-gray-800">
-                  {tool?.attributes?.title}: Creator Story
-                </div>
-              </div>
+      <div className="h-screen w-screen">
+        <div className="flex flex-row mx-auto w-full">
+          <div className="w-full">
+            <EditorWrapper
+              isInterview={true}
+              tool={tool}
+              getUserArticle={getUserArticle}
+              getSlugFromArticleId={getSlugFromArticleId}
+              user={user}
+              mutateUser={mutateUser}
+              isLoadingUser={isLoading}
+            >
+              <InterviewEditor/>
+
+            </EditorWrapper>
+          </div>
+          <div className="w-[450px] flex-none h-screen">
+            <div
+              id="assitant-panel"
+              className="h-screen p-4 h-full border border-gray-200 w-[450px] shadow-sm fixed overflow-y-auto"
+            >
+              <h2 className="text-lg fixed z-30 top-0 right-0 w-[450px] border-l p-4 bg-gray-50 border-b border-gray-300 font-medium tracking-tight text-gray-800 mb-4">
+                Interview Assistant
+              </h2>
+              <div id="assistant-container" className="mt-[100px]"></div>
             </div>
           </div>
-        ) : null}
-        <EditorWrapper isInterview={true} tool={tool} />
+        </div>
       </div>
     </>
   );
