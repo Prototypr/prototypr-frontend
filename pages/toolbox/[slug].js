@@ -59,7 +59,7 @@ import buildToolboxGallery, {
 import { formatAllTools } from "@/lib/utils/formatToolContent";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import HeroCardSection from "@/components/toolbox/HeroCardSectionSimple";
-import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
+import { addTwitterScript } from "@/lib/addTwitterScript";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
 import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";

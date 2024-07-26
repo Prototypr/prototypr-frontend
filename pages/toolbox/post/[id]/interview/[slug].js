@@ -1,5 +1,4 @@
 import { getToolById } from "@/lib/api";
-// /import EditorWrapper from "@/components/Editor/EditorWrapper";
 import { getUserArticle, getSlugFromArticleId } from "@/lib/api";
 import useUser from "@/lib/iron-session/useUser";
 import dynamic from 'next/dynamic';

@@ -22,7 +22,6 @@ import MediaForm from "@/components/toolbox/forms/MediaForm";
 // import Link from "next/link";
 // import Button from "@/components/Primitives/Button";
 import DealForm from "@/components/toolbox/forms/DealForm";
-// import { PublishDialogButton } from "@/components/Editor/PublishDialogButton";
 import { PublishToolDialog } from "@/components/toolbox/forms/PublishToolDialog";
 import ToolIconCard from "@/components/v4/card/ToolIconCard";
 import Button from "@/components/Primitives/Button";

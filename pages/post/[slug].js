@@ -31,7 +31,7 @@ import { TOTAL_STATIC_POSTS } from "@/lib/constants";
 import PostHeader from "@/components/post-header";
 import SocialShare from "@/components/SocialShare";
 import PostGroupRow from "@/components/v4/layout/PostGroupRow";
-import { addTwitterScript } from "@/components/Editor/editorHooks/libs/addTwitterScript";
+import { addTwitterScript } from "@/lib/addTwitterScript";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
 
