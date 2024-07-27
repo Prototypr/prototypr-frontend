@@ -3,7 +3,9 @@ import { getUserArticle, getSlugFromArticleId } from "@/lib/api";
 import useUser from "@/lib/iron-session/useUser";
 import dynamic from 'next/dynamic';
 
-const EditorWrapper = dynamic(() => import("tiptypr/src/EditorWrapper"), {
+import '@prototypr/paper-interview/dist/styles.css';
+
+const EditorWrapper = dynamic(() => import("tiptypr/dist/EditorWrapper"), {
   ssr: false
 });
 

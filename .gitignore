@@ -66,4 +66,5 @@ next.config.wizardcopy.js
 .env*.development
 
 prototypr-packages/
+prototypr-packagesx/
 
