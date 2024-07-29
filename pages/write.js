@@ -5,6 +5,9 @@ const EditorWrapper = dynamic(() => import("tiptypr/dist/EditorWrapper"), {
   ssr: false
 });
 import 'tiptypr/dist/styles.css';
+import 'tippy.js/dist/svg-arrow.css';
+import 'tippy.js/animations/scale-subtle.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 /**
  * Write

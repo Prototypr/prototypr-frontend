@@ -4,6 +4,11 @@ import useUser from "@/lib/iron-session/useUser";
 import dynamic from 'next/dynamic';
 
 import '@prototypr/paper-interview/dist/styles.css';
+import 'tiptypr/dist/styles.css';
+import 'tippy.js/dist/svg-arrow.css';
+import 'tippy.js/animations/scale-subtle.css';
+import "react-datepicker/dist/react-datepicker.css";
+
 
 const EditorWrapper = dynamic(() => import("tiptypr/dist/EditorWrapper"), {
   ssr: false

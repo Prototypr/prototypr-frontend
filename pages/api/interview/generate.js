@@ -1,9 +1,14 @@
-import { userCheck } from "@/lib/account/userCheck";
+// import { userCheck } from "@/lib/account/userCheck";
 import { getIronSession } from "iron-session";
 import { sessionOptions } from "@/lib/iron-session/session";
 import {generate} from "@prototypr/paper-interview/dist/api/generate"
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
+
+const getSession = async (req, res) =>{
+  const session = await getIronSession(req, res, sessionOptions);
+  return session
+}
 
 async function handler(req, res) {
   if (req.method !== "POST") {
@@ -14,7 +19,19 @@ async function handler(req, res) {
   }
 
   try {
-    const { userId, user } = userCheck({ req, res, requireAuth: false });
+    const session = await getSession(req, res)
+    const user = session.user
+
+    if(!user?.login?.jwt){
+      console.log('no token')
+      return res.status(200).json({status:500,message:"User is not authenticated - invalid token"});
+    }
+
+    const userId = user?.login?.user?.id
+
+    if (!userId) {
+      return res.status(500).end("User is not authenticated");
+    }
 
     if (userId) {
       // Call generate and get the stream
