@@ -1,14 +1,21 @@
 // import { userCheck } from "@/lib/account/userCheck";
+import OpenAI from "openai";
+
 import { getIronSession } from "iron-session";
 import { sessionOptions } from "@/lib/iron-session/session";
 import {generate} from "@prototypr/paper-interview/dist/api/generate"
-export const runtime = "edge";
-export const dynamic = "force-dynamic";
 
 const getSession = async (req, res) =>{
   const session = await getIronSession(req, res, sessionOptions);
   return session
 }
+
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 async function handler(req, res) {
   if (req.method !== "POST") {
@@ -35,7 +42,7 @@ async function handler(req, res) {
 
     if (userId) {
       // Call generate and get the stream
-      const stream = await generate({ req, res, user });
+      const stream = await generate({ req, res, user, openai });
       
       // Return the stream directly
       return new Response(stream, {
