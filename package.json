@@ -188,7 +188,7 @@
     "zod": "^3.23.8"
   },
   "optionalDependencies": {
-    "@prototypr/paper-interview": "^0.0.30",
+    "@prototypr/paper-interview": "0.0.31",
     "@prototypr/prototypr-postie": "^1.0.91"
   },
   "resolutions": {
