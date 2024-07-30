@@ -129,7 +129,7 @@ const EmblaCarousel = props => {
                 src={item.original}
                 alt="Your alt text"
               /> */}
-              <div className="relative shimmer border border-gray-300/70 h-[240px] shadow-md w-full rounded-2xl h-full w-full relative overflow-hidden flex justify-center">
+              <div className="relative shimmer border border-gray-300/70 h-[240px] shadow-md w-full rounded-2xl w-full relative overflow-hidden flex justify-center">
                 {/* <img src={item.original} className='object-cover cursor-pointer pointer-events-auto' alt={`Gallery Image ${index}`}/> */}
                 <Image
                   // placeholder="blur"

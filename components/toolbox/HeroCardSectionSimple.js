@@ -136,7 +136,7 @@ const HeroCardSection = ({ post, tags, featuredImage, user }) => {
                                         href={`/toolbox/${tag.attributes.slug}/page/1/`}
                                       >
                                         <button
-                                          className={` h-5 ${i<2?'flex':'hidden md:flex'} flex-col justify-center capitalize font-medium text-base px-1.5 tracking-tight cursor-pointer bg-[#e0e4ea] hover:bg-gray-300 hover:text-black transition transition-all duration-400 rounded-full  text-black/50 text-[12px] font-base`}
+                                          className={` h-5 ${i<2?'flex':'hidden md:flex'} flex-col justify-center capitalize font-medium px-1.5 tracking-tight cursor-pointer bg-[#e0e4ea] hover:bg-gray-300 hover:text-black transition transition-all duration-400 rounded-full  text-black/50 text-[12px] font-base`}
                                         >
                                           {tag.attributes.name}
                                         </button>

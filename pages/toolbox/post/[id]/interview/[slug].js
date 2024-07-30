@@ -3,11 +3,12 @@ import { getUserArticle, getSlugFromArticleId } from "@/lib/api";
 import useUser from "@/lib/iron-session/useUser";
 import dynamic from 'next/dynamic';
 
-import '@prototypr/paper-interview/dist/styles.css';
-import 'tiptypr/dist/styles.css';
+
 import 'tippy.js/dist/svg-arrow.css';
 import 'tippy.js/animations/scale-subtle.css';
 import "react-datepicker/dist/react-datepicker.css";
+// import '@prototypr/paper-interview/dist/styles.css';
+// import 'tiptypr/dist/styles.css';
 
 
 const EditorWrapper = dynamic(() => import("tiptypr/dist/EditorWrapper"), {
@@ -15,9 +16,9 @@ const EditorWrapper = dynamic(() => import("tiptypr/dist/EditorWrapper"), {
 });
 
 // const InterviewEditor = dynamic(() => import("prototypr-packages/private/InterviewEditor/components/InterviewEditor"), {
-//   ssr: false
-// });
-const InterviewEditor = dynamic(() => import("@prototypr/paper-interview/dist/components/InterviewEditor"), {
+  //   ssr: false
+  // });
+  const InterviewEditor = dynamic(() => import("@prototypr/paper-interview/dist/components/InterviewEditor"), {
   ssr: false
 });
 

@@ -4,9 +4,11 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
-    "./prototypr-packages/**/src/**/*.{js,ts,jsx,tsx}",
+    // "./prototypr-packages/**/src/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./lib/constants.js",
+    "./node_modules/@prototypr/paper-interview/dist/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/tiptypr/dist/**/*.{js,ts,jsx,tsx}",
   ],
   corePlugins: {
     // due to https://github.com/tailwindlabs/tailwindcss/issues/6602 - buttons disappear
