@@ -181,14 +181,14 @@
     "tailwindcss-border-gradient-radius": "^3.0.1",
     "tinycolor2": "^1.4.1",
     "tippy.js": "^6.3.7",
-    "tiptypr": "^0.0.6",
+    "tiptypr": "^0.0.61",
     "tsparticles": "^2.7.1",
     "uuidv4": "^6.2.13",
     "yup": "^0.32.11",
     "zod": "^3.23.8"
   },
   "optionalDependencies": {
-    "@prototypr/paper-interview": "^0.0.33",
+    "@prototypr/paper-interview": "^0.0.35",
     "@prototypr/prototypr-postie": "^1.0.91"
   },
   "resolutions": {
