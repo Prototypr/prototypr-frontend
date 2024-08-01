@@ -23,6 +23,8 @@
     "@next/bundle-analyzer": "^12.1.5",
     "@phosphor-icons/react": "^2.0.15",
     "@plaiceholder/next": "^3.0.0",
+    "@prototypr/paper-interview": "^0.0.36",
+    "@prototypr/prototypr-postie": "^1.0.91",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-checkbox": "^1.0.1",
     "@radix-ui/react-collapsible": "^1.0.1",
@@ -181,15 +183,11 @@
     "tailwindcss-border-gradient-radius": "^3.0.1",
     "tinycolor2": "^1.4.1",
     "tippy.js": "^6.3.7",
-    "tiptypr": "^0.0.61",
+    "tiptypr": "^0.0.62",
     "tsparticles": "^2.7.1",
     "uuidv4": "^6.2.13",
     "yup": "^0.32.11",
     "zod": "^3.23.8"
-  },
-  "optionalDependencies": {
-    "@prototypr/paper-interview": "^0.0.35",
-    "@prototypr/prototypr-postie": "^1.0.91"
   },
   "resolutions": {
     "sharp": "0.33.2"

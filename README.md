@@ -113,3 +113,13 @@ NEXT_PUBLIC_DATABASE_URL=postgresql://[dbusername]:[dbpassword]@[dburl]:[db-port
 ```
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y71QU45)
 
+---
+
+### Switch between npm packages and local packages
+
+There is a script in the root of the repo to switch between npm packages and local packages.
+
+- `./switch-mode.sh local` to switch to local development mode
+- `./switch-mode.sh npm` to switch to npm packages mode
+
+switch-mode will update the package.json in the root directory to point to the correct version of the package.
