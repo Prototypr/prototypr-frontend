@@ -4,6 +4,9 @@ import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 
 const InterviewInviteBadge = ({ notification }) => {
+  if(!notification?.post){
+    return null;
+  }
   return (
     <div className="flex items-start justify-between">
       <div className="flex gap-6">
@@ -20,10 +23,10 @@ const InterviewInviteBadge = ({ notification }) => {
               <>
                 You're invited to answer an interview article about {" "}
                 <Link
-              href={{ pathname:`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`, query: { clearNotification: notification.id } }}
+              href={{ pathname:`/${notification?.post?.type == "article" ? "post" : "toolbox"}/${notification?.post?.slug}`, query: { clearNotification: notification.id } }}
               className="font-bold hover:underline"
                 >
-                  {notification.post.title}
+                  {notification?.post?.title}
                 </Link>
                 !
               </>
@@ -34,18 +37,18 @@ const InterviewInviteBadge = ({ notification }) => {
           <p className="text-sm text-gray-500 max-w-[42rem] line-clamp-2 mr-4">
             <Link
               className="hover:underline"
-              href={{ pathname:`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`, query: { clearNotification: notification.id } }}
+              href={{ pathname:`/${notification?.post?.type == "article" ? "post" : "toolbox"}/${notification?.post?.slug}`, query: { clearNotification: notification.id } }}
               // as={`/${notification.post.type == "article" ? "post" : "toolbox"}/${notification?.post.slug}`}
             >
               Get featured in the newsletter for telling your story about
               <span className="font-medium text-gray-700">
                 {" "}
-                {notification.post.title}
+                {notification?.post?.title}
               </span>
             </Link>
           </p>
           <div className="text-blue-400 text-sm">
-            {formatDistanceToNow(new Date(notification.createdAt), {
+            {formatDistanceToNow(new Date(notification?.createdAt), {
               addSuffix: true,
             })}
           </div>

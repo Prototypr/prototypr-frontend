@@ -47,7 +47,7 @@ const useLoad = (user) => {
     try {
       const data = await getUserArticle(user, id);
 
-      const post = data.userPostId;
+      const post = data;
 
       //only allow owner of post, and post type article
       if(post?.owner==user?.id && post?.type==='tool'){

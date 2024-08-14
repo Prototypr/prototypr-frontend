@@ -93,17 +93,14 @@ const InterviewDialog = ({
 
                   try {
                     const postInfo = await createPost({
-                      user,
-                      editor: initialEditor,
-                      forReview: false,
-                      relatedPost: relatedPostId,
+                      relatedPostId: relatedPostId,
                     });
                     //set the new slug
-                    localStorage.removeItem("wipInterview");
+                    // localStorage.removeItem("wipInterview");
 
-                    router.push(
-                      `/toolbox/post/${relatedPostId}/interview/${postInfo?.id}`
-                    );
+                    // router.push(
+                    //   `/toolbox/post/${relatedPostId}/interview/${postInfo?.id}`
+                    // );
                   } catch (e) {
                     setLoading(false);
                     alert("Error creating post. Please try again.");

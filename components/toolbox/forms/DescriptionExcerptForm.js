@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
 import { FormContainer } from "@/components/Jobs/FormStepper";
-import { FormInput } from "@/components/Jobs/FormInput";
+// import { FormInput } from "@/components/Jobs/FormInput";
 import * as Yup from "yup";
 import dynamic from "next/dynamic";
 
@@ -10,7 +10,8 @@ import Button from "@/components/Primitives/Button";
 import MiniEditor from "@/components/MiniEditor/MiniEditor";
 // import useLoad from "../hooks/useLoad";
 import { useWizardContext } from "react-sweet-wizard";
-import Editor from "tiptypr/dist/Editor";
+// import Editor from "tiptypr/dist/Editor";
+import {Editor} from 'tiptypr'
 import { ToggleSwitch } from "@/components/atom/Switch/switch";
 const Spinner = dynamic(() => import("@/components/atom/Spinner/Spinner"));
 const axios = require("axios");

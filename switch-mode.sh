@@ -176,13 +176,13 @@ deploy_package() {
     echo "Deploying package..."
     
     # Check if package name is provided
-    if [ -z "$2" ]; then
+    if [ -z "$1" ]; then
         echo "Error: Package name is required."
         echo "Usage: $0 deploy <package-name>"
         exit 1
     fi
 
-    package_name="$2"
+    package_name="$1"
     package_dir="prototypr-packages/$package_name"
 
     # Check if the package directory exists
@@ -223,10 +223,10 @@ deploy_package() {
     cd ../../
     
     # Update package.json in project root
-    new_version=$(node -p "require('./prototypr-packages/$package_name/package.json').version")
-    sed -i '' "s/\"$package_name\": \".*\"/\"$package_name\": \"^$new_version\"/" package.json
+    # new_version=$(node -p "require('./prototypr-packages/$package_name/package.json').version")
+    # sed -i '' "s/\"$package_name\": \".*\"/\"$package_name\": \"^$new_version\"/" package.json
     
-    echo "Deployment complete. Package version updated to $new_version. Make sure you run 'npm install' in the root directory to update all packages."
+    echo "Deployment complete. Package version updated to $new_version. Make sure to update it in the main project package.json."
 }
 
 # Main script logic
@@ -254,7 +254,7 @@ case "$1" in
         watch_package "$2"
         ;;
     *)
-        echo "Usage: $0 {local|npm|deploy|watch <package-name>}"
+        echo "Usage: $0 {local|npm|deploy|watch (<package-name>)}"
         exit 1
         ;;
 esac

@@ -1,26 +1,28 @@
 import { getToolById } from "@/lib/api";
-import { getUserArticle, getSlugFromArticleId } from "@/lib/api";
 import useUser from "@/lib/iron-session/useUser";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-
-import 'tippy.js/dist/svg-arrow.css';
-import 'tippy.js/animations/scale-subtle.css';
+import "tippy.js/dist/svg-arrow.css";
+import "tippy.js/animations/scale-subtle.css";
 import "react-datepicker/dist/react-datepicker.css";
 // import '@prototypr/paper-interview/dist/styles.css';
 // import 'tiptypr/dist/styles.css';
+import { useRouter } from "next/router";
+import { typrProps } from "@/lib/editor/typrProps";
 
-
-const EditorWrapper = dynamic(() => import("tiptypr/dist/EditorWrapper"), {
-  ssr: false
+const Tiptypr = dynamic(() => import("tiptypr"), {
+  ssr: false,
 });
 
 // const InterviewEditor = dynamic(() => import("prototypr-packages/private/InterviewEditor/components/InterviewEditor"), {
-  //   ssr: false
-  // });
-  const InterviewEditor = dynamic(() => import("@prototypr/paper-interview/dist/components/InterviewEditor"), {
-  ssr: false
-});
+//   ssr: false
+// });
+const InterviewEditor = dynamic(
+  () => import("@prototypr/paper-interview/dist/components/InterviewEditor"),
+  {
+    ssr: false,
+  }
+);
 
 /**
  * Edit post page
@@ -39,23 +41,22 @@ export default function EditPostPage({ tool }) {
     redirectTo: "/onboard",
     redirectIfFound: false,
   });
+  const router = useRouter();
+
+  
   return (
     <>
       <div className="h-screen w-screen">
         <div className="flex flex-row mx-auto w-full">
-          <div className="w-full">
-            <EditorWrapper
+          <div className="w-full" id="interview-editor">
+            <Tiptypr
+              {...typrProps({ user, userLoading: isLoading, mutateUser, router })}
               isInterview={true}
               tool={tool}
-              getUserArticle={getUserArticle}
-              getSlugFromArticleId={getSlugFromArticleId}
-              user={user}
-              mutateUser={mutateUser}
-              isLoadingUser={isLoading}
+              postId={router?.isReady && (router.query.slug || router.query.id)}
             >
-              <InterviewEditor/>
-
-            </EditorWrapper>
+              <InterviewEditor />
+            </Tiptypr>
           </div>
           <div className="w-[450px] flex-none h-screen">
             <div

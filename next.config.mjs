@@ -4,7 +4,6 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 // const { withSentryConfig } = require('@sentry/nextjs');
 import path from 'path';
-import withPlaiceholder from "@plaiceholder/next";
 import { withPlausibleProxy } from "next-plausible";
 
 // import withBundleAnalyzer from '@next/bundle-analyzer';
@@ -20,6 +19,7 @@ const nextConfig =
     domain: "4.prototypr.io",
     selfHosted: true,
   })({
+    reactStrictMode: false,
     i18n: {
       locales: ["en-US", "es-ES"],
       defaultLocale: "en-US",
@@ -243,5 +243,5 @@ const nextConfig =
 // { hideSourcemaps: true }
 // );
 
-// export default bundleAnalyzer(withPlaiceholder(nextConfig));
-export default withPlaiceholder(nextConfig);
+// export default bundleAnalyzer(nextConfig);
+export default nextConfig;

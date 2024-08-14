@@ -4,7 +4,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import useUser from "@/lib/iron-session/useUser";
 import { useState, useEffect } from "react";
 import jsCookie from "js-cookie";
-import UndoRedoButtons from "tiptypr/dist/UndoRedoButtons";
+import UndoRedoButtons from "tiptypr";
 const NavigationMenuDemo = dynamic(() => import("./navbar-menu"), {
   ssr: true,
 });

@@ -155,7 +155,9 @@ const NotificationItem = ({ notification }) => {
 
   return (
     <div className="bg-white rounded-lg shadow p-4">
-      {notification?.entity_type == "post" ? (
+      {
+      !notification?.post?'':
+      notification?.entity_type == "post" ? (
         <PostNotification notification={notification} />
       ) : notification?.entity_type == "badge" ? (
         <CreatorBadgeNotification notification={notification} />

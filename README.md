@@ -3,7 +3,7 @@
 <img style="width:250px" src="https://prototypr.io/static/images/prototypr_logo.svg"/>
   </a>
 <h3>Open-source Publishing Platform</h3>
-<p>Built with <a href="https://github.com/Prototypr/prototypr-frontend/wiki/Building-the-Prototypr-Website">Next.js</a>, <a href="https://github.com/Prototypr/prototypr-frontend/wiki/Prototypr-Backend-CMS-(Strapi.io)">Strapi.io</a>, and <a href="https://tiptap.dev">TipTap/ProseMirror (editor)</a>, by <a href="https://github.com/GraemeFulton">graeme</a>
+<p>Built with <a href="https://github.com/Prototypr/prototypr-frontend/wiki/Building-the-Prototypr-Website">Next.js</a>, <a href="https://github.com/Prototypr/prototypr-frontend/wiki/Prototypr-Backend-CMS-(Strapi.io)">Strapi.io</a>, and <ath href="https://tiptap.dev">TipTap/ProseMirror (editor)</a>, by <a href="https://github.com/GraemeFulton">graeme</a>
   </p>
   <p>
 <a href="https://github.com/sponsors/prototypr"><img src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86"/>
@@ -19,18 +19,26 @@
 _In the past, Prototypr has been backed by Adobe Fund, and [**Interledger Foundation**](https://interledger.org/) to build a [Web Monetized Publishing platform](https://open.prototypr.io/)._
 
 **Important:**
-* This repo is only the Next.js Frontend app, but the features below describe the whole project.
-* The [backend app is built with Strapi, and the repo for that is over here](https://github.com/Prototypr/prototypr-backend). 
+**This repo is only the Next.js Frontend app, but the features below describe the whole project.**
+
+---
 
 ## ⚠️ Use as reference only 
 
-At the moment, there is no succinct guide or docs to clone and set up the platform locally, but it is possible with some poking around.
-Therefore, please only use this repo as a reference and for example code - there will be teething problems running it without data.
+This repo is for reference only - there's currently no documentation or seed data that is required to set up the platform locally - so it's not advised to do it yet. You can install the [Prototypr Editor](https://github.com/Prototypr/typr) separately though (see below). 
 
-💓 If you really need this, consider [sponsoring me](https://github.com/sponsors/prototypr) so I can create documentation, seed data, and all things necessary to install and run the project seamlessly.
+💓 If you want to set it up, consider [sponsoring me](https://github.com/sponsors/prototypr) so I can create documentation, seed data, and all things necessary to install and run the project.
 
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/prototypr)
 
+
+### Update: Prototypr Editor is here!
+**[UPDATE: AUG 2024]** The [Prototypr Editor](https://github.com/Prototypr/typr) is now available as a standalone [NPM package](https://www.npmjs.com/package/tiptypr) that you can install separately (I still need to add a license, probably will put MIT).
+
+<a href="https://github.com/Prototypr/typr"><img src="https://prototypr-media.sfo2.digitaloceanspaces.com/strapi/af968e21ccb808a0a57c4a7827a44237.png"/></a>
+
+
+---
 
 ## Features Overview
 
