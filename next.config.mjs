@@ -20,6 +20,7 @@ const nextConfig =
     selfHosted: true,
   })({
     reactStrictMode: false,
+    transpilePackages: ['tiptypr'],
     i18n: {
       locales: ["en-US", "es-ES"],
       defaultLocale: "en-US",
