@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import useUser from "@/lib/iron-session/useUser";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
@@ -24,12 +25,19 @@ export default function EditPostPage() {
   });
 
   const router = useRouter();
+  const [postId, setPostId] = useState(-1);
+
+  useEffect(() => {
+    if (router.isReady && (router.query.slug || router.query.id)) {
+      setPostId((router.query.slug || router.query.id) || -1);
+    }
+  }, [router.isReady, router.query.slug, router.query.id]);
 
   return (
     <>
       <Tiptypr
         {...typrProps({ user, userLoading: isLoading, mutateUser, router })}
-        postId={router?.isReady && (router.query.slug || router.query.id)}
+        postId={postId}
       />
     </>
   );

@@ -53,7 +53,7 @@ export default function EditPostPage({ tool }) {
               {...typrProps({ user, userLoading: isLoading, mutateUser, router })}
               isInterview={true}
               tool={tool}
-              postId={router?.isReady && (router.query.slug || router.query.id)}
+              postId={(router?.isReady && (router.query.slug || router.query.id) )|| -1}
             >
               <InterviewEditor />
             </Tiptypr>
