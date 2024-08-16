@@ -6,6 +6,8 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     // "./prototypr-packages/**/src/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./components/typr-demo/**/*.{js,ts,jsx,tsx}",
+    './app/**/*.{js,jsx}',
     "./lib/constants.js",
     "./node_modules/@prototypr/paper-interview/dist/components/**/*.{js,ts,jsx,tsx}",
     "./node_modules/tiptypr/dist/**/*.{js,ts,jsx,tsx}",
@@ -256,6 +258,5 @@ module.exports = {
   plugins: [
     require("@tailwindcss/forms"),
     require("tailwindcss-border-gradient-radius"),
-    require("@tailwindcss/line-clamp"),
   ],
 };

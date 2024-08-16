@@ -6,7 +6,7 @@ import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { indigo, mauve, green, teal } from "@radix-ui/colors";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
 import { FormattedMessage, useIntl } from "react-intl";

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { keyframes } from "@stitches/react";
 import { styled } from "../../../stitches.config";
@@ -311,6 +311,14 @@ const ContentList = styled("ul", {
           gridTemplateRows: "repeat(3, 1fr)",
         },
       },
+      four: {
+        "@media only screen and (min-width: 600px)": {
+          width: 750,
+          gridAutoFlow: "column",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateRows: "repeat(2, 1fr)",
+        },
+      },
     },
   },
 });
@@ -520,7 +528,8 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
               }}
               className="normal-case"
             >
-              <ContentList layout="two">
+              <ContentList layout="three">
+                {/* <ContentListItemCallout /> */}
                 <ContentListItem title={submenu2Title1} href="/toolbox">
                   {submenu2Desc1}
                 </ContentListItem>
@@ -609,6 +618,9 @@ export const NavigationMenuDemo = ({ activeNav, collapse }) => {
                 </ContentListItem>
                 <ContentListItem title={"Sponsor"} href="/sponsor">
                   Promote your product.
+                </ContentListItem>
+                <ContentListItem title={"Typr Editor"} href="/typr">
+                  Explore our open-source writing tool.
                 </ContentListItem>
               </ContentList>
             </NavigationMenuContent>

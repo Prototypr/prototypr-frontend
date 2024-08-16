@@ -36,7 +36,7 @@ export default async function AccountPage() {
 
   return (
     <Layout sessionUser={userData?.user?.id} background={"#fbfcff"}>
-      <div className="flex flex-col overflow-y-auto pt-[96px] mx-auto w-full">
+      <div className="flex flex-col overflow-y-auto mx-auto w-full">
         {/* {userData?.user?.id} */}
         <div
           className="pb-20 mx-auto px-2 sm:px-6 lg:px-8 w-full"
