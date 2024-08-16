@@ -3,7 +3,7 @@
 <img style="width:250px" src="https://prototypr.io/static/images/prototypr_logo.svg"/>
   </a>
 <h3>Open-source Publishing Platform</h3>
-<p>Built with <a href="https://github.com/Prototypr/prototypr-frontend/wiki/Building-the-Prototypr-Website">Next.js</a>, <a href="https://github.com/Prototypr/prototypr-frontend/wiki/Prototypr-Backend-CMS-(Strapi.io)">Strapi.io</a>, and <ath href="https://tiptap.dev">TipTap/ProseMirror (editor)</a>, by <a href="https://github.com/GraemeFulton">graeme</a>
+<p>Built with <a href="https://github.com/Prototypr/prototypr-frontend/wiki/Building-the-Prototypr-Website">Next.js</a>, <a href="https://github.com/Prototypr/prototypr-frontend/wiki/Prototypr-Backend-CMS-(Strapi.io)">Strapi.io</a>, and <a href="https://github.com/prototypr/typr">Typr Editor</a>, by <a href="https://github.com/GraemeFulton">graeme</a>
   </p>
   <p>
 <a href="https://github.com/sponsors/prototypr"><img src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86"/>
