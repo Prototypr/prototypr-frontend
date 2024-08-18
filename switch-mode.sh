@@ -13,7 +13,7 @@ switch_to_local() {
             if [ -d "$package_dir" ] && [ -f "$package_dir/package.json" ]; then
                 package_name=$(jq -r .name "$package_dir/package.json")
                 echo "Uninstalling $package_name..."
-                npm uninstall "$package_name" --legacy-peer-deps
+                npm uninstall "$package_name"
             fi
         done
     fi
@@ -41,9 +41,27 @@ switch_to_local() {
     # npm cache clean --force
     
     # Install dependencies
-    npm install --legacy-peer-deps
+    npm install
     
     echo "Switched to local development mode. Workspace and @prototypr packages have been linked."
+    
+    # Revert jsconfig.json to remove tiptypr src path
+    jq 'del(.compilerOptions.paths.tiptypr)' jsconfig.json > temp.json && mv temp.json jsconfig.json
+
+    echo "Reverted next.config.mjs to original webpack configuration."
+}
+
+# Function to switch to src development mode
+switch_to_src() {
+    echo "Switching to src development mode..."
+    
+    # Call switch_to_local function
+    switch_to_local
+    
+    # Update jsconfig.json
+    jq '.compilerOptions.paths["tiptypr"] = ["./prototypr-packages/tiptypr/src"]' jsconfig.json > temp.json && mv temp.json jsconfig.json
+    
+    echo "Switched to src development mode. You can now use 'npm run dev:src' to run in src mode."
 }
 
 # Function to switch to npm packages mode
@@ -82,7 +100,7 @@ switch_to_npm() {
             if [ -d "$package_dir" ] && [ -f "$package_dir/package.json" ]; then
                 package_name=$(jq -r .name "$package_dir/package.json")
                 echo "Uninstalling $package_name..."
-                npm uninstall "$package_name" --legacy-peer-deps
+                npm uninstall "$package_name"
             fi
         done
     fi
@@ -97,22 +115,34 @@ switch_to_npm() {
         echo "Renaming operation completed"
     fi
 
-    npm install --legacy-peer-deps
+    npm install
     # Install @prototypr packages
     if [ -d "prototypr-packages" ]; then
         for package_dir in prototypr-packages/*; do
             if [ -d "$package_dir" ] && [ -f "$package_dir/package.json" ]; then
                 package_name=$(jq -r .name "$package_dir/package.json")
-                echo "Installing $package_name..."
-                npm install "$package_name@latest" --legacy-peer-deps
+                private_package=$(jq -r .private "$package_dir/package.json")
+                package_version=$(jq -r .version "$package_dir/package.json")
+                echo "Installing $package_name (version $package_version)"
+                if [ "$private_package" = "true" ]; then
+                    npm install "$package_name@$package_version" --save-optional
+                else
+                    npm install "$package_name@$package_version" --save
+                fi
             fi
         done
     elif [ -d "prototypr-packagesx" ]; then
         for package_dir in prototypr-packagesx/*; do
             if [ -d "$package_dir" ] && [ -f "$package_dir/package.json" ]; then
                 package_name=$(jq -r .name "$package_dir/package.json")
-                echo "Installing $package_name..."
-                npm install "$package_name@latest" --legacy-peer-deps
+                private_package=$(jq -r .private "$package_dir/package.json")
+                package_version=$(jq -r .version "$package_dir/package.json")
+                echo "Installing $package_name (version $package_version)"
+                if [ "$private_package" = "true" ]; then
+                    npm install "$package_name@$package_version" --save-optional
+                else
+                    npm install "$package_name@$package_version" --save
+                fi
             fi
         done
     else
@@ -162,9 +192,9 @@ watch_package() {
     # Navigate to the package directory
     cd "$package_dir" || exit 1
     
-    # Run npm install with legacy peer deps
+    # Run npm install
     echo "Installing dependencies for $package_name..."
-    npm install --legacy-peer-deps
+    npm install
     
     # Run npm watch
     echo "Starting watch mode for $package_name..."
@@ -205,7 +235,7 @@ deploy_package() {
     # Increase version number by 0.01
     npm version patch
     
-    npm install --legacy-peer-deps
+    npm install
     # Run npm build
     npm run build
     
@@ -236,6 +266,9 @@ case "$1" in
         ;;
     npm)
         switch_to_npm
+        ;;
+    src)
+        switch_to_src
         ;;
     deploy)
         if [ -z "$2" ]; then

@@ -5,6 +5,10 @@
 // const { withSentryConfig } = require('@sentry/nextjs');
 import path from 'path';
 import { withPlausibleProxy } from "next-plausible";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // import withBundleAnalyzer from '@next/bundle-analyzer';
 // const bundleAnalyzer = withBundleAnalyzer({
@@ -163,16 +167,10 @@ const nextConfig =
         config.resolve.fallback.dns = false;
       }
 
-      // fix for npm-link module
-      // remove this when we have a better way to handle this
-      // as it breaks on the app router (e.g. for page /notifications)
-      // if(!isProd){
-      //   config.resolve.alias = {
-      //     ...config.resolve.alias,
-      //     react: path.resolve('./node_modules/react'),
-      //     'react-dom': path.resolve('./node_modules/react-dom'),
-      //   };
-      // }
+       // Add source aliasing for development mode
+       if (options.dev && process.env.USE_SRC_ALIAS === 'true') {
+        config.resolve.alias['tiptypr'] = path.resolve(__dirname, './prototypr-packages/tiptypr/src');
+      }
 
       if (typeof config.webpack === "function") {
         return config.webpack(config, options);
