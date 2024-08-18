@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Check if package.json contains a workflows section
+if grep -q '"workflows":' package.json; then
+    echo "Error: package.json contains a workflows section. Commit aborted."
+    echo "Please remove the workflows section before committing."
+    exit 1
+fi
+
+# If we get here, the check passed
+exit 0

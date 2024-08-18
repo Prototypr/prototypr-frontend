@@ -7,13 +7,17 @@ switch_to_local() {
     # Add workspaces entry to package.json
     jq '.workspaces = ["prototypr-packages/*"]' package.json > temp.json && mv temp.json package.json
 
-      # Uninstall @prototypr packages
+    # Create an array to store package names
+    declare -a packages_to_remove
+
+    # Uninstall @prototypr packages
     if [ -d "prototypr-packages" ]; then
         for package_dir in prototypr-packages/*; do
             if [ -d "$package_dir" ] && [ -f "$package_dir/package.json" ]; then
                 package_name=$(jq -r .name "$package_dir/package.json")
                 echo "Uninstalling $package_name..."
                 npm uninstall "$package_name"
+                packages_to_remove+=("$package_name")
             fi
         done
     fi
@@ -33,12 +37,11 @@ switch_to_local() {
         done
     fi
     
-    # Remove all @prototypr packages from node_modules
-    rm -rf node_modules/@prototypr
-    rm -rf node_modules/tiptypr
-    
-    # Clear npm cache
-    # npm cache clean --force
+    # Remove all packages from node_modules using the array
+    for package in "${packages_to_remove[@]}"; do
+        package_path=$(echo "$package" | sed 's/@//')
+        rm -rf "node_modules/$package_path"
+    done
     
     # Install dependencies
     npm install
@@ -90,9 +93,8 @@ switch_to_npm() {
     # Remove workspaces entry from package.json
     jq 'del(.workspaces)' package.json > temp.json && mv temp.json package.json
     
-    # Remove existing @prototypr packages from node_modules
-    rm -rf node_modules/tiptypr
-    rm -rf node_modules/@prototypr
+    # Create an array to store package names
+    declare -a packages_to_remove
 
     # Uninstall @prototypr packages
     if [ -d "prototypr-packages" ]; then
@@ -101,6 +103,7 @@ switch_to_npm() {
                 package_name=$(jq -r .name "$package_dir/package.json")
                 echo "Uninstalling $package_name..."
                 npm uninstall "$package_name"
+                packages_to_remove+=("$package_name")
             fi
         done
     fi
@@ -114,6 +117,13 @@ switch_to_npm() {
         done
         echo "Renaming operation completed"
     fi
+
+    # Remove all packages from node_modules using the array
+    for package in "${packages_to_remove[@]}"; do
+        package_path=$(echo "$package" | sed 's/@//')
+        rm -rf "node_modules/$package_path"
+    done
+
 
     npm install
     # Install @prototypr packages

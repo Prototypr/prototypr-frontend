@@ -166,5 +166,8 @@
   "optionalDependencies": {
     "@prototypr/paper-interview": "^0.0.466",
     "@prototypr/prototypr-postie": "^1.0.91"
-  }
+  },
+  "workspaces": [
+    "prototypr-packages/*"
+  ]
 }
