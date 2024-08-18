@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Check if package.json contains a workspaces section
+if grep -q '"workspaces":' package.json; then
+    echo "Error: package.json contains a workspaces section. Push aborted."
+    echo "Please remove the workspaces section before pushing."
+    exit 1
+fi
+
+# If we get here, the check passed
+exit 0
