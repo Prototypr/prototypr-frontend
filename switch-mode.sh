@@ -149,6 +149,7 @@ switch_to_npm() {
         echo "prototypr-packages directory not found. Skipping package installation."
     fi
 
+    jq 'del(.compilerOptions.paths.tiptypr)' jsconfig.json > temp.json && mv temp.json jsconfig.json
 
     
     echo "Switched to npm packages mode."
