@@ -71,17 +71,16 @@ export default function ProfileCard({
             ) : (
               <div className="w-[54px] h-[54px] mb-3 rounded-full bg-gray-100" />
             )}
-            {kofi && (
+            {/* {kofi && (
               <div className="absolute z-10 bottom-0 right-0 -mb-[8px] -mr-[8px]">
-                {/* <h2 className="font-medium text-sm mb-2 text-gray-700">Support {author?.firstName?author?.firstName:''}</h2> */}
                 <KoFiButton
                   size=" w-7 h-7"
                   color="#53b1e6"
-                  // label={"Buy me a coffee"}
+                  label={false}
                   id={kofi}
                 />
               </div>
-            )}
+            )} */}
           </div>
         </div>
         <div className="flex flex-col h-full justify-between">
