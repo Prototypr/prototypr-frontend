@@ -4,6 +4,7 @@
 if grep -q '"workspaces":' package.json; then
     echo "Error: package.json contains a workspaces section. Push aborted."
     echo "Please remove the workspaces section before pushing."
+    echo "To do this, run './switch-mode.sh npm', recommit, then push again."
     exit 1
 fi
 

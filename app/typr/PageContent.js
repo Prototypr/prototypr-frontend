@@ -11,8 +11,8 @@ import {
 } from "@/lib/typr-demo/indexedDB"; // Import the IndexedDB utility
 
 
-
-import "tiptypr/dist/styles.css";
+import "~/react-kofi/dist/kofi.css";
+import "~/tiptypr/dist/styles.css";
 import Tiptypr from "tiptypr";
 // import Head from 'next/head';
 
@@ -42,7 +42,8 @@ import { defaultProps } from "tiptypr";
 import { customDeepMerge } from "@/lib/typr-demo/customDeepMerge";
 import IndexedDBBrowser from "@/components/typr-demo/IndexedDBBrowser";
 import { openDB } from "idb";
-import KoFiDialog from "@/components/ko-fi-button/KoFiDialog";
+// import KoFiDialog from "@/components/ko-fi-button/KoFiDialog";
+import {KoFiDialog} from "react-kofi";
 
 const avatarOptions = [
   {
@@ -628,7 +629,7 @@ function DemoPageContent() {
                   Graeme
                 </a>
               </p>
-              <KoFiDialog color="#53b1e6" label={"Support me"} />
+              <KoFiDialog color="#53b1e6" label={"Support me"}/>
             </div>
           </div>
           <DemoCodeDialog

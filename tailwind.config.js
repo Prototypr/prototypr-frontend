@@ -1,6 +1,5 @@
-const { blueDark, mauve, violet } = require("@radix-ui/colors");
+const { blueDark } = require("@radix-ui/colors");
 
-const colors = require("tailwindcss/colors");
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -11,6 +10,7 @@ module.exports = {
     "./lib/constants.js",
     "./node_modules/@prototypr/paper-interview/dist/components/**/*.{js,ts,jsx,tsx}",
     "./node_modules/tiptypr/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/react-kofi/dist/**/*.{js,ts,jsx,tsx}",
   ],
   corePlugins: {
     // due to https://github.com/tailwindlabs/tailwindcss/issues/6602 - buttons disappear

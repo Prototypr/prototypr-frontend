@@ -129,5 +129,10 @@ There is a script in the root of the repo to switch between npm packages and loc
 
 - `./switch-mode.sh local` to switch to local development mode
 - `./switch-mode.sh npm` to switch to npm packages mode
+- `./switch-mode.sh src` to switch to src mode 
 
 switch-mode will update the package.json in the root directory to point to the correct version of the package.
+
+#### Path aliases:
+* the `~` in the jsconfig.json is a path alias for the node_modules folder. This is to allow the use of the local packages in the src mode.
+* the `@` in the jsconfig.json is a path alias for the project root. 

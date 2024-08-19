@@ -7,9 +7,13 @@ import { DribbbleLogo, TwitterLogo, GithubLogo, MapPin } from "@/components/icon
 import { accountLocations } from "@/lib/constants";
 import { useState } from "react";
 import Button from "../Primitives/Button";
-const KoFiButton = dynamic(() => import("@/components/people/KoFiButton"), {
-  ssr: true,
-});
+
+import '~/react-kofi/dist/kofi.css';
+import {KoFiButton} from "react-kofi";
+
+// const KoFiButton = dynamic(() => import("@/components/people/KoFiButton"), {
+//   ssr: true,
+// });
 export default function ProfileCard({
   title,
   slug,
@@ -74,7 +78,7 @@ export default function ProfileCard({
                   size=" w-7 h-7"
                   color="#53b1e6"
                   // label={"Buy me a coffee"}
-                  kofiId={kofi}
+                  id={kofi}
                 />
               </div>
             )}

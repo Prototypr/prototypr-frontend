@@ -1,12 +1,11 @@
 import SocialShare from "@/components/SocialShare";
 import Image from "next/image";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import { DribbbleLogo, GithubLogo, TwitterLogo } from "./icons";
 
-const KoFiButton = dynamic(
-  () => import("@/components/ko-fi-button/Ko-Fi-Button"),
-  { ssr: false }
-);
+
+import '~/react-kofi/dist/kofi.css';
+import {KoFiButton} from "react-kofi";
 
 export default function AuthorBio({ author, slug, title }) {
   const pic = author?.avatar?.data?.attributes?.url

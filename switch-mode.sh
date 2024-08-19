@@ -48,8 +48,27 @@ switch_to_local() {
     
     echo "Switched to local development mode. Workspace and @prototypr packages have been linked."
     
-    # Revert jsconfig.json to remove tiptypr src path
-    jq 'del(.compilerOptions.paths.tiptypr)' jsconfig.json > temp.json && mv temp.json jsconfig.json
+    # Update jsconfig.json to remove paths for packages in prototypr-packages
+    if [ -d "prototypr-packages" ]; then
+        for package_dir in prototypr-packages/*; do
+            if [ -d "$package_dir" ]; then
+                package_name=$(basename "$package_dir")
+                jq "del(.compilerOptions.paths[\"$package_name\"])" jsconfig.json > temp.json && mv temp.json jsconfig.json
+            fi
+        done
+    fi
+    
+    # Update jsconfig.json
+    # for package_dir in prototypr-packages/*; do
+    #     if [ -d "$package_dir/src" ]; then
+    #         package_name=$(basename "$package_dir")
+    #         jq --arg name "$package_name" --arg path "./prototypr-packages/$package_name/src" \
+    #            '.compilerOptions.paths[$name] = [$path]' jsconfig.json > temp.json && mv temp.json jsconfig.json
+            
+    #     fi
+    # done
+
+    write_package_names
 
     echo "Reverted next.config.mjs to original webpack configuration."
 }
@@ -62,7 +81,16 @@ switch_to_src() {
     switch_to_local
     
     # Update jsconfig.json
-    jq '.compilerOptions.paths["tiptypr"] = ["./prototypr-packages/tiptypr/src"]' jsconfig.json > temp.json && mv temp.json jsconfig.json
+    for package_dir in prototypr-packages/*; do
+        if [ -d "$package_dir/src" ]; then
+            package_name=$(basename "$package_dir")
+            jq --arg name "$package_name" --arg path "./prototypr-packages/$package_name/src" \
+               '.compilerOptions.paths[$name] = [$path]' jsconfig.json > temp.json && mv temp.json jsconfig.json
+            
+        fi
+    done
+
+    write_package_names
     
     echo "Switched to src development mode. You can now use 'npm run dev:src' to run in src mode."
 }
@@ -131,7 +159,7 @@ switch_to_npm() {
         for package_dir in prototypr-packages/*; do
             if [ -d "$package_dir" ] && [ -f "$package_dir/package.json" ]; then
                 package_name=$(jq -r .name "$package_dir/package.json")
-                private_package=$(jq -r .private "$package_dir/package.json")
+                private_package=$(jq -r .prototypr_private "$package_dir/package.json")
                 package_version=$(jq -r .version "$package_dir/package.json")
                 echo "Installing $package_name (version $package_version)"
                 if [ "$private_package" = "true" ]; then
@@ -145,7 +173,7 @@ switch_to_npm() {
         for package_dir in prototypr-packagesx/*; do
             if [ -d "$package_dir" ] && [ -f "$package_dir/package.json" ]; then
                 package_name=$(jq -r .name "$package_dir/package.json")
-                private_package=$(jq -r .private "$package_dir/package.json")
+                private_package=$(jq -r .prototypr_private "$package_dir/package.json")
                 package_version=$(jq -r .version "$package_dir/package.json")
                 echo "Installing $package_name (version $package_version)"
                 if [ "$private_package" = "true" ]; then
@@ -159,7 +187,14 @@ switch_to_npm() {
         echo "prototypr-packages directory not found. Skipping package installation."
     fi
 
-    jq 'del(.compilerOptions.paths.tiptypr)' jsconfig.json > temp.json && mv temp.json jsconfig.json
+    # Update jsconfig.json
+    for package_dir in prototypr-packages/*; do
+        if [ -d "$package_dir/src" ]; then
+            package_name=$(basename "$package_dir")
+            jq --arg name "$package_name" --arg path "./prototypr-packages/$package_name/src" \
+               '.compilerOptions.paths[$name] = [$path]' jsconfig.json > temp.json && mv temp.json jsconfig.json
+        fi
+    done
 
     
     echo "Switched to npm packages mode."
@@ -268,6 +303,34 @@ deploy_package() {
     # sed -i '' "s/\"$package_name\": \".*\"/\"$package_name\": \"^$new_version\"/" package.json
     
     echo "Deployment complete. Package version updated to $new_version. Make sure to update it in the main project package.json."
+}
+
+# New function to write package names to a JavaScript file
+write_package_names() {
+    echo "Writing package names to prototypr_package_names.js..."
+    
+    # Create the next-config directory if it doesn't exist
+    mkdir -p next-config
+
+    # Start the JavaScript array
+    echo "module.exports = {" > next-config/prototypr_package_names.js
+    echo "  prototyprPackageNames: [" >> next-config/prototypr_package_names.js
+
+    # Add package names to the array
+    if [ -d "prototypr-packages" ]; then
+        for package_dir in prototypr-packages/*; do
+            if [ -d "$package_dir" ] && [ -f "$package_dir/package.json" ]; then
+                package_name=$(jq -r .name "$package_dir/package.json")
+                echo "    '$package_name'," >> next-config/prototypr_package_names.js
+            fi
+        done
+    fi
+
+    # Close the JavaScript array and module.exports
+    echo "  ]" >> next-config/prototypr_package_names.js
+    echo "};" >> next-config/prototypr_package_names.js
+
+    echo "Package names written to next-config/prototypr_package_names.js"
 }
 
 # Main script logic

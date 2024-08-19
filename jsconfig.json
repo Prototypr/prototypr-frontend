@@ -10,6 +10,9 @@
       ],
       "@/styles/*": [
         "styles/*"
+      ],
+      "~/*": [
+        "./node_modules/*"
       ]
     }
   }

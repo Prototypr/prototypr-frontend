@@ -30,9 +30,11 @@ import ToolImageCardSingle from "../v4/card/ToolImageCardSingle";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import BigBackgroundCard from "../v4/card/BigCard/BigBackgroundCard";
 
-const KoFiButton = dynamic(() => import("@/components/people/KoFiButton"), {
-  ssr: true,
-});
+import '~/react-kofi/dist/kofi.css';
+import {KoFiButton} from "react-kofi";
+// const KoFiButton = dynamic(() => import("@/components/people/KoFiButton"), {
+//   ssr: true,
+// });
 
 const PAGE_SIZE = 12;
 const NewPagination = dynamic(() => import("@/components/pagination"));
@@ -342,9 +344,10 @@ const ProfilePageLayout = ({
                       {(kofi || (unapproved && user?.profile?.kofi)) && (
                         <div className="">
                           <KoFiButton
-                            color="#53b1e6"
+                            // radius="4px"
+                            // color="#53b1e6"
                             label={"Buy me a coffee"}
-                            kofiId={kofi || user?.profile?.kofi}
+                            id={kofi || user?.profile?.kofi}
                           />
                         </div>
                       )}
