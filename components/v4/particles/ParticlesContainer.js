@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 // import { cloneDeep } from "lodash";
 
 import { useCallback } from "react";
@@ -22,12 +22,12 @@ import { loadFull } from "tsparticles";
 // import { loadTiltUpdater } from "tsparticles-updater-tilt";
 // import { loadTwinkleUpdater } from "tsparticles-updater-twinkle";
 // import { loadWobbleUpdater } from "tsparticles-updater-wobble";
-import {useRouter} from 'next/router'
+// import {useRouter} from 'next/router'
 import {particleOptions} from './particleOptionsB'
 
 
 const ParticlesContainer = () => {
-  const router = useRouter()
+  // const router = useRouter()
   const options = particleOptions
 
   const particlesLoaded = useCallback(async (container) => {

@@ -7,7 +7,6 @@ import dynamic from "next/dynamic";
 import Layout from "@/components/new-index/layoutForIndex";
 // import TrendingFullWidth from "@/components/homepage/TrendingFullWidth";
 import IntroBanner from "@/components/v4/hero/IntroBanner2";
-
 /**new index components */
 // import { BrowserView } from "react-device-detect";
 const Footer = dynamic(() => import("@/components/footer"));
@@ -83,7 +82,7 @@ export default function Index({
   const titleText = intl.formatMessage({ id: "index.header.title" });
   const descriptionText = intl.formatMessage({ id: "intro.description" });
 
-  const { user, isLoading } = useUser({
+  const { user, isLoading, isLoggedIn } = useUser({
     redirectIfFound: false,
   });
   // const HeroPostRandomSection = randomPosts.filter((item, i) => i === 0);
@@ -111,7 +110,7 @@ export default function Index({
           url: "https://prototypr.io",
         }}
       >
-        {!user?.isLoggedIn ? (
+        {!isLoggedIn ? (
           <>
             <IntroBanner sponsor={sponsors?.length ? sponsors[0] : null} />
             {/* <SectionDivider
@@ -380,7 +379,7 @@ export default function Index({
           <DesignTool allTools={toolsList} />
         </BrowserView> */}
       </Layout>
-      {!user?.isLoggedIn && (
+      {!isLoggedIn && (
         <StickyFooterCTA
           title="Welcome to Prototypr"
           description="Join today to make posts and grow with us."

@@ -40,7 +40,7 @@ const Navbar = ({
   navType,
   navBackground,
 }) => {
-  const { user, isLoading } = useUser({
+  const { user, isLoading, isLoggedIn } = useUser({
     redirectIfFound: false,
   });
 
@@ -195,7 +195,7 @@ const Navbar = ({
             </div>
             <div
               className={`items-center sm:static sm:inset-auto flex ${
-                user?.isLoggedin ? "mr-[52px] sm:mr-16" : "lg:mr-0"
+                (user?.isLoggedIn || isLoggedIn) ? "mr-[52px] sm:mr-16" : "lg:mr-0"
               }`}
             >
               {/* <div className={`hidden mr-2 md:block my-auto`}>
@@ -243,12 +243,12 @@ const Navbar = ({
             {/* <MobileActiveLink href={"/web-monetization"}>
               Earn Micropayments
             </MobileActiveLink> */}
-            {!user?.isLoggedIn ? (
+            {!(user?.isLoggedIn || isLoggedIn) ? (
               <MobileActiveLink href={"/onboard"}>Sign in</MobileActiveLink>
             ) : (
               ""
             )}
-            {user?.isLoggedIn ? (
+            {(user?.isLoggedIn || isLoggedIn) ? (
               <div className="px-2.5 pt-2" onClick={toggleMobileNav}>
                 <NewPostDialog />
               </div>

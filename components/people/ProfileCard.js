@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import { useState } from "react";
 import Button from "../Primitives/Button";
 
 import '~/react-kofi/dist/kofi.css';
-import {KoFiButton} from "react-kofi";
+// import {KoFiButton} from "react-kofi";
 
 // const KoFiButton = dynamic(() => import("@/components/people/KoFiButton"), {
 //   ssr: true,

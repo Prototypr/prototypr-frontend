@@ -1,3 +1,4 @@
+'use client'
 import Container from "@/components/container";
 import GiantTag from "../tag/GiantTag";
 import {Compass} from '@/components/icons'
