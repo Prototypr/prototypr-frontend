@@ -45,7 +45,7 @@ const useLoad = (user) => {
     setLoading(true);
 
     try {
-      const data = await getUserArticle(user, id);
+      const data = await getUserArticle({user, id, type:'tool'});
 
       const post = data;
 

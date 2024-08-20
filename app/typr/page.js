@@ -10,7 +10,7 @@ export const metadata = {
     description: 'A customizable WYSIWYG editor with publishing flows and user state management for React.js. Built with Tiptap and ProseMirror.',
     images: [
       {
-        url: `${process.env.NEXTAUTH_URL}/static/images/typr-og.jpg`,
+        url: `${process.env.NEXTAUTH_URL}/static/images/typr-og.png`,
         width: 1200,
         height: 630,
         alt: 'Tiptypr Editor Preview',

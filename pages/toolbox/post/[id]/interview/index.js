@@ -54,7 +54,7 @@ export default function InterviewEditor({ tool }) {
     const fetchPostData = async () => {
       if (user && router.query.id) {
         try {
-          const data = await getUserArticle(user, router.query.id);
+          const data = await getUserArticle({user, id:router.query.id, type:'article'});
           setPostData(data);
         } catch (error) {
           console.error("Error fetching post data:", error);

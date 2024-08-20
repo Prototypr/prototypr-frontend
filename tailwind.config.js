@@ -10,6 +10,7 @@ module.exports = {
     "./lib/constants.js",
     "./node_modules/@prototypr/paper-interview/dist/components/**/*.{js,ts,jsx,tsx}",
     "./node_modules/tiptypr/dist/**/*.{js,ts,jsx,tsx}",
+    // "./node_modules/tiptypr/src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/react-kofi/dist/**/*.{js,ts,jsx,tsx}",
   ],
   corePlugins: {
@@ -20,6 +21,8 @@ module.exports = {
     extend: {
       opacity: ["group-hover", "hover"],
       background: ["group-hover", "hover"],
+      rotate: ['group-hover'],
+      borderOpacity: ['group-hover'],
     },
   },
   theme: {
@@ -55,6 +58,11 @@ module.exports = {
       contrast: {
         110: "1.10",
         115: "1.15",
+      },
+      rotate: {
+        '-10': '-10deg',
+        '-3': '-3deg',
+        '-1': '-1deg',
       },
       linearBorderGradients: ({ theme }) => ({
         directions: {
