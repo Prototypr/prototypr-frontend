@@ -13,15 +13,6 @@
       ],
       "~/*": [
         "./node_modules/*"
-      ],
-      "paper-interview": [
-        "./prototypr-packages/paper-interview/src"
-      ],
-      "react-kofi": [
-        "./prototypr-packages/react-kofi/src"
-      ],
-      "tiptypr": [
-        "./prototypr-packages/tiptypr/src"
       ]
     }
   }
