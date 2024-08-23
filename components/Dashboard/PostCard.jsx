@@ -67,7 +67,6 @@ const PostCard = ({ post, refetch, user, edit }) => {
     }
   };
 
-
   return (
     <div className="flex flex-row justify-between p-4 h-full rounded-lg border shadow-sm border-black/5 hover:border-opacity-10 cursor-default bg-white hover:transition duration-300 ease-in-out col-span-12">
       <div className="flex flex-col grid gap-2 w-full flex-shrink">
@@ -77,17 +76,21 @@ const PostCard = ({ post, refetch, user, edit }) => {
               edit === false && post.type == "article"
                 ? `/post/${post.slug}`
                 : edit === false && post.type == "tool"
-                  ? `/toolbox/${post.slug}`
-                  : post.type == "article" && post.tools?.length
-                    ? `/toolbox/post/${post.tools[0].id}/interview/${post.id}`
-                    : post.type == "article"
-                      ? `/p/${post.id}`
-                      : `/toolbox/post/${post.id}`
+                ? `/toolbox/${post.slug}`
+                : post.type == "article" && post.tools?.length
+                ? `/toolbox/post/${post.tools[0].id}/interview/${post.id}`
+                : post.type == "article"
+                ? `/p/${post.id}`
+                : post.type == "note"
+                ? `/n/${post.id}`
+                : `/toolbox/post/${post.id}`
             }
           >
-            <h3 className="text-xl font-semibold max-w-2xl ">{post.draft_title?post.draft_title:post.title}</h3>
+            <h3 className="text-xl font-semibold max-w-2xl ">
+              {post.draft_title ? post.draft_title : post.title}
+            </h3>
             <p className="text-base text-gray-600 mb-3 max-w-[38rem] line-clamp-2 overflow-ellipses">
-              {post.draft_excerpt?post.draft_excerpt:post.excerpt}
+              {post.draft_excerpt ? post.draft_excerpt : post.excerpt}
             </p>
             <div className="flex gap-1.5">
               <p className="text-sm my-auto text-gray-500">
@@ -108,15 +111,18 @@ const PostCard = ({ post, refetch, user, edit }) => {
 
               {post.type == "article" && post.tools?.length ? (
                 <>
-                <div className="my-auto text-sm text-gray-500">{` · `}</div>
-                <div className="flex-none my-auto">
-                  <Link target="_blank" href={`/toolbox/${post.tools[0].slug}`}>
-                    <img
-                      className="flex-none w-6 h-6 rounded-2xl my-auto"
-                      src={post.tools[0].logo?.url}
-                    />
-                  </Link>
-                </div>
+                  <div className="my-auto text-sm text-gray-500">{` · `}</div>
+                  <div className="flex-none my-auto">
+                    <Link
+                      target="_blank"
+                      href={`/toolbox/${post.tools[0].slug}`}
+                    >
+                      <img
+                        className="flex-none w-6 h-6 rounded-2xl my-auto"
+                        src={post.tools[0].logo?.url}
+                      />
+                    </Link>
+                  </div>
                 </>
               ) : (
                 ""
@@ -130,8 +136,8 @@ const PostCard = ({ post, refetch, user, edit }) => {
                       post.status === "draft"
                         ? "bg-yellow-100 text-yellow-800"
                         : post.status === "pending"
-                          ? "bg-orange-100 text-orange-800"
-                          : "bg-green-100 text-green-800"
+                        ? "bg-orange-100 text-orange-800"
+                        : "bg-green-100 text-green-800"
                     }   rounded-full`}
                   >
                     {post.status}
