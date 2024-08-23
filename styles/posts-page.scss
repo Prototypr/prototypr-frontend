@@ -805,3 +805,36 @@ figure, pre{
         margin-left: 0rem!important;
     }
   }
+
+  .menu-items-container {
+    .menu-item {
+      opacity: 0;
+      transform: scale(0.5);
+      animation: bubbleIn 0.3s ease-out forwards;
+    }
+
+    @for $i from 1 through 5 {
+      .menu-item:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.05}s;
+      }
+    }
+  }
+
+  @keyframes bubbleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    70% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  [data-tippy-root]{
+    z-index: 50!important;
+  }

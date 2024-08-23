@@ -1,6 +1,12 @@
 import { FacebookLogo, TwitterLogo, LinkedinLogo } from "@/components/icons";
 
-export default function SocialShare({ slug, authorTwitter, title = "" , size=28}) {
+export default function SocialShare({
+  slug,
+  authorTwitter,
+  title = "",
+  size = 28,
+  postType = "post",
+}) {
   const titleUrl = encodeURI(title);
   //   const url = encodeURI(slug);
 
@@ -9,31 +15,32 @@ export default function SocialShare({ slug, authorTwitter, title = "" , size=28}
       <div>
         <a
           target="_blank"
-          href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fprototypr.io%2Fpost%2F${slug}%2F&via=prototypr&text=Recommended%20read:%20%22${titleUrl}%22${authorTwitter ? "%20by%20" + authorTwitter : ""}%20✨%20check%20it%20out!`}
+          href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fprototypr.io%2F${postType}%2F${slug}%2F&via=prototypr&text=Recommended%20read:%20%22${titleUrl}%22${
+            authorTwitter ? "%20by%20" + authorTwitter : ""
+          }%20✨%20check%20it%20out!`}
         >
-          <TwitterLogo size={size}/>
+          <TwitterLogo size={size} />
         </a>
       </div>
       <div>
         <a
           target="_blank"
-          href={`http://www.facebook.com/share.php?u=https%3A%2F%2Fprototypr.io%2Fpost%2F${slug}`}>
-        <FacebookLogo size={size}/>
+          href={`http://www.facebook.com/share.php?u=https%3A%2F%2Fprototypr.io%2F${postType}%2F${slug}`}
+        >
+          <FacebookLogo size={size} />
         </a>
       </div>
       <div>
         <a
           target="_blank"
-          href={`https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprototypr.io%2Fpost%2F${slug}`}
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprototypr.io%2F${postType}%2F${slug}`}
         >
-                  <LinkedinLogo size={size}/>
-
+          <LinkedinLogo size={size} />
         </a>
       </div>
     </div>
   );
 }
-
 
 export function SocialShareVertical({ slug, authorTwitter, title = "" }) {
   const titleUrl = encodeURI(title);
@@ -44,16 +51,19 @@ export function SocialShareVertical({ slug, authorTwitter, title = "" }) {
       <div className="text-gray-500 hover:text-black">
         <a
           target="_blank"
-          href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fprototypr.io%2Ftoolbox%2F${slug}%2F&via=prototypr&text=Check%20it%20out%20%22${titleUrl}%22${authorTwitter ? "%20by%20" + authorTwitter : ""}%20on%20@Prototypr%20✨`}
+          href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fprototypr.io%2Ftoolbox%2F${slug}%2F&via=prototypr&text=Check%20it%20out%20%22${titleUrl}%22${
+            authorTwitter ? "%20by%20" + authorTwitter : ""
+          }%20on%20@Prototypr%20✨`}
         >
-          <TwitterLogo width={24} height={24}/>
+          <TwitterLogo width={24} height={24} />
         </a>
       </div>
       <div className="text-gray-500 hover:text-black">
         <a
           target="_blank"
-          href={`http://www.facebook.com/share.php?u=https%3A%2F%2Fprototypr.io%2Ftoolbox%2F${slug}`}>
-        <FacebookLogo width={24} height={24}/>
+          href={`http://www.facebook.com/share.php?u=https%3A%2F%2Fprototypr.io%2Ftoolbox%2F${slug}`}
+        >
+          <FacebookLogo width={24} height={24} />
         </a>
       </div>
       <div className="text-gray-500 hover:text-black">
@@ -61,8 +71,7 @@ export function SocialShareVertical({ slug, authorTwitter, title = "" }) {
           target="_blank"
           href={`https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprototypr.io%2Ftoolbox%2F${slug}`}
         >
-                  <LinkedinLogo width={24} height={24}/>
-
+          <LinkedinLogo width={24} height={24} />
         </a>
       </div>
     </div>

@@ -7,7 +7,7 @@ import { DribbbleLogo, GithubLogo, TwitterLogo } from "./icons";
 import '~/react-kofi/dist/kofi.css';
 import {KoFiButton} from "react-kofi";
 
-export default function AuthorBio({ author, slug, title }) {
+export default function AuthorBio({ author, slug, title, showShare = true }) {
   const pic = author?.avatar?.data?.attributes?.url
     ? author?.avatar?.data?.attributes?.url
     : author?.legacyAvatar
@@ -21,7 +21,7 @@ export default function AuthorBio({ author, slug, title }) {
 
   return (
     <div className="py-4">
-      <div
+      {showShare && <div
         className="flex md:px-0 justify-between mx-auto"
         style={{ maxWidth: "60rem" }}
       >
@@ -39,9 +39,9 @@ export default function AuthorBio({ author, slug, title }) {
             />
           </div>
         </div>
-      </div>
+      </div>}
       <div className=" mx-auto" style={{ maxWidth: "60rem" }}>
-        <div className="w-full border-b border-gray-200 my-10" />
+        {showShare && <div className="w-full border-b border-gray-200 my-10" />}
         <div className="flex flex-col sm:flex-row sm:justify-between">
           <div className="flex flex-col w-full">
             <div className="w-32 mx-auto flex justify-center">
