@@ -492,6 +492,9 @@ function DemoPageContent() {
                     </div>
                     <IndexedDBBrowser
                       data={data}
+                      reset={()=>{
+                        setPostId(-1)
+                      }}
                       onDelete={fetchData}
                       router={router}
                       searchParams={searchParams}

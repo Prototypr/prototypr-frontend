@@ -4,7 +4,7 @@ import { DB_NAME, STORE_NAME } from "@/lib/typr-demo/indexedDB"; // Import the I
 import { TrashIcon } from "@radix-ui/react-icons"; // Import the Radix TrashIcon
 import { PlusIcon } from "@radix-ui/react-icons"; // Import the Radix PlusIcon
 
-const IndexedDBBrowser = ({ data, onDelete, router, searchParams }) => {
+const IndexedDBBrowser = ({ data, onDelete, router, searchParams, reset }) => {
   const deleteRow = async id => {
     // const db = await openDB(DB_NAME, 1);
     const db = await openDB(DB_NAME);
@@ -15,8 +15,9 @@ const IndexedDBBrowser = ({ data, onDelete, router, searchParams }) => {
     onDelete(); // Fetch data again after deletion
   };
 
-  const handleCreateNew = () => {
+  const handleCreateNew = reset => {
     router.push("/typr");
+    reset();
   };
 
   return (
@@ -27,14 +28,22 @@ const IndexedDBBrowser = ({ data, onDelete, router, searchParams }) => {
         ) : (
           <>
             {data.map(entry => (
-              <Card key={entry.id} entry={entry} router={router} searchParams={searchParams} onDelete={deleteRow} />
+              <Card
+                key={entry.id}
+                entry={entry}
+                router={router}
+                searchParams={searchParams}
+                onDelete={deleteRow}
+              />
             ))}
             <div
               className="bg-gradient-to-b group from-slate-100 transition transition-all duration-600 to-slate-50 hover:shadow border border-dotted border-gray-300/70 rounded-lg p-2 mb-4 relative group cursor-pointer flex items-center justify-center"
               onClick={handleCreateNew}
             >
               <PlusIcon className="text-gray-500" />
-              <span className="ml-2 text-sm group-hover:text-gray-800 text-gray-500">Start New</span>
+              <span className="ml-2 text-sm group-hover:text-gray-800 text-gray-500">
+                Start New
+              </span>
             </div>
           </>
         )}
@@ -71,7 +80,9 @@ const Card = ({ entry, onDelete, router, searchParams }) => {
 
   return (
     <div
-      className={`bg-gradient-to-b from-slate-100 transition transition-all duration-600 to-slate-50 hover:shadow border border-gray-300/70 rounded-lg p-2 mb-4 relative group hover:from-white hover:to-white cursor-pointer ${isActive ? 'border-gray-500 from-white to-white' : ''}`}
+      className={`bg-gradient-to-b from-slate-100 transition transition-all duration-600 to-slate-50 hover:shadow border border-gray-300/70 rounded-lg p-2 mb-4 relative group hover:from-white hover:to-white cursor-pointer ${
+        isActive ? "border-gray-500 from-white to-white" : ""
+      }`}
       onClick={handleClick}
     >
       <div className="flex justify-between items-start">
