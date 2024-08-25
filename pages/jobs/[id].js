@@ -75,7 +75,7 @@ export default function Post({
 
   const image = `${
     process.env.NEXT_PUBLIC_HOME_URL
-  }/api/og?title=${encodeURIComponent(title)}&companyName=${encodeURIComponent(
+  }/api/og-generator/og-job?title=${encodeURIComponent(title)}&companyName=${encodeURIComponent(
     companyName
   )}&companyLogo=${companyLogo}&salary=${encodeURIComponent(salaryText)}`;
   return (

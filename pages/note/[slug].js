@@ -28,19 +28,20 @@ import Link from "next/link";
 import Image from "next/image";
 import gumletLoader from "@/components/new-index/gumletLoader";
 import { TOTAL_STATIC_POSTS } from "@/lib/constants";
-import PostHeader from "@/components/post-header";
+// import PostHeader from "@/components/post-header";
 import SocialShare from "@/components/SocialShare";
 import PostGroupRow from "@/components/v4/layout/PostGroupRow";
 import { addTwitterScript } from "@/lib/addTwitterScript";
 import { createB64WithFallback } from "@/lib/utils/blurHashToDataURL";
 import getSponsors from "@/lib/utils/getSponsors";
 
-import AdCard from "@/components/v4/card/AdCard";
-import { NoteReceipt, PenLineSimple } from "@/components/icons";
-import AuthorSidebar from "@/components/AuthorSidebar";
-import LikeButton from "@/components/LikeButton";
+// import AdCard from "@/components/v4/card/AdCard";
+// import { NoteReceipt, PenLineSimple } from "@/components/icons";
+// import AuthorSidebar from "@/components/AuthorSidebar";
+// import LikeButton from "@/components/LikeButton";
 import isoToReadableDate from "@/lib/utils/isoToReadableDate";
 import { Note } from "@phosphor-icons/react";
+import { PenLineSimple } from "@/components/icons";
 
 // import ToolBackgroundCard from "@/components/v4/card/ToolBackgroundCard";
 const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
@@ -133,6 +134,13 @@ export default function Post({
     }
   }, [post.attributes?.content]);
 
+  const ogImage = `${
+    process.env.NEXT_PUBLIC_HOME_URL
+  }/api/og-generator/og-note?title=${encodeURIComponent(title)}&author=${encodeURIComponent(
+    authorName
+  )}&date=${encodeURIComponent(date)}&avatar=${encodeURIComponent(avatar)}`;
+
+
   return (
     <Layout
       maxWidth={"max-w-[1350px] search-wide"}
@@ -141,7 +149,7 @@ export default function Post({
       seo={{
         title: `${title}`,
         description: `${description}`,
-        image: `${image}`,
+        image: `${ogImage}`,
         canonical: `${canonical}`,
         url: `${url}`,
         monetization: `${paymentPointer}`,

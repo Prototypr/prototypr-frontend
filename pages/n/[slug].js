@@ -51,11 +51,11 @@ export default function EditPostPage() {
         url: "https://prototypr.io/note",
       }}
     >
-      <div className="h-screen overflow-hidden bg-gray-100">
+      <div className="h-screen overflow-auto bg-gray-100">
         <div className="w-[758px] group z-10 flex items-center justify-center bg-gray-50 mx-auto mt-20 relative rounded-sm rounded-b-none shadow-lg h-[calc(100vh-114px)]">
           <div className="group relative w-full h-full overflow-hidden bg-white group-hover:border-gray-100  shadow-lg p-6 transform -rotate-1 hover:rotate-0 transition-all duration-500 ease-in-out border border-opacity-0 border-gray-400 group-hover:border-opacity-100">
             <div className="absolute inset-0 z-0 overflow-hidden">
-              <div className="relative bg-white flex flex-col justify-start h-full z-10">
+              <div className="z-10">
                 <Tiptypr
                   {...typrNotesProps({
                     user,
