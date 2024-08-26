@@ -15,7 +15,7 @@ const IndexedDBBrowser = ({ data, onDelete, router, searchParams, reset }) => {
     onDelete(); // Fetch data again after deletion
   };
 
-  const handleCreateNew = reset => {
+  const handleCreateNew = () => {
     router.push("/typr");
     reset();
   };

@@ -176,11 +176,11 @@ export default function Post({
             ) : (
               <>
                 {/* <img src={'/static/images/check.svg'} className="absolute opacity-20 p-6 h-[298px] mt-[60px] top-0 left-0 w-full object-cover"/> */}
-                <div className="h-fit overflow-hidden bg-gray-100">
-                  <div className="w-[758px] group z-10 flex items-center justify-center bg-gray-50 mx-auto mt-32 mb-20 relative rounded-sm rounded-b-none shadow-lg h-fit">
-                    <div className="group relative w-full h-full overflow-hidden bg-white group-hover:border-gray-100  shadow-lg p-6 transform -rotate-0 hover:rotate-0 transition-all duration-500 ease-in-out border border-opacity-0 border-gray-400 group-hover:border-opacity-100">
+                <div className="h-fit overflow-hidden bg-gray-100 px-2 md:px-0">
+                  <div className="w-[758px] max-w-full px-2 md:px-0 group z-10 flex items-center justify-center bg-gray-50 mx-auto mt-20 md:mt-32 mb-20 relative rounded-sm rounded-b-none shadow-lg h-fit">
+                    <div className="group relative w-full h-full overflow-hidden bg-white group-hover:border-gray-100  shadow-lg p-3 md:p-6 transform -rotate-0 hover:rotate-0 transition-all duration-500 ease-in-out border border-opacity-0 border-gray-400 group-hover:border-opacity-100">
                       <div className="inset-0 z-0">
-                        <div className="relative bg-white p-6 flex flex-col justify-start h-full z-10">
+                        <div className="relative bg-white p-0 md:p-6 flex flex-col justify-start h-full z-10">
                           <div className="mb-6 text-xs flex font-medium text-gray-500 tracking-tight uppercase p-1 px-2 bg-gray-100 rounded-full w-fit">
                             <Note className="w-4 h-4 mr-1" />
                             <div className="text-[11px]">Note</div>
