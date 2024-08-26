@@ -75,6 +75,8 @@ const PostCard = ({ post, refetch, user, edit }) => {
             href={
               edit === false && post.type == "article"
                 ? `/post/${post.slug}`
+                : edit === false && post.type == "note"
+                ? `/note/${post.slug}`
                 : edit === false && post.type == "tool"
                 ? `/toolbox/${post.slug}`
                 : post.type == "article" && post.tools?.length

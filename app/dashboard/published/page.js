@@ -51,6 +51,7 @@ export default async function AccountPage() {
             currentTab="publish"
             postStatus={["publish"]}
             postType=""
+            edit={false}
           />
         </div>
         {/* <AccountPageWrapper userData={userData}/> */}

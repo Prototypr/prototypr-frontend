@@ -26,6 +26,19 @@ export default async function handler(req, res) {
       }
       return res.json({ revalidated: true });
     }
+    else if (
+      entry.type == "note" &&
+      (entry.status === "publish" || entry.publishedAt)
+    ) {
+      const url = `/note/${entry.slug}`;
+
+      await res.revalidate(url);
+      if (process.env.NODE_ENV == "production") {
+        await purgeCloudFlareCache(url);
+        await clearAuthCache(entry.id);
+      }
+      return res.json({ revalidated: true });
+    }
     //revalidate jobs
     else if (entry.type == "job" && entry.publishedAt) {
       console.log("revalidating job post :", entry.slug);

@@ -136,10 +136,11 @@ export default function Post({
 
   const ogImage = `${
     process.env.NEXT_PUBLIC_HOME_URL
-  }/api/og-generator/og-note?title=${encodeURIComponent(title)}&author=${encodeURIComponent(
-    authorName
-  )}&date=${encodeURIComponent(date)}&avatar=${encodeURIComponent(avatar)}`;
-
+  }/api/og-generator/og-note?title=${encodeURIComponent(
+    title
+  )}&author=${encodeURIComponent(authorName)}&date=${encodeURIComponent(
+    date
+  )}&avatar=${encodeURIComponent(avatar)}`;
 
   return (
     <Layout
@@ -163,31 +164,6 @@ export default function Post({
         maxWidth="max-w-full mx-auto -mt-[96px] bg-gray-100/20"
       >
         <div className="w-full h-full grid grid-cols-12 gap-1 mx-auto mx-auto bg-gray-100/20">
-          {user?.isAdmin && (
-            <div className="fixed bottom-0 mb-6 z-50 border border-gray-200 bg-white mr-20 right-0 p-2 px-3 rounded-full shadow-sm">
-              {/* <button className="p-1 px-3 text-sm text-white bg-purple-600 shadow rounded"> */}
-              <Link href={`/n/${post?.id}`}>
-                <div className="flex text-gray-700">
-                  <PenLineSimple className="w-4 h-4 my-auto mr-2" />
-                  <div className="my-auto text-sm">Edit</div>
-                </div>
-              </Link>
-              {/* </button> */}
-            </div>
-          )}
-          {!user?.isAdmin && user?.id == post?.attributes?.author?.data?.id ? (
-            <div className="fixed bottom-0 mb-6 z-50 border border-gray-200 bg-white mr-20 right-0 p-2 px-3 rounded-full shadow-sm">
-              {/* <button className="p-1 px-3 text-sm text-white bg-purple-600 shadow rounded"> */}
-              <Link href={`/n/${post?.id}`}>
-                <div className="flex text-gray-700">
-                  <PenLineSimple className="w-4 h-4 my-auto mr-2" />
-                  <div className="my-auto text-sm">Edit</div>
-                </div>
-              </Link>
-              {/* </button> */}
-            </div>
-          ) : null}
-
           {/* <Alert preview={preview} /> */}
           <main className="gap-2 col-span-12 lg:col-span-12 px-0 ">
             {/* {post?.id && process.env.NODE_ENV === "production" && (
@@ -206,8 +182,8 @@ export default function Post({
                       <div className="inset-0 z-0">
                         <div className="relative bg-white p-6 flex flex-col justify-start h-full z-10">
                           <div className="mb-6 text-xs flex font-medium text-gray-500 tracking-tight uppercase p-1 px-2 bg-gray-100 rounded-full w-fit">
-                           <Note className="w-4 h-4 mr-1" />
-                           <div className="text-[11px]">Note</div>
+                            <Note className="w-4 h-4 mr-1" />
+                            <div className="text-[11px]">Note</div>
                           </div>
                           <h1 className="text-[44px] tracking-tight mb-6 w-full leading-tight md:max-w-[90%] text-black/90  font-medium text-left drop-shadow-sm">
                             {title}
@@ -268,13 +244,44 @@ export default function Post({
                             </div>
                           ) : null}
 
-                          <div className="my-3 py-3 border-b border-t border-gray-200">
+                          <div className="my-3 py-3 border-b border-t border-gray-200 flex justify-between">
                             <SocialShare
                               slug={post?.attributes?.slug}
                               title={title}
                               authorTwitter={author?.twitter}
                               postType="note"
                             />
+                            <div className="flex items-center">
+                              {user?.isAdmin && (
+                                <div className="border border-gray-200 bg-white mr-1 p-1 px-3 rounded-full shadow-sm">
+                                  {/* <button className="p-1 px-3 text-sm text-white bg-purple-600 shadow rounded"> */}
+                                  <Link href={`/n/${post?.id}`}>
+                                    <div className="flex text-gray-700">
+                                      <PenLineSimple className="w-4 h-4 my-auto mr-2" />
+                                      <div className="my-auto text-sm">
+                                        Edit
+                                      </div>
+                                    </div>
+                                  </Link>
+                                  {/* </button> */}
+                                </div>
+                              )}
+                              {!user?.isAdmin &&
+                              user?.id == post?.attributes?.author?.data?.id ? (
+                                <div className="border border-gray-200 bg-white mr-1 p-1 px-3 rounded-full shadow-sm">
+                                  {/* <button className="p-1 px-3 text-sm text-white bg-purple-600 shadow rounded"> */}
+                                  <Link href={`/n/${post?.id}`}>
+                                    <div className="flex text-gray-700">
+                                      <PenLineSimple className="w-4 h-4 my-auto mr-2" />
+                                      <div className="my-auto text-sm">
+                                        Edit
+                                      </div>
+                                    </div>
+                                  </Link>
+                                  {/* </button> */}
+                                </div>
+                              ) : null}
+                            </div>
                           </div>
                           <div
                             className="max-w-full blog-content w-[44rem] mt-6 mx-auto"
