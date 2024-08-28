@@ -8,6 +8,7 @@ import "tippy.js/animations/scale-subtle.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { typrNotesProps } from "@/lib/editor/typrNotesProps";
 import Layout from "@/components/new-index/layoutForIndex";
+import { useTypr } from "tiptypr";
 
 const Tiptypr = dynamic(() => import("tiptypr"), {
   ssr: false,
@@ -34,6 +35,16 @@ export default function EditPostPage() {
     }
   }, [router.isReady, router.query.slug, router.query.id]);
 
+  const typr = useTypr({
+    ...typrNotesProps({
+      user,
+      userLoading: isLoading,
+      mutateUser,
+      router,
+    }),
+    postId:postId
+  });
+
   return (
     <Layout
       navOffset={false}
@@ -56,15 +67,7 @@ export default function EditPostPage() {
           <div className="group relative w-full h-full overflow-hidden bg-white group-hover:border-gray-100  shadow-lg p-6 transform -rotate-1 hover:rotate-0 transition-all duration-500 ease-in-out border border-opacity-0 border-gray-400 group-hover:border-opacity-100">
             <div className="absolute inset-0 z-0 overflow-auto">
               <div className="z-10">
-                <Tiptypr
-                  {...typrNotesProps({
-                    user,
-                    userLoading: isLoading,
-                    mutateUser,
-                    router,
-                  })}
-                  postId={postId}
-                />
+                <Tiptypr typr={typr}/>
               </div>
             </div>
           </div>

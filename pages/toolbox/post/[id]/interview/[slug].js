@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/router";
 import { typrProps } from "@/lib/editor/typrProps";
 
+import { useTypr } from "tiptypr";
 const Tiptypr = dynamic(() => import("tiptypr"), {
   ssr: false,
 });
@@ -43,18 +44,20 @@ export default function EditPostPage({ tool }) {
   });
   const router = useRouter();
 
-  
+
+  const typr = useTypr({
+    ...typrProps({ user, userLoading: isLoading, mutateUser, router }),
+    isInterview: true,
+    tool: tool,
+    postId: ((router?.isReady && (router.query.slug || router.query.id) )|| -1)
+  });
+
   return (
     <>
       <div className="h-screen w-screen">
         <div className="flex flex-row mx-auto w-full">
           <div className="w-full" id="interview-editor">
-            <Tiptypr
-              {...typrProps({ user, userLoading: isLoading, mutateUser, router })}
-              isInterview={true}
-              tool={tool}
-              postId={(router?.isReady && (router.query.slug || router.query.id) )|| -1}
-            >
+            <Tiptypr typr={typr}>
               <InterviewEditor />
             </Tiptypr>
           </div>

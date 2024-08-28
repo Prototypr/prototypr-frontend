@@ -7,6 +7,7 @@ import "tippy.js/dist/svg-arrow.css";
 import "tippy.js/animations/scale-subtle.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { typrProps } from "@/lib/editor/typrProps";
+import { useTypr } from "tiptypr";
 
 const Tiptypr = dynamic(() => import("tiptypr"), {
   ssr: false,
@@ -27,6 +28,11 @@ export default function EditPostPage() {
   const router = useRouter();
   const [postId, setPostId] = useState(-1);
 
+  const typr = useTypr({
+    ...typrProps({ user, userLoading: isLoading, mutateUser, router }),
+    postId:postId
+  });
+
   useEffect(() => {
     if (router.isReady && (router.query.slug || router.query.id)) {
       setPostId((router.query.slug || router.query.id) || -1);
@@ -35,10 +41,8 @@ export default function EditPostPage() {
 
   return (
     <>
-      <Tiptypr
-        {...typrProps({ user, userLoading: isLoading, mutateUser, router })}
-        postId={postId}
-      />
+
+      <Tiptypr typr={typr} />
     </>
   );
 }

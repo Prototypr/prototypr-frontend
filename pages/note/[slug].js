@@ -54,6 +54,8 @@ const StickyFooterCTA = dynamic(() => import("@/components/StickyFooterCTA"), {
 //   }
 // );
 
+import { throttle } from 'lodash';
+
 export default function Post({
   post,
   preview,
@@ -142,6 +144,31 @@ export default function Post({
     date
   )}&avatar=${encodeURIComponent(avatar)}`;
 
+  useEffect(() => {
+    const handleScroll = throttle(() => {
+      const scrollPosition = window.scrollY;
+      const viewportHeight = window.innerHeight;
+
+      if (scrollPosition > viewportHeight * 0.1) {
+        document.querySelector('.main-container').style.width = '764px';
+        document.querySelector('.rotate-1').style.transform = 'rotate(0.2deg)';
+        document.querySelector('.rotate-2').style.transform = 'rotate(0.3deg)';
+        document.querySelector('.rotate-3').style.transform = 'rotate(0.4deg)';
+      } else {
+        document.querySelector('.main-container').style.width = '758px';
+        document.querySelector('.rotate-1').style.transform = 'rotate(-1.5deg)';
+        document.querySelector('.rotate-2').style.transform = 'rotate(1.5deg)';
+        document.querySelector('.rotate-3').style.transform = 'rotate(1.5deg)';
+      }
+    }, 100);
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Layout
       maxWidth={"max-w-[1350px] search-wide"}
@@ -177,7 +204,7 @@ export default function Post({
               <>
                 {/* <img src={'/static/images/check.svg'} className="absolute opacity-20 p-6 h-[298px] mt-[60px] top-0 left-0 w-full object-cover"/> */}
                 <div className="h-fit overflow-hidden bg-gray-100 px-2 md:px-0">
-                  <div className="w-[758px] max-w-full px-2 md:px-0 group z-10 flex items-center justify-center bg-gray-50 mx-auto mt-20 md:mt-32 mb-20 relative rounded-sm rounded-b-none shadow-lg h-fit">
+                  <div className="main-container w-[758px] transition-all duration-500 ease-in-out max-w-full px-2 md:px-0 group z-10 flex items-center justify-center bg-gray-50 mx-auto mt-20 md:mt-32 mb-20 relative rounded-sm rounded-b-none shadow-lg h-fit">
                     <div className="group relative w-full h-full overflow-hidden bg-white group-hover:border-gray-100  shadow-lg p-3 md:p-6 transform -rotate-0 hover:rotate-0 transition-all duration-500 ease-in-out border border-opacity-0 border-gray-400 group-hover:border-opacity-100">
                       <div className="inset-0 z-0">
                         <div className="relative bg-white p-0 md:p-6 flex flex-col justify-start h-full z-10">
@@ -293,12 +320,9 @@ export default function Post({
                       </div>
                     </div>
 
-                    {/* <div className="absolute inset-0 bg-gray-50 -left-1 top-0.5 transform -rotate-[1.5deg] -z-10 shadow-md transition-all duration-500 ease-in-out group-hover:-left-0.5 group-hover:-top-[2px] group-hover:rotate-0 border-l border-gray-50 border border-opacity-0 group-hover:border-gray-100 group-hover:border-opacity-100" />
-                    <div className="absolute inset-0 bg-white/80 -right-0.5 top-0.5 transform rotate-[1.5deg] -z-20 shadow-md transition-all duration-500 ease-in-out group-hover:-left-[4px] group-hover:right-0 group-hover:-top-[4px] group-hover:rotate-0 border-l border-t border-gray-50 border-opacity-0 group-hover:border-gray-100 group-hover:border-opacity-100" />
-                    <div className="absolute inset-0 -right-0.5 top-0 transform rotate-[1.5deg] -z-50 shadow-md transition-all duration-500 ease-in-out group-hover:right-0.5 group-hover:-top-0.5 group-hover:rotate-0 border-l group-hover:border-gray-100 border-opacity-0 group-hover:border-opacity-100" /> */}
-                    <div className="absolute inset-0 bg-gray-50 -left-1 top-0.5 transform -rotate-[1.5deg] -z-10 shadow-md transition-all duration-500 ease-in-out border-l border-gray-50 border border-opacity-0" />
-                    <div className="absolute inset-0 bg-white/80 -right-0.5 top-0.5 transform rotate-[1.5deg] -z-20 shadow-md transition-all duration-500 ease-in-out border-l border-t border-gray-50 border-opacity-0" />
-                    <div className="absolute inset-0 -right-0.5 top-0 transform rotate-[1.5deg] -z-50 shadow-md transition-all duration-500 ease-in-out border-l border-opacity-0" />
+                    <div className="rotate-1 absolute inset-0 bg-gray-50 -left-1 top-0.5 transform -rotate-[1.5deg] -z-10 shadow-md transition-all duration-500 ease-in-out border-l border-gray-50 border border-opacity-0" />
+                    <div className="rotate-2 absolute inset-0 bg-white/80 -right-0.5 top-0.5 transform rotate-[1.5deg] -z-20 shadow-md transition-all duration-500 ease-in-out border-l border-t border-gray-50 border-opacity-0" />
+                    <div className="rotate-3 absolute inset-0 -right-0.5 top-0 transform rotate-[1.5deg] -z-50 shadow-md transition-all duration-500 ease-in-out border-l border-opacity-0" />
                   </div>
                 </div>
                 {/* <Head> */}

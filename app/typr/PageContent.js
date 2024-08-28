@@ -13,6 +13,7 @@ import {
 
 import "~/react-kofi/dist/kofi.css";
 import "~/tiptypr/dist/styles.css";
+import { useTypr } from "tiptypr";
 import Tiptypr from "tiptypr";
 // import Head from 'next/head';
 
@@ -293,6 +294,48 @@ function DemoPageContent() {
     useEffect(() => {
       fetchData();
     }, []);
+
+    const typr = useTypr({
+      requireLogin: editorProps.requireLogin,
+      components: editorProps.components,
+      theme: editorProps.theme,
+      user: editorProps.user,
+      enablePublishingFlow: editorProps.enablePublishingFlow,
+      customPostStatuses: editorProps.customPostStatuses,
+      postId: postId, // Update to use postId state
+      postOperations: {
+        load: async function ({ postId }) {
+          const postObject = await loadPostById(parseInt(postId, 10));
+          console.log("loaded", postObject);
+          return postObject;
+        },
+        save: async function ({ postId, entry }) {
+          console.log("saving entry", entry);
+          const postObject = await savePost(
+            entry,
+            parseInt(postId, 10)
+          );
+          fetchData();
+          return postObject;
+        },
+        create: async function ({ entry }) {
+          console.log("creating post", entry);
+          const postObject = await createPost(entry);
+          fetchData();
+          return postObject;
+        },
+      },
+      hooks: {
+        onPostCreated: ({ id }) => {
+          const params = new URLSearchParams(searchParams);
+          params.set("id", id);
+          router.push(`?${params.toString()}`, undefined, {
+            shallow: true,
+            scroll: false,
+          });
+        },
+      },
+    });
   
     return (
       <Layout sessionUser={false} background={"#fbfcff"}>
@@ -545,45 +588,7 @@ function DemoPageContent() {
           <div className="w-full md:p-3 flex flex-col relative h-[calc(100vh-54px)]">
             <div className="bg-white md:rounded-xl border border-gray-300/60 flex-1 w-full overflow-y-auto max-w-[900px] mx-auto md:p-3 md:pr-1 md:pt-0">
               <Tiptypr
-                requireLogin={editorProps.requireLogin}
-                components={editorProps.components}
-                theme={editorProps.theme}
-                user={editorProps.user}
-                enablePublishingFlow={editorProps.enablePublishingFlow}
-                customPostStatuses={editorProps.customPostStatuses}
-                postId={postId} // Update to use postId state
-                postOperations={{
-                  load: async function ({ postId }) {
-                    const postObject = await loadPostById(parseInt(postId, 10));
-                    console.log("loaded", postObject);
-                    return postObject;
-                  },
-                  save: async function ({ postId, entry }) {
-                    console.log("saving entry", entry);
-                    const postObject = await savePost(
-                      entry,
-                      parseInt(postId, 10)
-                    );
-                    fetchData();
-                    return postObject;
-                  },
-                  create: async function ({ entry }) {
-                    console.log("creating post", entry);
-                    const postObject = await createPost(entry);
-                    fetchData();
-                    return postObject;
-                  },
-                }}
-                hooks={{
-                  onPostCreated: ({ id }) => {
-                    const params = new URLSearchParams(searchParams);
-                    params.set("id", id);
-                    router.push(`?${params.toString()}`, undefined, {
-                      shallow: true,
-                      scroll: false,
-                    });
-                  },
-                }}
+                typr={typr}
               />
             </div>
           </div>
@@ -647,6 +652,10 @@ function DemoPageContent() {
           />
         </div>
         {/* <KofiWidget /> */}
+
+     <button className="fixed bottom-0 right-0" onClick={()=>{
+      typr.forcePublish();
+    }}>Publish</button>
       </Layout>
     );
   }

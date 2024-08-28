@@ -7,7 +7,7 @@ import "tippy.js/dist/svg-arrow.css";
 import "tippy.js/animations/scale-subtle.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { typrProps } from "@/lib/editor/typrProps";
-
+import { useTypr } from "tiptypr";
 const Tiptypr = dynamic(() => import("tiptypr"), {
   ssr: false,
 });
@@ -92,20 +92,23 @@ export default function InterviewEditor({ tool }) {
       </div>
     );
   }
-console.log('user',user)
+
+  const typr = useTypr({
+    ...typrProps({ user, userLoading: isLoading, mutateUser, router }),
+    tool: tool,
+    hooks:{
+      onPostCreated: ({ id }) => {
+        localStorage.removeItem("wipInterview");
+
+        router.push(`/toolbox/post/${id}/interview/${postInfo?.id}`);
+      },
+    }
+  });
+
   return (
     <>
       <Tiptypr
-        {...typrProps({ user, userLoading: isLoading, mutateUser, router })}
-        // postId={router?.isReady && (router.query.slug || router.query.id)}
-        tool={tool}
-        hooks={{
-          onPostCreated: ({ id }) => {
-            localStorage.removeItem("wipInterview");
-
-            router.push(`/toolbox/post/${id}/interview/${postInfo?.id}`);
-          },
-        }}
+        typr={typr}
         // postOperations={{
         //   load: typrProps({ user, userLoading: isLoading, mutateUser, router }).postOperations.load,
         //   save: typrProps({ user, userLoading: isLoading, mutateUser, router }).postOperations.save,
@@ -129,9 +132,7 @@ console.log('user',user)
             relation:relatedPostId
           };
 
-          console.log('user',user)
           let post = await createPost({ entry: dummyPost, user: user });
-          console.log('created post',post)
           localStorage.removeItem("wipInterview");
 
           router.push(

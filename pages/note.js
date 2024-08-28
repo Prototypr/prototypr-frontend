@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { typrNotesProps } from "@/lib/editor/typrNotesProps";
 import { useState } from "react";
 
+import { useTypr } from "tiptypr";
 const Typr = dynamic(() => import("tiptypr"), {
   ssr: false,
 });
@@ -24,8 +25,16 @@ export default function Write() {
     redirectIfFound: false,
   });
   const router = useRouter();
-
-  const [editorInstance, setEditorInstance] = useState(null);
+  
+  const typr = useTypr({
+    ...typrNotesProps({
+      user,
+      userLoading: isLoading,
+      mutateUser,
+      router,
+    }),
+    postId:router?.isReady && (router.query.slug || router.query.id)
+  });
 
   return (
     <Layout
@@ -49,18 +58,7 @@ export default function Write() {
     <div className="group relative w-full h-full overflow-hidden bg-white group-hover:border-gray-100  shadow-lg p-6 transform -rotate-1 hover:rotate-0 transition-all duration-500 ease-in-out border border-opacity-0 border-gray-400 group-hover:border-opacity-100">
       <div className="absolute inset-0 z-0 overflow-auto">
         <div className="z-10">
-        <Typr
-          {...typrNotesProps({
-            user,
-            userLoading: isLoading,
-            mutateUser,
-            router,
-          })}
-          onReady={({editor})=>{
-            setEditorInstance(editor)
-          }}
-          postId={router?.isReady && (router.query.slug || router.query.id)}
-        />
+        <Typr typr={typr}/>
         </div>
       </div>
     </div>

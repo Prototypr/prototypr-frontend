@@ -7,6 +7,8 @@ import "tippy.js/animations/scale-subtle.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { typrProps } from "@/lib/editor/typrProps";
 
+import { useTypr } from "tiptypr";
+
 const Tiptypr = dynamic(() => import("tiptypr"), {
   ssr: false,
 });
@@ -21,14 +23,26 @@ export default function Write() {
     redirectTo: "/onboard",
     redirectIfFound: false,
   });
+  
   const router = useRouter();
+
+  const typr = useTypr({
+    ...typrProps({ user, userLoading: isLoading, mutateUser, router }),
+    postId: router?.isReady && (router.query.slug || router.query.id)
+  });
+
 
   return (
     <>
-      <Tiptypr
+      <Tiptypr typr={typr} />
+      {/* <Tiptypr
+        typr={typr}
+        onReady={({editor})=>{
+          
+        }}
         {...typrProps({ user, userLoading: isLoading, mutateUser, router })}
         postId={router?.isReady && (router.query.slug || router.query.id)}
-      />
+      /> */}
     </>
   );
 }
