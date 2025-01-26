@@ -13,8 +13,8 @@ import Link from "next/link";
 import { MagnifyingGlass } from "../icons";
 
 const originalSearchClient = instantMeiliSearch(
-  // process.env.NEXT_PUBLIC_MEILISEARCH_URL,
-  "https://search.prototypr.io/",
+  process.env.NEXT_PUBLIC_MEILISEARCH_URL,
+  // "https://search.prototypr.io/",
   process.env.NEXT_PUBLIC_MEILISEARCH_KEY
   //   {
   //     filters: "(type:article OR type:tool)",
