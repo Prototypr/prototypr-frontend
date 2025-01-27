@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const nextConfig = withPlausibleProxy({
   customDomain: "https://analytics.prototypr.io",
-  domain: "4.prototypr.io",
+  domain: "prototypr.io",
   selfHosted: true,
 })({
   reactStrictMode: false,

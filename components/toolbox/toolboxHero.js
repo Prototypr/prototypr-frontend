@@ -49,7 +49,7 @@ const ProductListData = [
     description: "Build products that are accessible, ethical, and inclusive.",
     slug:'stark',
     image:
-      "https://prototyprwp.gumlet.io/wp-content/uploads/2021/01/www_prototypr_io_HcsoZ-150x150.?w=256&q=75&format=auto&compress=true&dpr=2",
+      "https://wp.prototypr.io/wp-content/uploads/2021/01/www_prototypr_io_HcsoZ-150x150.?w=128&q=70&format=avif&compress=true&dpr=1",
   },
   {
     title: "The Design System Encyclopedia",
@@ -57,7 +57,7 @@ const ProductListData = [
     description:
       "The Design Encyclopedia is a vast collection of meticulously documented design tokens, components, page layouts, interaction patterns, and visualizations.",
     image:
-      "https://prototyprwp.gumlet.io/wp-content/uploads/2020/09/Frame-1-33-150x150.png?w=256&q=75&format=auto&compress=true&dpr=2",
+      "https://wp.prototypr.io/wp-content/uploads/2020/09/Frame-1-33-150x150.png?w=256&q=75&format=auto&compress=true&dpr=2",
   },
 ];
 
@@ -67,14 +67,14 @@ const ProductListData2 = [
     description: "Customizable Fintech 3D Icons",
     slug:'feenancy-3d-icons',
     image:
-      "https://prototyprwp.gumlet.io/wp-content/uploads/2021/01/556129ef-c783-40c0-b1e1-f4adfbef4a70-150x150.gif?w=256&q=75&format=auto&compress=true&dpr=2",
+      "https://wp.prototypr.io/wp-content/uploads/2021/01/556129ef-c783-40c0-b1e1-f4adfbef4a70-150x150.gif?w=256&q=75&format=auto&compress=true&dpr=2",
   },
   {
     title: "Toy Faces 3D",
     description: "Fun diverse library of 3D avatars",
     slug:'toy-faces-3d-avatar-library',
     image:
-      "https://prototyprwp.gumlet.io/wp-content/uploads/2021/01/static1_squarespace_com_ueDe0-150x150.?w=256&q=75&format=auto&compress=true&dpr=2",
+      "https://wp.prototypr.io/wp-content/uploads/2021/01/static1_squarespace_com_ueDe0-150x150.png?w=256&q=75&format=auto&compress=true&dpr=2",
   },
   {
     title: "Maze Templates",
@@ -88,7 +88,7 @@ const ProductListData2 = [
     slug:'cabana-4',
     description: "Latest Design System for Sketch",
     image:
-      "https://prototyprwp.gumlet.io/wp-content/uploads/2020/11/3348b430-1d8b-48a7-94fc-24840be0863e.jpeg?w=256&q=75&format=auto&compress=true&dpr=2",
+      "https://wp.prototypr.io/wp-content/uploads/2020/11/3348b430-1d8b-48a7-94fc-24840be0863e.jpeg?w=256&q=75&format=auto&compress=true&dpr=2",
   },
   {
     title: "Magicul",

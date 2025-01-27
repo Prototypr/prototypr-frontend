@@ -92,7 +92,8 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
     // https://next-auth.js.org/getting-started/upgrade-v4#sessionprovider
     // `session` comes from `getServerSideProps` or `getInitialProps`.
     // Avoids flickering/session loading on first load.
-    <PlausibleProvider customDomain="https://analytics.prototypr.io" selfHosted={true} domain="4.prototypr.io">
+    <PlausibleProvider customDomain="https://analytics.prototypr.io" selfHosted={true} domain="prototypr.io"
+    trackOutboundLinks={true} taggedEvents={true} trackLocalhost={true}>
     <IntlProvider 
       key={locale || "en-US"}
       defaultLocale="en-US" locale={locale || "en-US"} messages={messages}>
